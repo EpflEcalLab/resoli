@@ -10,7 +10,7 @@ set :http_auth_users, [
 ]
 
 # Disable Notification on slack
-# set :slackistrano, false
+set :slackistrano, false
 
 before "styleguide:deploy_build", "styleguide:build_local"
 

@@ -1,0 +1,38 @@
+{
+  "src": "web/themes/quartiers_solidaires/assets/",
+  "dest": "web/themes/quartiers_solidaires/build/",
+  "ghpages": "web/themes/quartiers_solidaires/build/",
+  "images": [
+    "web/themes/quartiers_solidaires/build/images/**/*"
+  ],
+  "svg": [
+    "web/themes/quartiers_solidaires/build/svg/**/*"
+  ],
+  "icons": [
+    "web/themes/quartiers_solidaires/build/icons/**/*"
+  ],
+  "iconsFontName": "icon",
+  "fonts": [
+    "web/themes/quartiers_solidaires/build/fonts/**/*"
+  ],
+  "vendors": {
+    "css": [],
+    "js": [
+      "node_modules/bootstrap/js/dist/alert.js",
+      "node_modules/bootstrap/js/dist/button.js",
+      "node_modules/bootstrap/js/dist/carousel.js",
+      "node_modules/bootstrap/js/dist/collapse.js",
+      "node_modules/bootstrap/js/dist/dropdown.js",
+      "node_modules/bootstrap/js/dist/modal.js",
+      "node_modules/bootstrap/js/dist/popover.js",
+      "node_modules/bootstrap/js/dist/scrollspy.js",
+      "node_modules/bootstrap/js/dist/tab.js",
+      "node_modules/bootstrap/js/dist/tooltip.js",
+      "node_modules/bootstrap/js/dist/util.js"
+    ]
+  },
+  "singles": [{
+    "src": "",
+    "dest": ""
+  }]
+}

@@ -1,0 +1,8 @@
+{
+  "generator-toolbox": {
+    "promptValues": {
+      "src": "web/themes/quartiers_solidaires/assets/",
+      "dest": "web/themes/quartiers_solidaires/build/"
+    }
+  }
+}

@@ -6,7 +6,6 @@ screenshot: screenshot.png
 
 libraries:
   - quartiers_solidaires/global-styling
-  - quartiers_solidaires/head-styling
 
 stylesheets-remove:
   - core/assets/vendor/normalize-css/normalize.css

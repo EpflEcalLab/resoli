@@ -2,7 +2,8 @@ global-styling:
   css:
     theme:
       build/css/base.css: {}
-
+  js:
+    build/js/vendors.min.js: {}
   dependencies:
     - core/jquery
     - core/drupal

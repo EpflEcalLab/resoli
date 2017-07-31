@@ -16,30 +16,34 @@
 /////////////////
 
 .btn-outline-primary {
-  @include button-active($purple-darker);
+  color: $body-color;
+
+  @include button-active($btn-primary-active);
 }
 
 // Button Secondary
 ///////////////////
 
 .btn-outline-secondary {
-  @include button-active($green-dark);
+  color: $body-color;
+
+  @include button-active($btn-secondary-active);
 }
 
 .btn-secondary,
 .btn-outline-secondary {
 
   // Handle shadows on elements
-  @include drop-shadows($brand-secondary);
+  @include drop-shadows($btn-secondary-border);
 
-  // re-add focus styles from
+  // re-add focus styles from Bootstrap button mixin
   &:focus,
   &.focus {
-    box-shadow: 0 0 0 2px rgba($brand-secondary, 0.5);
+    box-shadow: 0 0 0 2px rgba($btn-secondary-border, 0.5);
   }
 
   &.shadow-floating {
-    @include floating-shadow($brand-secondary);
+    @include floating-shadow($btn-secondary-border);
   }
 }
 
@@ -58,8 +62,14 @@
     margin: 0 ($btn-padding-x / 3) 0 ($btn-padding-x / 3);
     transform: translateY(-50%);
 
-    use {
-      fill: $blue;
+    svg {
+      color: $btn-primary-border;
+    }
+  }
+
+  &.btn-outline-secondary {
+    .icon svg {
+      color: $btn-secondary-border;
     }
   }
 }

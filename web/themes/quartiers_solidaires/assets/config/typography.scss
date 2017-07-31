@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+// Fonts
+
+@font-face {
+  font-family: 'SF UI Text';
+  src: url('../fonts/SF-UI-Text-Regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/SF-UI-Text-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/SF-UI-Text-Regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/SF-UI-Text-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/SF-UI-Text-Regular.svg#9fef9c1e9495539ae44b9413de12d80c') format('svg'); /* Legacy iOS */
+
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'SF UI Text';
+  src: url('../fonts/SF-UI-Text-Semibold.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/SF-UI-Text-Semibold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/SF-UI-Text-Semibold.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/SF-UI-Text-Semibold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/SF-UI-Text-Semibold.svg#e94601dcad73f6dc7b5cc6eac8aff4e6') format('svg'); /* Legacy iOS */
+
+  font-style: normal;
+  font-weight: 600;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

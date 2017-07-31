@@ -83,3 +83,13 @@
     }
   }
 }
+
+.btn-icon-right {
+  padding-right: $btn-padding-x * 1.4;
+  padding-left: $btn-padding-x * 1.2;
+
+  .icon {
+    left: auto;
+    right: 0;
+  }
+}

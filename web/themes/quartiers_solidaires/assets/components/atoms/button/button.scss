@@ -64,12 +64,20 @@
 
     svg {
       color: $btn-primary-border;
+
+      @include transition($btn-transition);
     }
   }
 
   &.btn-outline-secondary {
     .icon svg {
       color: $btn-secondary-border;
+    }
+  }
+
+  &:hover {
+    .icon svg {
+      color: $white;
     }
   }
 }

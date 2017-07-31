@@ -34,3 +34,12 @@
     border-color: $color;
   }
 }
+
+// Sets the size of the icon
+@mixin icon-size($size) {
+  .icon,
+  .icon svg {
+    width: $size;
+    height: $size;
+  }
+}

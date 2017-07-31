@@ -6,7 +6,6 @@ const nav = () => {
       $('.navbar-toggle').toggleClass('active');
       $('body').toggleClass('open');
     };
-    toggleMenu();
 
     // Handle click on menu toggle button
     $(

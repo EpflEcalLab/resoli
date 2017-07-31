@@ -98,3 +98,18 @@
     right: 0;
   }
 }
+
+// Button Circle
+////////////////
+
+.btn-circle {
+  min-width: inherit;
+  padding: $btn-padding-y;
+  line-height: 0;
+
+  @include icon-size(20px);
+}
+
+.btn-white {
+  background-color: $white;
+}

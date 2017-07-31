@@ -1,0 +1,31 @@
+@charset 'utf-8';
+
+.list-items {
+  @include list-unstyled();
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacer / 1.5;
+  background-image: linear-gradient(to right, rgba($brand-secondary, 0) 5%, rgba($brand-secondary, 0.08) 50%);
+  border-radius: $btn-border-radius;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  @include icon-size(30px);
+}
+
+.list-item-title {
+  margin: 0 auto 0 10px;
+  font-size: $font-size-lg;
+}
+
+.list-item-date {
+  color: $body-color;
+  margin-right: $spacer * 3;
+  white-space: nowrap;
+}

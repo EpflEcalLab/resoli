@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
-    <title>money</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-
       <g id="money" transform="translate(4.000000, 14.000000)" fill-rule="nonzero" fill="currentColor">
           <path d="M1.5,23 C0.671572875,23 0,22.3284271 0,21.5 L0,1.5 C0,0.671572875 0.671572875,0 1.5,0 L41.5,0 C42.3284271,0 43,0.671572875 43,1.5 L43,21.5 C43,22.3284271 42.3284271,23 41.5,23 L1.5,23 Z M40,20 L40,3 L3,3 L3,20 L40,20 Z" id="Stroke-1"></path>
           <path d="M1.5003,10.253 C6.33472712,10.253 10.2533,6.33442712 10.2533,1.5 C10.2533,0.671572875 9.58172712,0 8.7533,0 C7.92487288,0 7.2533,0.671572875 7.2533,1.5 C7.2533,4.67757288 4.67787288,7.253 1.5003,7.253 C0.671872875,7.253 0.0003,7.92457288 0.0003,8.753 C0.0003,9.58142712 0.671872875,10.253 1.5003,10.253 Z" id="Stroke-3"></path>

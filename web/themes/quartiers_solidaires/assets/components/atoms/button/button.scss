@@ -36,14 +36,14 @@
   // Handle shadows on elements
   @include drop-shadows($btn-secondary-border);
 
+  &.shadow-floating {
+    @include floating-shadow($btn-secondary-border);
+  }
+
   // re-add focus styles from Bootstrap button mixin
   &:focus,
   &.focus {
     box-shadow: 0 0 0 2px rgba($btn-secondary-border, 0.5);
-  }
-
-  &.shadow-floating {
-    @include floating-shadow($btn-secondary-border);
   }
 }
 

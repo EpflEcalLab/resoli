@@ -111,7 +111,7 @@ $gray-lighter:              #eceeef !default;
 $gray-lightest:             #f7f7f9 !default;
 
 // Reassign color vars to semantic color scheme
-$brand-primary:             $blue !default;
+$brand-primary:             $purple-dark !default;
 $brand-success:             $green !default;
 $brand-info:                $teal !default;
 $brand-warning:             $orange !default;
@@ -167,7 +167,7 @@ $spacers: (
     y: ($spacer-y * 3)
   )
 ) !default;
-$border-width: 1px !default;
+$border-width: 2px !default;
 
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: (
@@ -249,8 +249,8 @@ $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:       "SF UI Text", $font-family-sans-serif !default;
 
-$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
-$font-size-lg:   1.25rem !default;
+$font-size-base: 1.125rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:   1.3125rem !default;
 $font-size-sm:   .875rem !default;
 $font-size-xs:   .75rem !default;
 
@@ -372,8 +372,8 @@ $btn-primary-bg:                 $brand-primary !default;
 $btn-primary-border:             $btn-primary-bg !default;
 
 $btn-secondary-color:            $gray-dark !default;
-$btn-secondary-bg:               $white !default;
-$btn-secondary-border:           #ccc !default;
+$btn-secondary-bg:               $green !default;
+$btn-secondary-border:           $btn-secondary-bg !default;
 
 $btn-info-color:                 $white !default;
 $btn-info-bg:                    $brand-info !default;
@@ -403,9 +403,9 @@ $btn-block-spacing-y:            .5rem !default;
 $btn-toolbar-margin:             .5rem !default;
 
 // Allows for customizing button radius independently from global border radius
-$btn-border-radius:              $border-radius !default;
-$btn-border-radius-lg:           $border-radius-lg !default;
-$btn-border-radius-sm:           $border-radius-sm !default;
+$btn-border-radius:              100px !default;
+$btn-border-radius-lg:           500px !default;
+$btn-border-radius-sm:           $btn-border-radius !default;
 
 $btn-transition:                 all .2s ease-in-out !default;
 

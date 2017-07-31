@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+// Handle shadows on elements, with brand-primary color
+.shadow-to-right {
+  @include drop-shadow();
+}
+
+.shadow-to-left {
+  @include drop-shadow(left);
+}
+
+.shadow-floating {
+  @include floating-shadow();
+}

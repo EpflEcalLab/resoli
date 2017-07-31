@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+// Handle drop shadows on elements
+@mixin drop-shadows($color) {
+  &.shadow-to-right {
+    @include drop-shadow(right, $color);
+  }
+
+  &.shadow-to-left {
+    @include drop-shadow(left, $color);
+  }
+}
+
+// Adds a shadow to the element, to the direction you want
+@mixin drop-shadow($direction: right, $color: $brand-primary) {
+  @if ($direction == right) {
+    box-shadow: 2px 2px 2px 0 rgba($color, 0.3);
+  } @else {
+    box-shadow: -2px 2px 2px 0 rgba($color, 0.3);
+  }
+}
+
+// Adds a floating shadow effect
+@mixin floating-shadow($color: $brand-primary) {
+  box-shadow: 0 0 10px 0 rgba($color, 0.6);
+}
+
+// Button on :active only
+@mixin button-active($color) {
+  &:active {
+    background-color: $color;
+    border-color: $color;
+  }
+}

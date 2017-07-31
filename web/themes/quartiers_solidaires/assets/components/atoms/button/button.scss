@@ -1,0 +1,44 @@
+@charset 'utf-8';
+
+// Button
+/////////
+
+.btn {
+  min-width: 160px;
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: none;
+  }
+}
+
+// Button Primary
+/////////////////
+
+.btn-outline-primary {
+  @include button-active($purple-darker);
+}
+
+// Button Secondary
+///////////////////
+
+.btn-outline-secondary {
+  @include button-active($green-dark);
+}
+
+.btn-secondary,
+.btn-outline-secondary {
+
+  // Handle shadows on elements
+  @include drop-shadows($brand-secondary);
+
+  // re-add focus styles from
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 2px rgba($brand-secondary, 0.5);
+  }
+
+  &.shadow-floating {
+    @include floating-shadow($brand-secondary);
+  }
+}

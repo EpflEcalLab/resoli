@@ -1,6 +1,6 @@
 const svgIcons = () => {
   const ajax = new XMLHttpRequest();
-  ajax.open('GET', '<%= iconsPath %>', true);
+  ajax.open('GET', '../icons/icons.svg', true);
   ajax.send();
   ajax.onload = function(e) {
     var div = document.createElement('div');

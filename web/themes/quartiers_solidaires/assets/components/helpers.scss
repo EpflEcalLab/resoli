@@ -9,6 +9,10 @@
   @include drop-shadow(left);
 }
 
+.shadow-to-bottom {
+  @include drop-shadow(bottom);
+}
+
 .shadow-floating {
   @include floating-shadow();
 }

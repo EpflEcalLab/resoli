@@ -15,8 +15,10 @@
 @mixin drop-shadow($direction: right, $color: $brand-primary) {
   @if ($direction == right) {
     box-shadow: 2px 2px 2px 0 rgba($color, 0.3);
-  } @else {
+  } @else if ($direction == left) {
     box-shadow: -2px 2px 2px 0 rgba($color, 0.3);
+  } @else {
+    box-shadow: 0 2px 2px 0 rgba($color, 0.3);
   }
 }
 

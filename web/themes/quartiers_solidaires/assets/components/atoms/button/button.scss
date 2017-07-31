@@ -65,9 +65,13 @@
     transform: translateY(-50%);
 
     svg {
-      color: $btn-primary-border;
-
       @include transition($btn-transition);
+    }
+  }
+
+  &.btn-outline-primary {
+    .icon svg {
+      color: $btn-primary-border;
     }
   }
 

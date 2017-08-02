@@ -766,7 +766,7 @@ $popover-arrow-outer-color:           fade-in($popover-border-color, .05) !defau
 
 // Badges
 
-$badge-default-bg:            $gray-light !default;
+$badge-default-bg:            $brand-secondary !default;
 $badge-primary-bg:            $brand-primary !default;
 $badge-success-bg:            $brand-success !default;
 $badge-info-bg:               $brand-info !default;
@@ -775,12 +775,12 @@ $badge-danger-bg:             $brand-danger !default;
 
 $badge-color:                 $white !default;
 $badge-link-hover-color:      $white !default;
-$badge-font-size:             75% !default;
+$badge-font-size:             100% !default;
 $badge-font-weight:           $font-weight-bold !default;
-$badge-padding-x:             .4em !default;
-$badge-padding-y:             .25em !default;
+$badge-padding-x:             $btn-padding-x !default;
+$badge-padding-y:             calc(#{$btn-padding-y} + #{$input-btn-border-width}) !default;
 
-$badge-pill-padding-x:        .6em !default;
+$badge-pill-padding-x:        $btn-padding-x !default;
 // Use a higher than normal value to ensure completely rounded edges when
 // customizing padding or font-size on labels.
 $badge-pill-border-radius:    10rem !default;

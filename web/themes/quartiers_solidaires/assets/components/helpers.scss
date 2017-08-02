@@ -21,3 +21,12 @@
 @include bg-variant('.bg-white', $white);
 @include bg-variant('.bg-blue', $blue);
 @include bg-variant('.bg-primary', $purple-light);
+
+.bg-blue,
+.bg-primary {
+  color: $inverse-color;
+
+  .text-muted {
+    color: rgba($inverse-color, 0.75) !important;
+  }
+}

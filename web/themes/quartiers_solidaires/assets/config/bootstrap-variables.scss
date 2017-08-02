@@ -184,7 +184,7 @@ $sizes: (
 $body-bg:       $white !default;
 $body-color:    $gray-dark !default;
 $inverse-bg:    $gray-dark !default;
-$inverse-color: $gray-lighter !default;
+$inverse-color: $white !default;
 
 
 // Links
@@ -420,9 +420,9 @@ $input-bg:                       $white !default;
 $input-bg-disabled:              $gray-lighter !default;
 
 $input-color:                    $gray !default;
-$input-border-color:             rgba($black,.15) !default;
+$input-border-color:             rgba($black,.5) !default;
 $input-btn-border-width:         $border-width !default; // For form controls and buttons
-$input-box-shadow:               inset 0 1px 1px rgba($black,.075) !default;
+$input-box-shadow:               0 0 0 0 transparent !default;
 
 $input-border-radius:            $border-radius !default;
 $input-border-radius-lg:         $border-radius-lg !default;

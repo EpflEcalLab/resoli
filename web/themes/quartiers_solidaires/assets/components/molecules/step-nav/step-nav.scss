@@ -1,0 +1,36 @@
+@charset 'utf-8';
+
+.step-nav {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  counter-reset: step-nav;
+
+  @include list-unstyled;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: $spacer;
+    right: $spacer;
+    width: calc(100% - #{$spacer * 2});
+    height: $border-width;
+    transform: translateY(-50%);
+    background: $white;
+  }
+}
+
+.step-nav-item {
+  position: relative;
+  z-index: 1;
+}
+
+.step-nav-link {
+  &:after {
+    counter-increment: step-nav;
+    content: counter(step-nav);
+  }
+}

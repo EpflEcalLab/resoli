@@ -144,15 +144,44 @@
 ////////////////
 
 .btn-circle {
-  min-width: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  min-height: 40px;
   padding: $btn-padding-y;
   line-height: 0;
 
   @include icon-size($font-size-base * 1.25);
 }
 
-// Button White
-///////////////
-.btn-white {
-  background-color: $white;
+// Button Invert
+////////////////
+// To put on a colored background, will be with a white border,
+// white text and transparent background
+.btn-outline-invert {
+  color: $white;
+  background-color: transparent;
+  border-color: $white;
+
+  @include hover {
+    color: $white;
+    background-color: rgba($white, 0.2);
+  }
+
+  &:focus,
+  &.focus {
+    color: $white;
+    box-shadow: 0 0 0 2px rgba($white, 0.5);
+  }
+
+  &:active,
+  &.active,
+  .show > &.dropdown-toggle {
+    color: $body-color;
+    background-color: $white;
+  }
+
+  // Set color of text based on background when button is active
+  @include button-outline-invert('.bg-blue', $blue);
 }

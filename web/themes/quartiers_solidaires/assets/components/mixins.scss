@@ -40,6 +40,24 @@
   }
 }
 
+// Set button-outline-invert color of text and background based on parent background
+@mixin button-outline-invert($background-class, $color, $color-invert: $white) {
+  #{$background-class} & {
+    background-color: $color;
+
+    @include hover {
+      background-color: lighten($color, 5);
+    }
+
+    &:active,
+    &.active,
+    .show > &.dropdown-toggle {
+      color: $color;
+      background-color: $color-invert;
+    }
+  }
+}
+
 // Sets the size of the icon
 @mixin icon-size($size) {
   .icon,

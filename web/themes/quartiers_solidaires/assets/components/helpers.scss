@@ -16,3 +16,8 @@
 .shadow-floating {
   @include floating-shadow();
 }
+
+// Background helpers
+@include bg-variant('.bg-white', $white);
+@include bg-variant('.bg-blue', $blue);
+@include bg-variant('.bg-primary', $purple-light);

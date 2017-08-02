@@ -77,8 +77,8 @@
   // First filter item (is actually the second in the markup)
   &:not(:last-of-type) {
     right: 100%;
-    margin-right: $spacer * -1.5;
-    padding-right: $spacer * 2;
+    margin-right: -1.5rem;
+    padding-right: 2rem;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -87,8 +87,8 @@
   &:last-of-type {
     left: 100%;
     order: 2;
-    margin-left: $spacer * -1.5;
-    padding-left: $spacer * 2;
+    margin-left: -1.5rem;
+    padding-left: 2rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
@@ -119,9 +119,11 @@
   overflow: hidden;
   opacity: 0;
   margin-top: ($navbar-icon-size + $grid-gutter-width-base / 2 - $border-width);
-  transition:
+
+  @include transition(
     height 0.3s ease 0.1s,
-    opacity 0.145s ease;
+    opacity 0.145s ease
+  );
 
   // Long vertical line drawn below items
   &:after {
@@ -134,20 +136,24 @@
     width: $border-width;
     height: 0;
     background: $brand-primary;
-    transition: height 0.1s ease-out;
+
+    @include transition(height 0.1s ease-out);
   }
 
   // Styles of navbar when navbar is open
   .open & {
     opacity: 1;
     height: 80vh;
-    transition:
+
+    @include transition(
       height 0s ease,
-      opacity 0.3s ease;
+      opacity 0.3s ease
+    );
 
     &:after {
       height: 100%;
-      transition: height 0.34s ease-out;
+
+      @include transition(height 0.34s ease-out);
     }
   }
 }
@@ -179,9 +185,10 @@
   height: 15vh;
   border-radius: $border-radius-lg;
   border: $border-width solid $brand-primary;
-  padding-bottom: $spacer / 2;
+  padding-bottom: 2rem;
   font-weight: 600;
-  transition: top 0.1s ease-out;
+
+  @include transition(top 0.1s ease-out);
 
   @for $i from 2 through 5 {
     &:nth-child(#{$i}) {
@@ -198,8 +205,7 @@
 
   &:active,
   &.active,
-  &:hover,
-  &.hover {
+  &:hover {
     text-decoration: none;
 
     &,
@@ -219,7 +225,8 @@
   // Styles when navbar is open
   .open & {
     top: 0;
-    transition: top 0.3s ease-out;
+
+    @include transition(top 0.3s ease-out);
   }
 
   .icon {

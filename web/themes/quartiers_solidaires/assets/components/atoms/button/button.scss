@@ -18,6 +18,11 @@
 .btn-outline-primary {
   color: $body-color;
 
+  @include hover {
+    color: $body-color;
+    background-color: rgba($btn-primary-bg, 0.1);
+  }
+
   @include button-active($btn-primary-active);
 }
 
@@ -26,6 +31,11 @@
 
 .btn-outline-secondary {
   color: $body-color;
+
+  @include hover {
+    color: $body-color;
+    background-color: rgba($btn-secondary-border, 0.1);
+  }
 
   @include button-active($btn-secondary-active);
 }
@@ -44,6 +54,36 @@
   &:focus,
   &.focus {
     box-shadow: 0 0 0 2px rgba($btn-secondary-border, 0.5);
+  }
+}
+
+// Override button-outline-* styles to be more UX friendly
+// (don't invert colors on hover)
+.btn-outline-info {
+  @include hover {
+    color: $body-color;
+    background-color: rgba($btn-info-bg, 0.1);
+  }
+}
+
+.btn-outline-success {
+  @include hover {
+    color: $body-color;
+    background-color: rgba($btn-success-bg, 0.1);
+  }
+}
+
+.btn-outline-warning {
+  @include hover {
+    color: $body-color;
+    background-color: rgba($btn-warning-bg, 0.1);
+  }
+}
+
+.btn-outline-danger {
+  @include hover {
+    color: $body-color;
+    background-color: rgba($btn-danger-bg, 0.1);
   }
 }
 
@@ -81,7 +121,8 @@
     }
   }
 
-  &:hover {
+  &:active,
+  &.active {
     .icon svg {
       color: $white;
     }
@@ -107,9 +148,11 @@
   padding: $btn-padding-y;
   line-height: 0;
 
-  @include icon-size(20px);
+  @include icon-size($font-size-base * 1.25);
 }
 
+// Button White
+///////////////
 .btn-white {
   background-color: $white;
 }

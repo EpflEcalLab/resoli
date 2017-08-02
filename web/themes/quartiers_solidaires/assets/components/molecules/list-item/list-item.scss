@@ -12,7 +12,7 @@
   background-image: linear-gradient(to right, rgba($brand-secondary, 0) 5%, rgba($brand-secondary, 0.08) 50%);
   border-radius: $btn-border-radius;
 
-  &:hover {
+  @include hover  {
     text-decoration: none;
   }
 

@@ -4,6 +4,7 @@
   @include list-unstyled();
 }
 
+// Single list item
 .list-item {
   display: flex;
   align-items: center;
@@ -18,6 +19,10 @@
     text-decoration: none;
   }
 
+  @include media-breakpoint-down(sm) {
+    flex-wrap: wrap;
+  }
+
   &:active,
   &.active {
     transform: scale(0.98);
@@ -29,17 +34,28 @@
   }
 }
 
+// Left icon has a right margin
 .list-item-icon {
   margin-right: $spacer;
 }
 
+// The title pushes everything to the right
 .list-item-title {
   margin-right: auto;
   font-size: $font-size-lg;
+
+  @include media-breakpoint-down(sm) {
+    flex: 1 1 100%;
+  }
 }
 
+// Text inside list item is black and has a right margin
 .list-item-inside {
   color: $body-color;
   margin-right: $spacer * 3;
   white-space: nowrap;
+
+  @include media-breakpoint-down(sm) {
+    margin-right: $spacer;
+  }
 }

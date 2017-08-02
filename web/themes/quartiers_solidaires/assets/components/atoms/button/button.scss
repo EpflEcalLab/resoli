@@ -1,10 +1,23 @@
 @charset 'utf-8';
 
+// Placeholders (hack with a mixin to include in media query)
+@mixin btn-circle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 42px;
+  min-height: 42px;
+  padding: $btn-padding-y / 2;
+  line-height: 0;
+}
+
 // Button
 /////////
 
 .btn {
-  min-width: 160px;
+  @include media-breakpoint-up(md) {
+    min-width: 160px;
+  }
 
   &:active {
     transform: scale(0.95);
@@ -109,15 +122,27 @@
     }
   }
 
-  &.btn-outline-primary {
-    .icon svg {
-      color: $btn-primary-border;
+  @include media-breakpoint-down(sm) {
+    @include btn-circle;
+
+    .icon {
+      position: static;
+      margin: 0;
+      transform: none;
     }
   }
 
-  &.btn-outline-secondary {
-    .icon svg {
-      color: $btn-secondary-border;
+  @include media-breakpoint-up(sm) {
+    &.btn-outline-primary {
+      .icon svg {
+        color: $btn-primary-border;
+      }
+    }
+
+    &.btn-outline-secondary {
+      .icon svg {
+        color: $btn-secondary-border;
+      }
     }
   }
 
@@ -144,14 +169,7 @@
 ////////////////
 
 .btn-circle {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 42px;
-  min-height: 42px;
-  padding: $btn-padding-y / 2;
-  line-height: 0;
-
+  @include btn-circle;
   @include icon-size($font-size-base * 1.25);
 }
 

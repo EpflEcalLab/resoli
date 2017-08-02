@@ -2,3 +2,5 @@ title: List Item
 name: list-item
 variants:
   - Detailed
+notes: |
+  The `list-items` is used on `ul` element and contains `li.list-item` components.

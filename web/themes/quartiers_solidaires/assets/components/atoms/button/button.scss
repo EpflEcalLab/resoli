@@ -92,7 +92,7 @@
 
 .btn-icon {
   position: relative;
-  padding-right: $btn-padding-x * 1.2;
+  padding-right: $btn-padding-x;
   padding-left: $btn-padding-x * 1.4;
 
   // icon is inheriting color from its parent,
@@ -147,9 +147,9 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  min-width: 40px;
-  min-height: 40px;
-  padding: $btn-padding-y;
+  min-width: 42px;
+  min-height: 42px;
+  padding: $btn-padding-y / 2;
   line-height: 0;
 
   @include icon-size($font-size-base * 1.25);
@@ -182,6 +182,12 @@
     background-color: $white;
   }
 
+
   // Set color of text based on background when button is active
   @include button-outline-invert('.bg-blue', $blue);
+}
+
+// We still need a Button White when the background is lightly colored
+.btn-white {
+  background-color: $white;
 }

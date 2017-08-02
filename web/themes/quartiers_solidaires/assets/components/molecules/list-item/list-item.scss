@@ -6,25 +6,39 @@
 
 .list-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: $spacer / 1.5;
+  margin-bottom: $spacer;
   background-image: linear-gradient(to right, rgba($brand-secondary, 0) 5%, rgba($brand-secondary, 0.08) 50%);
   border-radius: $btn-border-radius;
 
-  @include hover  {
+  @include icon-size(30px);
+  @include transition(transform 0.2s ease);
+
+  @include hover-focus {
     text-decoration: none;
   }
 
-  @include icon-size(30px);
+  &:active,
+  &.active {
+    transform: scale(0.98);
+    background-image: linear-gradient(to right, rgba($brand-secondary, 0.02) 5%, rgba($brand-secondary, 0.3) 70%);
+  }
+
+  .btn:first-of-type {
+    border: 0;
+  }
+}
+
+.list-item-icon {
+  margin-right: $spacer;
 }
 
 .list-item-title {
-  margin: 0 auto 0 10px;
+  margin-right: auto;
   font-size: $font-size-lg;
 }
 
-.list-item-date {
+.list-item-inside {
   color: $body-color;
   margin-right: $spacer * 3;
   white-space: nowrap;

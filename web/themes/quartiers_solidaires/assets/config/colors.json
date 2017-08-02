@@ -1,1 +1,12 @@
-{}
+{
+  "Black": "#212121",
+  "White": "#fff",
+  "Purple": "#934bcb",
+  "Purple Dark": "#781ebe",
+  "Purple Darker": "#430772",
+  "Green": "#00a082",
+  "Green Dark": "#085445",
+  "Blue": "#5aa0fa",
+  "Lightest Gray": "#f2f2f2",
+  "Lightest Purple": "#f8f4fc"
+}

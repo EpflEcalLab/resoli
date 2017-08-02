@@ -15,6 +15,10 @@
 
   @include drop-shadow(bottom);
 
+  &:hover:not(:active):not(.active) {
+    color: $brand-primary;
+  }
+
   // Small vertical dash below button
   &:after {
     content: '';
@@ -29,9 +33,20 @@
 
   @include icon-size(40px);
 
+  // Handle icon animation on open
+  .icon {
+    transform: rotate(0deg);
+
+    @include transition(transform 0.6s cubic-bezier(0.5, 0.53, 0.37, 0.94));
+  }
+
   // With navbar open
-  .open {
+  .open & {
     z-index: 10;
+
+    .icon {
+      transform: rotate(180deg);
+    }
   }
 }
 
@@ -67,11 +82,12 @@
   padding-right: $btn-padding-x / 1.5;
   padding-left: $btn-padding-x / 1.5;
   min-width: 0;
+  border-color: $purple;
 
   &.active,
   &:active {
-    background-color: $brand-primary;
-    border-color: $brand-primary;
+    background-color: $purple;
+    border-color: $purple;
   }
 
   // First filter item (is actually the second in the markup)
@@ -183,9 +199,11 @@
   align-items: center;
   width: 15vh;
   height: 15vh;
+  min-width: 100px;
+  min-height: 100px;
   border-radius: $border-radius-lg;
   border: $border-width solid $brand-primary;
-  padding-bottom: 2rem;
+  padding-bottom: 2vh;
   font-weight: 600;
 
   @include transition(top 0.1s ease-out);
@@ -198,7 +216,7 @@
 
   @include button-variant($brand-primary, $brand-primary, $brand-primary);
   @include drop-shadow(bottom);
-  @include icon-size(6vh);
+  @include icon-size(6vh, 38px);
 
   // Override background-color set in button variant
   background-color: $brand-primary-light;

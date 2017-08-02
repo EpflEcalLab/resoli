@@ -33,7 +33,8 @@
 
 // Button on :active only
 @mixin button-active($color, $color-active: $white) {
-  &:active {
+  &:active,
+  &.active {
     background-color: $color;
     border-color: $color;
     color: $color-active;
@@ -59,10 +60,15 @@
 }
 
 // Sets the size of the icon
-@mixin icon-size($size) {
+@mixin icon-size($size, $min-size: 0) {
   .icon,
   .icon svg {
     width: $size;
     height: $size;
+
+    @if ($min-size > 0) {
+      min-width: $min-size;
+      min-height: $min-size;
+    }
   }
 }

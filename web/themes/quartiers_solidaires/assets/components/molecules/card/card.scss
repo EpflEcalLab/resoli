@@ -1,0 +1,70 @@
+@charset 'utf-8';
+
+// The card header displays an icon at the left
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-top: -$card-border-width;
+  margin-right: -$card-border-width;
+  margin-left: -$card-border-width;
+  padding: $card-border-width $card-spacer-x $card-border-width $card-border-width;
+  color: $inverse-color;
+  font-weight: 600;
+  border-bottom: none;
+
+  &:first-child {
+    @include border-radius($card-border-radius);
+  }
+
+  &.card-header-no-icon {
+    padding-left: $card-spacer-x;
+  }
+}
+
+.card-header-title {
+  span {
+    white-space: nowrap;
+
+    // space the spans correctly inside card-header title
+    &:not(:last-child) {
+      margin-right: $card-spacer-x;
+    }
+  }
+}
+
+// The icon, pushed against the left border
+.card-header-icon {
+  line-height: 0;
+  margin-right: $card-spacer-x;
+
+  .icon {
+    justify-content: center;
+    align-items: center;
+    width: $card-border-radius * 1.6;
+    height: $card-border-radius * 1.6;
+    border-radius: 50%;
+    background-color: $inverse-color;
+    color: $card-cap-bg;
+
+    svg {
+      width: $card-border-radius * 1.1;
+      height: $card-border-radius * 1.1;
+    }
+  }
+}
+
+.card-title {
+  margin-top: $card-spacer-y * 2;
+  margin-bottom: $card-spacer-y * 3;
+  text-align: center;
+}
+
+.card-icon {
+  text-align: center;
+
+  @include icon-size(60px);
+}
+
+.card-actions {
+  margin-top: $card-spacer-y;
+}

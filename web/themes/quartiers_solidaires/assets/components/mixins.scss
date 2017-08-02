@@ -3,11 +3,19 @@
 // Handle drop shadows on elements
 @mixin drop-shadows($color) {
   &.shadow-to-right {
-    @include drop-shadow(right, $color);
+    @include drop-shadow(bottom, $color);
+
+    @include media-breakpoint-up(md) {
+      @include drop-shadow(right, $color);
+    }
   }
 
   &.shadow-to-left {
-    @include drop-shadow(left, $color);
+    @include drop-shadow(bottom, $color);
+
+    @include media-breakpoint-up(md) {
+      @include drop-shadow(left, $color);
+    }
   }
 }
 

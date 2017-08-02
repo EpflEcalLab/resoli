@@ -2,11 +2,19 @@
 
 // Handle shadows on elements, with brand-primary color
 .shadow-to-right {
-  @include drop-shadow();
+  @include drop-shadow(bottom);
+
+  @include media-breakpoint-up(md) {
+    @include drop-shadow(right);
+  }
 }
 
 .shadow-to-left {
-  @include drop-shadow(left);
+  @include drop-shadow(bottom);
+
+  @include media-breakpoint-up(make-col-modifier) {
+    @include drop-shadow(left);
+  }
 }
 
 .shadow-to-bottom {

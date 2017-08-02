@@ -15,6 +15,10 @@
 /////////
 
 .btn {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   @include media-breakpoint-up(md) {
     min-width: 160px;
   }
@@ -122,26 +126,30 @@
     }
   }
 
-  @include media-breakpoint-down(sm) {
-    @include btn-circle;
-
-    .icon {
-      position: static;
-      margin: 0;
-      transform: none;
+  &.btn-outline-primary {
+    .icon svg {
+      color: $btn-primary-border;
     }
   }
 
-  @include media-breakpoint-up(sm) {
-    &.btn-outline-primary {
-      .icon svg {
-        color: $btn-primary-border;
-      }
+  &.btn-outline-secondary {
+    .icon svg {
+      color: $btn-secondary-border;
     }
+  }
 
-    &.btn-outline-secondary {
-      .icon svg {
-        color: $btn-secondary-border;
+  &.btn-icon-to-circle {
+    @include media-breakpoint-down(sm) {
+      @include btn-circle;
+
+      .icon {
+        position: static;
+        margin: 0;
+        transform: none;
+
+        svg {
+          color: $body-color;
+        }
       }
     }
   }

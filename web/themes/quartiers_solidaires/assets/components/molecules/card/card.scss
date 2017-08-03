@@ -19,6 +19,13 @@
   &.card-header-no-icon {
     padding-left: $card-spacer-x;
   }
+
+  .flag {
+    margin: ($spacer * -2) 0 ($spacer * -3) ($card-spacer-x * 2);
+    color: $card-cap-bg;
+
+    @include flag-size(60px);
+  }
 }
 
 .card-header-title {

@@ -12,7 +12,6 @@
   background-image: linear-gradient(to right, rgba($brand-secondary, 0) 5%, rgba($brand-secondary, 0.08) 50%);
   border-radius: $btn-border-radius;
 
-  @include icon-size(30px);
   @include transition(transform 0.2s ease);
 
   @include hover-focus {
@@ -37,6 +36,8 @@
 // Left icon has a right margin
 .list-item-icon {
   margin-right: $spacer;
+
+  @include icon-size(30px);
 }
 
 // The title pushes everything to the right
@@ -58,4 +59,17 @@
   @include media-breakpoint-down(sm) {
     margin-right: $spacer;
   }
+}
+
+// Display a flag when the status of the list item is set
+.list-item-flag {
+  margin: ($spacer * -2) 0;
+  color: $inverse-color;
+
+  svg {
+    fill: $blue;
+  }
+
+
+  @include flag-size(50px);
 }

@@ -1,17 +1,19 @@
 @charset 'utf-8';
 
 .flag {
-  svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  use:last-child {
-    transform: scale(0.6);
-    transform-origin: (40px / 2) (40px / 2.5);
-  }
+  @include flag-size(40px);
 }
 
 .flag-glow {
   filter: drop-shadow(0 0 5px currentColor);
+}
+
+.flag-blue {
+  svg {
+    fill: $inverse-color;
+  }
+
+  .flag-glow {
+    filter: drop-shadow(0 0 5px $blue);
+  }
 }

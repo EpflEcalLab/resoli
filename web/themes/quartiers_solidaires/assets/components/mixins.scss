@@ -80,3 +80,16 @@
     }
   }
 }
+
+// Sets the size of the flag icon
+@mixin flag-size($size) {
+  svg {
+    width: $size;
+    height: $size;
+  }
+
+  use:last-child {
+    transform: scale(0.6);
+    transform-origin: ($size / 2) ($size / 2.5);
+  }
+}

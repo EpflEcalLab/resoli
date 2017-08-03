@@ -23,6 +23,7 @@
   .flag {
     margin: ($spacer * -2) 0 ($spacer * -3) ($card-spacer-x * 2);
     color: $card-cap-bg;
+    fill: $white;
 
     @include flag-size(60px);
   }

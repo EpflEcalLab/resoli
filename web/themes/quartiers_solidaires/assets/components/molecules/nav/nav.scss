@@ -12,6 +12,7 @@
   margin-bottom: ($grid-gutter-width-base / 2);
   padding: 0;
   color: $brand-primary;
+  overflow: visible; 
 
   @include drop-shadow(bottom);
 
@@ -23,11 +24,12 @@
   &:after {
     content: '';
     position: absolute;
+    z-index: -1;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
     width: $border-width;
-    height: ($grid-gutter-width-base / 2 + $border-width);
+    height: ($grid-gutter-width-base / 2 + 10px);
     background: $brand-primary;
   }
 
@@ -40,10 +42,13 @@
     @include transition(transform 0.6s cubic-bezier(0.5, 0.53, 0.37, 0.94));
   }
 
+  &:active,
+  &.active {
+    border-color: $purple-darker;
+  }
+
   // With navbar open
   .open & {
-    z-index: 10;
-
     .icon {
       transform: rotate(180deg);
     }

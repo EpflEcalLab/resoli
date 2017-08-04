@@ -2,6 +2,7 @@
   "src": "web/themes/quartiers_solidaires/assets/",
   "dest": "web/themes/quartiers_solidaires/build/",
   "ghpages": "web/themes/quartiers_solidaires/build/",
+  "remote": "git@github.com:antistatique/quartiers-solidaires.git",
   "images": [
     "web/themes/quartiers_solidaires/build/images/**/*"
   ],

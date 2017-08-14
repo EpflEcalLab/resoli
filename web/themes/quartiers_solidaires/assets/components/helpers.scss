@@ -28,13 +28,13 @@
 // Background helpers
 @include bg-variant('.bg-white', $white);
 @include bg-variant('.bg-blue', $blue);
-@include bg-variant('.bg-primary', $purple-light);
+@include bg-variant('.bg-primary', color("primary-light"));
 
 .bg-blue,
 .bg-primary {
-  color: theme-color("dark");
+  color: color("light");
 
   .text-muted {
-    color: rgba(theme-color("dark"), 0.75) !important;
+    color: rgba(color("light"), 0.75) !important;
   }
 }

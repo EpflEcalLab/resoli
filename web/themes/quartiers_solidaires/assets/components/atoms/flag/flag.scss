@@ -2,22 +2,26 @@
 
 .flag {
   svg {
-    fill: $green-lightest;
+    fill: color("secondary-lightest");
   }
 
   @include flag-size(40px);
 }
 
 .flag-glow {
-  filter: drop-shadow(0 0 5px currentColor);
+  @if $enable-shadows {
+    filter: drop-shadow(0 0 5px currentColor);
+  }
 }
 
 .flag-blue {
   svg {
-    fill: theme-color("dark");
+    fill: color("dark");
   }
 
   .flag-glow {
-    filter: drop-shadow(0 0 5px $blue);
+    @if $enable-shadows {
+      filter: drop-shadow(0 0 5px $blue);
+    }
   }
 }

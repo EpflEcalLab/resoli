@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   margin-bottom: $spacer;
-  background-image: linear-gradient(to right, rgba($brand-secondary, 0) 5%, rgba($brand-secondary, 0.08) 50%);
+  background-image: linear-gradient(to right, rgba(theme-color("secondary"), 0) 5%, rgba(theme-color("secondary"), 0.08) 50%);
   border-radius: $btn-border-radius;
 
   @include transition(transform 0.2s ease);
@@ -25,7 +25,7 @@
   &:active,
   &.active {
     transform: scale(0.98);
-    background-image: linear-gradient(to right, rgba($brand-secondary, 0.02) 5%, rgba($brand-secondary, 0.3) 70%);
+    background-image: linear-gradient(to right, rgba(theme-color("secondary"), 0.02) 5%, rgba(theme-color("secondary"), 0.3) 70%);
   }
 
   .btn:first-of-type {
@@ -64,7 +64,7 @@
 // Display a flag when the status of the list item is set
 .list-item-flag {
   margin: ($spacer * -2) 0;
-  color: theme-color("dark");
+  color: color("light");
 
   svg {
     fill: $blue;

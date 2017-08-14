@@ -8,7 +8,7 @@
   margin-right: -$card-border-width;
   margin-left: -$card-border-width;
   padding: $card-border-width $card-spacer-x $card-border-width $card-border-width;
-  color: theme-color("dark");
+  color: color("light");
   font-weight: 600;
   border-bottom: none;
 
@@ -51,7 +51,7 @@
     width: $card-border-radius * 1.6;
     height: $card-border-radius * 1.6;
     border-radius: 50%;
-    background-color: theme-color("dark");
+    background-color: color("light");
     color: $card-cap-bg;
 
     svg {

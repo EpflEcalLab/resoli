@@ -63,7 +63,7 @@
     background-color: rgba(theme-color("primary"), 0.1);
   }
 
-  @include button-active($btn-primary-active);
+  @include button-active(color("primary-darker"));
 }
 
 // Button Secondary
@@ -77,7 +77,7 @@
     background-color: rgba(theme-color("secondary"), 0.1);
   }
 
-  @include button-active($btn-secondary-active);
+  @include button-active(color("secondary-dark"));
 }
 
 .btn-secondary,
@@ -99,33 +99,34 @@
 
 // Override button-outline-* styles to be more UX friendly
 // (don't invert colors on hover)
-.btn-outline-info {
-  @include hover {
-    color: $body-color;
-    background-color: rgba(theme-color("info"), 0.1);
-  }
-}
+// REFACTOR THIS WITH MAP
+// .btn-outline-info {
+//   @include hover {
+//     color: $body-color;
+//     background-color: rgba(theme-color("info"), 0.1);
+//   }
+// }
 
-.btn-outline-success {
-  @include hover {
-    color: $body-color;
-    background-color: rgba(theme-color("success"), 0.1);
-  }
-}
+// .btn-outline-success {
+//   @include hover {
+//     color: $body-color;
+//     background-color: rgba(theme-color("success"), 0.1);
+//   }
+// }
 
-.btn-outline-warning {
-  @include hover {
-    color: $body-color;
-    background-color: rgba(theme-color("warning"), 0.1);
-  }
-}
+// .btn-outline-warning {
+//   @include hover {
+//     color: $body-color;
+//     background-color: rgba(theme-color("warning"), 0.1);
+//   }
+// }
 
-.btn-outline-danger {
-  @include hover {
-    color: $body-color;
-    background-color: rgba(theme-color("danger"), 0.1);
-  }
-}
+// .btn-outline-danger {
+//   @include hover {
+//     color: $body-color;
+//     background-color: rgba(theme-color("danger"), 0.1);
+//   }
+// }
 
 // Button Icon
 //////////////

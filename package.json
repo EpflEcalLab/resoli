@@ -28,8 +28,8 @@
   },
   "stylelint": {
     "ignoreFiles": [
-      "assets/sass/main.scss",
-      "assets/sass/main-variables.scss"
+      "web/themes/quartiers_solidaires/assets/config/bootstrap-variables.scss",
+      "web/themes/quartiers_solidaires/assets/config/variables.scss"
     ],
     "extends": "stylelint-config-standard",
     "rules": {

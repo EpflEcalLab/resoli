@@ -44,7 +44,7 @@
 
   &:active,
   &.active {
-    border-color: $purple-darker;
+    border-color: color("primary-darker");
   }
 
   // With navbar open

@@ -1,0 +1,43 @@
+# Log in
+qs_auth.login:
+    path: '/authentication/login'
+    defaults:
+        _form: '\Drupal\user\Form\UserLoginForm'
+        _title: 'qs_auth.login'
+    requirements:
+      _user_is_logged_in: 'FALSE'
+    options:
+      _maintenance_access: TRUE
+
+# Forget Password
+qs_auth.pass:
+    path: '/authentication/password'
+    defaults:
+      _form: '\Drupal\user\Form\UserPasswordForm'
+      _title: 'qs_auth.forget_password'
+    requirements:
+      _user_is_logged_in: 'FALSE'
+    options:
+      _maintenance_access: TRUE
+
+# Register
+qs_auth.register:
+    path: '/authentication/register'
+    defaults:
+        _form: '\Drupal\qs_auth\Form\RegisterForm'
+        _title: 'qs_auth.register'
+    requirements:
+      _user_is_logged_in: 'FALSE'
+    options:
+      _maintenance_access: FALSE
+
+# Approval
+qs_auth.approval:
+    path: '/authentication/approval'
+    defaults:
+        _controller: '\Drupal\qs_auth\Controller\AccountController::approval'
+        _title: 'qs_auth.approval'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+    options:
+      _maintenance_access: FALSE

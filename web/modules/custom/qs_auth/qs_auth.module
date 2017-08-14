@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * @file
+ * QS Authentication hooks.
+ */
+
+// Includes.
+require_once 'inc/user_login_form.inc';
+require_once 'inc/user_pass_form.inc';
+require_once 'inc/mails.inc';

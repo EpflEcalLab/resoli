@@ -9,3 +9,4 @@ sendmail_mode: bs
 spool_directory: ''
 _core:
   default_config_hash: 0SeYZshzgoabDrbz-junYqeQOQ9BypPv2gaFcnqKy0M
+langcode: fr

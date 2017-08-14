@@ -9,3 +9,4 @@ excludes:
     - user.password_reset
 _core:
   default_config_hash: GbbPZdROKX1oBVjxw6ag3kLxSlRdXCbaPv0LsH7eqW4
+langcode: fr

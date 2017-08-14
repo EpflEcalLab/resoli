@@ -27,6 +27,7 @@ module:
   focal_point: 0
   help: 0
   history: 0
+  honeypot: 0
   image: 0
   language: 0
   link: 0
@@ -38,6 +39,9 @@ module:
   page_cache: 0
   path: 0
   pathauto: 0
+  qs_auth: 0
+  qs_site: 0
+  qs_toolbar: 0
   rdf: 0
   redirect: 0
   swiftmailer: 0
@@ -60,3 +64,4 @@ theme:
 profile: standard
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
+langcode: fr

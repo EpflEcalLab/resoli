@@ -1,0 +1,28 @@
+uuid: 46766182-d3ba-42eb-924f-a9899e09f36f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_community_members
+    - taxonomy.vocabulary.communities
+id: taxonomy_term.communities.field_community_members
+field_name: field_community_members
+entity_type: taxonomy_term
+bundle: communities
+label: Members
+description: 'Certified Member of this community.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

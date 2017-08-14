@@ -3,11 +3,55 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_firstname
+    - field.field.user.user.field_lastname
     - field.field.user.user.user_picture
-    - image.style.thumbnail
   module:
-    - image
+    - field_group
     - user
+third_party_settings:
+  field_group:
+    group_tabs:
+      children:
+        - group_credentials
+        - group_informations
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: vertical
+      label: Tabs
+    group_credentials:
+      children:
+        - account
+        - timezone
+        - language
+      parent_name: group_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Credentials
+    group_informations:
+      children:
+        - field_firstname
+        - field_lastname
+      parent_name: group_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Informations
 _core:
   default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
 id: user.user.default
@@ -16,29 +60,40 @@ bundle: user
 mode: default
 content:
   account:
-    weight: -10
+    weight: 0
     region: content
+    settings: {  }
+    third_party_settings: {  }
   contact:
     weight: 5
     region: content
-  language:
-    weight: 0
+  field_firstname:
+    weight: 22
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
-  path:
-    type: path
-    weight: 30
+  field_lastname:
+    weight: 23
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  language:
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }
   timezone:
-    weight: 6
+    weight: 2
     region: content
-  user_picture:
-    type: image_image
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
+    settings: {  }
     third_party_settings: {  }
-    weight: -1
-    region: content
-hidden: {  }
+hidden:
+  langcode: true
+  path: true
+  user_picture: true

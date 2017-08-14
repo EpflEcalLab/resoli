@@ -1,0 +1,17 @@
+uuid: 9aae8eee-7ea9-4ada-9956-e1a225533164
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Event
+type: event
+description: 'Event which belongs to only one Activity.'
+help: ''
+new_revision: true
+preview_mode: 2
+display_submitted: false

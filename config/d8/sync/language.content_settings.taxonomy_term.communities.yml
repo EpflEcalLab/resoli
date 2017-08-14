@@ -1,0 +1,11 @@
+uuid: 939a7cd9-685f-47e8-9a88-853b16f47cb7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.communities
+id: taxonomy_term.communities
+target_entity_type_id: taxonomy_term
+target_bundle: communities
+default_langcode: zxx
+language_alterable: false

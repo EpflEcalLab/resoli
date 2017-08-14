@@ -1,0 +1,19 @@
+uuid: 258cf93f-9670-4ee2-8877-755441333647
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_venue
+    - node.type.activity
+id: node.activity.field_venue
+field_name: field_venue
+entity_type: node
+bundle: activity
+label: Venue
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

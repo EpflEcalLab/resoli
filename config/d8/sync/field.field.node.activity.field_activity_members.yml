@@ -1,0 +1,28 @@
+uuid: 6f1d91b8-aa43-4efd-9681-cc3611bcdbb3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_activity_members
+    - node.type.activity
+id: node.activity.field_activity_members
+field_name: field_activity_members
+entity_type: node
+bundle: activity
+label: Members
+description: 'Certified members for this activity'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

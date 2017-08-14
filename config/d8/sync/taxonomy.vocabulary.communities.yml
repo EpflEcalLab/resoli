@@ -1,0 +1,9 @@
+uuid: c725fdea-29a8-4058-81be-d68b97c736bb
+langcode: zxx
+status: true
+dependencies: {  }
+name: Communities
+vid: communities
+description: 'Communities member will belongs to.'
+hierarchy: 0
+weight: 0

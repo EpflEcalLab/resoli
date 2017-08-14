@@ -1,0 +1,21 @@
+uuid: a6f79bc6-123b-45d9-bae6-a94acfed6da5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_icon
+    - taxonomy.vocabulary.themes
+  module:
+    - options
+id: taxonomy_term.themes.field_icon
+field_name: field_icon
+entity_type: taxonomy_term
+bundle: themes
+label: Icon
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

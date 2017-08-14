@@ -1,0 +1,22 @@
+uuid: 042d6653-c0ba-4d19-b745-add7a4007778
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.activity
+  module:
+    - text
+id: node.activity.body
+field_name: body
+entity_type: node
+bundle: activity
+label: Body
+description: 'The default body will be used as <strong>placeholder</strong> for attached events.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

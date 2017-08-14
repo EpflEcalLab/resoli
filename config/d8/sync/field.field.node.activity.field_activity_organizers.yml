@@ -1,0 +1,28 @@
+uuid: 7a5c86e2-ab42-4e78-bce6-e52053e24991
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_activity_organizers
+    - node.type.activity
+id: node.activity.field_activity_organizers
+field_name: field_activity_organizers
+entity_type: node
+bundle: activity
+label: Organizers
+description: 'May create events, manage members privileges (members, maintainers, organizers) & see events subscriptions.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

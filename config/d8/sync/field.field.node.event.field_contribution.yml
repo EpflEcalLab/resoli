@@ -1,0 +1,23 @@
+uuid: 334431a7-03ff-44be-8cfb-7b387c68b136
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contribution
+    - node.type.event
+id: node.event.field_contribution
+field_name: field_contribution
+entity_type: node
+bundle: event
+label: Contribution
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

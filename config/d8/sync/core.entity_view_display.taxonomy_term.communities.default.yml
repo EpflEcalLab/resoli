@@ -1,0 +1,60 @@
+uuid: dba2c5b3-3cdd-4c77-b576-6c7c01c5039a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.communities.field_community_logo
+    - field.field.taxonomy_term.communities.field_community_managers
+    - field.field.taxonomy_term.communities.field_community_members
+    - field.field.taxonomy_term.communities.field_community_organizers
+    - taxonomy.vocabulary.communities
+  module:
+    - image
+    - text
+id: taxonomy_term.communities.default
+targetEntityType: taxonomy_term
+bundle: communities
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_community_logo:
+    weight: 4
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_community_managers:
+    weight: 2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_community_members:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_community_organizers:
+    weight: 3
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  langcode: true

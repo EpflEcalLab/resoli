@@ -6,9 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_auth\Service\Account;
-use Drupal\Core\Locale\CountryManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Render\RendererInterface;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
 
 /**
@@ -25,13 +23,6 @@ class RegisterForm extends FormBase {
   protected $account;
 
   /**
-   * The country field manager.
-   *
-   * @var \Drupal\country\CountryManager
-   */
-  protected $country;
-
-  /**
    * EntityTypeManagerInterface to load Term(s)
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -39,29 +30,11 @@ class RegisterForm extends FormBase {
   private $termStorage;
 
   /**
-   * The renderer service.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
+   * {@inheritdoc}
    */
-  private $renderer;
-
-  /**
-   * Class constructor.
-   *
-   * @param \Drupal\qs_auth\Service\Account $account
-   *   The qs account service.
-   * @param \Drupal\country\CountryManager $country
-   *   The country field manager.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity
-   *   The Entity type manager service.
-   * @param \Drupal\Core\Render\RendererInterface $renderer
-   *   The renderer service.
-   */
-  public function __construct(Account $account, CountryManager $country, EntityTypeManagerInterface $entity, RendererInterface $renderer) {
+  public function __construct(Account $account, EntityTypeManagerInterface $entity) {
     $this->account     = $account;
-    $this->country     = $country;
     $this->termStorage = $entity->getStorage('taxonomy_term');
-    $this->renderer    = $renderer;
   }
 
   /**
@@ -70,9 +43,7 @@ class RegisterForm extends FormBase {
   public static function create(ContainerInterface $container) {
     return new static(
     $container->get('qs_auth.account'),
-    $container->get('country_manager'),
-    $container->get('entity_type.manager'),
-    $container->get('renderer')
+    $container->get('entity_type.manager')
     );
   }
 
@@ -106,7 +77,7 @@ class RegisterForm extends FormBase {
       $options[$community->tid->value] = $community->name->value;
     }
     $form['register']['step-1']['community'] = [
-      '#attributes' => ['title' => $this->t('qs_auth.register_form.community *'),],
+      '#attributes' => ['title' => $this->t('qs_auth.register_form.community *')],
       '#type'       => 'radios',
       '#required'   => FALSE,
       '#options'    => $options,
@@ -130,7 +101,7 @@ class RegisterForm extends FormBase {
       '#required'    => FALSE,
     ];
 
-   $form['register']['step-3'] = [
+    $form['register']['step-3'] = [
       '#type'  => 'fieldset',
     ];
 
@@ -153,7 +124,7 @@ class RegisterForm extends FormBase {
       '#required' => FALSE,
     ];
 
-   $form['register']['step-4'] = [
+    $form['register']['step-4'] = [
       '#type'  => 'fieldset',
     ];
 

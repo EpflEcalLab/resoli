@@ -8,6 +8,7 @@ use Drupal\Core\Controller\ControllerBase;
  * AccountController.
  */
 class AccountController extends ControllerBase {
+
   /**
    * Account page.
    */

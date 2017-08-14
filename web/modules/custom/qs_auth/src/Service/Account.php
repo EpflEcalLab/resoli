@@ -42,11 +42,19 @@ class Account {
   protected $queryFactory;
 
   /**
+   * EntityTypeManagerInterface to load Term(s)
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  private $termStorage;
+
+  /**
    * Class constructor.
    */
   public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, QueryFactory $query_factory) {
     $this->mail         = $mail;
     $this->userStorage  = $entity_type_manager->getStorage('user');
+    $this->termStorage  = $entity_type_manager->getStorage('taxonomy_term');
     $this->userAuth     = $user_auth;
     $this->queryFactory = $query_factory;
   }
@@ -66,7 +74,7 @@ class Account {
     // Mandatory settings.
     $user->setPassword($data['password']);
     $user->enforceIsNew();
-    $user->setEmail($data['username']);
+    $user->setEmail($data['mail']);
     // This username must be unique and accept only a-Z,0-9, - _ @
     // We use the email address as Username.
     $user->setUsername($data['username']);
@@ -77,10 +85,16 @@ class Account {
     $user->set('field_phone', $data['phone']);
 
     // Add default role need-approval.
-    // $user->addRole('need-approval');
-
+    // $user->addRole('need-approval');.
     $user->activate();
     $user->save();
+
+    // Add this user to the community.
+    $community = $this->termStorage->load($data['community']);
+    if ($community) {
+      $community->get('field_community_members')->appendItem($user);
+      $community->save();
+    }
 
     // Login the created user.
     $this->login($user->mail->value, $data['password']);
@@ -116,8 +130,7 @@ class Account {
     $user->set('field_phone', $data['phone']);
 
     // Add default role need-approval.
-    // $user->addRole('need-approval');
-
+    // $user->addRole('need-approval');.
     $user->save();
 
     return $user;
@@ -151,10 +164,8 @@ class Account {
    * @param \Drupal\user\UserInterface $user
    *   The user to send register mail.
    */
-  public function sendRegisterMail(UserInterface $user) {
-    $params = [
-      'user' => $user,
-    ];
+  public function sendRegisterEmail(UserInterface $user) {
+    $params = ['user' => $user];
     $this->mail->mail('qs_auth', 'register', $user->getEmail(), $user->getPreferredLangcode(), $params);
   }
 

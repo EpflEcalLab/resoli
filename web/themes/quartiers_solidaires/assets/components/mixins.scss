@@ -20,7 +20,8 @@
 }
 
 // Adds a shadow to the element, to the direction you want
-@mixin drop-shadow($direction: right, $color: $brand-primary) {
+/* stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after */
+@mixin drop-shadow($direction: right, $color: theme-color("primary")) {
   @if $enable-shadows {
     @if ($direction == right) {
       box-shadow: 2px 2px 2px 0 rgba($color, 0.3);
@@ -31,9 +32,10 @@
     }
   }
 }
+/* stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after */
 
 // Adds a floating shadow effect
-@mixin floating-shadow($color: $brand-primary) {
+@mixin floating-shadow($color: theme-color("primary")) {
   @if $enable-shadows {
     box-shadow: 0 0 10px 0 rgba($color, 0.6);
   }

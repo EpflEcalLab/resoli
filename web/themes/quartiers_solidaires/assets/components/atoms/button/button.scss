@@ -9,15 +9,15 @@
   align-items: center;
   min-width: 42px;
   min-height: 42px;
-  padding: $btn-padding-y / 2;
+  padding: $input-btn-padding-y / 2;
   line-height: 0;
 }
 
 // Also used for badges
 %btn-icon {
   position: relative;
-  padding-right: $btn-padding-x;
-  padding-left: $btn-padding-x * 1.4;
+  padding-right: $input-btn-padding-x;
+  padding-left: $input-btn-padding-x * 1.4;
 
   // icon is inheriting color from its parent,
   // please use `fill="currentColor"` in your svg file
@@ -25,7 +25,7 @@
     position: absolute;
     top: 50%;
     left: 0;
-    margin: 0 ($btn-padding-x / 3) 0 ($btn-padding-x / 5);
+    margin: 0 ($input-btn-padding-x / 3) 0 ($input-btn-padding-x / 5);
     transform: translateY(-50%);
 
     svg {
@@ -60,7 +60,7 @@
 
   @include hover {
     color: $body-color;
-    background-color: rgba($btn-primary-bg, 0.1);
+    background-color: rgba(theme-color("primary"), 0.1);
   }
 
   @include button-active($btn-primary-active);
@@ -74,7 +74,7 @@
 
   @include hover {
     color: $body-color;
-    background-color: rgba($btn-secondary-border, 0.1);
+    background-color: rgba(theme-color("secondary"), 0.1);
   }
 
   @include button-active($btn-secondary-active);
@@ -84,16 +84,16 @@
 .btn-outline-secondary {
 
   // Handle shadows on elements
-  @include drop-shadows($btn-secondary-border);
+  @include drop-shadows(theme-color("secondary"));
 
   &.shadow-floating {
-    @include floating-shadow($btn-secondary-border);
+    @include floating-shadow(theme-color("secondary"));
   }
 
   // re-add focus styles from Bootstrap button mixin
   &:focus,
   &.focus {
-    box-shadow: 0 0 0 2px rgba($btn-secondary-border, 0.5);
+    box-shadow: 0 0 0 2px rgba(theme-color("secondary"), 0.5);
   }
 }
 
@@ -102,28 +102,28 @@
 .btn-outline-info {
   @include hover {
     color: $body-color;
-    background-color: rgba($btn-info-bg, 0.1);
+    background-color: rgba(theme-color("info"), 0.1);
   }
 }
 
 .btn-outline-success {
   @include hover {
     color: $body-color;
-    background-color: rgba($btn-success-bg, 0.1);
+    background-color: rgba(theme-color("success"), 0.1);
   }
 }
 
 .btn-outline-warning {
   @include hover {
     color: $body-color;
-    background-color: rgba($btn-warning-bg, 0.1);
+    background-color: rgba(theme-color("warning"), 0.1);
   }
 }
 
 .btn-outline-danger {
   @include hover {
     color: $body-color;
-    background-color: rgba($btn-danger-bg, 0.1);
+    background-color: rgba(theme-color("danger"), 0.1);
   }
 }
 
@@ -135,13 +135,13 @@
 
   &.btn-outline-primary {
     .icon svg {
-      color: $btn-primary-border;
+      color: theme-color("primary");
     }
   }
 
   &.btn-outline-secondary {
     .icon svg {
-      color: $btn-secondary-border;
+      color: theme-color("secondary");
     }
   }
 
@@ -170,11 +170,11 @@
 }
 
 .btn-icon-right {
-  padding-right: $btn-padding-x * 1.4;
-  padding-left: $btn-padding-x * 1.2;
+  padding-right: $input-btn-padding-x * 1.4;
+  padding-left: $input-btn-padding-x * 1.2;
 
   .icon {
-    margin: 0 ($btn-padding-x / 5) 0 ($btn-padding-x / 3);
+    margin: 0 ($input-btn-padding-x / 5) 0 ($input-btn-padding-x / 3);
     left: auto;
     right: 0;
   }
@@ -214,7 +214,6 @@
     color: $body-color;
     background-color: $white;
   }
-
 
   // Set color of text based on background when button is active
   @include button-outline-invert('.bg-blue', $blue);

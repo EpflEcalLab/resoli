@@ -64,12 +64,11 @@
 // Display a flag when the status of the list item is set
 .list-item-flag {
   margin: ($spacer * -2) 0;
-  color: $inverse-color;
+  color: theme-color("dark");
 
   svg {
     fill: $blue;
   }
-
 
   @include flag-size(50px);
 }

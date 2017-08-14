@@ -32,9 +32,9 @@
 
 .bg-blue,
 .bg-primary {
-  color: $inverse-color;
+  color: theme-color("dark");
 
   .text-muted {
-    color: rgba($inverse-color, 0.75) !important;
+    color: rgba(theme-color("dark"), 0.75) !important;
   }
 }

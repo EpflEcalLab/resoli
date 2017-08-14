@@ -14,7 +14,7 @@
 
 .flag-blue {
   svg {
-    fill: $inverse-color;
+    fill: theme-color("dark");
   }
 
   .flag-glow {

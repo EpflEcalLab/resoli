@@ -1,6 +1,10 @@
 @charset 'utf-8';
 
 .flag {
+  svg {
+    fill: $green-lightest;
+  }
+
   @include flag-size(40px);
 }
 

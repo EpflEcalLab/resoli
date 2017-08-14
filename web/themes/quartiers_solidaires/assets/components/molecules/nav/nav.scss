@@ -12,7 +12,7 @@
   margin-bottom: ($grid-gutter-width-base / 2);
   padding: 0;
   color: $brand-primary;
-  overflow: visible; 
+  overflow: visible;
 
   @include drop-shadow(bottom);
 
@@ -23,6 +23,7 @@
   // Small vertical dash below button
   &:after {
     content: '';
+    background: $brand-primary;
     position: absolute;
     z-index: -1;
     top: 100%;
@@ -30,7 +31,6 @@
     transform: translateX(-50%);
     width: $border-width;
     height: ($grid-gutter-width-base / 2 + 10px);
-    background: $brand-primary;
   }
 
   @include icon-size(40px);

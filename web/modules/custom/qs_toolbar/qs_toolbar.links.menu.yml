@@ -1,0 +1,5 @@
+qs_toolbar.admin:
+  title: Quartiers Solidaires
+  parent: system.admin
+  route_name: qs_toolbar.admin
+  weight: 100

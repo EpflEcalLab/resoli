@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+/**
+ * Hook Toolbar Alter.
+ *
+ * Implements hook_toolbar_alter().
+ */
+function qs_toolbar_toolbar_alter(&$items) {
+  $items['administration']['#attached']['library'][] = 'qs_toolbar/icons';
+}

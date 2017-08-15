@@ -57,7 +57,7 @@ qs_auth.communities:
 
 # Communities apply form
 qs_auth.communities.apply:
-    path: '/authentication/communities'
+    path: '/authentication/communities/apply'
     defaults:
         _form: '\Drupal\qs_auth\Form\CommunitiesApplyForm'
         _title: 'qs_auth.communities.apply'

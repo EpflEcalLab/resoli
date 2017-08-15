@@ -3,6 +3,7 @@
 namespace Drupal\qs_auth\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\taxonomy\TermInterface;
 
 /**
  * AccountController.
@@ -19,7 +20,8 @@ class AccountController extends ControllerBase {
    * @TODO: Code the page with link of community, appliance link,
    * status of pending appliance & membership.
    */
-  public function approval() {
+  public function approval(TermInterface $community) {
+    dump($community);
     return ['#markup' => 'approval'];
   }
 

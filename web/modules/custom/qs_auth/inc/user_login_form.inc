@@ -45,8 +45,28 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
 
 /**
  * Custom submit handler for login form.
+ *
+ * Set redirect when the GET parameter destination doesn't exists.
  */
 function qs_auth_user_login_form_submit($form, $form_state) {
-  // Set redirect to login form if the ?destination=XYZ doesn't exist.
-  // $form_state->setRedirect('<front>', [], []);.
+  // Fallback redirection.
+  $form_state->setRedirect('<front>', [], []);
+
+  // Load services.
+  $acl = \Drupal::service('qs_acl.access_control');
+
+  // Check the current user has apply to at least one community.
+  if (!$acl->hasCommunity()) {
+    $form_state->setRedirect('qs_auth.communities.apply', [], []);
+  }
+
+  // Check user is a beginner, so need unboarding.
+  if ($acl->isBeginner()) {
+    // $form_state->setRedirect('qs_onboarding.welcome', [], []);.
+  }
+
+  // If the user has multiple communities, redirect him on the communities page.
+  if ($acl->hasMultipleCommunities()) {
+    $form_state->setRedirect('qs_auth.communities', [], []);
+  }
 }

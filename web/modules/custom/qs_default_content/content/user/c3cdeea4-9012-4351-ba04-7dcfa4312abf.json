@@ -1,0 +1,68 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/4?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 4
+        }
+    ],
+    "uuid": [
+        {
+            "value": "c3cdeea4-9012-4351-ba04-7dcfa4312abf"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "member+fribourg@antistatique.net"
+        }
+    ],
+    "created": [
+        {
+            "value": 1502813267
+        }
+    ],
+    "changed": [
+        {
+            "value": 1502813267,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Member"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Fribourg"
+        }
+    ],
+    "pass": [
+        {
+            "value": "member+fribourg"
+        }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

@@ -219,8 +219,8 @@ class RegisterForm extends FormBase {
     $user = $this->account->create($form_state->getValues());
     $this->account->sendRegisterEmail($user);
 
-    drupal_set_message($this->t("Thank you <strong>@nickname</strong> for your subscription!", [
-      '@nickname' => $user->field_nickname->value,
+    drupal_set_message($this->t("Thank you <strong>@firstname</strong> for your subscription!", [
+      '@firstname' => $user->field_firstname->value,
     ]));
 
     $form_state->setRedirect('<front>');

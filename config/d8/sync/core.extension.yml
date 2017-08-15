@@ -39,6 +39,7 @@ module:
   page_cache: 0
   path: 0
   pathauto: 0
+  qs_acl: 0
   qs_auth: 0
   qs_site: 0
   qs_toolbar: 0

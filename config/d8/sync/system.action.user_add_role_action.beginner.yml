@@ -1,0 +1,14 @@
+uuid: 4181cdd3-e68c-4f56-8527-3283eea18ca8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.beginner
+  module:
+    - user
+id: user_add_role_action.beginner
+label: 'Ajouter le rôle Beginner aux utilisateurs sélectionnés'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: beginner

@@ -84,8 +84,8 @@ class Account {
     $user->set('field_lastname', $data['lastname']);
     $user->set('field_phone', $data['phone']);
 
-    // Add default role need-approval.
-    // $user->addRole('need-approval');.
+    // Add default role beginner.
+    $user->addRole('beginner');
     $user->activate();
     $user->save();
 
@@ -129,8 +129,6 @@ class Account {
     $user->set('field_lastname', $data['lastname']);
     $user->set('field_phone', $data['phone']);
 
-    // Add default role need-approval.
-    // $user->addRole('need-approval');.
     $user->save();
 
     return $user;

@@ -223,7 +223,8 @@ class RegisterForm extends FormBase {
       '@firstname' => $user->field_firstname->value,
     ]));
 
-    $form_state->setRedirect('<front>');
+    $community = $this->termStorage->load($form_state->getValue('community'));
+    $form_state->setRedirect('qs_auth.approval', ['community' => $community->id()], []);
   }
 
 }

@@ -53,4 +53,13 @@ qs_auth.communities:
     options:
       _maintenance_access: FALSE
 
-
+# Communities apply form
+qs_auth.communities.apply:
+    path: '/authentication/communities'
+    defaults:
+        _form: '\Drupal\qs_auth\Form\CommunitiesApplyForm'
+        _title: 'qs_auth.communities.apply'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+    options:
+      _maintenance_access: FALSE

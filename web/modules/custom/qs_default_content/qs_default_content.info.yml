@@ -1,0 +1,8 @@
+name: Default Content
+description: 'Default content of Quartiers Solidaires'
+package: Quartiers Solidaires
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:default_content

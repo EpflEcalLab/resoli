@@ -7,6 +7,7 @@ use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\user\UserAuthInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\qs_acl\Service\PrivilegeManger;
 
 /**
  * Service Account.
@@ -49,14 +50,22 @@ class Account {
   private $termStorage;
 
   /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   */
+  private $privilegeManger;
+
+  /**
    * Class constructor.
    */
-  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, QueryFactory $query_factory) {
-    $this->mail         = $mail;
-    $this->userStorage  = $entity_type_manager->getStorage('user');
-    $this->termStorage  = $entity_type_manager->getStorage('taxonomy_term');
-    $this->userAuth     = $user_auth;
-    $this->queryFactory = $query_factory;
+  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, QueryFactory $query_factory, PrivilegeManger $privilege_manager) {
+    $this->mail            = $mail;
+    $this->userStorage     = $entity_type_manager->getStorage('user');
+    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
+    $this->userAuth        = $user_auth;
+    $this->queryFactory    = $query_factory;
+    $this->privilegeManger = $privilege_manager;
   }
 
   /**
@@ -89,11 +98,10 @@ class Account {
     $user->activate();
     $user->save();
 
-    // Add this user to the community.
+    // Create a Request Privilege as Member for this community.
     $community = $this->termStorage->load($data['community']);
     if ($community) {
-      $community->get('field_community_members')->appendItem($user);
-      $community->save();
+      $this->privilegeManger->request('community_members', $community, $user);
     }
 
     // Login the created user.

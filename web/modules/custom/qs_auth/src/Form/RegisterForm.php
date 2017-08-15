@@ -58,8 +58,6 @@ class RegisterForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL) {
-    $form['#attributes']['class'] = ['form-emphasis'];
-
     // Honeypot.
     honeypot_add_form_protection($form, $form_state, ['honeypot', 'time_restriction']);
 

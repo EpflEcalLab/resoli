@@ -15,14 +15,12 @@ class AccountController extends ControllerBase {
    * This page is shown when the user access to a community which he previously
    * applied but which he's not a certified member.
    * He must be reviewed by a Manager of this community.
+   *
+   * @TODO: Code the page with link of community, appliance link,
+   * status of pending appliance & membership.
    */
   public function approval() {
-    $variables = [];
-
-    return [
-      '#theme'     => 'egj_auth_approval_page',
-      '#variables' => $variables,
-    ];
+    return ['#markup' => 'approval'];
   }
 
   /**

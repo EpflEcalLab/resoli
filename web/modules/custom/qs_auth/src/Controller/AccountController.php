@@ -21,4 +21,17 @@ class AccountController extends ControllerBase {
     ];
   }
 
+  /**
+   * Communities page.
+   *
+   * This page is shown when the user has more than 1 community where he's a
+   * certified member.
+   *
+   * @TODO: Code the page with link of community, appliance link,
+   * status of pending appliance & membership.
+   */
+  public function communities() {
+    return ['#markup' => 'communities'];
+  }
+
 }

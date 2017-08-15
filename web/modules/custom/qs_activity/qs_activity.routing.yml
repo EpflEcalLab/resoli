@@ -1,0 +1,13 @@
+# Activities by themes
+qs_activity.collection.themes:
+    path: '/activities/{community}/theme'
+    defaults:
+      _controller: '\Drupal\qs_activity\Controller\CollectionController::themes'
+      _title: 'Activities by themes'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Controller\CollectionController::access'
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term

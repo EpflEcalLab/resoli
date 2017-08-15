@@ -1,0 +1,137 @@
+<?php
+
+namespace Drupal\qs_acl\Service;
+
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Entity\Query\QueryFactory;
+
+/**
+ * AccessControl.
+ */
+class AccessControl {
+  /**
+   * The current active user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  private $currentUser;
+
+  /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
+   * The entity query factory.
+   *
+   * @var \Drupal\Core\Entity\Query\QueryFactory
+   */
+  protected $queryFactory;
+
+  /**
+   * Class constructor.
+   */
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity, QueryFactory $query_factory) {
+    $this->currentUser  = $currentUser;
+    $this->termStorage  = $entity->getStorage('taxonomy_term');
+    $this->queryFactory = $query_factory;
+  }
+
+  /**
+   * Check if the given user or the current logged one has the role beginner.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the account has the beginner role.
+   */
+  public function isBeginner(AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $roles = $user->getRoles();
+
+    return in_array('beginner', $roles);
+  }
+
+  /**
+   * Check if the user belongs to at least one community.
+   *
+   * This only check if the users belongs to a community
+   * as Member or Organizer or Managers.
+   * It doesn't get pending request..
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the account belongs to at least one community.
+   */
+  public function hasCommunity(AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $number = $this->countCommunitiesByUser($user);
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the user belongs to more than one community.
+   *
+   * This only check if the users belongs to a community
+   * as Member or Organizer or Managers.
+   * It doesn't get pending request.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the account belongs to more than one community.
+   */
+  public function hasMultipleCommunities(AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $number = $this->countCommunitiesByUser($user);
+
+    return $number > 1 ? TRUE : FALSE;
+  }
+
+  /**
+   * Count communities for a given user.
+   *
+   * This only count relation as Member or Organizer or Managers.
+   * It doesn't count pending request.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User.
+   *
+   * @return int
+   *   Number of communities the user belongs to.
+   */
+  private function countCommunitiesByUser(AccountInterface $account) {
+    $query = $this->queryFactory->get('taxonomy_term')
+      ->condition('vid', 'communities');
+
+    $or = $query->orConditionGroup();
+    $or->condition('field_community_members', $account->id());
+    $or->condition('field_community_organizers', $account->id());
+    $or->condition('field_community_managers', $account->id());
+    $query->condition($or);
+
+    return $query->count()->execute();
+  }
+
+}

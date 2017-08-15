@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+<label class="custom-control custom-radio">
+  {%
+    set classes = [
+    'custom-control-input',
+    ]
+  %}
+  <input{{ attributes.addClass(classes) }} />
+  <span class="custom-control-indicator"></span>
+  <span class="custom-control-description"> {{ element['#title'] }}</span>
+</label>

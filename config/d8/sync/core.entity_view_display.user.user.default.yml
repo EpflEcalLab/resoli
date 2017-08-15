@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.user.user.field_firstname
     - field.field.user.user.field_lastname
+    - field.field.user.user.field_phone
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -27,6 +28,14 @@ content:
     region: content
   field_lastname:
     weight: 7
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_phone:
+    weight: 8
     label: above
     settings:
       link_to_entity: false

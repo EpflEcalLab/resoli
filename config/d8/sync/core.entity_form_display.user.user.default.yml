@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.user.user.field_firstname
     - field.field.user.user.field_lastname
+    - field.field.user.user.field_phone
     - field.field.user.user.user_picture
   module:
     - field_group
@@ -42,6 +43,7 @@ third_party_settings:
       children:
         - field_firstname
         - field_lastname
+        - field_phone
       parent_name: group_tabs
       weight: 21
       format_type: tab
@@ -77,6 +79,14 @@ content:
     region: content
   field_lastname:
     weight: 23
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_phone:
+    weight: 24
     settings:
       size: 60
       placeholder: ''

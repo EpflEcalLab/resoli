@@ -1,2 +1,4 @@
 title: Card
 name: card
+variants:
+  - list

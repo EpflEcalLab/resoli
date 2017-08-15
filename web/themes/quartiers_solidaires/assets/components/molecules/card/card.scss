@@ -1,47 +1,60 @@
 @charset 'utf-8';
 
-// The card header displays an icon at the left
-.card-header {
+// The card pill displays an icon at the left
+.card-pill {
   display: flex;
   align-items: center;
-  margin-top: -$card-border-width;
-  margin-right: -$card-border-width;
-  margin-left: -$card-border-width;
-  padding: $card-border-width $card-spacer-x $card-border-width $card-border-width;
+  margin: -$card-border-width;
   color: color("light");
-  font-weight: 600;
+  font-weight: $font-weight-bold;
   border-bottom: none;
+  background-color: $card-cap-bg;
+  border: 2px solid $card-cap-bg;
+
+  @include media-breakpoint-down(sm) {
+    flex-wrap: wrap;
+  }
 
   &:first-child {
     @include border-radius($card-border-radius);
   }
 
-  &.card-header-no-icon {
+  &.card-pill-no-icon {
     padding-left: $card-spacer-x;
   }
 
   .flag {
-    margin: ($spacer * -2) 0 ($spacer * -3) ($card-spacer-x * 2);
+    margin: ($spacer * -3) 0 ($spacer * -3) ($card-spacer-x * 2);
     color: $card-cap-bg;
-    fill: $white;
 
     @include flag-size(60px);
   }
 }
 
-.card-header-title {
+a[href].card-pill {
+  @include hover-focus {
+    text-decoration: none;
+    color: color("light");
+  }
+}
+
+.card-pill-title {
   span {
     white-space: nowrap;
 
-    // space the spans correctly inside card-header title
+    // space the spans correctly inside card-pill title
     &:not(:last-child) {
-      margin-right: $card-spacer-x;
+      margin-right: $card-spacer-x * 2;
+
+      @include media-breakpoint-down(sm) {
+        margin-right: $card-spacer-x;
+      }
     }
   }
 }
 
 // The icon, pushed against the left border
-.card-header-icon {
+.card-pill-icon {
   line-height: 0;
   margin-right: $card-spacer-x;
 
@@ -75,4 +88,76 @@
 
 .card-actions {
   margin-top: $card-spacer-y;
+}
+
+.card-list {
+  @include list-unstyled();
+}
+
+// When the card is only a pill in a list, closed state, hides the card-body
+// add .open class to animate opening
+.card-list-item {
+  margin-bottom: $spacer;
+
+  // Apply some styles when card is ONLY NOT OPEN
+  &:not(.card-open) {
+    background: none;
+    border-color: transparent;
+
+    .card-pill-icon {
+      .icon {
+        background-color: $card-cap-bg;
+        color: color("light");
+      }
+    }
+
+    .card-pill {
+      padding: 0;
+      border-color: $white;
+    }
+
+    .card-pill-title {
+      color: $body-color;
+    }
+  }
+
+  .card-pill {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  // Hide the button at the right of the pill ONLY WHEN OPEN
+  &.card-open {
+    .card-pill {
+      border: 2px solid $card-cap-bg;
+
+      .btn {
+        display: none;
+      }
+    }
+  }
+
+  .card-pill.collapsed {
+    background-color: transparent;
+    background-image: linear-gradient(to right, rgba($card-cap-bg, 0) 5%, rgba($card-cap-bg, 0.08) 50%);
+  }
+
+  a.card-pill.collapsed {
+    &:active,
+    &.active {
+      // transform: scale(0.98);
+      background-image: linear-gradient(to right, rgba(theme-color("secondary"), 0.02) 5%, rgba(theme-color("secondary"), 0.3) 70%);
+    }
+  }
+
+  // Display a flag when the status of the list item is set
+  .flag {
+    color: color("light");
+
+    svg {
+      fill: $blue;
+    }
+
+    @include flag-size(50px);
+  }
 }

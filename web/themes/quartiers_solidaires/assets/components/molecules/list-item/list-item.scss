@@ -1,11 +1,14 @@
 @charset 'utf-8';
 
+// .card.list-item styles are in card.scss
+
 .list-items {
   @include list-unstyled();
 }
 
 // Single list item
 .list-item {
+
   display: flex;
   align-items: center;
   margin-bottom: $spacer;

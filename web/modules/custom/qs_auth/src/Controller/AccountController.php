@@ -10,7 +10,11 @@ use Drupal\Core\Controller\ControllerBase;
 class AccountController extends ControllerBase {
 
   /**
-   * Account page.
+   * Approval page.
+   *
+   * This page is shown when the user access to a community which he previously
+   * applied but which he's not a certified member.
+   * He must be reviewed by a Manager of this community.
    */
   public function approval() {
     $variables = [];

@@ -57,7 +57,21 @@ function qs_auth_user_login_form_submit($form, $form_state) {
 
   // Check the current user has apply to at least one community.
   if (!$acl->hasCommunity()) {
-    $form_state->setRedirect('qs_auth.communities.apply', [], []);
+
+    // Get the first pending approval.
+    $approvals = $acl->getPendingApproval();
+    $approval = reset($approvals);
+
+    // If has no communities access but already asked for approval,
+    // go to the approval page.
+    if ($approval) {
+      $form_state->setRedirect('qs_auth.approval', ['community' => $approval->id()], []);
+
+      // Otherwise go to the form communities to apply.
+    }
+    else {
+      $form_state->setRedirect('qs_auth.communities.apply', [], []);
+    }
   }
 
   // Check user is a beginner, so need unboarding.
@@ -66,7 +80,17 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   }
 
   // If the user has multiple communities, redirect him on the communities page.
+  // to choose which community he want to connect on.
   if ($acl->hasMultipleCommunities()) {
     $form_state->setRedirect('qs_auth.communities', [], []);
+  }
+
+  // Get the first communities.
+  $communities = $acl->getCommunities();
+  $community = reset($communities);
+
+  // The user has only 1 communitiy access so connect it on.
+  if ($community) {
+    $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
   }
 }

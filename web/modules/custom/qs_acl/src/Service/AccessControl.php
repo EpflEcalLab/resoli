@@ -27,6 +27,13 @@ class AccessControl {
   private $termStorage;
 
   /**
+   * The Privilege Storage.
+   *
+   * @var \Drupal\Core\Entity\ContentEntityStorageInterface
+   */
+  private $privilegeStorage;
+
+  /**
    * The entity query factory.
    *
    * @var \Drupal\Core\Entity\Query\QueryFactory
@@ -37,9 +44,10 @@ class AccessControl {
    * Class constructor.
    */
   public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity, QueryFactory $query_factory) {
-    $this->currentUser  = $currentUser;
-    $this->termStorage  = $entity->getStorage('taxonomy_term');
-    $this->queryFactory = $query_factory;
+    $this->currentUser      = $currentUser;
+    $this->termStorage      = $entity->getStorage('taxonomy_term');
+    $this->privilegeStorage = $entity->getStorage('request_privileges');
+    $this->queryFactory     = $query_factory;
   }
 
   /**
@@ -87,7 +95,8 @@ class AccessControl {
 
     $query = $this->queryFactory->get('request_privileges')
       ->condition('status', 0)
-      ->condition('entity', $community->id());
+      ->condition('entity', $community->id())
+      ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
     $or->condition('reviewer', NULL);
@@ -163,6 +172,45 @@ class AccessControl {
     $number = $this->countCommunitiesByUser($user);
 
     return $number > 1 ? TRUE : FALSE;
+  }
+
+  /**
+   * Get pending approval communities for a given user.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User.
+   *
+   * @return \Drupal\taxonomy\TermInterface[]
+   *   Collection of communities.
+   */
+  public function getPendingApproval(AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $query = $this->queryFactory->get('request_privileges')
+      ->condition('status', 0)
+      ->condition('bundle', 'communities')
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('reviewer', NULL);
+    $or->notExists('reviewer');
+    $query->condition($or);
+
+    $entities = [];
+    $tids = [];
+    $ids = $query->execute();
+
+    if (!empty($ids)) {
+      $requests = $this->privilegeStorage->loadMultiple($ids);
+      foreach ($requests as $request) {
+        $entities[] = $request->entity->entity;
+      }
+    }
+
+    return $entities;
   }
 
   /**

@@ -5,8 +5,8 @@
  * Contains alias generation for activities list by communities.
  */
 
-use \Drupal\taxonomy\TermInterface;
-use \Drupal\Core\Language\LanguageInterface;
+use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Language\LanguageInterface;
 
 /**
  * Implements hook_pathauto_alias_alter().

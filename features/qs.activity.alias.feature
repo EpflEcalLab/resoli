@@ -5,19 +5,20 @@ Feature: Activitiy Alias
 
   @api
   Scenario: Logged as Member of Lausanne, I can't access to Fribourg activities
-    Given I am on "/user/login"
-    When I fill in "edit-name" with "member+lausanne@antistatique.net"
-    Then I fill in "edit-pass" with "member+lausanne"
-    And I press "edit-submit"
+    Given I am logged in as user "member+lausanne"
     When I am on "/activities/fribourg/theme"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Member of Lausanne, I can access to Lausanne activities
-    Given I am on "/user/login"
-    When I fill in "edit-name" with "member+lausanne@antistatique.net"
-    Then I fill in "edit-pass" with "member+lausanne"
-    And I press "edit-submit"
+    Given I am logged in as user "member+lausanne"
     When I am on "/activities/lausanne/theme"
     And the response status code should be 200
+    And I should see "Activities by themes"
 
+  @api
+  Scenario: Logged as Member of Fribourg, I can access to Fribourg activities
+    Given I am logged in as user "member+fribourg"
+    When I am on "/activities/fribourg/theme"
+    And the response status code should be 200
+    And I should see "Activities by themes"

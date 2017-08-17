@@ -2,6 +2,7 @@ title: Button
 name: button
 variants:
   - Secondary
+  - Danger
   - Floating
   - Icon
   - Circle

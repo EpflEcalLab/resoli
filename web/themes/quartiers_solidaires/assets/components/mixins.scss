@@ -4,12 +4,18 @@
 ////////////////
 
 // Handle drop shadows on elements
-@mixin drop-shadows($color) {
+@mixin drop-shadows($color, $with-hover: false) {
   &.shadow-to-right {
     @include drop-shadow(bottom, $color);
 
     @include media-breakpoint-up(md) {
       @include drop-shadow(right, $color);
+    }
+
+    @if ($with-hover) {
+      @include hover {
+        @include floating-shadow($color);
+      }
     }
   }
 
@@ -18,6 +24,12 @@
 
     @include media-breakpoint-up(md) {
       @include drop-shadow(left, $color);
+    }
+
+    @if ($with-hover) {
+      @include hover {
+        @include floating-shadow($color);
+      }
     }
   }
 }
@@ -38,9 +50,15 @@
 /* stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after */
 
 // Adds a floating shadow effect
-@mixin floating-shadow($color: theme-color("primary")) {
+@mixin floating-shadow($color: theme-color("primary"), $with-hover: false) {
   @if $enable-shadows {
     box-shadow: 0 0 10px 0 rgba($color, 0.6);
+
+    @if ($with-hover) {
+      @include hover {
+        box-shadow: 0 0 10px 0 rgba($color, 1);
+      }
+    }
   }
 }
 

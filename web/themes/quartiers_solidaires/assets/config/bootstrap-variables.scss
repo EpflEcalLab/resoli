@@ -83,10 +83,12 @@ $teal-100: #f0f7f5 !default;
 $teal:     #00a082 !default;
 $teal-700: #085445;
 
+$red:     #c80050 !default;
+$red-700:   #640028;
+
 $blue:    #5aa0fa !default;
 $indigo:  #6610f2 !default;
 $pink:    #e83e8c !default;
-$red:     #dc3545 !default;
 $orange:  #fd7e14 !default;
 $yellow:  #ffc107 !default;
 $green:   #28a745 !default;
@@ -101,13 +103,16 @@ $colors: (
   secondary-lightest:  $teal-100,
   secondary:        $teal,
   secondary-darker:   $teal-700,
+  danger:           $red,
+  danger-darker:    $red-700,
   light:            $white,
   dark:             $black
 ) !default;
 
 $theme-colors: (
   primary:   $purple-600,
-  secondary: $teal
+  secondary: $teal,
+  danger:    $red,
 ) !default;
 
 // Set a specific jump point for requesting color jumps

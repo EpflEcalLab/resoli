@@ -40,7 +40,9 @@
 
     @include hover {
       color: $body-color;
-      background-color: rgba(theme-color(#{$color}), 0.1);
+      background-color: transparent;
+
+      @include floating-shadow(theme-color($color));
     }
 
     @include button-active(color("#{$color}-darker"));
@@ -51,16 +53,16 @@
     .btn-outline-#{$color} {
 
       // Handle shadows on elements
-      @include drop-shadows(theme-color(#{$color}));
+      @include drop-shadows(theme-color($color), true);
 
       &.shadow-floating {
-        @include floating-shadow(theme-color(#{$color}));
+        @include floating-shadow(theme-color($color), true);
       }
 
       // re-add focus styles from Bootstrap button mixin
       &:focus,
       &.focus {
-        box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba(theme-color(#{$color}), 0.5);
+        box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba(theme-color($color), 0.5);
       }
     }
   }
@@ -96,7 +98,7 @@
   @each $color, $value in $theme-colors {
     &.btn-outline-#{$color} {
       .icon svg {
-        color: theme-color(#{$color});
+        color: theme-color($color);
       }
     }
   }

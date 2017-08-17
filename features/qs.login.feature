@@ -15,8 +15,8 @@ Feature: Login
     When I fill in "edit-name" with "Batman"
     Then I fill in "edit-pass" with "RobinMyLove"
     And I press "edit-submit"
-    And I should see "Unrecognized username or password." in the "messages" region
-    And I should see "Forgot your password?" in the ".alert-danger" element
+    And I should see "Unrecognized username or password." in the ".alert" element
+    And I should see "Forgot your password?" in the ".alert" element
     And the response status code should be 200
 
   @api
@@ -27,7 +27,7 @@ Feature: Login
     Then I fill in "edit-pass" with "member+lausanne"
     And I press "edit-submit"
     And I should see "Activities by themes"
-    And the url should match "activities/1/theme"
+    And the url should match "activities/lausanne/theme"
 
   @api
   Scenario: Login as Manager of Lausanne redirect me on Lausanne activities
@@ -37,7 +37,7 @@ Feature: Login
     Then I fill in "edit-pass" with "manager+lausanne"
     And I press "edit-submit"
     And I should see "Activities by themes"
-    And the url should match "activities/1/theme"
+    And the url should match "activities/lausanne/theme"
 
   @api
   Scenario: Login as Organizer of Lausanne redirect me on Lausanne activities
@@ -47,7 +47,7 @@ Feature: Login
     Then I fill in "edit-pass" with "organizer+lausanne"
     And I press "edit-submit"
     And I should see "Activities by themes"
-    And the url should match "activities/1/theme"
+    And the url should match "activities/lausanne/theme"
 
   @api
   Scenario: Login as Member of Fribourg redirect me on Fribourg activities
@@ -57,7 +57,7 @@ Feature: Login
     Then I fill in "edit-pass" with "member+fribourg"
     And I press "edit-submit"
     And I should see "Activities by themes"
-    And the url should match "activities/2/theme"
+    And the url should match "activities/fribourg/theme"
 
   # TODO
   # @api

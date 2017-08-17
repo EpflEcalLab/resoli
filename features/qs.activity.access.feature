@@ -9,7 +9,7 @@ Feature: Activitiy Access
     When I fill in "edit-name" with "member+lausanne@antistatique.net"
     Then I fill in "edit-pass" with "member+lausanne"
     And I press "edit-submit"
-    When I am on "/activities/2/theme"
+    When I am on "/activities/fribourg/theme"
     And the response status code should be 403
 
   @api
@@ -18,7 +18,7 @@ Feature: Activitiy Access
     When I fill in "edit-name" with "manager+lausanne@antistatique.net"
     Then I fill in "edit-pass" with "manager+lausanne"
     And I press "edit-submit"
-    When I am on "/activities/2/theme"
+    When I am on "/activities/fribourg/theme"
     And the response status code should be 403
 
   @api
@@ -27,5 +27,5 @@ Feature: Activitiy Access
     When I fill in "edit-name" with "organizer+lausanne@antistatique.net"
     Then I fill in "edit-pass" with "organizer+lausanne"
     And I press "edit-submit"
-    When I am on "/activities/2/theme"
+    When I am on "/activities/fribourg/theme"
     And the response status code should be 403

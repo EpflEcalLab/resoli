@@ -1,5 +1,24 @@
 @charset 'utf-8';
 
+@mixin card-pill-bg-gradient($class) {
+  #{$class} {
+    background-color: transparent;
+    background-image: linear-gradient(to right, rgba($card-cap-bg, 0) 5%, rgba($card-cap-bg, 0.08) 50%);
+  }
+
+  a#{$class} {
+    &:active,
+    &.active {
+      transform: scale(0.98);
+      background-image: linear-gradient(to right, rgba(theme-color("secondary"), 0.02) 5%, rgba(theme-color("secondary"), 0.3) 70%);
+    }
+  }
+}
+
+.card {
+  @include border-radius($card-border-radius - $card-border-width);
+}
+
 // The card pill displays an icon at the left
 .card-pill {
   display: flex;
@@ -35,6 +54,26 @@ a[href].card-pill {
   @include hover-focus {
     text-decoration: none;
     color: color("light");
+  }
+}
+
+// Variation of the pill with Primary colors
+.card-pill-simple {
+  color: theme-color("primary");
+  font-weight: $font-weight-normal;
+  border: 0;
+
+  .card-pill-icon .icon {
+    color: theme-color("primary");
+  }
+}
+
+@include card-pill-bg-gradient(".card-pill-simple");
+
+a[href].card-pill-simple {
+  @include hover-focus {
+    text-decoration: none;
+    color: theme-color("primary");
   }
 }
 
@@ -119,7 +158,10 @@ a[href].card-pill {
     .card-pill-title {
       color: $body-color;
     }
+
+    @include card-pill-bg-gradient(".card-pill");
   }
+
 
   .card-pill {
     padding-top: 0;
@@ -137,19 +179,6 @@ a[href].card-pill {
     }
   }
 
-  .card-pill.collapsed {
-    background-color: transparent;
-    background-image: linear-gradient(to right, rgba($card-cap-bg, 0) 5%, rgba($card-cap-bg, 0.08) 50%);
-  }
-
-  a.card-pill.collapsed {
-    &:active,
-    &.active {
-      // transform: scale(0.98);
-      background-image: linear-gradient(to right, rgba(theme-color("secondary"), 0.02) 5%, rgba(theme-color("secondary"), 0.3) 70%);
-    }
-  }
-
   // Display a flag when the status of the list item is set
   .flag {
     color: color("light");
@@ -159,5 +188,12 @@ a[href].card-pill {
     }
 
     @include flag-size(50px);
+  }
+}
+
+.card-list-simple-item {
+  &:not(.card-open) {
+    background: none;
+    border: 0;
   }
 }

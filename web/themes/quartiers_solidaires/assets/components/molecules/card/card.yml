@@ -2,3 +2,4 @@ title: Card
 name: card
 variants:
   - list
+  - list-simple

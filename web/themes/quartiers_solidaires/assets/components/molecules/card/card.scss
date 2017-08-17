@@ -1,5 +1,9 @@
 @charset 'utf-8';
 
+// Card Pill
+////////////
+
+// Mixin to set the pill gradient
 @mixin card-pill-bg-gradient($class) {
   #{$class} {
     background-color: transparent;
@@ -15,6 +19,7 @@
   }
 }
 
+// Card border radius has to be smaller to correspond to the card-pill
 .card {
   @include border-radius($card-border-radius - $card-border-width);
 }
@@ -28,7 +33,7 @@
   font-weight: $font-weight-bold;
   border-bottom: none;
   background-color: $card-cap-bg;
-  border: 2px solid $card-cap-bg;
+  border: $card-border-width solid $card-cap-bg;
 
   @include media-breakpoint-down(sm) {
     flex-wrap: wrap;
@@ -113,6 +118,9 @@ a[href].card-pill-simple {
   }
 }
 
+// Card
+///////
+
 .card-title {
   margin-top: $card-spacer-y * 2;
   margin-bottom: $card-spacer-y * 3;
@@ -129,6 +137,10 @@ a[href].card-pill-simple {
   margin-top: $card-spacer-y;
 }
 
+// Card List Item
+/////////////////
+
+// This wraps the list items
 .card-list {
   @include list-unstyled();
 }

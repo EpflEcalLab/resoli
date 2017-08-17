@@ -26,4 +26,13 @@ content:
     weight: 100
     region: content
 hidden:
+  field_activity: true
+  field_contact_mail: true
+  field_contact_phone: true
+  field_contribution: true
+  field_end_at: true
+  field_start_at: true
+  field_venue: true
+  field_venue_lat: true
+  field_venue_long: true
   langcode: true

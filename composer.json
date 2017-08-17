@@ -41,18 +41,20 @@
         "drupal/redirect": "^1.0@alpha",
         "drupal/swiftmailer": "^1.0@beta",
         "drush/drush": "~8.0",
-        "squizlabs/php_codesniffer": "^2.7",
         "symfony/property-access": "^3.3",
         "webflo/drupal-finder": "^0.3.0",
-        "webmozart/path-util": "^2.3"
+        "webmozart/path-util": "^2.3",
+        "drupal/default_content": "~1.0"
     },
     "require-dev": {
         "behat/mink": "~1.7",
         "behat/mink-goutte-driver": "~1.2",
         "drupal/coder": "^8.2",
+        "drupal/drupal-extension": "^3.3",
         "jcalderonzumba/gastonjs": "~1.0.2",
         "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
         "mikey179/vfsstream": "~1.2",
+        "squizlabs/php_codesniffer": "^2.7",
         "phpmd/phpmd": "^2.6",
         "phpunit/phpunit": ">=4.8.28 <5",
         "sebastian/phpcpd": "^2.0",

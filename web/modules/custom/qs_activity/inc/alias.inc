@@ -5,7 +5,8 @@
  * Contains alias generation for activities list by communities.
  */
 
-use \Drupal\taxonomy\TermInterface;
+use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Language\LanguageInterface;
 
 /**
  * Implements hook_pathauto_alias_alter().
@@ -25,7 +26,7 @@ function qs_activity_pathauto_alias_alter(&$alias, array &$context) {
 function qs_activity_alias(TermInterface $entity, $alias, $operation = 'insert') {
   // Load services.
   $alias_storage = \Drupal::service('path.alias_storage');
-  $langcode = $entity->language()->getId();
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
 
   if ($entity->bundle() == 'communities') {
     $aliases = [

@@ -47,3 +47,7 @@ npm-debug.log
 /config/d8/sync/system.menu.devel.yml
 /config/d8/sync/devel.toolbar.settings.yml
 /config/d8/sync/webprofiler.config.yml
+
+# Ignore nohup created by Behat
+web/nohup.out
+web/localhost

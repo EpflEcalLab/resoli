@@ -4,9 +4,10 @@ const multiStep = () => {
   if ($form.length > 0) {
     $form.each(function() {
       const id = $(this).attr('id');
+      const $fieldsets = $(this).find('fieldset');
       $(`<ol class="step-nav" id="stepnav-${id}"></ol>`).prependTo($(this));
 
-      $(this).find('fieldset').each(function(index) {
+      $fieldsets.each(function(index) {
         const currentFieldset = $(this);
         const $parent = currentFieldset.parents('.form-multistep');
         const stepLabel = currentFieldset.data('step');
@@ -43,7 +44,7 @@ const multiStep = () => {
           .append($link);
 
         // Add a next button on all steps except last
-        if (index + 1 < $form.find('fieldset').length) {
+        if (index + 1 < $fieldsets.length) {
           $('<button/>')
             .addClass('btn btn-outline-invert btn-icon btn-icon-right')
             .text('Étape suivante')

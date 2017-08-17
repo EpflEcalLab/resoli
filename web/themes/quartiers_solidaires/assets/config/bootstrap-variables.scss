@@ -100,7 +100,7 @@ $colors: (
   primary-darker:   $purple-800,
   secondary-lightest:  $teal-100,
   secondary:        $teal,
-  secondary-dark:   $teal-700,
+  secondary-darker:   $teal-700,
   light:            $white,
   dark:             $black
 ) !default;
@@ -345,7 +345,8 @@ $input-btn-line-height-lg:  1.5 !default;
 
 $btn-font-weight:                $font-weight-bold !default;
 $btn-box-shadow:                 0 0 0 0 transparent !default;
-$btn-focus-box-shadow:           0 0 0 3px rgba(theme-color("primary"), .25) !default;
+$btn-focus-box-shadow-width:     3px;
+$btn-focus-box-shadow:           0 0 0 $btn-focus-box-shadow-width rgba(theme-color("primary"), .25) !default;
 $btn-active-box-shadow:          none !default;
 
 $btn-link-disabled-color:        $gray-600 !default;

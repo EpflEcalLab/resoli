@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+// Shadow mixins
+////////////////
+
 // Handle drop shadows on elements
 @mixin drop-shadows($color) {
   &.shadow-to-right {
@@ -41,6 +44,9 @@
   }
 }
 
+// Button mixins
+////////////////
+
 // Button on :active only
 @mixin button-active($color, $color-active: $white) {
   &:active,
@@ -68,6 +74,9 @@
     }
   }
 }
+
+// Icons & Flags mixins
+///////////////////////
 
 // Sets the size of the icon
 @mixin icon-size($size, $min-size: 0) {

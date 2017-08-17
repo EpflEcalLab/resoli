@@ -13,6 +13,62 @@
   line-height: 0;
 }
 
+// Button
+/////////
+
+.btn {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @include media-breakpoint-up(md) {
+    min-width: 160px;
+  }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: none;
+  }
+}
+
+// Themed Buttons
+/////////////////
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    color: $body-color;
+
+    @include hover {
+      color: $body-color;
+      background-color: rgba(theme-color(#{$color}), 0.1);
+    }
+
+    @include button-active(color("#{$color}-darker"));
+  }
+
+  @if ($color != 'primary') {
+    .btn-#{$color},
+    .btn-outline-#{$color} {
+
+      // Handle shadows on elements
+      @include drop-shadows(theme-color(#{$color}));
+
+      &.shadow-floating {
+        @include floating-shadow(theme-color(#{$color}));
+      }
+
+      // re-add focus styles from Bootstrap button mixin
+      &:focus,
+      &.focus {
+        box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba(theme-color(#{$color}), 0.5);
+      }
+    }
+  }
+}
+
+// Button Icon
+//////////////
+
 // Also used for badges
 %btn-icon {
   position: relative;
@@ -34,115 +90,14 @@
   }
 }
 
-// Button
-/////////
-
-.btn {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-
-  @include media-breakpoint-up(md) {
-    min-width: 160px;
-  }
-
-  &:active {
-    transform: scale(0.95);
-    box-shadow: none;
-  }
-}
-
-// Button Primary
-/////////////////
-
-.btn-outline-primary {
-  color: $body-color;
-
-  @include hover {
-    color: $body-color;
-    background-color: rgba(theme-color("primary"), 0.1);
-  }
-
-  @include button-active(color("primary-darker"));
-}
-
-// Button Secondary
-///////////////////
-
-.btn-outline-secondary {
-  color: $body-color;
-
-  @include hover {
-    color: $body-color;
-    background-color: rgba(theme-color("secondary"), 0.1);
-  }
-
-  @include button-active(color("secondary-dark"));
-}
-
-.btn-secondary,
-.btn-outline-secondary {
-
-  // Handle shadows on elements
-  @include drop-shadows(theme-color("secondary"));
-
-  &.shadow-floating {
-    @include floating-shadow(theme-color("secondary"));
-  }
-
-  // re-add focus styles from Bootstrap button mixin
-  &:focus,
-  &.focus {
-    box-shadow: 0 0 0 2px rgba(theme-color("secondary"), 0.5);
-  }
-}
-
-// Override button-outline-* styles to be more UX friendly
-// (don't invert colors on hover)
-// REFACTOR THIS WITH MAP
-// .btn-outline-info {
-//   @include hover {
-//     color: $body-color;
-//     background-color: rgba(theme-color("info"), 0.1);
-//   }
-// }
-
-// .btn-outline-success {
-//   @include hover {
-//     color: $body-color;
-//     background-color: rgba(theme-color("success"), 0.1);
-//   }
-// }
-
-// .btn-outline-warning {
-//   @include hover {
-//     color: $body-color;
-//     background-color: rgba(theme-color("warning"), 0.1);
-//   }
-// }
-
-// .btn-outline-danger {
-//   @include hover {
-//     color: $body-color;
-//     background-color: rgba(theme-color("danger"), 0.1);
-//   }
-// }
-
-// Button Icon
-//////////////
-
 .btn-icon {
   @extend %btn-icon;
 
-  &.btn-outline-primary {
-    .icon svg {
-      color: theme-color("primary");
-    }
-  }
-
-  &.btn-outline-secondary {
-    .icon svg {
-      color: theme-color("secondary");
+  @each $color, $value in $theme-colors {
+    &.btn-outline-#{$color} {
+      .icon svg {
+        color: theme-color(#{$color});
+      }
     }
   }
 
@@ -206,7 +161,7 @@
   &:focus,
   &.focus {
     color: $white;
-    box-shadow: 0 0 0 2px rgba($white, 0.5);
+    box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
   }
 
   &:active,
@@ -221,6 +176,8 @@
 }
 
 // We still need a Button White when the background is lightly colored
+// Can't use the .bg-white class because of the !important blocking
+// us on hover and active states
 .btn-white {
   background-color: $white;
 }

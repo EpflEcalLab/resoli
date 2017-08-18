@@ -80,6 +80,7 @@ $purple-600: #781ebe;
 $purple-800: #430772;
 
 $teal-100: #f0f7f5 !default;
+$teal-300: #66C4B2;
 $teal:     #00a082 !default;
 $teal-700: #085445;
 
@@ -100,9 +101,11 @@ $colors: (
   primary:          $purple,
   primary-dark:     $purple-600,
   primary-darker:   $purple-800,
-  secondary-lightest:  $teal-100,
+  secondary-lightest: $teal-100,
+  secondary-light:  $teal-300,
   secondary:        $teal,
-  secondary-darker:   $teal-700,
+  secondary-darker: $teal-700,
+  danger-light:     lighten($red, 10%),
   danger:           $red,
   danger-darker:    $red-700,
   light:            $white,
@@ -549,7 +552,7 @@ $nav-link-padding-x:            1rem !default;
 $nav-link-disabled-color:       $gray-600 !default;
 
 $nav-tabs-border-color:                       #ddd !default;
-$nav-tabs-border-width:                       $border-width !default;
+$nav-tabs-border-width:                       0 !default;
 $nav-tabs-border-radius:                      $border-radius !default;
 $nav-tabs-link-hover-border-color:            $gray-200 !default;
 $nav-tabs-link-active-color:                  $gray-700 !default;

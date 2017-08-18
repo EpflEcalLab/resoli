@@ -18,5 +18,6 @@ notes: |
   - `.card-list-simple-item`: to wrap a `.card-pill-simple` in a listing
   - `.card-actions`: the wrapper of the buttons in the card body
   - `.card-icon`: big centered icon in the card body
+  - `.card-{theme-color}`: change the color of the card and/or card pill (e.g. `.card-primary`), uses the secondary theme color by default
 
   Wrap the cards in a `.card-list` ul to display a list of cards or collapsible cards. This is used in most activities listings. Setup a collapse group like an accordion by setting a `data-parent` attribute to all cards.

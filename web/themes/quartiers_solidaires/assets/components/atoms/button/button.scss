@@ -40,7 +40,7 @@
 
     @include hover {
       color: $body-color;
-      background-color: transparent;
+      background-color: $white;
 
       @include floating-shadow(theme-color($color));
     }

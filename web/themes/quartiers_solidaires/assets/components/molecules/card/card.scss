@@ -208,3 +208,77 @@ a[href].card-pill-simple {
     border: 0;
   }
 }
+
+// Invert colors with theme colors
+@each $color, $value in $theme-colors {
+  .card-#{$color} {
+    background: color(#{$color}-light);
+    border-color: $value;
+
+    // Automaticly calculate color value based on contrast with background
+    @include color-contrast($value);
+
+    // Base is secondary color, just apply to other colors
+    @if ($color != 'secondary') {
+      .card-pill {
+        background-color: $value;
+        border-color: $value;
+      }
+
+      .card-pill-simple {
+        background: none;
+        background-image: linear-gradient(to right, rgba($value, 0) 5%, rgba($value, 0.08) 50%);
+      }
+
+      .card-pill-icon {
+        .icon {
+          color: $value;
+        }
+      }
+
+      .card-pill-simple {
+        color: $value;
+      }
+
+      &.card-list-item {
+        &:not(.card-open) {
+          .card-pill {
+            background-image: linear-gradient(to right, rgba($value, 0) 5%, rgba($value, 0.08) 50%);
+          }
+
+          a.card-pill {
+            &:active,
+            &.active {
+              background-image: linear-gradient(to right, rgba($value, 0.02) 5%, rgba($value, 0.3) 70%);
+            }
+          }
+
+          .card-pill-icon {
+            .icon {
+              background-color: $value;
+            }
+          }
+        }
+
+        &.card-open {
+          .card-pill {
+            border-color: $value;
+          }
+        }
+      }
+
+      &.card-list-simple-item {
+        a.card-pill {
+          @include hover-focus-active {
+            color: $value;
+          }
+
+          &:active,
+          &.active {
+            background-image: linear-gradient(to right, rgba($value, 0.02) 5%, rgba($value, 0.3) 70%);
+          }
+        }
+      }
+    }
+  }
+}

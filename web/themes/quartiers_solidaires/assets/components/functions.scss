@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+// Color contrast, copied from Bootstrap, added parameters
+/* stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after */
+@mixin color-contrast($color, $dark: color(dark), $light: color(light)) {
+  $r: red($color);
+  $g: green($color);
+  $b: blue($color);
+
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+  @if ($yiq >= 150) {
+    color: $dark;
+  } @else {
+    color: $light;
+  }
+}
+/* stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after */

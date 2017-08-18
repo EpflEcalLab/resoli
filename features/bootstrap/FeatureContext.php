@@ -20,6 +20,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    * @var array
    */
   protected $accounts = [
+    'nobody' => [
+        'username' => 'nobody@antistatique.net',
+        'pass'     => 'nobody',
+    ],
     'member+lausanne' => [
         'username' => 'member+lausanne@antistatique.net',
         'pass'     => 'member+lausanne',
@@ -35,6 +39,30 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     'member+fribourg' => [
         'username' => 'member+fribourg@antistatique.net',
         'pass'     => 'member+fribourg',
+    ],
+    'member+lausanne+organizer+fribourg' => [
+        'username' => 'member+lausanne+organizer+fribourg@antistatique.net',
+        'pass'     => 'member+lausanne+organizer+fribourg',
+    ],
+    'member+fribourg+member+lausanne' => [
+        'username' => 'member+fribourg+member+lausanne@antistatique.net',
+        'pass'     => 'member+fribourg+member+lausanne',
+    ],
+    'approval+lausanne' => [
+        'username' => 'approval+lausanne@antistatique.net',
+        'pass'     => 'approval+lausanne',
+    ],
+    'approval+fribourg+approval+lausanne' => [
+        'username' => 'approval+fribourg+approval+lausanne@antistatique.net',
+        'pass'     => 'approval+fribourg+approval+lausanne',
+    ],
+    'member+fribourg+approval+lausanne' => [
+        'username' => 'member+fribourg+approval+lausanne@antistatique.net',
+        'pass'     => 'member+fribourg+approval+lausanne',
+    ],
+    'member+fribourg+approval+lausanne+member+geneve' => [
+        'username' => 'member+fribourg+approval+lausanne+member+geneve@as.net',
+        'pass'     => 'member+fribourg+approval+lausanne+member+geneve',
     ],
   ];
 

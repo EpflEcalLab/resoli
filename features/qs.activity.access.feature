@@ -1,7 +1,7 @@
 Feature: Activitiy Access
   In order to make sure ACL is working for activities
   As a bunch of users
-  I want to make sure the access & accessbypass are working like a charm
+  I want to make sure the access & access bypass are working like a charm
 
   @api
   Scenario: Logged as Member of Lausanne, I can't access to Fribourg activities

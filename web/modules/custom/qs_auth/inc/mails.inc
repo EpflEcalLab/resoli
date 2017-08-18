@@ -37,7 +37,7 @@ function qs_auth_mail($key, &$message, $params) {
       $content = $config->get('register_pending_approval');
 
       $message['subject'] = $token->replace($content['subject']);
-      $message['body'][]  = Markup::create($token->replace($content['body']));
+      $message['body'][] = Markup::create($token->replace($content['body']));
       break;
   }
 }

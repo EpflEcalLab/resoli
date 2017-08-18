@@ -1,0 +1,7 @@
+services:
+  qs_acl.access_control:
+    class: Drupal\qs_acl\Service\AccessControl
+    arguments: ['@current_user', '@entity_type.manager', '@entity.query']
+  qs_acl.privilege_manger:
+    class: Drupal\qs_acl\Service\PrivilegeManger
+    arguments: ['@current_user', '@entity_type.manager', '@entity.query']

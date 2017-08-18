@@ -26,4 +26,15 @@ content:
     weight: 100
     region: content
 hidden:
+  field_activity_maintainers: true
+  field_activity_members: true
+  field_activity_organizers: true
+  field_community: true
+  field_contact_mail: true
+  field_contact_phone: true
+  field_contribution: true
+  field_theme: true
+  field_venue: true
+  field_venue_lat: true
+  field_venue_long: true
   langcode: true

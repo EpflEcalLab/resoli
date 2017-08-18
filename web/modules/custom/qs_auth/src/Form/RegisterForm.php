@@ -58,8 +58,6 @@ class RegisterForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL) {
-    $form['#attributes']['class'] = ['form-emphasis'];
-
     // Honeypot.
     honeypot_add_form_protection($form, $form_state, ['honeypot', 'time_restriction']);
 
@@ -221,11 +219,12 @@ class RegisterForm extends FormBase {
     $user = $this->account->create($form_state->getValues());
     $this->account->sendRegisterEmail($user);
 
-    drupal_set_message($this->t("Thank you <strong>@nickname</strong> for your subscription!", [
-      '@nickname' => $user->field_nickname->value,
+    drupal_set_message($this->t("Thank you <strong>@firstname</strong> for your subscription!", [
+      '@firstname' => $user->field_firstname->value,
     ]));
 
-    $form_state->setRedirect('<front>');
+    $community = $this->termStorage->load($form_state->getValue('community'));
+    $form_state->setRedirect('qs_auth.approval', ['community' => $community->id()], []);
   }
 
 }

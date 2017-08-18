@@ -75,6 +75,17 @@ Maintaining code quality by adding the custom post-commit hook to yours.
   $ cat ./scripts/hooks/post-commit >> ./.git/hooks/post-commit
   ```
 
+## 🔥 Behavior Driven Development using Behat
+
+For isolation test databases, you should run Behat using our custom script `scripts/behat/drupal`.
+
+### Quick & dirty
+
+1. Launch a stand-alone server with `drush runserver`.
+
+2. Keep this command line open and run `./vendor/bin/behat`
+in the root of your project.
+
 ## 🚛 Install
 
 1. Setup your virtualhost (like `http://qs.dev`) to serve `/web`.

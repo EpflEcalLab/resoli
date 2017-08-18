@@ -33,10 +33,34 @@ qs_auth.register:
 
 # Approval
 qs_auth.approval:
-    path: '/authentication/approval'
+    path: '/authentication/approval/{community}'
     defaults:
         _controller: '\Drupal\qs_auth\Controller\AccountController::approval'
         _title: 'qs_auth.approval'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# Communities selector page
+qs_auth.communities:
+    path: '/authentication/communities'
+    defaults:
+        _controller: '\Drupal\qs_auth\Controller\AccountController::communities'
+        _title: 'qs_auth.communities.selector'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+    options:
+      _maintenance_access: FALSE
+
+# Communities apply form
+qs_auth.communities.apply:
+    path: '/authentication/communities/apply'
+    defaults:
+        _form: '\Drupal\qs_auth\Form\CommunitiesApplyForm'
+        _title: 'qs_auth.communities.apply'
     requirements:
       _user_is_logged_in: 'TRUE'
     options:

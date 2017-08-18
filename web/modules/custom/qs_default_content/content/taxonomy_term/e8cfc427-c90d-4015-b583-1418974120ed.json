@@ -1,0 +1,54 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/lausanne?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+        }
+    },
+    "tid": [
+        {
+            "value": 1
+        }
+    ],
+    "uuid": [
+        {
+            "value": "e8cfc427-c90d-4015-b583-1418974120ed"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "communities"
+        }
+    ],
+    "name": [
+        {
+            "value": "Lausanne",
+            "lang": "zxx"
+        }
+    ],
+    "weight": [
+        {
+            "value": 0
+        }
+    ],
+    "changed": [
+        {
+            "value": 1503057185,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ]
+}

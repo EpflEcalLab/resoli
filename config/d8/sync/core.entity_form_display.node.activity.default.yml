@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.activity.body
-    - field.field.node.activity.field_activity_maintainers
-    - field.field.node.activity.field_activity_members
-    - field.field.node.activity.field_activity_organizers
     - field.field.node.activity.field_community
     - field.field.node.activity.field_contact_mail
     - field.field.node.activity.field_contact_phone
@@ -112,33 +109,6 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
-    region: content
-  field_activity_maintainers:
-    weight: 2
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_activity_members:
-    weight: 1
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_activity_organizers:
-    weight: 3
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   field_community:
     weight: 2

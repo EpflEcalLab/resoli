@@ -1,0 +1,68 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/12?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 12
+        }
+    ],
+    "uuid": [
+        {
+            "value": "a55d4ca7-95d9-4a6b-b6d0-545f34adde70"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "member+fribourg+approval+lausanne+member+geneve@as.net"
+        }
+    ],
+    "created": [
+        {
+            "value": 1503057994
+        }
+    ],
+    "changed": [
+        {
+            "value": 1503057994,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "member+fribourg+approval+lausanne+member+geneve"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Antistatique"
+        }
+    ],
+    "pass": [
+      {
+          "value": "member+fribourg+approval+lausanne+member+geneve"
+      }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

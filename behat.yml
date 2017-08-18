@@ -1,0 +1,30 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2: ~
+      base_url: http://127.0.0.1:8888
+    Drupal\DrupalExtension:
+      blackbox: ~
+      api_driver: 'drupal'
+      drupal:
+       drupal_root: 'web'
+      region_map:
+        header: "#header"
+        messages: "#messages"
+        breadcrumb: "#breadcrumb"
+        content: "#content"
+        footer: "#footer"
+      text:
+        username_field: "Votre nom"
+        password_field: "Votre mot de passe"
+        log_in: "Se connecter"
+        log_out: "Se déconnecter"

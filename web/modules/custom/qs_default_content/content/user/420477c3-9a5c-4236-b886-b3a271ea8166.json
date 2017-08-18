@@ -1,0 +1,68 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/3?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 3
+        }
+    ],
+    "uuid": [
+        {
+            "value": "420477c3-9a5c-4236-b886-b3a271ea8166"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "approval+lausanne@antistatique.net"
+        }
+    ],
+    "created": [
+        {
+            "value": 1502813234
+        }
+    ],
+    "changed": [
+        {
+            "value": 1502813234,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Approval"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Lausanne"
+        }
+    ],
+    "pass": [
+        {
+            "value": "approval+lausanne"
+        }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

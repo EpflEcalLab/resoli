@@ -28,12 +28,15 @@ trait InlineErrorFormTrait {
           $accessor->getValue($form, $field_accessor);
           if ($field = $accessor->getValue($form, $field_accessor)) {
 
-            $prefix = str_replace('form-group', 'form-group has-danger', $field['#prefix']);
+            if (isset($field['#prefix'])) {
+              $prefix = str_replace('form-group', 'form-group has-danger', $field['#prefix']);
+              $accessor->setValue($form, $field_accessor . '[#prefix]', $prefix);
+            }
 
-            $suffix = '<div class="form-control-feedback" id="' . $field['#id'] . '-error">' . $error . '</div>' . $field['#suffix'];
-
-            $accessor->setValue($form, $field_accessor . '[#prefix]', $prefix);
-            $accessor->setValue($form, $field_accessor . '[#suffix]', $suffix);
+            if (isset($field['#suffix'])) {
+              $suffix = '<div class="form-control-feedback" id="' . $field['#id'] . '-error">' . $error . '</div>' . $field['#suffix'];
+              $accessor->setValue($form, $field_accessor . '[#suffix]', $suffix);
+            }
 
             $accessor->setValue($form, $field_accessor . '[#attributes][aria-invalid]', 'true');
             $accessor->setValue($form, $field_accessor . '[#attributes][aria-describedby]', $field['#id'] . '-error');

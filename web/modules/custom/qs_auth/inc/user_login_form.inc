@@ -66,11 +66,12 @@ function qs_auth_user_login_form_submit($form, $form_state) {
     // go to the approval page.
     if ($approval) {
       $form_state->setRedirect('qs_auth.approval', ['community' => $approval->id()], []);
-
-      // Otherwise go to the form communities to apply.
+      return;
     }
+    // Otherwise go to the form communities to apply.
     else {
       $form_state->setRedirect('qs_auth.communities.apply', [], []);
+      return;
     }
   }
 
@@ -83,6 +84,7 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   // to choose which community he want to connect on.
   if ($acl->hasMultipleCommunities()) {
     $form_state->setRedirect('qs_auth.communities', [], []);
+    return;
   }
 
   // Get the first communities.
@@ -92,5 +94,6 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   // The user has only 1 communitiy access so connect it on.
   if ($community) {
     $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
+    return;
   }
 }

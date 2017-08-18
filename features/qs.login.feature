@@ -22,28 +22,24 @@ Feature: Login
   @api
   Scenario: Login as Member of Lausanne redirect him on Lausanne activities
     Given I am logged in as user "member+lausanne"
-    And I should see "Activities by themes"
     And the url should match "activities/lausanne/theme"
     And the response status code should be 200
 
   @api
   Scenario: Login as Manager of Lausanne redirect him on Lausanne activities
     Given I am logged in as user "manager+lausanne"
-    And I should see "Activities by themes"
     And the url should match "activities/lausanne/theme"
     And the response status code should be 200
 
   @api
   Scenario: Login as Organizer of Lausanne redirect him on Lausanne activities
     Given I am logged in as user "organizer+lausanne"
-    And I should see "Activities by themes"
     And the url should match "activities/lausanne/theme"
     And the response status code should be 200
 
   @api
   Scenario: Login as Member of Fribourg redirect him on Fribourg activities
     Given I am logged in as user "member+fribourg"
-    And I should see "Activities by themes"
     And the url should match "activities/fribourg/theme"
     And the response status code should be 200
 

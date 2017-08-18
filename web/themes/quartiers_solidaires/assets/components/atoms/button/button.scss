@@ -45,7 +45,7 @@
       @include floating-shadow(theme-color($color));
     }
 
-    @include button-active(color("#{$color}-darker"));
+    @include button-active($color);
   }
 
   @if ($color != 'primary') {

@@ -11,5 +11,5 @@ In addition to all Bootstrap utility classes, we implemented these ones:
 
 ## Background
 
-- `.bg-blue`: sets a blue background
+- `.bg-blue`, `.bg-primary-light`: sets a colored background
 - `.bg-gradient`: sets a great gradient background

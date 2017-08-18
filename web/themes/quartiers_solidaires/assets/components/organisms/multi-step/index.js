@@ -5,7 +5,7 @@ const multiStep = () => {
     $form.each(function() {
       const id = $(this).attr('id');
       const $fieldsets = $(this).find('fieldset');
-      $(`<ol class="step-nav" id="stepnav-${id}"></ol>`).prependTo($(this));
+      $(`<ol class="step-nav nav nav-tabs" id="stepnav-${id}"></ol>`).prependTo($(this));
 
       $fieldsets.each(function(index) {
         const currentFieldset = $(this);

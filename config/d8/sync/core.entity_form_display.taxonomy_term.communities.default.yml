@@ -4,9 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.communities.field_community_logo
-    - field.field.taxonomy_term.communities.field_community_managers
-    - field.field.taxonomy_term.communities.field_community_members
-    - field.field.taxonomy_term.communities.field_community_organizers
     - image.style.thumbnail
     - taxonomy.vocabulary.communities
   module:
@@ -71,33 +68,6 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
-    region: content
-  field_community_managers:
-    weight: 4
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_community_members:
-    weight: 5
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_community_organizers:
-    weight: 3
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   name:
     type: string_textfield

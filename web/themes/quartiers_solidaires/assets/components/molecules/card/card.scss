@@ -1,47 +1,104 @@
 @charset 'utf-8';
 
-// The card header displays an icon at the left
-.card-header {
+// Card Pill
+////////////
+
+// Mixin to set the pill gradient
+@mixin card-pill-bg-gradient($class) {
+  #{$class} {
+    background-color: transparent;
+    background-image: linear-gradient(to right, rgba($card-cap-bg, 0) 5%, rgba($card-cap-bg, 0.08) 50%);
+  }
+
+  a#{$class} {
+    &:active,
+    &.active {
+      transform: scale(0.98);
+      background-image: linear-gradient(to right, rgba(theme-color("secondary"), 0.02) 5%, rgba(theme-color("secondary"), 0.3) 70%);
+    }
+  }
+}
+
+// Card border radius has to be smaller to correspond to the card-pill
+.card {
+  @include border-radius($card-border-radius - $card-border-width);
+}
+
+// The card pill displays an icon at the left
+.card-pill {
   display: flex;
   align-items: center;
-  margin-top: -$card-border-width;
-  margin-right: -$card-border-width;
-  margin-left: -$card-border-width;
-  padding: $card-border-width $card-spacer-x $card-border-width $card-border-width;
-  color: $inverse-color;
-  font-weight: 600;
+  margin: -$card-border-width;
+  color: color("light");
+  font-weight: $font-weight-bold;
   border-bottom: none;
+  background-color: $card-cap-bg;
+  border: $card-border-width solid $card-cap-bg;
+
+  @include media-breakpoint-down(sm) {
+    flex-wrap: wrap;
+  }
 
   &:first-child {
     @include border-radius($card-border-radius);
   }
 
-  &.card-header-no-icon {
+  &.card-pill-no-icon {
     padding-left: $card-spacer-x;
   }
 
   .flag {
-    margin: ($spacer * -2) 0 ($spacer * -3) ($card-spacer-x * 2);
+    margin: ($spacer * -3) 0 ($spacer * -3) ($card-spacer-x * 2);
     color: $card-cap-bg;
-    fill: $white;
 
     @include flag-size(60px);
   }
 }
 
-.card-header-title {
+a[href].card-pill {
+  @include hover-focus {
+    text-decoration: none;
+    color: color("light");
+  }
+}
+
+// Variation of the pill with Primary colors
+.card-pill-simple {
+  color: theme-color("primary");
+  font-weight: $font-weight-normal;
+  border: 0;
+
+  .card-pill-icon .icon {
+    color: theme-color("primary");
+  }
+}
+
+@include card-pill-bg-gradient(".card-pill-simple");
+
+a[href].card-pill-simple {
+  @include hover-focus {
+    text-decoration: none;
+    color: theme-color("primary");
+  }
+}
+
+.card-pill-title {
   span {
     white-space: nowrap;
 
-    // space the spans correctly inside card-header title
+    // space the spans correctly inside card-pill title
     &:not(:last-child) {
-      margin-right: $card-spacer-x;
+      margin-right: $card-spacer-x * 2;
+
+      @include media-breakpoint-down(sm) {
+        margin-right: $card-spacer-x;
+      }
     }
   }
 }
 
 // The icon, pushed against the left border
-.card-header-icon {
+.card-pill-icon {
   line-height: 0;
   margin-right: $card-spacer-x;
 
@@ -51,7 +108,7 @@
     width: $card-border-radius * 1.6;
     height: $card-border-radius * 1.6;
     border-radius: 50%;
-    background-color: $inverse-color;
+    background-color: color("light");
     color: $card-cap-bg;
 
     svg {
@@ -60,6 +117,9 @@
     }
   }
 }
+
+// Card
+///////
 
 .card-title {
   margin-top: $card-spacer-y * 2;
@@ -75,4 +135,150 @@
 
 .card-actions {
   margin-top: $card-spacer-y;
+}
+
+// Card List Item
+/////////////////
+
+// This wraps the list items
+.card-list {
+  @include list-unstyled();
+}
+
+// When the card is only a pill in a list, closed state, hides the card-body
+// add .open class to animate opening
+.card-list-item {
+  margin-bottom: $spacer;
+
+  // Apply some styles when card is ONLY NOT OPEN
+  &:not(.card-open) {
+    background: none;
+    border-color: transparent;
+
+    .card-pill-icon {
+      .icon {
+        background-color: $card-cap-bg;
+        color: color("light");
+      }
+    }
+
+    .card-pill {
+      padding: 0;
+      border-color: $white;
+    }
+
+    .card-pill-title {
+      color: $body-color;
+    }
+
+    @include card-pill-bg-gradient(".card-pill");
+  }
+
+  .card-pill {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  // Hide the button at the right of the pill ONLY WHEN OPEN
+  &.card-open {
+    .card-pill {
+      border: 2px solid $card-cap-bg;
+
+      .btn {
+        display: none;
+      }
+    }
+  }
+
+  // Display a flag when the status of the list item is set
+  .flag {
+    color: color("light");
+
+    svg {
+      fill: $blue;
+    }
+
+    @include flag-size(50px);
+  }
+}
+
+.card-list-simple-item {
+  &:not(.card-open) {
+    background: none;
+    border: 0;
+  }
+}
+
+// Invert colors with theme colors
+@each $color, $value in $theme-colors {
+  .card-#{$color} {
+    background: color(#{$color}-light);
+    border-color: $value;
+
+    // Automaticly calculate color value based on contrast with background
+    @include color-contrast($value);
+
+    // Base is secondary color, just apply to other colors
+    @if ($color != 'secondary') {
+      .card-pill {
+        background-color: $value;
+        border-color: $value;
+      }
+
+      .card-pill-simple {
+        background: none;
+        background-image: linear-gradient(to right, rgba($value, 0) 5%, rgba($value, 0.08) 50%);
+      }
+
+      .card-pill-icon {
+        .icon {
+          color: $value;
+        }
+      }
+
+      .card-pill-simple {
+        color: $value;
+      }
+
+      &.card-list-item {
+        &:not(.card-open) {
+          .card-pill {
+            background-image: linear-gradient(to right, rgba($value, 0) 5%, rgba($value, 0.08) 50%);
+          }
+
+          a.card-pill {
+            &:active,
+            &.active {
+              background-image: linear-gradient(to right, rgba($value, 0.02) 5%, rgba($value, 0.3) 70%);
+            }
+          }
+
+          .card-pill-icon {
+            .icon {
+              background-color: $value;
+            }
+          }
+        }
+
+        &.card-open {
+          .card-pill {
+            border-color: $value;
+          }
+        }
+      }
+
+      &.card-list-simple-item {
+        a.card-pill {
+          @include hover-focus-active {
+            color: $value;
+          }
+
+          &:active,
+          &.active {
+            background-image: linear-gradient(to right, rgba($value, 0.02) 5%, rgba($value, 0.3) 70%);
+          }
+        }
+      }
+    }
+  }
 }

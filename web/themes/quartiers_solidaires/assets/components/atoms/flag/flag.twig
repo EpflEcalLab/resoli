@@ -1,5 +1,5 @@
-<div class="flag {{ classes|join(' ') }}" title="Inscription confirmée">
-  <svg class="icon flag-glow" preserveAspectRatio="xMidYMid">
+<div class="flag {{ classes|join(' ') }}" title="Inscription en attente">
+  <svg class="icon flag-glow" preserveAspectRatio="xMidYMid" aria-hidden="true">
     <use xlink:href="#icon-flag"></use>
     <use xlink:href="#icon-{{ icon|default('wait') }}"></use>
   </svg>

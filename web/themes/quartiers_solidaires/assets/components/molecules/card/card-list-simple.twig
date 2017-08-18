@@ -1,0 +1,17 @@
+<ul class="card-list">
+  <li class="card card-list-simple-item">
+    <a href="#" class="card-pill card-pill-simple">
+      <span class="card-pill-icon">
+        {% include "@atoms/icon/icon.twig" with {icon: 'activities', circle: true} %}
+      </span>
+      <span class="card-pill-title">
+        <span>22 juillet 2017</span>
+        <span class="d-none d-sm-inline">13:00 – 13:30</span>
+      </span>
+      {% include "@atoms/flag/flag.twig" with {icon: 'confirmed'} %}
+      <span class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-auto" aria-label="Voir les détails">
+        {% include "@atoms/icon/icon.twig" with {icon: 'look'} %}
+      </span>
+    </a>
+  </li>
+</ul>

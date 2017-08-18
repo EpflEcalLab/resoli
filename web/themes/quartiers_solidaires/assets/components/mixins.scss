@@ -1,12 +1,21 @@
 @charset "utf-8";
 
+// Shadow mixins
+////////////////
+
 // Handle drop shadows on elements
-@mixin drop-shadows($color) {
+@mixin drop-shadows($color: theme-color("primary"), $with-hover: false) {
   &.shadow-to-right {
     @include drop-shadow(bottom, $color);
 
     @include media-breakpoint-up(md) {
       @include drop-shadow(right, $color);
+    }
+
+    @if $with-hover {
+      @include hover {
+        @include floating-shadow($color);
+      }
     }
   }
 
@@ -16,11 +25,28 @@
     @include media-breakpoint-up(md) {
       @include drop-shadow(left, $color);
     }
+
+    @if $with-hover {
+      @include hover {
+        @include floating-shadow($color);
+      }
+    }
+  }
+
+  &.shadow-to-bottom {
+    @include drop-shadow(bottom, $color);
+
+    @if $with-hover {
+      @include hover {
+        @include floating-shadow($color);
+      }
+    }
   }
 }
 
 // Adds a shadow to the element, to the direction you want
-@mixin drop-shadow($direction: right, $color: $brand-primary) {
+/* stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after */
+@mixin drop-shadow($direction: right, $color: theme-color("primary")) {
   @if $enable-shadows {
     @if ($direction == right) {
       box-shadow: 2px 2px 2px 0 rgba($color, 0.3);
@@ -31,20 +57,66 @@
     }
   }
 }
+/* stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after */
 
 // Adds a floating shadow effect
-@mixin floating-shadow($color: $brand-primary) {
+@mixin floating-shadow($color: theme-color("primary"), $with-hover: false) {
   @if $enable-shadows {
     box-shadow: 0 0 10px 0 rgba($color, 0.6);
+
+    @if $with-hover {
+      @include hover {
+        box-shadow: 0 0 10px 0 rgba($color, 1);
+      }
+    }
   }
 }
 
+// Adds a shadow to a pseudo-element just below the current element
+// Usefull for button groups
+@mixin after-shadow($color: theme-color("primary"), $border-radius: $btn-border-radius, $with-hover: false) {
+  @if $enable-shadows {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      display: block;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: $border-radius;
+      background-color: rgba($color, 0.3);
+
+      @include drop-shadow(bottom, $color);
+
+      @if $with-hover {
+        @include hover {
+          @include floating-shadow($color);
+        }
+      }
+    }
+  }
+}
+
+// Button mixins
+////////////////
+
 // Button on :active only
 @mixin button-active($color, $color-active: $white) {
-  &:active,
+  $dark-color: color("#{$color}-darker");
+  $normal-color: color($color);
+
+  &:active {
+    border-color: $dark-color;
+    background-color: $dark-color;
+    color: $color-active;
+  }
+
   &.active {
-    background-color: $color;
-    border-color: $color;
+    background-color: $normal-color;
     color: $color-active;
   }
 }
@@ -66,6 +138,9 @@
     }
   }
 }
+
+// Icons & Flags mixins
+///////////////////////
 
 // Sets the size of the icon
 @mixin icon-size($size, $min-size: 0) {

@@ -1,2 +1,23 @@
 title: Card
 name: card
+variants:
+  - list
+  - list-simple
+notes: |
+  The card component is almost always beginning with a `.card-pill` header. The pill can contain a Flag component to indicate a status.
+
+  The card body can be used as a collapsible element, with the card pill as a toggle. This uses the Bootstrap collapse component.
+
+  Classes to extend the card component:
+
+  - `.card-pill-no-icon`: if you don't want an icon in the card pill.
+  - `.card-pill-simple`: to display the pill only, without a card body. **To use only in card lists.**
+  - `.card-open`: when you want to display the body of a collapsible card, it has to have this class too.
+  - `.card-list`: to wrap a card listing
+  - `.card-list-item`: to wrap a card in a listing
+  - `.card-list-simple-item`: to wrap a `.card-pill-simple` in a listing
+  - `.card-actions`: the wrapper of the buttons in the card body
+  - `.card-icon`: big centered icon in the card body
+  - `.card-{theme-color}`: change the color of the card and/or card pill (e.g. `.card-primary`), uses the secondary theme color by default
+
+  Wrap the cards in a `.card-list` ul to display a list of cards or collapsible cards. This is used in most activities listings. Setup a collapse group like an accordion by setting a `data-parent` attribute to all cards.

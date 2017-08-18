@@ -12,27 +12,24 @@ use Drupal\Core\Entity\EntityChangedInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
- * Defines the Request Privilege entity.
+ * Defines the Privilege entity.
  *
  * Populate and updated when a user request new privilege on an Entity such:
  *   - Community (Taxonomy Term), to became Member.
  *   - Activity (Node), to became Member.
  *
- * The following construct is the actual definition of the entity type which
- * is read and cached. Don't forget to clear cache after changes.
- *
  * @ContentEntityType(
- *   id = "request_privileges",
- *   label = @Translation("Request Privilege"),
- *   base_table = "request_privileges",
- *   admin_permission = "administer request_privilege entity",
+ *   id = "privilege",
+ *   label = @Translation("Privilege"),
+ *   base_table = "privileges",
+ *   admin_permission = "administer privilege entity",
  *   fieldable = false,
  *   entity_keys = {
  *     "id" = "id"
  *   },
  * )
  */
-class RequestPrivilege extends ContentEntityBase implements ContentEntityInterface, EntityChangedInterface {
+class Privilege extends ContentEntityBase implements ContentEntityInterface, EntityChangedInterface {
 
   /**
    * {@inheritdoc}
@@ -113,7 +110,7 @@ class RequestPrivilege extends ContentEntityBase implements ContentEntityInterfa
     $field_manger = \Drupal::service('entity_field.manager');
 
     // Load the field definitions.
-    $bundle_fields = $field_manger->getFieldDefinitions('request_privileges', 'request_privileges');
+    $bundle_fields = $field_manger->getFieldDefinitions('privilege', 'privilege');
     $field_definition = $bundle_fields['privilege'];
     $allowed_values = $field_definition->getSetting('allowed_values');
 
@@ -140,7 +137,7 @@ class RequestPrivilege extends ContentEntityBase implements ContentEntityInterfa
     $field_manger = \Drupal::service('entity_field.manager');
 
     // Load the field definitions.
-    $bundle_fields = $field_manger->getFieldDefinitions('request_privileges', 'request_privileges');
+    $bundle_fields = $field_manger->getFieldDefinitions('privilege', 'privilege');
     $field_definition = $bundle_fields['bundle'];
     $allowed_values = $field_definition->getSetting('allowed_values');
 
@@ -156,7 +153,23 @@ class RequestPrivilege extends ContentEntityBase implements ContentEntityInterfa
    * {@inheritdoc}
    */
   public function getEntity() {
-    return $this->get('entity');
+
+    // Load services. No way to inject them on EntityInterface.
+    $type_manager = \Drupal::service('entity_type.manager');
+
+    // Get the storage according the bundle.
+    $storage = $type_manager->getStorage($this->bundle->value);
+    if (empty($storage)) {
+      return NULL;
+    }
+
+    // Load the entity.
+    $entity = $storage->load($this->entity->value);
+    if (empty($entity)) {
+      return NULL;
+    }
+
+    return $entity;
   }
 
   /**
@@ -171,7 +184,7 @@ class RequestPrivilege extends ContentEntityBase implements ContentEntityInterfa
    * {@inheritdoc}
    *
    * How to humanize the boolean status:
-   *  - pending: status = 0 & reviewer = NULL
+   *  - pending: status = NULL & reviewer == NULL
    *  - accepted: status = 1 & reviewer != NULL
    *  - declined: status = 0 & reviewer != NULL.
    */
@@ -237,15 +250,16 @@ class RequestPrivilege extends ContentEntityBase implements ContentEntityInterfa
       ->setRequired(TRUE)
       ->setSettings([
         'allowed_values' => [
-          'communities' => new TranslatableMarkup('Communities'),
-          'activity'    => new TranslatableMarkup('Activity'),
+          'taxomony_term' => new TranslatableMarkup('Communities (taxomony_term)'),
+          'node'          => new TranslatableMarkup('Activity (node)'),
         ],
       ]);
 
-    $fields['entity'] = BaseFieldDefinition::create('entity_reference')
+    $fields['entity'] = BaseFieldDefinition::create('integer')
       ->setLabel(new TranslatableMarkup('Entity'))
       ->setDescription(new TranslatableMarkup('The entity ID this privilege is attached.'))
-      ->setRequired(TRUE);
+      ->setRequired(TRUE)
+      ->setSetting('unsigned', TRUE);
 
     $fields['user'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(new TranslatableMarkup('Used by'))
@@ -261,8 +275,7 @@ class RequestPrivilege extends ContentEntityBase implements ContentEntityInterfa
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(new TranslatableMarkup('Request status'))
       ->setDescription(new TranslatableMarkup('A boolean indicating whether the request is pending|accepted|declined.'))
-      ->setRequired(TRUE)
-      ->setDefaultValue(FALSE);
+      ->setDefaultValue(NULL);
 
     $fields['reviewed'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(new TranslatableMarkup('Reviewed'))

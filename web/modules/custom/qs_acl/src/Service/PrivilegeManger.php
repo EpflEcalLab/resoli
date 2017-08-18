@@ -38,7 +38,7 @@ class PrivilegeManger {
    */
   public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity, QueryFactory $query_factory) {
     $this->currentUser      = $currentUser;
-    $this->privilegeStorage = $entity->getStorage('request_privileges');
+    $this->privilegeStorage = $entity->getStorage('privilege');
     $this->queryFactory     = $query_factory;
   }
 

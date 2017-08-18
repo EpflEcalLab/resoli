@@ -46,7 +46,7 @@ class AccessControl {
   public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity, QueryFactory $query_factory) {
     $this->currentUser      = $currentUser;
     $this->termStorage      = $entity->getStorage('taxonomy_term');
-    $this->privilegeStorage = $entity->getStorage('request_privileges');
+    $this->privilegeStorage = $entity->getStorage('privilege');
     $this->queryFactory     = $query_factory;
   }
 
@@ -93,7 +93,7 @@ class AccessControl {
       return FALSE;
     }
 
-    $query = $this->queryFactory->get('request_privileges')
+    $query = $this->queryFactory->get('privilege')
       ->condition('status', 0)
       ->condition('entity', $community->id())
       ->condition('user', $user->id());
@@ -131,7 +131,7 @@ class AccessControl {
    *
    * This only check if the users belongs to a community
    * as Member or Organizer or Managers.
-   * It doesn't get pending request..
+   * It doesn't get pending request.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Drupal Entity User against check access. Otherwise use current user.
@@ -183,30 +183,33 @@ class AccessControl {
    * @return \Drupal\taxonomy\TermInterface[]
    *   Collection of communities.
    */
-  public function getPendingApproval(AccountInterface $account = NULL) {
+  public function getPendingApprovalCommunities(AccountInterface $account = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
     }
 
-    $query = $this->queryFactory->get('request_privileges')
-      ->condition('status', 0)
-      ->condition('bundle', 'communities')
+    $query = $this->queryFactory->get('privilege')
+      ->condition('bundle', 'taxonomy_term')
       ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
-    $or->condition('reviewer', NULL);
-    $or->notExists('reviewer');
+    $or->condition('status', NULL);
+    $or->notExists('status');
     $query->condition($or);
 
+    $or2 = $query->orConditionGroup();
+    $or2->condition('reviewer', NULL);
+    $or2->notExists('reviewer');
+    $query->condition($or2);
+
     $entities = [];
-    $tids = [];
     $ids = $query->execute();
 
     if (!empty($ids)) {
-      $requests = $this->privilegeStorage->loadMultiple($ids);
-      foreach ($requests as $request) {
-        $entities[] = $request->entity->entity;
+      $privileges = $this->privilegeStorage->loadMultiple($ids);
+      foreach ($privileges as $privilege) {
+        $entities[] = $privilege->getEntity();
       }
     }
 
@@ -231,19 +234,24 @@ class AccessControl {
       $user = $account;
     }
 
-    $query = $this->queryFactory->get('taxonomy_term')
-      ->condition('vid', 'communities');
+    $query = $this->queryFactory->get('privilege')
+    ->condition('status', 1)
+    ->condition('bundle', 'taxonomy_term')
+    ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
-    $or->condition('field_community_members', $user->id());
-    $or->condition('field_community_organizers', $user->id());
-    $or->condition('field_community_managers', $user->id());
+    $or->condition('privilege', 'community_members');
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
     $query->condition($or);
 
-    $entities = [];
-    $tids = $query->execute();
-    if (!empty($tids)) {
-      $entities = $this->termStorage->loadMultiple($tids);
+     $entities = [];
+    $ids = $query->execute();
+    if (!empty($ids)) {
+      $privileges = $this->privilegeStorage->loadMultiple($ids);
+      foreach ($privileges as $privilege) {
+        $entities[] = $privilege->getEntity();
+      }
     }
 
     return $entities;
@@ -262,13 +270,15 @@ class AccessControl {
    *   Number of communities the user belongs to.
    */
   private function countCommunitiesByUser(AccountInterface $account) {
-    $query = $this->queryFactory->get('taxonomy_term')
-      ->condition('vid', 'communities');
+    $query = $this->queryFactory->get('privilege')
+    ->condition('status', 1)
+    ->condition('bundle', 'taxonomy_term')
+    ->condition('user', $account->id());
 
     $or = $query->orConditionGroup();
-    $or->condition('field_community_members', $account->id());
-    $or->condition('field_community_organizers', $account->id());
-    $or->condition('field_community_managers', $account->id());
+    $or->condition('privilege', 'community_members');
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
     $query->condition($or);
 
     return (int) $query->count()->execute();
@@ -289,14 +299,16 @@ class AccessControl {
    *   Does the user has access on the community.
    */
   private function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
-    $query = $this->queryFactory->get('taxonomy_term')
-      ->condition('vid', 'communities')
-      ->condition('tid', $community->id());
+    $query = $this->queryFactory->get('privilege')
+    ->condition('status', 1)
+    ->condition('bundle', 'taxonomy_term')
+    ->condition('user', $account->id())
+    ->condition('entity', $community->id());
 
     $or = $query->orConditionGroup();
-    $or->condition('field_community_members', $account->id());
-    $or->condition('field_community_organizers', $account->id());
-    $or->condition('field_community_managers', $account->id());
+    $or->condition('privilege', 'community_members');
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
     $query->condition($or);
 
     return $query->count()->execute() > 0 ? TRUE : FALSE;

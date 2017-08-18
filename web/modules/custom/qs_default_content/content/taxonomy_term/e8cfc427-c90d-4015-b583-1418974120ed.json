@@ -5,25 +5,7 @@
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
-        },
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_managers": [
-            {
-                "href": "http:\/\/default\/fr\/user\/5?_format=hal_json"
-            }
-        ],
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_members": [
-            {
-                "href": "http:\/\/default\/fr\/user\/2?_format=hal_json"
-            },
-            {
-                "href": "http:\/\/default\/fr\/user\/8?_format=hal_json"
-            }
-        ],
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_organizers": [
-            {
-                "href": "http:\/\/default\/fr\/user\/6?_format=hal_json"
-            }
-        ]
+        }
     },
     "tid": [
         {
@@ -68,73 +50,5 @@
             "value": true,
             "lang": "zxx"
         }
-    ],
-    "_embedded": {
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_managers": [
-            {
-                "_links": {
-                    "self": {
-                        "href": "http:\/\/default\/fr\/user\/5?_format=hal_json"
-                    },
-                    "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
-                    }
-                },
-                "uuid": [
-                    {
-                        "value": "79ebbfd1-4918-479c-b05c-b5c3ec52f7e2"
-                    }
-                ]
-            }
-        ],
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_members": [
-            {
-                "_links": {
-                    "self": {
-                        "href": "http:\/\/default\/fr\/user\/2?_format=hal_json"
-                    },
-                    "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
-                    }
-                },
-                "uuid": [
-                    {
-                        "value": "962f5253-7237-45f3-b567-26fd227a0089"
-                    }
-                ]
-            },
-            {
-                "_links": {
-                    "self": {
-                        "href": "http:\/\/default\/fr\/user\/8?_format=hal_json"
-                    },
-                    "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
-                    }
-                },
-                "uuid": [
-                    {
-                        "value": "1bbb8566-39e6-4d09-ab2b-e1569e19b0bc"
-                    }
-                ]
-            }
-        ],
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_organizers": [
-            {
-                "_links": {
-                    "self": {
-                        "href": "http:\/\/default\/fr\/user\/6?_format=hal_json"
-                    },
-                    "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
-                    }
-                },
-                "uuid": [
-                    {
-                        "value": "6a14afb5-35ea-4180-bba1-666b7f6860c9"
-                    }
-                ]
-            }
-        ]
-    }
+    ]
 }

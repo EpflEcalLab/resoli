@@ -5,12 +5,7 @@
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
-        },
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_members": [
-            {
-                "href": "http:\/\/default\/fr\/user\/12?_format=hal_json"
-            }
-        ]
+        }
     },
     "tid": [
         {
@@ -55,24 +50,5 @@
             "value": true,
             "lang": "zxx"
         }
-    ],
-    "_embedded": {
-        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/communities\/field_community_members": [
-            {
-                "_links": {
-                    "self": {
-                        "href": "http:\/\/default\/fr\/user\/12?_format=hal_json"
-                    },
-                    "type": {
-                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
-                    }
-                },
-                "uuid": [
-                    {
-                        "value": "a55d4ca7-95d9-4a6b-b6d0-545f34adde70"
-                    }
-                ]
-            }
-        ]
-    }
+    ]
 }

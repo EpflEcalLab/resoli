@@ -271,7 +271,7 @@ class AccessControl {
     $or->condition('field_community_managers', $account->id());
     $query->condition($or);
 
-    return (int)$query->count()->execute();
+    return (int) $query->count()->execute();
   }
 
   /**

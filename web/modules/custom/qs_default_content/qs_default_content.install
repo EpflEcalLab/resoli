@@ -6,142 +6,181 @@
  */
 
  /**
- * Implements hook_install().
- *
- * Create some approval (pending, accepted, canceled) for tests.
- */
+  * Implements hook_install().
+  *
+  * Create some approval (pending, accepted, canceled) for tests.
+  */
 function qs_default_content_install() {
 
   // @var \Drupal\Core\Entity\EntityTypeManagerInterface
   $entityManager = \Drupal::service('entity_type.manager');
   $privilegeStorage = $entityManager->getStorage('request_privileges');
 
-  // User 2: member+lausanne
+  // User 2: member+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 2, // User 2: member+lausanne
-    'status'    => 1, // approved
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 2: member+lausanne.
+    'user'      => 2,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
   ]);
   $privilege->save();
 
-  // User 3: approval+lausanne
+  // User 3: approval+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 3, // User 3: approval+lausanne
-    'status'    => 0, // pending
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 3: approval+lausanne.
+    'user'      => 3,
+  // pending.
+    'status'    => 0,
     'privilege' => 'community_members',
   ]);
   $privilege->save();
 
-  // User 4: manager+lausanne
+  // User 4: manager+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 5, // User 5: manager+lausanne
-    'status'    => 1, // approved
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 5: manager+lausanne.
+    'user'      => 5,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_managers',
     'reviewer'  => 1,
   ]);
   $privilege->save();
 
-  // User 5: manager+lausanne
+  // User 5: manager+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 5, // User 5: manager+lausanne
-    'status'    => 1, // approved
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 5: manager+lausanne.
+    'user'      => 5,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_managers',
     'reviewer'  => 1,
   ]);
   $privilege->save();
 
-  // User 6: organizer+lausanne
+  // User 6: organizer+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 6, // User 6: organizer+lausanne
-    'status'    => 1, // approved
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 6: organizer+lausanne.
+    'user'      => 6,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_organizers',
     'reviewer'  => 1,
   ]);
   $privilege->save();
 
-  // User 8: member+lausanne+organizer+fribourg
+  // User 8: member+lausanne+organizer+fribourg.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 8, // User 8: member+lausanne+organizer+fribourg
-    'status'    => 1, // approved
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 8: member+lausanne+organizer+fribourg.
+    'user'      => 8,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 2, // Community 2: fribourg
-    'user'      => 8, // User 8: member+lausanne+organizer+fribourg
-    'status'    => 1, // approved
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 8: member+lausanne+organizer+fribourg.
+    'user'      => 8,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_organizers',
     'reviewer'  => 1,
   ]);
   $privilege->save();
 
-  // User 9: member+fribourg+member+lausanne
+  // User 9: member+fribourg+member+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 9, // User 9: member+fribourg+member+lausanne
-    'status'    => 1, // approved
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 9: member+fribourg+member+lausanne.
+    'user'      => 9,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 2, // Community 2: fribourg
-    'user'      => 9, // User 9: member+fribourg+member+lausanne
-    'status'    => 1, // approved
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 9: member+fribourg+member+lausanne.
+    'user'      => 9,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
   ]);
   $privilege->save();
 
-  // User 10: approval+fribourg+approval+lausanne
+  // User 10: approval+fribourg+approval+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 10, // User 10: approval+fribourg+approval+lausanne
-    'status'    => 0, // pending
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 10: approval+fribourg+approval+lausanne.
+    'user'      => 10,
+  // pending.
+    'status'    => 0,
     'privilege' => 'community_members',
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 2, // Community 2: fribourg
-    'user'      => 10, // User 10: approval+fribourg+approval+lausanne
-    'status'    => 0, // pending
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 10: approval+fribourg+approval+lausanne.
+    'user'      => 10,
+  // pending.
+    'status'    => 0,
     'privilege' => 'community_organizers',
   ]);
   $privilege->save();
 
-  // User 11: member+fribourg+approval+lausanne
+  // User 11: member+fribourg+approval+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 1, // Community 1: lausanne
-    'user'      => 11, // User 11: member+fribourg+approval+lausanne
-    'status'    => 0, // pending
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 11: member+fribourg+approval+lausanne.
+    'user'      => 11,
+  // pending.
+    'status'    => 0,
     'privilege' => 'community_members',
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
     'bundle'    => 'communities',
-    'entity'    => 2, // Community 2: fribourg
-    'user'      => 11, // User 11: member+fribourg+approval+lausanne
-    'status'    => 1, // approved
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 11: member+fribourg+approval+lausanne.
+    'user'      => 11,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
   ]);

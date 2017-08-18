@@ -59,7 +59,7 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   if (!$acl->hasCommunity()) {
 
     // Get the first pending approval.
-    $approvals = $acl->getPendingApproval();
+    $approvals = $acl->getPendingApprovalCommunities();
     $approval = reset($approvals);
 
     // If has no communities access but already asked for approval,
@@ -91,7 +91,7 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   $communities = $acl->getCommunities();
   $community = reset($communities);
 
-  // The user has only 1 communitiy access so connect it on.
+  // The user has only 1 community access so connect it on.
   if ($community) {
     $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
     return;

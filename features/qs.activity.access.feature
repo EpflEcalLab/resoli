@@ -20,3 +20,11 @@ Feature: Activitiy Access
     Given I am logged in as user "organizer+lausanne"
     When I am on "/activities/fribourg/theme"
     And the response status code should be 403
+
+  @api
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg I can't access to Lausanne & Fribourg activities
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/activities/fribourg/theme"
+    And the response status code should be 200
+    When I am on "/activities/lausanne/theme"
+    And the response status code should be 200

@@ -9,3 +9,17 @@
 require_once 'inc/user_login_form.inc';
 require_once 'inc/user_pass_form.inc';
 require_once 'inc/mails.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function qs_auth_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_auth_communities_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--auth--communities',
+    ],
+  ];
+}

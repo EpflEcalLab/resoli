@@ -1,0 +1,17 @@
+{% if variables.communities %}
+Access
+<ul>
+  {% for community in variables.communities %}
+  <li><a href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}">{{ community.name.value }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if variables.pending %}
+Pending
+<ul>
+  {% for community in variables.pending %}
+  <li><a href="{{ path('qs_auth.approval', {'community': community.id}) }}">{{ community.name.value }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}

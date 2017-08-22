@@ -105,7 +105,7 @@ class Account {
     }
 
     // Login the created user.
-    $this->login($user->mail->value, $data['password']);
+    user_login_finalize($user);
 
     return $user;
   }
@@ -140,28 +140,6 @@ class Account {
     $user->save();
 
     return $user;
-  }
-
-  /**
-   * Login the given user/password.
-   *
-   * @param string $login
-   *   Username.
-   * @param string $password
-   *   Password uncrypted.
-   *
-   * @return \Drupal\user\UserInterface
-   *   The loggedin user.
-   */
-  protected function login($login, $password) {
-    $user_uid = $this->userAuth->authenticate($login, $password);
-    $account = $this->userStorage->load($user_uid);
-    if (!empty($user_uid) && $account != NULL) {
-      // Login the user.
-      user_login_finalize($account);
-      return $account;
-    }
-    return NULL;
   }
 
   /**

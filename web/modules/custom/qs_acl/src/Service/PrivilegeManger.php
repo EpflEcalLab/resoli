@@ -45,8 +45,8 @@ class PrivilegeManger {
   /**
    * Request a new privilege for the user on the given entity.
    *
-   * @param string $privilege
-   *   The privilege.
+   * @param string $privilege_requested
+   *   The requested string privilege.
    * @param Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    * @param Drupal\Core\Session\AccountInterface $account
@@ -55,18 +55,18 @@ class PrivilegeManger {
    * @return Drupal\Core\Entity\EntityInterface
    *   The created privilege request.
    */
-  public function request($privilege, EntityInterface $entity, AccountInterface $account = NULL) {
+  public function request($privilege_requested, EntityInterface $entity, AccountInterface $account = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
     }
 
     $privilege = $this->privilegeStorage->create([
-      'entity'    => $entity->id(),
-      'user'      => $user->id(),
+      'entity' => $entity->id(),
+      'user'   => $user->id(),
     ]);
-    $privilege->setPrivilege($privilege);
-    $privilege->setBundle($entity->bundle());
+    $privilege->setPrivilege($privilege_requested);
+    $privilege->setBundle($entity->getEntityTypeId());
     $privilege->save();
 
     return $privilege;

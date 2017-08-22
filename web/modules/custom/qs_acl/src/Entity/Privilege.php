@@ -115,10 +115,11 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
     $allowed_values = $field_definition->getSetting('allowed_values');
 
     // Set data only if allowed values.
-    if (isset($allowed_values[$privilege])) {
-      $this->set('privilege', $privilege);
+    if (!isset($allowed_values[$privilege])) {
+      throw new \Exception(new TranslatableMarkup('Privilege entity not allowed value :value for privilege.', [':value' => $privilege]));
     }
 
+    $this->set('privilege', $privilege);
     return $this;
   }
 
@@ -142,10 +143,11 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
     $allowed_values = $field_definition->getSetting('allowed_values');
 
     // Set data only if allowed values.
-    if (isset($allowed_values[$bundle])) {
-      $this->set('bundle', $bundle);
+    if (!isset($allowed_values[$bundle])) {
+      throw new \Exception(new TranslatableMarkup('Privilege entity not allowed value :value for bundle.', [':value' => $bundle]));
     }
 
+    $this->set('bundle', $bundle);
     return $this;
   }
 
@@ -250,7 +252,7 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
       ->setRequired(TRUE)
       ->setSettings([
         'allowed_values' => [
-          'taxomony_term' => new TranslatableMarkup('Communities (taxomony_term)'),
+          'taxonomy_term' => new TranslatableMarkup('Communities (taxonomy_term)'),
           'node'          => new TranslatableMarkup('Activity (node)'),
         ],
       ]);

@@ -235,9 +235,9 @@ class AccessControl {
     }
 
     $query = $this->queryFactory->get('privilege')
-    ->condition('status', 1)
-    ->condition('bundle', 'taxonomy_term')
-    ->condition('user', $user->id());
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
     $or->condition('privilege', 'community_members');
@@ -245,7 +245,7 @@ class AccessControl {
     $or->condition('privilege', 'community_managers');
     $query->condition($or);
 
-     $entities = [];
+    $entities = [];
     $ids = $query->execute();
     if (!empty($ids)) {
       $privileges = $this->privilegeStorage->loadMultiple($ids);
@@ -271,9 +271,9 @@ class AccessControl {
    */
   private function countCommunitiesByUser(AccountInterface $account) {
     $query = $this->queryFactory->get('privilege')
-    ->condition('status', 1)
-    ->condition('bundle', 'taxonomy_term')
-    ->condition('user', $account->id());
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('user', $account->id());
 
     $or = $query->orConditionGroup();
     $or->condition('privilege', 'community_members');
@@ -300,10 +300,10 @@ class AccessControl {
    */
   private function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
     $query = $this->queryFactory->get('privilege')
-    ->condition('status', 1)
-    ->condition('bundle', 'taxonomy_term')
-    ->condition('user', $account->id())
-    ->condition('entity', $community->id());
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('user', $account->id())
+      ->condition('entity', $community->id());
 
     $or = $query->orConditionGroup();
     $or->condition('privilege', 'community_members');

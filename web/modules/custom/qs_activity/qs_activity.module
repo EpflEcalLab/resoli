@@ -7,3 +7,17 @@
 
 // Includes.
 require_once 'inc/alias.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function qs_activity_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_activity_collection_by_theme_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--collection-by-theme',
+    ],
+  ];
+}

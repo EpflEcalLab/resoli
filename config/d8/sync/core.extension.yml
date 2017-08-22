@@ -5,6 +5,7 @@ module:
   backerymails: 0
   bamboo_twig: 0
   bamboo_twig_loader: 0
+  bamboo_twig_security: 0
   block: 0
   block_content: 0
   breakpoint: 0

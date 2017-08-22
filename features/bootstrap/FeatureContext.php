@@ -6,6 +6,7 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Behat\Tester\Exception\PendingException;
 use Drupal\Component\Render\FormattableMarkup;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * Defines application features from the specific context.
@@ -92,4 +93,18 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     $this->getSession()->getPage()->pressButton('edit-submit');
   }
 
+  /**
+   * @Given I should see :label link with href :href
+  */
+  public function iShouldSeeLinkWithHref($label, $href) {
+    $link = $this->getSession()->getPage()->findLink($label);
+
+    if (null === $link) {
+      throw new ElementNotFoundException($this->getSession(), 'link', 'id|title|alt|text', $label);
+    }
+
+    if (strpos($link->getAttribute('href'), $href) === false) {
+      throw new ElementNotFoundException($this->getSession(), 'link', 'href', $href);
+    }
+  }
 }

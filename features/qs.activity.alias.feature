@@ -6,23 +6,29 @@ Feature: Activitiy Alias
   @api
   Scenario: Logged as Member of Lausanne, I can't access to Fribourg activities
     Given I am logged in as user "member+lausanne"
-    When I am on "/activities/fribourg/theme"
+    When I am on "/fribourg/activities/theme"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Member of Lausanne, I can access to Lausanne activities
     Given I am logged in as user "member+lausanne"
-    When I am on "/activities/lausanne/theme"
+    When I am on "/lausanne/activities/theme"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Member of Fribourg, I can access to Fribourg activities
     Given I am logged in as user "member+fribourg"
-    When I am on "/activities/fribourg/theme"
+    When I am on "/fribourg/activities/theme"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Manager of Genève, I can access to Genève activities
     Given I am logged in as user "member+fribourg+approval+lausanne+member+geneve"
-    When I am on "/activities/geneve/theme"
+    When I am on "/geneve/activities/theme"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Organizer of Lausanne, I can access to Lausanne activities add form
+    Given I am logged in as user "organizer+lausanne"
+    When I am on "/lausanne/activities/add"
     And the response status code should be 200

@@ -28,7 +28,7 @@ class EventManager {
    * Class constructor.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory) {
-    $this->nodeStorage  = $entity_type_manager->getStorage('node');
+    $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->queryFactory = $query_factory;
   }
 

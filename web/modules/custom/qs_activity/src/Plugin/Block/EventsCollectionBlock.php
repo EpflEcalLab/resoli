@@ -7,8 +7,6 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_acl\Service\PrivilegeManger;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\qs_activity\Service\EventManager;
 
 /**

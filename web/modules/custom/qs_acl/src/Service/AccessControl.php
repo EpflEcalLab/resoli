@@ -67,6 +67,11 @@ class AccessControl {
       $user = $account;
     }
 
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
     return $this->hasCommunityByUser($community, $user);
   }
 

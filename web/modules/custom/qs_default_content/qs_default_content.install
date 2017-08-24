@@ -19,11 +19,11 @@ function qs_default_content_install() {
 }
 
 /**
- * Implements hook_update_N().
+ * Implements hook_modules_installed().
  *
  * Update some content (events) for tests.
  * Must run after default_content has imported original content.
  */
-function qs_default_content_update_8002(&$sandbox) {
+function qs_default_content_modules_installed($modules) {
   qs_default_content_events();
 }

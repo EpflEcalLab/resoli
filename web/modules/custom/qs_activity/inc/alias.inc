@@ -30,9 +30,17 @@ function qs_activity_alias(TermInterface $entity, $alias, $operation = 'insert')
 
   if ($entity->bundle() == 'communities') {
     $aliases = [
+      'activities' => [
+        'route' => '/activities/' . $entity->id() . '/theme',
+        'alias' => '/' . trim($alias, '/') . '/activities',
+      ],
       'activities_by_theme' => [
         'route' => '/activities/' . $entity->id() . '/theme',
-        'alias' => '/activities/' . trim($alias, '/') . '/theme',
+        'alias' => '/' . trim($alias, '/') . '/activities/theme',
+      ],
+      'activities_form_add' => [
+        'route' => '/activities/' . $entity->id() . '/add',
+        'alias' => '/' . trim($alias, '/') . '/activities/add',
       ],
     ];
 

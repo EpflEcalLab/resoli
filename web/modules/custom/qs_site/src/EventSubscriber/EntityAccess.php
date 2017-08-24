@@ -47,7 +47,6 @@ class EntityAccess implements EventSubscriberInterface {
    * @var array
    */
   private $disabledNodes = [
-    'activity',
     'event',
   ];
 

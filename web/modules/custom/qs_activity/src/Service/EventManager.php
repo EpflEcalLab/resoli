@@ -11,10 +11,11 @@ use Drupal\node\NodeInterface;
  * EventManager.
  */
 class EventManager {
+
   /**
-   * EntityTypeManagerInterface to load Node(s)
+   * The node Storage.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\node\NodeStorageInterface
    */
   protected $nodeStorage;
 

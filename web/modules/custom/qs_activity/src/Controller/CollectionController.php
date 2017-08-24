@@ -25,9 +25,9 @@ class CollectionController extends ControllerBase {
   private $acl;
 
   /**
-   * EntityTypeManagerInterface to load Node(s)
+   * The node Storage.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\node\NodeStorageInterface
    */
   protected $nodeStorage;
 

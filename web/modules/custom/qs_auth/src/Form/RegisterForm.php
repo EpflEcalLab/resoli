@@ -16,25 +16,33 @@ class RegisterForm extends FormBase {
   use InlineErrorFormTrait;
 
   /**
-   * The qs account service.
+   * The QS account service.
    *
    * @var \Drupal\qs_auth\Service\Account
    */
   protected $account;
 
   /**
-   * EntityTypeManagerInterface to load Term(s)
+   * The term Storage.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\taxonomy\TermStorageInterface
    */
   private $termStorage;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(Account $account, EntityTypeManagerInterface $entity) {
+  public function __construct(Account $account, EntityTypeManagerInterface $entity_type_manager) {
     $this->account     = $account;
-    $this->termStorage = $entity->getStorage('taxonomy_term');
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+    $this->userStorage = $entity_type_manager->getStorage('user');
   }
 
   /**
@@ -191,17 +199,13 @@ class RegisterForm extends FormBase {
     }
 
     // Check email is uniq.
-    // TODO use the service such:
-    // \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['name' => $name]);.
-    $account = user_load_by_mail($form_state->getValue('mail'));
+    $account = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($account) {
       $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs_auth.form.error.mail_used.'));
     }
 
     // Check username is uniq.
-    // TODO use the service such:
-    // \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $mail]);.
-    $account = user_load_by_name($form_state->getValue('username'));
+    $account = $this->userStorage->loadByProperties(['name' => $form_state->getValue('username')]);
     if ($account) {
       $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs_auth.form.error.username_used.'));
     }

@@ -26,18 +26,18 @@ class ActivityAddForm extends FormBase {
   private $acl;
 
   /**
-   * EntityTypeManagerInterface to load Term(s)
+   * The term Storage.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\taxonomy\TermStorageInterface
    */
   private $termStorage;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager) {
     $this->acl         = $acl;
-    $this->termStorage = $entity->getStorage('taxonomy_term');
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
   }
 
   /**

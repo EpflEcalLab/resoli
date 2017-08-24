@@ -7,6 +7,22 @@ qs_activity.collection.themes:
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Controller\CollectionController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# Activities add form
+qs_activity.form.add:
+    path: '/activities/{community}/add'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\ActivityAddForm'
+      _title: 'Activities by themes'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\ActivityAddForm::access'
+      community: \d+
     options:
       parameters:
         community:

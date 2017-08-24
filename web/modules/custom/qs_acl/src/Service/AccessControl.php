@@ -71,6 +71,44 @@ class AccessControl {
   }
 
   /**
+   * Check if the user has write access on the given community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community against we check pending approval.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one write access for this community.
+   */
+  public function hasWriteAccessCommunity(TermInterface $community, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('entity', $community->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
    * Check if the user is waiting for at least one Privilege on this community.
    *
    * If the user has already one privilege it will alwayse return FALSE.
@@ -312,6 +350,25 @@ class AccessControl {
     $query->condition($or);
 
     return $query->count()->execute() > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the given user can bypass any security restriction.$_COOKIE.
+   *
+   * This method has security implications.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User.
+   *
+   * @return bool
+   *   Does the given user has bypass security permission.
+   */
+  private function hasBypass(AccountInterface $account) {
+    if ($account->hasPermission('bypass node access')) {
+      return TRUE;
+    }
+
+    return FALSE;
   }
 
 }

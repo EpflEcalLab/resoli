@@ -1,0 +1,23 @@
+uuid: 618fe138-62af-4e47-8257-443955e099c0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_community_access_contact
+    - node.type.activity
+id: node.activity.field_community_access_contact
+field_name: field_community_access_contact
+entity_type: node
+bundle: activity
+label: 'Montrer les informations de contact à la communauté'
+description: 'Si décoché, seuls les membres de l''activité peuvent les voir.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

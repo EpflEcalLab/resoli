@@ -1,0 +1,23 @@
+uuid: cf9e7b9d-eb72-478a-b2ce-72a69c350bbc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_community_access_story
+    - node.type.activity
+id: node.activity.field_community_access_story
+field_name: field_community_access_story
+entity_type: node
+bundle: activity
+label: 'Montrer les récits à la communauté'
+description: 'Si décoché, seuls les membres de l''activité peuvent les voir.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

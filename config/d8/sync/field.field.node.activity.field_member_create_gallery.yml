@@ -1,0 +1,23 @@
+uuid: 654f440e-c0f1-407d-a297-7be351dd064a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_member_create_gallery
+    - node.type.activity
+id: node.activity.field_member_create_gallery
+field_name: field_member_create_gallery
+entity_type: node
+bundle: activity
+label: 'Permettre la soumission de photos'
+description: 'Pour les membres uniquement.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

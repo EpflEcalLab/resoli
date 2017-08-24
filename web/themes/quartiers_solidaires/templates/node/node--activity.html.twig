@@ -2,4 +2,7 @@
 
 {% block node_body %}
 {{ node.title.value }}
+
+{{ bamboo_render_block('qs_activity_events_collection_block') }}
 {% endblock %}
+

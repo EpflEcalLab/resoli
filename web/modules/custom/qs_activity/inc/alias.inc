@@ -28,42 +28,46 @@ function qs_activity_alias(TermInterface $entity, $alias, $operation = 'insert')
   $alias_storage = \Drupal::service('path.alias_storage');
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
 
-  if ($entity->bundle() == 'communities') {
-    $aliases = [
-      'activities' => [
-        'route' => '/activities/' . $entity->id() . '/theme',
-        'alias' => '/' . trim($alias, '/') . '/activities',
-      ],
-      'activities_by_theme' => [
-        'route' => '/activities/' . $entity->id() . '/theme',
-        'alias' => '/' . trim($alias, '/') . '/activities/theme',
-      ],
-      'activities_form_add' => [
-        'route' => '/activities/' . $entity->id() . '/add',
-        'alias' => '/' . trim($alias, '/') . '/activities/add',
-      ],
-    ];
+  $aliases = [];
 
-    // TODO: translation the alias_suffix before creation/deletion,
-    // on every language.
-    // Generate every alias for the current community alias.
-    foreach ($aliases as $item) {
-      // Generate alias.
-      if ($operation == 'insert' || $operation == 'update' || $operation == 'bulkupdate') {
-        if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE) {
-          $alias_storage->save($item['route'], $item['alias'], $langcode);
-        }
+  switch ($entity->bundle()) {
+    case 'communities':
+      $aliases = [
+        'activities' => [
+          'route' => '/activities/' . $entity->id() . '/theme',
+          'alias' => '/' . trim($alias, '/') . '/activities',
+        ],
+        'activities_by_theme' => [
+          'route' => '/activities/' . $entity->id() . '/theme',
+          'alias' => '/' . trim($alias, '/') . '/activities/theme',
+        ],
+        'activities_form_add' => [
+          'route' => '/activities/' . $entity->id() . '/add',
+          'alias' => '/' . trim($alias, '/') . '/activities/add',
+        ],
+      ];
+      break;
+  }
+
+  // TODO: translation the alias_suffix before creation/deletion,
+  // on every language.
+  // Generate every alias for the current community alias.
+  foreach ($aliases as $item) {
+    // Generate alias.
+    if ($operation == 'insert' || $operation == 'update' || $operation == 'bulkupdate') {
+      if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE) {
+        $alias_storage->save($item['route'], $item['alias'], $langcode);
       }
+    }
 
-      // Delete alias on operation delete.
-      if ($operation == 'delete') {
-        if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE) {
-          $alias_storage->delete([
-            'source'   => $item['route'],
-            'alias'    => $item['alias'],
-            'langcode' => $langcode,
-          ]);
-        }
+    // Delete alias on operation delete.
+    if ($operation == 'delete') {
+      if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE) {
+        $alias_storage->delete([
+          'source'   => $item['route'],
+          'alias'    => $item['alias'],
+          'langcode' => $langcode,
+        ]);
       }
     }
   }

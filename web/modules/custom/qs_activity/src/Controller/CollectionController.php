@@ -14,6 +14,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\qs_activity\Service\EventManager;
 
 /**
  * CollectionController.
@@ -56,13 +57,6 @@ class CollectionController extends ControllerBase {
   protected $nodeStorage;
 
   /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
-
-  /**
    * The database connection to use.
    *
    * @var \Drupal\Core\Database\Connection
@@ -70,15 +64,22 @@ class CollectionController extends ControllerBase {
   protected $connection;
 
   /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, AccountProxyInterface $currentUser, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
+  public function __construct(AccessControl $acl, AccountProxyInterface $currentUser, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager, Connection $connection, EventManager $event_manager) {
     $this->acl          = $acl;
     $this->currentUser  = $currentUser;
     $this->requestStack = $request_stack;
     $this->nodeStorage  = $entity_type_manager->getStorage('node');
-    $this->queryFactory = $query_factory;
     $this->connection   = $connection;
+    $this->eventManager = $event_manager;
   }
 
   /**
@@ -92,8 +93,8 @@ class CollectionController extends ControllerBase {
     $container->get('current_user'),
     $container->get('request_stack'),
     $container->get('entity_type.manager'),
-    $container->get('entity.query'),
-    $container->get('database')
+    $container->get('database'),
+    $container->get('qs_activity.event_manager')
     );
   }
 
@@ -126,14 +127,13 @@ class CollectionController extends ControllerBase {
     $activities_nids = $this->getActivitiesByTheme($community);
 
     // From the activity before, get the only next events of each ones.
-    $events_nids = $this->getNextEventByActivities($activities_nids);
+    $events = $this->eventManager->getNextEventByActivities($activities_nids);
 
     if (!empty($activities_nids)) {
       $variables['activities'] = $this->nodeStorage->loadMultiple($activities_nids);
     }
 
-    if (!empty($events_nids)) {
-      $events = $this->nodeStorage->loadMultiple($events_nids);
+    if (!empty($events)) {
       foreach ($events as $event) {
         $variables['events'][$event->field_activity->target_id] = $event;
       }
@@ -215,31 +215,6 @@ class CollectionController extends ControllerBase {
     foreach ($rows as $row) {
       $nids[] = $row->nid;
     }
-
-    return $nids;
-  }
-
-  /**
-   * TODO: comment.
-   */
-  private function getNextEventByActivities(array $activities_nids) {
-    $now = new DrupalDateTime();
-
-    if (!$activities_nids) {
-      return NULL;
-    }
-
-    // Get every activity that belongs to the current community.
-    $query = $this->queryFactory->get('node')
-      ->condition('type', 'event')
-      ->condition('field_start_at', $now, '>=')
-      ->condition('field_end_at', $now, '>=')
-      ->condition('status', TRUE)
-      ->condition('field_activity', $activities_nids, 'IN')
-      ->sort('field_start_at', 'ASC')
-      ->groupBy('field_activity');
-
-    $nids = $query->execute();
 
     return $nids;
   }

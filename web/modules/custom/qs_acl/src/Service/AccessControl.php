@@ -285,10 +285,12 @@ class AccessControl {
 
     $entities = [];
     $ids = $query->execute();
+
     if (!empty($ids)) {
       $privileges = $this->privilegeStorage->loadMultiple($ids);
       foreach ($privileges as $privilege) {
-        $entities[] = $privilege->getEntity();
+        $community = $privilege->getEntity();
+        $entities[$community->id()] = $community;
       }
     }
 

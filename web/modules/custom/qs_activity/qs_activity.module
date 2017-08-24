@@ -19,5 +19,12 @@ function qs_activity_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--activity--collection-by-theme',
     ],
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_activity_btn_activity_add_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--btn-activity-add',
+    ],
+
   ];
 }

@@ -16,5 +16,14 @@ require_once 'inc/default_events.inc';
  */
 function qs_default_content_install() {
   qs_default_content_privileges();
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Update some content (events) for tests.
+ * Must run after default_content has imported original content.
+ */
+function qs_default_content_update_8002(&$sandbox) {
   qs_default_content_events();
 }

@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/node\/9?_format=hal_json"
+            "href": "http:\/\/default\/geneve\/activities\/activity-9-geneve-theme-ndeg2?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -40,7 +40,7 @@
     ],
     "vid": [
         {
-            "value": 25
+            "value": 56
         }
     ],
     "langcode": [
@@ -62,7 +62,7 @@
     ],
     "title": [
         {
-            "value": "Activity - Gen\u00e8ve - Theme N\u00b02",
+            "value": "Activity 9 - Gen\u00e8ve - Theme N\u00b02",
             "lang": "zxx"
         }
     ],
@@ -79,7 +79,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "b3a2455d-a08e-4182-a327-b38d2b2219b6"
                     }
                 ],
                 "lang": "zxx"
@@ -97,7 +97,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "b3a2455d-a08e-4182-a327-b38d2b2219b6"
                     }
                 ]
             }
@@ -145,7 +145,7 @@
     ],
     "changed": [
         {
-            "value": 1503414301,
+            "value": 1503591542,
             "lang": "zxx"
         }
     ],
@@ -163,7 +163,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1503414301
+            "value": 1503591542
         }
     ],
     "revision_translation_affected": [
@@ -176,6 +176,41 @@
         {
             "value": true,
             "lang": "zxx"
+        }
+    ],
+    "field_community_access_contact": [
+        {
+            "value": true
+        }
+    ],
+    "field_community_access_detail": [
+        {
+            "value": true
+        }
+    ],
+    "field_community_access_gallery": [
+        {
+            "value": false
+        }
+    ],
+    "field_community_access_story": [
+        {
+            "value": false
+        }
+    ],
+    "field_community_can_subscribe": [
+        {
+            "value": false
+        }
+    ],
+    "field_member_create_gallery": [
+        {
+            "value": true
+        }
+    ],
+    "field_member_create_story": [
+        {
+            "value": true
         }
     ],
     "field_venue_lat": [

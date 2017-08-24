@@ -67,6 +67,11 @@ class AccessControl {
       $user = $account;
     }
 
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
     return $this->hasCommunityByUser($community, $user);
   }
 
@@ -285,10 +290,12 @@ class AccessControl {
 
     $entities = [];
     $ids = $query->execute();
+
     if (!empty($ids)) {
       $privileges = $this->privilegeStorage->loadMultiple($ids);
       foreach ($privileges as $privilege) {
-        $entities[] = $privilege->getEntity();
+        $community = $privilege->getEntity();
+        $entities[$community->id()] = $community;
       }
     }
 

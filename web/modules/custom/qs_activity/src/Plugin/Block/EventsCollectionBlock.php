@@ -36,20 +36,6 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   private $route;
 
   /**
-   * EntityTypeManagerInterface to load Node(s)
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $nodeStorage;
-
-  /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
-
-  /**
    * The entity QS Event Manager.
    *
    * @var \Drupal\qs_activity\Service\EventManager
@@ -97,7 +83,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
     if ($activity) {
       $variables['activity']   = $activity;
       $variables['privileges'] = $this->privilegeManger->fetchActive($activity);
-      $variables['events']     = $this->eventManager->getNextEventByActivities([$activity->id()]);
+      $variables['events']     = $this->eventManager->getAllNext($activity);
     }
 
     return [

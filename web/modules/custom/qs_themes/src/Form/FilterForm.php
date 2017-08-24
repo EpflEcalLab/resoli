@@ -85,10 +85,10 @@ class FilterForm extends FormBase {
     // Get all selected themes for options.
     $filtred_themes = $master_request->query->get('themes');
     $form['themes'] = [
-      '#type'     => 'checkboxes',
-      '#required' => FALSE,
-      '#options'  => $options,
-      '#default'  => $filtred_themes,
+      '#type'          => 'checkboxes',
+      '#required'      => FALSE,
+      '#options'       => $options,
+      '#default_value' => $filtred_themes,
     ];
 
     $form['actions']['submit'] = [

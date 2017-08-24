@@ -10,37 +10,27 @@
  */
 function qs_auth_form_user_login_form_alter(&$form, $form_state) {
   $form['#attributes']['autocomplete'] = "off";
-  $form['#attributes']['class'] = ['form-emphasis'];
 
   $form['login'] = [
     '#type'  => 'fieldset',
-    '#title' => t('Log in'),
+    '#title' => t('qs_auth.login_form.title'),
   ];
 
   $form['login']['name'] = $form['name'];
   unset($form['name']);
-  $form['login']['name']['#title'] = t('E-mail address');
+  $form['login']['name']['#title'] = t('qs_auth.login_form.name.label');
   $form['login']['name']['#attributes']['autocomplete'] = "off";
   $form['login']['name']['#attributes']['autofocus'] = "autofocus";
-  $form['login']['name']['#description'] = '';
-  $form['login']['name']['#prefix'] = '<div class="form-group">';
-  $form['login']['name']['#suffix'] = '</div>';
+  $form['login']['name']['#description'] = t('qs_auth.login_form.name.description');
 
   $form['login']['pass'] = $form['pass'];
   unset($form['pass']);
-  $form['login']['pass']['#title'] = t('Password');
+  $form['login']['pass']['#title'] = t('qs_auth.login_form.password.label');
   $form['login']['pass']['#attributes']['autocomplete'] = "off";
   $form['login']['pass']['#description'] = '';
-  $form['login']['pass']['#prefix'] = '<div class="form-group">';
-  $form['login']['pass']['#suffix'] = '</div>';
 
-  $form['actions']['submit']['#attributes']['class'] = ['btn', 'btn-primary'];
-  $form['actions']['submit']['#prefix'] = '<div class="form-group mb-0">';
-  $form['actions']['submit']['#suffix'] = '</div>';
   $form['#submit'][] = 'qs_auth_user_login_form_submit';
-
-  $links = ['#theme' => 'qs_auth_links', '#variables' => ['login' => TRUE]];
-  $form['#suffix'] = \Drupal::service('renderer')->render($links);
+  $form['actions']['submit']['#value'] = t('qs_auth.login_form.submit');
 }
 
 /**

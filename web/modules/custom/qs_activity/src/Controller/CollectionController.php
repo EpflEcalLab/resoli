@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Session\AccountProxyInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Access\AccessResult;
@@ -41,6 +42,13 @@ class CollectionController extends ControllerBase {
   protected $currentUser;
 
   /**
+   * Request stack that controls the lifecycle of requests.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
    * EntityTypeManagerInterface to load Node(s)
    *
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -64,9 +72,10 @@ class CollectionController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
+  public function __construct(AccessControl $acl, AccountProxyInterface $currentUser, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
     $this->acl          = $acl;
     $this->currentUser  = $currentUser;
+    $this->requestStack = $request_stack;
     $this->nodeStorage  = $entity_type_manager->getStorage('node');
     $this->queryFactory = $query_factory;
     $this->connection   = $connection;
@@ -81,6 +90,7 @@ class CollectionController extends ControllerBase {
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
     $container->get('current_user'),
+    $container->get('request_stack'),
     $container->get('entity_type.manager'),
     $container->get('entity.query'),
     $container->get('database')
@@ -112,7 +122,10 @@ class CollectionController extends ControllerBase {
    * Collection by themes.
    */
   public function themes(TermInterface $community) {
+    // Query to retreive all activities by theme.
     $activities_nids = $this->getActivitiesByTheme($community);
+
+    // From the activity before, get the only next events of each ones.
     $events_nids = $this->getNextEventByActivities($activities_nids);
 
     if (!empty($activities_nids)) {
@@ -132,6 +145,7 @@ class CollectionController extends ControllerBase {
       '#cache' => [
         'contexts' => [
           'user',
+          'url.query_args',
         ],
         'tags' => [
           // Invalidated whenever any Community is updated, deleted or created.
@@ -144,9 +158,12 @@ class CollectionController extends ControllerBase {
   }
 
   /**
-   * TODO: comment
+   * TODO: comment.
    */
   private function getActivitiesByTheme(TermInterface $community) {
+    // The request should be took at the latest moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
     $now = new DrupalDateTime();
     $max = new DrupalDateTime();
     $max->modify(self::MAX_DATE_LIST)->setTime(23, 59, 59);
@@ -160,7 +177,9 @@ class CollectionController extends ControllerBase {
 
     // TOOD: Apply filter to display activities of the current community
     // which are open to anybody
-    // OR activities where the current user is organizers|maintainers|members.
+    // OR
+    // activities of the current community
+    // where the current user is organizers|maintainers|members.
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
 
     $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
@@ -174,9 +193,18 @@ class CollectionController extends ControllerBase {
 
     $query->leftJoin('node__field_theme', 'field_theme', 'field_theme.entity_id = activity.nid');
 
-    // TOOD: Apply filter by theme if requested..
     $query->groupBy('activity.nid');
     $query->groupBy('field_theme.field_theme_target_id');
+
+    // Apply filter by theme if requested.
+    $themes = $master_request->query->get('themes');
+    if ($themes) {
+      $or_themes = $query->orConditionGroup();
+      foreach ($themes as $theme) {
+        $or_themes->condition('field_theme.field_theme_target_id', $theme);
+      }
+      $query->condition($or_themes);
+    }
 
     $query->orderBy('field_theme.field_theme_target_id');
     $query->orderBy('activity.nid');
@@ -192,10 +220,14 @@ class CollectionController extends ControllerBase {
   }
 
   /**
-   * TODO: comment
+   * TODO: comment.
    */
   private function getNextEventByActivities(array $activities_nids) {
     $now = new DrupalDateTime();
+
+    if (!$activities_nids) {
+      return NULL;
+    }
 
     // Get every activity that belongs to the current community.
     $query = $this->queryFactory->get('node')

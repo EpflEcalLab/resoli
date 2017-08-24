@@ -34,8 +34,15 @@ Feature: Activitiy Alias
     And the response status code should be 200
 
   @api
-  Scenario: Logged as Member of Lausanne, I can access to the Event N°2 (Activity - Lausanne - Theme N°1)
+  Scenario: Logged as Member of Lausanne, I can access to the Activity N°2 (Activity - Lausanne - Theme N°1)
     Given I am logged in as user "member+lausanne"
     When I am on "/node/2"
+    And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Member of Lausanne, when I access to an Event of Activity N°2 (Activity - Lausanne - Theme N°1) I am redirected on the activity page
+    Given I am logged in as user "member+lausanne"
+    When I am on "/node/15"
     And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
     And the response status code should be 200

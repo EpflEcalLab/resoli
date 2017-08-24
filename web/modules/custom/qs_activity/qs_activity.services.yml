@@ -6,3 +6,10 @@ services:
   qs_activity.activity_manager:
     class: Drupal\qs_activity\Service\ActivityManager
     arguments: ['@request_stack', '@database']
+
+  # Redirect
+  qs_activity.redirect:
+    class: Drupal\qs_activity\EventSubscriber\RedirectSubscriber
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }

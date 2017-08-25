@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
@@ -33,11 +34,19 @@ class ActivityAddForm extends FormBase {
   private $termStorage;
 
   /**
+   * The entity QS Activity Manager.
+   *
+   * @var \Drupal\qs_activity\Service\ActivityManager
+   */
+  protected $activityManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager) {
-    $this->acl         = $acl;
-    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager) {
+    $this->acl             = $acl;
+    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
+    $this->activityManager = $activity_manager;
   }
 
   /**
@@ -46,7 +55,8 @@ class ActivityAddForm extends FormBase {
   public static function create(ContainerInterface $container) {
     return new static(
     $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager')
+    $container->get('entity_type.manager'),
+    $container->get('qs_activity.activity_manager')
     );
   }
 
@@ -86,7 +96,8 @@ class ActivityAddForm extends FormBase {
 
     // Save the community for submisson.
     $form['community'] = [
-      '#hidden' => $community->id(),
+      '#type'  => 'hidden',
+      '#value' => $community->id(),
     ];
 
     $form['activity']['step-1'] = [
@@ -227,10 +238,28 @@ class ActivityAddForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $community = $this->termStorage->load($form_state->getValue('community'));
 
-    // drupal_set_message($this->t("qs_activity.add_form.success @activity", [
-    // '@activity' => $node->getTitle(),
-    // ]));
-    $form_state->setRedirect('qs_activity.collection', ['community' => $community->id()], []);
+    // Format authorizations for creations.
+    $authorizations = [
+      'field_community_can_subscribe'  => (bool) $form_state->getValue('community_can_subscribe'),
+      'field_community_access_contact' => (bool) $form_state->getValue('community_access_contact'),
+      'field_community_access_detail'  => (bool) $form_state->getValue('community_access_detail'),
+      'field_community_access_story'   => (bool) $form_state->getValue('community_access_story'),
+      'field_member_create_story'      => (bool) $form_state->getValue('member_create_story'),
+      'field_community_access_gallery' => (bool) $form_state->getValue('community_access_gallery'),
+      'field_member_create_gallery'    => (bool) $form_state->getValue('member_create_gallery'),
+    ];
+
+    // Format themes for creations.
+    // Use an array now for futur proof (multiple themes).
+    $themes = [$form_state->getValue('theme')];
+
+    // Create the new activity.
+    $activity = $this->activityManager->create($form_state->getValue('title'), $themes, $authorizations, $community);
+
+    drupal_set_message($this->t("qs_activity.add_form.success @activity", [
+      '@activity' => $activity->getTitle(),
+    ]));
+    $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
   }
 
 }

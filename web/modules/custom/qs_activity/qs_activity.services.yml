@@ -5,7 +5,7 @@ services:
 
   qs_activity.activity_manager:
     class: Drupal\qs_activity\Service\ActivityManager
-    arguments: ['@request_stack', '@database']
+    arguments: ['@entity_type.manager', '@request_stack', '@database']
 
   # Redirect
   qs_activity.redirect:

@@ -8,3 +8,9 @@ global-styling:
     - core/jquery
     - core/drupal
     - core/drupalSettings
+
+#Google Place Autocomplete Library
+google-place-autocomplete:
+  version: 3.0
+  js:
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyAEhBVBgOur7E8GQpF-CPsa2ZX4W02F1EI&sensor=true&libraries=places: {type: external, defer: true, async: true}

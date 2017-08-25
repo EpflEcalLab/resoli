@@ -277,6 +277,11 @@ class AccessControl {
       $user = $account;
     }
 
+    // If user has bypass Access, return the list of all communities.
+    if ($this->hasBypass($user)) {
+      return $this->termStorage->loadTree('communities', 0, NULL, TRUE);
+    }
+
     $query = $this->queryFactory->get('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
@@ -360,18 +365,23 @@ class AccessControl {
   }
 
   /**
-   * Check if the given user can bypass any security restriction.$_COOKIE.
+   * Check if the given user can bypass any security restriction.
    *
    * This method has security implications.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User.
+   *   Drupal Entity User against check access. Otherwise use current user.
    *
    * @return bool
    *   Does the given user has bypass security permission.
    */
-  private function hasBypass(AccountInterface $account) {
-    if ($account->hasPermission('bypass node access')) {
+  public function hasBypass(AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    if ($user->hasPermission('bypass node access')) {
       return TRUE;
     }
 

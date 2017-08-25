@@ -45,6 +45,12 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   // Load services.
   $acl = \Drupal::service('qs_acl.access_control');
 
+  // User with Bypass access can go everywhere, so redirect him on communities.
+  if ($acl->hasBypass()) {
+    $form_state->setRedirect('qs_auth.communities', [], []);
+    return;
+  }
+
   // Check the current user has apply to at least one community.
   if (!$acl->hasCommunity()) {
 

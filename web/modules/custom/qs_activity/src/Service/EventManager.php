@@ -99,4 +99,66 @@ class EventManager {
     return $events;
   }
 
+  /**
+   * Create an Event .
+   *
+   * @param int $title
+   *   The new activity title.
+   * @param int[] $themes
+   *   A collection of theme TID.
+   * @param bool[] $autorizations
+   *   The list of autorizations & the boolean value.
+   * @param Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The created event.
+   */
+
+  /**
+   * Undocumented function.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activiity this event will belongs to.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
+   *   The start date.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
+   *   The end date.
+   * @param array $data
+   *   Optional data to override default activity value.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The created event.
+   */
+  public function create(NodeInterface $activity, DrupalDateTime $date_start, DrupalDateTime $date_end, array $data = NULL) {
+
+    $title = isset($data['title']) ? $data['title'] : $activity->title->value;
+    $body = isset($data['body']) ? $data['body'] : $activity->body->value;
+    $contact_mail = isset($data['contact_mail']) ? $data['contact_mail'] : $activity->field_contact_mail->value;
+    $contact_phone = isset($data['contact_phone']) ? $data['contact_phone'] : $activity->cfield_ontact_phone->value;
+    $contribution = isset($data['contribution']) ? $data['contribution'] : $activity->field_contribution->value;
+    $venue = isset($data['venue']) ? $data['venue'] : $activity->field_venue->value;
+    $venue_lat = isset($data['venue_lat']) ? $data['venue_lat'] : $activity->field_venue_lat->value;
+    $venue_long = isset($data['venue_long']) ? $data['venue_long'] : $activity->field_venue_long->value;
+
+    $event = $this->nodeStorage->create([
+      'type'                => 'event',
+      'status'              => TRUE,
+      'field_activity'      => $activity->id(),
+      'field_start_at'      => $date_start->format('Y-m-d\TH:i:s'),
+      'field_end_at'        => $date_end->format('Y-m-d\TH:i:s'),
+      'title'               => $title,
+      'body'                => $body,
+      'field_contact_mail'  => $contact_mail,
+      'field_contact_phone' => $contact_phone,
+      'field_contribution'  => $contribution,
+      'field_venue'         => $venue,
+      'field_venue_lat'     => $venue_lat,
+      'field_venue_long'    => $venue_long,
+    ]);
+
+    $event->save();
+    return $event;
+  }
+
 }

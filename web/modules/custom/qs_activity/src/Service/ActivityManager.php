@@ -118,7 +118,7 @@ class ActivityManager {
   }
 
   /**
-   * Create an Activity at the end of the given parent.
+   * Create an Activity.
    *
    * @param int $title
    *   The new activity title.

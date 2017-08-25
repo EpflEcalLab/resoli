@@ -526,7 +526,20 @@ display:
           plugin_id: node_status
           group: 1
           entity_type: node
-      sorts: {  }
+      sorts:
+        field_start_at_value:
+          id: field_start_at_value
+          table: node__field_start_at
+          field: field_start_at_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
       title: Content
       empty:
         area_text_custom:
@@ -725,6 +738,7 @@ display:
         filter_groups: false
         fields: false
         header: false
+        sorts: false
       filter_groups:
         operator: AND
         groups:
@@ -992,6 +1006,7 @@ display:
           tokenize: false
           content: "<ul class=\"action-links\">\n  <li>\n    <a href=\"/node/add/activity\" class=\"button button-action button--primary button--small\">Add activity</a>\n  </li>\n  <li>\n    <a href=\"/node/add/event\" class=\"button button-action button--primary button--small\">Add event</a>\n  </li>\n</ul>\n\n"
           plugin_id: text_custom
+      sorts: {  }
     display_plugin: page
     display_title: Page
     id: page_1
@@ -1205,6 +1220,7 @@ display:
         header: false
         style: false
         row: false
+        sorts: false
       filter_groups:
         operator: AND
         groups:
@@ -1581,6 +1597,7 @@ display:
       row:
         type: fields
         options: {  }
+      sorts: {  }
     cache_metadata:
       max-age: 0
       contexts:
@@ -1612,7 +1629,16 @@ display:
         weight: 0
         context: '0'
         menu_name: main
-      relationships: {  }
+      relationships:
+        field_activity:
+          id: field_activity
+          table: node__field_activity
+          field: field_activity
+          relationship: none
+          group_type: group
+          admin_label: 'field_activity: Content'
+          required: true
+          plugin_id: standard
       defaults:
         relationships: false
         fields: false
@@ -1621,6 +1647,7 @@ display:
         header: false
         style: false
         row: false
+        sorts: false
       fields:
         node_bulk_form:
           id: node_bulk_form
@@ -1705,6 +1732,71 @@ display:
           plugin_id: field
           entity_type: node
           entity_field: status
+        field_start_at_1:
+          id: field_start_at_1
+          table: node__field_start_at
+          field: field_start_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Temporality
+          exclude: false
+          alter:
+            alter_text: true
+            text: "<span class=\"marker\">{% if field_start_at_1 == '+' %}futur{% endif %}</span>\n{% if field_start_at_1 == '-' %}past{% endif %}\n\n  "
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_time_ago
+          settings:
+            future_format: +
+            past_format: '-'
+            granularity: 2
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         title:
           id: title
           table: node_field_data
@@ -1724,6 +1816,71 @@ display:
           type: string
           settings:
             link_to_entity: true
+          plugin_id: field
+        field_start_at_2:
+          id: field_start_at_2
+          table: node__field_start_at
+          field: field_start_at
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: When
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_time_ago
+          settings:
+            future_format: '@interval'
+            past_format: '-'
+            granularity: 2
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
           plugin_id: field
         field_start_at:
           id: field_start_at
@@ -1904,6 +2061,70 @@ display:
           destination: true
           plugin_id: entity_operations
       filters:
+        field_start_at_value:
+          id: field_start_at_value
+          table: node__field_start_at
+          field: field_start_at_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_start_at_value_op
+            label: 'Date start at (field_start_at)'
+            description: null
+            use_operator: false
+            operator: field_start_at_value_op
+            identifier: field_start_at_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: true
+          group_info:
+            label: Temporality
+            description: ''
+            identifier: field_start_at_value
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: '1'
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Futur
+                operator: '>='
+                value:
+                  type: offset
+                  value: now
+                  min: ''
+                  max: ''
+              2:
+                title: Past
+                operator: '<='
+                value:
+                  type: offset
+                  value: now
+                  min: ''
+                  max: ''
+              3:
+                title: ''
+                operator: '='
+                value:
+                  type: date
+                  value: ''
+                  min: ''
+                  max: ''
+          plugin_id: datetime
         title:
           id: title
           table: node_field_data
@@ -2033,7 +2254,9 @@ display:
           columns:
             node_bulk_form: node_bulk_form
             status: status
+            field_start_at_1: field_start_at_1
             title: title
+            field_start_at_2: field_start_at_2
             field_start_at: field_start_at
             field_end_at: field_end_at
             operations: operations
@@ -2050,7 +2273,21 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
+            field_start_at_1:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_start_at_2:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -2081,6 +2318,20 @@ display:
       row:
         type: fields
         options: {  }
+      sorts:
+        field_start_at_value:
+          id: field_start_at_value
+          table: node__field_start_at
+          field: field_start_at_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          plugin_id: datetime
     cache_metadata:
       max-age: 0
       contexts:
@@ -2142,6 +2393,7 @@ display:
         style: false
         row: false
         relationships: false
+        sorts: false
       filters:
         title:
           id: title
@@ -2625,6 +2877,7 @@ display:
         type: fields
         options: {  }
       relationships: {  }
+      sorts: {  }
     cache_metadata:
       max-age: 0
       contexts:

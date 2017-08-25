@@ -3,7 +3,8 @@
 import svgIcons from '../icons/svg-icons';
 import nav from 'molecules/nav/nav';
 import card from 'molecules/card/card';
-import multiStep from 'organisms/multi-step'
+import multiStep from 'organisms/multi-step';
+import formControl from 'molecules/form-control/form-control';
 
 svgIcons();
 
@@ -11,4 +12,5 @@ $(document).ready(function() {
   card();
   nav();
   multiStep();
+  formControl();
 });

@@ -1,2 +1,4 @@
 title: Form Control
 name: form-control
+variants:
+  - google-autocomplete

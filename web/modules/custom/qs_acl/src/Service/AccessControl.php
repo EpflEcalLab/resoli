@@ -132,14 +132,16 @@ class AccessControl {
     }
 
     // Check bypass.
-    // if ($this->hasBypass($user)) {
-    //   return TRUE;
-    // }.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
     // Check user is the original author.
-    // $owner = $activity->getOwner();
-    // if ($owner->id() == $user->id()) {
-    //   return TRUE;
-    // }.
+    $owner = $activity->getOwner();
+    if ($owner->id() == $user->id()) {
+      return TRUE;
+    }
+
     $query = $this->queryFactory->get('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'node')

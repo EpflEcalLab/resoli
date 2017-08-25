@@ -259,7 +259,8 @@ class ActivityAddForm extends FormBase {
     drupal_set_message($this->t("qs_activity.add_form.success @activity", [
       '@activity' => $activity->getTitle(),
     ]));
-    $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
+
+    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
   }
 
 }

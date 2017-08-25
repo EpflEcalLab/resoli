@@ -3,7 +3,7 @@ qs_activity.collection.themes:
     path: '/activities/{community}/theme'
     defaults:
       _controller: '\Drupal\qs_activity\Controller\CollectionController::themes'
-      _title: 'Activities by themes'
+      _title: 'qs_activity.collection.themes.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Controller\CollectionController::access'
@@ -18,7 +18,7 @@ qs_activity.form.add:
     path: '/activities/{community}/add'
     defaults:
       _form: '\Drupal\qs_activity\Form\ActivityAddForm'
-      _title: 'Activities by themes'
+      _title: 'qs_activity.form.add.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Form\ActivityAddForm::access'
@@ -27,3 +27,18 @@ qs_activity.form.add:
       parameters:
         community:
           type: entity:taxonomy_term
+
+# Events add form
+qs_activity.events.form.add:
+    path: '/events/{activity}/add'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\EventAddForm'
+      _title: 'qs_activity.events.form.add.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\EventAddForm::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node

@@ -5,7 +5,7 @@
  * Contains alias generation for activities list by communities.
  */
 
-use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
 
 /**
@@ -14,16 +14,22 @@ use Drupal\Core\Language\LanguageInterface;
  * Generate alias for lessons based on node alias.
  */
 function qs_activity_pathauto_alias_alter(&$alias, array &$context) {
+
   if (isset($context['module']) &&
   $context['module'] == 'taxonomy' && isset($context['data']['term'])) {
     qs_activity_alias($context['data']['term'], $alias, $context['op']);
+  }
+
+  if (isset($context['module']) &&
+  $context['module'] == 'node' && isset($context['data']['node'])) {
+    qs_activity_alias($context['data']['node'], $alias, $context['op']);
   }
 }
 
 /**
  * Generate alias variant for communities based on taxonomy term alias.
  */
-function qs_activity_alias(TermInterface $entity, $alias, $operation = 'insert') {
+function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert') {
   // Load services.
   $alias_storage = \Drupal::service('path.alias_storage');
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
@@ -47,6 +53,19 @@ function qs_activity_alias(TermInterface $entity, $alias, $operation = 'insert')
         ],
       ];
       break;
+
+    case 'activity':
+      $aliases = [
+        'events_form_add' => [
+          'route' => '/events/' . $entity->id() . '/add',
+          'alias' => '/' . trim($alias, '/') . '/events/add',
+        ],
+      ];
+      break;
+  }
+
+  if (!$aliases) {
+    return;
   }
 
   // TODO: translation the alias_suffix before creation/deletion,

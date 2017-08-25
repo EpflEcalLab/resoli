@@ -9,6 +9,14 @@
  * Global function to create default privileges.
  */
 function qs_default_content_privileges() {
+  qs_default_content_privileges_community();
+  qs_default_content_privileges_activities();
+}
+
+/**
+ * Global function to create default privileges for communities.
+ */
+function qs_default_content_privileges_community() {
 
   // @var \Drupal\Core\Entity\EntityTypeManagerInterface
   $entityManager = \Drupal::service('entity_type.manager');
@@ -217,6 +225,92 @@ function qs_default_content_privileges() {
   // approved.
     'status'    => 1,
     'privilege' => 'community_members',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+}
+
+/**
+ * Global function to create default privileges for activities.
+ */
+function qs_default_content_privileges_activities() {
+  // @var \Drupal\Core\Entity\EntityTypeManagerInterface
+  $entityManager = \Drupal::service('entity_type.manager');
+  $privilegeStorage = $entityManager->getStorage('privilege');
+
+  // User 2: member+lausanne.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 4: Activity 4 - Lausanne - Theme N°1.
+    'entity'    => 4,
+  // User 2: member+lausanne.
+    'user'      => 2,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_members',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 5: Activity 5 - Lausanne - Theme N°1.
+    'entity'    => 5,
+  // User 2: member+lausanne.
+    'user'      => 2,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'activity_members',
+  ]);
+  $privilege->save();
+
+  // User 5: manager+lausanne.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 2: Activity 2 - Lausanne - Theme N°1.
+    'entity'    => 2,
+  // User 5.
+    'user'      => 5,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_organizers',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 3: Activity 3 - Lausanne - Theme N°1.
+    'entity'    => 3,
+  // User 5.
+    'user'      => 5,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_maintainers',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+
+  // User 6: organizer+lausanne.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 3: Activity 3 - Lausanne - Theme N°1.
+    'entity'    => 3,
+  // User 6.
+    'user'      => 6,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_organizers',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 5: Activity 5 - Lausanne - Theme N°1.
+    'entity'    => 5,
+  // User 6.
+    'user'      => 6,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_organizers',
     'reviewer'  => 1,
   ]);
   $privilege->save();

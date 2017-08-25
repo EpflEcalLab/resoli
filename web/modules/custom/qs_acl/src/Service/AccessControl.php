@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\taxonomy\TermInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * AccessControl.
@@ -106,6 +107,48 @@ class AccessControl {
     $or = $query->orConditionGroup();
     $or->condition('privilege', 'community_organizers');
     $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the user has write access on the given community.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The community against we check pending approval.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one write access for this community.
+   */
+  public function hasWriteAccessActivity(NodeInterface $activity, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    // if ($this->hasBypass($user)) {
+    //   return TRUE;
+    // }.
+    // Check user is the original author.
+    // $owner = $activity->getOwner();
+    // if ($owner->id() == $user->id()) {
+    //   return TRUE;
+    // }.
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
     $query->condition($or);
 
     $number = (int) $query->count()->execute();

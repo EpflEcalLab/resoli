@@ -36,6 +36,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
+    $events[KernelEvents::REQUEST][] = ['communityRedirect'];
     $events[KernelEvents::REQUEST][] = ['eventRedirect'];
     return $events;
   }
@@ -53,6 +54,23 @@ class RedirectSubscriber implements EventSubscriberInterface {
     $node = $this->routeMatch->getParameter('node');
     if ($this->routeMatch->getRouteName() == 'entity.node.canonical' && $node->bundle() === 'event') {
       $destination = Url::fromRoute('entity.node.canonical', ['node' => $node->field_activity->target_id]);
+      $event->setResponse(new RedirectResponse($destination->toString()));
+    }
+  }
+
+  /**
+   * Redirect Community canonical access.
+   *
+   * It verify the current route is Community canonical access then
+   * redirect on the activities page.
+   *
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   *   Event subscriber.
+   */
+  public function communityRedirect(GetResponseEvent $event) {
+    $term = $this->routeMatch->getParameter('taxonomy_term');
+    if ($this->routeMatch->getRouteName() == 'entity.taxonomy_term.canonical' && $term->bundle() === 'communities') {
+      $destination = Url::fromRoute('qs_activity.collection.themes', ['community' => $term->id()]);
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
   }

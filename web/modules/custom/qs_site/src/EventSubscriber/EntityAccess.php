@@ -37,7 +37,6 @@ class EntityAccess implements EventSubscriberInterface {
    * @var array
    */
   private $disabledVocabularies = [
-    'communities',
     'themes',
   ];
 

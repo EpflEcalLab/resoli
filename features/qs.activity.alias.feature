@@ -16,6 +16,20 @@ Feature: Activitiy Alias
     And the response status code should be 200
 
   @api
+  Scenario: Logged as Member of Lausanne, I can access to Lausanne activities
+    Given I am logged in as user "member+lausanne"
+    When I am on "/lausanne/activities"
+    And the url should match "lausanne/activities/theme"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Member of Lausanne, I can access to Lausanne activities
+    Given I am logged in as user "member+lausanne"
+    When I am on "/lausanne"
+    And the url should match "lausanne/activities/theme"
+    And the response status code should be 200
+
+  @api
   Scenario: Logged as Member of Fribourg, I can access to Fribourg activities
     Given I am logged in as user "member+fribourg"
     When I am on "/fribourg/activities/theme"

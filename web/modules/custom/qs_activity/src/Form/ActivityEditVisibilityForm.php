@@ -86,7 +86,7 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
 
     $form['step-1']['actions']['submit'] = [
       '#type'  => 'submit',
-      '#value' => $this->t('qs_activity.edit_visibility_form.submit'),
+      '#value' => $this->t('qs.form.submit'),
     ];
 
     return $form;

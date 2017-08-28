@@ -85,7 +85,7 @@ class RegisterForm extends FormBase {
     $form['register']['step-1']['community'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title'    => $this->t('qs_auth.register_form.community'),
+        'title'    => $this->t('qs_auth.form.register.community'),
       ],
       '#type'       => 'radios',
       '#required'   => FALSE,
@@ -98,16 +98,16 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-2']['firstname'] = [
       '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_auth.register_form.firstname'),
-      '#placeholder' => $this->t('qs_auth.register_form.firstname.placeholder'),
+      '#title'       => $this->t('qs_auth.form.register.firstname'),
+      '#placeholder' => $this->t('qs_auth.form.register.firstname.placeholder'),
       '#type'        => 'textfield',
       '#required'    => FALSE,
     ];
 
     $form['register']['step-2']['lastname'] = [
       '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_auth.register_form.lastname'),
-      '#placeholder' => $this->t('qs_auth.register_form.lastname.placeholder'),
+      '#title'       => $this->t('qs_auth.form.register.lastname'),
+      '#placeholder' => $this->t('qs_auth.form.register.lastname.placeholder'),
       '#type'        => 'textfield',
       '#required'    => FALSE,
     ];
@@ -120,8 +120,8 @@ class RegisterForm extends FormBase {
       '#type'     => 'checkboxes',
       '#required' => FALSE,
       '#options'  => [
-        'mail'  => $this->t('qs_auth.register_form.contacts.mail'),
-        'phone' => $this->t('qs_auth.register_form.contacts.phone'),
+        'mail'  => $this->t('qs_auth.form.register.contacts.mail'),
+        'phone' => $this->t('qs_auth.form.register.contacts.phone'),
       ],
     ];
 
@@ -141,29 +141,29 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-4']['username'] = [
       '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_auth.register_form.username'),
-      '#placeholder' => $this->t('qs_auth.register_form.username.placeholder'),
+      '#title'       => $this->t('qs_auth.form.register.username'),
+      '#placeholder' => $this->t('qs_auth.form.register.username.placeholder'),
       '#type'        => 'textfield',
       '#required'    => FALSE,
     ];
 
     $form['register']['step-4']['password'] = [
       '#attributes'  => ['required' => TRUE],
-      '#title'    => $this->t('qs_auth.register_form.password'),
+      '#title'    => $this->t('qs_auth.form.register.password'),
       '#type'     => 'password',
       '#required' => FALSE,
     ];
 
     $form['register']['step-4']['password_verification'] = [
       '#attributes'  => ['required' => TRUE],
-      '#title'    => $this->t('qs_auth.register_form.password_verification'),
+      '#title'    => $this->t('qs_auth.form.register.password_verification'),
       '#type'     => 'password',
       '#required' => FALSE,
     ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
-      '#value' => $this->t('qs_auth.register_form.submit'),
+      '#value' => $this->t('qs.form.submit'),
     ];
 
     return $form;
@@ -175,39 +175,39 @@ class RegisterForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the community is valid.
     if (!$form_state->getValue('community') || empty($form_state->getValue('community'))) {
-      $form_state->setErrorByName('[register][step-1][community]', $this->t('qs_auth.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-1']['community']['#attributes']['title']]));
+      $form_state->setErrorByName('[register][step-1][community]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-1']['community']['#attributes']['title']]));
     }
 
     // Assert the firstname is valid.
     if (!$form_state->getValue('firstname') || empty($form_state->getValue('firstname'))) {
-      $form_state->setErrorByName('[register][step-2][firstname]', $this->t('qs_auth.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['firstname']['#title']]));
+      $form_state->setErrorByName('[register][step-2][firstname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['firstname']['#title']]));
     }
 
     // Assert the lastname is valid.
     if (!$form_state->getValue('lastname') || empty($form_state->getValue('lastname'))) {
-      $form_state->setErrorByName('[register][step-2][lastname]', $this->t('qs_auth.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['lastname']['#title']]));
+      $form_state->setErrorByName('[register][step-2][lastname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['lastname']['#title']]));
     }
 
     // Assert the password is valid.
     if (!$form_state->getValue('password') || empty($form_state->getValue('password'))) {
-      $form_state->setErrorByName('[register][step-4][password]', $this->t('qs_auth.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password']['#title']]));
+      $form_state->setErrorByName('[register][step-4][password]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password']['#title']]));
     }
 
     // Assert the mail is valid.
     if (!$form_state->getValue('mail') || !filter_var($form_state->getValue('mail'), FILTER_VALIDATE_EMAIL)) {
-      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs_auth.form.error.mail_invalid'));
+      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
     // Check email is uniq.
     $account = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($account) {
-      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs_auth.form.error.mail_used.'));
+      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail.used'));
     }
 
     // Check username is uniq.
     $account = $this->userStorage->loadByProperties(['name' => $form_state->getValue('username')]);
     if ($account) {
-      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs_auth.form.error.username_used.'));
+      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.username.used'));
     }
 
     // Check username is Drupal compliant.
@@ -217,17 +217,17 @@ class RegisterForm extends FormBase {
 
     // Assert the password is valid.
     if (!$form_state->getValue('password') || empty($form_state->getValue('password'))) {
-      $form_state->setErrorByName('[register][step-4][password]', $this->t('qs_auth.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password']['#title']]));
+      $form_state->setErrorByName('[register][step-4][password]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password']['#title']]));
     }
 
     // Assert the password_verification is valid.
     if (!$form_state->getValue('password_verification') || empty($form_state->getValue('password_verification'))) {
-      $form_state->setErrorByName('[register][step-4][password_verification]', $this->t('qs_auth.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password_verification']['#title']]));
+      $form_state->setErrorByName('[register][step-4][password_verification]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password_verification']['#title']]));
     }
 
     // Assert the password_verification is equal to password.
     if ($form_state->getValue('password') !== $form_state->getValue('password_verification')) {
-      $form_state->setErrorByName('[register][step-4][password_verification]', $this->t('qs_auth.form.error.password_invalid'));
+      $form_state->setErrorByName('[register][step-4][password_verification]', $this->t('qs_auth.form.register.error.password_verification.invalid'));
     }
 
     // Add inline errors.
@@ -241,8 +241,10 @@ class RegisterForm extends FormBase {
     $user = $this->account->create($form_state->getValues());
     $this->account->sendRegisterEmail($user);
 
-    drupal_set_message($this->t("Thank you <strong>@firstname</strong> for your subscription!", [
+    drupal_set_message($this->t('qs_auth.form.register.success @firstname, @lastname, @mail', [
       '@firstname' => $user->field_firstname->value,
+      '@lastname'  => $user->field_lastname->value,
+      '@mail'      => $user->field_email->value,
     ]));
 
     $community = $this->termStorage->load($form_state->getValue('community'));

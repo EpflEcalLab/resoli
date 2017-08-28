@@ -75,7 +75,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
-      '#value' => $this->t('qs_activity.activities.form.edit.defaults.submit'),
+      '#value' => $this->t('qs.form.submit'),
     ];
 
     return $form;

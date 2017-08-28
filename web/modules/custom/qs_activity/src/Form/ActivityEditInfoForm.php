@@ -30,8 +30,8 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
 
     $form['step-1']['title'] = [
       '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.edit_info_form.title'),
-      '#placeholder'   => $this->t('qs_activity.edit_info_form.title.placeholder'),
+      '#title'         => $this->t('qs_activity.activities.form.edit.info.title'),
+      '#placeholder'   => $this->t('qs_activity.activities.form.edit.info.title.placeholder'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
       '#default_value' => $activity->getTitle(),
@@ -50,7 +50,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $form['step-2']['theme'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title'    => $this->t('qs_activity.edit_info_form.theme'),
+        'title'    => $this->t('qs_activity.activities.form.edit.info.theme'),
       ],
       '#type'          => 'radios',
       '#required'      => FALSE,
@@ -60,7 +60,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
 
     $form['step-2']['actions']['submit'] = [
       '#type'  => 'submit',
-      '#value' => $this->t('qs_activity.edit_info_form.submit'),
+      '#value' => $this->t('qs.form.submit'),
     ];
 
     return $form;
@@ -72,12 +72,12 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
-      $form_state->setErrorByName('[step-1][title]', $this->t('qs_activity.form.error.empty @fieldname', ['@fieldname' => $form['step-1']['title']['#title']]));
+      $form_state->setErrorByName('[step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-1']['title']['#title']]));
     }
 
     // Assert the theme is valid.
     if (!$form_state->getValue('theme') || empty($form_state->getValue('theme'))) {
-      $form_state->setErrorByName('[step-2][theme]', $this->t('qs_activity.form.error.empty @fieldname', ['@fieldname' => $form['step-2']['theme']['#attributes']['title']]));
+      $form_state->setErrorByName('[step-2][theme]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-2']['theme']['#attributes']['title']]));
     }
 
     // Add inline errors.
@@ -98,7 +98,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     // Create the new activity.
     $activity = $this->activityManager->update($activity, $fields);
 
-    drupal_set_message($this->t("qs_activity.edit_info_form.success @activity", [
+    drupal_set_message($this->t("qs_activity.activities.form.edit.info.success @activity", [
       '@activity' => $activity->getTitle(),
     ]));
 

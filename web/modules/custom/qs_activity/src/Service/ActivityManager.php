@@ -155,7 +155,7 @@ class ActivityManager {
   /**
    * Update an Activity.
    *
-   * Only update given fields
+   * Only update given fields.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to update.

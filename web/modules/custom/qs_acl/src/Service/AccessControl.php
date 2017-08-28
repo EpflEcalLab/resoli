@@ -115,7 +115,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access on the given community.
+   * Check if the user has write access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The community against we check pending approval.

@@ -14,9 +14,10 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 /**
  * Defines the Privilege entity.
  *
- * Populate and updated when a user request new privilege on an Entity such:
- *   - Community (Taxonomy Term), to became Member.
- *   - Activity (Node), to became Member.
+ * Populated and updated when a user requests a new privilege on an Entity such
+ * as:
+ *   - Community (Taxonomy Term), to become Member.
+ *   - Activity (Node), to become Member.
  *
  * @ContentEntityType(
  *   id = "privilege",
@@ -236,19 +237,19 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
       ->setSettings([
         'allowed_values' => [
             // Communities bundle privilege.
-          'community_managers'   => new TranslatableMarkup('Manager of community'),
-          'community_organizers' => new TranslatableMarkup('Organizer of community'),
-          'community_members'    => new TranslatableMarkup('Member of community'),
+          'community_managers'   => new TranslatableMarkup('Community Manager'),
+          'community_organizers' => new TranslatableMarkup('Community Organizer'),
+          'community_members'    => new TranslatableMarkup('Community Member'),
             // Activity bundle privilege.
-          'activity_organizers'  => new TranslatableMarkup('Manager of activity'),
-          'activity_maintainers' => new TranslatableMarkup('Organizer of activity'),
-          'activity_members'     => new TranslatableMarkup('Member of activity'),
+          'activity_organizers'  => new TranslatableMarkup('Activity Manager'),
+          'activity_maintainers' => new TranslatableMarkup('Activity Organizer'),
+          'activity_members'     => new TranslatableMarkup('Activity Member'),
         ],
       ]);
 
     $fields['bundle'] = BaseFieldDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Bundle'))
-      ->setDescription(new TranslatableMarkup('The bundle this privilege is attached (community or activity).'))
+      ->setDescription(new TranslatableMarkup('The bundle this privilege is attached to (community or activity).'))
       ->setRequired(TRUE)
       ->setSettings([
         'allowed_values' => [
@@ -259,19 +260,19 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
 
     $fields['entity'] = BaseFieldDefinition::create('integer')
       ->setLabel(new TranslatableMarkup('Entity'))
-      ->setDescription(new TranslatableMarkup('The entity ID this privilege is attached.'))
+      ->setDescription(new TranslatableMarkup('The entity ID this privilege is attached to.'))
       ->setRequired(TRUE)
       ->setSetting('unsigned', TRUE);
 
     $fields['user'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(new TranslatableMarkup('Used by'))
-      ->setDescription(new TranslatableMarkup('The user which request the privilege.'))
+      ->setDescription(new TranslatableMarkup('The user requesting the privilege.'))
       ->setRequired(TRUE)
       ->setSetting('target_type', 'user');
 
     $fields['reviewer'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(new TranslatableMarkup('Reviewer'))
-      ->setDescription(new TranslatableMarkup('The user which operate the review.'))
+      ->setDescription(new TranslatableMarkup('The user reviewing the request.'))
       ->setSetting('target_type', 'user');
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
@@ -281,15 +282,15 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
 
     $fields['reviewed'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(new TranslatableMarkup('Reviewed'))
-      ->setDescription(new TranslatableMarkup('The time that the request has been reviewed.'));
+      ->setDescription(new TranslatableMarkup('When the request was reviewed.'));
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(new TranslatableMarkup('Created'))
-      ->setDescription(new TranslatableMarkup('The time that the entity was created.'));
+      ->setDescription(new TranslatableMarkup('When the request was created.'));
 
     $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(new TranslatableMarkup('Changed'))
-      ->setDescription(new TranslatableMarkup('The time that the entity was last edited.'));
+      ->setDescription(new TranslatableMarkup('When the request was last edited.'));
 
     return $fields;
   }

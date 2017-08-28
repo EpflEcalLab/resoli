@@ -68,7 +68,7 @@ class FilterForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['#method'] = 'GET';
 
-    // The request should be took at the latest moment, avoid it on constructor.
+    // The request should be took at the last moment, avoid it on constructor.
     $master_request = $this->requestStack->getMasterRequest();
 
     // Disable caching & HTML5 validation.
@@ -83,12 +83,12 @@ class FilterForm extends FormBase {
     }
 
     // Get all selected themes for options.
-    $filtred_themes = $master_request->query->get('themes');
+    $filtered_themes = $master_request->query->get('themes') ?: [];
     $form['themes'] = [
       '#type'          => 'checkboxes',
       '#required'      => FALSE,
       '#options'       => $options,
-      '#default_value' => $filtred_themes,
+      '#default_value' => $filtered_themes,
     ];
 
     $form['actions']['submit'] = [

@@ -96,6 +96,7 @@ class CollectionController extends ControllerBase {
   public function themes(TermInterface $community) {
     // Query to retreive all activities by theme.
     $activities_nids = $this->activityManager->getThemed($community);
+    $variables = [];
 
     // From the activity before, get the only next events of each ones.
     $events = $this->eventManager->getNext($activities_nids);

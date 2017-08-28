@@ -88,7 +88,20 @@ qs_activity.activities.form.edit.defaults:
         activity:
           type: entity:node
 
-
+# Activities delete form
+qs_activity.activities.form.delete:
+    path: '/activities/{activity}/delete'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\ActivityDeleteForm'
+      _title: 'qs_activity.settings.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\ActivityDeleteForm::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
 
 # Events add form
 qs_activity.events.form.add:

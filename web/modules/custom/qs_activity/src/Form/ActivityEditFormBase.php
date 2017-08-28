@@ -8,7 +8,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\qs_activity\Service\EventManager;
 use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
@@ -48,13 +50,29 @@ abstract class ActivityEditFormBase extends FormBase {
   protected $activityManager;
 
   /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
+
+  /**
+   * The url generator service.
+   *
+   * @var \Drupal\Core\Routing\UrlGeneratorInterface
+   */
+  protected $urlGenerator;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, eventManager $event_manager, UrlGeneratorInterface $url_generator) {
     $this->acl             = $acl;
     $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
     $this->nodeStorage     = $entity_type_manager->getStorage('node');
     $this->activityManager = $activity_manager;
+    $this->eventManager    = $event_manager;
+    $this->urlGenerator    = $url_generator;
   }
 
   /**
@@ -64,7 +82,9 @@ abstract class ActivityEditFormBase extends FormBase {
     return new static(
     $container->get('qs_acl.access_control'),
     $container->get('entity_type.manager'),
-    $container->get('qs_activity.activity_manager')
+    $container->get('qs_activity.activity_manager'),
+    $container->get('qs_activity.event_manager'),
+    $container->get('url_generator')
     );
   }
 

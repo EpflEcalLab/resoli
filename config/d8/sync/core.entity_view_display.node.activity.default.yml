@@ -5,9 +5,16 @@ dependencies:
   config:
     - field.field.node.activity.body
     - field.field.node.activity.field_community
+    - field.field.node.activity.field_community_access_contact
+    - field.field.node.activity.field_community_access_detail
+    - field.field.node.activity.field_community_access_gallery
+    - field.field.node.activity.field_community_access_story
+    - field.field.node.activity.field_community_can_subscribe
     - field.field.node.activity.field_contact_mail
     - field.field.node.activity.field_contact_phone
     - field.field.node.activity.field_contribution
+    - field.field.node.activity.field_member_create_gallery
+    - field.field.node.activity.field_member_create_story
     - field.field.node.activity.field_theme
     - field.field.node.activity.field_venue
     - field.field.node.activity.field_venue_lat
@@ -36,6 +43,56 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_community_access_contact:
+    weight: 114
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_community_access_detail:
+    weight: 115
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_community_access_gallery:
+    weight: 118
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_community_access_story:
+    weight: 116
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_community_can_subscribe:
+    weight: 113
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
   field_contact_mail:
     weight: 107
     label: above
@@ -62,6 +119,26 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_decimal
+    region: content
+  field_member_create_gallery:
+    weight: 119
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_member_create_story:
+    weight: 117
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_theme:
     weight: 106

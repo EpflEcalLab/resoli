@@ -12,25 +12,25 @@ Feature: Login
   @api
   Scenario: Login as Member of Lausanne redirect him on Lausanne activities
     Given I am logged in as user "member+lausanne"
-    And the url should match "activities/lausanne/theme"
+    And the url should match "lausanne/activities/theme"
     And the response status code should be 200
 
   @api
   Scenario: Login as Manager of Lausanne redirect him on Lausanne activities
     Given I am logged in as user "manager+lausanne"
-    And the url should match "activities/lausanne/theme"
+    And the url should match "lausanne/activities/theme"
     And the response status code should be 200
 
   @api
   Scenario: Login as Organizer of Lausanne redirect him on Lausanne activities
     Given I am logged in as user "organizer+lausanne"
-    And the url should match "activities/lausanne/theme"
+    And the url should match "lausanne/activities/theme"
     And the response status code should be 200
 
   @api
   Scenario: Login as Member of Fribourg redirect him on Fribourg activities
     Given I am logged in as user "member+fribourg"
-    And the url should match "activities/fribourg/theme"
+    And the url should match "fribourg/activities/theme"
     And the response status code should be 200
 
   @api
@@ -66,7 +66,7 @@ Feature: Login
   @api
   Scenario: Login as Member with 1 community & 1 approval redirect him on the community page
     Given I am logged in as user "member+fribourg+approval+lausanne"
-    And the url should match "activities/fribourg/theme"
+    And the url should match "fribourg/activities/theme"
     And the response status code should be 200
 
   @api

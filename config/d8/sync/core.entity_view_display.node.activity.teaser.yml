@@ -30,9 +30,16 @@ hidden:
   field_activity_members: true
   field_activity_organizers: true
   field_community: true
+  field_community_access_contact: true
+  field_community_access_detail: true
+  field_community_access_gallery: true
+  field_community_access_story: true
+  field_community_can_subscribe: true
   field_contact_mail: true
   field_contact_phone: true
   field_contribution: true
+  field_member_create_gallery: true
+  field_member_create_story: true
   field_theme: true
   field_venue: true
   field_venue_lat: true

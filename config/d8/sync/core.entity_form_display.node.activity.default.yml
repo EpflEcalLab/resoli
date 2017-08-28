@@ -5,9 +5,16 @@ dependencies:
   config:
     - field.field.node.activity.body
     - field.field.node.activity.field_community
+    - field.field.node.activity.field_community_access_contact
+    - field.field.node.activity.field_community_access_detail
+    - field.field.node.activity.field_community_access_gallery
+    - field.field.node.activity.field_community_access_story
+    - field.field.node.activity.field_community_can_subscribe
     - field.field.node.activity.field_contact_mail
     - field.field.node.activity.field_contact_phone
     - field.field.node.activity.field_contribution
+    - field.field.node.activity.field_member_create_gallery
+    - field.field.node.activity.field_member_create_story
     - field.field.node.activity.field_theme
     - field.field.node.activity.field_venue
     - field.field.node.activity.field_venue_lat
@@ -23,7 +30,6 @@ third_party_settings:
       children:
         - group_general
         - group_default
-        - group_privileges
         - group_authorizations
       parent_name: ''
       weight: 0
@@ -33,21 +39,6 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Tabs
-    group_privileges:
-      children:
-        - field_activity_members
-        - field_activity_maintainers
-        - field_activity_organizers
-      parent_name: group_t
-      weight: 5
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-      label: Privileges
     group_general:
       children:
         - field_community
@@ -65,7 +56,14 @@ third_party_settings:
         required_fields: true
       label: General
     group_authorizations:
-      children: {  }
+      children:
+        - field_community_can_subscribe
+        - field_community_access_contact
+        - field_community_access_detail
+        - field_community_access_story
+        - field_member_create_story
+        - field_community_access_gallery
+        - field_member_create_gallery
       parent_name: group_t
       weight: 6
       format_type: tab
@@ -119,6 +117,41 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_community_access_contact:
+    weight: 27
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_community_access_detail:
+    weight: 28
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_community_access_gallery:
+    weight: 31
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_community_access_story:
+    weight: 29
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_community_can_subscribe:
+    weight: 26
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
   field_contact_mail:
     weight: 5
     settings:
@@ -141,6 +174,20 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
+  field_member_create_gallery:
+    weight: 32
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_member_create_story:
+    weight: 30
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_theme:
     weight: 3

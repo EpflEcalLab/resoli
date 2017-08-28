@@ -37,13 +37,13 @@ module:
   menu_ui: 0
   node: 0
   options: 0
-  page_cache: 0
   path: 0
   pathauto: 0
   qs_acl: 0
   qs_activity: 0
   qs_auth: 0
   qs_site: 0
+  qs_themes: 0
   qs_toolbar: 0
   rdf: 0
   redirect: 0

@@ -23,8 +23,6 @@ display:
         type:
           label: 'Type de contenu'
           separator: ', '
-        name:
-          label: Auteur
         status:
           label: Statut
           settings:

@@ -28,8 +28,8 @@ cd "web"
 ../vendor/bin/drush ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
 ../vendor/bin/drush config-set system.site uuid "b38de9f3-fd4d-4779-ab7f-29e7b91556f1" -y
 ../vendor/bin/drush config-import -y --source='../config/d8/sync/'
-../vendor/bin/drush updatedb -y
 ../vendor/bin/drush en qs_default_content -y
+../vendor/bin/drush updatedb -y
 ../vendor/bin/drush pmu hal serialization default_content qs_default_content -y
 nohup bash -c "php ../vendor/bin/drush runserver &" && sleep 3;
 

@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label for="input-google-autocomplete">Où aura lieu votre évènement?</label>
+  <input type="email" class="form-control"
+    id="input-google-autocomplete"
+    placeholder="11, avenue du 24-Janvier"
+    data-google-autocomplete="true"
+    data-google-input-lat="input-lat"
+    data-google-input-lng="input-lng">
+</div>
+<input type="hidden" id="input-lat">
+<input type="hidden" id="input-lng">
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places" async defer></script>

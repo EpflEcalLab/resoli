@@ -37,25 +37,13 @@ class EntityAccess implements EventSubscriberInterface {
    * @var array
    */
   private $disabledVocabularies = [
-    'communities',
     'themes',
-  ];
-
-  /**
-   * Disabled $disabledNodes terms vid.
-   *
-   * @var array
-   */
-  private $disabledNodes = [
-    'activity',
-    'event',
   ];
 
   /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::REQUEST][] = ['isDisabledNode'];
     $events[KernelEvents::REQUEST][] = ['isDisabledTaxonomy'];
     return $events;
   }
@@ -71,22 +59,6 @@ class EntityAccess implements EventSubscriberInterface {
     $route_name = $this->routeMatch->getRouteName();
 
     if ($route_name == 'entity.taxonomy_term.canonical' && in_array($term->vid->target_id, $this->disabledVocabularies)) {
-      $dest = Url::fromRoute('<front>')->toString();
-      $event->setResponse(RedirectResponse::create($dest));
-    }
-  }
-
-  /**
-   * It verify the requested page is a disabled node view and shut-it-down.
-   *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
-   *   A response for a request.
-   */
-  public function isDisabledNode(GetResponseEvent $event) {
-    $node = $this->routeMatch->getParameter('node');
-    $route_name = $this->routeMatch->getRouteName();
-
-    if ($route_name == 'entity.node.canonical' && in_array($node->bundle(), $this->disabledNodes)) {
       $dest = Url::fromRoute('<front>')->toString();
       $event->setResponse(RedirectResponse::create($dest));
     }

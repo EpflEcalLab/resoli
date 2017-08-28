@@ -7,20 +7,20 @@ Feature: Login Communities
   Scenario: Login as Member with many communities redirect him on the communities page
     Given I am logged in as user "member+fribourg+member+lausanne"
     And the url should match "communities"
-    And I should see "Fribourg" link with href "activities/fribourg/theme"
-    And I should see "Lausanne" link with href "activities/lausanne/theme"
+    And I should see "Fribourg" link with href "fribourg/activities/theme"
+    And I should see "Lausanne" link with href "lausanne/activities/theme"
 
   @api
   Scenario: Login as Member of Lausanne & Organizer of Fribourg redirect him on the communities page
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     And the url should match "communities"
-    And I should see "Fribourg" link with href "activities/fribourg/theme"
-    And I should see "Lausanne" link with href "activities/lausanne/theme"
+    And I should see "Fribourg" link with href "fribourg/activities/theme"
+    And I should see "Lausanne" link with href "lausanne/activities/theme"
 
   @api
   Scenario: Login as Member with multiple communities & 1 approval redirect him on the communities page
     Given I am logged in as user "member+fribourg+approval+lausanne+member+geneve"
     And the url should match "communities"
-    And I should see "Fribourg" link with href "activities/fribourg/theme"
+    And I should see "Fribourg" link with href "fribourg/activities/theme"
     And I should see "Lausanne" link with href "authentication/approval/1"
-    And I should see "Genève" link with href "activities/geneve/theme"
+    And I should see "Genève" link with href "geneve/activities/theme"

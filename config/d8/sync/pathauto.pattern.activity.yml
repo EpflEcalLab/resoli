@@ -1,0 +1,22 @@
+uuid: 70b59b68-703b-4f83-b042-ddebe0fac913
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: activity
+label: Activity
+type: 'canonical_entities:node'
+pattern: '/[node:field_community:entity:name]/activities/[node:title]'
+selection_criteria:
+  df4099fc-a24b-4b52-b42a-6748bfd416ed:
+    id: node_type
+    bundles:
+      activity: activity
+    negate: false
+    context_mapping:
+      node: node
+    uuid: df4099fc-a24b-4b52-b42a-6748bfd416ed
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -15,4 +15,11 @@
     attributes.type != 'checkbox' and attributes.type != 'radio' ? 'form-control',
   ]
 %}
-<input{{ attributes.addClass(classes).removeClass('form-text') }} />{{ children }}
+{%
+  set data = [
+    attributes['google-autocomplete'] ? 'data-google-autocomplete',
+    attributes['google-input-lat'] ? 'data-google-input-lat='~attributes['google-input-lat'],
+    attributes['google-input-lng'] ? 'data-google-input-lng='~attributes['google-input-lng'],
+  ]
+%}
+<input{{ attributes.addClass(classes).removeClass('form-text') }} {{ data|join(' ') }} />{{ children }}

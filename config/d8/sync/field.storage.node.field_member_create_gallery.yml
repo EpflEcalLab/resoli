@@ -1,0 +1,18 @@
+uuid: 89567026-34da-4c37-8ecf-543f26e4b7ec
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_member_create_gallery
+field_name: field_member_create_gallery
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

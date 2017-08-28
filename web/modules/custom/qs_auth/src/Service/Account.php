@@ -22,9 +22,9 @@ class Account {
   protected $mail;
 
   /**
-   * EntityTypeManagerInterface to load user.
+   * The user Storage.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
 
@@ -43,9 +43,9 @@ class Account {
   protected $queryFactory;
 
   /**
-   * EntityTypeManagerInterface to load Term(s)
+   * The term Storage.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var \Drupal\taxonomy\TermStorageInterface
    */
   private $termStorage;
 

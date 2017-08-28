@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\taxonomy\TermInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * AccessControl.
@@ -43,10 +44,10 @@ class AccessControl {
   /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity, QueryFactory $query_factory) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory) {
     $this->currentUser      = $currentUser;
-    $this->termStorage      = $entity->getStorage('taxonomy_term');
-    $this->privilegeStorage = $entity->getStorage('privilege');
+    $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
+    $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
     $this->queryFactory     = $query_factory;
   }
 
@@ -67,7 +68,94 @@ class AccessControl {
       $user = $account;
     }
 
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
     return $this->hasCommunityByUser($community, $user);
+  }
+
+  /**
+   * Check if the user has write access on the given community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community against we check pending approval.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one write access for this community.
+   */
+  public function hasWriteAccessCommunity(TermInterface $community, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('entity', $community->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the user has write access on the given community.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The community against we check pending approval.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one write access for this community.
+   */
+  public function hasWriteAccessActivity(NodeInterface $activity, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    // Check user is the original author.
+    $owner = $activity->getOwner();
+    if ($owner->id() == $user->id()) {
+      return TRUE;
+    }
+
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
   }
 
   /**
@@ -234,6 +322,11 @@ class AccessControl {
       $user = $account;
     }
 
+    // If user has bypass Access, return the list of all communities.
+    if ($this->hasBypass($user)) {
+      return $this->termStorage->loadTree('communities', 0, NULL, TRUE);
+    }
+
     $query = $this->queryFactory->get('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
@@ -247,10 +340,12 @@ class AccessControl {
 
     $entities = [];
     $ids = $query->execute();
+
     if (!empty($ids)) {
       $privileges = $this->privilegeStorage->loadMultiple($ids);
       foreach ($privileges as $privilege) {
-        $entities[] = $privilege->getEntity();
+        $community = $privilege->getEntity();
+        $entities[$community->id()] = $community;
       }
     }
 
@@ -312,6 +407,30 @@ class AccessControl {
     $query->condition($or);
 
     return $query->count()->execute() > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the given user can bypass any security restriction.
+   *
+   * This method has security implications.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User against check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the given user has bypass security permission.
+   */
+  public function hasBypass(AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    if ($user->hasPermission('bypass node access')) {
+      return TRUE;
+    }
+
+    return FALSE;
   }
 
 }

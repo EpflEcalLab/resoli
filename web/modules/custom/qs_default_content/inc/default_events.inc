@@ -6,7 +6,6 @@
  */
 
 use Drupal\Core\Datetime\DrupalDateTime;
-use DateTimeZone;
 
 /**
  * Global function to alter default events with date according now.

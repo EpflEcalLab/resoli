@@ -1,0 +1,15 @@
+{% for activity in variables.activities %}
+  {{ activity.nid.value }} <br>
+  {{ activity.title.value }}
+
+  <br> <br>
+  <strong>Next Event</strong> <br>
+  {% set event = variables.events[activity.nid.value] %}
+  {{ event.nid.value }} <br>
+  {{ event.title.value }} <br>
+  {{ event.field_start_at.value }} UTC
+  <hr>
+{% endfor %}
+
+{{ bamboo_render_block('qs_themes_filter_block') }}
+{{ bamboo_render_block('qs_activity_btn_activity_add_block') }}

@@ -14,7 +14,7 @@ qs_activity.collection.themes:
           type: entity:taxonomy_term
 
 # Activities add form
-qs_activity.form.add:
+qs_activity.activities.form.add:
     path: '/activities/{community}/add'
     defaults:
       _form: '\Drupal\qs_activity\Form\ActivityAddForm'
@@ -27,6 +27,36 @@ qs_activity.form.add:
       parameters:
         community:
           type: entity:taxonomy_term
+
+# Activities settings page (link on forms for edition)
+qs_activity.activities.form.edit:
+    path: '/activities/{activity}/edit'
+    defaults:
+      _controller: '\Drupal\qs_activity\Controller\ActivitySettingsController::settings'
+      _title: 'qs_activity.settings.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Controller\ActivitySettingsController::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
+
+# Activities edit info form
+qs_activity.activities.form.edit.info:
+    path: '/activities/{activity}/edit/info'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\ActivityEditInfoForm'
+      _title: 'qs_activity.settings.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\ActivityEditInfoForm::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
 
 # Events add form
 qs_activity.events.form.add:

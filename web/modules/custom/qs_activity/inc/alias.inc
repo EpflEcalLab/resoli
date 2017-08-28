@@ -72,6 +72,11 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'route' => '/activities/' . $entity->id() . '/edit/visibility',
           'alias' => '/' . trim($alias, '/') . '/settings/visibility',
         ],
+        'activities_form_edit_defaults' => [
+          'route' => '/activities/' . $entity->id() . '/edit/defaults',
+          'alias' => '/' . trim($alias, '/') . '/settings/defaults',
+        ],
+
       ];
       break;
   }

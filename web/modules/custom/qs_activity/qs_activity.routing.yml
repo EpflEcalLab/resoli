@@ -73,6 +73,23 @@ qs_activity.activities.form.edit.visibility:
         activity:
           type: entity:node
 
+# Activities edit defaults values form (body, contact, place, contribution)
+qs_activity.activities.form.edit.defaults:
+    path: '/activities/{activity}/edit/defaults'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\ActivityEditDefaultsForm'
+      _title: 'qs_activity.settings.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\ActivityEditDefaultsForm::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
+
+
+
 # Events add form
 qs_activity.events.form.add:
     path: '/events/{activity}/add'

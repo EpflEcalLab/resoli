@@ -73,7 +73,7 @@ class CommunitiesApplyForm extends FormBase {
       $options[$community->tid->value] = $community->name->value;
     }
     $form['step-1']['community'] = [
-      '#attributes' => ['title' => $this->t('qs_auth.communities_apply_form.community *')],
+      '#attributes' => ['title' => $this->t('qs_auth.form.communities_apply.community')],
       '#type'       => 'radios',
       '#required'   => FALSE,
       '#options'    => $options,
@@ -81,7 +81,7 @@ class CommunitiesApplyForm extends FormBase {
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
-      '#value' => $this->t('qs_auth.communities_apply_form.submit'),
+      '#value' => $this->t('qs.form.submit'),
     ];
 
     return $form;

@@ -13,24 +13,24 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
 
   $form['login'] = [
     '#type'  => 'fieldset',
-    '#title' => t('qs_auth.login_form.title'),
+    '#title' => t('qs_auth.form.login.title'),
   ];
 
   $form['login']['name'] = $form['name'];
   unset($form['name']);
-  $form['login']['name']['#title'] = t('qs_auth.login_form.name.label');
+  $form['login']['name']['#title'] = t('qs_auth.form.login.name');
   $form['login']['name']['#attributes']['autocomplete'] = "off";
   $form['login']['name']['#attributes']['autofocus'] = "autofocus";
-  $form['login']['name']['#description'] = t('qs_auth.login_form.name.description');
+  $form['login']['name']['#description'] = t('qs_auth.form.login.name.description');
 
   $form['login']['pass'] = $form['pass'];
   unset($form['pass']);
-  $form['login']['pass']['#title'] = t('qs_auth.login_form.password.label');
+  $form['login']['pass']['#title'] = t('qs_auth.form.login.password');
   $form['login']['pass']['#attributes']['autocomplete'] = "off";
   $form['login']['pass']['#description'] = '';
 
   $form['#submit'][] = 'qs_auth_user_login_form_submit';
-  $form['actions']['submit']['#value'] = t('qs_auth.login_form.submit');
+  $form['actions']['submit']['#value'] = t('qs.form.submit');
 }
 
 /**

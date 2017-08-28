@@ -69,12 +69,12 @@ class EventAddForm extends FormBase {
   }
 
   /**
-   * Checks access for creating file in the given rubric.
+   * Checks access for creating file in the given community.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
    * @param \Drupal\node\NodeInterface $activity
-   *   Run access checks for this taxonomy.
+   *   Run access checks for this node.
    *
    * @return bool
    *   Access allowed or rejected.

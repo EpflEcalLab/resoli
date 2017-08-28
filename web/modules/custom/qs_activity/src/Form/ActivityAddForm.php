@@ -68,7 +68,7 @@ class ActivityAddForm extends FormBase {
   }
 
   /**
-   * Checks access for creating file in the given rubric.
+   * Checks access for creating file in the given community.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.

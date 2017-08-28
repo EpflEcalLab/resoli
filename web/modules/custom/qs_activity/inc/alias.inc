@@ -60,21 +60,21 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'route' => '/events/' . $entity->id() . '/add',
           'alias' => '/' . trim($alias, '/') . '/events/add',
         ],
-        'activities_form_edit' => [
-          'route' => '/activities/' . $entity->id() . '/edit',
-          'alias' => '/' . trim($alias, '/') . '/settings',
+        'activities_dashboard' => [
+          'route' => '/activities/' . $entity->id() . '/dashboard',
+          'alias' => '/' . trim($alias, '/') . '/dashboard',
         ],
         'activities_form_edit_info' => [
           'route' => '/activities/' . $entity->id() . '/edit/info',
-          'alias' => '/' . trim($alias, '/') . '/settings/info',
+          'alias' => '/' . trim($alias, '/') . '/edit/info',
         ],
         'activities_form_edit_visibility' => [
           'route' => '/activities/' . $entity->id() . '/edit/visibility',
-          'alias' => '/' . trim($alias, '/') . '/settings/visibility',
+          'alias' => '/' . trim($alias, '/') . '/edit/visibility',
         ],
         'activities_form_edit_defaults' => [
           'route' => '/activities/' . $entity->id() . '/edit/defaults',
-          'alias' => '/' . trim($alias, '/') . '/settings/defaults',
+          'alias' => '/' . trim($alias, '/') . '/edit/defaults',
         ],
         'activities_form_delete' => [
           'route' => '/activities/' . $entity->id() . '/delete',
@@ -85,13 +85,13 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
 
     case 'event':
       $aliases = [
+        'events_dashboard' => [
+          'route' => '/events/' . $entity->id() . '/dashboard',
+          'alias' => '/' . trim($alias, '/') . '/dashboard',
+        ],
         'events_form_edit' => [
           'route' => '/events/' . $entity->id() . '/edit',
-          'alias' => '/' . trim($alias, '/') . '/settings',
-        ],
-        'events_form_edit_info' => [
-          'route' => '/events/' . $entity->id() . '/edit/info',
-          'alias' => '/' . trim($alias, '/') . '/settings/info',
+          'alias' => '/' . trim($alias, '/') . '/edit',
         ],
       ];
       break;

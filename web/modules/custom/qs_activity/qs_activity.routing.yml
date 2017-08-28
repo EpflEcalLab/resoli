@@ -13,12 +13,12 @@ qs_activity.collection.themes:
         community:
           type: entity:taxonomy_term
 
-# Activities add form
+# Activities add form - Multisteps forms
 qs_activity.activities.form.add:
     path: '/activities/{community}/add'
     defaults:
       _form: '\Drupal\qs_activity\Form\ActivityAddForm'
-      _title: 'qs_activity.form.add.title'
+      _title: 'qs_activity.activities.form.add.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Form\ActivityAddForm::access'
@@ -28,27 +28,27 @@ qs_activity.activities.form.add:
         community:
           type: entity:taxonomy_term
 
-# Activities settings page (link on forms for edition)
-qs_activity.activities.form.edit:
-    path: '/activities/{activity}/edit'
+# Activities dashboard page - links of forms for CRUD oprations
+qs_activity.activities.dashboard:
+    path: '/activities/{activity}/dashboard'
     defaults:
-      _controller: '\Drupal\qs_activity\Controller\ActivitySettingsController::settings'
-      _title: 'qs_activity.settings.title'
+      _controller: '\Drupal\qs_activity\Controller\DashboardController::dashboard'
+      _title: 'qs_activity.activities.dashboard.title'
     requirements:
       _user_is_logged_in: 'TRUE'
-      _custom_access: '\Drupal\qs_activity\Controller\ActivitySettingsController::access'
+      _custom_access: '\Drupal\qs_activity\Controller\DashboardController::access'
       activity: \d+
     options:
       parameters:
         activity:
           type: entity:node
 
-# Activities edit info form
+# Activities edit form - General informations (Title, Themes, ...)
 qs_activity.activities.form.edit.info:
     path: '/activities/{activity}/edit/info'
     defaults:
       _form: '\Drupal\qs_activity\Form\ActivityEditInfoForm'
-      _title: 'qs_activity.settings.title'
+      _title: 'qs_activity.activities.form.edit.info.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Form\ActivityEditInfoForm::access'
@@ -58,12 +58,12 @@ qs_activity.activities.form.edit.info:
         activity:
           type: entity:node
 
-# Activities edit visibility form
+# Activities edit form - visibility
 qs_activity.activities.form.edit.visibility:
     path: '/activities/{activity}/edit/visibility'
     defaults:
       _form: '\Drupal\qs_activity\Form\ActivityEditVisibilityForm'
-      _title: 'qs_activity.settings.title'
+      _title: 'qs_activity.activities.form.edit.visibility.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Form\ActivityEditVisibilityForm::access'
@@ -73,12 +73,12 @@ qs_activity.activities.form.edit.visibility:
         activity:
           type: entity:node
 
-# Activities edit defaults values form (body, contact, place, contribution)
+# Activities edit form - defaults values such Body, Venue, ...
 qs_activity.activities.form.edit.defaults:
     path: '/activities/{activity}/edit/defaults'
     defaults:
       _form: '\Drupal\qs_activity\Form\ActivityEditDefaultsForm'
-      _title: 'qs_activity.settings.title'
+      _title: 'qs_activity.activities.form.edit.defaults.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Form\ActivityEditDefaultsForm::access'
@@ -93,7 +93,7 @@ qs_activity.activities.form.delete:
     path: '/activities/{activity}/delete'
     defaults:
       _form: '\Drupal\qs_activity\Form\ActivityDeleteForm'
-      _title: 'qs_activity.settings.title'
+      _title: 'qs_activity.activities.form.delete.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Form\ActivityDeleteForm::access'
@@ -103,7 +103,7 @@ qs_activity.activities.form.delete:
         activity:
           type: entity:node
 
-# Events add form
+# Events add form - Multisteps form
 qs_activity.events.form.add:
     path: '/events/{activity}/add'
     defaults:
@@ -118,15 +118,15 @@ qs_activity.events.form.add:
         activity:
           type: entity:node
 
-# Events settings page (link on forms for edition)
-qs_activity.events.form.edit:
-    path: '/events/{event}/edit'
+# Events dashboard page - links of forms for CRUD oprations
+qs_activity.events.dashboard:
+    path: '/events/{event}/dashboard'
     defaults:
-      _controller: '\Drupal\qs_activity\Controller\EventSettingsController::settings'
-      _title: 'qs_activity.settings.title'
+      _controller: '\Drupal\qs_activity\Controller\EventDashboardController::dashboard'
+      _title: 'qs_activity.events.dashboard.title'
     requirements:
       _user_is_logged_in: 'TRUE'
-      _custom_access: '\Drupal\qs_activity\Controller\EventSettingsController::access'
+      _custom_access: '\Drupal\qs_activity\Controller\EventDashboardController::access'
       event: \d+
     options:
       parameters:
@@ -134,11 +134,11 @@ qs_activity.events.form.edit:
           type: entity:node
 
 # Events edit form
-qs_activity.events.form.edit.info:
-    path: '/events/{event}/edit/info'
+qs_activity.events.form.edit:
+    path: '/events/{event}/edit'
     defaults:
       _form: '\Drupal\qs_activity\Form\EventEditForm'
-      _title: 'qs_activity.settings.title'
+      _title: 'qs_activity.events.form.edit.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_activity\Form\EventEditForm::access'

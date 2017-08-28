@@ -2,62 +2,28 @@
 
 namespace Drupal\qs_activity\Form;
 
-use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\qs_site\Form\InlineErrorFormTrait;
 
 /**
  * ActivityAddForm class.
  */
-class ActivityAddForm extends FormBase {
-  use InlineErrorFormTrait;
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  private $termStorage;
-
-  /**
-   * The entity QS Activity Manager.
-   *
-   * @var \Drupal\qs_activity\Service\ActivityManager
-   */
-  protected $activityManager;
+class ActivityAddForm extends FormBasic {
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager) {
-    $this->acl             = $acl;
-    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
-    $this->activityManager = $activity_manager;
-  }
+  public function __construct(ContainerInterface $container) {
+    // Initialize the container.
+    parent::__construct($container);
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('qs_activity.activity_manager')
-    );
+    // From the container, inject services.
+    $this->acl             = $this->getAcl();
+    $this->termStorage     = $this->getTermStorage();
+    $this->activityManager = $this->getActivityManager();
   }
 
   /**
@@ -90,9 +56,7 @@ class ActivityAddForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
-    // Disable caching & HTML5 validation.
-    $form['#cache']['max-age'] = 0;
-    $form['#attributes']['novalidate'] = 'novalidate';
+    $form = parent::buildForm($form, $form_state);
 
     // Save the community for submisson.
     $form['community'] = [

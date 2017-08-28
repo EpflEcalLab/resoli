@@ -3,12 +3,24 @@
 namespace Drupal\qs_activity\Form;
 
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 
 /**
  * ActivityEditInfoForm class.
  */
 class ActivityEditInfoForm extends ActivityEditFormBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ContainerInterface $container) {
+    // Initialize the container.
+    parent::__construct($container);
+
+    // From the container, inject services.
+    $this->termStorage = $this->getTermStorage();
+  }
 
   /**
    * {@inheritdoc}

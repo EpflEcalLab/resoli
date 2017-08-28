@@ -2,90 +2,28 @@
 
 namespace Drupal\qs_activity\Form;
 
-use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\qs_activity\Service\EventManager;
-use Drupal\qs_activity\Service\ActivityManager;
-use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\qs_site\Form\InlineErrorFormTrait;
 
 /**
  * ActivityEditFormBase class.
  */
-abstract class ActivityEditFormBase extends FormBase {
-  use InlineErrorFormTrait;
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  protected $acl;
-
-  /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  protected $termStorage;
-
-  /**
-   * The node Storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
-
-  /**
-   * The entity QS Activity Manager.
-   *
-   * @var \Drupal\qs_activity\Service\ActivityManager
-   */
-  protected $activityManager;
-
-  /**
-   * The entity QS Event Manager.
-   *
-   * @var \Drupal\qs_activity\Service\EventManager
-   */
-  protected $eventManager;
-
-  /**
-   * The url generator service.
-   *
-   * @var \Drupal\Core\Routing\UrlGeneratorInterface
-   */
-  protected $urlGenerator;
+abstract class ActivityEditFormBase extends FormBasic {
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, eventManager $event_manager, UrlGeneratorInterface $url_generator) {
-    $this->acl             = $acl;
-    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
-    $this->nodeStorage     = $entity_type_manager->getStorage('node');
-    $this->activityManager = $activity_manager;
-    $this->eventManager    = $event_manager;
-    $this->urlGenerator    = $url_generator;
-  }
+  public function __construct(ContainerInterface $container) {
+    // Initialize the container.
+    parent::__construct($container);
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('qs_activity.activity_manager'),
-    $container->get('qs_activity.event_manager'),
-    $container->get('url_generator')
-    );
+    // From the container, inject services.
+    $this->acl             = $this->getAcl();
+    $this->nodeStorage     = $this->getNodeStorage();
+    $this->activityManager = $this->getActivityManager();
   }
 
   /**
@@ -111,9 +49,7 @@ abstract class ActivityEditFormBase extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
-    // Disable caching & HTML5 validation.
-    $form['#cache']['max-age'] = 0;
-    $form['#attributes']['novalidate'] = 'novalidate';
+    $form = parent::buildForm($form, $form_state);
 
     // Save the community for submisson.
     $form['activity'] = [

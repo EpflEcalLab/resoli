@@ -194,7 +194,7 @@ class EventAddForm extends FormBase {
 
     $form['event']['step-2']['actions']['submit'] = [
       '#type'  => 'submit',
-      '#value' => $this->t('qs_activity.events.form.add.submit'),
+      '#value' => $this->t('qs.form.submit'),
     ];
 
     return $form;

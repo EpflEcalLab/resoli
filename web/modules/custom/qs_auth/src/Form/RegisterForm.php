@@ -201,7 +201,7 @@ class RegisterForm extends FormBase {
     // Check email is uniq.
     $account = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($account) {
-      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail._used'));
+      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail.used'));
     }
 
     // Check username is uniq.

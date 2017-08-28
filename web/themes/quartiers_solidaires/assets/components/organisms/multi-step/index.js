@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const multiStep = () => {
   const $form = $('.form-multistep');
 
@@ -5,7 +7,9 @@ const multiStep = () => {
     $form.each(function() {
       const id = $(this).attr('id');
       const $fieldsets = $(this).find('fieldset');
-      $(`<ol class="step-nav nav nav-tabs" id="stepnav-${id}"></ol>`).prependTo($(this));
+      $(`<ol class="step-nav nav nav-tabs" id="stepnav-${id}"></ol>`).prependTo(
+        $(this)
+      );
 
       $fieldsets.each(function(index) {
         const currentFieldset = $(this);
@@ -18,14 +22,14 @@ const multiStep = () => {
         const $link = $('<a/>')
           .addClass('step-nav-link btn btn-outline-invert btn-circle')
           .attr({
-            'href': `#${fieldsetId}`,
-            'title': stepLabel,
+            href: `#${fieldsetId}`,
+            title: stepLabel,
             'aria-label': stepLabel,
-            'id': `steptab-${fieldsetId}`,
+            id: `steptab-${fieldsetId}`,
             'aria-controls': fieldsetId,
             'aria-expanded': 'false'
           })
-          .on('click', function (e) {
+          .on('click', function(e) {
             e.preventDefault();
 
             // Forbid opening the tab if some fields are empty and required
@@ -48,7 +52,7 @@ const multiStep = () => {
           $('<button/>')
             .addClass('btn btn-outline-invert btn-icon btn-icon-right')
             .text('Étape suivante')
-            .on('click', function (e) {
+            .on('click', function(e) {
               e.preventDefault();
 
               // Forbid opening the tab if some fields are empty and required
@@ -60,15 +64,15 @@ const multiStep = () => {
               }
             })
             .appendTo(currentFieldset)
-            .append('<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-right"></use></svg></span>');
+            .append(
+              '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-right"></use></svg></span>'
+            );
         }
       });
 
       // Show the first tab on load
       $(this).find('a.step-nav-link:first').tab('show');
     });
-
-
   }
 };
 

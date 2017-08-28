@@ -42,3 +42,9 @@
 .bg-gradient {
   background-image: linear-gradient(to top, $purple-400, #934bcb, $blue, #66d4ea, #5cdac2);
 }
+
+.fullpage-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

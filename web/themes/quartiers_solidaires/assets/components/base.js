@@ -8,9 +8,11 @@ import formControl from 'molecules/form-control/form-control';
 
 svgIcons();
 
-$(document).ready(function() {
-  card();
-  nav();
-  multiStep();
-  formControl();
-});
+(function($) {
+  $(document).ready(function() {
+    card();
+    nav();
+    multiStep();
+    formControl();
+  });
+})(jQuery);

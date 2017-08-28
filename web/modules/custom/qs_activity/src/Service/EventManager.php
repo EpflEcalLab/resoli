@@ -132,6 +132,10 @@ class EventManager {
    */
   public function create(NodeInterface $activity, DrupalDateTime $date_start, DrupalDateTime $date_end, array $data = NULL) {
 
+    // Change timezone for storage.
+    $date_end->setTimezone(new \DateTimeZone('UTC'));
+    $date_start->setTimezone(new \DateTimeZone('UTC'));
+
     $title = isset($data['title']) ? $data['title'] : $activity->title->value;
     $body = isset($data['body']) ? $data['body'] : $activity->body->value;
     $contact_mail = isset($data['contact_mail']) ? $data['contact_mail'] : $activity->field_contact_mail->value;
@@ -145,8 +149,8 @@ class EventManager {
       'type'                => 'event',
       'status'              => TRUE,
       'field_activity'      => $activity->id(),
-      'field_start_at'      => $date_start->format('Y-m-d\TH:i:s'),
-      'field_end_at'        => $date_end->format('Y-m-d\TH:i:s'),
+      'field_start_at'      => $date_start->format(DATETIME_DATETIME_STORAGE_FORMAT),
+      'field_end_at'        => $date_end->format(DATETIME_DATETIME_STORAGE_FORMAT),
       'title'               => $title,
       'body'                => $body,
       'field_contact_mail'  => $contact_mail,

@@ -10,9 +10,9 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 
 /**
- * EventSettingsController.
+ * DashboardController.
  */
-class EventSettingsController extends ControllerBase {
+class DashboardController extends ControllerBase {
 
   /**
    * Access Control Service.
@@ -44,31 +44,31 @@ class EventSettingsController extends ControllerBase {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
-   * @param \Drupal\node\NodeInterface $event
+   * @param \Drupal\node\NodeInterface $activity
    *   Run access checks for this node.
    *
    * @return bool
    *   Access allowed or rejected.
    */
-  public function access(AccountInterface $account, NodeInterface $event) {
+  public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
-    if ($this->acl->hasWriteAccessEvent($event)) {
+    if ($this->acl->hasWriteAccessActivity($activity)) {
       $access = AccessResult::allowed();
     }
     return $access;
   }
 
   /**
-   * Settings page.
+   * Dashboard page.
    */
-  public function settings(NodeInterface $event) {
+  public function dashboard(NodeInterface $activity) {
     return [
-      '#theme'     => 'qs_activity_event_settings_page',
-      '#variables' => ['event' => $event],
+      '#theme'     => 'qs_activity_dashboard_page',
+      '#variables' => ['activity' => $activity],
       '#cache' => [
         'tags' => [
           // Invalidated whenever any Activity is updated, deleted or created.
-          'node_list:event',
+          'node_list:activity',
           // Invalidated whenever any Privilege is updated, deleted or created.
           'privilege_list:privilege',
         ],

@@ -55,7 +55,7 @@ class AccessControl {
    * Check if the user has access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
@@ -80,7 +80,7 @@ class AccessControl {
    * Check if the user has write access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
@@ -118,7 +118,7 @@ class AccessControl {
    * Check if the user has write access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
-   *   The activity against we check pending approval.
+   *   The activity to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
@@ -159,12 +159,47 @@ class AccessControl {
   }
 
   /**
+   * Check if the user has write access on the given event.
+   *
+   * @param \Drupal\node\NodeInterface $event
+   *   The event to check access..
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one write access for this activity.
+   */
+  public function hasWriteAccessEvent(NodeInterface $event, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    // Get the attached activitiy.
+    $activity = $event->field_activitiy->entity;
+
+    // Check user is the original author.
+    $owner = $event->getOwner();
+    $activity_owner = $event->getOwner();
+    if ($owner->id() == $user->id() || $activity_owner->id() == $user->id()) {
+      return TRUE;
+    }
+
+    return $this->hasWriteAccessActivity($activity);
+  }
+
+  /**
    * Check if the user is waiting for at least one Privilege on this community.
    *
    * If the user has already one privilege it will alwayse return FALSE.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
@@ -386,7 +421,7 @@ class AccessControl {
    * It doesn't count pending request.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Drupal Entity User.
    *

@@ -23,6 +23,10 @@ function qs_activity_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--activity--settings',
     ],
+    'qs_activity_event_settings_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--event-settings',
+    ],
     // Blocks themes
     // ---------------------------------------------------------------------.
     'qs_activity_events_collection_block' => [

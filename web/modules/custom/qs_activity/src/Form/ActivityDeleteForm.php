@@ -3,12 +3,25 @@
 namespace Drupal\qs_activity\Form;
 
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 
 /**
  * ActivityDeleteForm class.
  */
 class ActivityDeleteForm extends ActivityEditFormBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ContainerInterface $container) {
+    // Initialize the container.
+    parent::__construct($container);
+
+    // From the container, inject services.
+    $this->urlGenerator = $this->getUrlGenerator();
+    $this->eventManager = $this->getEventManager();
+  }
 
   /**
    * {@inheritdoc}
@@ -21,8 +34,8 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
-
     $form = parent::buildForm($form, $form_state, $activity);
+
     $form['warning']['#markup'] = '<p>' . $this->t('qs_activity.activities.form.delete.warning') . '</p>';
 
     $form['actions']['submit'] = [

@@ -9,9 +9,9 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 
 /**
- * ActivityEditFormBase class.
+ * EventEditFormBase class.
  */
-abstract class ActivityEditFormBase extends FormBasic {
+abstract class EventEditFormBase extends FormBasic {
 
   /**
    * {@inheritdoc}
@@ -21,9 +21,11 @@ abstract class ActivityEditFormBase extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl             = $this->getAcl();
-    $this->nodeStorage     = $this->getNodeStorage();
-    $this->activityManager = $this->getActivityManager();
+    $this->currentUser  = $this->getCurrentUser();
+    $this->acl          = $this->getAcl();
+    $this->termStorage  = $this->getTermStorage();
+    $this->nodeStorage  = $this->getNodeStorage();
+    $this->eventManager = $this->getEventManager();
   }
 
   /**
@@ -31,15 +33,15 @@ abstract class ActivityEditFormBase extends FormBasic {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
-   * @param \Drupal\node\NodeInterface $activity
+   * @param \Drupal\node\NodeInterface $event
    *   Run access checks for this node.
    *
    * @return bool
    *   Access allowed or rejected.
    */
-  public function access(AccountInterface $account, NodeInterface $activity) {
+  public function access(AccountInterface $account, NodeInterface $event) {
     $access = AccessResult::forbidden();
-    if ($this->acl->hasWriteAccessActivity($activity)) {
+    if ($this->acl->hasWriteAccessEvent($event)) {
       $access = AccessResult::allowed();
     }
     return $access;
@@ -48,13 +50,13 @@ abstract class ActivityEditFormBase extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
     $form = parent::buildForm($form, $form_state);
 
-    // Save the community for submisson.
-    $form['activity'] = [
+    // Save the event for submisson.
+    $form['event'] = [
       '#type'  => 'hidden',
-      '#value' => $activity->id(),
+      '#value' => $event->id(),
     ];
 
     return $form;

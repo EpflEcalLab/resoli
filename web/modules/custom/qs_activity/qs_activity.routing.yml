@@ -117,3 +117,33 @@ qs_activity.events.form.add:
       parameters:
         activity:
           type: entity:node
+
+# Events settings page (link on forms for edition)
+qs_activity.events.form.edit:
+    path: '/events/{event}/edit'
+    defaults:
+      _controller: '\Drupal\qs_activity\Controller\EventSettingsController::settings'
+      _title: 'qs_activity.settings.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Controller\EventSettingsController::access'
+      event: \d+
+    options:
+      parameters:
+        event:
+          type: entity:node
+
+# Events edit form
+qs_activity.events.form.edit.info:
+    path: '/events/{event}/edit/info'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\EventEditForm'
+      _title: 'qs_activity.settings.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\EventEditForm::access'
+      event: \d+
+    options:
+      parameters:
+        event:
+          type: entity:node

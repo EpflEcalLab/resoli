@@ -60,6 +60,14 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'route' => '/events/' . $entity->id() . '/add',
           'alias' => '/' . trim($alias, '/') . '/events/add',
         ],
+        'activities_form_edit' => [
+          'route' => '/activities/' . $entity->id() . '/edit',
+          'alias' => '/' . trim($alias, '/') . '/settings',
+        ],
+        'activities_form_edit_info' => [
+          'route' => '/activities/' . $entity->id() . '/edit/info',
+          'alias' => '/' . trim($alias, '/') . '/settings/info',
+        ],
       ];
       break;
   }

@@ -100,6 +100,30 @@ class EventManager {
   }
 
   /**
+   * Get all events.
+   *
+   * @param Drupal\node\NodeInterface $activity
+   *   The activity which we want the retrieve futur events.
+   *
+   * @return Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Oterwhise an empty array.
+   */
+  public function getAll(NodeInterface $activity) {
+    // Get every activity that belongs to the current community.
+    $query = $this->queryFactory->get('node')
+      ->condition('type', 'event')
+      ->condition('field_activity', $activity->id());
+
+    $nids = $query->execute();
+    $events = NULL;
+    if ($nids) {
+      $events = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $events;
+  }
+
+  /**
    * Create an Event .
    *
    * @param int $title

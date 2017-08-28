@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\taxonomy\TermInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * ActivityManager.
@@ -144,6 +145,30 @@ class ActivityManager {
     foreach ($autorizations as $key => $value) {
       if ($activity->hasField($key)) {
         $activity->set($key, (bool) $value);
+      }
+    }
+
+    $activity->save();
+    return $activity;
+  }
+
+  /**
+   * Update an Activity.
+   *
+   * Only update given fields.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity to update.
+   * @param array $fields
+   *   The fields to update with the new value.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The updated activity.
+   */
+  public function update(NodeInterface $activity, array $fields) {
+    foreach ($fields as $key => $value) {
+      if ($activity->hasField($key)) {
+        $activity->set($key, $value);
       }
     }
 

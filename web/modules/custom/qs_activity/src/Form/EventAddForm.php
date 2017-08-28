@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\qs_activity\Service\eventManager;
+use Drupal\qs_activity\Service\EventManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
@@ -37,7 +37,7 @@ class EventAddForm extends FormBase {
   /**
    * The entity QS Event Manager.
    *
-   * @var \Drupal\qs_activity\Service\eventManager
+   * @var \Drupal\qs_activity\Service\EventManager
    */
   protected $eventManager;
 
@@ -69,12 +69,12 @@ class EventAddForm extends FormBase {
   }
 
   /**
-   * Checks access for creating file in the given rubric.
+   * Checks access for creating file in the given community.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
    * @param \Drupal\node\NodeInterface $activity
-   *   Run access checks for this taxonomy.
+   *   Run access checks for this node.
    *
    * @return bool
    *   Access allowed or rejected.

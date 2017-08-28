@@ -1,4 +1,4 @@
-uuid: 8c7012e4-4a05-4d8e-b128-31837f5ea1b2
+uuid: 947bac98-af10-4fcf-a918-d9a2258506c1
 langcode: fr
 status: true
 dependencies:
@@ -7,10 +7,11 @@ dependencies:
 id: node.field_contribution
 field_name: field_contribution
 entity_type: node
-type: decimal
+type: string
 settings:
-  precision: 10
-  scale: 2
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

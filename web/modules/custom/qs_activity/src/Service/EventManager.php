@@ -189,4 +189,39 @@ class EventManager {
     return $event;
   }
 
+  /**
+   * Update an Event.
+   *
+   * Only update given fields.
+   *
+   * @param \Drupal\node\NodeInterface $event
+   *   The event to update.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
+   *   The start date.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
+   *   The end date.
+   * @param array $fields
+   *   The fields to update with the new value.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The updated activity.
+   */
+  public function update(NodeInterface $event, DrupalDateTime $date_start, DrupalDateTime $date_end, array $fields) {
+    // Change timezone for storage.
+    $date_start->setTimezone(new \DateTimeZone('UTC'));
+    $date_end->setTimezone(new \DateTimeZone('UTC'));
+
+    $event->set('field_start_at', $date_start->format(DATETIME_DATETIME_STORAGE_FORMAT));
+    $event->set('field_end_at', $date_end->format(DATETIME_DATETIME_STORAGE_FORMAT));
+
+    foreach ($fields as $key => $value) {
+      if ($event->hasField($key)) {
+        $event->set($key, $value);
+      }
+    }
+
+    $event->save();
+    return $event;
+  }
+
 }

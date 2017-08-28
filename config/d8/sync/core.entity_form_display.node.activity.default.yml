@@ -77,9 +77,9 @@ third_party_settings:
     group_default:
       children:
         - body
+        - field_contribution
         - field_contact_mail
         - field_contact_phone
-        - field_contribution
         - field_venue
         - field_venue_lat
         - field_venue_long
@@ -153,14 +153,6 @@ content:
     type: boolean_checkbox
     region: content
   field_contact_mail:
-    weight: 5
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_contact_phone:
     weight: 6
     settings:
       size: 60
@@ -168,12 +160,21 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_contribution:
+  field_contact_phone:
     weight: 7
     settings:
+      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: number
+    type: string_textfield
+    region: content
+  field_contribution:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_member_create_gallery:
     weight: 32

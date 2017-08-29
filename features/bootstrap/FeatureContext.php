@@ -21,6 +21,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    * @var array
    */
   protected $accounts = [
+    'admin' => [
+        'username' => 'admin',
+        'pass'     => 'admin',
+    ],
     'nobody' => [
         'username' => 'nobody@antistatique.net',
         'pass'     => 'nobody',

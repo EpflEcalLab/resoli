@@ -1,0 +1,33 @@
+# User
+qs_supervisor.account.dashboard:
+  path: '/account/{user}/dashboard'
+  defaults:
+    _controller: '\Drupal\qs_supervisor\Controller\AccountController::dashboard'
+    _title: 'qs_supervisor.account.dashboard.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_supervisor\Controller\AccountController::access'
+    user: \d+
+  options:
+    _maintenance_access: FALSE
+  options:
+    parameters:
+      user:
+        type: entity:user
+
+# User edit form
+qs_supervisor.account.form.edit:
+  path: '/account/{user}/edit'
+  defaults:
+    _controller: '\Drupal\qs_supervisor\Form\UserEditForm'
+    _title: 'qs_supervisor.account.form.edit.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_supervisor\Form\UserEditForm::access'
+    user: \d+
+  options:
+    _maintenance_access: FALSE
+  options:
+    parameters:
+      user:
+        type: entity:user

@@ -27,3 +27,28 @@ Feature: Supervisor - Redirect
         Given I am logged in as user "admin"
     Then I am on "/account/2/dashboard"
     And the response status code should be 200
+
+# User edit form
+  @api
+  Scenario: Logged a Member of Lausanne, I can access my account edit form
+    Given I am logged in as user "member+lausanne"
+    Then I am on "/account/2/edit"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged a Member of Lausanne, I can't access the account edit form of another user
+    Given I am logged in as user "member+lausanne"
+    Then I am on "/account/1/edit"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged a Admin, I can access my account edit form
+        Given I am logged in as user "admin"
+    Then I am on "/account/1/edit"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged a Admin, I can access to any account edit form
+        Given I am logged in as user "admin"
+    Then I am on "/account/2/edit"
+    And the response status code should be 200

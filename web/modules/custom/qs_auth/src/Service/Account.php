@@ -111,34 +111,35 @@ class Account {
   }
 
   /**
-   * Account update using uid & Array to fill data.
+   * Update a User.
    *
-   * @param int $uid
-   *   User id to update.
-   * @param array $data
-   *   Data used to create the user.
+   * Only update given fields.
    *
-   * @return Drupal\Core\Session\AccountProxyInterface
-   *   Created user object.
+   * @param \Drupal\user\UserInterface $user
+   *   The user to update.
+   * @param array $fields
+   *   The fields to update with the new value.
+   *
+   * @return \Drupal\user\UserInterface
+   *   The updated user.
    */
-  public function update($uid, array $data) {
-    $user = $this->userStorage->load($uid);
-
-    if (isset($data['password']) && !empty($data['password'])) {
-      $user->setPassword($data['password']);
+  public function update(UserInterface $user, array $fields) {
+    foreach ($fields as $key => $value) {
+      if ($key == 'password') {
+        $user->setPassword($value);
+      }
+      elseif ($key == 'username') {
+        $user->setUsername($value);
+      }
+      elseif ($key == 'mail') {
+        $user->setEmail($value);
+      }
+      elseif ($user->hasField($key)) {
+        $user->set($key, $value);
+      }
     }
-    $user->setEmail($data['username']);
-    // This username must be unique and accept only a-Z,0-9, - _ @
-    // We use the email address as Username.
-    $user->setUsername($data['username']);
-
-    // Account settings.
-    $user->set('field_firstname', $data['firstname']);
-    $user->set('field_lastname', $data['lastname']);
-    $user->set('field_phone', $data['phone']);
 
     $user->save();
-
     return $user;
   }
 

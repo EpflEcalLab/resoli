@@ -5,8 +5,6 @@ namespace Drupal\qs_supervisor\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\qs_auth\Service\Account;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\user\UserInterface;
@@ -23,26 +21,10 @@ class AccountController extends ControllerBase {
   private $acl;
 
   /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  private $termStorage;
-
-  /**
-   * The Quartiers-Solidaires account service.
-   *
-   * @var \Drupal\qs_auth\Service\Account
-   */
-  private $account;
-
-  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, Account $account) {
-    $this->acl         = $acl;
-    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
-    $this->account     = $account;
+  public function __construct(AccessControl $acl) {
+    $this->acl = $acl;
   }
 
   /**
@@ -52,9 +34,7 @@ class AccountController extends ControllerBase {
     // Instantiates this form class.
     return new static(
       // Load customs services used in this class.
-      $container->get('qs_acl.access_control'),
-      $container->get('entity_type.manager'),
-      $container->get('qs_auth.account')
+      $container->get('qs_acl.access_control')
     );
   }
 

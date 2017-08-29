@@ -177,12 +177,6 @@ class AccessControl {
       return TRUE;
     }
 
-    // Check user is the original author.
-    $owner = $activity->getOwner();
-    if ($owner->id() == $user->id()) {
-      return TRUE;
-    }
-
     $query = $this->queryFactory->get('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'node')
@@ -217,12 +211,6 @@ class AccessControl {
 
     // Check bypass.
     if ($this->hasBypass($user)) {
-      return TRUE;
-    }
-
-    // Check user is the original author.
-    $owner = $activity->getOwner();
-    if ($owner->id() == $user->id()) {
       return TRUE;
     }
 
@@ -500,11 +488,13 @@ class AccessControl {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity.
    *
    * @return bool
    *   Does the given user has bypass security permission.
    */
-  public function hasBypass(AccountInterface $account = NULL) {
+  public function hasBypass(AccountInterface $account = NULL, EntityInterface $entity = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
@@ -512,6 +502,14 @@ class AccessControl {
 
     if ($user->hasPermission('bypass node access')) {
       return TRUE;
+    }
+
+    if ($entity) {
+      // Check user is the original author of the given entity.
+      $owner = $entity->getOwner();
+      if ($owner->id() == $user->id()) {
+        return TRUE;
+      }
     }
 
     return FALSE;

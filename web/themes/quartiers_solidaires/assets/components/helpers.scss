@@ -50,3 +50,7 @@
   flex-direction: column;
   min-height: 100vh;
 }
+
+
+// Text helpers
+@include text-emphasis-variant('.text-dark', color("dark"));

@@ -24,6 +24,12 @@
   @include border-radius($card-border-radius - $card-border-width);
 }
 
+a.card {
+  @include hover {
+    text-decoration: none;
+  }
+}
+
 // The card pill displays an icon at the left
 .card-pill {
   display: flex;
@@ -39,9 +45,7 @@
     flex-wrap: wrap;
   }
 
-  &:first-child {
-    @include border-radius($card-border-radius);
-  }
+  @include border-radius($card-border-radius);
 
   &.card-pill-no-icon {
     padding-left: $card-spacer-x;
@@ -53,6 +57,11 @@
 
     @include flag-size(60px);
   }
+}
+
+.card-pill-white {
+  background-color: color("light");
+  color: $card-cap-bg;
 }
 
 a[href].card-pill {
@@ -94,6 +103,14 @@ a[href].card-pill-simple {
         margin-right: $card-spacer-x;
       }
     }
+  }
+
+  // Make sure when we're centering the text, the icon is not pushing things in
+  // one direction
+  &.mx-auto {
+    position: relative;
+    left: 0;
+    width: 100%;
   }
 }
 

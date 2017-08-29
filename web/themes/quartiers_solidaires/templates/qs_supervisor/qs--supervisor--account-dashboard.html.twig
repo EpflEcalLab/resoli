@@ -1,1 +1,18 @@
 User page
+
+{{ variables.user.name.value }}
+
+<hr>
+Member of:
+
+{{ dump(variables.communities) }}
+<hr>
+
+Pending of
+
+{{ dump(variables.pending) }}
+
+<hr>
+<a href="{{ path('qs_auth.communities.apply') }}">{% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}
+<br>
+<a href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}

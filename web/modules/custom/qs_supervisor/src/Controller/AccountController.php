@@ -86,16 +86,18 @@ class AccountController extends ControllerBase {
    *   The user's dashboard.
    */
   public function dashboard(UserInterface $user) {
+    $variables['user']        = $user;
+    $variables['communities'] = $this->acl->getCommunities($user);
+    $variables['pending']     = $this->acl->getPendingApprovalCommunities($user);
+
     return [
       '#theme'     => 'qs_supervisor_account_dashboard_page',
-      '#variables' => ['user' => $user],
+      '#variables' => $variables,
       '#cache' => [
         'contexts' => [
           'user',
         ],
         'tags' => [
-          // Invalidated whenever any Community is updated, deleted or created.
-          'taxonomy_term_list:communities',
           // Invalidated whenever any Privilege is updated, deleted or created.
           'privilege_list:privilege',
         ],

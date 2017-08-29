@@ -77,7 +77,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access on the given community.
+   * Check if the account has write access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
@@ -115,7 +115,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access on the given activity.
+   * Check if the account has write access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
@@ -158,7 +158,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access for event on the given activity.
+   * Check if the account has write access for event on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The event to check access.
@@ -202,7 +202,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user is waiting for at least one Privilege on this community.
+   * Check the account is waiting for at least one Privilege on the community.
    *
    * If the user has already one privilege it will alwayse return FALSE.
    *
@@ -258,9 +258,9 @@ class AccessControl {
   }
 
   /**
-   * Check if the user belongs to at least one community.
+   * Check if the account belongs to at least one community.
    *
-   * This only check if the users belongs to a community
+   * This only check if the accounts belongs to a community
    * as Member or Organizer or Managers.
    * It doesn't get pending request.
    *
@@ -282,9 +282,9 @@ class AccessControl {
   }
 
   /**
-   * Check if the user belongs to more than one community.
+   * Check if the account belongs to more than one community.
    *
-   * This only check if the users belongs to a community
+   * This only check if the accounts belongs to a community
    * as Member or Organizer or Managers.
    * It doesn't get pending request.
    *

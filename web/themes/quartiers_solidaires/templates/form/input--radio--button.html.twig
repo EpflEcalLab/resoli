@@ -10,7 +10,11 @@
  * @see template_preprocess_input()
  */
 #}
-<label class="btn btn-outline-blue btn-outline-invert btn-block">
+{% set classes = [
+   'btn btn-outline-blue btn-outline-invert btn-block',
+   attributes.checked ? 'active',
+] %}
+<label class="{{ classes|join(' ') }}">
   <input{{ attributes }} />
   {{ element['#title'] }}
 </label>

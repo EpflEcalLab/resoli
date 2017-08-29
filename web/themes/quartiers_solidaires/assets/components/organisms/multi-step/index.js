@@ -47,11 +47,11 @@ const multiStep = () => {
 
         // Generate link to step
         const $link = $('<a/>', {
-          class: 'step-nav-link btn btn-outline-invert btn-circle',
-          href: `#${fieldsetId}`,
-          title: stepLabel,
+          'class': 'step-nav-link btn btn-outline-invert btn-circle',
+          'href': `#${fieldsetId}`,
+          'title': stepLabel,
           'aria-label': stepLabel,
-          id: `steptab-${fieldsetId}`,
+          'id': `steptab-${fieldsetId}`,
           'aria-controls': fieldsetId,
           'aria-expanded': 'false',
           'data-last': index + 1 === $fieldsets.length ? 'true' : 'false',

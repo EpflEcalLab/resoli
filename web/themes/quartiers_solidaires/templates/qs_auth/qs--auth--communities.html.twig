@@ -1,11 +1,29 @@
-{% if variables.communities %}
-Access
-<ul>
-  {% for community in variables.communities %}
-  <li><a href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}">{{ community.name.value }}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="bg-secondary">
+  <div class="fullpage-wrapper">
+    {% if variables.communities %}
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-sm-6 col-lg-4 mx-auto text-center">
+          <h2>{{ 'qs.auth.communities.welcome'|t }}</h2>
+          <p>{{ 'qs.auth.communities.description'|t }}</p>
+          <div class="mt-4">
+            {{ macros.icon('communities') }}
+          </div>
+          <ul class="list-unstyled mt-3">
+            {% for community in variables.communities %}
+            <li>
+              <a class="btn btn-block btn-outline-secondary btn-outline-invert" href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}">{{ community.name.value }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
 
 {% if variables.pending %}
 Pending

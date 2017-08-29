@@ -71,10 +71,23 @@ class RegisterForm extends FormBase {
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
-    $form['#attributes']['novalidate'] = 'novalidate';
+    $form['#attributes'] = [
+      'novalidate' => 'novalidate',
+    ];
+
+    // Apply custom styles to wrapper.
+    $form['#theme_wrappers'] = [
+      'form__fullpage__multistep',
+    ];
 
     $form['register']['step-1'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_auth.register_form.step1'),
+      ],
+      '#theme_wrappers' => [
+        'fieldset__step',
+      ],
     ];
 
     $communities = $this->termStorage->loadTree('communities', 0, NULL, TRUE);
@@ -86,6 +99,11 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'required' => TRUE,
         'title'    => $this->t('qs_auth.register_form.community'),
+        'variant' => 'button',
+      ],
+      '#theme_wrappers' => [
+        'radios__buttons',
+        'container__center',
       ],
       '#type'       => 'radios',
       '#required'   => FALSE,
@@ -94,6 +112,12 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-2'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_auth.register_form.step2'),
+        'class' => [
+          'tab-pane fade',
+        ],
+      ],
     ];
 
     $form['register']['step-2']['firstname'] = [
@@ -114,6 +138,12 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-3'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_auth.register_form.step3'),
+        'class' => [
+          'tab-pane fade',
+        ],
+      ],
     ];
 
     $form['register']['step-3']['contacts'] = [
@@ -137,6 +167,12 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-4'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_auth.register_form.step4'),
+        'class' => [
+          'tab-pane fade',
+        ],
+      ],
     ];
 
     $form['register']['step-4']['username'] = [

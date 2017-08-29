@@ -8,6 +8,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\taxonomy\TermInterface;
 use Drupal\node\NodeInterface;
+use Drupal\user\UserInterface;
 
 /**
  * AccessControl.
@@ -52,7 +53,27 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has access on the given community.
+   * Check if the account has access on the given user dashboard.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access.
+   *
+   * @return bool
+   *   Does the account has access to the user dashboard.
+   */
+  public function hasAccessAccountDashboard(UserInterface $user, AccountInterface $account) {
+    // Check bypass.
+    if ($this->hasBypass($account)) {
+      return TRUE;
+    }
+
+    return $user->id() == $account->id();
+  }
+
+  /**
+   * Check if the account has access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.

@@ -1,16 +1,24 @@
 import $ from 'jquery';
 
+const checkRequired = (el) => {
+  // Forbid opening the tab if some fields are empty and required
+  // in the previous fieldset
+  return el.find('input[required]').val() !== '';
+}
+
 const multiStep = () => {
   const $form = $('.form-multistep');
 
   if ($form.length > 0) {
     $form.each(function() {
       const id = $(this).attr('id');
-      const $fieldsets = $(this).find('fieldset');
+      const currentForm = $(this);
+      const $fieldsets = currentForm.find('fieldset');
       let nextTab = null;
       let currentTab = null;
 
-      $(`<ol class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ol>`).prependTo($(this));
+      // Init the step nav above form
+      $(`<ol class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ol>`).prependTo(currentForm);
 
       // Create the "Next step" button below the form
       $('<button/>')
@@ -20,9 +28,12 @@ const multiStep = () => {
         .on('click', function(e) {
           e.preventDefault();
 
-          nextTab.tab('show');
+          // @TODO make it work: disable the nav if current tab pane has required and empty fields
+          // if (checkRequired(currentTab)) {
+            nextTab.tab('show');
+          // };
         })
-        .appendTo($(this).find(`.tab-content`))
+        .appendTo(currentForm.find(`.tab-content`))
         .append(
           '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-right"></use></svg></span>'
         );
@@ -47,13 +58,10 @@ const multiStep = () => {
         }).on('click', function(e) {
           e.preventDefault();
 
-          // Forbid opening the tab if some fields are empty and required
-          // in the previous fieldset
-          if (currentFieldset.prev().find('input[required]').val() !== '') {
+          // @TODO make it work: disable the nav if current tab pane has required and empty fields
+          // if (checkRequired(currentFieldset)) {
             $(this).tab('show');
-          } else {
-            alert('fill in the field!');
-          }
+          // };
         });
 
         // Append the step nav to the form
@@ -65,13 +73,11 @@ const multiStep = () => {
 
       // show next tab on click
       $('a.step-nav-link').on('show.bs.tab', function(e) {
-        currentTab = $(e.relatedTarget).find('a.step-nav-link');
+        const target = $(e.relatedTarget).attr('href');
+        currentTab = e.relatedTarget ? $(target) : currentForm.find('fieldset:first-of-type');
+        nextTab = $(e.target).parent().next().find('a.step-nav-link');
 
-        nextTab = $(e.target)
-          .parent()
-          .next()
-          .find('a.step-nav-link');
-
+        // Toggle buttons depending on current step
         if (nextTab.length <= 0) {
           $(`#${id} input[type=submit]`).show();
           $(`#next-btn-${id}`).hide();

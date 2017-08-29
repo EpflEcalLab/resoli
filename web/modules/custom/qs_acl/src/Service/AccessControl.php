@@ -73,6 +73,26 @@ class AccessControl {
   }
 
   /**
+   * Check if the account has write access on the given user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access.
+   *
+   * @return bool
+   *   Does the account has write access to the user.
+   */
+  public function hasWriteAccessAccount(UserInterface $user, AccountInterface $account) {
+    // Check bypass.
+    if ($this->hasBypass($account)) {
+      return TRUE;
+    }
+
+    return $user->id() == $account->id();
+  }
+
+  /**
    * Check if the account has access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community

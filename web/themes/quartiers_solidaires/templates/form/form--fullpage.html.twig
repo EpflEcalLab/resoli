@@ -13,11 +13,21 @@
 {% set classes = [
   'form',
   element['#validated'] ? 'was-validated',
+  'my-auto',
 ] %}
 
 <div class="bg-secondary">
   <div class="container fullpage-wrapper p-4">
-    <div class="row flex-column justify-content-center">
+
+    {% if element['#top_links'] %}
+    <div class="row justify-content-between">
+      {% for path, text in element['#top_links'] %}
+        <a class="btn btn-outline-secondary btn-outline-invert" href="{{ url(path) }}">{{ text }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row flex-column justify-content-center my-auto">
       <form{{ attributes.addClass(classes) }}>
         <div class="row">
            <div class="col-md-10 col-lg-8 mx-auto">{{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}</div>

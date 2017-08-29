@@ -53,7 +53,6 @@
     'js-form-item-' ~ name|clean_class,
     title_display not in ['after', 'before'] ? 'form-no-label',
     disabled == 'disabled' ? 'form-disabled',
-    errors ? 'has-error',
     type == 'radio' ? 'input-radio mb-0',
     type == 'checkbox' ? 'input-checkbox',
   ]
@@ -68,11 +67,6 @@
 %}
 <div{{ attributes.addClass(classes) }} {% if element['#attributes']['required'] %}data-required{% endif %}>
   {% if label_display in ['before', 'invisible'] %}
-    {%
-      set label_classes = [
-        'form-control-label',
-      ]
-    %}
     {% if type != 'file' %}
     {{ label }}
     {% endif %}
@@ -93,7 +87,7 @@
     {{ label }}
   {% endif %}
   {% if element['#error'] %}
-    <div class="form-control-feedback">
+    <div class="invalid-feedback">
       {{ element['#error']|raw }}
     </div>
   {% endif %}

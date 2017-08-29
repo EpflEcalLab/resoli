@@ -114,9 +114,10 @@ class RegisterForm extends FormBase {
       '#type'  => 'fieldset',
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step2'),
-        'class' => [
-          'tab-pane fade',
-        ],
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
       ],
     ];
 
@@ -140,28 +141,25 @@ class RegisterForm extends FormBase {
       '#type'  => 'fieldset',
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step3'),
-        'class' => [
-          'tab-pane fade',
-        ],
       ],
-    ];
-
-    $form['register']['step-3']['contacts'] = [
-      '#type'     => 'checkboxes',
-      '#required' => FALSE,
-      '#options'  => [
-        'mail'  => $this->t('qs_auth.register_form.contacts.mail'),
-        'phone' => $this->t('qs_auth.register_form.contacts.phone'),
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
       ],
     ];
 
     $form['register']['step-3']['mail'] = [
-      '#type'     => 'textfield',
+      '#type'     => 'email',
+      '#attributes'  => ['required' => TRUE],
+      '#title'       => $this->t('qs_auth.register_form.mail'),
+      '#placeholder' => $this->t('qs_auth.register_form.mail.placeholder'),
       '#required' => FALSE,
     ];
 
     $form['register']['step-3']['phone'] = [
-      '#type'     => 'textfield',
+      '#type'     => 'tel',
+      '#title'       => $this->t('qs_auth.register_form.phone'),
+      '#placeholder' => $this->t('qs_auth.register_form.phone.placeholder'),
       '#required' => FALSE,
     ];
 
@@ -169,9 +167,10 @@ class RegisterForm extends FormBase {
       '#type'  => 'fieldset',
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step4'),
-        'class' => [
-          'tab-pane fade',
-        ],
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
       ],
     ];
 
@@ -186,6 +185,7 @@ class RegisterForm extends FormBase {
     $form['register']['step-4']['password'] = [
       '#attributes'  => ['required' => TRUE],
       '#title'    => $this->t('qs_auth.register_form.password'),
+      '#placeholder' => $this->t('qs_auth.register_form.password.placeholder'),
       '#type'     => 'password',
       '#required' => FALSE,
     ];
@@ -193,12 +193,19 @@ class RegisterForm extends FormBase {
     $form['register']['step-4']['password_verification'] = [
       '#attributes'  => ['required' => TRUE],
       '#title'    => $this->t('qs_auth.register_form.password_verification'),
+      '#placeholder'    => $this->t('qs_auth.register_form.password_verification.placeholder'),
       '#type'     => 'password',
       '#required' => FALSE,
     ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'class' => [
+          'align-self-center',
+        ],
+        'icon' => 'check',
+      ],
       '#value' => $this->t('qs_auth.register_form.submit'),
     ];
 

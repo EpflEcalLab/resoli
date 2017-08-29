@@ -23,7 +23,7 @@ const multiStep = () => {
       // Create the "Next step" button below the form
       $('<button/>')
         .attr('id', `next-btn-${id}`)
-        .addClass('btn btn-outline-invert btn-icon btn-icon-right')
+        .addClass('btn btn-outline-invert btn-icon btn-icon-right align-self-center')
         .text('Étape suivante')
         .on('click', function(e) {
           e.preventDefault();
@@ -35,7 +35,7 @@ const multiStep = () => {
         })
         .appendTo(currentForm.find(`.tab-content`))
         .append(
-          '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-right"></use></svg></span>'
+          '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow"></use></svg></span>'
         );
 
       $fieldsets.each(function(index) {
@@ -79,10 +79,10 @@ const multiStep = () => {
 
         // Toggle buttons depending on current step
         if (nextTab.length <= 0) {
-          $(`#${id} input[type=submit]`).show();
+          $(`#${id} .js-form-submit`).show();
           $(`#next-btn-${id}`).hide();
         } else {
-          $('input[type=submit]').hide();
+          $(`#${id} .js-form-submit`).hide();
           $(`#next-btn-${id}`).show();
         }
       });
@@ -90,9 +90,6 @@ const multiStep = () => {
 
     // Show the first tab on load
     $('a.step-nav-link:first').tab('show');
-
-    // Hide submit button on load
-    // $('input[type=submit]').hide();
   }
 };
 

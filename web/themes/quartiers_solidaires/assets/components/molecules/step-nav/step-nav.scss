@@ -5,6 +5,7 @@
   position: relative;
   justify-content: space-between;
   counter-reset: step-nav;
+  padding-right: 0;
 
   @include list-unstyled;
 

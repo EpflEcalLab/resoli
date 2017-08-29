@@ -106,12 +106,12 @@ class AccountEditForm extends FormBase {
       '#type'  => 'fieldset',
     ];
 
-    $form['credentials']['username'] = [
+    $form['credentials']['mail'] = [
       '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_supervisor.account.form.edit.username'),
       '#type'          => 'textfield',
+      '#title'         => $this->t('qs_supervisor.account.form.edit.mail'),
       '#required'      => FALSE,
-      '#default_value' => $user->name->value,
+      '#default_value' => $user->mail->value,
     ];
 
     $form['credentials']['password'] = [
@@ -141,19 +141,7 @@ class AccountEditForm extends FormBase {
       '#default_value' => $user->field_lastname->value,
     ];
 
-    $form['contact'] = [
-      '#type'  => 'fieldset',
-    ];
-
-    $form['contact']['mail'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#type'          => 'textfield',
-      '#title'         => $this->t('qs_supervisor.account.form.edit.mail'),
-      '#required'      => FALSE,
-      '#default_value' => $user->mail->value,
-    ];
-
-    $form['contact']['phone'] = [
+    $form['personnal']['phone'] = [
       '#attributes'    => ['required' => TRUE],
       '#type'          => 'textfield',
       '#title'         => $this->t('qs_supervisor.account.form.edit.phone'),
@@ -184,24 +172,18 @@ class AccountEditForm extends FormBase {
 
     // Assert the mail is valid.
     if (!$form_state->getValue('mail') || !filter_var($form_state->getValue('mail'), FILTER_VALIDATE_EMAIL)) {
-      $form_state->setErrorByName('[contact][mail]', $this->t('qs.form.error.mail.malformed'));
+      $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
     // Check email is uniq.
     $accounts = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
-      $form_state->setErrorByName('[contact][mail]', $this->t('qs.form.error.mail.used'));
-    }
-
-    // Check username is uniq.
-    $accounts = $this->userStorage->loadByProperties(['name' => $form_state->getValue('username')]);
-    if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
-      $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.username.used'));
+      $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
     }
 
     // Check username is Drupal compliant.
-    if ($violation = user_validate_name($form_state->getValue('username'))) {
-      $form_state->setErrorByName('[credentials][username]', $violation);
+    if ($violation = user_validate_name($form_state->getValue('mail'))) {
+      $form_state->setErrorByName('[credentials][mail]', $violation);
     }
 
     // Add inline errors.
@@ -215,8 +197,8 @@ class AccountEditForm extends FormBase {
     $user = $this->userStorage->load($form_state->getValue('user'));
 
     // Prepare fields.
-    $fields['username']        = $form_state->getValue('username');
     $fields['mail']            = $form_state->getValue('mail');
+    $fields['username']        = $form_state->getValue('mail');
     $fields['field_phone']     = $form_state->getValue('phone');
     $fields['field_firstname'] = $form_state->getValue('firstname');
     $fields['field_lastname']  = $form_state->getValue('lastname');

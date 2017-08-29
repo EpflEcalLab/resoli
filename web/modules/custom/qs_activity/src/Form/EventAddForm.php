@@ -47,7 +47,7 @@ class EventAddForm extends FormBasic {
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
-    if ($this->acl->hasWriteAccessActivity($activity)) {
+    if ($this->acl->hasWriteAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
     return $access;

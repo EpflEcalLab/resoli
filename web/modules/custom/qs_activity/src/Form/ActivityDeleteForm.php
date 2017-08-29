@@ -43,7 +43,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
       '#value' => $this->t('qs.form.submit'),
     ];
 
-    $cancel_link = $this->urlGenerator->generateFromRoute('qs_activity.activities.form.edit', ['activity' => $activity->id()]);
+    $cancel_link = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', ['activity' => $activity->id()]);
     $form['actions']['cancel'] = [
       '#markup' => '<a href="' . $cancel_link . '">' . $this->t('qs_activity.form.cancel') . '</a>',
     ];

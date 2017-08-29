@@ -57,14 +57,14 @@ Feature: Activitiy Alias
     And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
     And the response status code should be 200
 
-## Activity form add
+## Activity Edit Form
   @api
   Scenario: Logged as Organizer of Lausanne, I can access to Lausanne activities add form
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/add"
     And the response status code should be 200
 
-## Event form add
+## Event Add Form
   @api
   Scenario: Logged as Organizer of Lausanne, I can access to Lausanne events add form
     Given I am logged in as user "manager+lausanne"

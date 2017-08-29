@@ -150,7 +150,6 @@ class AccessControl {
 
     $or = $query->orConditionGroup();
     $or->condition('privilege', 'activity_organizers');
-    $or->condition('privilege', 'activity_maintainers');
     $query->condition($or);
 
     $number = (int) $query->count()->execute();
@@ -159,17 +158,17 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access on the given event.
+   * Check if the user has write access for event on the given activity.
    *
-   * @param \Drupal\node\NodeInterface $event
-   *   The event to check access..
+   * @param \Drupal\node\NodeInterface $activity
+   *   The event to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user has at least one write access for this activity.
    */
-  public function hasWriteAccessEvent(NodeInterface $event, AccountInterface $account = NULL) {
+  public function hasWriteAccessEvent(NodeInterface $activity, AccountInterface $account = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
@@ -180,17 +179,26 @@ class AccessControl {
       return TRUE;
     }
 
-    // Get the attached activitiy.
-    $activity = $event->field_activitiy->entity;
-
     // Check user is the original author.
-    $owner = $event->getOwner();
-    $activity_owner = $event->getOwner();
-    if ($owner->id() == $user->id() || $activity_owner->id() == $user->id()) {
+    $owner = $activity->getOwner();
+    if ($owner->id() == $user->id()) {
       return TRUE;
     }
 
-    return $this->hasWriteAccessActivity($activity);
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
   }
 
   /**

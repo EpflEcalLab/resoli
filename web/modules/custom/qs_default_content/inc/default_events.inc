@@ -95,7 +95,7 @@ function qs_default_content_events() {
   $event_22->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
   $event_22->save();
 
-  // Event - Activity (7) - Yesterday at 00:05.
+  // Event - Activity (7) - Yesterday at 00h05.
   $event_23 = $nodeStorage->load(23);
   $dt = new DrupalDateTime();
   $dt->modify('yesterday')->setTime(00, 5);
@@ -179,7 +179,7 @@ function qs_default_content_events() {
   $event_30->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
   $event_30->save();
 
-  // Event - Activity (8) - Tomorrow at 13:30.
+  // Event - Activity (8) - Tomorrow at 13h30.
   $event_31 = $nodeStorage->load(31);
   $dt = new DrupalDateTime();
   $dt->modify('tomorrow')->setTime(13, 30);
@@ -189,7 +189,7 @@ function qs_default_content_events() {
   $event_31->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
   $event_31->save();
 
-  // Event - Activity (7) - In 14 days at 16:00.
+  // Event - Activity (7) - In 14 days at 16h00.
   $event_32 = $nodeStorage->load(32);
   $dt = new DrupalDateTime();
   $dt->modify('+14 days')->setTime(16, 00);
@@ -209,7 +209,7 @@ function qs_default_content_events() {
   $event_33->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
   $event_33->save();
 
-  // Event - Activity (10) - Yesterday at 00:00.
+  // Event - Activity (10) - Yesterday at 00h00.
   $event_34 = $nodeStorage->load(34);
   $dt = new DrupalDateTime();
   $dt->modify('yesterday')->setTime(0, 0);
@@ -218,4 +218,14 @@ function qs_default_content_events() {
   $dt->modify('+20 minutes');
   $event_34->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
   $event_34->save();
+
+  // Event - Activity (3) - In 2 days at 16h00.
+  $event_35 = $nodeStorage->load(35);
+  $dt = new DrupalDateTime();
+  $dt->modify('+2 days')->setTime(16, 0);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_35->set('field_start_at', $dt->format('Y-m-d\TH:i:s'));
+  $dt->modify('+20 minutes');
+  $event_35->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
+  $event_35->save();
 }

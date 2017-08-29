@@ -52,7 +52,11 @@ class EventDashboardController extends ControllerBase {
    */
   public function access(AccountInterface $account, NodeInterface $event) {
     $access = AccessResult::forbidden();
-    if ($this->acl->hasWriteAccessEvent($event)) {
+
+    // Get the related activity.
+    $activity = $event->field_activity->entity;
+
+    if ($activity && $this->acl->hasWriteAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
     return $access;

@@ -10,7 +10,6 @@ qs_supervisor.account.dashboard:
     user: \d+
   options:
     _maintenance_access: FALSE
-  options:
     parameters:
       user:
         type: entity:user
@@ -19,15 +18,14 @@ qs_supervisor.account.dashboard:
 qs_supervisor.account.form.edit:
   path: '/account/{user}/edit'
   defaults:
-    _controller: '\Drupal\qs_supervisor\Form\UserEditForm'
+    _form: '\Drupal\qs_supervisor\Form\AccountEditForm'
     _title: 'qs_supervisor.account.form.edit.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_supervisor\Form\UserEditForm::access'
+    _custom_access: '\Drupal\qs_supervisor\Form\AccountEditForm::access'
     user: \d+
   options:
     _maintenance_access: FALSE
-  options:
     parameters:
       user:
         type: entity:user

@@ -30,6 +30,8 @@
 @include bg-variant('.bg-primary', color("primary-light"));
 @include bg-variant('.bg-primary-light', color("primary-light"));
 
+// Light colors on colored backgrounds
+.bg-secondary,
 .bg-blue,
 .bg-primary {
   color: color("light");
@@ -47,4 +49,12 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  > .row {
+    flex: 1 1 auto;
+  }
+
+  .form {
+    margin: auto 0;
+  }
 }

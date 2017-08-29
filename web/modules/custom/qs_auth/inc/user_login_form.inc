@@ -9,7 +9,9 @@
  * Alter Drupal login form with custom markup and submission.
  */
 function qs_auth_form_user_login_form_alter(&$form, $form_state) {
-  $form['#attributes']['autocomplete'] = "off";
+  $form['#theme_wrappers'] = [
+    'form__fullpage',
+  ];
 
   $form['login'] = [
     '#type'  => 'fieldset',
@@ -19,18 +21,20 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
   $form['login']['name'] = $form['name'];
   unset($form['name']);
   $form['login']['name']['#title'] = t('qs_auth.login_form.name.label');
-  $form['login']['name']['#attributes']['autocomplete'] = "off";
   $form['login']['name']['#attributes']['autofocus'] = "autofocus";
   $form['login']['name']['#description'] = t('qs_auth.login_form.name.description');
+  $form['login']['name']['#placeholder'] = t('qs_auth.login_form.name.placeholder');
 
   $form['login']['pass'] = $form['pass'];
   unset($form['pass']);
   $form['login']['pass']['#title'] = t('qs_auth.login_form.password.label');
-  $form['login']['pass']['#attributes']['autocomplete'] = "off";
   $form['login']['pass']['#description'] = '';
+  $form['login']['pass']['#placeholder'] = t('qs_auth.login_form.password.placeholder');
 
   $form['#submit'][] = 'qs_auth_user_login_form_submit';
   $form['actions']['submit']['#value'] = t('qs_auth.login_form.submit');
+  $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];
+  $form['actions']['submit']['#attributes']['icon'] = ['check'];
 }
 
 /**

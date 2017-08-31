@@ -28,7 +28,7 @@
 <div class="d-flex align-items-center py-2">
   {% if term.field_icon.value != 'none' %}
   <div class="mr-2 text-gray d-inline-flex justify-content-center align-items-center">
-    {{ macros.icon(term.field_icon.value, 'icon-lg') }}
+    {{ macros.icon('theme_' ~ term.field_icon.value, 'icon-lg') }}
   </div>
   {% endif %}
   <h2 class="mb-0 h5">{{ name }}</h2>

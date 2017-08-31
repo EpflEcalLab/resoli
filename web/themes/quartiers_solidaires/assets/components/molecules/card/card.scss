@@ -32,6 +32,7 @@ a.card {
 
 // The card pill displays an icon at the left
 .card-pill {
+  position: relative;
   display: flex;
   align-items: center;
   margin: -$card-border-width;
@@ -108,9 +109,16 @@ a[href].card-pill-simple {
   // Make sure when we're centering the text, the icon is not pushing things in
   // one direction
   &.mx-auto {
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
+    padding: 0 calc(#{$card-pill-icon-size} + #{$card-spacer-x});
+    text-align: center;
   }
 }
 
@@ -122,15 +130,15 @@ a[href].card-pill-simple {
   .icon {
     justify-content: center;
     align-items: center;
-    width: $card-border-radius * 1.6;
-    height: $card-border-radius * 1.6;
+    width: $card-pill-icon-size;
+    height: $card-pill-icon-size;
     border-radius: 50%;
     background-color: color("light");
     color: $card-cap-bg;
 
     svg {
-      width: $card-border-radius * 1.1;
-      height: $card-border-radius * 1.1;
+      width: $card-pill-icon-size * 0.6875;
+      height: $card-pill-icon-size * 0.6875;
     }
   }
 }

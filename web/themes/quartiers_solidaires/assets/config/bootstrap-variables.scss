@@ -633,6 +633,7 @@ $card-spacer-y:            .75rem !default;
 $card-spacer-x:            1.25rem !default;
 $card-border-width:        $border-width !default;
 $card-border-radius:       25px !default;
+$card-pill-icon-size:      $card-border-radius * 1.6;
 $card-border-color:        theme-color("secondary") !default;
 $card-inner-border-radius: calc(#{$card-border-radius} - #{$card-border-width}) !default;
 $card-cap-bg:              theme-color("secondary") !default;

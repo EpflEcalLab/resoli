@@ -71,13 +71,11 @@
  */
 #}
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-{{ title_prefix }}
-{{ title_suffix }}
-<a href="{{ url }}" class="card">
+<a href="{{ path('entity.node.canonical', {node: node.nid.value}) }}" class="card mb-4">
   <div class="card-body">
-    <h2 class="mt-3 mb-4 h5 font-weight-normal text-center">{{ label }}</h2>
+    <h3 class="mt-3 mb-4 h5 font-weight-normal text-center">{{ node.title.value }}</h3>
     <div class="text-center">
-      <p class="text-secondary">Prochain événement:<br> <span class="text-dark">{{ event.title.value }}<br>{{ event.field_start_at.value }}</span></p>
+      <p class="text-secondary">{{ 'qs.activity.nextevent'|t }}:<br> <span class="text-dark">{{ event.title.value }}<br>{{ event.field_start_at.value }}</span></p>
     </div>
   </div>
   <div class="card-pill card-pill-white">
@@ -85,7 +83,7 @@
       {{ macros.icon('look') }}
     </span>
     <span class="card-pill-title mx-auto">
-      <span class="text-dark">Voir les détails</span>
+      <span class="text-dark">{{ 'qs.activity.readmore'|t }}</span>
     </span>
   </div>
 </a>

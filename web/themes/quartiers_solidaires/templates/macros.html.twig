@@ -1,6 +1,6 @@
-{% macro icon(icon, icon_circle, icon_baseline) %}
+{% macro icon(icon, classes) %}
 {% spaceless %}
-<span class="icon{{ icon_baseline|default(false) ? ' icon-baseline' }}{{ icon_circle|default(false) ? ' icon-circle' }}" aria-hidden="true">
+<span class="icon {{ classes|join(' ') }}" aria-hidden="true">
   <svg>
     <use xlink:href="#icon-{{ icon|default('calendar') }}"></use>
   </svg>

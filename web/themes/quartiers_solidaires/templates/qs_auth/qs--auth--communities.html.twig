@@ -14,7 +14,7 @@
           <ul class="list-unstyled mt-3">
             {% for community in variables.communities %}
             <li>
-              <a class="btn btn-block btn-outline-secondary btn-outline-invert" href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}">{{ community.name.value }}</a>
+              <a class="btn btn-block btn-outline-secondary btn-outline-invert mb-2" href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}">{{ community.name.value }}</a>
             </li>
             {% endfor %}
           </ul>

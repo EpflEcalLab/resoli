@@ -107,12 +107,20 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
         'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
           'community' => $community->id(),
         ]),
+        'icon' => 'activities',
         'links' => [
           'qs_activity.collection.themes' => [
             'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
               'community' => $community->id(),
             ]),
             'label' => $this->t('qs_menu.links.activities.themes'),
+          ],
+          // @TODO temp link to not have a broken nav:
+          'qs_activity.collection.date' => [
+            'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.activities.date'),
           ],
         ],
         'activated_by' => [
@@ -122,6 +130,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       'settings'   => [
         'label' => $this->t('qs_menu.links.account.dashboard'),
         'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
+        'icon' => 'settings',
         'links' => [
           'qs_menu.links.account.dashboard' => [
             'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),

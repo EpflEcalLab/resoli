@@ -1,20 +1,43 @@
-<ul>
-{% for section in variables.menu %}
-  <li>
-    <a href="{{ section.url }}">{{ section.label }}</a>
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+<div class="navbar-container">
+  <button class="btn btn-outline-primary navbar-toggle" title="Afficher ou cacher le menu">
+    {{ macros.icon('wheel') }}
+  </button>
 
-    {% set active = FALSE %}
-    {% if route_name in section.activated_by %}
-      {% set active = FALSE %}
-    {% endif %}
+  <div class="navbar-current">
+    <div class="navbar-filters">
+      {% for section in variables.menu if variables.route_name in section.activated_by %}
 
-    {% if section.active and section.links %}
-    <ul>
-      {% for link in section.links %}
-      <a href="{{ link.url }}">{{ link.label }}</a>
+        <button class="btn btn-primary btn-icon">
+          {{ macros.icon(section.icon) }}
+          <span class="sr-only">{{ 'qs.menu.current_page'|t }}</span>
+          {{ section.label }}
+        </button>
+
+        {% for key, link in section.links %}
+          {% set active = key == variables.route_name %}
+          {% set classes = [
+            'btn btn-outline-primary navbar-filter',
+            active ? 'active',
+          ] %}
+          <a href="{{ link.url }}" class="{{ classes|join(' ') }}">
+            <span class="sr-only">{{ active ? 'qs.menu.sorted_by'|t : 'qs.menu.sort_by'|t }}</span>
+            {{ link.label }}
+          </a>
+        {% endfor %}
+
       {% endfor %}
-    </ul>
-    {% endif %}
-  </li>
-{% endfor %}
-</ul>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    {% for section in variables.menu %}
+      <a href="{{ section.url }}" class="nav-item{{ loop.index == 2 ? ' active' }}">
+        {{ macros.icon(section.icon ~ '-big') }}
+        {{ section.label }}
+      </a>
+    {% endfor %}
+  </nav>
+
+  <div class="navbar-overlay"></div>
+</div>

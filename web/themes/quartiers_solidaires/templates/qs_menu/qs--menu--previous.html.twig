@@ -1,1 +1,5 @@
-<a href="javascript:history.back()">{% trans %}qs.previous{% endtrans %}</a>
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+<a class="btn btn-icon btn-outline-secondary shadow-to-left" href="javascript:history.back()">
+  {{ macros.icon('chevron-left') }}
+  {% trans %}qs.previous{% endtrans %}
+</a>

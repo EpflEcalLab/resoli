@@ -1,16 +1,17 @@
-uuid: 5e3c8a4d-87ef-4c46-b0ce-2976f293a2fd
+uuid: 0b38a720-86c2-4248-be6c-19d84b81a729
 langcode: fr
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.taxonomy_term.teaser
     - field.field.taxonomy_term.themes.field_icon
     - taxonomy.vocabulary.themes
   module:
     - options
-id: taxonomy_term.themes.default
+id: taxonomy_term.themes.teaser
 targetEntityType: taxonomy_term
 bundle: themes
-mode: default
+mode: teaser
 content:
   field_icon:
     weight: 0

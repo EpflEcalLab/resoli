@@ -1,0 +1,18 @@
+uuid: bc658398-c6fa-49a2-b229-2c3b8136d85e
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - quartiers_solidaires
+id: activity_add_btn
+theme: quartiers_solidaires
+region: footer
+weight: 0
+provider: null
+plugin: qs_activity_btn_activity_add_block
+settings:
+  id: null
+  label: 'Button Add Activity'
+  provider: null
+  label_display: '0'
+visibility: {  }

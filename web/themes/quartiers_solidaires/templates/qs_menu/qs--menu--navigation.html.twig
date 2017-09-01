@@ -1,0 +1,21 @@
+menu
+<ul>
+{% for section in variables.menu %}
+  <li>
+    <a href="{{ section.url }}">{{ section.label }}</a>
+
+    {% set active = FALSE %}
+    {% if route_name in section.activated_by %}
+      {% set active = FALSE %}
+    {% endif %}
+
+    {% if section.active and section.links %}
+    <ul>
+      {% for link in section.links %}
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>

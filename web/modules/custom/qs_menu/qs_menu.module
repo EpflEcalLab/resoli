@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function qs_menu_theme() {
+  return [
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_menu_navigation_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--menu--navigation',
+    ],
+  ];
+}

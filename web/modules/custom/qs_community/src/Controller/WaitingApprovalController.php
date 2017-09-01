@@ -59,7 +59,7 @@ class WaitingApprovalController extends ControllerBase {
   }
 
   /**
-   * Members page.
+   * Collection page of Accounts waiting for Approval.
    */
   public function waitingApproval(TermInterface $community) {
     return [

@@ -314,4 +314,30 @@ function qs_default_content_privileges_activities() {
     'reviewer'  => 1,
   ]);
   $privilege->save();
+
+  // User 13: member+lausanne+manager+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 13: member+lausanne+manager+fribourg.
+    'user'      => 13,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 13: member+lausanne+manager+fribourg.
+    'user'      => 13,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_managers',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+
 }

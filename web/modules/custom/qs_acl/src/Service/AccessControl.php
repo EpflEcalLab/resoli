@@ -146,8 +146,8 @@ class AccessControl {
       ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_organizers');
     $or->condition('privilege', 'community_managers');
+    $or->condition('privilege', 'community_organizers');
     $query->condition($or);
 
     $number = (int) $query->count()->execute();
@@ -184,7 +184,7 @@ class AccessControl {
       ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
     $query->condition($or);
 
     $number = (int) $query->count()->execute();

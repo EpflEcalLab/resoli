@@ -35,7 +35,7 @@ Feature: Activities by Theme Access
     And the response status code should be 403
 
   @api
-  Scenario: Logged as Member of Lausanne & Organizer of Fribourg I can't access to Lausanne & Fribourg activities
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg I can access to Lausanne & Fribourg activities
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/fribourg/activities/theme"
     And the response status code should be 200

@@ -82,7 +82,7 @@ class FilterForm extends FormBase {
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
     foreach ($themes as $theme) {
-      $options[$theme->tid->value] = $theme->name->value . '|' . $theme->field_icon->value;
+      $options[$theme->id()] = $theme->getName() . '|' . $theme->field_icon->value;
     }
 
     // Get all selected themes for options.

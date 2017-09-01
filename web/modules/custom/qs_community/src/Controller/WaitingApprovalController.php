@@ -10,9 +10,9 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 
 /**
- * DashboardController.
+ * WaitingApprovalController.
  */
-class DashboardController extends ControllerBase {
+class WaitingApprovalController extends ControllerBase {
 
   /**
    * Access Control Service.
@@ -59,16 +59,16 @@ class DashboardController extends ControllerBase {
   }
 
   /**
-   * Dashboard page.
+   * Members page.
    */
-  public function dashboard(TermInterface $community) {
+  public function waitingApproval(TermInterface $community) {
     return [
-      '#theme'     => 'qs_community_dashboard_page',
+      '#theme'     => 'qs_community_waiting_approval_page',
       '#variables' => ['community' => $community],
       '#cache' => [
         'tags' => [
           // Invalidated whenever any community is updated, deleted or created.
-          'node_list:community',
+          'user_list:user',
           // Invalidated whenever any Privilege is updated, deleted or created.
           'privilege_list:privilege',
         ],

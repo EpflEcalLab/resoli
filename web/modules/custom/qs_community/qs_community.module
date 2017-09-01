@@ -19,25 +19,13 @@ function qs_community_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--community--dashboard',
     ],
-    'qs_community_members_collection_page' => [
-      'variables' => ['variables' => []],
-      'template'  => 'qs--community--members-collection',
-    ],
-    'qs_community_waiting_approval_collection_page' => [
-      'variables' => ['variables' => []],
-      'template'  => 'qs--community--waiting-approval-collection',
-    ],
-
-    // Blocks themes
-    // ---------------------------------------------------------------------.
-    'qs_community_waiting_approval_collection_block' => [
-      'variables' => ['variables' => []],
-      'template'  => 'qs--community--waiting-approval',
-    ],
-    'qs_community_members_collection_block' => [
+    'qs_community_members_page' => [
       'variables' => ['variables' => []],
       'template'  => 'qs--community--members',
     ],
-
+    'qs_community_waiting_approval_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--community--waiting-approval',
+    ],
   ];
 }

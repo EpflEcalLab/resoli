@@ -119,19 +119,19 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
           'qs_activity.collection.themes',
         ],
       ],
-      // 'settings'   => [
-      //   'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
-      //   'label' => $this->t('qs_menu.links.account.dashboard'),
-      //   'links' => [
-      //     'qs_menu.links.account.dashboard' => [
-      //       'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
-      //       'label' => $this->t('qs_menu.links.account.dashboard'),
-      //     ],
-      //   ],
-      //   'activated_by' => [
-      //     'qs_menu.links.account.dashboard',
-      //   ],
-      // ],.
+      'settings'   => [
+        'label' => $this->t('qs_menu.links.account.dashboard'),
+        'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
+        'links' => [
+          'qs_menu.links.account.dashboard' => [
+            'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
+            'label' => $this->t('qs_menu.links.account.dashboard'),
+          ],
+        ],
+        'activated_by' => [
+          'qs_menu.links.account.dashboard',
+        ],
+      ],
     ];
 
     return $render;

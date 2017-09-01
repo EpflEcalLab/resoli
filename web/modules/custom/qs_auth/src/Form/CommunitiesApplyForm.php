@@ -5,8 +5,10 @@ namespace Drupal\qs_auth\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_auth\Service\Account;
+use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\qs_acl\Service\PrivilegeManger;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
 
 /**
@@ -18,11 +20,11 @@ class CommunitiesApplyForm extends FormBase {
   use InlineErrorFormTrait;
 
   /**
-   * The QS account service.
+   * Access Control Service.
    *
-   * @var \Drupal\qs_auth\Service\Account
+   * @var \Drupal\qs_acl\Service\AccessControl
    */
-  protected $account;
+  protected $acl;
 
   /**
    * The term Storage.
@@ -32,11 +34,27 @@ class CommunitiesApplyForm extends FormBase {
   private $termStorage;
 
   /**
+   * The current active user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   */
+  private $privilegeManger;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(Account $account, EntityTypeManagerInterface $entity_type_manager) {
-    $this->account     = $account;
-    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManger $privilege_manager, AccountProxyInterface $currentUser) {
+    $this->acl             = $acl;
+    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
+    $this->privilegeManger = $privilege_manager;
+    $this->currentUser     = $currentUser;
   }
 
   /**
@@ -44,8 +62,10 @@ class CommunitiesApplyForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-    $container->get('qs_auth.account'),
-    $container->get('entity_type.manager')
+    $container->get('qs_acl.access_control'),
+    $container->get('entity_type.manager'),
+    $container->get('qs_acl.privilege_manger'),
+    $container->get('current_user')
     );
   }
 
@@ -60,9 +80,6 @@ class CommunitiesApplyForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL) {
-    // Honeypot.
-    honeypot_add_form_protection($form, $form_state, ['honeypot', 'time_restriction']);
-
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
@@ -72,7 +89,22 @@ class CommunitiesApplyForm extends FormBase {
     foreach ($communities as $community) {
       $options[$community->tid->value] = $community->name->value;
     }
-    $form['step-1']['community'] = [
+
+    // Get current user already requested communities.
+    $user_communities = $this->acl->getCommunities();
+    $user_pending     = $this->acl->getPendingApprovalCommunities();
+    foreach ($user_communities as $community) {
+      if (isset($options[$community->tid->value])) {
+        unset($options[$community->tid->value]);
+      }
+    }
+    foreach ($user_pending as $community) {
+      if (isset($options[$community->tid->value])) {
+        unset($options[$community->tid->value]);
+      }
+    }
+
+    $form['community'] = [
       '#attributes' => ['title' => $this->t('qs_auth.form.communities_apply.community')],
       '#type'       => 'radios',
       '#required'   => FALSE,
@@ -91,14 +123,27 @@ class CommunitiesApplyForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-
+    // Assert the community is valid.
+    if (!$form_state->getValue('community') || empty($form_state->getValue('community'))) {
+      $form_state->setErrorByName('[community]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['community']['#attributes']['title']]));
+    }
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $user = $this->currentUser;
 
+    // Create a Request Privilege as Member for this community.
+    $community = $this->termStorage->load($form_state->getValue('community'));
+    $this->privilegeManger->request('community_members', $community, $user);
+
+    drupal_set_message($this->t('qs_auth.communities.apply.success @community', [
+      '@community' => $community->getName(),
+    ]));
+
+    $form_state->setRedirect('qs_supervisor.account.dashboard', ['user' => $user->id()], []);
   }
 
 }

@@ -8,6 +8,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\taxonomy\TermInterface;
 use Drupal\node\NodeInterface;
+use Drupal\user\UserInterface;
 
 /**
  * AccessControl.
@@ -52,7 +53,47 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has access on the given community.
+   * Check if the account has access on the given user dashboard.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access.
+   *
+   * @return bool
+   *   Does the account has access to the user dashboard.
+   */
+  public function hasAccessAccountDashboard(UserInterface $user, AccountInterface $account) {
+    // Check bypass.
+    if ($this->hasBypass($account)) {
+      return TRUE;
+    }
+
+    return $user->id() == $account->id();
+  }
+
+  /**
+   * Check if the account has write access on the given user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access.
+   *
+   * @return bool
+   *   Does the account has write access to the user.
+   */
+  public function hasWriteAccessAccount(UserInterface $user, AccountInterface $account) {
+    // Check bypass.
+    if ($this->hasBypass($account)) {
+      return TRUE;
+    }
+
+    return $user->id() == $account->id();
+  }
+
+  /**
+   * Check if the account has access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
@@ -77,7 +118,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access on the given community.
+   * Check if the account has write access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
@@ -115,7 +156,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access on the given activity.
+   * Check if the account has write access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
@@ -136,12 +177,6 @@ class AccessControl {
       return TRUE;
     }
 
-    // Check user is the original author.
-    $owner = $activity->getOwner();
-    if ($owner->id() == $user->id()) {
-      return TRUE;
-    }
-
     $query = $this->queryFactory->get('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'node')
@@ -158,7 +193,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access for event on the given activity.
+   * Check if the account has write access for event on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The event to check access.
@@ -179,12 +214,6 @@ class AccessControl {
       return TRUE;
     }
 
-    // Check user is the original author.
-    $owner = $activity->getOwner();
-    if ($owner->id() == $user->id()) {
-      return TRUE;
-    }
-
     $query = $this->queryFactory->get('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'node')
@@ -202,7 +231,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the user is waiting for at least one Privilege on this community.
+   * Check the account is waiting for at least one Privilege on the community.
    *
    * If the user has already one privilege it will alwayse return FALSE.
    *
@@ -258,9 +287,9 @@ class AccessControl {
   }
 
   /**
-   * Check if the user belongs to at least one community.
+   * Check if the account belongs to at least one community.
    *
-   * This only check if the users belongs to a community
+   * This only check if the accounts belongs to a community
    * as Member or Organizer or Managers.
    * It doesn't get pending request.
    *
@@ -282,9 +311,9 @@ class AccessControl {
   }
 
   /**
-   * Check if the user belongs to more than one community.
+   * Check if the account belongs to more than one community.
    *
-   * This only check if the users belongs to a community
+   * This only check if the accounts belongs to a community
    * as Member or Organizer or Managers.
    * It doesn't get pending request.
    *
@@ -459,11 +488,13 @@ class AccessControl {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity.
    *
    * @return bool
    *   Does the given user has bypass security permission.
    */
-  public function hasBypass(AccountInterface $account = NULL) {
+  public function hasBypass(AccountInterface $account = NULL, EntityInterface $entity = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
@@ -471,6 +502,14 @@ class AccessControl {
 
     if ($user->hasPermission('bypass node access')) {
       return TRUE;
+    }
+
+    if ($entity) {
+      // Check user is the original author of the given entity.
+      $owner = $entity->getOwner();
+      if ($owner->id() == $user->id()) {
+        return TRUE;
+      }
     }
 
     return FALSE;

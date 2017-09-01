@@ -6,6 +6,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
@@ -27,6 +28,13 @@ class PrivilegeManger {
   private $privilegeStorage;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * The entity query factory.
    *
    * @var \Drupal\Core\Entity\Query\QueryFactory
@@ -34,12 +42,21 @@ class PrivilegeManger {
   protected $queryFactory;
 
   /**
+   * The database connection to use.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
+
+  /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
     $this->currentUser      = $currentUser;
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
+    $this->userStorage      = $entity_type_manager->getStorage('user');
     $this->queryFactory     = $query_factory;
+    $this->connection       = $connection;
   }
 
   /**
@@ -65,15 +82,24 @@ class PrivilegeManger {
       ->condition('user', $user->id())
       ->condition('entity', $entity->id());
 
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_members');
-    $or->condition('privilege', 'community_organizers');
-    $or->condition('privilege', 'community_managers');
-    $query->condition($or);
+    if ($entity->bundle() === 'communities') {
+      $or = $query->orConditionGroup();
+      $or->condition('privilege', 'community_members');
+      $or->condition('privilege', 'community_organizers');
+      $or->condition('privilege', 'community_managers');
+      $query->condition($or);
+    }
+    elseif ($entity->bundle() === 'activity') {
+      $or = $query->orConditionGroup();
+      $or->condition('privilege', 'activity_members');
+      $or->condition('privilege', 'activity_maintainers');
+      $or->condition('privilege', 'activity_organizers');
+      $query->condition($or);
+    }
 
     $ids = $query->execute();
     $privileges = [];
-    if ($privileges) {
+    if ($ids) {
       $privileges = $this->privilegeStorage->loadMultiple($ids);
     }
 
@@ -165,6 +191,49 @@ class PrivilegeManger {
     dump($user);
     dump('remove');
     die();
+  }
+
+  /**
+   * Request the collection of members for a given community.
+   *
+   * An account is processed as member of community if it has one privilege:
+   *  - community_members
+   *  - community_organizers
+   *  - community_managers.
+   *
+   * @param Drupal\taxonomy\TermInterface $entity
+   *   The Drupal Content Entity for the privilege.
+   *
+   * @return Drupal\Core\Session\AccountInterface[]
+   *   A collection of members.
+   */
+  public function fetchMembers(EntityInterface $community) {
+    // TODO Refactoring using $connection for futur filter, order by name user, ...
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('entity', $community->id())
+      ->groupBy('user');
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_members');
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    $ids = $query->execute();
+
+    if (empty($ids)) {
+      return NULL;
+    }
+
+    $privileges = $this->privilegeStorage->loadMultiple($ids);
+    $members = [];
+    foreach ($privileges as $privilege) {
+      $members[] = $privilege->user->entity;
+    }
+
+    return $members;
   }
 
 }

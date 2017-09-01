@@ -17,7 +17,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  *
  * @Block(
  *   id = "qs_themes_filter_block",
- *   admin_label = @Translation("Themes Filter block"),
+ *   admin_label = @Translation("Themes Filter"),
  * )
  */
 class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {

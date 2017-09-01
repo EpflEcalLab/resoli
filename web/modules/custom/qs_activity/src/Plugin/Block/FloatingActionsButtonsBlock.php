@@ -15,7 +15,7 @@ use Drupal\Core\Routing\CurrentRouteMatch;
  *
  * @Block(
  *   id = "qs_activity_floating_actions_buttons_block",
- *   admin_label = @Translation("Floating actions buttons block"),
+ *   admin_label = @Translation("Floating actions buttons"),
  * )
  */
 class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryPluginInterface {

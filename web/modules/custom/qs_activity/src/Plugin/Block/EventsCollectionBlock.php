@@ -16,7 +16,7 @@ use Drupal\qs_activity\Service\EventManager;
  *
  * @Block(
  *   id = "qs_activity_events_collection_block",
- *   admin_label = @Translation("Button activity add block"),
+ *   admin_label = @Translation("Collection of Events by Activity"),
  * )
  */
 class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginInterface {

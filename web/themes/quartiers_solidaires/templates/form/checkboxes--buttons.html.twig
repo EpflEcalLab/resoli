@@ -23,4 +23,4 @@
   <label{{ attributes.addClass(classes) }}>{{ attributes.title|raw }}</label> {%- if required or attributes.required -%} * {%- endif -%}
 </div>
 {% endif %}
-<div{{ attributes }} data-toggle="buttons">{{ children }}</div>
+<div{{ attributes.addClass('js-filter-themes') }} data-toggle="buttons">{{ children }}</div>

@@ -3,6 +3,7 @@
 import svgIcons from '../icons/svg-icons';
 import nav from 'molecules/nav/nav';
 import card from 'molecules/card/card';
+import checkbox from 'molecules/checkbox/checkbox';
 import multiStep from 'organisms/multi-step';
 import formControl from 'molecules/form-control/form-control';
 
@@ -14,5 +15,6 @@ svgIcons();
     nav();
     multiStep();
     formControl();
+    checkbox();
   });
 })(jQuery);

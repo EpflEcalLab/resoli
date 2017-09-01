@@ -9,16 +9,16 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Routing\CurrentRouteMatch;
 
 /**
- * Button Activity Add Block.
+ * Floating actions buttons Block.
  *
- * Expose a button to access the Activity Add Form.
+ * Expose the Floating actions buttons to access privilegied pages.
  *
  * @Block(
- *   id = "qs_activity_btn_activity_add_block",
- *   admin_label = @Translation("Button activity add block"),
+ *   id = "qs_activity_floating_actions_buttons_block",
+ *   admin_label = @Translation("Floating actions buttons block"),
  * )
  */
-class BtnActivityAddBlock extends BlockBase implements ContainerFactoryPluginInterface {
+class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * Access Control Service.
@@ -63,16 +63,21 @@ class BtnActivityAddBlock extends BlockBase implements ContainerFactoryPluginInt
    * {@inheritdoc}
    */
   public function build($params = []) {
-    $variables = ['has_write_access' => FALSE, 'community' => NULL];
+    $variables = [
+      'community'                       => NULL,
+      'community_has_write_access'      => FALSE,
+      'community_has_supervisor_access' => FALSE,
+    ];
 
     $community = $this->route->getParameter('community');
     if ($community) {
-      $variables['has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
+      $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
+      $variables['community_has_supervisor_access'] = FALSE;
       $variables['community'] = $community;
     }
 
     return [
-      '#theme'     => 'qs_activity_btn_activity_add_block',
+      '#theme'     => 'qs_activity_floating_actions_buttons_block',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

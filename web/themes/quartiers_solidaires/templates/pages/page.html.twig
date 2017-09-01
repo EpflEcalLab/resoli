@@ -52,6 +52,10 @@
     {% block content %}{{ page.content }}{% endblock %}
 </main>
 
+{% if page.floating %}
+  {{ page.floating }}
+{% endif %}
+
 {% if page.footer %}
     <footer role="contentinfo">
         {{ page.footer }}

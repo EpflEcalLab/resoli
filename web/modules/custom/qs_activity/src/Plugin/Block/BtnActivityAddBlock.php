@@ -38,6 +38,7 @@ class BtnActivityAddBlock extends BlockBase implements ContainerFactoryPluginInt
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->acl   = $acl;
     $this->route = $route;
   }

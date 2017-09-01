@@ -16,5 +16,9 @@ function qs_menu_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--menu--navigation',
     ],
+    'qs_menu_previous_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--menu--previous',
+    ],
   ];
 }

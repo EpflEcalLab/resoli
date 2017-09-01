@@ -15,7 +15,7 @@ use Drupal\Core\Routing\UrlGeneratorInterface;
  *
  * @Block(
  *   id = "qs_menu_navigation_block",
- *   admin_label = @Translation("Navigation Block"),
+ *   admin_label = @Translation("Accordion Main Navigation"),
  * )
  */
 class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -39,9 +39,9 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
    *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
-   protected $currentUser;
+  protected $currentUser;
 
-    /**
+  /**
    * The url generator service.
    *
    * @var \Drupal\Core\Routing\UrlGeneratorInterface
@@ -52,6 +52,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, AccountProxyInterface $currentUser, UrlGeneratorInterface $url_generator) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->acl          = $acl;
     $this->route        = $route;
     $this->currentUser  = $currentUser;
@@ -83,7 +84,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $variables['route_name'] = $this->route->getRouteName();
     $variables['current_user'] = $this->currentUser;
 
-    $theme = [
+    $render = [
       '#theme'     => 'qs_menu_navigation_block',
       '#variables' => $variables,
       '#cache' => [
@@ -96,7 +97,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
 
     $community = $this->route->getParameter('community');
     if (!$community) {
-      return;
+      return $render;
     }
 
     $variables['community'] = $community;
@@ -104,10 +105,14 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $variables['menu'] = [
       'activities' => [
         'label' => $this->t('qs_menu.links.activities'),
-        'url' => $this->urlGenerator->generate('qs_activity.collection.themes', ['community' => $community->id()]),
+        'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
+          'community' => $community->id(),
+        ]),
         'links' => [
           'qs_activity.collection.themes' => [
-            'url' => $this->urlGenerator->generate('qs_activity.collection.themes', ['community' => $community->id()]),
+            'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
+              'community' => $community->id(),
+            ]),
             'label' => $this->t('qs_menu.links.activities.themes'),
           ],
         ],
@@ -127,19 +132,10 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       //   'activated_by' => [
       //     'qs_menu.links.account.dashboard',
       //   ],
-      // ],
+      // ],.
     ];
 
-    return [
-      '#theme'     => 'qs_menu_navigation_block',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url',
-        ],
-      ],
-    ];
+    return $render;
   }
 
 }

@@ -42,6 +42,7 @@ module:
   qs_acl: 0
   qs_activity: 0
   qs_auth: 0
+  qs_menu: 0
   qs_site: 0
   qs_themes: 0
   qs_toolbar: 0

@@ -123,9 +123,10 @@ content:
   field_contribution:
     weight: 31
     settings:
+      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: number
+    type: string_textfield
     region: content
   field_end_at:
     weight: 30

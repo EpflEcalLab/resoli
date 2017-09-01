@@ -55,9 +55,9 @@ class AccessControl {
    * Check if the user has access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user has at least one access for this community.
@@ -80,9 +80,9 @@ class AccessControl {
    * Check if the user has write access on the given community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user has at least one write access for this community.
@@ -115,17 +115,60 @@ class AccessControl {
   }
 
   /**
-   * Check if the user has write access on the given community.
+   * Check if the user has write access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
-   *   The community against we check pending approval.
+   *   The activity to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
-   *   Does the user has at least one write access for this community.
+   *   Does the user has at least one write access for this activity.
    */
   public function hasWriteAccessActivity(NodeInterface $activity, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    // Check user is the original author.
+    $owner = $activity->getOwner();
+    if ($owner->id() == $user->id()) {
+      return TRUE;
+    }
+
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the user has write access for event on the given activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The event to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one write access for this activity.
+   */
+  public function hasWriteAccessEvent(NodeInterface $activity, AccountInterface $account = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
@@ -164,9 +207,9 @@ class AccessControl {
    * If the user has already one privilege it will alwayse return FALSE.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user is waiting for Privilege on this community.
@@ -198,7 +241,7 @@ class AccessControl {
    * Check if the given user or the current logged one has the role beginner.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the account has the beginner role.
@@ -222,7 +265,7 @@ class AccessControl {
    * It doesn't get pending request.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the account belongs to at least one community.
@@ -246,7 +289,7 @@ class AccessControl {
    * It doesn't get pending request.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the account belongs to more than one community.
@@ -386,7 +429,7 @@ class AccessControl {
    * It doesn't count pending request.
    *
    * @param \Drupal\taxonomy\TermInterface $community
-   *   The community against we check pending approval.
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Drupal Entity User.
    *
@@ -415,7 +458,7 @@ class AccessControl {
    * This method has security implications.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the given user has bypass security permission.

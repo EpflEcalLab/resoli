@@ -3,154 +3,109 @@
 namespace Drupal\qs_activity\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
- * EventAddForm class.
+ * EventEditForm class.
  */
-class EventAddForm extends FormBasic {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct(ContainerInterface $container) {
-    // Initialize the container.
-    parent::__construct($container);
-
-    // From the container, inject services.
-    $this->acl          = $this->getAcl();
-    $this->nodeStorage  = $this->getNodeStorage();
-    $this->eventManager = $this->getEventManager();
-  }
+class EventEditForm extends EventEditFormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'qs_activity_event_add_form';
-  }
-
-  /**
-   * Checks access for creating file in the given community.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Run access checks for this account.
-   * @param \Drupal\node\NodeInterface $activity
-   *   Run access checks for this node.
-   *
-   * @return bool
-   *   Access allowed or rejected.
-   */
-  public function access(AccountInterface $account, NodeInterface $activity) {
-    $access = AccessResult::forbidden();
-    if ($this->acl->hasWriteAccessEvent($activity)) {
-      $access = AccessResult::allowed();
-    }
-    return $access;
+    return 'qs_activity_event_edit_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
-    $form = parent::buildForm($form, $form_state);
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
+    $form = parent::buildForm($form, $form_state, $event);
 
-    // Save the activity for submisson.
-    $form['activity'] = [
-      '#type'  => 'hidden',
-      '#value' => $activity->id(),
-    ];
-
-    $form['event']['step-1'] = [
-      '#type' => 'fieldset',
-    ];
-
-    $form['event']['step-1']['title'] = [
+    $form['title'] = [
       '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.add.title'),
-      '#placeholder'   => $this->t('qs_activity.events.form.add.title.placeholder'),
+      '#title'         => $this->t('qs_activity.events.form.edit.title'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
-      '#default_value' => $activity->title->value,
+      '#default_value' => $event->title->value,
     ];
 
-    $now = new DrupalDateTime();
-    $form['event']['step-1']['date'] = [
+    // Load date from UTC in Drupal 8 to curent loggedin user Timezone.
+    $start_at = $event->field_start_at->date;
+    $start_at->setTimezone(new \DateTimeZone($this->currentUser->getTimezone()));
+    $end_at = $event->field_end_at->date;
+    $end_at->setTimezone(new \DateTimeZone($this->currentUser->getTimezone()));
+
+    $form['date'] = [
       '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.add.date'),
+      '#title'         => $this->t('qs_activity.events.form.edit.date'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
-      '#default_value' => $now->format('d.m.Y'),
+      '#default_value' => $start_at->format('d.m.Y'),
     ];
 
-    $form['event']['step-1']['start_at'] = [
+    $form['start_at'] = [
       '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.add.start_at'),
+      '#title'         => $this->t('qs_activity.events.form.edit.start_at'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
-      '#default_value' => $now->format('H:i'),
+      '#default_value' => $start_at->format('H:i'),
     ];
 
-    $form['event']['step-1']['end_at'] = [
+    $form['end_at'] = [
       '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.add.end_at'),
+      '#title'         => $this->t('qs_activity.events.form.edit.end_at'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
-      '#default_value' => $now->modify('+30 minutes')->format('H:i'),
+      '#default_value' => $end_at->format('H:i'),
     ];
 
-    $form['event']['step-2'] = [
-      '#type'  => 'fieldset',
-    ];
-
-    $form['event']['step-2']['body'] = [
+    $form['body'] = [
       '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.add.body'),
-      '#placeholder'   => $this->t('qs_activity.events.form.add.body.placeholder'),
+      '#title'         => $this->t('qs_activity.events.form.edit.body'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.body.placeholder'),
       '#type'          => 'textarea',
       '#required'      => FALSE,
-      '#default_value' => $activity->body->value,
+      '#default_value' => $event->body->value,
     ];
 
-    $form['event']['step-2']['venue'] = [
+    $form['venue'] = [
       '#attributes' => [
         'google-autocomplete' => TRUE,
         'google-input-lat' => 'edit-latitude',
         'google-input-lng' => 'edit-longitude',
       ],
-      '#title'         => $this->t('qs_activity.events.form.add.venue'),
+      '#title'         => $this->t('qs_activity.events.form.edit.venue'),
       '#type'          => 'textfield',
-      '#default_value' => $activity->field_venue->value,
+      '#default_value' => $event->field_venue->value,
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
     $form['latitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $activity->field_venue_lat->value,
+      '#default_value' => $event->field_venue_lat->value,
     ];
     $form['longitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $activity->field_venue_long->value,
+      '#default_value' => $event->field_venue_long->value,
     ];
 
-    $form['event']['step-2']['has_contribution'] = [
-      '#title'   => $this->t('qs_activity.events.form.add.has_contribution'),
-      '#type'    => 'radios',
-      '#options' => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
+    $form['has_contribution'] = [
+      '#title'       => $this->t('qs_activity.events.form.edit.has_contribution'),
+      '#type'        => 'radios',
+      '#options'     => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
     ];
 
-    $form['event']['step-2']['contribution'] = [
-      '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_activity.events.form.add.contribution'),
-      '#type'        => 'textfield',
-      '#required'    => FALSE,
+    $form['contribution'] = [
+      '#attributes'    => ['required' => TRUE],
+      '#title'         => $this->t('qs_activity.events.form.edit.contribution'),
+      '#type'          => 'textfield',
+      '#default_value' => $event->field_contribution->value,
     ];
 
-    $form['event']['step-2']['actions']['submit'] = [
+    $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#value' => $this->t('qs.form.submit'),
     ];
@@ -219,27 +174,31 @@ class EventAddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $event = $this->nodeStorage->load($form_state->getValue('event'));
 
     // Format dates.
     $date = $form_state->getValue('date');
     $date_start = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('start_at') . ':00');
     $date_end = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('end_at') . ':00');
 
-    // Prepare data.
-    $data['title'] = $form_state->getValue('title');
-    $data['body'] = $form_state->getValue('body');
-    $data['contact_mail'] = $form_state->getValue('contact_mail');
-    $data['contact_phone'] = $form_state->getValue('contact_phone');
-    $data['contribution'] = $form_state->getValue('contribution');
-    $data['venue'] = $form_state->getValue('venue');
-    $data['venue_lat'] = $form_state->getValue('venue_lat');
-    $data['venue_long'] = $form_state->getValue('venue_long');
+    // Prepare fields.
+    $fields['title']               = $form_state->getValue('title');
+    $fields['body']                = $form_state->getValue('body');
+    $fields['field_contact_mail']  = $form_state->getValue('contact_mail');
+    $fields['field_contact_phone'] = $form_state->getValue('contact_phone');
+    $fields['field_contribution']  = $form_state->getValue('contribution');
+    $fields['field_venue']         = $form_state->getValue('venue');
+    $fields['field_venue_lat']     = $form_state->getValue('venue_lat');
+    $fields['field_venue_long']    = $form_state->getValue('venue_long');
 
-    // // Create the new event.
-    $this->eventManager->create($activity, $date_start, $date_end, $data);
-    drupal_set_message($this->t('qs_activity.events.form.add.success'));
-    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+    // Update new event.
+    $this->eventManager->update($event, $date_start, $date_end, $fields);
+
+    drupal_set_message($this->t('qs_activity.events.form.edit.success @event', [
+      '@event' => $event->getTitle(),
+    ]));
+
+    $form_state->setRedirect('qs_activity.events.form.edit', ['event' => $event->id()], []);
   }
 
 }

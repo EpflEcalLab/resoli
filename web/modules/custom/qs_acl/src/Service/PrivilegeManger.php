@@ -48,7 +48,7 @@ class PrivilegeManger {
    * @param Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    * @param Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return Drupal\qs_acl\Entity\Privilege[]
    *   A collection of active Privilege according the user & the entity given.
@@ -88,7 +88,7 @@ class PrivilegeManger {
    * @param Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    * @param Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    *
    * @return Drupal\Core\Entity\EntityInterface
    *   The created privilege request.
@@ -155,7 +155,7 @@ class PrivilegeManger {
    * @param Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    * @param Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User against check access. Otherwise use current user.
+   *   User used to check access. Otherwise use current user.
    */
   public function remove($privilege, EntityInterface $entity, AccountInterface $account = NULL) {
     $user = $this->currentUser;

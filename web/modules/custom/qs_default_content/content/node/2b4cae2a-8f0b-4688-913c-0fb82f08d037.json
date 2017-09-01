@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/node\/18?_format=hal_json"
+            "href": "http:\/\/default\/lausanne\/activities\/activity-3-lausanne-theme-ndeg1\/events\/event-activity-3-2-days-1600?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
@@ -19,23 +19,23 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
             {
-                "href": "http:\/\/default\/node\/4?_format=hal_json"
+                "href": "http:\/\/default\/lausanne\/activities\/activity-3-lausanne-theme-ndeg1?_format=hal_json"
             }
         ]
     },
     "nid": [
         {
-            "value": 18
+            "value": 35
         }
     ],
     "uuid": [
         {
-            "value": "4ec098fb-370d-4c1d-ad31-faa7562d47f7"
+            "value": "2b4cae2a-8f0b-4688-913c-0fb82f08d037"
         }
     ],
     "vid": [
         {
-            "value": 34
+            "value": 65
         }
     ],
     "langcode": [
@@ -57,7 +57,7 @@
     ],
     "title": [
         {
-            "value": "Event - Activity (4) - Tomorrow at 18h00",
+            "value": "Event - Activity (3) - In 2 days at 16h00",
             "lang": "zxx"
         }
     ],
@@ -74,7 +74,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "d9aebbe3-4dea-4982-bb75-4e300e64f56d"
                     }
                 ],
                 "lang": "zxx"
@@ -92,7 +92,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "d9aebbe3-4dea-4982-bb75-4e300e64f56d"
                     }
                 ]
             }
@@ -101,7 +101,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/node\/4?_format=hal_json"
+                        "href": "http:\/\/default\/lausanne\/activities\/activity-3-lausanne-theme-ndeg1?_format=hal_json"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -109,7 +109,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "69ba6e03-31e1-4ee5-add1-467f3efab36a"
+                        "value": "8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441"
                     }
                 ]
             }
@@ -117,13 +117,13 @@
     },
     "created": [
         {
-            "value": 1503414645,
+            "value": 1503935593,
             "lang": "zxx"
         }
     ],
     "changed": [
         {
-            "value": 1503414645,
+            "value": 1503935593,
             "lang": "zxx"
         }
     ],
@@ -141,7 +141,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1503414645
+            "value": 1503935593
         }
     ],
     "revision_translation_affected": [
@@ -158,12 +158,12 @@
     ],
     "field_end_at": [
         {
-            "value": "2017-08-22T17:09:02"
+            "value": "2017-08-28T17:50:48"
         }
     ],
     "field_start_at": [
         {
-            "value": "2017-08-22T15:09:02"
+            "value": "2017-08-28T15:50:48"
         }
     ],
     "field_venue_lat": [

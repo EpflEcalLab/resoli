@@ -100,6 +100,30 @@ class EventManager {
   }
 
   /**
+   * Get all events.
+   *
+   * @param Drupal\node\NodeInterface $activity
+   *   The activity which we want the retrieve futur events.
+   *
+   * @return Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Oterwhise an empty array.
+   */
+  public function getAll(NodeInterface $activity) {
+    // Get every activity that belongs to the current community.
+    $query = $this->queryFactory->get('node')
+      ->condition('type', 'event')
+      ->condition('field_activity', $activity->id());
+
+    $nids = $query->execute();
+    $events = NULL;
+    if ($nids) {
+      $events = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $events;
+  }
+
+  /**
    * Create an Event .
    *
    * @param int $title
@@ -160,6 +184,41 @@ class EventManager {
       'field_venue_lat'     => $venue_lat,
       'field_venue_long'    => $venue_long,
     ]);
+
+    $event->save();
+    return $event;
+  }
+
+  /**
+   * Update an Event.
+   *
+   * Only update given fields.
+   *
+   * @param \Drupal\node\NodeInterface $event
+   *   The event to update.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
+   *   The start date.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
+   *   The end date.
+   * @param array $fields
+   *   The fields to update with the new value.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The updated activity.
+   */
+  public function update(NodeInterface $event, DrupalDateTime $date_start, DrupalDateTime $date_end, array $fields) {
+    // Change timezone for storage.
+    $date_start->setTimezone(new \DateTimeZone('UTC'));
+    $date_end->setTimezone(new \DateTimeZone('UTC'));
+
+    $event->set('field_start_at', $date_start->format(DATETIME_DATETIME_STORAGE_FORMAT));
+    $event->set('field_end_at', $date_end->format(DATETIME_DATETIME_STORAGE_FORMAT));
+
+    foreach ($fields as $key => $value) {
+      if ($event->hasField($key)) {
+        $event->set($key, $value);
+      }
+    }
 
     $event->save();
     return $event;

@@ -26,18 +26,19 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
 
     $form['forget'] = [
       '#type'  => 'fieldset',
-      '#title' => t('qs_auth.forget_pass_form.title'),
+      '#title' => t('qs_auth.form.pass.title'),
     ];
 
     $form['forget']['name'] = $form['name'];
     unset($form['name']);
 
-    $form['forget']['name']['#title'] = t('qs_auth.forget_pass_form.name.label');
+    $form['forget']['name']['#title'] = t('qs_auth.form.pass.name.label');
     $form['forget']['name']['#attributes']['autocomplete'] = "off";
-    $form['forget']['name']['#description'] = t('qs_auth.forget_pass_form.name.description');
-    $form['forget']['name']['#placeholder'] = t('qs_auth.forget_pass_form.name.placeholder');
+    $form['forget']['name']['#attributes']['autofocus'] = "autofocus";
+    $form['forget']['name']['#description'] = t('qs_auth.form.pass.name.description');
+    $form['forget']['name']['#description'] = t('qs_auth.form.pass.name.description');
 
-    $form['actions']['submit']['#value'] = t('qs_auth.forget_pass_form.submit');
+    $form['actions']['submit']['#value'] = t('qs.form.submit');
     $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];
   }
 
@@ -52,6 +53,6 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
     $form['reset']['message'] = $form['message'];
     unset($form['message']);
 
-    $form['actions']['submit']['#value'] = t('qs_auth.pass_reset_form.submit');
+    $form['actions']['submit']['#value'] = t('qs.form.submit');
   }
 }

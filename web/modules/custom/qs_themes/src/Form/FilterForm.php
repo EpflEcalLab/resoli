@@ -74,12 +74,15 @@ class FilterForm extends FormBase {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
 
     // Get all themes for options.
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
-    foreach ($themes as $community) {
-      $options[$community->tid->value] = $community->name->value;
+    foreach ($themes as $theme) {
+      $options[$theme->tid->value] = $theme->name->value . '|' . $theme->field_icon->value;
     }
 
     // Get all selected themes for options.
@@ -89,11 +92,25 @@ class FilterForm extends FormBase {
       '#required'      => FALSE,
       '#options'       => $options,
       '#default_value' => $filtered_themes,
+      '#theme_wrappers' => [
+        'checkboxes__buttons',
+      ],
+      '#attributes' => [
+        'variant' => 'button',
+        'data-toggle' => 'buttons',
+        'no_form_group' => TRUE,
+      ],
     ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#value' => $this->t('qs_themes.filter_form.submit'),
+      '#attributes' => [
+        'modal' => TRUE,
+        'outline' => TRUE,
+        'icon' => 'check',
+        'icon_left' => TRUE,
+      ],
     ];
 
     return $form;

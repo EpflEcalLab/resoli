@@ -65,7 +65,10 @@
     description_display != 'before' ? 'form-text',
   ]
 %}
+{% if not element['#attributes'].no_form_group %}
 <div{{ attributes.addClass(classes) }} {% if element['#attributes']['required'] %}data-required{% endif %}>
+{% endif %}
+
   {% if label_display in ['before', 'invisible'] %}
     {% if type != 'file' %}
     {{ label }}
@@ -83,7 +86,7 @@
   {% if suffix is not empty %}
     <span class="field-suffix">{{ suffix }}</span>
   {% endif %}
-  {% if label_display == 'after' and type != 'radio' %}
+  {% if label_display == 'after' and type != 'radio' and type != 'checkbox' %}
     {{ label }}
   {% endif %}
   {% if element['#error'] %}
@@ -96,4 +99,7 @@
       {{ description.content }}
     </small>
   {% endif %}
+
+{% if not element['#attributes'].no_form_group %}
 </div>
+{% endif %}

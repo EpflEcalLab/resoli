@@ -1,3 +1,16 @@
-Blocks XY with toggle for modal form
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch demo modal
+</button>
+<div class="modal fade" id="exampleModalLong">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content bg-primary">
+      <div class="modal-header justify-content-center">
+        <h4 class="modal-title text-center">Choisissez un ou plusieurs thèmes qui correspondent à vos intérêts!</h4>
+      </div>
+      {{ bamboo_render_form('qs_themes', 'FilterForm') }}
+    </div>
+  </div>
+</div>
 
-{{ bamboo_render_form('qs_themes', 'FilterForm') }}
+
+

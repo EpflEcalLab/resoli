@@ -1,0 +1,26 @@
+@charset 'utf-8';
+
+.modal-dialog {
+  margin-bottom: 5vh;
+}
+
+.modal-header {
+  margin-bottom: ($spacer * 2);
+  flex-shrink: 0;
+}
+
+.modal-content {
+  max-height: 85vh;
+}
+
+.modal-title {
+  font-weight: $font-weight-normal;
+}
+
+.modal-body {
+  overflow-y: scroll;
+}
+
+.modal-footer {
+  flex-shrink: 0;
+}

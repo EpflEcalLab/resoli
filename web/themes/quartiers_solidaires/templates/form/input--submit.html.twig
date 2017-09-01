@@ -15,10 +15,15 @@
 {%
   set classes = [
     'btn',
-    'btn-primary',
-     icon ? 'btn-icon btn-icon-right',
+    attributes.outline ? 'btn-outline-primary btn-outline-invert' : 'btn-primary',
+    icon ? 'btn-icon',
+    not attributes.icon_left ? 'btn-icon-right',
   ]
 %}
+
+{% if attributes.modal %}
+<div class="modal-footer justify-content-center">
+{% endif %}
 
 {% if not icon %}
   <input{{ attributes.addClass(classes) }} />
@@ -29,3 +34,7 @@
   </button>
 {% endif %}
 {{ children }}
+
+{% if attributes.modal %}
+</div>
+{% endif %}

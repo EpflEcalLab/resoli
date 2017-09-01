@@ -1,0 +1,36 @@
+@charset 'utf-8';
+
+.checkbox {
+  &.btn {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: $font-weight-normal;
+
+    @include icon-size(50px);
+
+    svg {
+      fill: transparent;
+    }
+  }
+
+  &.active {
+    .icon {
+      color: $white;
+
+      svg {
+        fill: $body-color;
+      }
+    }
+  }
+
+  .bg-primary &.active {
+    .icon {
+      color: theme-color('primary');
+
+      svg {
+        fill: $white;
+      }
+    }
+  }
+}

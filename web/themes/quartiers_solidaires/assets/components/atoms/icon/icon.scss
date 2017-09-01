@@ -31,3 +31,13 @@
     height: $icon-size-base * 1.2;
   }
 }
+
+.icon-xl {
+  width: $icon-size-base * 3;
+  height: $icon-size-base * 3;
+
+  svg {
+    width: $icon-size-base * 3;
+    height: $icon-size-base * 3;
+  }
+}

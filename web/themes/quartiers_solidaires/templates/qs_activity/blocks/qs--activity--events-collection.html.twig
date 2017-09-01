@@ -1,3 +1,80 @@
-{% for event in variables.events %}
-  {{ event.title.value }}
-{% endfor %}
+{% if variables.events %}
+  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+  <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+    {% for key, event in variables.events %}
+      <li class="card card-list-item">
+        <a
+          data-toggle="collapse"
+          data-parent="#events-accordion"
+          href="#collapse-{{ key }}"
+          class="card-pill collapsed"
+          role="tab"
+          aria-expanded="false"
+          aria-controls="collapse-{{ key }}"
+        >
+          <span class="card-pill-icon">
+            {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
+          </span>
+          <span class="card-pill-title">
+            <time datetime="{{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
+              {{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'j F Y') }}
+            </time>
+            <span class="d-none d-sm-inline">
+              <time datetime="{{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'h:i') }}">
+                {{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'h:i') }}
+              </time>
+              - <time datetime="{{ event.field_end_at.value|bamboo_i18n_format_date('custom', 'h:i') }}">
+                {{ event.field_end_at.value|bamboo_i18n_format_date('custom', 'h:i') }}
+              </time>
+            </span>
+          </span>
+
+          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.event.readmore'|t }}">
+             {{ macros.icon('look') }}
+            <span class="d-none d-md-inline">{{ 'qs.event.readmore'|t }}</span>
+          </span>
+        </a>
+        <div class="collapse" id="collapse-{{ key }}" role="tabpanel">
+
+          <div class="card-body pb-0 text-center">
+
+            <h4 class="card-title">{{ event.label }}</h4>
+            <div class="card-text">
+              {{ event.body.value|raw }}
+            </div>
+
+            <div class="card-actions row">
+              <div class="col-sm-6 mb-3">
+                <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+                  {{ macros.icon('register') }}
+                  {{ 'qs.event.register'|t }}
+                </button>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+                  {{ macros.icon('user') }}
+                  {{ 'qs.event.contact'|t }}
+                </button>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+                  {{ macros.icon('meeting') }}
+                  {{ 'qs.event.location'|t }}
+                </button>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <span class="badge badge-pill badge-icon badge-white d-block">
+                  {{ macros.icon('money') }}
+                  contribution asdf
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

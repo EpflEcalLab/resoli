@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - qs_menu
+    - system
   theme:
     - quartiers_solidaires
 id: previousnavigation
@@ -17,4 +18,9 @@ settings:
   label: 'Previous Navigation'
   provider: qs_menu
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/authentication/*\r\n/user/*"
+    negate: true
+    context_mapping: {  }

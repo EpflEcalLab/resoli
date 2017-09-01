@@ -100,9 +100,8 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       return $render;
     }
 
-    $variables['community'] = $community;
-
-    $variables['menu'] = [
+    $render['#variables']['community'] = $community;
+    $render['#variables']['menu'] = [
       'activities' => [
         'label' => $this->t('qs_menu.links.activities'),
         'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [

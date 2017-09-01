@@ -73,15 +73,15 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build($params = []) {
-    $variables = ['filtred' => NULL];
+    $variables = ['filtered' => NULL];
 
     // The request should be took at the latest moment, avoid it on constructor.
     $master_request = $this->requestStack->getMasterRequest();
 
-    $filtred_themes = $master_request->query->get('themes');
+    $filtered_themes = $master_request->query->get('themes');
 
-    if ($filtred_themes) {
-      $variables['filtred'] = $this->termStorage->loadMultiple($filtred_themes);
+    if ($filtered_themes) {
+      $variables['filtered'] = $this->termStorage->loadMultiple($filtered_themes);
     }
 
     return [

@@ -12,7 +12,7 @@
 #}
 {% set labelIcon = element['#title']|split('|') %}
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-<label class="btn checkbox">
+<label class="btn checkbox {{ attributes.checked ? 'active' }}">
   {{ macros.icon("theme_#{labelIcon|last}_o") }}
   <input{{ attributes }} />
   {{ labelIcon|first }}

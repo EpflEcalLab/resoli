@@ -1,3 +1,4 @@
 {% for event in variables.events %}
   {{ event.title.value }}
+  <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}">{% trans %}qs_activity.events.dashboard.title{% endtrans %}</a>
 {% endfor %}

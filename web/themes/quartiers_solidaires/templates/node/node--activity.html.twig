@@ -3,6 +3,10 @@
 {% block node_body %}
 {{ node.title.value }}
 
+<hr>
+<a href="{{ path('qs_activity.activities.dashboard', {community: node.field_community.target_id, activity: node.nid.value}) }}">{% trans %}qs_activity.activity.dashboard{% endtrans %}</a>
+
+<hr>
 {{ bamboo_render_block('qs_activity_events_collection_block') }}
 {% endblock %}
 

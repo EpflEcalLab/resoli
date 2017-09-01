@@ -5,12 +5,12 @@ User page
 <hr>
 Member of:
 
-{{ dump(variables.communities) }}
+{{ dump(variables.communities|keys) }}
 <hr>
 
 Pending of
 
-{{ dump(variables.pending) }}
+{{ dump(variables.pending|keys) }}
 
 <hr>
 <a href="{{ path('qs_auth.communities.apply') }}">{% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}

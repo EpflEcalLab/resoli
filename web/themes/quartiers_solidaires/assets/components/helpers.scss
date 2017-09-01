@@ -27,9 +27,11 @@
 
 // Background helpers
 @include bg-variant('.bg-blue', $blue);
-@include bg-variant('.bg-primary', color("primary-light"));
+@include bg-variant('.bg-primary', color("primary"));
 @include bg-variant('.bg-primary-light', color("primary-light"));
 
+// Light colors on colored backgrounds
+.bg-secondary,
 .bg-blue,
 .bg-primary {
   color: color("light");
@@ -42,3 +44,14 @@
 .bg-gradient {
   background-image: linear-gradient(to top, $purple-400, #934bcb, $blue, #66d4ea, #5cdac2);
 }
+
+.fullpage-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+// Text helpers
+@include text-emphasis-variant('.text-dark', color("dark"));
+@include text-emphasis-variant('.text-gray', $gray-700);

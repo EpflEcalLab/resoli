@@ -15,8 +15,50 @@ settings:
       value: none
       label: None
     -
-      value: run
-      label: Run
+      value: activitescreatrices
+      label: 'Activités Créatrices'
+    -
+      value: boireunpot
+      label: 'Boire Un Pot'
+    -
+      value: conferences
+      label: Conférences
+    -
+      value: cuisine
+      label: Cuisine
+    -
+      value: culture
+      label: Culture
+    -
+      value: divers
+      label: Divers
+    -
+      value: enpleinair
+      label: 'En Plein Air'
+    -
+      value: entraide
+      label: Entraide
+    -
+      value: informatique
+      label: Informatique
+    -
+      value: intergenerationnel
+      label: Intergénérationnel
+    -
+      value: jeuxetloisirs
+      label: 'Jeux Et Loisirs'
+    -
+      value: langues
+      label: Langues
+    -
+      value: manifestations
+      label: Manifestations
+    -
+      value: mouvementsetbienetre
+      label: 'Mouvements Et Bien-être'
+    -
+      value: rencontresthematiques
+      label: 'Rencontres Thématiques'
   allowed_values_function: ''
 module: options
 locked: false

@@ -5,7 +5,6 @@ namespace Drupal\qs_themes\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
@@ -18,17 +17,10 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  *
  * @Block(
  *   id = "qs_themes_filter_block",
- *   admin_label = @Translation("Themes Filter block"),
+ *   admin_label = @Translation("Themes Filter"),
  * )
  */
 class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
-  /**
-   * The current active user.
-   *
-   * @var \Drupal\Core\Session\AccountProxyInterface
-   */
-  protected $currentUser;
-
   /**
    * Request stack that controls the lifecycle of requests.
    *
@@ -46,8 +38,8 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccountProxyInterface $currentUser, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager) {
-    $this->currentUser = $currentUser;
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->requestStack = $request_stack;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
   }
@@ -58,12 +50,9 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        // Load the service required to construct this class.
         $configuration,
         $plugin_id,
         $plugin_definition,
-        // Load customs services used in this class.
-        $container->get('current_user'),
         $container->get('request_stack'),
         $container->get('entity_type.manager')
     );
@@ -73,15 +62,15 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build($params = []) {
-    $variables = ['filtred' => NULL];
+    $variables = ['filtered' => NULL];
 
     // The request should be took at the latest moment, avoid it on constructor.
     $master_request = $this->requestStack->getMasterRequest();
 
-    $filtred_themes = $master_request->query->get('themes');
+    $filtered_themes = $master_request->query->get('themes');
 
-    if ($filtred_themes) {
-      $variables['filtred'] = $this->termStorage->loadMultiple($filtred_themes);
+    if ($filtered_themes) {
+      $variables['filtered'] = $this->termStorage->loadMultiple($filtered_themes);
     }
 
     return [

@@ -38,28 +38,26 @@
  * @see html.html.twig
  */
 #}
-<div class="">
+{% if page.header %}
+<header role="banner">
+    {{ page.header }}
+</header>
+{% endif %}
+{% block header %}{% endblock %}
 
-    <header role="banner">
-        {{ page.header }}
-    </header>
-    {% block header %}{% endblock %}
+{{ page.messages }}
 
-    {{ page.messages }}
+<main role="main">
+    <a id="main-content" tabindex="-1"></a>
+    {% block content %}{{ page.content }}{% endblock %}
+</main>
 
-    {{ page.breadcrumb }}
+{% if page.floating %}
+  {{ page.floating }}
+{% endif %}
 
-    <main role="main">
-        <a id="main-content" tabindex="-1"></a>
-        <div class="container">
-            {% block content %}{{ page.content }}{% endblock %}
-        </div>{# /.layout-content #}
-    </main>
-
-    {% if page.footer %}
-        <footer role="contentinfo">
-            {{ page.footer }}
-        </footer>
-    {% endif %}
-
-</div>{# /.layout-container #}
+{% if page.footer %}
+    <footer role="contentinfo">
+        {{ page.footer }}
+    </footer>
+{% endif %}

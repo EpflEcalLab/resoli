@@ -33,9 +33,9 @@ function qs_activity_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--activity--events-collection',
     ],
-    'qs_activity_btn_activity_add_block' => [
+    'qs_activity_floating_actions_buttons_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--btn-activity-add',
+      'template'  => 'qs--activity--floating-actions-buttons',
     ],
 
   ];

@@ -21,6 +21,8 @@ trait InlineErrorFormTrait {
   public static function applyErrorsInline(array &$form, FormStateInterface $form_state) {
     // If validation errors, add inline errors.
     if ($errors = $form_state->getErrors()) {
+      $form['#validated'] = TRUE;
+
       // Add error to fields using Symfony Accessor.
       $accessor = PropertyAccess::createPropertyAccessor();
       foreach ($errors as $field_accessor => $error) {

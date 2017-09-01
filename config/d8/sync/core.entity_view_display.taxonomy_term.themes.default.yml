@@ -7,25 +7,18 @@ dependencies:
     - taxonomy.vocabulary.themes
   module:
     - options
-    - text
 id: taxonomy_term.themes.default
 targetEntityType: taxonomy_term
 bundle: themes
 mode: default
 content:
-  description:
-    label: hidden
-    type: text_default
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   field_icon:
-    weight: 1
-    label: above
+    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_default
+    type: list_key
     region: content
 hidden:
+  description: true
   langcode: true

@@ -1,0 +1,5 @@
+<?php
+
+function quartiers_solidaires_theme_suggestions_taxonomy_term_alter(&$suggestions, $vars, $hook) {
+  $suggestions[] = $suggestions[0] . '__' . $vars['elements']['#view_mode'];
+}

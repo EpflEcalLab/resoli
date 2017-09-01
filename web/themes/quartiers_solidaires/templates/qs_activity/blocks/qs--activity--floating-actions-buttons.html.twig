@@ -1,0 +1,7 @@
+{% if variables.community and variables.community_has_write_access %}
+  <a href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">add activity</a>
+{% endif %}
+
+{% if variables.activity and variables.community_has_supervisor_access %}
+  <a href="">Manage community</a>
+{% endif %}

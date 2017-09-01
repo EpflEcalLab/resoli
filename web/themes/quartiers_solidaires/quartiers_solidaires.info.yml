@@ -18,4 +18,5 @@ regions:
   messages: Messages
   pageTitle: Page Title
   content: Content
+  floating: Floating
   footer: Footer

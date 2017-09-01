@@ -13,6 +13,7 @@
 {%
   set classes = [
     attributes.type != 'checkbox' and attributes.type != 'radio' ? 'form-control',
+    element['#error'] ? 'is-invalid'
   ]
 %}
 {%

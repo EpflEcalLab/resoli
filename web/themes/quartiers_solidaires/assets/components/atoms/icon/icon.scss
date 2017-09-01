@@ -21,3 +21,13 @@
     }
   }
 }
+
+.icon-lg {
+  width: $icon-size-base * 1.2;
+  height: $icon-size-base * 1.2;
+
+  svg {
+    width: $icon-size-base * 1.2;
+    height: $icon-size-base * 1.2;
+  }
+}

@@ -63,13 +63,23 @@ class AccountController extends ControllerBase {
    * This page is shown when the user access to a community which he previously
    * applied but which he's not a certified member.
    * He must be reviewed by a Manager of this community.
-   *
-   * @TODO: Code the page with link of community, appliance link,
-   * status of pending appliance & membership.
    */
   public function approval(TermInterface $community) {
-    dump($community);
-    return ['#markup' => 'approval'];
+    $variables['community'] = $community;
+
+    return [
+      '#theme' => 'qs_auth_approval_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+        ],
+        'tags' => [
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'privilege_list:privilege',
+        ],
+      ],
+    ];
   }
 
   /**

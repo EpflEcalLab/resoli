@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+{% set classes = [
+  'form',
+  element['#validated'] ? 'was-validated',
+  'my-auto',
+] %}
+
+<div class="bg-secondary">
+  <div class="container fullpage-wrapper py-4">
+
+    {% if element['#top_links'] %}
+    <div class="row justify-content-between">
+      {% for path, text in element['#top_links'] %}
+        <a class="btn btn-outline-secondary btn-outline-invert" href="{{ url(path) }}">{{ text }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row flex-column justify-content-center my-auto">
+      <form{{ attributes.addClass(classes) }}>
+        <div class="row">
+           <div class="col-md-10 col-lg-8 mx-auto">{{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto tab-content d-flex flex-column">{{ children }}</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

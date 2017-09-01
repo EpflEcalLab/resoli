@@ -1,15 +1,37 @@
-{% for activity in variables.activities %}
-  {{ activity.nid.value }} <br>
-  {{ activity.title.value }}
-
-  <br> <br>
-  <strong>Next Event</strong> <br>
-  {% set event = variables.events[activity.nid.value] %}
-  {{ event.nid.value }} <br>
-  {{ event.title.value }} <br>
-  {{ event.field_start_at.value }} UTC
-  <hr>
-{% endfor %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set currentTheme = null %}
 
 {{ bamboo_render_block('qs_themes_filter_block') }}
-{{ bamboo_render_block('qs_activity_btn_activity_add_block') }}
+
+
+{# Block with current search filters #}
+<div class="container">
+  <p>Voici les activités à COMMUNITY, par date, pour tous les thèmes.</p>
+</div>
+
+{% if variables.activities %}
+  <div class="container my-5">
+    <div class="row">
+      {% for activity in variables.activities %}
+       {% set event = variables.events[activity.nid.value] %}
+
+       {# Print the theme header if we are on the next one #}
+       {% if (activity.field_theme.target_id != currentTheme) %}
+        {% set currentTheme = activity.field_theme.target_id %}
+        {% if loop.index > 1 %}
+          </div>
+          <div class="row">
+        {% endif %}
+          <div class="col-12 sticky-top bg-white mb-2">
+            {{ bamboo_render_entity('taxonomy_term', activity.field_theme.target_id, 'teaser') }}
+          </div>
+       {% endif %}
+
+        <div class="col-sm-6 col-lg-4 d-flex">
+          {% include "@quartiers_solidaires/node/node--activity--teaser.html.twig" with {node: activity, event: event} %}
+        </div>
+
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

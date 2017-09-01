@@ -1,0 +1,7 @@
+{% if variables.community and variables.community_has_write_access %}
+  <a href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">{% trans %}qs_activity.floating.add.activity{% endtrans %}</a>
+{% endif %}
+
+{% if variables.activity and variables.community_has_supervisor_access %}
+  <a href="">{% trans %}qs_activity.floating.supervisor.community{% endtrans %}</a>
+{% endif %}

@@ -98,7 +98,7 @@
   @each $color, $value in $theme-colors {
     &.btn-outline-#{$color} {
       .icon svg {
-        color: theme-color($color);
+        color: $value;
       }
     }
   }
@@ -158,6 +158,11 @@
   @include hover {
     color: $white;
     background-color: rgba($white, 0.2);
+    border-color: $white;
+  }
+
+  &[class*=btn-outline-] .icon svg {
+    color: $white;
   }
 
   &:focus,

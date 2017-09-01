@@ -10,6 +10,9 @@
  * @see template_preprocess_input()
  */
 #}
+{% if attributes.variant == 'button' %}
+  {% include "input--radio--button.html.twig" %}
+{% else %}
 <label class="custom-control custom-radio">
   {%
     set classes = [
@@ -20,3 +23,4 @@
   <span class="custom-control-indicator"></span>
   <span class="custom-control-description"> {{ element['#title'] }}</span>
 </label>
+{% endif %}

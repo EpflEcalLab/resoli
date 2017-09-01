@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+{% set classes = [
+  'form-multistep',
+  element['#validated'] ? 'was-validated',
+] %}
+
+<div class="bg-blue">
+  <div class="container fullpage-wrapper py-4">
+
+    <form{{ attributes.addClass(classes) }}>
+      {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}
+      <div class="row">
+        <div class="col tab-content d-flex flex-column">{{ children }}</div>
+      </div>
+    </form>
+
+  </div>
+</div>
+

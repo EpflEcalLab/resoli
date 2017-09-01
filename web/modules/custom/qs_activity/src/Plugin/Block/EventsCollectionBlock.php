@@ -16,7 +16,7 @@ use Drupal\qs_activity\Service\EventManager;
  *
  * @Block(
  *   id = "qs_activity_events_collection_block",
- *   admin_label = @Translation("Button activity add block"),
+ *   admin_label = @Translation("Collection of Events by Activity"),
  * )
  */
 class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -46,6 +46,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManger $privilege_manager, CurrentRouteMatch $route, EventManager $event_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->privilegeManger = $privilege_manager;
     $this->route           = $route;
     $this->eventManager    = $event_manager;

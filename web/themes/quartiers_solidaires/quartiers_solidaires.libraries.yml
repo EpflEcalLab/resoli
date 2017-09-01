@@ -3,6 +3,8 @@ global-styling:
     theme:
       build/css/base.css: {}
   js:
+    build/js/vendors.bundle.js: {}
+    build/js/app.bundle.js: {}
     build/js/vendors.min.js: {}
   dependencies:
     - core/jquery

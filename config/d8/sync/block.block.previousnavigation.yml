@@ -1,0 +1,26 @@
+uuid: f90a47d4-40cf-480a-a734-bb7d946b3f0e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - qs_menu
+    - system
+  theme:
+    - quartiers_solidaires
+id: previousnavigation
+theme: quartiers_solidaires
+region: header
+weight: -3
+provider: null
+plugin: qs_menu_previous_block
+settings:
+  id: qs_menu_previous_block
+  label: 'Previous Navigation'
+  provider: qs_menu
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/authentication/*\r\n/user/*"
+    negate: true
+    context_mapping: {  }

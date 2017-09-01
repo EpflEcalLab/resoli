@@ -16,7 +16,7 @@ stylesheets-remove:
 regions:
   header: Header
   messages: Messages
-  breadcrumb: Breadcrumb
   pageTitle: Page Title
   content: Content
+  floating: Floating
   footer: Footer

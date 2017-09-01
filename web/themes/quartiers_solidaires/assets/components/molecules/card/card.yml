@@ -3,6 +3,7 @@ name: card
 variants:
   - list
   - list-simple
+  - tile
 notes: |
   The card component is almost always beginning with a `.card-pill` header. The pill can contain a Flag component to indicate a status.
 

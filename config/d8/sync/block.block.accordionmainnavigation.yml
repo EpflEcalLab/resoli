@@ -1,0 +1,26 @@
+uuid: 795dc6ce-9aa8-4521-a7bd-3aed0b9a64dd
+langcode: fr
+status: true
+dependencies:
+  module:
+    - qs_menu
+    - system
+  theme:
+    - quartiers_solidaires
+id: accordionmainnavigation
+theme: quartiers_solidaires
+region: header
+weight: -2
+provider: null
+plugin: qs_menu_navigation_block
+settings:
+  id: qs_menu_navigation_block
+  label: 'Accordion Main Navigation'
+  provider: qs_menu
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/authentication/*\r\n/user/*"
+    negate: true
+    context_mapping: {  }

@@ -28,7 +28,7 @@ qs_activity.activities.form.add:
         community:
           type: entity:taxonomy_term
 
-# Activities dashboard page - links of forms for CRUD oprations
+# Activities dashboard page - links of forms for CRUD operations
 qs_activity.activities.dashboard:
     path: '/activities/{activity}/dashboard'
     defaults:
@@ -118,7 +118,7 @@ qs_activity.events.form.add:
         activity:
           type: entity:node
 
-# Events dashboard page - links of forms for CRUD oprations
+# Events dashboard page - links of forms for CRUD operations
 qs_activity.events.dashboard:
     path: '/events/{event}/dashboard'
     defaults:

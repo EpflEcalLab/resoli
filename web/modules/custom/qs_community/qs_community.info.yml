@@ -1,0 +1,10 @@
+name: qs_community
+type: module
+description: Communities
+core: 8.x
+package: Quartiers Solidaires
+
+dependencies:
+  - drupal:qs_site
+  - drupal:qs_acl
+  - drupal:qs_auth

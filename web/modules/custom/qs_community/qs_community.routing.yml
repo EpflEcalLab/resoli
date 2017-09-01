@@ -1,0 +1,44 @@
+# Community dashboard page - links of forms for CRUD operations
+qs_community.dashboard:
+    path: '/communities/{community}/dashboard'
+    defaults:
+      _controller: '\Drupal\qs_community\Controller\DashboardController::dashboard'
+      _title: 'qs_community.dashboard.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_community\Controller\DashboardController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+## Collection of Accounts waiting for Approval by Community.
+qs_community.waiting_approval:
+    path: '/communities/{community}/waiting-approval'
+    defaults:
+      _controller: '\Drupal\qs_community\Controller\DashboardController::waitingApproval'
+      _title: 'qs_community.waiting_approval.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_community\Controller\DashboardController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+## Collection of Members by Community.
+qs_community.members:
+    path: '/communities/{community}/members'
+    defaults:
+      _controller: '\Drupal\qs_community\Controller\DashboardController::members'
+      _title: 'qs_community.members.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_community\Controller\DashboardController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term

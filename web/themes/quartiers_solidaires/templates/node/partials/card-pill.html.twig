@@ -1,0 +1,39 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<a
+  data-toggle="collapse"
+  data-parent="#events-accordion"
+  href="#collapse-{{ key }}"
+  class="card-pill collapsed"
+  role="tab"
+  aria-expanded="false"
+  aria-controls="collapse-{{ key }}"
+>
+
+  <span class="card-pill-icon">
+    {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
+  </span>
+
+  <span class="card-pill-title">
+    <time datetime="{{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
+      {{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'j F Y') }}
+    </time>
+    <span class="d-none d-sm-inline">
+      <time datetime="{{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'h:i') }}">
+        {{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'h:i') }}
+      </time>
+      - <time datetime="{{ event.field_end_at.value|bamboo_i18n_format_date('custom', 'h:i') }}">
+        {{ event.field_end_at.value|bamboo_i18n_format_date('custom', 'h:i') }}
+      </time>
+    </span>
+  </span>
+
+  <span
+    class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto"
+    aria-label="{{ 'qs.event.readmore'|t }}"
+  >
+    {{ macros.icon('look') }}
+    <span class="d-none d-md-inline">{{ 'qs.event.readmore'|t }}</span>
+  </span>
+
+</a>

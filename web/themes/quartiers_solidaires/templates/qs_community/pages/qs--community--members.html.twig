@@ -1,6 +1,7 @@
 <div class="container">
   <div class="text-center my-5">
     <h1>{% trans %}qs_community.members.title{% endtrans %}</h1>
+    <h2>{{ variables.community.name.value }}</h2>
   </div>
 
   {% if variables.members %}
@@ -57,6 +58,6 @@
     {% endfor %}
     </ul>
   {% else %}
-    <p>{% trans %}qs_community.members.waiting_approval{% endtrans %}</p>
+    <p>{% trans %}qs_community.members.empty{% endtrans %}</p>
   {% endif %}
 </div>

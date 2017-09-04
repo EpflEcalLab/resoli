@@ -284,6 +284,7 @@ class PrivilegeManger {
     // TODO: Add Filter block by name, firstname, lastname.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
 
+    $query->orderBy('users.created', 'ASC');
     $query->orderBy('users.name', 'ASC');
     $rows = $query->execute()->fetchAll();
 

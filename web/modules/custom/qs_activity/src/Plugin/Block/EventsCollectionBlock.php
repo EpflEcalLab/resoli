@@ -82,9 +82,9 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
 
     $activity = $this->route->getParameter('node');
     if ($activity) {
-      $variables['activity']   = $activity;
-      $privileges = $this->privilegeManger->fetchActive($activity);
-      $variables['events']     = $this->eventManager->getAllNext($activity);
+      $variables['activity'] = $activity;
+      $privileges            = $this->privilegeManger->fetchActive($activity);
+      $variables['events']   = $this->eventManager->getAllNext($activity);
 
       foreach ($privileges as $privilege) {
         $variables['privileges'][] = $privilege->privilege->value;

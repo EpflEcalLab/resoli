@@ -15,15 +15,15 @@ Feature: Community Alias
   @api
   Scenario: Logged as Manager of Lausanne, I can access to Lausanne list of members
     Given I am logged in as user "manager+lausanne"
-    When I am on "lausanne/members"
-    And the url should match "lausanne/members"
+    When I am on "lausanne/dashboard/members"
+    And the url should match "lausanne/dashboard/members"
     And the response status code should be 200
 
 ## Community - Collection  of Accounts waiting for Approval
   @api
   Scenario: Logged as Manager of Lausanne, I can access to Lausanne list of accounts waiting for approval
     Given I am logged in as user "manager+lausanne"
-    When I am on "lausanne/waiting-approval"
-    And the url should match "lausanne/waiting-approval"
+    When I am on "lausanne/dashboard/waiting-approval"
+    And the url should match "lausanne/dashboard/waiting-approval"
     And the response status code should be 200
 

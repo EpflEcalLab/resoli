@@ -16,9 +16,9 @@
   <nav class="navbar">
     {% for key, value in nav_items %}
     <a href="#" class="nav-item{{ loop.index == 2 ? ' active' }}">
-        {% include "@atoms/icon/icon.twig" with {icon: key ~ '-big'} %}
-        {{value}}
-      </a> {% endfor %}
+      {% include "@atoms/icon/icon.twig" with {icon: key ~ '-big'} %}
+      {{value}}
+    </a> {% endfor %}
   </nav>
   <div class="navbar-overlay"></div>
 </div>

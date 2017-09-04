@@ -1,20 +1,21 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set current_item = variables.current_menu_item %}
+
 <div class="navbar-container">
-  <button class="btn btn-outline-primary navbar-toggle" title="Afficher ou cacher le menu">
+  <button class="btn btn-outline-primary navbar-toggle{{ not current_item ? ' navbar-toggle-simple' }}" title="Afficher ou cacher le menu">
     {{ macros.icon('wheel') }}
   </button>
 
   <div class="navbar-current">
     <div class="navbar-filters">
-      {% for section in variables.menu if variables.route_name in section.activated_by %}
-
+      {% if current_item %}
         <button class="btn btn-primary btn-icon">
-          {{ macros.icon(section.icon) }}
+          {{ macros.icon(current_item.icon) }}
           <span class="sr-only">{{ 'qs.menu.current_page'|t }}</span>
-          {{ section.label }}
+          {{ current_item.label }}
         </button>
 
-        {% for key, link in section.links %}
+        {% for key, link in current_item.links %}
           {% set active = key == variables.route_name %}
           {% set classes = [
             'btn btn-outline-primary navbar-filter',
@@ -25,8 +26,7 @@
             {{ link.label }}
           </a>
         {% endfor %}
-
-      {% endfor %}
+      {% endif %}
     </div>
   </div>
 

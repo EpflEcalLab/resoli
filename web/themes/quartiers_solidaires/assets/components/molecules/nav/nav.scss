@@ -57,6 +57,13 @@
       transform: rotate(180deg);
     }
   }
+
+  // If we don't have a current path to display, remove the :after
+  body:not(.open) &.navbar-toggle-simple {
+    &:after {
+      content: none;
+    }
+  }
 }
 
 // The whole navbar component

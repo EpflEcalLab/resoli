@@ -34,6 +34,24 @@ Feature: Activitiy Forms Access
     When I am on "/fribourg/activities/add"
     And the response status code should be 403
 
+  @api
+  Scenario: Login as Multiple Privileges (Member of Fribourg & waiting approval Organizer for Fribourg), I can't access to Fribourg activities add form
+    Given I am logged in as user "member+fribourg+approval+organizer+fribourg"
+    When I am on "/fribourg/activities/add"
+    And the response status code should be 403
+
+  @api
+  Scenario: Login as Multiple Privileges (Member & Organizer of Fribourg), I can access to Fribourg activities add form
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/add"
+    And the response status code should be 200
+
+  @api
+  Scenario: Login as Multiple waiting approval (Member & Organizer for Fribourg), I can't access to Fribourg activities add form
+    Given I am logged in as user "approval+member+fribourg+approval+organizer+fribourg"
+    When I am on "/fribourg/activities/add"
+    And the response status code should be 403
+
 ## Dashboard
   @api
   Scenario: Logged as Manager of Lausanne, I can access to the Dashboard of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity

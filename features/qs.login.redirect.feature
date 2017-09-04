@@ -75,6 +75,24 @@ Feature: Login
     And the url should match "communities"
     And the response status code should be 200
 
+  @api
+  Scenario: Login as Multiple Privileges (Member of Fribourg & waiting approval Organizer for Fribourg) in the same community redirect him on the community page
+    Given I am logged in as user "member+fribourg+approval+organizer+fribourg"
+    And the url should match "fribourg/activities/theme"
+    And the response status code should be 200
+
+  @api
+  Scenario: Login as Multiple waiting approval (Member & Organizer for Fribourg) in the same community redirect him on the community approval page
+    Given I am logged in as user "approval+member+fribourg+approval+organizer+fribourg"
+    And the url should match "/authentication/approval/2"
+    And the response status code should be 200
+
+  @api
+  Scenario: Login as Multiple Privileges (Member & Organizer of Fribourg) in the same community redirect him on the community page
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    And the url should match "fribourg/activities/theme"
+    And the response status code should be 200
+
   # @api
   # Scenario: Login as Beginner redirect him on the onboarding page
   #   Given I am logged in as a user with the "beginner" role

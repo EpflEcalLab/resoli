@@ -3,7 +3,18 @@
 
 {# Block with current search filters #}
 <div class="container">
-  <p>Voici les activités à COMMUNITY, par date, pour tous les thèmes.</p>
+  <h1 class="text-center mt-5">
+    {%- set count = variables.themes|length -%}
+    {%- set themes_names = variables.themes|join(', ')|trim -%}
+    {%- set community_name = variables.community.name.value|trim -%}
+
+    {% if count >= 1 %}
+      {%- trans -%}qs.activity.theme.filters {{ community_name }} {{ themes_names }}.
+      {%- endtrans -%}
+    {% else %}
+      {%- trans -%}qs.activity.theme.filters {{ community_name }}.{%- endtrans -%}
+    {% endif %}
+  </h1>
 </div>
 
 {% if variables.activities %}

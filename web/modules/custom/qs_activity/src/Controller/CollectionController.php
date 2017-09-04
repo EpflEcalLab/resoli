@@ -11,6 +11,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\qs_activity\Service\EventManager;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * CollectionController.
@@ -32,6 +33,13 @@ class CollectionController extends ControllerBase {
   protected $nodeStorage;
 
   /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  protected $termStorage;
+
+  /**
    * The entity QS Activity Manager.
    *
    * @var \Drupal\qs_activity\Service\ActivityManager
@@ -46,13 +54,22 @@ class CollectionController extends ControllerBase {
   protected $eventManager;
 
   /**
+   * Request stack that controls the lifecycle of requests.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager, RequestStack $request_stack) {
     $this->acl             = $acl;
     $this->nodeStorage     = $entity_type_manager->getStorage('node');
+    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
     $this->activityManager = $activity_manager;
     $this->eventManager    = $event_manager;
+    $this->requestStack    = $request_stack;
   }
 
   /**
@@ -65,7 +82,8 @@ class CollectionController extends ControllerBase {
     $container->get('qs_acl.access_control'),
     $container->get('entity_type.manager'),
     $container->get('qs_activity.activity_manager'),
-    $container->get('qs_activity.event_manager')
+    $container->get('qs_activity.event_manager'),
+    $container->get('request_stack')
     );
   }
 
@@ -96,7 +114,19 @@ class CollectionController extends ControllerBase {
   public function themes(TermInterface $community) {
     // Query to retreive all activities by theme.
     $activities_nids = $this->activityManager->getThemed($community);
-    $variables = [];
+    $variables = ['community' => $community];
+
+    // The request should be took at the last moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
+    // Get filters themes.
+    $filtered_themes = $master_request->query->get('themes');
+    if ($filtered_themes) {
+      $themes = $this->termStorage->loadMultiple($filtered_themes);
+      foreach ($themes as $theme) {
+        $variables['themes'][] = $theme->getName();
+      }
+    }
 
     // From the activity before, get the only next events of each ones.
     $events = $this->eventManager->getNext($activities_nids);

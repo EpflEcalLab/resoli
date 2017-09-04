@@ -1,8 +1,62 @@
-Members
-<hr>
-<hr>
-{% for member in variables.members %}
-  {{ member.name.value }} <br>
-  {{ member.privileges|join(' ') }}
-  <hr>
-{% endfor %}
+<div class="container">
+  <div class="text-center my-5">
+    <h1>{% trans %}qs_community.members.title{% endtrans %}</h1>
+  </div>
+
+  {% if variables.members %}
+    {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+    <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
+    {% for member in variables.members %}
+      <li class="card card-list-item">
+        <a
+          data-toggle="collapse"
+          data-parent="#users-accordion"
+          href="#collapse-{{ loop.index0 }}"
+          class="card-pill collapsed"
+          role="tab"
+          aria-expanded="false"
+          aria-controls="collapse-{{ loop.index0 }}"
+        >
+          <span class="card-pill-icon">
+              {{ macros.icon('user') }}
+            </span>
+          <span class="card-pill-title">
+              {{ member.field_firstname.value }} {{ member.field_lastname.value }}
+          </span>
+          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+            {{ macros.icon('look') }}
+            <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
+          </span>
+        </a>
+
+        <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
+          <div class="card-body pb-0 text-center">
+
+            <h4 class="card-title">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
+
+            <div class="card-text">
+              <div class="d-flex">
+                <div class="btn-group" role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}">
+                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_members' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_member{% endtrans %}</a>
+                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_organizers' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_organizer{% endtrans %}</a>
+                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_managers' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_manager{% endtrans %}</a>
+                </div>
+                <a href="#" class="btn btn-white btn-outline-secondary">{% trans %}qs.roles.community_none{% endtrans %}</a>
+              </div>
+            </div>
+
+            <div class="card-actions d-flex justify-content-center">
+              <a href="mailto:{{ member.mail.value }}" class="btn btn-outline-secondary btn-icon btn-icon-left shadow-to-left">
+                <span class="icon" aria-hidden="true">{{ macros.icon('mail') }}</span>
+                {% trans %}qs.contact {{ member.field_firstname.value }}{% endtrans %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% trans %}qs_community.members.waiting_approval{% endtrans %}</p>
+  {% endif %}
+</div>

@@ -242,7 +242,7 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
           'community_members'    => new TranslatableMarkup('Community Member'),
             // Activity bundle privilege.
           'activity_organizers'  => new TranslatableMarkup('Activity Manager'),
-          'activity_maintainers' => new TranslatableMarkup('Activity Organizer'),
+          'activity_maintainers' => new TranslatableMarkup('Activity Maintainer'),
           'activity_members'     => new TranslatableMarkup('Activity Member'),
         ],
       ]);

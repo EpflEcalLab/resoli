@@ -15,4 +15,6 @@ Pending of
 <hr>
 <a href="{{ path('qs_auth.communities.apply') }}">{% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}
 <br>
+<a href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}">{% trans %}qs_supervisor.account.dashboard.edit{% endtrans %}
+<br>
 <a href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}

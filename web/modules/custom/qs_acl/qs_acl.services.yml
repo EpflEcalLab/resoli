@@ -4,4 +4,4 @@ services:
     arguments: ['@current_user', '@entity_type.manager', '@entity.query']
   qs_acl.privilege_manger:
     class: Drupal\qs_acl\Service\PrivilegeManger
-    arguments: ['@current_user', '@entity_type.manager', '@entity.query']
+    arguments: ['@current_user', '@entity_type.manager', '@entity.query', '@database']

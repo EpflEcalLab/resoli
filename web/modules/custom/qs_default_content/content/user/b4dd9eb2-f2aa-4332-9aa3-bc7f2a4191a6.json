@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/fr\/user\/9?_format=hal_json"
+            "href": "http:\/\/default\/fr\/user\/16?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
@@ -9,12 +9,12 @@
     },
     "uid": [
         {
-            "value": 9
+            "value": 16
         }
     ],
     "uuid": [
         {
-            "value": "0cebf08f-ec90-4684-b025-d0b4e39b4089"
+            "value": "b4dd9eb2-f2aa-4332-9aa3-bc7f2a4191a6"
         }
     ],
     "langcode": [
@@ -25,17 +25,17 @@
     ],
     "name": [
         {
-            "value": "member+fribourg+member+lausanne@antistatique.net"
+            "value": "member+fribourg+organizer+fribourg@antistatique.net"
         }
     ],
     "created": [
         {
-            "value": 1503057354
+            "value": 1504513492
         }
     ],
     "changed": [
         {
-            "value": 1503057354,
+            "value": 1504513492,
             "lang": "fr"
         }
     ],
@@ -47,17 +47,17 @@
     ],
     "field_firstname": [
         {
-            "value": "Larry"
+            "value": "Pierre"
         }
     ],
     "field_lastname": [
         {
-            "value": "Bambelle"
+            "value": "Affeu"
         }
     ],
     "pass": [
       {
-          "value": "member+fribourg+member+lausanne"
+          "value": "member+fribourg+organizer+fribourg"
       }
     ],
     "status": [

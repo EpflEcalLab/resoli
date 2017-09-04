@@ -15,6 +15,8 @@ function qs_default_content_privileges() {
 
 /**
  * Global function to create default privileges for communities.
+ *
+ * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_privileges_community() {
 
@@ -228,10 +230,87 @@ function qs_default_content_privileges_community() {
     'reviewer'  => 1,
   ]);
   $privilege->save();
+
+  // User 14: member+fribourg+approval+organizer+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 14: member+fribourg+approval+organizer+fribourg.
+    'user'      => 14,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 14: member+fribourg+approval+organizer+fribourg.
+    'user'      => 14,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_organizers',
+  ]);
+  $privilege->save();
+
+  // User 15: approval+member+fribourg+approval+organizer+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 15: approval+member+fribourg+approval+organizer+fribourg.
+    'user'      => 15,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 15: approval+member+fribourg+approval+organizer+fribourg.
+    'user'      => 15,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_organizers',
+  ]);
+  $privilege->save();
+
+  // User 16: member+fribourg+organizer+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 16: member+fribourg+organizer+fribourg.
+    'user'      => 16,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 16: member+fribourg+organizer+fribourg.
+    'user'      => 16,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_organizers',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
 }
 
 /**
  * Global function to create default privileges for activities.
+ *
+ * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_privileges_activities() {
   // @var \Drupal\Core\Entity\EntityTypeManagerInterface
@@ -314,4 +393,30 @@ function qs_default_content_privileges_activities() {
     'reviewer'  => 1,
   ]);
   $privilege->save();
+
+  // User 13: member+lausanne+manager+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 13: member+lausanne+manager+fribourg.
+    'user'      => 13,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 13: member+lausanne+manager+fribourg.
+    'user'      => 13,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_managers',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+
 }

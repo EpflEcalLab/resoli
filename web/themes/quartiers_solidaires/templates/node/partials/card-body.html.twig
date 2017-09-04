@@ -34,6 +34,12 @@
         {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
       </span>
     </div>
+    <div class="col-sm-6 mb-3">
+      <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-primary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
+        {{ macros.icon('meeting') }}
+        {{ 'qs.event.edit'|t }}
+      </a>
+    </div>
 
   </div>
 

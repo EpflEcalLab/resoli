@@ -19,17 +19,22 @@
 
       <span class="card-pill-title">
         <span>
-          {# @TODO add name of organizer here #}
+          {{ 'qs.event.contact'|t }}
         </span>
       </span>
 
     </div>
     <div class="card-body text-center">
 
-      <p class="card-text">
-        {# @TODO add name of organizer here #}
-         Le responsable de cet évènement est JOHN DOE. Vous pouvez le contacter par téléphone ou par email.
-      </p>
+      {% if event.field_contact_name.value %}
+        <p class="card-text">
+          {% trans %}qs.event.contact_description {{ event.field_contact_name.value }}{% endtrans %}
+          {% if event.field_contact_phone.value or event.field_contact_mail.value %}{{ 'qs.event.contact.you_can_contact'|t }}{% endif %}
+          {% if event.field_contact_phone.value %}{{ 'qs.event.contact.by_phone'|t }}{% endif %}
+          {% if event.field_contact_phone.value and event.field_contact_mail.value %}{{ 'qs.event.contact.or'|t }}{% endif %}
+          {% if event.field_contact_mail.value %}{{ 'qs.event.contact.by_email'|t }}{% endif %}
+        </p>
+      {% endif %}
 
       <div class="row">
         {% if event.field_contact_phone.value %}
@@ -61,6 +66,7 @@
     </div>
   </div>
 
+  {% if event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
     <div class="card-back card-secondary" id="map-{{ event.nid.value }}">
       <div class="card-pill">
 
@@ -92,7 +98,6 @@
 
       </div>
     </div>
-  {% if event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
   {% endif %}
 
 </li>

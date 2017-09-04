@@ -1,0 +1,19 @@
+uuid: 3613d581-9497-4b98-a42e-99988bdfdc8d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_name
+    - node.type.activity
+id: node.activity.field_contact_name
+field_name: field_contact_name
+entity_type: node
+bundle: activity
+label: 'Contact – Prénom et nom'
+description: 'Veuillez indiquer le nom de la personne de contact pour cette activité.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

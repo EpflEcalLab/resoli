@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.activity.field_community_access_story
     - field.field.node.activity.field_community_can_subscribe
     - field.field.node.activity.field_contact_mail
+    - field.field.node.activity.field_contact_name
     - field.field.node.activity.field_contact_phone
     - field.field.node.activity.field_contribution
     - field.field.node.activity.field_member_create_gallery
@@ -95,6 +96,14 @@ content:
     region: content
   field_contact_mail:
     weight: 107
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contact_name:
+    weight: 121
     label: above
     settings:
       link_to_entity: false

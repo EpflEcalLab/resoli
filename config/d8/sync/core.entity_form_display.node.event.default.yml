@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_activity
     - field.field.node.event.field_contact_mail
+    - field.field.node.event.field_contact_name
     - field.field.node.event.field_contact_phone
     - field.field.node.event.field_contribution
     - field.field.node.event.field_end_at
@@ -69,6 +70,7 @@ third_party_settings:
       label: Venue
     group_contact:
       children:
+        - field_contact_name
         - field_contact_phone
         - field_contact_mail
       parent_name: group_tabs
@@ -105,7 +107,15 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_contact_mail:
-    weight: 11
+    weight: 34
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_contact_name:
+    weight: 32
     settings:
       size: 60
       placeholder: ''
@@ -113,7 +123,7 @@ content:
     type: string_textfield
     region: content
   field_contact_phone:
-    weight: 10
+    weight: 33
     settings:
       size: 60
       placeholder: ''

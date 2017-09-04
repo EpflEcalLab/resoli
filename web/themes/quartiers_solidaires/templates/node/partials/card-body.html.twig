@@ -5,7 +5,15 @@
   <h4 class="card-title">{{ event.label }}</h4>
 
   <div class="card-text">
-    {{ event.body.value|raw }}
+    {# Body #}
+    {# User should have some privileges OR activity should allow community to access details #}
+    {% if variables.privileges is not empty or variables.activity.field_community_access_detail.value %}
+      {{ event.body.value|raw }}
+    {% else %}
+      <p>
+        {{ 'qs.event.not_accessible'|t }}
+      </p>
+    {% endif %}
   </div>
 
   <div class="card-actions row">
@@ -32,8 +40,9 @@
     {% endif %}
 
     {# Location button #}
+    {# User should have some privileges OR activity should allow community to access details #}
     <div class="col-sm-6 mb-3">
-      {% if event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
+      {% if variables.activity.field_community_access_detail.value and event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
       <a href="#map-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
         {{ macros.icon('meeting') }}
         {{ 'qs.event.location'|t }}
@@ -43,14 +52,14 @@
 
     {# Contribution #}
     {# User should be member of the activity OR activity should allow subscription to community members #}
-    {% if 'activity_members' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
     <div class="col-sm-6 mb-3">
+    {% if 'activity_members' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
       <span class="badge badge-pill badge-icon badge-white d-block">
         {{ macros.icon('money') }}
         {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
       </span>
-    </div>
     {% endif %}
+    </div>
 
     {# Edit button #}
     {# User should be organizer OR maintainer of the activity #}

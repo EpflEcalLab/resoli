@@ -1,6 +1,5 @@
 name: ACL Manager
-description: 'ACL Manager'
-package: Quartiers Solidaires
 type: module
-version: 1.0
+description: 'ACL Manager'
 core: 8.x
+package: Quartiers Solidaires

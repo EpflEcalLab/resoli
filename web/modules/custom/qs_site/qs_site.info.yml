@@ -1,9 +1,8 @@
 name: Quartiers Solidaires Site
-description: 'Site settings'
-package: Quartiers Solidaires
 type: module
-version: 1.0
+description: 'Site settings'
 core: 8.x
+package: Quartiers Solidaires
 
 dependencies:
   - drupal:qs_toolbar

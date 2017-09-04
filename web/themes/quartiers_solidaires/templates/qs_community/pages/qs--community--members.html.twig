@@ -37,8 +37,8 @@
             <h4 class="card-title">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
 
             <div class="card-text">
-              <div class="d-flex">
-                <div class="btn-group" role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}">
+              <div class="d-flex flex-wrap">
+                <div class="btn-group mb-3" role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}">
                   <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_members' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_member{% endtrans %}</a>
                   <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_organizers' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_organizer{% endtrans %}</a>
                   <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_managers' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_manager{% endtrans %}</a>

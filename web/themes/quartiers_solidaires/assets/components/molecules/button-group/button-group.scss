@@ -4,6 +4,8 @@
 $max-items: 5;
 
 .btn-group {
+  max-width: 100%;
+
   @include after-shadow(theme-color("secondary"));
 
   .btn {

@@ -84,8 +84,7 @@ class EventManager {
     // Get every activity that belongs to the current community.
     $query = $this->queryFactory->get('node')
       ->condition('type', 'event')
-      ->condition('field_start_at', $now, '>=')
-      ->condition('field_end_at', $now, '>=')
+      ->condition('field_end_at', $now, '>')
       ->condition('status', TRUE)
       ->condition('field_activity', $activity->id())
       ->sort('field_start_at', 'ASC');

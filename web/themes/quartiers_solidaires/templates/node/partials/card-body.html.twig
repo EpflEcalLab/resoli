@@ -1,0 +1,46 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="card-body pb-0 text-center">
+
+  <h4 class="card-title">{{ event.label }}</h4>
+
+  <div class="card-text">
+    {{ event.body.value|raw }}
+  </div>
+
+  <div class="card-actions row">
+
+    <div class="col-sm-6 mb-3">
+      <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+        {{ macros.icon('register') }}
+        {{ 'qs.event.register'|t }}
+      </button>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <a href="#contact-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
+        {{ macros.icon('user') }}
+        {{ 'qs.event.contact'|t }}
+      </a>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <a href="#map-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
+        {{ macros.icon('meeting') }}
+        {{ 'qs.event.location'|t }}
+      </a>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <span class="badge badge-pill badge-icon badge-white d-block">
+        {{ macros.icon('money') }}
+        {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
+      </span>
+    </div>
+    <div class="col-sm-6 mb-3">
+      <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-primary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
+        {{ macros.icon('meeting') }}
+        {{ 'qs.event.edit'|t }}
+      </a>
+    </div>
+
+  </div>
+
+</div>

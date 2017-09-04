@@ -1,4 +1,9 @@
-{% for event in variables.events %}
-  {{ event.title.value }}
-  <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}">{% trans %}qs_activity.events.dashboard.title{% endtrans %}</a>
-{% endfor %}
+{% if variables.events %}
+  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+  <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+    {% for key, event in variables.events %}
+      {% include "@quartiers_solidaires/node/card-list-item.html.twig" %}
+    {% endfor %}
+  </ul>
+{% endif %}

@@ -62,7 +62,7 @@
 // The whole navbar component
 .navbar-container {
   position: relative;
-  z-index: $zindex-dropdown;
+  z-index: $zindex-modal-backdrop;
   display: flex;
   flex-direction: column;
   align-items: center;

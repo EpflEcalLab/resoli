@@ -35,7 +35,7 @@
 
             <h4 class="card-title">{{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}</h4>
 
-            <div class="card-text">
+            <div class="card-text mb-4">
               {% if privilege.privilege.value == 'community_managers' %}
                 {% trans %}qs.community.waiting_approval.request.manger{% endtrans %}
               {% elseif privilege.privilege.value == 'community_organizers' %}

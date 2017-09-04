@@ -1,3 +1,5 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
 <div class="container">
   <div class="text-center my-5">
     <h1>{% trans %}qs_community.members.title{% endtrans %}</h1>
@@ -5,7 +7,6 @@
   </div>
 
   {% if variables.members %}
-    {% import "@quartiers_solidaires/macros.html.twig" as macros %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
     {% for member in variables.members %}
       <li class="card card-list-item">
@@ -46,9 +47,9 @@
               </div>
             </div>
 
-            <div class="card-actions d-flex justify-content-center">
+            <div class="card-actions d-flex justify-content-center mt-4 mb-3">
               <a href="mailto:{{ member.mail.value }}" class="btn btn-outline-secondary btn-icon btn-icon-left shadow-to-left">
-                <span class="icon" aria-hidden="true">{{ macros.icon('mail') }}</span>
+                {{ macros.icon('mail') }}
                 {% trans %}qs.contact {{ member.field_firstname.value }}{% endtrans %}
               </a>
             </div>

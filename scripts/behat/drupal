@@ -20,6 +20,7 @@ elif [ "$BEHAT_DATABASE" = "" ]
 then
   BEHAT_DATABASE="sqlite://localhost//tmp/development-qs.sqlite"
 fi
+echo "Database: $BEHAT_DATABASE"
 
 cd $scriptDir
 

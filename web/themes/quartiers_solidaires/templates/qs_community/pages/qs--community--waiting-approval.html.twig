@@ -2,7 +2,7 @@ Waiting Approval
 <hr>
 <hr>
 {% for privilege in variables.privileges %}
-  {{ privilege.user.entity.name.value }} <br>
-  {{ privilege.privilege.value }}
+  ({{ privilege.user.entity.uid.value }}) {{ privilege.user.entity.name.value }} <br>
+  ({{ privilege.id.value }}) {{ privilege.privilege.value }}
   <hr>
 {% endfor %}

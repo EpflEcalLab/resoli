@@ -285,9 +285,10 @@ function qs_default_content_privileges_community() {
     'entity'    => 2,
   // User 16: member+fribourg+organizer+fribourg.
     'user'      => 16,
-  // pending.
-    'status'    => NULL,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_members',
+    'reviewer'  => 1,
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -296,9 +297,10 @@ function qs_default_content_privileges_community() {
     'entity'    => 2,
   // User 16: member+fribourg+organizer+fribourg.
     'user'      => 16,
-  // pending.
-    'status'    => NULL,
-    'privilege' => 'community_organizers',
+  // approved.
+  'status'    => 1,
+  'privilege' => 'community_organizers',
+  'reviewer'  => 1,
   ]);
   $privilege->save();
 }

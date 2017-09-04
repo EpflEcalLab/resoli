@@ -228,6 +228,79 @@ function qs_default_content_privileges_community() {
     'reviewer'  => 1,
   ]);
   $privilege->save();
+
+  // User 14: member+fribourg+approval+organizer+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 14: member+fribourg+approval+organizer+fribourg.
+    'user'      => 14,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 14: member+fribourg+approval+organizer+fribourg.
+    'user'      => 14,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_organizers',
+  ]);
+  $privilege->save();
+
+  // User 15: approval+member+fribourg+approval+organizer+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 15: approval+member+fribourg+approval+organizer+fribourg.
+    'user'      => 15,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 15: approval+member+fribourg+approval+organizer+fribourg.
+    'user'      => 15,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_organizers',
+  ]);
+  $privilege->save();
+
+  // User 16: member+fribourg+organizer+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 16: member+fribourg+organizer+fribourg.
+    'user'      => 16,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 16: member+fribourg+organizer+fribourg.
+    'user'      => 16,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_organizers',
+  ]);
+  $privilege->save();
 }
 
 /**

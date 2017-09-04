@@ -22,7 +22,7 @@ class WaitingApprovalController extends ControllerBase {
    */
   private $acl;
 
-    /**
+  /**
    * The Privilege Manager.
    *
    * @var \Drupal\qs_acl\Service\PrivilegeManger

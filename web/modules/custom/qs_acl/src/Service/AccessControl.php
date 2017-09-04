@@ -272,7 +272,7 @@ class AccessControl {
    *
    * If the user has already one privilege it will alwayse return FALSE.
    * Accounts are referenced as waiting for Approval when it has
-   * none approved privilege(s) & only pending one(s) on the community
+   * none approved privilege(s) & only pending one(s) on the community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.

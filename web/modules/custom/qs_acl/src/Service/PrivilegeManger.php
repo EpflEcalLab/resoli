@@ -201,18 +201,18 @@ class PrivilegeManger {
    *  - community_organizers
    *  - community_managers.
    *
-   * @param Drupal\taxonomy\TermInterface $entity
+   * @param Drupal\taxonomy\TermInterface $community
    *   The Community Entity for the privilege.
    *
    * @return Drupal\Core\Session\AccountInterface[]
    *   A collection of members.
    */
-  public function fetchMembersWithPrivileges(EntityInterface $community) {
-  $query = $this->connection->select('privileges', 'privileges');
-  $query->fields('privileges', ['user', 'privilege'])
-    ->condition('privileges.status', 1)
-    ->condition('privileges.bundle', 'taxonomy_term')
-    ->condition('privileges.entity', $community->id());
+  public function fetchMembersWithPrivileges(TermInterface $community) {
+    $query = $this->connection->select('privileges', 'privileges');
+    $query->fields('privileges', ['user', 'privilege'])
+      ->condition('privileges.status', 1)
+      ->condition('privileges.bundle', 'taxonomy_term')
+      ->condition('privileges.entity', $community->id());
 
     $or = $query->orConditionGroup();
     $or->condition('privileges.privilege', 'community_members');
@@ -221,7 +221,7 @@ class PrivilegeManger {
     $query->condition($or);
 
     // Join the users data for filters criteria.
-    // TODO: Add Filter block by name, firstname, lastname
+    // TODO: Add Filter block by name, firstname, lastname.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
 
     $query->orderBy('users.name', 'ASC');
@@ -249,7 +249,6 @@ class PrivilegeManger {
     return $members;
   }
 
-
   /**
    * Request the collection of Accounts waiting for Approval on the community.
    *
@@ -259,15 +258,15 @@ class PrivilegeManger {
    * on the community.
    *  - community_members
    *  - community_organizers
-   *  - community_managers
+   *  - community_managers.
    *
-   * @param Drupal\taxonomy\TermInterface $entity
+   * @param Drupal\taxonomy\TermInterface $community
    *   The Community Entity for the privilege.
    *
    * @return array
    *   A collection of requested privileges.
    */
-  public function fetchWaitingApproval(EntityInterface $community) {
+  public function fetchWaitingApproval(TermInterface $community) {
     $query = $this->connection->select('privileges', 'privileges');
     $query->fields('privileges', ['user', 'id'])
       ->condition('privileges.status', NULL, 'IS')
@@ -281,18 +280,16 @@ class PrivilegeManger {
     $query->condition($or);
 
     // Join the users data for filters criteria.
-    // TODO: Add Filter block by name, firstname, lastname
+    // TODO: Add Filter block by name, firstname, lastname.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
 
     $query->orderBy('users.name', 'ASC');
-
     $rows = $query->execute()->fetchAll();
 
     $ids = [];
     foreach ($rows as $row) {
       $ids[] = $row->id;
     }
-
     // Load user entities whitout privileges.
     $privileges = $this->privilegeStorage->loadMultiple($ids);
 

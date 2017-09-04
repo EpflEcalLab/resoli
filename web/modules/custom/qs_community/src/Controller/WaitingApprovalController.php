@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_acl\Service\PrivilegeManger;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 
@@ -21,11 +22,19 @@ class WaitingApprovalController extends ControllerBase {
    */
   private $acl;
 
+    /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   */
+  private $privilegeManger;
+
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl) {
+  public function __construct(AccessControl $acl, PrivilegeManger $privilege_manager) {
     $this->acl = $acl;
+    $this->privilegeManger = $privilege_manager;
   }
 
   /**
@@ -35,7 +44,8 @@ class WaitingApprovalController extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
-    $container->get('qs_acl.access_control')
+    $container->get('qs_acl.access_control'),
+    $container->get('qs_acl.privilege_manger')
     );
   }
 
@@ -62,9 +72,12 @@ class WaitingApprovalController extends ControllerBase {
    * Collection page of Accounts waiting for Approval.
    */
   public function waitingApproval(TermInterface $community) {
+    $variables['community'] = $community;
+    $variables['privileges'] = $this->privilegeManger->fetchWaitingApproval($community);
+
     return [
       '#theme'     => 'qs_community_waiting_approval_page',
-      '#variables' => ['community' => $community],
+      '#variables' => $variables,
       '#cache' => [
         'tags' => [
           // Invalidated whenever any community is updated, deleted or created.

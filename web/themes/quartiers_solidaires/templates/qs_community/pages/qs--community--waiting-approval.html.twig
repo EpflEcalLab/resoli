@@ -1,1 +1,8 @@
 Waiting Approval
+<hr>
+<hr>
+{% for privilege in variables.privileges %}
+  {{ privilege.user.entity.name.value }} <br>
+  {{ privilege.privilege.value }}
+  <hr>
+{% endfor %}

@@ -8,14 +8,17 @@ scriptDir=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 echo "Running Behat"
 
 BEHAT_DATABASE=$1
-if [ "$BEHAT_DATABASE" = "" ]
-then
-# Jenkins env.
-  BEHAT_DATABASE="sqlite://localhost//tmp/portail_ca_behat.sqlite"
-elif [ "TEST_ENV_NUMBER" -ne "" ]
+if [ "$TEST_ENV_NUMBER" -ne "" ]
 then
 # Codeship env.
   BEHAT_DATABASE="mysql://$MYSQL_USER:$MYSQL_PASSWORD@localhost/development$TEST_ENV_NUMBER"
+elif [ "$BEHAT_DATABASE" -ne "" ]
+then
+  # Jenkins env.
+  BEHAT_DATABASE="$BEHAT_DATABASE"
+elif [ "$BEHAT_DATABASE" = "" ]
+then
+  BEHAT_DATABASE="sqlite://localhost//tmp/development-qs.sqlite"
 fi
 
 cd $scriptDir

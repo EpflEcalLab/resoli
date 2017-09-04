@@ -97,7 +97,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
 
     $community = $this->route->getParameter('community');
     $node = $this->route->getParameter('node');
-    if (!$community && $node->bundle() == 'activity') {
+    if (!$community && $node && $node->bundle() == 'activity') {
       $community = $node->field_community->entity;
     }
 

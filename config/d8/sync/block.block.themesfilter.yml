@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - qs_themes
+    - system
   theme:
     - quartiers_solidaires
 id: themesfilter
@@ -17,4 +18,9 @@ settings:
   label: 'Themes Filter'
   provider: qs_themes
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '*/activities/theme'
+    negate: false
+    context_mapping: {  }

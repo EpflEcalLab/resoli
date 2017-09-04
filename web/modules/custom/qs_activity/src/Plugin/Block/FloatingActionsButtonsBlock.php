@@ -64,15 +64,16 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
    */
   public function build($params = []) {
     $variables = [
-      'community'                       => NULL,
-      'community_has_write_access'      => FALSE,
-      'community_has_supervisor_access' => FALSE,
+      'community'                      => NULL,
+      'community_has_write_access'     => FALSE,
+      'community_has_dashboard_access' => FALSE,
+      'activity_has_dashboard_access'  => FALSE,
     ];
 
     $community = $this->route->getParameter('community');
     if ($community) {
       $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
-      $variables['community_has_supervisor_access'] = FALSE;
+      $variables['community_has_dashboard_access'] = $this->acl->hasAdminAccessCommunity($community);
       $variables['community'] = $community;
     }
 

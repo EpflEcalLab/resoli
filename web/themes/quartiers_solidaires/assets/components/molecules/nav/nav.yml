@@ -1,2 +1,4 @@
 title: Nav
 name: nav
+variants:
+  - empty

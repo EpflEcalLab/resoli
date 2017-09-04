@@ -2,6 +2,11 @@
   <a href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">{% trans %}qs_activity.floating.add.activity{% endtrans %}</a>
 {% endif %}
 
-{% if variables.activity and variables.community_has_supervisor_access %}
-  <a href="">{% trans %}qs_activity.floating.supervisor.community{% endtrans %}</a>
+{% if variables.activity and variables.activity_has_dashboard_access %}
+  <a href="">{% trans %}qs_activity.floating.dashboard.activity{% endtrans %}</a>
 {% endif %}
+
+{% if variables.community and variables.community_has_dashboard_access %}
+  <a href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">{% trans %}qs_activity.floating.dashboard.community{% endtrans %}</a>
+{% endif %}
+

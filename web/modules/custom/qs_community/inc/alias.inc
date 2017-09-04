@@ -38,12 +38,12 @@ function qs_community_alias(EntityInterface $entity, $alias, $operation = 'inser
           'alias' => '/' . trim($alias, '/') . '/dashboard',
         ],
         'communities_approval' => [
-          'route' => '/communities/' . $entity->id() . '/waiting-approval',
-          'alias' => '/' . trim($alias, '/') . '/waiting-approval',
+          'route' => '/communities/' . $entity->id() . '/dashboard/waiting-approval',
+          'alias' => '/' . trim($alias, '/') . '/dashboard/waiting-approval',
         ],
         'communities_members' => [
-          'route' => '/communities/' . $entity->id() . '/members',
-          'alias' => '/' . trim($alias, '/') . '/members',
+          'route' => '/communities/' . $entity->id() . '/dashboard/members',
+          'alias' => '/' . trim($alias, '/') . '/dashboard/members',
         ],
       ];
       break;

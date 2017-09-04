@@ -149,6 +149,15 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ],
     ];
 
+    $current_item = NULL;
+    foreach ($render['#variables']['menu'] as $item) {
+      if (in_array($variables['route_name'], $item['activated_by'])) {
+        $current_item = $item;
+      }
+    }
+
+    $render['#variables']['current_menu_item'] = $current_item;
+
     return $render;
   }
 

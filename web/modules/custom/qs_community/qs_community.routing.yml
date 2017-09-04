@@ -15,7 +15,7 @@ qs_community.dashboard:
 
 ## Collection of Accounts waiting for Approval by Community.
 qs_community.waiting_approval:
-    path: '/communities/{community}/waiting-approval'
+    path: '/communities/{community}/dashboard/waiting-approval'
     defaults:
       _controller: '\Drupal\qs_community\Controller\WaitingApprovalController::waitingApproval'
       _title: 'qs_community.waiting_approval.title'
@@ -30,7 +30,7 @@ qs_community.waiting_approval:
 
 ## Collection of Members by Community.
 qs_community.members:
-    path: '/communities/{community}/members'
+    path: '/communities/{community}/dashboard/members'
     defaults:
       _controller: '\Drupal\qs_community\Controller\MembersController::members'
       _title: 'qs_community.members.title'

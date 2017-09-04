@@ -6,54 +6,54 @@ Feature: Community Waiting Approval Access
   @api
   Scenario: Logged as Member of Lausanne, I can't access to Lausanne list of accounts waiting for approval
     Given I am logged in as user "member+lausanne"
-    When I am on "/lausanne/waiting-approval"
+    When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 403
 
   @api
   Scenario: Login as user waiting approval of Lausanne, I can't access to Lausanne list of accounts waiting for approval
     Given I am logged in as user "approval+lausanne"
-    When I am on "/lausanne/waiting-approval"
+    When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Member of Lausanne, I can't access to Lausanne list of accounts waiting for approval
     Given I am logged in as user "member+lausanne"
-    When I am on "/lausanne/waiting-approval"
+    When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can't access to Lausanne list of accounts waiting for approval
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/lausanne/waiting-approval"
+    When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can't access to Fribourg list of accounts waiting for approval
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/fribourg/waiting-approval"
+    When I am on "/fribourg/dashboard/waiting-approval"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Manager of Lausanne, I can access to Lausanne list of accounts waiting for approval
     Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/waiting-approval"
+    When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Manager of Lausanne, I can't access to Fribourg list of accounts waiting for approval
     Given I am logged in as user "manager+lausanne"
-    When I am on "/fribourg/waiting-approval"
+    When I am on "/fribourg/dashboard/waiting-approval"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Member of Lausanne & Manager of Fribourg I can't access to Fribourg list of accounts waiting for approval
     Given I am logged in as user "member+lausanne+manager+fribourg"
-    When I am on "/fribourg/waiting-approval"
+    When I am on "/fribourg/dashboard/waiting-approval"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Member of Lausanne & Manager of Fribourg I can't access to Lausanne list of accounts waiting for approval
     Given I am logged in as user "member+lausanne+manager+fribourg"
-    When I am on "/lausanne/waiting-approval"
+    When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 403
 

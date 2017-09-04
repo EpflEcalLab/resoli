@@ -28,7 +28,7 @@ cd "../../"
 
 composer install
 bundle install
-bundle exec cap staging styleguide:build_from_git
+bundle exec cap staging styleguide:build_local
 
 cd "web"
 

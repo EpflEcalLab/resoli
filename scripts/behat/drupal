@@ -15,7 +15,7 @@ then
 elif [ "TEST_ENV_NUMBER" -ne "" ]
 then
 # Codeship env.
-  BEHAT_DATABASE='mysql://$MYSQL_USER:$MYSQL_PASSWORD@localhost/development$TEST_ENV_NUMBER'
+  BEHAT_DATABASE="mysql://$MYSQL_USER:$MYSQL_PASSWORD@localhost/development$TEST_ENV_NUMBER"
 fi
 
 cd $scriptDir

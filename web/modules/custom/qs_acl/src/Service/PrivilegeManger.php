@@ -202,35 +202,48 @@ class PrivilegeManger {
    *  - community_managers.
    *
    * @param Drupal\taxonomy\TermInterface $entity
-   *   The Drupal Content Entity for the privilege.
+   *   The Community Entity for the privilege.
    *
    * @return Drupal\Core\Session\AccountInterface[]
    *   A collection of members.
    */
-  public function fetchMembers(EntityInterface $community) {
-    // TODO Refactoring using $connection for futur filter, order by name user, ...
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', 1)
-      ->condition('bundle', 'taxonomy_term')
-      ->condition('entity', $community->id())
-      ->groupBy('user');
+  public function fetchMembersWithPrivileges(EntityInterface $community) {
+  $query = $this->connection->select('privileges', 'privileges');
+  $query->fields('privileges', ['user', 'privilege'])
+    ->condition('privileges.status', 1)
+    ->condition('privileges.bundle', 'taxonomy_term')
+    ->condition('privileges.entity', $community->id());
 
     $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_members');
-    $or->condition('privilege', 'community_organizers');
-    $or->condition('privilege', 'community_managers');
+    $or->condition('privileges.privilege', 'community_members');
+    $or->condition('privileges.privilege', 'community_organizers');
+    $or->condition('privileges.privilege', 'community_managers');
     $query->condition($or);
 
-    $ids = $query->execute();
+    // Join the users data for filters criteria.
+    // TODO: Add Filter block by name, firstname, lastname
+    $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
 
-    if (empty($ids)) {
-      return NULL;
+    $query->orderBy('users.name', 'ASC');
+    $query->groupBy('privileges.privilege');
+    $query->groupBy('privileges.user');
+    $query->groupBy('users.name');
+
+    $rows = $query->execute()->fetchAll();
+
+    $uids = [];
+    $privileges = [];
+    foreach ($rows as $row) {
+      $uids[] = $row->user;
+      $privileges[$row->user][] = $row->privilege;
     }
 
-    $privileges = $this->privilegeStorage->loadMultiple($ids);
-    $members = [];
-    foreach ($privileges as $privilege) {
-      $members[] = $privilege->user->entity;
+    // Load user entities whitout privileges.
+    $members = $this->userStorage->loadMultiple($uids);
+
+    // Add privileges to users.
+    foreach ($members as $member) {
+      $member->privileges = $privileges[$member->id()];
     }
 
     return $members;

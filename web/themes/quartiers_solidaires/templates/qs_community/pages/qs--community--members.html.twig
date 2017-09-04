@@ -1,1 +1,8 @@
 Members
+<hr>
+<hr>
+{% for member in variables.members %}
+  {{ member.name.value }} <br>
+  {{ member.privileges|join(' ') }}
+  <hr>
+{% endfor %}

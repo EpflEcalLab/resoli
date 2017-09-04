@@ -73,10 +73,7 @@ class MembersController extends ControllerBase {
    */
   public function members(TermInterface $community) {
     $variables['community'] = $community;
-    $variables['members'] = $this->privilegeManger->fetchMembers($community);
-
-    dump($variables['members']);
-    die();
+    $variables['members'] = $this->privilegeManger->fetchMembersWithPrivileges($community);
 
     return [
       '#theme'     => 'qs_community_members_page',

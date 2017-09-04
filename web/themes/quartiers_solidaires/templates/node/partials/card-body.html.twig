@@ -17,16 +17,16 @@
       </button>
     </div>
     <div class="col-sm-6 mb-3">
-      <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+      <a href="#contact-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
         {{ macros.icon('user') }}
         {{ 'qs.event.contact'|t }}
-      </button>
+      </a>
     </div>
     <div class="col-sm-6 mb-3">
-      <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+      <a href="#map-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
         {{ macros.icon('meeting') }}
         {{ 'qs.event.location'|t }}
-      </button>
+      </a>
     </div>
     <div class="col-sm-6 mb-3">
       <span class="badge badge-pill badge-icon badge-white d-block">

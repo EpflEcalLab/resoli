@@ -167,6 +167,8 @@ a[href].card-pill-simple {
 
 // This wraps the list items
 .card-list {
+  perspective: 2000px;
+
   @include list-unstyled();
 }
 
@@ -207,7 +209,7 @@ a[href].card-pill-simple {
   // Hide the button at the right of the pill ONLY WHEN OPEN
   &.card-open {
     .card-pill {
-      border: 2px solid $card-cap-bg;
+      border: $card-border-width solid $card-cap-bg;
 
       .btn {
         display: none;
@@ -304,6 +306,64 @@ a[href].card-pill-simple {
           }
         }
       }
+    }
+  }
+}
+
+// Animations
+.card-flippable {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(1px);
+  transition: transform 0.4s;
+
+  &:hover {
+    will-change: transform;
+  }
+
+  .card-back,
+  .card-front,
+  .collapse {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    backface-visibility: hidden;
+    z-index: 0;
+  }
+
+  .card-back {
+    position: absolute;
+    top: -$card-border-width;
+    right: -$card-border-width;
+    bottom: -$card-border-width;
+    left: -$card-border-width;
+    z-index: 10;
+    transform: rotateX(180deg) translateZ(1px);
+
+    @include border-radius($card-border-radius - $card-border-width);
+
+    &:not(:target) {
+      display: none;
+    }
+  }
+
+  &.flip {
+    z-index: 10;
+    transform: rotateX(-180deg) translateZ(1px);
+
+    .card-front,
+    .collapse {
+      position: absolute;
+    }
+
+    .collapse {
+      top: $card-pill-icon-size; // keep the collapse below the .card-pill
+    }
+
+    .card-back:target {
+      position: static;
     }
   }
 }

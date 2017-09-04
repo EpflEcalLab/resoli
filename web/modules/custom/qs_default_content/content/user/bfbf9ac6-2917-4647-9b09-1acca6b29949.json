@@ -1,0 +1,68 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/13?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 13
+        }
+    ],
+    "uuid": [
+        {
+            "value": "bfbf9ac6-2917-4647-9b09-1acca6b29949"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "member+lausanne+manager+fribourg@antistatique.net"
+        }
+    ],
+    "created": [
+        {
+            "value": 1504274808
+        }
+    ],
+    "changed": [
+        {
+            "value": 1504274808,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "member+lausanne+manager+fribourg"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Antistatique"
+        }
+    ],
+    "pass": [
+      {
+          "value": "member+lausanne+manager+fribourg"
+      }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

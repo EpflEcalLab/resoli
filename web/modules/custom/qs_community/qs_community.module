@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+// Includes.
+require_once 'inc/alias.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function qs_community_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_community_dashboard_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--community--dashboard',
+    ],
+    'qs_community_members_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--community--members',
+    ],
+    'qs_community_waiting_approval_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--community--waiting-approval',
+    ],
+  ];
+}

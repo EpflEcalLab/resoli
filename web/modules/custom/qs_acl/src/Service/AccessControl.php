@@ -146,7 +146,44 @@ class AccessControl {
       ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_managers');
     $or->condition('privilege', 'community_organizers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account has admin access on the given community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one admin access for this community.
+   */
+  public function hasAdminAccessCommunity(TermInterface $community, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('entity', $community->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
     $or->condition('privilege', 'community_managers');
     $query->condition($or);
 
@@ -234,6 +271,8 @@ class AccessControl {
    * Check the account is waiting for at least one Privilege on the community.
    *
    * If the user has already one privilege it will alwayse return FALSE.
+   * Accounts are referenced as waiting for Approval when it has
+   * none approved privilege(s) & only pending one(s) on the community.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
@@ -437,10 +476,11 @@ class AccessControl {
    *   Number of communities the user belongs to.
    */
   private function countCommunitiesByUser(AccountInterface $account) {
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->queryFactory->getAggregate('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
-      ->condition('user', $account->id());
+      ->condition('user', $account->id())
+      ->groupBy('entity');
 
     $or = $query->orConditionGroup();
     $or->condition('privilege', 'community_members');

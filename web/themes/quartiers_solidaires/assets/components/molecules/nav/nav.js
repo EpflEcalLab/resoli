@@ -1,7 +1,5 @@
-import $ from 'jquery';
-
 const nav = () => {
-  $(function() {
+  (function ($) {
     const toggleMenu = () => {
       $('.navbar-toggle').toggleClass('active');
       $('body').toggleClass('open');
@@ -23,7 +21,7 @@ const nav = () => {
       )
         toggleMenu();
     });
-  });
+  })(jQuery);
 };
 
 export default nav;

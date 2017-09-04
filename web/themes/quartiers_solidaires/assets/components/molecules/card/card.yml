@@ -22,3 +22,7 @@ notes: |
   - `.card-{theme-color}`: change the color of the card and/or card pill (e.g. `.card-primary`), uses the secondary theme color by default
 
   Wrap the cards in a `.card-list` ul to display a list of cards or collapsible cards. This is used in most activities listings. Setup a collapse group like an accordion by setting a `data-parent` attribute to all cards.
+
+  ### Flip the card
+
+  You can setup the card to be flippable by adding the `.card-flippable` class to it. It will flip when you add the class `flip` to it.

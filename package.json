@@ -77,6 +77,6 @@
     "bootstrap": "4.0.0-beta",
     "jquery": "^3.2.1",
     "popper.js": "^1.11.1",
-    "toolbox-utils": "^1.0.8"
+    "toolbox-utils": "^1.0.9"
   }
 }

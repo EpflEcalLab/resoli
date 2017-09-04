@@ -1,0 +1,98 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<li class="card card-flippable card-list-item">
+
+  <div class="card-front">
+    {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}
+  </div>
+
+  <div class="collapse" id="collapse-{{ key }}" role="tabpanel" data-parent="#events-accordion">
+    {% include "@quartiers_solidaires/node/partials/card-body.html.twig" %}
+  </div>
+
+  <div class="card-back card-secondary" id="contact-{{ event.nid.value }}">
+    <div class="card-pill">
+
+      <span class="card-pill-icon">
+        {{ macros.icon('user') }}
+      </span>
+
+      <span class="card-pill-title">
+        <span>
+          {# @TODO add name of organizer here #}
+        </span>
+      </span>
+
+    </div>
+    <div class="card-body text-center">
+
+      <p class="card-text">
+        {# @TODO add name of organizer here #}
+         Le responsable de cet évènement est JOHN DOE. Vous pouvez le contacter par téléphone ou par email.
+      </p>
+
+      <div class="row">
+        {% if event.field_contact_phone.value %}
+          <div class="col-md-8 mx-auto">
+            <a href="tel:{{ event.field_contact_phone.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3" data-toggle="flip">
+              {{ macros.icon('phone') }}
+              {{ event.field_contact_phone.value }}
+            </a>
+          </div>
+        {% endif %}
+
+        {% if event.field_contact_mail.value %}
+          <div class="col-md-8 mx-auto">
+            <a href="mailto:{{ event.field_contact_mail.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3" data-toggle="flip">
+              {{ macros.icon('mail') }}
+              {{ event.field_contact_mail.value }}
+            </a>
+          </div>
+        {% endif %}
+
+        <div class="col-md-8 mx-auto">
+          <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4" data-toggle="flip">
+            {{ macros.icon('arrow-left') }}
+            {{ 'qs.event.back_to_event'|t }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+    <div class="card-back card-secondary" id="map-{{ event.nid.value }}">
+      <div class="card-pill">
+
+        <span class="card-pill-icon">
+          {{ macros.icon('meeting') }}
+        </span>
+
+        <span class="card-pill-title">
+          <span>
+            {{ event.field_venue.value }}
+          </span>
+        </span>
+
+      </div>
+      <div class="card-body text-center">
+
+        <p class="card-text">
+          Map here
+        </p>
+
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4" data-toggle="flip">
+              {{ macros.icon('arrow-left') }}
+              {{ 'qs.event.back_to_event'|t }}
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  {% if event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
+  {% endif %}
+
+</li>

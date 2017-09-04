@@ -101,6 +101,11 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $community = $node->field_community->entity;
     }
 
+    $event = $this->route->getParameter('event');
+    if (!$community && $event && $event->bundle() == 'event') {
+      $community = $event->field_activity->entity->field_community->entity;
+    }
+
     // When the community doesn't exists, it's impossible build the menu.
     if (!$community) {
       return $render;

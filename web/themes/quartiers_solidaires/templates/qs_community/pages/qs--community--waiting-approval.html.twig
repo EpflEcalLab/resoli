@@ -1,8 +1,70 @@
-Waiting Approval
-<hr>
-<hr>
-{% for privilege in variables.privileges %}
-  ({{ privilege.user.entity.uid.value }}) {{ privilege.user.entity.name.value }} <br>
-  ({{ privilege.id.value }}) {{ privilege.privilege.value }}
-  <hr>
-{% endfor %}
+<div class="container">
+  <div class="text-center my-5">
+    <h1>{% trans %}qs_community.waiting_approval.title{% endtrans %}</h1>
+    <h2>{{ variables.community.name.value }}</h2>
+  </div>
+
+  {% if variables.privileges %}
+    {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+    <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
+    {% for privilege in variables.privileges %}
+      <li class="card card-list-item">
+        <a
+          data-toggle="collapse"
+          data-parent="#users-accordion"
+          href="#collapse-{{ loop.index0 }}"
+          class="card-pill collapsed"
+          role="tab"
+          aria-expanded="false"
+          aria-controls="collapse-{{ loop.index0 }}"
+        >
+          <span class="card-pill-icon">
+              {{ macros.icon('user') }}
+            </span>
+          <span class="card-pill-title">
+              {{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}
+          </span>
+          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+            {{ macros.icon('look') }}
+            <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
+          </span>
+        </a>
+
+        <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
+          <div class="card-body pb-0 text-center">
+
+            <h4 class="card-title">{{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}</h4>
+
+            <div class="card-text">
+              {% if privilege.privilege.value == 'community_managers' %}
+                {% trans %}qs.community.waiting_approval.request.manger{% endtrans %}
+              {% elseif privilege.privilege.value == 'community_organizers' %}
+                {% trans %}qs.community.waiting_approval.request.organizer{% endtrans %}
+              {% elseif privilege.privilege.value == 'community_members' %}
+                {% trans %}qs.community.waiting_approval.request.member{% endtrans %}
+              {% endif %}
+            </div>
+
+            <div class="card-actions row">
+              <div class="col-sm-6 mb-3">
+                <a href="#" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+                  {{ macros.icon('check') }}
+                  {{ 'qs.confirmed'|t }}
+                </a>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <a href="#" class="btn btn-outline-danger btn-icon btn-white shadow-to-right btn-block">
+                  {{ macros.icon('cancel') }}
+                  {{ 'qs.reject'|t }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% trans %}qs_community.waiting_approval.empty{% endtrans %}</p>
+  {% endif %}
+</div>

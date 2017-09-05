@@ -139,7 +139,7 @@ class PrivilegeManger {
   }
 
   /**
-   * Confirm the previously requested privilege.
+   * Confirm a previously requested privilege.
    *
    * @param \Drupal\qs_acl\Entity\Privilege $privilege
    *   The privilege to confirme.
@@ -150,7 +150,7 @@ class PrivilegeManger {
   public function confirm(Privilege $privilege) {
     $reviewer = $this->currentUser;
 
-    $privilege->setStatus(TRUE);
+    $privilege->setStatus(1);
     $privilege->setReviewer($reviewer);
     $privilege->setReviewedTime(time());
     $privilege->save();
@@ -159,18 +159,23 @@ class PrivilegeManger {
   }
 
   /**
-   * Decline the privilege.
+   * Decline a previously requested privilege.
    *
-   * TOOD: code the function.
+   * @param \Drupal\qs_acl\Entity\Privilege $privilege
+   *   The privilege to decline.
    *
-   * @param Drupal\Core\Entity\EntityInterface $entity
-   *   The privilege to accepte.
+   * @return \Drupal\qs_acl\Entity\Privilege
+   *   The declined privilege.
    */
-  public function decline(EntityInterface $entity) {
+  public function decline(Privilege $privilege) {
     $reviewer = $this->currentUser;
-    dump($reviewer);
-    dump('decline');
-    die();
+
+    $privilege->setStatus(0);
+    $privilege->setReviewer($reviewer);
+    $privilege->setReviewedTime(time());
+    $privilege->save();
+
+    return $privilege;
   }
 
   /**

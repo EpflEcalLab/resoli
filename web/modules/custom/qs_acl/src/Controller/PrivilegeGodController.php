@@ -2,90 +2,148 @@
 
 namespace Drupal\qs_acl\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * PrivilegeGodController.
+ *
+ * This following AJAX call are made from the members dashboard only.
  */
-class PrivilegeGodController extends ControllerBase {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The Privilege Manager.
-   *
-   * @var \Drupal\qs_acl\Service\PrivilegeManger
-   */
-  private $privilegeManger;
-
-
-  /**
-   * Request stack that controls the lifecycle of requests.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
-   */
-  protected $requestStack;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManger $privilege_manager, RequestStack $request_stack) {
-    $this->acl             = $acl;
-    $this->privilegeManger = $privilege_manager;
-    $this->requestStack    = $request_stack;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manger'),
-    $container->get('request_stack')
-    );
-  }
+class PrivilegeGodController extends AjaxControllerBase {
 
   /**
    * Checks access.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   Run access checks for this entity (communities of activity).
    *
    * @return bool
    *   Access allowed or rejected.
    */
-  public function access(AccountInterface $account, EntityInterface $entity) {
+  public function access(AccountInterface $account) {
     $access = AccessResult::forbidden();
-    if ($entity->bundle() == 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
+    $request = $this->requestStack->getCurrentRequest();
+
+    $user_id = $request->request->get('user');
+    $user = $this->userStorage->load($user_id);
+    if (!$user) {
+      return AccessResult::forbidden();
+    }
+
+    $privilege = $request->request->get('privilege');
+
+    $community_id = $request->request->get('community');
+    $community = $this->termStorage->load($community_id);
+    if ($community && $community->bundle() == 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
+
+    // TOOD: Check access for activity.
+    // $activity_id = $request->request->get('activity');.
+
     return $access;
   }
 
-  /**
-   * Toggle (create if not exists) a privilege for a give entity & account.
+   /**
+    * Toggle the given privilege for the entity & the account.
+    *
+    * If the toggle is requested for a non existing privilege, it create it.
+    * This AJAX call is called from the members dashboard only.
    *
-   * This AJAX call is called from the members dashboard only.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   *
+   * @return Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formated response. Contains status & toggled/created privilege.
    */
-  public function toggle(AccountInterface $account, EntityInterface $entity, $privilege) {
+  public function toggle(Request $request) {
+    $privilege_string = $request->request->get('privilege');
 
+    if (!$privilege_string) {
+      return new JsonResponse(['status'=> FALSE]);
+    }
+
+    $user_id = $request->request->get('user');
+    $user    = $this->userStorage->load($user_id);
+
+    $community_id = $request->request->get('community');
+    $community = $this->termStorage->load($community_id);
+
+    if (!$community) {
+      return new JsonResponse(['status'=> FALSE]);
+    }
+
+    // Check if a privilege already exists
+    $privileges = $this->privilegeStorage->loadByProperties([
+      'privilege' => $privilege_string,
+      'bundle'    => $community->getEntityTypeId(),
+      'entity'    => $community->id(),
+      'user'      => $user->id(),
+    ]);
+    $privilege = reset($privileges);
+
+    if ($privilege) {
+      $privilege->setStatus(!$privilege->getStatus());
+    } else {
+      $privilege = $this->privilegeManger->create($privilege_string, $community, $user);
+    }
+
+    return new JsonResponse([
+      'status'    => TRUE,
+      'privilege' => $privilege->toArray(),
+    ]);
+  }
+
+    /**
+    * Decline all the privilege for the entity & the account.
+    *
+    * This AJAX call is called from the members dashboard only.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   *
+   * @return Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formated response. Contains status & declined privileges.
+   */
+  public function ban(Request $request) {
+    $user_id = $request->request->get('user');
+    $user    = $this->userStorage->load($user_id);
+
+    $community_id = $request->request->get('community');
+    $community = $this->termStorage->load($community_id);
+
+    if (!$community) {
+      return new JsonResponse(['status'=> FALSE]);
+    }
+
+    // Check if a privilege already exists
+    $privileges = $this->privilegeStorage->loadByProperties([
+      'bundle' => $community->getEntityTypeId(),
+      'entity' => $community->id(),
+      'user'   => $user->id(),
+    ]);
+
+    if (!$privileges) {
+      return new JsonResponse([
+        'status'    => TRUE,
+        'privilege' => [],
+      ]);
+    }
+
+    $declined = [];
+    foreach ($privileges as $privilege) {
+      $declined[] = $this->privilegeManger->decline($privilege)->toArray();
+    }
+
+    return new JsonResponse([
+      'status'     => TRUE,
+      'privileges' => $declined,
+    ]);
   }
 
 }

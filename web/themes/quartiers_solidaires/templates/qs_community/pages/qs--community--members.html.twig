@@ -37,13 +37,30 @@
             <h4 class="card-title">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
 
             <div class="card-text">
+
+              <form id="privilege-{{ loop.index }}" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
+                <input type="hidden" name="privilege" value="">
+                <input type="hidden" name="user" value="{{ member.uid.value }}">
+                <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
+              </form>
+
               <div class="d-flex flex-wrap">
                 <div class="btn-group mb-3" role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}">
-                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_members' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_member{% endtrans %}</a>
-                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_organizers' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_organizer{% endtrans %}</a>
-                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_managers' in member.privileges %}active{% endif %}">{% trans %}qs.roles.community_manager{% endtrans %}</a>
+                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_members' in member.privileges %}active{% endif %}" data-privilege="community_members" data-form="privilege-{{ loop.index }}">{{ 'qs.roles.community_member'|t }}</a>
+
+                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_organizers' in member.privileges %}active{% endif %}" data-privilege="community_organizers" data-form="privilege-{{ loop.index }}">{{ 'qs.roles.community_organizer'|t }}</a>
+
+                  <a href="#" class="btn btn-white btn-outline-secondary {% if 'community_managers' in member.privileges %}active{% endif %}" data-privilege="community_managers" data-form="privilege-{{ loop.index }}">{{ 'qs.roles.community_manager'|t }}</a>
                 </div>
-                <a href="#" class="btn btn-white btn-outline-secondary">{% trans %}qs.roles.community_none{% endtrans %}</a>
+
+                <form action="{{ path('qs_acl.privilege.ban') }}" method="post">
+                  <input type="hidden" name="user" value="{{ member.uid.value }}">
+                  <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
+
+                  <button class="btn btn-white btn-outline-secondary" type="submit" value="{{ 'qs.roles.community_member'|t }}">
+                    {{ 'qs.roles.community_none'|t }}
+                  </button>
+                </form>
               </div>
             </div>
 

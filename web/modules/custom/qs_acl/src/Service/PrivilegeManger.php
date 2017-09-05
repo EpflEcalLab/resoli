@@ -139,6 +139,35 @@ class PrivilegeManger {
   }
 
   /**
+   * Create a new privilege for the user on the given entity.
+   *
+   * @param string $privilege_requested
+   *   The requested string privilege.
+   * @param Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
+   * @param Drupal\Core\Session\AccountInterface $user
+   *   Account for who we will request de privilege.
+   *
+   * @return Drupal\Core\Entity\EntityInterface
+   *   The created privilege.
+   */
+  public function create($privilege, EntityInterface $entity, AccountInterface $user) {
+    $current_user = $this->currentUser;
+
+    $created = $this->privilegeStorage->create([
+      'bundle'    => 'taxonomy_term',
+      'entity'    => $entity->getEntityTypeId(),
+      'user'      => $user->id(),
+      'status'    => 1,
+      'privilege' => $privilege,
+      'reviewer'  => $current_user->id(),
+      'reviewed'  => time(),
+    ]);
+
+    return $created;
+  }
+
+  /**
    * Confirm a previously requested privilege.
    *
    * @param \Drupal\qs_acl\Entity\Privilege $privilege

@@ -20,3 +20,24 @@ qs_acl.privilege.decline:
       _custom_access: '\Drupal\qs_acl\Controller\PrivilegeJudgeController::access'
     methods: POST
 
+## AJAX route to toggle a privilege of given entity.
+qs_acl.privilege.toggle:
+    path: '/acl/privilege/toggle'
+    defaults:
+      _controller: '\Drupal\qs_acl\Controller\PrivilegeGodController::toggle'
+      _title: 'qs_acl.privilege.toggle.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_acl\Controller\PrivilegeGodController::access'
+    methods: POST
+
+## AJAX route to ban all privilege of given entity & user.
+qs_acl.privilege.ban:
+    path: '/acl/privilege/ban'
+    defaults:
+      _controller: '\Drupal\qs_acl\Controller\PrivilegeGodController::ban'
+      _title: 'qs_acl.privilege.ban.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_acl\Controller\PrivilegeGodController::access'
+    methods: POST

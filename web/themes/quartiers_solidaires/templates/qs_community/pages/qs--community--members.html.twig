@@ -9,7 +9,7 @@
   {% if variables.members %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
     {% for member in variables.members %}
-      <li class="card card-list-item">
+      <li class="card card-list-item" id="card-{{ loop.index0 }}">
         <a
           data-toggle="collapse"
           data-parent="#users-accordion"
@@ -37,7 +37,7 @@
             <h4 class="card-title">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
 
             <div class="card-text">
-              <form id="privilege-{{ loop.index }}" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
+              <form id="privilege-{{ loop.index }}" data-ajax="true" data-submit="checkbox" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
                 <input type="hidden" name="user" value="{{ member.uid.value }}">
                 <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
 
@@ -60,7 +60,7 @@
                   </div>
                 </div>
               </form>
-              <form action="{{ path('qs_acl.privilege.ban') }}" method="post">
+              <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post">
                 <input type="hidden" name="user" value="{{ member.uid.value }}">
                 <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
                 <button class="btn btn-white btn-outline-secondary" type="submit" value="{{ 'qs.roles.community_none'|t }}">

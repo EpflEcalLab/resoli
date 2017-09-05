@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManger;
-use Drupal\qs_acl\Entity\Privilege;
 
 /**
  * AjaxControllerBase.
@@ -79,4 +78,5 @@ class AjaxControllerBase extends ControllerBase {
     $container->get('qs_acl.privilege_manger')
     );
   }
+
 }

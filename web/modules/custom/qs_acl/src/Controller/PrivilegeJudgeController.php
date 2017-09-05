@@ -2,7 +2,6 @@
 
 namespace Drupal\qs_acl\Controller;
 
-use Drupal\qs_acl\Entity\Privilege;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

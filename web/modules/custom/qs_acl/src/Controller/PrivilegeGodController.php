@@ -2,12 +2,10 @@
 
 namespace Drupal\qs_acl\Controller;
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-
 
 /**
  * PrivilegeGodController.
@@ -43,15 +41,14 @@ class PrivilegeGodController extends AjaxControllerBase {
 
     // TOOD: Check access for activity.
     // $activity_id = $request->request->get('activity');.
-
     return $access;
   }
 
-   /**
-    * Toggle the given privilege for the entity & the account.
-    *
-    * If the toggle is requested for a non existing privilege, it create it.
-    * This AJAX call is called from the members dashboard only.
+  /**
+   * Toggle the given privilege for the entity & the account.
+   *
+   * If the toggle is requested for a non existing privilege, it create it.
+   * This AJAX call is called from the members dashboard only.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
@@ -63,7 +60,7 @@ class PrivilegeGodController extends AjaxControllerBase {
     $privileges = $request->request->get('privileges');
 
     if (!$privileges) {
-      return new JsonResponse(['status'=> FALSE]);
+      return new JsonResponse(['status' => FALSE]);
     }
 
     $user_id = $request->request->get('user');
@@ -73,7 +70,7 @@ class PrivilegeGodController extends AjaxControllerBase {
     $community = $this->termStorage->load($community_id);
 
     if (!$community) {
-      return new JsonResponse(['status'=> FALSE]);
+      return new JsonResponse(['status' => FALSE]);
     }
 
     $roles = [
@@ -102,7 +99,8 @@ class PrivilegeGodController extends AjaxControllerBase {
         $privilege->setStatus($status);
         $privilege->save();
         $updated[] = $privilege->toArray();
-      } elseif ($status === 1) {
+      }
+      elseif ($status === 1) {
         $updated[] = $this->privilegeManger->create($role, $community, $user)->toArray();
       }
     }
@@ -113,10 +111,10 @@ class PrivilegeGodController extends AjaxControllerBase {
     ]);
   }
 
-    /**
-    * Decline all the privilege for the entity & the account.
-    *
-    * This AJAX call is called from the members dashboard only.
+  /**
+   * Decline all the privilege for the entity & the account.
+   *
+   * This AJAX call is called from the members dashboard only.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
@@ -132,10 +130,10 @@ class PrivilegeGodController extends AjaxControllerBase {
     $community = $this->termStorage->load($community_id);
 
     if (!$community) {
-      return new JsonResponse(['status'=> FALSE]);
+      return new JsonResponse(['status' => FALSE]);
     }
 
-    // Check if a privilege already exists
+    // Check if a privilege already exists.
     $privileges = $this->privilegeStorage->loadByProperties([
       'bundle' => $community->getEntityTypeId(),
       'entity' => $community->id(),

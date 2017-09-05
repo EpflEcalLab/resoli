@@ -67,7 +67,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'community'                      => NULL,
       'community_has_write_access'     => FALSE,
       'community_has_dashboard_access' => FALSE,
-      'activity_has_dashboard_access'  => FALSE,
+      'activity_has_write_access'      => FALSE,
     ];
 
     $community = $this->route->getParameter('community');
@@ -75,6 +75,21 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
       $variables['community_has_dashboard_access'] = $this->acl->hasAdminAccessCommunity($community);
       $variables['community'] = $community;
+    }
+
+    $node = $this->route->getParameter('node');
+    if ($node && $node->bundle() == 'activity') {
+      $variables['activity_has_write_access'] = $this->acl->hasWriteAccessActivity($node);
+      $variables['activity'] = $node;
+      if (!$community) {
+        $variables['community'] = $node->field_community->entity;
+      }
+    }
+
+    if ($this->acl->hasBypass()) {
+      $variables['community_has_write_access']     = TRUE;
+      $variables['community_has_dashboard_access'] = TRUE;
+      $variables['activity_has_write_access']      = TRUE;
     }
 
     return [

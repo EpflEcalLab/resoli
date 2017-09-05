@@ -66,8 +66,8 @@
             <a href="{{ path('qs_auth.approval', {'community': community.id}) }}" class="card-pill">
               <span class="card-pill-icon">{{ macros.icon('wait') }}</span>
               <span class="card-pill-title">
-                <span class="text-primary">{{ 'qs_supervisor.account.community_pending'|t }}</span>
                 <span>{{ community.name.value }}</span>
+                <span class="text-primary">{{ 'qs_supervisor.account.community_pending'|t }}</span>
               </span>
               <span class="btn btn-outline-primary btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs_supervisor.account.approval_go'|t }}">
                 {{ macros.icon('look')}}

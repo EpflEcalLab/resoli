@@ -84,6 +84,21 @@ class CommunitiesApplyForm extends FormBase {
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
 
+    $form['#top_links'] = [
+      'qs_supervisor.account.dashboard' => [
+        'label' => $this->t('qs_supervisor.account.form.back'),
+        'params' => [
+          'user' => $this->currentUser->id(),
+        ],
+        'options' => [
+          'icon' => 'chevron-left',
+        ],
+      ],
+    ];
+    $form['#theme_wrappers'] = [
+      'form__fullpage',
+    ];
+
     $communities = $this->termStorage->loadTree('communities', 0, NULL, TRUE);
     $options = [];
     foreach ($communities as $community) {
@@ -104,17 +119,45 @@ class CommunitiesApplyForm extends FormBase {
       }
     }
 
-    $form['community'] = [
-      '#attributes' => ['title' => $this->t('qs_auth.form.communities_apply.community')],
-      '#type'       => 'radios',
-      '#required'   => FALSE,
-      '#options'    => $options,
-    ];
+    if (!empty($options)) {
+      $form['community'] = [
+        '#attributes' => [
+          'required' => TRUE,
+          'title' => $this->t('qs_auth.form.communities_apply.community'),
+          'variant' => 'button',
+        ],
+        '#type'       => 'radios',
+        '#required'   => FALSE,
+        '#options'    => $options,
+        '#theme_wrappers' => [
+          'radios__buttons',
+          'container__center',
+        ],
+      ];
 
-    $form['actions']['submit'] = [
-      '#type'  => 'submit',
-      '#value' => $this->t('qs.form.submit'),
-    ];
+      $form['actions']['submit'] = [
+        '#type'  => 'submit',
+        '#attributes' => [
+          'class' => [
+            'align-self-center',
+            'mt-5',
+          ],
+          'icon' => 'check',
+        ],
+        '#value' => $this->t('qs.form.submit'),
+      ];
+    }
+    else {
+      $form['community'] = [
+        '#type' => 'fieldset',
+        '#title' => $this->t('qs_auth.form.communities_apply.no_community'),
+        '#attributes' => [
+          'class' => [
+            'mx-auto',
+          ],
+        ],
+      ];
+    }
 
     return $form;
   }

@@ -8,7 +8,7 @@
       {# Edit account button #}
       <p>
         <a
-          class="btn btn-icon btn-icon-right btn-outline-primary"
+          class="btn btn-icon btn-icon-right btn-outline-primary mx-2"
           href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}"
           title="{{ 'qs_supervisor.account.dashboard.edit'|t }}"
         >
@@ -16,48 +16,59 @@
           {{ variables.user.name.value }}
           {{ macros.icon('pencil') }}
         </a>
+        <a class="text-danger mx-2" href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}</a>
       </p>
 
     </div>
   </div>
 
-  {# List all communities the use is a member of #}
-  {% if variables.communities is not empty %}
-    <div class="row">
-      <div class="col text-center mb-4">
-        <h2 class="h3 font-weight-light">{{ 'qs_supervisor.account.community_member_of'|t }}</h2>
-      </div>
+  {# List all communities the use is a member of or is waiting for an approval #}
+  <div class="row">
+    <div class="col text-center mb-4">
+      <h2 class="h3 font-weight-light">{{ 'qs_supervisor.account.communities'|t }}</h2>
     </div>
-    <div class="row">
-      <div class="col">
-        <ul class="card-list">
-          {% for community in variables.communities %}
-            <li class="card card-list-item">
-              <a href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}" class="card-pill">
-                <span class="card-pill-icon">{{ macros.icon('communities') }}</span>
-                <span class="card-pill-title">
-                  <span>{{ community.name.value }}</span>
-                </span>
-                <span class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
-                  {{ macros.icon('look')}}
-                  <span class="sr-only">{{ 'qs_supervisor.account.community_go'|t }}</span>
-                </span>
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <ul class="card-list">
+        {% for community in variables.communities %}
+          <li class="card card-list-item">
+            <a href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}" class="card-pill">
+              <span class="card-pill-icon">{{ macros.icon('communities') }}</span>
+              <span class="card-pill-title">
+                <span>{{ community.name.value }}</span>
+              </span>
+              <span class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
+                {{ macros.icon('look')}}
+                <span class="sr-only">{{ 'qs_supervisor.account.community_go'|t }}</span>
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+        {% for community in variables.pending %}
+          <li class="card card-list-item card-list-item-primary">
+            <a href="{{ path('qs_auth.approval', {'community': community.id}) }}" class="card-pill">
+              <span class="card-pill-icon">{{ macros.icon('wait') }}</span>
+              <span class="card-pill-title">
+                <span class="text-primary">{{ 'qs_supervisor.account.community_pending'|t }}</span>
+                <span>{{ community.name.value }}</span>
+              </span>
+              <span class="btn btn-outline-primary btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs_supervisor.account.approval_go'|t }}">
+                {{ macros.icon('look')}}
+                <span class="sr-only">{{ 'qs_supervisor.account.approval_go'|t }}</span>
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
-  {% endif %}
+  </div>
+  <div class="row mb-5">
+    <div class="col text-center">
+      <a class="btn btn-icon btn-outline-secondary" href="{{ path('qs_auth.communities.apply') }}">
+        {{ macros.icon('plus') }}
+        {% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}
+      </a>
+    </div>
+  </div>
 </div>
-
-Pending of
-
-{{ dump(variables.pending|keys) }}
-
-<hr>
-<a href="{{ path('qs_auth.communities.apply') }}">{% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}
-<br>
-<a href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}">{% trans %}qs_supervisor.account.dashboard.edit{% endtrans %}</a>
-<br>
-<a href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}

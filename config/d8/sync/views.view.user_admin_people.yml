@@ -435,8 +435,8 @@ display:
           empty_zero: false
           hide_alter_empty: false
           plugin_id: custom
-        mail_1:
-          id: mail_1
+        mail:
+          id: mail
           table: users_field_data
           field: mail
           relationship: none
@@ -445,8 +445,8 @@ display:
           label: Email
           exclude: false
           alter:
-            alter_text: true
-            text: '<a href="mailto:{{ mail_1 }}">{{ mail_1 }}</a>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -484,7 +484,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: basic_string
+          type: email_mailto
           settings: {  }
           group_column: value
           group_columns: {  }
@@ -812,7 +812,7 @@ display:
             name: name
             field_firstname: field_firstname
             field_lastname: field_lastname
-            mail_1: mail_1
+            mail: mail
           plugin_id: combine
         status:
           id: status

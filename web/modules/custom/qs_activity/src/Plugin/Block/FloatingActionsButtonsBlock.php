@@ -86,6 +86,12 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
+    if ($this->acl->hasBypass()) {
+      $variables['community_has_write_access']     = TRUE;
+      $variables['community_has_dashboard_access'] = TRUE;
+      $variables['activity_has_write_access']      = TRUE;
+    }
+
     return [
       '#theme'     => 'qs_activity_floating_actions_buttons_block',
       '#variables' => $variables,

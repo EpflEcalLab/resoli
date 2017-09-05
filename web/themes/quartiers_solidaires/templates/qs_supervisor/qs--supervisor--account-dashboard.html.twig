@@ -2,24 +2,39 @@
 
 <div class="container">
   <div class="row">
-    <div class="col text-center my-5">
-      <h1>{{ 'qs.user.settings.personal_info'|t }}</h1>
-
-      {# Edit account button #}
-      <p>
-        <a
-          class="btn btn-icon btn-icon-right btn-outline-primary mx-2"
-          href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}"
-          title="{{ 'qs_supervisor.account.dashboard.edit'|t }}"
-        >
-          <span class="sr-only">{{ 'qs_supervisor.account.dashboard.edit'|t }}</span>
-          {{ variables.user.name.value }}
-          {{ macros.icon('pencil') }}
-        </a>
-        <a class="text-danger mx-2" href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}</a>
-      </p>
-
+    <div class="col my-5">
+      <div class="text-center">
+        <h1>{{ 'qs_supervisor.account.personal_info'|t }}</h1>
+      </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-auto">
+      <dl class="row">
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.firstname'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.field_firstname.value }}</dd>
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.lastname'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.field_lastname.value }}</dd>
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.phone'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.field_phone.value }}</dd>
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.mail'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.mail.value }}</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="text-center mt-2 mb-5">
+    {# Edit account button #}
+    <a
+      class="btn btn-icon btn-icon-right btn-outline-primary mb-2"
+      href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}"
+      title="{{ 'qs_supervisor.account.dashboard.edit'|t }}"
+    >
+      {{ 'qs_supervisor.account.dashboard.edit'|t }}
+      {{ macros.icon('pencil') }}
+    </a>
+    <br>
+    <a class="text-danger" href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}</a>
   </div>
 
   {# List all communities the use is a member of or is waiting for an approval #}

@@ -11,3 +11,8 @@
     }
   }
 }
+
+// Drupal
+#toolbar-administration {
+  z-index: ($zindex-tooltip * 2);
+}

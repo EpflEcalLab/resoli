@@ -63,6 +63,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
 
@@ -77,6 +78,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_managers',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
 
@@ -91,6 +93,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_organizers',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
 
@@ -105,6 +108,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -117,6 +121,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_organizers',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
 
@@ -131,6 +136,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -143,6 +149,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
 
@@ -192,6 +199,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
 
@@ -206,6 +214,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -270,6 +279,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -319,6 +329,7 @@ function qs_default_content_privileges_community() {
     'status'    => 1,
     'privilege' => 'community_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -428,6 +439,7 @@ function qs_default_content_privileges_activities() {
     'status'    => 1,
     'privilege' => 'activity_members',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -453,6 +465,7 @@ function qs_default_content_privileges_activities() {
     'status'    => 1,
     'privilege' => 'activity_organizers',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([
@@ -465,6 +478,7 @@ function qs_default_content_privileges_activities() {
     'status'    => 1,
     'privilege' => 'activity_maintainers',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
 
@@ -479,6 +493,7 @@ function qs_default_content_privileges_activities() {
     'status'    => 1,
     'privilege' => 'activity_organizers',
     'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([

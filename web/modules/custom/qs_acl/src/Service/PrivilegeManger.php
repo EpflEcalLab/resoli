@@ -155,14 +155,15 @@ class PrivilegeManger {
     $current_user = $this->currentUser;
 
     $created = $this->privilegeStorage->create([
-      'bundle'    => 'taxonomy_term',
-      'entity'    => $entity->getEntityTypeId(),
+      'bundle'    => $entity->getEntityTypeId(),
+      'entity'    => $entity->id(),
       'user'      => $user->id(),
       'status'    => 1,
       'privilege' => $privilege,
       'reviewer'  => $current_user->id(),
       'reviewed'  => time(),
     ]);
+    $created->save();
 
     return $created;
   }
@@ -205,31 +206,6 @@ class PrivilegeManger {
     $privilege->save();
 
     return $privilege;
-  }
-
-  /**
-   * Remove the privilege for a given user.
-   *
-   * To remove a privilege, we use the givne $privlege as field of $entity
-   * and remove the $account from it.
-   *
-   * TOOD: code the function.
-   *
-   * @param string $privilege
-   *   The privilege.
-   * @param Drupal\Core\Entity\EntityInterface $entity
-   *   The Drupal Content Entity for the privilege.
-   * @param Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   */
-  public function remove($privilege, EntityInterface $entity, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-    dump($user);
-    dump('remove');
-    die();
   }
 
   /**

@@ -35,8 +35,6 @@ class PrivilegeGodController extends AjaxControllerBase {
       return AccessResult::forbidden();
     }
 
-    $privilege = $request->request->get('privilege');
-
     $community_id = $request->request->get('community');
     $community = $this->termStorage->load($community_id);
     if ($community && $community->bundle() == 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
@@ -62,9 +60,9 @@ class PrivilegeGodController extends AjaxControllerBase {
    *   JSON formated response. Contains status & toggled/created privilege.
    */
   public function toggle(Request $request) {
-    $privilege_string = $request->request->get('privilege');
+    $privileges = $request->request->get('privileges');
 
-    if (!$privilege_string) {
+    if (!$privileges) {
       return new JsonResponse(['status'=> FALSE]);
     }
 
@@ -78,24 +76,40 @@ class PrivilegeGodController extends AjaxControllerBase {
       return new JsonResponse(['status'=> FALSE]);
     }
 
-    // Check if a privilege already exists
-    $privileges = $this->privilegeStorage->loadByProperties([
-      'privilege' => $privilege_string,
-      'bundle'    => $community->getEntityTypeId(),
-      'entity'    => $community->id(),
-      'user'      => $user->id(),
-    ]);
-    $privilege = reset($privileges);
+    $roles = [
+      'community_members'    => 0,
+      'community_organizers' => 0,
+      'community_managers'   => 0,
+    ];
 
-    if ($privilege) {
-      $privilege->setStatus(!$privilege->getStatus());
-    } else {
-      $privilege = $this->privilegeManger->create($privilege_string, $community, $user);
+    foreach ($privileges as $privilege) {
+      if (isset($roles[$privilege])) {
+        $roles[$privilege] = 1;
+      }
+    }
+
+    $updated = [];
+    foreach ($roles as $role => $status) {
+      $privileges = $this->privilegeStorage->loadByProperties([
+        'privilege' => $role,
+        'bundle'    => $community->getEntityTypeId(),
+        'entity'    => $community->id(),
+        'user'      => $user->id(),
+      ]);
+      $privilege = reset($privileges);
+
+      if ($privilege) {
+        $privilege->setStatus($status);
+        $privilege->save();
+        $updated[] = $privilege->toArray();
+      } elseif ($status === 1) {
+        $updated[] = $this->privilegeManger->create($role, $community, $user)->toArray();
+      }
     }
 
     return new JsonResponse([
       'status'    => TRUE,
-      'privilege' => $privilege->toArray(),
+      'privilege' => $updated,
     ]);
   }
 

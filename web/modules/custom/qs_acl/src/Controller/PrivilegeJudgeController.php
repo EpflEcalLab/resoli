@@ -3,7 +3,10 @@
 namespace Drupal\qs_acl\Controller;
 
 use Drupal\qs_acl\Entity\Privilege;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * PrivilegeJudgeController.
@@ -13,17 +16,48 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class PrivilegeJudgeController extends AjaxControllerBase {
 
   /**
+   * Checks access.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Run access checks for this account.
+   *
+   * @return bool
+   *   Access allowed or rejected.
+   */
+  public function access(AccountInterface $account) {
+    $access = AccessResult::forbidden();
+    $request = $this->requestStack->getCurrentRequest();
+
+    $privilege_id = $request->request->get('privilege');
+    $privilege = $this->privilegeStorage->load($privilege_id);
+
+    if (!$privilege) {
+      return AccessResult::forbidden();
+    }
+
+    $community = $privilege->getEntity();
+    if ($community->bundle() == 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
+      $access = AccessResult::allowed();
+    }
+
+    return $access;
+  }
+
+  /**
    * Confirm the requested privilege.
    *
    * This AJAX call is called from the waiting-approval dashboard only.
    *
-   * @param \Drupal\qs_acl\Entity\Privilege $privilege
-   *   The Privilege to confirm.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
    *
    * @return Symfony\Component\HttpFoundation\JsonResponse
    *   JSON formated response. Contains the status & the confirmed privilege.
    */
-  public function confirm(Privilege $privilege) {
+  public function confirm(Request $request) {
+    $privilege_id = $request->request->get('privilege');
+    $privilege = $this->privilegeStorage->load($privilege_id);
+
     $confirmed = $this->privilegeManger->confirm($privilege);
     return new JsonResponse([
       'status'    => TRUE,
@@ -36,13 +70,16 @@ class PrivilegeJudgeController extends AjaxControllerBase {
    *
    * This AJAX call is called from the waiting-approval dashboard only.
    *
-   * @param \Drupal\qs_acl\Entity\Privilege $privilege
-   *   The Privilege to decline.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
    *
    * @return Symfony\Component\HttpFoundation\JsonResponse
    *   JSON formated response. Contains the status & the declined privilege.
    */
-  public function decline(Privilege $privilege) {
+  public function decline(Request $request) {
+    $privilege_id = $request->request->get('privilege');
+    $privilege = $this->privilegeStorage->load($privilege_id);
+
     $declined = $this->privilegeManger->decline($privilege);
     return new JsonResponse([
       'status'    => TRUE,

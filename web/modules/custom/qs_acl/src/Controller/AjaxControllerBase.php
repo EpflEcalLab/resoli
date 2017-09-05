@@ -4,16 +4,21 @@ namespace Drupal\qs_acl\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManger;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Entity\Privilege;
 
 /**
  * AjaxControllerBase.
  */
 class AjaxControllerBase extends ControllerBase {
+  /**
+   * The request stack (get the URL argument(s) and combined it with the path).
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
 
   /**
    * Access Control Service.
@@ -30,11 +35,36 @@ class AjaxControllerBase extends ControllerBase {
   protected $privilegeManger;
 
   /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  protected $termStorage;
+
+  /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
+   * The Privilege Storage.
+   *
+   * @var \Drupal\Core\Entity\ContentEntityStorageInterface
+   */
+  protected $privilegeStorage;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManger $privilege_manager) {
-    $this->acl             = $acl;
-    $this->privilegeManger = $privilege_manager;
+  public function __construct(RequestStack $request_stack, AccessControl $acl, PrivilegeManger $privilege_manager) {
+    $this->requestStack     = $request_stack;
+    $this->acl              = $acl;
+    $this->privilegeManger  = $privilege_manager;
+    $this->privilegeStorage = $this->entityTypeManager()->getStorage('privilege');
+    $this->termStorage      = $this->entityTypeManager()->getStorage('taxonomy_term');
+    $this->userStorage      = $this->entityTypeManager()->getStorage('user');
   }
 
   /**
@@ -44,30 +74,9 @@ class AjaxControllerBase extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
+    $container->get('request_stack'),
     $container->get('qs_acl.access_control'),
     $container->get('qs_acl.privilege_manger')
     );
   }
-
-  /**
-   * Checks access.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Run access checks for this account.
-   * @param \Drupal\qs_acl\Entity\Privilege $privilege
-   *   Run access checks for this privilege (communities privileges).
-   *
-   * @return bool
-   *   Access allowed or rejected.
-   */
-  public function access(AccountInterface $account, Privilege $privilege) {
-    $access = AccessResult::forbidden();
-
-    $entity = $privilege->getEntity();
-    if ($entity->bundle() == 'communities' && $this->acl->hasAdminAccessCommunity($entity)) {
-      $access = AccessResult::allowed();
-    }
-    return $access;
-  }
-
 }

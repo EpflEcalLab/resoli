@@ -116,7 +116,7 @@ class PrivilegeManger {
    * @param Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    * @param Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
+   *   Account for who we will request de privilege.
    *
    * @return Drupal\Core\Entity\EntityInterface
    *   The created privilege request.

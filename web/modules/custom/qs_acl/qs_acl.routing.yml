@@ -1,29 +1,22 @@
-## AJAX route to confirm a privilege.
+## AJAX route to confirm a specific privilege.
 qs_acl.privilege.confirm:
-    path: '/acl/privilege/confirm/{privilege}'
+    path: '/acl/privilege/confirm'
     defaults:
       _controller: '\Drupal\qs_acl\Controller\PrivilegeJudgeController::confirm'
       _title: 'qs_acl.privilege.confirm.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_acl\Controller\PrivilegeJudgeController::access'
-      privilege: \d+
-    options:
-      parameters:
-        privilege:
-          type: entity:privilege
+    methods: POST
 
-## AJAX route to decline a privilege.
+## AJAX route to decline a specific privilege.
 qs_acl.privilege.decline:
-    path: '/acl/privilege/decline/{privilege}'
+    path: '/acl/privilege/decline'
     defaults:
       _controller: '\Drupal\qs_acl\Controller\PrivilegeJudgeController::decline'
       _title: 'qs_acl.privilege.decline.title'
     requirements:
       _user_is_logged_in: 'TRUE'
       _custom_access: '\Drupal\qs_acl\Controller\PrivilegeJudgeController::access'
-      privilege: \d+
-    options:
-      parameters:
-        privilege:
-          type: entity:privilege
+    methods: POST
+

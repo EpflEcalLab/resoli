@@ -30,13 +30,6 @@ class PrivilegeManger {
   private $privilegeStorage;
 
   /**
-   * The user Storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected $userStorage;
-
-  /**
    * The entity query factory.
    *
    * @var \Drupal\Core\Entity\Query\QueryFactory
@@ -56,7 +49,6 @@ class PrivilegeManger {
   public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
     $this->currentUser      = $currentUser;
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
-    $this->userStorage      = $entity_type_manager->getStorage('user');
     $this->queryFactory     = $query_factory;
     $this->connection       = $connection;
   }
@@ -219,10 +211,10 @@ class PrivilegeManger {
    * @param Drupal\taxonomy\TermInterface $community
    *   The Community Entity for the privilege.
    *
-   * @return Drupal\Core\Session\AccountInterface[]
-   *   A collection of members.
+   * @return \Drupal\Core\Database\Query\SelectInterface
+   *   The database query.
    */
-  public function fetchMembersWithPrivileges(TermInterface $community) {
+  public function queryMembersWithPrivileges(TermInterface $community) {
     $query = $this->connection->select('privileges', 'privileges');
     $query->fields('privileges', ['user', 'privilege'])
       ->condition('privileges.status', 1)
@@ -244,24 +236,7 @@ class PrivilegeManger {
     $query->groupBy('privileges.user');
     $query->groupBy('users.name');
 
-    $rows = $query->execute()->fetchAll();
-
-    $uids = [];
-    $privileges = [];
-    foreach ($rows as $row) {
-      $uids[] = $row->user;
-      $privileges[$row->user][] = $row->privilege;
-    }
-
-    // Load user entities whitout privileges.
-    $members = $this->userStorage->loadMultiple($uids);
-
-    // Add privileges to users.
-    foreach ($members as $member) {
-      $member->privileges = $privileges[$member->id()];
-    }
-
-    return $members;
+    return $query;
   }
 
   /**

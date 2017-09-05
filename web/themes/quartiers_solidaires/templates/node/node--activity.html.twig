@@ -7,9 +7,6 @@
     {{ macros.icon('theme_' ~ node.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-primary']) }}
     <h1>{{ node.title.value }}</h1>
 
-    <a href="{{ path('qs_activity.activities.dashboard', {community: node.field_community.target_id, activity: node.nid.value}) }}">{% trans %}qs.activity.edit{% endtrans %}</a>
-
-
   </div>
   <h2 class="h4 mb-4">{{ 'qs.activity.next_events'|t }}</h2>
 

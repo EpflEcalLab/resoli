@@ -53,7 +53,7 @@
                 </a>
               </div>
               <div class="col-sm-6 mb-3">
-                <a href="#" class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block">
+                <a href="{{ path('qs_acl.privilege.decline', {privilege: privilege.id.value}) }}" class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block">
                   {{ macros.icon('trash') }}
                   {{ 'qs.reject'|t }}
                 </a>

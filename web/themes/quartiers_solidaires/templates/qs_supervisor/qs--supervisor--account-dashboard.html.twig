@@ -1,12 +1,55 @@
-User page
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{{ variables.user.name.value }}
+<div class="container">
+  <div class="row">
+    <div class="col text-center my-5">
+      <h1>{{ 'qs.user.settings.personal_info'|t }}</h1>
 
-<hr>
-Member of:
+      {# Edit account button #}
+      <p>
+        <a
+          class="btn btn-icon btn-icon-right btn-outline-primary"
+          href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}"
+          title="{{ 'qs_supervisor.account.dashboard.edit'|t }}"
+        >
+          <span class="sr-only">{{ 'qs_supervisor.account.dashboard.edit'|t }}</span>
+          {{ variables.user.name.value }}
+          {{ macros.icon('pencil') }}
+        </a>
+      </p>
 
-{{ dump(variables.communities|keys) }}
-<hr>
+    </div>
+  </div>
+
+  {# List all communities the use is a member of #}
+  {% if variables.communities is not empty %}
+    <div class="row">
+      <div class="col text-center mb-4">
+        <h2 class="h3 font-weight-light">{{ 'qs_supervisor.account.community_member_of'|t }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <ul class="card-list">
+          {% for community in variables.communities %}
+            <li class="card card-list-item">
+              <a href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}" class="card-pill">
+                <span class="card-pill-icon">{{ macros.icon('communities') }}</span>
+                <span class="card-pill-title">
+                  <span>{{ community.name.value }}</span>
+                </span>
+                <span class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
+                  {{ macros.icon('look')}}
+                  <span class="sr-only">{{ 'qs_supervisor.account.community_go'|t }}</span>
+                </span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+</div>
 
 Pending of
 
@@ -15,6 +58,6 @@ Pending of
 <hr>
 <a href="{{ path('qs_auth.communities.apply') }}">{% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}
 <br>
-<a href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}">{% trans %}qs_supervisor.account.dashboard.edit{% endtrans %}
+<a href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}">{% trans %}qs_supervisor.account.dashboard.edit{% endtrans %}</a>
 <br>
 <a href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}

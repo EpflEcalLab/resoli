@@ -15,19 +15,30 @@
   element['#validated'] ? 'was-validated',
   'my-auto',
 ] %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 <div class="bg-secondary">
   <div class="container fullpage-wrapper py-4">
 
     {% if element['#top_links'] %}
     <div class="row justify-content-between">
-      {% for path, text in element['#top_links'] %}
-        <a class="btn btn-outline-secondary btn-outline-invert" href="{{ url(path) }}">{{ text }}</a>
+      {% for path, link in element['#top_links'] %}
+        <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }}" href="{{ link.params ? path(path, link.params) : path(path) }}">
+          {{ macros.icon(link.options.icon) }}
+          {{ link.label }}
+        </a>
       {% endfor %}
     </div>
     {% endif %}
 
     <div class="row flex-column justify-content-center my-auto">
+      {% if element['#title'] %}
+        <div class="row mb-5">
+          <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h1>{{ element['#title'] }}</h1>
+          </div>
+        </div>
+      {% endif %}
       <form{{ attributes.addClass(classes) }}>
         <div class="row">
            <div class="col-md-10 col-lg-8 mx-auto">{{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}</div>

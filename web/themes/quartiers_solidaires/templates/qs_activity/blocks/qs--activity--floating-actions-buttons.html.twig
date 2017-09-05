@@ -4,21 +4,21 @@
 
 <div class="floating">
   <div class="container">
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center">
       {# Button to add activities #}
-      {% if variables.community_has_write_access %}
+      {% if variables.community and variables.community_has_write_access %}
         <div class="col text-center">
-          <a class="btn btn-outline-secondary btn-white btn-icon shadow-floating" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
+          <a class="btn btn-outline-secondary btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
             {{ macros.icon('plus') }}
             {% trans %}qs_activity.floating.add.activity{% endtrans %}
           </a>
         </div>
       {% endif %}
 
-       {# Button to access activities dashboard #}
-      {% if variables.activity_has_write_access %}
+      {# Button to access activities dashboard #}
+      {% if variables.activity and variables.activity_has_write_access %}
         <div class="col text-center">
-          <a class="btn btn-outline-danger btn-white btn-icon shadow-floating" href="{{ path('qs_activity.activities.dashboard', {community: variables.community.tid.value, activity: variables.activity.nid.value}) }}">
+          <a class="btn btn-outline-danger btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.dashboard', {community: variables.community.tid.value, activity: variables.activity.nid.value}) }}">
             {{ macros.icon('activities') }}
             {% trans %}qs_activity.floating.dashboard.activity{% endtrans %}
           </a>
@@ -26,9 +26,9 @@
       {% endif %}
 
       {# Button to access communities dashboard #}
-      {% if variables.community_has_dashboard_access %}
+      {% if variables.community and variables.community_has_dashboard_access %}
         <div class="col text-center">
-          <a class="btn btn-outline-danger btn-white btn-icon shadow-floating" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
+          <a class="btn btn-outline-danger btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
                 {{ macros.icon('communities') }}
                 {% trans %}qs_activity.floating.dashboard.community{% endtrans %}
               </a>

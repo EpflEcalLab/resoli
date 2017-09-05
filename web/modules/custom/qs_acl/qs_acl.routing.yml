@@ -1,0 +1,14 @@
+## Collection of Accounts waiting for Approval by Community.
+qs_acl.privilege.confirm:
+    path: '/acl/privilege/confirm/{privilege}'
+    defaults:
+      _controller: '\Drupal\qs_acl\Controller\PrivilegeJudgeController::confirm'
+      _title: 'qs_acl.privilege.confirm.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_acl\Controller\PrivilegeJudgeController::access'
+      privilege: \d+
+    options:
+      parameters:
+        privilege:
+          type: entity:privilege

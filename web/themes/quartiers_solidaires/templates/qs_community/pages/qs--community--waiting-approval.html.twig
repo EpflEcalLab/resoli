@@ -47,7 +47,7 @@
 
             <div class="card-actions row">
               <div class="col-sm-6 mb-3">
-                <a href="#" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+                <a href="{{ path('qs_acl.privilege.confirm', {privilege: privilege.id.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
                   {{ macros.icon('check') }}
                   {{ 'qs.confirmed'|t }}
                 </a>

@@ -9,6 +9,7 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\qs_acl\Entity\Privilege;
 
 /**
  * PrivilegeManger.
@@ -138,20 +139,23 @@ class PrivilegeManger {
   }
 
   /**
-   * Accept the privilege & add the privilege to the user.
+   * Confirm the previously requested privilege.
    *
-   * To add a privilege, we load the entity of this privlege (using the bundle)
-   * & check add the user in the field of the named privilege field.
-   * TOOD: code the function.
+   * @param \Drupal\qs_acl\Entity\Privilege $privilege
+   *   The privilege to confirme.
    *
-   * @param Drupal\Core\Entity\EntityInterface $entity
-   *   The privilege to accepte.
+   * @return \Drupal\qs_acl\Entity\Privilege
+   *   The confirmed privilege.
    */
-  public function accepte(EntityInterface $entity) {
+  public function confirm(Privilege $privilege) {
     $reviewer = $this->currentUser;
-    dump($reviewer);
-    dump('accepte');
-    die();
+
+    $privilege->setStatus(TRUE);
+    $privilege->setReviewer($reviewer);
+    $privilege->setReviewedTime(time());
+    $privilege->save();
+
+    return $privilege;
   }
 
   /**

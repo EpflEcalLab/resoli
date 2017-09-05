@@ -8,7 +8,7 @@ scriptDir=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 echo "Running Behat"
 
 BEHAT_DATABASE=$1
-if [ ! -z "$TEST_ENV_NUMBER" ]
+if [ ! -z "$MYSQL_USER" ]
 then
 # Codeship env.
   BEHAT_DATABASE="mysql://$MYSQL_USER:$MYSQL_PASSWORD@localhost/development$TEST_ENV_NUMBER"

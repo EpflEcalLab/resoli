@@ -253,10 +253,10 @@ class PrivilegeManger {
    * @param Drupal\taxonomy\TermInterface $community
    *   The Community Entity for the privilege.
    *
-   * @return array
-   *   A collection of requested privileges.
+   * @return \Drupal\Core\Database\Query\SelectInterface
+   *   The database query.
    */
-  public function fetchWaitingApproval(TermInterface $community) {
+  public function queryWaitingApproval(TermInterface $community) {
     $query = $this->connection->select('privileges', 'privileges');
     $query->fields('privileges', ['user', 'id'])
       ->condition('privileges.status', NULL, 'IS')
@@ -275,16 +275,8 @@ class PrivilegeManger {
 
     $query->orderBy('users.created', 'ASC');
     $query->orderBy('users.name', 'ASC');
-    $rows = $query->execute()->fetchAll();
 
-    $ids = [];
-    foreach ($rows as $row) {
-      $ids[] = $row->id;
-    }
-    // Load user entities whitout privileges.
-    $privileges = $this->privilegeStorage->loadMultiple($ids);
-
-    return $privileges;
+    return $query;
   }
 
 }

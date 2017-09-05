@@ -57,3 +57,22 @@ Feature: Community Members Access
     When I am on "/lausanne/dashboard/members"
     And the response status code should be 403
 
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to Lausanne list of members
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/dashboard/members"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can't access to Lausanne list of members
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/dashboard/members"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, I can't access to Lausanne list of members neither Fribourg list of members
+    Given I am logged in as user "member+fribourg+declined+member+lausanne"
+    When I am on "/lausanne/dashboard/members"
+    And the response status code should be 403
+    When I am on "/fribourg/dashboard/members"
+    And the response status code should be 403

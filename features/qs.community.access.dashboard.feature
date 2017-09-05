@@ -57,3 +57,22 @@ Feature: Community Dashboard Access
     When I am on "/lausanne/dashboard"
     And the response status code should be 403
 
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to Lausanne dashboard
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/dashboard"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to Lausanne dashboard
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/dashboard"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, I can't access to Lausanne dashboard neither Fribourg dashboard
+    Given I am logged in as user "member+fribourg+declined+member+lausanne"
+    When I am on "/lausanne/dashboard"
+    And the response status code should be 403
+    When I am on "/fribourg/dashboard"
+    And the response status code should be 403

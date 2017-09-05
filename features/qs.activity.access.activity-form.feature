@@ -17,6 +17,12 @@ Feature: Activitiy Forms Access
     And the response status code should be 200
 
   @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to Lausanne activities add form
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/activities/add"
+    And the response status code should be 403
+
+  @api
   Scenario: Logged as Member of Lausanne, I can't access to Fribourg activities add form
     Given I am logged in as user "member+lausanne"
     When I am on "/fribourg/activities/add"
@@ -57,6 +63,24 @@ Feature: Activitiy Forms Access
   Scenario: Logged as Manager of Lausanne, I can access to the Dashboard of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/dashboard"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to the Dashboard of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/dashboard"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can't access to the Dashboard of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/dashboard"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to the Dashboard of Activity N°3 (Activity 8 - Lausanne - Theme N°3) because I'm the organizer of this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-8-lausanne-theme-ndeg3/dashboard"
     And the response status code should be 200
 
   @api
@@ -110,6 +134,24 @@ Feature: Activitiy Forms Access
     And the response status code should be 200
 
   @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to the Edit Info Form of of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/edit/info"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can't access to the Edit Info Form of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/edit/info"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to the Edit Info Form of Activity N°3 (Activity 8 - Lausanne - Theme N°3) because I'm the organizer of this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-8-lausanne-theme-ndeg3/edit/info"
+    And the response status code should be 200
+
+  @api
   Scenario: Logged as Manager of Lausanne, I can't access to the Edit Info Form of Activity N°3 (Activity 3 - Lausanne - Theme N°1) because I'm only a maintainer of this activity
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/activity-3-lausanne-theme-ndeg1/edit/info"
@@ -157,6 +199,24 @@ Feature: Activitiy Forms Access
   Scenario: Logged as Manager of Lausanne, I can access to the Edit Visibility Form of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/edit/visibility"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to the Edit Visibility Form of of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/edit/visibility"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can't access to the Edit Visibility Form of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/edit/visibility"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to the Edit Visibility Form of Activity N°3 (Activity 8 - Lausanne - Theme N°3) because I'm the organizer of this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-8-lausanne-theme-ndeg3/edit/visibility"
     And the response status code should be 200
 
   @api
@@ -210,6 +270,24 @@ Feature: Activitiy Forms Access
     And the response status code should be 200
 
   @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to the Edit Defaults Form of of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/edit/defaults"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can't access to the Edit Defaults Form of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/edit/defaults"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to the Edit Defaults Form of Activity N°3 (Activity 8 - Lausanne - Theme N°3) because I'm the organizer of this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-8-lausanne-theme-ndeg3/edit/defaults"
+    And the response status code should be 200
+
+  @api
   Scenario: Logged as Manager of Lausanne, I can't access to the Edit Defaults Form of Activity N°3 (Activity 3 - Lausanne - Theme N°1) because I'm only a maintainer of this activity
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/activity-3-lausanne-theme-ndeg1/edit/defaults"
@@ -257,6 +335,24 @@ Feature: Activitiy Forms Access
   Scenario: Logged as Manager of Lausanne, I can access to the Delete Form of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/delete"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to the Delete Form of of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/delete"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can't access to the Delete Form of Activity N°2 (Activity 2 - Lausanne - Theme N°1) because I have no provilege on this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/delete"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to the Delete Form of Activity N°3 (Activity 8 - Lausanne - Theme N°3) because I'm the organizer of this activity
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-8-lausanne-theme-ndeg3/delete"
     And the response status code should be 200
 
   @api

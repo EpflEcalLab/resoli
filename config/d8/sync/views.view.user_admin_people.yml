@@ -2,6 +2,9 @@ uuid: af2a6b2b-2cba-42be-8003-ae348b6ccdbb
 langcode: fr
 status: true
 dependencies:
+  config:
+    - field.storage.user.field_firstname
+    - field.storage.user.field_lastname
   module:
     - user
 _core:
@@ -200,7 +203,7 @@ display:
           group_type: group
           admin_label: ''
           label: Username
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -240,10 +243,198 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          plugin_id: field
+          click_sort_column: value
           type: user_name
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
           entity_type: user
           entity_field: name
+        field_firstname:
+          id: field_firstname
+          table: user__field_firstname
+          field: field_firstname
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Firstname
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_lastname:
+          id: field_lastname
+          table: user__field_lastname
+          field: field_lastname
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Lastname
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Fullname
+          exclude: false
+          alter:
+            alter_text: true
+            text: "{{ field_firstname }} • <strong>{{ field_lastname }}</strong><br>\n{{ name }}"
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
         status:
           id: status
           table: users_field_data
@@ -604,6 +795,7 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+              beginner: '0'
           is_grouped: false
           group_info:
             label: ''
@@ -618,7 +810,8 @@ display:
             group_items: {  }
           fields:
             name: name
-            mail: mail
+            field_firstname: field_firstname
+            field_lastname: field_lastname
           plugin_id: combine
         status:
           id: status
@@ -879,7 +1072,9 @@ display:
         - url.query_args
         - user.permissions
       max-age: 0
-      tags: {  }
+      tags:
+        - 'config:field.storage.user.field_firstname'
+        - 'config:field.storage.user.field_lastname'
   page_1:
     display_plugin: page
     id: page_1
@@ -912,4 +1107,6 @@ display:
         - url.query_args
         - user.permissions
       max-age: 0
-      tags: {  }
+      tags:
+        - 'config:field.storage.user.field_firstname'
+        - 'config:field.storage.user.field_lastname'

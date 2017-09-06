@@ -15,12 +15,7 @@
   element['#validated'] ? 'was-validated',
 ] %}
 
-{% set wrapper_class = [
-  'bg-' ~ attributes.bg|default('blue')
-] %}
-
-
-<div class="{{ wrapper_class|join(' ') }}">
+<div class="bg-blue">
   <div class="container fullpage-wrapper py-4">
 
     {% if element['#top_links'] %}

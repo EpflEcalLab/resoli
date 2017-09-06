@@ -48,6 +48,15 @@ const checkbox = () => {
       // We need to check on load if the button has to be enabled
       toggleAllBtn($themes.find('input[type=checkbox]:checked').length);
     }
+
+
+    // Very simple checbox toggle
+    // Enable by pressing space
+    $(document).on('keydown', '.checkbox-toggle-btn', function(e) {
+      if (e.keyCode === 32) {
+        $(this).trigger('click');
+      }
+    })
   })(jQuery);
 }
 

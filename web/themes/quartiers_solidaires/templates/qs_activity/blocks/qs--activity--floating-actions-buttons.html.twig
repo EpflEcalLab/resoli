@@ -8,7 +8,7 @@
       {# Button to add activities #}
       {% if variables.community and variables.community_has_write_access %}
         <div class="col text-center">
-          <a class="btn btn-outline-secondary btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
+          <a class="btn btn-outline-danger btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
             {{ macros.icon('plus') }}
             {% trans %}qs_activity.floating.add.activity{% endtrans %}
           </a>

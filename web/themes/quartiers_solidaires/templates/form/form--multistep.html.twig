@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+{% set classes = [
+  'form-multistep',
+  element['#validated'] ? 'was-validated',
+] %}
+
+{% if element['#top_links'] %}
+<div class="row justify-content-between">
+  {% for path, link in element['#top_links'] %}
+    <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }}" href="{{ link.params ? path(path, link.params) : path(path) }}">
+      {{ macros.icon(link.options.icon) }}
+      {{ link.label }}
+    </a>
+  {% endfor %}
+</div>
+{% endif %}
+
+<form{{ attributes.addClass(classes) }}>
+  {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}
+  <div class="row">
+    <div class="col tab-content d-flex flex-column">{{ children }}</div>
+  </div>
+</form>

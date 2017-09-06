@@ -10,8 +10,8 @@
  * @see template_preprocess_input()
  */
 #}
-{% if attributes.variant == 'button' %}
-  {% include "input--checkbox--button.html.twig" %}
+{% if attributes.variant %}
+  {% include "input--checkbox--" ~ attributes.variant ~ ".html.twig" %}
 {% else %}
   <input{{ attributes }} />{{ children }}
 {% endif %}

@@ -33,7 +33,8 @@
 // Light colors on colored backgrounds
 .bg-secondary,
 .bg-blue,
-.bg-primary {
+.bg-primary,
+.bg-danger {
   color: color("light");
 
   .text-muted {

@@ -180,6 +180,7 @@
 
   // Set color of text based on background when button is active
   @include button-outline-invert('.bg-blue', $blue);
+  @include button-outline-invert('.bg-danger', color('danger'));
 }
 
 // We still need a Button White when the background is lightly colored

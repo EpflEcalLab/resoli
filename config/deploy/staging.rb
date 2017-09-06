@@ -13,6 +13,7 @@ set :http_auth_users, [
 set :slackistrano, false
 
 before "styleguide:deploy_build", "styleguide:build_local"
+after "deploy:finished", "httpauth:protect"
 
 # Map composer and drush commands
 # NOTE: If stage have different deploy_to

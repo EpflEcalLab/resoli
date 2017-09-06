@@ -257,7 +257,7 @@ class ActivityAddForm extends FormBasic {
         'required' => TRUE,
         // Enable submit on click via JS.
         'variant' => 'button',
-        'data-submit' => TRUE,,
+        'data-submit' => TRUE,
         'data-toggle' => 'buttons',
       ],
       '#type'       => 'radios',
@@ -266,8 +266,10 @@ class ActivityAddForm extends FormBasic {
         'radios__buttons',
       ],
       '#options'    => [
+        // @codingStandardsIgnoreStart
         0 => $this->t('qs_activity.activities.form.add.save') . '|check',
         1 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus',
+        // @codingStandardsIgnoreEnd
       ],
     ];
 

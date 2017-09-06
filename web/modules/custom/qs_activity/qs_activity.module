@@ -9,13 +9,14 @@
 require_once 'inc/alias.inc';
 
 /**
- * Alter suggestions for fullpage
+ * Alter suggestions for fullpage.
  */
 function qs_activity_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
   // Set to fullpage layout some special pages.
   if (in_array('page__activities__add', $suggestions)) {
     $suggestions[] = 'page__fullpage';
-  } elseif (in_array('page__activities__dashboard', $suggestions) || in_array('page__activities__edit', $suggestions) || in_array('page__activities__delete', $suggestions)) {
+  }
+  elseif (in_array('page__activities__dashboard', $suggestions) || in_array('page__activities__edit', $suggestions) || in_array('page__activities__delete', $suggestions)) {
     $suggestions[] = 'page__fullmodal';
   }
 }

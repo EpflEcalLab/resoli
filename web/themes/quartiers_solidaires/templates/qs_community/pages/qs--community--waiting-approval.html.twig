@@ -58,7 +58,7 @@
               <div class="col-sm-6 mb-3">
                 <form action="{{ path('qs_acl.privilege.decline') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
                   <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
-                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-right btn-block" type="submit" value="{{ 'qs.reject'|t }}">
+                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" type="submit" value="{{ 'qs.reject'|t }}">
                     {{ macros.icon('trash') }}
                     {{ 'qs.reject'|t }}
                   </button>

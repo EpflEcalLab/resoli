@@ -10,6 +10,14 @@
   padding: $input-btn-padding-y ($input-btn-padding-x / 2);
 }
 
+[data-required] {
+  label:not(.btn) {
+    &:after {
+      content: '*';
+    }
+  }
+}
+
 [data-toggle=buttons] {
   .btn {
     input[type="radio"],

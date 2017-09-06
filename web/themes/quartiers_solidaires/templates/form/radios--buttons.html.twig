@@ -18,8 +18,8 @@
   ]
 %}
 {% if attributes.title is not empty or required -%}
-<div>
-  <label{{ attributes.addClass(classes).addAttribute('data-toggle', 'buttons') }}>{{ attributes.title|raw }}</label> {%- if required or attributes.required -%} * {%- endif -%}
+<div{{ required or element['#attributes'].required ? ' data-required' }}>
+  <label{{ attributes.addClass(classes).addAttribute('data-toggle', 'buttons') }}>{{ attributes.title|raw }}</label>
 </div>
 {% endif %}
 

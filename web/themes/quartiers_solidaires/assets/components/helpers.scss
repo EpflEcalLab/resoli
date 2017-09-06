@@ -25,6 +25,11 @@
   @include floating-shadow();
 }
 
+// Positionning
+.over-modal {
+  z-index: $zindex-modal + 5;
+}
+
 // Background helpers
 @include bg-variant('.bg-blue', $blue);
 @include bg-variant('.bg-primary', color("primary"));

@@ -1,6 +1,6 @@
 const formSubmit = () => {
   (function ($) {
-    const $checkboxes = $('form[data-submit="checkbox"] input[type=checkbox]');
+    const $checkboxes = $('input[type=checkbox][data-submit=checkbox]');
     $checkboxes.change(function(){
       const $form = $(this).parents('form');
 

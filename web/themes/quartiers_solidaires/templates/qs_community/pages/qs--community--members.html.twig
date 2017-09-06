@@ -37,24 +37,24 @@
             <h4 class="card-title">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
 
             <div class="card-text">
-              <form id="privilege-{{ loop.index }}" data-ajax="true" data-submit="checkbox" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
+              <form id="privilege-{{ loop.index }}" data-ajax="true" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
                 <input type="hidden" name="user" value="{{ member.uid.value }}">
                 <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
 
                 <div class="d-flex flex-wrap">
                   <div class="btn-group mb-3" role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}" data-toggle="buttons">
                     <label class="btn btn-white btn-outline-secondary {% if 'community_members' in member.privileges %}active{% endif %}">
-                      <input title="{{ 'qs.roles.community_member'|t }}" variant="button" type="checkbox" name="privileges[]" value="community_members" {% if 'community_members' in member.privileges %}checked{% endif %} class="form-checkbox">
+                      <input title="{{ 'qs.roles.community_member'|t }}" variant="button" type="checkbox" data-submit="checkbox" name="privileges[]" value="community_members" {% if 'community_members' in member.privileges %}checked{% endif %} class="form-checkbox">
                       {{ 'qs.roles.community_member'|t }}
                     </label>
 
                     <label class="btn btn-white btn-outline-secondary {% if 'community_organizers' in member.privileges %}active{% endif %}">
-                      <input title="{{ 'qs.roles.community_organizer'|t }}" variant="button" type="checkbox" name="privileges[]" value="community_organizers" {% if 'community_organizers' in member.privileges %}checked{% endif %} class="form-checkbox">
+                      <input title="{{ 'qs.roles.community_organizer'|t }}" variant="button" type="checkbox" data-submit="checkbox" name="privileges[]" value="community_organizers" {% if 'community_organizers' in member.privileges %}checked{% endif %} class="form-checkbox">
                       {{ 'qs.roles.community_organizer'|t }}
                     </label>
 
                     <label class="btn btn-white btn-outline-secondary {% if 'community_managers' in member.privileges %}active{% endif %}">
-                      <input title="{{ 'qs.roles.community_manager'|t }}" variant="button" type="checkbox" name="privileges[]" value="community_managers" {% if 'community_managers' in member.privileges %}checked{% endif %} class="form-checkbox">
+                      <input title="{{ 'qs.roles.community_manager'|t }}" variant="button" type="checkbox" data-submit="checkbox" name="privileges[]" value="community_managers" {% if 'community_managers' in member.privileges %}checked{% endif %} class="form-checkbox">
                       {{ 'qs.roles.community_manager'|t }}
                     </label>
                   </div>

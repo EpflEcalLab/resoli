@@ -59,3 +59,27 @@ Feature: Activities by Theme Access
     Given I am logged in as user "approval+member+fribourg+approval+organizer+fribourg"
     Then I am on "/fribourg/activities/theme"
     And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to Lausanne activities
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/activities/theme"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to Lausanne activities
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/theme"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, I can't access to Lausanne activities
+    Given I am logged in as user "member+fribourg+declined+member+lausanne"
+    When I am on "/lausanne/activities/theme"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, I can access to Fribourg activities
+    Given I am logged in as user "member+fribourg+declined+member+lausanne"
+    When I am on "/fribourg/activities/theme"
+    And the response status code should be 200

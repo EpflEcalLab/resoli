@@ -9,6 +9,7 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\qs_acl\Entity\Privilege;
 
 /**
  * PrivilegeManger.
@@ -27,13 +28,6 @@ class PrivilegeManger {
    * @var \Drupal\Core\Entity\ContentEntityStorageInterface
    */
   private $privilegeStorage;
-
-  /**
-   * The user Storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected $userStorage;
 
   /**
    * The entity query factory.
@@ -55,7 +49,6 @@ class PrivilegeManger {
   public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
     $this->currentUser      = $currentUser;
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
-    $this->userStorage      = $entity_type_manager->getStorage('user');
     $this->queryFactory     = $query_factory;
     $this->connection       = $connection;
   }
@@ -110,88 +103,101 @@ class PrivilegeManger {
   /**
    * Request a new privilege for the user on the given entity.
    *
-   * @param string $privilege_requested
+   * @param string $privilege
    *   The requested string privilege.
    * @param Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    * @param Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
+   *   Account for who we will request de privilege.
    *
    * @return Drupal\Core\Entity\EntityInterface
    *   The created privilege request.
    */
-  public function request($privilege_requested, EntityInterface $entity, AccountInterface $account = NULL) {
+  public function request($privilege, EntityInterface $entity, AccountInterface $account = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
     }
 
-    $privilege = $this->privilegeStorage->create([
+    $requested = $this->privilegeStorage->create([
       'entity' => $entity->id(),
       'user'   => $user->id(),
     ]);
-    $privilege->setPrivilege($privilege_requested);
-    $privilege->setBundle($entity->getEntityTypeId());
+    $requested->setPrivilege($privilege);
+    $requested->setBundle($entity->getEntityTypeId());
+    $requested->save();
+
+    return $requested;
+  }
+
+  /**
+   * Create a new privilege for the user on the given entity.
+   *
+   * @param string $privilege
+   *   The requested string privilege.
+   * @param Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
+   * @param Drupal\Core\Session\AccountInterface $user
+   *   Account for who we will request de privilege.
+   *
+   * @return Drupal\Core\Entity\EntityInterface
+   *   The created privilege.
+   */
+  public function create($privilege, EntityInterface $entity, AccountInterface $user) {
+    $current_user = $this->currentUser;
+
+    $created = $this->privilegeStorage->create([
+      'bundle'    => $entity->getEntityTypeId(),
+      'entity'    => $entity->id(),
+      'user'      => $user->id(),
+      'status'    => 1,
+      'privilege' => $privilege,
+      'reviewer'  => $current_user->id(),
+      'reviewed'  => time(),
+    ]);
+    $created->save();
+
+    return $created;
+  }
+
+  /**
+   * Confirm a previously requested privilege.
+   *
+   * @param \Drupal\qs_acl\Entity\Privilege $privilege
+   *   The privilege to confirme.
+   *
+   * @return \Drupal\qs_acl\Entity\Privilege
+   *   The confirmed privilege.
+   */
+  public function confirm(Privilege $privilege) {
+    $reviewer = $this->currentUser;
+
+    $privilege->setStatus(1);
+    $privilege->setReviewer($reviewer);
+    $privilege->setReviewedTime(time());
     $privilege->save();
 
     return $privilege;
   }
 
   /**
-   * Accept the privilege & add the privilege to the user.
+   * Decline a previously requested privilege.
    *
-   * To add a privilege, we load the entity of this privlege (using the bundle)
-   * & check add the user in the field of the named privilege field.
-   * TOOD: code the function.
+   * @param \Drupal\qs_acl\Entity\Privilege $privilege
+   *   The privilege to decline.
    *
-   * @param Drupal\Core\Entity\EntityInterface $entity
-   *   The privilege to accepte.
+   * @return \Drupal\qs_acl\Entity\Privilege
+   *   The declined privilege.
    */
-  public function accepte(EntityInterface $entity) {
+  public function decline(Privilege $privilege) {
     $reviewer = $this->currentUser;
-    dump($reviewer);
-    dump('accepte');
-    die();
-  }
 
-  /**
-   * Decline the privilege.
-   *
-   * TOOD: code the function.
-   *
-   * @param Drupal\Core\Entity\EntityInterface $entity
-   *   The privilege to accepte.
-   */
-  public function decline(EntityInterface $entity) {
-    $reviewer = $this->currentUser;
-    dump($reviewer);
-    dump('decline');
-    die();
-  }
+    $privilege->setStatus(0);
+    $privilege->setReviewer($reviewer);
+    $privilege->setReviewedTime(time());
+    $privilege->save();
 
-  /**
-   * Remove the privilege for a given user.
-   *
-   * To remove a privilege, we use the givne $privlege as field of $entity
-   * and remove the $account from it.
-   *
-   * TOOD: code the function.
-   *
-   * @param string $privilege
-   *   The privilege.
-   * @param Drupal\Core\Entity\EntityInterface $entity
-   *   The Drupal Content Entity for the privilege.
-   * @param Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   */
-  public function remove($privilege, EntityInterface $entity, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-    dump($user);
-    dump('remove');
-    die();
+    return $privilege;
   }
 
   /**
@@ -205,10 +211,10 @@ class PrivilegeManger {
    * @param Drupal\taxonomy\TermInterface $community
    *   The Community Entity for the privilege.
    *
-   * @return Drupal\Core\Session\AccountInterface[]
-   *   A collection of members.
+   * @return \Drupal\Core\Database\Query\SelectInterface
+   *   The database query.
    */
-  public function fetchMembersWithPrivileges(TermInterface $community) {
+  public function queryMembersWithPrivileges(TermInterface $community) {
     $query = $this->connection->select('privileges', 'privileges');
     $query->fields('privileges', ['user', 'privilege'])
       ->condition('privileges.status', 1)
@@ -230,24 +236,7 @@ class PrivilegeManger {
     $query->groupBy('privileges.user');
     $query->groupBy('users.name');
 
-    $rows = $query->execute()->fetchAll();
-
-    $uids = [];
-    $privileges = [];
-    foreach ($rows as $row) {
-      $uids[] = $row->user;
-      $privileges[$row->user][] = $row->privilege;
-    }
-
-    // Load user entities whitout privileges.
-    $members = $this->userStorage->loadMultiple($uids);
-
-    // Add privileges to users.
-    foreach ($members as $member) {
-      $member->privileges = $privileges[$member->id()];
-    }
-
-    return $members;
+    return $query;
   }
 
   /**
@@ -264,10 +253,10 @@ class PrivilegeManger {
    * @param Drupal\taxonomy\TermInterface $community
    *   The Community Entity for the privilege.
    *
-   * @return array
-   *   A collection of requested privileges.
+   * @return \Drupal\Core\Database\Query\SelectInterface
+   *   The database query.
    */
-  public function fetchWaitingApproval(TermInterface $community) {
+  public function queryWaitingApproval(TermInterface $community) {
     $query = $this->connection->select('privileges', 'privileges');
     $query->fields('privileges', ['user', 'id'])
       ->condition('privileges.status', NULL, 'IS')
@@ -286,16 +275,8 @@ class PrivilegeManger {
 
     $query->orderBy('users.created', 'ASC');
     $query->orderBy('users.name', 'ASC');
-    $rows = $query->execute()->fetchAll();
 
-    $ids = [];
-    foreach ($rows as $row) {
-      $ids[] = $row->id;
-    }
-    // Load user entities whitout privileges.
-    $privileges = $this->privilegeStorage->loadMultiple($ids);
-
-    return $privileges;
+    return $query;
   }
 
 }

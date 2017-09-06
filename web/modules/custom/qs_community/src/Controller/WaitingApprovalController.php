@@ -16,6 +16,12 @@ use Drupal\Core\Session\AccountInterface;
 class WaitingApprovalController extends ControllerBase {
 
   /**
+   * {@inheritdoc}
+   */
+  private $configuration = ['limit' => 50];
+
+
+  /**
    * Access Control Service.
    *
    * @var \Drupal\qs_acl\Service\AccessControl
@@ -30,11 +36,19 @@ class WaitingApprovalController extends ControllerBase {
   private $privilegeManger;
 
   /**
+   * The Privilege Storage.
+   *
+   * @var \Drupal\Core\Entity\ContentEntityStorageInterface
+   */
+  private $privilegeStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(AccessControl $acl, PrivilegeManger $privilege_manager) {
-    $this->acl = $acl;
-    $this->privilegeManger = $privilege_manager;
+    $this->acl              = $acl;
+    $this->privilegeManger  = $privilege_manager;
+    $this->privilegeStorage = $this->entityTypeManager()->getStorage('privilege');
   }
 
   /**
@@ -73,7 +87,27 @@ class WaitingApprovalController extends ControllerBase {
    */
   public function waitingApproval(TermInterface $community) {
     $variables['community'] = $community;
-    $variables['privileges'] = $this->privilegeManger->fetchWaitingApproval($community);
+    $query = $this->privilegeManger->queryWaitingApproval($community);
+
+    $ids = $query->execute()->fetchAll();
+    pager_default_initialize(count($ids), $this->configuration['limit']);
+    $variables['pager'] = [
+      '#type'     => 'pager',
+      '#quantity' => '3',
+    ];
+    $page = pager_find_page();
+    $query->range($page, $this->configuration['limit']);
+
+    $rows = $query->execute()->fetchAll();
+
+    $ids = [];
+    foreach ($rows as $row) {
+      $ids[] = $row->id;
+    }
+    // Load user entities whitout privileges.
+    $privileges = $this->privilegeStorage->loadMultiple($ids);
+
+    $variables['privileges'] = $privileges;
 
     return [
       '#theme'     => 'qs_community_waiting_approval_page',

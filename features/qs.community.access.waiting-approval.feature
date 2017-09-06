@@ -57,3 +57,22 @@ Feature: Community Waiting Approval Access
     When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 403
 
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to Lausanne list of accounts waiting for approval
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/dashboard/waiting-approval"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can't access to Lausanne list of accounts waiting for approval
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/dashboard/waiting-approval"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, I can't access to Lausanne list of accounts waiting for approval neither Fribourg list of accounts waiting for approval
+    Given I am logged in as user "member+fribourg+declined+member+lausanne"
+    When I am on "/lausanne/dashboard/waiting-approval"
+    And the response status code should be 403
+    When I am on "/fribourg/dashboard/waiting-approval"
+    And the response status code should be 403

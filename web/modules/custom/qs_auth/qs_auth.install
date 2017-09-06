@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains qs_auth.install.
+ */
+
+use Drupal\Core\Language\LanguageInterface;
+
+/**
+ * Implements hook_install().
+ *
+ * Create default alias.
+ */
+function qs_auth_install() {
+  // Load services.
+  $alias_storage = \Drupal::service('path.alias_storage');
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+
+  if ($alias_storage->aliasExists('/authentication', $langcode) === FALSE) {
+    $alias_storage->save('/authentication', '/authentication/login', $langcode);
+  }
+}

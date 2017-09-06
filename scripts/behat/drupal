@@ -59,7 +59,7 @@ fi
 cd "web"
 
 printf "\e[1;35m******************************************\e[0m\n"
-printf "\e[1;35m* Install Drupal - Quariters Solidaires. *\e[0m\n"
+printf "\e[1;35m* Install Drupal - Quartiers Solidaires. *\e[0m\n"
 printf "\e[1;35m******************************************\e[0m\n"
 
 if [ ! -z "$BEHAT_DATABASE" ]

@@ -66,7 +66,7 @@
   ]
 %}
 {% if not element['#attributes'].no_form_group %}
-<div{{ attributes.addClass(classes) }} {% if element['#attributes']['required'] %}data-required{% endif %}>
+<div{{ attributes.addClass(classes) }}{{ element['#attributes']['required'] ? ' data-required' }}>
 {% endif %}
 
   {% if label_display in ['before', 'invisible'] %}

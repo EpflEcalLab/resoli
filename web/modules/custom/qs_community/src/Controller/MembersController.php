@@ -16,6 +16,11 @@ use Drupal\Core\Session\AccountInterface;
 class MembersController extends ControllerBase {
 
   /**
+   * {@inheritdoc}
+   */
+  private $configuration = ['limit' => 50];
+
+  /**
    * Access Control Service.
    *
    * @var \Drupal\qs_acl\Service\AccessControl
@@ -30,11 +35,19 @@ class MembersController extends ControllerBase {
   private $privilegeManger;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(AccessControl $acl, PrivilegeManger $privilege_manager) {
     $this->acl             = $acl;
     $this->privilegeManger = $privilege_manager;
+    $this->userStorage     = $this->entityTypeManager()->getStorage('user');
   }
 
   /**
@@ -73,7 +86,34 @@ class MembersController extends ControllerBase {
    */
   public function members(TermInterface $community) {
     $variables['community'] = $community;
-    $variables['members'] = $this->privilegeManger->fetchMembersWithPrivileges($community);
+
+    $query = $this->privilegeManger->queryMembersWithPrivileges($community);
+    $ids = $query->execute()->fetchAll();
+    pager_default_initialize(count($ids), $this->configuration['limit']);
+    $variables['pager'] = [
+      '#type'     => 'pager',
+      '#quantity' => '3',
+    ];
+    $page = pager_find_page();
+    $query->range($page, $this->configuration['limit']);
+    $rows = $query->execute()->fetchAll();
+
+    $uids = [];
+    $privileges = [];
+    foreach ($rows as $row) {
+      $uids[] = $row->user;
+      $privileges[$row->user][] = $row->privilege;
+    }
+
+    // Load user entities whitout privileges.
+    $members = $this->userStorage->loadMultiple($uids);
+
+    // Add privileges to users.
+    foreach ($members as $member) {
+      $member->privileges = $privileges[$member->id()];
+    }
+
+    $variables['members'] = $members;
 
     return [
       '#theme'     => 'qs_community_members_page',

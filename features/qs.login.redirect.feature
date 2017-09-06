@@ -93,6 +93,24 @@ Feature: Login
     And the url should match "fribourg/activities/theme"
     And the response status code should be 200
 
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne redirect him on the apply form
+    Given I am logged in as user "declined+organizer+lausanne"
+    And the url should match "authentication/communities/apply"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne redirect him on the community page
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    And the url should match "lausanne/activities/theme"
+    And the response status code should be 200
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, redirect him on the community page
+    Given I am logged in as user "member+fribourg+declined+member+lausanne"
+    And the url should match "fribourg/activities/theme"
+    And the response status code should be 200
+
   # @api
   # Scenario: Login as Beginner redirect him on the onboarding page
   #   Given I am logged in as a user with the "beginner" role

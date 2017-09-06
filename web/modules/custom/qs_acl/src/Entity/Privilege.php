@@ -6,6 +6,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
@@ -213,7 +214,7 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
   /**
    * {@inheritdoc}
    */
-  public function setReviewer(UserInterface $account) {
+  public function setReviewer(AccountInterface $account) {
     $this->set('reviewer', $account->id());
     return $this;
   }

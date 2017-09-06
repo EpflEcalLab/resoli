@@ -22,6 +22,18 @@ Feature: Activitiy Detail Page Access
     And the response status code should be 200
 
   @api
+  Scenario: Logged as Declined Organizer of Lausanne, I can't access to the Activity N°2 (Activity 2 - Lausanne - Theme N°1)
+    Given I am logged in as user "declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    And the response status code should be 403
+
+  @api
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to the Activity N°2 (Activity 2 - Lausanne - Theme N°1)
+    Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    And the response status code should be 200
+
+  @api
   Scenario: Logged as Member of Lausanne, I can't access to the Activity N°11 (Activity 11 - Fribourg - Theme N°3)
     Given I am logged in as user "member+lausanne"
     When I am on "/fribourg/activities/activity-11-fribourg-theme-ndeg3"

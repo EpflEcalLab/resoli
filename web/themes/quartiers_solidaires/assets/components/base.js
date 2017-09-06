@@ -6,6 +6,8 @@ import card from 'molecules/card/card';
 import checkbox from 'molecules/checkbox/checkbox';
 import multiStep from 'organisms/multi-step';
 import formControl from 'molecules/form-control/form-control';
+import formAjax from 'molecules/form-control/form-ajax';
+import formSubmit from 'molecules/form-control/form-submit';
 
 svgIcons();
 
@@ -15,6 +17,8 @@ svgIcons();
     nav();
     multiStep();
     formControl();
+    formAjax();
+    formSubmit();
     checkbox();
   });
 })(jQuery);

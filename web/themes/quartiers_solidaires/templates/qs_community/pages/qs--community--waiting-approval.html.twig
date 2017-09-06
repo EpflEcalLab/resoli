@@ -8,7 +8,7 @@
     {% import "@quartiers_solidaires/macros.html.twig" as macros %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
     {% for privilege in variables.privileges %}
-      <li class="card card-list-item">
+      <li class="card card-list-item" id="card-{{ loop.index0 }}">
         <a
           data-toggle="collapse"
           data-parent="#users-accordion"
@@ -47,16 +47,22 @@
 
             <div class="card-actions row">
               <div class="col-sm-6 mb-3">
-                <a href="#" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
-                  {{ macros.icon('check') }}
-                  {{ 'qs.confirmed'|t }}
-                </a>
+                <form action="{{ path('qs_acl.privilege.confirm') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                  <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
+                  <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" type="submit" value="{{ 'qs.confirmed'|t }}">
+                    {{ macros.icon('check') }}
+                    {{ 'qs.confirmed'|t }}
+                  </button>
+                </form>
               </div>
               <div class="col-sm-6 mb-3">
-                <a href="#" class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block">
-                  {{ macros.icon('trash') }}
-                  {{ 'qs.reject'|t }}
-                </a>
+                <form action="{{ path('qs_acl.privilege.decline') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                  <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
+                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-right btn-block" type="submit" value="{{ 'qs.reject'|t }}">
+                    {{ macros.icon('trash') }}
+                    {{ 'qs.reject'|t }}
+                  </button>
+                </form>
               </div>
             </div>
           </div>
@@ -67,4 +73,6 @@
   {% else %}
     <p>{% trans %}qs_community.waiting_approval.empty{% endtrans %}</p>
   {% endif %}
+
+  {{ variables.pager }}
 </div>

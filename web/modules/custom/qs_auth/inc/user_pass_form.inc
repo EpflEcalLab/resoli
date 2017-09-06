@@ -42,6 +42,7 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
     $form['forget']['name']['#attributes']['autocomplete'] = "off";
     $form['forget']['name']['#attributes']['autofocus'] = "autofocus";
     $form['forget']['name']['#description'] = t('qs_auth.form.pass.name.description');
+    $form['forget']['name']['#placeholder'] = t('qs_auth.form.pass.name.placeholder');
 
     $form['actions']['submit']['#value'] = t('qs.form.submit');
     $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];

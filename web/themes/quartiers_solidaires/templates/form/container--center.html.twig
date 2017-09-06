@@ -19,8 +19,9 @@
  * @see template_preprocess_container()
  */
 #}
+{% set classes = attributes.class|join(' ') %}
 <div class="row">
-  <div class="{% block container_classes %}col-sm-8 col-md-6 mx-auto{% endblock %}">
+  <div class="{% block container_classes %}col-sm-8 col-md-6 mx-auto{% endblock %} {{ classes }}">
     {{ children }}
   </div>
 </div>

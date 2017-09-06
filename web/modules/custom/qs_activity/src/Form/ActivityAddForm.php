@@ -255,9 +255,10 @@ class ActivityAddForm extends FormBasic {
     $form['activity']['step-4']['redirection'] = [
       '#attributes' => [
         'required' => TRUE,
+        // Enable submit on click via JS.
         'variant' => 'button',
-    // Enable submit on click via JS.
-        'data-submit' => TRUE,
+        'data-submit' => TRUE,,
+        'data-toggle' => 'buttons',
       ],
       '#type'       => 'radios',
       '#required'   => FALSE,

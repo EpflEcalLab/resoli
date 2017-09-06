@@ -15,9 +15,7 @@ function qs_activity_theme_suggestions_page_alter(array &$suggestions, array &$v
   // Set to fullpage layout some special pages.
   if (in_array('page__activities__add', $suggestions)) {
     $suggestions[] = 'page__fullpage';
-  }
-
-  if (in_array('page__activities__dashboard', $suggestions)) {
+  } elseif (in_array('page__activities__dashboard', $suggestions) || in_array('page__activities__edit', $suggestions)) {
     $suggestions[] = 'page__fullmodal';
   }
 }

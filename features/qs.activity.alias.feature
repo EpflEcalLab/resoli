@@ -57,6 +57,13 @@ Feature: Activitiy Alias
     And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
     And the response status code should be 200
 
+  @api
+  Scenario: Logged as Member of Lausanne, I can access to the Activity N°2 (Activity - Lausanne - Theme N°1)
+    Given I am logged in as user "member+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/events"
+    And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    And the response status code should be 200
+
 ## Activity Edit Form
   @api
   Scenario: Logged as Organizer of Lausanne, I can access to Lausanne activities add form

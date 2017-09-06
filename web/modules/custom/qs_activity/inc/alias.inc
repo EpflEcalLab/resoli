@@ -56,6 +56,10 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
 
     case 'activity':
       $aliases = [
+        'events' => [
+          'route' => '/node/' . $entity->id(),
+          'alias' => '/' . trim($alias, '/') . '/events',
+        ],
         'events_form_add' => [
           'route' => '/events/' . $entity->id() . '/add',
           'alias' => '/' . trim($alias, '/') . '/events/add',

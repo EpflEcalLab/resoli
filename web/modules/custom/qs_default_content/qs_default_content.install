@@ -15,6 +15,15 @@ require_once 'inc/default_events.inc';
  * Create some approval (pending, accepted, canceled) for tests.
  */
 function qs_default_content_install() {
+  // @var \Drupal\Core\Entity\EntityTypeManagerInterface
+  $entityManager = \Drupal::service('entity_type.manager');
+  $userStorage = $entityManager->getStorage('user');
+
+  // Update the timezone of the admin user.
+  $admin = $userStorage->load(1);
+  $admin->timezone = 'Europe/Zurich';
+  $admin->save();
+
   qs_default_content_privileges();
 }
 

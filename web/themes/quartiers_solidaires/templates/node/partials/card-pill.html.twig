@@ -15,16 +15,16 @@
 
   <span class="card-pill-title">
     <span>
-      <time datetime="{{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
-        {{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'j F Y') }}
+      <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
+        {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F Y') }}
       </time>
     </span>
     <span class="d-none d-sm-inline">
-      <time datetime="{{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'h:i') }}">
-        {{ event.field_start_at.value|bamboo_i18n_format_date('custom', 'h:i') }}
+      <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H:i') }}">
+        {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H:i') }}
       </time>
-      - <time datetime="{{ event.field_end_at.value|bamboo_i18n_format_date('custom', 'h:i') }}">
-        {{ event.field_end_at.value|bamboo_i18n_format_date('custom', 'h:i') }}
+      - <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H:i') }}">
+        {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H:i') }}
       </time>
     </span>
   </span>

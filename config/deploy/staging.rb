@@ -12,8 +12,8 @@ set :http_auth_users, [
 # Disable Notification on slack
 set :slackistrano, false
 
+before "styleguide:build_local", "httpauth:protect"
 before "styleguide:deploy_build", "styleguide:build_local"
-after "deploy:finished", "httpauth:protect"
 
 # Map composer and drush commands
 # NOTE: If stage have different deploy_to

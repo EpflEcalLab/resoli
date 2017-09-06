@@ -5,6 +5,7 @@ namespace Drupal\qs_activity\Form;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
 
 /**
  * ActivityDeleteForm class.
@@ -19,7 +20,6 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->urlGenerator = $this->getUrlGenerator();
     $this->eventManager = $this->getEventManager();
   }
 
@@ -36,16 +36,49 @@ class ActivityDeleteForm extends ActivityEditFormBase {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state, $activity);
 
-    $form['warning']['#markup'] = '<p>' . $this->t('qs_activity.activities.form.delete.warning') . '</p>';
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
+
+    $form['#attributes'] = [
+      'title' => $activity->title->value,
+      'description' => $this->t('qs_activity.activities.form.delete.warning'),
+    ];
+
+    $form['actions'] = [
+      '#type' => 'fieldset',
+      '#theme_wrappers' => [
+        'container__center',
+      ],
+      '#attributes' => [
+        'class' => [
+          'text-center',
+        ],
+      ],
+    ];
+
+    $form['actions']['cancel'] = [
+      '#type' => 'link',
+      '#title' => $this->t('qs_activity.form.cancel'),
+      '#url' => Url::fromRoute('qs_activity.activities.dashboard', ['activity' => $activity->id()]),
+      '#attributes' => [
+        'class' => [
+          'btn btn-outline-danger btn-outline-invert',
+        ],
+      ],
+    ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'class' => [
+          'text-danger',
+        ],
+        'icon' => 'trash',
+        'icon_left' => TRUE,
+        'white' => TRUE,
+      ],
       '#value' => $this->t('qs.form.submit'),
-    ];
-
-    $cancel_link = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', ['activity' => $activity->id()]);
-    $form['actions']['cancel'] = [
-      '#markup' => '<a href="' . $cancel_link . '">' . $this->t('qs_activity.form.cancel') . '</a>',
     ];
 
     return $form;
@@ -60,7 +93,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     // Assert the activity has no event.
     $events = $this->eventManager->getAll($activity);
     if (!empty($events)) {
-      $form_state->setError($form, $this->t("qs_activity.activities.form.delete.error.has_events @activity", ['@activity' => $activity->getTitle()]));
+      $form_state->setError($form, $this->t("qs_activity.activities.form.delete.error.has_events @activity", ['@activity' => $activity->toLink($activity->getTitle())->toString()]));
     }
 
     // Add inline errors.

@@ -24,8 +24,24 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
 
     $form = parent::buildForm($form, $form_state, $activity);
 
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
+    $form['#attributes'] = [
+      'title' => $activity->title->value,
+      'description' => $this->t('qs.activity.edit_visibility'),
+    ];
+
     $form['step-1'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'mb-5',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+      ],
     ];
 
     $form['step-1']['community_can_subscribe'] = [
@@ -34,6 +50,12 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $activity->field_community_can_subscribe->value,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['step-1']['community_access_contact'] = [
@@ -42,6 +64,12 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $activity->field_community_access_contact->value,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['step-1']['community_access_detail'] = [
@@ -50,6 +78,12 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $activity->field_community_access_detail->value,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['step-1']['community_access_story'] = [
@@ -58,6 +92,12 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $activity->field_community_access_story->value,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['step-1']['member_create_story'] = [
@@ -66,6 +106,12 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $activity->field_member_create_story->value,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['step-1']['community_access_gallery'] = [
@@ -74,6 +120,12 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $activity->field_community_access_gallery->value,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['step-1']['member_create_gallery'] = [
@@ -82,10 +134,22 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $activity->field_member_create_gallery->value,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
-    $form['step-1']['actions']['submit'] = [
+    $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'icon' => 'check',
+        'modal' => TRUE,
+        'icon_left' => TRUE,
+        'outline' => TRUE,
+      ],
       '#value' => $this->t('qs.form.submit'),
     ];
 
@@ -121,7 +185,7 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       '@activity' => $activity->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_activity.activities.form.edit', ['activity' => $activity->id()], []);
+    $form_state->setRedirect('qs_activity.activities.dashboard', ['activity' => $activity->id()], []);
   }
 
 }

@@ -45,18 +45,17 @@
 {% endif %}
 {% block header %}{% endblock %}
 
-{{ page.messages }}
-
 <main role="main" class="modal-open">
   <a id="main-content" tabindex="-1"></a>
   <div class="modal modal-full force-show">
     <div class="modal-dialog">
       <div class="modal-content bg-danger">
+        {{ page.messages }}
         {% block content %}{{ page.content }}{% endblock %}
       </div>
     </div>
   </div>
-<div class="modal-backdrop show"></div>
+  <div class="modal-backdrop show"></div>
 </main>
 
 

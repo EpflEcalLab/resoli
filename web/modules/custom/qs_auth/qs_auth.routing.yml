@@ -1,6 +1,6 @@
 # Log in
 qs_auth.login:
-    path: '/authentication/login'
+    path: '/authentication'
     defaults:
         _form: '\Drupal\user\Form\UserLoginForm'
         _title: 'qs_auth.login'

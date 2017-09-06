@@ -30,7 +30,8 @@
 
     {# Contact button #}
     {# User should be member of the activity OR activity should allow access to community members #}
-    {% if 'activity_members' in variables.privileges or variables.activity.field_community_access_contact.value %}
+    {% set display_contact = event.field_contact_mail.value or event.field_contact_phone.value or event.field_contact_name.value %}
+    {% if display_contact and ('activity_members' in variables.privileges or variables.activity.field_community_access_contact.value) %}
     <div class="col-sm-6 mb-3">
       <a href="#contact-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
         {{ macros.icon('user') }}
@@ -41,8 +42,9 @@
 
     {# Location button #}
     {# User should have some privileges OR activity should allow community to access details #}
+    {% set display_location = event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
     <div class="col-sm-6 mb-3">
-      {% if variables.activity.field_community_access_detail.value and event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
+      {% if display_location and variables.activity.field_community_access_detail.value %}
       <a href="#map-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
         {{ macros.icon('meeting') }}
         {{ 'qs.event.location'|t }}

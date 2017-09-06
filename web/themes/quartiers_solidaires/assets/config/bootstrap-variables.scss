@@ -501,7 +501,7 @@ $custom-file-text: (
 
 // Form validation
 $form-feedback-valid-color:   $green !default;
-$form-feedback-invalid-color: $red !default;
+$form-feedback-invalid-color: color('danger-darker') !default;
 
 
 // Dropdowns

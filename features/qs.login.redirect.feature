@@ -6,7 +6,7 @@ Feature: Login
   @api
   Scenario: Log in redirection
     Given I am on "/user/login"
-    Then the url should match "authentication/login"
+    Then the url should match "authentication"
     And the response status code should be 200
 
   @api

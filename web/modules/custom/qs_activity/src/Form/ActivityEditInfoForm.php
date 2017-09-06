@@ -36,8 +36,24 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
 
     $form = parent::buildForm($form, $form_state, $activity);
 
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
+    $form['#attributes'] = [
+      'title' => $activity->title->value,
+      'description' => $this->t('qs.activity.edit_info'),
+    ];
+
     $form['step-1'] = [
       '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'mb-5',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+      ],
     ];
 
     $form['step-1']['title'] = [
@@ -51,18 +67,32 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
 
     $form['step-2'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'mb-5',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+      ],
     ];
 
     // Get all themes for options.
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
     foreach ($themes as $theme) {
-      $options[$theme->id()] = $theme->getName();
+      $options[$theme->id()] = $theme->getName() . '|' . $theme->field_icon->value;
     }
     $form['step-2']['theme'] = [
       '#attributes' => [
         'required' => TRUE,
         'title'    => $this->t('qs_activity.activities.form.edit.info.theme'),
+        'variant' => 'button_theme',
+        'data-toggle' => 'buttons',
+        'no_form_group' => TRUE,
+      ],
+      '#theme_wrappers' => [
+        'radios__buttons',
       ],
       '#type'          => 'radios',
       '#required'      => FALSE,
@@ -70,8 +100,14 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
       '#default_value' => $activity->field_theme->target_id,
     ];
 
-    $form['step-2']['actions']['submit'] = [
+    $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'icon' => 'check',
+        'modal' => TRUE,
+        'icon_left' => TRUE,
+        'outline' => TRUE,
+      ],
       '#value' => $this->t('qs.form.submit'),
     ];
 
@@ -107,14 +143,14 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
       'field_theme' => [$form_state->getValue('theme')],
     ];
 
-    // Create the new activity.
+    // Update the activity.
     $activity = $this->activityManager->update($activity, $fields);
 
     drupal_set_message($this->t("qs_activity.activities.form.edit.info.success @activity", [
       '@activity' => $activity->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_activity.activities.form.edit', ['activity' => $activity->id()], []);
+    $form_state->setRedirect('qs_activity.activities.dashboard', ['activity' => $activity->id()], []);
   }
 
 }

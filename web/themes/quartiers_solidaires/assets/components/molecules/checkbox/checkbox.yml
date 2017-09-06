@@ -1,2 +1,4 @@
 title: Checkbox
 name: checkbox
+variants:
+  - toggle

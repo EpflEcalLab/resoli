@@ -24,12 +24,158 @@
     }
   }
 
-  .bg-primary &.active {
-    .icon {
-      color: theme-color('primary');
+  @each $color, $value in $theme-colors {
+    .bg-#{$color} &.active {
+      .icon {
+        color: $value;
+      }
 
       svg {
         fill: $white;
+      }
+    }
+  }
+}
+
+// Toggle
+@function svg-cross($color) {
+  @return str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 70 70'%3E%3Cpath fill='#{$color}' d='M27.6211,25.5 L41.5601,11.561 C42.1461,10.975 42.1461,10.025 41.5601,9.439 C40.9751,8.854 40.0251,8.854 39.4391,9.439 L25.5001,23.379 L11.5601,9.439 C10.9751,8.854 10.0251,8.854 9.4391,9.439 C8.8531,10.025 8.8531,10.975 9.4391,11.561 L23.3791,25.5 L9.4391,39.439 C8.8531,40.025 8.8531,40.975 9.4391,41.561 C9.7321,41.854 10.1161,42 10.5001,42 C10.8841,42 11.2671,41.854 11.5601,41.561 L25.5001,27.621 L39.4391,41.561 C39.7321,41.854 40.1161,42 40.5001,42 C40.8841,42 41.2671,41.854 41.5601,41.561 C42.1461,40.975 42.1461,40.025 41.5601,39.439 L27.6211,25.5 Z'/%3E%3C/svg%3E"), "#", "%23");
+}
+
+@function svg-check($color) {
+  @return str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 70 70'%3E%3Cpath fill='#{$color}' d='M18.83275,39.6665 L18.83275,39.6665 C18.43575,39.6665 18.05375,39.5085 17.77175,39.2275 L4.43875,25.8935 C3.85375,25.3085 3.85375,24.3585 4.43875,23.7725 C5.02475,23.1875 5.97475,23.1865 6.56075,23.7725 L18.83275,36.0455 L44.43875,10.4395 C45.02475,9.8535 45.97475,9.8535 46.56075,10.4395 C47.14575,11.0255 47.14575,11.9745 46.56075,12.5605 L19.89375,39.2275 C19.61175,39.5085 19.22975,39.6665 18.83275,39.6665'/%3E%3C/svg%3E"), "#", "%23");
+}
+
+
+.checkbox-toggle-container {
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-down(xs) {
+    justify-content: space-between;
+  }
+
+  > label:first-child {
+    margin: 0;
+  }
+}
+
+.checkbox-toggle {
+  display: none;
+
+  &,
+  &:after,
+  &:before,
+  & *,
+  & *:after,
+  & *:before,
+  & + .checkbox-toggle-btn {
+    &::selection {
+      background: none;
+    }
+  }
+
+  + .checkbox-toggle-btn {
+    display: block;
+    position: relative;
+    width: $spacer * 5;
+    height: $spacer * 2.5;
+    margin-bottom: -0.05rem;
+    outline: 0;
+    cursor: pointer;
+    user-select: none;
+    border-radius: $btn-border-radius;
+    background-color: theme-color('primary');
+    border: $border-width solid $white;
+    transition: all 0.4s ease;
+
+    &:focus {
+      box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
+    }
+
+    &:after {
+      content: svg-check(theme-color('primary'));
+      display: block;
+      position: absolute;
+      top: -$border-width;
+      left: -$border-width;
+      width: $spacer * 2.5;
+      height: $spacer * 2.5;
+      background: $white;
+      border-radius: 50%;
+      transition:
+        left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        padding 0.3s ease,
+        margin 0.3s ease;
+    }
+
+    &:before {
+      content: svg-cross($white);
+      display: block;
+      position: absolute;
+      top: -$border-width;
+      right: -$border-width;
+      width: $spacer * 2.5;
+      height: $spacer * 2.5;
+      transition:
+        left 0.3s ease,
+        right 0.3s ease;
+    }
+
+    &:hover:after {
+      will-change: padding;
+    }
+
+    &:active {
+      box-shadow:
+        0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5),
+        inset 0 0 0 2em rgba($white, 0.25);
+
+      &:after {
+        left: 25%;
+      }
+    }
+  }
+
+  &:checked + .checkbox-toggle-btn {
+    &:after {
+      content: svg-cross(theme-color('primary'));
+      left: 50%;
+    }
+
+    &:before {
+      content: svg-check($white);
+      display: block;
+      position: absolute;
+      top: -$border-width;
+      left: -$border-width;
+      right: auto;
+      width: $spacer * 2.5;
+      height: $spacer * 2.5;
+    }
+
+    &:active {
+      &:after {
+        left: 50%;
+        margin-left: $spacer * -1.25;
+      }
+    }
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .bg-#{$color} {
+    .checkbox-toggle + .checkbox-toggle-btn {
+      background-color: $value;
+
+      &:after {
+        content: svg-check($value);
+      }
+    }
+
+    .checkbox-toggle:checked + .checkbox-toggle-btn {
+      &:after {
+        content: svg-cross($value);
       }
     }
   }

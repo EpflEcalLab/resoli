@@ -24,6 +24,8 @@ class ActivityAddForm extends FormBasic {
     $this->acl             = $this->getAcl();
     $this->termStorage     = $this->getTermStorage();
     $this->activityManager = $this->getActivityManager();
+    $this->privilegeManger = $this->getPrivilegeManager();
+    $this->currentUser     = $this->getCurrentUser();
   }
 
   /**
@@ -58,6 +60,21 @@ class ActivityAddForm extends FormBasic {
   public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
     $form = parent::buildForm($form, $form_state);
 
+    // Disable caching & HTML5 validation.
+    $form['#cache']['max-age'] = 0;
+    $form['#attributes'] = [
+      'novalidate' => 'novalidate',
+      'class' => [
+        'modal-body',
+      ],
+      'bg' => 'danger',
+    ];
+
+    // Apply custom styles to wrapper.
+    $form['#theme_wrappers'] = [
+      'form__fullpage__multistep',
+    ];
+
     // Save the community for submisson.
     $form['community'] = [
       '#type'  => 'hidden',
@@ -66,6 +83,13 @@ class ActivityAddForm extends FormBasic {
 
     $form['activity']['step-1'] = [
       '#type' => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_activity.activities.form.step1'),
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
+      ],
     ];
 
     $form['activity']['step-1']['title'] = [
@@ -78,18 +102,32 @@ class ActivityAddForm extends FormBasic {
 
     $form['activity']['step-2'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_activity.activities.form.step2'),
+      ],
+      '#theme_wrappers' => [
+        'container__center__wide',
+        'fieldset__step',
+      ],
     ];
 
     // Get all themes for options.
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
     foreach ($themes as $theme) {
-      $options[$theme->id()] = $theme->getName();
+      $options[$theme->id()] = $theme->getName() . '|' . $theme->field_icon->value;
     }
+
     $form['activity']['step-2']['theme'] = [
       '#attributes' => [
         'required' => TRUE,
         'title'    => $this->t('qs_activity.activities.form.add.theme'),
+        'variant' => 'button_theme',
+        'data-toggle' => 'buttons',
+        'no_form_group' => TRUE,
+      ],
+      '#theme_wrappers' => [
+        'radios__buttons',
       ],
       '#type'     => 'radios',
       '#required' => FALSE,
@@ -98,6 +136,13 @@ class ActivityAddForm extends FormBasic {
 
     $form['activity']['step-3'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_activity.activities.form.step3'),
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
+      ],
     ];
 
     $form['activity']['step-3']['community_can_subscribe'] = [
@@ -106,6 +151,12 @@ class ActivityAddForm extends FormBasic {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => 0,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['activity']['step-3']['community_access_contact'] = [
@@ -114,6 +165,12 @@ class ActivityAddForm extends FormBasic {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => 1,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['activity']['step-3']['community_access_detail'] = [
@@ -122,6 +179,12 @@ class ActivityAddForm extends FormBasic {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => 1,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['activity']['step-3']['community_access_story'] = [
@@ -130,6 +193,12 @@ class ActivityAddForm extends FormBasic {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => 0,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['activity']['step-3']['member_create_story'] = [
@@ -138,6 +207,12 @@ class ActivityAddForm extends FormBasic {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => 1,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['activity']['step-3']['community_access_gallery'] = [
@@ -146,6 +221,12 @@ class ActivityAddForm extends FormBasic {
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => 0,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['activity']['step-3']['member_create_gallery'] = [
@@ -154,25 +235,52 @@ class ActivityAddForm extends FormBasic {
       '#type'        => 'checkbox',
       '#required'    => FALSE,
       '#default_value'     => 1,
+      '#attributes' => [
+        'variant' => 'toggle',
+      ],
+      '#theme_wrappers' => [
+        'input__checkbox__toggle',
+      ],
     ];
 
     $form['activity']['step-4'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_activity.activities.form.step4'),
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
+      ],
     ];
 
-    $form['activity']['step-4']['event'] = [
+    $form['activity']['step-4']['redirection'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title'    => $this->t('qs_activity.activities.form.add.event'),
+        // Enable submit on click via JS.
+        'variant' => 'button',
+        'data-submit' => TRUE,
+        'data-toggle' => 'buttons',
       ],
       '#type'       => 'radios',
       '#required'   => FALSE,
-      '#options'    => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
+      '#theme_wrappers' => [
+        'radios__buttons',
+      ],
+      '#options'    => [
+        // @codingStandardsIgnoreStart
+        0 => $this->t('qs_activity.activities.form.add.save') . '|check',
+        1 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus',
+        // @codingStandardsIgnoreEnd
+      ],
     ];
 
     $form['activity']['step-4']['actions']['submit'] = [
       '#type'  => 'submit',
       '#value' => $this->t('qs.form.submit'),
+      '#attributes' => [
+        'hidden' => TRUE,
+      ],
     ];
 
     return $form;
@@ -220,11 +328,23 @@ class ActivityAddForm extends FormBasic {
     // Create the new activity.
     $activity = $this->activityManager->create($form_state->getValue('title'), $themes, $authorizations, $community);
 
+    // Add the current user as the first organier of this activity.
+    $this->privilegeManger->create('activity_organizers', $activity, $this->currentUser);
+
     drupal_set_message($this->t("qs_activity.activities.form.add.success @activity", [
       '@activity' => $activity->getTitle(),
     ]));
 
-    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+    // Handle redirection.
+    $redirect_to_event = $form_state->getValue('redirection');
+
+    if ($redirect_to_event) {
+      $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
+    }
+    else {
+      $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+    }
+
   }
 
 }

@@ -1,8 +1,49 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+<div class="modal-body">
+  <h1 class="text-center mt-3 mb-5">{{ variables.activity.title.value }}</h1>
 
-<ul>
-  <li><a href="{{ path('qs_activity.activities.form.edit.info', {'activity': variables.activity.id}) }}">edit info</a></li>
-  <li><a href="{{ path('qs_activity.activities.form.edit.visibility', {'activity': variables.activity.id}) }}">edit visiblity</a></li>
-  <li><a href="{{ path('qs_activity.activities.form.edit.defaults', {'activity': variables.activity.id}) }}">edit default values</a></li>
-  <li><a href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">delete activity</a></li>
-  <li><a href="">Membership</a></li>
-</ul>
+  <div class="row">
+    <div class="col-sm-6 col-lg-4 mx-auto text-center">
+      <ul class="list-unstyled mt-3 mx-auto">
+        <li>
+          {# Edit info Button #}
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.activities.form.edit.info', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('pencil') }}
+            {{ 'qs.activity.edit_info'|t }}
+          </a>
+        </li>
+        <li>
+          {# Edit visibility Button #}
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.activities.form.edit.visibility', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('pencil') }}
+            {{ 'qs.activity.edit_visibility'|t }}
+          </a>
+        </li>
+        <li>
+          {# Edit default values Button #}
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.activities.form.edit.defaults', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('pencil') }}
+            {{ 'qs.activity.edit_default_values'|t }}
+          </a>
+        </li>
+        <li>
+          {# Delete Button #}
+          <a class="btn btn-block btn-outline-danger btn-white btn-icon mb-2" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('trash') }}
+            {{ 'qs.activity.delete'|t }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="my-auto d-flex flex-column">
+
+
+
+
+
+
+  </div>
+</div>
+

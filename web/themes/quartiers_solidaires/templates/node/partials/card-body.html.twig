@@ -21,7 +21,7 @@
     {# User should be member of the activity OR activity should allow subscription to community members #}
     {% if 'activity_members' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
     <div class="col-sm-6 mb-3">
-      <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+      <button onclick="alert('This feature is not yet availaible.')" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
         {{ macros.icon('register') }}
         {{ 'qs.event.register'|t }}
       </button>

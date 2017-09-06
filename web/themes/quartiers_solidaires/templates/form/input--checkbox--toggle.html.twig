@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+
+<div class="form-group checkbox-toggle-container row">
+  <label class="col-8" for="{{ attributes.id }}">{{ element['#title'] }}</label>
+  <div class="col-4 d-flex justify-content-end">
+    <input{{ attributes.addClass('checkbox-toggle') }} />
+    <label tabindex="0" for="{{ attributes.id }}" class="checkbox-toggle-btn"></label>
+  </div>
+</div>
+

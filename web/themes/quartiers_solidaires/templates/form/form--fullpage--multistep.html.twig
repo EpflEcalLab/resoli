@@ -15,8 +15,24 @@
   element['#validated'] ? 'was-validated',
 ] %}
 
-<div class="bg-blue">
+{% set wrapper_class = [
+  'bg-' ~ attributes.bg|default('blue')
+] %}
+
+
+<div class="{{ wrapper_class|join(' ') }}">
   <div class="container fullpage-wrapper py-4">
+
+    {% if element['#top_links'] %}
+    <div class="row justify-content-between">
+      {% for path, link in element['#top_links'] %}
+        <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }}" href="{{ link.params ? path(path, link.params) : path(path) }}">
+          {{ macros.icon(link.options.icon) }}
+          {{ link.label }}
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
 
     <form{{ attributes.addClass(classes) }}>
       {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}

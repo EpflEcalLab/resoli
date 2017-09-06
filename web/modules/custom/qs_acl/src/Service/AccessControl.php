@@ -9,6 +9,7 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\taxonomy\TermInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * AccessControl.
@@ -247,7 +248,7 @@ class AccessControl {
     }
 
     // Check bypass.
-    if ($this->hasBypass($user)) {
+    if ($this->hasBypass($user, $activity)) {
       return TRUE;
     }
 

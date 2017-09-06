@@ -2,6 +2,7 @@
 
 .modal-dialog {
   margin-bottom: 5vh;
+  text-align: left;
 }
 
 .modal-header {
@@ -18,9 +19,21 @@
 }
 
 .modal-body {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .modal-footer {
   flex-shrink: 0;
+}
+
+.modal-full {
+  .modal-content {
+    height: 85vh;
+  }
+}
+
+
+// We sometimes need to have a modal look but it's not really a modal
+.modal.force-show {
+  display: block;
 }

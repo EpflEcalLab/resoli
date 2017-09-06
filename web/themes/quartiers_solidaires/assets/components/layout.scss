@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .header {
-  .row > * {
+  > .row > * {
     // basic column properties
     @include make-col-ready();
     @include make-col(4);
@@ -10,4 +10,9 @@
       text-align: right;
     }
   }
+}
+
+// Drupal
+#toolbar-administration {
+  z-index: ($zindex-tooltip * 2);
 }

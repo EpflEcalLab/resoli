@@ -30,8 +30,10 @@
         "drupal/admin_toolbar": "^1.19",
         "drupal/backerymails": "^1.2",
         "drupal/bamboo_twig": "^3.0",
+        "drupal/block_exclude_pages": "^1.2",
         "drupal/console": "~1.0",
         "drupal/core": "~8.0",
+        "drupal/default_content": "~1.0",
         "drupal/field_group": "^1.0@RC",
         "drupal/focal_point": "^1.0@beta",
         "drupal/honeypot": "^1.27",
@@ -43,8 +45,7 @@
         "drush/drush": "~8.0",
         "symfony/property-access": "^3.3",
         "webflo/drupal-finder": "^0.3.0",
-        "webmozart/path-util": "^2.3",
-        "drupal/default_content": "~1.0"
+        "webmozart/path-util": "^2.3"
     },
     "require-dev": {
         "behat/mink": "~1.7",

@@ -4,17 +4,17 @@
 ////////////
 
 // Mixin to set the pill gradient
-@mixin card-pill-bg-gradient($class) {
+@mixin card-pill-bg-gradient($class, $color: $card-cap-bg) {
   #{$class} {
     background-color: transparent;
-    background-image: linear-gradient(to right, rgba($card-cap-bg, 0) 5%, rgba($card-cap-bg, 0.08) 50%);
+    background-image: linear-gradient(to right, rgba($color, 0) 5%, rgba($color, 0.08) 50%);
   }
 
   a#{$class} {
     &:active,
     &.active {
       transform: scale(0.98);
-      background-image: linear-gradient(to right, rgba(theme-color("secondary"), 0.02) 5%, rgba(theme-color("secondary"), 0.3) 70%);
+      background-image: linear-gradient(to right, rgba($color, 0.02) 5%, rgba($color, 0.3) 70%);
     }
   }
 }
@@ -226,6 +226,39 @@ a[href].card-pill-simple {
     }
 
     @include flag-size(50px);
+  }
+}
+
+.card-list-item-muted:not(.card-open) {
+  @include card-pill-bg-gradient(".card-pill", $gray-600);
+
+  .card-pill-icon {
+    .icon {
+      background-color: $gray-300;
+      color: color("secondary");
+    }
+  }
+}
+
+.card-list-item-danger:not(.card-open) {
+  @include card-pill-bg-gradient(".card-pill", rgba(color('danger'), 0.5));
+
+  .card-pill-icon {
+    .icon {
+      background-color: color('danger');
+      color: color("light");
+    }
+  }
+}
+
+.card-list-item-primary:not(.card-open) {
+  @include card-pill-bg-gradient(".card-pill", rgba(color('primary'), 0.5));
+
+  .card-pill-icon {
+    .icon {
+      background-color: color('primary');
+      color: color("light");
+    }
   }
 }
 

@@ -85,6 +85,15 @@ const multiStep = () => {
             $(`#next-btn-${id}`).show();
           }
         });
+
+        // Jump to the next step on Enter
+        $(document).on('keydown', function (e) {
+
+          if (e.keyCode === 13 && nextTab.length > 0) {
+            e.preventDefault();
+            nextTab.tab('show');
+          }
+        });
       });
 
       // Show the first tab on load

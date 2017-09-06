@@ -11,13 +11,11 @@
  */
 #}
 {% set classes = [
-  'form',
+  'form-multistep',
   element['#validated'] ? 'was-validated',
-  'my-auto',
 ] %}
-{% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="bg-secondary">
+<div class="bg-blue">
   <div class="container fullpage-wrapper py-4">
 
     {% if element['#top_links'] %}
@@ -31,23 +29,13 @@
     </div>
     {% endif %}
 
-    <div class="row flex-column justify-content-center my-auto">
-      {% if element['#title'] %}
-        <div class="row mb-5">
-          <div class="col-md-10 col-lg-8 mx-auto text-center">
-            <h1>{{ element['#title'] }}</h1>
-          </div>
-        </div>
-      {% endif %}
-      <form{{ attributes.addClass(classes) }}>
-        <div class="row">
-           <div class="col-md-10 col-lg-8 mx-auto">{{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}</div>
-        </div>
-        <div class="row">
-          <div class="col-md-10 col-lg-8 mx-auto tab-content d-flex flex-column">{{ children }}</div>
-        </div>
-      </form>
-    </div>
+    <form{{ attributes.addClass(classes) }}>
+      {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}
+      <div class="row">
+        <div class="col tab-content d-flex flex-column">{{ children }}</div>
+      </div>
+    </form>
+
   </div>
 </div>
 

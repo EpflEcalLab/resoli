@@ -15,9 +15,15 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
 
   // Display links to other meaningful pages.
   $form['#top_links'] = [
-    '<front>' => t('qs_auth.link.home'),
-    'qs_auth.pass' => t('qs_auth.link.password'),
-    'qs_auth.register' => t('qs_auth.link.register'),
+    '<front>' => [
+      'label' => t('qs_auth.link.home'),
+    ],
+    'qs_auth.pass' => [
+      'label' => t('qs_auth.link.password'),
+    ],
+    'qs_auth.register' => [
+      'label' => t('qs_auth.link.register'),
+    ],
   ];
 
   $form['login'] = [

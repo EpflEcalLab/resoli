@@ -95,6 +95,21 @@ class AccountEditForm extends FormBase {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
+    $form['#title'] = $this->t('qs_supervisor.account.form.edit_title');
+    $form['#top_links'] = [
+      'qs_supervisor.account.dashboard' => [
+        'label' => $this->t('qs_supervisor.account.form.back'),
+        'params' => [
+          'user' => $user->uid->value,
+        ],
+        'options' => [
+          'icon' => 'chevron-left',
+        ],
+      ],
+    ];
+    $form['#theme_wrappers'] = [
+      'form__fullpage',
+    ];
 
     // Save the user for submisson.
     $form['user'] = [
@@ -104,12 +119,17 @@ class AccountEditForm extends FormBase {
 
     $form['credentials'] = [
       '#type'  => 'fieldset',
+      '#title'  => 'fieldset',
+      '#theme_wrappers' => [
+        'container__center',
+      ],
     ];
 
     $form['credentials']['mail'] = [
       '#attributes'    => ['required' => TRUE],
-      '#type'          => 'textfield',
+      '#type'          => 'email',
       '#title'         => $this->t('qs_supervisor.account.form.edit.mail'),
+      '#placeholder' => $this->t('qs_auth.register_form.mail.placeholder'),
       '#required'      => FALSE,
       '#default_value' => $user->mail->value,
     ];
@@ -118,16 +138,21 @@ class AccountEditForm extends FormBase {
       '#attributes' => ['required' => TRUE],
       '#type'       => 'password',
       '#title'      => $this->t('qs_supervisor.account.form.edit.password'),
+      '#placeholder' => $this->t('qs_auth.register_form.password.placeholder'),
       '#required'   => FALSE,
     ];
 
     $form['personnal'] = [
       '#type'  => 'fieldset',
+      '#theme_wrappers' => [
+        'container__center',
+      ],
     ];
 
     $form['personnal']['step-2']['firstname'] = [
       '#attributes'  => ['required' => TRUE],
       '#title'       => $this->t('qs_supervisor.account.form.edit.firstname'),
+      '#placeholder' => $this->t('qs_auth.form.register.firstname.placeholder'),
       '#type'        => 'textfield',
       '#required'    => FALSE,
       '#default_value' => $user->field_firstname->value,
@@ -136,6 +161,7 @@ class AccountEditForm extends FormBase {
     $form['personnal']['step-2']['lastname'] = [
       '#attributes'  => ['required' => TRUE],
       '#title'       => $this->t('qs_supervisor.account.form.edit.lastname'),
+      '#placeholder' => $this->t('qs_auth.form.register.lastname.placeholder'),
       '#type'        => 'textfield',
       '#required'    => FALSE,
       '#default_value' => $user->field_lastname->value,
@@ -145,14 +171,22 @@ class AccountEditForm extends FormBase {
       '#attributes'    => ['required' => TRUE],
       '#type'          => 'textfield',
       '#title'         => $this->t('qs_supervisor.account.form.edit.phone'),
+      '#placeholder' => $this->t('qs_auth.register_form.phone.placeholder'),
       '#required'      => FALSE,
       '#default_value' => $user->field_phone->value,
     ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'class' => [
+          'align-self-center',
+        ],
+        'icon' => 'check',
+      ],
       '#value' => $this->t('qs.form.submit'),
     ];
+
     return $form;
   }
 

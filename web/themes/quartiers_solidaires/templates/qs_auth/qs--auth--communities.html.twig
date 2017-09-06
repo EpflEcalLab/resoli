@@ -5,17 +5,29 @@
     {% if variables.communities %}
     <div class="container my-auto">
       <div class="row">
-        <div class="col-sm-6 col-lg-4 mx-auto text-center">
+        <div class="col-sm-10 col-lg-8 mx-auto text-center">
           <h2>{{ 'qs.auth.communities.welcome'|t }}</h2>
           <p>{{ 'qs.auth.communities.description'|t }}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-lg-4 mx-auto text-center">
           <div class="mt-4">
-            {{ macros.icon('communities') }}
+            {{ macros.icon('communities', ['icon-xl']) }}
           </div>
           <ul class="list-unstyled mt-3">
             {% for community in variables.communities %}
             <li>
               <a class="btn btn-block btn-outline-secondary btn-outline-invert mb-2" href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}">{{ community.name.value }}</a>
             </li>
+            {% endfor %}
+            {% for community in variables.pending %}
+              <li>
+                <a class="btn btn-icon btn-block btn-outline-danger btn-outline-invert mb-2" href="{{ path('qs_auth.approval', {'community': community.id}) }}">
+                  {{ macros.icon('wait') }}
+                  {{ community.name.value }}
+                </a>
+              </li>
             {% endfor %}
           </ul>
         </div>
@@ -24,12 +36,3 @@
     {% endif %}
   </div>
 </div>
-
-{% if variables.pending %}
-Pending
-<ul>
-  {% for community in variables.pending %}
-  <li><a href="{{ path('qs_auth.approval', {'community': community.id}) }}">{{ community.name.value }}</a></li>
-  {% endfor %}
-</ul>
-{% endif %}

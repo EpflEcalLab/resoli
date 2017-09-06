@@ -11,9 +11,9 @@
  */
 #}
 {% set labelIcon = element['#title']|split('|') %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{% if labelIcon|length > 1 %}
-  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% if labelIcon|length > 1 and attributes.variant == 'button_theme' %}
   <label class="btn checkbox {{ attributes.checked ? 'active' }}">
     {{ macros.icon("theme_#{labelIcon|last}_o") }}
     <input{{ attributes }} />
@@ -22,11 +22,15 @@
 {% else %}
   {% set classes = [
     'btn btn-outline-blue btn-outline-invert btn-block',
+    labelIcon|length > 1 ? 'btn-icon',
     attributes.checked ? 'active',
   ] %}
   <label class="{{ classes|join(' ') }}">
+    {% if labelIcon|length > 1 %}
+      {{ macros.icon("#{labelIcon|last}") }}
+    {% endif %}
     <input{{ attributes }} />
-    {{ element['#title'] }}
+    {{ labelIcon|first }}
   </label>
 {% endif %}
 

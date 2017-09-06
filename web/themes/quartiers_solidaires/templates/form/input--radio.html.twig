@@ -10,7 +10,7 @@
  * @see template_preprocess_input()
  */
 #}
-{% if attributes.variant == 'button' %}
+{% if attributes.variant == 'button' or attributes.variant == 'button_theme' %}
   {% include "input--radio--button.html.twig" %}
 {% else %}
 <label class="custom-control custom-radio">

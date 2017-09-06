@@ -176,6 +176,10 @@
   .show > &.dropdown-toggle {
     color: $body-color;
     background-color: $white;
+
+    .icon svg {
+      color: $body-color;
+    }
   }
 
   // Set color of text based on background when button is active

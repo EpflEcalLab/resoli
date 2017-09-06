@@ -1,7 +1,7 @@
 const formSubmit = () => {
   (function ($) {
-    const $checkboxes = $('input[type=checkbox][data-submit=checkbox]');
-    $checkboxes.change(function(){
+    const $checkboxes = $('[data-submit]');
+    $checkboxes.on('change click', function(){
       const $form = $(this).parents('form');
 
       if ($form.length > 0) {

@@ -116,11 +116,11 @@ class ActivityAddForm extends FormBasic {
       $options[$theme->id()] = $theme->getName() . '|' . $theme->field_icon->value;
     }
 
-    $form['activity']['step-2']['themes'] = [
+    $form['activity']['step-2']['theme'] = [
       '#attributes' => [
         'required' => TRUE,
         'title'    => $this->t('qs_activity.activities.form.add.theme'),
-        'variant' => 'button',
+        'variant' => 'button_theme',
         'data-toggle' => 'buttons',
         'no_form_group' => TRUE,
       ],
@@ -252,19 +252,30 @@ class ActivityAddForm extends FormBasic {
       ],
     ];
 
-    $form['activity']['step-4']['event'] = [
+    $form['activity']['step-4']['redirection'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title'    => $this->t('qs_activity.activities.form.add.event'),
+        'variant' => 'button',
+    // Enable submit on click via JS.
+        'data-submit' => TRUE,
       ],
       '#type'       => 'radios',
       '#required'   => FALSE,
-      '#options'    => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
+      '#theme_wrappers' => [
+        'radios__buttons',
+      ],
+      '#options'    => [
+        0 => $this->t('qs_activity.activities.form.add.save') . '|check',
+        1 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus',
+      ],
     ];
 
     $form['activity']['step-4']['actions']['submit'] = [
       '#type'  => 'submit',
       '#value' => $this->t('qs.form.submit'),
+      '#attributes' => [
+        'hidden' => TRUE,
+      ],
     ];
 
     return $form;
@@ -316,7 +327,16 @@ class ActivityAddForm extends FormBasic {
       '@activity' => $activity->getTitle(),
     ]));
 
-    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+    // Handle redirection.
+    $redirect_to_event = $form_state->getValue('redirection');
+
+    if ($redirect_to_event) {
+      $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
+    }
+    else {
+      $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+    }
+
   }
 
 }

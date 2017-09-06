@@ -135,6 +135,10 @@
     .show > &.dropdown-toggle {
       color: $color;
       background-color: $color-invert;
+
+      .icon svg {
+        color: $color;
+      }
     }
   }
 }

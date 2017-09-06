@@ -221,6 +221,9 @@ class PrivilegeManger {
       ->condition('privileges.bundle', 'taxonomy_term')
       ->condition('privileges.entity', $community->id());
 
+    // Remove current user from the list.
+    $query->condition('privileges.user', $this->currentUser->id(), '<>');
+
     $or = $query->orConditionGroup();
     $or->condition('privileges.privilege', 'community_members');
     $or->condition('privileges.privilege', 'community_organizers');

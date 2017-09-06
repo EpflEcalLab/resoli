@@ -24,28 +24,48 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
 
     $form = parent::buildForm($form, $form_state, $activity);
 
-    $form['body'] = [
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
+    $form['#attributes'] = [
+      'title' => $activity->title->value,
+      'description' => $this->t('qs.activity.edit_defaults'),
+    ];
+
+    $form['group'] = [
+      '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'mb-5',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+      ],
+    ];
+
+    $form['group']['body'] = [
       '#title'         => $this->t('qs_activity.activities.form.edit.defaults.body'),
       '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.body.placeholder'),
       '#type'          => 'textarea',
       '#default_value' => $activity->body->value,
     ];
 
-    $form['contact_phone'] = [
+    $form['group']['contact_phone'] = [
       '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_phone'),
       '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_phone.placeholder'),
       '#type'          => 'textfield',
       '#default_value' => $activity->field_contact_phone->value,
     ];
 
-    $form['contact_mail'] = [
+    $form['group']['contact_mail'] = [
       '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_mail'),
       '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_mail.placeholder'),
       '#type'          => 'textfield',
       '#default_value' => $activity->field_contact_mail->value,
     ];
 
-    $form['venue'] = [
+    $form['group']['venue'] = [
       '#attributes' => [
         'google-autocomplete'     => TRUE,
         'google-input-lat' => 'edit-latitude',
@@ -55,26 +75,33 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       '#type'          => 'textfield',
       '#default_value' => $activity->field_venue->value,
     ];
-    $form['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
+    $form['group']['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
     // Save the community for submisson.
-    $form['latitude'] = [
+    $form['group']['latitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_lat->value,
     ];
-    $form['longitude'] = [
+    $form['group']['longitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_long->value,
     ];
 
-    $form['contribution'] = [
+    $form['group']['contribution'] = [
       '#title' => $this->t('qs_activity.activities.form.edit.defaults.contribution'),
+      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contribution.placeholder'),
       '#type'  => 'textfield',
       '#default_value' => $activity->field_contribution->value,
     ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'icon' => 'check',
+        'modal' => TRUE,
+        'icon_left' => TRUE,
+        'outline' => TRUE,
+      ],
       '#value' => $this->t('qs.form.submit'),
     ];
 
@@ -110,7 +137,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       '@activity' => $activity->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_activity.activities.form.edit', ['activity' => $activity->id()], []);
+    $form_state->setRedirect('qs_activity.activities.dashboard', ['activity' => $activity->id()], []);
   }
 
 }

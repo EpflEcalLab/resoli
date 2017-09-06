@@ -1,18 +1,3 @@
-# French translation of Drupal
-#
-msgid ""
-msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2017-08-22 13:16+0200\n"
-"PO-Revision-Date: 2017-09-04 19:38+0100\n"
-"Last-Translator: NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
-"X-Generator: Poedit 1.7.7\n"
 
 # Patterns
 msgid "last year"
@@ -42,148 +27,216 @@ msgstr "cette semaine"
 msgid "next week"
 msgstr "la semaine prochaine"
 
-msgid "yesterday"
-msgstr "hier"
+msgid "Yesterday"
+msgstr "Hier"
 
-msgid "today"
-msgstr "aujourd'hui"
+msgid "Today"
+msgstr "Aujourd'hui"
 
-msgid "tomorrow"
-msgstr "demain"
+msgid "Tomorrow"
+msgstr "Demain"
+
+msgctxt "ampm"
+msgid "am"
+msgstr "am"
+
+msgctxt "ampm"
+msgid "pm"
+msgstr "pm"
 
 # Day Periods
-msgid "midnight"
-msgstr "minuit"
+msgid "Midnight"
+msgstr "Minuit"
 
-msgid "night"
-msgstr "nuit"
+msgid "Night"
+msgstr "Nuit"
 
-msgid "morning"
-msgstr "matin"
+msgid "Morning"
+msgstr "Matin"
 
-msgid "noon"
-msgstr "midi"
+msgid "Noon"
+msgstr "Midi"
 
-msgid "afternoon"
-msgstr "après-midi"
+msgid "Afternoon"
+msgstr "Après-midi"
 
-msgid "evening"
-msgstr "soir"
+msgid "Evening"
+msgstr "Soir"
 
 # Weekdays full
-msgid "sunday"
-msgstr "dimanche"
+msgid "Sunday"
+msgstr "Dimanche"
 
-msgid "monday"
-msgstr "lundi"
+msgid "Monday"
+msgstr "Lundi"
 
-msgid "tuesday"
-msgstr "mardi"
+msgid "Tuesday"
+msgstr "Mardi"
 
-msgid "wednesday"
-msgstr "mercredi"
+msgid "Wednesday"
+msgstr "Mercredi"
 
-msgid "thursday"
-msgstr "jeudi"
+msgid "Thursday"
+msgstr "Jeudi"
 
-msgid "friday"
-msgstr "vendredi"
+msgid "Friday"
+msgstr "Vendredi"
 
-msgid "saturday"
-msgstr "samedi"
+msgid "Saturday"
+msgstr "Samedi"
 
 # Weekdays abbr
-msgid "sun"
-msgstr "dim."
+msgctxt "Abbreviated weekday"
+msgid "Sun"
+msgstr "Dim."
 
-msgid "mon"
-msgstr "lun."
+msgctxt "Abbreviated weekday"
+msgid "Mon"
+msgstr "Lun."
 
-msgid "tue"
-msgstr "mar."
+msgctxt "Abbreviated weekday"
+msgid "Tue"
+msgstr "Mar."
 
-msgid "wed"
-msgstr "mer."
+msgctxt "Abbreviated weekday"
+msgid "Wed"
+msgstr "Mer."
 
-msgid "thu"
-msgstr "jeu."
+msgctxt "Abbreviated weekday"
+msgid "Thu"
+msgstr "Jeu."
 
-msgid "fri"
-msgstr "ven."
+msgctxt "Abbreviated weekday"
+msgid "Fri"
+msgstr "Ven."
 
-msgid "sat"
-msgstr "sam."
+msgctxt "Abbreviated weekday"
+msgid "Sat"
+msgstr "Sam."
+
+# Abbreviated 1 letter weekday
+msgctxt "Abbreviated 1 letter weekday Sunday"
+msgid "S"
+msgstr "D"
+
+msgctxt "Abbreviated 1 letter weekday Monday"
+msgid "M"
+msgstr "L"
+
+msgctxt "Abbreviated 1 letter weekday Tuesday"
+msgid "T"
+msgstr "M"
+
+msgctxt "Abbreviated 1 letter weekday Wednesday"
+msgid "W"
+msgstr "M"
+
+msgctxt "Abbreviated 1 letter weekday Thursday"
+msgid "T"
+msgstr "J"
+
+msgctxt "Abbreviated 1 letter weekday Friday"
+msgid "F"
+msgstr "V"
+
+msgctxt "Abbreviated 1 letter weekday Saturday"
+msgid "S"
+msgstr "S"
 
 # Months full
-msgid "january"
-msgstr "janvier"
+msgctxt "Long month name"
+msgid "January"
+msgstr "Janvier"
 
-msgid "february"
-msgstr "février"
+msgctxt "Long month name"
+msgid "February"
+msgstr "Février"
 
-msgid "march"
-msgstr "mars"
+msgctxt "Long month name"
+msgid "March"
+msgstr "Mars"
 
-msgid "april"
-msgstr "avril"
+msgctxt "Long month name"
+msgid "April"
+msgstr "Avril"
 
-msgid "may"
-msgstr "mai"
+msgctxt "Long month name"
+msgid "May"
+msgstr "Mai"
 
-msgid "june"
-msgstr "juin"
+msgctxt "Long month name"
+msgid "June"
+msgstr "Juin"
 
-msgid "july"
-msgstr "juillet"
+msgctxt "Long month name"
+msgid "July"
+msgstr "Juillet"
 
-msgid "august"
-msgstr "août"
+msgctxt "Long month name"
+msgid "August"
+msgstr "Août"
 
-msgid "september"
-msgstr "septembre"
+msgctxt "Long month name"
+msgid "September"
+msgstr "Septembre"
 
-msgid "october"
-msgstr "octobre"
+msgctxt "Long month name"
+msgid "October"
+msgstr "Octobre"
 
-msgid "november"
-msgstr "novembre"
+msgctxt "Long month name"
+msgid "November"
+msgstr "Novembre"
 
-msgid "december"
-msgstr "décembre"
+msgctxt "Long month name"
+msgid "December"
+msgstr "Décembre"
 
 # Months abbr
-msgid "jan"
-msgstr "janv."
 
-msgid "feb"
-msgstr "févr."
+msgctxt "Abbreviated month name"
+msgid "Jan"
+msgstr "Janv."
 
-msgid "mar"
-msgstr "mars"
+msgctxt "Abbreviated month name"
+msgid "Feb"
+msgstr "Févr."
 
-msgid "apr"
-msgstr "avr."
+msgctxt "Abbreviated month name"
+msgid "Mar"
+msgstr "Mars"
 
-msgid "jun"
-msgstr "juin"
+msgctxt "Abbreviated month name"
+msgid "Apr"
+msgstr "Avr."
 
+msgctxt "Abbreviated month name"
+msgid "Jun"
+msgstr "Juin"
+
+msgctxt "Abbreviated month name"
 msgid "Jul"
-msgstr "juil."
+msgstr "Juil."
 
+msgctxt "Abbreviated month name"
 msgid "Aug"
-msgstr "août"
+msgstr "Août"
 
+msgctxt "Abbreviated month name"
 msgid "Sep"
-msgstr "sept."
+msgstr "Sept."
 
+msgctxt "Abbreviated month name"
 msgid "Oct"
-msgstr "oct."
+msgstr "Oct."
 
+msgctxt "Abbreviated month name"
 msgid "Nov"
-msgstr "nov."
+msgstr "Nov."
 
+msgctxt "Abbreviated month name"
 msgid "Dec"
-msgstr "déc."
+msgstr "Déc."
 
 # Quartiers Solidaires
 msgid "qs_auth.form.login.name.placeholder"

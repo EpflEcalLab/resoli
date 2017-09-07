@@ -64,12 +64,16 @@
     </div>
 
     {# Edit button #}
-    {# User should be organizer OR maintainer of the activity #}
-    {% if 'activity_organizers' in variables.privileges or 'activity_maintainers' in variables.privileges %}
+    {# User should be organizer OR maintainer of the activity OR admin #}
+    {% if
+      'activity_organizers' in variables.privileges
+      or 'activity_maintainers' in variables.privileges
+      or user.hasPermission('administer nodes')
+    %}
     <div class="col-sm-6 mb-3">
       <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-primary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
         {{ macros.icon('meeting') }}
-        {{ 'qs.event.edit'|t }}
+        {{ 'qs.event.dashboard'|t }}
       </a>
     </div>
     {% endif %}

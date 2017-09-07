@@ -100,29 +100,61 @@ class EventAddForm extends FormBasic {
       '#default_value' => $activity->title->value,
     ];
 
-    $now = new DrupalDateTime();
-    $form['event']['step-1']['date'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.add.date'),
-      '#type'          => 'textfield',
-      '#required'      => FALSE,
-      '#default_value' => $now->format('d.m.Y'),
+    $form['event']['step-1']['date_fieldset'] = [
+      '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'flex-wrap',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__date',
+      ],
     ];
 
-    $form['event']['step-1']['start_at'] = [
-      '#attributes'    => ['required' => TRUE],
+    $now = new DrupalDateTime();
+    $form['event']['step-1']['date_fieldset']['date'] = [
+      '#attributes' => [
+        'type' => 'date',
+        'required' => TRUE,
+        'class'          => [
+          'flex-grow',
+        ],
+      ],
+      '#title'         => $this->t('qs_activity.events.form.add.date'),
+      '#type'          => 'date',
+      '#default_value' => $now->format('Y-m-d'),
+      '#size'          => 8,
+    ];
+
+    $form['event']['step-1']['date_fieldset']['time_fieldset'] = [
+      '#type' => 'fieldset',
+      '#theme_wrappers' => [
+        'container__date',
+      ],
+    ];
+
+    $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at'] = [
+      '#attributes'    => [
+        'type' => 'time',
+        'required' => TRUE,
+      ],
       '#title'         => $this->t('qs_activity.events.form.add.start_at'),
-      '#type'          => 'textfield',
+      '#type'          => 'date',
       '#required'      => FALSE,
       '#default_value' => $now->format('H:i'),
+      '#size'          => 5,
     ];
 
-    $form['event']['step-1']['end_at'] = [
-      '#attributes'    => ['required' => TRUE],
+    $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at'] = [
+      '#attributes'    => [
+        'type' => 'time',
+        'required' => TRUE,
+      ],
       '#title'         => $this->t('qs_activity.events.form.add.end_at'),
-      '#type'          => 'textfield',
+      '#type'          => 'date',
       '#required'      => FALSE,
-      '#default_value' => $now->modify('+30 minutes')->format('H:i'),
+      '#default_value' => $now->modify('+1 hour')->format('H:i'),
     ];
 
     $form['event']['step-2'] = [
@@ -167,17 +199,20 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-2']['has_contribution'] = [
-      '#title'   => $this->t('qs_activity.events.form.add.has_contribution'),
       '#type'    => 'radios',
       '#options' => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
       '#required'      => FALSE,
       '#default_value' => 0,
       '#attributes' => [
+        'title'   => $this->t('qs_activity.events.form.add.has_contribution'),
         'no_form_group' => TRUE,
         'data-toggle' => 'buttons',
         'color' => 'danger',
         'variant' => 'button',
         'no_block' => TRUE,
+        'class' => [
+          'mb-2',
+        ],
       ],
       '#theme_wrappers' => [
         'input__button_group',

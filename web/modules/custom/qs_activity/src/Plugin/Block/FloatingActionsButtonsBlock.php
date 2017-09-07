@@ -90,9 +90,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     }
 
     if ($this->acl->hasBypass()) {
-      $variables['community_has_write_access']     = TRUE;
-      $variables['community_has_dashboard_access'] = TRUE;
-      $variables['activity_has_admin_access']      = TRUE;
+      $variables['community_has_write_access']      = TRUE;
+      $variables['community_has_dashboard_access']  = TRUE;
+      $variables['activity_has_admin_access']       = TRUE;
       $variables['activity_has_write_access_event'] = TRUE;
     }
 

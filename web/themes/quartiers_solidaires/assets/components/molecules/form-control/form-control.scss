@@ -8,6 +8,10 @@
 
 .form-control {
   padding: $input-btn-padding-y ($input-btn-padding-x / 2);
+
+  &[type=time] {
+    padding-right: 0.2rem;
+  }
 }
 
 [data-required] {

@@ -57,6 +57,10 @@
   min-height: 100vh;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 // Text helpers
 @include text-emphasis-variant('.text-dark', color("dark"));
 @include text-emphasis-variant('.text-gray', $gray-700);

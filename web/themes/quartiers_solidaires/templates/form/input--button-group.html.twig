@@ -10,6 +10,9 @@
  * @see template_preprocess_input()
  */
 #}
-<div{{ attributes.addClass('btn-group').setAttribute('role', 'group').setAttribute('aria-label', element['#title']) }}>
-  {{ children }}
+<div class="form-group">
+  <label class="form-control-label">{{ attributes.title }}</label>
+  <div{{ attributes.addClass('btn-group d-block').setAttribute('role', 'group').setAttribute('aria-label', element['#title']) }}>
+    {{ children }}
+  </div>
 </div>

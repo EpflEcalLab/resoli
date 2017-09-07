@@ -46,7 +46,8 @@
 #}
 {%
   set classes = [
-    'form-group',
+    element['#attributes'].class|join(' '),
+    element['#attributes'].size == 60 ? 'form-group',
     'js-form-item',
     'js-form-type-' ~ type|clean_class,
     'form-item-' ~ name|clean_class,

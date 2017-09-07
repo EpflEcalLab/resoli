@@ -12,7 +12,7 @@ const multiStep = () => {
       $form.each(function() {
         const id = $(this).attr('id');
         const currentForm = $(this);
-        const $fieldsets = currentForm.find('fieldset');
+        const $fieldsets = currentForm.find('[data-step]');
         let nextTab = null;
         let currentTab = null;
 

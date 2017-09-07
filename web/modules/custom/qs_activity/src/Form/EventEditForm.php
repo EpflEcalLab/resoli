@@ -24,6 +24,10 @@ class EventEditForm extends EventEditFormBase {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
     $form = parent::buildForm($form, $form_state, $event);
 
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
+
     $form['title'] = [
       '#attributes'    => ['required' => TRUE],
       '#title'         => $this->t('qs_activity.events.form.edit.title'),

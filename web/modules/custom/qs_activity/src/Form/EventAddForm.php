@@ -59,6 +59,21 @@ class EventAddForm extends FormBasic {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
 
+    // Disable caching & HTML5 validation.
+    $form['#cache']['max-age'] = 0;
+    $form['#attributes'] = [
+      'novalidate' => 'novalidate',
+      'class' => [
+        'modal-body',
+      ],
+      'bg' => 'danger',
+    ];
+
+    // Apply custom styles to wrapper.
+    $form['#theme_wrappers'] = [
+      'form__fullpage__multistep',
+    ];
+
     // Save the activity for submisson.
     $form['activity'] = [
       '#type'  => 'hidden',
@@ -67,6 +82,13 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-1'] = [
       '#type' => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_activity.events.form.step1'),
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
+      ],
     ];
 
     $form['event']['step-1']['title'] = [
@@ -105,6 +127,13 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-2'] = [
       '#type'  => 'fieldset',
+      '#attributes' => [
+        'data-step' => $this->t('qs_activity.events.form.step2'),
+      ],
+      '#theme_wrappers' => [
+        'container__center__wide',
+        'fieldset__step',
+      ],
     ];
 
     $form['event']['step-2']['body'] = [
@@ -128,11 +157,11 @@ class EventAddForm extends FormBasic {
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
-    $form['latitude'] = [
+    $form['event']['step-2']['latitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_lat->value,
     ];
-    $form['longitude'] = [
+    $form['event']['step-2']['longitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_long->value,
     ];
@@ -141,6 +170,18 @@ class EventAddForm extends FormBasic {
       '#title'   => $this->t('qs_activity.events.form.add.has_contribution'),
       '#type'    => 'radios',
       '#options' => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
+      '#required'      => FALSE,
+      '#default_value' => 0,
+      '#attributes' => [
+        'no_form_group' => TRUE,
+        'data-toggle' => 'buttons',
+        'color' => 'danger',
+        'variant' => 'button',
+        'no_block' => TRUE,
+      ],
+      '#theme_wrappers' => [
+        'input__button_group',
+      ],
     ];
 
     $form['event']['step-2']['contribution'] = [
@@ -148,10 +189,21 @@ class EventAddForm extends FormBasic {
       '#title'       => $this->t('qs_activity.events.form.add.contribution'),
       '#type'        => 'textfield',
       '#required'    => FALSE,
+      '#states' => [
+        'visible' => [
+          ':input[name="has_contribution"]' => ['value' => 1],
+        ],
+      ],
     ];
 
     $form['event']['step-2']['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'icon' => 'check',
+        'modal' => TRUE,
+        'icon_left' => TRUE,
+        'outline' => TRUE,
+      ],
       '#value' => $this->t('qs.form.submit'),
     ];
 

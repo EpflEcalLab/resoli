@@ -20,6 +20,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  cursor: pointer;
 
   @include media-breakpoint-up(md) {
     min-width: 160px;

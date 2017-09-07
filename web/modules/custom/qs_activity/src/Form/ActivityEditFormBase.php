@@ -39,7 +39,7 @@ abstract class ActivityEditFormBase extends FormBasic {
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
-    if ($this->acl->hasWriteAccessActivity($activity)) {
+    if ($this->acl->hasAdminAccessActivity($activity)) {
       $access = AccessResult::allowed();
     }
     return $access;

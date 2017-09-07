@@ -27,6 +27,13 @@
           </a>
         </li>
         <li>
+          {# Add event Button #}
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.events.form.add', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('plus') }}
+            {{ 'qs.activity.add_event'|t }}
+          </a>
+        </li>
+        <li>
           {# Delete Button #}
           <a class="btn btn-block btn-outline-danger btn-white btn-icon mb-2" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
             {{ macros.icon('trash') }}

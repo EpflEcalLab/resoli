@@ -194,7 +194,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the account has write access on the given activity.
+   * Check if the account has admin access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
@@ -202,9 +202,9 @@ class AccessControl {
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
-   *   Does the user has at least one write access for this activity.
+   *   Does the user has at least one admin access for this activity.
    */
-  public function hasWriteAccessActivity(NodeInterface $activity, AccountInterface $account = NULL) {
+  public function hasAdminAccessActivity(NodeInterface $activity, AccountInterface $account = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;

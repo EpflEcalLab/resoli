@@ -44,10 +44,11 @@
  * @see template_preprocess_form_element()
  */
 #}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
 {%
   set classes = [
     element['#attributes'].class|join(' '),
-    element['#attributes'].size == 60 ? 'form-group',
+    element['#attributes'].size == 60 or element['#cols'] == 60 ? 'form-group',
     'js-form-item',
     'js-form-type-' ~ type|clean_class,
     'form-item-' ~ name|clean_class,
@@ -66,8 +67,15 @@
     description_display != 'before' ? 'form-text',
   ]
 %}
+
 {% if not element['#attributes'].no_form_group %}
 <div{{ attributes.addClass(classes) }}{{ element['#attributes']['required'] ? ' data-required' }}>
+{% endif %}
+
+{% if element['#attributes'].icon %}
+<div class="d-flex">
+  {{ macros.icon(element['#attributes'].icon, ['mr-2', 'icon-lg', 'mt-4']) }}
+  <div class="flex-grow">
 {% endif %}
 
   {% if label_display in ['before', 'invisible'] %}
@@ -100,6 +108,11 @@
       {{ description.content }}
     </small>
   {% endif %}
+
+{% if element['#attributes'].icon %}
+  </div>
+</div>
+{% endif %}
 
 {% if not element['#attributes'].no_form_group %}
 </div>

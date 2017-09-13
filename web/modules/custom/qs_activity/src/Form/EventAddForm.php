@@ -92,7 +92,10 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-1']['title'] = [
-      '#attributes'    => ['required' => TRUE],
+      '#attributes'    => [
+        'required' => TRUE,
+        'icon' => 'theme_' . $activity->field_theme->entity->field_icon->value,
+      ],
       '#title'         => $this->t('qs_activity.events.form.add.title'),
       '#placeholder'   => $this->t('qs_activity.events.form.add.title.placeholder'),
       '#type'          => 'textfield',
@@ -105,6 +108,7 @@ class EventAddForm extends FormBasic {
       '#attributes' => [
         'class' => [
           'flex-wrap',
+          'row',
         ],
       ],
       '#theme_wrappers' => [
@@ -119,7 +123,10 @@ class EventAddForm extends FormBasic {
         'required' => TRUE,
         'class'          => [
           'flex-grow',
+          'px-3',
+          'mb-2',
         ],
+        'icon' => 'calendar',
       ],
       '#title'         => $this->t('qs_activity.events.form.add.date'),
       '#type'          => 'date',
@@ -129,6 +136,13 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-1']['date_fieldset']['time_fieldset'] = [
       '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'flex-grow',
+          'flex-wrap',
+          'mb-3',
+        ],
+      ],
       '#theme_wrappers' => [
         'container__date',
       ],
@@ -138,6 +152,11 @@ class EventAddForm extends FormBasic {
       '#attributes'    => [
         'type' => 'time',
         'required' => TRUE,
+        'class' => [
+          'flex-grow',
+          'px-3',
+        ],
+        'icon' => 'watch',
       ],
       '#title'         => $this->t('qs_activity.events.form.add.start_at'),
       '#type'          => 'date',
@@ -150,6 +169,10 @@ class EventAddForm extends FormBasic {
       '#attributes'    => [
         'type' => 'time',
         'required' => TRUE,
+        'class' => [
+          'flex-grow',
+          'px-3',
+        ],
       ],
       '#title'         => $this->t('qs_activity.events.form.add.end_at'),
       '#type'          => 'date',
@@ -254,20 +277,26 @@ class EventAddForm extends FormBasic {
       $form_state->setErrorByName('[event][step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['title']['#title']]));
     }
 
+    // Date validation
+    // ===============
+
     // Assert the date is valid.
     if (!$form_state->getValue('date') || empty($form_state->getValue('date'))) {
       $form_state->setErrorByName('[event][step-1][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date']['#date']]));
     }
 
-    // Assert the date is formatted as requested.
-    $date = $form_state->getValue('date');
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
     $now = new DrupalDateTime();
-    if (!$this->validateDate($date, 'd.m.Y') && !$this->validateDate($date, 'd.m.Y')) {
-      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs_activity.form.error.date_format_invalid'));
 
-      // Assert the date is in the futur.
+    // Assert the date is formatted as requested.
+    if (!$this->validateDate($formatted_date, 'd.m.Y')) {
+      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs_activity.form.error.date_format_invalid'));
     }
-    elseif ($date < $now) {
+    // Assert the date is in the future.
+    elseif ($formatted_date < $now->format('d.m.Y')) {
       $form_state->setErrorByName('[event][step-1][date]', $this->t('qs_activity.form.error.date_past'));
     }
 
@@ -292,8 +321,6 @@ class EventAddForm extends FormBasic {
     }
 
     // Check hours are realistic.
-    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('start_at') . ':00');
-    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('end_at') . ':00');
     if ($start_at >= $end_at) {
       $form_state->setErrorByName('[event][step-1][start_at]', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['event']['step-1']['start_at']['#title']]));
     }
@@ -309,9 +336,10 @@ class EventAddForm extends FormBasic {
     $activity = $this->nodeStorage->load($form_state->getValue('activity'));
 
     // Format dates.
-    $date = $form_state->getValue('date');
-    $date_start = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('start_at') . ':00');
-    $date_end = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('end_at') . ':00');
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
 
     // Prepare data.
     $data['title'] = $form_state->getValue('title');
@@ -324,7 +352,7 @@ class EventAddForm extends FormBasic {
     $data['venue_long'] = $form_state->getValue('venue_long');
 
     // // Create the new event.
-    $this->eventManager->create($activity, $date_start, $date_end, $data);
+    $this->eventManager->create($activity, $start_at, $end_at, $data);
     drupal_set_message($this->t('qs_activity.events.form.add.success'));
     $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
   }

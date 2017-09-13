@@ -21,7 +21,7 @@
 #}
 {% set classes = attributes.class|join(' ') %}
 <div class="row">
-  <div class="{% block container_classes %}col-md-10 col-lg-6 mx-auto{% endblock %} {{ classes }}">
+  <div class="{% block container_classes %}col-md-10 col-lg-8 col-xl-6 mx-auto{% endblock %} {{ classes }}">
     {{ children }}
   </div>
 </div>

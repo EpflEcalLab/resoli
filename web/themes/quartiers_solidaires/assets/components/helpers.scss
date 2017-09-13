@@ -21,6 +21,10 @@
   @include drop-shadow(bottom);
 }
 
+.shadow-to-bottom-secondary {
+  @include drop-shadow(bottom, theme-color('secondary'));
+}
+
 .shadow-floating {
   @include floating-shadow();
 }

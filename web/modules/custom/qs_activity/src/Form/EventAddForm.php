@@ -279,8 +279,7 @@ class EventAddForm extends FormBasic {
     }
 
     // Date validation
-    // ===============
-
+    // ===============.
     // Assert the date is valid.
     if (!$form_state->getValue('date') || empty($form_state->getValue('date'))) {
       $form_state->setErrorByName('[event][step-1][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date']['#date']]));

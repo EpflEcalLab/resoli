@@ -81,7 +81,6 @@ class EventEditForm extends EventEditFormBase {
       '#size'          => 8,
     ];
 
-
     $form['date_fieldset']['time_fieldset'] = [
       '#type' => 'fieldset',
       '#attributes' => [

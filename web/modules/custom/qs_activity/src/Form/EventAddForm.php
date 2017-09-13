@@ -178,6 +178,7 @@ class EventAddForm extends FormBasic {
       '#type'          => 'date',
       '#required'      => FALSE,
       '#default_value' => $now->modify('+1 hour')->format('H:i'),
+      '#size'          => 5,
     ];
 
     $form['event']['step-2'] = [

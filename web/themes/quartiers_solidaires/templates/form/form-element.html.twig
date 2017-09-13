@@ -48,7 +48,7 @@
 {%
   set classes = [
     element['#attributes'].class|join(' '),
-    element['#attributes'].size == 60 or element['#cols'] == 60 ? 'form-group',
+    'form-group',
     'js-form-item',
     'js-form-type-' ~ type|clean_class,
     'form-item-' ~ name|clean_class,
@@ -69,7 +69,7 @@
 %}
 
 {% if not element['#attributes'].no_form_group %}
-<div{{ attributes.addClass(classes) }}{{ element['#attributes']['required'] ? ' data-required' }}>
+<div{{ attributes.addClass(classes).removeClass('form-text') }}{{ element['#attributes']['required'] ? ' data-required' }}>
 {% endif %}
 
 {% if element['#attributes'].icon %}

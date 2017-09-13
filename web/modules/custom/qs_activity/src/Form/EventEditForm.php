@@ -24,13 +24,21 @@ class EventEditForm extends EventEditFormBase {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
     $form = parent::buildForm($form, $form_state, $event);
 
+    // Disable caching & HTML5 validation.
+    $form['#cache']['max-age'] = 0;
+    $form['#title'] = $this->t('qs_activity.events.form.edit.title_form');
+    $form['#attributes'] = [
+      'novalidate' => 'novalidate',
+    ];
+
     $form['#theme_wrappers'] = [
-      'form__modal',
+      'form__fullpage',
     ];
 
     $form['title'] = [
       '#attributes'    => ['required' => TRUE],
       '#title'         => $this->t('qs_activity.events.form.edit.title'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.title.placeholder'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
       '#default_value' => $event->title->value,
@@ -42,28 +50,83 @@ class EventEditForm extends EventEditFormBase {
     $end_at = $event->field_end_at->date;
     $end_at->setTimezone(new \DateTimeZone($this->currentUser->getTimezone()));
 
-    $form['date'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.edit.date'),
-      '#type'          => 'textfield',
-      '#required'      => FALSE,
-      '#default_value' => $start_at->format('d.m.Y'),
+    $form['date_fieldset'] = [
+      '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'flex-wrap',
+          'row',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__date',
+      ],
     ];
 
-    $form['start_at'] = [
-      '#attributes'    => ['required' => TRUE],
+    $form['date_fieldset']['date'] = [
+      '#attributes' => [
+        'type' => 'date',
+        'required' => TRUE,
+        'class'          => [
+          'flex-grow',
+          'px-3',
+          'mb-2',
+        ],
+        'icon' => 'calendar',
+      ],
+      '#title'         => $this->t('qs_activity.events.form.edit.date'),
+      '#type'          => 'date',
+      '#required'      => FALSE,
+      '#default_value' => $start_at->format('Y-m-d'),
+      '#size'          => 8,
+    ];
+
+
+    $form['date_fieldset']['time_fieldset'] = [
+      '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'flex-grow',
+          'flex-wrap',
+          'mb-3',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__date',
+      ],
+    ];
+
+    $form['date_fieldset']['time_fieldset']['start_at'] = [
+      '#attributes'    => [
+        'type' => 'time',
+        'required' => TRUE,
+        'class' => [
+          'flex-grow',
+          'px-3',
+        ],
+        'icon' => 'watch',
+      ],
       '#title'         => $this->t('qs_activity.events.form.edit.start_at'),
-      '#type'          => 'textfield',
+      '#type'          => 'date',
       '#required'      => FALSE,
       '#default_value' => $start_at->format('H:i'),
+      '#size'          => 5,
     ];
 
-    $form['end_at'] = [
-      '#attributes'    => ['required' => TRUE],
+    $form['date_fieldset']['time_fieldset']['end_at'] = [
+      '#attributes'    => [
+        'type' => 'time',
+        'required' => TRUE,
+        'class' => [
+          'flex-grow',
+          'px-3',
+        ],
+      ],
       '#title'         => $this->t('qs_activity.events.form.edit.end_at'),
-      '#type'          => 'textfield',
+      '#type'          => 'date',
       '#required'      => FALSE,
       '#default_value' => $end_at->format('H:i'),
+      '#size'          => 5,
     ];
 
     $form['body'] = [
@@ -97,9 +160,24 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['has_contribution'] = [
-      '#title'       => $this->t('qs_activity.events.form.edit.has_contribution'),
       '#type'        => 'radios',
       '#options'     => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
+      '#required'      => FALSE,
+      '#default_value' => 0,
+      '#attributes' => [
+        'title'   => $this->t('qs_activity.events.form.add.has_contribution'),
+        'no_form_group' => TRUE,
+        'data-toggle' => 'buttons',
+        'color' => 'secondary',
+        'variant' => 'button',
+        'no_block' => TRUE,
+        'class' => [
+          'mb-2',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'input__button_group',
+      ],
     ];
 
     $form['contribution'] = [
@@ -107,10 +185,22 @@ class EventEditForm extends EventEditFormBase {
       '#title'         => $this->t('qs_activity.events.form.edit.contribution'),
       '#type'          => 'textfield',
       '#default_value' => $event->field_contribution->value,
+      '#required'    => FALSE,
+      '#states' => [
+        'visible' => [
+          ':input[name="has_contribution"]' => ['value' => 1],
+        ],
+      ],
     ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'icon' => 'check',
+        'modal' => TRUE,
+        'icon_left' => TRUE,
+        'outline' => TRUE,
+      ],
       '#value' => $this->t('qs.form.submit'),
     ];
 

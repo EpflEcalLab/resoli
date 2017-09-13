@@ -16,6 +16,7 @@ function qs_activity_theme_suggestions_page_alter(array &$suggestions, array &$v
   if (array_intersect($suggestions, [
     'page__activities__add',
     'page__events__add',
+    'page__events__edit',
   ])) {
     $suggestions[] = 'page__fullpage';
   }

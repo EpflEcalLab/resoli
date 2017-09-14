@@ -212,51 +212,53 @@ class EventEditForm extends EventEditFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
-      $form_state->setErrorByName('[event][step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['title']['#title']]));
+      $form_state->setErrorByName('[title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['title']['#title']]));
     }
 
     // Assert the date is valid.
     if (!$form_state->getValue('date') || empty($form_state->getValue('date'))) {
-      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date']['#date']]));
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#date']]));
     }
 
-    // Assert the date is formatted as requested.
-    $date = $form_state->getValue('date');
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
     $now = new DrupalDateTime();
-    if (!$this->validateDate($date, 'd.m.Y') && !$this->validateDate($date, 'd.m.Y')) {
-      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs_activity.form.error.date_format_invalid'));
+
+    // Assert the date is formatted as requested.
+    if (!$this->validateDate($formatted_date, 'd.m.Y')) {
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid'));
 
       // Assert the date is in the futur.
     }
-    elseif ($date < $now) {
-      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs_activity.form.error.date_past'));
+    elseif ($formatted_date < $now->format('d.m.Y')) {
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_past'));
     }
 
     // Assert the start is valid.
     if (!$form_state->getValue('start_at') || empty($form_state->getValue('start_at'))) {
-      $form_state->setErrorByName('[event][step-1][start_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['start_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Assert the start is formatted as requested.
     if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('start_at'))) {
-      $form_state->setErrorByName('[event][step-1][start_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['start_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Assert the end is valid.
     if (!$form_state->getValue('end_at') || empty($form_state->getValue('end_at'))) {
-      $form_state->setErrorByName('[event][step-1][end_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['end_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][end_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
     // Assert the end is formatted as requested.
     if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('end_at'))) {
-      $form_state->setErrorByName('[event][step-1][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['end_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
     // Check hours are realistic.
-    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('start_at') . ':00');
-    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('end_at') . ':00');
     if ($start_at >= $end_at) {
-      $form_state->setErrorByName('[event][step-1][start_at]', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['event']['step-1']['start_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Add inline errors.
@@ -270,9 +272,10 @@ class EventEditForm extends EventEditFormBase {
     $event = $this->nodeStorage->load($form_state->getValue('event'));
 
     // Format dates.
-    $date = $form_state->getValue('date');
-    $date_start = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('start_at') . ':00');
-    $date_end = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('end_at') . ':00');
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
 
     // Prepare fields.
     $fields['title']               = $form_state->getValue('title');
@@ -285,7 +288,7 @@ class EventEditForm extends EventEditFormBase {
     $fields['field_venue_long']    = $form_state->getValue('venue_long');
 
     // Update new event.
-    $this->eventManager->update($event, $date_start, $date_end, $fields);
+    $this->eventManager->update($event, $start_at, $end_at, $fields);
 
     drupal_set_message($this->t('qs_activity.events.form.edit.success @event', [
       '@event' => $event->getTitle(),

@@ -35,7 +35,6 @@
 }
 
 // Background helpers
-@include bg-variant('.bg-blue', $blue);
 @include bg-variant('.bg-primary', color("primary"));
 @include bg-variant('.bg-primary-light', color("primary-light"));
 

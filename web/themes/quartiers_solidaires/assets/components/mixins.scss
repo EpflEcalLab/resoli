@@ -14,7 +14,7 @@
 
     @if $with-hover {
       @include hover {
-        @include floating-shadow($color);
+        @include hover-shadow($color);
       }
     }
   }
@@ -28,7 +28,7 @@
 
     @if $with-hover {
       @include hover {
-        @include floating-shadow($color);
+        @include hover-shadow($color);
       }
     }
   }
@@ -38,7 +38,7 @@
 
     @if $with-hover {
       @include hover {
-        @include floating-shadow($color);
+        @include hover-shadow($color);
       }
     }
   }
@@ -49,11 +49,11 @@
 @mixin drop-shadow($direction: right, $color: theme-color("primary")) {
   @if $enable-shadows {
     @if ($direction == right) {
-      box-shadow: 2px 2px 2px 0 rgba($color, 0.3);
+      box-shadow: 2px 2px 1px 0 rgba($color, 0.4);
     } @else if ($direction == left) {
-      box-shadow: -2px 2px 2px 0 rgba($color, 0.3);
+      box-shadow: -2px 2px 1px 0 rgba($color, 0.4);
     } @else {
-      box-shadow: 0 2px 2px 0 rgba($color, 0.3);
+      box-shadow: 0 2px 1px 0 rgba($color, 0.4);
     }
   }
 }
@@ -69,6 +69,15 @@
         box-shadow: 0 0 10px 0 rgba($color, 1);
       }
     }
+  }
+}
+
+// Adds a hover shadow (combination of drop and floating shadow)
+@mixin hover-shadow($color: theme-color("primary")) {
+  @if $enable-shadows {
+    box-shadow:
+      0 2px 1px 0 rgba($color, 0.4),
+      0 0 10px 0 rgba($color, 0.4);
   }
 }
 
@@ -122,19 +131,21 @@
 }
 
 // Set button-outline-invert color of text and background based on parent background
-@mixin button-outline-invert($background-class, $color, $color-invert: $white) {
+@mixin button-outline-invert($background-class, $color, $color-invert: $white, $color-dark: darken($color, 15%)) {
   #{$background-class} & {
     background-color: $color;
 
-    @include hover {
-      background-color: lighten($color, 5);
+    &:active {
+      color: $color-invert;
+      background-color: $color-dark;
+      border-color: $color-dark;
     }
 
-    &:active,
     &.active,
     .show > &.dropdown-toggle {
-      color: $color;
+      color: $body-color;
       background-color: $color-invert;
+      border-color: $color-invert;
 
       .icon svg {
         color: $color;

@@ -67,6 +67,12 @@
       }
     }
   }
+
+  .bg-#{$color} {
+    .btn-outline-invert {
+      @include drop-shadows(color(dark), true);
+    }
+  }
 }
 
 // Button Icon
@@ -158,7 +164,7 @@
 
   @include hover {
     color: $white;
-    background-color: rgba($white, 0.2);
+    background-color: transparent;
     border-color: $white;
   }
 
@@ -169,10 +175,13 @@
   &:focus,
   &.focus {
     color: $white;
-    box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
+    box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5) !important; // This has to be important for buttons in bg-*
   }
 
-  &:active,
+  &:active {
+    color: $white;
+  }
+
   &.active,
   .show > &.dropdown-toggle {
     color: $body-color;
@@ -184,8 +193,8 @@
   }
 
   // Set color of text based on background when button is active
-  @include button-outline-invert('.bg-blue', $blue);
-  @include button-outline-invert('.bg-danger', color('danger'));
+  @include button-outline-invert('.bg-blue', $blue, $white, color('blue-darker'));
+  @include button-outline-invert('.bg-danger', color('danger'), $white, color('danger-darker'));
 }
 
 // We still need a Button White when the background is lightly colored

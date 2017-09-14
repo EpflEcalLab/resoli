@@ -21,11 +21,13 @@
   </label>
 {% else %}
   {% set classes = [
-    'btn btn-outline-blue btn-outline-invert btn-block',
+    'btn btn-outline-invert',
+    'btn-outline-' ~ attributes.color|default('blue'),
     labelIcon|length > 1 ? 'btn-icon',
     attributes.checked ? 'active',
+    not attributes.no_block ? 'btn-block',
   ] %}
-  <label class="{{ classes|join(' ') }}">
+  <label class="{{ classes|join(' ') }}" tabindex="0">
     {% if labelIcon|length > 1 %}
       {{ macros.icon("#{labelIcon|last}") }}
     {% endif %}

@@ -24,9 +24,21 @@ class EventEditForm extends EventEditFormBase {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
     $form = parent::buildForm($form, $form_state, $event);
 
+    // Disable caching & HTML5 validation.
+    $form['#cache']['max-age'] = 0;
+    $form['#title'] = $this->t('qs_activity.events.form.edit.title_form');
+    $form['#attributes'] = [
+      'novalidate' => 'novalidate',
+    ];
+
+    $form['#theme_wrappers'] = [
+      'form__fullpage',
+    ];
+
     $form['title'] = [
       '#attributes'    => ['required' => TRUE],
       '#title'         => $this->t('qs_activity.events.form.edit.title'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.title.placeholder'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
       '#default_value' => $event->title->value,
@@ -38,28 +50,82 @@ class EventEditForm extends EventEditFormBase {
     $end_at = $event->field_end_at->date;
     $end_at->setTimezone(new \DateTimeZone($this->currentUser->getTimezone()));
 
-    $form['date'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.edit.date'),
-      '#type'          => 'textfield',
-      '#required'      => FALSE,
-      '#default_value' => $start_at->format('d.m.Y'),
+    $form['date_fieldset'] = [
+      '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'flex-wrap',
+          'row',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__date',
+      ],
     ];
 
-    $form['start_at'] = [
-      '#attributes'    => ['required' => TRUE],
+    $form['date_fieldset']['date'] = [
+      '#attributes' => [
+        'type' => 'date',
+        'required' => TRUE,
+        'class'          => [
+          'flex-grow',
+          'px-3',
+          'mb-2',
+        ],
+        'icon' => 'calendar',
+      ],
+      '#title'         => $this->t('qs_activity.events.form.edit.date'),
+      '#type'          => 'date',
+      '#required'      => FALSE,
+      '#default_value' => $start_at->format('Y-m-d'),
+      '#size'          => 8,
+    ];
+
+    $form['date_fieldset']['time_fieldset'] = [
+      '#type' => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'flex-grow',
+          'flex-wrap',
+          'mb-3',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__date',
+      ],
+    ];
+
+    $form['date_fieldset']['time_fieldset']['start_at'] = [
+      '#attributes'    => [
+        'type' => 'time',
+        'required' => TRUE,
+        'class' => [
+          'flex-grow',
+          'px-3',
+        ],
+        'icon' => 'watch',
+      ],
       '#title'         => $this->t('qs_activity.events.form.edit.start_at'),
-      '#type'          => 'textfield',
+      '#type'          => 'date',
       '#required'      => FALSE,
       '#default_value' => $start_at->format('H:i'),
+      '#size'          => 5,
     ];
 
-    $form['end_at'] = [
-      '#attributes'    => ['required' => TRUE],
+    $form['date_fieldset']['time_fieldset']['end_at'] = [
+      '#attributes'    => [
+        'type' => 'time',
+        'required' => TRUE,
+        'class' => [
+          'flex-grow',
+          'px-3',
+        ],
+      ],
       '#title'         => $this->t('qs_activity.events.form.edit.end_at'),
-      '#type'          => 'textfield',
+      '#type'          => 'date',
       '#required'      => FALSE,
       '#default_value' => $end_at->format('H:i'),
+      '#size'          => 5,
     ];
 
     $form['body'] = [
@@ -93,9 +159,24 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['has_contribution'] = [
-      '#title'       => $this->t('qs_activity.events.form.edit.has_contribution'),
       '#type'        => 'radios',
       '#options'     => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
+      '#required'      => FALSE,
+      '#default_value' => 0,
+      '#attributes' => [
+        'title'   => $this->t('qs_activity.events.form.add.has_contribution'),
+        'no_form_group' => TRUE,
+        'data-toggle' => 'buttons',
+        'color' => 'secondary',
+        'variant' => 'button',
+        'no_block' => TRUE,
+        'class' => [
+          'mb-2',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'input__button_group',
+      ],
     ];
 
     $form['contribution'] = [
@@ -103,10 +184,22 @@ class EventEditForm extends EventEditFormBase {
       '#title'         => $this->t('qs_activity.events.form.edit.contribution'),
       '#type'          => 'textfield',
       '#default_value' => $event->field_contribution->value,
+      '#required'    => FALSE,
+      '#states' => [
+        'visible' => [
+          ':input[name="has_contribution"]' => ['value' => 1],
+        ],
+      ],
     ];
 
     $form['actions']['submit'] = [
       '#type'  => 'submit',
+      '#attributes' => [
+        'icon' => 'check',
+        'modal' => TRUE,
+        'icon_left' => TRUE,
+        'outline' => TRUE,
+      ],
       '#value' => $this->t('qs.form.submit'),
     ];
 
@@ -119,51 +212,53 @@ class EventEditForm extends EventEditFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
-      $form_state->setErrorByName('[event][step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['title']['#title']]));
+      $form_state->setErrorByName('[title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['title']['#title']]));
     }
 
     // Assert the date is valid.
     if (!$form_state->getValue('date') || empty($form_state->getValue('date'))) {
-      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date']['#date']]));
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#date']]));
     }
 
-    // Assert the date is formatted as requested.
-    $date = $form_state->getValue('date');
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
     $now = new DrupalDateTime();
-    if (!$this->validateDate($date, 'd.m.Y') && !$this->validateDate($date, 'd.m.Y')) {
-      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs_activity.form.error.date_format_invalid'));
+
+    // Assert the date is formatted as requested.
+    if (!$this->validateDate($formatted_date, 'd.m.Y')) {
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid'));
 
       // Assert the date is in the futur.
     }
-    elseif ($date < $now) {
-      $form_state->setErrorByName('[event][step-1][date]', $this->t('qs_activity.form.error.date_past'));
+    elseif ($formatted_date < $now->format('d.m.Y')) {
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_past'));
     }
 
     // Assert the start is valid.
     if (!$form_state->getValue('start_at') || empty($form_state->getValue('start_at'))) {
-      $form_state->setErrorByName('[event][step-1][start_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['start_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Assert the start is formatted as requested.
     if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('start_at'))) {
-      $form_state->setErrorByName('[event][step-1][start_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['start_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Assert the end is valid.
     if (!$form_state->getValue('end_at') || empty($form_state->getValue('end_at'))) {
-      $form_state->setErrorByName('[event][step-1][end_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['end_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][end_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
     // Assert the end is formatted as requested.
     if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('end_at'))) {
-      $form_state->setErrorByName('[event][step-1][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['end_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
     // Check hours are realistic.
-    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('start_at') . ':00');
-    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('end_at') . ':00');
     if ($start_at >= $end_at) {
-      $form_state->setErrorByName('[event][step-1][start_at]', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['event']['step-1']['start_at']['#title']]));
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Add inline errors.
@@ -177,9 +272,10 @@ class EventEditForm extends EventEditFormBase {
     $event = $this->nodeStorage->load($form_state->getValue('event'));
 
     // Format dates.
-    $date = $form_state->getValue('date');
-    $date_start = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('start_at') . ':00');
-    $date_end = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $date . ' ' . $form_state->getValue('end_at') . ':00');
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
 
     // Prepare fields.
     $fields['title']               = $form_state->getValue('title');
@@ -192,7 +288,7 @@ class EventEditForm extends EventEditFormBase {
     $fields['field_venue_long']    = $form_state->getValue('venue_long');
 
     // Update new event.
-    $this->eventManager->update($event, $date_start, $date_end, $fields);
+    $this->eventManager->update($event, $start_at, $end_at, $fields);
 
     drupal_set_message($this->t('qs_activity.events.form.edit.success @event', [
       '@event' => $event->getTitle(),

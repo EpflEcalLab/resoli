@@ -1,7 +1,5 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{% if (variables.community and (variables.community_has_write_access or variables.community_has_dashboard_access)) or (variables.activity and variables.activity_has_write_access)  %}
-
 <div class="floating">
   <div class="container">
     <div class="row justify-content-center">
@@ -16,11 +14,21 @@
       {% endif %}
 
       {# Button to access activities dashboard #}
-      {% if variables.activity and variables.activity_has_write_access %}
+      {% if variables.activity and variables.activity_has_admin_access %}
         <div class="col text-center">
           <a class="btn btn-outline-danger btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.dashboard', {community: variables.community.tid.value, activity: variables.activity.nid.value}) }}">
             {{ macros.icon('activities') }}
             {% trans %}qs_activity.floating.dashboard.activity{% endtrans %}
+          </a>
+        </div>
+      {% endif %}
+
+      {# Button to add Event to activity #}
+      {% if variables.activity and variables.activity_has_write_access_event %}
+        <div class="col text-center">
+          <a class="btn btn-outline-secondary btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_activity.events.form.add', {activity: variables.activity.nid.value}) }}">
+            {{ macros.icon('plus') }}
+            {% trans %}qs_activity.floating.add.event{% endtrans %}
           </a>
         </div>
       {% endif %}
@@ -37,6 +45,4 @@
     </div>
   </div>
 </div>
-
-{% endif %}
 

@@ -84,13 +84,19 @@ $teal-300: #66C4B2;
 $teal:     #00a082 !default;
 $teal-700: #085445;
 
+$red-200: #d84c84;
 $red:     #c80050 !default;
-$red-700:   #640028;
+$red-700: #640028;
 
-$blue:    #5aa0fa !default;
+$blue-300: #83b8fb;
+$blue:     #5aa0fa !default;
+$blue-700: #325ac8;
+
+$orange-300:  #ff9343;
+$orange:  #ff7814 !default;
+
 $indigo:  #6610f2 !default;
 $pink:    #e83e8c !default;
-$orange:  #fd7e14 !default;
 $yellow:  #ffc107 !default;
 $green:   #28a745 !default;
 $cyan:    #17a2b8 !default;
@@ -105,17 +111,24 @@ $colors: (
   secondary-light:  $teal-300,
   secondary:        $teal,
   secondary-darker: $teal-700,
+  info-light:       $blue-300,
+  info:             $blue,
+  info-darker:      $blue-700,
+  danger-lighter:   $red-200,
   danger-light:     lighten($red, 10%),
   danger:           $red,
   danger-darker:    $red-700,
   light:            $white,
-  dark:             $black
+  dark:             $black,
+  warning-light:    $orange-300,
+  warning:          $orange,
 ) !default;
 
 $theme-colors: (
   primary:   $purple-600,
   secondary: $teal,
   danger:    $red,
+  info:      $blue,
 ) !default;
 
 // Set a specific jump point for requesting color jumps
@@ -839,10 +852,10 @@ $carousel-transition:           transform .6s ease !default;
 
 // Close
 
-$close-font-size:             $font-size-base * 1.5 !default;
-$close-font-weight:           $font-weight-bold !default;
+$close-font-size:             $font-size-base * 3 !default;
+$close-font-weight:           $font-weight-light !default;
 $close-color:                 $black !default;
-$close-text-shadow:           0 1px 0 $white !default;
+$close-text-shadow:           none !default;
 
 // Code
 

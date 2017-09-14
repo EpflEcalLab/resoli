@@ -12,16 +12,14 @@ $max-items: 5;
     padding-right: $input-btn-padding-x * 1.5;
     padding-left: $input-btn-padding-x * 1.5;
 
-    &:not(:focus) {
-      @include hover {
-        box-shadow: none;
-      }
-    }
+    // &:not(:focus) {
+    //   @include hover {
+    //     box-shadow: none;
+    //   }
+    // }
 
-    &:not(.active) {
-      @include hover-focus {
-        z-index: initial;
-      }
+    @include hover-focus {
+      z-index: initial;
     }
 
     + .btn {
@@ -40,7 +38,9 @@ $max-items: 5;
     }
 
     &.active {
-      z-index: $max-items + 1;
+      @include plain-hover-focus {
+        z-index: #{$max-items + 1};
+      }
     }
   }
 }

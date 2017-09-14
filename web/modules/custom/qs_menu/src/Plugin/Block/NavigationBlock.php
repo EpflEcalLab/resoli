@@ -138,6 +138,63 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
           'qs_activity.collection.themes',
         ],
       ],
+      'calendar' => [
+        'label' => $this->t('qs_menu.links.calendar'),
+        'url' => $this->urlGenerator->generate('<front>'),
+        'icon' => 'calendar',
+        'links' => [
+          'qs_activity.collection.themes' => [
+            'url' => $this->urlGenerator->generate('<front>'),
+            'label' => $this->t('qs_menu.links.activities.themes'),
+          ],
+          // @TODO temp link to not have a broken nav:
+          'qs_activity.collection.date' => [
+            'url' => $this->urlGenerator->generate('<front>'),
+            'label' => $this->t('qs_menu.links.activities.date'),
+          ],
+        ],
+        'activated_by' => [
+          'qs_activity.collection.themes',
+        ],
+      ],
+      'stories' => [
+        'label' => $this->t('qs_menu.links.stories'),
+        'url' => $this->urlGenerator->generate('<front>'),
+        'icon' => 'stories',
+        'links' => [
+          'qs_activity.collection.themes' => [
+            'url' => $this->urlGenerator->generate('<front>'),
+            'label' => $this->t('qs_menu.links.stories.themes'),
+          ],
+          // @TODO temp link to not have a broken nav:
+          'qs_activity.collection.date' => [
+            'url' => $this->urlGenerator->generate('<front>'),
+            'label' => $this->t('qs_menu.links.stories.date'),
+          ],
+        ],
+        'activated_by' => [
+          '<front>',
+        ],
+      ],
+      'photos' => [
+        'label' => $this->t('qs_menu.links.photos'),
+        'url' => $this->urlGenerator->generate('<front>'),
+        'icon' => 'pictures',
+        'links' => [
+          'qs_activity.collection.themes' => [
+            'url' => $this->urlGenerator->generate('<front>'),
+            'label' => $this->t('qs_menu.links.photos.themes'),
+          ],
+          // @TODO temp link to not have a broken nav:
+          'qs_activity.collection.date' => [
+            'url' => $this->urlGenerator->generate('<front>'),
+            'label' => $this->t('qs_menu.links.photos.date'),
+          ],
+        ],
+        'activated_by' => [
+          '<front>',
+        ],
+      ],
       'settings'   => [
         'label' => $this->t('qs_menu.links.account.dashboard'),
         'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),

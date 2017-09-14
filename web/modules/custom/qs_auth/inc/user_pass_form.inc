@@ -46,6 +46,8 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
 
     $form['actions']['submit']['#value'] = t('qs.form.submit');
     $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];
+
+    $form['#submit'][] = 'qs_auth_user_pass_form_submit';
   }
 
   if ($form_id == 'user_pass_reset') {
@@ -61,4 +63,11 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
 
     $form['actions']['submit']['#value'] = t('qs.form.submit');
   }
+}
+
+/**
+ * Custom submit handler for pass recovery form.
+ */
+function qs_auth_user_pass_form_submit($form, $form_state) {
+  $form_state->setRedirect('qs_auth.pass.confirmation', [], []);
 }

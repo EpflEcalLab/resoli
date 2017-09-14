@@ -112,4 +112,13 @@ class AccountController extends ControllerBase {
     ];
   }
 
+  /**
+   * Confimration page when user request a recovery password.
+   */
+  public function passConfirm() {
+    return [
+      '#theme' => 'qs_auth_pass_confirm_page',
+    ];
+  }
+
 }

@@ -21,7 +21,10 @@ function qs_auth_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--auth--communities',
     ],
-
+    'qs_auth_pass_confirm_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--auth--pass-confirm',
+    ],
     'qs_auth_approval_page' => [
       'variables' => ['variables' => []],
       'template'  => 'qs--auth--approval',

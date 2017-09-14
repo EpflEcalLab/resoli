@@ -20,6 +20,17 @@ qs_auth.pass:
     options:
       _maintenance_access: TRUE
 
+# Forget Password Confirmation
+qs_auth.pass.confirmation:
+  path: '/authentication/password/confirmation'
+  defaults:
+      _controller: '\Drupal\qs_auth\Controller\AccountController::passConfirm'
+      _title: 'qs_auth.pass.confirmation'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+
 # Register
 qs_auth.register:
     path: '/authentication/register'

@@ -7,7 +7,7 @@ use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\user\UserAuthInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
-use Drupal\qs_acl\Service\PrivilegeManger;
+use Drupal\qs_acl\Service\PrivilegeManager;
 
 /**
  * Service Account.
@@ -52,20 +52,20 @@ class Account {
   /**
    * The Privilege Manager.
    *
-   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
    */
-  private $privilegeManger;
+  private $privilegeManager;
 
   /**
    * Class constructor.
    */
-  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, QueryFactory $query_factory, PrivilegeManger $privilege_manager) {
-    $this->mail            = $mail;
-    $this->userStorage     = $entity_type_manager->getStorage('user');
-    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
-    $this->userAuth        = $user_auth;
-    $this->queryFactory    = $query_factory;
-    $this->privilegeManger = $privilege_manager;
+  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, QueryFactory $query_factory, PrivilegeManager $privilege_manager) {
+    $this->mail             = $mail;
+    $this->userStorage      = $entity_type_manager->getStorage('user');
+    $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
+    $this->userAuth         = $user_auth;
+    $this->queryFactory     = $query_factory;
+    $this->privilegeManager = $privilege_manager;
   }
 
   /**
@@ -101,7 +101,7 @@ class Account {
     // Create a Request Privilege as Member for this community.
     $community = $this->termStorage->load($data['community']);
     if ($community) {
-      $this->privilegeManger->request('community_members', $community, $user);
+      $this->privilegeManager->request('community_members', $community, $user);
     }
 
     // Login the created user.

@@ -57,7 +57,7 @@ class PrivilegeJudgeController extends AjaxControllerBase {
     $privilege_id = $request->request->get('privilege');
     $privilege = $this->privilegeStorage->load($privilege_id);
 
-    $confirmed = $this->privilegeManger->confirm($privilege);
+    $confirmed = $this->privilegeManager->confirm($privilege);
     return new JsonResponse([
       'status'    => TRUE,
       'privilege' => $confirmed->toArray(),
@@ -79,7 +79,7 @@ class PrivilegeJudgeController extends AjaxControllerBase {
     $privilege_id = $request->request->get('privilege');
     $privilege = $this->privilegeStorage->load($privilege_id);
 
-    $declined = $this->privilegeManger->decline($privilege);
+    $declined = $this->privilegeManager->decline($privilege);
     return new JsonResponse([
       'status'    => TRUE,
       'privilege' => $declined->toArray(),

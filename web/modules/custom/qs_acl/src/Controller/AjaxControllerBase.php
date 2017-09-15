@@ -6,7 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\qs_acl\Service\AccessControl;
-use Drupal\qs_acl\Service\PrivilegeManger;
+use Drupal\qs_acl\Service\PrivilegeManager;
 
 /**
  * AjaxControllerBase.
@@ -29,9 +29,9 @@ class AjaxControllerBase extends ControllerBase {
   /**
    * The Privilege Manager.
    *
-   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
    */
-  protected $privilegeManger;
+  protected $privilegeManager;
 
   /**
    * The term Storage.
@@ -57,10 +57,10 @@ class AjaxControllerBase extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(RequestStack $request_stack, AccessControl $acl, PrivilegeManger $privilege_manager) {
+  public function __construct(RequestStack $request_stack, AccessControl $acl, PrivilegeManager $privilege_manager) {
     $this->requestStack     = $request_stack;
     $this->acl              = $acl;
-    $this->privilegeManger  = $privilege_manager;
+    $this->privilegeManager = $privilege_manager;
     $this->privilegeStorage = $this->entityTypeManager()->getStorage('privilege');
     $this->termStorage      = $this->entityTypeManager()->getStorage('taxonomy_term');
     $this->userStorage      = $this->entityTypeManager()->getStorage('user');
@@ -75,7 +75,7 @@ class AjaxControllerBase extends ControllerBase {
     // Load customs services used in this class.
     $container->get('request_stack'),
     $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manger')
+    $container->get('qs_acl.privilege_manager')
     );
   }
 

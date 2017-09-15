@@ -117,7 +117,7 @@ abstract class FormBasic extends FormBase {
    *   Return the Quartiers-Solidaires Privilege Manager.
    */
   protected function getPrivilegeManager() {
-    return $this->container->get('qs_acl.privilege_manger');
+    return $this->container->get('qs_acl.privilege_manager');
   }
 
   /**

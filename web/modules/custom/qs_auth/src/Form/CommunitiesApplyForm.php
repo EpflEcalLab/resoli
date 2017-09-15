@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\qs_acl\Service\PrivilegeManger;
+use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
 
 /**
@@ -43,18 +43,18 @@ class CommunitiesApplyForm extends FormBase {
   /**
    * The Privilege Manager.
    *
-   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
    */
-  private $privilegeManger;
+  private $privilegeManager;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManger $privilege_manager, AccountProxyInterface $currentUser) {
-    $this->acl             = $acl;
-    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
-    $this->privilegeManger = $privilege_manager;
-    $this->currentUser     = $currentUser;
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManager $privilege_manager, AccountProxyInterface $currentUser) {
+    $this->acl              = $acl;
+    $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
+    $this->privilegeManager = $privilege_manager;
+    $this->currentUser      = $currentUser;
   }
 
   /**
@@ -64,7 +64,7 @@ class CommunitiesApplyForm extends FormBase {
     return new static(
     $container->get('qs_acl.access_control'),
     $container->get('entity_type.manager'),
-    $container->get('qs_acl.privilege_manger'),
+    $container->get('qs_acl.privilege_manager'),
     $container->get('current_user')
     );
   }
@@ -180,7 +180,7 @@ class CommunitiesApplyForm extends FormBase {
 
     // Create a Request Privilege as Member for this community.
     $community = $this->termStorage->load($form_state->getValue('community'));
-    $this->privilegeManger->request('community_members', $community, $user);
+    $this->privilegeManager->request('community_members', $community, $user);
 
     drupal_set_message($this->t('qs_auth.communities.apply.success @community', [
       '@community' => $community->getName(),

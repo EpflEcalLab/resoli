@@ -101,7 +101,7 @@ class PrivilegeGodController extends AjaxControllerBase {
         $updated[] = $privilege->toArray();
       }
       elseif ($status === 1) {
-        $updated[] = $this->privilegeManger->create($role, $community, $user)->toArray();
+        $updated[] = $this->privilegeManager->create($role, $community, $user)->toArray();
       }
     }
 
@@ -149,7 +149,7 @@ class PrivilegeGodController extends AjaxControllerBase {
 
     $declined = [];
     foreach ($privileges as $privilege) {
-      $declined[] = $this->privilegeManger->decline($privilege)->toArray();
+      $declined[] = $this->privilegeManager->decline($privilege)->toArray();
     }
 
     return new JsonResponse([

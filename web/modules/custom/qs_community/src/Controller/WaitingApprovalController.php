@@ -6,7 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Service\AccessControl;
-use Drupal\qs_acl\Service\PrivilegeManger;
+use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 
@@ -31,9 +31,9 @@ class WaitingApprovalController extends ControllerBase {
   /**
    * The Privilege Manager.
    *
-   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
    */
-  private $privilegeManger;
+  private $privilegeManager;
 
   /**
    * The Privilege Storage.
@@ -45,9 +45,9 @@ class WaitingApprovalController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManger $privilege_manager) {
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager) {
     $this->acl              = $acl;
-    $this->privilegeManger  = $privilege_manager;
+    $this->privilegeManager = $privilege_manager;
     $this->privilegeStorage = $this->entityTypeManager()->getStorage('privilege');
   }
 
@@ -59,7 +59,7 @@ class WaitingApprovalController extends ControllerBase {
     return new static(
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manger')
+    $container->get('qs_acl.privilege_manager')
     );
   }
 
@@ -87,7 +87,7 @@ class WaitingApprovalController extends ControllerBase {
    */
   public function waitingApproval(TermInterface $community) {
     $variables['community'] = $community;
-    $query = $this->privilegeManger->queryWaitingApproval($community);
+    $query = $this->privilegeManager->queryWaitingApproval($community);
 
     $ids = $query->execute()->fetchAll();
     pager_default_initialize(count($ids), $this->configuration['limit']);

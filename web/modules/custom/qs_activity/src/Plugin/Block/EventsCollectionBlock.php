@@ -5,7 +5,7 @@ namespace Drupal\qs_activity\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\PrivilegeManger;
+use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\qs_activity\Service\EventManager;
 
@@ -24,9 +24,9 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * The Privilege Manager.
    *
-   * @var \Drupal\qs_acl\Service\PrivilegeManger
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
    */
-  private $privilegeManger;
+  private $privilegeManager;
 
   /**
    * Current Route.
@@ -45,11 +45,11 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManger $privilege_manager, CurrentRouteMatch $route, EventManager $event_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManager $privilege_manager, CurrentRouteMatch $route, EventManager $event_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->privilegeManger = $privilege_manager;
-    $this->route           = $route;
-    $this->eventManager    = $event_manager;
+    $this->privilegeManager = $privilege_manager;
+    $this->route            = $route;
+    $this->eventManager     = $event_manager;
   }
 
   /**
@@ -63,7 +63,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
         $plugin_id,
         $plugin_definition,
         // Load customs services used in this class.
-        $container->get('qs_acl.privilege_manger'),
+        $container->get('qs_acl.privilege_manager'),
         $container->get('current_route_match'),
         $container->get('qs_activity.event_manager')
     );
@@ -83,7 +83,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
     $activity = $this->route->getParameter('node');
     if ($activity) {
       $variables['activity'] = $activity;
-      $privileges            = $this->privilegeManger->fetchActive($activity);
+      $privileges            = $this->privilegeManager->fetchActive($activity);
       $variables['events']   = $this->eventManager->getAllNext($activity);
 
       foreach ($privileges as $privilege) {

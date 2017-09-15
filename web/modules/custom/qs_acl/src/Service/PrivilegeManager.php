@@ -12,9 +12,9 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Entity\Privilege;
 
 /**
- * PrivilegeManger.
+ * PrivilegeManager.
  */
-class PrivilegeManger {
+class PrivilegeManager {
   /**
    * The current active user.
    *

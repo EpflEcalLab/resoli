@@ -109,10 +109,10 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
    */
   public function setPrivilege($privilege) {
     // Load services. No way to inject them on EntityInterface.
-    $field_manger = \Drupal::service('entity_field.manager');
+    $field_manager = \Drupal::service('entity_field.manager');
 
     // Load the field definitions.
-    $bundle_fields = $field_manger->getFieldDefinitions('privilege', 'privilege');
+    $bundle_fields = $field_manager->getFieldDefinitions('privilege', 'privilege');
     $field_definition = $bundle_fields['privilege'];
     $allowed_values = $field_definition->getSetting('allowed_values');
 
@@ -137,10 +137,10 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
    */
   public function setBundle($bundle) {
     // Load services. No way to inject them on EntityInterface.
-    $field_manger = \Drupal::service('entity_field.manager');
+    $field_manager = \Drupal::service('entity_field.manager');
 
     // Load the field definitions.
-    $bundle_fields = $field_manger->getFieldDefinitions('privilege', 'privilege');
+    $bundle_fields = $field_manager->getFieldDefinitions('privilege', 'privilege');
     $field_definition = $bundle_fields['bundle'];
     $allowed_values = $field_definition->getSetting('allowed_values');
 

@@ -3,9 +3,9 @@
 <a
   data-toggle="collapse"
   href="#collapse-{{ key }}"
-  class="card-pill collapsed"
+  class="card-pill {{ not is_open ? "collapsed" }}"
   role="tab"
-  aria-expanded="false"
+  aria-expanded="{{ is_open ? "true" : "false" }}"
   aria-controls="collapse-{{ key }}"
 >
 

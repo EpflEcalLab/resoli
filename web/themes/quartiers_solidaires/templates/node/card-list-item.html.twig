@@ -1,12 +1,14 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<li class="card card-flippable card-list-item">
+{% set is_open = loop.first %}
+
+<li class="card card-flippable card-list-item {{ is_open ? "card-open" }}">
 
   <div class="card-front">
     {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}
   </div>
 
-  <div class="collapse" id="collapse-{{ key }}" role="tabpanel" data-parent="#events-accordion">
+  <div class="collapse {{ is_open ? "show" }}" id="collapse-{{ key }}" role="tabpanel" data-parent="#events-accordion">
     {% include "@quartiers_solidaires/node/partials/card-body.html.twig" %}
   </div>
 

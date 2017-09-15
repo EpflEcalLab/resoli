@@ -5,7 +5,6 @@ namespace Drupal\qs_activity\Service;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Database\Connection;
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\taxonomy\TermInterface;
 use Drupal\node\NodeInterface;
 
@@ -13,13 +12,6 @@ use Drupal\node\NodeInterface;
  * ActivityManager.
  */
 class ActivityManager {
-  /**
-   * Relative date from now. A format accepted by strtotime().
-   *
-   * @var string
-   */
-  const MAX_DATE_LIST = '+6 months';
-
   /**
    * The node Storage.
    *
@@ -63,36 +55,19 @@ class ActivityManager {
     // The request should be took at the latest moment, avoid it on constructor.
     $master_request = $this->requestStack->getMasterRequest();
 
-    $now = new DrupalDateTime();
-    $max = new DrupalDateTime();
-    $max->modify(self::MAX_DATE_LIST)->setTime(23, 59, 59);
-
     $query = $this->connection->select('node_field_data', 'activity');
-    $query->fields('activity', ['nid'])
+    $query->fields('activity', ['nid', 'title'])
       ->condition('activity.type', 'activity')
       ->condition('activity.status', TRUE);
 
     $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
-
-    // TOOD: Apply filter to display activities of the current community
-    // which are open to anybody
-    // OR
-    // activities of the current community
-    // where the current user is organizers|maintainers|members.
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
 
     $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
-
-    // Filter activities only if at least one event finish in the futur.
-    $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_activity.entity_id');
-    $query->condition('field_end_at.field_end_at_value', $now, '>=');
-
-    // Filter activities on a maximum date for performance purpose.
-    $query->condition('field_end_at.field_end_at_value', $max, '<=');
-
     $query->leftJoin('node__field_theme', 'field_theme', 'field_theme.entity_id = activity.nid');
 
     $query->groupBy('activity.nid');
+    $query->groupBy('activity.title');
     $query->groupBy('field_theme.field_theme_target_id');
 
     // Apply filter by theme if requested.
@@ -106,7 +81,7 @@ class ActivityManager {
     }
 
     $query->orderBy('field_theme.field_theme_target_id');
-    $query->orderBy('activity.nid');
+    $query->orderBy('activity.title', 'ASC');
 
     $rows = $query->execute()->fetchAll();
 

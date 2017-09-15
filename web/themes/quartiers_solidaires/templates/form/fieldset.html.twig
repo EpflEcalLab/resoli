@@ -41,8 +41,17 @@
     <span{{ legend_span.attributes.addClass(legend_span_classes) }}>{{ legend.title }}</span>
   </legend>
 
-  {% if description.content %}
-    <div{{ description.attributes.addClass('description') }}>{{ description.content }}</div>
+  {% if description.content or attributes.sub_description %}
+    <div class="text-center mb-5">
+
+    {% if description.content %}
+      <p class="lead">{{ description.content }}</p>
+    {% endif %}
+    {% if attributes.sub_description %}
+      <p>{{ attributes.sub_description }}</p>
+    {% endif %}
+
+    </div>
   {% endif %}
 
   <div class="fieldset-wrapper">

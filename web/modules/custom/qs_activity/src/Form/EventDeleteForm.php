@@ -6,11 +6,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
- * ActivityDeleteForm class.
+ * EventDeleteForm class.
  */
-class ActivityDeleteForm extends ActivityEditFormBase {
+class EventDeleteForm extends EventEditFormBase {
 
   /**
    * {@inheritdoc}
@@ -27,22 +28,22 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'qs_activity_delete_form';
+    return 'qs_activity_event_delete_form';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
-    $form = parent::buildForm($form, $form_state, $activity);
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
+    $form = parent::buildForm($form, $form_state, $event);
 
     $form['#theme_wrappers'] = [
       'form__modal',
     ];
 
     $form['#attributes'] = [
-      'title' => $activity->title->value,
-      'description' => $this->t('qs_activity.activities.form.delete.warning'),
+      'title' => $event->title->value,
+      'description' => $this->t('qs_activity.events.form.delete.warning'),
     ];
 
     $form['actions'] = [
@@ -60,7 +61,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     $form['actions']['cancel'] = [
       '#type' => 'link',
       '#title' => $this->t('qs.form.cancel'),
-      '#url' => Url::fromRoute('qs_activity.activities.dashboard', ['activity' => $activity->id()]),
+      '#url' => Url::fromRoute('qs_activity.events.dashboard', ['event' => $event->id()]),
       '#attributes' => [
         'class' => [
           'btn btn-outline-danger btn-outline-invert',
@@ -88,14 +89,15 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $now = new DrupalDateTime();
 
-    // Assert the activity has no event.
-    $events = $this->eventManager->getAll($activity);
-    if (!empty($events)) {
-      $form_state->setError($form, $this->t("qs_activity.activities.form.delete.error.has_events @activity", ['@activity' => $activity->toLink($activity->getTitle())->toString()]));
+    // Assert the event has not started.
+    if ($event->field_start_at->date <= $now) {
+      $form_state->setError($form, $this->t("qs_activity.events.form.delete.error.is_past @event", ['@event' => $event->toLink($event->getTitle())->toString()]));
     }
 
+    // TODO Assert the event has no subscriber(s).
     // Add inline errors.
     $this->applyErrorsInline($form, $form_state);
   }
@@ -104,17 +106,17 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
-    $community = $activity->field_community->entity;
+    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $activity = $event->field_activity->entity;
 
-    drupal_set_message($this->t("qs_activity.activities.form.delete.success @activity", [
-      '@activity' => $activity->getTitle(),
+    drupal_set_message($this->t("qs_event.events.form.delete.success @event", [
+      '@event' => $event->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
+    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
 
-    // Delete the activity.
-    $activity = $activity->delete();
+    // Delete the event.
+    $event = $event->delete();
   }
 
 }

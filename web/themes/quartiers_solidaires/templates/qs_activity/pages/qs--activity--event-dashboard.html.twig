@@ -22,7 +22,7 @@
           </a>
         </li>
         <li>
-          <a class="btn btn-outline-danger btn-icon btn-block shadow-to-bottom mb-2" href="javascript:alert('This feature is not yet availaible.')">
+          <a class="btn btn-outline-danger btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.form.delete', {'event': variables.event.id}) }}">
             {{ macros.icon('trash') }}
             {{ 'qs.event.delete'|t }}
           </a>

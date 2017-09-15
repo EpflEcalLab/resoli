@@ -147,3 +147,18 @@ qs_activity.events.form.edit:
       parameters:
         event:
           type: entity:node
+
+# Events delete form
+qs_activity.events.form.delete:
+    path: '/events/{event}/delete'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\EventDeleteForm'
+      _title: 'qs_activity.events.form.delete.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\EventDeleteForm::access'
+      event: \d+
+    options:
+      parameters:
+        event:
+          type: entity:node

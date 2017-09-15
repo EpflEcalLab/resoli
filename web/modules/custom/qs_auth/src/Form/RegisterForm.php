@@ -82,8 +82,10 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-1'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_auth.register_form.step1.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step1'),
+        'sub_description' => $this->t('qs_auth.register_form.step1.sub_description'),
       ],
       '#theme_wrappers' => [
         'fieldset__step',
@@ -112,8 +114,10 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-2'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_auth.register_form.step2.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step2'),
+        'sub_description' => $this->t('qs_auth.register_form.step2.sub_description'),
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -139,8 +143,10 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-3'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_auth.register_form.step3.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step3'),
+        'sub_description' => $this->t('qs_auth.register_form.step3.sub_description'),
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -165,8 +171,10 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-4'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_auth.register_form.step4.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step4'),
+        'sub_description' => $this->t('qs_auth.register_form.step4.sub_description'),
       ],
       '#theme_wrappers' => [
         'container__center',

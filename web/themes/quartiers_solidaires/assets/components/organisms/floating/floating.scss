@@ -7,3 +7,8 @@
   right: 0;
   z-index: $zindex-sticky;
 }
+
+.floating-wrapper {
+  min-height: 60px;
+  height: 10vh;
+}

@@ -36,13 +36,13 @@ Feature: Supervisor - Redirect
 
   @api
   Scenario: Logged a Admin, I can access my account dashboard
-        Given I am logged in as user "admin"
+    Given I am logged in as user "admin"
     Then I am on "/account/1/dashboard"
     And the response status code should be 200
 
   @api
   Scenario: Logged a Admin, I can access to any account dashboard
-        Given I am logged in as user "admin"
+    Given I am logged in as user "admin"
     Then I am on "/account/2/dashboard"
     And the response status code should be 200
 

@@ -64,19 +64,28 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
    */
   public function build($params = []) {
     $variables = [
-      'display'                        => FALSE,
-      'community'                      => NULL,
-      'community_has_write_access'     => FALSE,
-      'community_has_dashboard_access' => FALSE,
-      'activity_has_admin_access'      => FALSE,
+      'display'                         => FALSE,
+      'community'                       => NULL,
+      'community_has_write_access'      => FALSE,
+      'community_has_dashboard_access'  => FALSE,
+      'activity_has_admin_access'       => FALSE,
       'activity_has_write_access_event' => FALSE,
     ];
+    $route_name = $this->route->getRouteName();
 
     $community = $this->route->getParameter('community');
     if ($community) {
-      $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
-      $variables['community_has_dashboard_access'] = $this->acl->hasAdminAccessCommunity($community);
       $variables['community'] = $community;
+
+      if (in_array($route_name, ['qs_activity.collection.themes'])) {
+        $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
+        $variables['community_has_dashboard_access'] = $this->acl->hasAdminAccessCommunity($community);
+
+        if ($this->acl->hasBypass()) {
+          $variables['community_has_write_access']     = TRUE;
+          $variables['community_has_dashboard_access'] = TRUE;
+        }
+      }
     }
 
     $node = $this->route->getParameter('node');
@@ -87,13 +96,11 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       if (!$community) {
         $variables['community'] = $node->field_community->entity;
       }
-    }
 
-    if ($this->acl->hasBypass()) {
-      $variables['community_has_write_access']      = TRUE;
-      $variables['community_has_dashboard_access']  = TRUE;
-      $variables['activity_has_admin_access']       = TRUE;
-      $variables['activity_has_write_access_event'] = TRUE;
+      if ($this->acl->hasBypass()) {
+        $variables['activity_has_admin_access']       = TRUE;
+        $variables['activity_has_write_access_event'] = TRUE;
+      }
     }
 
     return [

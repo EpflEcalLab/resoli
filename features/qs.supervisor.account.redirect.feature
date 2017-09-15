@@ -25,14 +25,14 @@ Feature: Supervisor - Redirect
 
   @api
   Scenario: Logged a Admin, accessing my Drupal system user page brings me on my account dashboard
-        Given I am logged in as user "admin"
+    Given I am logged in as user "admin"
     Then I am on "/user/1"
     And the url should match "/account/1/dashboard"
     And the response status code should be 200
 
   @api
   Scenario: Logged a Admin, accessing another Drupal system user page brings me on the account dashboard
-        Given I am logged in as user "admin"
+    Given I am logged in as user "admin"
     Then I am on "/user/2"
     And the url should match "/account/2/dashboard"
     And the response status code should be 200

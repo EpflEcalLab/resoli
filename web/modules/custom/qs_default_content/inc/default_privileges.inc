@@ -249,9 +249,11 @@ function qs_default_content_privileges_community() {
     'entity'    => 1,
   // User 13: member+lausanne+manager+fribourg.
     'user'      => 13,
-  // pending.
-    'status'    => NULL,
+  // approved.
+    'status'    => 1,
     'privilege' => 'community_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
   ]);
   $privilege->save();
   $privilege = $privilegeStorage->create([

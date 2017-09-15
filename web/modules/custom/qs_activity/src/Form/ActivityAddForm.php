@@ -83,6 +83,7 @@ class ActivityAddForm extends FormBasic {
 
     $form['activity']['step-1'] = [
       '#type' => 'fieldset',
+      '#description' => $this->t('qs_activity.activities.form.step1.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step1'),
       ],
@@ -102,6 +103,7 @@ class ActivityAddForm extends FormBasic {
 
     $form['activity']['step-2'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_activity.activities.form.step2.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step2'),
       ],
@@ -136,6 +138,7 @@ class ActivityAddForm extends FormBasic {
 
     $form['activity']['step-3'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_activity.activities.form.step3.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step3'),
       ],
@@ -245,6 +248,7 @@ class ActivityAddForm extends FormBasic {
 
     $form['activity']['step-4'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_activity.activities.form.step4.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step4'),
       ],

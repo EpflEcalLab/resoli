@@ -7,35 +7,35 @@
       <ul class="list-unstyled mt-3 mx-auto">
         <li>
           {# Edit info Button #}
-          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.activities.form.edit.info', {'activity': variables.activity.id}) }}">
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.info', {'activity': variables.activity.id}) }}">
             {{ macros.icon('pencil') }}
             {{ 'qs.activity.edit_info'|t }}
           </a>
         </li>
         <li>
           {# Edit visibility Button #}
-          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.activities.form.edit.visibility', {'activity': variables.activity.id}) }}">
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.visibility', {'activity': variables.activity.id}) }}">
             {{ macros.icon('pencil') }}
             {{ 'qs.activity.edit_visibility'|t }}
           </a>
         </li>
         <li>
           {# Edit default values Button #}
-          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.activities.form.edit.defaults', {'activity': variables.activity.id}) }}">
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.defaults', {'activity': variables.activity.id}) }}">
             {{ macros.icon('pencil') }}
             {{ 'qs.activity.edit_default_values'|t }}
           </a>
         </li>
         <li>
           {# Add event Button #}
-          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2" href="{{ path('qs_activity.events.form.add', {'activity': variables.activity.id}) }}">
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.events.form.add', {'activity': variables.activity.id}) }}">
             {{ macros.icon('plus') }}
             {{ 'qs.activity.add_event'|t }}
           </a>
         </li>
         <li>
           {# Delete Button #}
-          <a class="btn btn-block btn-outline-danger btn-white btn-icon mb-2" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
+          <a class="btn btn-block btn-white text-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
             {{ macros.icon('trash') }}
             {{ 'qs.activity.delete'|t }}
           </a>

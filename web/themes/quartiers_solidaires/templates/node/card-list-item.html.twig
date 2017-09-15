@@ -42,7 +42,7 @@
       <div class="row">
         {% if event.field_contact_phone.value %}
           <div class="col-md-8 mx-auto">
-            <a href="tel:{{ event.field_contact_phone.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3">
+            <a href="tel:{{ event.field_contact_phone.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
               {{ macros.icon('phone') }}
               {{ event.field_contact_phone.value }}
             </a>
@@ -51,7 +51,7 @@
 
         {% if event.field_contact_mail.value %}
           <div class="col-md-8 mx-auto">
-            <a href="mailto:{{ event.field_contact_mail.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3">
+            <a href="mailto:{{ event.field_contact_mail.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
               {{ macros.icon('mail') }}
               {{ event.field_contact_mail.value }}
             </a>
@@ -59,7 +59,7 @@
         {% endif %}
 
         <div class="col-md-8 mx-auto">
-          <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4" data-toggle="flip">
+          <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
             {{ macros.icon('arrow-left') }}
             {{ 'qs.event.back_to_event'|t }}
           </button>
@@ -93,7 +93,7 @@
 
         <div class="row">
           <div class="col-md-8 mx-auto">
-            <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4" data-toggle="flip">
+            <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
               {{ macros.icon('arrow-left') }}
               {{ 'qs.event.back_to_event'|t }}
             </button>

@@ -64,7 +64,7 @@
               <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post">
                 <input type="hidden" name="user" value="{{ member.uid.value }}">
                 <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
-                <button class="btn btn-white btn-outline-secondary" type="submit" value="{{ 'qs.roles.community_none'|t }}">
+                <button class="btn btn-white btn-outline-secondary shadow-to-bottom" type="submit" value="{{ 'qs.roles.community_none'|t }}">
                   {{ 'qs.roles.community_none'|t }}
                 </button>
               </form>

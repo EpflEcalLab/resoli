@@ -27,7 +27,7 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
 
   $form['login'] = [
     '#type'  => 'fieldset',
-    '#title' => t('qs_auth.form.login.title'),
+    '#description' => t('qs_auth.form.login.title'),
   ];
 
   $form['login']['name'] = $form['name'];

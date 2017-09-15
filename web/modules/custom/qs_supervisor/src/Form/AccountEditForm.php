@@ -129,17 +129,17 @@ class AccountEditForm extends FormBase {
       '#attributes'    => ['required' => TRUE],
       '#type'          => 'email',
       '#title'         => $this->t('qs_supervisor.account.form.edit.mail'),
-      '#placeholder' => $this->t('qs_auth.register_form.mail.placeholder'),
+      '#placeholder'   => $this->t('qs_auth.register_form.mail.placeholder'),
       '#required'      => FALSE,
       '#default_value' => $user->mail->value,
     ];
 
     $form['credentials']['password'] = [
-      '#attributes' => ['required' => TRUE],
-      '#type'       => 'password',
-      '#title'      => $this->t('qs_supervisor.account.form.edit.password'),
+      '#attributes'  => ['required' => FALSE],
+      '#type'        => 'password',
+      '#title'       => $this->t('qs_supervisor.account.form.edit.password'),
       '#placeholder' => $this->t('qs_auth.register_form.password.placeholder'),
-      '#required'   => FALSE,
+      '#required'    => FALSE,
     ];
 
     $form['personnal'] = [
@@ -149,29 +149,29 @@ class AccountEditForm extends FormBase {
       ],
     ];
 
-    $form['personnal']['step-2']['firstname'] = [
-      '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_supervisor.account.form.edit.firstname'),
-      '#placeholder' => $this->t('qs_auth.form.register.firstname.placeholder'),
-      '#type'        => 'textfield',
-      '#required'    => FALSE,
+    $form['personnal']['firstname'] = [
+      '#attributes'    => ['required' => TRUE],
+      '#title'         => $this->t('qs_supervisor.account.form.edit.firstname'),
+      '#placeholder'   => $this->t('qs_auth.form.register.firstname.placeholder'),
+      '#type'          => 'textfield',
+      '#required'      => FALSE,
       '#default_value' => $user->field_firstname->value,
     ];
 
-    $form['personnal']['step-2']['lastname'] = [
-      '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_supervisor.account.form.edit.lastname'),
-      '#placeholder' => $this->t('qs_auth.form.register.lastname.placeholder'),
-      '#type'        => 'textfield',
-      '#required'    => FALSE,
+    $form['personnal']['lastname'] = [
+      '#attributes'    => ['required' => TRUE],
+      '#title'         => $this->t('qs_supervisor.account.form.edit.lastname'),
+      '#placeholder'   => $this->t('qs_auth.form.register.lastname.placeholder'),
+      '#type'          => 'textfield',
+      '#required'      => FALSE,
       '#default_value' => $user->field_lastname->value,
     ];
 
     $form['personnal']['phone'] = [
-      '#attributes'    => ['required' => TRUE],
+      '#attributes'    => ['required' => FALSE],
       '#type'          => 'textfield',
       '#title'         => $this->t('qs_supervisor.account.form.edit.phone'),
-      '#placeholder' => $this->t('qs_auth.register_form.phone.placeholder'),
+      '#placeholder'   => $this->t('qs_auth.register_form.phone.placeholder'),
       '#required'      => FALSE,
       '#default_value' => $user->field_phone->value,
     ];
@@ -196,12 +196,12 @@ class AccountEditForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the firstname is valid.
     if (!$form_state->getValue('firstname') || empty($form_state->getValue('firstname'))) {
-      $form_state->setErrorByName('[register][step-2][firstname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['firstname']['#title']]));
+      $form_state->setErrorByName('[personnal][firstname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['firstname']['#title']]));
     }
 
     // Assert the lastname is valid.
     if (!$form_state->getValue('lastname') || empty($form_state->getValue('lastname'))) {
-      $form_state->setErrorByName('[register][step-2][lastname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['lastname']['#title']]));
+      $form_state->setErrorByName('[personnal][lastname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['lastname']['#title']]));
     }
 
     // Assert the mail is valid.
@@ -209,8 +209,14 @@ class AccountEditForm extends FormBase {
       $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
-    // Check email is uniq.
+    // Check email is uniq. as mail.
     $accounts = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
+    if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
+      $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
+    }
+
+    // Check email is uniq. as username.
+    $accounts = $this->userStorage->loadByProperties(['name' => $form_state->getValue('mail')]);
     if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
       $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
     }

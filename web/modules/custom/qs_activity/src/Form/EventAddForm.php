@@ -82,6 +82,7 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-1'] = [
       '#type' => 'fieldset',
+      '#description' => $this->t('qs_activity.events.form.step1.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.events.form.step1'),
       ],
@@ -183,6 +184,7 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-2'] = [
       '#type'  => 'fieldset',
+      '#description' => $this->t('qs_activity.events.form.step2.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.events.form.step2'),
       ],

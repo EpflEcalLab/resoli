@@ -5,6 +5,8 @@
  * User Login form hook.
  */
 
+use Drupal\Core\Link;
+
 /**
  * Alter Drupal login form with custom markup and submission.
  */
@@ -17,9 +19,6 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
   $form['#top_links'] = [
     '<front>' => [
       'label' => t('qs_auth.link.home'),
-    ],
-    'qs_auth.pass' => [
-      'label' => t('qs_auth.link.password'),
     ],
     'qs_auth.register' => [
       'label' => t('qs_auth.link.register'),
@@ -44,7 +43,13 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
   $form['login']['pass']['#title'] = t('qs_auth.form.login.password');
   $form['login']['pass']['#attributes']['autocomplete'] = "off";
   $form['login']['name']['#attributes']['autofocus'] = "autofocus";
-  $form['login']['pass']['#description'] = '';
+  $form['login']['pass']['#description'] = Link::CreateFromRoute(
+    t('qs_auth.link.password'), 'qs_auth.pass', [], [
+      'attributes' => [
+        'class' => ['link-underline text-white'],
+      ],
+    ]
+  );
   $form['login']['pass']['#placeholder'] = t('qs_auth.form.login.placeholder');
 
   $form['#submit'][] = 'qs_auth_user_login_form_submit';

@@ -28,6 +28,11 @@
 
   @include border-radius($alert-border-radius);
   @include drop-shadow('bottom', color('dark'));
+
+  ul,
+  ol {
+    text-align: left;
+  }
 }
 
 // Headings for larger alerts

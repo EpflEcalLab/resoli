@@ -12,9 +12,11 @@ const formControl = () => {
 
       // Enable the Google Place API for each inputs.
       $inputs.each(function(i, el) {
-        const $inputLat = $(el).data('googleInputLat');
-        const $inputLng = $(el).data('googleInputLng');
-        const autocomplete = new google.maps.places.Autocomplete(el);
+        const inputLat = $(el).data('googleInputLat');
+        const inputLng = $(el).data('googleInputLng');
+        const autocomplete = new google.maps.places.Autocomplete(el, {
+          componentRestrictions: {country: 'ch'},
+        });
 
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
@@ -22,13 +24,11 @@ const formControl = () => {
           let lat = '';
           let lng = '';
           if (place.geometry) {
-            console.log(place.geometry.location);
-            lat = place.geometry.location;
-            lng = place.geometry.location;
+            lat = place.geometry.location.lat();
+            lng = place.geometry.location.lng();
           }
-
-          $inputLat.val(lat);
-          $inputLat.val(lng);
+          $(`#${inputLat}`).val(lat);
+          $(`#${inputLng}`).val(lng);
         });
       });
     }

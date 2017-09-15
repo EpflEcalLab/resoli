@@ -15,4 +15,4 @@ global-styling:
 google-place-autocomplete:
   version: 3.0
   js:
-    https://maps.googleapis.com/maps/api/js?key=AIzaSyCnqi0V1YW_Di2eY4N4PdlhmYEasdFdax4&libraries=places: {type: external, defer: true, async: true}
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyDCxS2BMP-uAhxYq2PcDKWJBtWc8ZwkBnY&libraries=places: {type: external, defer: true, async: true}

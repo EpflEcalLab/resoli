@@ -22,7 +22,7 @@ const multiStep = () => {
         // Create the "Next step" button below the form
         $('<button/>')
           .attr('id', `next-btn-${id}`)
-          .addClass('btn btn-outline-invert btn-icon btn-icon-right align-self-center')
+          .addClass('btn btn-outline-invert btn-icon btn-icon-right align-self-center shadow-to-bottom')
           .text(Drupal.t('qs.next'))
           .on('click', function(e) {
             e.preventDefault();
@@ -46,7 +46,7 @@ const multiStep = () => {
 
           // Generate link to step
           const $link = $('<a/>', {
-            'class': 'step-nav-link btn btn-outline-invert btn-circle',
+            'class': 'step-nav-link btn btn-outline-invert btn-circle shadow-to-bottom',
             'href': `#${fieldsetId}`,
             'title': stepLabel,
             'aria-label': stepLabel,

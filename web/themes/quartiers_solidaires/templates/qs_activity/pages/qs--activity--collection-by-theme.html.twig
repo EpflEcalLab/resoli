@@ -3,7 +3,7 @@
 
 {# Block with current search filters #}
 <div class="container">
-  <h1 class="text-center mt-5">
+  <p class="lead text-center mt-5">
     {%- set count = variables.themes|length -%}
     {%- set themes_names = variables.themes|join(', ')|trim -%}
     {%- set community_name = variables.community.name.value|trim -%}
@@ -14,7 +14,7 @@
     {% else %}
       {%- trans -%}qs.activity.theme.filters {{ community_name }}.{%- endtrans -%}
     {% endif %}
-  </h1>
+  </p>
 </div>
 
 {% if variables.activities %}

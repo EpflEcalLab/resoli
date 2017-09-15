@@ -103,7 +103,7 @@
 
       @if $with-hover {
         @include hover {
-          @include floating-shadow($color);
+          @include hover-shadow($color);
         }
       }
     }
@@ -139,6 +139,10 @@
       color: $color-invert;
       background-color: $color-dark;
       border-color: $color-dark;
+
+      .icon svg {
+        color: $color-invert;
+      }
     }
 
     &.active,

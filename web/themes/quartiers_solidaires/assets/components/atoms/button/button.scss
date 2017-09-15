@@ -69,12 +69,12 @@
   }
 
   .bg-#{$color} {
-    .btn-outline-invert {
+    [class*=btn-outline-] {
       @include drop-shadows(color(dark), true);
     }
   }
 
-  [class^=bg-] {
+  [class*=bg-] {
     .btn-outline-#{$color} {
       &:active {
         .icon svg {
@@ -133,13 +133,6 @@
           color: $body-color;
         }
       }
-    }
-  }
-
-  &:active,
-  &.active {
-    .icon svg {
-      color: $white;
     }
   }
 }

@@ -1,5 +1,5 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+<button type="button" class="btn btn-primary shadow-to-left" data-toggle="modal" data-target="#exampleModalLong">
   {{ 'qs.themes.filter_btn'|t }}
 </button>
 <div class="modal fade" id="exampleModalLong">
@@ -9,9 +9,9 @@
         <h4 class="modal-title text-center">{{ 'qs.themes.filter_title'|t }}</h4>
       </div>
       <div class="modal-body text-center" data-toggle="buttons">
-        <label class="btn checkbox" id="js-all-themes">
+        <label class="btn checkbox active" id="js-all-themes">
           {{ macros.icon('theme_cuisine_o') }}
-          <input type="checkbox" name="allthemes" value="all">
+          <input type="radio" name="allthemes" value="all" checked="checked">
           {{ 'qs.themes.filter_all'|t }}
         </label>
       </div>

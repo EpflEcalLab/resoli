@@ -1,5 +1,11 @@
 <form{{ attributes.addClass(classes) }}>
   <div class="modal-body">
+    {% if attributes.icon %}
+      {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+      <div class="text-center my-5">
+        {{ macros.icon(attributes.icon, ['icon-xl']) }}
+      </div>
+    {% endif %}
     {% if attributes.title %}
       <h1 class="text-center mt-3 mb-5">{{ attributes.title }}</h1>
     {% endif %}

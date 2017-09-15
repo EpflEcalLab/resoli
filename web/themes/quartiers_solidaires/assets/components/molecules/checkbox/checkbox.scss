@@ -87,9 +87,12 @@
     background-color: theme-color('primary');
     border: $border-width solid $white;
     transition: all 0.4s ease;
+    box-shadow: inset 0 0 6px 0 rgba(color(dark), 0.4);
 
     &:focus {
-      box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
+      box-shadow:
+        inset 0 0 2px 0 color(dark),
+        0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
     }
 
     &:after {

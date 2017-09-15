@@ -199,6 +199,9 @@ class EventEditForm extends EventEditFormBase {
         'modal' => TRUE,
         'icon_left' => TRUE,
         'outline' => TRUE,
+        'class' => [
+          'shadow-to-bottom',
+        ],
       ],
       '#value' => $this->t('qs.form.submit'),
     ];

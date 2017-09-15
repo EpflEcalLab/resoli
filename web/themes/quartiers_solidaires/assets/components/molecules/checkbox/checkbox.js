@@ -7,9 +7,9 @@ const checkbox = () => {
 
     if ($btn_check_all.length > 0) {
       // Listen to click events on the ALL button
-      // We can't listen to `change` event as it would trigger every time
+      // Always toggle all other checkboxes
       $btn_check_all.on('click', function() {
-        toggleSelected(!$btn_check_all.find('input[type=checkbox]').prop('checked'));
+        toggleSelected(true);
       });
 
       // We can't listen to `change` event as it would trigger every time
@@ -26,20 +26,18 @@ const checkbox = () => {
       });
 
       const toggleAllBtn = (counter) => {
-        // if counter is equal to the total of checkboxes, toggle the ALL button
-        // else if counter is less than the total and the ALL button is active, toggle it
-        if (counter >= $themes.length) {
-          $btn_check_all.button('toggle');
-        } else if (counter < $themes.length && $btn_check_all.hasClass('active')) {
-          $btn_check_all.button('toggle');
+        // If the ALL button is active and some other themes are selected,
+        // uncheck the ALL button
+        if ((counter > 0 && $btn_check_all.hasClass('active')) || counter === 0) {
+          $btn_check_all.toggleClass('active');
         }
       }
 
       const toggleSelected = (state) => {
-        // Check all checkboxes that are not yet of the same value as ALL button
+        // Uncheck all checkboxes when we click on the ALL button
         $themes.each(function() {
           const checkbox_checked = $(this).find('input[type=checkbox]').prop('checked');
-          if (checkbox_checked !== state) {
+          if (checkbox_checked === state) {
             $(this).button('toggle');
           }
         });

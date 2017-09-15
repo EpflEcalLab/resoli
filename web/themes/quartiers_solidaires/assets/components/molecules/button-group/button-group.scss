@@ -5,6 +5,7 @@ $max-items: 5;
 
 .btn-group {
   max-width: 100%;
+  z-index: 1;
 
   @include after-shadow(theme-color("secondary"));
 
@@ -43,6 +44,12 @@ $max-items: 5;
       }
     }
   }
+
+  [class*=bg-] & {
+    z-index: 1;
+
+    @include after-shadow($body-color);
+  }
 }
 
 .btn-group-lg {
@@ -65,12 +72,4 @@ $max-items: 5;
 .btn-group > .btn:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
   @include border-left-radius($btn-border-radius);
-}
-
-@each $color, $value in $theme-colors {
-  @if ($color != 'secondary') {
-    .btn-group-#{$color} {
-      @include after-shadow(theme-color($color));
-    }
-  }
 }

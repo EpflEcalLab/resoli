@@ -34,7 +34,8 @@
         <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
           <div class="card-body pb-0 text-center">
 
-            <h4 class="card-title">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
+            <h4 class="card-title mb-0">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
+            <h5 class="card-title mt-1">{{ member.mail.value }}</h5>
 
             <div class="card-text">
               <form id="privilege-{{ loop.index }}" data-ajax="true" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">

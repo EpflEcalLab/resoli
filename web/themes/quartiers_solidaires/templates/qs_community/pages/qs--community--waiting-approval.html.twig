@@ -33,7 +33,8 @@
         <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
           <div class="card-body pb-0 text-center">
 
-            <h4 class="card-title">{{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}</h4>
+            <h4 class="card-title mb-0">{{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}</h4>
+            <h5 class="card-title mt-1">{{ privilege.user.entity.mail.value }}</h5>
 
             <div class="card-text mb-4">
               {% if privilege.privilege.value == 'community_managers' %}
@@ -64,6 +65,13 @@
                   </button>
                 </form>
               </div>
+            </div>
+
+            <div class="card-actions d-flex justify-content-center mt-4 mb-3">
+              <a href="mailto:{{ privilege.user.entity.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+                {{ macros.icon('mail') }}
+                {% trans %}qs.contact {{ privilege.user.entity.field_firstname.value }}{% endtrans %}
+              </a>
             </div>
           </div>
         </div>

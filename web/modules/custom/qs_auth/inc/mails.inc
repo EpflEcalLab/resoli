@@ -12,11 +12,10 @@ use Drupal\Core\Render\Markup;
  */
 function qs_auth_mail($key, &$message, $params) {
   // Load services.
-  $configFacotry = \Drupal::service('config.factory');
-  $token = \Drupal::token();
+  $configFactory = \Drupal::service('config.factory');
 
-  // Get Drupal Config for users mails.
-  $config = $configFacotry->get('user.mail');
+  // Get Drupal Config for site.
+  $site = $configFactory->get('system.site');
 
   $headers = [
     'MIME-Version'              => '1.0',
@@ -34,10 +33,50 @@ function qs_auth_mail($key, &$message, $params) {
 
     // Sended to new user when registering.
     case 'register':
-      $content = $config->get('register_pending_approval');
+      $account = $params['user'];
+      $message['subject'] = t('qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname', [
+        '@sitename'  => $site->get('name'),
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+      ]);
 
-      $message['subject'] = $token->replace($content['subject']);
-      $message['body'][] = Markup::create($token->replace($content['body']));
+      $message['body'][] = Markup::create(t('qs.mail.welcome.no_approval.body @mail @firstname @lastname', [
+        '@mail'           => $account->mail->value,
+        '@firstname'      => $account->field_firstname->value,
+        '@lastname'       => $account->field_lastname->value,
+      ]));
+
+      break;
+  }
+}
+
+/**
+ * Mail hook alteration.
+ */
+function qs_auth_mail_alter(&$message) {
+  // Load services.
+  $configFactory = \Drupal::service('config.factory');
+
+  // Get Drupal Config for site.
+  $site = $configFactory->get('system.site');
+
+  switch ($message['id']) {
+    case 'user_password_reset':
+      $account = $message['params']['account'];
+      $message['subject'] = t('qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname', [
+        '@sitename'  => $site->get('name'),
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+      ]);
+
+      $message['body'][0] = Markup::create(t('qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login', [
+        '@mail'           => $account->mail->value,
+        '@firstname'      => $account->field_firstname->value,
+        '@lastname'       => $account->field_lastname->value,
+        '@one-time-login' => user_pass_reset_url($account),
+      ]));
       break;
   }
 }

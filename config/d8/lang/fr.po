@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 1.7.7\n"
 
 # Patterns
 msgid "last year"
@@ -508,9 +508,6 @@ msgstr ""
 msgid "qs_activity.activities.form.edit.defaults.title"
 msgstr ""
 
-msgid "qs_activity.activities.form.delete.warning"
-msgstr ""
-
 msgid "qs_activity.form.cancel"
 msgstr "Ne pas supprimer"
 
@@ -745,12 +742,6 @@ msgstr ""
 msgid "qs.activity.theme.filters @community_name @themes_names."
 msgstr "Voici les activités à @community_name, par thème, pour @themes_names."
 
-msgid "Further instructions have been sent to your email address."
-msgstr ""
-
-msgid "You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."
-msgstr ""
-
 msgid "qs.activity.nextevent"
 msgstr ""
 
@@ -759,7 +750,6 @@ msgstr ""
 
 msgid "qs.event.location"
 msgstr ""
-
 
 msgid "qs.event.delete"
 msgstr ""
@@ -800,10 +790,10 @@ msgstr ""
 msgid "qs.error.404.decription"
 msgstr ""
 
-msgid "qs.error.403.title
+msgid "qs.error.403.title"
 msgstr ""
 
-msgid "qs.error.403.decription
+msgid "qs.error.403.decription"
 msgstr ""
 
 msgid "qs_auth.register_form.step1.description"
@@ -926,9 +916,7 @@ msgstr ""
 msgid "qs_event.events.form.delete.success @event"
 msgstr ""
 
-msgid ""
-"Unrecognized username or password. <a href=\":password\">Forgot your "
-"password?</a>"
+msgid "Unrecognized username or password. <a href=\":password\">Forgot your password?</a>"
 msgstr ""
 
 msgid "qs_auth.form.pass.name.placeholder"
@@ -959,4 +947,68 @@ msgid "qs_activity.activities.form.add.save"
 msgstr ""
 
 msgid "qs_activity.activities.form.add.save_and_new_event"
+msgstr ""
+
+msgid "qs.activity.nextevent.date @event_date @event_hour"
+msgstr ""
+
+msgid "qs.activity.nextevent.empty"
+msgstr ""
+
+msgid "qs_auth.form.reset.help"
+msgstr ""
+
+msgid "qs_auth.form.reset.message @mail @expiration_date"
+msgstr ""
+
+msgid "qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname"
+msgstr "Remplacement des informations de connexion pour votre compte sur @sitename"
+
+msgid "qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login"
+msgstr ""
+"Bonjour @firstname @lastname,\r\n"
+"\r\n"
+"Vous avez effectué une demande de nouveau mot de passe.\r\n"
+"\r\n"
+"Vous pouvez désormais vous connecter en appuyant sur le lien suivant, ou en le copiant-collant dans votre navigateur internet:\r\n"
+"\r\n"
+"<a href=\"@one-time-login\">@one-time-login</a>\r\n"
+"\r\n"
+"Ce lien ne peut être utilisé qu’une seule fois et vous conduira vers vos informations personnelles.\r\n"
+"\r\n"
+"Là, vous pourrez choisir un nouveau mot de passe à votre convenance.\r\n"
+"\r\n"
+"Si vous n’utilisez pas ce lien, il sera automatiquement échu après un jour."
+
+msgid "You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."
+msgstr ""
+
+msgid "qs.mail.account.cancel.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.account.cancel.body @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.welcome.no_approval.body @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.awaiting.approval.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.awaiting.approval.body @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.awaiting.approval.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.awaiting.approval.body @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.welcome.no_approval.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.welcome.no_approval.body @mail @firstname @lastname"
 msgstr ""

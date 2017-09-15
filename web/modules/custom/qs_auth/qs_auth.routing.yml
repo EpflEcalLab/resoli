@@ -31,6 +31,43 @@ qs_auth.pass.confirmation:
   options:
     _maintenance_access: TRUE
 
+# User Reset Login
+qs_auth.pass.reset.login:
+  path: '/authentication/password/reset/{uid}/{timestamp}/{hash}/login'
+  defaults:
+    _controller: '\Drupal\user\Controller\UserController::resetPassLogin'
+    _title: 'user.reset.login'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+    no_cache: TRUE
+
+# User Reset Password
+qs_auth.pass.reset:
+  path: 'authentication/password/reset/{uid}/{timestamp}/{hash}'
+  defaults:
+    _controller: '\Drupal\user\Controller\UserController::resetPass'
+    _title: 'qs_auth.pass.reset'
+  requirements:
+   # Everybody shoud have access on this page.
+    _access: 'TRUE'
+  options:
+    _maintenance_access: TRUE
+    no_cache: TRUE
+
+# User Reset Password
+qs_auth.pass.reset.form:
+  path: 'authentication/password/reset/{uid}'
+  defaults:
+    _controller: '\Drupal\user\Controller\UserController::getResetPassForm'
+    _title: 'qs_auth.pass.reset.form'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+    no_cache: TRUE
+
 # Register
 qs_auth.register:
     path: '/authentication/register'

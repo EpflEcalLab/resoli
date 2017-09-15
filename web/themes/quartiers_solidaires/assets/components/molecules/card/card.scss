@@ -167,6 +167,8 @@ a[href].card-pill-simple {
 
 // This wraps the list items
 .card-list {
+  display: flex;
+  flex-direction: column;
   perspective: 2000px;
 
   @include list-unstyled();
@@ -175,6 +177,7 @@ a[href].card-pill-simple {
 // When the card is only a pill in a list, closed state, hides the card-body
 // add .open class to animate opening
 .card-list-item {
+  flex: 1 0 auto;
   margin-bottom: $spacer;
 
   // Apply some styles when card is ONLY NOT OPEN
@@ -398,5 +401,32 @@ a[href].card-pill-simple {
     .card-back:target {
       position: static;
     }
+  }
+}
+
+.card-fadeout {
+  animation: fadeout 0.4s forwards;
+}
+
+@keyframes fadeout {
+  0% {
+    flex-basis: auto;
+    opacity: 1;
+    border-width: $card-border-width;
+    margin-bottom: $spacer;
+  }
+
+  75% {
+    flex-basis: auto;
+    opacity: 0;
+    border-width: $card-border-width;
+  }
+
+  100% {
+    flex-basis: 0;
+    opacity: 0;
+    visibility: hidden;
+    margin-bottom: 0;
+    border-width: 0;
   }
 }

@@ -30,3 +30,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.link-underline {
+  text-decoration: underline;
+
+  @include hover {
+    text-decoration: underline;
+  }
+}

@@ -138,7 +138,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ],
       'calendar' => [
         'label' => $this->t('qs_menu.links.calendar'),
-        'url' => $this->urlGenerator->generate('<front>'),
+        'url' => "javascript:alert('This feature is not yet availaible.')",
         'icon' => 'calendar',
         'links' => [
           'qs_activity.collection.themes' => [
@@ -152,12 +152,12 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
           ],
         ],
         'activated_by' => [
-          'qs_activity.collection.themes',
+          'qs_activity.collection.calendar',
         ],
       ],
       'stories' => [
         'label' => $this->t('qs_menu.links.stories'),
-        'url' => $this->urlGenerator->generate('<front>'),
+        'url' => "javascript:alert('This feature is not yet availaible.')",
         'icon' => 'stories',
         'links' => [
           'qs_activity.collection.themes' => [
@@ -176,7 +176,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ],
       'photos' => [
         'label' => $this->t('qs_menu.links.photos'),
-        'url' => $this->urlGenerator->generate('<front>'),
+        'url' => "javascript:alert('This feature is not yet availaible.')",
         'icon' => 'pictures',
         'links' => [
           'qs_activity.collection.themes' => [

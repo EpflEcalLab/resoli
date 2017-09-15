@@ -205,6 +205,7 @@ class RegisterForm extends FormBase {
           'align-self-center',
         ],
         'icon' => 'check',
+        'outline' => TRUE,
       ],
       '#value' => $this->t('qs.form.submit'),
     ];

@@ -50,7 +50,11 @@
   <div class="modal modal-full force-show">
     <div class="modal-dialog">
       <div class="modal-content bg-danger">
-        {{ page.messages }}
+        {% if page.messages %}
+          <div class="container mt-3">
+            {{ page.messages }}
+          </div>
+        {% endif %}
         {% block content %}{{ page.content }}{% endblock %}
       </div>
     </div>

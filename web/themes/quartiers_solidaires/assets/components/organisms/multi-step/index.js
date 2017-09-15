@@ -98,6 +98,13 @@ const multiStep = () => {
 
       // Show the first tab on load
       $('a.step-nav-link:first').tab('show');
+
+      // Check if there are any errors in the form and display the corresponding tab
+      const tabWithError = $form.find('input.is-invalid').first().closest('.tab-pane').attr('id');
+
+      if (tabWithError) {
+        $(`a[href="#${tabWithError}"]`).tab('show');
+      }
     }
   })(jQuery);
 };

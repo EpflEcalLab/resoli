@@ -93,7 +93,7 @@
     }
 
     &:after {
-      content: svg-check(theme-color('primary'));
+      content: svg-cross(theme-color('primary'));
       display: block;
       position: absolute;
       top: -$border-width;
@@ -109,7 +109,7 @@
     }
 
     &:before {
-      content: svg-cross($white);
+      content: svg-check($white);
       display: block;
       position: absolute;
       top: -$border-width;
@@ -138,12 +138,12 @@
 
   &:checked + .checkbox-toggle-btn {
     &:after {
-      content: svg-cross(theme-color('primary'));
+      content: svg-check(theme-color('primary'));
       left: 50%;
     }
 
     &:before {
-      content: svg-check($white);
+      content: svg-cross($white);
       display: block;
       position: absolute;
       top: -$border-width;
@@ -168,13 +168,13 @@
       background-color: $value;
 
       &:after {
-        content: svg-check($value);
+        content: svg-cross($value);
       }
     }
 
     .checkbox-toggle:checked + .checkbox-toggle-btn {
       &:after {
-        content: svg-cross($value);
+        content: svg-check($value);
       }
     }
   }

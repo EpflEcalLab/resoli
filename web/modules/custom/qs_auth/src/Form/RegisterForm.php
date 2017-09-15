@@ -174,14 +174,6 @@ class RegisterForm extends FormBase {
       ],
     ];
 
-    $form['register']['step-4']['username'] = [
-      '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_auth.form.register.username'),
-      '#placeholder' => $this->t('qs_auth.form.register.username.placeholder'),
-      '#type'        => 'textfield',
-      '#required'    => FALSE,
-    ];
-
     $form['register']['step-4']['password'] = [
       '#attributes'  => ['required' => TRUE],
       '#title'    => $this->t('qs_auth.form.register.password'),
@@ -241,21 +233,21 @@ class RegisterForm extends FormBase {
       $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
-    // Check email is uniq.
+    // Check email is uniq. as mail.
     $account = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($account) {
       $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail.used'));
     }
 
-    // Check username is uniq.
-    $account = $this->userStorage->loadByProperties(['name' => $form_state->getValue('username')]);
+    // Check email is uniq. as username.
+    $account = $this->userStorage->loadByProperties(['name' => $form_state->getValue('mail')]);
     if ($account) {
       $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.username.used'));
     }
 
     // Check username is Drupal compliant.
-    if ($violation = user_validate_name($form_state->getValue('username'))) {
-      $form_state->setErrorByName('[register][step-4][username]', $violation);
+    if ($violation = user_validate_name($form_state->getValue('mail'))) {
+      $form_state->setErrorByName('[register][step-3][mail]', $violation);
     }
 
     // Assert the password is valid.

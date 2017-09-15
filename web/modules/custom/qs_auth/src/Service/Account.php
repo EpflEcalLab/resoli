@@ -86,7 +86,7 @@ class Account {
     $user->setEmail($data['mail']);
     // This username must be unique and accept only a-Z,0-9, - _ @
     // We use the email address as Username.
-    $user->setUsername($data['username']);
+    $user->setUsername($data['mail']);
 
     // Account settings.
     $user->set('field_firstname', $data['firstname']);

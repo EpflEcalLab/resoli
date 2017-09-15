@@ -21,6 +21,8 @@
 
 // Card border radius has to be smaller to correspond to the card-pill
 .card {
+  width: 100%;
+
   @include border-radius($card-border-radius - $card-border-width);
 }
 

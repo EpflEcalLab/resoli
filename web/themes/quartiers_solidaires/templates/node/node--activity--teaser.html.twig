@@ -75,7 +75,17 @@
   <div class="card-body">
     <h3 class="mt-3 mb-4 h5 font-weight-normal text-center">{{ node.title.value }}</h3>
     <div class="text-center">
-      <p class="text-secondary">{{ 'qs.activity.nextevent'|t }}:<br> <span class="text-dark">{{ event.title.value }}<br>{{ event.field_start_at.value }}</span></p>
+
+      <p class="text-secondary">
+        {{ 'qs.activity.nextevent'|t }}:<br>
+        {%- if event -%}
+          {% set event_date = event.field_start_at.value|bamboo_i18n_format_date('custom', 'j F Y') %}
+          {% set event_hour = event.field_start_at.value|bamboo_i18n_format_date('custom', 'H:i') %}
+          <span class="text-dark">{% trans %}qs.activity.nextevent.date {{ event_date }} {{ event_hour }}{% endtrans %}</span>
+        {% else %}
+          <span class="text-dark">{{ 'qs.activity.nextevent.empty'|t }}</span>
+        {%- endif -%}
+      </p>
     </div>
   </div>
   <div class="card-pill card-pill-white">

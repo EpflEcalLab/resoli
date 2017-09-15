@@ -119,6 +119,28 @@ class PrivilegeManager {
       $user = $account;
     }
 
+    // Check we don't already have the same privilege.
+    $privileges = $this->privilegeStorage->loadByProperties([
+      'bundle'    => $entity->getEntityTypeId(),
+      'entity'    => $entity->id(),
+      'user'      => $user->id(),
+      'privilege' => $privilege,
+    ]);
+
+    // If the privilege already exists.
+    if ($privileges) {
+      $privilege = reset($privileges);
+
+      // Previously declined ? Change as request again.
+      if ($privilege->getStatus()->value == 0) {
+        $privilege->setStatus(NULL);
+        $privilege->reviewer = NULL;
+        $privilege->reviewed = NULL;
+        $privilege->save();
+      }
+      return $privilege;
+    }
+
     $requested = $this->privilegeStorage->create([
       'entity' => $entity->id(),
       'user'   => $user->id(),
@@ -146,6 +168,21 @@ class PrivilegeManager {
   public function create($privilege, EntityInterface $entity, AccountInterface $user) {
     $current_user = $this->currentUser;
 
+    // Check we don't already have the same privilege.
+    $privileges = $this->privilegeStorage->loadByProperties([
+      'bundle'    => $entity->getEntityTypeId(),
+      'entity'    => $entity->id(),
+      'user'      => $user->id(),
+      'privilege' => $privilege,
+    ]);
+
+    // If the privilege already exists, just confirm it.
+    if ($privileges) {
+      $privilege = reset($privileges);
+      return $this->confirm($privilege);
+    }
+
+    // When the privilege don't exists, create one.
     $created = $this->privilegeStorage->create([
       'bundle'    => $entity->getEntityTypeId(),
       'entity'    => $entity->id(),

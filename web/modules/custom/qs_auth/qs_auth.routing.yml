@@ -87,6 +87,7 @@ qs_auth.approval:
         _title: 'qs_auth.approval'
     requirements:
       _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_auth\Controller\AccountController::accessApproval'
     options:
       parameters:
         community:

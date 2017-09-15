@@ -8,6 +8,8 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * AccountController.
@@ -55,6 +57,25 @@ class AccountController extends ControllerBase {
     $container->get('entity_type.manager'),
     $container->get('entity.query')
     );
+  }
+
+  /**
+   * Checks access for Approval.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Run access checks for this account.
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   Run access checks for this taxonomy.
+   *
+   * @return bool
+   *   Access allowed or rejected.
+   */
+  public function accessApproval(AccountInterface $account, TermInterface $community) {
+    $access = AccessResult::forbidden();
+    if ($community->bundle() == 'communities') {
+      $access = AccessResult::allowed();
+    }
+    return $access;
   }
 
   /**

@@ -20,31 +20,31 @@
   <div class="container">
     <div class="row mb-3">
       {% if bamboo_has_role('authenticated') %}
-      <div class="col-6">
-        <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('user.logout') }}">
-              {% trans %}qs_auth.logout{% endtrans %}
-              {{ macros.icon('minus') }}
-            </a>
-      </div>
-      <div class="col-6">
-        <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.communities') }}">
-              {% trans %}qs_auth.communities{% endtrans %}
-              {{ macros.icon('arrow') }}
-            </a>
-      </div>
+        <div class="col-6">
+          <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('user.logout') }}">
+            {% trans %}qs_auth.logout{% endtrans %}
+            {{ macros.icon('minus') }}
+          </a>
+        </div>
+        <div class="col-6">
+          <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.communities') }}">
+            {% trans %}qs_auth.communities{% endtrans %}
+            {{ macros.icon('arrow') }}
+          </a>
+        </div>
       {% else %}
-      <div class="col-6">
-        <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.login') }}">
-              {% trans %}qs_auth.login{% endtrans %}
-                {{ macros.icon('plus') }}
-            </a>
-      </div>
-      <div class="col-6">
-        <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.register') }}">
-              {% trans %}qs_auth.register{% endtrans %}
-              {{ macros.icon('arrow') }}
-            </a>
-      </div>
+        <div class="col-6">
+          <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.register') }}">
+            {% trans %}qs_auth.register{% endtrans %}
+            {{ macros.icon('arrow') }}
+          </a>
+        </div>
+        <div class="col-6">
+          <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.login') }}">
+            {% trans %}qs_auth.login{% endtrans %}
+            {{ macros.icon('plus') }}
+          </a>
+        </div>
       {% endif %}
     </div>
   </div>

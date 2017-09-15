@@ -35,15 +35,15 @@
           </div>
         {% else %}
           <div class="col-6">
-            <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.login') }}">
-              {% trans %}qs_auth.login{% endtrans %}
-                {{ macros.icon('plus') }}
-            </a>
-          </div>
-          <div class="col-6">
             <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.register') }}">
               {% trans %}qs_auth.register{% endtrans %}
               {{ macros.icon('arrow') }}
+            </a>
+          </div>
+          <div class="col-6">
+            <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.login') }}">
+              {% trans %}qs_auth.login{% endtrans %}
+                {{ macros.icon('plus') }}
             </a>
           </div>
         {% endif %}

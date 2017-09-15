@@ -39,6 +39,7 @@ class AuthRedirect implements EventSubscriberInterface {
     $events[KernelEvents::REQUEST][] = ['loginRedirect'];
     $events[KernelEvents::REQUEST][] = ['registerRedirect'];
     $events[KernelEvents::REQUEST][] = ['passRedirect'];
+    $events[KernelEvents::REQUEST][] = ['resetRedirect'];
     return $events;
   }
 
@@ -75,7 +76,7 @@ class AuthRedirect implements EventSubscriberInterface {
   }
 
   /**
-   * Forget Password register.
+   * Forget Password.
    *
    * It verify the current route is default drupal '/user/password' then
    * redirect on our custom one.
@@ -88,6 +89,49 @@ class AuthRedirect implements EventSubscriberInterface {
       $destination = Url::fromRoute('qs_auth.pass');
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
+  }
+
+  /**
+   * User Reset Password.
+   *
+   * It verify the current route is default drupal '/user/password' then
+   * redirect on our custom one.
+   *
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   *   Event subscriber.
+   */
+  public function resetRedirect(GetResponseEvent $event) {
+    $destination = NULL;
+
+    switch ($this->routeMatch->getRouteName()) {
+      case 'user.reset.login':
+        $destination = Url::fromRoute('qs_auth.pass.reset.login', [
+          'uid'       => $this->routeMatch->getParameter('uid'),
+          'timestamp' => $this->routeMatch->getParameter('timestamp'),
+          'hash'      => $this->routeMatch->getParameter('hash'),
+        ]);
+        break;
+
+      case 'user.reset':
+        $destination = Url::fromRoute('qs_auth.pass.reset', [
+          'uid'       => $this->routeMatch->getParameter('uid'),
+          'timestamp' => $this->routeMatch->getParameter('timestamp'),
+          'hash'      => $this->routeMatch->getParameter('hash'),
+        ]);
+        break;
+
+      case 'user.reset.form':
+        $destination = Url::fromRoute('qs_auth.pass.reset.form', [
+          'uid'       => $this->routeMatch->getParameter('uid'),
+        ]);
+        break;
+    }
+
+    if (!$destination) {
+      return;
+    }
+
+    $event->setResponse(new RedirectResponse($destination->toString()));
   }
 
 }

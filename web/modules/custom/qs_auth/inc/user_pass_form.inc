@@ -12,10 +12,12 @@
  * The user_reset form desn't have a module_hook_form_alter.
  */
 function qs_auth_form_alter(&$form, $form_state, $form_id) {
-  if ($form_id == 'user_pass') {
+  if ($form_id == 'user_pass' || $form_id == 'user_pass_reset') {
     $form['#theme_wrappers'] = [
       'form__fullpage',
     ];
+
+    unset($form['#title']);
 
     // Display links to other meaningful pages.
     $form['#top_links'] = [
@@ -30,6 +32,11 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
       ],
     ];
 
+    $form['actions']['submit']['#value'] = t('qs.form.submit');
+    $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];
+  }
+
+  if ($form_id == 'user_pass') {
     $form['forget'] = [
       '#type'  => 'fieldset',
       '#title' => t('qs_auth.form.pass.title'),
@@ -44,9 +51,6 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
     $form['forget']['name']['#description'] = t('qs_auth.form.pass.name.description');
     $form['forget']['name']['#placeholder'] = t('qs_auth.form.pass.name.placeholder');
 
-    $form['actions']['submit']['#value'] = t('qs.form.submit');
-    $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];
-
     $form['#submit'][] = 'qs_auth_user_pass_form_submit';
   }
 
@@ -56,12 +60,21 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
       '#title' => t('qs_auth.pass_reset_form.title'),
     ];
 
-    $form['reset']['help'] = $form['help'];
-    unset($form['help']);
-    $form['reset']['message'] = $form['message'];
-    unset($form['message']);
+    $form['forget']['name']['#description'] = t('qs_auth.form.pass.name.description');
+    $form['forget']['name']['#description'] = t('qs_auth.form.pass.name.description');
 
-    $form['actions']['submit']['#value'] = t('qs.form.submit');
+    // Help.
+    $form['reset']['help']['#markup'] = t('qs_auth.form.reset.help');
+
+    // Message.
+    $args = $form['message']['#markup']->getArguments();
+    $form['reset']['message']['#markup'] = t('qs_auth.form.reset.message @mail @expiration_date', [
+      '@mail'            => $args['%user_name'],
+      '@expiration_date' => $args['%expiration_date'],
+    ]);
+
+    unset($form['help']);
+    unset($form['message']);
   }
 }
 

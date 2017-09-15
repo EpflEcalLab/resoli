@@ -75,6 +75,10 @@ fi
 ../vendor/bin/drush updatedb -y
 ../vendor/bin/drush pmu hal serialization default_content qs_default_content -y
 
+# Fix Sitename bugged keep display "| Drupal"
+# https://www.drupal.org/node/2851877
+../vendor/bin/drush eval "\Drupal::languageManager()->getLanguageConfigOverrideStorage('fr')->delete('system.site');"
+
 if [ $SKIP_TESTS -eq 0 ]
 then
   nohup bash -c "php ../vendor/bin/drush runserver &" && sleep 3;

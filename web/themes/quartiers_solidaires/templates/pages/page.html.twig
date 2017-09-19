@@ -45,7 +45,11 @@
 {% endif %}
 {% block header %}{% endblock %}
 
-{{ page.messages }}
+{% if page.messages %}
+  <div class="container">
+    {{ page.messages }}
+  </div>
+{% endif %}
 
 <main role="main">
     <a id="main-content" tabindex="-1"></a>

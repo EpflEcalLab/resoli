@@ -9,6 +9,11 @@
       </div>
     </div>
   </div>
+  {% if page.messages %}
+    <div class="container mt-5">
+      {{ page.messages }}
+    </div>
+  {% endif %}
   <div class="container my-auto">
     <div class="row">
       <div class="col-6 mx-auto">

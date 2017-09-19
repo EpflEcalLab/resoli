@@ -27,10 +27,10 @@
 #}
 {%
   set status_heading = {
-    'status': 'Status message'|t,
-    'error': 'Error message'|t,
-    'warning': 'Warning message'|t,
-    'info': 'Informative message'|t,
+    'status': 'qs.status_message'|t,
+    'error': 'qs.error_message'|t,
+    'warning': 'qs.warning_message'|t,
+    'info': 'qs_informative_message'|t,
   }
 %}
 {%
@@ -54,7 +54,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
   {% if status_headings[type] %}
-    <h4 class="sr-only">trans{{ status_headings[type] }}</h4>
+    <h4 class="sr-only">{{ status_headings[type] }}</h4>
   {% endif %}
   {% if messages|length > 1 %}
     <ul class="item-list item-list--messages mb-0">

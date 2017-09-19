@@ -9,6 +9,7 @@
     border-top-color: darken($border, 5%);
   }
 
+  > a,
   .alert-link {
     color: darken($background, 35%);
   }
@@ -32,6 +33,10 @@
   ul,
   ol {
     text-align: left;
+  }
+
+  > a {
+    @extend .alert-link;
   }
 }
 

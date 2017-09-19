@@ -28,6 +28,11 @@
             "value": "manager+lausanne@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "manager+lausanne@antistatique.net"
+      }
+    ],
     "created": [
         {
             "value": 1502813361

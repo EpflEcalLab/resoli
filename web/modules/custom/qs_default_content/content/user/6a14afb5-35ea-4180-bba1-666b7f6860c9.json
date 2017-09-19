@@ -28,6 +28,11 @@
             "value": "organizer+lausanne@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "organizer+lausanne@antistatique.net"
+      }
+    ],
     "created": [
         {
             "value": 1502813391

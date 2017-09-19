@@ -28,6 +28,16 @@
             "value": "member+fribourg+approval+organizer+fribourg@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "member+fribourg+approval+organizer+fribourg@antistatique.net"
+      }
+    ],
+    "field_phone": [
+        {
+            "value": "0211234567"
+        }
+    ],
     "created": [
         {
             "value": 1504512314

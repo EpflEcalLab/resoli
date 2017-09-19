@@ -28,6 +28,16 @@
             "value": "approval+fribourg+approval+lausanne@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "approval+fribourg+approval+lausanne@antistatique.net"
+      }
+    ],
+    "field_phone": [
+        {
+            "value": "0211234567"
+        }
+    ],
     "created": [
         {
             "value": 1503057691

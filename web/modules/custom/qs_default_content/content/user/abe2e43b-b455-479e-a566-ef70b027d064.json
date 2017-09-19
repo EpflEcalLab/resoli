@@ -24,8 +24,18 @@
         }
     ],
     "name": [
+      {
+        "value": "approval+member+fribourg+approval+organizer+fribourg@as.net"
+      }
+    ],
+    "mail": [
+      {
+        "value": "approval+member+fribourg+approval+organizer+fribourg@as.net"
+      }
+    ],
+    "field_phone": [
         {
-            "value": "approval+member+fribourg+approval+organizer+fribourg@as.net"
+            "value": "0211234567"
         }
     ],
     "created": [

@@ -28,6 +28,16 @@
             "value": "member+fribourg+approval+lausanne+member+geneve@as.net"
         }
     ],
+    "mail": [
+      {
+        "value": "member+fribourg+approval+lausanne+member+geneve@as.net"
+      }
+    ],
+    "field_phone": [
+        {
+            "value": "0211234567"
+        }
+    ],
     "created": [
         {
             "value": 1503057994

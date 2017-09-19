@@ -28,6 +28,11 @@
             "value": "member+fribourg+approval+lausanne@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "member+fribourg+approval+lausanne@antistatique.net"
+      }
+    ],
     "created": [
         {
             "value": 1503057727

@@ -28,6 +28,16 @@
             "value": "approval+lausanne@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "approval+lausanne@antistatique.net"
+      }
+    ],
+    "field_phone": [
+        {
+            "value": "0211234567"
+        }
+    ],
     "created": [
         {
             "value": 1502813234

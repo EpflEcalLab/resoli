@@ -28,6 +28,11 @@
             "value": "declined+organizer+lausanne@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "declined+organizer+lausanne@antistatique.net"
+      }
+    ],
     "created": [
         {
             "value": 1504603632

@@ -28,6 +28,11 @@
             "value": "nobody@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "nobody@antistatique.net"
+      }
+    ],
     "created": [
         {
             "value": 1503056940

@@ -277,7 +277,7 @@ a[href].card-pill-simple {
 // Invert colors with theme colors
 @each $color, $value in $theme-colors {
   .card-#{$color} {
-    background: color(#{$color}-light);
+    background: color(#{$color}-lighter);
     border-color: $value;
 
     // Automaticly calculate color value based on contrast with background

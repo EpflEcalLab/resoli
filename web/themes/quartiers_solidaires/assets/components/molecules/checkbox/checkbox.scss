@@ -55,7 +55,7 @@
   }
 
   > label:first-child {
-    margin: 0;
+    margin: 0 $spacer 0 0;
   }
 }
 
@@ -84,26 +84,23 @@
     cursor: pointer;
     user-select: none;
     border-radius: $btn-border-radius;
-    background-color: theme-color('primary');
-    border: $border-width solid $white;
+    border: $border-width solid theme-color('primary');
     transition: all 0.4s ease;
-    box-shadow: inset 0 0 6px 0 rgba(color(dark), 0.4);
+    background-color: mix(theme-color('primary'), $white, 5%);
 
     &:focus {
-      box-shadow:
-        inset 0 0 2px 0 color(dark),
-        0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
+      box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba(theme-color('primary'), 0.5);
     }
 
     &:after {
-      content: svg-cross(theme-color('primary'));
+      content: svg-cross($white);
       display: block;
       position: absolute;
       top: -$border-width;
       left: -$border-width;
       width: $spacer * 2.5;
       height: $spacer * 2.5;
-      background: $white;
+      background: theme-color('primary');
       border-radius: 50%;
       transition:
         left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
@@ -112,7 +109,7 @@
     }
 
     &:before {
-      content: svg-check($white);
+      content: svg-check(theme-color('primary'));
       display: block;
       position: absolute;
       top: -$border-width;
@@ -130,8 +127,7 @@
 
     &:active {
       box-shadow:
-        0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5),
-        inset 0 0 0 2em rgba($white, 0.25);
+        0 0 0 $btn-focus-box-shadow-width rgba(theme-color('primary'), 0.5);
 
       &:after {
         left: 25%;
@@ -141,12 +137,12 @@
 
   &:checked + .checkbox-toggle-btn {
     &:after {
-      content: svg-check(theme-color('primary'));
+      content: svg-check($white);
       left: 50%;
     }
 
     &:before {
-      content: svg-cross($white);
+      content: svg-cross(theme-color('primary'));
       display: block;
       position: absolute;
       top: -$border-width;
@@ -168,16 +164,31 @@
 @each $color, $value in $theme-colors {
   .bg-#{$color} {
     .checkbox-toggle + .checkbox-toggle-btn {
-      background-color: $value;
+      background-color: mix($value, $white, 85%);
+      border-color: $white;
 
       &:after {
         content: svg-cross($value);
+        background-color: $white;
+      }
+
+      &:before {
+        content: svg-check($white);
+      }
+
+      &:active {
+        box-shadow:
+          0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
       }
     }
 
     .checkbox-toggle:checked + .checkbox-toggle-btn {
       &:after {
         content: svg-check($value);
+      }
+
+      &:before {
+        content: svg-cross($white);
       }
     }
   }

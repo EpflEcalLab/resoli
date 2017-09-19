@@ -45,6 +45,12 @@ $max-items: 5;
     }
   }
 
+  @each $color, $value in $theme-colors {
+    &.btn-group-#{$color} {
+      @include after-shadow($value);
+    }
+  }
+
   [class*=bg-] & {
     z-index: 1;
 

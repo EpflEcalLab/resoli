@@ -118,14 +118,14 @@
   $dark-color: color("#{$color}-darker");
   $normal-color: color($color);
 
-  &:active {
-    border-color: $dark-color;
-    background-color: $dark-color;
+  &.active {
+    background-color: mix($normal-color, $white, 75%);
     color: $color-active;
   }
 
-  &.active {
-    background-color: $normal-color;
+  &:active {
+    border-color: $dark-color;
+    background-color: $dark-color;
     color: $color-active;
   }
 }

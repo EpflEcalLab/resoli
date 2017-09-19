@@ -243,7 +243,7 @@
   @include icon-size(6vh, 38px);
 
   // Override background-color set in button variant
-  background-color: theme-color("primary-light");
+  background-color: theme-color("primary-lighter");
 
   &:active,
   &.active,

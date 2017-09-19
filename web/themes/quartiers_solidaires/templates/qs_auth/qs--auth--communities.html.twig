@@ -5,7 +5,7 @@
 
     <div class="container">
       <div class="row justify-content-between">
-        <a class="btn btn-outline-primary btn-outline-invert shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
+        <a class="btn btn-outline-secondary btn-outline-invert shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
           {{ macros.icon('chevron-left') }}
           {{ 'qs_auth.link.home'|t }}
         </a>
@@ -33,7 +33,7 @@
             {% endfor %}
             {% for community in variables.pending %}
               <li>
-                <a class="btn btn-icon btn-block btn-outline-danger btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_auth.approval', {'community': community.id}) }}">
+                <a class="btn btn-icon btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_auth.approval', {'community': community.id}) }}">
                   {{ macros.icon('wait') }}
                   {{ community.name.value }}
                 </a>

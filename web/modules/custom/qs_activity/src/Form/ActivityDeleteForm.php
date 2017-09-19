@@ -79,7 +79,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
         'icon_left' => TRUE,
         'white' => TRUE,
       ],
-      '#value' => $this->t('qs.form.submit'),
+      '#value' => $this->t('qs.form.delete_submit'),
     ];
 
     return $form;

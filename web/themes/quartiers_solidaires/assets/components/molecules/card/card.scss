@@ -60,6 +60,12 @@ a.card {
 
     @include flag-size(60px);
   }
+
+  > .btn {
+    &:active {
+      transform: none;
+    }
+  }
 }
 
 .card-pill-white {

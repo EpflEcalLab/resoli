@@ -102,7 +102,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
           // Invalidated whenever any Event is updated, deleted or created.
           'node_list:event',
           // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege:privilege',
+          'privilege_list:privilege',
         ],
       ],
     ];

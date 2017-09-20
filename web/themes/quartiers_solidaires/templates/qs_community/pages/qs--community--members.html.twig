@@ -42,8 +42,8 @@
                 <input type="hidden" name="user" value="{{ member.uid.value }}">
                 <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
 
-                <div class="d-flex flex-wrap">
-                  <div class="btn-group mb-3" role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}" data-toggle="buttons">
+                <div class="d-flex flex-wrap justify-content-center">
+                  <div class="btn-group mb-3 mx-2 " role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}" data-toggle="buttons">
                     <label class="btn btn-white btn-outline-secondary {% if 'community_members' in member.privileges %}active{% endif %}">
                       <input title="{{ 'qs.roles.community_member'|t }}" variant="button" type="checkbox" data-submit name="privileges[]" value="community_members" {% if 'community_members' in member.privileges %}checked{% endif %} class="form-checkbox">
                       {{ 'qs.roles.community_member'|t }}
@@ -59,14 +59,15 @@
                       {{ 'qs.roles.community_manager'|t }}
                     </label>
                   </div>
+                  <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"
+                    method="post">
+                    <input type="hidden" name="user" value="{{ member.uid.value }}">
+                    <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
+                    <button class="btn mb-3 mx-2 btn-white btn-outline-secondary shadow-to-bottom" type="submit" value="{{ 'qs.roles.community_none'|t }}">
+                      {{ 'qs.roles.community_none'|t }}
+                    </button>
+                  </form>
                 </div>
-              </form>
-              <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post">
-                <input type="hidden" name="user" value="{{ member.uid.value }}">
-                <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
-                <button class="btn btn-white btn-outline-secondary shadow-to-bottom" type="submit" value="{{ 'qs.roles.community_none'|t }}">
-                  {{ 'qs.roles.community_none'|t }}
-                </button>
               </form>
             </div>
 

@@ -64,6 +64,12 @@
   flex-grow: 1;
 }
 
+.sticky-top {
+  // We sometimes have a small pixel gap on top...
+  top: -1px;
+  padding-top: 1px;
+}
+
 // Text helpers
 @include text-emphasis-variant('.text-dark', color("dark"));
 @include text-emphasis-variant('.text-gray', $gray-700);

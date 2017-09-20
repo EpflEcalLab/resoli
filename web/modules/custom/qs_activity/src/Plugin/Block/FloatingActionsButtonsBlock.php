@@ -113,7 +113,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         ],
         'tags' => [
           // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege:privilege',
+          'privilege_list:privilege',
         ],
       ],
     ];

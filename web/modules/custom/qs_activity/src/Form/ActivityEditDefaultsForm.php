@@ -51,20 +51,6 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       '#default_value' => $activity->body->value,
     ];
 
-    $form['group']['contact_phone'] = [
-      '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_phone'),
-      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_phone.placeholder'),
-      '#type'          => 'textfield',
-      '#default_value' => $activity->field_contact_phone->value,
-    ];
-
-    $form['group']['contact_mail'] = [
-      '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_mail'),
-      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_mail.placeholder'),
-      '#type'          => 'textfield',
-      '#default_value' => $activity->field_contact_mail->value,
-    ];
-
     $form['group']['venue'] = [
       '#attributes' => [
         'google-autocomplete'     => TRUE,
@@ -94,6 +80,30 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       '#default_value' => $activity->field_contribution->value,
     ];
 
+    $form['group']['contact_name'] = [
+      '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_name'),
+      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_name.placeholder'),
+      '#type'          => 'textfield',
+      '#default_value' => $activity->field_contact_name->value,
+    ];
+
+    $form['group']['contact_phone'] = [
+      '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_phone'),
+      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_phone.placeholder'),
+      '#type'          => 'tel',
+      '#default_value' => $activity->field_contact_phone->value,
+    ];
+
+    $form['group']['contact_mail'] = [
+      '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_mail'),
+      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_mail.placeholder'),
+      '#type'          => 'email',
+      '#default_value' => $activity->field_contact_mail->value,
+      '#attributes' => [
+        'required' => TRUE,
+      ],
+    ];
+
     $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#attributes' => [
@@ -115,6 +125,15 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Assert the email is valid.
+    if (!$form_state->getValue('contact_mail') || empty($form_state->getValue('contact_mail'))) {
+      $form_state->setErrorByName('[group][contact_mail]', $this->t('qs.form.error.empty @mail', ['@mail' => $form['group']['contact_mail']['#title']]));
+    }
+
+    // Assert the mail is valid.
+    if (!$form_state->getValue('contact_mail') || !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+      $form_state->setErrorByName('[group][contact_mail]', $this->t('qs.form.error.mail.malformed'));
+    }
   }
 
   /**
@@ -125,6 +144,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
 
     $fields = [
       'body'                => $form_state->getValue('body'),
+      'field_contact_name'  => $form_state->getValue('contact_name'),
       'field_contact_phone' => $form_state->getValue('contact_phone'),
       'field_contact_mail'  => $form_state->getValue('contact_mail'),
       'field_venue'         => $form_state->getValue('venue'),

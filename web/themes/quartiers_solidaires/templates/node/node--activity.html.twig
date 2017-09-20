@@ -7,7 +7,18 @@
     {{ macros.icon('theme_' ~ node.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-primary']) }}
     <h1>{{ node.title.value }}</h1>
   </div>
-  <h2 class="h4 mb-4">{{ 'qs.activity.next_events'|t }}</h2>
+  {% if variables.events %}
+    <h2 class="h4 mb-4">{{ 'qs.activity.next_events'|t }}</h2>
+  {% else %}
+    <h2 class="h4 mb-4">
+      {% if node.field_contact_mail is not empty %}
+        {% set mail_link = link(node.field_contact_name.value, 'mailto:' ~ node.field_contact_mail.value, { 'target':['_blank']} )|render %}
+        {% trans %}qs.activity.no_events_please_contact {{ mail_link }}{% endtrans %}
+      {% else %}
+        {{ 'qs.activity.no_events'|t }}
+      {% endif %}
+    </h2>
+  {% endif %}
 
   {{ bamboo_render_block('qs_activity_events_collection_block') }}
 </div>

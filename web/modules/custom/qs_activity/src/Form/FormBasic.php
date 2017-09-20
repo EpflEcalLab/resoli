@@ -101,6 +101,16 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Return the user storage.
+   *
+   * @return \Drupal\user\Entity\User
+   *   Return the user storage.
+   */
+  protected function getUserStorage() {
+    return $this->getEntityTypeManager()->getStorage('user');
+  }
+
+  /**
    * Lazy loading for the Drupal current user account proxy.
    *
    * @return \Drupal\Core\Session\AccountInterface

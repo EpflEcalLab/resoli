@@ -23,6 +23,7 @@ class ActivityAddForm extends FormBasic {
     // From the container, inject services.
     $this->acl                = $this->getAcl();
     $this->termStorage        = $this->getTermStorage();
+    $this->userStorage        = $this->getUserStorage();
     $this->activityManager    = $this->getActivityManager();
     $this->privilegeManager   = $this->getPrivilegeManager();
     $this->currentUser        = $this->getCurrentUser();
@@ -323,6 +324,7 @@ class ActivityAddForm extends FormBasic {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $community = $this->termStorage->load($form_state->getValue('community'));
+    $user = $this->userStorage->load($this->currentUser->id());
 
     // Format authorizations for creations.
     $authorizations = [
@@ -340,9 +342,9 @@ class ActivityAddForm extends FormBasic {
     $themes = [$form_state->getValue('theme')];
 
     // Create the new activity.
-    $activity = $this->activityManager->create($form_state->getValue('title'), $themes, $authorizations, $community);
+    $activity = $this->activityManager->create($form_state->getValue('title'), $themes, $authorizations, $community, $user);
 
-    // Add the current user as the first organier of this activity.
+    // Add the current user as the first organizer of this activity.
     $this->privilegeManager->create('activity_organizers', $activity, $this->currentUser);
 
     drupal_set_message($this->t("qs_activity.activities.form.add.success @activity", [

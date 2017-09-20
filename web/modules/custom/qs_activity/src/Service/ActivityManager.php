@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Database\Connection;
 use Drupal\taxonomy\TermInterface;
 use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
 
 /**
  * ActivityManager.
@@ -104,17 +105,21 @@ class ActivityManager {
    *   The list of autorizations & the boolean value.
    * @param Drupal\taxonomy\TermInterface $community
    *   The community entity.
+   * @param Drupal\user\Entity\User $user
+   *   The user entity.
    *
    * @return \Drupal\node\NodeInterface
    *   The created activity.
    */
-  public function create($title, array $themes, array $autorizations, TermInterface $community) {
+  public function create($title, array $themes, array $autorizations, TermInterface $community, User $user = NULL) {
     $activity = $this->nodeStorage->create([
       'type'            => 'activity',
       'status'          => TRUE,
       'title'           => $title,
       'field_theme'     => $themes,
       'field_community' => $community->id(),
+      'field_contact_name' => $user->field_firstname->value . ' ' . $user->field_lastname->value,
+      'field_contact_mail' => $user->mail->value,
     ]);
 
     foreach ($autorizations as $key => $value) {
@@ -122,7 +127,6 @@ class ActivityManager {
         $activity->set($key, (bool) $value);
       }
     }
-
     $activity->save();
     return $activity;
   }

@@ -1,23 +1,23 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 {% set currentTheme = null %}
+{% set community_name = variables.community.name.value|trim %}
 
 {# Block with current search filters #}
-<div class="container">
-  <p class="lead text-center mt-5">
-    {%- set count = variables.themes|length -%}
-    {%- set themes_names = variables.themes|join(', ')|trim -%}
-    {%- set community_name = variables.community.name.value|trim -%}
-
-    {% if count >= 1 %}
-      {%- trans -%}qs.activity.theme.filters {{ community_name }} {{ themes_names }}.
-      {%- endtrans -%}
-    {% else %}
-      {%- trans -%}qs.activity.theme.filters {{ community_name }}.{%- endtrans -%}
-    {% endif %}
-  </p>
-</div>
-
 {% if variables.activities %}
+  <div class="container">
+    <p class="lead text-center mt-5">
+      {%- set count = variables.themes|length -%}
+      {%- set themes_names = variables.themes|join(', ')|trim -%}
+
+      {% if count >= 1 %}
+        {%- trans -%}qs.activity.theme.filters {{ community_name }} {{ themes_names }}.
+        {%- endtrans -%}
+      {% else %}
+        {%- trans -%}qs.activity.theme.filters {{ community_name }}.{%- endtrans -%}
+      {% endif %}
+    </p>
+  </div>
+
   <div class="container my-5">
     <div class="row">
       {% for activity in variables.activities %}
@@ -42,4 +42,8 @@
       {% endfor %}
     </div>
   </div>
+{% else %}
+<div class="container">
+  <p class="lead text-center mt-5">{% trans %}qs.activity.theme.title_empty {{ community_name }}{% endtrans %}</p>
+</div>
 {% endif %}

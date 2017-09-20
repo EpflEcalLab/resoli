@@ -18,7 +18,7 @@
         <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.lastname'|t }}</dt>
         <dd class="col-sm-9">{{ variables.user.field_lastname.value }}</dd>
         <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.phone'|t }}</dt>
-        <dd class="col-sm-9">{{ variables.user.field_phone.value }}</dd>
+        <dd class="col-sm-9">{{ variables.user.field_phone.value|default('<span class="text-muted">' ~ 'qs_supervisor.account.phone_default'|t ~ '</span>')|raw }}</dd>
         <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.mail'|t }}</dt>
         <dd class="col-sm-9">{{ variables.user.mail.value }}</dd>
       </dl>

@@ -200,17 +200,21 @@
 
 // White overlay when navbar is open
 .navbar-overlay {
-  display: none;
   position: fixed;
   z-index: -1;
-  top: 0;
+  top: -200vh;
   right: 0;
   bottom: 0;
   left: 0;
+  opacity: 0;
   background-color: rgba($white, 0.8);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 
   .open & {
-    display: block;
+    top: 0;
+    opacity: 1;
+    pointer-events: initial;
   }
 }
 

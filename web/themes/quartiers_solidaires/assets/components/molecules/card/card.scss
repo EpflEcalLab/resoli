@@ -112,6 +112,11 @@ a[href].card-pill-simple {
         margin-right: $card-spacer-x;
       }
     }
+
+    &.size-date {
+      display: inline-block;
+      width: 11em;
+    }
   }
 
   // Make sure when we're centering the text, the icon is not pushing things in

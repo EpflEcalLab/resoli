@@ -218,25 +218,11 @@ class EventEditForm extends EventEditFormBase {
       $form_state->setErrorByName('[title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['title']['#title']]));
     }
 
+    // Date validation
+    // ===============.
     // Assert the date is valid.
     if (!$form_state->getValue('date') || empty($form_state->getValue('date'))) {
-      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#date']]));
-    }
-
-    $date = new DrupalDateTime($form_state->getValue('date'));
-    $formatted_date = $date->format('d.m.Y');
-    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
-    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
-    $now = new DrupalDateTime();
-
-    // Assert the date is formatted as requested.
-    if (!$this->validateDate($formatted_date, 'd.m.Y')) {
-      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid'));
-
-      // Assert the date is in the futur.
-    }
-    elseif ($formatted_date < $now->format('d.m.Y')) {
-      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_past'));
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
     }
 
     // Assert the start is valid.
@@ -244,19 +230,40 @@ class EventEditForm extends EventEditFormBase {
       $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
-    // Assert the start is formatted as requested.
-    if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('start_at'))) {
-      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
-    }
-
     // Assert the end is valid.
     if (!$form_state->getValue('end_at') || empty($form_state->getValue('end_at'))) {
       $form_state->setErrorByName('[date_fieldset][time_fieldset][end_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
+    // Assert the start is formatted as requested.
+    if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('start_at'))) {
+      $form_state->setErrorByName('[date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
+    }
+
     // Assert the end is formatted as requested.
     if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('end_at'))) {
       $form_state->setErrorByName('[date_fieldset][time_fieldset][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['end_at']['#title']]));
+    }
+
+    $now = new DrupalDateTime();
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    try {
+      $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+      $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
+    }
+    catch (\Exception $e) {
+      $form_state->setErrorByName('[event]', $this->t('qs.form.error.something_went_wrong'));
+      return;
+    }
+
+    // Assert the date is formatted as requested.
+    if (!$this->validateDate($formatted_date, 'd.m.Y')) {
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
+    }
+    // Assert the date is in the future.
+    elseif ($formatted_date < $now->format('d.m.Y')) {
+      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_past @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
     }
 
     // Check hours are realistic.

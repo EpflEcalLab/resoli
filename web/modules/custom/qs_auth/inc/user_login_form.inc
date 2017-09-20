@@ -54,7 +54,7 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
 
   $form['#submit'][] = 'qs_auth_user_login_form_submit';
   $form['actions']['submit']['#value'] = t('qs.form.submit');
-  $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];
+  $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert shadow-to-bottom'];
   $form['actions']['submit']['#attributes']['icon'] = ['check'];
 }
 

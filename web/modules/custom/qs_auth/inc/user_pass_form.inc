@@ -33,7 +33,7 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
     ];
 
     $form['actions']['submit']['#value'] = t('qs.form.submit');
-    $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert'];
+    $form['actions']['submit']['#attributes']['class'] = ['mx-auto d-block btn btn-outline-secondary mt-3 btn-outline-invert shadow-to-bottom'];
   }
 
   if ($form_id == 'user_pass') {

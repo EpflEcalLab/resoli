@@ -191,7 +191,7 @@
     );
 
     &:after {
-      height: calc(100% - #{$border-width});
+      height: 90%;
 
       @include transition(height 0.34s ease-out);
     }
@@ -234,7 +234,7 @@
   padding-bottom: 2vh;
   font-weight: 600;
 
-  @include transition(top 0.1s ease-out);
+  @include transition(top 0.1s ease-out, background-color 0.2s ease-out);
 
   @for $i from 2 through 5 {
     &:nth-child(#{$i}) {
@@ -242,16 +242,24 @@
     }
   }
 
-  @include button-variant(theme-color("primary"), theme-color("primary"), theme-color("primary"));
+  @include button-variant(color("primary-light"), theme-color("primary"), theme-color("primary"));
   @include drop-shadow(bottom);
   @include icon-size(6vh, 38px);
 
   // Override background-color set in button variant
-  background-color: theme-color("primary-lighter");
+  background-color: color("primary-lightest");
+  color: theme-color("primary");
+
+  @include hover {
+    &:not(:active):not(.active) {
+      text-decoration: none;
+      background-color: darken(color("primary-lightest"), 7%);
+      color: theme-color("primary");
+    }
+  }
 
   &:active,
-  &.active,
-  &:hover {
+  &.active {
     text-decoration: none;
 
     &,
@@ -272,7 +280,7 @@
   .open & {
     top: 0;
 
-    @include transition(top 0.3s ease-out);
+    @include transition(top 0.3s ease-out, background-color 0.2s ease-out);
   }
 
   .icon {

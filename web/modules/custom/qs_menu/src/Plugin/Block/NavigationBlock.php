@@ -210,9 +210,10 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
     ];
 
     $current_item = NULL;
-    foreach ($render['#variables']['menu'] as $item) {
+    foreach ($render['#variables']['menu'] as $key => $item) {
       if (in_array($variables['route_name'], $item['activated_by'])) {
         $current_item = $item;
+        $render['#variables']['menu'][$key]['current'] = TRUE;
       }
     }
 

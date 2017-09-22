@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Export translations strings from PHP files
+echo "Extracting translations from PHP files..."
+find web/modules/custom -iname "*.php" | xargs xgettext --from-code=UTF-8 -n -k=t -j -o config/d8/lang/fr.po --omit-header
+
+# Run script to export translations from PHP files
+echo "Extracting translations from Twig templates..."
+cd web && drush scr ../scripts/trans-extractor/extractor.php && cd ..
+echo "Temp .po file created."
+
+# Merge PO file with existing translation
+echo "Merging with fr.po file"
+msgcat --use-first config/d8/lang/fr.po config/d8/lang/tmp.po -o config/d8/lang/fr.po
+
+# Remove temp file
+rm config/d8/lang/tmp.po
+echo "Done!"

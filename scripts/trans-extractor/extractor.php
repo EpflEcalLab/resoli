@@ -14,4 +14,15 @@ $extractor = new \TwigExtractor($twig);
 
 $translations = $extractor->extract($path);
 
-var_dump($translations);
+// Write the .po file
+$fh = fopen("../config/d8/lang/tmp.po", 'w');
+fwrite($fh, "msgid \"\"\n");
+fwrite($fh,  "msgstr \"\"\n\"Content-Type: text/plain; charset=UTF-8\\n\"\n\"Content-Transfer-Encoding: 8bit\\n\"\n");
+
+foreach ($translations as $value) {
+    $value = addslashes($value);
+    fwrite($fh, "\n");
+    fwrite($fh, "msgid \"$value\"\n");
+    fwrite($fh, "msgstr \"\"\n");
+}
+fclose($fh);

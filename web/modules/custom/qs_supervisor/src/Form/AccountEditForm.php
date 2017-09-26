@@ -252,7 +252,7 @@ class AccountEditForm extends FormBase {
     drupal_set_message($this->t('qs_supervisor.account.form.edit.success @firstname, @lastname, @mail', [
       '@firstname' => $user->field_firstname->value,
       '@lastname'  => $user->field_lastname->value,
-      '@mail'      => $user->field_email->value,
+      '@mail'      => $user->mail->value,
     ]));
 
     $form_state->setRedirect('qs_supervisor.account.dashboard', ['user' => $user->id()], []);

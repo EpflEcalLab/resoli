@@ -29,6 +29,16 @@ To run any drush command, you need to be on a hight bootstrapped drupal director
 
 On common errors, see the Troubleshootings section.
 
+## 🏋️ Export all translations to a PO file
+
+To allow the client to update the translation him/herself, you need to export all the custom translations from our modules by running:
+
+```bash
+$ ./scripts/trans-extractor/run
+```
+
+The PO file is created in the `./config/d8/lang/` directory.
+
 ## 🚔 Check Drupal coding standards & Drupal best practices
 
 You need to run composer before using PHPCS. Then register the Drupal and DrupalPractice Standard with PHPCS: `./vendor/bin/phpcs --config-set installed_paths "`pwd`/vendor/drupal/coder/coder_sniffer"`

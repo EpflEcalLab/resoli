@@ -372,25 +372,25 @@ msgstr "Inscrivez le nom de votre activité ici"
 msgid "qs_activity.activities.form.add.theme"
 msgstr "Quel thème correspond le mieux à votre activité?"
 
-msgid "qs_activity.activities.form.add.community_can_subscribe.description"
+msgid "qs_activity.activities.form.add.community_can_subscribe"
 msgstr "Permettre à la communauté l’inscription aux évènements"
 
-msgid "qs_activity.activities.form.add.community_access_contact.description"
+msgid "qs_activity.activities.form.add.community_access_contact"
 msgstr "Montrer les informations de contact à la communauté"
 
-msgid "qs_activity.activities.form.add.community_access_detail.description"
+msgid "qs_activity.activities.form.add.community_access_detail"
 msgstr "Montrer les détails des évènements à la communauté"
 
-msgid "qs_activity.activities.form.add.community_access_story.description"
+msgid "qs_activity.activities.form.add.community_access_story"
 msgstr "Montrer les récits à la communauté"
 
-msgid "qs_activity.activities.form.add.member_create_story.description"
+msgid "qs_activity.activities.form.add.member_create_story"
 msgstr "Permettre la soumission de récits"
 
-msgid "qs_activity.activities.form.add.community_access_gallery.description"
+msgid "qs_activity.activities.form.add.community_access_gallery"
 msgstr "Montrer les photos à la communauté"
 
-msgid "qs_activity.activities.form.add.member_create_gallery.description"
+msgid "qs_activity.activities.form.add.member_create_gallery"
 msgstr "Permettre la soumission de photos"
 
 msgid "qs_activity.activities.form.add.event"
@@ -784,7 +784,6 @@ msgstr "Modifiez l’évènement et gérez les inscriptions."
 msgid "qs.event.subscriptions"
 msgstr "Gérer les inscriptions"
 
-#: loco:59c38a86a39ff3602d8b4652
 msgid "qs_activity.events.form.delete.warning"
 msgstr "Etes-vous sûr de vouloir supprimer cet évènement?"
 
@@ -881,7 +880,6 @@ msgstr "Mon e-mail"
 msgid "qs_supervisor.account.communities"
 msgstr "Mes communautés"
 
-#: loco:59c38a86a39ff3602d8b466d
 msgid "qs_auth.form.communities_apply.no_community"
 msgstr "Il n’y a pas d’autres communautés disponibles."
 
@@ -966,11 +964,9 @@ msgstr ""
 msgid "qs_auth.form.pass.name.placeholder"
 msgstr ""
 
-#: loco:59c38a86a39ff3602d8b4687
 msgid "qs.auth.pass.confirmation.thanks"
 msgstr "Merci pour votre demande."
 
-#: loco:59c38a86a39ff3602d8b4688
 msgid "qs.auth.pass.confirmation.description"
 msgstr ""
 "Vérifier votre boîte de réception, un e-mail vient de vous être envoyé!"
@@ -981,11 +977,9 @@ msgstr ""
 msgid "Further instructions have been sent to your email address."
 msgstr "De plus amples informations vous ont été envoyées par e-mail."
 
-#: loco:59c38a86a39ff3602d8b468b
 msgid "qs.auth.communities.dashboard_title"
 msgstr "Voici l’espace dédié à la gestion de votre communauté"
 
-#: loco:59c38a86a39ff3602d8b468c
 msgid "qs.auth.communities.dashboard_description"
 msgstr "Choisissez une des options ci-dessous."
 
@@ -1029,7 +1023,6 @@ msgstr ""
 "\r\n"
 "Si vous n’utilisez pas ce lien, il sera automatiquement échu après un jour."
 
-#: loco:59c38a86a39ff3602d8b4695
 msgid ""
 "You have just used your one-time login link. It is no longer necessary to "
 "use this link to log in. Please change your password."
@@ -1072,108 +1065,196 @@ msgstr ""
 msgid "qs.mail.admin.welcome.no_approval.body @mail @firstname @lastname"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4567
 msgid "qs.auth.communities.dashboard_title @variables.community.name.value"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4568
 msgid "qs.community.waiting_approval.request.manger"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4569
 msgid "qs_community.members.empty"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b456a
 msgid "qs_supervisor.account.community_go"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b456b
 msgid "qs_supervisor.account.community_pending"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b456c
 msgid "qs_supervisor.account.approval_go"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b456d
 msgid "Contact Us"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b456e
 msgid "Home"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b456f
 msgid "qs.status_message"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4570
 msgid "qs.error_message"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4571
 msgid "qs.warning_message"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4572
 msgid "qs_informative_message"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4573
 msgid "Close"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4574
 msgid "qs.event.contact_description @event.field_contact_name.value"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4575
 msgid "qs.event.contact.you_can_contact"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4576
 msgid "qs.event.contact.by_phone"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4577
 msgid "qs.event.contact.or"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4578
 msgid "qs.event.contact.by_email"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4579
 msgid "qs.activity.no_events_please_contact @mail_link"
 msgstr ""
 "Il n’y a pas de prochain évènement prévu pour le moment.\n"
 "Pour toutes questions, contactez @mail_link"
 
-#: loco:59c4c884a39ff3e2728b457a
 msgid "qs.activity.no_events"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b457b
 msgid "qs.event.not_accessible"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b457c
 msgid "qs.event.register"
 msgstr "S’inscrire à l’évènement"
 
-#: loco:59c4c884a39ff3e2728b457d
 msgid "qs.event.contribution"
 msgstr "Contribution"
 
-#: loco:59c4c884a39ff3e2728b457e
 msgid "qs.error.403.description"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b457f
 msgid "qs.auth.approval.description @variables.community.name.value "
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4580
 msgid "qs.activity.theme.title_empty @community_name"
+msgstr ""
+
+msgid "qs_supervisor.account.phone_default"
+msgstr ""
+
+msgid "qs_menu.links.stories.themes"
+msgstr ""
+
+msgid "qs_menu.links.stories.date"
+msgstr ""
+
+msgid "qs_menu.links.photos.themes"
+msgstr ""
+
+msgid "qs_menu.links.photos.date"
+msgstr ""
+
+msgid "qs_supervisor.account.form.edit.success @firstname, @lastname, @mail"
+msgstr ""
+
+msgid "qs_auth.pass_reset_form.title"
+msgstr ""
+
+msgid "qs.form.error.username.used"
+msgstr ""
+
+msgid "qs_auth.form.register.success @firstname, @lastname, @mail"
+msgstr ""
+
+msgid "qs_auth.communities.apply.success @community"
+msgstr ""
+
+msgid "qs_activity.activities.form.edit.info.success @activity"
+msgstr ""
+
+msgid "qs.form.delete_submit"
+msgstr ""
+
+msgid "qs_activity.activities.form.delete.error.has_events @activity"
+msgstr ""
+
+msgid "qs_activity.activities.form.delete.success @activity"
+msgstr ""
+
+msgid "qs.activity.edit_defaults"
+msgstr ""
+
+msgid "qs_activity.activities.form.edit.defaults.contact_name"
+msgstr ""
+
+msgid "qs_activity.activities.form.edit.defaults.contact_name.placeholder"
+msgstr ""
+
+msgid "qs.form.error.empty @mail"
+msgstr ""
+
+msgid "qs_activity.activities.form.edit.defaults.success @activity"
+msgstr ""
+
+msgid "qs_activity.edit_visibility_form.success @activity"
+msgstr ""
+
+msgid "qs_activity.events.form.step1"
+msgstr ""
+
+msgid "qs_activity.events.form.step2"
+msgstr ""
+
+msgid "qs_activity.events.form.add.error.hours.malformed @fieldname"
+msgstr ""
+
+msgid "qs.form.error.something_went_wrong"
+msgstr ""
+
+msgid "qs_activity.form.error.date_format_invalid @fieldname"
+msgstr ""
+
+msgid "qs_activity.form.error.date_past @fieldname"
+msgstr ""
+
+msgid "qs_activity.events.form.add.error.hours.inconsistency @fieldname"
+msgstr ""
+
+msgid "qs_activity.activities.form.step1.description"
+msgstr ""
+
+msgid "qs_activity.activities.form.step1"
+msgstr ""
+
+msgid "qs_activity.activities.form.step2.description"
+msgstr ""
+
+msgid "qs_activity.activities.form.step2"
+msgstr ""
+
+msgid "qs_activity.activities.form.step3.description"
+msgstr ""
+
+msgid "qs_activity.activities.form.step3"
+msgstr ""
+
+msgid "qs_activity.activities.form.step4.description"
+msgstr ""
+
+msgid "qs_activity.activities.form.step4"
+msgstr ""
+
+msgid "qs_activity.events.form.delete.error.is_past @event"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.title.placeholder"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.success @event"
 msgstr ""

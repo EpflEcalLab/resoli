@@ -155,7 +155,6 @@ class ActivityAddForm extends FormBasic {
     $field_definition = $activity_fields['field_community_can_subscribe'];
     $form['activity']['step-3']['community_can_subscribe'] = [
       '#title'         => $this->t('qs_activity.activities.form.add.community_can_subscribe'),
-      '#description'   => $this->t('qs_activity.activities.form.add.community_can_subscribe.description'),
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
@@ -170,7 +169,6 @@ class ActivityAddForm extends FormBasic {
     $field_definition = $activity_fields['field_community_access_contact'];
     $form['activity']['step-3']['community_access_contact'] = [
       '#title'         => $this->t('qs_activity.activities.form.add.community_access_contact'),
-      '#description'   => $this->t('qs_activity.activities.form.add.community_access_contact.description'),
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
@@ -185,7 +183,6 @@ class ActivityAddForm extends FormBasic {
     $field_definition = $activity_fields['field_community_access_detail'];
     $form['activity']['step-3']['community_access_detail'] = [
       '#title'         => $this->t('qs_activity.activities.form.add.community_access_detail'),
-      '#description'   => $this->t('qs_activity.activities.form.add.community_access_detail.description'),
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
@@ -200,7 +197,6 @@ class ActivityAddForm extends FormBasic {
     $field_definition = $activity_fields['field_community_access_story'];
     $form['activity']['step-3']['community_access_story'] = [
       '#title'         => $this->t('qs_activity.activities.form.add.community_access_story'),
-      '#description'   => $this->t('qs_activity.activities.form.add.community_access_story.description'),
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
@@ -215,7 +211,6 @@ class ActivityAddForm extends FormBasic {
     $field_definition = $activity_fields['field_member_create_story'];
     $form['activity']['step-3']['member_create_story'] = [
       '#title'         => $this->t('qs_activity.activities.form.add.member_create_story'),
-      '#description'   => $this->t('qs_activity.activities.form.add.member_create_story.description'),
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
@@ -230,7 +225,6 @@ class ActivityAddForm extends FormBasic {
     $field_definition = $activity_fields['field_community_access_gallery'];
     $form['activity']['step-3']['community_access_gallery'] = [
       '#title'         => $this->t('qs_activity.activities.form.add.community_access_gallery'),
-      '#description'   => $this->t('qs_activity.activities.form.add.community_access_gallery.description'),
       '#type'          => 'checkbox',
       '#required'      => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
@@ -245,7 +239,6 @@ class ActivityAddForm extends FormBasic {
     $field_definition = $activity_fields['field_member_create_gallery'];
     $form['activity']['step-3']['member_create_gallery'] = [
       '#title'       => $this->t('qs_activity.activities.form.add.member_create_gallery'),
-      '#description' => $this->t('qs_activity.activities.form.add.member_create_gallery.description'),
       '#type'        => 'checkbox',
       '#required'    => FALSE,
       '#default_value'     => $field_definition->getDefaultValueLiteral()[0]['value'],

@@ -2,7 +2,7 @@
 
 # Export translations strings from PHP files
 echo "Extracting translations from PHP files..."
-find web/modules/custom -iname "*.php" -or -iname "*.inc" -or -iname "*.module" -or -iname "*.install" | xargs xgettext -L php --from-code=UTF-8 -n -k=t -j -o config/d8/lang/fr.po --omit-header
+find web/modules/custom -iname "*.php" -or -iname "*.inc" -or -iname "*.module" -or -iname "*.install" | xargs xgettext --language=php --from-code=UTF-8 --keyword=t --join-existing --output=config/d8/lang/fr.po --omit-header --no-location
 
 # Run script to export translations from PHP files
 echo "Extracting translations from Twig templates..."

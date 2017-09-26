@@ -881,8 +881,9 @@ msgstr "Mon e-mail"
 msgid "qs_supervisor.account.communities"
 msgstr "Mes communautés"
 
+#: loco:59c38a86a39ff3602d8b466d
 msgid "qs_auth.form.communities_apply.no_community"
-msgstr ""
+msgstr "Il n’y a pas d’autres communautés disponibles."
 
 msgid "qs_supervisor.account.form.back"
 msgstr "Retour à mon résumé"
@@ -1174,6 +1175,5 @@ msgid "qs.auth.approval.description @variables.community.name.value "
 msgstr ""
 
 #: loco:59c4c884a39ff3e2728b4580
-
 msgid "qs.activity.theme.title_empty @community_name"
 msgstr ""

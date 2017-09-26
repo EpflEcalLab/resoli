@@ -266,7 +266,9 @@ msgid "qs_auth.form.login.password"
 msgstr "Inscrivez votre mot de passe ici"
 
 msgid "qs_auth.form.login.title"
-msgstr "Entrez les informations suivantes pour vous connecter de manière sécurisée à Réseaux Solidaires."
+msgstr ""
+"Entrez les informations suivantes pour vous connecter de manière sécurisée à "
+"Réseaux Solidaires."
 
 msgid "qs.form.submit"
 msgstr "Valider les données"
@@ -434,7 +436,8 @@ msgid "qs_supervisor.account.form.edit.phone"
 msgstr "Modifier mon numéro de téléphone"
 
 msgid "qs_supervisor.account.form.edit.title"
-msgstr "Ici, vous pouvez modifier vos informations personnelles en toute sécurité."
+msgstr ""
+"Ici, vous pouvez modifier vos informations personnelles en toute sécurité."
 
 msgid "The requested page could not be found."
 msgstr "La page demandée ne peut pas être trouvée."
@@ -479,7 +482,10 @@ msgid "qs_activity.activities.form.edit.visibility.title"
 msgstr ""
 
 msgid "qs_activity.activities.form.edit.defaults.body.placeholder"
-msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+msgstr ""
+"Ex. Atelier intergénérationnel de pratique informatique (ordinateur, "
+"tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des "
+"solutions! Session de deux heures au maximum. Tarif horaire."
 
 msgid "qs_activity.activities.form.edit.defaults.body"
 msgstr "Définissez une description par défaut"
@@ -541,7 +547,10 @@ msgid "qs.auth.approval.thanks"
 msgstr "Merci pour toutes ces informations!"
 
 msgid "qs.auth.approval.description @variables.community.name.value"
-msgstr "Un responsable de la communauté @variables.community.name.value va maintenant vérifier votre adhésion. \rIl vous informera par email lorsque vous pourrez commencer à utiliser Réseaux Solidaires!"
+msgstr ""
+"Un responsable de la communauté @variables.community.name.value va "
+"maintenant vérifier votre adhésion. \rIl vous informera par email lorsque "
+"vous pourrez commencer à utiliser Réseaux Solidaires!"
 
 msgid "qs.auth.approval.short"
 msgstr "Adhésion en cours de validation"
@@ -589,7 +598,10 @@ msgid "qs_activity.events.form.add.end_at"
 msgstr "Heure de fin"
 
 msgid "qs_activity.events.form.add.body.placeholder"
-msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+msgstr ""
+"Ex. Atelier intergénérationnel de pratique informatique (ordinateur, "
+"tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des "
+"solutions! Session de deux heures au maximum. Tarif horaire."
 
 msgid "qs_activity.events.form.add.body"
 msgstr "Comment décririez-vous votre évènement?"
@@ -616,7 +628,10 @@ msgid "qs_activity.events.form.edit.end_at"
 msgstr "Heure de fin"
 
 msgid "qs_activity.events.form.edit.body.placeholder"
-msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+msgstr ""
+"Ex. Atelier intergénérationnel de pratique informatique (ordinateur, "
+"tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des "
+"solutions! Session de deux heures au maximum. Tarif horaire."
 
 msgid "qs_activity.events.form.edit.body"
 msgstr "Comment décririez-vous votre évènement?"
@@ -673,7 +688,9 @@ msgid "qs_auth.form.pass.name.description"
 msgstr "En cas d’oubli, demandez-la à votre responsable de communauté"
 
 msgid "qs_auth.form.pass.title"
-msgstr "Indiquez comment nous pouvons vous contacter et nous vous enverrons les informations pour réinitialiser votre mot de passe."
+msgstr ""
+"Indiquez comment nous pouvons vous contacter et nous vous enverrons les "
+"informations pour réinitialiser votre mot de passe."
 
 msgid "qs_auth.link.login"
 msgstr "Utiliser mon compte"
@@ -767,8 +784,9 @@ msgstr "Modifiez l’évènement et gérez les inscriptions."
 msgid "qs.event.subscriptions"
 msgstr "Gérer les inscriptions"
 
+#: loco:59c38a86a39ff3602d8b4652
 msgid "qs_activity.events.form.delete.warning"
-msgstr ""
+msgstr "Etes-vous sûr de vouloir supprimer cet évènement?"
 
 msgid "qs.form.cancel"
 msgstr "Annuler"
@@ -777,7 +795,8 @@ msgid "qs.form.error.empty @fieldname"
 msgstr "Vous avez oublié de compléter cette demande: « @fieldname »"
 
 msgid "qs_activity.events.form.edit.title_form"
-msgstr "Quelles sont les informations de votre évènement pour l’activité @activity ?"
+msgstr ""
+"Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
 msgid "qs.form.error.mail.malformed"
 msgstr "Votre adresse e-mail semble être incorrecte"
@@ -786,7 +805,8 @@ msgid "qs.form.error.mail.used"
 msgstr "Cette adresse est déjà utilisée par un compte."
 
 msgid "qs_auth.form.register.error.password_verification.invalid"
-msgstr "Il semblerait que vous n’ayez pas inscrit des mots de passe identiques."
+msgstr ""
+"Il semblerait que vous n’ayez pas inscrit des mots de passe identiques."
 
 msgid "qs.error.404.title"
 msgstr "Vous êtes perdu?"
@@ -801,25 +821,38 @@ msgid "qs.error.403.decription"
 msgstr "Choisissez une des deux options ci-dessous."
 
 msgid "qs_auth.register_form.step1.description"
-msgstr "Bienvenue! Pour commencer, indiquez la communauté que vous souhaitez rejoindre!"
+msgstr ""
+"Bienvenue! Pour commencer, indiquez la communauté que vous souhaitez "
+"rejoindre!"
 
 msgid "qs_auth.register_form.step1.sub_description"
-msgstr "Ce choix peut être facilement modifié à tout instant, dans vos réglages personnels."
+msgstr ""
+"Ce choix peut être facilement modifié à tout instant, dans vos réglages "
+"personnels."
 
 msgid "qs_auth.register_form.step2.description"
-msgstr "Afin de vous donner accès à la communauté, merci d’indiquer les renseignements suivants:"
+msgstr ""
+"Afin de vous donner accès à la communauté, merci d’indiquer les "
+"renseignements suivants:"
 
 msgid "qs_auth.register_form.step2.sub_description"
-msgstr "Ces données seront visibles uniquement par vous et votre responsablede communauté."
+msgstr ""
+"Ces données seront visibles uniquement par vous et votre responsablede "
+"communauté."
 
 msgid "qs_auth.register_form.step3.description"
-msgstr "Excellent! Merci d’indiquer vos informations de contact pour que les autres membres puissent communiquer avec vous!\r"
+msgstr ""
+"Excellent! Merci d’indiquer vos informations de contact pour que les autres "
+"membres puissent communiquer avec vous!\r"
 
 msgid "qs_auth.register_form.step3.sub_description"
-msgstr "Seuls les membres validés par la communauté pourront voir cette information."
+msgstr ""
+"Seuls les membres validés par la communauté pourront voir cette information."
 
 msgid "qs_auth.register_form.step4.description"
-msgstr "Finalement, choisissez un mot de passe pour que vous seul puissiez accéder à votre compte."
+msgstr ""
+"Finalement, choisissez un mot de passe pour que vous seul puissiez accéder à "
+"votre compte."
 
 msgid "qs_auth.register_form.step4.sub_description"
 msgstr "En cas d’oubli, vous pourrez à tout instant le réinitialiser."
@@ -861,10 +894,12 @@ msgid "qs_activity.floating.add.event"
 msgstr "Créer un évènement"
 
 msgid "qs_activity.events.form.step1.description"
-msgstr "Quelles sont les informations de votre évènement pour l’activité @activity ?"
+msgstr ""
+"Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
 msgid "qs_activity.events.form.step2.description"
-msgstr "Quelles sont les informations de votre évènement pour l’activité @activity ?"
+msgstr ""
+"Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
 msgid "qs.next"
 msgstr "Etape suivante"
@@ -920,17 +955,24 @@ msgstr ""
 msgid "qs_event.events.form.delete.success @event"
 msgstr ""
 
-msgid "Unrecognized username or password. <a href=\":password\">Forgot your password?</a>"
-msgstr "E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</a>"
+msgid ""
+"Unrecognized username or password. <a href=\":password\">Forgot your "
+"password?</a>"
+msgstr ""
+"E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</"
+"a>"
 
 msgid "qs_auth.form.pass.name.placeholder"
 msgstr ""
 
+#: loco:59c38a86a39ff3602d8b4687
 msgid "qs.auth.pass.confirmation.thanks"
-msgstr ""
+msgstr "Merci pour votre demande."
 
+#: loco:59c38a86a39ff3602d8b4688
 msgid "qs.auth.pass.confirmation.description"
 msgstr ""
+"Vérifier votre boîte de réception, un e-mail vient de vous être envoyé!"
 
 msgid "%name is not recognized as a username or an email address."
 msgstr ""
@@ -938,11 +980,13 @@ msgstr ""
 msgid "Further instructions have been sent to your email address."
 msgstr "De plus amples informations vous ont été envoyées par e-mail."
 
+#: loco:59c38a86a39ff3602d8b468b
 msgid "qs.auth.communities.dashboard_title"
-msgstr ""
+msgstr "Voici l’espace dédié à la gestion de votre communauté"
 
+#: loco:59c38a86a39ff3602d8b468c
 msgid "qs.auth.communities.dashboard_description"
-msgstr ""
+msgstr "Choisissez une des options ci-dessous."
 
 msgid "qs.contact @privilege.user.entity.field_firstname.value"
 msgstr ""
@@ -963,7 +1007,8 @@ msgid "qs_auth.form.reset.message @mail @expiration_date"
 msgstr ""
 
 msgid "qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname"
-msgstr "Remplacement des informations de connexion pour votre compte sur @sitename"
+msgstr ""
+"Remplacement des informations de connexion pour votre compte sur @sitename"
 
 msgid "qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login"
 msgstr ""
@@ -971,18 +1016,26 @@ msgstr ""
 "\r\n"
 "Vous avez effectué une demande de nouveau mot de passe.\r\n"
 "\r\n"
-"Vous pouvez désormais vous connecter en appuyant sur le lien suivant, ou en le copiant-collant dans votre navigateur internet:\r\n"
+"Vous pouvez désormais vous connecter en appuyant sur le lien suivant, ou en "
+"le copiant-collant dans votre navigateur internet:\r\n"
 "\r\n"
 "<a href=\"@one-time-login\">@one-time-login</a>\r\n"
 "\r\n"
-"Ce lien ne peut être utilisé qu’une seule fois et vous conduira vers vos informations personnelles.\r\n"
+"Ce lien ne peut être utilisé qu’une seule fois et vous conduira vers vos "
+"informations personnelles.\r\n"
 "\r\n"
 "Là, vous pourrez choisir un nouveau mot de passe à votre convenance.\r\n"
 "\r\n"
 "Si vous n’utilisez pas ce lien, il sera automatiquement échu après un jour."
 
-msgid "You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."
+#: loco:59c38a86a39ff3602d8b4695
+msgid ""
+"You have just used your one-time login link. It is no longer necessary to "
+"use this link to log in. Please change your password."
 msgstr ""
+"Vous venez d’utiliser un lien à usage unique. Vous n’aurez plus besoin "
+"d’utiliser ce lien lors de vos prochaines connexions. Merci de modifier "
+"votre mot de passe."
 
 msgid "qs.mail.account.cancel.subject @sitename @mail @firstname @lastname"
 msgstr ""
@@ -990,7 +1043,8 @@ msgstr ""
 msgid "qs.mail.account.cancel.body @mail @firstname @lastname"
 msgstr ""
 
-msgid "qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname"
+msgid ""
+"qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname"
 msgstr ""
 
 msgid "qs.mail.welcome.no_approval.body @mail @firstname @lastname"
@@ -1002,14 +1056,123 @@ msgstr ""
 msgid "qs.mail.awaiting.approval.body @mail @firstname @lastname"
 msgstr ""
 
-msgid "qs.mail.admin.awaiting.approval.subject @sitename @mail @firstname @lastname"
+msgid ""
+"qs.mail.admin.awaiting.approval.subject @sitename @mail @firstname @lastname"
 msgstr ""
 
 msgid "qs.mail.admin.awaiting.approval.body @mail @firstname @lastname"
 msgstr ""
 
-msgid "qs.mail.admin.welcome.no_approval.subject @sitename @mail @firstname @lastname"
+msgid ""
+"qs.mail.admin.welcome.no_approval.subject @sitename @mail @firstname "
+"@lastname"
 msgstr ""
 
 msgid "qs.mail.admin.welcome.no_approval.body @mail @firstname @lastname"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4567
+msgid "qs.auth.communities.dashboard_title @variables.community.name.value"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4568
+msgid "qs.community.waiting_approval.request.manger"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4569
+msgid "qs_community.members.empty"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b456a
+msgid "qs_supervisor.account.community_go"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b456b
+msgid "qs_supervisor.account.community_pending"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b456c
+msgid "qs_supervisor.account.approval_go"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b456d
+msgid "Contact Us"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b456e
+msgid "Home"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b456f
+msgid "qs.status_message"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4570
+msgid "qs.error_message"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4571
+msgid "qs.warning_message"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4572
+msgid "qs_informative_message"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4573
+msgid "Close"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4574
+msgid "qs.event.contact_description @event.field_contact_name.value"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4575
+msgid "qs.event.contact.you_can_contact"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4576
+msgid "qs.event.contact.by_phone"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4577
+msgid "qs.event.contact.or"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4578
+msgid "qs.event.contact.by_email"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4579
+msgid "qs.activity.no_events_please_contact @mail_link"
+msgstr ""
+"Il n’y a pas de prochain évènement prévu pour le moment.\n"
+"Pour toutes questions, contactez @mail_link"
+
+#: loco:59c4c884a39ff3e2728b457a
+msgid "qs.activity.no_events"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b457b
+msgid "qs.event.not_accessible"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b457c
+msgid "qs.event.register"
+msgstr "S’inscrire à l’évènement"
+
+#: loco:59c4c884a39ff3e2728b457d
+msgid "qs.event.contribution"
+msgstr "Contribution"
+
+#: loco:59c4c884a39ff3e2728b457e
+msgid "qs.error.403.description"
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b457f
+msgid "qs.auth.approval.description @variables.community.name.value "
+msgstr ""
+
+#: loco:59c4c884a39ff3e2728b4580
+msgid "qs.activity.theme.title_empty @community_name"
 msgstr ""

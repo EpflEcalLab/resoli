@@ -1,11 +1,13 @@
 @charset 'utf-8';
 
 .step-nav {
-  display: flex;
   position: relative;
   justify-content: space-between;
   counter-reset: step-nav;
   padding-right: 0;
+
+  // Fix issue in Safari 9
+  flex-basis: initial;
 
   @include list-unstyled;
 

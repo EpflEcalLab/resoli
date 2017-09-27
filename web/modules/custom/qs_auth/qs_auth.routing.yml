@@ -1,24 +1,34 @@
 # Log in
 qs_auth.login:
-    path: '/authentication'
-    defaults:
-        _form: '\Drupal\user\Form\UserLoginForm'
-        _title: 'qs_auth.login'
-    requirements:
-      _user_is_logged_in: 'FALSE'
-    options:
-      _maintenance_access: TRUE
+  path: '/authentication'
+  defaults:
+      _form: '\Drupal\user\Form\UserLoginForm'
+      _title: 'qs_auth.login'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+
+# User cancel confirmation
+qs_auth.cancel.confirm:
+  path: '/authentication/{user}/cancel/confirm/{timestamp}/{hashed_pass}'
+  defaults:
+    _title: 'qs_auth.cancel.confirm'
+    _controller: '\Drupal\qs_auth\Controller\AccountController::confirmCancel'
+  requirements:
+     # Everybody shoud have access on this page.
+    _access: 'TRUE'
 
 # Forget Password
 qs_auth.pass:
-    path: '/authentication/password'
-    defaults:
-      _form: '\Drupal\user\Form\UserPasswordForm'
-      _title: 'qs_auth.forget_password'
-    requirements:
-      _user_is_logged_in: 'FALSE'
-    options:
-      _maintenance_access: TRUE
+  path: '/authentication/password'
+  defaults:
+    _form: '\Drupal\user\Form\UserPasswordForm'
+    _title: 'qs_auth.forget_password'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
 
 # Forget Password Confirmation
 qs_auth.pass.confirmation:

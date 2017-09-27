@@ -29,5 +29,10 @@ function qs_auth_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--auth--approval',
     ],
+    'qs_auth_cancel_confirm_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--auth--cancel-confirm',
+    ],
+
   ];
 }

@@ -7,6 +7,7 @@ scriptDir=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 
 SKIP_DEPEDENCIES=0
 SKIP_TESTS=0
+SKIP_INTERACTION=0
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -18,6 +19,9 @@ while [ $# -gt 0 ]; do
       ;;
     --database=*)
       BEHAT_DATABASE="${1#*=}"
+      ;;
+    --skip-interaction=*)
+      SKIP_INTERACTION="-y"
       ;;
     *)
       printf "\e[1;91m***************************\e[0m\n"
@@ -67,7 +71,7 @@ then
   printf "\e[1;93mthe database is: $BEHAT_DATABASE\e[0m\n"
 fi
 
-../vendor/bin/drush si standard --db-url=$BEHAT_DATABASE --site-name='Behat' --account-name=admin --account-pass=admin --account-mail=behat@antistatique.net -y
+../vendor/bin/drush si standard --db-url=$BEHAT_DATABASE --site-name='Behat' --account-name=admin --account-pass=admin --account-mail=behat@antistatique.net $SKIP_INTERACTION
 ../vendor/bin/drush ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();'
 ../vendor/bin/drush config-set system.site uuid "b38de9f3-fd4d-4779-ab7f-29e7b91556f1" -y
 ../vendor/bin/drush config-import -y --source='../config/d8/sync/'

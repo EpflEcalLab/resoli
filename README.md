@@ -96,6 +96,14 @@ For isolation test databases, you should run Behat using our custom script `scri
 2. Keep this command line open and run `./vendor/bin/behat`
 in the root of your project.
 
+### Re-install default values
+
+You can use the Driven Development script to install re-install defaul values by running:
+
+  ```bash
+  ./scripts/behat/drupal --skip-dependencies=1 --skip-tests=1 --skip-interaction=1
+  ```
+
 ## 🚛 Install
 
 1. Setup your virtualhost (like `http://qs.dev`) to serve `/web`.

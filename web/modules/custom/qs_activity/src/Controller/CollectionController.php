@@ -12,6 +12,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\qs_activity\Service\EventManager;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * CollectionController.
@@ -150,6 +151,69 @@ class CollectionController extends ControllerBase {
           'url.query_args',
         ],
         'tags' => [
+          // Invalidated whenever any Event is updated, deleted or created.
+          'node_list:event',
+          // Invalidated whenever any Activity is updated, deleted or created.
+          'node_list:activity',
+          // Invalidated whenever any Community is updated, deleted or created.
+          'taxonomy_term_list:communities',
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'privilege_list:privilege',
+        ],
+      ],
+    ];
+  }
+
+  /**
+   * Collection by dates.
+   */
+  public function dates(TermInterface $community) {
+    $variables = ['community' => $community];
+
+    // The request should be took at the last moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
+    // Get pagination date.
+    $pagination_date = $master_request->query->get('date');
+    $date = new DrupalDateTime();
+    if ($pagination_date) {
+      try {
+        $date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
+      }
+      catch (\Exception $e) {
+        $date = new DrupalDateTime();
+      }
+    }
+
+    $month_start = clone $date;
+    $month_start->modify('first day of this month');
+    $month_start->setTime(0, 0);
+    $month_end = clone $date;
+    $month_end->modify('last day of this month');
+    $month_end->setTime(23, 59, 59);
+
+    $next_month = clone $month_start;
+    $next_month->modify('first day of previous month');
+    $prev_month = clone $month_end;
+    $prev_month->modify('last day of next month');
+
+    $variables['prev_month'] = $prev_month;
+    $variables['next_month'] = $next_month;
+
+    // Get the only next events of each ones.
+    $variables['events'] = $this->eventManager->getByDate($community, $month_start, $month_end);
+
+    return [
+      '#theme'     => 'qs_activity_collection_by_date_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+          'url.query_args',
+        ],
+        'tags' => [
+          // Invalidated whenever any Event is updated, deleted or created.
+          'node_list:event',
           // Invalidated whenever any Community is updated, deleted or created.
           'taxonomy_term_list:communities',
           // Invalidated whenever any Privilege is updated, deleted or created.

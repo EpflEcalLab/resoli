@@ -47,6 +47,10 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'route' => '/activities/' . $entity->id() . '/theme',
           'alias' => '/' . trim($alias, '/') . '/activities/theme',
         ],
+        'activities_by_date' => [
+          'route' => '/activities/' . $entity->id() . '/date',
+          'alias' => '/' . trim($alias, '/') . '/activities/date',
+        ],
         'activities_form_add' => [
           'route' => '/activities/' . $entity->id() . '/add',
           'alias' => '/' . trim($alias, '/') . '/activities/add',

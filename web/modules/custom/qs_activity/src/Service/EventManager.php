@@ -4,8 +4,10 @@ namespace Drupal\qs_activity\Service;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
 
 /**
  * EventManager.
@@ -27,11 +29,19 @@ class EventManager {
   protected $queryFactory;
 
   /**
+   * The database connection to use.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
+
+  /**
    * Class constructor.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory) {
-    $this->nodeStorage = $entity_type_manager->getStorage('node');
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
+    $this->nodeStorage  = $entity_type_manager->getStorage('node');
     $this->queryFactory = $query_factory;
+    $this->connection   = $connection;
   }
 
   /**
@@ -61,6 +71,49 @@ class EventManager {
       ->groupBy('field_activity');
 
     $nids = $query->execute();
+    $events = NULL;
+    if ($nids) {
+      $events = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $events;
+  }
+
+  /**
+   * Get only the next events (nearest from now) for the given date range.
+   *
+   * @param Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   * @param \DateTime $date_start
+   *   The start date.
+   * @param \DateTime $date_end
+   *   The end date.
+   *
+   * @return integer[]
+   *   A collection of node's Event. Oterwhise an empty array.
+   */
+  public function getByDate(TermInterface $community, \DateTime $date_start, \DateTime $date_end) {
+    $query = $this->connection->select('node_field_data', 'event');
+    $query->fields('event', ['nid'])
+      ->condition('event.type', 'event')
+      ->condition('event.status', TRUE);
+
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.entity_id = event.nid');
+    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = field_activity.field_activity_target_id');
+    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+
+    $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = event.nid');
+    $query->condition('field_start_at.field_start_at_value', [$date_start->format('c'), $date_end->format('c')], 'BETWEEN');
+
+    $query->orderBy('field_start_at.field_start_at_value', 'ASC');
+
+    $rows = $query->execute()->fetchAll();
+
+    $nids = [];
+    foreach ($rows as $row) {
+      $nids[$row->nid] = $row->nid;
+    }
+
     $events = NULL;
     if ($nids) {
       $events = $this->nodeStorage->loadMultiple($nids);

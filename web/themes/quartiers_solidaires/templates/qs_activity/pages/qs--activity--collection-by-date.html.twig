@@ -9,15 +9,62 @@
     </p>
   </div>
 
-  <div class="container my-5">
-    <div class="row">
-      <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+  <ul class="container my-5">
+    <ul class="card-list">
+
+      {% set current_header = null %}
+
       {% for key, event in variables.events %}
-        {% include "@quartiers_solidaires/node/card-list-item.html.twig" %}
+        {% set date = event.field_start_at.value|date('Y-m-d') %}
+        {% set week = event.field_start_at.value|date('W') %}
+        {% set current_week = 'now'|date('W') %}
+
+
+        {% if 'now'|date('Y-m-d') == date %}
+          {# TODAY #}
+          {% set new_header = 'qs.activity.date.sticky.today' %}
+
+        {% elseif 'tomorrow'|date('Y-m-d') == date %}
+          {# TOMORROW #}
+          {% set new_header = 'qs.activity.date.sticky.tomorrow' %}
+
+        {% elseif date > 'tomorrow'|date('Y-m-d') and current_week == week %}
+          {# THIS WEEK (between day after tomorrow and next Sunday but not next week) #}
+          {% set new_header = 'qs.activity.date.sticky.this_week' %}
+
+        {% elseif current_week != week %}
+          {# FOLLOWING WEEKS #}
+          {% set week_diff = week - current_week %}
+          {% if week_diff == 1 %}
+            {% set new_header = 'qs.activity.date.sticky.next_week' %}
+          {% elseif week_diff == 2 %}
+            {% set new_header = 'qs.activity.date.sticky.in_two_weeks' %}
+          {% elseif week_diff == 3 %}
+            {% set new_header = 'qs.activity.date.sticky.in_three_weeks' %}
+          {% else %}
+            {% set new_header = 'qs.activity.date.sticky.in_four_weeks' %}
+          {% endif %}
+        {% endif %}
+
+        {# Write the header if we have a new value #}
+        {% if current_header != new_header %}
+          {% set current_header = new_header %}
+            {% if loop.index > 1 %}
+              </ul>
+              <ul class="card-list">
+            {% endif %}
+          <li class="sticky-top bg-white mb-2 py-2 row">
+            <h2 class="col-12 h5 mb-0">{{ current_header|t }}</h2>
+          </li>
+        {% endif %}
+
+        <li class="card card-list-simple-item ">
+          {% include "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+        </li>
       {% endfor %}
-      </ul>
-    </div>
-  </div>
+    </ul>
+
+  </ul>
 {% else %}
 <div class="container">
   <p class="lead text-center mt-5">{% trans %}qs.activity.date.title_empty {{ community_name }}{% endtrans %}</p>

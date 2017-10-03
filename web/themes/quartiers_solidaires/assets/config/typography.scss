@@ -38,3 +38,9 @@
     text-decoration: underline;
   }
 }
+
+.lead {
+  @include media-breakpoint-down(sm) {
+    font-size: $lead-font-size * 0.75;
+  }
+}

@@ -1,0 +1,32 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<a
+  href="{{ path('entity.node.canonical', { 'node': event.field_activity.target_id }) }}"
+  class="card-pill card-pill-simple"
+>
+
+  <span class="card-pill-icon card-pill-icon-lg">
+    {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
+  </span>
+
+  <span class="card-pill-title">
+    <span class="lead">
+      {{ event.label }}
+    </span>
+  </span>
+
+  <span class="size-date ml-auto text-dark">
+    <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
+      {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F') }}
+      <span class="d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y') }}</span>
+    </time>
+  </span>
+
+  <span
+    class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-1"
+    aria-label="{{ 'qs.readmore.about'|t }} {{ event.label }}"
+  >
+    {{ macros.icon('look') }}
+  </span>
+
+</a>

@@ -8,7 +8,6 @@
 // Includes.
 require_once 'inc/alias.inc';
 
-
 /**
  * Implements hook_theme().
  */

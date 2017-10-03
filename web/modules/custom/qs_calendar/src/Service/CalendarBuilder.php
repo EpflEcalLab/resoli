@@ -10,27 +10,66 @@ use Drupal\Core\Datetime\DrupalDateTime;
 class Calendarbuilder {
 
   /**
-   * Class constructor.
-   */
+     * Class constructor.
+     */
   public function __construct() {
 
   }
 
+   /**
+      * Get the monday for the $date week.
+      *
+      * @param Drupal\Core\Datetime\DrupalDateTime $date
+      *   The date object.
+      *
+    * @return Drupal\Core\Datetime\DrupalDateTime
+    *   The monday.
+    */
   public function getMondayWeek(DrupalDateTime $date) {
     $cloned = clone $date;
     $cloned->modify('monday this week');
     return $cloned;
   }
 
-  public function getFridayWeek(DrupalDateTime $date) {
-
+   /**
+    * Get the sunday for the $date week.
+    *
+    * @param Drupal\Core\Datetime\DrupalDateTime $date
+    *   The date object.
+    *
+    * @return Drupal\Core\Datetime\DrupalDateTime
+    *   The sunday.
+    */
+  public function getSundayWeek(DrupalDateTime $date) {
+    $cloned = clone $date;
+    $cloned->modify('sunday this week');
+    return $cloned;
   }
 
+  /**
+    * Get the first monday for the $date month.
+    *
+    * @param Drupal\Core\Datetime\DrupalDateTime $date
+    *   The date object.
+    *
+    * @return Drupal\Core\Datetime\DrupalDateTime
+    *   The first monday month.
+    */
   public function getFirstMondayMonth(DrupalDateTime $date) {
 
   }
 
-  public function getLastFridayMonth(DrupalDateTime $date) {
+  /**
+    * Get the last sunday for the $date month.
+    *
+    * @param Drupal\Core\Datetime\DrupalDateTime $date
+    *   The date object.
+    *
+    * @return Drupal\Core\Datetime\DrupalDateTime
+    *   The last sunday month.
+    */
+  public function getLastSundayMonth(DrupalDateTime $date) {
 
   }
+
 }

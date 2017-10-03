@@ -20,16 +20,9 @@ class CalendarBuilderTest extends KernelTestBase {
    */
   public static $modules = ['qs_calendar'];
 
-  /**
-   * {@inheritdoc}
-   */
-  protected function getUp() {
-    parent::getUp();
-
-    // $connectionProphet = $this->prophesize('\Drupal\Core\Database\Connection');
-    // $enTypeManagerProphet = $this->prophesize('\Drupal\Core\Entity\EntityTypeManagerInterface');
-    // $queryFactoryProphet = $this->prophesize('\Drupal\Core\Entity\Query\QueryFactory');
-    // $mailManagerProphet = $this->prophesize('\Drupal\Core\Mail\MailManagerInterface');
+  protected function setUp() {
+    parent::setUp();
+    $this->calendarBuilder = \Drupal::service('qs_calendar.calendar_builder');
   }
 
   /**
@@ -38,10 +31,7 @@ class CalendarBuilderTest extends KernelTestBase {
    */
   public function testGetMondayWeek($date, $expected) {
     $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
-
-    $this->calendarBuilder = \Drupal::service('qs_calendar.calendar_builder');
     $monday = $this->calendarBuilder->getMondayWeek($date);
-
     $this->assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $monday);
     $this->assertEqual($monday->format('Y-m-d'), $expected);
   }
@@ -64,24 +54,82 @@ class CalendarBuilderTest extends KernelTestBase {
       ['2000-02-28', '2000-02-28'],
       ['2010-02-26', '2010-02-22'],
       ['2017-04-01', '2017-03-27'],
+      ['2016-12-26', '2016-12-26'],
+      ['2018-01-01', '2018-01-01'],
+      ['2017-01-01', '2016-12-26'],
     ];
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getFridayWeek
+   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getSundayWeek
+   * @dataProvider getSundayWeekProvider
    */
-  public function testGetFridayWeek() {
+  public function testGetSundayWeek($date, $expected) {
+    $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
+    $sunday = $this->calendarBuilder->getSundayWeek($date);
+    $this->assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $sunday);
+    $this->assertEqual($sunday->format('Y-m-d'), $expected);
+  }
+
+  /**
+   * Tests provider for testGetSundayWeek.
+   *
+   * @return array
+   *   Return an array of arrays containg date formatted Y-m-d.
+   */
+  public function getSundayWeekProvider() {
+    return [
+      ['2017-10-03', '2017-10-08'],
+      ['2017-10-08', '2017-10-08'],
+      ['2018-03-07', '2018-03-11'],
+      ['2000-06-06', '2000-06-11'],
+      ['2000-06-11', '2000-06-11'],
+      ['2000-06-03', '2000-06-04'],
+      ['2000-05-29', '2000-06-04'],
+      ['2000-02-29', '2000-03-05'],
+      ['2000-02-28', '2000-03-05'],
+      ['2010-02-26', '2010-02-28'],
+      ['2017-04-01', '2017-04-02'],
+      ['2016-12-26', '2017-01-01'],
+    ];
   }
 
   /**
    * @covers Drupal\qs_calendar\Service\CalendarBuilder::getFirstMondayMonth
+   * @dataProvider getFirstMondayMonthProvider
    */
-  public function testGetFirstMondayMonth() {
+  public function testGetFirstMondayMonth($date, $expected) {
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getLastFridayMonth
+   * Tests provider for testGetFirstMondayMonth.
+   *
+   * @return array
+   *   Return an array of arrays containg date formatted Y-m-d.
    */
-  public function testGetLastFridayMonth() {
+  public function getFirstMondayMonthProvider() {
+    return [
+      ['2017-10-03', '2017-09-25'],
+    ];
   }
+
+  /**
+   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getLastSundayMonth
+   * @dataProvider getLastSundayMonthProvider
+   */
+  public function testGetLastSundayMonth($date, $expected) {
+  }
+
+  /**
+   * Tests provider for testGetLastSundayMonth.
+   *
+   * @return array
+   *   Return an array of arrays containg date formatted Y-m-d.
+   */
+  public function getLastSundayMonthProvider() {
+    return [
+      ['2017-10-03', '2017-11-05'],
+    ];
+  }
+
 }

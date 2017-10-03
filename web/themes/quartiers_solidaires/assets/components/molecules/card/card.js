@@ -16,6 +16,26 @@ const card = () => {
       $(this).parents('.card-flippable').toggleClass('flip');
     });
 
+    // Update the hash in URL on collapse
+    $('.card .collapse').on('show.bs.collapse', function(e) {
+      const event_id = $(e.currentTarget).attr('id').replace('collapse-', '');
+      window.location.hash = `event${event_id}`;
+    });
+
+    // Get the hash in the URL
+    const hash = window.location.hash;
+
+    let event_id = '';
+    let $card = $('.card:first .card-pill[data-toggle=collapse]');
+
+    if (hash && hash.includes('event')) {
+      $card = $(hash);
+    }
+
+    // Always toggle the first card or the one from the URL on load
+    $card.trigger('click');
+    $('html, body').animate({ scrollTop: $card.offset().top }, 200);
+
   })(jQuery);
 };
 

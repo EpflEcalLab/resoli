@@ -5,9 +5,11 @@ namespace Drupal\qs_calendar\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\qs_calendar\Service\CalendarBuilder;
 use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_activity\Service\EventManager;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Calendar Monthly.
@@ -20,18 +22,18 @@ use Drupal\qs_activity\Service\EventManager;
 class MonthlyBlock extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * The Privilege Manager.
+   * The Calendar builder.
    *
-   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   * @var \Drupal\qs_calendar\Service\CalendarBuilder
    */
-  private $privilegeManager;
+  protected $calendarBuilder;
 
   /**
    * Current Route.
    *
    * @var \Drupal\Core\Routing\CurrentRouteMatch
    */
-  private $route;
+  protected $route;
 
   /**
    * The entity QS Event Manager.
@@ -41,13 +43,21 @@ class MonthlyBlock extends BlockBase implements ContainerFactoryPluginInterface 
   protected $eventManager;
 
   /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  protected $privilegeManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManager $privilege_manager, CurrentRouteMatch $route, EventManager $event_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CalendarBuilder $calendar_builder, CurrentRouteMatch $route, EventManager $event_manager, PrivilegeManager $privilege_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->privilegeManager = $privilege_manager;
+    $this->calendarBuilder  = $calendar_builder;
     $this->route            = $route;
     $this->eventManager     = $event_manager;
+    $this->privilegeManager = $privilege_manager;
   }
 
   /**
@@ -61,9 +71,10 @@ class MonthlyBlock extends BlockBase implements ContainerFactoryPluginInterface 
         $plugin_id,
         $plugin_definition,
         // Load customs services used in this class.
-        $container->get('qs_acl.privilege_manager'),
+        $container->get('qs_calendar.calendar_builder'),
         $container->get('current_route_match'),
-        $container->get('qs_activity.event_manager')
+        $container->get('qs_activity.event_manager'),
+        $container->get('qs_acl.privilege_manager')
     );
   }
 
@@ -72,6 +83,33 @@ class MonthlyBlock extends BlockBase implements ContainerFactoryPluginInterface 
    */
   public function build($params = []) {
     $variables = [];
+
+    // Get pagination day.
+    $pagination_day = $this->route->getParameter('day');
+    $day = new DrupalDateTime();
+    if ($pagination_day) {
+      try {
+        $day = DrupalDateTime::createFromFormat('Y-m-d', $pagination_day);
+      }
+      catch (\Exception $e) {
+        $day = new DrupalDateTime();
+      }
+    }
+
+    $next_month = clone $day;
+    $next_month->modify('first day of previous month');
+    $next_month->setTime(0, 0);
+
+    $prev_month = clone $day;
+    $prev_month->modify('first day of next month');
+    $prev_month->setTime(0, 0);
+
+    $variables['prev_month'] = $prev_month;
+    $variables['next_month'] = $next_month;
+
+    $date_start         = $this->calendarBuilder->getFirstMondayMonthFullWeek($day);
+    $date_end           = $this->calendarBuilder->getLastSundayMonthFullWeek($day);
+    $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
     return [
       '#theme'     => 'qs_calendar_monthly_block',

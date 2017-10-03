@@ -3,11 +3,14 @@
 namespace Drupal\qs_calendar\Service;
 
 use Drupal\Core\Datetime\DrupalDateTime;
+use DateTime;
+use DateInterval;
+use DatePeriod;
 
 /**
- * Calendarbuilder.
+ * CalendarBuilder.
  */
-class Calendarbuilder {
+class CalendarBuilder {
 
   /**
    * Class constructor.
@@ -74,6 +77,29 @@ class Calendarbuilder {
     $cloned = clone $date;
     $cloned->modify('last day of this month')->modify('sunday this week');
     return $cloned;
+  }
+
+  /**
+   * Generate an iterator of dates between 2 dates.
+   *
+   * @param Drupal\Core\Datetime\DrupalDateTime $date_start
+   *   The start date for the period.
+   * @param Drupal\Core\Datetime\DrupalDateTime $date_end
+   *   The end date for the period.
+   *
+   * @return \DatePeriod
+   *   A date period for iteration over a set of dates.
+   */
+  public function build(DrupalDateTime $date_start, DrupalDateTime $date_end) {
+    $interval = new DateInterval('P1D');
+    $start    = DateTime::createFromFormat('Y-m-d', $date_start->format('Y-m-d'));
+    $end      = DateTime::createFromFormat('Y-m-d', $date_end->format('Y-m-d'));
+
+    $start->setTime(0, 0);
+    $end->setTime(23, 59, 59);
+
+    // The last parameter is used to keep the start date in the period.
+    return new DatePeriod($start, $interval, $end, 0);
   }
 
 }

@@ -9,6 +9,8 @@ use Drupal\Core\Datetime\DrupalDateTime;
 /**
  * @coversDefaultClass \Drupal\qs_calendar\Service\CalendarBuilder
  *
+ * Be carefull, 2016 is a bissextile year - see tests it :D
+ *
  * @group qs_calendar
  * @group qs_calendar_kernel
  */
@@ -160,6 +162,39 @@ class CalendarBuilderTest extends KernelTestBase {
       ['2015-12-20', '2016-01-03'],
       ['2015-11-01', '2015-12-06'],
       ['2015-09-26', '2015-10-04'],
+    ];
+  }
+
+  /**
+   * @covers Drupal\qs_calendar\Service\CalendarBuilder::build
+   * @dataProvider buildProvider
+   */
+  public function testBuild($date_start, $date_end, $expected) {
+    $start = DrupalDateTime::createFromFormat('Y-m-d', $date_start);
+    $end   = DrupalDateTime::createFromFormat('Y-m-d', $date_end);
+
+    $period = $this->calendarBuilder->build($start, $end);
+
+    $this->assertInstanceOf('\DatePeriod', $period);
+    $this->assertEqual(iterator_count($period), $expected);
+  }
+
+  /**
+   * Tests provider for testGetLastSundayMonth.
+   *
+   * @return array
+   *   Return an array of arrays containg date formatted Y-m-d.
+   */
+  public function buildProvider() {
+    return [
+      ['2017-10-01', '2017-10-02', 2],
+      ['2017-10-01', '2017-10-01', 1],
+      ['2017-10-01', '2017-09-01', 0],
+      ['2014-12-29', '2015-02-01', 35],
+      ['2015-02-06', '2015-03-01', 24],
+      ['2018-12-29', '2015-02-01', 0],
+      ['2015-12-01', '2016-03-09', 100],
+      ['2015-12-01', '2017-10-30', 700],
     ];
   }
 

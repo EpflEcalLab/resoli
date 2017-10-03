@@ -79,6 +79,6 @@
     "jquery": "^3.2.1",
     "patch-package": "^3.4.0",
     "popper.js": "^1.11.1",
-    "toolbox-utils": "^1.0.9"
+    "toolbox-utils": "^1.1.0"
   }
 }

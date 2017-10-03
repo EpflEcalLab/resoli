@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+// Includes.
+require_once 'inc/alias.inc';
+
+
+/**
+ * Implements hook_theme().
+ */
+function qs_calendar_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_calendar_collection_weekly_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--calendar--collection-weekly',
+    ],
+    'qs_calendar_collection_monthly_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--calendar--collection-monthly',
+    ],
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_calendar_weekly_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--calendar--weekly',
+    ],
+    'qs_calendar_monthly_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--calendar--monthly',
+    ],
+  ];
+}

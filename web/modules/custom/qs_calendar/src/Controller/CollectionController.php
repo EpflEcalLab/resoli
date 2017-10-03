@@ -166,21 +166,16 @@ class CollectionController extends ControllerBase {
       }
     }
 
-    // $month_start = clone $date;
-    // $month_start->modify('first day of this month');
-    // $month_start->setTime(0, 0);
-    // $month_end = clone $date;
-    // $month_end->modify('last day of this month');
-    // $month_end->setTime(23, 59, 59);.
-    // $next_month = clone $month_start;
-    // $next_month->modify('first day of previous month');
-    // $prev_month = clone $month_end;
-    // $prev_month->modify('last day of next month');.
-    // $variables['prev_month'] = $prev_month;
-    // $variables['next_month'] = $next_month;.
-    // // Get the only next events of each ones.
-    // $events = $this->eventManager->getByDate($community, $month_start, $month_end);
-    // $variables['events'] = $events;.
+    $day_start = clone $day;
+    $day_start->setTime(0, 0);
+
+    $day_end = clone $day;
+    $day_end->setTime(23, 59, 59);
+
+    // Get the only next events of each ones.
+    $events = $this->eventManager->getByDate($community, $day_start, $day_end);
+    $variables['events'] = $events;
+
     // Get badges.
     if (!empty($events)) {
       // // For a list of Events IDs where current user has rejected subscription.

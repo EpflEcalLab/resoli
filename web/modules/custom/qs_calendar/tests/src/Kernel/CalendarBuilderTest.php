@@ -13,6 +13,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * @group qs_calendar_kernel
  */
 class CalendarBuilderTest extends KernelTestBase {
+
   /**
    * Modules to install.
    *
@@ -20,6 +21,9 @@ class CalendarBuilderTest extends KernelTestBase {
    */
   public static $modules = ['qs_calendar'];
 
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp() {
     parent::setUp();
     $this->calendarBuilder = \Drupal::service('qs_calendar.calendar_builder');
@@ -95,10 +99,14 @@ class CalendarBuilderTest extends KernelTestBase {
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getFirstMondayMonth
+   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getFirstMondayMonthFullWeek
    * @dataProvider getFirstMondayMonthProvider
    */
   public function testGetFirstMondayMonth($date, $expected) {
+    $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
+    $monday = $this->calendarBuilder->getFirstMondayMonthFullWeek($date);
+    $this->assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $monday);
+    $this->assertEqual($monday->format('Y-m-d'), $expected);
   }
 
   /**
@@ -110,14 +118,26 @@ class CalendarBuilderTest extends KernelTestBase {
   public function getFirstMondayMonthProvider() {
     return [
       ['2017-10-03', '2017-09-25'],
+      ['2017-05-18', '2017-05-01'],
+      ['2017-05-31', '2017-05-01'],
+      ['2017-12-13', '2017-11-27'],
+      ['2017-11-27', '2017-10-30'],
+      ['2015-01-01', '2014-12-29'],
+      ['2015-12-20', '2015-11-30'],
+      ['2015-11-01', '2015-10-26'],
+      ['2015-09-26', '2015-08-31'],
     ];
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getLastSundayMonth
+   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getLastSundayMonthFullWeek
    * @dataProvider getLastSundayMonthProvider
    */
   public function testGetLastSundayMonth($date, $expected) {
+    $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
+    $sunday = $this->calendarBuilder->getLastSundayMonthFullWeek($date);
+    $this->assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $sunday);
+    $this->assertEqual($sunday->format('Y-m-d'), $expected);
   }
 
   /**
@@ -129,6 +149,17 @@ class CalendarBuilderTest extends KernelTestBase {
   public function getLastSundayMonthProvider() {
     return [
       ['2017-10-03', '2017-11-05'],
+      ['2017-05-18', '2017-06-04'],
+      ['2017-05-31', '2017-06-04'],
+      ['2017-12-13', '2017-12-31'],
+      ['2017-11-27', '2017-12-03'],
+      ['2017-01-01', '2017-02-05'],
+      ['2016-12-27', '2017-01-01'],
+      ['2015-01-01', '2015-02-01'],
+      ['2014-12-01', '2015-01-04'],
+      ['2015-12-20', '2016-01-03'],
+      ['2015-11-01', '2015-12-06'],
+      ['2015-09-26', '2015-10-04'],
     ];
   }
 

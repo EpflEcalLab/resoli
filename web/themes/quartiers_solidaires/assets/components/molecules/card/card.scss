@@ -30,6 +30,11 @@ a.card {
   @include hover {
     text-decoration: none;
   }
+
+  &:active,
+  &.active {
+    transform: scale(0.98);
+  }
 }
 
 // The card pill displays an icon at the left

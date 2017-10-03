@@ -124,6 +124,23 @@ class CollectionController extends ControllerBase {
    */
   public function weekly(TermInterface $community) {
     $variables = ['community' => $community];
+    $variables['events'] = $this->getEventsByDay($community);
+
+    // Get badges.
+    if (!empty($variables['events'])) {
+      // // For a list of Events IDs where current user has rejected subscription.
+      // // Used to know when display the rejected subscription button & badge.
+      // $variables['user_events_has_rejected_subscription'] = $this->subscriptionManager->getSubscription($events, 0);.
+      // // For a list of Events IDs where current user has confirmed subscription.
+      // // Used to know when display the confirmed subscription button & badge.
+      // $variables['user_events_has_confirmed_subscription'] = $this->subscriptionManager->getSubscription($events, 1);.
+      // For a list of Events IDs number of pending subscriptions.
+      // Used to know when display for organizer or maintainer the High Privilege Badge.
+      // $variables['events_count_pending_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, NULL);.
+      // For a list of Events IDs number of subscriptions.
+      // Used to know when display for organizer or maintainer the High Privilege Badge.
+      // $variables['events_count_confirmed_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, 1);.
+    }
 
     return [
       '#theme'     => 'qs_calendar_collection_weekly_page',
@@ -150,34 +167,10 @@ class CollectionController extends ControllerBase {
    */
   public function monthly(TermInterface $community) {
     $variables = ['community' => $community];
-
-    // The request should be took at the last moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
-
-    // Get pagination day.
-    $pagination_day = $master_request->query->get('day');
-    $day = new DrupalDateTime();
-    if ($pagination_day) {
-      try {
-        $day = DrupalDateTime::createFromFormat('Y-m-d', $pagination_day);
-      }
-      catch (\Exception $e) {
-        $day = new DrupalDateTime();
-      }
-    }
-
-    $day_start = clone $day;
-    $day_start->setTime(0, 0);
-
-    $day_end = clone $day;
-    $day_end->setTime(23, 59, 59);
-
-    // Get the only next events of each ones.
-    $events = $this->eventManager->getByDate($community, $day_start, $day_end);
-    $variables['events'] = $events;
+    $variables['events'] = $this->getEventsByDay($community);
 
     // Get badges.
-    if (!empty($events)) {
+    if (!empty($variables['events'])) {
       // // For a list of Events IDs where current user has rejected subscription.
       // // Used to know when display the rejected subscription button & badge.
       // $variables['user_events_has_rejected_subscription'] = $this->subscriptionManager->getSubscription($events, 0);.
@@ -210,6 +203,41 @@ class CollectionController extends ControllerBase {
         ],
       ],
     ];
+  }
+
+  /**
+   * Get every events for the given community & day in GET parameter.
+   *
+   * @param Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   *
+   * @return Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Oterwhise an empty array.
+   */
+  protected function getEventsByDay(TermInterface $community) {
+    // The request should be took at the last moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
+    // Get pagination day.
+    $pagination_day = $master_request->query->get('day');
+    $day = new DrupalDateTime();
+    if ($pagination_day) {
+      try {
+        $day = DrupalDateTime::createFromFormat('Y-m-d', $pagination_day);
+      }
+      catch (\Exception $e) {
+        $day = new DrupalDateTime();
+      }
+    }
+
+    $day_start = clone $day;
+    $day_start->setTime(0, 0);
+
+    $day_end = clone $day;
+    $day_end->setTime(23, 59, 59);
+
+    // Get the only next events of each ones.
+    return $this->eventManager->getByDate($community, $day_start, $day_end);
   }
 
 }

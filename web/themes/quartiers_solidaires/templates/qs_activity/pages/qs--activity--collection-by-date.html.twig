@@ -9,7 +9,7 @@
     </p>
   </div>
 
-  <ul class="container my-5">
+  <div class="container my-5">
     <ul class="card-list">
 
       {% set current_header = null %}
@@ -19,42 +19,48 @@
         {% set week = event.field_start_at.value|date('W') %}
         {% set current_week = 'now'|date('W') %}
 
+        {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
+          '@start_date': variables.start|date('j F Y'),
+          '@end_date': variables.end|date('j F Y'),
+        }) %}
+
 
         {% if 'now'|date('Y-m-d') == date %}
           {# TODAY #}
-          {% set new_header = 'qs.activity.date.sticky.today' %}
+          {% set new_header = 'qs.activity.date.sticky.today'|t %}
 
         {% elseif 'tomorrow'|date('Y-m-d') == date %}
           {# TOMORROW #}
-          {% set new_header = 'qs.activity.date.sticky.tomorrow' %}
+          {% set new_header = 'qs.activity.date.sticky.tomorrow'|t %}
 
         {% elseif date > 'tomorrow'|date('Y-m-d') and current_week == week %}
           {# THIS WEEK (between day after tomorrow and next Sunday but not next week) #}
-          {% set new_header = 'qs.activity.date.sticky.this_week' %}
+          {% set new_header = 'qs.activity.date.sticky.this_week'|t %}
 
         {% elseif current_week != week %}
           {# FOLLOWING WEEKS #}
           {% set week_diff = week - current_week %}
           {% if week_diff == 1 %}
-            {% set new_header = 'qs.activity.date.sticky.next_week' %}
+            {% set new_header = 'qs.activity.date.sticky.next_week'|t %}
           {% elseif week_diff == 2 %}
-            {% set new_header = 'qs.activity.date.sticky.in_two_weeks' %}
+            {% set new_header = 'qs.activity.date.sticky.in_two_weeks'|t %}
           {% elseif week_diff == 3 %}
-            {% set new_header = 'qs.activity.date.sticky.in_three_weeks' %}
-          {% else %}
-            {% set new_header = 'qs.activity.date.sticky.in_four_weeks' %}
+            {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
+              '@start_date': variables.start|date_modify("next Monday +2 weeks")|date('j F Y'),
+              '@end_date': variables.end|date('j F Y'),
+            }) %}
           {% endif %}
         {% endif %}
 
         {# Write the header if we have a new value #}
-        {% if current_header != new_header %}
+        {% if current_header|render != new_header|render %}
           {% set current_header = new_header %}
-            {% if loop.index > 1 %}
-              </ul>
-              <ul class="card-list">
-            {% endif %}
+          {% if loop.index > 1 %}
+            </ul>
+            <ul class="card-list">
+          {% endif %}
           <li class="sticky-top bg-white mb-2 py-2 row">
-            <h2 class="col-12 h5 mb-0">{{ current_header|t }}</h2>
+            <h2 class="col-12 h5 mb-0">{{ current_header }}</h2>
           </li>
         {% endif %}
 
@@ -64,9 +70,25 @@
       {% endfor %}
     </ul>
 
-  </ul>
+  </div>
 {% else %}
 <div class="container">
-  <p class="lead text-center mt-5">{% trans %}qs.activity.date.title_empty {{ community_name }}{% endtrans %}</p>
+  <p class="lead text-center mt-5">
+    {{ 'qs.activity.date.title_empty @community @start_date @end_date'|t({
+      '@start_date': variables.start|date('j F Y'),
+      '@end_date': variables.end|date('j F Y'),
+      '@community': community_name,
+    }) }}
 </div>
 {% endif %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    {% if variables.prev|date('Y-m-d') > 'now'|date('Y-m-d') %}
+      <a class="btn btn-outline-primary mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.prev|date('Y-m-d'), 'community': variables.community.tid.value}) }}">{{ 'qs.activity.date.link_prev'|t }}</a>
+    {% elseif variables.prev|date('Y-m-d') == 'now'|date('Y-m-d') %}
+      <a class="btn btn-outline-primary mx-3" href="{{ path('qs_activity.collection.dates', {'community': variables.community.tid.value}) }}">{{ 'qs.activity.date.link_prev'|t }}</a>
+    {% endif %}
+    <a class="btn btn-outline-primary mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.next|date('Y-m-d'), 'community': variables.community.tid.value}) }}">{{ 'qs.activity.date.link_next'|t }}</a>
+  </div>
+</div>

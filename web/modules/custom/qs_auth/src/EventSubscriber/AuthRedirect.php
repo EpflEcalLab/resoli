@@ -38,6 +38,7 @@ class AuthRedirect implements EventSubscriberInterface {
   public static function getSubscribedEvents() {
     $events[KernelEvents::REQUEST][] = ['loginRedirect'];
     $events[KernelEvents::REQUEST][] = ['registerRedirect'];
+    $events[KernelEvents::REQUEST][] = ['cancelRedirect'];
     $events[KernelEvents::REQUEST][] = ['passRedirect'];
     $events[KernelEvents::REQUEST][] = ['resetRedirect'];
     return $events;
@@ -89,6 +90,35 @@ class AuthRedirect implements EventSubscriberInterface {
       $destination = Url::fromRoute('qs_auth.pass');
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
+  }
+
+  /**
+   * User Cancel.
+   *
+   * It verify the current route is default drupal '/user/cancel' then
+   * redirect on our custom one.
+   *
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   *   Event subscriber.
+   */
+  public function cancelRedirect(GetResponseEvent $event) {
+    $destination = NULL;
+
+    switch ($this->routeMatch->getRouteName()) {
+      case 'user.cancel_confirm':
+        $destination = Url::fromRoute('qs_auth.cancel.confirm', [
+          'user'        => $this->routeMatch->getParameter('user')->id(),
+          'timestamp'   => $this->routeMatch->getParameter('timestamp'),
+          'hashed_pass' => $this->routeMatch->getParameter('hashed_pass'),
+        ]);
+        break;
+    }
+
+    if (!$destination) {
+      return;
+    }
+
+    $event->setResponse(new RedirectResponse($destination->toString()));
   }
 
   /**

@@ -126,14 +126,16 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
             ]),
             'label' => $this->t('qs_menu.links.activities.themes'),
           ],
-          // @TODO temp link to not have a broken nav:
-          'qs_activity.collection.date' => [
-            'url' => "javascript:alert('This feature is not yet availaible.')",
-            'label' => $this->t('qs_menu.links.activities.date'),
+          'qs_activity.collection.dates' => [
+            'url' => $this->urlGenerator->generate('qs_activity.collection.dates', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.activities.dates'),
           ],
         ],
         'activated_by' => [
           'qs_activity.collection.themes',
+          'qs_activity.collection.dates',
         ],
       ],
       'calendar' => [

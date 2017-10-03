@@ -1,0 +1,25 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set community_name = variables.community.name.value|trim %}
+
+{# Block with current search filters #}
+{% if variables.events %}
+  <div class="container">
+    <p class="lead text-center mt-5">
+      {%- set count = variables.themes|length -%}
+    </p>
+  </div>
+
+  <div class="container my-5">
+    <div class="row">
+      <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+      {% for key, event in variables.events %}
+        {% include "@quartiers_solidaires/node/card-list-item.html.twig" %}
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% else %}
+<div class="container">
+  <p class="lead text-center mt-5">{% trans %}qs.activity.date.title_empty {{ community_name }}{% endtrans %}</p>
+</div>
+{% endif %}

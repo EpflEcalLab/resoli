@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\qs_acl\Service\SubscriptionManager;
 use Drupal\qs_activity\Service\EventManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Datetime\DrupalDateTime;
@@ -55,6 +56,13 @@ class CollectionController extends ControllerBase {
   protected $eventManager;
 
   /**
+   * The Subscription Manager.
+   *
+   * @var \Drupal\qs_acl\Service\SubscriptionManager
+   */
+  protected $subscriptionManager;
+
+  /**
    * Request stack that controls the lifecycle of requests.
    *
    * @var \Symfony\Component\HttpFoundation\RequestStack
@@ -64,13 +72,14 @@ class CollectionController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager, RequestStack $request_stack) {
-    $this->acl             = $acl;
-    $this->nodeStorage     = $entity_type_manager->getStorage('node');
-    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
-    $this->activityManager = $activity_manager;
-    $this->eventManager    = $event_manager;
-    $this->requestStack    = $request_stack;
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager, SubscriptionManager $subscription_manager, RequestStack $request_stack) {
+    $this->acl                 = $acl;
+    $this->nodeStorage         = $entity_type_manager->getStorage('node');
+    $this->termStorage         = $entity_type_manager->getStorage('taxonomy_term');
+    $this->activityManager     = $activity_manager;
+    $this->eventManager        = $event_manager;
+    $this->subscriptionManager = $subscription_manager;
+    $this->requestStack        = $request_stack;
   }
 
   /**
@@ -84,6 +93,7 @@ class CollectionController extends ControllerBase {
     $container->get('entity_type.manager'),
     $container->get('qs_activity.activity_manager'),
     $container->get('qs_activity.event_manager'),
+    $container->get('qs_acl.subscription_manager'),
     $container->get('request_stack')
     );
   }
@@ -201,7 +211,24 @@ class CollectionController extends ControllerBase {
     $variables['next_month'] = $next_month;
 
     // Get the only next events of each ones.
-    $variables['events'] = $this->eventManager->getByDate($community, $month_start, $month_end);
+    $events = $this->eventManager->getByDate($community, $month_start, $month_end);
+    $variables['events'] = $events;
+
+    // Get badges.
+    if (!empty($events)) {
+      // // For a list of Events IDs where current user has rejected subscription.
+      // // Used to know when display the rejected subscription button & badge.
+      // $variables['user_events_has_rejected_subscription'] = $this->subscriptionManager->getSubscription($events, 0);.
+      // // For a list of Events IDs where current user has confirmed subscription.
+      // // Used to know when display the confirmed subscription button & badge.
+      // $variables['user_events_has_confirmed_subscription'] = $this->subscriptionManager->getSubscription($events, 1);.
+      // For a list of Events IDs number of pending subscriptions.
+      // Used to know when display for organizer or maintainer the High Privilege Badge.
+      // $variables['events_count_pending_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, NULL);.
+      // For a list of Events IDs number of subscriptions.
+      // Used to know when display for organizer or maintainer the High Privilege Badge.
+      // $variables['events_count_confirmed_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, 1);.
+    }
 
     return [
       '#theme'     => 'qs_activity_collection_by_date_page',

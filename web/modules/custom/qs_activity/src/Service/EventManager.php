@@ -84,15 +84,15 @@ class EventManager {
    *
    * @param Drupal\taxonomy\TermInterface $community
    *   The community entity.
-   * @param \DateTime $date_start
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
    *   The start date.
-   * @param \DateTime $date_end
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
    *   The end date.
    *
-   * @return integer[]
+   * @return Drupal\node\NodeInterface[]
    *   A collection of node's Event. Oterwhise an empty array.
    */
-  public function getByDate(TermInterface $community, \DateTime $date_start, \DateTime $date_end) {
+  public function getByDate(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end) {
     $query = $this->connection->select('node_field_data', 'event');
     $query->fields('event', ['nid'])
       ->condition('event.type', 'event')
@@ -176,23 +176,7 @@ class EventManager {
   }
 
   /**
-   * Create an Event .
-   *
-   * @param int $title
-   *   The new activity title.
-   * @param int[] $themes
-   *   A collection of theme TID.
-   * @param bool[] $autorizations
-   *   The list of autorizations & the boolean value.
-   * @param Drupal\taxonomy\TermInterface $community
-   *   The community entity.
-   *
-   * @return \Drupal\node\NodeInterface
-   *   The created event.
-   */
-
-  /**
-   * Undocumented function.
+   * Create an Event.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activiity this event will belongs to.

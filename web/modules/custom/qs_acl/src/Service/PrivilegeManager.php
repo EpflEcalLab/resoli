@@ -319,4 +319,50 @@ class PrivilegeManager {
     return $query;
   }
 
+  /**
+   * Check for the given entity IDs, if the user has the requested privileges.
+   *
+   * @param integer[] $entities
+   *   A collection of entites IDs.
+   * @param string[] $privileges
+   *   A collection of privileges.
+   * @param bool $status
+   *   The required status for the privileges.
+   * @param Drupal\Core\Session\AccountInterface $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return array[]
+   *   A collection of Entities ID.
+   */
+  public function getPrivileges(array $entities, array $privileges, $status = TRUE, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', $status)
+      ->condition('user', $user->id())
+      ->condition('entity', $entities, 'IN');
+
+    $or = $query->orConditionGroup();
+    foreach ($privileges as $privilege) {
+      $or->condition('privilege', $privilege);
+    }
+    $query->condition($or);
+
+    $ids = $query->execute();
+    $entity_ids = [];
+    $privileges = NULL;
+    if ($ids) {
+      $privileges = $this->privilegeStorage->loadMultiple($ids);
+
+      foreach ($privileges as $privilege) {
+        $entity_ids[$privilege->entity] = $privilege->entity;
+      }
+    }
+
+    return $entity_ids;
+  }
+
 }

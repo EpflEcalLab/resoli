@@ -5,3 +5,6 @@ services:
   qs_acl.privilege_manager:
     class: Drupal\qs_acl\Service\PrivilegeManager
     arguments: ['@current_user', '@entity_type.manager', '@entity.query', '@database']
+  qs_acl.subscription_manager:
+    class: Drupal\qs_acl\Service\SubscriptionManager
+    arguments: ['@current_user', '@entity_type.manager', '@entity.query', '@database']

@@ -97,11 +97,11 @@ class MonthlyBlock extends BlockBase implements ContainerFactoryPluginInterface 
     }
 
     $next_month = clone $day;
-    $next_month->modify('first day of previous month');
+    $next_month->modify('first day of next month');
     $next_month->setTime(0, 0);
 
     $prev_month = clone $day;
-    $prev_month->modify('first day of next month');
+    $prev_month->modify('first day of previous month');
     $prev_month->setTime(0, 0);
 
     $variables['prev_month'] = $prev_month;

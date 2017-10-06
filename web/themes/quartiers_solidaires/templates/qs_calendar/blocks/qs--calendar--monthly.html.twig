@@ -17,10 +17,15 @@
         </a>
       {% endif %}
     </div>
-    <div class="col mx-auto">
-      <h2 class="text-center">
+    <div class="col mx-auto text-center">
+      <h2>
         {{ variables.current_day|bamboo_i18n_format_date('custom', 'F Y') }}
       </h2>
+      <p>
+        {% if variables.current_day|date('Y-m-d') != 'now'|date('Y-m-d') %}
+          <a href="{{ path('<current>') }}">{{ 'qs.calendar.today'|t }}</a>
+        {% endif %}
+      </p>
     </div>
     <div class="col">
       <a

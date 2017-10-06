@@ -4,7 +4,6 @@
   "license": "MIT",
   "main": "index.html",
   "scripts": {
-    "prepare": "patch-package",
     "start": "toolbox serve",
     "build": "toolbox build",
     "deploy": "toolbox build styleguide && toolbox deploy"

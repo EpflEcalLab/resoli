@@ -1,28 +1,72 @@
 @charset 'utf-8';
 
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 3.125rem);
-  grid-auto-rows: 1fr;
-  grid-gap: $grid-gutter-width 3rem;
-  margin: 0 auto;
+$calendar-item-size: 3.125rem;
+
+.calendar-wrapper {
+  text-align: center;
 }
 
-.calendar-item {
-  min-width: 3.125rem;
-  min-height: 3.125rem;
+@supports (display: grid) {
+  .calendar {
+    display: inline-grid;
+    grid-template-columns: repeat(7, $calendar-item-size);
+    grid-auto-rows: 1fr;
+    grid-gap: $grid-gutter-width 3rem;
+    margin: 0 auto;
+  }
 
-  &.active {
-    width: 7rem;
-    margin-left: -1.9375rem; // center it (7 - 3.125) / 2
+  .calendar-item {
+    min-width: $calendar-item-size;
+    min-height: $calendar-item-size;
+
+    &.active {
+      width: 7rem;
+      margin-left: -1.9375rem; // center it (7 - 3.125) / 2
+    }
+  }
+
+  .calendar-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $calendar-item-size;
+    min-height: $calendar-item-size;
+    color: grayscale(600);
   }
 }
 
-.calendar-head {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 3.125rem;
-  min-height: 3.125rem;
-  color: grayscale(600);
+@supports not (display: grid) {
+  .calendar {
+    width: calc(7 * #{$calendar-item-size} + 7 * #{$grid-gutter-width});
+
+    @include make-row();
+
+    display: inline-flex;
+  }
+
+  .calendar-item {
+    width: 100%;
+    flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+    max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+    height: $calendar-item-size;
+    padding: 0;
+    margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+
+    &.active {
+      flex-basis: 6.5rem;
+      max-width: 6.5rem;
+      margin-right: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
+      margin-left: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
+    }
+  }
+
+  .calendar-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $calendar-item-size;
+    min-height: $calendar-item-size;
+    margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+    color: grayscale(600);
+  }
 }

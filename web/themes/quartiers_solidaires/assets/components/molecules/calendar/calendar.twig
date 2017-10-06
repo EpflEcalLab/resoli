@@ -1,20 +1,35 @@
-<div class="calendar" aria-label="Calendar">
+<div class="calendar-wrapper">
+  <div class="calendar" aria-label="Calendar">
 
-  {% for i in 25..29 %}
-    <button disabled class="calendar-item btn btn-outline-primary btn-circle shadow-to-bottom">
-      <span class="sr-only">{{ i }}</span>
-    </button>
-  {% endfor %}
+    {% set week = [
+      'mon',
+      'tue',
+      'wed',
+      'thu',
+      'fri',
+      'sat',
+      'sun',
+    ] %}
+    {% for day in week %}
+      <strong class="calendar-head">{{ day }}</strong>
+    {% endfor %}
 
-  {% for i in 1..31 %}
-    <button class="calendar-item btn btn-outline-primary btn-circle shadow-to-bottom {{ i == 1 ? 'active btn-outline-secondary' }}" aria-label="{{ i }} octobre 2017">
-      {{ i }}
-    </button>
-  {% endfor %}
+    {% for i in 25..29 %}
+      <button disabled class="calendar-item btn btn-outline-primary btn-circle shadow-to-bottom">
+        <span class="sr-only">{{ i }}</span>
+      </button>
+    {% endfor %}
 
-  {% for i in 1..5 %}
-    <button disabled class="calendar-item btn btn-outline-primary btn-circle shadow-to-bottom">
-      <span class="sr-only">{{ i }}</span>
-    </button>
-  {% endfor %}
+    {% for i in 1..31 %}
+      <button class="calendar-item btn btn-outline-primary btn-circle shadow-to-bottom {{ i == 1 ? 'active btn-outline-secondary' }}" aria-label="{{ i }} octobre 2017">
+        {{ i }}
+      </button>
+    {% endfor %}
+
+    {% for i in 1..5 %}
+      <button disabled class="calendar-item btn btn-outline-primary btn-circle shadow-to-bottom">
+        <span class="sr-only">{{ i }}</span>
+      </button>
+    {% endfor %}
+  </div>
 </div>

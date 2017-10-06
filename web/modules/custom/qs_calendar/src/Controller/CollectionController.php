@@ -169,6 +169,11 @@ class CollectionController extends ControllerBase {
     $variables = ['community' => $community];
     $variables['events'] = $this->getEventsByDay($community);
 
+    // Get day from parameter.
+    $master_request = $this->requestStack->getMasterRequest();
+    $current_day = $master_request->query->get('day');
+    $variables['current_day'] = $current_day ?: new DrupalDateTime();
+
     // Get badges.
     if (!empty($variables['events'])) {
       // // For a list of Events IDs where current user has rejected subscription.

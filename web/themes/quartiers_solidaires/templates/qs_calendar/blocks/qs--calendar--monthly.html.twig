@@ -40,7 +40,7 @@
       </a>
     </div>
   </div>
-  <div class="row">
+  <div class="calendar-wrapper">
     <div class="calendar">
       {% set week = [
         'monday'|date('D'),
@@ -64,18 +64,21 @@
           'calendar-item btn btn-circle shadow-to-bottom',
           is_today ? 'btn-outline-secondary' : 'btn-outline-primary',
           is_active ? 'active',
-          not is_current_month ? 'disabled',
         ] %}
 
         {% set parameters = is_today ? {} : {'day': day|date('Y-m-d')} %}
 
+        {% if is_current_month %}
         <a
           class="{{ classes|join(' ') }}"
           aria-label="{{ day|bamboo_i18n_format_date('custom', 'j F Y') }}"
           href="{{ path('<current>', parameters) }}"
         >
-          {{ is_current_month ? day|date('j') }}
+          {{ day|date('j') }}
         </a>
+        {% else %}
+        <span class="{{ classes|join(' ') }} disabled"></span>
+        {% endif %}
       {% endfor %}
     </div>
   </div>

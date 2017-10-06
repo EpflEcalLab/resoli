@@ -37,7 +37,9 @@ const calendar = () => {
 
     // Focus the new index on keydown
     const select = new_index => {
-      $calendar.find('.calendar-item').eq(new_index).focus();
+      // Compensate the weekdays inside the container
+      const index = new_index - 7 > 0 ? new_index - 7 : 0;
+      $('.calendar-item').eq(index).focus();
     }
 
   })(jQuery);

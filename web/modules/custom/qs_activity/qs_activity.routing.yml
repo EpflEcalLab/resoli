@@ -177,3 +177,18 @@ qs_activity.events.form.delete:
       parameters:
         event:
           type: entity:node
+
+## Collection of Members by Activity.
+qs_activity.activities.members:
+    path: '/activities/{activity}/dashboard/members'
+    defaults:
+      _controller: '\Drupal\qs_activity\Controller\MembersController::members'
+      _title: 'qs_activity.activities.members.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Controller\MembersController::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node

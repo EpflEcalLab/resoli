@@ -34,6 +34,13 @@
           </a>
         </li>
         <li>
+          {# Manage members Button #}
+          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.members', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('user') }}
+            {{ 'qs.activity.members'|t }}
+          </a>
+        </li>
+        <li>
           {# Delete Button #}
           <a class="btn btn-block btn-white text-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
             {{ macros.icon('trash') }}

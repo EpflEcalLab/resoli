@@ -53,6 +53,10 @@ function qs_activity_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--activity--event-dashboard',
     ],
+    'qs_activity_members_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--members',
+    ],
     // Blocks themes
     // ---------------------------------------------------------------------.
     'qs_activity_events_collection_block' => [

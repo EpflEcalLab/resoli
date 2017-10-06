@@ -56,7 +56,7 @@ class WeeklyBlock extends PeriodBlockBase {
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
     // Count for every days between two dates how many events occure by day.
-    $variables['events'] = $this->eventManager->countByDate($community, $date_start, $date_end);
+    $variables['events'] = $this->badgeManager->countEventsByDates($community, $date_start, $date_end);
 
     return [
       '#theme'     => 'qs_calendar_weekly_block',

@@ -9,6 +9,7 @@ import multiStep from 'organisms/multi-step';
 import formControl from 'molecules/form-control/form-control';
 import formAjax from 'molecules/form-control/form-ajax';
 import formSubmit from 'molecules/form-control/form-submit';
+import calendar from 'molecules/calendar/calendar';
 
 svgIcons();
 
@@ -19,7 +20,7 @@ svgIcons();
     multiStep();
     formControl();
     formAjax();
-    formSubmit();
+    calendar();
     checkbox();
     button();
   });

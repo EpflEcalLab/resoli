@@ -20,7 +20,10 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  cursor: pointer;
+
+  @include hover {
+    cursor: pointer;
+  }
 
   @include media-breakpoint-up(md) {
     min-width: 160px;
@@ -29,6 +32,19 @@
   &:active {
     transform: scale(0.95);
     box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    border-color: grayscale(100);
+    color: color('dark');
+    opacity: 1;
+
+    @include hover {
+      box-shadow: none;
+      cursor: default;
+      color: inherit;
+    }
   }
 }
 

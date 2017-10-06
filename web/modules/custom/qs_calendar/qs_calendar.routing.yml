@@ -1,0 +1,29 @@
+# Calendar monthly
+qs_calendar.collection.monthly:
+    path: '/calendar/{community}/monthly'
+    defaults:
+      _controller: '\Drupal\qs_calendar\Controller\CollectionController::monthly'
+      _title: 'qs_calendar.collection.monthly.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_calendar\Controller\CollectionController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# Calendar weekly
+qs_calendar.collection.weekly:
+    path: '/calendar/{community}/weekly'
+    defaults:
+      _controller: '\Drupal\qs_calendar\Controller\CollectionController::weekly'
+      _title: 'qs_calendar.collection.weekly.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_calendar\Controller\CollectionController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term

@@ -47,6 +47,7 @@ module:
   qs_activity: 0
   qs_auth: 0
   qs_badge: 0
+  qs_calendar: 0
   qs_community: 0
   qs_menu: 0
   qs_site: 0

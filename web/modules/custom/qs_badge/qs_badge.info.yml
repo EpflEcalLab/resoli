@@ -1,6 +1,6 @@
-name: qs_activity
+name: qs_badge
 type: module
-description: Activities
+description: Badges
 core: 8.x
 package: Quartiers Solidaires
 
@@ -8,4 +8,4 @@ dependencies:
   - drupal:qs_site
   - drupal:qs_acl
   - drupal:qs_auth
-  - drupal:qs_badge
+  - drupal:qs_subscription

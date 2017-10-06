@@ -1,0 +1,77 @@
+## Collection of subscribers waiting for Approval by Event.
+qs_subscription.waiting_approval:
+    path: '/events/{event}/dashboard/waiting-approval'
+    defaults:
+      _controller: '\Drupal\qs_subscription\Controller\WaitingApprovalController::waitingApproval'
+      _title: 'qs_subscription.waiting_approval.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_subscription\Controller\WaitingApprovalController::access'
+      event: \d+
+    options:
+      parameters:
+        event:
+          type: entity:node
+
+## Collection of subscribers by Event.
+qs_subscription.subscribers:
+    path: '/events/{event}/dashboard/subscribers'
+    defaults:
+      _controller: '\Drupal\qs_subscription\Controller\SubscribersController::subscribers'
+      _title: 'qs_subscription.subscribers.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_subscription\Controller\SubscribersController::access'
+      event: \d+
+    options:
+      parameters:
+        event:
+          type: entity:node
+
+## AJAX route to confirm a specific subscription.
+qs_subscription.confirm:
+    path: '/subscriptions/{subscription}/confirm'
+    defaults:
+      _controller: '\Drupal\qs_subscription\Controller\JudgeController::confirm'
+      _title: 'qs_subscription.confirm.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_subscription\Controller\JudgeController::access'
+      subscription: \d+
+    methods: POST
+    options:
+      parameters:
+        subscription:
+          type: entity:subscription
+
+# AJAX route to decline a specific subscription.
+qs_subscription.decline:
+    path: '/subscriptions/{subscription}/decline'
+    defaults:
+      _controller: '\Drupal\qs_subscription\Controller\JudgeController::decline'
+      _title: 'qs_subscription.decline.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_subscription\Controller\JudgeController::access'
+      subscription: \d+
+    methods: POST
+    options:
+      parameters:
+        subscription:
+          type: entity:subscription
+
+## AJAX route to request a subscription of event.
+qs_subscription.request:
+    path: '/subscriptions/request/{event}'
+    defaults:
+      _controller: '\Drupal\qs_subscription\Controller\RegisterController::request'
+      _title: 'qs_subscription.request.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_subscription\Controller\RegisterController::access'
+      event: \d+
+    methods: POST
+    options:
+      parameters:
+        event:
+          type: entity:node

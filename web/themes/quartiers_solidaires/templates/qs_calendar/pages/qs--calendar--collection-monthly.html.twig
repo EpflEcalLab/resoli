@@ -8,7 +8,17 @@
     </li>
     {% for key, event in variables.events %}
       <li class="card card-list-simple-item ">
-        {% include "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+        {% embed "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+          {% block card_pill_time %}
+            <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H:i') }}">
+              {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H:i') }}
+            </time>
+            -
+            <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H:i') }}">
+              {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H:i') }}
+            </time>
+          {% endblock %}
+        {% endembed  %}
       </li>
     {% else %}
       <li>{{ 'qs.calendar.monthly.collection_empty'|t }}</li>

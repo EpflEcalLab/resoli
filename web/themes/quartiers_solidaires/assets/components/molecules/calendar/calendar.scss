@@ -13,15 +13,39 @@ $calendar-item-size: 3.125rem;
     grid-auto-rows: 1fr;
     grid-gap: $grid-gutter-width 3rem;
     margin: 0 auto;
+
+    @include media-breakpoint-only(sm) {
+      grid-gap: ($grid-gutter-width / 2) 1.5rem;
+    }
+
+    @include media-breakpoint-down(xs) {
+      grid-template-columns: repeat(7, 1fr);
+      grid-gap: 2vw;
+    }
   }
 
   .calendar-item {
     min-width: $calendar-item-size;
     min-height: $calendar-item-size;
 
+    @include media-breakpoint-down(xs) {
+      min-width: 10vw;
+      min-height: 10vw;
+    }
+
     &.active {
       width: 7rem;
-      margin-left: -1.9375rem; // center it (7 - 3.125) / 2
+      margin-left: ((7rem - $calendar-item-size) / -2); // center it (7 - 3.125) / -2
+
+      @include media-breakpoint-only(sm) {
+        width: 5rem;
+        margin-left: ((5rem - $calendar-item-size) / -2); // center it (4 - 3.125) / 2
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: auto;
+        margin: 0;
+      }
     }
   }
 
@@ -32,6 +56,11 @@ $calendar-item-size: 3.125rem;
     min-width: $calendar-item-size;
     min-height: $calendar-item-size;
     color: grayscale(600);
+
+    @include media-breakpoint-down(xs) {
+      min-width: 10vw;
+      min-height: 10vw;
+    }
   }
 }
 

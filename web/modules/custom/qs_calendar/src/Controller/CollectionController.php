@@ -126,20 +126,13 @@ class CollectionController extends ControllerBase {
     $variables = ['community' => $community];
     $variables['events'] = $this->getEventsByDay($community);
 
+    // Get day from parameter.
+    $master_request = $this->requestStack->getMasterRequest();
+    $current_day = $master_request->query->get('day');
+    $variables['current_day'] = $current_day ?: new DrupalDateTime();
+
     // Get badges.
     if (!empty($variables['events'])) {
-      // // For a list of Events IDs where current user has rejected subscription.
-      // // Used to know when display the rejected subscription button & badge.
-      // $variables['user_events_has_rejected_subscription'] = $this->subscriptionManager->getSubscription($events, 0);.
-      // // For a list of Events IDs where current user has confirmed subscription.
-      // // Used to know when display the confirmed subscription button & badge.
-      // $variables['user_events_has_confirmed_subscription'] = $this->subscriptionManager->getSubscription($events, 1);.
-      // For a list of Events IDs number of pending subscriptions.
-      // Used to know when display for organizer or maintainer the High Privilege Badge.
-      // $variables['events_count_pending_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, NULL);.
-      // For a list of Events IDs number of subscriptions.
-      // Used to know when display for organizer or maintainer the High Privilege Badge.
-      // $variables['events_count_confirmed_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, 1);.
     }
 
     return [
@@ -176,18 +169,6 @@ class CollectionController extends ControllerBase {
 
     // Get badges.
     if (!empty($variables['events'])) {
-      // // For a list of Events IDs where current user has rejected subscription.
-      // // Used to know when display the rejected subscription button & badge.
-      // $variables['user_events_has_rejected_subscription'] = $this->subscriptionManager->getSubscription($events, 0);.
-      // // For a list of Events IDs where current user has confirmed subscription.
-      // // Used to know when display the confirmed subscription button & badge.
-      // $variables['user_events_has_confirmed_subscription'] = $this->subscriptionManager->getSubscription($events, 1);.
-      // For a list of Events IDs number of pending subscriptions.
-      // Used to know when display for organizer or maintainer the High Privilege Badge.
-      // $variables['events_count_pending_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, NULL);.
-      // For a list of Events IDs number of subscriptions.
-      // Used to know when display for organizer or maintainer the High Privilege Badge.
-      // $variables['events_count_confirmed_subscriptions'] = $this->subscriptionManager->countSubscriptions($events, 1);.
     }
 
     return [

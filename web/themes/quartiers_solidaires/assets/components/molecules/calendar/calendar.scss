@@ -71,21 +71,32 @@ $calendar-item-size: 3.125rem;
     @include make-row();
 
     display: inline-flex;
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
   }
 
   .calendar-item {
     width: 100%;
-    flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
-    max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+    flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    min-width: 20px;
+    max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     height: $calendar-item-size;
     padding: 0;
-    margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+    margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
 
-    &.active {
-      flex-basis: 6.5rem;
-      max-width: 6.5rem;
-      margin-right: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
-      margin-left: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
+    @include media-breakpoint-up(md) {
+      flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+
+      &.active {
+        flex-basis: 6.5rem;
+        max-width: 6.5rem;
+        margin-right: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
+        margin-left: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
+      }
     }
   }
 
@@ -93,9 +104,17 @@ $calendar-item-size: 3.125rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: $calendar-item-size;
-    min-height: $calendar-item-size;
-    margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+    flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    min-width: 20px;
+    max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
     color: grayscale(600);
+    border: 2px solid transparent;
+
+    @include media-breakpoint-up(md) {
+      flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+    }
   }
 }

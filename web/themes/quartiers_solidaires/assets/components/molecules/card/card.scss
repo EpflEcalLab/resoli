@@ -30,6 +30,11 @@ a.card {
   @include hover {
     text-decoration: none;
   }
+
+  &:active,
+  &.active {
+    transform: scale(0.98);
+  }
 }
 
 // The card pill displays an icon at the left
@@ -43,10 +48,6 @@ a.card {
   border-bottom: none;
   background-color: $card-cap-bg;
   border: $card-border-width solid $card-cap-bg;
-
-  @include media-breakpoint-down(sm) {
-    flex-wrap: wrap;
-  }
 
   @include border-radius($card-border-radius);
 
@@ -101,6 +102,9 @@ a[href].card-pill-simple {
 }
 
 .card-pill-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   span {
     white-space: nowrap;
 
@@ -113,10 +117,6 @@ a[href].card-pill-simple {
       }
     }
 
-    &.size-date {
-      display: inline-block;
-      width: 11em;
-    }
   }
 
   // Make sure when we're centering the text, the icon is not pushing things in
@@ -132,6 +132,20 @@ a[href].card-pill-simple {
     width: 100%;
     padding: 0 calc(#{$card-pill-icon-size} + #{$card-spacer-x});
     text-align: center;
+  }
+}
+
+.size-date {
+  display: inline-block;
+  width: 11em;
+  flex-shrink: 0;
+
+  @include media-breakpoint-down(sm) {
+    width: 7em;
+  }
+
+  time {
+    white-space: nowrap;
   }
 }
 
@@ -152,6 +166,17 @@ a[href].card-pill-simple {
     svg {
       width: $card-pill-icon-size * 0.6875;
       height: $card-pill-icon-size * 0.6875;
+    }
+  }
+}
+
+.card-pill-icon-lg {
+  margin-right: $card-spacer-x * 0.5;
+
+  .icon {
+    svg {
+      width: $card-pill-icon-size;
+      height: $card-pill-icon-size;
     }
   }
 }
@@ -279,6 +304,8 @@ a[href].card-pill-simple {
 }
 
 .card-list-simple-item {
+  margin-bottom: calc(#{$spacer} + #{$card-border-width * 4});
+
   &:not(.card-open) {
     background: none;
     border: 0;

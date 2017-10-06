@@ -130,7 +130,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
             'url' => $this->urlGenerator->generate('qs_activity.collection.dates', [
               'community' => $community->id(),
             ]),
-            'label' => $this->t('qs_menu.links.activities.dates'),
+            'label' => $this->t('qs_menu.links.activities.date'),
           ],
         ],
         'activated_by' => [

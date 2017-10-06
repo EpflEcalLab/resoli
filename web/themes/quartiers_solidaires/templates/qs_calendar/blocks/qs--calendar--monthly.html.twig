@@ -55,6 +55,7 @@
           'calendar-item btn btn-circle shadow-to-bottom',
           is_today ? 'btn-outline-secondary' : 'btn-outline-primary',
           is_active ? 'active',
+          day|date('Y-m-d') not in variables.events|keys ? 'disabled',
         ] %}
 
         {% set parameters = is_today ? {} : {'day': day|date('Y-m-d')} %}

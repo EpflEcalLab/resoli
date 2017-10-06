@@ -23,6 +23,9 @@ class MonthlyBlock extends PeriodBlockBase {
     // The request should be took at the last moment, avoid it on constructor.
     $master_request = $this->requestStack->getMasterRequest();
 
+    // Get the community route parameter.
+    $community = $master_request->attributes->get('community');
+
     // Get pagination day.
     $pagination_day = $master_request->query->get('day');
 
@@ -52,6 +55,9 @@ class MonthlyBlock extends PeriodBlockBase {
     $date_start         = $this->calendarBuilder->getFirstMondayMonthFullWeek($day);
     $date_end           = $this->calendarBuilder->getLastSundayMonthFullWeek($day);
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
+
+    // Count for every days between two dates how many events occure by day.
+    $variables['events'] = $this->eventManager->countByDate($community, $date_start, $date_end);
 
     return [
       '#theme'     => 'qs_calendar_monthly_block',

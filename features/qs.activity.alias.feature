@@ -77,3 +77,17 @@ Feature: Activitiy Alias
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/events/add"
     And the response status code should be 200
+
+## Activity Dashboard
+  @api
+  Scenario: Logged as Manager of Lausanne, I can access to the Dashboard of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/dashboard"
+    And the response status code should be 200
+
+## Activity Dashboard Members
+  @api
+  Scenario: Logged as Manager of Lausanne, I can access to the Dashboard Members of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/dashboard/members"
+    And the response status code should be 200

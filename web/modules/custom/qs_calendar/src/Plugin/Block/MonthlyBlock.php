@@ -20,8 +20,12 @@ class MonthlyBlock extends PeriodBlockBase {
   public function build($params = []) {
     $variables = [];
 
+    // The request should be took at the last moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
     // Get pagination day.
-    $pagination_day = $this->route->getParameter('day');
+    $pagination_day = $master_request->query->get('day');
+
     $day = new DrupalDateTime();
     if ($pagination_day) {
       try {
@@ -42,6 +46,8 @@ class MonthlyBlock extends PeriodBlockBase {
 
     $variables['prev_month'] = $prev_month;
     $variables['next_month'] = $next_month;
+
+    $variables['current_day'] = $day;
 
     $date_start         = $this->calendarBuilder->getFirstMondayMonthFullWeek($day);
     $date_end           = $this->calendarBuilder->getLastSundayMonthFullWeek($day);

@@ -1,0 +1,28 @@
+@charset 'utf-8';
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 3.125rem);
+  grid-auto-rows: 1fr;
+  grid-gap: $grid-gutter-width 3rem;
+  margin: 0 auto;
+}
+
+.calendar-item {
+  min-width: 3.125rem;
+  min-height: 3.125rem;
+
+  &.active {
+    width: 7rem;
+    margin-left: -1.9375rem; // center it (7 - 3.125) / 2
+  }
+}
+
+.calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.125rem;
+  min-height: 3.125rem;
+  color: grayscale(600);
+}

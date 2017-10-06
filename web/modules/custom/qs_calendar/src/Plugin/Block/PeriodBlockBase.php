@@ -6,7 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_calendar\Service\CalendarBuilder;
-use Drupal\Core\Routing\CurrentRouteMatch;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_activity\Service\EventManager;
 
@@ -23,11 +23,11 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
   protected $calendarBuilder;
 
   /**
-   * Current Route.
+   * The request stack (get the URL argument(s) and combined it with the path).
    *
-   * @var \Drupal\Core\Routing\CurrentRouteMatch
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
-  protected $route;
+  protected $requestStack;
 
   /**
    * The entity QS Event Manager.
@@ -46,10 +46,10 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CalendarBuilder $calendar_builder, CurrentRouteMatch $route, EventManager $event_manager, PrivilegeManager $privilege_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CalendarBuilder $calendar_builder, RequestStack $request_stack, EventManager $event_manager, PrivilegeManager $privilege_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->calendarBuilder  = $calendar_builder;
-    $this->route            = $route;
+    $this->requestStack     = $request_stack;
     $this->eventManager     = $event_manager;
     $this->privilegeManager = $privilege_manager;
   }
@@ -66,7 +66,7 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
         $plugin_definition,
         // Load customs services used in this class.
         $container->get('qs_calendar.calendar_builder'),
-        $container->get('current_route_match'),
+        $container->get('request_stack'),
         $container->get('qs_activity.event_manager'),
         $container->get('qs_acl.privilege_manager')
     );

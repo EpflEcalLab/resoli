@@ -20,8 +20,11 @@ class WeeklyBlock extends PeriodBlockBase {
   public function build($params = []) {
     $variables = [];
 
+    // The request should be took at the last moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
     // Get pagination day.
-    $pagination_day = $this->route->getParameter('day');
+    $pagination_day = $master_request->query->get('day');
     $day = new DrupalDateTime();
     if ($pagination_day) {
       try {

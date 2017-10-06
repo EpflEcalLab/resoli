@@ -140,21 +140,27 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ],
       'calendar' => [
         'label' => $this->t('qs_menu.links.calendar'),
-        'url' => "javascript:alert('This feature is not yet availaible.')",
+        'url' => $this->urlGenerator->generate('qs_calendar.collection.monthly', [
+          'community' => $community->id(),
+        ]),
         'icon' => 'calendar',
         'links' => [
-          'qs_activity.collection.themes' => [
-            'url' => $this->urlGenerator->generate('<front>'),
-            'label' => $this->t('qs_menu.links.activities.themes'),
+          'qs_calendar.collection.weekly' => [
+            'url' => $this->urlGenerator->generate('qs_calendar.collection.weekly', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.calendar.weekly'),
           ],
-          // @TODO temp link to not have a broken nav:
-          'qs_activity.collection.date' => [
-            'url' => $this->urlGenerator->generate('<front>'),
-            'label' => $this->t('qs_menu.links.activities.date'),
+          'qs_calendar.collection.monthly' => [
+            'url' => $this->urlGenerator->generate('qs_calendar.collection.monthly', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.calendar.monthly'),
           ],
         ],
         'activated_by' => [
-          'qs_activity.collection.calendar',
+          'qs_calendar.collection.weekly',
+          'qs_calendar.collection.monthly',
         ],
       ],
       'stories' => [

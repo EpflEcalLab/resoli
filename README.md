@@ -214,21 +214,98 @@ For more help about Toolbox, the [official documentation](http://frontend.github
 We use Capistrano to deploy:
 
   ```bash
-    $ bundle exec cap -T
-    $ bundle exec cap staging deploy
+  $ bundle exec cap -T
+  $ bundle exec cap staging deploy
   ```
 
 ## 🏆 Tests
 
-  ```bash
-  $ ./vendor/bin/phpunit
-  ```
+For tests you need a working database connection and for browser tests
+your Drupal installation needs to be reachable via a web server.
 
-  For kernel tests you need a working database connection and for browser tests your Drupal installation needs to be reachable via a web server. Copy the phpunit config file:
+Copy the phpunit config file:
 
   ```bash
+  $ cd core
   $ cp phpunit.xml.dist phpunit.xml
   ```
+
+You must provide `SIMPLETEST_BASE_URL`, Eg. `http://localhost`.
+You must provide `SIMPLETEST_DB`,
+Eg. `sqlite://localhost/build/editor_advanced_image.sqlite`.
+
+Run tests using PHPUnit
+
+  ```bash
+  # You must be on the drupal-root folder - usually /web.
+  $ cd web
+  $ ../vendor/bin/phpunit -c core \
+  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
+  ```
+
+### Unit
+
+  ```bash
+  # You must be on the drupal-root folder - usually /web.
+  $ cd web
+  $ ../vendor/bin/phpunit -c core --group [UNIT-GROUP] \
+  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
+  ```
+
+### Kernel
+
+  ```bash
+  # You must be on the drupal-root folder - usually /web.
+  $ cd web
+  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
+  SIMPLETEST_BASE_URL='http://d8.dev' \
+  ../vendor/bin/phpunit -c core --group [KERNEL-GROUP] \
+  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
+  ```
+
+### Functional
+
+  ```bash
+  # You must be on the drupal-root folder - usually /web.
+  $ cd web
+  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
+  SIMPLETEST_BASE_URL='http://d8.dev' \
+  ../vendor/bin/phpunit -c core --group [FUNCTIONAL-GROUP] \
+  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
+  ```
+
+### WebBase
+
+  ```bash
+  # You must be on the drupal-root folder - usually /web.
+  $ cd web
+  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
+  SIMPLETEST_BASE_URL='http://d8.dev' \
+  ../vendor/bin/phpunit -c core --group [WEBBASE-GROUP] \
+  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
+  ```
+
+### Javascript
+
+  ```bash
+  phantomjs --ssl-protocol=any --ignore-ssl-errors=true \
+  vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768&
+  ```
+
+  ```bash
+  # You must be on the drupal-root folder - usually /web.
+  $ cd web
+  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
+  SIMPLETEST_BASE_URL='http://d8.dev' \
+  ../vendor/bin/phpunit -c core --testsuite functional-javascript \
+  --group [JS-GROUP] \
+  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
+  ```
+
+### Debug
+
+You must provide a `BROWSERTEST_OUTPUT_DIRECTORY`,
+Eg. `/path/to/webroot/sites/simpletest/browser_output`.
 
 ## 📋 Documentations
 

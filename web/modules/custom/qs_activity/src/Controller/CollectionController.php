@@ -216,18 +216,18 @@ class CollectionController extends ControllerBase {
 
     // Get badges.
     if (!empty($events)) {
-      // // For a list of Events IDs where current user has rejected subscription.
-      // // Used to know when display the rejected subscription button & badge.
-      // $variables['user_events_has_rejected_subscription'] = $this->badgeManager->getSubscription($events, 0);.
-      // // For a list of Events IDs where current user has confirmed subscription.
-      // // Used to know when display the confirmed subscription button & badge.
-      // $variables['user_events_has_confirmed_subscription'] = $this->badgeManager->getSubscription($events, 1);.
+      // For a list of Events IDs where current user has rejected subscription.
+      // Used to know when display the rejected subscription button & badge(s).
+      $variables['user_events_has_rejected_subscription'] = $this->badgeManager->getSubscription($events, 0);
+      // For a list of Events IDs where current user has confirmed subscription.
+      // Used to know when display the confirmed subscription button & badge(s).
+      $variables['user_events_has_confirmed_subscription'] = $this->badgeManager->getSubscription($events, 1);
       // For a list of Events IDs number of pending subscriptions.
-      // Used to know when display for organizer or maintainer the High Privilege Badge.
-      // $variables['events_count_pending_subscriptions'] = $this->badgeManager->countSubscriptions($events, NULL);.
+      // Used to know when display for organizer or maintainer badge(s).
+      $variables['events_count_pending_subscriptions'] = $this->badgeManager->countSubscriptions($events, NULL);
       // For a list of Events IDs number of subscriptions.
-      // Used to know when display for organizer or maintainer the High Privilege Badge.
-      // $variables['events_count_confirmed_subscriptions'] = $this->badgeManager->countSubscriptions($events, 1);.
+      // Used to know when display for organizer or maintainer badge(s).
+      $variables['events_count_confirmed_subscriptions'] = $this->badgeManager->countSubscriptions($events, 1);
     }
 
     return [

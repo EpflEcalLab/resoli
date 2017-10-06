@@ -42,17 +42,8 @@
   </div>
   <div class="calendar-wrapper">
     <div class="calendar">
-      {% set week = [
-        'monday'|date('D'),
-        'tuesday'|date('D'),
-        'wednesday'|date('D'),
-        'thursday'|date('D'),
-        'friday'|date('D'),
-        'saturday'|date('D'),
-        'sunday'|date('D'),
-      ] %}
-      {% for day in week %}
-        <strong class="calendar-head">{{ day }}</strong>
+      {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
+        <strong class="calendar-head">{{ day|bamboo_i18n_format_date('custom', 'D') }}</strong>
       {% endfor %}
 
       {% for day in variables.dates %}

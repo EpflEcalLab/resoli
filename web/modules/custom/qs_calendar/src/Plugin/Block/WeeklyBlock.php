@@ -36,15 +36,17 @@ class WeeklyBlock extends PeriodBlockBase {
     }
 
     $next_week = clone $day;
-    $next_week->modify('first day of next month');
+    $next_week->modify('Monday next week');
     $next_week->setTime(0, 0);
 
     $prev_week = clone $day;
-    $prev_week->modify('first day of previous week');
+    $prev_week->modify('Monday last week');
     $prev_week->setTime(0, 0);
 
     $variables['prev_week'] = $prev_week;
     $variables['next_week'] = $next_week;
+
+    $variables['current_day'] = $day;
 
     $date_start         = $this->calendarBuilder->getMondayWeek($day);
     $date_end           = $this->calendarBuilder->getSundayWeek($day);

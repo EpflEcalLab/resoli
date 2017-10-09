@@ -34,7 +34,7 @@ On common errors, see the Troubleshootings section.
 This project don't use the traditionnal translates strings in English.
 We move to a flexible solution which is not language based but keys strings Eg. `form.submit`
 
-To allow the client to update the translation him/herself, you need to export all the custom translations from our modules & templates by running our custom extractor:
+To allow the client to update the translation him/herself, you need to export all the custom translations from our modules & templates by running our custom extractor.
 
 ### Prerequisites
 
@@ -61,6 +61,8 @@ To allow the client to update the translation him/herself, you need to export al
   ```
 
 The PO file is created in the `./config/d8/lang/` directory.
+
+Once done, don't forget to add the new assets on the Loco project.
 
 ## 🚔 Check Drupal coding standards & Drupal best practices
 

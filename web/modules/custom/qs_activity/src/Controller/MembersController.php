@@ -44,9 +44,9 @@ class MembersController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager) {
-    $this->acl              = $acl;
+  public function __construct(PrivilegeManager $privilege_manager, AccessControl $acl) {
     $this->privilegeManager = $privilege_manager;
+    $this->acl              = $acl;
     $this->userStorage      = $this->entityTypeManager()->getStorage('user');
   }
 
@@ -57,8 +57,8 @@ class MembersController extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager')
+    $container->get('qs_acl.privilege_manager'),
+    $container->get('qs_acl.access_control')
     );
   }
 
@@ -107,14 +107,14 @@ class MembersController extends ControllerBase {
     }
 
     // Load user entities whitout privileges.
-    $members = $this->userStorage->loadMultiple($uids);
+    $activity_members = $this->userStorage->loadMultiple($uids);
 
     // Add privileges to users.
-    foreach ($members as $member) {
-      $member->privileges = $privileges[$member->id()];
+    foreach ($activity_members as $activity_member) {
+      $activity_member->privileges = $privileges[$activity_member->id()];
     }
 
-    $variables['members'] = $members;
+    $variables['members'] = $activity_members;
 
     return [
       '#theme'     => 'qs_activity_members_page',

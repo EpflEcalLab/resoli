@@ -106,14 +106,14 @@ class MembersController extends ControllerBase {
     }
 
     // Load user entities whitout privileges.
-    $members = $this->userStorage->loadMultiple($uids);
+    $community_members = $this->userStorage->loadMultiple($uids);
 
     // Add privileges to users.
-    foreach ($members as $member) {
-      $member->privileges = $privileges[$member->id()];
+    foreach ($community_members as $community_member) {
+      $community_member->privileges = $privileges[$community_member->id()];
     }
 
-    $variables['members'] = $members;
+    $variables['members'] = $community_members;
 
     return [
       '#theme'     => 'qs_community_members_page',

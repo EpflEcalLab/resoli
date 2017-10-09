@@ -46,13 +46,14 @@
       {% for day in variables.dates %}
         {% set is_today = day|date('Y-m-d') == 'now'|date('Y-m-d') %}
         {% set is_active = day|date('Y-m-d') == variables.current_day|date('Y-m-d') %}
+        {% set is_past = day|date('Y-m-d') < 'now'|date('Y-m-d') %}
 
         {% set classes = [
           'calendar-item btn btn-circle shadow-to-bottom',
           is_today ? 'btn-outline-secondary' : 'btn-outline-primary',
           is_active ? 'active',
-          day|date('Y-m-d') not in variables.events|keys ? 'disabled',
-        ] %}
+          not is_today and (is_past or day|date('Y-m-d') not in variables.events|keys) ? 'disabled',
+          ] %}
 
         {% set parameters = is_today ? {} : {'day': day|date('Y-m-d')} %}
 

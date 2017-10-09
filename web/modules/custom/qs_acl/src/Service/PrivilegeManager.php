@@ -9,6 +9,7 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\qs_acl\Entity\Privilege;
+use Drupal\Core\Database\Query\SelectInterface;
 
 /**
  * PrivilegeManager.
@@ -261,20 +262,7 @@ class PrivilegeManager {
       ->condition('privileges.bundle', $entity->getEntityTypeId())
       ->condition('privileges.entity', $entity->id());
 
-    if ($entity->bundle() === 'communities') {
-      $or = $query->orConditionGroup();
-      $or->condition('privileges.privilege', 'community_members');
-      $or->condition('privileges.privilege', 'community_organizers');
-      $or->condition('privileges.privilege', 'community_managers');
-      $query->condition($or);
-    }
-    elseif ($entity->bundle() === 'activity') {
-      $or = $query->orConditionGroup();
-      $or->condition('privileges.privilege', 'activity_members');
-      $or->condition('privileges.privilege', 'activity_maintainers');
-      $or->condition('privileges.privilege', 'activity_organizers');
-      $query->condition($or);
-    }
+    $this->alterQueryHasOneRole($query, $entity);
 
     // Remove current user from the list.
     $query->condition('privileges.user', $this->currentUser->id(), '<>');
@@ -322,20 +310,7 @@ class PrivilegeManager {
       ->condition('privileges.bundle', $entity->getEntityTypeId())
       ->condition('privileges.entity', $entity->id());
 
-    if ($entity->bundle() === 'communities') {
-      $or = $query->orConditionGroup();
-      $or->condition('privileges.privilege', 'community_members');
-      $or->condition('privileges.privilege', 'community_organizers');
-      $or->condition('privileges.privilege', 'community_managers');
-      $query->condition($or);
-    }
-    elseif ($entity->bundle() === 'activity') {
-      $or = $query->orConditionGroup();
-      $or->condition('privileges.privilege', 'activity_members');
-      $or->condition('privileges.privilege', 'activity_maintainers');
-      $or->condition('privileges.privilege', 'activity_organizers');
-      $query->condition($or);
-    }
+    $this->alterQueryHasOneRole($query, $entity);
 
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
@@ -391,6 +366,31 @@ class PrivilegeManager {
     }
 
     return $entity_ids;
+  }
+
+  /**
+   * Alter the given query to add the subtest: Does it has at least on role.
+   *
+   * @param Drupal\Core\Database\Query\SelectInterface $query
+   *   The query to alter.
+   * @param Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the roles.
+   */
+  protected function alterQueryHasOneRole(SelectInterface &$query, EntityInterface $entity) {
+    if ($entity->bundle() === 'communities') {
+      $or = $query->orConditionGroup();
+      $or->condition('privileges.privilege', 'community_members');
+      $or->condition('privileges.privilege', 'community_organizers');
+      $or->condition('privileges.privilege', 'community_managers');
+      $query->condition($or);
+    }
+    elseif ($entity->bundle() === 'activity') {
+      $or = $query->orConditionGroup();
+      $or->condition('privileges.privilege', 'activity_members');
+      $or->condition('privileges.privilege', 'activity_maintainers');
+      $or->condition('privileges.privilege', 'activity_organizers');
+      $query->condition($or);
+    }
   }
 
 }

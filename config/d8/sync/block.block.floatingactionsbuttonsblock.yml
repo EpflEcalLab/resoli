@@ -21,6 +21,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "*/activities/*\r\n*/activities/theme\r\n*/activities/date\r\n\r\n"
+    pages: "*/activities/*\r\n*/activities/theme\r\n*/activities/date\r\n*/calendar/*\r\n*/calendar/monthly\r\n*/calendar/weekly"
     negate: false
     context_mapping: {  }

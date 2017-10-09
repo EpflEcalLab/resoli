@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/taxonomy\/term\/6?_format=hal_json"
+            "href": "http:\/\/default\/taxonomy\/term\/15?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
@@ -9,12 +9,12 @@
     },
     "tid": [
         {
-            "value": 6
+            "value": 15
         }
     ],
     "uuid": [
         {
-            "value": "668377e9-b635-48a8-b027-d604723458a7"
+            "value": "4a0618f8-f41c-4355-9379-fb984edd11a8"
         }
     ],
     "langcode": [
@@ -30,13 +30,13 @@
     ],
     "name": [
         {
-            "value": "Conf\u00e9rences",
+            "value": "Manifestations",
             "lang": "zxx"
         }
     ],
     "weight": [
         {
-            "value": 2
+            "value": 11
         }
     ],
     "changed": [
@@ -53,7 +53,7 @@
     ],
     "field_icon": [
         {
-            "value": "conferences"
+            "value": "manifestations"
         }
     ]
 }

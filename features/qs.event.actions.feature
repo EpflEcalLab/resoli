@@ -7,7 +7,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°2 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
     Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-17" element
@@ -16,7 +16,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
     Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/activities/activity-3-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
     Then I should see 3 ".card-list-item" elements
     Then I should see a "#collapse-37" element
@@ -31,7 +31,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Organizer of Lausanne, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a not member of this activity
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-17" element
@@ -40,7 +40,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Organizer of Lausanne, I can see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/lausanne/activities/activity-3-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
     Then I should see 3 ".card-list-item" elements
     Then I should see a "#collapse-37" element
@@ -54,7 +54,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Organizer of Lausanne, I can see "register" button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/lausanne/activities/activity-4-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-bougies"
     And the response status code should be 200
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-22" element
@@ -65,7 +65,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Member of Lausanne, I can see "register" button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
     Given I am logged in as user "member+lausanne"
-    When I am on "/lausanne/activities/activity-4-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-bougies"
     And the response status code should be 200
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-22" element
@@ -76,7 +76,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can see "register" button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
     Given I am logged in as user "member+lausanne+organizer+fribourg"
-    When I am on "/lausanne/activities/activity-4-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-bougies"
     And the response status code should be 200
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-22" element
@@ -87,7 +87,7 @@ Feature: Event Actions Buttons
   @api
   Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is a public activity
     Given I am logged in as user "member+lausanne+organizer+fribourg"
-    When I am on "/lausanne/activities/activity-3-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
     Then I should see 3 ".card-list-item" elements
     Then I should see a "#collapse-37" element

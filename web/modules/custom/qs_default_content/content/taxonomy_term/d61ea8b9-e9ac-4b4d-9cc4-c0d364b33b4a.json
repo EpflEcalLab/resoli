@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/taxonomy\/term\/6?_format=hal_json"
+            "href": "http:\/\/default\/taxonomy\/term\/8?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
@@ -9,12 +9,12 @@
     },
     "tid": [
         {
-            "value": 6
+            "value": 8
         }
     ],
     "uuid": [
         {
-            "value": "668377e9-b635-48a8-b027-d604723458a7"
+            "value": "d61ea8b9-e9ac-4b4d-9cc4-c0d364b33b4a"
         }
     ],
     "langcode": [
@@ -30,13 +30,13 @@
     ],
     "name": [
         {
-            "value": "Conf\u00e9rences",
+            "value": "Culture",
             "lang": "zxx"
         }
     ],
     "weight": [
         {
-            "value": 2
+            "value": 4
         }
     ],
     "changed": [
@@ -53,7 +53,7 @@
     ],
     "field_icon": [
         {
-            "value": "conferences"
+            "value": "culture"
         }
     ]
 }

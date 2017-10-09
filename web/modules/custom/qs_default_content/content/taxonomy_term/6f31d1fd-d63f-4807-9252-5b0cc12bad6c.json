@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/taxonomy\/term\/6?_format=hal_json"
+            "href": "http:\/\/default\/taxonomy\/term\/18?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
@@ -9,12 +9,12 @@
     },
     "tid": [
         {
-            "value": 6
+            "value": 18
         }
     ],
     "uuid": [
         {
-            "value": "668377e9-b635-48a8-b027-d604723458a7"
+            "value": "6f31d1fd-d63f-4807-9252-5b0cc12bad6c"
         }
     ],
     "langcode": [
@@ -30,13 +30,13 @@
     ],
     "name": [
         {
-            "value": "Conf\u00e9rences",
+            "value": "Divers",
             "lang": "zxx"
         }
     ],
     "weight": [
         {
-            "value": 2
+            "value": 14
         }
     ],
     "changed": [
@@ -53,7 +53,7 @@
     ],
     "field_icon": [
         {
-            "value": "conferences"
+            "value": "divers"
         }
     ]
 }

@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/lausanne\/activities\/activity-4-lausanne-theme-ndeg1?_format=hal_json"
+            "href": "http:\/\/default\/lausanne\/activities\/atelier-bougies\/events?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -40,7 +40,7 @@
     ],
     "vid": [
         {
-            "value": 71
+            "value": 74
         }
     ],
     "langcode": [
@@ -62,7 +62,7 @@
     ],
     "title": [
         {
-            "value": "Activity 4 - Lausanne - Theme N\u00b01",
+            "value": "Atelier Bougies",
             "lang": "zxx"
         }
     ],
@@ -79,7 +79,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "db73c3bd-c5c6-4d84-b4f0-dc637e2af7d6"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ],
                 "lang": "zxx"
@@ -97,7 +97,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "db73c3bd-c5c6-4d84-b4f0-dc637e2af7d6"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ]
             }
@@ -145,7 +145,7 @@
     ],
     "changed": [
         {
-            "value": 1507547630,
+            "value": 1507563228,
             "lang": "zxx"
         }
     ],
@@ -163,7 +163,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1507547630
+            "value": 1507563228
         }
     ],
     "revision_translation_affected": [

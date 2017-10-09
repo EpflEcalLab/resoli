@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/taxonomy\/term\/6?_format=hal_json"
+            "href": "http:\/\/default\/taxonomy\/term\/16?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
@@ -9,12 +9,12 @@
     },
     "tid": [
         {
-            "value": 6
+            "value": 16
         }
     ],
     "uuid": [
         {
-            "value": "668377e9-b635-48a8-b027-d604723458a7"
+            "value": "cb4fe583-6c9a-496e-9592-1d08373dcf69"
         }
     ],
     "langcode": [
@@ -30,13 +30,13 @@
     ],
     "name": [
         {
-            "value": "Conf\u00e9rences",
+            "value": "Mouvements & Bien-\u00eatre",
             "lang": "zxx"
         }
     ],
     "weight": [
         {
-            "value": 2
+            "value": 12
         }
     ],
     "changed": [
@@ -53,7 +53,7 @@
     ],
     "field_icon": [
         {
-            "value": "conferences"
+            "value": "mouvementsetbienetre"
         }
     ]
 }

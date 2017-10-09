@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/lausanne\/activities\/activity-5-lausanne-theme-ndeg1\/events\/event-activity-5-1-weeks-ago-12h00?_format=hal_json"
+            "href": "http:\/\/default\/lausanne\/activities\/accueil-cafe\/events\/accueil-cafe-1?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
@@ -19,7 +19,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
             {
-                "href": "http:\/\/default\/lausanne\/activities\/activity-5-lausanne-theme-ndeg1?_format=hal_json"
+                "href": "http:\/\/default\/lausanne\/activities\/accueil-cafe\/events?_format=hal_json"
             }
         ]
     },
@@ -35,7 +35,7 @@
     ],
     "vid": [
         {
-            "value": 69
+            "value": 95
         }
     ],
     "langcode": [
@@ -57,7 +57,7 @@
     ],
     "title": [
         {
-            "value": "Event - Activity (5) - 1 weeks ago at 12h00",
+            "value": "Accueil Caf\u00e9",
             "lang": "zxx"
         }
     ],
@@ -74,7 +74,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "6240fb95-91d0-4d14-9419-32c8eece63d7"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ],
                 "lang": "zxx"
@@ -92,7 +92,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "6240fb95-91d0-4d14-9419-32c8eece63d7"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ]
             }
@@ -101,7 +101,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/lausanne\/activities\/activity-5-lausanne-theme-ndeg1?_format=hal_json"
+                        "href": "http:\/\/default\/lausanne\/activities\/accueil-cafe\/events?_format=hal_json"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -123,7 +123,7 @@
     ],
     "changed": [
         {
-            "value": 1507541063,
+            "value": 1507563848,
             "lang": "zxx"
         }
     ],
@@ -141,7 +141,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1507541063
+            "value": 1507563848
         }
     ],
     "revision_translation_affected": [
@@ -156,14 +156,27 @@
             "lang": "zxx"
         }
     ],
+    "body": [
+        {
+            "value": "<p>Partagez un simple caf\u00e9 entre habitants!<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contribution": [
+        {
+            "value": "20 centimes"
+        }
+    ],
     "field_end_at": [
         {
-            "value": "2017-10-09T11:20:43"
+            "value": "2017-10-02T13:00:00"
         }
     ],
     "field_start_at": [
         {
-            "value": "2017-10-09T09:20:43"
+            "value": "2017-10-02T10:00:00"
         }
     ],
     "field_venue_lat": [

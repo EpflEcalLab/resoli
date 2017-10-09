@@ -249,6 +249,60 @@ msgctxt "Abbreviated month name"
 msgid "Dec"
 msgstr "Déc."
 
+# Drupal 8 - Immutable
+msgid "The requested page could not be found."
+msgstr "La page demandée ne peut pas être trouvée."
+
+msgid "Page not found"
+msgstr "Page non trouvée"
+
+# Drupal 8 - Login/Register/Password - Authentication
+
+msgid "%name is not recognized as a username or an email address."
+msgstr ""
+
+## Forget Password
+
+msgid "qs_auth.form.pass.title"
+msgstr "Demander un nouveau mot de passe"
+
+msgid "Password reset instructions will be sent to your registered email address."
+msgstr "Indiquez comment nous pouvons vous contacter et nous vous enverrons les informations pour réinitialiser votre mot de passe."
+
+msgid "qs_auth.form.pass.name.label"
+msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
+
+msgid "qs_auth.form.pass.name.description"
+msgstr "En cas d’oubli, demandez-la à votre responsable de communauté"
+
+msgid "Further instructions have been sent to your email address."
+msgstr "De plus amples informations vous ont été envoyées par e-mail."
+
+msgid ""
+"You have just used your one-time login link. It is no longer necessary to use "
+"this link to log in. Please change your password."
+msgstr ""
+"Vous venez d’utiliser un lien à usage unique. Vous n’aurez plus besoin "
+"d’utiliser ce lien lors de vos prochaines connexions. Merci de modifier votre "
+"mot de passe."
+
+msgid ""
+"Unrecognized username or password. <a href=\":password\">Forgot your password?"
+"</a>"
+msgstr ""
+"E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</a>"
+
+msgid "A confirmation request to cancel your account has been sent to your email address."
+msgstr ""
+
+# Drupal 8 - Honeypot
+
+msgid "There was a problem with your form submission. Please refresh the page and try again."
+msgstr ""
+
+msgid "There was a problem with your form submission. Please wait @limit seconds and try again."
+msgstr ""
+
 # Quartiers Solidaires
 msgid "qs_auth.form.login.name.placeholder"
 msgstr "Ex. catherine.dubuis@prosenectute.ch"
@@ -438,12 +492,6 @@ msgstr "Modifier mon numéro de téléphone"
 msgid "qs_supervisor.account.form.edit.title"
 msgstr ""
 "Ici, vous pouvez modifier vos informations personnelles en toute sécurité."
-
-msgid "The requested page could not be found."
-msgstr "La page demandée ne peut pas être trouvée."
-
-msgid "Page not found"
-msgstr "Page non trouvée"
 
 msgid "qs_activity.activities.dashboard.title"
 msgstr ""
@@ -680,17 +728,6 @@ msgstr ""
 
 msgid "qs.community.waiting_approval.request.manager"
 msgstr ""
-
-msgid "qs_auth.form.pass.name.label"
-msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
-
-msgid "qs_auth.form.pass.name.description"
-msgstr "En cas d’oubli, demandez-la à votre responsable de communauté"
-
-msgid "qs_auth.form.pass.title"
-msgstr ""
-"Indiquez comment nous pouvons vous contacter et nous vous enverrons les "
-"informations pour réinitialiser votre mot de passe."
 
 msgid "qs_auth.link.login"
 msgstr "Utiliser mon compte"
@@ -953,12 +990,6 @@ msgstr ""
 msgid "qs_event.events.form.delete.success @event"
 msgstr ""
 
-msgid ""
-"Unrecognized username or password. <a href=\":password\">Forgot your password?"
-"</a>"
-msgstr ""
-"E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</a>"
-
 msgid "qs_auth.form.pass.name.placeholder"
 msgstr ""
 
@@ -970,9 +1001,6 @@ msgstr "Vérifier votre boîte de réception, un e-mail vient de vous être envo
 
 msgid "%name is not recognized as a username or an email address."
 msgstr ""
-
-msgid "Further instructions have been sent to your email address."
-msgstr "De plus amples informations vous ont été envoyées par e-mail."
 
 msgid "qs.auth.communities.dashboard_title"
 msgstr "Voici l’espace dédié à la gestion de votre communauté"

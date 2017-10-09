@@ -9,7 +9,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 1.7.7\n"
 
 # Patterns
 msgid "last year"
@@ -256,18 +256,19 @@ msgstr "La page demandée ne peut pas être trouvée."
 msgid "Page not found"
 msgstr "Page non trouvée"
 
-# Drupal 8 - Login/Register/Password - Authentication
-
+# Drupal 8 - Authentication
 msgid "%name is not recognized as a username or an email address."
 msgstr ""
 
-## Forget Password
-
+# Drupal 8 - Authentication - Password
 msgid "qs_auth.form.pass.title"
 msgstr "Demander un nouveau mot de passe"
 
-msgid "Password reset instructions will be sent to your registered email address."
-msgstr "Indiquez comment nous pouvons vous contacter et nous vous enverrons les informations pour réinitialiser votre mot de passe."
+msgid ""
+"Password reset instructions will be sent to your registered email address."
+msgstr ""
+"Indiquez comment nous pouvons vous contacter et nous vous enverrons les "
+"informations pour réinitialiser votre mot de passe."
 
 msgid "qs_auth.form.pass.name.label"
 msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
@@ -292,15 +293,20 @@ msgid ""
 msgstr ""
 "E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</a>"
 
-msgid "A confirmation request to cancel your account has been sent to your email address."
+msgid ""
+"A confirmation request to cancel your account has been sent to your email "
+"address."
 msgstr ""
 
 # Drupal 8 - Honeypot
-
-msgid "There was a problem with your form submission. Please refresh the page and try again."
+msgid ""
+"There was a problem with your form submission. Please refresh the page and "
+"try again."
 msgstr ""
 
-msgid "There was a problem with your form submission. Please wait @limit seconds and try again."
+msgid ""
+"There was a problem with your form submission. Please wait @limit seconds and "
+"try again."
 msgstr ""
 
 # Quartiers Solidaires
@@ -999,9 +1005,6 @@ msgstr "Merci pour votre demande."
 msgid "qs.auth.pass.confirmation.description"
 msgstr "Vérifier votre boîte de réception, un e-mail vient de vous être envoyé!"
 
-msgid "%name is not recognized as a username or an email address."
-msgstr ""
-
 msgid "qs.auth.communities.dashboard_title"
 msgstr "Voici l’espace dédié à la gestion de votre communauté"
 
@@ -1047,14 +1050,6 @@ msgstr ""
 "automatiquement échu après un jour.\r\n"
 "\r\n"
 "Cordialement."
-
-msgid ""
-"You have just used your one-time login link. It is no longer necessary to use "
-"this link to log in. Please change your password."
-msgstr ""
-"Vous venez d’utiliser un lien à usage unique. Vous n’aurez plus besoin "
-"d’utiliser ce lien lors de vos prochaines connexions. Merci de modifier votre "
-"mot de passe."
 
 msgid ""
 "qs.mail.account.cancel_confirm.subject @sitename @mail @firstname @lastname"
@@ -1121,7 +1116,6 @@ msgstr ""
 msgid "qs.mail.admin.welcome.no_approval.body @mail @firstname @lastname"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4567
 msgid "qs.auth.communities.dashboard_title @variables.community.name.value"
 msgstr "Voici le gestionnaire de la communauté @variables.community.name.value."
 
@@ -1134,7 +1128,6 @@ msgstr ""
 msgid "qs_supervisor.account.community_go"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b456b
 msgid "qs_supervisor.account.community_pending"
 msgstr "Demande d’accès en attente de validation"
 
@@ -1159,7 +1152,6 @@ msgstr ""
 msgid "qs_informative_message"
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4573
 msgid "Close"
 msgstr "Fermer"
 
@@ -1183,7 +1175,6 @@ msgstr ""
 "Il n’y a pas de prochain évènement prévu pour le moment.\n"
 "Pour toutes questions, contactez @mail_link"
 
-#: loco:59c4c884a39ff3e2728b457a
 msgid "qs.activity.no_events"
 msgstr "Il n’y a pas de prochain évènement prévu pour le moment."
 
@@ -1202,7 +1193,6 @@ msgstr ""
 msgid "qs.auth.approval.description @variables.community.name.value "
 msgstr ""
 
-#: loco:59c4c884a39ff3e2728b4580
 msgid "qs.activity.theme.title_empty @community_name"
 msgstr ""
 "Aucune activité ne correspond à votre choix de thème(s) à @community_name."
@@ -1222,7 +1212,6 @@ msgstr ""
 msgid "qs_menu.links.photos.date"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b4573
 msgid "qs_supervisor.account.form.edit.success @firstname, @lastname, @mail"
 msgstr "Vos données personnelles ont bien été mises à jour, @firstname!"
 
@@ -1232,41 +1221,33 @@ msgstr ""
 msgid "qs.form.error.username.used"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b4576
 msgid "qs_auth.form.register.success @firstname, @lastname, @mail"
 msgstr ""
 "Votre compte a bien été créé @firstname!\n"
 "Vous recevrez un e-mail aussitôt que vous pourrez commencer à l’utiliser."
 
-#: loco:59ca823fa39ff3f06a8b4577
 msgid "qs_auth.communities.apply.success @community"
 msgstr ""
 "Une demande d’accès à la communauté @community a bien été envoyée à son "
 "responsable!"
 
-#: loco:59ca823fa39ff3f06a8b4578
 msgid "qs_activity.activities.form.edit.info.success @activity"
 msgstr "Les informations de l’activité @activity ont bien été modifiées!"
 
-#: loco:59ca823fa39ff3f06a8b4579
 msgid "qs.form.delete_submit"
 msgstr "Oui, supprimer"
 
-#: loco:59ca823fa39ff3f06a8b457a
 msgid "qs_activity.activities.form.delete.error.has_events @activity"
 msgstr ""
 "Vous ne pouvez pas supprimer l’activité @activity avant d’avoir supprimer ses "
 "prochains évènements."
 
-#: loco:59ca823fa39ff3f06a8b457b
 msgid "qs_activity.activities.form.delete.success @activity"
 msgstr "L’activité @activity a bien été supprimée!"
 
-#: loco:59ca823fa39ff3f06a8b457c
 msgid "qs.activity.edit_defaults"
 msgstr "Modifier les valeurs par défaut des prochains évènements"
 
-#: loco:59ca823fa39ff3f06a8b457d
 msgid "qs_activity.activities.form.edit.defaults.contact_name"
 msgstr "Définissez une personne de contact par défaut"
 
@@ -1276,11 +1257,9 @@ msgstr ""
 msgid "qs.form.error.empty @mail"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b4580
 msgid "qs_activity.activities.form.edit.defaults.success @activity"
 msgstr "Les valeurs par défaut de l’activité @activity ont bien été modifiées!"
 
-#: loco:59ca823fa39ff3f06a8b4581
 msgid "qs_activity.edit_visibility_form.success @activity"
 msgstr ""
 "Les réglages de visibilité de l’activité @activity ont bien été modifiés!"
@@ -1303,32 +1282,27 @@ msgstr ""
 msgid "qs_activity.form.error.date_past @fieldname"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b4588
 msgid "qs_activity.events.form.add.error.hours.inconsistency @fieldname"
 msgstr "Vérifiez l’heure de votre évènement."
 
-#: loco:59ca823fa39ff3f06a8b4589
 msgid "qs_activity.activities.form.step1.description"
 msgstr "Quel nom voulez-vous donner à votre activité?"
 
 msgid "qs_activity.activities.form.step1"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b458b
 msgid "qs_activity.activities.form.step2.description"
 msgstr "Quel thème correspond le mieux à votre activité?"
 
 msgid "qs_activity.activities.form.step2"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b458d
 msgid "qs_activity.activities.form.step3.description"
 msgstr "Quel degré de confidentialité souhaitez-vous pour votre activité?"
 
 msgid "qs_activity.activities.form.step3"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b458f
 msgid "qs_activity.activities.form.step4.description"
 msgstr ""
 "Votre activité a bien été créée!\n"
@@ -1338,51 +1312,162 @@ msgstr ""
 msgid "qs_activity.activities.form.step4"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b4591
 msgid "qs_activity.events.form.delete.error.is_past @event"
 msgstr "L’évènement @event ne peut pas être supprimé, car il est déjà passé."
 
 msgid "qs_activity.events.form.edit.title.placeholder"
 msgstr ""
 
-#: loco:59ca823fa39ff3f06a8b4593
 msgid "qs_activity.events.form.edit.success @event"
 msgstr "Votre évènement @event a bien été modifié!"
 
-#: loco:59c38a86a39ff3602d8b45cf
 msgid "qs_activity.activities.form.add.community_can_subscribe.description"
 msgstr "Permettre à la communauté l’inscription aux évènements"
 
-#: loco:59c38a86a39ff3602d8b45d0
 msgid "qs_activity.activities.form.add.community_access_contact.description"
 msgstr "Montrer les informations de contact à la communauté"
 
-#: loco:59c38a86a39ff3602d8b45d1
 msgid "qs_activity.activities.form.add.community_access_detail.description"
 msgstr "Montrer les détails des évènements à la communauté"
 
-#: loco:59c38a86a39ff3602d8b45d2
 msgid "qs_activity.activities.form.add.community_access_story.description"
 msgstr "Montrer les récits à la communauté"
 
-#: loco:59c38a86a39ff3602d8b45d3
 msgid "qs_activity.activities.form.add.member_create_story.description"
 msgstr "Permettre la soumission de récits"
 
-#: loco:59c38a86a39ff3602d8b45d4
 msgid "qs_activity.activities.form.add.community_access_gallery.description"
 msgstr "Montrer les photos à la communauté"
 
-#: loco:59c38a86a39ff3602d8b45d5
 msgid "qs_activity.activities.form.add.member_create_gallery.description"
 msgstr "Permettre la soumission de photos"
 
-#: loco:59c38a86a39ff3602d8b4696
 msgid "qs.mail.account.cancel.subject @sitename @mail @firstname @lastname"
 msgstr ""
 
-#: loco:59cb5157a39ff333138b4567
 msgid "qs.activity.nextevent.date @event_date @event_hour"
 msgstr ""
 "Jour @event_date \n"
 "@event_hour – heure de fin"
+
+msgid "qs.activity.add_member"
+msgstr ""
+
+msgid "Member"
+msgstr ""
+
+msgid "qs_activity.activities.form.add.member.success @activity"
+msgstr ""
+
+msgid ""
+"qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url"
+msgstr ""
+
+msgid "qs.cancel.confirm.expired"
+msgstr ""
+
+msgid "qs_menu.links.calendar.weekly"
+msgstr ""
+
+msgid "qs_menu.links.calendar.monthly"
+msgstr ""
+
+msgid "qs.activity.date.sticky.from_to @start_date @end_date"
+msgstr ""
+
+msgid "qs.activity.date.sticky.today"
+msgstr ""
+
+msgid "qs.activity.date.sticky.tomorrow"
+msgstr ""
+
+msgid "qs.activity.date.sticky.this_week"
+msgstr ""
+
+msgid "qs.activity.date.sticky.next_week"
+msgstr ""
+
+msgid "qs.activity.date.sticky.in_two_weeks"
+msgstr ""
+
+msgid "qs.activity.date.title_empty @community @start_date @end_date"
+msgstr ""
+
+msgid "qs.activity.date.link_prev"
+msgstr ""
+
+msgid "qs.activity.date.link_next"
+msgstr ""
+
+msgid "qs.activity.members"
+msgstr ""
+
+msgid "qs.event.subscriptions.subscribers"
+msgstr ""
+
+msgid "qs.event.subscriptions.waiting_approval"
+msgstr ""
+
+msgid "qs_activity.members.title"
+msgstr ""
+
+msgid "qs_activity.members.roles"
+msgstr ""
+
+msgid "qs.roles.activity_member"
+msgstr ""
+
+msgid "qs.roles.activity_maintainer"
+msgstr ""
+
+msgid "qs.roles.activity_organizer"
+msgstr ""
+
+msgid "qs_activity.members.empty"
+msgstr ""
+
+msgid "qs.auth.cancel.confirmation.thanks"
+msgstr ""
+
+msgid "qs.auth.cancel.confirmation.description"
+msgstr ""
+
+msgid "qs.calendar.monthly.goto @month"
+msgstr ""
+
+msgid "qs.calendar.today"
+msgstr ""
+
+msgid "qs.calendar.weekly.week"
+msgstr ""
+
+msgid "qs.calendar.weekly.previous"
+msgstr ""
+
+msgid "qs.calendar.weekly.next"
+msgstr ""
+
+msgid "qs.calendar.events.collection_empty"
+msgstr ""
+
+msgid ""
+"qs_subscription.subscribers.title @variables.event.title.value @variables."
+"activity.title.value"
+msgstr ""
+
+msgid "qs.contact @subscriber.field_firstname.value"
+msgstr ""
+
+msgid "qs_subscription.subscribers.empty"
+msgstr ""
+
+msgid ""
+"qs_subscription.waiting_approval.title @variables.event.title.value "
+"@variables.activity.title.value"
+msgstr ""
+
+msgid "qs.contact @subscription.user.entity.field_firstname.value"
+msgstr ""
+
+msgid "qs_subscription.waiting_approval.empty"
+msgstr ""

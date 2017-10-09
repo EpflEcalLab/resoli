@@ -9,6 +9,7 @@ use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Database\Connection;
 use Drupal\node\NodeInterface;
 use Drupal\qs_subscription\Entity\Subscription;
+use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 
 /**
  * SubscriptionManager.
@@ -43,43 +44,21 @@ class SubscriptionManager {
   protected $connection;
 
   /**
+   * The cache tags invalidator.
+   *
+   * @var \Drupal\Core\Cache\CacheTagsInvalidatorInterface
+   */
+  protected $cacheTagsInvalidator;
+
+  /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
-    $this->currentUser         = $currentUser;
-    $this->subscriptionStorage = $entity_type_manager->getStorage('subscription');
-    $this->queryFactory        = $query_factory;
-    $this->connection          = $connection;
-  }
-
-  /**
-   * Get for the given events IDs, if they have subscriptions.
-   *
-   * @param integer[] $events
-   *   A collection of events IDs.
-   * @param bool $status
-   *   The required status for the subscriptions.
-   *
-   * @return array[]
-   *   The collection of events IDs which have subscriptions.
-   */
-  public function getSubscription(array $events, $status = TRUE) {
-    return [];
-  }
-
-  /**
-   * Count for the given events IDs, if they have subscriptions.
-   *
-   * @param integer[] $events
-   *   A collection of $events IDs.
-   * @param bool $status
-   *   The required status for the subscriptions.
-   *
-   * @return array[]
-   *   The collection of events IDs which have subscriptions.
-   */
-  public function countSubscriptions(array $events, $status = TRUE) {
-    return [];
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection, CacheTagsInvalidatorInterface $cache_tags_invalidator) {
+    $this->currentUser          = $currentUser;
+    $this->subscriptionStorage  = $entity_type_manager->getStorage('subscription');
+    $this->queryFactory         = $query_factory;
+    $this->connection           = $connection;
+    $this->cacheTagsInvalidator = $cache_tags_invalidator;
   }
 
   /**
@@ -104,6 +83,7 @@ class SubscriptionManager {
       'entity' => $event->id(),
       'user'   => $user->id(),
     ]);
+    $this->cacheTagsInvalidator->invalidateTags(['node:' . $event->id()]);
 
     // If the subscription already exists.
     if ($subscriptions) {
@@ -145,6 +125,8 @@ class SubscriptionManager {
     $subscription->setReviewedTime(time());
     $subscription->save();
 
+    $this->cacheTagsInvalidator->invalidateTags(['node:' . $subscription->entity->value]);
+
     return $subscription;
   }
 
@@ -164,6 +146,8 @@ class SubscriptionManager {
     $subscription->setReviewer($reviewer);
     $subscription->setReviewedTime(time());
     $subscription->save();
+
+    $this->cacheTagsInvalidator->invalidateTags(['node:' . $subscription->entity->value]);
 
     return $subscription;
   }

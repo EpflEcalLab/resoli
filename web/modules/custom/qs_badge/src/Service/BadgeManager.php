@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_badge\Service;
 
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
@@ -10,6 +11,13 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * BadgeManager.
  */
 class BadgeManager {
+
+  /**
+   * The current active user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  private $currentUser;
 
   /**
    * The database connection to use.
@@ -21,7 +29,8 @@ class BadgeManager {
   /**
    * Class constructor.
    */
-  public function __construct(Connection $connection) {
+  public function __construct(AccountProxyInterface $currentUser, Connection $connection) {
+    $this->currentUser = $currentUser;
     $this->connection = $connection;
   }
 
@@ -68,18 +77,49 @@ class BadgeManager {
   }
 
   /**
-   * Get for the given events IDs, if they have subscriptions.
+   * From a given events node IDs, return the list w/ subscription for the user.
    *
-   * @param integer[] $events
-   *   A collection of events IDs.
+   * @param Drupal\node\NodeInterface[] $events
+   *   A collection of events.
    * @param bool $status
    *   The required status for the subscriptions.
+   * @param Drupal\user\UserInterface $account
+   *   The user entity.
    *
-   * @return array[]
+   * @return integer[]
    *   The collection of events IDs which have subscriptions.
    */
-  public function getSubscription(array $events, $status = TRUE) {
-    return [];
+  public function getSubscription(array $events, $status = TRUE, UserInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $nids = [];
+    foreach ($events as $event) {
+      $nids[$event->id()] = $event->id();
+    }
+
+    $query = $this->connection->select('subscriptions', 'subscriptions');
+    $query->fields('subscriptions', ['entity'])
+      ->condition('subscriptions.entity', $nids, 'in')
+      ->condition('subscriptions.user', $user->id());
+
+    if ($status) {
+      $query->condition('subscriptions.status', $status);
+    }
+    else {
+      $query->condition('subscriptions.status', NULL, 'is');
+    }
+
+    $rows = $query->execute()->fetchAll();
+
+    $subscriptions = [];
+    foreach ($rows as $row) {
+      $subscriptions[$row->entity] = $row->entity;
+    }
+
+    return $subscriptions;
   }
 
   /**

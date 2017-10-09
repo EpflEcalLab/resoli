@@ -8,6 +8,7 @@
  // Includes.
 require_once 'inc/default_privileges.inc';
 require_once 'inc/default_events.inc';
+require_once 'inc/default_subscriptions.inc';
 
 /**
  * Implements hook_install().
@@ -35,4 +36,5 @@ function qs_default_content_install() {
  */
 function qs_default_content_modules_installed($modules) {
   qs_default_content_events();
+  qs_default_content_subscriptions();
 }

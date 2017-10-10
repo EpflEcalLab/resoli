@@ -30,7 +30,7 @@ const card = () => {
           setTimeout(function () {
             const map = new google.maps.Map(document.getElementById(map_container.attr('id')), {
               center: latLng,
-              zoom: 8,
+              zoom: 12,
               zoomControl: true,
               mapTypeControl: false,
               scaleControl: false,

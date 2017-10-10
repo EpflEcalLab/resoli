@@ -20,15 +20,16 @@ const formControl = () => {
 
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
-
           let lat = '';
           let lng = '';
+
           if (place.geometry) {
             lat = place.geometry.location.lat();
             lng = place.geometry.location.lng();
           }
-          $(`#${inputLat}`).val(lat);
-          $(`#${inputLng}`).val(lng);
+
+          jQuery(`input[data-drupal-selector="${inputLat}"]`).val(lat);
+          jQuery(`input[data-drupal-selector="${inputLng}"]`).val(lng);
         });
       });
     }

@@ -312,6 +312,13 @@ a[href].card-pill-simple {
   }
 }
 
+.card-map {
+  position: relative;
+  top: -$spacer * 2;
+  width: 100%;
+  height: 600px;
+}
+
 // Invert colors with theme colors
 @each $color, $value in $theme-colors {
   .card-#{$color} {

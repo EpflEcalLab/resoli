@@ -125,6 +125,9 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
         ],
         'tags' => $this->getCacheTags($variables['events']),
       ],
+      '#attached' => [
+        'library' => 'quartiers_solidaires/google-map',
+      ],
     ];
   }
 

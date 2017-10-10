@@ -20,6 +20,7 @@ svgIcons();
     multiStep();
     formControl();
     formAjax();
+    formSubmit();
     calendar();
     checkbox();
     button();

@@ -29,13 +29,13 @@ const card = () => {
     let $card = $('.card:first .card-pill[data-toggle=collapse]');
 
     if ($card.length) {
-      if (hash && hash.includes('event')) {
+      if (hash && hash.includes('event') && $(hash).length) {
         $card = $(hash);
       }
 
       // Always toggle the first card or the one from the URL on load
       $card.trigger('click');
-      $('html, body').animate({ scrollTop: $card.offset().top }, 200);
+      // $('html, body').animate({ scrollTop: $card.offset().top }, 200);
     }
 
   })(jQuery);

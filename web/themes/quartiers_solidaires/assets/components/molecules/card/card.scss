@@ -67,6 +67,14 @@ a.card {
       transform: none;
     }
   }
+
+  @each $color, $value in $theme-colors {
+    .card-list-item-#{$color} & {
+      background-color: $value;
+      border-color: $value;
+    }
+  }
+
 }
 
 .card-pill-white {
@@ -267,6 +275,14 @@ a[href].card-pill-simple {
     }
 
     @include flag-size(50px);
+  }
+
+  @each $color, $value in $theme-colors {
+    &.card-list-item-#{$color}.card-open {
+      .card-pill {
+        border-color: $value;
+      }
+    }
   }
 }
 

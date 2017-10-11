@@ -1,6 +1,7 @@
 global-styling:
   css:
     theme:
+      build/css/vendors.min.css: {}
       build/css/base.css: {}
   js:
     build/js/vendors.min.js: {}

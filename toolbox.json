@@ -17,8 +17,11 @@
     "web/themes/quartiers_solidaires/build/fonts/**/*"
   ],
   "vendors": {
-    "css": [],
+    "css": [
+      "node_modules/selectize/dist/css/selectize.css"
+    ],
     "js": [
+      "node_modules/selectize/dist/js/standalone/selectize.js",
       "node_modules/popper.js/dist/umd/popper.min.js",
       "node_modules/bootstrap/js/dist/alert.js",
       "node_modules/bootstrap/js/dist/button.js",

@@ -57,7 +57,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     $fallback = [];
     if (!empty($community_members)) {
       foreach ($community_members as $community_member) {
-        $options[$community_member->id()] = [
+        $options[] = [
           'uid'         => $community_member->id(),
           'email'       => $community_member->mail->value,
           'displayname' => $community_member->field_firstname->value . ' ' . $community_member->field_lastname->value,
@@ -72,6 +72,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
       '#multiple'      => FALSE,
       '#required'      => FALSE,
       '#options'       => $fallback,
+      '#default_value' => NULL,
       '#attributes'    => [
         'selectize'    => TRUE,
         'class'        => ['selectize-members'],
@@ -79,15 +80,27 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
       ],
     ];
 
+    $form['actions'] = [
+      '#type'  => 'fieldset',
+      '#attributes' => [
+        'class' => [
+          'mb-5',
+          'text-center',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'container__center',
+      ],
+    ];
+
     $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#attributes' => [
         'icon' => 'check',
-        'modal' => TRUE,
         'icon_left' => TRUE,
-        'outline' => TRUE,
         'class' => [
           'shadow-to-bottom',
+          'mx-auto',
         ],
       ],
       '#value' => $this->t('qs.form.submit'),

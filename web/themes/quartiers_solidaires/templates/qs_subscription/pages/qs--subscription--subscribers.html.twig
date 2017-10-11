@@ -9,7 +9,7 @@
   {% if variables.subscribers %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
     {% for subscriber in variables.subscribers %}
-      <li class="card card-list-item" id="card-{{ loop.index0 }}">
+      <li class="card card-list-item card-list-item-danger" id="card-{{ loop.index0 }}">
         <a
           data-toggle="collapse"
           data-parent="#users-accordion"
@@ -25,7 +25,7 @@
           <span class="card-pill-title">
               {{ subscriber.field_firstname.value }} {{ subscriber.field_lastname.value }}
           </span>
-          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+          <span class="btn btn-outline-danger btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
             {{ macros.icon('look') }}
             <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
           </span>
@@ -38,7 +38,7 @@
             <h5 class="card-title mt-1">{{ subscriber.mail.value }}</h5>
 
              <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-              <a href="mailto:{{ subscriber.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+              <a href="mailto:{{ subscriber.mail.value }}" class="btn btn-outline-danger btn-icon btn-white shadow-to-bottom">
                 {{ macros.icon('mail') }}
                 {% trans %}qs.contact {{ subscriber.field_firstname.value }}{% endtrans %}
               </a>

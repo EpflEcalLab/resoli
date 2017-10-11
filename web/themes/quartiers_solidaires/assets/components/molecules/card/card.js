@@ -18,23 +18,22 @@ const card = () => {
 
     // Update the hash in URL on collapse
     $('.card .collapse').on('show.bs.collapse', function(e) {
-      const event_id = $(e.currentTarget).attr('id').replace('collapse-', '');
-      window.location.hash = `event${event_id}`;
+      const card_id = $(e.currentTarget).attr('id').replace('collapse-', '');
+      window.location.hash = `card${card_id}`;
     });
 
     // Get the hash in the URL
     const hash = window.location.hash;
 
-    let event_id = '';
     let $card = $('.card:first .card-pill[data-toggle=collapse]');
 
     if ($card.length) {
-      if (hash && hash.includes('event') && $(hash).length) {
+      if (hash && hash.includes('card') && $(hash).length) {
         $card = $(hash);
       }
 
       // Always toggle the first card or the one from the URL on load
-      $card.trigger('click');
+      $card.find('a').trigger('click');
       // $('html, body').animate({ scrollTop: $card.offset().top }, 200);
     }
 

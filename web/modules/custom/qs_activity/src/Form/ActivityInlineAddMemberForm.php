@@ -42,7 +42,6 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
 
     $form['#attributes'] = [
       'title'       => $options['activity']->title->value,
-      'description' => $this->t('qs.activity.add_member'),
     ];
 
     $query = $this->privilegeManager->queryMembersWithPrivileges($community);
@@ -67,7 +66,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     }
 
     $form['member'] = [
-      '#title'         => $this->t('Member'),
+      '#title'         => $this->t('qs.activity.add_member'),
       '#type'          => 'select',
       '#multiple'      => FALSE,
       '#required'      => FALSE,
@@ -77,6 +76,10 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
         'selectize'    => TRUE,
         'class'        => ['selectize-members'],
         'data-options' => json_encode($options),
+      ],
+      '#theme_wrappers' => [
+        'form_element',
+        'container__center',
       ],
     ];
 
@@ -103,7 +106,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
           'mx-auto',
         ],
       ],
-      '#value' => $this->t('qs.form.submit'),
+      '#value' => $this->t('qs.activity.add_member.submit'),
     ];
 
     return $form;
@@ -121,7 +124,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
       '@activity' => $activity->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_activity.activities.members', ['activity' => $activity->id()], []);
+    $form_state->setRedirect('qs_activity.activities.members', ['activity' => $activity->id()], ['fragment' => 'card' . $account->id()]);
   }
 
 }

@@ -4,7 +4,6 @@ const formSelectize = () => {
     '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
     const options = $('select.selectize-members').data('options');
-    console.log(options);
 
     $('select.selectize-members').selectize({
       persist: false,

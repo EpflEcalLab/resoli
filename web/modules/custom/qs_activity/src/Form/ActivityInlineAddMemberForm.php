@@ -52,16 +52,23 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     // Load user entities whitout privileges.
     $community_members = $this->userStorage->loadMultiple($uids);
 
-    $options = [];
+    $select_options = [];
     $fallback = [];
     if (!empty($community_members)) {
       foreach ($community_members as $community_member) {
-        $options[] = [
+
+        // Remove users showed on the page and passed in options to avoid
+        // confusion.
+        if (isset($options['members'][$community_member->id()])) {
+          continue;
+        }
+
+        $select_options[] = [
           'uid'         => $community_member->id(),
           'email'       => $community_member->mail->value,
           'displayname' => $community_member->field_firstname->value . ' ' . $community_member->field_lastname->value,
         ];
-        $fallback[$community_member->id()] = !empty($options[$community_member->id()]['displayname']) ? $options[$community_member->id()]['displayname'] : $community_member->name->value;
+        $fallback[$community_member->id()] = !empty($select_options[$community_member->id()]['displayname']) ? $select_options[$community_member->id()]['displayname'] : $community_member->name->value;
       }
     }
 

@@ -6,7 +6,7 @@
     <h2>{{ variables.activity.title.value }}</h2>
   </div>
 
-  {{ bamboo_render_form('qs_activity', 'ActivityInlineAddMemberForm', {'activity': variables.activity}) }}
+  {{ bamboo_render_form('qs_activity', 'ActivityInlineAddMemberForm', {'activity': variables.activity, 'members': variables.members}) }}
 
   {% if variables.members %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">

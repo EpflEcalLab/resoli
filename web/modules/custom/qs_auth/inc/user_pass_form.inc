@@ -42,6 +42,9 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
       '#title' => t('qs_auth.form.pass.title'),
     ];
 
+    $form['forget']['mail'] = $form['mail'];
+    unset($form['mail']);
+
     $form['forget']['name'] = $form['name'];
     unset($form['name']);
 

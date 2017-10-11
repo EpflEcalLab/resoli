@@ -15,11 +15,21 @@
     </span>
   </span>
 
+  {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
+    {{ macros.badge('wait', 'flag-subscription-wait') }}
+  {% endif %}
+
+  {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
+    {{ macros.badge('confirmed', 'flag-subscription-confirmed') }}
+  {% endif %}
+
   <span class="size-date ml-auto text-dark">
-    <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
+    {% block card_pill_time %}
+    <time datetime="{{ event.field_start_at.date|date('Y-m-d') }}">
       {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F') }}
-      <span class="d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y') }}</span>
+      <span class="d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">{{ event.field_start_at.date|date('Y') }}</span>
     </time>
+    {% endblock %}
   </span>
 
   <span

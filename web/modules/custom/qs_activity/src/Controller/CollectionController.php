@@ -221,18 +221,17 @@ class CollectionController extends ControllerBase {
 
     // Get badges.
     if (!empty($events)) {
-      // For a list of Events IDs where current user has rejected subscription.
-      // Used to know when display the rejected subscription button & badge(s).
-      $variables['user_events_has_rejected_subscription'] = $this->badgeManager->getSubscription($events, 0);
-      // For a list of Events IDs where current user has confirmed subscription.
-      // Used to know when display the confirmed subscription button & badge(s).
-      $variables['user_events_has_confirmed_subscription'] = $this->badgeManager->getSubscription($events, 1);
-      // For a list of Events IDs number of pending subscriptions.
-      // Used to know when display for organizer or maintainer badge(s).
-      $variables['events_count_pending_subscriptions'] = $this->badgeManager->countSubscriptions($events, NULL);
-      // For a list of Events IDs number of subscriptions.
-      // Used to know when display for organizer or maintainer badge(s).
-      $variables['events_count_confirmed_subscriptions'] = $this->badgeManager->countSubscriptions($events, 1);
+      // From a list of Events where current user has pending subscriptions.
+      $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($events, NULL);
+
+      // From a list of Events where current user has confirmed subscription.
+      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($events, 1);
+
+      // From a list of Events number of pending subscriptions.
+      $variables['badges']['admin']['subscriptions']['pendings'] = [];
+
+      // From a list of Events number of subscriptions.
+      $variables['badges']['admin']['subscriptions']['confirmed'] = [];
     }
 
     return [
@@ -243,16 +242,29 @@ class CollectionController extends ControllerBase {
           'user',
           'url.query_args',
         ],
-        'tags' => [
-          // Invalidated whenever any Event is updated, deleted or created.
-          'node_list:event',
-          // Invalidated whenever any Community is updated, deleted or created.
-          'taxonomy_term_list:communities',
-          // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege_list:privilege',
-        ],
+        'tags' => $this->getCacheTags($variables['events']),
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags(array $nodes = NULL) {
+    $tags = [
+      // Invalidated whenever any Event is updated, deleted or created.
+      'node_list:event',
+      // Invalidated whenever any Community is updated, deleted or created.
+      'taxonomy_term_list:communities',
+      // Invalidated whenever any Privilege is updated, deleted or created.
+      'privilege_list:privilege',
+    ];
+    if ($nodes) {
+      foreach ($nodes as $node) {
+        $tags[] = 'node:' . $node->id();
+      }
+    }
+    return $tags;
   }
 
 }

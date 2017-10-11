@@ -1,0 +1,59 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/taxonomy\/term\/12?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
+        }
+    },
+    "tid": [
+        {
+            "value": 12
+        }
+    ],
+    "uuid": [
+        {
+            "value": "a98a6d0e-7076-4109-a7b6-108ffe6470c0"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "themes"
+        }
+    ],
+    "name": [
+        {
+            "value": "Interg\u00e9n\u00e9rationnel",
+            "lang": "zxx"
+        }
+    ],
+    "weight": [
+        {
+            "value": 8
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507560008,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "field_icon": [
+        {
+            "value": "intergenerationnel"
+        }
+    ]
+}

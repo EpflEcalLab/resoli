@@ -10,6 +10,7 @@ import formControl from 'molecules/form-control/form-control';
 import formAjax from 'molecules/form-control/form-ajax';
 import formSubmit from 'molecules/form-control/form-submit';
 import formSelectize from 'molecules/form-control/form-selectize';
+import calendar from 'molecules/calendar/calendar';
 
 svgIcons();
 
@@ -22,6 +23,7 @@ svgIcons();
     formAjax();
     formSubmit();
     formSelectize();
+    calendar();
     checkbox();
     button();
   });

@@ -51,7 +51,6 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     }
     // Load user entities whitout privileges.
     $community_members = $this->userStorage->loadMultiple($uids);
-
     $select_options = [];
     $fallback = [];
     if (!empty($community_members)) {
@@ -78,11 +77,11 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
       '#multiple'      => FALSE,
       '#required'      => FALSE,
       '#options'       => $fallback,
-      '#default_value' => NULL,
+      '#default_value' => 0,
       '#attributes'    => [
         'selectize'    => TRUE,
         'class'        => ['selectize-members'],
-        'data-options' => json_encode($options),
+        'data-options' => json_encode($select_options),
       ],
       '#theme_wrappers' => [
         'form_element',

@@ -11,7 +11,7 @@
   </div>
 
   {# Contact info card #}
-  <div class="card-back card-secondary" id="contact-{{ event.nid.value }}">
+  <div class="card-back" id="contact-{{ event.nid.value }}">
     <div class="card-pill">
 
       <span class="card-pill-icon">
@@ -69,7 +69,7 @@
 
   {# Map info card #}
   {% if event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
-    <div class="card-back card-secondary" id="map-{{ event.nid.value }}">
+    <div class="card-back" id="map-{{ event.nid.value }}">
       <div class="card-pill">
 
         <span class="card-pill-icon">
@@ -84,10 +84,9 @@
 
       </div>
       <div class="card-body text-center">
-
-        <p class="card-text">
-          Map here
-        </p>
+        <div class="card-map" id="map-container-{{ event.nid.value }}" data-lat="{{ event.field_venue_lat.value }}" data-lng="{{ event.field_venue_long.value }}" data-label="{{ event.field_venue.value }}" data-info="<strong>{{ event.title.value }}</strong> <br/>{{ event.field_venue.value }}">
+          {{ 'qs.mp.loading'|t }}
+        </div>
 
         <div class="row">
           <div class="col-md-8 mx-auto">

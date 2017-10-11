@@ -144,18 +144,24 @@ class PrivilegeGodController extends AjaxControllerBase {
   public function ban(Request $request) {
     $user_id = $request->request->get('user');
     $user    = $this->userStorage->load($user_id);
+    $entity  = NULL;
 
-    $community_id = $request->request->get('community');
-    $community = $this->termStorage->load($community_id);
+    if ($community_id = $request->request->get('community')) {
+      $entity = $this->termStorage->load($community_id);
+    }
 
-    if (!$community) {
+    if ($activity_id = $request->request->get('activity')) {
+      $entity = $this->nodeStorage->load($activity_id);
+    }
+
+    if (!$entity) {
       return new JsonResponse(['status' => FALSE]);
     }
 
     // Check if a privilege already exists.
     $privileges = $this->privilegeStorage->loadByProperties([
-      'bundle' => $community->getEntityTypeId(),
-      'entity' => $community->id(),
+      'bundle' => $entity->getEntityTypeId(),
+      'entity' => $entity->id(),
       'user'   => $user->id(),
     ]);
 

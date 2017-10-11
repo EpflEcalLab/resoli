@@ -6,67 +6,67 @@ Feature: Activitiy Detail Page Access
   @api
   Scenario: Logged as Member of Lausanne, I can access to the Activity N°2 (Activity 2 - Lausanne - Theme N°1)
     Given I am logged in as user "member+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can access to the Activity N°2 (Activity 2 - Lausanne - Theme N°1)
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Manager of Lausanne, I can access to the Activity N°2 (Activity 2 - Lausanne - Theme N°1)
     Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Declined Organizer of Lausanne, I can't access to the Activity N°2 (Activity 2 - Lausanne - Theme N°1)
     Given I am logged in as user "declined+organizer+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne, I can access to the Activity N°2 (Activity 2 - Lausanne - Theme N°1)
     Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Member of Lausanne, I can't access to the Activity N°11 (Activity 11 - Fribourg - Theme N°3)
     Given I am logged in as user "member+lausanne"
-    When I am on "/fribourg/activities/activity-11-fribourg-theme-ndeg3"
+    When I am on "/fribourg/activities/cours-smartphone-tablette"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can't access to the Activity N°11 (Activity 11 - Fribourg - Theme N°3)
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/fribourg/activities/activity-11-fribourg-theme-ndeg3"
+    When I am on "/fribourg/activities/cours-smartphone-tablette"
     And the response status code should be 403
 
   @api
   Scenario: Logged as Manager of Lausanne, I can't access to the Activity N°11 (Activity 11 - Fribourg - Theme N°3)
     Given I am logged in as user "manager+lausanne"
-    When I am on "/fribourg/activities/activity-11-fribourg-theme-ndeg3"
+    When I am on "/fribourg/activities/cours-smartphone-tablette"
     And the response status code should be 403
 
   @api
   Scenario: Login as Multiple Privileges (Member of Fribourg & waiting approval Organizer for Fribourg), I can access to the Activity N°11 (Activity 11 - Fribourg - Theme N°3)
     Given I am logged in as user "member+fribourg+approval+organizer+fribourg"
-    When I am on "/fribourg/activities/activity-11-fribourg-theme-ndeg3"
+    When I am on "/fribourg/activities/cours-smartphone-tablette"
     And the response status code should be 200
 
   @api
   Scenario: Login as Multiple Privileges (Member & Organizer of Fribourg), I can access to the Activity N°11 (Activity 11 - Fribourg - Theme N°3)
     Given I am logged in as user "member+fribourg+organizer+fribourg"
-    When I am on "/fribourg/activities/activity-11-fribourg-theme-ndeg3"
+    When I am on "/fribourg/activities/cours-smartphone-tablette"
     And the response status code should be 200
 
   @api
   Scenario: Login as Multiple waiting approval (Member & Organizer for Fribourg), I can't access to the Activity N°11 (Activity 11 - Fribourg - Theme N°3)
     Given I am logged in as user "approval+member+fribourg+approval+organizer+fribourg"
-    When I am on "/fribourg/activities/activity-11-fribourg-theme-ndeg3"
+    When I am on "/fribourg/activities/cours-smartphone-tablette"
     And the response status code should be 403
 
   @api

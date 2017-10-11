@@ -1,0 +1,207 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events\/labio-de-liebre-bec-de-lievre?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events?_format=hal_json"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 38
+        }
+    ],
+    "uuid": [
+        {
+            "value": "619eba65-2a76-42e3-a6f1-ad81408ea026"
+        }
+    ],
+    "vid": [
+        {
+            "value": 110
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "event"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Labio de liebre \"Bec de li\u00e8vre\"",
+            "lang": "zxx"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441"
+                    }
+                ]
+            }
+        ]
+    },
+    "created": [
+        {
+            "value": 1507540987,
+            "lang": "zxx"
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507564376,
+            "lang": "zxx"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": 1507564376
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "<p id=\"_description2\" itemprop=\"description\">Labio de liebre \"Bec de li\u00e8vre\", une pi\u00e8ce \u00e9crite et mise en sc\u00e8ne par Fabio Rubiano Orjuela \u00e0 voir au Th\u00e9\u00e2tre Kl\u00e9ber-M\u00e9leau (TKM) \u00e0 Renens-Malley du 19 au 21 octobre 2017.<br \/>\r\n<br \/>\r\nLe Teatro Petra nous propose un th\u00e9\u00e2tre lieu de m\u00e9moire, qui revient sur l\u2019histoire de la Colombie, sur ses bourreaux et ses victimes, sur le d\u00e9sir de vengeance et le pardon.<br \/>\r\n<br \/>\r\nLe protagoniste de ce spectacle, Salvo Castello, est un homme dur et implacable, qui fut un tortionnaire et qui purge sa peine en r\u00e9sidence surveill\u00e9e. Parmi les fant\u00f4mes qui habitent avec lui sa demeure, il y a un gar\u00e7on au bec de li\u00e8vre, Granado Sosa, mais aussi toute sa famille (s\u0153ur, fr\u00e8re et m\u00e8re), des paysans dont il a ordonn\u00e9 le massacre.<br \/>\r\n<br \/>\r\nLa fable porte ainsi autant sur le pardon des victimes que sur la vengeance, le bourreau ne trouvant pas de repos dans sa retraite, tel Macbeth apr\u00e8s son crime, ses victimes ne le quittant pas, ayant une pr\u00e9sence fantomatique pr\u00e9gnante. Il les appelle, leur parle, se souvient: rien ne peut lui faire oublier ses exactions et leurs souffrances, sa cruaut\u00e9 et leur martyre, ses viols et leurs cris.<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_mail": [
+        {
+            "value": "billetterie@t-km.ch"
+        }
+    ],
+    "field_contact_phone": [
+        {
+            "value": "+41 21 625 84 29"
+        }
+    ],
+    "field_contribution": [
+        {
+            "value": "de chf 8 \u00e0 45.-"
+        }
+    ],
+    "field_end_at": [
+        {
+            "value": "2017-10-08T12:00:00"
+        }
+    ],
+    "field_start_at": [
+        {
+            "value": "2017-10-08T10:00:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Th\u00e9\u00e2tre Kl\u00e9ber-M\u00e9leau (TKM) Chemin de l'Usine \u00e0 Gaz 9 1020 Renens-Malley"
+        }
+    ],
+    "field_venue_lat": [
+        {
+            "value": "46.8182"
+        }
+    ],
+    "field_venue_long": [
+        {
+            "value": "8.2275"
+        }
+    ]
+}

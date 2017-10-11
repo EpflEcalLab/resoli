@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/lausanne\/activities\/activity-2-lausanne-theme-ndeg1?_format=hal_json"
+            "href": "http:\/\/default\/lausanne\/activities\/atelier-creatif\/events?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -40,7 +40,7 @@
     ],
     "vid": [
         {
-            "value": 64
+            "value": 72
         }
     ],
     "langcode": [
@@ -62,7 +62,7 @@
     ],
     "title": [
         {
-            "value": "Activity 2 - Lausanne - Theme N\u00b01",
+            "value": "Atelier Cr\u00e9atif",
             "lang": "zxx"
         }
     ],
@@ -79,7 +79,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "b3a2455d-a08e-4182-a327-b38d2b2219b6"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ],
                 "lang": "zxx"
@@ -97,7 +97,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "b3a2455d-a08e-4182-a327-b38d2b2219b6"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ]
             }
@@ -145,7 +145,7 @@
     ],
     "changed": [
         {
-            "value": 1503591584,
+            "value": 1507563191,
             "lang": "zxx"
         }
     ],
@@ -163,7 +163,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1503591584
+            "value": 1507563191
         }
     ],
     "revision_translation_affected": [

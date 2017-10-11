@@ -1,0 +1,78 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="row mt-3">
+    <div class="col text-right">
+      {% if variables.prev_month|date('Y-m') >= 'now'|date('Y-m') %}
+        {% set parameters = variables.prev_month|date('Y-m') == 'now'|date('Y-m') ? {} : {'day': variables.prev_month|date('Y-m-d')} %}
+        <a
+          class="btn btn-outline-secondary btn-icon"
+          href="{{ path('<current>', parameters) }}"
+          aria-label="{{ 'qs.calendar.monthly.goto @month'|t({
+            '@month': variables.prev_month|bamboo_i18n_format_date('custom', 'F')
+          }) }}"
+        >
+          {{macros.icon('chevron-left')}}
+          {{ variables.prev_month|bamboo_i18n_format_date('custom', 'F') }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="col mx-auto text-center">
+      <h2>
+        {{ variables.current_day|bamboo_i18n_format_date('custom', 'F Y') }}
+      </h2>
+      <p>
+        {% if variables.current_day|date('Y-m-d') != 'now'|date('Y-m-d') %}
+          <a href="{{ path('<current>') }}">{{ 'qs.calendar.today'|t }}</a>
+        {% endif %}
+      </p>
+    </div>
+    <div class="col">
+      <a
+        class="btn btn-outline-secondary btn-icon btn-icon-right"
+        href="{{ path('<current>', {'day': variables.next_month|date('Y-m-d')}) }}"
+        aria-label="{{ 'qs.calendar.monthly.goto @month'|t({
+          '@month': variables.next_month|bamboo_i18n_format_date('custom', 'F')
+        }) }}"
+      >
+        {{macros.icon('chevron-right')}}
+        {{ variables.next_month|bamboo_i18n_format_date('custom', 'F') }}
+      </a>
+    </div>
+  </div>
+  <div class="calendar-wrapper">
+    <div class="calendar">
+      {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
+        <strong class="calendar-head">{{ day|bamboo_i18n_format_date('custom', 'D') }}</strong>
+      {% endfor %}
+
+      {% for day in variables.dates %}
+        {% set is_today = day|date('Y-m-d') == 'now'|date('Y-m-d') %}
+        {% set is_current_month = day|date('Y-m') == variables.current_day|date('Y-m') %}
+        {% set is_active = day|date('Y-m-d') == variables.current_day|date('Y-m-d') %}
+        {% set is_past = day|date('Y-m-d') < 'now'|date('Y-m-d') %}
+
+        {% set classes = [
+          'calendar-item btn btn-circle shadow-to-bottom',
+          is_today ? 'btn-outline-secondary' : 'btn-outline-primary',
+          is_active ? 'active',
+          not is_today and (is_past or day|date('Y-m-d') not in variables.events|keys) ? 'disabled',
+        ] %}
+
+        {% set parameters = is_today ? {} : {'day': day|date('Y-m-d')} %}
+
+        {% if is_current_month %}
+        <a
+          class="{{ classes|join(' ') }}"
+          aria-label="{{ day|bamboo_i18n_format_date('custom', 'j F Y') }}"
+          href="{{ path('<current>', parameters) }}"
+        >
+          {{ day|date('j') }}
+        </a>
+        {% else %}
+        <span class="{{ classes|join(' ') }} disabled"></span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

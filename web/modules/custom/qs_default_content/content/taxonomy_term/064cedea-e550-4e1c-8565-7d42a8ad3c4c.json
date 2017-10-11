@@ -1,0 +1,59 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/taxonomy\/term\/17?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
+        }
+    },
+    "tid": [
+        {
+            "value": 17
+        }
+    ],
+    "uuid": [
+        {
+            "value": "064cedea-e550-4e1c-8565-7d42a8ad3c4c"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "themes"
+        }
+    ],
+    "name": [
+        {
+            "value": "Rencontres Th\u00e9matiques",
+            "lang": "zxx"
+        }
+    ],
+    "weight": [
+        {
+            "value": 13
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507560008,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "field_icon": [
+        {
+            "value": "rencontresthematiques"
+        }
+    ]
+}

@@ -47,21 +47,21 @@ Feature: Activitiy Alias
   Scenario: Logged as Member of Lausanne, I can access to the Activity N°2 (Activity - Lausanne - Theme N°1)
     Given I am logged in as user "member+lausanne"
     When I am on "/node/2"
-    And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    And the url should match "lausanne/activities/atelier-creatif"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Member of Lausanne, when I access to an Event of Activity N°2 (Activity - Lausanne - Theme N°1) I am redirected on the activity page
     Given I am logged in as user "member+lausanne"
     When I am on "/node/15"
-    And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    And the url should match "lausanne/activities/atelier-creatif"
     And the response status code should be 200
 
   @api
   Scenario: Logged as Member of Lausanne, I can access to the Activity N°2 (Activity - Lausanne - Theme N°1)
     Given I am logged in as user "member+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/events"
-    And the url should match "lausanne/activities/activity-2-lausanne-theme-ndeg1"
+    When I am on "/lausanne/activities/atelier-creatif/events"
+    And the url should match "lausanne/activities/atelier-creatif"
     And the response status code should be 200
 
 ## Activity Edit Form
@@ -75,19 +75,19 @@ Feature: Activitiy Alias
   @api
   Scenario: Logged as Organizer of Lausanne, I can access to Lausanne events add form
     Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/events/add"
+    When I am on "/lausanne/activities/atelier-creatif/events/add"
     And the response status code should be 200
 
 ## Activity Dashboard
   @api
   Scenario: Logged as Manager of Lausanne, I can access to the Dashboard of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity
     Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/dashboard"
+    When I am on "/lausanne/activities/atelier-creatif/dashboard"
     And the response status code should be 200
 
 ## Activity Dashboard Members
   @api
   Scenario: Logged as Manager of Lausanne, I can access to the Dashboard Members of Activity N°2 (Activity 2 - Lausanne - Theme N°1) I'm the organizer of this activity
     Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/activities/activity-2-lausanne-theme-ndeg1/dashboard/members"
+    When I am on "/lausanne/activities/atelier-creatif/dashboard/members"
     And the response status code should be 200

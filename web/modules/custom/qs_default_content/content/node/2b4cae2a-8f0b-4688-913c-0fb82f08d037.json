@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/lausanne\/activities\/activity-3-lausanne-theme-ndeg1\/events\/event-activity-3-2-days-1600?_format=hal_json"
+            "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events\/un-obus-dans-le-coeur?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
@@ -19,7 +19,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
             {
-                "href": "http:\/\/default\/lausanne\/activities\/activity-3-lausanne-theme-ndeg1?_format=hal_json"
+                "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events?_format=hal_json"
             }
         ]
     },
@@ -35,7 +35,7 @@
     ],
     "vid": [
         {
-            "value": 65
+            "value": 107
         }
     ],
     "langcode": [
@@ -57,7 +57,7 @@
     ],
     "title": [
         {
-            "value": "Event - Activity (3) - In 2 days at 16h00",
+            "value": "Un Obus dans le coeur",
             "lang": "zxx"
         }
     ],
@@ -74,7 +74,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "d9aebbe3-4dea-4982-bb75-4e300e64f56d"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ],
                 "lang": "zxx"
@@ -92,7 +92,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "d9aebbe3-4dea-4982-bb75-4e300e64f56d"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ]
             }
@@ -101,7 +101,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/lausanne\/activities\/activity-3-lausanne-theme-ndeg1?_format=hal_json"
+                        "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events?_format=hal_json"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -123,7 +123,7 @@
     ],
     "changed": [
         {
-            "value": 1503935593,
+            "value": 1507564217,
             "lang": "zxx"
         }
     ],
@@ -141,7 +141,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1503935593
+            "value": 1507564217
         }
     ],
     "revision_translation_affected": [
@@ -156,14 +156,32 @@
             "lang": "zxx"
         }
     ],
+    "body": [
+        {
+            "value": "<p id=\"_description2\" itemprop=\"description\">Un Obus dans le coeur, une pi\u00e8ce de Wajdi Mouawad mise en sc\u00e8ne par Laurent Gachoud \u00e0 d\u00e9couvrir au Th\u00e9\u00e2tre de l'\u00c9chandole \u00e0 Yverdon-les-Bains les 26 et 27 octobre 2017.<br \/>\r\n<br \/>\r\nLa rencontre entre l\u2019auteur canado-libanais Wajdi Mouawad et l\u2019interpr\u00e8te Sofyen Khalfaoui promet manifestement une cr\u00e9ation puissante. Com\u00e9dien tr\u00e8s impliqu\u00e9 dans les programmes de soutien humanitaires tels qu\u2019au Darfour et en Syrie, son \u0153il se pose de fa\u00e7on toute personnelle sur les th\u00e8mes de pr\u00e9dilection de l\u2019auteur, tels que le conflit ou les liens du sang.<br \/>\r\n<br \/>\r\nEn \u00e9chos aux probl\u00e9matiques terroristes, migratoires et identitaires actuelles, ce spectacle ouvre notre regard de spectateur sur le cheminement int\u00e9rieur \u00e0 activer pour se reconstruire, reprendre foi en la vie et passer au-del\u00e0 d\u2019un traumatisme quel qu\u2019il soit. Dans cette histoire, le personnage de Wahab se rend au chevet de sa m\u00e8re mourante, emprunt \u00e0 ses questionnements int\u00e9rieurs. Cela nous touche au plus profond du c\u0153ur: de fa\u00e7on visc\u00e9rale, lib\u00e9ratrice et g\u00e9n\u00e9reuse. C\u2019est un r\u00e9cit initiatique avec en ligne de mire, la lumi\u00e8re salvatrice.<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contribution": [
+        {
+            "value": "de chf 22 \u00e0 29.-"
+        }
+    ],
     "field_end_at": [
         {
-            "value": "2017-08-28T17:50:48"
+            "value": "2017-10-11T14:20:00"
         }
     ],
     "field_start_at": [
         {
-            "value": "2017-08-28T15:50:48"
+            "value": "2017-10-11T14:00:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Th\u00e9\u00e2tre de l'\u00c9chandole, Rue du Casino 9 1401, Yverdon-les-Bains"
         }
     ],
     "field_venue_lat": [

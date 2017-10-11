@@ -327,7 +327,7 @@ class EventAddForm extends FormBasic {
       $form_state->setErrorByName('[event][step-1][date][date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
     }
     // Assert the date is in the future.
-    elseif ($formatted_date < $now->format('d.m.Y')) {
+    elseif ($date < $now) {
       $form_state->setErrorByName('[event][step-1][date][date_fieldset][date]', $this->t('qs_activity.form.error.date_past @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
     }
 
@@ -359,8 +359,8 @@ class EventAddForm extends FormBasic {
     $data['contact_phone'] = $form_state->getValue('contact_phone');
     $data['contribution'] = $form_state->getValue('contribution');
     $data['venue'] = $form_state->getValue('venue');
-    $data['venue_lat'] = $form_state->getValue('venue_lat');
-    $data['venue_long'] = $form_state->getValue('venue_long');
+    $data['venue_lat'] = $form_state->getValue('latitude');
+    $data['venue_long'] = $form_state->getValue('longitude');
 
     // // Create the new event.
     $this->eventManager->create($activity, $start_at, $end_at, $data);

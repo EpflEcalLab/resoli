@@ -29,11 +29,11 @@ const card = () => {
 
     if ($card.length) {
       if (hash && hash.includes('card') && $(hash).length) {
-        $card = $(hash);
+        $card = $(hash).find('a');
       }
 
       // Always toggle the first card or the one from the URL on load
-      $card.find('a').trigger('click');
+      $card.trigger('click');
       // $('html, body').animate({ scrollTop: $card.offset().top }, 200);
     }
 

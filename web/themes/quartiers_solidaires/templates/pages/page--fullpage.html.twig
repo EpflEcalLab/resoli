@@ -11,5 +11,12 @@ but not * comment/reply/12345). * * Regions: * - page.header: Items for the head
 messages region. * - page.breadcrumb: Items for the breadcrumb region. * - page.content: The main content of the current
 page. * - page.footer: Items for the footer region. * * @see template_preprocess_page() * @see html.html.twig */ #}
 <main role="main">
-  <a id="main-content" tabindex="-1"></a> {% block content %}{{ page.content }}{% endblock %}
+  {% if page.header %}
+    <header class="header container py-3" role="banner">
+      {{ page.header }}
+    </header>
+  {% endif %}
+  {% block header %}{% endblock %}
+  <a id="main-content" tabindex="-1"></a>
+  {% block content %}{{ page.content }}{% endblock %}
 </main>

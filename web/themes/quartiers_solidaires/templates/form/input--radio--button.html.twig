@@ -22,6 +22,7 @@
 {% else %}
   {% set classes = [
     'btn btn-outline-invert',
+    'shadow-to-bottom',
     'btn-outline-' ~ attributes.color|default('blue'),
     labelIcon|length > 1 ? 'btn-icon',
     attributes.checked ? 'active',

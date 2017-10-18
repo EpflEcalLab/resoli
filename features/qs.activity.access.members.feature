@@ -1,4 +1,4 @@
-Feature: Activitiy Members Access
+Feature: Activity Members Access
   In order to make sure ACL is working for activity forms
   As a bunch of users
   I want to make sure the access & access bypass are working like a charm

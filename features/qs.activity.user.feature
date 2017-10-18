@@ -1,4 +1,4 @@
-Feature: Activitiy User Collection
+Feature: Activity User Collection
   In order to make sure activities user collection are working
   As a bunch of users
   I want to make sure the correct activities are shown

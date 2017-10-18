@@ -156,4 +156,53 @@ class ActivityManager {
     return $activity;
   }
 
+  /**
+   * Get all activities for the $user in the given $community.
+   *
+   * @param Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   * @param Drupal\user\UserInterface $user
+   *   The user entity.
+   *
+   * @return Drupal\node\NodeInterface[]
+   *   A collection of node's Activity. Oterwhise an empty array.
+   */
+  public function getByUser(TermInterface $community, UserInterface $user) {
+    $query = $this->connection->select('node_field_data', 'activity');
+    $query->fields('activity', ['nid', 'title'])
+      ->condition('activity.type', 'activity')
+      ->condition('activity.status', TRUE);
+
+    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
+    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+
+    $query->leftJoin('privileges', 'privileges', 'privileges.entity = activity.nid');
+    $query->condition('privileges.user', $user->id());
+    $query->condition('privileges.bundle', 'node');
+
+    $or = $query->orConditionGroup();
+    $or->condition('privileges.privilege', 'activity_members');
+    $or->condition('privileges.privilege', 'activity_maintainers');
+    $or->condition('privileges.privilege', 'activity_organizers');
+    $query->condition($or);
+
+    $query->groupBy('activity.nid');
+    $query->groupBy('activity.title');
+    $query->orderBy('activity.title', 'ASC');
+
+    $rows = $query->execute()->fetchAll();
+
+    $nids = [];
+    foreach ($rows as $row) {
+      $nids[] = $row->nid;
+    }
+
+    $activities = [];
+    if ($nids) {
+      $activities = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $activities;
+  }
+
 }

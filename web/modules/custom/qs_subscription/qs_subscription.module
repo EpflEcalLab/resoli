@@ -21,6 +21,9 @@ function qs_subscription_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--subscription--waiting-approval',
     ],
-
+    'qs_subscription_user_collection_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--subscription--user-collection',
+    ],
   ];
 }

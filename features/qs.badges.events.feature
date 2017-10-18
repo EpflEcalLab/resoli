@@ -1,7 +1,7 @@
 Feature: Badges
   In order to make sure Badges are working for event pills & activities
   As a bunch of users
-  I want to make sure thex are shown like a charm
+  I want to make sure they are shown like a charm
 
 ## Activity Detail Page
   @api

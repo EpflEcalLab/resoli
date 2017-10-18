@@ -3,6 +3,7 @@
 <a
   href="{{ path('entity.node.canonical', { 'node': event.field_activity.target_id }, {'fragment': 'card' ~ event.nid.value}) }}"
   class="card-pill card-pill-simple"
+  id="event{{ event.nid.value }}"
 >
 
   <span class="card-pill-icon card-pill-icon-lg">

@@ -5,6 +5,7 @@ namespace Drupal\qs_badge\Service;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\taxonomy\TermInterface;
+use Drupal\user\UserInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**

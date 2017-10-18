@@ -1,4 +1,4 @@
-Feature: Activitiy Alias
+Feature: Activity Alias
   In order to make sure Alias is working for activities
   As a bunch of users
   I want to make sure the alias are working like a charm

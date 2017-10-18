@@ -6,6 +6,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Routing\UrlGeneratorInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -33,13 +34,20 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
   protected $urlGenerator;
 
   /**
+   * The current active user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  private $currentUser;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $route, UrlGeneratorInterface $urlGenerator) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $route, UrlGeneratorInterface $urlGenerator, AccountProxyInterface $current_user) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-
     $this->route = $route;
     $this->urlGenerator = $urlGenerator;
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -54,7 +62,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
       $plugin_definition,
       // Load customs services used in this class.
       $container->get('current_route_match'),
-      $container->get('url_generator')
+      $container->get('url_generator'),
+      $container->get('current_user')
     );
   }
 
@@ -65,7 +74,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $variables = [];
 
     $route_name = $this->route->getRouteName();
-    dump($route_name);
 
     $label = $this->t('qs.previous');
     $theme = 'secondary';
@@ -74,79 +82,122 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $community = $this->route->getParameter('community');
     $activity = $this->route->getParameter('activity');
     $event = $this->route->getParameter('event');
+    $node = $this->route->getParameter('node');
 
-    switch ($route_name) {
-      // Go to Community Dashboard.
-      case "qs_activity.activities.dashboard":
-      case "qs_activity.events.dashboard":
-      case "qs_community.members":
-      case "qs_community.waiting_approval":
-        $url = $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
-          'community' => $community->id(),
-        ], $options);
-        $label = $this->t('qs.previous.to_community_dashboard');
-        $theme = 'primary';
-        break;
+    if (!$activity && $event && !$event->get('field_activity')->isEmpty()) {
+      $community = $activity->field_activity->entity;
+    }
 
-      // Go to Activities Listing.
-      case "qs_community.dashboard":
-      case "entity.node.canonical":
-        if (!$community && $node = $this->route->getParameter('node')) {
-          $community = $node->field_community->entity;
-        }
-        $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
-          'community' => $community->id(),
-        ], $options);
-        $label = $this->t('qs.previous.to_activities_list');
-        $theme = 'primary';
-        break;
+    if (!$activity && $event && $event->hasField('field_activity')) {
+      $activity = $event->field_activity->entity;
+    }
 
-      // Go to Activity.
-      case "qs_activity.activities.dashboard":
-      case "qs_activity.events.dashboard":
-        if (!$activity && $event) {
-          $activity = $event->field_activity->entity;
+    if (!$community && $node && $node->hasField('field_community')) {
+      $community = $node->field_community->entity;
+    }
+
+    if (!$community && $activity && !$activity->get('field_community')->isEmpty()) {
+      $community = $activity->field_community->entity;
+    }
+
+    if ($route_name === 'entity.node.canonical') {
+      switch ($node->bundle()) {
+        case "activity":
+          $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_activities_list');
+          $theme = 'primary';
+          break;
+
+        case "event":
           $options = ['fragment' => "card{$event->id()}"];
-        }
-        $url = $this->urlGenerator->generateFromRoute('entity.node.canonical', [
-          'node' => $activity->id(),
-        ], $options);
-        $label = $this->t('qs.previous.to_activity');
-        $theme = 'primary';
-        break;
+          $url = $this->urlGenerator->generateFromRoute('entity.node.canonical', [
+            'node' => $node->field_activity->target_id,
+          ], $options);
+          $label = $this->t('qs.previous.to_activity');
+          $theme = 'primary';
+          break;
+      }
+    }
+    else {
+      switch ($route_name) {
+        // Go to Community Dashboard.
+        case "qs_community.members":
+        case "qs_community.waiting_approval":
+          $url = $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_community_dashboard');
+          $theme = 'primary';
+          break;
 
-      // Go to Activity Dashboard.
-      case "qs_activity.activities.form.edit.info":
-      case "qs_activity.activities.form.edit.visibility":
-      case "qs_activity.activities.form.edit.defaults":
-      case "qs_activity.events.form.add":
-      case "qs_activity.activities.members":
-        if (!$activity && $event) {
-          $activity = $event->field_activity->entity;
-          $options = ['fragment' => "card{$event->id()}"];
-        }
-        $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
-          'activity' => $activity->id(),
+        // Go to Activities Listing.
+        case "qs_community.dashboard":
+        case "qs_activity.user.collection":
+          $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_activities_list');
+          $theme = 'primary';
+          break;
 
-        ], $options);
-        $label = $this->t('qs.previous.to_activity_dashboard');
-        $theme = 'primary';
-        break;
+        // Go to Activity.
+        case "qs_activity.activities.dashboard":
+        case "qs_activity.events.dashboard":
+          $options = [];
+          if ($event) {
+            $options = ['fragment' => "card{$event->id()}"];
+          }
+          $url = $this->urlGenerator->generateFromRoute('entity.node.canonical', [
+            'node' => $activity->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_activity');
+          $theme = 'primary';
+          break;
 
-      // Go to Event Dashboard.
-      case "qs_activity.events.form.edit":
-      case "qs_subscription.subscribers":
-      case "qs_subscription.waiting_approval":
-        $url = $this->urlGenerator->generateFromRoute('qs_activity.events.dashboard', [
-          'event' => $event->id(),
-        ], $options);
-        $label = $this->t('qs.previous.to_event_dashboard');
-        $theme = 'primary';
-        break;
+        // Go to My Activities.
+        case "qs_activity.activities.form.add":
+          $url = $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
+            'community' => $community->id(),
+            'user' => $this->currentUser->id(),
+          ]);
+          $label = $this->t('qs.previous.to_my_activities');
+          $theme = 'primary';
+          break;
 
-      default:
-        $url = FALSE;
-        break;
+        // Go to Activity Dashboard.
+        case "qs_activity.activities.form.edit.info":
+        case "qs_activity.activities.form.edit.visibility":
+        case "qs_activity.activities.form.edit.defaults":
+        case "qs_activity.events.form.add":
+        case "qs_activity.activities.members":
+          $options = [];
+          if ($event) {
+            $options = ['fragment' => "card{$event->id()}"];
+          }
+          $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
+            'activity' => $activity->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_activity_dashboard');
+          $theme = 'primary';
+          break;
+
+        // Go to Event Dashboard.
+        case "qs_activity.events.form.edit":
+        case "qs_subscription.subscribers":
+        case "qs_subscription.waiting_approval":
+          $url = $this->urlGenerator->generateFromRoute('qs_activity.events.dashboard', [
+            'event' => $event->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_event_dashboard');
+          $theme = 'primary';
+          break;
+
+        default:
+          $url = FALSE;
+          break;
+      }
     }
 
     $variables['url'] = $url;

@@ -307,7 +307,7 @@ class EventEditForm extends EventEditFormBase {
       '@event' => $event->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_activity.events.form.edit', ['event' => $event->id()], []);
+    $form_state->setRedirect('qs_activity.events.dashboard', ['event' => $event->id()], []);
   }
 
 }

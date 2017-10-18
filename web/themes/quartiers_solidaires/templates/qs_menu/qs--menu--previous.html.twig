@@ -1,5 +1,7 @@
-{% import "@quartiers_solidaires/macros.html.twig" as macros %}
-<a class="btn btn-icon btn-outline-secondary shadow-to-right over-modal" href="javascript:history.back()">
-  {{ macros.icon('chevron-left') }}
-  {% trans %}qs.previous{% endtrans %}
-</a>
+{% if variables.url %}
+  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+  <a class="btn btn-icon btn-outline-{{ variables.theme }} shadow-to-right over-modal" href="{{ variables.url }}">
+    {{ macros.icon('chevron-left') }}
+    {{ variables.label }}
+  </a>
+{% endif %}

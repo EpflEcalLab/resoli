@@ -80,6 +80,19 @@ class RegisterForm extends FormBase {
       'form__fullpage__multistep',
     ];
 
+    // Display links to other meaningful pages.
+    $form['#top_links'] = [
+      '<front>' => [
+        'label' => $this->t('qs_auth.link.home'),
+        'options' => [
+          'icon' => 'chevron-left',
+        ],
+      ],
+      'qs_auth.login' => [
+        'label' => $this->t('qs_auth.link.login'),
+      ],
+    ];
+
     $form['register']['step-1'] = [
       '#type'  => 'fieldset',
       '#description' => $this->t('qs_auth.register_form.step1.description'),

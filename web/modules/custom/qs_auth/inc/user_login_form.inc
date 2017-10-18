@@ -19,6 +19,9 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
   $form['#top_links'] = [
     '<front>' => [
       'label' => t('qs_auth.link.home'),
+      'options' => [
+        'icon' => 'chevron-left',
+      ],
     ],
     'qs_auth.register' => [
       'label' => t('qs_auth.link.register'),

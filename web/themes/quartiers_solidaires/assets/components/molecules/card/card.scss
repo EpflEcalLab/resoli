@@ -330,9 +330,30 @@ a[href].card-pill-simple {
 
 .card-map {
   position: relative;
-  top: -$spacer * 2;
+  margin-top: $spacer * -1;
   width: 100%;
   height: 600px;
+}
+
+.card-map-container {
+  overflow: hidden;
+
+  @include border-radius($card-border-radius - $card-border-width);
+
+  .card-pill {
+    position: relative;
+    z-index: 100;
+  }
+
+  .card-body {
+    padding: 0;
+  }
+}
+
+.card-map-footer {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
 }
 
 // Invert colors with theme colors

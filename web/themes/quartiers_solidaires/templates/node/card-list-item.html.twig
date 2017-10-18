@@ -69,7 +69,7 @@
 
   {# Map info card #}
   {% if event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
-    <div class="card-back" id="map-{{ event.nid.value }}">
+    <div class="card-back card-map-container" id="map-{{ event.nid.value }}">
       <div class="card-pill">
 
         <span class="card-pill-icon">
@@ -88,7 +88,7 @@
           {{ 'qs.mp.loading'|t }}
         </div>
 
-        <div class="row">
+        <div class="row card-map-footer">
           <div class="col-md-8 mx-auto">
             <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
               {{ macros.icon('arrow-left') }}

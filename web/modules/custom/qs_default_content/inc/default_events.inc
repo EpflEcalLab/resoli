@@ -230,4 +230,54 @@ function qs_default_content_events() {
   $dt->modify('+20 minutes');
   $event_35->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
   $event_35->save();
+
+  // Event - Event - Activity (3) - In 1 month at 16h00.
+  $event_36 = $nodeStorage->load(36);
+  $dt = new DrupalDateTime();
+  $dt->modify('+1 month')->setTime(16, 0);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_36->set('field_start_at', $dt->format('Y-m-d\TH:i:s'));
+  $dt->modify('+20 minutes');
+  $event_36->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
+  $event_36->save();
+
+  // Event - Event - Activity (3) - today at 23:00.
+  $event_37 = $nodeStorage->load(37);
+  $dt = new DrupalDateTime();
+  $dt->modify('today')->setTime(23, 0);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_37->set('field_start_at', $dt->format('Y-m-d\TH:i:s'));
+  $dt->modify('+20 minutes');
+  $event_37->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
+  $event_37->save();
+
+  // Event - Event - Activity (3) - Yesterday at 12h00.
+  $event_38 = $nodeStorage->load(38);
+  $dt = new DrupalDateTime();
+  $dt->modify('yesterday')->setTime(12, 0);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_38->set('field_start_at', $dt->format('Y-m-d\TH:i:s'));
+  $dt->modify('+2 hours');
+  $event_38->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
+  $event_38->save();
+
+  // Event - Event - Activity (5) - 1 weeks ago at 12h00.
+  $event_39 = $nodeStorage->load(39);
+  $dt = new DrupalDateTime();
+  $dt->modify('-1 week')->setTime(12, 0);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_39->set('field_start_at', $dt->format('Y-m-d\TH:i:s'));
+  $dt->modify('3 hours');
+  $event_39->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
+  $event_39->save();
+
+  // Event - Event - Activity (5) - In 8 months at 11h00.
+  $event_40 = $nodeStorage->load(40);
+  $dt = new DrupalDateTime();
+  $dt->modify('+8 months')->setTime(11, 0);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_40->set('field_start_at', $dt->format('Y-m-d\TH:i:s'));
+  $dt->modify('+4 hours');
+  $event_40->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
+  $event_40->save();
 }

@@ -17,7 +17,7 @@ const formAjax = () => {
             switch (behavior) {
               case 'fadeout-parent':
                 const $parent = $(`#${$this.data('parent')}`);
-
+                console.log($parent);
                 if ($parent.length > 0) {
                   $parent.toggleClass('card-fadeout');
                 }
@@ -28,7 +28,7 @@ const formAjax = () => {
             console.log(data);
           },
           error: function (data) {
-              console.log('An error occurred.');
+              console.error('An error occurred.');
               console.log(data);
           },
       });

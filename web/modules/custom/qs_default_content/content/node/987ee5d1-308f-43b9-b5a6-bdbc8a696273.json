@@ -1,0 +1,202 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events\/macbeth?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events?_format=hal_json"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 37
+        }
+    ],
+    "uuid": [
+        {
+            "value": "987ee5d1-308f-43b9-b5a6-bdbc8a696273"
+        }
+    ],
+    "vid": [
+        {
+            "value": 109
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "event"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Macbeth",
+            "lang": "zxx"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441"
+                    }
+                ]
+            }
+        ]
+    },
+    "created": [
+        {
+            "value": 1507540961,
+            "lang": "zxx"
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507564317,
+            "lang": "zxx"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": 1507564317
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "<p id=\"_description2\" itemprop=\"description\">Apr\u00e8s quelques infid\u00e9lit\u00e9s \u00e0 son auteur f\u00e9tiche, Valentin Rossier revient \u00e0 ses premi\u00e8res amours et pr\u00e9sente \"la pi\u00e8ce \u00e9cossaise\", celle dont on ne doit pas prononcer le nom dans un th\u00e9\u00e2tre.&nbsp;Macbeth\u2026 Vision sombre de l\u2019humanit\u00e9, o\u00f9 l\u2019oppression est vou\u00e9e \u00e0 succ\u00e9der \u00e0 l\u2019oppression, o\u00f9 la fronti\u00e8re entre le visible et l\u2019invisible se dissout. Transpos\u00e9 dans l\u2019environnement aseptis\u00e9 et gla\u00e7ant d\u2019un palace cinq \u00e9toiles,&nbsp;Macbeth&nbsp;ne d\u00e9rogera cependant \u00e0 aucune tradition shakespearienne: meurtre, trahison et folie!<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_phone": [
+        {
+            "value": "+41 21 692 21 24"
+        }
+    ],
+    "field_contribution": [
+        {
+            "value": "CHF 20.-"
+        }
+    ],
+    "field_end_at": [
+        {
+            "value": "2017-10-09T21:20:00"
+        }
+    ],
+    "field_start_at": [
+        {
+            "value": "2017-10-09T21:00:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Th\u00e9\u00e2tre La Grange de Dorigny. Universit\u00e9 de Lausanne, Quartier Centre 1015 Lausanne"
+        }
+    ],
+    "field_venue_lat": [
+        {
+            "value": "46.8182"
+        }
+    ],
+    "field_venue_long": [
+        {
+            "value": "8.2275"
+        }
+    ]
+}

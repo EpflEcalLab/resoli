@@ -88,6 +88,10 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'route' => '/activities/' . $entity->id() . '/delete',
           'alias' => '/' . trim($alias, '/') . '/delete',
         ],
+        'activities_members' => [
+          'route' => '/activities/' . $entity->id() . '/dashboard/members',
+          'alias' => '/' . trim($alias, '/') . '/dashboard/members',
+        ],
       ];
       break;
 
@@ -104,6 +108,14 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
         'events_form_delete' => [
           'route' => '/events/' . $entity->id() . '/delete',
           'alias' => '/' . trim($alias, '/') . '/delete',
+        ],
+        'events_subscribers' => [
+          'route' => '/events/' . $entity->id() . '/dashboard/subscribers',
+          'alias' => '/' . trim($alias, '/') . '/dashboard/subscribers',
+        ],
+        'events_approval' => [
+          'route' => '/events/' . $entity->id() . '/dashboard/waiting-approval',
+          'alias' => '/' . trim($alias, '/') . '/dashboard/waiting-approval',
         ],
       ];
       break;

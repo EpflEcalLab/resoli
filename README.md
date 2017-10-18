@@ -31,13 +31,38 @@ On common errors, see the Troubleshootings section.
 
 ## 🏋️ Export all translations to a PO file
 
-To allow the client to update the translation him/herself, you need to export all the custom translations from our modules by running:
+This project don't use the traditionnal translates strings in English.
+We move to a flexible solution which is not language based but keys strings Eg. `form.submit`
 
-```bash
-$ ./scripts/trans-extractor/run
-```
+To allow the client to update the translation him/herself, you need to export all the custom translations from our modules & templates by running our custom extractor.
+
+### Prerequisites
+
+  * gettext & xgettext
+  * xargs & gxargs
+
+1. Install `gettext`
+
+  ```bash
+  $ brew install gettext
+  $ brew link gettext
+  ```
+
+1. Install `xargs`
+
+  ```bash
+  $ brew install findutils --with-default-names
+  ```
+
+### Export
+
+  ```bash
+  $ ./scripts/trans-extractor/run
+  ```
 
 The PO file is created in the `./config/d8/lang/` directory.
+
+Once done, don't forget to add the new assets on the Loco project.
 
 ## 🚔 Check Drupal coding standards & Drupal best practices
 

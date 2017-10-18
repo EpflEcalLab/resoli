@@ -16,11 +16,18 @@
             {{ 'qs.event.edit'|t }}
           </a>
         </li>
+
         <li>
-          <a class="btn btn-outline-secondary btn-icon btn-block shadow-to-bottom mb-2" href="javascript:alert('This feature is not yet availaible.')">
-            {{ 'qs.event.subscriptions'|t }}
+          <a class="btn btn-outline-secondary btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
+            {{ 'qs.event.subscriptions.subscribers'|t }}
           </a>
         </li>
+        <li>
+          <a class="btn btn-outline-secondary btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">
+            {{ 'qs.event.subscriptions.waiting_approval'|t }}
+          </a>
+        </li>
+
         <li>
           <a class="btn btn-outline-danger btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.form.delete', {'event': variables.event.id}) }}">
             {{ macros.icon('trash') }}

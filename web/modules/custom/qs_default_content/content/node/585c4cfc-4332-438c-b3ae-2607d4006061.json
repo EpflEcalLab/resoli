@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/node\/27?_format=hal_json"
+            "href": "http:\/\/default\/fribourg\/activities\/cours-smartphone-tablette\/events\/les-smartphones-android?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
@@ -19,7 +19,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
             {
-                "href": "http:\/\/default\/node\/11?_format=hal_json"
+                "href": "http:\/\/default\/fribourg\/activities\/cours-smartphone-tablette\/events?_format=hal_json"
             }
         ]
     },
@@ -35,7 +35,7 @@
     ],
     "vid": [
         {
-            "value": 43
+            "value": 103
         }
     ],
     "langcode": [
@@ -57,7 +57,7 @@
     ],
     "title": [
         {
-            "value": "Event - Activity (9) - 22 Months ago, the 26nd at 06h00",
+            "value": "Les Smartphones Android",
             "lang": "zxx"
         }
     ],
@@ -74,7 +74,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ],
                 "lang": "zxx"
@@ -92,7 +92,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ]
             }
@@ -101,7 +101,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/node\/11?_format=hal_json"
+                        "href": "http:\/\/default\/fribourg\/activities\/cours-smartphone-tablette\/events?_format=hal_json"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -123,7 +123,7 @@
     ],
     "changed": [
         {
-            "value": 1503415011,
+            "value": 1507564069,
             "lang": "zxx"
         }
     ],
@@ -141,7 +141,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1503415011
+            "value": 1507564069
         }
     ],
     "revision_translation_affected": [
@@ -156,14 +156,27 @@
             "lang": "zxx"
         }
     ],
+    "body": [
+        {
+            "value": "<p>Venez d\u00e9couvrir les particularit\u00e9s de ce type de t\u00e9l\u00e9phones les plus r\u00e9pandus.<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
     "field_end_at": [
         {
-            "value": "2017-08-22T17:12:58"
+            "value": "2015-12-26T05:20:00"
         }
     ],
     "field_start_at": [
         {
-            "value": "2017-08-22T15:12:58"
+            "value": "2015-12-26T05:00:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Avenue du 24-Janvier 11, Renens, Suisse"
         }
     ],
     "field_venue_lat": [

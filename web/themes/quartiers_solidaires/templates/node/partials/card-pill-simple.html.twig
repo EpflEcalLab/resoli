@@ -1,7 +1,7 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 <a
-  href="{{ path('entity.node.canonical', { 'node': event.field_activity.target_id }, {'fragment': 'event' ~ event.nid.value}) }}"
+  href="{{ path('entity.node.canonical', { 'node': event.field_activity.target_id }, {'fragment': 'card' ~ event.nid.value}) }}"
   class="card-pill card-pill-simple"
 >
 
@@ -14,6 +14,14 @@
       {{ event.label }}
     </span>
   </span>
+
+  {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
+    {{ macros.badge('wait', 'flag-subscription-wait') }}
+  {% endif %}
+
+  {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
+    {{ macros.badge('confirmed', 'flag-subscription-confirmed') }}
+  {% endif %}
 
   <span class="size-date ml-auto text-dark">
     {% block card_pill_time %}

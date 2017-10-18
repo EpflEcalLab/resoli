@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/node\/24?_format=hal_json"
+            "href": "http:\/\/default\/lausanne\/activities\/aperitif\/events\/aperitif-0?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
@@ -19,7 +19,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
             {
-                "href": "http:\/\/default\/node\/7?_format=hal_json"
+                "href": "http:\/\/default\/lausanne\/activities\/aperitif\/events?_format=hal_json"
             }
         ]
     },
@@ -35,7 +35,7 @@
     ],
     "vid": [
         {
-            "value": 40
+            "value": 98
         }
     ],
     "langcode": [
@@ -57,7 +57,7 @@
     ],
     "title": [
         {
-            "value": "Event - Activity (7) - 1 Month ago, the 2nd at 16h00",
+            "value": "Aperitif",
             "lang": "zxx"
         }
     ],
@@ -74,7 +74,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ],
                 "lang": "zxx"
@@ -92,7 +92,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "923b7b53-05a7-467f-92e0-86400a0e0101"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ]
             }
@@ -101,7 +101,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/node\/7?_format=hal_json"
+                        "href": "http:\/\/default\/lausanne\/activities\/aperitif\/events?_format=hal_json"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -123,7 +123,7 @@
     ],
     "changed": [
         {
-            "value": 1503414814,
+            "value": 1507563926,
             "lang": "zxx"
         }
     ],
@@ -141,7 +141,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1503414814
+            "value": 1507563926
         }
     ],
     "revision_translation_affected": [
@@ -156,14 +156,27 @@
             "lang": "zxx"
         }
     ],
+    "body": [
+        {
+            "value": "<p>Cave Communale, Avenue du Prieur\u00e9, Pully, Switzerland<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_phone": [
+        {
+            "value": "+41 21 804 15 65"
+        }
+    ],
     "field_end_at": [
         {
-            "value": "2017-08-22T17:12:56"
+            "value": "2017-09-09T14:20:00"
         }
     ],
     "field_start_at": [
         {
-            "value": "2017-08-22T15:12:56"
+            "value": "2017-09-09T14:00:00"
         }
     ],
     "field_venue_lat": [

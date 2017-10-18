@@ -8,8 +8,8 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Entity\Privilege;
+use Drupal\Core\Database\Query\SelectInterface;
 
 /**
  * PrivilegeManager.
@@ -238,34 +238,34 @@ class PrivilegeManager {
   }
 
   /**
-   * Request the collection of members for a given community.
+   * Request the collection of members for a given entity.
    *
    * An account is processed as member of community if it has one privilege:
    *  - community_members
    *  - community_organizers
    *  - community_managers.
+   * An account is processed as member of activity if it has one privilege:
+   *  - activity_members
+   *  - activity_maintainers
+   *  - activity_organizers.
    *
-   * @param Drupal\taxonomy\TermInterface $community
-   *   The Community Entity for the privilege.
+   * @param Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryMembersWithPrivileges(TermInterface $community) {
+  public function queryMembersWithPrivileges(EntityInterface $entity) {
     $query = $this->connection->select('privileges', 'privileges');
     $query->fields('privileges', ['user', 'privilege'])
       ->condition('privileges.status', 1)
-      ->condition('privileges.bundle', 'taxonomy_term')
-      ->condition('privileges.entity', $community->id());
+      ->condition('privileges.bundle', $entity->getEntityTypeId())
+      ->condition('privileges.entity', $entity->id());
+
+    $this->alterQueryHasOneRole($query, $entity);
 
     // Remove current user from the list.
     $query->condition('privileges.user', $this->currentUser->id(), '<>');
-
-    $or = $query->orConditionGroup();
-    $or->condition('privileges.privilege', 'community_members');
-    $or->condition('privileges.privilege', 'community_organizers');
-    $or->condition('privileges.privilege', 'community_managers');
-    $query->condition($or);
 
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
@@ -280,7 +280,7 @@ class PrivilegeManager {
   }
 
   /**
-   * Request the collection of Accounts waiting for Approval on the community.
+   * Request the collection of Accounts waiting for Approval on the entity.
    *
    * Accounts are referenced as waiting for Approval when it has
    * at leaset one pending privilege on the community.
@@ -289,25 +289,28 @@ class PrivilegeManager {
    *  - community_members
    *  - community_organizers
    *  - community_managers.
+   * Accounts are referenced as waiting for Approval when it has
+   * at leaset one pending privilege on the activity.
+   * Even if the user already has the privilege or another one(s)
+   * on the activity.
+   *  - activity_members
+   *  - activity_maintainers
+   *  - activity_organizers.
    *
-   * @param Drupal\taxonomy\TermInterface $community
-   *   The Community Entity for the privilege.
+   * @param Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryWaitingApproval(TermInterface $community) {
+  public function queryWaitingApproval(EntityInterface $entity) {
     $query = $this->connection->select('privileges', 'privileges');
     $query->fields('privileges', ['user', 'id'])
-      ->condition('privileges.status', NULL, 'IS')
-      ->condition('privileges.bundle', 'taxonomy_term')
-      ->condition('privileges.entity', $community->id());
+      ->condition('privileges.status', NULL, 'is')
+      ->condition('privileges.bundle', $entity->getEntityTypeId())
+      ->condition('privileges.entity', $entity->id());
 
-    $or = $query->orConditionGroup();
-    $or->condition('privileges.privilege', 'community_members');
-    $or->condition('privileges.privilege', 'community_organizers');
-    $or->condition('privileges.privilege', 'community_managers');
-    $query->condition($or);
+    $this->alterQueryHasOneRole($query, $entity);
 
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
@@ -363,6 +366,31 @@ class PrivilegeManager {
     }
 
     return $entity_ids;
+  }
+
+  /**
+   * Alter the given query to add the subtest: Does it has at least on role.
+   *
+   * @param Drupal\Core\Database\Query\SelectInterface $query
+   *   The query to alter.
+   * @param Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the roles.
+   */
+  protected function alterQueryHasOneRole(SelectInterface &$query, EntityInterface $entity) {
+    if ($entity->bundle() === 'communities') {
+      $or = $query->orConditionGroup();
+      $or->condition('privileges.privilege', 'community_members');
+      $or->condition('privileges.privilege', 'community_organizers');
+      $or->condition('privileges.privilege', 'community_managers');
+      $query->condition($or);
+    }
+    elseif ($entity->bundle() === 'activity') {
+      $or = $query->orConditionGroup();
+      $or->condition('privileges.privilege', 'activity_members');
+      $or->condition('privileges.privilege', 'activity_maintainers');
+      $or->condition('privileges.privilege', 'activity_organizers');
+      $query->condition($or);
+    }
   }
 
 }

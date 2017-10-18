@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\qs_activity\Service\EventManager;
+use Drupal\qs_badge\Service\BadgeManager;
 
 /**
  * Collection of Events by Activity.
@@ -43,13 +44,21 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   protected $eventManager;
 
   /**
+   * The Badge Manager.
+   *
+   * @var \Drupal\qs_badge\Service\BadgeManager
+   */
+  protected $badgeManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManager $privilege_manager, CurrentRouteMatch $route, EventManager $event_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManager $privilege_manager, CurrentRouteMatch $route, EventManager $event_manager, BadgeManager $badge_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->privilegeManager = $privilege_manager;
     $this->route            = $route;
     $this->eventManager     = $event_manager;
+    $this->badgeManager     = $badge_manager;
   }
 
   /**
@@ -65,8 +74,9 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
         // Load customs services used in this class.
         $container->get('qs_acl.privilege_manager'),
         $container->get('current_route_match'),
-        $container->get('qs_activity.event_manager')
-    );
+        $container->get('qs_activity.event_manager'),
+        $container->get('qs_badge.badge_manager')
+      );
   }
 
   /**
@@ -89,6 +99,21 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
       foreach ($privileges as $privilege) {
         $variables['privileges'][] = $privilege->privilege->value;
       }
+
+      // Get badges.
+      if (!empty($variables['events'])) {
+        // From list of Events where current user has pending subscriptions.
+        $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($variables['events'], NULL);
+
+        // From list of Events where current user has confirmed subscription.
+        $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($variables['events'], 1);
+
+        // From list of Events number of pending subscriptions.
+        $variables['badges']['admin']['subscriptions']['pendings'] = [];
+
+        // From list of Events number of subscriptions.
+        $variables['badges']['admin']['subscriptions']['confirmed'] = [];
+      }
     }
 
     return [
@@ -98,14 +123,30 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
         'contexts' => [
           'user',
         ],
-        'tags' => [
-          // Invalidated whenever any Event is updated, deleted or created.
-          'node_list:event',
-          // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege_list:privilege',
-        ],
+        'tags' => $this->getCacheTags($variables['events']),
+      ],
+      '#attached' => [
+        'library' => 'quartiers_solidaires/google-map',
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags(array $nodes = NULL) {
+    $tags = [
+      // Invalidated whenever any Event is updated, deleted or created.
+      'node_list:event',
+      // Invalidated whenever any Privilege is updated, deleted or created.
+      'privilege_list:privilege',
+    ];
+    if ($nodes) {
+      foreach ($nodes as $node) {
+        $tags[] = 'node:' . $node->id();
+      }
+    }
+    return $tags;
   }
 
 }

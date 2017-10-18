@@ -77,7 +77,12 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     if ($community) {
       $variables['community'] = $community;
 
-      if (in_array($route_name, ['qs_activity.collection.themes'])) {
+      if (in_array($route_name, [
+        'qs_activity.collection.themes',
+        'qs_activity.collection.dates',
+        'qs_calendar.collection.monthly',
+        'qs_calendar.collection.weekly',
+      ])) {
         $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
         $variables['community_has_dashboard_access'] = $this->acl->hasAdminAccessCommunity($community);
 

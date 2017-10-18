@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/fribourg\/activities\/activity-11-fribourg-theme-ndeg3?_format=hal_json"
+            "href": "http:\/\/default\/fribourg\/activities\/cours-smartphone-tablette\/events?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
@@ -24,7 +24,7 @@
         ],
         "http:\/\/drupal.org\/rest\/relation\/node\/activity\/field_theme": [
             {
-                "href": "http:\/\/default\/taxonomy\/term\/6?_format=hal_json"
+                "href": "http:\/\/default\/taxonomy\/term\/11?_format=hal_json"
             }
         ]
     },
@@ -40,7 +40,7 @@
     ],
     "vid": [
         {
-            "value": 55
+            "value": 81
         }
     ],
     "langcode": [
@@ -62,7 +62,7 @@
     ],
     "title": [
         {
-            "value": "Activity 11 - Fribourg - Theme N\u00b03",
+            "value": "Cours Smartphone & Tablette",
             "lang": "zxx"
         }
     ],
@@ -79,7 +79,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "b3a2455d-a08e-4182-a327-b38d2b2219b6"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ],
                 "lang": "zxx"
@@ -97,7 +97,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "b3a2455d-a08e-4182-a327-b38d2b2219b6"
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
                     }
                 ]
             }
@@ -123,7 +123,7 @@
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/default\/taxonomy\/term\/6?_format=hal_json"
+                        "href": "http:\/\/default\/taxonomy\/term\/11?_format=hal_json"
                     },
                     "type": {
                         "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
@@ -131,7 +131,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "668377e9-b635-48a8-b027-d604723458a7"
+                        "value": "cf86aa82-0eef-41c0-bcdd-9a8827fd8c1a"
                     }
                 ]
             }
@@ -145,7 +145,7 @@
     ],
     "changed": [
         {
-            "value": 1503591536,
+            "value": 1507563388,
             "lang": "zxx"
         }
     ],
@@ -163,7 +163,7 @@
     ],
     "revision_timestamp": [
         {
-            "value": 1503591536
+            "value": 1507563388
         }
     ],
     "revision_translation_affected": [

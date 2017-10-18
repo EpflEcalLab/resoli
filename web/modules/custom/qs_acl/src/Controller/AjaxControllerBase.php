@@ -48,6 +48,13 @@ class AjaxControllerBase extends ControllerBase {
   protected $userStorage;
 
   /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
    * The Privilege Storage.
    *
    * @var \Drupal\Core\Entity\ContentEntityStorageInterface
@@ -63,6 +70,7 @@ class AjaxControllerBase extends ControllerBase {
     $this->privilegeManager = $privilege_manager;
     $this->privilegeStorage = $this->entityTypeManager()->getStorage('privilege');
     $this->termStorage      = $this->entityTypeManager()->getStorage('taxonomy_term');
+    $this->nodeStorage      = $this->entityTypeManager()->getStorage('node');
     $this->userStorage      = $this->entityTypeManager()->getStorage('user');
   }
 

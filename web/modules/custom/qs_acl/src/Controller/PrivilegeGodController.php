@@ -39,8 +39,12 @@ class PrivilegeGodController extends AjaxControllerBase {
       $access = AccessResult::allowed();
     }
 
-    // TOOD: Check access for activity.
-    // $activity_id = $request->request->get('activity');.
+    // Check access for activity.
+    $activity_id = $request->request->get('activity');
+    $activity = $this->nodeStorage->load($activity_id);
+    if ($activity && $activity->bundle() == 'activity' && $this->acl->hasAdminAccessActivity($activity)) {
+      $access = AccessResult::allowed();
+    }
     return $access;
   }
 
@@ -69,15 +73,30 @@ class PrivilegeGodController extends AjaxControllerBase {
     $community_id = $request->request->get('community');
     $community = $this->termStorage->load($community_id);
 
-    if (!$community) {
+    $activity_id = $request->request->get('activity');
+    $activity = $this->nodeStorage->load($activity_id);
+
+    if (!$community && !$activity) {
       return new JsonResponse(['status' => FALSE]);
     }
 
-    $roles = [
-      'community_members'    => 0,
-      'community_organizers' => 0,
-      'community_managers'   => 0,
-    ];
+    if ($community) {
+      $entity = $community;
+      $roles = [
+        'community_members'    => 0,
+        'community_organizers' => 0,
+        'community_managers'   => 0,
+      ];
+    }
+
+    if ($activity) {
+      $entity = $activity;
+      $roles = [
+        'activity_members'     => 0,
+        'activity_maintainers' => 0,
+        'activity_organizers'  => 0,
+      ];
+    }
 
     foreach ($privileges as $privilege) {
       if (isset($roles[$privilege])) {
@@ -89,8 +108,8 @@ class PrivilegeGodController extends AjaxControllerBase {
     foreach ($roles as $role => $status) {
       $privileges = $this->privilegeStorage->loadByProperties([
         'privilege' => $role,
-        'bundle'    => $community->getEntityTypeId(),
-        'entity'    => $community->id(),
+        'bundle'    => $entity->getEntityTypeId(),
+        'entity'    => $entity->id(),
         'user'      => $user->id(),
       ]);
       $privilege = reset($privileges);
@@ -101,7 +120,7 @@ class PrivilegeGodController extends AjaxControllerBase {
         $updated[] = $privilege->toArray();
       }
       elseif ($status === 1) {
-        $updated[] = $this->privilegeManager->create($role, $community, $user)->toArray();
+        $updated[] = $this->privilegeManager->create($role, $entity, $user)->toArray();
       }
     }
 
@@ -125,18 +144,24 @@ class PrivilegeGodController extends AjaxControllerBase {
   public function ban(Request $request) {
     $user_id = $request->request->get('user');
     $user    = $this->userStorage->load($user_id);
+    $entity  = NULL;
 
-    $community_id = $request->request->get('community');
-    $community = $this->termStorage->load($community_id);
+    if ($community_id = $request->request->get('community')) {
+      $entity = $this->termStorage->load($community_id);
+    }
 
-    if (!$community) {
+    if ($activity_id = $request->request->get('activity')) {
+      $entity = $this->nodeStorage->load($activity_id);
+    }
+
+    if (!$entity) {
       return new JsonResponse(['status' => FALSE]);
     }
 
     // Check if a privilege already exists.
     $privileges = $this->privilegeStorage->loadByProperties([
-      'bundle' => $community->getEntityTypeId(),
-      'entity' => $community->id(),
+      'bundle' => $entity->getEntityTypeId(),
+      'entity' => $entity->id(),
       'user'   => $user->id(),
     ]);
 

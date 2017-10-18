@@ -262,7 +262,7 @@ class EventEditForm extends EventEditFormBase {
       $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
     }
     // Assert the date is in the future.
-    elseif ($formatted_date < $now->format('d.m.Y')) {
+    elseif ($date < $now) {
       $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_past @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
     }
 
@@ -294,8 +294,8 @@ class EventEditForm extends EventEditFormBase {
     $fields['field_contact_phone'] = $form_state->getValue('contact_phone');
     $fields['field_contribution']  = $form_state->getValue('contribution');
     $fields['field_venue']         = $form_state->getValue('venue');
-    $fields['field_venue_lat']     = $form_state->getValue('venue_lat');
-    $fields['field_venue_long']    = $form_state->getValue('venue_long');
+    $fields['field_venue_lat']     = $form_state->getValue('latitude');
+    $fields['field_venue_long']    = $form_state->getValue('longitude');
 
     // Update new event.
     $this->eventManager->update($event, $start_at, $end_at, $fields);

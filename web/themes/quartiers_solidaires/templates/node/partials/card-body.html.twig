@@ -14,6 +14,20 @@
         {{ 'qs.event.not_accessible'|t }}
       </p>
     {% endif %}
+    {# Contribution #}
+    {# User should be member of the activity OR activity should allow subscription to community members #}
+    {% if
+    ('activity_members' in variables.privileges
+    or 'activity_organizers' in variables.privileges
+    or 'activity_maintainers' in variables.privileges
+    or variables.activity.field_community_can_subscribe.value)
+    and event.field_contribution.value
+    %}
+      <p class="text-primary">
+        {{ macros.icon('money', 'icon-offset') }}
+        {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
+      </p>
+    {% endif %}
   </div>
 
   <div class="card-actions row">
@@ -71,23 +85,6 @@
         {{ 'qs.event.location'|t }}
       </a>
       </div>
-    {% endif %}
-
-    {# Contribution #}
-    {# User should be member of the activity OR activity should allow subscription to community members #}
-    {% if
-      ('activity_members' in variables.privileges
-      or 'activity_organizers' in variables.privileges
-      or 'activity_maintainers' in variables.privileges
-      or variables.activity.field_community_can_subscribe.value)
-      and event.field_contribution.value
-    %}
-    <div class="col-sm-6 mb-3 mx-auto">
-      <span class="badge badge-pill badge-icon badge-white d-block">
-        {{ macros.icon('money') }}
-        {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
-      </span>
-    </div>
     {% endif %}
 
     {# Edit button #}

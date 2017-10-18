@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\qs_activity\Controller;
+namespace Drupal\qs_subscription\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -9,7 +9,7 @@ use Drupal\user\UserInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Access\AccessResult;
-use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_badge\Service\BadgeManager;
 
@@ -33,11 +33,11 @@ class UserController extends ControllerBase {
   protected $nodeStorage;
 
   /**
-   * The entity QS Activity Manager.
+   * The Subscription Manager.
    *
-   * @var \Drupal\qs_activity\Service\ActivityManager
+   * @var \Drupal\qs_subscription\Service\SubscriptionManager
    */
-  protected $activityManager;
+  private $subscriptionManager;
 
   /**
    * The Privilege Manager.
@@ -56,12 +56,12 @@ class UserController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, BadgeManager $badge_manager) {
-    $this->acl              = $acl;
-    $this->privilegeManager = $privilege_manager;
-    $this->nodeStorage      = $this->entityTypeManager()->getStorage('node');
-    $this->activityManager  = $activity_manager;
-    $this->badgeManager     = $badge_manager;
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, BadgeManager $badge_manager) {
+    $this->acl                 = $acl;
+    $this->privilegeManager    = $privilege_manager;
+    $this->nodeStorage         = $this->entityTypeManager()->getStorage('node');
+    $this->subscriptionManager = $subscription_manager;
+    $this->badgeManager        = $badge_manager;
   }
 
   /**
@@ -73,7 +73,7 @@ class UserController extends ControllerBase {
       // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('qs_acl.privilege_manager'),
-      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_subscription.subscription_manager'),
       $container->get('qs_badge.badge_manager')
     );
   }
@@ -109,7 +109,7 @@ class UserController extends ControllerBase {
    * @param \Drupal\user\UserInterface $user
    *   The user.
    */
-  public function activities(TermInterface $community, UserInterface $user) {
+  public function subscriptions(TermInterface $community, UserInterface $user) {
     $variables['community'] = $community;
 
     // We are browsing as an account with AccessBypass, add user info to page.
@@ -117,11 +117,19 @@ class UserController extends ControllerBase {
       $variables['user'] = $user;
     }
 
-    $variables['activities'] = $this->activityManager->getByUser($community, $user);
-    $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
+    $variables['events'] = $this->subscriptionManager->getByUser($community, $user);
+
+    // Get badges.
+    if (!empty($variables['events'])) {
+      // From list of Events where current user has pending subscriptions.
+      $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($variables['events'], NULL, $user);
+
+      // From list of Events where current user has confirmed subscription.
+      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($variables['events'], 1, $user);
+    }
 
     return [
-      '#theme'     => 'qs_activity_user_collection_page',
+      '#theme'     => 'qs_subscription_user_collection_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

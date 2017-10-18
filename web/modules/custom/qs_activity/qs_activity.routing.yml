@@ -28,7 +28,7 @@ qs_activity.collection.dates:
         community:
           type: entity:taxonomy_term
 
-# Activities by dates
+# User Activities
 qs_activity.user.collection:
     path: '/activities/{community}/user/{user}'
     defaults:

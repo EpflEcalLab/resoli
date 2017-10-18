@@ -1,0 +1,33 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="text-center my-5">
+    {% if variables.user %}
+      <h1>{% trans %}qs.subscription.user.collection.title {{ variables.user.field_firstname.value }} {{ variables.user.field_lastname.value }} {{ variables.user.mail.value }}{% endtrans %}</h1>
+    {% else %}
+      <h1>{% trans %}qs.subscription.user.collection.title{% endtrans %}</h1>
+    {% endif %}
+  </div>
+
+  {% if variables.events %}
+    <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+      {% for key, event in variables.events %}
+        <li class="card card-list-simple-item" id="card{{ event.nid.value }}"></li>
+          {% embed "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+            {% block card_pill_time %}
+              <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H:i') }}">
+                {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H:i') }}
+              </time>
+              -
+              <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H:i') }}">
+                {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H:i') }}
+              </time>
+            {% endblock %}
+          {% endembed  %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>{{ 'qs.subscription.user.collection.empty'|t }}</p>
+  {% endif %}
+</div>

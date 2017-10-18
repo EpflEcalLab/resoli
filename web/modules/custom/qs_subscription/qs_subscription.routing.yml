@@ -28,6 +28,24 @@ qs_subscription.subscribers:
         event:
           type: entity:node
 
+# User Subscriptions
+qs_subscription.user.collection:
+    path: '/events/{community}/user/{user}'
+    defaults:
+      _controller: '\Drupal\qs_subscription\Controller\UserController::subscriptions'
+      _title: 'qs_subscription.user.collection.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_subscription\Controller\UserController::access'
+      community: \d+
+      user: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+        user:
+          type: entity:user
+
 ## AJAX route to confirm a specific subscription.
 qs_subscription.confirm:
     path: '/subscriptions/{subscription}/confirm'

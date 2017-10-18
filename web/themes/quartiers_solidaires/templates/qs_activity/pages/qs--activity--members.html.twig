@@ -45,19 +45,19 @@
                 <input type="hidden" name="activity" value="{{ variables.activity.nid.value }}">
 
                 <div class="d-flex flex-wrap justify-content-center">
-                  <div class="btn-group mb-3 mx-2 " role="group" aria-label="{% trans %}qs_activity.members.roles{% endtrans %}" data-toggle="buttons">
+                  <div class="btn-group mb-3 mx-2 js-radio-group" role="group" aria-label="{% trans %}qs_activity.members.roles{% endtrans %}" data-toggle="buttons">
                     <label class="btn btn-white btn-outline-secondary {% if 'activity_members' in member.privileges %}active{% endif %}">
-                      <input title="{{ 'qs.roles.activity_member'|t }}" variant="button" type="checkbox" data-submit name="privileges[]" value="activity_members" {% if 'activity_members' in member.privileges %}checked{% endif %} class="form-checkbox">
+                      <input title="{{ 'qs.roles.activity_member'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members" {% if 'activity_members' in member.privileges %}checked{% endif %} class="form-radio">
                       {{ 'qs.roles.activity_member'|t }}
                     </label>
 
                     <label class="btn btn-white btn-outline-secondary {% if 'activity_maintainers' in member.privileges %}active{% endif %}">
-                      <input title="{{ 'qs.roles.activity_maintainer'|t }}" variant="button" type="checkbox" data-submit name="privileges[]" value="activity_maintainers" {% if 'activity_maintainers' in member.privileges %}checked{% endif %} class="form-checkbox">
+                      <input title="{{ 'qs.roles.activity_maintainer'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members|activity_maintainers" {% if 'activity_maintainers' in member.privileges %}checked{% endif %} class="form-radio">
                       {{ 'qs.roles.activity_maintainer'|t }}
                     </label>
 
                     <label class="btn btn-white btn-outline-secondary {% if 'activity_organizers' in member.privileges %}active{% endif %}">
-                      <input title="{{ 'qs.roles.activity_organizer'|t }}" variant="button" type="checkbox" data-submit name="privileges[]" value="activity_organizers" {% if 'activity_organizers' in member.privileges %}checked{% endif %} class="form-checkbox">
+                      <input title="{{ 'qs.roles.activity_organizer'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members|activity_maintainers|activity_organizers" {% if 'activity_organizers' in member.privileges %}checked{% endif %} class="form-radio">
                       {{ 'qs.roles.activity_organizer'|t }}
                     </label>
                   </div>

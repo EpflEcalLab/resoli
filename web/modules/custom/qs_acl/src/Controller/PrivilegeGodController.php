@@ -62,6 +62,7 @@ class PrivilegeGodController extends AjaxControllerBase {
    */
   public function toggle(Request $request) {
     $privileges = $request->request->get('privileges');
+    $privileges = explode('|', $privileges);
 
     if (!$privileges) {
       return new JsonResponse(['status' => FALSE]);

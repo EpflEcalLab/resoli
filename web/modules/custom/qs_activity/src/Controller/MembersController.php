@@ -106,7 +106,7 @@ class MembersController extends ControllerBase {
       $privileges[$row->user][] = $row->privilege;
     }
 
-    // Load user entities whitout privileges.
+    // Load user entities without privileges.
     $activity_members = $this->userStorage->loadMultiple($uids);
 
     // Add privileges to users.

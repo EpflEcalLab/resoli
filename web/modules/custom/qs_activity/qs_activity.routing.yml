@@ -28,6 +28,24 @@ qs_activity.collection.dates:
         community:
           type: entity:taxonomy_term
 
+# Activities by dates
+qs_activity.user.collection:
+    path: '/activities/{community}/user/{user}'
+    defaults:
+      _controller: '\Drupal\qs_activity\Controller\UserController::activities'
+      _title: 'qs_activity.user.collection.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Controller\UserController::access'
+      community: \d+
+      user: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+        user:
+          type: entity:user
+
 # Activities add form - Multisteps forms
 qs_activity.activities.form.add:
     path: '/activities/{community}/add'

@@ -8,6 +8,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\taxonomy\TermInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * ActivityManager.
@@ -161,13 +162,13 @@ class ActivityManager {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
-   * @param \Drupal\user\UserInterface $user
+   * @param \Drupal\Core\Session\AccountInterface $user
    *   The user entity.
    *
    * @return \Drupal\node\NodeInterface[]
    *   A collection of node's Activity. Otherwise an empty array.
    */
-  public function getByUser(TermInterface $community, UserInterface $user) {
+  public function getByUser(TermInterface $community, AccountInterface $user) {
     $query = $this->connection->select('node_field_data', 'activity');
     $query->fields('activity', ['nid', 'title'])
       ->condition('activity.type', 'activity')

@@ -11,6 +11,7 @@ Scenario: Logged as Member of Lausanne, I can access my own activities page in L
   Then I should see 2 ".card-list-item" elements
   Then I should see a "#activity5" element
   Then I should see a "#activity4" element
+  And I should see "qs.activity.become.activity.organizer"
 
 @api
 Scenario: Logged as Manager of Lausanne, I can access my own activities page in Lausanne
@@ -20,6 +21,7 @@ Scenario: Logged as Manager of Lausanne, I can access my own activities page in 
   Then I should see 2 ".card-list-item" elements
   Then I should see a "#activity2" element
   Then I should see a "#activity3" element
+  And I should not see "qs.activity.become.activity.organizer"
 
 @api
 Scenario: Logged as Organizer of Lausanne, I can access my own activities page in Lausanne
@@ -29,3 +31,13 @@ Scenario: Logged as Organizer of Lausanne, I can access my own activities page i
   Then I should see 2 ".card-list-item" elements
   Then I should see a "#activity5" element
   Then I should see a "#activity3" element
+  And I should not see "qs.activity.become.activity.organizer"
+
+  @api
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can access my own activities page in Lausanne
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/activities/1/user/8"
+    And the response status code should be 200
+    Then I should see 0 ".card-list-item" elements
+    And I should see "qs.activity.user.collection.empty"
+    And I should see "qs.activity.become.activity.organizer"

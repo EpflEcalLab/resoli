@@ -15,6 +15,27 @@ use Drupal\Core\Datetime\DrupalDateTime;
 class EventAddForm extends FormBasic {
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -42,8 +63,8 @@ class EventAddForm extends FormBasic {
    * @param \Drupal\node\NodeInterface $activity
    *   Run access checks for this node.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
@@ -74,7 +95,7 @@ class EventAddForm extends FormBasic {
       'form__fullpage__multistep',
     ];
 
-    // Save the activity for submisson.
+    // Save the activity for submission.
     $form['activity'] = [
       '#type'  => 'hidden',
       '#value' => $activity->id(),

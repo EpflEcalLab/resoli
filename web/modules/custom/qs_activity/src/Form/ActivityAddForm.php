@@ -12,6 +12,54 @@ use Drupal\Core\Session\AccountInterface;
  * ActivityAddForm class.
  */
 class ActivityAddForm extends FormBasic {
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
+   * The entity QS Activity Manager.
+   *
+   * @var \Drupal\qs_activity\Service\ActivityManager
+   */
+  protected $activityManager;
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  private $privilegeManager;
+
+  /**
+   * The current user account proxy.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
+   * Manages the discovery of entity fields.
+   *
+   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
+   */
+  protected $entityFieldManager;
 
   /**
    * {@inheritdoc}
@@ -45,8 +93,8 @@ class ActivityAddForm extends FormBasic {
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
@@ -77,7 +125,7 @@ class ActivityAddForm extends FormBasic {
       'form__fullpage__multistep',
     ];
 
-    // Save the community for submisson.
+    // Save the community for submission.
     $form['community'] = [
       '#type'  => 'hidden',
       '#value' => $community->id(),
@@ -331,7 +379,7 @@ class ActivityAddForm extends FormBasic {
     ];
 
     // Format themes for creations.
-    // Use an array now for futur proof (multiple themes).
+    // Use an array now for future proof (multiple themes).
     $themes = [$form_state->getValue('theme')];
 
     // Create the new activity.

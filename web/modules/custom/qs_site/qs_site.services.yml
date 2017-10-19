@@ -1,5 +1,5 @@
 services:
-  # Event subscrbiber to avoid access of somes Taxonomy Terms
+  # Event subscriber to avoid access of some Taxonomy Terms
   qs_site.entity_access:
     class: Drupal\qs_site\EventSubscriber\EntityAccess
     arguments: ['@current_route_match']

@@ -20,8 +20,8 @@ class PrivilegeJudgeController extends AjaxControllerBase {
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account) {
     $access = AccessResult::forbidden();
@@ -50,8 +50,8 @@ class PrivilegeJudgeController extends AjaxControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formated response. Contains the status & the confirmed privilege.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains the status & the confirmed privilege.
    */
   public function confirm(Request $request) {
     $privilege_id = $request->request->get('privilege');
@@ -72,8 +72,8 @@ class PrivilegeJudgeController extends AjaxControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formated response. Contains the status & the declined privilege.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains the status & the declined privilege.
    */
   public function decline(Request $request) {
     $privilege_id = $request->request->get('privilege');

@@ -64,9 +64,9 @@ function qs_auth_mail_alter(&$message) {
 
   switch ($message['id']) {
     /*
-     * Mails already woking :
+     * Mails already working :
      *  - qs.mail.pass.recovery - Mails for requesting a new pass.
-     *  - qs.mail.account.cancel_confirm - Mails to confirm your cancelation.
+     *  - qs.mail.account.cancel_confirm - Mails to confirm your cancellation.
      *  - qs.mail.welcome.no_approval - Mails when you account is created
      *
      * Mails @todo:
@@ -76,7 +76,7 @@ function qs_auth_mail_alter(&$message) {
      *    confirmed/rejected
      *
      *  - qs.mail.admin.awaiting.approval - Mails for admin - when user
-     *    requestion approval in community
+     *    requesting approval in community
      *  - qs.mail.admin.welcome.no_approval - Mails for admin when user
      *    create account
      */

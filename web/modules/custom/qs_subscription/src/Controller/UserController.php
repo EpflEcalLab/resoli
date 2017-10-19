@@ -88,8 +88,8 @@ class UserController extends ControllerBase {
    * @param \Drupal\user\UserInterface $user
    *   Run access checks for this user.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountProxyInterface $account, TermInterface $community, UserInterface $user) {
     $access = AccessResult::forbidden();
@@ -102,12 +102,15 @@ class UserController extends ControllerBase {
   }
 
   /**
-   * Account activities page.
+   * Account subscriptions page.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community.
    * @param \Drupal\user\UserInterface $user
    *   The user.
+   *
+   * @return array
+   *   Render array of account subscriptions.
    */
   public function subscriptions(TermInterface $community, UserInterface $user) {
     $variables['community'] = $community;

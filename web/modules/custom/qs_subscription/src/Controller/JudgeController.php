@@ -57,8 +57,8 @@ class JudgeController extends ControllerBase {
    * @param \Drupal\qs_subscription\Entity\Subscription $subscription
    *   Run access checks for this $subscription.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, Subscription $subscription) {
     $access = AccessResult::forbidden();
@@ -85,8 +85,8 @@ class JudgeController extends ControllerBase {
    * @param \Drupal\qs_subscription\Entity\Subscription $subscription
    *   The subscription.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formated response. Contains the status & the confirmed subscription.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains status & confirmed subscription.
    */
   public function confirm(Subscription $subscription) {
     $confirmed = $this->subscriptionManager->confirm($subscription);
@@ -104,8 +104,8 @@ class JudgeController extends ControllerBase {
    * @param \Drupal\qs_subscription\Entity\Subscription $subscription
    *   The subscription.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formated response. Contains the status & the declined subscription.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains the status & the declined subscription.
    */
   public function decline(Subscription $subscription) {
     $declined = $this->subscriptionManager->decline($subscription);

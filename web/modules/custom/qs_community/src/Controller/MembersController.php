@@ -70,8 +70,8 @@ class MembersController extends ControllerBase {
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
@@ -105,7 +105,7 @@ class MembersController extends ControllerBase {
       $privileges[$row->user][] = $row->privilege;
     }
 
-    // Load user entities whitout privileges.
+    // Load user entities without privileges.
     $community_members = $this->userStorage->loadMultiple($uids);
 
     // Add privileges to users.

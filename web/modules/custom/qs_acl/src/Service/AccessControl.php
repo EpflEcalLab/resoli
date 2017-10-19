@@ -271,7 +271,7 @@ class AccessControl {
   /**
    * Check the account is waiting for at least one Privilege on the community.
    *
-   * If the user has already one privilege it will alwayse return FALSE.
+   * If the user has already one privilege it will always return FALSE.
    * Accounts are referenced as waiting for Approval when it has
    * none approved privilege(s) & only pending one(s) on the community.
    *

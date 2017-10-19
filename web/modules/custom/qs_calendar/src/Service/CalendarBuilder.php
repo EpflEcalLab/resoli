@@ -22,10 +22,10 @@ class CalendarBuilder {
   /**
    * Get the monday for the $date week.
    *
-   * @param Drupal\Core\Datetime\DrupalDateTime $date
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date
    *   The date object.
    *
-   * @return Drupal\Core\Datetime\DrupalDateTime
+   * @return \Drupal\Core\Datetime\DrupalDateTime
    *   The monday.
    */
   public function getMondayWeek(DrupalDateTime $date) {
@@ -37,10 +37,10 @@ class CalendarBuilder {
   /**
    * Get the sunday for the $date week.
    *
-   * @param Drupal\Core\Datetime\DrupalDateTime $date
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date
    *   The date object.
    *
-   * @return Drupal\Core\Datetime\DrupalDateTime
+   * @return \Drupal\Core\Datetime\DrupalDateTime
    *   The sunday.
    */
   public function getSundayWeek(DrupalDateTime $date) {
@@ -52,10 +52,10 @@ class CalendarBuilder {
   /**
    * Get the first monday for the $date month.
    *
-   * @param Drupal\Core\Datetime\DrupalDateTime $date
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date
    *   The date object.
    *
-   * @return Drupal\Core\Datetime\DrupalDateTime
+   * @return \Drupal\Core\Datetime\DrupalDateTime
    *   The first monday month.
    */
   public function getFirstMondayMonthFullWeek(DrupalDateTime $date) {
@@ -67,10 +67,10 @@ class CalendarBuilder {
   /**
    * Get the last sunday for the $date month.
    *
-   * @param Drupal\Core\Datetime\DrupalDateTime $date
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date
    *   The date object.
    *
-   * @return Drupal\Core\Datetime\DrupalDateTime
+   * @return \Drupal\Core\Datetime\DrupalDateTime
    *   The last sunday month.
    */
   public function getLastSundayMonthFullWeek(DrupalDateTime $date) {
@@ -82,9 +82,9 @@ class CalendarBuilder {
   /**
    * Generate an iterator of dates between 2 dates.
    *
-   * @param Drupal\Core\Datetime\DrupalDateTime $date_start
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
    *   The start date for the period.
-   * @param Drupal\Core\Datetime\DrupalDateTime $date_end
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
    *   The end date for the period.
    *
    * @return \DatePeriod

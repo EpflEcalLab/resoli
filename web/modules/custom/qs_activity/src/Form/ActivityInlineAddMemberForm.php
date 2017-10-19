@@ -49,7 +49,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     foreach ($rows as $row) {
       $uids[] = $row->user;
     }
-    // Load user entities whitout privileges.
+    // Load user entities without privileges.
     $community_members = $this->userStorage->loadMultiple($uids);
     $select_options = [];
     $fallback = [];

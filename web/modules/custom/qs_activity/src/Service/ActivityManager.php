@@ -46,7 +46,7 @@ class ActivityManager {
   /**
    * Get all activities for the given community, filtred by theme if requested.
    *
-   * @param Drupal\taxonomy\TermInterface $community
+   * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
    *
    * @return integer[]
@@ -101,17 +101,17 @@ class ActivityManager {
    *   The new activity title.
    * @param int[] $themes
    *   A collection of theme TID.
-   * @param bool[] $autorizations
-   *   The list of autorizations & the boolean value.
-   * @param Drupal\taxonomy\TermInterface $community
+   * @param bool[] $authorizations
+   *   The list of authorizations & the boolean value.
+   * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
-   * @param Drupal\user\UserInterface $user
+   * @param \Drupal\user\UserInterface $user
    *   The user entity.
    *
    * @return \Drupal\node\NodeInterface
    *   The created activity.
    */
-  public function create($title, array $themes, array $autorizations, TermInterface $community, UserInterface $user = NULL) {
+  public function create($title, array $themes, array $authorizations, TermInterface $community, UserInterface $user = NULL) {
     $activity = $this->nodeStorage->create([
       'type'                => 'activity',
       'status'              => TRUE,
@@ -123,7 +123,7 @@ class ActivityManager {
       'field_contact_phone' => $user ? $user->field_phone->value : '',
     ]);
 
-    foreach ($autorizations as $key => $value) {
+    foreach ($authorizations as $key => $value) {
       if ($activity->hasField($key)) {
         $activity->set($key, (bool) $value);
       }
@@ -159,13 +159,13 @@ class ActivityManager {
   /**
    * Get all activities for the $user in the given $community.
    *
-   * @param Drupal\taxonomy\TermInterface $community
+   * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
-   * @param Drupal\user\UserInterface $user
+   * @param \Drupal\user\UserInterface $user
    *   The user entity.
    *
-   * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Activity. Oterwhise an empty array.
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Activity. Otherwise an empty array.
    */
   public function getByUser(TermInterface $community, UserInterface $user) {
     $query = $this->connection->select('node_field_data', 'activity');

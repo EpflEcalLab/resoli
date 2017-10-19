@@ -80,8 +80,8 @@ class AccountController extends ControllerBase {
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function accessApproval(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
@@ -147,7 +147,7 @@ class AccountController extends ControllerBase {
   }
 
   /**
-   * Confimration page when user request a recovery password.
+   * Confirmation page when user request a recovery password.
    */
   public function passConfirm() {
     return [

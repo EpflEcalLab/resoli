@@ -1,7 +1,7 @@
 Feature: Supervisor - Redirect
   In order to make sure Supervisor - Redirection are working
   As a bunch of users
-  I want to make sure the redirections bring on the correct pages
+  I want to make sure the redirection bring on the correct pages
 
   @api
   Scenario: Logged a Member of Lausanne, accessing my root Drupal system user page brings me on my account dashboard

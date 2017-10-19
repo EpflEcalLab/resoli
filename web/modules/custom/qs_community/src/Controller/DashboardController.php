@@ -47,8 +47,8 @@ class DashboardController extends ControllerBase {
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();

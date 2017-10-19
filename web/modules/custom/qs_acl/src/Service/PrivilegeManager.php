@@ -56,12 +56,12 @@ class PrivilegeManager {
   /**
    * Request the collection of Privilege active for a given entiy & the user.
    *
-   * @param Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
-   * @return Drupal\qs_acl\Entity\Privilege[]
+   * @return \Drupal\qs_acl\Entity\Privilege[]
    *   A collection of active Privilege according the user & the entity given.
    */
   public function fetchActive(EntityInterface $entity, AccountInterface $account = NULL) {
@@ -105,12 +105,12 @@ class PrivilegeManager {
    *
    * @param string $privilege
    *   The requested string privilege.
-   * @param Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface $account
    *   Account for who we will request de privilege.
    *
-   * @return Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface
    *   The created privilege request.
    */
   public function request($privilege, EntityInterface $entity, AccountInterface $account = NULL) {
@@ -157,12 +157,12 @@ class PrivilegeManager {
    *
    * @param string $privilege
    *   The requested string privilege.
-   * @param Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param Drupal\Core\Session\AccountInterface $user
+   * @param \Drupal\Core\Session\AccountInterface $user
    *   Account for who we will request de privilege.
    *
-   * @return Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface
    *   The created privilege.
    */
   public function create($privilege, EntityInterface $entity, AccountInterface $user) {
@@ -201,7 +201,7 @@ class PrivilegeManager {
    * Confirm a previously requested privilege.
    *
    * @param \Drupal\qs_acl\Entity\Privilege $privilege
-   *   The privilege to confirme.
+   *   The privilege to confirm.
    *
    * @return \Drupal\qs_acl\Entity\Privilege
    *   The confirmed privilege.
@@ -249,7 +249,7 @@ class PrivilegeManager {
    *  - activity_maintainers
    *  - activity_organizers.
    *
-   * @param Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
@@ -283,21 +283,21 @@ class PrivilegeManager {
    * Request the collection of Accounts waiting for Approval on the entity.
    *
    * Accounts are referenced as waiting for Approval when it has
-   * at leaset one pending privilege on the community.
+   * at least one pending privilege on the community.
    * Even if the user already has the privilege or another one(s)
    * on the community.
    *  - community_members
    *  - community_organizers
    *  - community_managers.
    * Accounts are referenced as waiting for Approval when it has
-   * at leaset one pending privilege on the activity.
+   * at least one pending privilege on the activity.
    * Even if the user already has the privilege or another one(s)
    * on the activity.
    *  - activity_members
    *  - activity_maintainers
    *  - activity_organizers.
    *
-   * @param Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
@@ -326,12 +326,12 @@ class PrivilegeManager {
    * Check for the given entity IDs, if the user has the requested privileges.
    *
    * @param integer[] $entities
-   *   A collection of entites IDs.
+   *   A collection of entities IDs.
    * @param string[] $privileges
    *   A collection of privileges.
    * @param bool $status
    *   The required status for the privileges.
-   * @param Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
    * @return array[]
@@ -369,11 +369,11 @@ class PrivilegeManager {
   }
 
   /**
-   * Alter the given query to add the subtest: Does it has at least on role.
+   * Alter the given query to add the condition: Should have at least on role.
    *
-   * @param Drupal\Core\Database\Query\SelectInterface $query
+   * @param \Drupal\Core\Database\Query\SelectInterface $query
    *   The query to alter.
-   * @param Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the roles.
    */
   protected function alterQueryHasOneRole(SelectInterface &$query, EntityInterface $entity) {

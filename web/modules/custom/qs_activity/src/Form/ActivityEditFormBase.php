@@ -14,6 +14,27 @@ use Drupal\Core\Session\AccountInterface;
 abstract class ActivityEditFormBase extends FormBasic {
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * The entity QS Activity Manager.
+   *
+   * @var \Drupal\qs_activity\Service\ActivityManager
+   */
+  protected $activityManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -34,8 +55,8 @@ abstract class ActivityEditFormBase extends FormBasic {
    * @param \Drupal\node\NodeInterface $activity
    *   Run access checks for this node.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
@@ -51,7 +72,7 @@ abstract class ActivityEditFormBase extends FormBasic {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
 
-    // Save the community for submisson.
+    // Save the community for submission.
     $form['activity'] = [
       '#type'  => 'hidden',
       '#value' => $activity->id(),

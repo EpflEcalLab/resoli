@@ -63,7 +63,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     ];
     $form['group']['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
-    // Save the community for submisson.
+    // Save the community for submission.
     $form['group']['latitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_lat->value,

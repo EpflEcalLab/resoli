@@ -46,8 +46,8 @@ class AccountController extends ControllerBase {
    * @param \Drupal\user\UserInterface $user
    *   Run access checks for this user.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountProxyInterface $account, UserInterface $user) {
     $access = AccessResult::forbidden();
@@ -64,6 +64,9 @@ class AccountController extends ControllerBase {
    *
    * @param \Drupal\user\UserInterface $user
    *   The user's dashboard.
+   *
+   * @return array
+   *   Render array of account dashboard.
    */
   public function dashboard(UserInterface $user) {
     $variables['user']        = $user;

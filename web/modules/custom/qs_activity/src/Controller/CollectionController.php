@@ -106,8 +106,8 @@ class CollectionController extends ControllerBase {
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
@@ -123,7 +123,7 @@ class CollectionController extends ControllerBase {
    * Collection by themes.
    */
   public function themes(TermInterface $community) {
-    // Query to retreive all activities by theme.
+    // Query to retrieve all activities by theme.
     $activities_nids = $this->activityManager->getThemed($community);
     $variables = ['community' => $community];
 

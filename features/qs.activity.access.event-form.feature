@@ -189,7 +189,7 @@ Feature: Event Forms Access
     When I am on "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo/delete"
     And the response status code should be 403
 
-  # Shoud I tests access of community & privilege of activity ? If I don't a member with organizer privilege of Fribourg but not a member of community Fribourg could access to the dashboard. What should I do ?
+  # Should I tests access of community & privilege of activity ? If I don't a member with organizer privilege of Fribourg but not a member of community Fribourg could access to the dashboard. What should I do ?
   @api
   Scenario: Logged as Member of Fribourg, I can't access to the Delete Form of Event 16, because I have no privilege on this activity
     Given I am logged in as user "member+fribourg"

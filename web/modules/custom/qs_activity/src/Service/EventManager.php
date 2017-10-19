@@ -50,8 +50,8 @@ class EventManager {
    * @param array $activities_nids
    *   Activities ID for which one we want the nearest next event.
    *
-   * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Event. Oterwhise an empty array.
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
    */
   public function getNext(array $activities_nids) {
     $now = new DrupalDateTime();
@@ -82,15 +82,15 @@ class EventManager {
   /**
    * Get only the next events (nearest from now) for the given date range.
    *
-   * @param Drupal\taxonomy\TermInterface $community
+   * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
    * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
    *   The start date.
    * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
    *   The end date.
    *
-   * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Event. Oterwhise an empty array.
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
    */
   public function getByDate(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end) {
     $query = $this->connection->select('node_field_data', 'event');
@@ -125,11 +125,11 @@ class EventManager {
   /**
    * Get all the next event for the given activity.
    *
-   * @param Drupal\node\NodeInterface $activity
-   *   The activity which we want the retrieve futur events.
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity which we want the retrieve future events.
    *
-   * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Event. Oterwhise an empty array.
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
    */
   public function getAllNext(NodeInterface $activity) {
     $now = new DrupalDateTime();
@@ -154,11 +154,11 @@ class EventManager {
   /**
    * Get all events.
    *
-   * @param Drupal\node\NodeInterface $activity
-   *   The activity which we want the retrieve futur events.
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity which we want the retrieve future events.
    *
-   * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Event. Oterwhise an empty array.
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
    */
   public function getAll(NodeInterface $activity) {
     // Get every activity that belongs to the current community.
@@ -179,7 +179,7 @@ class EventManager {
    * Create an Event.
    *
    * @param \Drupal\node\NodeInterface $activity
-   *   The activiity this event will belongs to.
+   *   The activity this event will belongs to.
    * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
    *   The start date.
    * @param \Drupal\Core\Datetime\DrupalDateTime $date_end

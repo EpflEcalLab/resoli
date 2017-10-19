@@ -20,8 +20,8 @@ class PrivilegeGodController extends AjaxControllerBase {
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account) {
     $access = AccessResult::forbidden();
@@ -57,8 +57,8 @@ class PrivilegeGodController extends AjaxControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formated response. Contains status & toggled/created privilege.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains status & toggled/created privilege.
    */
   public function toggle(Request $request) {
     $privileges = $request->request->get('privileges');
@@ -138,8 +138,8 @@ class PrivilegeGodController extends AjaxControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formated response. Contains status & declined privileges.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains status & declined privileges.
    */
   public function ban(Request $request) {
     $user_id = $request->request->get('user');

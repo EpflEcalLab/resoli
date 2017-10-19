@@ -10,7 +10,7 @@ Feature: Event Alias
     When I am on "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo/dashboard"
     And the response status code should be 200
 
-## Edit Form - General Informations
+## Edit Form - General Information
   @api
   Scenario: Logged as Manager of Lausanne, I can access to the Edit Form of Event 16, I'm the organizer of this activity
     Given I am logged in as user "manager+lausanne"

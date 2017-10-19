@@ -14,6 +14,41 @@ use Drupal\Core\Session\AccountInterface;
 abstract class EventEditFormBase extends FormBasic {
 
   /**
+   * The current user account proxy.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -36,8 +71,8 @@ abstract class EventEditFormBase extends FormBasic {
    * @param \Drupal\node\NodeInterface $event
    *   Run access checks for this node.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, NodeInterface $event) {
     $access = AccessResult::forbidden();
@@ -57,7 +92,7 @@ abstract class EventEditFormBase extends FormBasic {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
     $form = parent::buildForm($form, $form_state);
 
-    // Save the event for submisson.
+    // Save the event for submission.
     $form['event'] = [
       '#type'  => 'hidden',
       '#value' => $event->id(),

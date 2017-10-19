@@ -13,6 +13,13 @@ use Drupal\Core\Url;
 class ActivityDeleteForm extends ActivityEditFormBase {
 
   /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {

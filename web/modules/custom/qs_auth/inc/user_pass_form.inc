@@ -8,8 +8,8 @@
 /**
  * Alter Drupal Pass form with custom markup and submission.
  *
- * The user_pass form desn't have a module_hook_form_alter.
- * The user_reset form desn't have a module_hook_form_alter.
+ * The user_pass form doesn't have a module_hook_form_alter.
+ * The user_reset form doesn't have a module_hook_form_alter.
  */
 function qs_auth_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'user_pass' || $form_id == 'user_pass_reset') {

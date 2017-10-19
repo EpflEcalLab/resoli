@@ -75,12 +75,12 @@ class SubscriptionManager {
   /**
    * Request a new subscription for the user on the given event.
    *
-   * @param Drupal\node\NodeInterface $event
+   * @param \Drupal\node\NodeInterface $event
    *   The event.
-   * @param Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface $account
    *   Account for who we will request the subscription.
    *
-   * @return Drupal\Core\Entity\EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface
    *   The created subscription request.
    */
   public function request(NodeInterface $event, AccountInterface $account = NULL) {
@@ -123,7 +123,7 @@ class SubscriptionManager {
    * Confirm a previously requested subscription.
    *
    * @param \Drupal\qs_subscription\Entity\Subscription $subscription
-   *   The subscription to confirme.
+   *   The subscription to confirm.
    *
    * @return \Drupal\qs_subscription\Entity\Subscription
    *   The confirmed subscription.
@@ -166,7 +166,7 @@ class SubscriptionManager {
   /**
    * Request the collection of subscriber for a given event.
    *
-   * @param Drupal\node\NodeInterface $event
+   * @param \Drupal\node\NodeInterface $event
    *   The event.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
@@ -190,7 +190,7 @@ class SubscriptionManager {
   /**
    * Request the collection of Accounts waiting for subscription on the event.
    *
-   * @param Drupal\node\NodeInterface $event
+   * @param \Drupal\node\NodeInterface $event
    *   The event.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
@@ -217,13 +217,13 @@ class SubscriptionManager {
    *
    * This method will fetch every subscriptions (excepted cancel ones).
    *
-   * @param Drupal\taxonomy\TermInterface $community
+   * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
-   * @param Drupal\user\UserInterface $user
+   * @param \Drupal\user\UserInterface $user
    *   The user entity.
    *
-   * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Event. Oterwhise an empty array.
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
    */
   public function getByUser(TermInterface $community, UserInterface $user) {
     $now = new DrupalDateTime();

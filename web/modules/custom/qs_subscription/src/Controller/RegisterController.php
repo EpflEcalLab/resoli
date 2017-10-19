@@ -58,8 +58,8 @@ class RegisterController extends ControllerBase {
    * @param \Drupal\node\NodeInterface $event
    *   Run access checks for this event.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, NodeInterface $event) {
     $access = AccessResult::forbidden();
@@ -82,8 +82,8 @@ class RegisterController extends ControllerBase {
    * @param \Drupal\node\NodeInterface $event
    *   The event.
    *
-   * @return Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formated response. Contains the status & the confirmed subscription.
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains status & confirmed subscription.
    */
   public function request(NodeInterface $event) {
     $requested = $this->subscriptionManager->request($event);

@@ -11,7 +11,7 @@ use Drupal\Core\Routing\CurrentRouteMatch;
 /**
  * Floating actions buttons Block.
  *
- * Expose the Floating actions buttons to access privilegied pages.
+ * Expose the Floating actions buttons to access privileged pages.
  *
  * @Block(
  *   id = "qs_activity_floating_actions_buttons_block",

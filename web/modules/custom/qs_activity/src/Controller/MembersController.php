@@ -70,8 +70,8 @@ class MembersController extends ControllerBase {
    * @param \Drupal\node\NodeInterface $activity
    *   Run access checks for this node.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
@@ -106,7 +106,7 @@ class MembersController extends ControllerBase {
       $privileges[$row->user][] = $row->privilege;
     }
 
-    // Load user entities whitout privileges.
+    // Load user entities without privileges.
     $activity_members = $this->userStorage->loadMultiple($uids);
 
     // Add privileges to users.

@@ -12,6 +12,13 @@ use Drupal\node\NodeInterface;
 class ActivityEditInfoForm extends ActivityEditFormBase {
 
   /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {

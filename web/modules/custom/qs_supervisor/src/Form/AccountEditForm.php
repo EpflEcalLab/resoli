@@ -68,8 +68,8 @@ class AccountEditForm extends FormBase {
    * @param \Drupal\user\UserInterface $user
    *   Run access checks for this user.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountProxyInterface $account, UserInterface $user) {
     $access = AccessResult::forbidden();
@@ -111,7 +111,7 @@ class AccountEditForm extends FormBase {
       'form__fullpage',
     ];
 
-    // Save the user for submisson.
+    // Save the user for submission.
     $form['user'] = [
       '#type'  => 'hidden',
       '#value' => $user->id(),
@@ -209,13 +209,13 @@ class AccountEditForm extends FormBase {
       $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
-    // Check email is uniq. as mail.
+    // Check email is unique as mail.
     $accounts = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
       $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
     }
 
-    // Check email is uniq. as username.
+    // Check email is unique as username.
     $accounts = $this->userStorage->loadByProperties(['name' => $form_state->getValue('mail')]);
     if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
       $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));

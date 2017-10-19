@@ -69,8 +69,8 @@ class CollectionController extends ControllerBase {
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
@@ -169,7 +169,7 @@ class CollectionController extends ControllerBase {
    *   The community entity.
    *
    * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Event. Oterwhise an empty array.
+   *   A collection of node's Event. Otherwise an empty array.
    */
   protected function getEventsByDay(Request $request, TermInterface $community) {
     // Get pagination day.

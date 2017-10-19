@@ -45,7 +45,7 @@ function qs_site_entity_delete(EntityInterface $entity) {
 /**
  * Implements hook_theme_suggestions_hook_alter().
  *
- * Since Durpal 8.3.x, the 404 & 403 pages don't provide any sugestions.
+ * Since Drupal 8.3.x, the 404 & 403 pages don't provide any suggestions.
  */
 function qs_site_theme_suggestions_page_alter(array &$suggestions, array $variables) {
   $request = Drupal::service('request_stack')->getCurrentRequest();

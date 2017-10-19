@@ -71,8 +71,8 @@ class WaitingApprovalController extends ControllerBase {
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
@@ -104,7 +104,7 @@ class WaitingApprovalController extends ControllerBase {
     foreach ($rows as $row) {
       $ids[] = $row->id;
     }
-    // Load user entities whitout privileges.
+    // Load user entities without privileges.
     $privileges = $this->privilegeStorage->loadMultiple($ids);
 
     $variables['privileges'] = $privileges;

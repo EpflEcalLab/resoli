@@ -17,7 +17,7 @@ class Account {
   /**
    * Composes and optionally sends an email message.
    *
-   * @var Drupal\Core\Mail\MailManagerInterface
+   * @var \Drupal\Core\Mail\MailManagerInterface
    */
   protected $mail;
 
@@ -74,7 +74,7 @@ class Account {
    * @param array $data
    *   Data used to create the user.
    *
-   * @return Drupal\Core\Session\AccountProxyInterface
+   * @return \Drupal\Core\Session\AccountProxyInterface
    *   Created user object.
    */
   public function create(array $data) {
@@ -144,7 +144,7 @@ class Account {
   }
 
   /**
-   * Send mail to new account mail to confirme his identity.
+   * Send mail to new account mail to confirm his identity.
    *
    * @param \Drupal\user\UserInterface $user
    *   The user to send register mail.

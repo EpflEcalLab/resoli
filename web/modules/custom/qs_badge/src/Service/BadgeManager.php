@@ -36,7 +36,7 @@ class BadgeManager {
   }
 
   /**
-   * Count for every days between two dates how many events occure by day.
+   * Count for every days between two dates how many events occur by day.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
@@ -46,7 +46,7 @@ class BadgeManager {
    *   The end date.
    *
    * @return array[]
-   *   A collection of dates where it occure an event. Oterwhise an empty array.
+   *   A collection of dates where it occur an event. Otherwise an empty array.
    */
   public function countEventsByDates(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end) {
     $query = $this->connection->select('node_field_data', 'event');
@@ -80,11 +80,11 @@ class BadgeManager {
   /**
    * From a given events node IDs, return the list w/ subscription for the user.
    *
-   * @param Drupal\node\NodeInterface[] $events
+   * @param \Drupal\node\NodeInterface[] $events
    *   A collection of events.
    * @param bool $status
    *   The required status for the subscriptions.
-   * @param Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface $account
    *   The user entity.
    *
    * @return integer[]

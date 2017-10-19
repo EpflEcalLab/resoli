@@ -12,6 +12,12 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * EventDeleteForm class.
  */
 class EventDeleteForm extends EventEditFormBase {
+  /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
 
   /**
    * {@inheritdoc}

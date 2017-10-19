@@ -47,8 +47,8 @@ class DashboardController extends ControllerBase {
    * @param \Drupal\node\NodeInterface $activity
    *   Run access checks for this node.
    *
-   * @return bool
-   *   Access allowed or rejected.
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();

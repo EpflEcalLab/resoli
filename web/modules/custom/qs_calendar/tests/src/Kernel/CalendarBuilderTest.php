@@ -9,7 +9,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 /**
  * @coversDefaultClass \Drupal\qs_calendar\Service\CalendarBuilder
  *
- * Be carefull, 2016 is a bissextile year - see tests it :D
+ * Be careful, 2016 is a bissextile year - see tests it :D
  *
  * @group qs_calendar
  * @group qs_calendar_kernel
@@ -67,7 +67,7 @@ class CalendarBuilderTest extends KernelTestBase {
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getSundayWeek
+   * @covers \Drupal\qs_calendar\Service\CalendarBuilder::getSundayWeek
    * @dataProvider getSundayWeekProvider
    */
   public function testGetSundayWeek($date, $expected) {
@@ -101,7 +101,7 @@ class CalendarBuilderTest extends KernelTestBase {
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getFirstMondayMonthFullWeek
+   * @covers \Drupal\qs_calendar\Service\CalendarBuilder::getFirstMondayMonthFullWeek
    * @dataProvider getFirstMondayMonthProvider
    */
   public function testGetFirstMondayMonth($date, $expected) {
@@ -132,7 +132,7 @@ class CalendarBuilderTest extends KernelTestBase {
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::getLastSundayMonthFullWeek
+   * @covers \Drupal\qs_calendar\Service\CalendarBuilder::getLastSundayMonthFullWeek
    * @dataProvider getLastSundayMonthProvider
    */
   public function testGetLastSundayMonth($date, $expected) {
@@ -166,7 +166,7 @@ class CalendarBuilderTest extends KernelTestBase {
   }
 
   /**
-   * @covers Drupal\qs_calendar\Service\CalendarBuilder::build
+   * @covers \Drupal\qs_calendar\Service\CalendarBuilder::build
    * @dataProvider buildProvider
    */
   public function testBuild($date_start, $date_end, $expected) {
@@ -183,7 +183,7 @@ class CalendarBuilderTest extends KernelTestBase {
    * Tests provider for testGetLastSundayMonth.
    *
    * @return array
-   *   Return an array of arrays containg date formatted Y-m-d.
+   *   Return an array of arrays contains date formatted Y-m-d.
    */
   public function buildProvider() {
     return [

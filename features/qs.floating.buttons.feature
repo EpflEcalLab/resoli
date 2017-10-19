@@ -53,6 +53,24 @@ Feature: Floating actions buttons
     Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_activity.floating.add.activity" link with href "/fribourg/activities/add"
 
+## Calendar by week page
+  @api
+  Scenario: Logged as Member of Lausanne, when reaching the Calendar by week page of Lausanne, I must see the "My subscription" button
+    Given I am logged in as user "member+lausanne"
+    When I am on "/lausanne/calendar/weekly"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.my_subscriptions" link with href "/events/1/user/2"
+
+## Calendar by month page
+  @api
+  Scenario: Logged as Member of Lausanne, when reaching the Calendar by week page of Lausanne, I must see the "My subscription" button
+    Given I am logged in as user "member+lausanne"
+    When I am on "/lausanne/calendar/monthly"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.my_subscriptions" link with href "/events/1/user/2"
+
 ## Activity detail page
   @api
   Scenario: Logged as Member of Lausanne, when reaching the Activity N°2, I don't see any floating button

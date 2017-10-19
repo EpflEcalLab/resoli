@@ -1,17 +1,21 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: Quartiers Solidaires\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-21 10:44+0100\n"
+"PO-Revision-Date: 2017-10-18 16:20+0100\n"
+"Last-Translator: Gilles Doge\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"X-Generator: Poedit 1.7.7\n"
+"X-Generator: Loco https://localise.biz\n"
+"X-Loco-Source-Locale: en\n"
+"X-Loco-Project-Id: 30500\n"
+"X-Loco-Api-Version: 1.0.18 20171009-1"
 
-# Patterns
 msgid "last year"
 msgstr "l'année dernière"
 
@@ -56,7 +60,6 @@ msgctxt "ampm"
 msgid "pm"
 msgstr "pm"
 
-# Day Periods
 msgid "Midnight"
 msgstr "Minuit"
 
@@ -75,7 +78,6 @@ msgstr "Après-midi"
 msgid "Evening"
 msgstr "Soir"
 
-# Weekdays full
 msgid "Sunday"
 msgstr "Dimanche"
 
@@ -97,7 +99,6 @@ msgstr "Vendredi"
 msgid "Saturday"
 msgstr "Samedi"
 
-# Weekdays abbr
 msgctxt "Abbreviated weekday"
 msgid "Sun"
 msgstr "Dim."
@@ -126,7 +127,6 @@ msgctxt "Abbreviated weekday"
 msgid "Sat"
 msgstr "Sam."
 
-# Abbreviated 1 letter weekday
 msgctxt "Abbreviated 1 letter weekday Sunday"
 msgid "S"
 msgstr "D"
@@ -155,7 +155,6 @@ msgctxt "Abbreviated 1 letter weekday Saturday"
 msgid "S"
 msgstr "S"
 
-# Months full
 msgctxt "Long month name"
 msgid "January"
 msgstr "Janvier"
@@ -204,7 +203,6 @@ msgctxt "Long month name"
 msgid "December"
 msgstr "Décembre"
 
-# Months abbr
 msgctxt "Abbreviated month name"
 msgid "Jan"
 msgstr "Janv."
@@ -249,68 +247,6 @@ msgctxt "Abbreviated month name"
 msgid "Dec"
 msgstr "Déc."
 
-# Drupal 8 - Immutable
-msgid "The requested page could not be found."
-msgstr "La page demandée ne peut pas être trouvée."
-
-msgid "Page not found"
-msgstr "Page non trouvée"
-
-# Drupal 8 - Authentication
-msgid "%name is not recognized as a username or an email address."
-msgstr ""
-
-# Drupal 8 - Authentication - Password
-msgid "qs_auth.form.pass.title"
-msgstr "Demander un nouveau mot de passe"
-
-msgid ""
-"Password reset instructions will be sent to your registered email address."
-msgstr ""
-"Indiquez comment nous pouvons vous contacter et nous vous enverrons les "
-"informations pour réinitialiser votre mot de passe."
-
-msgid "qs_auth.form.pass.name.label"
-msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
-
-msgid "qs_auth.form.pass.name.description"
-msgstr "En cas d’oubli, demandez-la à votre responsable de communauté"
-
-msgid "Further instructions have been sent to your email address."
-msgstr "De plus amples informations vous ont été envoyées par e-mail."
-
-msgid ""
-"You have just used your one-time login link. It is no longer necessary to "
-"use this link to log in. Please change your password."
-msgstr ""
-"Vous venez d’utiliser un lien à usage unique. Vous n’aurez plus besoin "
-"d’utiliser ce lien lors de vos prochaines connexions. Merci de modifier "
-"votre mot de passe."
-
-msgid ""
-"Unrecognized username or password. <a href=\":password\">Forgot your "
-"password?</a>"
-msgstr ""
-"E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</"
-"a>"
-
-msgid ""
-"A confirmation request to cancel your account has been sent to your email "
-"address."
-msgstr ""
-
-# Drupal 8 - Honeypot
-msgid ""
-"There was a problem with your form submission. Please refresh the page and "
-"try again."
-msgstr ""
-
-msgid ""
-"There was a problem with your form submission. Please wait @limit seconds "
-"and try again."
-msgstr ""
-
-# Quartiers Solidaires
 msgid "qs_auth.form.login.name.placeholder"
 msgstr "Ex. catherine.dubuis@prosenectute.ch"
 
@@ -318,10 +254,11 @@ msgid "qs_auth.form.login.name"
 msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
 
 msgid "qs_auth.form.login.name.description"
-msgstr "En cas d’oubli, demandez-la à votre responsable de communauté"
+msgstr ""
+"En cas d’oubli, demandez-la à la personne responsable de votre communauté"
 
 msgid "qs_auth.form.login.placeholder"
-msgstr "Vous seul le connaissez"
+msgstr "Vous seul(e) le connaissez"
 
 msgid "qs_auth.form.login.password"
 msgstr "Inscrivez votre mot de passe ici"
@@ -433,26 +370,26 @@ msgstr "Inscrivez le nom de votre activité ici"
 msgid "qs_activity.activities.form.add.theme"
 msgstr "Quel thème correspond le mieux à votre activité?"
 
-msgid "qs_activity.activities.form.add.community_can_subscribe"
+msgid "qs_activity.activities.form.add.community_can_subscribe.description"
 msgstr "Permettre à la communauté l’inscription aux évènements"
 
-msgid "qs_activity.activities.form.add.community_access_contact"
+msgid "qs_activity.activities.form.add.community_access_contact.description"
 msgstr "Montrer les informations de contact à la communauté"
 
-msgid "qs_activity.activities.form.add.community_access_detail"
+msgid "qs_activity.activities.form.add.community_access_detail.description"
 msgstr "Montrer les détails des évènements à la communauté"
 
-msgid "qs_activity.activities.form.add.community_access_story"
+msgid "qs_activity.activities.form.add.community_access_story.description"
 msgstr "Montrer les récits à la communauté"
 
-msgid "qs_activity.activities.form.add.member_create_story"
+msgid "qs_activity.activities.form.add.member_create_story.description"
 msgstr "Permettre la soumission de récits"
 
-msgid "qs_activity.activities.form.add.community_access_gallery"
+msgid "qs_activity.activities.form.add.community_access_gallery.description"
 msgstr "Montrer les photos à la communauté"
 
-msgid "qs_activity.activities.form.add.member_create_gallery"
-msgstr "Permettre la soumission de photos"
+msgid "qs_activity.activities.form.add.member_create_gallery.description"
+msgstr "Permettre la publication de photos"
 
 msgid "qs_activity.activities.form.add.event"
 msgstr ""
@@ -500,6 +437,12 @@ msgid "qs_supervisor.account.form.edit.title"
 msgstr ""
 "Ici, vous pouvez modifier vos informations personnelles en toute sécurité."
 
+msgid "The requested page could not be found."
+msgstr "La page demandée ne peut pas être trouvée."
+
+msgid "Page not found"
+msgstr "Page non trouvée"
+
 msgid "qs_activity.activities.dashboard.title"
 msgstr ""
 
@@ -531,7 +474,7 @@ msgid "qs_activity.add_form.community_access_gallery.description"
 msgstr "Montrer les photos à la communauté"
 
 msgid "qs_activity.add_form.member_create_gallery.description"
-msgstr "Permettre la soumissions de photos"
+msgstr "Permettre la publication de photos"
 
 msgid "qs_activity.activities.form.edit.visibility.title"
 msgstr ""
@@ -603,9 +546,12 @@ msgstr "Merci pour toutes ces informations!"
 
 msgid "qs.auth.approval.description @variables.community.name.value"
 msgstr ""
-"Un responsable de la communauté @variables.community.name.value va "
-"maintenant vérifier votre adhésion. \rIl vous informera par email lorsque "
-"vous pourrez commencer à utiliser Réseaux Solidaires!"
+"La personne responsable de la communauté @variables.community.name.value va "
+"maintenant vérifier votre adhésion. \n"
+"Elle vous informera, par email, lorsque vous pourrez commencer à utiliser "
+"Réseaux Solidaires! Notez que cette validation peut durer quelques minutes, "
+"comme quelques jours. N’hésitez pas à la contacter pour toute information "
+"complémentaire."
 
 msgid "qs.auth.approval.short"
 msgstr "Adhésion en cours de validation"
@@ -641,7 +587,7 @@ msgid "qs_activity.events.form.add.title.placeholder"
 msgstr "Ex. Introduction à la recherche sur internet"
 
 msgid "qs_activity.events.form.add.title"
-msgstr "Quel est le titre de votre évènement?"
+msgstr "Quel est le nom de votre évènement?"
 
 msgid "qs_activity.events.form.add.date"
 msgstr "Quand aura lieu votre évènement?"
@@ -671,7 +617,7 @@ msgid "qs_activity.events.form.add.contribution"
 msgstr "Inscrivez ci-dessous le montant en francs"
 
 msgid "qs_activity.events.form.edit.title"
-msgstr "Quel est le titre de votre évènement?"
+msgstr "Quel est le nom de votre évènement?"
 
 msgid "qs_activity.events.form.edit.date"
 msgstr "Quand aura lieu votre évènement?"
@@ -735,6 +681,16 @@ msgstr ""
 
 msgid "qs.community.waiting_approval.request.manager"
 msgstr ""
+
+msgid "qs_auth.form.pass.name.label"
+msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
+
+msgid "qs_auth.form.pass.name.description"
+msgstr ""
+"En cas d’oubli, demandez-la à la personne responsable de votre communauté"
+
+msgid "qs_auth.form.pass.title"
+msgstr "Demander un nouveau mot de passe"
 
 msgid "qs_auth.link.login"
 msgstr "Utiliser mon compte"
@@ -835,7 +791,7 @@ msgid "qs.form.cancel"
 msgstr "Annuler"
 
 msgid "qs.form.error.empty @fieldname"
-msgstr "Vous avez oublié de compléter cette demande: « @fieldname »"
+msgstr "Cette information est manquante: « @fieldname »"
 
 msgid "qs_activity.events.form.edit.title_form"
 msgstr ""
@@ -870,32 +826,33 @@ msgstr ""
 
 msgid "qs_auth.register_form.step1.sub_description"
 msgstr ""
-"Ce choix peut être facilement modifié à tout instant, dans vos réglages "
+"Ce choix peut être facilement modifié, à tout instant, dans vos réglages "
 "personnels."
 
 msgid "qs_auth.register_form.step2.description"
 msgstr ""
-"Afin de vous donner accès à la communauté, merci d’indiquer les "
-"renseignements suivants:"
+"Afin de vous donner accès à la communauté, indiquez les renseignements "
+"suivants:"
 
 msgid "qs_auth.register_form.step2.sub_description"
 msgstr ""
-"Ces données seront visibles uniquement par vous et votre responsablede "
+"Ces données seront visibles uniquement par vous et votre responsable de "
 "communauté."
 
 msgid "qs_auth.register_form.step3.description"
 msgstr ""
-"Excellent! Merci d’indiquer vos informations de contact pour que les autres "
-"membres puissent communiquer avec vous!\r"
+"Excellent! Indiquez à présent vos informations de contact, afin que les "
+"autres personnes membres puissent communiquer avec vous!"
 
 msgid "qs_auth.register_form.step3.sub_description"
 msgstr ""
-"Seuls les membres validés par la communauté pourront voir cette information."
+"Seules les personnes validées par la communauté pourront voir cette "
+"information."
 
 msgid "qs_auth.register_form.step4.description"
 msgstr ""
-"Finalement, choisissez un mot de passe pour que vous seul puissiez accéder à "
-"votre compte."
+"Finalement, choisissez un mot de passe pour que vous, uniquement, puissiez "
+"accéder à votre compte."
 
 msgid "qs_auth.register_form.step4.sub_description"
 msgstr "En cas d’oubli, vous pourrez à tout instant le réinitialiser."
@@ -972,7 +929,7 @@ msgid "qs_activity.add_form.community_access_gallery"
 msgstr "Montrer les photos à la communauté"
 
 msgid "qs_activity.add_form.member_create_gallery"
-msgstr "Permettre la soumission de photos"
+msgstr "Permettre la publication de photos"
 
 msgid "qs.activity.edit_default_values"
 msgstr "Modifier les valeurs par défaut"
@@ -990,13 +947,20 @@ msgid "qs_activity.activities.form.add.success @activity"
 msgstr "L’activité @activity a bien été créée!"
 
 msgid "qs_activity.events.form.add.success"
-msgstr ""
+msgstr "Votre évènement a bien été créé!"
 
 msgid "qs_event.events.form.add.success @event"
 msgstr ""
 
 msgid "qs_event.events.form.delete.success @event"
 msgstr ""
+
+msgid ""
+"Unrecognized username or password. <a href=\":password\">Forgot your "
+"password?</a>"
+msgstr ""
+"E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</"
+"a>"
 
 msgid "qs_auth.form.pass.name.placeholder"
 msgstr ""
@@ -1008,6 +972,12 @@ msgid "qs.auth.pass.confirmation.description"
 msgstr ""
 "Vérifier votre boîte de réception, un e-mail vient de vous être envoyé!"
 
+msgid "%name is not recognized as a username or an email address."
+msgstr ""
+
+msgid "Further instructions have been sent to your email address."
+msgstr "De plus amples informations vous ont été envoyées par e-mail."
+
 msgid "qs.auth.communities.dashboard_title"
 msgstr "Voici l’espace dédié à la gestion de votre communauté"
 
@@ -1018,7 +988,7 @@ msgid "qs.contact @privilege.user.entity.field_firstname.value"
 msgstr ""
 
 msgid "qs_activity.activities.form.add.save"
-msgstr "Valider et créer l’activité"
+msgstr "Voir l’activité"
 
 msgid "qs_activity.activities.form.add.save_and_new_event"
 msgstr "Valider et ajouter un évènement"
@@ -1037,26 +1007,33 @@ msgstr "Remplacement de vos informations de connexion sur @sitename"
 
 msgid "qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login"
 msgstr ""
-"Bonjour @firstname @lastname,\r\n"
-"\r\n"
+"Bonjour @firstname @lastname,\n"
+"\n"
 "Vous avez effectué une demande de nouveau mot de passe pour la plateforme "
-"@sitename.\r\n"
-"\r\n"
+"@sitename.\n"
+"\n"
 "Vous pouvez désormais vous y connecter en appuyant sur le lien suivant, ou "
-"en le copiant-collant dans votre navigateur internet:\r\n"
-"\r\n"
-"<a href=\"@one-time-login\">@one-time-login</a>\r\n"
-"\r\n"
+"en le copiant-collant dans votre navigateur internet:\n"
+"\n"
+"<a href=\"@one-time-login\">@one-time-login</a>\n"
+"\n"
 "Ce lien ne peut être utilisé qu’une seule fois et vous conduira vers une "
 "page regroupant vos informations personnelles. Là, vous pourrez choisir un "
 "nouveau mot de passe à votre convenance. Si vous n’utilisez pas ce lien, il "
-"sera automatiquement échu après un jour.\r\n"
-"\r\n"
+"sera automatiquement échu après un jour.\n"
+"\n"
 "Cordialement."
 
 msgid ""
-"qs.mail.account.cancel_confirm.subject @sitename @mail @firstname @lastname"
-msgstr "Demande d’annulation de votre compte sur @sitename"
+"You have just used your one-time login link. It is no longer necessary to "
+"use this link to log in. Please change your password."
+msgstr ""
+"Vous venez d’utiliser un lien à usage unique. Vous n’aurez plus besoin "
+"d’utiliser ce lien lors de vos prochaines connexions. Merci de modifier "
+"votre mot de passe."
+
+msgid "qs.mail.account.cancel.subject @sitename @mail @firstname @lastname"
+msgstr ""
 
 msgid "qs.mail.account.cancel.body @mail @firstname @lastname"
 msgstr ""
@@ -1191,7 +1168,7 @@ msgid "qs.event.register"
 msgstr "S’inscrire à l’évènement"
 
 msgid "qs.event.contribution"
-msgstr "Contribution"
+msgstr "Contribution:"
 
 msgid "qs.error.403.description"
 msgstr ""
@@ -1203,8 +1180,29 @@ msgid "qs.activity.theme.title_empty @community_name"
 msgstr ""
 "Aucune activité ne correspond à votre choix de thème(s) à @community_name."
 
+msgid "qs_activity.activities.form.add.community_can_subscribe"
+msgstr "Permettre à la communauté l’inscription aux évènements"
+
+msgid "qs_activity.activities.form.add.community_access_contact"
+msgstr "Montrer les informations de contact à la communauté"
+
+msgid "qs_activity.activities.form.add.community_access_detail"
+msgstr "Montrer les détails des évènements à la communauté"
+
+msgid "qs_activity.activities.form.add.community_access_story"
+msgstr "Montrer les récits à la communauté"
+
+msgid "qs_activity.activities.form.add.member_create_story"
+msgstr "Permettre la soumission de récits"
+
+msgid "qs_activity.activities.form.add.community_access_gallery"
+msgstr "Montrer les photos à la communauté"
+
+msgid "qs_activity.activities.form.add.member_create_gallery"
+msgstr "Permettre la publication de photos"
+
 msgid "qs_supervisor.account.phone_default"
-msgstr ""
+msgstr "Vous n’avez pas indiqué de numéro"
 
 msgid "qs_menu.links.stories.themes"
 msgstr ""
@@ -1310,10 +1308,7 @@ msgid "qs_activity.activities.form.step3"
 msgstr ""
 
 msgid "qs_activity.activities.form.step4.description"
-msgstr ""
-"Votre activité a bien été créée!\n"
-"\n"
-"Voulez-vous directement créer un évènement?"
+msgstr "Votre activité a bien été créée! Que souhaitez-vous faire maintenant?"
 
 msgid "qs_activity.activities.form.step4"
 msgstr ""
@@ -1327,43 +1322,44 @@ msgstr ""
 msgid "qs_activity.events.form.edit.success @event"
 msgstr "Votre évènement @event a bien été modifié!"
 
-msgid "qs_activity.activities.form.add.community_can_subscribe.description"
-msgstr "Permettre à la communauté l’inscription aux évènements"
-
-msgid "qs_activity.activities.form.add.community_access_contact.description"
-msgstr "Montrer les informations de contact à la communauté"
-
-msgid "qs_activity.activities.form.add.community_access_detail.description"
-msgstr "Montrer les détails des évènements à la communauté"
-
-msgid "qs_activity.activities.form.add.community_access_story.description"
-msgstr "Montrer les récits à la communauté"
-
-msgid "qs_activity.activities.form.add.member_create_story.description"
-msgstr "Permettre la soumission de récits"
-
-msgid "qs_activity.activities.form.add.community_access_gallery.description"
-msgstr "Montrer les photos à la communauté"
-
-msgid "qs_activity.activities.form.add.member_create_gallery.description"
-msgstr "Permettre la soumission de photos"
-
-msgid "qs.mail.account.cancel.subject @sitename @mail @firstname @lastname"
-msgstr ""
+msgid ""
+"qs.mail.account.cancel_confirm.subject @sitename @mail @firstname @lastname"
+msgstr "Demande d’annulation de votre compte sur @sitename"
 
 msgid "qs.activity.nextevent.date @event_date @event_hour"
 msgstr ""
 "Jour @event_date \n"
 "@event_hour – heure de fin"
 
-msgid "qs.activity.add_member"
+msgid ""
+"Password reset instructions will be sent to your registered email address."
 msgstr ""
+"Indiquez comment nous pouvons vous contacter et nous vous enverrons les "
+"informations pour réinitialiser votre mot de passe."
+
+msgid ""
+"A confirmation request to cancel your account has been sent to your email "
+"address."
+msgstr ""
+
+msgid ""
+"There was a problem with your form submission. Please refresh the page and "
+"try again."
+msgstr ""
+
+msgid ""
+"There was a problem with your form submission. Please wait @limit seconds "
+"and try again."
+msgstr ""
+
+msgid "qs.activity.add_member"
+msgstr "Ajouter un membre"
 
 msgid "Member"
 msgstr ""
 
 msgid "qs_activity.activities.form.add.member.success @activity"
-msgstr ""
+msgstr "Vous avez bien ajouté de nouveaux membre à l’activité @activity!"
 
 msgid ""
 "qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url"
@@ -1373,64 +1369,64 @@ msgid "qs.cancel.confirm.expired"
 msgstr ""
 
 msgid "qs_menu.links.calendar.weekly"
-msgstr ""
+msgstr "Hebdo"
 
 msgid "qs_menu.links.calendar.monthly"
-msgstr ""
+msgstr "Mensuel"
 
 msgid "qs.activity.date.sticky.from_to @start_date @end_date"
-msgstr ""
+msgstr "Semaine du @start_date au @end_date"
 
 msgid "qs.activity.date.sticky.today"
-msgstr ""
+msgstr "Aujourd’hui"
 
 msgid "qs.activity.date.sticky.tomorrow"
-msgstr ""
+msgstr "Demain"
 
 msgid "qs.activity.date.sticky.this_week"
-msgstr ""
+msgstr "Cette semaine"
 
 msgid "qs.activity.date.sticky.next_week"
-msgstr ""
+msgstr "La semaine prochaine"
 
 msgid "qs.activity.date.sticky.in_two_weeks"
-msgstr ""
+msgstr "Dans deux semaines"
 
 msgid "qs.activity.date.title_empty @community @start_date @end_date"
 msgstr ""
 
 msgid "qs.activity.date.link_prev"
-msgstr ""
+msgstr "Précédents évènements"
 
 msgid "qs.activity.date.link_next"
-msgstr ""
+msgstr "Prochains évènements"
 
 msgid "qs.activity.members"
-msgstr ""
+msgstr "Gérer les membres"
 
 msgid "qs.event.subscriptions.subscribers"
-msgstr ""
+msgstr "Inscriptions confirmées"
 
 msgid "qs.event.subscriptions.waiting_approval"
-msgstr ""
+msgstr "Inscriptions en attente"
 
 msgid "qs_activity.members.title"
-msgstr ""
+msgstr "Voici les membres de votre activité"
 
 msgid "qs_activity.members.roles"
 msgstr ""
 
 msgid "qs.roles.activity_member"
-msgstr ""
+msgstr "Membre"
 
 msgid "qs.roles.activity_maintainer"
-msgstr ""
+msgstr "Coorganisateur"
 
 msgid "qs.roles.activity_organizer"
-msgstr ""
+msgstr "Organisateur"
 
 msgid "qs_activity.members.empty"
-msgstr ""
+msgstr "Il n’y a aucun membre pour le moment."
 
 msgid "qs.auth.cancel.confirmation.thanks"
 msgstr ""
@@ -1442,27 +1438,29 @@ msgid "qs.calendar.monthly.goto @month"
 msgstr ""
 
 msgid "qs.calendar.today"
-msgstr ""
+msgstr "Aujourd’hui"
 
 msgid "qs.calendar.weekly.week"
 msgstr ""
 
 msgid "qs.calendar.weekly.previous"
-msgstr ""
+msgstr "Précédente"
 
 msgid "qs.calendar.weekly.next"
-msgstr ""
+msgstr "Suivante"
 
 msgid "qs.calendar.events.collection_empty"
-msgstr ""
+msgstr "Aucun évènement n’est prévu pour cette date."
 
 msgid ""
 "qs_subscription.subscribers.title @variables.event.title.value @variables."
 "activity.title.value"
 msgstr ""
+"Voici la liste des inscriptions confirmées pour l’évènement @variables.event."
+"title.value"
 
 msgid "qs.contact @subscriber.field_firstname.value"
-msgstr ""
+msgstr "Contacter @subscriber.field_firstname.value"
 
 msgid "qs_subscription.subscribers.empty"
 msgstr ""
@@ -1471,14 +1469,34 @@ msgid ""
 "qs_subscription.waiting_approval.title @variables.event.title.value "
 "@variables.activity.title.value"
 msgstr ""
+"Voici la liste des inscriptions en attente pour l’évènement @variables.event."
+"title.value"
 
 msgid "qs.contact @subscription.user.entity.field_firstname.value"
-msgstr ""
+msgstr "Contacter @subscription.user.entity.field_firstname.value"
 
 msgid "qs_subscription.waiting_approval.empty"
-msgstr ""
+msgstr "Il n’y a pas d’inscription en attente de confirmation."
 
 msgid "qs.activity.add_member.submit"
+msgstr ""
+
+msgid "qs.previous.to_activities_list"
+msgstr ""
+
+msgid "qs.previous.to_activity"
+msgstr ""
+
+msgid "qs.previous.to_community_dashboard"
+msgstr ""
+
+msgid "qs.previous.to_my_activities"
+msgstr ""
+
+msgid "qs.previous.to_activity_dashboard"
+msgstr ""
+
+msgid "qs.previous.to_event_dashboard"
 msgstr ""
 
 msgid "qs.mp.loading"
@@ -1491,4 +1509,35 @@ msgid "qs.event.register.confirmed"
 msgstr ""
 
 msgid "qs.roles.activity_none"
+msgstr ""
+
+msgid ""
+"qs.activity.user.collection.title @variables.user.field_firstname.value "
+"@variables.user.field_lastname.value @variables.user.mail.value"
+msgstr ""
+
+msgid "qs.activity.user.collection.title"
+msgstr ""
+
+msgid "qs.activity.more"
+msgstr ""
+
+msgid "qs.activity.goto"
+msgstr ""
+
+msgid "qs.activity.user.collection.empty"
+msgstr ""
+
+msgid "qs.activity.become.activity.organizer"
+msgstr ""
+
+msgid ""
+"qs.subscription.user.collection.title @variables.user.field_firstname.value "
+"@variables.user.field_lastname.value @variables.user.mail.value"
+msgstr ""
+
+msgid "qs.subscription.user.collection.title"
+msgstr ""
+
+msgid "qs.subscription.user.collection.empty"
 msgstr ""

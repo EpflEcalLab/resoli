@@ -10,8 +10,13 @@
 
 {% macro badge(flag, icon, classes, title) %}
 {# The `classes` is used by Behat tests to identify flags #}
+{% set classes = [
+  'flag',
+  'flag-' ~ flag,
+  classes,
+] %}
 {% spaceless %}
-<div class="flag {{ flag }} {{ classes|join(' ') }}" title="{{ title }}">
+<div class="{{ classes|join(' ') }}" title="{{ title }}">
   <svg class="icon " preserveAspectRatio="xMidYMid" aria-hidden="true">
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-flag"></use>
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ icon|default('confirmed') }}"></use>

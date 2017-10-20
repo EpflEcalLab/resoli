@@ -33,15 +33,15 @@
           {% if activity.nid.value in variables.badges.privileges|keys %}
             {% set privilege = variables.badges.privileges[activity.nid.value]|last %}
             {% if privilege == 'activity_members' %}
-              {{ macros.badge('flag-info', 'happy', 'flag-privilege-members') }}
+              {{ macros.badge('info', 'happy', 'flag-privilege-members') }}
             {% endif %}
 
             {% if privilege == 'activity_maintainers' %}
-              {{ macros.badge('flag-warning', 'happy', 'flag-privilege-maintainers') }}
+              {{ macros.badge('warning', 'happy', 'flag-privilege-maintainers') }}
             {% endif %}
 
             {% if privilege == 'activity_organizers' %}
-              {{ macros.badge('flag-danger', 'happy', 'flag-privilege-organizers') }}
+              {{ macros.badge('danger', 'happy', 'flag-privilege-organizers') }}
             {% endif %}
           {% endif %}
 
@@ -63,8 +63,8 @@
     {% endfor %}
     </ul>
   {% else %}
-    {{ macros.badge('flag-info', 'happy', 'flag-privilege-members') }}
-    {{ macros.badge('flag-warning', 'happy', 'flag-subscription-maintainers') }}
+    {{ macros.badge('info', 'happy', 'flag-privilege-members') }}
+    {{ macros.badge('warning', 'happy', 'flag-subscription-maintainers') }}
     <p>{{ 'qs.activity.user.collection.empty'|t }}</p>
   {% endif %}
 
@@ -77,7 +77,7 @@
       </a>
     </div>
   {% else %}
-    {{ macros.badge('flag-danger', 'happy', 'flag-privilege-organizers') }}
+    {{ macros.badge('danger', 'happy', 'flag-privilege-organizers') }}
     <p>{{ 'qs.activity.become.activity.organizer'|t }}</p>
   {% endif %}
 </div>

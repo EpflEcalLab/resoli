@@ -60,6 +60,10 @@
   min-height: 100vh;
 }
 
+.fullpage-wrapper-menu {
+  min-height: calc(100vh - 107px);
+}
+
 .flex-grow {
   flex-grow: 1;
 }

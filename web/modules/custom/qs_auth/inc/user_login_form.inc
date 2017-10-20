@@ -117,7 +117,7 @@ function qs_auth_user_login_form_submit($form, $form_state) {
 
   // The user has only 1 community access so connect it on.
   if ($community) {
-    $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
+    $form_state->setRedirect('qs_community.welcome', ['community' => $community->id()], []);
     return;
   }
 }

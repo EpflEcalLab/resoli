@@ -37,6 +37,10 @@ function qs_community_alias(EntityInterface $entity, $alias, $operation = 'inser
           'route' => '/communities/' . $entity->id() . '/dashboard',
           'alias' => '/' . trim($alias, '/') . '/dashboard',
         ],
+        'communities_welcome' => [
+          'route' => '/communities/' . $entity->id() . '/welcome',
+          'alias' => '/' . trim($alias, '/') . '/welcome',
+        ],
         'communities_approval' => [
           'route' => '/communities/' . $entity->id() . '/dashboard/waiting-approval',
           'alias' => '/' . trim($alias, '/') . '/dashboard/waiting-approval',

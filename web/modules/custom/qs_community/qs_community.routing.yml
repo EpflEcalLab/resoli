@@ -1,3 +1,17 @@
+# Welcome
+qs_community.welcome:
+    path: '/communities/{community}/welcome'
+    defaults:
+        _controller: '\Drupal\qs_community\Controller\WelcomeController::welcome'
+        _title: 'qs.community.welcome'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_community\Controller\WelcomeController::access'
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
 # Community dashboard page - links of forms for CRUD operations
 qs_community.dashboard:
     path: '/communities/{community}/dashboard'

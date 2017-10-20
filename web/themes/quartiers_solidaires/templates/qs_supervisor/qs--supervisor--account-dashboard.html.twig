@@ -50,7 +50,7 @@
       <ul class="card-list">
         {% for community in variables.communities %}
           <li class="card card-list-item">
-            <a href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}" class="card-pill">
+            <a href="{{ path('qs_community.welcome', {'community': community.id}) }}" class="card-pill">
               <span class="card-pill-icon">{{ macros.icon('communities') }}</span>
               <span class="card-pill-title">
                 <span>{{ community.name.value }}</span>

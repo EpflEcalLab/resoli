@@ -70,7 +70,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
   public function communityRedirect(GetResponseEvent $event) {
     $term = $this->routeMatch->getParameter('taxonomy_term');
     if ($this->routeMatch->getRouteName() == 'entity.taxonomy_term.canonical' && $term->bundle() === 'communities') {
-      $destination = Url::fromRoute('qs_activity.collection.themes', ['community' => $term->id()]);
+      $destination = Url::fromRoute('qs_community.welcome', ['community' => $term->id()]);
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
   }

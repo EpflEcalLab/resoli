@@ -15,6 +15,10 @@ function qs_community_theme() {
   return [
     // Pages themes
     // ---------------------------------------------------------------------.
+    'qs_community_welcome_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--community--welcome',
+    ],
     'qs_community_dashboard_page' => [
       'variables' => ['variables' => []],
       'template'  => 'qs--community--dashboard',

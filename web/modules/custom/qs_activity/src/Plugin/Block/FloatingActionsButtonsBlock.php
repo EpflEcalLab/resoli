@@ -156,7 +156,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // Button "Activity Dashboard".
       if ($this->acl->hasAdminAccessActivity($node)) {
         $icon = 'activities';
-        $theme = 'secondary';
+        $theme = 'primary';
         $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
           'activity' => $node->id(),
         ]);

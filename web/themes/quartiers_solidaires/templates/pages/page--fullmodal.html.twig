@@ -45,11 +45,16 @@
 {% endif %}
 {% block header %}{% endblock %}
 
+
+
 <main role="main" class="modal-open">
   <a id="main-content" tabindex="-1"></a>
   <div class="modal modal-full force-show">
     <div class="modal-dialog">
-      <div class="modal-content bg-danger">
+      {% set classes = [
+        attributes.bg ? 'bg-' ~ attributes.bg
+      ] %}
+      <div class="modal-content {{ classes|join(' ') }}">
         {% if page.messages %}
           <div class="container mt-3">
             {{ page.messages }}

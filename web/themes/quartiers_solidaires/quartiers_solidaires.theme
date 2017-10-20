@@ -54,3 +54,45 @@ function quartiers_solidaires_preprocess_html(&$variables) {
 
   }
 }
+
+/**
+ * Implements template_theme_suggestion_page_alter().
+ *
+ * Create new suggestion for pages & set background colors on some modals.
+ */
+function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
+
+  switch (true) {
+    // todo check if page_fullpage is really necessary.
+//      $suggestions[] = 'page__fullpage';
+//      // Background color of fullpage are switched
+//      // in a template_preprocess_html().
+//      break;
+
+    case in_array('page__events__user', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'info';
+      break;
+
+    case in_array('page__activities__dashboard', $suggestions):
+    case in_array('page__activities__add', $suggestions):
+    case in_array('page__activities__edit', $suggestions):
+    case in_array('page__activities__dashboard__members', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'primary';
+      break;
+
+    case in_array('page__activities__delete', $suggestions):
+    case in_array('page__events__delete', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'danger';
+      break;
+
+    case in_array('page__events__dashboard', $suggestions):
+    case in_array('page__events__add', $suggestions):
+    case in_array('page__events__edit', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'secondary';
+      break;
+  }
+}

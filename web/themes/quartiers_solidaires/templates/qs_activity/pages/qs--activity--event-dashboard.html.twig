@@ -1,35 +1,37 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-10 col-lg-8 mx-auto text-center">
-      <h2>{{ 'qs.event.dashboard_title'|t }}</h2>
-      <p>{{ 'qs.event.dashboard_description'|t }}</p>
-    </div>
+<div class="modal-body">
+
+  <div class="text-center mt-3 my-5">
+    <h2>{{ 'qs.event.dashboard_title'|t }}</h2>
+    <p>{{ 'qs.event.dashboard_description'|t }}</p>
   </div>
-  <div class="row">
-    <div class="col-sm-8 col-md-6 mx-auto">
-      <ul class="list-unstyled mt-3">
+
+  <div class="row ">
+    <div class="col-sm-6 col-lg-4 mx-auto text-center">
+      <ul class="list-unstyled mt-3 mx-auto">
         <li>
-          <a class="btn btn-outline-secondary btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.form.edit', {'event': variables.event.id}) }}">
+          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.form.edit', {'event': variables.event.id}) }}">
             {{ macros.icon('pencil') }}
             {{ 'qs.event.edit'|t }}
           </a>
         </li>
 
         <li>
-          <a class="btn btn-outline-secondary btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
+          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
+            {{ macros.icon('register') }}
             {{ 'qs.event.subscriptions.subscribers'|t }}
           </a>
         </li>
         <li>
-          <a class="btn btn-outline-secondary btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">
+          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">
+            {{ macros.icon('wait') }}
             {{ 'qs.event.subscriptions.waiting_approval'|t }}
           </a>
         </li>
 
-        <li>
-          <a class="btn btn-outline-danger btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.form.delete', {'event': variables.event.id}) }}">
+        <li class="mt-5">
+          <a class="btn btn-block btn-white text-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.events.form.delete', {'event': variables.event.id}) }}">
             {{ macros.icon('trash') }}
             {{ 'qs.event.delete'|t }}
           </a>

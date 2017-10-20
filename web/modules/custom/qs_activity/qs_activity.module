@@ -9,29 +9,6 @@
 require_once 'inc/alias.inc';
 
 /**
- * Alter suggestions for fullpage.
- */
-function qs_activity_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
-  // Set to fullpage layout some special pages.
-  if (array_intersect($suggestions, [
-    'page__activities__add',
-    'page__events__add',
-    'page__events__edit',
-    'page__activities__dashboard__members',
-  ])) {
-    $suggestions[] = 'page__fullpage';
-  }
-  elseif (array_intersect($suggestions, [
-    'page__activities__dashboard',
-    'page__activities__edit',
-    'page__activities__delete',
-    'page__events__delete',
-  ])) {
-    $suggestions[] = 'page__fullmodal';
-  }
-}
-
-/**
  * Implements hook_theme().
  */
 function qs_activity_theme() {

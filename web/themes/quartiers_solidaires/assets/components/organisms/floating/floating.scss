@@ -8,7 +8,6 @@
   z-index: $zindex-sticky;
 }
 
-.floating-wrapper {
-  min-height: 60px;
-  height: 10vh;
+.floating-offset {
+  margin-bottom: 10vh;
 }

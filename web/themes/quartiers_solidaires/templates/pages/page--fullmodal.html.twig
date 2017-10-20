@@ -55,7 +55,7 @@
         attributes.bg ? 'bg-' ~ attributes.bg
       ] %}
       <div class="modal-content {{ classes|join(' ') }}">
-        {% if page.messages %}
+        {% if page.messages is not empty %}
           <div class="container mt-3">
             {{ page.messages }}
           </div>

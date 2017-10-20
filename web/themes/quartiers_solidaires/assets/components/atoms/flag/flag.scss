@@ -1,27 +1,33 @@
 @charset 'utf-8';
 
 .flag {
+  color: $body-color;
+
   svg {
-    fill: color("secondary-lightest");
+    fill: $white;
   }
 
   @include flag-size(40px);
 }
 
-.flag-glow {
-  @if $enable-shadows {
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-}
+@each $color, $value in $flag-colors {
+  &.flag-#{$color} {
+    color: $white;
 
-.flag-blue {
-  svg {
-    fill: color("dark");
-  }
+    svg {
+      fill: $value;
+    }
 
-  .flag-glow {
     @if $enable-shadows {
-      filter: drop-shadow(0 0 5px $blue);
+      filter: drop-shadow(0 0 5px $value);
+    }
+  }
+
+  &.flag-outline-#{$color} {
+    color: $value;
+
+    @if $enable-shadows {
+      filter: drop-shadow(0 0 5px currentColor);
     }
   }
 }

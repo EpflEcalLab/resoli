@@ -20,11 +20,11 @@ Feature: Badges
     And the response status code should be 200
     Then I should see 3 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    Then I should see a "#event37 .flag .flag-subscription-wait" element
+    Then I should see a "#event37 .flag.flag-subscription-wait" element
     Then I should see a "#collapse-35" element
     Then I should not see a "#event35 .flag" element
     Then I should see a "#collapse-36" element
-    Then I should see a "#event36 .flag .flag-subscription-confirmed" element
+    Then I should see a "#event36 .flag.flag-subscription-confirmed" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a not member of this activity
@@ -42,7 +42,7 @@ Feature: Badges
     And the response status code should be 200
     Then I should see 3 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    Then I should see a "#event37 .flag .flag-subscription-confirmed" element
+    Then I should see a "#event37 .flag.flag-subscription-confirmed" element
     Then I should see a "#collapse-35" element
     Then I should not see a "#event35 .flag" element
     Then I should see a "#collapse-36" element
@@ -99,11 +99,11 @@ Feature: Badges
     And the response status code should be 200
     Then I should see 9 ".card-list-simple-item" elements
     Then I should see 1 ".card-list-simple-item .flag" elements
-    Then I should see 1 ".card-list-simple-item .flag .flag-subscription-wait" elements
+    Then I should see 1 ".card-list-simple-item .flag.flag-subscription-wait" elements
     Then I follow "qs.activity.date.link_next"
     Then I should see 1 ".card-list-simple-item" elements
     Then I should see 1 ".card-list-simple-item .flag" elements
-    Then I should see 1 ".card-list-simple-item .flag .flag-subscription-confirmed" elements
+    Then I should see 1 ".card-list-simple-item .flag.flag-subscription-confirmed" elements
 
   @api
   Scenario: Logged as Organizer of Lausanne, I see my own badge of Subscription(s) in the Event(s) pill(s)
@@ -111,7 +111,7 @@ Feature: Badges
     When I am on "/lausanne/activities/date"
     Then I should see 9 ".card-list-simple-item" elements
     Then I should see 1 ".card-list-simple-item .flag" elements
-    Then I should see 1 ".card-list-simple-item .flag .flag-subscription-confirmed" elements
+    Then I should see 1 ".card-list-simple-item .flag.flag-subscription-confirmed" elements
     Then I follow "qs.activity.date.link_next"
     Then I should see 1 ".card-list-simple-item" elements
     Then I should see 0 ".card-list-simple-item .flag" elements
@@ -134,4 +134,6 @@ Feature: Badges
 
 ## Calendar by Week
 
+## My activities
 
+## My subscriptions

@@ -1,2 +1,7 @@
 title: Flag
 name: flag
+variants:
+  - Info
+  - Danger
+  - Warning
+  - Outline

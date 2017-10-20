@@ -11,10 +11,10 @@ Scenario: Logged as Manager of Lausanne, I can access my own subscriptions page 
   Then I should see 2 ".card-list-simple-item" elements
   Then I should see a "#event36" element
   Then I should see a "#event36 .flag" element
-  Then I should see a "#event36 .flag .flag-subscription-confirmed" element
+  Then I should see a "#event36 .flag.flag-subscription-confirmed" element
   Then I should see a "#event37" element
   Then I should see a "#event37 .flag" element
-  Then I should see a "#event37 .flag .flag-subscription-wait" element
+  Then I should see a "#event37 .flag.flag-subscription-wait" element
   Then I should not see a "#event38" element
 
 @api
@@ -25,7 +25,7 @@ Scenario: Logged as Member of Lausanne & Manager of Fribourg, I can access my ow
   Then I should see 1 ".card-list-simple-item" elements
   Then I should see a "#event29" element
   Then I should see a "#event29 .flag" element
-  Then I should see a "#event29 .flag .flag-subscription-confirmed" element
+  Then I should see a "#event29 .flag.flag-subscription-confirmed" element
 
 @api
 Scenario: Logged as Member of Lausanne & Manager of Fribourg, I can access my own subscriptions page in Lausanne
@@ -43,7 +43,7 @@ Scenario: Logged as Organizer of Lausanne, I can access my own subscriptions pag
   Then I should see 2 ".card-list-simple-item" elements
   Then I should see a "#event37" element
   Then I should see a "#event37 .flag" element
-  Then I should see a "#event37 .flag .flag-subscription-confirmed" element
+  Then I should see a "#event37 .flag.flag-subscription-confirmed" element
   Then I should see a "#event40" element
   Then I should see a "#event40 .flag" element
-  Then I should see a "#event40 .flag .flag-subscription-confirmed" element
+  Then I should see a "#event40 .flag.flag-subscription-confirmed" element

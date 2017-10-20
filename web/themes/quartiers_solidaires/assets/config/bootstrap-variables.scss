@@ -92,7 +92,7 @@ $blue-300: #83b8fb;
 $blue:     #5aa0fa !default;
 $blue-700: #325ac8;
 
-$orange-300:  #ff9343;
+$orange-300: #ff9343;
 $orange:  #ff7814 !default;
 
 $indigo:  #6610f2 !default;
@@ -127,6 +127,12 @@ $colors: (
 $theme-colors: (
   primary:   $purple-600,
   secondary: $teal,
+  danger:    $red,
+  info:      $teal-100,
+) !default;
+
+$flag-colors: (
+  warning:   $orange-300,
   danger:    $red,
   info:      $blue,
 ) !default;

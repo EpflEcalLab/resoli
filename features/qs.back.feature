@@ -120,6 +120,14 @@ Feature: Back buttons
     When I am on "/lausanne/calendar/monthly"
     Then I should not see a "#block-previousnavigation a" element
 
+## Subscriptions Dashboard
+  @api
+  Scenario: In the My Subscriptions, I see a back button for Calendar by month
+    Given I am logged in as user "admin"
+    When I am on "/events/1/user/1"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_calendar" link with href "/lausanne/calendar/monthly"
+
 # Activity Dashboard
   @api
   Scenario: In the Activity Add Form, I see a back button for My Activities

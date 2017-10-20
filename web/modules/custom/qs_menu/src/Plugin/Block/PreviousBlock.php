@@ -78,6 +78,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $label = $this->t('qs.previous');
     $theme = 'secondary';
     $options = [];
+    $url = FALSE;
 
     $community = $this->route->getParameter('community');
     $activity = $this->route->getParameter('activity');
@@ -194,8 +195,13 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
           break;
 
-        default:
-          $url = FALSE;
+        // Go to Calendar.
+        case "qs_subscription.user.collection":
+          $url = $this->urlGenerator->generateFromRoute('qs_calendar.collection.monthly', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_calendar');
+          $theme = 'primary';
           break;
       }
     }

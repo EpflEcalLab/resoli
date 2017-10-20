@@ -1541,3 +1541,18 @@ msgstr ""
 
 msgid "qs.subscription.user.collection.empty"
 msgstr ""
+
+msgid "qs_activity.floating.my_activities"
+msgstr ""
+
+msgid "qs_activity.floating.my_subscriptions"
+msgstr ""
+
+msgid "qs_supervisor.floating.my_account"
+msgstr ""
+
+msgid "qs.event.calendar"
+msgstr ""
+
+msgid "qs.community.welcome.body"
+msgstr ""

@@ -74,6 +74,14 @@
   padding-top: 1px;
 }
 
+.sticky-bottom {
+  @supports (position: sticky) {
+    position: sticky;
+    bottom: 0;
+    z-index: $zindex-sticky;
+  }
+}
+
 // Text helpers
 @include text-emphasis-variant('.text-dark', color("dark"));
 @include text-emphasis-variant('.text-gray', $gray-700);

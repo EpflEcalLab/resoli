@@ -202,6 +202,7 @@ class EventEditForm extends EventEditFormBase {
         'modal' => TRUE,
         'icon_left' => TRUE,
         'outline' => TRUE,
+        'theme' => 'secondary',
         'class' => [
           'shadow-to-bottom',
         ],
@@ -290,12 +291,14 @@ class EventEditForm extends EventEditFormBase {
     $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
     $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
 
+    $contribution = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
+
     // Prepare fields.
     $fields['title']               = $form_state->getValue('title');
     $fields['body']                = $form_state->getValue('body');
     $fields['field_contact_mail']  = $form_state->getValue('contact_mail');
     $fields['field_contact_phone'] = $form_state->getValue('contact_phone');
-    $fields['field_contribution']  = $form_state->getValue('contribution');
+    $fields['field_contribution']  = $contribution;
     $fields['field_venue']         = $form_state->getValue('venue');
     $fields['field_venue_lat']     = $form_state->getValue('latitude');
     $fields['field_venue_long']    = $form_state->getValue('longitude');
@@ -307,7 +310,7 @@ class EventEditForm extends EventEditFormBase {
       '@event' => $event->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_activity.events.form.edit', ['event' => $event->id()], []);
+    $form_state->setRedirect('qs_activity.events.dashboard', ['event' => $event->id()], []);
   }
 
 }

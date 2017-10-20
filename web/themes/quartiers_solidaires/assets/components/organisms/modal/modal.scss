@@ -1,5 +1,9 @@
 @charset 'utf-8';
 
+.modal-open {
+  height: 100vh;
+}
+
 .modal-dialog {
   margin-bottom: 5vh;
   text-align: left;
@@ -12,6 +16,7 @@
 
 .modal-content {
   max-height: 85vh;
+  overflow: hidden;
 }
 
 .modal-title {
@@ -19,7 +24,12 @@
 }
 
 .modal-body {
-  overflow-y: auto;
+  overflow-y: scroll;
+
+  // Hack to avoid moving a submit button out of its form parent
+  .modal-footer {
+    margin-bottom: (-$modal-inner-padding);
+  }
 }
 
 .modal-footer {

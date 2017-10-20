@@ -14,13 +14,27 @@
         {{ 'qs.event.not_accessible'|t }}
       </p>
     {% endif %}
+    {# Contribution #}
+    {# User should be member of the activity OR activity should allow subscription to community members #}
+    {% if
+    ('activity_members' in variables.privileges
+    or 'activity_organizers' in variables.privileges
+    or 'activity_maintainers' in variables.privileges
+    or variables.activity.field_community_can_subscribe.value)
+    and event.field_contribution.value
+    %}
+      <p class="text-primary">
+        {{ macros.icon('money', 'icon-offset') }}
+        {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
+      </p>
+    {% endif %}
   </div>
 
   <div class="card-actions row">
     {# Register button #}
     {# User should be member of the activity OR activity should allow subscription to community members #}
     {% if 'activity_members' in variables.privileges or 'activity_maintainers' in variables.privileges or 'activity_organizers' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
-    <div class="col-sm-6 mb-3">
+    <div class="col-sm-6 mb-3 mx-auto">
       {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
           <button class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
               {{ macros.icon('wait') }}
@@ -45,8 +59,12 @@
     {# Contact button #}
     {# User should be member of the activity OR activity should allow access to community members #}
     {% set display_contact = event.field_contact_mail.value or event.field_contact_phone.value or event.field_contact_name.value %}
-    {% if display_contact and ('activity_members' in variables.privileges or variables.activity.field_community_access_contact.value) %}
-    <div class="col-sm-6 mb-3">
+    {% if
+      display_contact
+      and ('activity_members' in variables.privileges
+      or variables.activity.field_community_access_contact.value)
+    %}
+    <div class="col-sm-6 mb-3 mx-auto">
       <a href="#contact-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
         {{ macros.icon('user') }}
         {{ 'qs.event.contact'|t }}
@@ -57,25 +75,17 @@
     {# Location button #}
     {# User should have some privileges OR activity should allow community to access details #}
     {% set display_location = event.field_venue.value and event.field_venue_lat.value and event.field_venue_long.value %}
-    <div class="col-sm-6 mb-3">
-      {% if display_location and variables.activity.field_community_access_detail.value %}
+    {% if
+      display_location
+      and variables.activity.field_community_access_detail.value
+    %}
+      <div class="col-sm-6 mb-3 mx-auto">
       <a href="#map-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
         {{ macros.icon('meeting') }}
         {{ 'qs.event.location'|t }}
       </a>
-      {% endif %}
-    </div>
-
-    {# Contribution #}
-    {# User should be member of the activity OR activity should allow subscription to community members #}
-    <div class="col-sm-6 mb-3">
-    {% if 'activity_members' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
-      <span class="badge badge-pill badge-icon badge-white d-block">
-        {{ macros.icon('money') }}
-        {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
-      </span>
+      </div>
     {% endif %}
-    </div>
 
     {# Calendar #}
     <div class="col-sm-6 mb-3">
@@ -92,7 +102,7 @@
       or 'activity_maintainers' in variables.privileges
       or user.hasPermission('administer nodes')
     %}
-    <div class="col-sm-6 mb-3">
+    <div class="col-sm-6 mb-3 mx-auto">
       <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-primary btn-icon btn-white shadow-to-right btn-block">
         {{ macros.icon('checklist') }}
         {{ 'qs.event.dashboard'|t }}

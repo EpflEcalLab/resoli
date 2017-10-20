@@ -165,14 +165,24 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     }
 
     if ($community && in_array($route_name, [
-        'qs_community.welcome',
-      ])) {
+      'qs_community.welcome',
+    ])) {
       $icon = 'activities';
       $theme = 'info';
       $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
         'user' => $this->currentUser->id(),
       ]);
       $label = $this->t('qs_supervisor.floating.my_account');
+
+      // Button "Community Dashboard".
+      if ($this->acl->hasAdminAccessCommunity($community)) {
+        $icon = 'communities';
+        $theme = 'danger';
+        $url = $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
+          'community' => $community->id(),
+        ]);
+        $label = $this->t('qs_activity.floating.dashboard.community');
+      }
     }
 
     $variables['url'] = $url;

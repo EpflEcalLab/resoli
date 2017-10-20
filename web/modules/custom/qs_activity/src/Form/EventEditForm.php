@@ -32,7 +32,6 @@ class EventEditForm extends EventEditFormBase {
       'class' => [
         'modal-body',
       ],
-      'bg' => 'secondary',
     ];
 
     $form['#theme_wrappers'] = [

@@ -117,7 +117,6 @@ class ActivityAddForm extends FormBasic {
       'class' => [
         'modal-body',
       ],
-      'bg' => 'danger',
     ];
 
     // Apply custom styles to wrapper.

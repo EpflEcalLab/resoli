@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Kill runserver if one is alive
 ps -ef | grep 'runserver' | grep -v grep | awk '{print $2}' | xargs kill -9

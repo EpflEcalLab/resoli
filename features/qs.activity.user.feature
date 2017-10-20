@@ -8,8 +8,7 @@ Scenario: Logged as Member of Lausanne, I can access my own activities page in L
   Given I am logged in as user "member+lausanne"
   When I am on "/activities/1/user/2"
   And the response status code should be 200
-  Then I should see 2 ".card-list-item" elements
-  Then I should see a "#activity5" element
+  Then I should see 1 ".card-list-item" elements
   Then I should see a "#activity4" element
   And I should see "qs.activity.become.activity.organizer"
 

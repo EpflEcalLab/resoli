@@ -2,7 +2,13 @@
 {% set current_item = variables.current_menu_item %}
 
 <div class="navbar-container">
-  <button class="btn btn-outline-primary navbar-toggle{{ not current_item ? ' navbar-toggle-simple' }}" title="Afficher ou cacher le menu">
+  {% set classes = [
+    'btn',
+    'navbar-toggle',
+    not current_item ? 'navbar-toggle-simple',
+    'btn-outline-primary',
+  ] %}
+  <button class="{{ classes|join(' ') }}" title="Afficher ou cacher le menu">
     {{ macros.icon('wheel') }}
   </button>
 

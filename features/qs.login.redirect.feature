@@ -10,27 +10,27 @@ Feature: Login
     And the response status code should be 200
 
   @api
-  Scenario: Login as Member of Lausanne redirect him on Lausanne activities
+  Scenario: Login as Member of Lausanne redirect him on Lausanne welcome
     Given I am logged in as user "member+lausanne"
-    And the url should match "lausanne/activities/theme"
+    And the url should match "lausanne/welcome"
     And the response status code should be 200
 
   @api
-  Scenario: Login as Manager of Lausanne redirect him on Lausanne activities
+  Scenario: Login as Manager of Lausanne redirect him on Lausanne welcome
     Given I am logged in as user "manager+lausanne"
-    And the url should match "lausanne/activities/theme"
+    And the url should match "lausanne/welcome"
     And the response status code should be 200
 
   @api
-  Scenario: Login as Organizer of Lausanne redirect him on Lausanne activities
+  Scenario: Login as Organizer of Lausanne redirect him on Lausanne welcome
     Given I am logged in as user "organizer+lausanne"
-    And the url should match "lausanne/activities/theme"
+    And the url should match "lausanne/welcome"
     And the response status code should be 200
 
   @api
-  Scenario: Login as Member of Fribourg redirect him on Fribourg activities
+  Scenario: Login as Member of Fribourg redirect him on Fribourg welcome
     Given I am logged in as user "member+fribourg"
-    And the url should match "fribourg/activities/theme"
+    And the url should match "fribourg/welcome"
     And the response status code should be 200
 
   @api
@@ -64,9 +64,9 @@ Feature: Login
     And the response status code should be 200
 
   @api
-  Scenario: Login as Member with 1 community & 1 approval redirect him on the community page
+  Scenario: Login as Member with 1 community & 1 approval redirect him on the community welcome
     Given I am logged in as user "member+fribourg+approval+lausanne"
-    And the url should match "fribourg/activities/theme"
+    And the url should match "fribourg/welcome"
     And the response status code should be 200
 
   @api
@@ -76,9 +76,9 @@ Feature: Login
     And the response status code should be 200
 
   @api
-  Scenario: Login as Multiple Privileges (Member of Fribourg & waiting approval Organizer for Fribourg) in the same community redirect him on the community page
+  Scenario: Login as Multiple Privileges (Member of Fribourg & waiting approval Organizer for Fribourg) in the same community redirect him on the community welcome
     Given I am logged in as user "member+fribourg+approval+organizer+fribourg"
-    And the url should match "fribourg/activities/theme"
+    And the url should match "fribourg/welcome"
     And the response status code should be 200
 
   @api
@@ -88,9 +88,9 @@ Feature: Login
     And the response status code should be 200
 
   @api
-  Scenario: Login as Multiple Privileges (Member & Organizer of Fribourg) in the same community redirect him on the community page
+  Scenario: Login as Multiple Privileges (Member & Organizer of Fribourg) in the same community redirect him on the community welcome
     Given I am logged in as user "member+fribourg+organizer+fribourg"
-    And the url should match "fribourg/activities/theme"
+    And the url should match "fribourg/welcome"
     And the response status code should be 200
 
   @api
@@ -100,15 +100,15 @@ Feature: Login
     And the response status code should be 200
 
   @api
-  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne redirect him on the community page
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Lausanne redirect him on the community welcome
     Given I am logged in as user "member+lausanne+declined+organizer+lausanne"
-    And the url should match "lausanne/activities/theme"
+    And the url should match "lausanne/welcome"
     And the response status code should be 200
 
   @api
-  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, redirect him on the community page
+  Scenario: Logged as Declined Organizer of Lausanne but still a Member of Fribourg, redirect him on the community welcome
     Given I am logged in as user "member+fribourg+declined+member+lausanne"
-    And the url should match "fribourg/activities/theme"
+    And the url should match "fribourg/welcome"
     And the response status code should be 200
 
   # @api

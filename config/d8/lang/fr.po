@@ -1556,3 +1556,6 @@ msgstr ""
 
 msgid "qs.community.welcome.body"
 msgstr ""
+
+msgid "qs.previous.to_calendar"
+msgstr ""

@@ -1,11 +1,27 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 <div class="">
-  <div class="onboarding-arrow-top" aria-hidden="true"></div>
+  <div class="arrow-onboarding arrow-onboarding-top" aria-hidden="true">
+    <svg class="" preserveAspectRatio="xMidYMid" aria-hidden="true">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-big-top"></use>
+    </svg>
+  </div>
+  <div class="text-onboarding text-onboarding-top text-center anim-fade-in-delay">
+    {{ 'qs.onboarding.menu'|t }}
+  </div>
+
   <div class="fullpage-wrapper fullpage-wrapper-menu text-center d-flex flex-column justify-content-center">
     <div class="col-md-10 col-lg-8 mx-auto">
       {{ 'qs.community.welcome.body'|t }}
     </div>
   </div>
-  <div class="onboarding-arrow-bottom" aria-hidden="true"></div>
+
+  <div class="text-onboarding text-onboarding-bottom text-center anim-fade-in-delay">
+    {{ 'qs.onboarding.my_account'|t }}
+  </div>
+  <div class="arrow-onboarding arrow-onboarding-bottom" aria-hidden="true">
+    <svg class="" preserveAspectRatio="xMidYMid" aria-hidden="true">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-big-bottom"></use>
+    </svg>
+  </div>
 </div>

@@ -1,3 +1,5 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
 <div class="container">
   <div class="text-center my-5">
     <h1>{% trans %}qs_subscription.waiting_approval.title {{ variables.event.title.value }} {{ variables.activity.title.value}}{% endtrans %}</h1>
@@ -71,4 +73,23 @@
   {% endif %}
 
   {{ variables.pager }}
+
+  <div class="container">
+    <div class="row mb-3 mt-5">
+      <div class="col-6">
+        {# Go to Subscribers #}
+        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
+          {{ macros.icon('register') }}
+          {{ 'qs.event.subscriptions.subscribers'|t }}
+        </a>
+      </div>
+      <div class="col-6">
+        {# Go to Event Dashboard #}
+        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.dashboard', {event: variables.event.nid.value}) }}">
+          {{ macros.icon('checklist') }}
+          {{ 'qs.previous.to_event_dashboard'|t }}
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

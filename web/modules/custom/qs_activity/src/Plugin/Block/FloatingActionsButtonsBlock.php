@@ -132,7 +132,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_calendar.collection.monthly',
       'qs_calendar.collection.weekly',
     ])) {
-      $icon = 'calendar';
+      $icon = 'checkflag';
       $theme = 'info';
       $url = $this->urlGenerator->generateFromRoute('qs_subscription.user.collection', [
         'community' => $community->id(),

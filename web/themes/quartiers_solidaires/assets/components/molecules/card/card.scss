@@ -57,8 +57,6 @@ a.card {
 
   .flag {
     margin: ($spacer * -3) 0 ($spacer * -3) ($card-spacer-x * 2);
-    color: $card-cap-bg;
-
     @include flag-size(60px);
   }
 
@@ -266,14 +264,7 @@ a[href].card-pill-simple {
     }
   }
 
-  // Display a flag when the status of the list item is set
   .flag {
-    color: color("light");
-
-    svg {
-      fill: $blue;
-    }
-
     @include flag-size(50px);
   }
 

@@ -93,13 +93,13 @@ Automatically fix coding standards
 Detect overcomplicated expressions & Unused parameters, methods, properties
 
   ```bash
-  $ ./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml
+  $ ./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml --suffixes php,module,inc,install,test,profile,theme,css,info,txt
   ```
 
 Copy/Paste Detector
 
   ```bash
-  $ ./vendor/bin/phpcpd ./web/modules/custom
+  $ ./vendor/bin/phpcpd ./web/modules/custom --names=*.php,*.module,*.inc,*.install,*.test,*.profile,*.theme,*.css,*.info,*.txt --names-exclude=*.md,*.info.yml --ansi
   ```
 
 ### Enforce code standards with git hooks
@@ -123,7 +123,7 @@ in the root of your project.
 
 ### Re-install default values
 
-You can use the Driven Development script to install re-install defaul values by running:
+You can use the Driven Development script to install re-install default values by running:
 
   ```bash
   ./scripts/behat/drupal --skip-dependencies=1 --skip-tests=1 --skip-interaction=1

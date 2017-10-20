@@ -1,7 +1,7 @@
 const formSubmit = () => {
   (function ($) {
     // On load remove every checked on data-submit.
-    $('[data-submit]:checked').prop('checked', true);
+    $('[data-submit]:checked').prop('checked', false);
     $('[data-submit]:checked').removeAttr('checked');
 
     const $checkboxes = $('[data-submit]');

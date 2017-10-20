@@ -119,13 +119,18 @@
   $normal-color: color($color);
 
   &.active {
-    background-color: mix($normal-color, $white, 75%);
+    background-color: mix($normal-color, $white, 85%);
     color: $color-active;
   }
 
   &:active {
     border-color: $dark-color;
     background-color: $dark-color;
+    color: $color-active;
+  }
+
+  &.active-alt {
+    background-color: mix($normal-color, $white, 55%);
     color: $color-active;
   }
 }

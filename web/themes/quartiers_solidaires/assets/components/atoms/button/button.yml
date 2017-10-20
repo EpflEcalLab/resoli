@@ -13,6 +13,7 @@ notes: |
 
   - `.shadow-to-[right|left]`: add a drop-shadow (you should decide which one to use depending on what side of the screen the button is at)
   - `.active`: display the button in an active state
+  - `.active-alt`: setup a light active state
   - `.btn-circle`: set a button circle
   - `.btn-icon`: display an icon at one side of the button (add `.btn-icon-right` to display it at the right)
   - `.btn-outline-invert`: invert the colors, to display on a colored background

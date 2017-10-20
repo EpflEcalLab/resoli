@@ -33,6 +33,23 @@ const formControl = () => {
         });
       });
     }
+
+    /**
+     * Radios group, add class to buttons before the clicked one
+     */
+
+    function togglePrevRadios(el) {
+      el.closest('label').prevAll().addClass('active-alt');
+    }
+
+    $('.js-radio-group').on('change', '.form-radio', function() {
+      // Remove all active-alt class
+      $(this).closest('.js-radio-group').find('.active-alt').removeClass('active-alt');
+      togglePrevRadios($(this));
+    });
+
+    togglePrevRadios($('.js-radio-group').find('.active'));
+
   })(jQuery);
 };
 

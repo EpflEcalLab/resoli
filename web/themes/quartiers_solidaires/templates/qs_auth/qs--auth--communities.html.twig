@@ -1,48 +1,45 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="bg-secondary">
-  <div class="fullpage-wrapper py-4">
-
-    <div class="container">
-      <div class="row justify-content-between">
-        <a class="btn btn-outline-secondary btn-outline-invert shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
-          {{ macros.icon('chevron-left') }}
-          {{ 'qs_auth.link.home'|t }}
-        </a>
-      </div>
+<div class="fullpage-wrapper py-4">
+  <div class="container">
+    <div class="row justify-content-between">
+      <a class="btn btn-outline-secondary btn-outline-invert shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
+        {{ macros.icon('chevron-left') }}
+        {{ 'qs_auth.link.home'|t }}
+      </a>
     </div>
-
-    {% if variables.communities or variables.pending %}
-    <div class="container my-auto">
-      <div class="row">
-        <div class="col-sm-10 col-lg-8 mx-auto text-center">
-          <h2>{{ 'qs.auth.communities.welcome'|t }}</h2>
-          <p>{{ 'qs.auth.communities.description'|t }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-lg-4 mx-auto text-center">
-          <div class="mt-4">
-            {{ macros.icon('communities-big', ['icon-xl']) }}
-          </div>
-          <ul class="list-unstyled mt-3">
-            {% for community in variables.communities %}
-            <li>
-              <a class="btn btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_activity.collection.themes', {'community': community.id}) }}">{{ community.name.value }}</a>
-            </li>
-            {% endfor %}
-            {% for community in variables.pending %}
-              <li>
-                <a class="btn btn-icon btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_auth.approval', {'community': community.id}) }}">
-                  {{ macros.icon('wait') }}
-                  {{ community.name.value }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-    {% endif %}
   </div>
+
+  {% if variables.communities or variables.pending %}
+  <div class="container my-auto">
+    <div class="row">
+      <div class="col-sm-10 col-lg-8 mx-auto text-center">
+        <h2>{{ 'qs.auth.communities.welcome'|t }}</h2>
+        <p>{{ 'qs.auth.communities.description'|t }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 mx-auto text-center">
+        <div class="mt-4">
+          {{ macros.icon('communities-big', ['icon-xl']) }}
+        </div>
+        <ul class="list-unstyled mt-3">
+          {% for community in variables.communities %}
+          <li>
+            <a class="btn btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_community.welcome', {'community': community.id}) }}">{{ community.name.value }}</a>
+          </li>
+          {% endfor %}
+          {% for community in variables.pending %}
+            <li>
+              <a class="btn btn-icon btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_auth.approval', {'community': community.id}) }}">
+                {{ macros.icon('wait') }}
+                {{ community.name.value }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 </div>

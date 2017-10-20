@@ -87,7 +87,7 @@ class EventAddForm extends FormBasic {
       'class' => [
         'modal-body',
       ],
-      'bg' => 'danger',
+      'bg' => 'secondary',
     ];
 
     // Apply custom styles to wrapper.

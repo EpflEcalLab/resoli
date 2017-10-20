@@ -17,9 +17,8 @@
 ] %}
 
 {% set wrapper_class = [
-  'bg-' ~ attributes.bg|default('info')
+  attributes.bg ? 'bg-' ~ attributes.bg
 ] %}
-
 
 <div class="{{ wrapper_class|join(' ') }}">
   <div class="container fullpage-wrapper py-4">

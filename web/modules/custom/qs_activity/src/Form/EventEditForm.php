@@ -29,6 +29,10 @@ class EventEditForm extends EventEditFormBase {
     $form['#title'] = $this->t('qs_activity.events.form.edit.title_form');
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
+      'class' => [
+        'modal-body',
+      ],
+      'bg' => 'secondary',
     ];
 
     $form['#theme_wrappers'] = [

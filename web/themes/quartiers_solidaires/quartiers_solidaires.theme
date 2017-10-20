@@ -6,3 +6,51 @@
 function quartiers_solidaires_theme_suggestions_taxonomy_term_alter(&$suggestions, $vars, $hook) {
   $suggestions[] = $suggestions[0] . '__' . $vars['elements']['#view_mode'];
 }
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Add body background colors on some specific route.
+ */
+function quartiers_solidaires_preprocess_html(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  if ($is_front = \Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['attributes']['class'][] = 'bg-gradient';
+  }
+
+  // todo add colors to every page which needs them.
+  // todo remove bg-x from templates.html.twig and add them here.
+  switch ($route_name) {
+    case 'system.404':
+    case 'system.403':
+      $variables['attributes']['class'][] = 'bg-gradient';
+    break;
+
+    case 'qs_auth.login':
+    case 'qs_auth.communities.apply':
+    case 'qs_auth.pass':
+    case 'qs_auth.pass.confirmation':
+    case 'qs_auth.pass.reset':
+    case 'qs_auth.pass.reset.login':
+    case 'qs_auth.pass.reset.form':
+    case 'qs_auth.communities':
+    case 'qs_auth.cancel.confirm':
+      $variables['attributes']['class'][] = 'bg-secondary';
+      break;
+
+    case 'qs_auth.approval':
+    case 'qs_community.welcome':
+      $variables['attributes']['class'][] = 'bg-primary';
+      break;
+
+    case 'qs_auth.register':
+      $variables['attributes']['class'][] = 'bg-info';
+      break;
+
+    case '<front>':
+      $variables['attributes']['class'][] = 'bg-primary';
+      break;
+
+  }
+}

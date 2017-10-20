@@ -1,30 +1,29 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="bg-primary">
-  <div class="fullpage-wrapper py-4">
+<div class="fullpage-wrapper py-4">
 
-    <div class="container">
-      <div class="row justify-content-between">
-        <a class="btn btn-outline-primary btn-outline-invert shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
-          {{ macros.icon('chevron-left') }}
-          {{ 'qs_auth.link.home'|t }}
-        </a>
-      </div>
+  <div class="container">
+    <div class="row justify-content-between">
+      <a class="btn btn-outline-primary btn-outline-invert shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
+        {{ macros.icon('chevron-left') }}
+        {{ 'qs_auth.link.home'|t }}
+      </a>
     </div>
-
-    <div class="container text-center mt-5 mb-5">
-      {{ macros.icon('wait-lg', ['icon-xl']) }}
-    </div>
-
-    <div class="container mt-5 mb-auto text-center">
-      <p class="lead">{% trans %}qs.auth.approval.thanks{% endtrans %}</p>
-      <p class="lead">{% trans %}qs.auth.approval.description {{ variables.community.name.value }} {% endtrans %}</p>
-    </div>
-
-    <div class="container text-center">
-      {{ macros.icon('wait') }}
-      <p class="mt-3">{% trans %}qs.auth.approval.short{% endtrans %}</p>
-    </div>
-
   </div>
+
+  <div class="container text-center mt-5 mb-5">
+    {{ macros.icon('wait-lg', ['icon-xl']) }}
+  </div>
+
+  <div class="container mt-5 mb-auto text-center">
+    <p class="lead">{% trans %}qs.auth.approval.thanks{% endtrans %}</p>
+    <p class="lead">{% trans %}qs.auth.approval.description {{ variables.community.name.value }} {% endtrans %}</p>
+  </div>
+
+  <div class="container text-center">
+    {{ macros.icon('wait') }}
+    <p class="mt-3">{% trans %}qs.auth.approval.short{% endtrans %}</p>
+  </div>
+
 </div>
+

@@ -89,7 +89,7 @@
 
     {# Calendar #}
     <div class="col-sm-6 mb-3">
-      <a href="{{ path('qs_calendar.collection.monthly', {community: variables.activity.field_community.entity.tid.value, 'days': event.field_start_at.date|date('Y-m-d') }) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+      <a href="{{ path('qs_calendar.collection.monthly', {community: variables.activity.field_community.entity.tid.value, 'day': event.field_start_at.date|date('Y-m-d') }) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
         {{ macros.icon('calendar') }}
         {{ 'qs.event.calendar'|t }}
       </a>

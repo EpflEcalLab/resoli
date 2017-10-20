@@ -121,6 +121,13 @@ class UserController extends ControllerBase {
     }
 
     $variables['activities'] = $this->activityManager->getByUser($community, $user);
+
+    // Get badges.
+    if (!empty($variables['activities'])) {
+      // From list of Activities get user privileges.
+      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($variables['activities'], $user);
+    }
+
     $variables['community_has_write_access'] = $this->acl->hasWriteAccessCommunity($community);
 
     return [

@@ -180,6 +180,7 @@ class ActivityManager {
     $query->leftJoin('privileges', 'privileges', 'privileges.entity = activity.nid');
     $query->condition('privileges.user', $user->id());
     $query->condition('privileges.bundle', 'node');
+    $query->condition('privileges.status', TRUE);
 
     $or = $query->orConditionGroup();
     $or->condition('privileges.privilege', 'activity_members');

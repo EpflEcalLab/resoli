@@ -17,11 +17,11 @@
   </span>
 
   {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
-    {{ macros.badge('wait', 'flag-subscription-wait') }}
+    {{ macros.badge('flag-info', 'wait', 'flag-subscription-wait') }}
   {% endif %}
 
   {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
-    {{ macros.badge('confirmed', 'flag-subscription-confirmed') }}
+    {{ macros.badge('flag-info', 'confirmed', 'flag-subscription-confirmed') }}
   {% endif %}
 
   <span class="size-date ml-auto text-dark">

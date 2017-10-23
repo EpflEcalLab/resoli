@@ -85,8 +85,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $event = $this->route->getParameter('event');
     $node = $this->route->getParameter('node');
 
-    if (!$activity && $event && !$event->get('field_activity')->isEmpty()) {
-      $community = $activity->field_activity->entity;
+    if (!$community && $event && !$event->get('field_activity')->isEmpty()) {
+      $community = $event->field_activity->entity;
     }
 
     if (!$activity && $event && $event->hasField('field_activity')) {

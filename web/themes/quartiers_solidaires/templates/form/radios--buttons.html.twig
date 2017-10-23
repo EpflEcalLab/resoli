@@ -25,7 +25,7 @@
 
 {%
   set classes = [
-    attributes.variant == 'button' ? 'btn-grid',
+    attributes.variant == 'button' or element['#attributes'].variant == 'button_theme' ? 'btn-grid',
   ]
 %}
 <div{{ attributes.addClass(classes).setAttribute('data-toggle', 'buttons') }}>{{ children }}</div>

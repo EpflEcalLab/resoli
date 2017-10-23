@@ -120,6 +120,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // Display a shortcut link "Add Activity".
       if (count($this->activityManager->getByUser($community, $this->currentUser)) <= 0 && $this->acl->hasWriteAccessCommunity($community)) {
         $icon = 'plus';
+        $theme = 'primary';
         $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.form.add', [
           'community' => $community->id(),
         ]);

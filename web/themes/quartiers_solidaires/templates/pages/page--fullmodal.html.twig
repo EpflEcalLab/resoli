@@ -38,36 +38,38 @@
  * @see html.html.twig
  */
 #}
-{% if page.header %}
-<header class="header container py-3" role="banner">
-  {{ page.header }}
-</header>
-{% endif %}
-{% block header %}{% endblock %}
+<div class="modal-open">
+  {% if page.header %}
+  <header class="header container py-3" role="banner">
+    {{ page.header }}
+  </header>
+  {% endif %}
+  {% block header %}{% endblock %}
 
 
 
-<main role="main" class="modal-open">
-  <a id="main-content" tabindex="-1"></a>
-  <div class="modal modal-full force-show">
-    <div class="modal-dialog">
-      {% set classes = [
-        attributes.bg ? 'bg-' ~ attributes.bg
-      ] %}
-      <div class="modal-content {{ classes|join(' ') }}">
-        {% if page.messages is not empty %}
-          <div class="container mt-3">
-            {{ page.messages }}
-          </div>
-        {% endif %}
-        {% block content %}{{ page.content }}{% endblock %}
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>
+    <div class="modal modal-full force-show">
+      <div class="modal-dialog">
+        {% set classes = [
+          attributes.bg ? 'bg-' ~ attributes.bg
+        ] %}
+        <div class="modal-content {{ classes|join(' ') }}">
+          {% if page.messages is not empty %}
+            <div class="container mt-3">
+              {{ page.messages }}
+            </div>
+          {% endif %}
+          {% block content %}{{ page.content }}{% endblock %}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="modal-backdrop show"></div>
-</main>
+    <div class="modal-backdrop show"></div>
+  </main>
 
 
-{% if page.floating %}
-  {{ page.floating }}
-{% endif %}
+  {% if page.floating %}
+    {{ page.floating }}
+  {% endif %}
+</div>

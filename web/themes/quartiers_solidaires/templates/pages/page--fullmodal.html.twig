@@ -57,11 +57,13 @@
         ] %}
         <div class="modal-content {{ classes|join(' ') }}">
           {% if page.messages is not empty %}
-            <div class="container mt-3">
+            <div class="modal-header container">
               {{ page.messages }}
             </div>
           {% endif %}
-          {% block content %}{{ page.content }}{% endblock %}
+          <div class="modal-body">
+            {% block content %}{{ page.content }}{% endblock %}
+          </div>
         </div>
       </div>
     </div>

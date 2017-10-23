@@ -101,6 +101,7 @@ class RegisterForm extends FormBase {
         'sub_description' => $this->t('qs_auth.register_form.step1.sub_description'),
       ],
       '#theme_wrappers' => [
+        'container__center',
         'fieldset__step',
       ],
     ];

@@ -23,4 +23,9 @@
 </div>
 {% endif %}
 
-<div{{ attributes.setAttribute('data-toggle', 'buttons') }}>{{ children }}</div>
+{%
+  set classes = [
+    attributes.variant == 'button' ? 'btn-grid',
+  ]
+%}
+<div{{ attributes.addClass(classes).setAttribute('data-toggle', 'buttons') }}>{{ children }}</div>

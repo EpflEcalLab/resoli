@@ -114,9 +114,6 @@ class ActivityAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
-      'class' => [
-        'modal-body',
-      ],
     ];
 
     // Apply custom styles to wrapper.
@@ -176,6 +173,9 @@ class ActivityAddForm extends FormBasic {
         'variant' => 'button_theme',
         'data-toggle' => 'buttons',
         'no_form_group' => TRUE,
+        'class' => [
+          'btn-grid',
+        ],
       ],
       '#theme_wrappers' => [
         'radios__buttons',

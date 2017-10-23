@@ -57,6 +57,7 @@ a.card {
 
   .flag {
     margin: ($spacer * -3) 0 ($spacer * -3) ($card-spacer-x * 2);
+
     @include flag-size(60px);
   }
 
@@ -72,7 +73,6 @@ a.card {
       border-color: $value;
     }
   }
-
 }
 
 .card-pill-white {
@@ -122,7 +122,6 @@ a[href].card-pill-simple {
         margin-right: $card-spacer-x;
       }
     }
-
   }
 
   // Make sure when we're centering the text, the icon is not pushing things in

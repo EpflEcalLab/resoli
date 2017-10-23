@@ -63,11 +63,9 @@ function quartiers_solidaires_preprocess_html(&$variables) {
 function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
 
   switch (true) {
-    // todo check if page_fullpage is really necessary.
-//      $suggestions[] = 'page__fullpage';
-//      // Background color of fullpage are switched
-//      // in a template_preprocess_html().
-//      break;
+    case in_array('page__communities__welcome', $suggestions):
+      $suggestions[] = 'page__fullpage';
+      break;
 
     case in_array('page__events__user', $suggestions):
       $suggestions[] = 'page__fullmodal';

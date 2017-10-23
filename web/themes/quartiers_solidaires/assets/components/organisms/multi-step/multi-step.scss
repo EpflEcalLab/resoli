@@ -10,7 +10,8 @@
     margin-bottom: auto;
   }
 
-  > .row {
+  > .row,
+  > .tab-content {
     flex: 1 1 auto;
   }
 }

@@ -12,12 +12,26 @@ const multiStep = () => {
       $form.each(function() {
         const id = $(this).attr('id');
         const currentForm = $(this);
+        const modalHeader = currentForm.closest('.modal-content').find('.modal-header');
         const $fieldsets = currentForm.find('[data-step]');
         let nextTab = null;
         let currentTab = null;
 
+        console.log(modalHeader);
+
         // Init the step nav above form
-        $(`<ol class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ol>`).prependTo(currentForm);
+        const stepNav = $(`<ol class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ol>`);
+
+
+        if (modalHeader.length > 0) {
+          stepNav.prependTo(modalHeader)
+        } else {
+          stepNav.prependTo(currentForm);
+        }
+
+        $('<div/>')
+          .addClass('modal-footer justify-content-center sticky-bottom')
+          .appendTo(currentForm.find(`.tab-content`));
 
         // Create the "Next step" button below the form
         $('<button/>')
@@ -32,7 +46,7 @@ const multiStep = () => {
               nextTab.tab('show');
             // };
           })
-          .appendTo(currentForm.find(`.tab-content`))
+          .appendTo(currentForm.find(`.modal-footer`))
           .append(
             '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow"></use></svg></span>'
           );

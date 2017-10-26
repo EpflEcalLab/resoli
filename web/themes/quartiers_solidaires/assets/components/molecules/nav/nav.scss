@@ -187,7 +187,7 @@
   // Styles of navbar when navbar is open
   .open & {
     opacity: 1;
-    height: 80vh;
+    height: 65vh;
 
     @include transition(
       height 0s ease,
@@ -201,6 +201,29 @@
     }
   }
 }
+
+.navbar-settings {
+  position: fixed;
+  bottom: -100vh;
+  z-index: 20;
+  opacity: 0;
+
+  .open & {
+    opacity: 1;
+    bottom: ($grid-gutter-width / 2);
+
+    @include transition(
+      height 0s ease,
+      opacity 0.3s ease
+    );
+  }
+
+  .btn {
+    background-color: color("primary-lightest");
+    color: theme-color("primary");
+  }
+}
+
 
 // White overlay when navbar is open
 .navbar-overlay {

@@ -206,7 +206,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           break;
 
         // Go to Homepage.
-        // TODO add test for this link
+        // TODO add test for this link.
         case "qs_community.welcome":
           $url = $this->urlGenerator->generateFromRoute('<front>');
           $label = $this->t('qs_auth.link.home');

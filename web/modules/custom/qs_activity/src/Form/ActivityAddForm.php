@@ -400,11 +400,17 @@ class ActivityAddForm extends FormBasic {
     // Handle redirection.
     $redirect_to_event = $form_state->getValue('redirection');
 
+    // Checkbox redirection on Form Edit Default values.
     if ($redirect_to_event == 1) {
       $form_state->setRedirect('qs_activity.activities.form.edit.defaults', ['activity' => $activity->id()], []);
-    } elseif ($redirect_to_event == 2) {
+    }
+
+    // Checkbox redirection on Form add event for this newly created activity.
+    elseif ($redirect_to_event == 2) {
       $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
     }
+
+    // Checkbox redirection on the newly created activity.
     else {
       $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
     }

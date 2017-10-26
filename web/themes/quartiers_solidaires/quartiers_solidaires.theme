@@ -45,6 +45,8 @@ function quartiers_solidaires_preprocess_html(&$variables) {
       break;
 
     case 'qs_auth.register':
+    case 'qs_supervisor.account.dashboard':
+    case 'qs_supervisor.account.form.edit':
       $variables['attributes']['class'][] = 'bg-info';
       break;
 

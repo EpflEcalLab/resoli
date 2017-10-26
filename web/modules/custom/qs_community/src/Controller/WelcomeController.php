@@ -4,7 +4,6 @@ namespace Drupal\qs_community\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
-use Drupal\user\UserStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\taxonomy\TermInterface;

@@ -219,12 +219,19 @@
   }
 
   .btn {
-    background-color: color("primary-light");
-    color: $white;
+    background-color: color("primary-lightest");
+    color: theme-color("primary");
+  }
 
-    .icon,
-    .icon svg {
-      color: $white !important;
+  .bg-primary & {
+    .btn {
+      background-color: color("primary-light");
+      color: $white;
+
+      .icon,
+      .icon svg {
+        color: $white !important;
+      }
     }
   }
 }

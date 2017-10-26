@@ -336,39 +336,6 @@ a[href].card-pill-simple {
   }
 }
 
-.card-list-item-muted:not(.card-open) {
-  @include card-pill-bg-gradient(".card-pill", $gray-600);
-
-  .card-pill-icon {
-    .icon {
-      background-color: $gray-300;
-      color: color("secondary");
-    }
-  }
-}
-
-.card-list-item-danger:not(.card-open) {
-  @include card-pill-bg-gradient(".card-pill", rgba(color('danger'), 0.5));
-
-  .card-pill-icon {
-    .icon {
-      background-color: color('danger');
-      color: color("light");
-    }
-  }
-}
-
-.card-list-item-primary:not(.card-open) {
-  @include card-pill-bg-gradient(".card-pill", rgba(color('primary'), 0.5));
-
-  .card-pill-icon {
-    .icon {
-      background-color: color('primary');
-      color: color("light");
-    }
-  }
-}
-
 .card-list-simple-item {
   margin-bottom: calc(#{$spacer} + #{$card-border-width * 4});
 

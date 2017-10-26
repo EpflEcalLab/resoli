@@ -226,7 +226,7 @@
 
   // Set color of text based on background when button is active
   @include button-outline-invert('.bg-primary', color('primary-light'), $white, color('primary-darker'));
-  @include button-outline-invert('.bg-info', $blue, $white, color('info-darker'));
+  @include button-outline-invert('.bg-info', lighten(color('info'), 3%), $white, color('info-darker'));
   @include button-outline-invert('.bg-danger', color('danger-light'), $white, color('danger-darker'));
   @include button-outline-invert('.bg-secondary', color('secondary-light'), $white, color('secondary-darker'));
 }

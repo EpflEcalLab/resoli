@@ -208,6 +208,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
         // Go to Homepage.
         // TODO add test for this link.
         case "qs_community.welcome":
+        case "qs_supervisor.account.dashboard":
           $url = $this->urlGenerator->generateFromRoute('<front>');
           $label = $this->t('qs_auth.link.home');
           $theme = 'primary';

@@ -1,0 +1,21 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set community_name = variables.community.name.value|trim %}
+
+{{ bamboo_render_block('qs_photo_monthly_block') }}
+
+{% if variables.photos %}
+  <div class="container my-5">
+    {% for key, photo in variables.photos %}
+      <img src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'thumbnail'}) }}" width="100" height="100" class="image-style-drupal-content-photos">
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="container">
+    <p class="lead text-center mt-5">
+      {{ 'qs.photo.month.empty @community @start_date @end_date'|t({
+        '@month': variables.dates.start|date('F'),
+        '@year': variables.dates.start|date('F'),
+        '@community': community_name,
+      }) }}
+  </div>
+{% endif %}

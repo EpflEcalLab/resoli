@@ -56,7 +56,7 @@ a.card {
   }
 
   .flag {
-    margin: ($spacer * -3) 0 ($spacer * -3) ($card-spacer-x * 2);
+    margin: ($spacer * -2.25) 0 ($spacer * -3) ($card-spacer-x * 2);
 
     @include flag-size(60px);
   }
@@ -375,6 +375,10 @@ a[href].card-pill-simple {
   &:not(.card-open) {
     background: none;
     border: 0;
+  }
+
+  .flag {
+    @include flag-size(50px);
   }
 }
 

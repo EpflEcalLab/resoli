@@ -1,0 +1,17 @@
+uuid: b5224ced-0ec1-4cbf-b20b-88237f39cc43
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Photo
+type: photo
+description: "Photo which belongs to only one Event.\t\r\n"
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

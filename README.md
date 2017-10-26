@@ -118,7 +118,7 @@ For isolation test databases, you should run Behat using our custom script `scri
 
 1. Launch a stand-alone server with `drush runserver`.
 
-2. Keep this command line open and run `./vendor/bin/behat`
+1. Keep this command line open and run `./vendor/bin/behat`
 in the root of your project.
 
 ### Re-install default values
@@ -133,22 +133,22 @@ You can use the Driven Development script to install re-install default values b
 
 1. Setup your virtualhost (like `http://qs.dev`) to serve `/web`.
 
-2. Install Drupal and dependencies using composer
+1. Install Drupal and dependencies using composer
 
   ```bash
   composer install
   ```
 
-3. Install and configure PHPCS for coding standards, see the previous section.
+1. Install and configure PHPCS for coding standards, see the previous section.
 
-4. Go to http://qs.dev and follow install instruction
+1. Go to http://qs.dev and follow install instruction
    Or run the following command:
 
   ```bash
   $ drush si standard --db-url=mysql://root:root@127.0.0.1/qs_staging --site-name="Quartiers Solidaires" --account-name=admin --account-pass=admin --account-mail=dev@antistatique.net
   ```
 
-5. Use the same site UUID than your collegue:
+1. Use the same site UUID than your collegue:
 
   ```bash
     $ drush config-set system.site uuid "b38de9f3-fd4d-4779-ab7f-29e7b91556f1"
@@ -156,19 +156,25 @@ You can use the Driven Development script to install re-install default values b
 
   (This is certainly a bad idea, [follow this drupal issue](https://www.drupal.org/node/1613424)).
 
-6. Update your `web/sites/default/settings.php`:
+1. Update your `web/sites/default/settings.php`:
 
   ```bash
   $ vim web/sites/default/settings.php
   ```
 
+  Set the custom configuration directory location:
+
   ```php
-    $config_directories['sync'] = '../config/d8/sync';
+   $config_directories['sync'] = '../config/d8/sync';
+  ```
+  
+  Set the custom private directory location:
+
+  ```php
+   $settings['file_private_path'] = '/privates/qs';
   ```
 
-  If you want to use the LDAP authentication, you must fill the LDAP settings.
-
-7. *(optional)* Update your `web/sites/default/drushrc.php`:
+1. *(optional)* Update your `web/sites/default/drushrc.php`:
 
   ```bash
   $ cp web/sites/default/default.drushrc.php web/sites/default/drushrc.php
@@ -179,13 +185,13 @@ You can use the Driven Development script to install re-install default values b
   $options['uri'] = "http://qs.dev";
   ```
 
-8. Import the configuration
+1. Import the configuration
 
   ```bash
   $ drush cim
   ```
 
-9. Rebuild the cache
+1. Rebuild the cache
 
   ```bash
   $ drush cr
@@ -211,13 +217,13 @@ You first need to setup the work environment by running `$ yarn install`.
 You can generate the styleguide and watch it:
 
   ```bash
-    $ yarn start
+   $ yarn start
   ```
 
 You can generate only the built assets for production by running:
 
   ```bash
-    $ yarn build
+   $ yarn build
   ```
 
 For more help about Toolbox, the [official documentation](http://frontend.github.io/toolbox/toolbox/#build-the-styleguide) is your best friend.
@@ -228,10 +234,10 @@ For more help about Toolbox, the [official documentation](http://frontend.github
 
   ```bash
     # You need to have ruby & bundler installed
-    $ bundle install
-    $ npm login
-    # enter the dev@antistatique.net npm credentials, ask Antistatique if you don't have these. (they should normally be in 1Password)
-    $ npm install -g gulp
+   $ bundle install
+   $ npm login
+   # enter the dev@antistatique.net npm credentials, ask Antistatique if you don't have these. (they should normally be in 1Password)
+   $ npm install -g gulp
   ```
 
 ### Each times
@@ -420,7 +426,7 @@ A better way is to use the `example.settings.local.php` that do more for your de
 You have to register the Drupal and DrupalPractice Standard with PHPCS:
 
   ```bash
-    $ ./vendor/bin/phpcs --config-set installed_paths [absolute-path-to-vendor]/drupal/coder/coder_sniffer
+  $ ./vendor/bin/phpcs --config-set installed_paths [absolute-path-to-vendor]/drupal/coder/coder_sniffer
   ```
 
 ## 💻 Drush Commands
@@ -431,4 +437,16 @@ You have to register the Drupal and DrupalPractice Standard with PHPCS:
 
 ## 🔐 Security
 
+For security reason, every Photos are stored in a Private folder.
+You have to update your `web/sites/default/settings.php`:
 
+  ```bash
+  $ vim web/sites/default/settings.php
+  ```
+
+  ```php
+  $settings['file_private_path'] = '/privates/qs';
+  ```
+
+Be sure to use a folder outside of your apache server to avoid security breach.
+Don't forget, this new private folder must be writable by your apache server owner.

@@ -26,4 +26,6 @@ content:
     weight: 100
     region: content
 hidden:
+  field_event: true
+  field_image: true
   langcode: true

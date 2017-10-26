@@ -50,6 +50,7 @@ module:
   qs_calendar: 0
   qs_community: 0
   qs_menu: 0
+  qs_photo: 0
   qs_site: 0
   qs_subscription: 0
   qs_supervisor: 0

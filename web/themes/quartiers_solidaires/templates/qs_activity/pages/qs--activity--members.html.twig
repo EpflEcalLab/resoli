@@ -1,9 +1,9 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 <div class="container">
-  <div class="text-center my-5">
-    <h1>{% trans %}qs_activity.members.title{% endtrans %}</h1>
-    <h2>{{ variables.activity.title.value }}</h2>
+  <div class="text-center">
+    <h1 class="h4">{% trans %}qs_activity.members.title{% endtrans %}</h1>
+    <h2 class="h5">{{ variables.activity.title.value }}</h2>
   </div>
 
   {{ bamboo_render_form('qs_activity', 'ActivityInlineAddMemberForm', {'activity': variables.activity, 'members': variables.members}) }}

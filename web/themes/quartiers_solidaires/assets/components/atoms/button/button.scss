@@ -228,6 +228,7 @@
   @include button-outline-invert('.bg-primary', color('primary-light'), $white, color('primary-darker'));
   @include button-outline-invert('.bg-info', $blue, $white, color('info-darker'));
   @include button-outline-invert('.bg-danger', color('danger-light'), $white, color('danger-darker'));
+  @include button-outline-invert('.bg-secondary', color('secondary-light'), $white, color('secondary-darker'));
 }
 
 // We still need a Button White when the background is lightly colored

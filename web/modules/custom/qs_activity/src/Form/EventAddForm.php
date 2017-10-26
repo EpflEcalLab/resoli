@@ -84,9 +84,6 @@ class EventAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
-      'class' => [
-        'modal-body',
-      ],
     ];
 
     // Apply custom styles to wrapper.

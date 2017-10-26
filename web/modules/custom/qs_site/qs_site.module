@@ -58,3 +58,10 @@ function qs_site_theme_suggestions_page_alter(array &$suggestions, array $variab
     $suggestions[] = 'page__system__404';
   }
 }
+
+/**
+ * Implementation of hook_query_TAG_alter.
+ */
+function qs_site_query_random_alter($query) {
+  $query->orderRandom();
+}

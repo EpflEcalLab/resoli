@@ -10,6 +10,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_photo\Service\PhotoManager;
 use Drupal\qs_calendar\Service\CalendarBuilder;
+use Drupal\qs_activity\Service\ActivityManager;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Datetime\DrupalDateTime;
 
@@ -40,12 +41,28 @@ class CollectionController extends ControllerBase {
   protected $calendarBuilder;
 
   /**
+   * The entity QS Activity Manager.
+   *
+   * @var \Drupal\qs_activity\Service\ActivityManager
+   */
+  protected $activityManager;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PhotoManager $photo_manager, CalendarBuilder $calendar_builder) {
+  public function __construct(AccessControl $acl, PhotoManager $photo_manager, CalendarBuilder $calendar_builder, ActivityManager $activity_manager) {
     $this->acl             = $acl;
     $this->photoManager    = $photo_manager;
     $this->calendarBuilder = $calendar_builder;
+    $this->activityManager = $activity_manager;
+    $this->nodeStorage     = $this->entityTypeManager()->getStorage('node');
   }
 
   /**
@@ -57,7 +74,8 @@ class CollectionController extends ControllerBase {
     // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('qs_photo.photo_manager'),
-      $container->get('qs_calendar.calendar_builder')
+      $container->get('qs_calendar.calendar_builder'),
+      $container->get('qs_activity.activity_manager')
     );
   }
 
@@ -129,7 +147,27 @@ class CollectionController extends ControllerBase {
    * Collection by themes.
    */
   public function themes(Request $request, TermInterface $community) {
-    $variables = [];
+    // Query to retrieve all activities by theme.
+    $activities_nids = $this->activityManager->getThemed($community);
+    $variables = ['community' => $community];
+
+    // Get filters themes.
+    $filtered_themes = $request->query->get('themes');
+    if ($filtered_themes) {
+      $themes = $this->termStorage->loadMultiple($filtered_themes);
+      foreach ($themes as $theme) {
+        $variables['themes'][] = $theme->getName();
+      }
+    }
+
+    if (!empty($activities_nids)) {
+      $activites = $this->nodeStorage->loadMultiple($activities_nids);
+      $variables['activities'] = $activites;
+      foreach ($activites as $activity) {
+        $variables['photos'][$activity->id()] = $this->photoManager->getByActivities($activity, 4);
+      }
+    }
+
     return [
       '#theme'     => 'qs_photo_collection_by_theme_page',
       '#variables' => $variables,

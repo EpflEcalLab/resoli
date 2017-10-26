@@ -1,1 +1,38 @@
-by themes
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set currentTheme = null %}
+{% set community_name = variables.community.name.value|trim %}
+
+{# Block with current search filters #}
+{% if variables.activities %}
+  <div class="container">
+    <p class="lead text-center mt-5">
+      {%- set count = variables.themes|length -%}
+      {%- set themes_names = variables.themes|join(', ')|trim -%}
+
+      {% if count >= 1 %}
+        {%- trans -%}qs.photo.theme.filters {{ community_name }} {{ themes_names }}.
+        {%- endtrans -%}
+      {% else %}
+        {%- trans -%}qs.photo.theme.filters {{ community_name }}.{%- endtrans -%}
+      {% endif %}
+    </p>
+  </div>
+
+  <div class="container my-5">
+    <div class="row">
+      {% for activity in variables.activities %}
+        <div class="col-12 sticky-top bg-white mb-2">
+          {% set photos = variables.photos[activity.nid.value] %}
+          <h1>{{ activity.title.value }}</h1>
+          {% for photo in photos %}
+            <img src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'thumbnail'}) }}" width="100" height="100" class="image-style-drupal-content-photos">
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+  <div class="container">
+    <p class="lead text-center mt-5">{% trans %}qs.photo.theme.title_empty {{ community_name }}{% endtrans %}</p>
+  </div>
+{% endif %}

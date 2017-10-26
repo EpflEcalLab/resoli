@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\taxonomy\TermInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * PhotoManager.
@@ -62,6 +63,44 @@ class PhotoManager {
     $query->condition('field_end_at.field_end_at_value', [$date_start->format('c'), $date_end->format('c')], 'BETWEEN');
 
     $query->orderBy('field_end_at.field_end_at_value', 'ASC');
+
+    $rows = $query->execute()->fetchAll();
+
+    $nids = [];
+    foreach ($rows as $row) {
+      $nids[$row->nid] = $row->nid;
+    }
+
+    $photos = NULL;
+    if ($nids) {
+      $photos = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $photos;
+  }
+
+  /**
+   * Get Photos for every given activities, in the given limit.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   * @param int $limit
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Photo. Otherwise an empty array.
+   */
+  public function getByActivities(NodeInterface $activity, $limit) {
+
+    $query = $this->connection->select('node_field_data', 'photo');
+    $query->fields('photo', ['nid'])
+      ->condition('photo.type', 'photo')
+      ->condition('photo.status', TRUE);
+
+    $query->leftJoin('node__field_event', 'field_event', 'field_event.entity_id = photo.nid');
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.entity_id = field_event.field_event_target_id');
+    $query->condition('field_activity.field_activity_target_id', $activity->id());
+
+    $query->addTag('random');
+    $query->range(0, $limit);
 
     $rows = $query->execute()->fetchAll();
 

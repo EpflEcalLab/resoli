@@ -1,0 +1,4 @@
+services:
+  qs_photo.photo_manager:
+    class: Drupal\qs_photo\Service\PhotoManager
+    arguments: ['@entity_type.manager', '@database']

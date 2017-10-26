@@ -160,6 +160,10 @@
         color: $color;
       }
     }
+
+    &.active-alt {
+      background-color: mix($color, $white, 55%);
+    }
   }
 }
 

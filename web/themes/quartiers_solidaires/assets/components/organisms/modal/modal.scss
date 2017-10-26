@@ -29,6 +29,7 @@
 
 .modal-body {
   display: flex;
+  flex-direction: column;
   overflow-y: scroll;
 
   // Hack to avoid moving a submit button out of its form parent

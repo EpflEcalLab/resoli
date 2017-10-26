@@ -79,6 +79,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $theme = 'secondary';
     $options = [];
     $url = FALSE;
+    $invert = FALSE;
 
     $community = $this->route->getParameter('community');
     $activity = $this->route->getParameter('activity');
@@ -203,12 +204,22 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $label = $this->t('qs.previous.to_calendar');
           $theme = 'primary';
           break;
+
+        // Go to Homepage.
+        // TODO add test for this link
+        case "qs_community.welcome":
+          $url = $this->urlGenerator->generateFromRoute('<front>');
+          $label = $this->t('qs_auth.link.home');
+          $theme = 'primary';
+          $invert = TRUE;
+          break;
       }
     }
 
     $variables['url'] = $url;
     $variables['label'] = $label;
     $variables['theme'] = $theme;
+    $variables['invert'] = $invert;
 
     return [
       '#theme'     => 'qs_menu_previous_block',

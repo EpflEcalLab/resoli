@@ -298,3 +298,43 @@ body.open {
   max-height: 100vh;
   overflow: hidden;
 }
+
+// Override the styles on the onboarding page
+.bg-primary .fullpage-wrapper {
+  .navbar {
+    &:after {
+      background-color: $white;
+    }
+  }
+
+  .navbar-toggle {
+    background-color: color('primary-light');
+    color: $white;
+    border-color: $white;
+
+    @include drop-shadow('bottom', color('primary-darker'));
+
+    @include hover-focus-active {
+      color: $white;
+      background-color: darken(color('primary-light'), 10%);
+    }
+
+    &:after {
+      background-color: $white;
+    }
+  }
+
+  .navbar-overlay {
+    background-color: theme-color('primary');
+  }
+
+  .nav-item {
+    @include button-variant(color("primary-light"), theme-color("primary"), theme-color("primary"));
+
+    border-color: $white;
+
+    @include hover {
+      border-color: $white;
+    }
+  }
+}

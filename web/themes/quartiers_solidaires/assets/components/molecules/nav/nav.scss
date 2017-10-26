@@ -219,11 +219,15 @@
   }
 
   .btn {
-    background-color: color("primary-lightest");
-    color: theme-color("primary");
+    background-color: color("primary-light");
+    color: $white;
+
+    .icon,
+    .icon svg {
+      color: $white !important;
+    }
   }
 }
-
 
 // White overlay when navbar is open
 .navbar-overlay {

@@ -134,7 +134,7 @@ class StreamController extends ControllerBase {
     try {
       // Stream the file.
       $user = $this->currentUser()->getAccount();
-      $now  = new \DateTime();
+      $now = new \DateTime();
 
       $logger->info($this->t("@user (@uid) stream `@file` (@nid) at @now.", [
         '@user' => $user->name,
@@ -152,11 +152,13 @@ class StreamController extends ControllerBase {
       );
 
       return $response;
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       $logger->error($e->getMessage());
       // Note: Don't display the default drupal message for security reason,
       // may contain the file name.
       throw new NotFoundHttpException();
     }
   }
+
 }

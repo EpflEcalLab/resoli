@@ -31,7 +31,7 @@ class PhotoManager {
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $connection) {
     $this->nodeStorage = $entity_type_manager->getStorage('node');
-    $this->connection  = $connection;
+    $this->connection = $connection;
   }
 
   /**

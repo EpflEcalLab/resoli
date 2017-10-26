@@ -105,8 +105,9 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#attributes' => [
-        'icon' => 'check',
+        'icon' => 'plus',
         'icon_left' => TRUE,
+        'outline' => TRUE,
         'class' => [
           'shadow-to-bottom',
           'mx-auto',

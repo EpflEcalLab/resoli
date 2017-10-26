@@ -162,7 +162,8 @@
     }
 
     &.active-alt {
-      background-color: mix($color, $white, 55%);
+      background-color: mix($color, $white, 75%);
+      color: $white;
     }
   }
 }

@@ -268,6 +268,66 @@ a[href].card-pill-simple {
   }
 
   @each $color, $value in $theme-colors {
+    $light: color('#{$color}-light');
+
+    .bg-#{$color} & {
+      .card-pill {
+        background-color: transparent;
+        background-image: linear-gradient(to right, rgba($light, 0.8) 50%, $value 95%);
+      }
+
+      a.card-pill {
+        &:active,
+        &.active {
+          transform: scale(0.98);
+          background-image: linear-gradient(to right, $light 50%, $value 70%);
+        }
+      }
+
+      .card-pill-title {
+        color: $white;
+      }
+
+      .card-pill-icon {
+        margin-top: (-$card-border-width);
+        margin-bottom: (-$card-border-width);
+        margin-left: (-$card-border-width);
+
+        .icon {
+          background-color: transparent;
+        }
+      }
+
+      .btn {
+        margin: (-$card-border-width) (-$card-border-width) (-$card-border-width) 0;
+      }
+
+      &.card-open {
+        background-color: $light;
+        border-color: $white;
+
+        .card-pill {
+          background: $white;
+          border-color: $white;
+        }
+
+        .card-pill-title {
+          color: $body-color;
+        }
+
+        .card-pill-icon {
+          margin-top: 0;
+          margin-bottom: 0;
+          margin-left: 0;
+
+          .icon {
+            background-color: $light;
+            color: $white;
+          }
+        }
+      }
+    }
+
     &.card-list-item-#{$color}.card-open {
       .card-pill {
         border-color: $value;

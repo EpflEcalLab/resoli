@@ -45,5 +45,14 @@
     {% endfor %}
   </nav>
 
+  <div class="navbar-settings">
+    {% for section in variables.settings %}
+      <a href="{{ section.url }}" class="btn btn-outline-primary btn-icon mx-2{{ section.current ? ' active' }}">
+        {{ macros.icon(section.icon) }}
+        {{ section.label }}
+      </a>
+    {% endfor %}
+  </div>
+
   <div class="navbar-overlay"></div>
 </div>

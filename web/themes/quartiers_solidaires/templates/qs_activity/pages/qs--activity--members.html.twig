@@ -27,7 +27,7 @@
           <span class="card-pill-title">
               {{ member.field_firstname.value }} {{ member.field_lastname.value }}
           </span>
-          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+          <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left ml-auto" aria-label="{{ 'qs.user.more'|t }}">
             {{ macros.icon('look') }}
             <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
           </span>
@@ -40,41 +40,41 @@
             <h5 class="card-title mt-1">{{ member.mail.value }}</h5>
 
             <div class="card-text">
-              <form id="privilege-{{ loop.index }}" data-ajax="true" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
-                <input type="hidden" name="user" value="{{ member.uid.value }}">
-                <input type="hidden" name="activity" value="{{ variables.activity.nid.value }}">
+              <div class="d-flex flex-wrap justify-content-center">
+                <form id="privilege-{{ loop.index }}" data-ajax="true" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
+                  <input type="hidden" name="user" value="{{ member.uid.value }}">
+                  <input type="hidden" name="activity" value="{{ variables.activity.nid.value }}">
+                  <div class="d-flex flex-wrap justify-content-center">
+                    <div class="btn-group mb-3 mx-2 js-radio-group" role="group" aria-label="{% trans %}qs_activity.members.roles{% endtrans %}" data-toggle="buttons">
+                      <label class="btn btn-outline-invert btn-fluid {% if 'activity_members' == member.privileges|last %}active{% endif %}">
+                        <input title="{{ 'qs.roles.activity_member'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members" {% if 'activity_members' == member.privileges|last %}checked{% endif %} class="form-radio">
+                        {{ 'qs.roles.activity_member'|t }}
+                      </label>
 
-                <div class="d-flex flex-wrap justify-content-center">
-                  <div class="btn-group mb-3 mx-2 js-radio-group" role="group" aria-label="{% trans %}qs_activity.members.roles{% endtrans %}" data-toggle="buttons">
-                    <label class="btn btn-white btn-outline-secondary {% if 'activity_members' == member.privileges|last %}active{% endif %}">
-                      <input title="{{ 'qs.roles.activity_member'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members" {% if 'activity_members' == member.privileges|last %}checked{% endif %} class="form-radio">
-                      {{ 'qs.roles.activity_member'|t }}
-                    </label>
+                      <label class="btn btn-outline-invert btn-fluid {% if 'activity_maintainers' == member.privileges|last %}active{% endif %}">
+                        <input title="{{ 'qs.roles.activity_maintainer'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members|activity_maintainers" {% if 'activity_maintainers' == member.privileges|last %}checked{% endif %} class="form-radio">
+                        {{ 'qs.roles.activity_maintainer'|t }}
+                      </label>
 
-                    <label class="btn btn-white btn-outline-secondary {% if 'activity_maintainers' == member.privileges|last %}active{% endif %}">
-                      <input title="{{ 'qs.roles.activity_maintainer'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members|activity_maintainers" {% if 'activity_maintainers' == member.privileges|last %}checked{% endif %} class="form-radio">
-                      {{ 'qs.roles.activity_maintainer'|t }}
-                    </label>
-
-                    <label class="btn btn-white btn-outline-secondary {% if 'activity_organizers' == member.privileges|last %}active{% endif %}">
-                      <input title="{{ 'qs.roles.activity_organizer'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members|activity_maintainers|activity_organizers" {% if 'activity_organizers' == member.privileges|last %}checked{% endif %} class="form-radio">
-                      {{ 'qs.roles.activity_organizer'|t }}
-                    </label>
+                      <label class="btn btn-outline-invert btn-fluid {% if 'activity_organizers' == member.privileges|last %}active{% endif %}">
+                        <input title="{{ 'qs.roles.activity_organizer'|t }}" variant="button" type="radio" data-submit name="privileges" value="activity_members|activity_maintainers|activity_organizers" {% if 'activity_organizers' == member.privileges|last %}checked{% endif %} class="form-radio">
+                        {{ 'qs.roles.activity_organizer'|t }}
+                      </label>
+                    </div>
                   </div>
+                </form>
+                <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card{{ member.uid.value }}" method="post">
+                  <input type="hidden" name="user" value="{{ member.uid.value }}">
+                  <input type="hidden" name="activity" value="{{ variables.activity.nid.value }}">
+                  <button class="btn mb-3 mx-2 btn-outline-invert btn-fluid shadow-to-bottom" type="submit" value="{{ 'qs.roles.activity_none'|t }}">
+                    {{ 'qs.roles.activity_none'|t }}
+                  </button>
+                </form>
                 </div>
-              </form>
-              <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card{{ member.uid.value }}"
-                method="post">
-                <input type="hidden" name="user" value="{{ member.uid.value }}">
-                <input type="hidden" name="activity" value="{{ variables.activity.nid.value }}">
-                <button class="btn mb-3 mx-2 btn-white btn-outline-secondary shadow-to-bottom" type="submit" value="{{ 'qs.roles.activity_none'|t }}">
-                  {{ 'qs.roles.activity_none'|t }}
-                </button>
-              </form>
             </div>
 
-             <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-              <a href="mailto:{{ member.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+             <div class="card-actions d-flex justify-content-center mb-3">
+              <a href="mailto:{{ member.mail.value }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
                 {{ macros.icon('mail') }}
                 {% trans %}qs.contact {{ member.field_firstname.value }}{% endtrans %}
               </a>

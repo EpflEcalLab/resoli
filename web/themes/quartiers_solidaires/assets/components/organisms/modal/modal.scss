@@ -10,8 +10,12 @@
 }
 
 .modal-header {
-  margin-bottom: ($spacer * 2);
+  flex-direction: column;
   flex-shrink: 0;
+
+  .alert {
+    margin-bottom: 0;
+  }
 }
 
 .modal-content {
@@ -25,6 +29,7 @@
 
 .modal-body {
   display: flex;
+  flex-direction: column;
   overflow-y: scroll;
 
   // Hack to avoid moving a submit button out of its form parent

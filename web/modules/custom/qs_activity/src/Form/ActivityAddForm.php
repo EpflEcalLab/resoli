@@ -316,6 +316,10 @@ class ActivityAddForm extends FormBasic {
         'variant' => 'button',
         'data-submit' => TRUE,
         'data-toggle' => 'buttons',
+        'class' => [
+          'col-md-8',
+          'mx-auto',
+        ],
       ],
       '#type'       => 'radios',
       '#required'   => FALSE,
@@ -324,8 +328,10 @@ class ActivityAddForm extends FormBasic {
       ],
       '#options'    => [
         // @codingStandardsIgnoreStart
-        0 => $this->t('qs_activity.activities.form.add.save') . '|check',
-        1 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus',
+        // This adds an icon to the button.
+        0 => $this->t('qs_activity.activities.form.add.save') . '|activities',
+        1 => $this->t('qs_activity.activities.form.add.save_and_set_default_values') . '|pencil',
+        2 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus|secondary',
         // @codingStandardsIgnoreEnd
       ],
     ];
@@ -394,7 +400,9 @@ class ActivityAddForm extends FormBasic {
     // Handle redirection.
     $redirect_to_event = $form_state->getValue('redirection');
 
-    if ($redirect_to_event) {
+    if ($redirect_to_event == 1) {
+      $form_state->setRedirect('qs_activity.activities.form.edit.defaults', ['activity' => $activity->id()], []);
+    } elseif ($redirect_to_event == 2) {
       $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
     }
     else {

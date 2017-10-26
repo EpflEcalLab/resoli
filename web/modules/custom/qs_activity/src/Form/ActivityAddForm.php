@@ -400,7 +400,9 @@ class ActivityAddForm extends FormBasic {
     // Handle redirection.
     $redirect_to_event = $form_state->getValue('redirection');
 
-    if ($redirect_to_event) {
+    if ($redirect_to_event == 1) {
+      $form_state->setRedirect('qs_activity.activities.form.edit.defaults', ['activity' => $activity->id()], []);
+    } elseif ($redirect_to_event == 2) {
       $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
     }
     else {

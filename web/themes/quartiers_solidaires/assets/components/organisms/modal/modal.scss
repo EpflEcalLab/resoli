@@ -10,8 +10,12 @@
 }
 
 .modal-header {
-  margin-bottom: ($spacer * 2);
+  flex-direction: column;
   flex-shrink: 0;
+
+  .alert {
+    margin-bottom: 0;
+  }
 }
 
 .modal-content {

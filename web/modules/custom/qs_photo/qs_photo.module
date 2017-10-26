@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+// Includes.
+require_once 'inc/alias.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function qs_photo_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_photo_collection_by_month_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--collection-by-month',
+    ],
+    'qs_photo_collection_by_theme_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--collection-by-theme',
+    ],
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_photo_monthly_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--monthly',
+    ],
+  ];
+}

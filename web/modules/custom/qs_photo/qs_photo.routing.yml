@@ -1,0 +1,61 @@
+# Photos by months
+qs_photo.collection.month:
+    path: '/photos/{community}/month'
+    defaults:
+      _controller: '\Drupal\qs_photo\Controller\CollectionController::months'
+      _title: 'qs_photo.collection.monthly.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Controller\CollectionController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# Photos by theme
+qs_photo.collection.theme:
+    path: '/photos/{community}/theme'
+    defaults:
+      _controller: '\Drupal\qs_photo\Controller\CollectionController::themes'
+      _title: 'qs_photo.collection.themes.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Controller\CollectionController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# Photos for one activity
+#qs_photo.activity:
+#    path: '/photos/{community}/activity/{activity}'
+#    defaults:
+#      _controller: '\Drupal\qs_photo\Controller\CollectionController::events'
+#      _title: 'qs_photo.collection.events.title'
+#    requirements:
+#      _user_is_logged_in: 'TRUE'
+#      _custom_access: '\Drupal\qs_photo\Controller\CollectionController::access'
+#      community: \d+
+#    options:
+#      parameters:
+#        community:
+#          type: entity:taxonomy_term
+
+# Photos stream
+qs_photo.streamer:
+    path: '/photos/{photo}/{image_style}'
+    defaults:
+      _controller: '\Drupal\qs_photo\Controller\StreamController::stream'
+      image_style: NULL
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Controller\StreamController::access'
+      photo: \d+
+    options:
+      parameters:
+        photo:
+          type: entity:node
+        image_style:
+          type: entity:image_style

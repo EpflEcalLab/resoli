@@ -80,7 +80,7 @@ class EventManager {
   }
 
   /**
-   * Get only the next events (nearest from now) for the given date range.
+   * Get only the events (nearest from $date_start) for the given date range.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.

@@ -269,6 +269,55 @@ class AccessControl {
   }
 
   /**
+   * Check if the account has read access on the given photo.
+   *
+   * @param \Drupal\node\NodeInterface $photo
+   *   The photo to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one read access for this photo.
+   */
+  public function hasAccessPhoto(NodeInterface $photo, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $event = $photo->field_event->entity;
+    $activity = $event->field_activity->entity;
+    $community = $activity->field_community->entity;
+
+    // Check if the photo's event is open to community or activity members only.
+    if ($event->field_community_access_gallery->value) {
+      return $this->hasAccessCommunity($community, $user);
+    }
+
+    // Activitiy Members+ have access to images.
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_members');
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
    * Check the account is waiting for at least one Privilege on the community.
    *
    * If the user has already one privilege it will always return FALSE.

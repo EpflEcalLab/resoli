@@ -83,12 +83,14 @@ class PhotoManager {
    * Get Photos for every given activities, in the given limit.
    *
    * @param \Drupal\node\NodeInterface $activity
+   *   Base activity where photos should come from.
    * @param int $limit
+   *   Maximum of photos by activity.
    *
    * @return \Drupal\node\NodeInterface[]
    *   A collection of node's Photo. Otherwise an empty array.
    */
-  public function getByActivities(NodeInterface $activity, $limit) {
+  public function getByActivity(NodeInterface $activity, $limit) {
 
     $query = $this->connection->select('node_field_data', 'photo');
     $query->fields('photo', ['nid'])

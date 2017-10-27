@@ -47,7 +47,7 @@
         </button>
       {% else %}
         <form action="{{ path('qs_subscription.request', {event: event.nid.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
-          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register'|t }}">
+          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block js-btn-subscription" id="subscribe{{ event.nid.value }}" type="submit" value="{{ 'qs.event.register'|t }}">
               {{ macros.icon('register') }}
               {{ 'qs.event.register'|t }}
           </button>

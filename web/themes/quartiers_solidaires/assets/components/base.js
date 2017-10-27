@@ -11,6 +11,7 @@ import formAjax from 'molecules/form-control/form-ajax';
 import formSubmit from 'molecules/form-control/form-submit';
 import formSelectize from 'molecules/form-control/form-selectize';
 import calendar from 'molecules/calendar/calendar';
+import formSubscription from 'molecules/form-control/form-subscription';
 
 svgIcons();
 
@@ -26,5 +27,6 @@ svgIcons();
     calendar();
     checkbox();
     button();
+    formSubscription();
   });
 })(jQuery);

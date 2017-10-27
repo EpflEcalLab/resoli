@@ -1579,9 +1579,6 @@ msgstr "Retour au calendrier"
 msgid "qs_activity.activities.form.add.save_and_set_default_values"
 msgstr ""
 
-msgid "qs_menu.links.account.communities"
-msgstr ""
-
 msgid "qs_activity.events.form.edit.contact_name"
 msgstr ""
 
@@ -1607,4 +1604,7 @@ msgid "qs_activity.events.form.add.venue.placeholder"
 msgstr ""
 
 msgid "qs_activity.events.form.edit.venue.placeholder"
+msgstr ""
+
+msgid "qs.previous.to_event"
 msgstr ""

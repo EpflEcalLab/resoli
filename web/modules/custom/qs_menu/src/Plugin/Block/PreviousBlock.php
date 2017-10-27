@@ -203,6 +203,15 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $label = $this->t('qs.previous.to_calendar');
           $theme = 'primary';
           break;
+
+        // Go to Photos.
+        case "qs_photo.activity":
+          $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.theme', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_photos_list');
+          $theme = 'primary';
+          break;
       }
     }
 

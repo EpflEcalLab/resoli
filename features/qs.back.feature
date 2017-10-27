@@ -242,3 +242,4 @@ Feature: Back buttons
     Then I should not see a "#block-previousnavigation a" element
     And I should see "qs.form.cancel" link with href "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo/dashboard"
 
+# Photos by Activity

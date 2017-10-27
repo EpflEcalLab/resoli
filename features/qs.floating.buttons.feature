@@ -173,3 +173,9 @@ Feature: Floating actions buttons
     And the response status code should be 200
     Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/8/dashboard"
+
+# Photos by Themes
+
+# Photos by Month
+
+# Photos by Activity

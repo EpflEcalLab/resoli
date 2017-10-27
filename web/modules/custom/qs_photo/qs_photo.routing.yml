@@ -28,24 +28,24 @@ qs_photo.collection.theme:
         community:
           type: entity:taxonomy_term
 
-# Photos for one activity
-#qs_photo.activity:
-#    path: '/photos/{community}/activity/{activity}'
-#    defaults:
-#      _controller: '\Drupal\qs_photo\Controller\CollectionController::events'
-#      _title: 'qs_photo.collection.events.title'
-#    requirements:
-#      _user_is_logged_in: 'TRUE'
-#      _custom_access: '\Drupal\qs_photo\Controller\CollectionController::access'
-#      community: \d+
-#    options:
-#      parameters:
-#        community:
-#          type: entity:taxonomy_term
+# Photos by activity
+qs_photo.activity:
+    path: '/photos/activity/{activity}'
+    defaults:
+      _controller: '\Drupal\qs_photo\Controller\ActivityController::activity'
+      _title: 'qs_photo.activity.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Controller\ActivityController::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
 
 # Photos stream
 qs_photo.streamer:
-    path: '/photos/{photo}/{image_style}'
+    path: '/photos/file/{photo}/{image_style}'
     defaults:
       _controller: '\Drupal\qs_photo\Controller\StreamController::stream'
       image_style: NULL

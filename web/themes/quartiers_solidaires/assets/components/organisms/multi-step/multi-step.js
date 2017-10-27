@@ -98,28 +98,20 @@ const multiStep = () => {
           prevTab = $(e.target).parent().prev().find('a.step-nav-link');
 
           // Toggle buttons depending on current step
-          if (nextTab.length <= 0) {
-            $(`#${id} .js-form-submit`).show();
-            $(`#next-btn-${id}`).hide();
-          } else {
-            $(`#${id} .js-form-submit`).hide();
-            $(`#next-btn-${id}`).show();
-          }
-
-          // Toggle buttons depending on current step
           if (prevTab.length <= 0) {
             $(`#prev-btn-${id}`).hide();
           } else {
             $(`#prev-btn-${id}`).show();
           }
-        });
 
-        // Jump to the next step on Enter
-        $(document).on('keydown', function (e) {
-
-          if (e.keyCode === 13 && nextTab.length > 0) {
-            e.preventDefault();
-            nextTab.tab('show');
+          // Toggle buttons depending on current step
+          if (nextTab.length <= 0) {
+            $(`#${id} .js-form-submit`).show();
+            $(`#next-btn-${id}`).hide();
+            $(`#prev-btn-${id}`).hide();
+          } else {
+            $(`#${id} .js-form-submit`).hide();
+            $(`#next-btn-${id}`).show();
           }
         });
       });

@@ -94,7 +94,6 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
    */
   public function build($params = []) {
     $route_name = $this->route->getRouteName();
-    dump($route_name);
     $community = $this->route->getParameter('community');
     $node = $this->route->getParameter('node');
     $activity = $this->route->getParameter('activity');

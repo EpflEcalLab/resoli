@@ -5,7 +5,36 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: $zindex-sticky;
+  z-index: ($zindex-modal-backdrop + 1);
+
+  .modal-open & {
+    .btn {
+      overflow: visible;
+
+      &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: $border-width;
+        height: 15vh;
+      }
+
+      @each $color, $value in $theme-colors {
+        &.btn-outline-#{$color} {
+          &:after {
+            background: $value;
+          }
+        }
+      }
+
+      &:not([disabled]):not(.disabled).active {
+        box-shadow: none;
+      }
+    }
+  }
 }
 
 .floating-offset {

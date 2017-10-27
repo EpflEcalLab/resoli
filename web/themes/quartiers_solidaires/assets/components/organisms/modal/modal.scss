@@ -15,6 +15,10 @@
 
   .alert {
     margin-bottom: 0;
+
+    .close {
+      margin: 0;
+    }
   }
 }
 
@@ -44,7 +48,9 @@
 
 .modal-full {
   .modal-content {
-    height: 85vh;
+    margin-top: 107px;
+    // 100vh - (.modal-dialog margin-bottom value) - (header height) - (floating buttons height)
+    height: calc(95vh - 107px - 55px);
   }
 }
 

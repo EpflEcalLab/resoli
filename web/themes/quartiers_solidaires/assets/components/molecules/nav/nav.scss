@@ -82,6 +82,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .open & {
+    z-index: $zindex-modal;
+  }
 }
 
 // Three items always visible below navbar toggle

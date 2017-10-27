@@ -141,6 +141,13 @@
       .icon svg {
         color: $value;
       }
+
+      &:not([disabled]):not(.disabled):active,
+      &:not([disabled]):not(.disabled).active {
+        .icon svg {
+          color: $white;
+        }
+      }
     }
   }
 

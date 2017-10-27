@@ -125,8 +125,11 @@ class CollectionController extends ControllerBase {
 
     $date_end->setTime(23, 59, 59);
 
-    // Get all photos for the given month ordered by event end date.
-    $variables['photos'] = $this->photoManager->getByDate($community, $date_start, $date_end);
+    // Get all activities in the date range.
+    $activities = $this->activityManager->getByDate($community, $date_start, $date_end);
+
+    // Get all photos for the given activities.
+    $variables['photos'] = $this->photoManager->getByActivities($activities);
 
     return [
       '#theme'     => 'qs_photo_collection_by_month_page',
@@ -147,9 +150,9 @@ class CollectionController extends ControllerBase {
    * Collection by themes.
    */
   public function themes(Request $request, TermInterface $community) {
-    // Query to retrieve all activities by theme.
-    $activities_nids = $this->activityManager->getThemed($community);
     $variables = ['community' => $community];
+    // Get all activities by theme.
+    $activities_nids = $this->activityManager->getThemed($community);
 
     // Get filters themes.
     $filtered_themes = $request->query->get('themes');
@@ -160,10 +163,12 @@ class CollectionController extends ControllerBase {
       }
     }
 
+    // Load 4 photos by activity.
     if (!empty($activities_nids)) {
       $activites = $this->nodeStorage->loadMultiple($activities_nids);
       $variables['activities'] = $activites;
       foreach ($activites as $activity) {
+        // Get photos by activity.
         $variables['photos'][$activity->id()] = $this->photoManager->getByActivity($activity, 4);
       }
     }

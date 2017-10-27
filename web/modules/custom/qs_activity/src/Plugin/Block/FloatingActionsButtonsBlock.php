@@ -94,18 +94,47 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
    */
   public function build($params = []) {
     $route_name = $this->route->getRouteName();
+    dump($route_name);
     $community = $this->route->getParameter('community');
     $node = $this->route->getParameter('node');
+    $activity = $this->route->getParameter('activity');
 
     $icon = NULL;
     $url = NULL;
     $label = $this->t('qs.previous');
     $theme = 'secondary';
+    $classes = [];
+
+    // Button - "Community Dashboard".
+    if ($community && in_array($route_name, [
+      'qs_community.dashboard',
+      'qs_community.members',
+      'qs_community.waiting_approval',
+    ])) {
+      // For everybody, show a button "My Activities".
+      $icon = 'activities';
+      $theme = 'danger';
+      $url =
+        $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
+          'community' => $community->id(),
+          'user' => $this->currentUser->id(),
+        ]);
+      $label = $this->t('qs_menu.links.account.communities');
+
+      if ($route_name == 'qs_community.members') {
+        $label = $this->t('qs_community.dashboard.members');
+      }
+      elseif ($route_name == 'qs_community.waiting_approval') {
+        $label = $this->t('qs_community.dashboard.waiting_approval');
+      }
+    }
 
     // Button - "Add Activity" or "My Activities".
     if ($community && in_array($route_name, [
       'qs_activity.collection.themes',
       'qs_activity.collection.dates',
+      'qs_activity.activities.form.add',
+      'qs_activity.user.collection',
     ])) {
       // For everybody, show a button "My Activities".
       $icon = 'activities';
@@ -143,25 +172,47 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     }
 
     // Button - "Add Event" or "Activity Dashboard".
-    if ($node && $node->bundle() == 'activity') {
+    if (($node && $node->bundle() == 'activity') || $activity) {
+      $act = $node ? $node : $activity;
       // Button "Add Event".
-      if ($this->acl->hasWriteAccessEvent($node)) {
+      if ($this->acl->hasWriteAccessEvent($act)) {
         $icon = 'plus';
         $theme = 'primary';
         $url = $this->urlGenerator->generateFromRoute('qs_activity.events.form.add', [
-          'activity' => $node->id(),
+          'activity' => $act->id(),
         ]);
         $label = $this->t('qs_activity.floating.add.event');
       }
 
       // Button "Activity Dashboard".
-      if ($this->acl->hasAdminAccessActivity($node)) {
+      if ($this->acl->hasAdminAccessActivity($act)) {
         $icon = 'activities';
         $theme = 'primary';
         $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
-          'activity' => $node->id(),
+          'activity' => $act->id(),
         ]);
         $label = $this->t('qs_activity.floating.dashboard.activity');
+      }
+
+      if ($route_name == 'qs_activity.activities.form.edit.info') {
+        $label = $this->t('qs.activity.edit_info');
+      }
+      elseif ($route_name == 'qs_activity.activities.form.edit.visibility') {
+        $label = $this->t('qs.activity.edit_visibility');
+      }
+      elseif ($route_name == 'qs_activity.activities.form.edit.defaults') {
+        $label = $this->t('qs.activity.edit_default_values');
+      }
+      elseif ($route_name == 'qs_activity.activities.members') {
+        $label = $this->t('qs.activity.members');
+      }
+      elseif ($route_name == 'qs_activity.events.form.add') {
+        $label = $this->t('qs.activity.add_event');
+        $theme = 'secondary';
+      }
+      elseif ($route_name == 'qs_activity.activities.form.delete') {
+        $label = $this->t('qs.activity.delete');
+        $theme = 'danger';
       }
     }
 
@@ -176,10 +227,29 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $label = $this->t('qs_supervisor.floating.my_account');
     }
 
+    // Display as active on these routes.
+    if (in_array($route_name, [
+      'qs_activity.activities.form.add',
+      'qs_activity.user.collection',
+      'qs_activity.activities.dashboard',
+      'qs_activity.activities.form.edit.info',
+      'qs_activity.activities.form.edit.visibility',
+      'qs_activity.activities.form.edit.defaults',
+      'qs_activity.activities.members',
+      'qs_activity.events.form.add',
+      'qs_activity.activities.form.delete',
+      'qs_community.dashboard',
+      'qs_community.members',
+      'qs_community.waiting_approval',
+    ])) {
+      $classes[] = 'active';
+    }
+
     $variables['url'] = $url;
     $variables['label'] = $label;
     $variables['theme'] = $theme;
     $variables['icon'] = $icon;
+    $variables['classes'] = $classes;
 
     return [
       '#theme'     => 'qs_activity_floating_actions_buttons_block',

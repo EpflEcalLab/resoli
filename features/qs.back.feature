@@ -220,7 +220,7 @@ Feature: Back buttons
     Given I am logged in as user "admin"
     When I am on "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo/dashboard"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_event" link with href "/lausanne/activities/atelier-creatif#card17"
+    And I should see "qs.previous.to_event" link with href "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo#card17"
 
   @api
   Scenario: In the Event Edit Form, I see a back button for Event Dashboard

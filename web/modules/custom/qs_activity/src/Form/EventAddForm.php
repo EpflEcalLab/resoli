@@ -227,6 +227,7 @@ class EventAddForm extends FormBasic {
         'google-input-lng' => 'edit-longitude',
       ],
       '#title'         => $this->t('qs_activity.events.form.add.venue'),
+      '#placeholder'   => $this->t('qs_activity.events.form.add.venue.placeholder'),
       '#type'          => 'textfield',
       '#default_value' => $activity->field_venue->value,
     ];

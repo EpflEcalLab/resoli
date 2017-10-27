@@ -147,6 +147,7 @@ class EventEditForm extends EventEditFormBase {
         'google-input-lng' => 'edit-longitude',
       ],
       '#title'         => $this->t('qs_activity.events.form.edit.venue'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.venue.placeholder'),
       '#type'          => 'textfield',
       '#default_value' => $event->field_venue->value,
     ];

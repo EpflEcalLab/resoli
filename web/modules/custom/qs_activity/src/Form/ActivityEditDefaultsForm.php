@@ -58,8 +58,10 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
         'google-input-lng' => 'edit-longitude',
       ],
       '#title'         => $this->t('qs_activity.activities.form.edit.defaults.venue'),
+      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.venue.placeholder'),
       '#type'          => 'textfield',
       '#default_value' => $activity->field_venue->value,
+
     ];
     $form['group']['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 

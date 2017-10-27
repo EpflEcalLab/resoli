@@ -1590,3 +1590,12 @@ msgstr ""
 
 msgid "qs_activity.events.form.edit.contact_mail.placeholder"
 msgstr ""
+
+msgid "qs_activity.activities.form.edit.defaults.venue.placeholder"
+msgstr ""
+
+msgid "qs_activity.events.form.add.venue.placeholder"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.venue.placeholder"
+msgstr ""

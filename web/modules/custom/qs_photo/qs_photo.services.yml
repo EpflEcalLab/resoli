@@ -1,4 +1,11 @@
 services:
   qs_photo.photo_manager:
     class: Drupal\qs_photo\Service\PhotoManager
-    arguments: ['@entity_type.manager', '@database']
+    arguments: ['@entity_type.manager', '@database', '@current_user', '@qs_acl.access_control']
+
+  # Redirect
+  qs_photo.redirect:
+    class: Drupal\qs_photo\EventSubscriber\RedirectSubscriber
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }

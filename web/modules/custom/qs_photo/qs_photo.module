@@ -23,6 +23,10 @@ function qs_photo_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--photo--collection-by-theme',
     ],
+    'qs_photo_collection_by_activity_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--by-activity',
+    ],
     // Blocks themes
     // ---------------------------------------------------------------------.
     'qs_photo_monthly_block' => [

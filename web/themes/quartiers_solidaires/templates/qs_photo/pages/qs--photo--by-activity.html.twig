@@ -1,0 +1,29 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="text-center my-5">
+    {{ macros.icon('theme_' ~ variables.activity.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-primary']) }}
+    <h1>{{ variables.activity.title.value }}</h1>
+  </div>
+
+  {% if variables.events %}
+    {% for event in variables.events %}
+      {% if event.nid.value in variables.photos|keys %}
+        <h1>{{ event.title.value }} - {{ event.field_end_at.value }}</h1>
+        {% for photo in variables.photos[event.nid.value] %}
+          <img src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'thumbnail'}) }}" width="100" height="100" class="image-style-drupal-content-photos">
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <h2 class="h4 mb-4">
+      {% if variables.activity.field_contact_mail is not empty %}
+        {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value, { 'target':['_blank']} )|render %}
+        {% trans %}qs.photo.no_photos_please_contact {{ mail_link }}{% endtrans %}
+      {% else %}
+        {{ 'qs.photo.no_photos'|t }}
+      {% endif %}
+    </h2>
+  {% endif %}
+</div>
+

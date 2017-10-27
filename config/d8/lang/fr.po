@@ -541,6 +541,9 @@ msgstr "Par date"
 msgid "qs_activity.floating.dashboard.community"
 msgstr "Gérer ma communauté"
 
+msgid "qs_menu.links.account.communities"
+msgstr "Gérer ma communauté"
+
 msgid "qs.auth.approval.thanks"
 msgstr "Merci pour toutes ces informations!"
 
@@ -552,6 +555,12 @@ msgstr ""
 "Réseaux Solidaires! Notez que cette validation peut durer quelques minutes, "
 "comme quelques jours. N’hésitez pas à la contacter pour toute information "
 "complémentaire."
+
+msgid "qs.and"
+msgstr "et"
+
+msgid "qs.etc"
+msgstr "etc..."
 
 msgid "qs.auth.approval.short"
 msgstr "Adhésion en cours de validation"

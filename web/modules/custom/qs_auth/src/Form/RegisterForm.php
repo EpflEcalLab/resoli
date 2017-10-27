@@ -99,6 +99,11 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step1'),
         'sub_description' => $this->t('qs_auth.register_form.step1.sub_description'),
+        'class' => [
+          'tab-pane',
+          'fade',
+        ],
+        'role' => 'tabpanel',
       ],
       '#theme_wrappers' => [
         'container__center',

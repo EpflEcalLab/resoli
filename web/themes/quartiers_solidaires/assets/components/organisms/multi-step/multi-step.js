@@ -1,27 +1,18 @@
-const checkRequired = (el) => {
-  // Forbid opening the tab if some fields are empty and required
-  // in the previous fieldset
-  return el.find('input[required]').val() !== '';
-}
-
 const multiStep = () => {
   (function ($) {
     const $form = $('.form-multistep');
 
     if ($form.length > 0) {
       $form.each(function() {
-        const id = $(this).attr('id');
         const currentForm = $(this);
+        const id = currentForm.attr('id');
         const modalHeader = currentForm.closest('.modal-content').find('.modal-header');
         const $fieldsets = currentForm.find('[data-step]');
         let nextTab = null;
         let currentTab = null;
 
-        console.log(modalHeader);
-
         // Init the step nav above form
-        const stepNav = $(`<ol class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ol>`);
-
+        const stepNav = $(`<ul class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ul>`);
 
         if (modalHeader.length > 0) {
           stepNav.prependTo(modalHeader)
@@ -51,6 +42,7 @@ const multiStep = () => {
             '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow"></use></svg></span>'
           );
 
+        // Add step nav at top of form.
         $fieldsets.each(function(index) {
           const currentFieldset = $(this);
           const $parent = currentFieldset.parents('.form-multistep');
@@ -66,15 +58,10 @@ const multiStep = () => {
             'aria-label': stepLabel,
             'id': `steptab-${fieldsetId}`,
             'aria-controls': fieldsetId,
-            'aria-expanded': 'false',
+            'aria-selected': 'false',
+            'data-toggle': 'tab',
             'data-last': index + 1 === $fieldsets.length ? 'true' : 'false',
-          }).on('click', function(e) {
-            e.preventDefault();
-
-            // @TODO make it work: disable the nav if current tab pane has required and empty fields
-            // if (checkRequired(currentFieldset)) {
-              $(this).tab('show');
-            // };
+            'role': 'tab',
           });
 
           // Append the step nav to the form
@@ -87,7 +74,7 @@ const multiStep = () => {
         // show next tab on click
         $('a.step-nav-link').on('show.bs.tab', function(e) {
           const target = $(e.relatedTarget).attr('href');
-          currentTab = e.relatedTarget ? $(target) : currentForm.find('fieldset:first-of-type');
+          currentTab = target ? $(target) : currentForm.find('fieldset:first-of-type');
           nextTab = $(e.target).parent().next().find('a.step-nav-link');
 
           // Toggle buttons depending on current step

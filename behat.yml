@@ -28,3 +28,5 @@ default:
         password_field: "Votre mot de passe"
         log_in: "Se connecter"
         log_out: "Se déconnecter"
+  gherkin:
+    cache: ~

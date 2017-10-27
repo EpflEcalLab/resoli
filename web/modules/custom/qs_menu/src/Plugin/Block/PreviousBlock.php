@@ -153,7 +153,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
         // Go to Activity.
         case "qs_activity.activities.dashboard":
-        case "qs_activity.events.dashboard":
           $options = [];
           if ($event) {
             $options = ['fragment' => "card{$event->id()}"];
@@ -200,7 +199,19 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'event' => $event->id(),
           ], $options);
           $label = $this->t('qs.previous.to_event_dashboard');
-          $theme = 'primary';
+          $theme = 'secondary';
+          break;
+
+        case "qs_activity.events.dashboard":
+          $options = [];
+          if ($event) {
+            $options = ['fragment' => "card{$event->id()}"];
+          }
+          $url = $this->urlGenerator->generateFromRoute('entity.node.canonical', [
+            'node' => $event->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_event');
+          $theme = 'secondary';
           break;
 
         // Go to Calendar.

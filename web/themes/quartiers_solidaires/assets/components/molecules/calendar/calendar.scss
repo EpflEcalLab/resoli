@@ -55,7 +55,7 @@ $calendar-item-size: 3.125rem;
     justify-content: center;
     min-width: $calendar-item-size;
     min-height: $calendar-item-size;
-    color: grayscale(600);
+    color: gray('600');
 
     @include media-breakpoint-down(xs) {
       min-width: 10vw;
@@ -108,7 +108,7 @@ $calendar-item-size: 3.125rem;
     min-width: 20px;
     max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
-    color: grayscale(600);
+    color: gray('600');
     border: 2px solid transparent;
 
     @include media-breakpoint-up(md) {

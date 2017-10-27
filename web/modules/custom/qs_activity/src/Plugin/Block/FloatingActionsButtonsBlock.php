@@ -215,7 +215,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
-    // Welcome
+    // Welcome.
     if ($community && in_array($route_name, [
       'qs_community.welcome',
     ])) {

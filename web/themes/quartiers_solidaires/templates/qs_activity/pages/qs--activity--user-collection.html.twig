@@ -1,11 +1,5 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{% set roles = [
-  privilege == 'activity_members' ? 'qs.roles.activity_member'|t,
-  privilege == 'activity_maintainers' ? 'qs.roles.activity_maintainer'|t,
-  privilege == 'activity_organizers' ? 'qs.roles.activity_organizer'|t,
-] %}
-
 <div class="container">
   <div class="text-center my-5">
     {% if variables.user %}
@@ -59,8 +53,19 @@
         <div class="collapse" id="collapse-{{ activity.nid.value }}" role="tabpanel">
           <div class="card-body">
             <div class="card-text text-center">
-              <p>{{ 'qs.activity.user.you_are @role'|t({
-                  '@role': roles|last|lower
+              <p>
+                {% if privilege == 'activity_members' %}
+                  {% set roles = 'qs.roles.activity_member'|t %}
+                {% endif %}
+                {% if privilege == 'activity_maintainers' %}
+                  {% set roles = 'qs.roles.activity_maintainer'|t %}
+                {% endif %}
+                {% if privilege == 'activity_organizers' %}
+                  {% set roles = 'qs.roles.activity_organizer'|t %}
+                {% endif %}
+
+                {{ 'qs.activity.user.you_are @role'|t({
+                  '@role': roles
                 }) }}</p>
             </div>
             <div class="card-actions d-flex justify-content-center">

@@ -541,6 +541,9 @@ msgstr "Par date"
 msgid "qs_activity.floating.dashboard.community"
 msgstr "Gérer ma communauté"
 
+msgid "qs_menu.links.account.communities"
+msgstr "Gérer ma communauté"
+
 msgid "qs.auth.approval.thanks"
 msgstr "Merci pour toutes ces informations!"
 

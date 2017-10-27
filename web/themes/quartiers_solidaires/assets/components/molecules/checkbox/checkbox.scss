@@ -87,7 +87,7 @@
     background-color: mix(theme-color('primary'), $white, 5%);
 
     &:focus {
-      box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba(theme-color('primary'), 0.5);
+      box-shadow: 0 0 0 $input-btn-focus-width rgba(theme-color('primary'), 0.5);
     }
 
     &:after {
@@ -124,7 +124,7 @@
     }
 
     &:active {
-      box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba(theme-color('primary'), 0.5);
+      box-shadow: 0 0 0 $input-btn-focus-width rgba(theme-color('primary'), 0.5);
 
       &:after {
         left: 25%;
@@ -174,7 +174,7 @@
       }
 
       &:active {
-        box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
+        box-shadow: 0 0 0 $input-btn-focus-width rgba($white, 0.5);
       }
     }
 

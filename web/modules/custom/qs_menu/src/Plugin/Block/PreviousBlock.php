@@ -131,11 +131,18 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_community_dashboard');
-          $theme = 'primary';
+          $theme = 'danger';
           break;
 
         // Go to Activities Listing.
         case "qs_community.dashboard":
+          $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_activities_list');
+          $theme = 'danger';
+          break;
+
         case "qs_activity.user.collection":
           $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
             'community' => $community->id(),

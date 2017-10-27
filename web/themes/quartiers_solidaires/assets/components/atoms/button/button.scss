@@ -83,7 +83,7 @@
       // re-add focus styles from Bootstrap button mixin
       &:focus,
       &.focus {
-        box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($value, 0.5);
+        box-shadow: 0 0 0 $input-btn-focus-width rgba($value, 0.5);
       }
     }
   }
@@ -202,7 +202,7 @@
   &:focus,
   &.focus {
     color: $white;
-    box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5) !important; // This has to be important for buttons in bg-*
+    box-shadow: 0 0 0 $input-btn-focus-width rgba($white, 0.5) !important; // This has to be important for buttons in bg-*
   }
 
   &:active {

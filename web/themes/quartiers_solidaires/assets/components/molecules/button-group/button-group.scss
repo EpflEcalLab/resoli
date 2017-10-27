@@ -10,6 +10,7 @@ $max-items: 5;
   @include after-shadow(theme-color("secondary"));
 
   .btn {
+    margin-bottom: 0;
     padding-right: $input-btn-padding-x * 1.5;
     padding-left: $input-btn-padding-x * 1.5;
 

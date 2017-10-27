@@ -227,6 +227,7 @@ class EventManager {
 
     $title = isset($data['title']) ? $data['title'] : $activity->title->value;
     $body = isset($data['body']) ? $data['body'] : $activity->body->value;
+    $contact_name = isset($data['contact_name']) ? $data['contact_name'] : $activity->field_contact_name->value;
     $contact_mail = isset($data['contact_mail']) ? $data['contact_mail'] : $activity->field_contact_mail->value;
     $contact_phone = isset($data['contact_phone']) ? $data['contact_phone'] : $activity->field_contact_phone->value;
     $contribution = isset($data['contribution']) ? $data['contribution'] : NULL;
@@ -242,6 +243,7 @@ class EventManager {
       'field_end_at'        => $date_end->format(DATETIME_DATETIME_STORAGE_FORMAT),
       'title'               => $title,
       'body'                => $body,
+      'field_contact_name'  => $contact_name,
       'field_contact_mail'  => $contact_mail,
       'field_contact_phone' => $contact_phone,
       'field_contribution'  => $contribution,

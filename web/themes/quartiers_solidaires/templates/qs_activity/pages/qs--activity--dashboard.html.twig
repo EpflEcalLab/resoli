@@ -1,5 +1,5 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-<div class="modal-body">
+<div>
 
   <div class="text-center mt-3 my-5">
     {{ macros.icon('theme_' ~ variables.activity.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-white']) }}
@@ -49,7 +49,7 @@
 
         <li>
           {# Delete Button #}
-          <a class="btn btn-block btn-white text-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
+          <a class="btn btn-block btn-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
             {{ macros.icon('trash') }}
             {{ 'qs.activity.delete'|t }}
           </a>

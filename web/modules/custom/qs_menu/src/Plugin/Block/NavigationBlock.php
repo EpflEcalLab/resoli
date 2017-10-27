@@ -212,22 +212,27 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
           'qs_photo.collection.theme',
         ],
       ],
-      'settings'   => [
-        'label' => $this->t('qs_menu.links.account.dashboard'),
-        'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
-        'icon' => 'settings',
-        'links' => [
-          'qs_menu.links.account.dashboard' => [
-            'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
-            'label' => $this->t('qs_menu.links.account.dashboard'),
-          ],
-        ],
-        'activated_by' => [
-          'qs_menu.links.account.dashboard',
-        ],
+    ];
+
+    $render['#variables']['settings']['account'] = [
+      'label' => $this->t('qs_menu.links.account.dashboard'),
+      'url' => $this->urlGenerator->generate('qs_supervisor.account.dashboard', ['user' => $this->currentUser->id()]),
+      'icon' => 'user',
+      'activated_by' => [
+        'qs_menu.links.account.dashboard',
       ],
     ];
 
+    if ($this->acl->hasAdminAccessCommunity($community)) {
+      $render['#variables']['settings']['community'] = [
+        'label' => $this->t('qs_menu.links.account.communities'),
+        'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
+        'icon' => 'communities-sm',
+        'activated_by' => [
+          'qs_menu.links.account.dashboard',
+        ],
+      ];
+    }
     $current_item = NULL;
     foreach ($render['#variables']['menu'] as $key => $item) {
       if (in_array($variables['route_name'], $item['activated_by'])) {

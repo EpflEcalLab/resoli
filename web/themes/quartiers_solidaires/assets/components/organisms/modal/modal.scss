@@ -10,8 +10,16 @@
 }
 
 .modal-header {
-  margin-bottom: ($spacer * 2);
+  flex-direction: column;
   flex-shrink: 0;
+
+  .alert {
+    margin-bottom: 0;
+
+    .close {
+      margin: 0;
+    }
+  }
 }
 
 .modal-content {
@@ -24,6 +32,8 @@
 }
 
 .modal-body {
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
 
   // Hack to avoid moving a submit button out of its form parent
@@ -38,7 +48,9 @@
 
 .modal-full {
   .modal-content {
-    height: 85vh;
+    margin-top: 107px;
+    // 100vh - (.modal-dialog margin-bottom value) - (header height) - (floating buttons height)
+    height: calc(95vh - 107px - 55px);
   }
 }
 

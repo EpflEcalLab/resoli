@@ -1,23 +1,47 @@
-const checkRequired = (el) => {
-  // Forbid opening the tab if some fields are empty and required
-  // in the previous fieldset
-  return el.find('input[required]').val() !== '';
-}
-
 const multiStep = () => {
   (function ($) {
     const $form = $('.form-multistep');
 
     if ($form.length > 0) {
       $form.each(function() {
-        const id = $(this).attr('id');
         const currentForm = $(this);
+        const id = currentForm.attr('id');
+        const modalHeader = currentForm.closest('.modal-content').find('.modal-header');
         const $fieldsets = currentForm.find('[data-step]');
         let nextTab = null;
+        let prevTab = null;
         let currentTab = null;
 
         // Init the step nav above form
-        $(`<ol class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ol>`).prependTo(currentForm);
+        const stepNav = $(`<ul class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ul>`);
+
+        if (modalHeader.length > 0) {
+          stepNav.prependTo(modalHeader)
+        } else {
+          stepNav.prependTo(currentForm);
+        }
+
+        $('<div/>')
+          .addClass('modal-footer justify-content-center sticky-bottom')
+          .appendTo(currentForm.find(`.tab-content`));
+
+        // Create the "Prev step" button below the form
+        $('<button/>')
+          .attr('id', `prev-btn-${id}`)
+          .addClass('btn btn-outline-invert btn-icon btn-icon-left align-self-center shadow-to-bottom')
+          .text(Drupal.t('qs.prev'))
+          .on('click', function(e) {
+            e.preventDefault();
+
+            // @TODO make it work: disable the nav if current tab pane has required and empty fields
+            // if (checkRequired(currentTab)) {
+            prevTab.tab('show');
+            // };
+          })
+          .appendTo(currentForm.find(`.modal-footer`))
+          .append(
+            '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow-left"></use></svg></span>'
+          );
 
         // Create the "Next step" button below the form
         $('<button/>')
@@ -26,17 +50,17 @@ const multiStep = () => {
           .text(Drupal.t('qs.next'))
           .on('click', function(e) {
             e.preventDefault();
-
             // @TODO make it work: disable the nav if current tab pane has required and empty fields
             // if (checkRequired(currentTab)) {
               nextTab.tab('show');
             // };
           })
-          .appendTo(currentForm.find(`.tab-content`))
+          .appendTo(currentForm.find(`.modal-footer`))
           .append(
             '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow"></use></svg></span>'
           );
 
+        // Add step nav at top of form.
         $fieldsets.each(function(index) {
           const currentFieldset = $(this);
           const $parent = currentFieldset.parents('.form-multistep');
@@ -52,15 +76,10 @@ const multiStep = () => {
             'aria-label': stepLabel,
             'id': `steptab-${fieldsetId}`,
             'aria-controls': fieldsetId,
-            'aria-expanded': 'false',
+            'aria-selected': 'false',
+            'data-toggle': 'tab',
             'data-last': index + 1 === $fieldsets.length ? 'true' : 'false',
-          }).on('click', function(e) {
-            e.preventDefault();
-
-            // @TODO make it work: disable the nav if current tab pane has required and empty fields
-            // if (checkRequired(currentFieldset)) {
-              $(this).tab('show');
-            // };
+            'role': 'tab',
           });
 
           // Append the step nav to the form
@@ -73,25 +92,26 @@ const multiStep = () => {
         // show next tab on click
         $('a.step-nav-link').on('show.bs.tab', function(e) {
           const target = $(e.relatedTarget).attr('href');
-          currentTab = e.relatedTarget ? $(target) : currentForm.find('fieldset:first-of-type');
+          currentTab = target ? $(target) : currentForm.find('fieldset:first-of-type');
           nextTab = $(e.target).parent().next().find('a.step-nav-link');
+          console.log(nextTab);
+          prevTab = $(e.target).parent().prev().find('a.step-nav-link');
+
+          // Toggle buttons depending on current step
+          if (prevTab.length <= 0) {
+            $(`#prev-btn-${id}`).hide();
+          } else {
+            $(`#prev-btn-${id}`).show();
+          }
 
           // Toggle buttons depending on current step
           if (nextTab.length <= 0) {
             $(`#${id} .js-form-submit`).show();
             $(`#next-btn-${id}`).hide();
+            $(`#prev-btn-${id}`).hide();
           } else {
             $(`#${id} .js-form-submit`).hide();
             $(`#next-btn-${id}`).show();
-          }
-        });
-
-        // Jump to the next step on Enter
-        $(document).on('keydown', function (e) {
-
-          if (e.keyCode === 13 && nextTab.length > 0) {
-            e.preventDefault();
-            nextTab.tab('show');
           }
         });
       });

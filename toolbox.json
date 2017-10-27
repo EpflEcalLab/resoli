@@ -21,8 +21,10 @@
       "node_modules/selectize/dist/css/selectize.css"
     ],
     "js": [
+      "web/themes/quartiers_solidaires/assets/config/fix-jquery.js",
       "node_modules/selectize/dist/js/standalone/selectize.js",
       "node_modules/popper.js/dist/umd/popper.min.js",
+      "node_modules/bootstrap/js/dist/index.js",
       "node_modules/bootstrap/js/dist/alert.js",
       "node_modules/bootstrap/js/dist/button.js",
       "node_modules/bootstrap/js/dist/collapse.js",

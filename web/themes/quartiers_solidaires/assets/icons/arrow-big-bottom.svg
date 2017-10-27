@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg width="143px" height="143px" version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-  viewBox="0 0 143 143" enable-background="new 0 0 143 143" xml:space="preserve">
-  <rect fill="currentColor" x="69.0544" y="0.5" width="4.8965" height="136.6913"/>
-  <polygon fill="currentColor" points="51.4762,120.9641 55.0634,117.6237 71.498,135.309 87.9376,117.6237 91.5238,120.9641 71.498,142.5 "/>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" width="43px" height="83px" viewBox="0 0 43 83" style="enable-background:new 0 0 43 83;" xml:space="preserve">
+<path fill="currentColor" d="M42.6,60.4c-0.6-0.6-1.5-0.6-2.1,0L23,77.9l0-76.4C23,0.7,22.3,0,21.5,0S20,0.7,20,1.5l0,76.4L2.6,60.4
+	c-0.6-0.6-1.5-0.6-2.1,0C0.1,60.7,0,61.1,0,61.5c0,0.4,0.1,0.8,0.4,1.1l20,20c0.3,0.3,0.6,0.4,1,0.4c0,0,0.1,0,0.1,0
+	c0.1,0,0.1,0,0.2,0c0.3,0,0.6-0.2,0.8-0.4c0,0,0.1,0,0.1-0.1l20-20C43.1,62,43.1,61,42.6,60.4z"/>
 </svg>

@@ -1,4 +1,7 @@
 {
+    "_comment": [
+      "behat/gherkin to be upgrade - 3.4.0 breaks the ability to run individual tests -> https://github.com/Behat/Behat/issues/1076"
+    ],
     "name": "drupal-composer/drupal-project",
     "description": "Project template for Drupal 8 projects with composer",
     "type": "project",
@@ -48,6 +51,8 @@
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
+        "behat/behat": "~3.3.0",
+        "behat/gherkin": "4.4.5",
         "behat/mink": "~1.7",
         "behat/mink-goutte-driver": "~1.2",
         "drupal/coder": "^8.2",

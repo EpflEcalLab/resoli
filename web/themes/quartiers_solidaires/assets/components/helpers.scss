@@ -60,10 +60,6 @@
   min-height: 100vh;
 }
 
-.fullpage-wrapper-menu {
-  min-height: calc(100vh - 107px);
-}
-
 .flex-grow {
   flex-grow: 1;
 }
@@ -85,3 +81,4 @@
 // Text helpers
 @include text-emphasis-variant('.text-dark', color("dark"));
 @include text-emphasis-variant('.text-gray', $gray-700);
+@include text-emphasis-variant('.text-warning', color("warning"));

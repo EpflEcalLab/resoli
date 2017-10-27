@@ -26,7 +26,7 @@
           <span class="card-pill-title">
               {{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}
           </span>
-          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+          <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
             {{ macros.icon('look') }}
             <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
           </span>
@@ -52,7 +52,7 @@
               <div class="col-sm-6 mb-3">
                 <form action="{{ path('qs_acl.privilege.confirm') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
                   <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
-                  <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" type="submit" value="{{ 'qs.confirmed'|t }}">
+                  <button class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.confirmed'|t }}">
                     {{ macros.icon('check') }}
                     {{ 'qs.confirmed'|t }}
                   </button>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-              <a href="mailto:{{ privilege.user.entity.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+              <a href="mailto:{{ privilege.user.entity.mail.value }}" class="btn btn-outline-invert btn-icon btn-white shadow-to-bottom">
                 {{ macros.icon('mail') }}
                 {% trans %}qs.contact {{ privilege.user.entity.field_firstname.value }}{% endtrans %}
               </a>

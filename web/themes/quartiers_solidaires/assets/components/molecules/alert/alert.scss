@@ -23,6 +23,7 @@
   position: relative;
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $alert-margin-bottom;
+  width: 100%;
   border: $alert-border-width solid transparent;
   text-align: center;
   -webkit-font-smoothing: auto;
@@ -61,7 +62,7 @@
   // Adjust close link position
   .close {
     position: absolute;
-    top: -0.1em;
+    top: 0;
     right: 0;
     height: 100%;
     padding: $alert-padding-y $alert-padding-x;

@@ -6,9 +6,44 @@
   left: 0;
   right: 0;
   z-index: $zindex-sticky;
+  background-image: linear-gradient(to top, rgba($white, 0.5) 60%, rgba($white, 0) 100%);
+
+  .modal-open.modal-full & {
+    z-index: ($zindex-modal-backdrop + 1);
+
+    .btn {
+      overflow: visible;
+
+      &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: $border-width;
+        height: 15vh;
+      }
+
+      @each $color, $value in $theme-colors {
+        &.btn-outline-#{$color} {
+          &:after {
+            background: $value;
+          }
+        }
+      }
+
+      &:not([disabled]):not(.disabled).active {
+        box-shadow: none;
+      }
+    }
+  }
+
+  [class*=bg-] & {
+    background-image: none;
+  }
 }
 
-.floating-wrapper {
-  min-height: 60px;
-  height: 10vh;
+.floating-offset {
+  margin-bottom: 10vh;
 }

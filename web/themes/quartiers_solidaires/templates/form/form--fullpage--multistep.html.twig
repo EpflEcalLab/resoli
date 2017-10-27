@@ -14,16 +14,12 @@
 {% set classes = [
   'form-multistep',
   element['#validated'] ? 'was-validated',
+  'container mb-3',
 ] %}
 
-{% set wrapper_class = [
-  attributes.bg ? 'bg-' ~ attributes.bg
-] %}
-
-<div class="{{ wrapper_class|join(' ') }}">
-  <div class="container fullpage-wrapper py-4">
-
-    {% if element['#top_links'] %}
+<div class="d-flex flex-column flex-grow">
+  {% if element['#top_links'] %}
+  <div class="container mt-3">
     <div class="row justify-content-between mb-4">
       {% for path, link in element['#top_links'] %}
         <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }} shadow-to-bottom" href="{{ link.params ? path(path, link.params) : path(path) }}">
@@ -34,15 +30,10 @@
         </a>
       {% endfor %}
     </div>
-    {% endif %}
-
-    <form{{ attributes.addClass(classes) }}>
-      {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}
-      <div class="row">
-        <div class="col tab-content d-flex flex-column">{{ children }}</div>
-      </div>
-    </form>
-
   </div>
-</div>
+  {% endif %}
 
+  <form{{ attributes.addClass(classes) }}>
+    <div class="tab-content d-flex flex-column">{{ children }}</div>
+  </form>
+</div>

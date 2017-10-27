@@ -84,9 +84,6 @@ class EventAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
-      'class' => [
-        'modal-body',
-      ],
     ];
 
     // Apply custom styles to wrapper.
@@ -230,6 +227,7 @@ class EventAddForm extends FormBasic {
         'google-input-lng' => 'edit-longitude',
       ],
       '#title'         => $this->t('qs_activity.events.form.add.venue'),
+      '#placeholder'   => $this->t('qs_activity.events.form.add.venue.placeholder'),
       '#type'          => 'textfield',
       '#default_value' => $activity->field_venue->value,
     ];
@@ -242,6 +240,27 @@ class EventAddForm extends FormBasic {
     $form['event']['step-2']['longitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_long->value,
+    ];
+
+    $form['event']['step-2']['contact_name'] = [
+      '#title'         => $this->t('qs_activity.events.form.edit.contact_name'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_name.placeholder'),
+      '#type'          => 'textfield',
+      '#default_value' => $activity->field_contact_name->value,
+    ];
+
+    $form['event']['step-2']['contact_phone'] = [
+      '#title'         => $this->t('qs_activity.events.form.edit.contact_phone'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_phone.placeholder'),
+      '#type'          => 'tel',
+      '#default_value' => $activity->field_contact_phone->value,
+    ];
+
+    $form['event']['step-2']['contact_mail'] = [
+      '#title'         => $this->t('qs_activity.events.form.edit.contact_mail'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
+      '#type'          => 'email',
+      '#default_value' => $activity->field_contact_mail->value,
     ];
 
     $form['event']['step-2']['has_contribution'] = [
@@ -301,6 +320,11 @@ class EventAddForm extends FormBasic {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
       $form_state->setErrorByName('[event][step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['title']['#title']]));
+    }
+
+    // Assert the mail is valid.
+    if (!$form_state->getValue('contact_mail') || !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+      $form_state->setErrorByName('[event][step-2][contact_mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
     // Date validation
@@ -373,19 +397,20 @@ class EventAddForm extends FormBasic {
     $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
 
     // Prepare data.
-    $data['title'] = $form_state->getValue('title');
-    $data['body'] = $form_state->getValue('body');
-    $data['contact_mail'] = $form_state->getValue('contact_mail');
+    $data['title']         = $form_state->getValue('title');
+    $data['body']          = $form_state->getValue('body');
+    $data['contact_name']  = $form_state->getValue('contact_name');
+    $data['contact_mail']  = $form_state->getValue('contact_mail');
     $data['contact_phone'] = $form_state->getValue('contact_phone');
-    $data['contribution'] = $form_state->getValue('contribution');
-    $data['venue'] = $form_state->getValue('venue');
-    $data['venue_lat'] = $form_state->getValue('latitude');
-    $data['venue_long'] = $form_state->getValue('longitude');
+    $data['contribution']  = $form_state->getValue('contribution');
+    $data['venue']         = $form_state->getValue('venue');
+    $data['venue_lat']     = $form_state->getValue('latitude');
+    $data['venue_long']    = $form_state->getValue('longitude');
 
     // // Create the new event.
-    $this->eventManager->create($activity, $start_at, $end_at, $data);
+    $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
     drupal_set_message($this->t('qs_activity.events.form.add.success'));
-    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
   }
 
 }

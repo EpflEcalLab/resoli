@@ -36,7 +36,7 @@
 
   &:disabled,
   &.disabled {
-    border-color: grayscale(100);
+    border-color: gray('100');
     color: color('dark');
     opacity: 1;
 
@@ -91,6 +91,11 @@
   .bg-#{$color} {
     [class*=btn-outline-] {
       @include drop-shadows(color('dark'), true);
+
+      &:not([disabled]):not(.disabled):active,
+      &:not([disabled]):not(.disabled).active {
+        @include drop-shadows(color('dark'));
+      }
     }
   }
 

@@ -6,6 +6,7 @@
   left: 0;
   right: 0;
   z-index: $zindex-sticky;
+  background-image: linear-gradient(to top, rgba($white, 0.5) 60%, rgba($white, 0) 100%);
 
   .modal-open.modal-full & {
     z-index: ($zindex-modal-backdrop + 1);

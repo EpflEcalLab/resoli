@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Quartiers Solidaires\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 10:44+0100\n"
-"PO-Revision-Date: 2017-10-18 16:20+0100\n"
+"PO-Revision-Date: 2017-10-26 10:30+0100\n"
 "Last-Translator: Gilles Doge\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -368,7 +368,7 @@ msgid "qs_activity.activities.form.add.title"
 msgstr "Inscrivez le nom de votre activité ici"
 
 msgid "qs_activity.activities.form.add.theme"
-msgstr "Quel thème correspond le mieux à votre activité?"
+msgstr "Choisissez-en un ci-dessous."
 
 msgid "qs_activity.activities.form.add.community_can_subscribe.description"
 msgstr "Permettre à la communauté l’inscription aux évènements"
@@ -539,7 +539,10 @@ msgid "qs_menu.links.activities.date"
 msgstr "Par date"
 
 msgid "qs_activity.floating.dashboard.community"
-msgstr "Gestion de communauté"
+msgstr "Gérer ma communauté"
+
+msgid "qs_menu.links.account.communities"
+msgstr "Gérer ma communauté"
 
 msgid "qs.auth.approval.thanks"
 msgstr "Merci pour toutes ces informations!"
@@ -552,6 +555,12 @@ msgstr ""
 "Réseaux Solidaires! Notez que cette validation peut durer quelques minutes, "
 "comme quelques jours. N’hésitez pas à la contacter pour toute information "
 "complémentaire."
+
+msgid "qs.and"
+msgstr "et"
+
+msgid "qs.etc"
+msgstr "etc..."
 
 msgid "qs.auth.approval.short"
 msgstr "Adhésion en cours de validation"
@@ -767,7 +776,7 @@ msgid "qs.activity.nextevent"
 msgstr "Prochain évènement"
 
 msgid "qs.event.dashboard"
-msgstr "Gestion d’évènement"
+msgstr "Gérer l’évènement"
 
 msgid "qs.event.location"
 msgstr "Point de rendez-vous"
@@ -776,7 +785,7 @@ msgid "qs.event.delete"
 msgstr "Supprimer l’évènement"
 
 msgid "qs.event.dashboard_title"
-msgstr "Gestion d’évènement"
+msgstr "Gérer l’évènement"
 
 msgid "qs.event.dashboard_description"
 msgstr "Modifiez l’évènement et gérez les inscriptions."
@@ -888,7 +897,7 @@ msgid "qs_supervisor.account.form.back"
 msgstr "Retour à mon résumé"
 
 msgid "qs_activity.floating.dashboard.activity"
-msgstr "Gestion d’activité"
+msgstr "Gérer mon activité"
 
 msgid "qs_activity.floating.add.event"
 msgstr "Créer un évènement"
@@ -904,11 +913,14 @@ msgstr ""
 msgid "qs.next"
 msgstr "Etape suivante"
 
+msgid "qs.prev"
+msgstr "Etape précédente"
+
 msgid "qs.activity.edit_info"
 msgstr "Modifier le titre et le thème"
 
 msgid "qs.activity.edit_visibility"
-msgstr "Modifier la visibilité"
+msgstr "Modifier la visibilité des évènements de l’activité."
 
 msgid "qs_activity.add_form.community_can_subscribe"
 msgstr "Permettre à la communauté l’inscription aux évènements"
@@ -1118,7 +1130,7 @@ msgid "qs_supervisor.account.approval_go"
 msgstr ""
 
 msgid "Contact Us"
-msgstr ""
+msgstr "Contactez-nous!"
 
 msgid "Home"
 msgstr ""
@@ -1163,6 +1175,8 @@ msgstr "Il n’y a pas de prochain évènement prévu pour le moment."
 
 msgid "qs.event.not_accessible"
 msgstr ""
+"Cet évènement est privé: les membres de l’activité uniquement peuvent en "
+"voir les détails."
 
 msgid "qs.event.register"
 msgstr "S’inscrire à l’évènement"
@@ -1205,16 +1219,16 @@ msgid "qs_supervisor.account.phone_default"
 msgstr "Vous n’avez pas indiqué de numéro"
 
 msgid "qs_menu.links.stories.themes"
-msgstr ""
+msgstr "Par thème"
 
 msgid "qs_menu.links.stories.date"
-msgstr ""
+msgstr "Par date"
 
 msgid "qs_menu.links.photos.themes"
-msgstr ""
+msgstr "Par thème"
 
 msgid "qs_menu.links.photos.date"
-msgstr ""
+msgstr "Par date"
 
 msgid "qs_supervisor.account.form.edit.success @firstname, @lastname, @mail"
 msgstr "Vos données personnelles ont bien été mises à jour, @firstname!"
@@ -1236,7 +1250,7 @@ msgstr ""
 "responsable!"
 
 msgid "qs_activity.activities.form.edit.info.success @activity"
-msgstr "Les informations de l’activité @activity ont bien été modifiées!"
+msgstr "Le titre et le thème de l’activité @activity ont bien été validés!"
 
 msgid "qs.form.delete_submit"
 msgstr "Oui, supprimer"
@@ -1256,17 +1270,17 @@ msgid "qs_activity.activities.form.edit.defaults.contact_name"
 msgstr "Définissez une personne de contact par défaut"
 
 msgid "qs_activity.activities.form.edit.defaults.contact_name.placeholder"
-msgstr ""
+msgstr "Ex. Chantal Durand"
 
 msgid "qs.form.error.empty @mail"
 msgstr ""
 
 msgid "qs_activity.activities.form.edit.defaults.success @activity"
-msgstr "Les valeurs par défaut de l’activité @activity ont bien été modifiées!"
+msgstr "Les valeurs par défaut de l’activité @activity ont bien été validées!"
 
 msgid "qs_activity.edit_visibility_form.success @activity"
 msgstr ""
-"Les réglages de visibilité de l’activité @activity ont bien été modifiés!"
+"Les réglages de visibilité de l’activité @activity ont bien été validés!"
 
 msgid "qs_activity.events.form.step1"
 msgstr ""
@@ -1317,10 +1331,10 @@ msgid "qs_activity.events.form.delete.error.is_past @event"
 msgstr "L’évènement @event ne peut pas être supprimé, car il est déjà passé."
 
 msgid "qs_activity.events.form.edit.title.placeholder"
-msgstr ""
+msgstr "Ex. Randonnées à la Montagne"
 
 msgid "qs_activity.events.form.edit.success @event"
-msgstr "Votre évènement @event a bien été modifié!"
+msgstr "Les informations de l’évènement @event ont bien été validées!"
 
 msgid ""
 "qs.mail.account.cancel_confirm.subject @sitename @mail @firstname @lastname"
@@ -1359,7 +1373,7 @@ msgid "Member"
 msgstr ""
 
 msgid "qs_activity.activities.form.add.member.success @activity"
-msgstr "Vous avez bien ajouté de nouveaux membre à l’activité @activity!"
+msgstr "Vous avez bien ajouté de nouveaux membres à l’activité @activity!"
 
 msgid ""
 "qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url"
@@ -1463,7 +1477,7 @@ msgid "qs.contact @subscriber.field_firstname.value"
 msgstr "Contacter @subscriber.field_firstname.value"
 
 msgid "qs_subscription.subscribers.empty"
-msgstr ""
+msgstr "Il n’y a aucune inscription pour l’instant."
 
 msgid ""
 "qs_subscription.waiting_approval.title @variables.event.title.value "
@@ -1479,37 +1493,37 @@ msgid "qs_subscription.waiting_approval.empty"
 msgstr "Il n’y a pas d’inscription en attente de confirmation."
 
 msgid "qs.activity.add_member.submit"
-msgstr ""
+msgstr "Valider comme membre de l’activité"
 
 msgid "qs.previous.to_activities_list"
-msgstr ""
+msgstr "Retour aux activités"
 
 msgid "qs.previous.to_activity"
-msgstr ""
+msgstr "Retour à l’activité"
 
 msgid "qs.previous.to_community_dashboard"
-msgstr ""
+msgstr "Retour au gestionnaire"
 
 msgid "qs.previous.to_my_activities"
-msgstr ""
+msgstr "Retour à mes activités"
 
 msgid "qs.previous.to_activity_dashboard"
-msgstr ""
+msgstr "Retour au gestionnaire"
 
 msgid "qs.previous.to_event_dashboard"
-msgstr ""
+msgstr "Retour au gestionnaire"
 
 msgid "qs.mp.loading"
 msgstr ""
 
 msgid "qs.event.register.pending"
-msgstr ""
+msgstr "Inscription non confirmée"
 
 msgid "qs.event.register.confirmed"
-msgstr ""
+msgstr "Inscription confirmée"
 
 msgid "qs.roles.activity_none"
-msgstr ""
+msgstr "Non membre"
 
 msgid ""
 "qs.activity.user.collection.title @variables.user.field_firstname.value "
@@ -1517,19 +1531,24 @@ msgid ""
 msgstr ""
 
 msgid "qs.activity.user.collection.title"
-msgstr ""
+msgstr "Voici la liste des activités qui vous concernent."
 
 msgid "qs.activity.more"
 msgstr ""
 
 msgid "qs.activity.goto"
-msgstr ""
+msgstr "Voir l’activité"
 
 msgid "qs.activity.user.collection.empty"
 msgstr ""
+"Vous n’êtes actuellement membre ou co-organisateur d’aucune activité. Pour "
+"le devenir, contacter son organisateur en vous rendant sur un évènement de "
+"l’activité désirée."
 
 msgid "qs.activity.become.activity.organizer"
 msgstr ""
+"Si vous désirez devenir organisateur d’activité, contactez votre responsable "
+"de communauté."
 
 msgid ""
 "qs.subscription.user.collection.title @variables.user.field_firstname.value "
@@ -1537,25 +1556,58 @@ msgid ""
 msgstr ""
 
 msgid "qs.subscription.user.collection.title"
-msgstr ""
+msgstr "Voici la liste des évènements auxquels vous vous êtes inscrit."
 
 msgid "qs.subscription.user.collection.empty"
-msgstr ""
+msgstr "Vous n’avez prévu de participer à aucun évènement pour l’instant."
 
 msgid "qs_activity.floating.my_activities"
-msgstr ""
+msgstr "Mes activités"
 
 msgid "qs_activity.floating.my_subscriptions"
-msgstr ""
+msgstr "Gérer mes inscriptions"
 
 msgid "qs_supervisor.floating.my_account"
-msgstr ""
+msgstr "Gérer mes informations"
 
 msgid "qs.event.calendar"
-msgstr ""
+msgstr "Voir dans le calendrier"
 
 msgid "qs.community.welcome.body"
 msgstr ""
 
 msgid "qs.previous.to_calendar"
+msgstr "Retour au calendrier"
+
+msgid "qs_activity.activities.form.add.save_and_set_default_values"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.contact_name"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.contact_name.placeholder"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.contact_phone"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.contact_phone.placeholder"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.contact_mail"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.contact_mail.placeholder"
+msgstr ""
+
+msgid "qs_activity.activities.form.edit.defaults.venue.placeholder"
+msgstr ""
+
+msgid "qs_activity.events.form.add.venue.placeholder"
+msgstr ""
+
+msgid "qs_activity.events.form.edit.venue.placeholder"
+msgstr ""
+
+msgid "qs.previous.to_event"
 msgstr ""

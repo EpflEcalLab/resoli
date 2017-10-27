@@ -3,6 +3,7 @@
 namespace Drupal\qs_community\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityTypeManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\taxonomy\TermInterface;
@@ -22,10 +23,26 @@ class WelcomeController extends ControllerBase {
   protected $acl;
 
   /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
+
+  /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl) {
+  public function __construct(AccessControl $acl, AccountInterface $currentUser, EntityTypeManager $entityTypeManager) {
     $this->acl = $acl;
+    $this->currentUser = $currentUser;
+    $this->userStorage = $entityTypeManager->getStorage('user');
   }
 
   /**
@@ -35,7 +52,9 @@ class WelcomeController extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
-    $container->get('qs_acl.access_control')
+    $container->get('qs_acl.access_control'),
+    $container->get('current_user'),
+    $container->get('entity_type.manager')
     );
   }
 
@@ -65,6 +84,7 @@ class WelcomeController extends ControllerBase {
    */
   public function welcome(TermInterface $community) {
     $variables['community'] = $community;
+    $variables['user'] = $this->userStorage->load($this->currentUser->id());
 
     return [
       '#theme' => 'qs_community_welcome_page',

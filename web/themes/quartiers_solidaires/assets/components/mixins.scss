@@ -118,12 +118,12 @@
   $dark-color: color("#{$color}-darker");
   $normal-color: color($color);
 
-  &.active {
+  &:not([disabled]):not(.disabled).active {
     background-color: mix($normal-color, $white, 85%);
     color: $color-active;
   }
 
-  &:active {
+  &:not([disabled]):not(.disabled):active {
     border-color: $dark-color;
     background-color: $dark-color;
     color: $color-active;
@@ -140,7 +140,7 @@
   #{$background-class} & {
     background-color: $color;
 
-    &:active {
+    &:not([disabled]):not(.disabled):active {
       color: $color-invert;
       background-color: $color-dark;
       border-color: $color-dark;
@@ -150,7 +150,7 @@
       }
     }
 
-    &.active,
+    &:not([disabled]):not(.disabled).active,
     .show > &.dropdown-toggle {
       color: $body-color;
       background-color: $color-invert;
@@ -159,6 +159,11 @@
       .icon svg {
         color: $color;
       }
+    }
+
+    &.active-alt {
+      background-color: mix($color, $white, 75%);
+      color: $white;
     }
   }
 }

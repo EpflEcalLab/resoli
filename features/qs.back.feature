@@ -65,6 +65,14 @@ Feature: Back buttons
     When I am on "/authentication/communities"
     And I should see "qs_auth.link.home" link with href "/"
 
+# Welcome page
+  @api
+  Scenario: Logged a Member of Lausanne, I can't access the account dashboard of another user
+    Given I am logged in as user "admin"
+    Then I am on "/lausanne/welcome"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs_auth.link.home" link with href "/"
+
 # Activities routes
   @api
   Scenario: In the Activities by dates page, I don't see any back button
@@ -212,7 +220,7 @@ Feature: Back buttons
     Given I am logged in as user "admin"
     When I am on "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo/dashboard"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_activity" link with href "/lausanne/activities/atelier-creatif#card17"
+    And I should see "qs.previous.to_event" link with href "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo#card17"
 
   @api
   Scenario: In the Event Edit Form, I see a back button for Event Dashboard
@@ -242,3 +250,10 @@ Feature: Back buttons
     Then I should not see a "#block-previousnavigation a" element
     And I should see "qs.form.cancel" link with href "/lausanne/activities/atelier-creatif/events/atelier-scooby-doo/dashboard"
 
+# Supervisor account
+  @api
+  Scenario: Logged a Member of Lausanne, I can't access the account dashboard of another user
+    Given I am logged in as user "admin"
+    Then I am on "/account/1/dashboard"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs_auth.link.home" link with href "/"

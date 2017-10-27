@@ -6,10 +6,10 @@
   margin-left: -150px;
 
   svg {
-    height: 80px;
+    height: 40px;
 
     @include media-breakpoint-up(md) {
-      height: 150px;
+      height: 83px;
     }
   }
 }
@@ -27,10 +27,10 @@
 }
 
 .text-onboarding-top {
-  top: 200px;
+  top: 160px;
 
   @include media-breakpoint-up(md) {
-    top: 275px;
+    top: 205px;
   }
 }
 
@@ -40,9 +40,9 @@
 }
 
 .text-onboarding-bottom {
-  bottom: 175px;
+  bottom: 145px;
 
   @include media-breakpoint-up(md) {
-    bottom: 260px;
+    bottom: 190px;
   }
 }

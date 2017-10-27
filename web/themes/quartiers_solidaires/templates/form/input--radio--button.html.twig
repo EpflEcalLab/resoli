@@ -15,13 +15,14 @@
 
 {% if labelIcon|length > 1 and attributes.variant == 'button_theme' %}
   <label class="btn checkbox {{ attributes.checked ? 'active' }}">
-    {{ macros.icon("theme_#{labelIcon|last}_o") }}
+    {{ macros.icon("theme_#{labelIcon[1]}_o") }}
     <input{{ attributes }} />
     {{ labelIcon|first }}
   </label>
 {% else %}
   {% set classes = [
-    'btn btn-outline-invert',
+    'btn',
+    labelIcon[2] ? 'mt-5 btn-' ~ labelIcon[2] : 'btn-outline-invert',
     'shadow-to-bottom',
     'btn-outline-' ~ attributes.color|default('blue'),
     labelIcon|length > 1 ? 'btn-icon',
@@ -30,7 +31,7 @@
   ] %}
   <label class="{{ classes|join(' ') }}" tabindex="0">
     {% if labelIcon|length > 1 %}
-      {{ macros.icon("#{labelIcon|last}") }}
+      {{ macros.icon("#{labelIcon[1]}") }}
     {% endif %}
     <input{{ attributes }} />
     {{ labelIcon|first }}

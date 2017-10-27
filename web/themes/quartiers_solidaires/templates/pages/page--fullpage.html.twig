@@ -38,13 +38,18 @@
  * @see html.html.twig
  */
 #}
-<main role="main">
+<main class="fullpage-wrapper" role="main">
   {% if page.header %}
     <header class="header container py-3" role="banner">
       {{ page.header }}
     </header>
   {% endif %}
   {% block header %}{% endblock %}
+
   <a id="main-content" tabindex="-1"></a>
   {% block content %}{{ page.content }}{% endblock %}
+
+  {% if page.floating %}
+    {{ page.floating }}
+  {% endif %}
 </main>

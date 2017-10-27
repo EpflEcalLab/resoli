@@ -56,7 +56,8 @@ a.card {
   }
 
   .flag {
-    margin: ($spacer * -3) 0 ($spacer * -3) ($card-spacer-x * 2);
+    margin: ($spacer * -2.25) 0 ($spacer * -3) ($card-spacer-x * 2);
+
     @include flag-size(60px);
   }
 
@@ -72,7 +73,6 @@ a.card {
       border-color: $value;
     }
   }
-
 }
 
 .card-pill-white {
@@ -122,7 +122,6 @@ a[href].card-pill-simple {
         margin-right: $card-spacer-x;
       }
     }
-
   }
 
   // Make sure when we're centering the text, the icon is not pushing things in
@@ -269,43 +268,77 @@ a[href].card-pill-simple {
   }
 
   @each $color, $value in $theme-colors {
+    $light: color('#{$color}-light');
+
+    .bg-#{$color} & {
+      .card-pill {
+        background-color: transparent;
+        background-image: linear-gradient(to right, rgba($light, 0.8) 50%, $value 95%);
+      }
+
+      a.card-pill {
+        &:active,
+        &.active {
+          transform: scale(0.98);
+          background-image: linear-gradient(to right, $light 50%, $value 70%);
+        }
+      }
+
+      .card-pill-title {
+        color: $white;
+      }
+
+      .card-pill-icon {
+        margin-top: (-$card-border-width);
+        margin-bottom: (-$card-border-width);
+        margin-left: (-$card-border-width);
+
+        .icon {
+          background-color: transparent;
+        }
+      }
+
+      .btn {
+        margin: (-$card-border-width) (-$card-border-width) (-$card-border-width) 0;
+      }
+
+      &.card-open {
+        background-color: $light;
+        border-color: $white;
+
+        .card-pill {
+          background: $white;
+          border-color: $white;
+        }
+
+        .card-pill-title {
+          color: $body-color;
+        }
+
+        .card-pill-icon {
+          margin-top: 0;
+          margin-bottom: 0;
+          margin-left: 0;
+
+          .icon {
+            width: ($card-pill-icon-size - $card-border-width);
+            height: ($card-pill-icon-size - $card-border-width);
+            background-color: $light;
+            color: $white;
+
+            svg {
+              width: ($card-pill-icon-size * 0.6875);
+              height: ($card-pill-icon-size * 0.6875);
+            }
+          }
+        }
+      }
+    }
+
     &.card-list-item-#{$color}.card-open {
       .card-pill {
         border-color: $value;
       }
-    }
-  }
-}
-
-.card-list-item-muted:not(.card-open) {
-  @include card-pill-bg-gradient(".card-pill", $gray-600);
-
-  .card-pill-icon {
-    .icon {
-      background-color: $gray-300;
-      color: color("secondary");
-    }
-  }
-}
-
-.card-list-item-danger:not(.card-open) {
-  @include card-pill-bg-gradient(".card-pill", rgba(color('danger'), 0.5));
-
-  .card-pill-icon {
-    .icon {
-      background-color: color('danger');
-      color: color("light");
-    }
-  }
-}
-
-.card-list-item-primary:not(.card-open) {
-  @include card-pill-bg-gradient(".card-pill", rgba(color('primary'), 0.5));
-
-  .card-pill-icon {
-    .icon {
-      background-color: color('primary');
-      color: color("light");
     }
   }
 }
@@ -316,6 +349,10 @@ a[href].card-pill-simple {
   &:not(.card-open) {
     background: none;
     border: 0;
+  }
+
+  .flag {
+    @include flag-size(50px);
   }
 }
 

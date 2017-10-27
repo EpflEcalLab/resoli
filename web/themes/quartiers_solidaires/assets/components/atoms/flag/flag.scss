@@ -10,6 +10,20 @@
   @include flag-size(40px);
 }
 
+.flag-shield {
+  margin-top: -3px;
+
+  @include flag-size(43px * 1.1);
+}
+
+.flag-lg {
+  @include flag-size(60px);
+
+  &.flag-shield {
+    @include flag-size(60px * 1.1);
+  }
+}
+
 @each $color, $value in $flag-colors {
   &.flag-#{$color} {
     color: $white;
@@ -19,7 +33,7 @@
     }
 
     @if $enable-shadows {
-      filter: drop-shadow(0 0 5px $value);
+      filter: drop-shadow(0 0 3px $value);
     }
   }
 
@@ -27,7 +41,7 @@
     color: $value;
 
     @if $enable-shadows {
-      filter: drop-shadow(0 0 5px currentColor);
+      filter: drop-shadow(0 0 3px currentColor);
     }
   }
 }

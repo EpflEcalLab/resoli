@@ -1,4 +1,4 @@
-{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+ {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 <div class="modal-body">
 
@@ -31,7 +31,7 @@
         </li>
 
         <li class="mt-5">
-          <a class="btn btn-block btn-white text-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.events.form.delete', {'event': variables.event.id}) }}">
+          <a class="btn btn-block btn-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.events.form.delete', {'event': variables.event.id}) }}">
             {{ macros.icon('trash') }}
             {{ 'qs.event.delete'|t }}
           </a>

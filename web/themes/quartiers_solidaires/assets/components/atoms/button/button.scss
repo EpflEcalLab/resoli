@@ -29,14 +29,14 @@
     min-width: 160px;
   }
 
-  &:active {
+  &:not([disabled]):not(.disabled):active {
     transform: scale(0.95);
     box-shadow: none;
   }
 
   &:disabled,
   &.disabled {
-    border-color: grayscale(100);
+    border-color: gray('100');
     color: color('dark');
     opacity: 1;
 
@@ -46,6 +46,10 @@
       color: inherit;
     }
   }
+}
+
+.btn-fluid {
+  min-width: auto;
 }
 
 // Themed Buttons
@@ -79,24 +83,33 @@
       // re-add focus styles from Bootstrap button mixin
       &:focus,
       &.focus {
-        box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($value, 0.5);
+        box-shadow: 0 0 0 $input-btn-focus-width rgba($value, 0.5);
       }
     }
   }
 
   .bg-#{$color} {
     [class*=btn-outline-] {
-      @include drop-shadows(color(dark), true);
+      @include drop-shadows(color('dark'), true);
+
+      &:not([disabled]):not(.disabled):active,
+      &:not([disabled]):not(.disabled).active {
+        @include drop-shadows(color('dark'));
+      }
     }
   }
 
   [class*=bg-] {
     .btn-outline-#{$color} {
-      &:active {
+      &:not([disabled]):not(.disabled):active {
         .icon svg {
           color: $value;
         }
       }
+    }
+
+    [class*=btn-] {
+      border-color: $white;
     }
   }
 }
@@ -132,6 +145,13 @@
     &.btn-outline-#{$color} {
       .icon svg {
         color: $value;
+      }
+
+      &:not([disabled]):not(.disabled):active,
+      &:not([disabled]):not(.disabled).active {
+        .icon svg {
+          color: $white;
+        }
       }
     }
   }
@@ -194,10 +214,10 @@
   &:focus,
   &.focus {
     color: $white;
-    box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5) !important; // This has to be important for buttons in bg-*
+    box-shadow: 0 0 0 $input-btn-focus-width rgba($white, 0.5) !important; // This has to be important for buttons in bg-*
   }
 
-  &:active {
+  &:not([disabled]):not(.disabled):active {
     color: $body-color;
     background: $white;
 
@@ -206,7 +226,7 @@
     }
   }
 
-  &.active,
+  &:not([disabled]):not(.disabled).active,
   .show > &.dropdown-toggle {
     color: $body-color;
     background-color: $white;
@@ -217,8 +237,10 @@
   }
 
   // Set color of text based on background when button is active
-  @include button-outline-invert('.bg-info', $blue, $white, color('info-darker'));
-  @include button-outline-invert('.bg-danger', color('danger'), $white, color('danger-darker'));
+  @include button-outline-invert('.bg-primary', color('primary-light'), $white, color('primary-darker'));
+  @include button-outline-invert('.bg-info', lighten(color('info'), 3%), $white, color('info-darker'));
+  @include button-outline-invert('.bg-danger', color('danger-light'), $white, color('danger-darker'));
+  @include button-outline-invert('.bg-secondary', color('secondary-light'), $white, color('secondary-darker'));
 }
 
 // We still need a Button White when the background is lightly colored
@@ -232,8 +254,20 @@
 ///////////////
 .btn-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 1fr;
   margin: 0 auto;
   max-width: 960px;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .btn {
+    min-width: auto;
+  }
 }

@@ -4,13 +4,15 @@
   &.btn {
     display: inline-flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     font-weight: $font-weight-normal;
+    overflow: visible;
+    white-space: normal;
 
     @include icon-size(50px);
 
     svg {
-      fill: transparent;
+      fill: rgba($white, 0.14);
     }
   }
 
@@ -85,7 +87,7 @@
     background-color: mix(theme-color('primary'), $white, 5%);
 
     &:focus {
-      box-shadow: 0 0 0 $btn-focus-box-shadow-width rgba(theme-color('primary'), 0.5);
+      box-shadow: 0 0 0 $input-btn-focus-width rgba(theme-color('primary'), 0.5);
     }
 
     &:after {
@@ -122,8 +124,7 @@
     }
 
     &:active {
-      box-shadow:
-        0 0 0 $btn-focus-box-shadow-width rgba(theme-color('primary'), 0.5);
+      box-shadow: 0 0 0 $input-btn-focus-width rgba(theme-color('primary'), 0.5);
 
       &:after {
         left: 25%;
@@ -173,8 +174,7 @@
       }
 
       &:active {
-        box-shadow:
-          0 0 0 $btn-focus-box-shadow-width rgba($white, 0.5);
+        box-shadow: 0 0 0 $input-btn-focus-width rgba($white, 0.5);
       }
     }
 

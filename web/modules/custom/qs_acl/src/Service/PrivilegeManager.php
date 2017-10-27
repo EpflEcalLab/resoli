@@ -272,6 +272,17 @@ class PrivilegeManager {
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
 
     $query->orderBy('users.name', 'ASC');
+
+    // Order privilege from low to high permissions.
+    // MySQL only.
+    if ($entity->bundle() === 'communities') {
+      $query->addExpression("find_in_set(privilege, 'community_members,community_organizers,community_managers')", 'order_privileges');
+    }
+    elseif ($entity->bundle() === 'activity') {
+      $query->addExpression("find_in_set(privilege, 'activity_members,activity_maintainers,activity_organizers')", 'order_privileges');
+    }
+    $query->orderBy('order_privileges');
+
     $query->groupBy('privileges.privilege');
     $query->groupBy('privileges.user');
     $query->groupBy('users.name');

@@ -8,17 +8,19 @@
 {% endspaceless %}
 {% endmacro %}
 
-{% macro badge(flag, icon, classes, title) %}
+{% macro badge(flag, icon, classes, title, shield) %}
+{% spaceless %}
+{% set shield = shield ?? false %}
 {# The `classes` is used by Behat tests to identify flags #}
 {% set classes = [
   'flag',
   'flag-' ~ flag,
+  shield ? 'flag-shield',
   classes,
 ] %}
-{% spaceless %}
 <div class="{{ classes|join(' ') }}" title="{{ title }}">
   <svg class="icon " preserveAspectRatio="xMidYMid" aria-hidden="true">
-    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-flag"></use>
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ shield ? 'shield' : 'flag' }}"></use>
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ icon|default('confirmed') }}"></use>
   </svg>
 </div>

@@ -8,15 +8,15 @@ const formSelectize = () => {
     $('select.selectize-members').selectize({
       persist: false,
       maxItems: 1,
+      items: null,
       valueField: 'uid',
       labelField: 'displayname',
       searchField: ['email', 'displayname'],
-      addPrecedence: true,
-      allowEmptyOption: true,
       sortField: [
         { field: 'displayname', direction: 'asc' }
       ],
       options: options,
+      plugins: ['remove_button'],
       render: {
         item: function(item, escape) {
           return '<div>' +

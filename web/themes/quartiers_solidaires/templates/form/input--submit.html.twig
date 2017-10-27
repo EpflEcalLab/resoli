@@ -14,8 +14,8 @@
 {% set icon = attributes.icon.__toString %}
 {%
   set classes = [
-    'btn',
-    not attributes.white and attributes.outline ? 'btn-outline-primary btn-outline-invert',
+    'btn shadow-to-bottom',
+    not attributes.white and attributes.outline ? 'btn-outline-invert',
     not attributes.white and not attributes.outline ? 'btn-primary' : attributes.white ? 'btn-white',
     icon ? 'btn-icon',
     not attributes.icon_left ? 'btn-icon-right',

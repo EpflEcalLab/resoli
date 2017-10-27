@@ -79,6 +79,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $theme = 'secondary';
     $options = [];
     $url = FALSE;
+    $invert = FALSE;
 
     $community = $this->route->getParameter('community');
     $activity = $this->route->getParameter('activity');
@@ -130,11 +131,18 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_community_dashboard');
-          $theme = 'primary';
+          $theme = 'danger';
           break;
 
         // Go to Activities Listing.
         case "qs_community.dashboard":
+          $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_activities_list');
+          $theme = 'danger';
+          break;
+
         case "qs_activity.user.collection":
           $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
             'community' => $community->id(),
@@ -145,7 +153,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
         // Go to Activity.
         case "qs_activity.activities.dashboard":
-        case "qs_activity.events.dashboard":
           $options = [];
           if ($event) {
             $options = ['fragment' => "card{$event->id()}"];
@@ -192,7 +199,19 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'event' => $event->id(),
           ], $options);
           $label = $this->t('qs.previous.to_event_dashboard');
-          $theme = 'primary';
+          $theme = 'secondary';
+          break;
+
+        case "qs_activity.events.dashboard":
+          $options = [];
+          if ($event) {
+            $options = ['fragment' => "card{$event->id()}"];
+          }
+          $url = $this->urlGenerator->generateFromRoute('entity.node.canonical', [
+            'node' => $event->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_event');
+          $theme = 'secondary';
           break;
 
         // Go to Calendar.
@@ -203,12 +222,23 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $label = $this->t('qs.previous.to_calendar');
           $theme = 'primary';
           break;
+
+        // Go to Homepage.
+        // TODO add test for this link.
+        case "qs_community.welcome":
+        case "qs_supervisor.account.dashboard":
+          $url = $this->urlGenerator->generateFromRoute('<front>');
+          $label = $this->t('qs_auth.link.home');
+          $theme = 'primary';
+          $invert = TRUE;
+          break;
       }
     }
 
     $variables['url'] = $url;
     $variables['label'] = $label;
     $variables['theme'] = $theme;
+    $variables['invert'] = $invert;
 
     return [
       '#theme'     => 'qs_menu_previous_block',

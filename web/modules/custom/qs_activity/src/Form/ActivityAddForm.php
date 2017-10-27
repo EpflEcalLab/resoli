@@ -114,9 +114,6 @@ class ActivityAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
-      'class' => [
-        'modal-body',
-      ],
     ];
 
     // Apply custom styles to wrapper.
@@ -176,6 +173,9 @@ class ActivityAddForm extends FormBasic {
         'variant' => 'button_theme',
         'data-toggle' => 'buttons',
         'no_form_group' => TRUE,
+        'class' => [
+          'btn-grid',
+        ],
       ],
       '#theme_wrappers' => [
         'radios__buttons',
@@ -316,6 +316,10 @@ class ActivityAddForm extends FormBasic {
         'variant' => 'button',
         'data-submit' => TRUE,
         'data-toggle' => 'buttons',
+        'class' => [
+          'col-md-8',
+          'mx-auto',
+        ],
       ],
       '#type'       => 'radios',
       '#required'   => FALSE,
@@ -324,8 +328,10 @@ class ActivityAddForm extends FormBasic {
       ],
       '#options'    => [
         // @codingStandardsIgnoreStart
-        0 => $this->t('qs_activity.activities.form.add.save') . '|check',
-        1 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus',
+        // This adds an icon to the button.
+        0 => $this->t('qs_activity.activities.form.add.save') . '|activities',
+        1 => $this->t('qs_activity.activities.form.add.save_and_set_default_values') . '|pencil',
+        2 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus|secondary',
         // @codingStandardsIgnoreEnd
       ],
     ];
@@ -394,9 +400,17 @@ class ActivityAddForm extends FormBasic {
     // Handle redirection.
     $redirect_to_event = $form_state->getValue('redirection');
 
-    if ($redirect_to_event) {
+    // Checkbox redirection on Form Edit Default values.
+    if ($redirect_to_event == 1) {
+      $form_state->setRedirect('qs_activity.activities.form.edit.defaults', ['activity' => $activity->id()], []);
+    }
+
+    // Checkbox redirection on Form add event for this newly created activity.
+    elseif ($redirect_to_event == 2) {
       $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
     }
+
+    // Checkbox redirection on the newly created activity.
     else {
       $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
     }

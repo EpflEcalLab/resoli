@@ -9,9 +9,18 @@
   {{ 'qs.onboarding.menu'|t }}
 </div>
 
-<div class="fullpage-wrapper fullpage-wrapper-menu text-center d-flex flex-column justify-content-center">
-  <div class="col-md-10 col-lg-8 mx-auto">
-    {{ 'qs.community.welcome.body'|t }}
+<div class="text-center my-auto">
+  <div class="col-md-10 col-lg-8 mx-auto mb-5">
+    {{ macros.icon('communities-big', {'classes': 'icon-xl mb-5'}) }}
+    <h1 class="h5">
+      {{ 'qs.community.welcome.title @firstname @lastname'|t({
+        '@firstname': variables.user.field_firstname|first.value,
+        '@lastname': variables.user.field_lastname|first.value,
+      }) }}
+    </h1>
+    {{ 'qs.community.welcome.body @community'|t({
+      '@community': variables.community.name.value
+    }) }}
   </div>
 </div>
 

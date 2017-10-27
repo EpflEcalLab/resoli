@@ -556,6 +556,12 @@ msgstr ""
 "comme quelques jours. N’hésitez pas à la contacter pour toute information "
 "complémentaire."
 
+msgid "qs.and"
+msgstr "et"
+
+msgid "qs.etc"
+msgstr "etc..."
+
 msgid "qs.auth.approval.short"
 msgstr "Adhésion en cours de validation"
 

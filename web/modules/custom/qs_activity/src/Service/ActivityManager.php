@@ -9,6 +9,7 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * ActivityManager.
@@ -191,6 +192,54 @@ class ActivityManager {
     $query->groupBy('activity.nid');
     $query->groupBy('activity.title');
     $query->orderBy('activity.title', 'ASC');
+
+    $rows = $query->execute()->fetchAll();
+
+    $nids = [];
+    foreach ($rows as $row) {
+      $nids[] = $row->nid;
+    }
+
+    $activities = [];
+    if ($nids) {
+      $activities = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $activities;
+  }
+
+  /**
+   * Get all activities in the given date range for the community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
+   *   The start date.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
+   *   The end date.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Activity. Otherwise an empty array.
+   */
+  public function getByDate(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end) {
+    // Get all activities in the community in the date range.
+    $query = $this->connection->select('node_field_data', 'activity');
+    $query->fields('activity', ['nid'])
+      ->condition('activity.type', 'activity')
+      ->condition('activity.status', TRUE);
+
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
+    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
+
+    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+
+    $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_activity.entity_id');
+    $query->condition('field_end_at.field_end_at_value', [
+      $date_start->format('c'),
+      $date_end->format('c'),
+    ], 'BETWEEN');
+
+    $query->groupBy('activity.nid');
 
     $rows = $query->execute()->fetchAll();
 

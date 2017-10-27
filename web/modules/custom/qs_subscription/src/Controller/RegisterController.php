@@ -67,8 +67,7 @@ class RegisterController extends ControllerBase {
     // Get the related activity.
     $activity = $event->field_activity->entity;
 
-    // @todo check access subscription
-    if ($activity && $this->acl->hasWriteAccessEvent($activity)) {
+    if ($activity && $this->acl->hasSubscribeAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
     return $access;

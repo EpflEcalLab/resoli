@@ -161,11 +161,32 @@ class EventEditForm extends EventEditFormBase {
       '#default_value' => $event->field_venue_long->value,
     ];
 
+    $form['contact_name'] = [
+      '#title'         => $this->t('qs_activity.events.form.edit.contact_name'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_name.placeholder'),
+      '#type'          => 'textfield',
+      '#default_value' => $event->field_contact_name->value,
+    ];
+
+    $form['contact_phone'] = [
+      '#title'         => $this->t('qs_activity.events.form.edit.contact_phone'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_phone.placeholder'),
+      '#type'          => 'tel',
+      '#default_value' => $event->field_contact_phone->value,
+    ];
+
+    $form['contact_mail'] = [
+      '#title'         => $this->t('qs_activity.events.form.edit.contact_mail'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
+      '#type'          => 'email',
+      '#default_value' => $event->field_contact_mail->value,
+    ];
+
     $form['has_contribution'] = [
       '#type'        => 'radios',
       '#options'     => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
       '#required'      => FALSE,
-      '#default_value' => 0,
+      '#default_value' => $event->get('field_contribution')->isEmpty() ? 0 : 1,
       '#attributes' => [
         'title'   => $this->t('qs_activity.events.form.add.has_contribution'),
         'no_form_group' => TRUE,
@@ -220,6 +241,11 @@ class EventEditForm extends EventEditFormBase {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
       $form_state->setErrorByName('[title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['title']['#title']]));
+    }
+
+    // Assert the mail is valid.
+    if (!$form_state->getValue('contact_mail') || !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+      $form_state->setErrorByName('[contact_mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
     // Date validation
@@ -296,6 +322,7 @@ class EventEditForm extends EventEditFormBase {
     // Prepare fields.
     $fields['title']               = $form_state->getValue('title');
     $fields['body']                = $form_state->getValue('body');
+    $fields['field_contact_name']  = $form_state->getValue('contact_name');
     $fields['field_contact_mail']  = $form_state->getValue('contact_mail');
     $fields['field_contact_phone'] = $form_state->getValue('contact_phone');
     $fields['field_contribution']  = $contribution;

@@ -140,7 +140,7 @@ class CollectionController extends ControllerBase {
           'url.query_args',
         ],
         'tags' => [
-          // TODO this crashes if you don't have any photos to display
+          // TODO this crashes if you don't have any photos to display.
           'tags' => $this->getCacheTags($variables['photos']),
         ],
       ],

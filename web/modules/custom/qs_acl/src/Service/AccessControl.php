@@ -234,7 +234,7 @@ class AccessControl {
    * Check if the account has write access for event on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
-   *   The event to check access.
+   *   The activity to check access.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   User used to check access. Otherwise use current user.
    *
@@ -259,6 +259,51 @@ class AccessControl {
       ->condition('user', $user->id());
 
     $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account has subscribe access for event on the given activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has subscribe access.
+   */
+  public function hasSubscribeAccessEvent(NodeInterface $activity, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user, $activity)) {
+      return TRUE;
+    }
+
+    // If this activity is open to the community & user has community access.
+    if ($activity->field_community_can_subscribe->value) {
+      return $this->hasAccessCommunity($activity->field_community->entity, $user);
+    }
+
+    // If the activity is only open to members, check the user has at least one.
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_members');
     $or->condition('privilege', 'activity_organizers');
     $or->condition('privilege', 'activity_maintainers');
     $query->condition($or);

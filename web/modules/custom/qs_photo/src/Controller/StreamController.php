@@ -69,7 +69,11 @@ class StreamController extends ControllerBase {
    */
   public function access(AccountInterface $account, NodeInterface $photo) {
     $access = AccessResult::forbidden();
-    if ($photo->bundle() == 'photo' && $this->acl->hasAccessPhoto($photo)) {
+
+    $event = $photo->field_event->entity;
+    $activity = $event->field_activity->entity;
+
+    if ($photo->bundle() == 'photo' && $this->acl->hasAccessPhoto($activity)) {
       $access = AccessResult::allowed();
     }
     return $access;

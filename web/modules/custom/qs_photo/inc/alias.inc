@@ -19,6 +19,11 @@ function qs_photo_pathauto_alias_alter(&$alias, array &$context) {
     $context['module'] == 'taxonomy' && isset($context['data']['term'])) {
     qs_photo_alias($context['data']['term'], $alias, $context['op']);
   }
+
+  if (isset($context['module']) &&
+    $context['module'] == 'node' && isset($context['data']['node'])) {
+    qs_activity_alias($context['data']['node'], $alias, $context['op']);
+  }
 }
 
 /**
@@ -45,6 +50,15 @@ function qs_photo_alias(EntityInterface $entity, $alias, $operation = 'insert') 
         'photo_by_month' => [
           'route' => '/photos/' . $entity->id() . '/month',
           'alias' => '/' . trim($alias, '/') . '/photos/month',
+        ],
+      ];
+      break;
+
+    case 'activity':
+      $aliases = [
+        'activity' => [
+          'route' => '/photos/activity/' . $entity->id(),
+          'alias' => '/' . trim($alias, '/') . '/photos',
         ],
       ];
       break;

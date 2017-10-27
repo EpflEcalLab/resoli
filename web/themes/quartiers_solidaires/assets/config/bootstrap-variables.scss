@@ -343,8 +343,8 @@ $input-btn-padding-x-lg:      4rem !default;
 $input-btn-line-height-lg:    $line-height-base !default;
 
 $btn-font-weight:             $font-weight-bold !default;
-$btn-box-shadow:              none !default;
-$btn-active-box-shadow:       none !default;
+$btn-box-shadow:              0 0 0 0 transparent !default;
+$btn-active-box-shadow:       0 0 0 0 transparent !default;
 
 $btn-link-disabled-color:     $gray-600 !default;
 

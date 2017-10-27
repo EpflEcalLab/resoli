@@ -29,7 +29,7 @@
     min-width: 160px;
   }
 
-  &:active {
+  &:not([disabled]):not(.disabled):active {
     transform: scale(0.95);
     box-shadow: none;
   }
@@ -96,7 +96,7 @@
 
   [class*=bg-] {
     .btn-outline-#{$color} {
-      &:active {
+      &:not([disabled]):not(.disabled):active {
         .icon svg {
           color: $value;
         }
@@ -205,7 +205,7 @@
     box-shadow: 0 0 0 $input-btn-focus-width rgba($white, 0.5) !important; // This has to be important for buttons in bg-*
   }
 
-  &:active {
+  &:not([disabled]):not(.disabled):active {
     color: $body-color;
     background: $white;
 
@@ -214,7 +214,7 @@
     }
   }
 
-  &.active,
+  &:not([disabled]):not(.disabled).active,
   .show > &.dropdown-toggle {
     color: $body-color;
     background-color: $white;

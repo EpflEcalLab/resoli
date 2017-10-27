@@ -38,6 +38,10 @@
       }
     }
   }
+
+  [class*=bg-] & {
+    background-image: none;
+  }
 }
 
 .floating-offset {

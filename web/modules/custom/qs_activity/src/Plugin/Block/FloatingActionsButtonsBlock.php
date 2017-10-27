@@ -109,7 +109,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     ])) {
       // For everybody, show a button "My Activities".
       $icon = 'activities';
-      $theme = 'danger';
+      $theme = 'primary';
       $url = $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
         'community' => $community->id(),
         'user' => $this->currentUser->id(),

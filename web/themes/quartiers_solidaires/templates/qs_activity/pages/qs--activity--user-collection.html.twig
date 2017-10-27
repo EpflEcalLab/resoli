@@ -24,7 +24,7 @@
           aria-controls="collapse-{{ activity.nid.value }}"
           id="activity{{ activity.nid.value }}"
         >
-          <span class="card-pill-icon card-pill-icon-lg">
+          <span class="card-pill-icon">
             {{ macros.icon('theme_' ~ activity.field_theme.entity.field_icon.value) }}
           </span>
           <span class="card-pill-title">{{ activity.title.value }}</span>
@@ -45,39 +45,72 @@
             {% endif %}
           {% endif %}
 
-          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.activity.more'|t }}">
+          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.activity.more'|t }}">
             {{ macros.icon('look') }}
-            <span class="d-none d-md-inline">{{ 'qs.activity.more'|t }}</span>
+            <span class="sr-only d-none d-md-inline">{{ 'qs.activity.more'|t }}</span>
           </span>
         </a>
 
+        {% set roles = [
+          privilege == 'activity_members' ? 'qs.roles.activity_member'|t,
+          privilege == 'activity_maintainers' ? 'qs.roles.activity_maintainer'|t,
+          privilege == 'activity_organizers' ? 'qs.roles.activity_organizer'|t,
+        ] %}
+
         <div class="collapse" id="collapse-{{ activity.nid.value }}" role="tabpanel">
-          <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-            <a href="{{ path('entity.node.canonical', {node: activity.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
-              {{ macros.icon('activity') }}
-              {{ 'qs.activity.goto'|t }}
-            </a>
+          <div class="card-body">
+            <div class="card-text text-center">
+              <p>{{ 'qs.activity.user.you_are @role'|t({
+                  '@role': roles|last|lower
+                }) }}</p>
+            </div>
+            <div class="card-actions d-flex justify-content-center">
+              <a href="{{ path('entity.node.canonical', {node: activity.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
+                {{ macros.icon('activity') }}
+                {{ 'qs.activity.goto'|t }}
+              </a>
+            </div>
           </div>
         </div>
       </li>
     {% endfor %}
     </ul>
   {% else %}
-    {{ macros.badge('info', 'happy', 'flag-privilege-members') }}
-    {{ macros.badge('warning', 'happy', 'flag-subscription-maintainers') }}
-    <p>{{ 'qs.activity.user.collection.empty'|t }}</p>
+    <div class="text-center">
+      <div class="d-flex justify-content-center mb-4">
+        {{ macros.badge('info', 'happy', 'flag-privilege-members flag-lg', 'qs.roles.activity_member'|t) }}
+        {{ macros.badge('warning', 'happy', 'flag-subscription-maintainers flag-lg', 'qs.roles.activity_maintainer'|t, true) }}
+      </div>
+      <p>
+        {% set member = 'qs.roles.activity_member'|t %}
+        {% set maintainer = 'qs.roles.activity_maintainer'|t %}
+        {% trans %}
+          qs.activity.user.collection.empty <span class="text-info">{{ member }}</span> <span class="text-warning">{{ maintainer }}</span>
+        {% endtrans %}
+      </p>
+    </div>
   {% endif %}
 
   {# Button to add activities #}
-  {% if variables.community_has_write_access and variables.community %}
+  {% if not variables.community_has_write_access and variables.community %}
     <div class="col text-center">
-      <a class="btn btn-outline-primary btn-white btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
+      <a class="btn btn-outline-invert btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
         {{ macros.icon('plus') }}
         {% trans %}qs_activity.floating.add.activity{% endtrans %}
       </a>
     </div>
   {% else %}
-    {{ macros.badge('danger', 'happy', 'flag-privilege-organizers') }}
-    <p>{{ 'qs.activity.become.activity.organizer'|t }}</p>
+    <div class="text-center mt-5">
+      <div class="d-flex justify-content-center mb-4">
+        {{ macros.badge('danger', 'happy', 'flag-privilege-organizers flag-lg', 'qs.roles.activity_organizer'|t, true) }}
+      </div>
+      <p>
+        {% set organizer = 'qs.roles.activity_organizer'|t %}
+        {% trans %}
+        qs.activity.become.activity.organizer <span class="text-danger">{{ organizer }}</span>
+        {% endtrans %}
+      </p>
+    </div>
+
   {% endif %}
 </div>

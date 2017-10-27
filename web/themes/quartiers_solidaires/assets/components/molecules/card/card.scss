@@ -321,8 +321,15 @@ a[href].card-pill-simple {
           margin-left: 0;
 
           .icon {
+            width: ($card-pill-icon-size - $card-border-width);
+            height: ($card-pill-icon-size - $card-border-width);
             background-color: $light;
             color: $white;
+
+            svg {
+              width: ($card-pill-icon-size * 0.6875);
+              height: ($card-pill-icon-size * 0.6875);
+            }
           }
         }
       }

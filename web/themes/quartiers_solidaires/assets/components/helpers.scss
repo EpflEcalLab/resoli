@@ -81,3 +81,4 @@
 // Text helpers
 @include text-emphasis-variant('.text-dark', color("dark"));
 @include text-emphasis-variant('.text-gray', $gray-700);
+@include text-emphasis-variant('.text-warning', color("warning"));

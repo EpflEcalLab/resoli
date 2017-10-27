@@ -15,6 +15,7 @@ const multiStep = () => {
         const modalHeader = currentForm.closest('.modal-content').find('.modal-header');
         const $fieldsets = currentForm.find('[data-step]');
         let nextTab = null;
+        let prevTab = null;
         let currentTab = null;
 
         console.log(modalHeader);
@@ -33,6 +34,24 @@ const multiStep = () => {
           .addClass('modal-footer justify-content-center sticky-bottom')
           .appendTo(currentForm.find(`.tab-content`));
 
+        // Create the "Prev step" button below the form
+        $('<button/>')
+          .attr('id', `prev-btn-${id}`)
+          .addClass('btn btn-outline-invert btn-icon btn-icon-left align-self-center shadow-to-bottom')
+          .text(Drupal.t('qs.prev'))
+          .on('click', function(e) {
+            e.preventDefault();
+
+            // @TODO make it work: disable the nav if current tab pane has required and empty fields
+            // if (checkRequired(currentTab)) {
+            prevTab.tab('show');
+            // };
+          })
+          .appendTo(currentForm.find(`.modal-footer`))
+          .append(
+            '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow-left"></use></svg></span>'
+          );
+
         // Create the "Next step" button below the form
         $('<button/>')
           .attr('id', `next-btn-${id}`)
@@ -40,7 +59,6 @@ const multiStep = () => {
           .text(Drupal.t('qs.next'))
           .on('click', function(e) {
             e.preventDefault();
-
             // @TODO make it work: disable the nav if current tab pane has required and empty fields
             // if (checkRequired(currentTab)) {
               nextTab.tab('show');
@@ -89,6 +107,8 @@ const multiStep = () => {
           const target = $(e.relatedTarget).attr('href');
           currentTab = e.relatedTarget ? $(target) : currentForm.find('fieldset:first-of-type');
           nextTab = $(e.target).parent().next().find('a.step-nav-link');
+          console.log(nextTab);
+          prevTab = $(e.target).parent().prev().find('a.step-nav-link');
 
           // Toggle buttons depending on current step
           if (nextTab.length <= 0) {
@@ -97,6 +117,13 @@ const multiStep = () => {
           } else {
             $(`#${id} .js-form-submit`).hide();
             $(`#next-btn-${id}`).show();
+          }
+
+          // Toggle buttons depending on current step
+          if (prevTab.length <= 0) {
+            $(`#prev-btn-${id}`).hide();
+          } else {
+            $(`#prev-btn-${id}`).show();
           }
         });
 

@@ -152,6 +152,35 @@ class EventManager {
   }
 
   /**
+   * Get all the previous event for the given activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity which we want the retrieve past events.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
+   */
+  public function getAllPrev(NodeInterface $activity) {
+    $now = new DrupalDateTime();
+
+    // Get every activity that belongs to the current community.
+    $query = $this->queryFactory->get('node')
+      ->condition('type', 'event')
+      ->condition('field_end_at', $now, '<')
+      ->condition('status', TRUE)
+      ->condition('field_activity', $activity->id())
+      ->sort('field_start_at', 'ASC');
+
+    $nids = $query->execute();
+    $events = NULL;
+    if ($nids) {
+      $events = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $events;
+  }
+
+  /**
    * Get all events.
    *
    * @param \Drupal\node\NodeInterface $activity

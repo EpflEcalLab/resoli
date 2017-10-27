@@ -57,4 +57,5 @@ class RedirectSubscriber implements EventSubscriberInterface {
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
   }
+
 }

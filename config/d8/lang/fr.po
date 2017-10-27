@@ -913,6 +913,9 @@ msgstr ""
 msgid "qs.next"
 msgstr "Etape suivante"
 
+msgid "qs.prev"
+msgstr "Etape précédente"
+
 msgid "qs.activity.edit_info"
 msgstr "Modifier le titre et le thème"
 

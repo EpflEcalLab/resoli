@@ -55,6 +55,13 @@ class CollectionController extends ControllerBase {
   protected $nodeStorage;
 
   /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  protected $termStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(AccessControl $acl, PhotoManager $photo_manager, CalendarBuilder $calendar_builder, ActivityManager $activity_manager) {
@@ -63,6 +70,7 @@ class CollectionController extends ControllerBase {
     $this->calendarBuilder = $calendar_builder;
     $this->activityManager = $activity_manager;
     $this->nodeStorage     = $this->entityTypeManager()->getStorage('node');
+    $this->termStorage     = $this->entityTypeManager()->getStorage('taxonomy_term');
   }
 
   /**
@@ -139,10 +147,7 @@ class CollectionController extends ControllerBase {
           'user',
           'url.query_args',
         ],
-        'tags' => [
-          // TODO this crashes if you don't have any photos to display.
-          'tags' => $this->getCacheTags($variables['photos']),
-        ],
+        'tags' => $this->getCacheTags($variables['photos']),
       ],
     ];
   }
@@ -165,6 +170,7 @@ class CollectionController extends ControllerBase {
     }
 
     // Load 4 photos by activity.
+    $activites = [];
     if (!empty($activities_nids)) {
       $activites = $this->nodeStorage->loadMultiple($activities_nids);
       $variables['activities'] = $activites;
@@ -182,7 +188,7 @@ class CollectionController extends ControllerBase {
           'user',
           'url.query_args',
         ],
-        'tags' => $this->getCacheTags($variables['events']),
+        'tags' => $this->getCacheTags($activites),
       ],
     ];
   }

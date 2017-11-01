@@ -5,9 +5,72 @@
 
 {% if variables.photos %}
   <div class="container my-5">
-    {% for key, photo in variables.photos %}
-      <img src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'thumbnail'}) }}" width="100" height="100" class="image-style-drupal-content-photos">
-    {% endfor %}
+    <div class="row">
+      {% set current_header = null %}
+
+      {% for key, photo in variables.photos %}
+
+        {% set date = photo.field_event.entity.field_start_at.value|date('Y-m-d') %}
+        {% set week = photo.field_event.entity.field_start_at.value|date('W') %}
+        {% set current_week = 'now'|date('W') %}
+
+        {% set new_header = 'qs.photos.date.sticky.from_to @start_date @end_date'|t({
+          '@start_date': variables.start|date('j F Y'),
+          '@end_date': variables.end|date('j F Y'),
+        }) %}
+
+
+        {% if 'now'|date('Y-m-d') == date %}
+          {# TODAY #}
+          {% set new_header = 'qs.photos.date.sticky.today'|t %}
+
+        {% elseif 'yesterday'|date('Y-m-d') == date %}
+          {# YESTERDAY #}
+          {% set new_header = 'qs.photos.date.sticky.tomorrow'|t %}
+
+        {% elseif date < 'yesterday'|date('Y-m-d') and current_week == week %}
+          {# THIS WEEK (between day before yesterday and previous Sunday but not last week) #}
+          {% set new_header = 'qs.photos.date.sticky.this_week'|t %}
+
+        {% elseif current_week != week %}
+          {# PREVIOUS WEEKS #}
+          {% set week_diff = current_week - week %}
+          {% if week_diff == 1 %}
+            {% set new_header = 'qs.photos.date.sticky.last_week'|t %}
+          {% elseif week_diff == 2 %}
+            {% set new_header = 'qs.photos.date.sticky.two_weeks_ago'|t %}
+          {% elseif week_diff == 3 %}
+            {% set new_header = 'qs.photos.date.sticky.from_to @start_date @end_date'|t({
+              '@start_date': variables.start|date_modify("last Monday -2 weeks")|date('j F Y'),
+              '@end_date': variables.end|date('j F Y'),
+            }) %}
+          {% endif %}
+        {% endif %}
+
+        {# Write the header if we have a new value #}
+        {% if current_header|render != new_header|render %}
+          {% set current_header = new_header %}
+          {% if loop.index > 1 %}
+            </div>
+            <div class="card-list">
+          {% endif %}
+
+          <div class="col-12 sticky-top bg-white mb-3">
+            <h2 class="col-12 h5 mb-0">{{ current_header }}</h2>
+          </div>
+        {% endif %}
+
+        <div class="col-6 col-sm-4 col-md-3 d-flex">
+          <a href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}" class="card">
+            <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}">
+            <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">
+              {{ macros.icon('look') }}
+            </span>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
   </div>
 {% else %}
   <div class="container">

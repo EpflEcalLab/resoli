@@ -37,6 +37,10 @@ a.card {
   }
 }
 
+.card-img {
+  @include border-radius($card-border-radius - $card-border-width * 2);
+}
+
 // The card pill displays an icon at the left
 .card-pill {
   position: relative;
@@ -203,6 +207,12 @@ a[href].card-pill-simple {
 
 .card-actions {
   margin-top: $card-spacer-y;
+}
+
+.card-btn-corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 // Card List Item

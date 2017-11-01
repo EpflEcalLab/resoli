@@ -123,6 +123,9 @@ class CollectionController extends ControllerBase {
     $date_end           = $this->calendarBuilder->getLastSundayMonthFullWeek($month);
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
+    $variables['start'] = $date_start;
+    $variables['end'] = $date_end;
+
     $date_end->setTime(23, 59, 59);
 
     // Get all activities in the date range.

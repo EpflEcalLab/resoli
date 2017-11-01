@@ -1,0 +1,36 @@
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
+<a
+  href="{{ path('qs_photo.activity', {'activity': activity.nid.value}) }}"
+  class="card"
+>
+  <div class="card-body">
+    <h3 class="mb-3 font-weight-normal text-center">{{ activity.title.value }}</h3>
+
+    <div class="img-grid">
+        {% for photo in photos %}
+          <img
+            src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}"
+            class="img-fluid rounded"
+            alt="{{ photo.title.value }}"
+            title="{{ photo.title.value }}"
+          >
+        {% endfor %}
+
+        {# Print the placeholders #}
+        {% if photos|length < 4 %}
+          {% for i in 0..(3 - photos|length) %}
+            <div class="img-placeholder rounded"></div>
+          {% endfor %}
+        {% endif %}
+    </div>
+
+  </div>
+  <div class="card-pill card-pill-white">
+    <span class="card-pill-icon">
+      {{ macros.icon('look') }}
+    </span>
+    <span class="card-pill-title mx-auto">
+      <span class="text-dark">{{ 'qs.photos.view_all'|t }}</span>
+    </span>
+  </div>
+</a>

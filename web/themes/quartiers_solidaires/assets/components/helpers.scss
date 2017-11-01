@@ -78,6 +78,11 @@
   }
 }
 
+// override Bootstrap rounded class
+.rounded {
+  border-radius: $spacer !important;
+}
+
 // Text helpers
 @include text-emphasis-variant('.text-dark', color("dark"));
 @include text-emphasis-variant('.text-gray', $gray-700);

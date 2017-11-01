@@ -6,9 +6,7 @@ const nav = () => {
     };
 
     // Handle click on menu toggle button
-    $(
-      '.navbar-container'
-    ).on('click', '.navbar-toggle, .navbar-overlay', function() {
+    $(document).on('click', '.navbar-toggle, .navbar-overlay', function() {
       toggleMenu();
     });
 

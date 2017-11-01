@@ -127,8 +127,14 @@ class CollectionController extends ControllerBase {
       }
     }
 
-    $date_start         = $this->calendarBuilder->getFirstMondayMonthFullWeek($month);
-    $date_end           = $this->calendarBuilder->getLastSundayMonthFullWeek($month);
+    $start = clone $month;
+    $start->modify('first day of this month');
+    $date_start = $start;
+
+    $end = clone $month;
+    $end->modify('last day of this month');
+    $date_end = $end;
+
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
     $variables['start'] = $date_start;

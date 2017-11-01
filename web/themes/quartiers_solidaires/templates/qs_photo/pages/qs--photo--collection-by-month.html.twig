@@ -15,10 +15,9 @@
         {% set current_week = 'now'|date('W') %}
 
         {% set new_header = 'qs.photos.date.sticky.from_to @start_date @end_date'|t({
-          '@start_date': variables.start|date('j F Y'),
-          '@end_date': variables.end|date('j F Y'),
+          '@start_date': date|date_modify("this week")|date('j F Y'),
+          '@end_date': date|date_modify("this week +6 days")|date('j F Y')
         }) %}
-
 
         {% if 'now'|date('Y-m-d') == date %}
           {# TODAY #}
@@ -39,11 +38,6 @@
             {% set new_header = 'qs.photos.date.sticky.last_week'|t %}
           {% elseif week_diff == 2 %}
             {% set new_header = 'qs.photos.date.sticky.two_weeks_ago'|t %}
-          {% elseif week_diff == 3 %}
-            {% set new_header = 'qs.photos.date.sticky.from_to @start_date @end_date'|t({
-              '@start_date': variables.start|date_modify("last Monday -2 weeks")|date('j F Y'),
-              '@end_date': variables.end|date('j F Y'),
-            }) %}
           {% endif %}
         {% endif %}
 

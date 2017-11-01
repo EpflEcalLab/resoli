@@ -62,7 +62,7 @@
 
         <div class="col-6 col-sm-4 col-md-3 d-flex">
           <a href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}" class="card">
-            <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}">
+            <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
             <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">
               {{ macros.icon('look') }}
             </span>

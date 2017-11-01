@@ -7,11 +7,24 @@
   <div class="container">
     <p class="lead text-center mt-5">
       {%- set count = variables.themes|length -%}
-      {%- set themes_names = variables.themes|join(', ')|trim -%}
 
       {% if count >= 1 %}
-        {%- trans -%}qs.photo.theme.filters {{ community_name }} {{ themes_names }}.
-        {%- endtrans -%}
+        {%- set themes_names = '' -%}
+        {% for theme in variables.themes|slice(0,3) %}
+          {% if not loop.first and not loop.last %}
+            {% set themes_names = themes_names ~ ', ' %}
+          {% endif %}
+          {% set themes_names = themes_names ~ theme %}
+          {% if loop.revindex == 2 and count <= 3 %}
+            {% set themes_names = themes_names ~ ' ' ~ 'qs.and'|t ~ ' ' %}
+          {% elseif loop.revindex == 2 %}
+            {% set themes_names = themes_names ~ ', ' %}
+          {% endif %}
+        {% endfor %}
+        {% if count >= 4 %}
+          {% set themes_names = themes_names ~ ', ' ~ 'qs.etc'|t %}
+        {% endif %}
+        {%- trans -%}qs.photo.theme.filters {{ community_name }} {{ themes_names }}.{%- endtrans -%}
       {% else %}
         {%- trans -%}qs.photo.theme.filters {{ community_name }}.{%- endtrans -%}
       {% endif %}

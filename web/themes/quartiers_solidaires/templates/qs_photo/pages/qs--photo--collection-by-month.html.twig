@@ -44,17 +44,19 @@
         {# Write the header if we have a new value #}
         {% if current_header|render != new_header|render %}
           {% set current_header = new_header %}
+
           {% if loop.index > 1 %}
+          {# Close the previous card list #}
             </div>
-            <div class="card-list">
           {% endif %}
 
           <div class="col-12 sticky-top bg-white mb-3">
             <h2 class="col-12 h5 mb-0">{{ current_header }}</h2>
           </div>
+          <div class="row col-12 flex-row">
         {% endif %}
 
-        <div class="col-6 col-sm-4 col-md-3 d-flex">
+        <div class="col-6 col-sm-4 col-md-3 d-flex mb-3">
           <a href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}" class="card">
             <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
             <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">
@@ -63,6 +65,8 @@
           </a>
         </div>
       {% endfor %}
+      {# Close the last card list #}
+      </div>
     </div>
 
   </div>

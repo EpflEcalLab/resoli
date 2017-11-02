@@ -1641,3 +1641,15 @@ msgstr ""
 
 msgid "qs_menu.links.photos.months"
 msgstr ""
+
+msgid "qs.community.welcome.body @community"
+msgstr ""
+
+msgid "qs.community.welcome.title @firstname @lastname"
+msgstr ""
+
+msgid "qs.onboarding.my_account"
+msgstr ""
+
+msgid "qs.onboarding.menu"
+msgstr ""

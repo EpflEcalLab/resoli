@@ -110,6 +110,11 @@ class ActivityController extends ControllerBase {
     return [
       '#theme'     => 'qs_photo_collection_by_activity_page',
       '#variables' => $variables,
+      '#attached' => [
+        'library' => [
+          'quartiers_solidaires/photoswipe',
+        ],
+      ],
       '#cache' => [
         'contexts' => [
           'user',

@@ -23,3 +23,19 @@ google-place-autocomplete:
   version: 3.0
   js:
     https://maps.googleapis.com/maps/api/js?key=AIzaSyDCxS2BMP-uAhxYq2PcDKWJBtWc8ZwkBnY&libraries=places: {type: external, defer: true, async: true}
+
+# Photoswipe
+photoswipe:
+  version: 4.1.1
+  css:
+    theme:
+      build/photoswipe/photoswipe.css: {}
+      build/photoswipe/default-skin/default-skin.css: {}
+  js:
+    build/photoswipe/photoswipe.min.js: {}
+    build/photoswipe/photoswipe-ui-default.min.js: {}
+    build/photoswipe/qs-photoswipe.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings

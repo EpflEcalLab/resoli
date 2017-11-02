@@ -1699,3 +1699,21 @@ msgstr ""
 msgid "qs.photos.view_all"
 msgstr ""
 
+msgid "qs.photoswipe.prev"
+msgstr ""
+
+msgid "qs.photoswipe.next"
+msgstr ""
+
+msgid "qs.photoswipe.btn.close"
+msgstr ""
+
+msgid "qs.photoswipe.btn.share"
+msgstr ""
+
+msgid "qs.photoswipe.btn.fullscreen"
+msgstr ""
+
+msgid "qs.photoswipe.btn.zoom"
+msgstr ""
+

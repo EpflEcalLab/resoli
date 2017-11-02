@@ -35,7 +35,22 @@
     ]
   },
   "singles": [{
-    "src": "",
-    "dest": ""
+    "src": "node_modules/photoswipe/dist/default-skin/*.{png,gif,svg}",
+    "dest": "web/themes/quartiers_solidaires/build/photoswipe/default-skin"
+  },{
+    "src": "node_modules/photoswipe/dist/photoswipe.min.js",
+    "dest": "web/themes/quartiers_solidaires/build/photoswipe"
+  },{
+    "src": "node_modules/photoswipe/dist/photoswipe-ui-default.min.js",
+    "dest": "web/themes/quartiers_solidaires/build/photoswipe"
+  },{
+    "src": "node_modules/photoswipe/dist/photoswipe.css",
+    "dest": "web/themes/quartiers_solidaires/build/photoswipe"
+  },{
+    "src": "node_modules/photoswipe/dist/default-skin/default-skin.css",
+    "dest": "web/themes/quartiers_solidaires/build/photoswipe/default-skin"
+  },{
+    "src": "web/themes/quartiers_solidaires/assets/components/atoms/image/qs-photoswipe.js",
+    "dest": "web/themes/quartiers_solidaires/build/photoswipe"
   }]
 }

@@ -159,6 +159,11 @@ class CollectionController extends ControllerBase {
     return [
       '#theme'     => 'qs_photo_collection_by_month_page',
       '#variables' => $variables,
+      '#attached' => [
+        'library' => [
+          'quartiers_solidaires/photoswipe',
+        ],
+      ],
       '#cache' => [
         'contexts' => [
           'user',

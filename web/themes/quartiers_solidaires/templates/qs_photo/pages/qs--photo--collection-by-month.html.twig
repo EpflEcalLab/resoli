@@ -5,7 +5,7 @@
 
 {% if variables.photos %}
   <div class="container my-5">
-    <div class="row">
+    <div class="row gallery-photoswipe" data-pswp-uid="gallery">
       {% set current_header = null %}
 
       {% for key, photo in variables.photos %}
@@ -57,12 +57,23 @@
         {% endif %}
 
         <div class="col-6 col-sm-4 col-md-3 d-flex mb-3">
-          <a href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}" class="card">
-            <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
-            <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">
-              {{ macros.icon('look') }}
-            </span>
-          </a>
+          <figure
+            class="gallery-item"
+          >
+            {% set image_width = photo.field_image.width %}
+            {% set image_height = photo.field_image.height %}
+            <a
+              href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}"
+              class="card"
+              data-index="{{ loop.index - 1 }}"
+              data-size="{{ image_width > 1920 ? 1920 : image_width }}x{{ image_height > 1080 ? 1080 : image_height }}"
+            >
+              <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
+              <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">
+                {{ macros.icon('look') }}
+              </span>
+            </a>
+          </figure>
         </div>
       {% endfor %}
       {# Close the last card list #}
@@ -81,3 +92,5 @@
     </p>
   </div>
 {% endif %}
+
+{% include '@quartiers_solidaires/misc/photoswipe-wrapper.html.twig' %}

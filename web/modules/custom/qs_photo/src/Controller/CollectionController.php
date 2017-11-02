@@ -11,6 +11,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_photo\Service\PhotoManager;
 use Drupal\qs_calendar\Service\CalendarBuilder;
 use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\qs_activity\Service\EventManager;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Datetime\DrupalDateTime;
 
@@ -48,6 +49,13 @@ class CollectionController extends ControllerBase {
   protected $activityManager;
 
   /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
+
+  /**
    * The node Storage.
    *
    * @var \Drupal\node\NodeStorageInterface
@@ -64,13 +72,15 @@ class CollectionController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PhotoManager $photo_manager, CalendarBuilder $calendar_builder, ActivityManager $activity_manager) {
+  public function __construct(AccessControl $acl, PhotoManager $photo_manager, CalendarBuilder $calendar_builder, ActivityManager $activity_manager, EventManager $event_manager) {
     $this->acl             = $acl;
     $this->photoManager    = $photo_manager;
     $this->calendarBuilder = $calendar_builder;
     $this->activityManager = $activity_manager;
+    $this->eventManager    = $event_manager;
     $this->nodeStorage     = $this->entityTypeManager()->getStorage('node');
-    $this->termStorage     = $this->entityTypeManager()->getStorage('taxonomy_term');
+    $this->termStorage     = $this->entityTypeManager()
+      ->getStorage('taxonomy_term');
   }
 
   /**
@@ -83,7 +93,8 @@ class CollectionController extends ControllerBase {
       $container->get('qs_acl.access_control'),
       $container->get('qs_photo.photo_manager'),
       $container->get('qs_calendar.calendar_builder'),
-      $container->get('qs_activity.activity_manager')
+      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_activity.event_manager')
     );
   }
 
@@ -127,13 +138,8 @@ class CollectionController extends ControllerBase {
       }
     }
 
-    $start = clone $month;
-    $start->modify('first day of this month');
-    $date_start = $start;
-
-    $end = clone $month;
-    $end->modify('last day of this month');
-    $date_end = $end;
+    $date_start = $this->calendarBuilder->getFirstMondayMonth($month);
+    $date_end = $this->calendarBuilder->getLastSundayMonth($month);
 
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
@@ -142,11 +148,13 @@ class CollectionController extends ControllerBase {
 
     $date_end->setTime(23, 59, 59);
 
-    // Get all activities in the date range.
-    $activities = $this->activityManager->getByDate($community, $date_start, $date_end);
+    // Get all events in the date range.
+    $events = $this->eventManager->getByDate($community, $date_start, $date_end);
 
-    // Get all photos for the given activities.
-    $variables['photos'] = $this->photoManager->getByActivities($activities);
+    if ($events) {
+      // Get all photos for the given events.
+      $variables['photos'] = $this->photoManager->getByEvents($events);
+    }
 
     return [
       '#theme'     => 'qs_photo_collection_by_month_page',

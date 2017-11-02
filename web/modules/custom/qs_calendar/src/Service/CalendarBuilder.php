@@ -65,6 +65,36 @@ class CalendarBuilder {
   }
 
   /**
+   * Get the first day for the $date month.
+   *
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date
+   *   The date object.
+   *
+   * @return \Drupal\Core\Datetime\DrupalDateTime
+   *   The first day month.
+   */
+  public function getFirstMondayMonth(DrupalDateTime $date) {
+    $cloned = clone $date;
+    $cloned->modify('first day of this month');
+    return $cloned;
+  }
+
+  /**
+   * Get the last day for the $date month.
+   *
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date
+   *   The date object.
+   *
+   * @return \Drupal\Core\Datetime\DrupalDateTime
+   *   The last day month.
+   */
+  public function getLastSundayMonth(DrupalDateTime $date) {
+    $cloned = clone $date;
+    $cloned->modify('last day of this month');
+    return $cloned;
+  }
+
+  /**
    * Get the last sunday for the $date month.
    *
    * @param \Drupal\Core\Datetime\DrupalDateTime $date

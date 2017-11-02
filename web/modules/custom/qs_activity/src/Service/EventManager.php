@@ -169,7 +169,7 @@ class EventManager {
       ->condition('field_end_at', $now, '<')
       ->condition('status', TRUE)
       ->condition('field_activity', $activity->id())
-      ->sort('field_start_at', 'ASC');
+      ->sort('field_end_at', 'DESC');
 
     $nids = $query->execute();
     $events = NULL;

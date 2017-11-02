@@ -1,0 +1,189 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/node\/50?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/photo"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_event": [
+            {
+                "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events\/labio-de-liebre-bec-de-lievre?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_image": [
+            {
+                "href": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/1200x800%20-%20233H.jpg"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 50
+        }
+    ],
+    "uuid": [
+        {
+            "value": "88f41c83-0615-4737-b70e-9b59f7c14c2b"
+        }
+    ],
+    "vid": [
+        {
+            "value": 130
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "photo"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2017-11-02T13:26:10+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "555bf13b-6446-4371-a514-75077152db93"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "555bf13b-6446-4371-a514-75077152db93"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_event": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events\/labio-de-liebre-bec-de-lievre?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "619eba65-2a76-42e3-a6f1-ad81408ea026"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_image": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/1200x800%20-%20233H.jpg"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "8cd60dd2-3e26-476d-ba67-d1b7babc42be"
+                    }
+                ],
+                "uri": [
+                    {
+                        "value": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/1200x800%20-%20233H.jpg"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Photo N\u00b0 10 - \"Labio de liebre \"\"Bec de li\u00e8vre\"\" (38)\" - Sorties Th\u00e9\u00e2tre (3)",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2017-11-02T13:19:48+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2017-11-02T13:26:10+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ]
+}

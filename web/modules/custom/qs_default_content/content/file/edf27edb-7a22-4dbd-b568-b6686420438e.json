@@ -1,0 +1,86 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/1200x800%20-%20217H.jpg"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/file\/file\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "fid": [
+        {
+            "value": 11
+        }
+    ],
+    "uuid": [
+        {
+            "value": "edf27edb-7a22-4dbd-b568-b6686420438e"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/file\/file\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "555bf13b-6446-4371-a514-75077152db93"
+                    }
+                ]
+            }
+        ]
+    },
+    "filename": [
+        {
+            "value": "1200x800 - 217H.jpg"
+        }
+    ],
+    "uri": [
+        {
+            "value": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/1200x800%20-%20217H.jpg"
+        }
+    ],
+    "filemime": [
+        {
+            "value": "image\/jpeg"
+        }
+    ],
+    "filesize": [
+        {
+            "value": 192818
+        }
+    ],
+    "status": [
+        {
+            "value": true
+        }
+    ],
+    "created": [
+        {
+            "value": "2017-11-02T13:21:07+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2017-11-02T13:21:08+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ]
+}

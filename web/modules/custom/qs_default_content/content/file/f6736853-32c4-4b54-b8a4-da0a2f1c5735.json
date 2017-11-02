@@ -1,0 +1,86 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/200x200%20-%20001S.png"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/file\/file\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ]
+    },
+    "fid": [
+        {
+            "value": 6
+        }
+    ],
+    "uuid": [
+        {
+            "value": "f6736853-32c4-4b54-b8a4-da0a2f1c5735"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/file\/file\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "555bf13b-6446-4371-a514-75077152db93"
+                    }
+                ]
+            }
+        ]
+    },
+    "filename": [
+        {
+            "value": "200x200 - 001S.png"
+        }
+    ],
+    "uri": [
+        {
+            "value": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/200x200%20-%20001S.png"
+        }
+    ],
+    "filemime": [
+        {
+            "value": "image\/png"
+        }
+    ],
+    "filesize": [
+        {
+            "value": 5162
+        }
+    ],
+    "status": [
+        {
+            "value": true
+        }
+    ],
+    "created": [
+        {
+            "value": "2017-11-02T13:11:01+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2017-11-02T13:11:03+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ]
+}

@@ -1,0 +1,189 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/node\/46?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/photo"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_event": [
+            {
+                "href": "http:\/\/default\/lausanne\/activities\/atelier-creatif\/events\/realisation-de-mandala?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_image": [
+            {
+                "href": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/200x200%20-%20001S.png"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 46
+        }
+    ],
+    "uuid": [
+        {
+            "value": "7a0b6554-a33e-40a9-a0ff-d8694edacc9e"
+        }
+    ],
+    "vid": [
+        {
+            "value": 121
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "photo"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2017-11-02T13:11:03+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "555bf13b-6446-4371-a514-75077152db93"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "555bf13b-6446-4371-a514-75077152db93"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_event": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/lausanne\/activities\/atelier-creatif\/events\/realisation-de-mandala?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "a8d7f98f-cf90-4b50-bd2d-e30faf11b055"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/photo\/field_image": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/200x200%20-%20001S.png"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/file\/file"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "f6736853-32c4-4b54-b8a4-da0a2f1c5735"
+                    }
+                ],
+                "uri": [
+                    {
+                        "value": "http:\/\/default\/fr\/system\/files\/photos\/2017-11\/200x200%20-%20001S.png"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Photo N\u00b0 6 - R\u00e9alisation de Mandala (16) - Atelier Cr\u00e9atif (2)",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2017-11-02T13:11:01+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2017-11-02T13:11:03+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ]
+}

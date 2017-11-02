@@ -124,7 +124,7 @@ then
 
   cd "web"
   # Enable Big Pipe.
-  ../vendor/bin/drush pmu big_pipe -y
+  ../vendor/bin/drush en big_pipe -y
 
   exit $behat_exit
 fi

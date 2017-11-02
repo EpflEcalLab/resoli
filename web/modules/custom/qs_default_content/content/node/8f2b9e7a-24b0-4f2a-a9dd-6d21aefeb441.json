@@ -190,7 +190,7 @@
     ],
     "field_community_access_gallery": [
         {
-            "value": false
+            "value": true
         }
     ],
     "field_community_access_story": [

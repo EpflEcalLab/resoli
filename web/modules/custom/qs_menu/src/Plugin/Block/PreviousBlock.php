@@ -123,7 +123,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
       }
     }
     else {
-;      switch ($route_name) {
+      ;      switch ($route_name) {
         // Go to Community Dashboard.
         case "qs_community.members":
         case "qs_community.waiting_approval":

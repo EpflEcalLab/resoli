@@ -123,7 +123,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
       }
     }
     else {
-      switch ($route_name) {
+;      switch ($route_name) {
         // Go to Community Dashboard.
         case "qs_community.members":
         case "qs_community.waiting_approval":
@@ -230,6 +230,16 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_photos_list');
+          $theme = 'primary';
+          break;
+
+        // Go to My Photos.
+        case "qs_photo.user.form.manage":
+          $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
+            'community' => $community->id(),
+            'user' => $this->currentUser->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_my_photos');
           $theme = 'primary';
           break;
 

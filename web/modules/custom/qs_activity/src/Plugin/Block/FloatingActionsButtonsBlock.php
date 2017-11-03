@@ -225,6 +225,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_photo.collection.month',
       'qs_photo.user.activities.collection',
       'qs_photo.activity',
+      'qs_photo.user.form.manage',
     ])) {
       // For everybody, show a button "My Photos".
       $icon = 'picture';
@@ -234,6 +235,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         'user' => $this->currentUser->id(),
       ]);
       $label = $this->t('qs_photo.floating.my_photos');
+
+      if ($route_name == 'qs_photo.user.form.manage') {
+        $label = $this->t('qs_photo.floating.manage_photos');
+      }
 
       // When the user never add photos display a shortcut link "Add Photo".
       if (count($this->activityManager->getByUser($community, $this->currentUser)) <= 0 && $this->acl->hasWriteAccessCommunity($community)) {
@@ -273,6 +278,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_community.members',
       'qs_community.waiting_approval',
       'qs_photo.user.activities.collection',
+      'qs_photo.user.form.manage',
     ])) {
       $classes[] = 'active';
     }

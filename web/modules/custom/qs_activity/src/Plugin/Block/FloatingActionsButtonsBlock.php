@@ -156,6 +156,31 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
+    // Button - "Add Activity" or "My Activities".
+    if ($community && in_array($route_name, [
+        'qs_photo.user.activities.collection',
+      ])) {
+      // For everybody, show a button "My Activities".
+      $icon = 'picture';
+      $theme = 'primary';
+      $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
+        'community' => $community->id(),
+        'user' => $this->currentUser->id(),
+      ]);
+      $label = $this->t('qs_activity.floating.my_photos');
+
+      // When the user has write access on the community & never add activities
+      // Display a shortcut link "Add Activity".
+      if (count($this->activityManager->getByUser($community, $this->currentUser)) <= 0 && $this->acl->hasWriteAccessCommunity($community)) {
+        $icon = 'plus';
+        $theme = 'primary';
+        $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.form.add', [
+          'community' => $community->id(),
+        ]);
+        $label = $this->t('qs_activity.floating.add.activity');
+      }
+    }
+
     // Button - "My Subscriptions".
     if ($community && in_array($route_name, [
       'qs_calendar.collection.monthly',

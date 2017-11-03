@@ -98,5 +98,10 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'secondary';
       break;
+
+    case in_array('page__photos', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'primary';
+      break;
   }
 }

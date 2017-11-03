@@ -29,7 +29,7 @@ To run any drush command, you need to be on a hight bootstrapped drupal director
 
 On common errors, see the Troubleshootings section.
 
-## 🏋️ Export all translations to a PO file
+## 🏋️ Export/Import all translations to a PO file
 
 This project don't use the traditionnal translates strings in English.
 We move to a flexible solution which is not language based but keys strings Eg. `form.submit`
@@ -63,6 +63,13 @@ To allow the client to update the translation him/herself, you need to export al
 The PO file is created in the `./config/d8/lang/` directory.
 
 Once done, don't forget to add the new assets on the Loco project.
+
+### Import
+
+When importing in the [Drupal admin interface](admin/config/regional/translate/import) don't forget to check the 2 following checkboxes:
+
+- Overwrite non-customized translations
+- Overwrite existing customized translations
 
 ## 🚔 Check Drupal coding standards & Drupal best practices
 

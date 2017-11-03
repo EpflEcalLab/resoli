@@ -225,6 +225,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
         // Go to Photos.
         case "qs_photo.activity":
+        case "qs_photo.user.activities.collection":
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.theme', [
             'community' => $community->id(),
           ], $options);

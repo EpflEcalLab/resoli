@@ -78,10 +78,35 @@ class UserManageForm extends FormBasic {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#title'] = $this->t('qs_photo.user.form.manage.title_form');
+    $form['#attributes'] = [
+      'novalidate' => 'novalidate',
+      'class' => [
+        'modal-body',
+      ],
+    ];
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
 
     $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
-    dump($photos);
-    die();
+    $options = [];
+    foreach ($photos as $photo) {
+      $options[$photo->id()] = $photo->getTitle();
+    }
+
+    $form['photos'] = [
+      '#attributes' => [
+        'required' => TRUE,
+        'title'    => $this->t('qs_photos.photos_select'),
+        'variant' => 'image',
+      ],
+      '#theme_wrappers' => [
+        'checkboxes__image',
+      ],
+      '#type'          => 'checkboxes',
+      '#required'      => FALSE,
+      '#options'       => $options,
+    ];
 
     return $form;
   }

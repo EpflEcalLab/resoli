@@ -76,6 +76,24 @@ qs_photo.form.add:
           type: entity:taxonomy_term
 
 # User Activities where he can add photo(s).
+qs_photo.user.form.manage:
+    path: '/photos/activity/{activity}/user/{user}'
+    defaults:
+      _form: '\Drupal\qs_photo\Form\UserManageForm'
+      _title: 'qs_photo.user.form.manage.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Form\UserManageForm::access'
+      activity: \d+
+      user: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
+        user:
+          type: entity:user
+
+# User Activities where he can add photo(s).
 qs_photo.user.activities.collection:
     path: '/photos/{community}/user/{user}'
     defaults:

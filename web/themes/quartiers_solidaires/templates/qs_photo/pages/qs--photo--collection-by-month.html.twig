@@ -65,7 +65,7 @@
             <a
               href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}"
               class="card"
-              data-index="{{ loop.index - 1 }}"
+              data-index="{{ loop.index }}"
               data-size="{{ image_width > 1920 ? 1920 : image_width }}x{{ image_height > 1080 ? 1080 : image_height }}"
             >
               <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">

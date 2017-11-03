@@ -41,11 +41,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         item.title = figureEl.children[1].innerHTML;
       }
 
-      if(linkEl.children.length > 0) {
-        // <img> thumbnail element, retrieving thumbnail url
-        item.msrc = linkEl.children[0].getAttribute('src');
-      }
-
       item.el = figureEl; // save link to element for getThumbBoundsFn
       items.push(item);
     }
@@ -82,11 +77,12 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
       return (el.classList.contains('gallery-photoswipe'));
     });
 
-    var childNodes = clickedListItem.parentNode.childNodes,
+    var childNodes = $(clickedListItem).parents('.gallery-photoswipe').find('.gallery-item'),
       numChildNodes = childNodes.length,
       nodeIndex = 0,
       index;
 
+      console.log(childNodes);
     for (var i = 0; i < numChildNodes; i++) {
       if(childNodes[i].nodeType !== 1) {
         continue;
@@ -140,18 +136,15 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
       options,
       items;
 
-    console.log(galleryElement);
-
     items = parseThumbnailElements(galleryElement);
-
-    console.log(items);
 
     // define options (if needed)
     options = {
       shareEl: false,
       loop: false,
-      tapToClose: false,
-      closeElClasses: [],
+      showHideOpacity: true,
+      getThumbBoundsFn: false,
+      closeOnScroll: false,
 
       // define gallery index (for URL)
       galleryUID: galleryElement.getAttribute('data-pswp-uid'),

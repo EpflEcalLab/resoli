@@ -9,10 +9,13 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\image\ImageStyleInterface;
+use Drupal\Core\Lock\LockBackendInterface;
 use Drupal\Core\File\FileSystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
+use Drupal\Component\Utility\Crypt;
 
 /**
  * StreamController.
@@ -33,27 +36,19 @@ class StreamController extends ControllerBase {
   protected $fso;
 
   /**
-   * The node Storage.
+   * The lock backend.
    *
-   * @var \Drupal\node\NodeStorageInterface
+   * @var \Drupal\Core\Lock\LockBackendInterface
    */
-  protected $nodeStorage;
-
-  /**
-   * The file Storage.
-   *
-   * @var \Drupal\file\FileStorageInterface
-   */
-  protected $fileStorage;
+  protected $lock;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, FileSystem $fso) {
-    $this->acl         = $acl;
-    $this->fso         = $fso;
-    $this->fileStorage = $this->entityTypeManager()->getStorage('file');
-    $this->nodeStorage = $this->entityTypeManager()->getStorage('node');
+  public function __construct(AccessControl $acl, FileSystem $fso, LockBackendInterface $lock) {
+    $this->acl = $acl;
+    $this->fso = $fso;
+    $this->lock = $lock;
   }
 
   /**
@@ -87,7 +82,8 @@ class StreamController extends ControllerBase {
     return new static(
     // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('lock')
     );
   }
 
@@ -125,6 +121,19 @@ class StreamController extends ControllerBase {
       $image_style_uri = $image_style->buildUri($file_uri);
       $image_style_path = $this->fso->realpath($image_style_uri);
       if (!is_file($image_style_path)) {
+
+        $lock_name = 'image_style_deliver:' . $image_style->id() . ':' . Crypt::hashBase64($file_uri);
+        $lock_acquired = $this->lock->acquire($lock_name);
+        if (!$lock_acquired) {
+          // Tell client to retry again in 3 seconds. Currently no browsers are
+          // known to support Retry-After.
+          throw new ServiceUnavailableHttpException(3, $this->t('Image generation in progress. Try again shortly.'));
+        }
+
+        if (!empty($lock_acquired)) {
+          $this->lock->release($lock_name);
+        }
+
         // Create the new image derivative.
         $image_style->createDerivative($file_uri, $image_style_uri);
         $image_style_path = $this->fso->realpath($image_style_uri);

@@ -99,7 +99,7 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
       $variables['attributes']['bg'] = 'secondary';
       break;
 
-    case in_array('page__photos', $suggestions):
+    case in_array('page__photos__user', $suggestions):
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'primary';
       break;

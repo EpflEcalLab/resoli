@@ -18,19 +18,16 @@
   width: 44px;
   height: 44px;
   position: relative;
-  background-color: $white;
+  background: none;
   cursor: pointer;
   overflow: visible;
   -webkit-appearance: none;
   display: block;
-  border: $card-border-width solid theme-color("secondary");
-  border-radius: 50%;
+  border: 0;
   padding: 0;
   margin: 0;
   float: right;
   opacity: 0.75;
-  transition: opacity 0.2s;
-  box-shadow: none;
 
   @include hover-focus {
     opacity: 1;
@@ -50,6 +47,20 @@
 /* pswp__ui--over-close class it added when mouse is over element that should close gallery */
 .pswp__ui--over-close .pswp__button--close {
   opacity: 1;
+}
+
+.pswp__button {
+  background: url('../photoswipe/default-skin/default-skin.png') 0 0 no-repeat;
+  background-size: 264px 88px;
+  width: 44px;
+  height: 44px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
+  /* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */
+  .pswp--svg .pswp__button {
+    background-image: url('../photoswipe/default-skin/default-skin.svg');
+  }
 }
 
 .pswp__button--close {

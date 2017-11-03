@@ -123,7 +123,10 @@ class CollectionController extends ControllerBase {
    * Collection by months.
    */
   public function months(Request $request, TermInterface $community) {
-    $variables = ['community' => $community];
+    $variables = [
+      'community' => $community,
+      'photos' => [],
+    ];
 
     // Get pagination month.
     $pagination_month = $request->query->get('month');

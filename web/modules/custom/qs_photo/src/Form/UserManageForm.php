@@ -3,6 +3,7 @@
 namespace Drupal\qs_photo\Form;
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
@@ -94,6 +95,17 @@ class UserManageForm extends FormBasic {
     foreach ($photos as $photo) {
       $options[$photo->id()] = $photo->getTitle();
     }
+
+    $form['select_all'] = [
+      '#type' => 'link',
+      '#title' => $this->t('qs_photos.photos_select_all'),
+      '#url' => Url::fromRoute('<front>'),
+      '#attributes' => [
+        'class' => [
+          'btn btn-outline-danger btn-outline-invert',
+        ],
+      ],
+    ];
 
     $form['photos'] = [
       '#attributes' => [

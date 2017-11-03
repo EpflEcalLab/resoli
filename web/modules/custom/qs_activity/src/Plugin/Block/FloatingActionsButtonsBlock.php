@@ -228,16 +228,6 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         'user' => $this->currentUser->id(),
       ]);
       $label = $this->t('qs_photo.floating.my_photos');
-
-      // When the user never add photos display a shortcut link "Add Photo".
-      if (count($this->activityManager->getByUser($community, $this->currentUser)) <= 0 && $this->acl->hasWriteAccessCommunity($community)) {
-        $icon = 'plus';
-        $theme = 'primary';
-        $url = $this->urlGenerator->generateFromRoute('qs_photo.form.add', [
-          'community' => $community->id(),
-        ]);
-        $label = $this->t('qs_photo.floating.add.photo');
-      }
     }
 
     // Welcome.

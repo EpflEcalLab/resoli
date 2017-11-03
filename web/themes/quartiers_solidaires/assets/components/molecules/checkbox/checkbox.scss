@@ -39,6 +39,41 @@
   }
 }
 
+// Checkbox image
+.checkbox-image {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  border-color: $white;
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba($purple-600, 0.75);
+    border: $border-width solid $white;
+    opacity: 0;
+
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  input:checked {
+    ~ .icon {
+      opacity: 1;
+    }
+  }
+}
+
 // Toggle
 @function svg-cross($color) {
   @return str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 -10 70 70'%3E%3Cpath fill='#{$color}' d='M27.6211,25.5 L41.5601,11.561 C42.1461,10.975 42.1461,10.025 41.5601,9.439 C40.9751,8.854 40.0251,8.854 39.4391,9.439 L25.5001,23.379 L11.5601,9.439 C10.9751,8.854 10.0251,8.854 9.4391,9.439 C8.8531,10.025 8.8531,10.975 9.4391,11.561 L23.3791,25.5 L9.4391,39.439 C8.8531,40.025 8.8531,40.975 9.4391,41.561 C9.7321,41.854 10.1161,42 10.5001,42 C10.8841,42 11.2671,41.854 11.5601,41.561 L25.5001,27.621 L39.4391,41.561 C39.7321,41.854 40.1161,42 40.5001,42 C40.8841,42 41.2671,41.854 41.5601,41.561 C42.1461,40.975 42.1461,40.025 41.5601,39.439 L27.6211,25.5 Z'/%3E%3C/svg%3E"), "#", "%23");

@@ -3,7 +3,12 @@
 <div class="container">
   <div class="text-center my-5">
     {% if variables.user %}
-      <h1>{% trans %}qs.activity.user.collection.title {{ variables.user.field_firstname.value }} {{ variables.user.field_lastname.value }} {{ variables.user.mail.value }}{% endtrans %}</h1>
+      <h1>
+        {{ 'qs.activity.user.collection.title @name @email'|t({
+          '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
+          '@email': variables.user.mail.value ? variables.user.mail.value : ''
+        }) }}
+      </h1>
     {% else %}
       <h1>{% trans %}qs.activity.user.collection.title{% endtrans %}</h1>
     {% endif %}

@@ -99,9 +99,8 @@ class UserController extends ControllerBase {
     $variables['community'] = $community;
 
     // We are browsing as an account with AccessBypass, add user info to page.
-    if ($this->currentUser()->id() != $user->id()) {
-      $variables['user'] = $user;
-    }
+    $variables['user'] = $user;
+    $variables['current_user'] = $this->currentUser()->id() === $user->id();
 
     if ($this->acl->hasBypass()) {
       // Show every activities for bypass user.

@@ -76,16 +76,16 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        // Load the service required to construct this class.
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        // Load customs services used in this class.
-        $container->get('qs_acl.access_control'),
-        $container->get('current_route_match'),
-        $container->get('url_generator'),
-        $container->get('current_user'),
-        $container->get('qs_activity.activity_manager')
+    // Load the service required to construct this class.
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('current_route_match'),
+      $container->get('url_generator'),
+      $container->get('current_user'),
+      $container->get('qs_activity.activity_manager')
     );
   }
 
@@ -98,6 +98,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     $node = $this->route->getParameter('node');
     $activity = $this->route->getParameter('activity');
 
+    if (!$community && $activity && !$activity->get('field_community')->isEmpty()) {
+      $community = $activity->field_community->entity;
+    }
+
     $icon = NULL;
     $url = NULL;
     $label = $this->t('qs.previous');
@@ -106,10 +110,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Button - "Community Dashboard".
     if ($community && in_array($route_name, [
-      'qs_community.dashboard',
-      'qs_community.members',
-      'qs_community.waiting_approval',
-    ])) {
+        'qs_community.dashboard',
+        'qs_community.members',
+        'qs_community.waiting_approval',
+      ])) {
       // For everybody, show a button "My Activities".
       $icon = 'activities';
       $theme = 'danger';
@@ -130,11 +134,11 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Button - "Add Activity" or "My Activities".
     if ($community && in_array($route_name, [
-      'qs_activity.collection.themes',
-      'qs_activity.collection.dates',
-      'qs_activity.activities.form.add',
-      'qs_activity.user.collection',
-    ])) {
+        'qs_activity.collection.themes',
+        'qs_activity.collection.dates',
+        'qs_activity.activities.form.add',
+        'qs_activity.user.collection',
+      ])) {
       // For everybody, show a button "My Activities".
       $icon = 'activities';
       $theme = 'primary';
@@ -158,9 +162,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Button - "My Subscriptions".
     if ($community && in_array($route_name, [
-      'qs_calendar.collection.monthly',
-      'qs_calendar.collection.weekly',
-    ])) {
+        'qs_calendar.collection.monthly',
+        'qs_calendar.collection.weekly',
+      ])) {
       $icon = 'checkflag';
       $theme = 'info';
       $url = $this->urlGenerator->generateFromRoute('qs_subscription.user.collection', [
@@ -215,11 +219,14 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
-    // Button - "Add Photos" or "My Photos".
+    // Button - "My Photos".
     if ($community && in_array($route_name, [
-      'qs_photo.collection.theme',
-      'qs_photo.collection.month',
-    ])) {
+        'qs_photo.collection.theme',
+        'qs_photo.collection.month',
+        'qs_photo.user.activities.collection',
+        'qs_photo.activity',
+        'qs_photo.user.form.manage',
+      ])) {
       // For everybody, show a button "My Photos".
       $icon = 'picture';
       $theme = 'primary';
@@ -228,12 +235,16 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         'user' => $this->currentUser->id(),
       ]);
       $label = $this->t('qs_photo.floating.my_photos');
+
+      if ($route_name == 'qs_photo.user.form.manage') {
+        $label = $this->t('qs_photo.floating.manage_photos');
+      }
     }
 
     // Welcome.
     if ($community && in_array($route_name, [
-      'qs_community.welcome',
-    ])) {
+        'qs_community.welcome',
+      ])) {
       $icon = 'activities';
       $theme = 'invert';
       $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
@@ -256,6 +267,8 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_community.dashboard',
       'qs_community.members',
       'qs_community.waiting_approval',
+      'qs_photo.user.activities.collection',
+      'qs_photo.user.form.manage',
     ])) {
       $classes[] = 'active';
     }

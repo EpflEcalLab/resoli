@@ -16,7 +16,7 @@
 }
 
 [data-required] {
-  label:not(.btn) {
+  label:not(.btn):not(.checkbox-image) {
     &:after {
       content: '*';
     }

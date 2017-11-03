@@ -7,6 +7,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * PhotoManager.
@@ -42,13 +43,21 @@ class PhotoManager {
   private $acl;
 
   /**
+   * The Privilege Storage.
+   *
+   * @var \Drupal\Core\Entity\ContentEntityStorageInterface
+   */
+  private $privilegeStorage;
+
+  /**
    * Class constructor.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $connection, AccountProxyInterface $current_user, AccessControl $acl) {
-    $this->nodeStorage = $entity_type_manager->getStorage('node');
-    $this->connection = $connection;
-    $this->currentUser = $current_user;
-    $this->acl = $acl;
+    $this->nodeStorage      = $entity_type_manager->getStorage('node');
+    $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
+    $this->connection       = $connection;
+    $this->currentUser      = $current_user;
+    $this->acl              = $acl;
   }
 
   /**
@@ -266,6 +275,93 @@ class PhotoManager {
       $query->addTag('random');
       $query->range(0, $limit);
     }
+
+    $rows = $query->execute()->fetchAll();
+
+    $nids = [];
+    foreach ($rows as $row) {
+      $nids[$row->nid] = $row->nid;
+    }
+
+    $photos = NULL;
+    if ($nids) {
+      $photos = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $photos;
+  }
+
+  /**
+   * Get all writable photos for the $user in the given $activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   Base activity where photos should come from.
+   * @param \Drupal\Core\Session\AccountInterface $user
+   *   The user entity.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Photo. Otherwise an empty array.
+   */
+  public function getWritablePhotoByUser(NodeInterface $activity, AccountInterface $user) {
+    // List all photos if user has bypass access.
+    if ($this->acl->hasBypass()) {
+      return $this->getByUser($activity, $user);
+    }
+
+    // When user has members+ access, list all photos of this activity.
+    $query = $this->privilegeStorage->getAggregateQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+
+    if ($query->count()->execute() > 0) {
+      return $this->getByActivity($activity);
+    }
+
+    // If the user has only member access, list only his photos.
+    $query = $this->privilegeStorage->getAggregateQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id())
+      ->condition('privilege', 'activity_members');
+    if ($query->count()->execute() > 0) {
+      return $this->getByUser($activity, $user);
+    }
+
+    return [];
+  }
+
+  /**
+   * Get all owned photos of the $user in the given $activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   Base activity where photos should come from.
+   * @param \Drupal\Core\Session\AccountInterface $user
+   *   The user entity.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Photo. Otherwise an empty array.
+   */
+  public function getByUser(NodeInterface $activity, AccountInterface $user) {
+    $query = $this->connection->select('node_field_data', 'photo');
+    $query->fields('photo', ['nid'])
+      ->condition('photo.type', 'photo')
+      ->condition('photo.status', TRUE);
+
+    // List all photos if user has bypass access.
+    if (!$this->acl->hasBypass()) {
+      $query->condition('photo.uid', $user->id());
+    }
+
+    $query->leftJoin('node__field_event', 'field_event', 'field_event.entity_id = photo.nid');
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.entity_id = field_event.field_event_target_id');
+    $query->condition('field_activity.field_activity_target_id', $activity->id());
 
     $rows = $query->execute()->fetchAll();
 

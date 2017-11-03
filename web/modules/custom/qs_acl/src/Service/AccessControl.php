@@ -293,7 +293,7 @@ class AccessControl {
     if ($activity->field_community_access_gallery->value) {
       return $this->hasAccessCommunity($community, $user);
     }
-    // Activitiy Members+ have access to photo.
+    // Activity Members+ have access to photo.
     $query = $this->queryFactory->get('privilege')
       ->condition('status', 1)
       ->condition('bundle', 'node')
@@ -306,6 +306,63 @@ class AccessControl {
     $query->condition($or);
     $number = (int) $query->count()->execute();
     return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account has upload photo access on the given activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity to check upload access of photos.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one read access for this photo.
+   */
+  public function hasWriteAccessPhoto(NodeInterface $activity, AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    // Activity Members+ have access to upload photo by default.
+    $query = $this->queryFactory->get('privilege')
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+    $number = (int) $query->count()->execute();
+
+    if ($number > 0) {
+      return $number;
+    }
+
+    // Check activity is allow member to publish photos.
+    if ($activity->field_member_create_gallery->value === TRUE) {
+      // Activity Members+ have access to upload photo by default.
+      $query = $this->queryFactory->get('privilege')
+        ->condition('status', 1)
+        ->condition('bundle', 'node')
+        ->condition('entity', $activity->id())
+        ->condition('user', $user->id())
+        ->condition('privilege', 'activity_members');
+      $number = (int) $query->count()->execute();
+
+      if ($number > 0) {
+        return $number;
+      }
+    }
+
+    return FALSE;
   }
 
   /**

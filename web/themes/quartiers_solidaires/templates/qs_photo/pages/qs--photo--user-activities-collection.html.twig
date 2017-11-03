@@ -18,7 +18,7 @@
     {{ macros.icon('picture-big', 'icon-xl') }}
   </div>
 
-  {% if not variables.activities %}
+  {% if variables.activities %}
     <ul class="card-list" id="activities-accordion" role="tablist" data-children=".card-list-item">
       {% for activity in variables.activities %}
         <li class="card card-list-item" id="card{{ activity.nid.value }}">

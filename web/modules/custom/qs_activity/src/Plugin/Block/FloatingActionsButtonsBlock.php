@@ -215,6 +215,31 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
+    // Button - "Add Photos" or "My Photos".
+    if ($community && in_array($route_name, [
+        'qs_photo.collection.theme',
+        'qs_photo.collection.month',
+      ])) {
+      // For everybody, show a button "My Photos".
+      $icon = 'picture';
+      $theme = 'primary';
+      $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
+        'community' => $community->id(),
+        'user' => $this->currentUser->id(),
+      ]);
+      $label = $this->t('qs_photo.floating.my_photos');
+
+      // When the user never add photos display a shortcut link "Add Photo".
+      if (count($this->activityManager->getByUser($community, $this->currentUser)) <= 0 && $this->acl->hasWriteAccessCommunity($community)) {
+        $icon = 'plus';
+        $theme = 'primary';
+        $url = $this->urlGenerator->generateFromRoute('qs_photo.form.add', [
+          'community' => $community->id(),
+        ]);
+        $label = $this->t('qs_photo.floating.add.photo');
+      }
+    }
+
     // Welcome.
     if ($community && in_array($route_name, [
       'qs_community.welcome',

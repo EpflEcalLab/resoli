@@ -59,3 +59,36 @@ qs_photo.streamer:
           type: entity:node
         image_style:
           type: entity:image_style
+
+# Photos add form - Multi-steps forms.
+qs_photo.form.add:
+    path: '/photos/{community}/add'
+    defaults:
+      _form: '\Drupal\qs_activity\Form\ActivityAddForm'
+      _title: 'qs_photo.form.add.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Form\ActivityAddForm::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# User Activities where he can add photo(s).
+qs_photo.user.activities.collection:
+    path: '/photos/{community}/user/{user}'
+    defaults:
+      _controller: '\Drupal\qs_activity\Controller\UserController::activities'
+      _title: 'qs_photo.user.activities.collection.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Controller\UserController::access'
+      community: \d+
+      user: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+        user:
+          type: entity:user

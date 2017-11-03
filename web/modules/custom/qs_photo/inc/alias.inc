@@ -22,7 +22,7 @@ function qs_photo_pathauto_alias_alter(&$alias, array &$context) {
 
   if (isset($context['module']) &&
     $context['module'] == 'node' && isset($context['data']['node'])) {
-    qs_activity_alias($context['data']['node'], $alias, $context['op']);
+    qs_photo_alias($context['data']['node'], $alias, $context['op']);
   }
 }
 

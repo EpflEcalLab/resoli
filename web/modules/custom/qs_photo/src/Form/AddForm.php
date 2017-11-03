@@ -242,8 +242,8 @@ class AddForm extends FormBasic {
         $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
       }
       else {
-        foreach ($saved_files as $saved_file) {
-          if (!$saved_file) {
+        foreach ($this->photos as $file) {
+          if (!$file) {
             $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.error.something_went_wrong'));
             break;
           }

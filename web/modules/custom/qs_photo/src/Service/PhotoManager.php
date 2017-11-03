@@ -383,7 +383,7 @@ class PhotoManager {
    *
    * @param \Drupal\node\NodeInterface $event
    *   The event.
-   * @param array $file
+   * @param mixed $file
    *   Uploaded $file.
    *
    * @return \Drupal\node\NodeInterface

@@ -103,7 +103,15 @@ class UserController extends ControllerBase {
       $variables['user'] = $user;
     }
 
-    $variables['activities'] = $this->activityManager->getByUserPhoto($community, $user);
+    if ($this->acl->hasBypass()) {
+      // Show every activities for bypass user.
+      $nids = $this->activityManager->getThemed($community);
+      $variables['activities'] = $this->nodeStorage->loadMultiple($nids);
+    }
+    else {
+      // Show only activity where user has upload photo access.
+      $variables['activities'] = $this->activityManager->getByUserPhoto($community, $user);
+    }
 
     return [
       '#theme'     => 'qs_photo_user_activities_collection_page',

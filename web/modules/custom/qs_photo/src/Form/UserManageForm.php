@@ -53,10 +53,10 @@ class UserManageForm extends FormBasic {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
-   * @param \Drupal\user\UserInterface $user
-   *   The user.
    * @param \Drupal\node\NodeInterface $activity
    *   The activity.
+   * @param \Drupal\user\UserInterface $user
+   *   The user.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.

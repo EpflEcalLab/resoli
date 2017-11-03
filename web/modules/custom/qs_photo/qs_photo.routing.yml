@@ -75,7 +75,7 @@ qs_photo.form.add:
         community:
           type: entity:taxonomy_term
 
-# User Activities where he can add photo(s).
+# Photos manager form
 qs_photo.user.form.manage:
     path: '/photos/activity/{activity}/user/{user}'
     defaults:

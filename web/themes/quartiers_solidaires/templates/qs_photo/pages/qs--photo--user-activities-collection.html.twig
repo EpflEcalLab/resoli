@@ -3,12 +3,18 @@
 <div class="container">
   <div class="text-center mb-5 mt-3">
     {% if variables.user %}
-      <h1>
-        {{ 'qs.photos.user.collection.title @name @email'|t({
-          '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
-          '@email': variables.user.mail.value ? variables.user.mail.value : ''
-        }) }}
-      </h1>
+      {% if variables.current_user %}
+        <h1>
+          {{ 'qs.photos.user.collection.title'|t }}
+        </h1>
+      {% else %}
+        <h1>
+          {{ 'qs.photos.user.collection.title @name @email'|t({
+            '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
+            '@email': variables.user.mail.value ? variables.user.mail.value : ''
+          }) }}
+        </h1>
+      {% endif %}
     {% else %}
       <h1>{% trans %}qs.activity.user.collection.title{% endtrans %}</h1>
     {% endif %}
@@ -50,13 +56,13 @@
               </div>
               <div class="card-actions card-actions-offset row">
                 <div class="col-sm-6 mb-3">
-                  <a href="{{ path('<front>', {node: activity.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                  <a href="{{ path('qs_photo.activity', {activity: activity.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
                     {{ macros.icon('picture') }}
                     {{ 'qs.photos.view_activity_photos'|t }}
                   </a>
                 </div>
                 <div class="col-sm-6 mb-3">
-                  <a href="{{ path('<front>', {node: activity.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                  <a href="{{ path('qs_photo.user.form.manage', {activity: activity.nid.value, user: variables.user.uid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
                     {{ macros.icon('pencil') }}
                     {{ 'qs.photos.manage_photos'|t }}
                   </a>
@@ -78,7 +84,7 @@
   {% endif %}
 
   <div class="text-center mb-5">
-    <a href="{{ path('<front>', {node: activity.nid.value}) }}" class="btn btn-secondary btn-icon shadow-to-bottom">
+    <a href="{{ path('qs_photo.form.add', {community: variables.community.tid.value}) }}" class="btn btn-secondary btn-icon shadow-to-bottom">
       {{ macros.icon('plus') }}
       {{ 'qs.photos.add_photos'|t }}
     </a>

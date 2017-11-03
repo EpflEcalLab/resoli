@@ -1,8 +1,8 @@
 const card = () => {
   (function ($) {
     // Toggle card body on card-pill header click
-    $('.collapse').on('show.bs.collapse hide.bs.collapse', function(e) {
-      $(this).parents('.card').toggleClass('card-open');
+    $(document).on('show.bs.collapse hide.bs.collapse', function(e) {
+      $(e.target).parents('.card').toggleClass('card-open');
 
       // Make sure we close all flipped cards
       $('.flip').removeClass('flip');
@@ -60,8 +60,11 @@ const card = () => {
 
     // Update the hash in URL on collapse
     $('.card .collapse').on('show.bs.collapse', function(e) {
-      const card_id = $(e.currentTarget).attr('id').replace('collapse-', '');
-      window.location.hash = `card${card_id}`;
+      const id = $(e.currentTarget).attr('id');
+      if (id) {
+        const card_id = id.replace('collapse-', '');
+        window.location.hash = `card${card_id}`;
+      }
     });
 
     // Get the hash in the URL

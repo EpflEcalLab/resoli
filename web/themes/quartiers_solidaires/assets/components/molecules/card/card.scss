@@ -109,6 +109,30 @@ a[href].card-pill-simple {
     text-decoration: none;
     color: theme-color("primary");
   }
+
+  &[data-toggle="collapse"] {
+    margin: 0;
+
+    .card-open & {
+      margin: -$card-border-width;
+      background: theme-color("secondary");
+      color: $white;
+
+      @include hover {
+        color: $white;
+      }
+
+      .card-pill-icon .icon {
+        border: $card-border-width solid theme-color("secondary");
+        color: theme-color("secondary");
+      }
+
+      .text-dark {
+        color: $white !important;
+      }
+    }
+  }
+
 }
 
 .card-pill-title {

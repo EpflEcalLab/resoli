@@ -1,3 +1,4 @@
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="pswp__bg"></div>
   <div class="pswp__scroll-wrap">
@@ -27,8 +28,10 @@
         <div class="pswp__share-tooltip"></div>
       </div>
       <button class="pswp__button pswp__button--arrow--left" title="{{ 'qs.photoswipe.prev'|t }}">
+        {{ macros.icon('chevron-left', 'icon-lg') }}
       </button>
       <button class="pswp__button pswp__button--arrow--right" title="{{ 'qs.photoswipe.next'|t }}">
+        {{ macros.icon('chevron-right', 'icon-lg') }}
       </button>
       <div class="pswp__caption">
         <div class="pswp__caption__center"></div>

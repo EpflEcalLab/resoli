@@ -77,9 +77,10 @@ class UserManageForm extends FormBasic {
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
-    $form['#title'] = $this->t('qs_photo.user.form.manage.title_form');
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
+      'title' => $this->t('qs_photo.user.form.manage.title_form @activity', ['@activity' => $activity->getTitle()]),
+      'description' => $this->t('qs_photo.user.form.manage.description_form'),
       'class' => [
         'modal-body',
       ],
@@ -106,6 +107,43 @@ class UserManageForm extends FormBasic {
       '#type'          => 'checkboxes',
       '#required'      => FALSE,
       '#options'       => $options,
+    ];
+
+    $form['actions'] = [
+      '#type' => 'fieldset',
+      '#theme_wrappers' => [
+        'container__center',
+      ],
+      '#attributes' => [
+        'class' => [
+          'text-center',
+        ],
+      ],
+    ];
+
+    $form['actions']['comment'] = [
+      '#type' => 'submit',
+      '#attributes' => [
+        'icon' => 'comment',
+        'icon_left' => TRUE,
+        'outline' => TRUE,
+        'class' => [
+          'shadow-to-bottom',
+        ],
+      ],
+      '#value' => $this->t('qs_photos.photos_comment'),
+    ];
+
+    $form['actions']['delete'] = [
+      '#type' => 'submit',
+      '#attributes' => [
+        'icon' => 'trash',
+        'icon_left' => TRUE,
+        'class' => [
+          'btn-danger',
+        ],
+      ],
+      '#value' => $this->t('qs_photos.photos_delete'),
     ];
 
     return $form;

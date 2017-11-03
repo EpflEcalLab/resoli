@@ -378,4 +378,27 @@ class PhotoManager {
     return $photos;
   }
 
+  /**
+   * Create a Photo.
+   *
+   * @param \Drupal\node\NodeInterface $event
+   *   The event.
+   * @param array $file
+   *   Uploaded $file.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The created photo.
+   */
+  public function create(NodeInterface $event, $file) {
+    $photo = $this->nodeStorage->create([
+      'type'        => 'photo',
+      'status'      => TRUE,
+      'title'       => $file->get('filename')->value . ' - ' . $event->getTitle(),
+      'field_event' => $event->id(),
+      'field_image' => $file,
+    ]);
+    $photo->save();
+    return $photo;
+  }
+
 }

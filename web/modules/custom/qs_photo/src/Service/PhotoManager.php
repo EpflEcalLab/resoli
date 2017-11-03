@@ -396,6 +396,7 @@ class PhotoManager {
       'title'       => $file->get('filename')->value . ' - ' . $event->getTitle(),
       'field_event' => $event->id(),
       'field_image' => $file,
+      'uid'         => $this->currentUser->id(),
     ]);
     $photo->save();
     return $photo;

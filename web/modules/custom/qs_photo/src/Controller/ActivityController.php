@@ -120,9 +120,7 @@ class ActivityController extends ControllerBase {
           'user',
           'url.query_args',
         ],
-        'tags' => [
-          'tags' => $this->getCacheTags($activity, $photos),
-        ],
+        'tags' => $this->getCacheTags($activity, $photos),
       ],
     ];
   }

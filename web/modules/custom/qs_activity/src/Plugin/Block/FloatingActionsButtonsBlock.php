@@ -98,6 +98,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     $node = $this->route->getParameter('node');
     $activity = $this->route->getParameter('activity');
 
+    if (!$community && $activity && !$activity->get('field_community')->isEmpty()) {
+      $community = $activity->field_community->entity;
+    }
+
     $icon = NULL;
     $url = NULL;
     $label = $this->t('qs.previous');
@@ -220,6 +224,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_photo.collection.theme',
       'qs_photo.collection.month',
       'qs_photo.user.activities.collection',
+      'qs_photo.activity',
     ])) {
       // For everybody, show a button "My Photos".
       $icon = 'picture';

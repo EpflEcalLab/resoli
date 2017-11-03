@@ -326,7 +326,7 @@ msgid "qs_menu.links.photos"
 msgstr "Photos"
 
 msgid "qs_menu.links.account.dashboard"
-msgstr "Gérer mon compte"
+msgstr "Mes informations"
 
 msgid "qs_activity.floating.add.activity"
 msgstr "Créer une activité"
@@ -1665,39 +1665,39 @@ msgstr ""
 
 msgid "qs.photo.month.empty @community @start_date @end_date"
 msgstr ""
+"Aucune photo n’a été publiée à @community pour la période du @start_date au "
+"@end_date"
 
 msgid "qs.photos.date.sticky.two_weeks_ago"
-msgstr ""
-
-msgid "qs_menu.links.photos.months"
-msgstr ""
-
-msgid "qs.menu.sorted_by"
-msgstr ""
+msgstr "Il y a deux semaines"
 
 msgid "qs.photos.date.sticky.last_week"
-msgstr ""
+msgstr "La semaine passée"
 
 msgid "qs.photos.date.sticky.this_week"
-msgstr ""
+msgstr "Cette semaine"
 
 msgid "qs.photos.date.sticky.tomorrow"
-msgstr ""
+msgstr "Hier"
 
 msgid "qs.photos.date.sticky.today"
-msgstr ""
+msgstr "Aujourd’hui"
 
 msgid "qs.photos.date.sticky.from_to @start_date @end_date"
-msgstr ""
+msgstr "Semaine du @start_date au @end_date"
 
 msgid "qs.photo.theme.filters @community_name @themes_names."
 msgstr ""
+"Voici les photos des activités pour @themes_names, par thème, \n"
+"qui se sont déroulées à @community_name."
 
 msgid "qs.photo.theme.filters @community_name."
 msgstr ""
+"Voici toutes les photos des activités, par thème, qui se sont déroulées à "
+"@community_name."
 
 msgid "qs.photos.view_all"
-msgstr ""
+msgstr "Toutes les photos"
 
 msgid "qs.photoswipe.prev"
 msgstr ""
@@ -1716,4 +1716,3 @@ msgstr ""
 
 msgid "qs.photoswipe.btn.zoom"
 msgstr ""
-

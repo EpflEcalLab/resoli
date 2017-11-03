@@ -955,7 +955,7 @@ msgid "qs_event.events.form.add.success @event"
 msgstr ""
 
 msgid "qs_event.events.form.delete.success @event"
-msgstr ""
+msgstr "L’évènement @event a bien été supprimé!"
 
 msgid ""
 "Unrecognized username or password. <a href=\":password\">Forgot your "
@@ -975,7 +975,7 @@ msgstr ""
 "Vérifier votre boîte de réception, un e-mail vient de vous être envoyé!"
 
 msgid "%name is not recognized as a username or an email address."
-msgstr ""
+msgstr "L’adresse e-mail %name est inconnue de Réseaux Solidaires."
 
 msgid "Further instructions have been sent to your email address."
 msgstr "De plus amples informations vous ont été envoyées par e-mail."
@@ -999,10 +999,10 @@ msgid "qs.activity.nextevent.empty"
 msgstr "Pas de prochaine date pour le moment"
 
 msgid "qs_auth.form.reset.help"
-msgstr ""
+msgstr "Vous pourrez en choisir un nouveau en validant cette requête."
 
 msgid "qs_auth.form.reset.message @mail @expiration_date"
-msgstr ""
+msgstr "Elle ne concerne que l’adresse @mail, et sera disponible jusqu’au @expiration_date."
 
 msgid "qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname"
 msgstr "Remplacement de vos informations de connexion sur @sitename"
@@ -1105,7 +1105,7 @@ msgstr ""
 "Voici le gestionnaire de la communauté @variables.community.name.value."
 
 msgid "qs.community.waiting_approval.request.manger"
-msgstr ""
+msgstr "Il n’y a actuellement aucune demande en attente pour rejoindre votre communauté."
 
 msgid "qs_community.members.empty"
 msgstr "Il n’y a actuellement aucune personne membre de votre communauté."
@@ -1225,7 +1225,7 @@ msgid "qs_supervisor.account.form.edit.success @firstname, @lastname, @mail"
 msgstr "Vos données personnelles ont bien été mises à jour, @firstname!"
 
 msgid "qs_auth.pass_reset_form.title"
-msgstr ""
+msgstr "Souhaitez-vous réinitialiser votre mot de passe?"
 
 msgid "qs.form.error.username.used"
 msgstr ""
@@ -1289,7 +1289,7 @@ msgid "qs_activity.form.error.date_format_invalid @fieldname"
 msgstr ""
 
 msgid "qs_activity.form.error.date_past @fieldname"
-msgstr ""
+msgstr "La date choisie est déjà passée."
 
 msgid "qs_activity.events.form.add.error.hours.inconsistency @fieldname"
 msgstr "Vérifiez l’heure de votre évènement."

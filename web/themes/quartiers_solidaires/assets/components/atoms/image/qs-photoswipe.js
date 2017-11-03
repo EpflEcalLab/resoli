@@ -149,6 +149,9 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     // define options (if needed)
     options = {
       shareEl: false,
+      loop: false,
+      tapToClose: false,
+      closeElClasses: [],
 
       // define gallery index (for URL)
       galleryUID: galleryElement.getAttribute('data-pswp-uid'),

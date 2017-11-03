@@ -6,7 +6,8 @@
   "scripts": {
     "start": "toolbox serve",
     "build": "toolbox build",
-    "deploy": "toolbox build styleguide && toolbox deploy"
+    "deploy": "toolbox build styleguide && toolbox deploy",
+    "single": "toolbox single"
   },
   "browserslist": [
     "> 1% in CH",

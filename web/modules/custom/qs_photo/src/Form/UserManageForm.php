@@ -10,7 +10,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
 
 /**
- * UserPhotosForm class.
+ * UserManageForm class.
  */
 class UserManageForm extends FormBasic {
 

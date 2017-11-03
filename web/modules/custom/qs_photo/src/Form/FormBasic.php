@@ -40,6 +40,26 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Lazy loading for the Quartiers-Solidaires Activity Manager service.
+   *
+   * @return \Drupal\qs_activity\Service\ActivityManager
+   *   Return the Quartiers-Solidaires Activity Manager.
+   */
+  protected function getActivityManager() {
+    return $this->container->get('qs_activity.activity_manager');
+  }
+
+  /**
+   * Lazy loading for the Quartiers-Solidaires Event Manager service.
+   *
+   * @return \Drupal\qs_activity\Service\EventManager
+   *   Return the Quartiers-Solidaires Event Manager.
+   */
+  protected function getEventManager() {
+    return $this->container->get('qs_activity.event_manager');
+  }
+
+  /**
    * Lazy loading for the Quartiers-Solidaires Photo Manager service.
    *
    * @return \Drupal\qs_photo\Service\PhotoManager

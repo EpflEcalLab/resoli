@@ -1,0 +1,23 @@
+@charset 'utf-8';
+
+.img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: ($grid-gutter-width / 2);
+}
+
+.img-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: darken($teal-100, 10%);
+}
+
+// Photoswipe
+/////////////
+
+.gallery-item {
+  figcaption {
+    display: none;
+  }
+}

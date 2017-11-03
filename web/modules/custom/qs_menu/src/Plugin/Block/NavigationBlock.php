@@ -101,6 +101,11 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $community = $node->field_community->entity;
     }
 
+    $activity = $this->route->getParameter('activity');
+    if (!$community && $activity && $activity->bundle() == 'activity') {
+      $community = $activity->field_community->entity;
+    }
+
     $event = $this->route->getParameter('event');
     if (!$community && $event && $event->bundle() == 'event') {
       $community = $event->field_activity->entity->field_community->entity;
@@ -184,21 +189,27 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ],
       'photos' => [
         'label' => $this->t('qs_menu.links.photos'),
-        'url' => "javascript:alert('This feature is not yet availaible.')",
+        'url' => $this->urlGenerator->generate('qs_photo.collection.month', [
+          'community' => $community->id(),
+        ]),
         'icon' => 'pictures',
         'links' => [
-          'qs_activity.collection.themes' => [
-            'url' => $this->urlGenerator->generate('<front>'),
-            'label' => $this->t('qs_menu.links.photos.themes'),
+          'qs_photo.collection.month' => [
+            'url' => $this->urlGenerator->generate('qs_photo.collection.month', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.photos.months'),
           ],
-          // @TODO temp link to not have a broken nav:
-          'qs_activity.collection.date' => [
-            'url' => $this->urlGenerator->generate('<front>'),
-            'label' => $this->t('qs_menu.links.photos.date'),
+          'qs_photo.collection.theme' => [
+            'url' => $this->urlGenerator->generate('qs_photo.collection.theme', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.photos.themes'),
           ],
         ],
         'activated_by' => [
-          '<front>',
+          'qs_photo.collection.month',
+          'qs_photo.collection.theme',
         ],
       ],
     ];

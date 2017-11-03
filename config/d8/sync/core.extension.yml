@@ -10,6 +10,7 @@ module:
   bamboo_twig_loader: 0
   bamboo_twig_path: 0
   bamboo_twig_security: 0
+  big_pipe: 0
   block: 0
   block_content: 0
   breakpoint: 0
@@ -50,6 +51,7 @@ module:
   qs_calendar: 0
   qs_community: 0
   qs_menu: 0
+  qs_photo: 0
   qs_site: 0
   qs_subscription: 0
   qs_supervisor: 0

@@ -80,7 +80,7 @@ class EventManager {
   }
 
   /**
-   * Get only the next events (nearest from now) for the given date range.
+   * Get only the events (nearest from $date_start) for the given date range.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
@@ -141,6 +141,35 @@ class EventManager {
       ->condition('status', TRUE)
       ->condition('field_activity', $activity->id())
       ->sort('field_start_at', 'ASC');
+
+    $nids = $query->execute();
+    $events = NULL;
+    if ($nids) {
+      $events = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $events;
+  }
+
+  /**
+   * Get all the previous event for the given activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity which we want the retrieve past events.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
+   */
+  public function getAllPrev(NodeInterface $activity) {
+    $now = new DrupalDateTime();
+
+    // Get every activity that belongs to the current community.
+    $query = $this->queryFactory->get('node')
+      ->condition('type', 'event')
+      ->condition('field_end_at', $now, '<')
+      ->condition('status', TRUE)
+      ->condition('field_activity', $activity->id())
+      ->sort('field_end_at', 'DESC');
 
     $nids = $query->execute();
     $events = NULL;

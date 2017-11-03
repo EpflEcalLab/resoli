@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Quartiers Solidaires\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-21 10:44+0100\n"
-"PO-Revision-Date: 2017-10-26 10:30+0100\n"
+"PO-Revision-Date: 2017-11-02 15:47+0100\n"
 "Last-Translator: Gilles Doge\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -11,10 +11,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz\n"
+"X-Generator: Poedit 1.7.7\n"
 "X-Loco-Source-Locale: en\n"
 "X-Loco-Project-Id: 30500\n"
-"X-Loco-Api-Version: 1.0.18 20171009-1"
+"X-Loco-Api-Version: 1.0.18 20171009-1\n"
 
 msgid "last year"
 msgstr "l'année dernière"
@@ -311,7 +311,7 @@ msgid "qs_activity.collection.themes.title"
 msgstr ""
 
 msgid "qs.previous"
-msgstr "Retour"
+msgstr "Etape précédente"
 
 msgid "qs_menu.links.activities"
 msgstr "Activités"
@@ -326,7 +326,7 @@ msgid "qs_menu.links.photos"
 msgstr "Photos"
 
 msgid "qs_menu.links.account.dashboard"
-msgstr "Réglages"
+msgstr "Mes informations"
 
 msgid "qs_activity.floating.add.activity"
 msgstr "Créer une activité"
@@ -495,7 +495,7 @@ msgid "qs_activity.activities.form.edit.defaults.contact_phone"
 msgstr "Définissez un numéro de téléphone de contact par défaut"
 
 msgid "qs_activity.activities.form.edit.defaults.contact_mail.placeholder"
-msgstr "Ex. Marcel Despraz"
+msgstr "Ex. marcel.despraz@re-so.ch"
 
 msgid "qs_activity.activities.form.edit.defaults.contact_mail"
 msgstr "Définissez une adresse e-mail de contact par défaut"
@@ -541,9 +541,6 @@ msgstr "Par date"
 msgid "qs_activity.floating.dashboard.community"
 msgstr "Gérer ma communauté"
 
-msgid "qs_menu.links.account.communities"
-msgstr "Gérer ma communauté"
-
 msgid "qs.auth.approval.thanks"
 msgstr "Merci pour toutes ces informations!"
 
@@ -555,12 +552,6 @@ msgstr ""
 "Réseaux Solidaires! Notez que cette validation peut durer quelques minutes, "
 "comme quelques jours. N’hésitez pas à la contacter pour toute information "
 "complémentaire."
-
-msgid "qs.and"
-msgstr "et"
-
-msgid "qs.etc"
-msgstr "etc..."
 
 msgid "qs.auth.approval.short"
 msgstr "Adhésion en cours de validation"
@@ -677,7 +668,7 @@ msgid "qs.contact @member.field_firstname.value"
 msgstr "Contacter @member.field_firstname.value"
 
 msgid "qs.community.waiting_approval.request.member"
-msgstr "souhaite devenir membre de la communauté."
+msgstr "Cette personne souhaite devenir membre de la communauté."
 
 msgid "qs.confirmed"
 msgstr "Confirmer"
@@ -766,6 +757,8 @@ msgstr ""
 
 msgid "qs_community.waiting_approval.empty"
 msgstr ""
+"Il n’y a actuellement aucune demande en attente pour rejoindre votre "
+"communauté."
 
 msgid "qs.activity.theme.filters @community_name @themes_names."
 msgstr ""
@@ -788,7 +781,7 @@ msgid "qs.event.dashboard_title"
 msgstr "Gérer l’évènement"
 
 msgid "qs.event.dashboard_description"
-msgstr "Modifiez l’évènement et gérez les inscriptions."
+msgstr "Modifier l’évènement et gérer les inscriptions."
 
 msgid "qs.event.subscriptions"
 msgstr "Gérer les inscriptions"
@@ -807,7 +800,7 @@ msgstr ""
 "Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
 msgid "qs.form.error.mail.malformed"
-msgstr "Votre adresse e-mail semble être incorrecte"
+msgstr "Votre adresse e-mail semble être incorrecte ou absente."
 
 msgid "qs.form.error.mail.used"
 msgstr "Cette adresse est déjà utilisée par un compte."
@@ -867,10 +860,10 @@ msgid "qs_auth.register_form.step4.sub_description"
 msgstr "En cas d’oubli, vous pourrez à tout instant le réinitialiser."
 
 msgid "qs_supervisor.account.personal_info"
-msgstr "Voici le résumé des informations liées à mon compte."
+msgstr "Voici les informations liées à mon compte."
 
 msgid "qs_supervisor.account.personal_data"
-msgstr "Mes données personnelles:"
+msgstr "Mes données personnelles"
 
 msgid "qs_supervisor.account.form.edit_title"
 msgstr "Réviser ou modifier mes données personnelles"
@@ -894,7 +887,7 @@ msgid "qs_auth.form.communities_apply.no_community"
 msgstr "Il n’y a pas d’autres communautés disponibles."
 
 msgid "qs_supervisor.account.form.back"
-msgstr "Retour à mon résumé"
+msgstr "Retour à mes infos"
 
 msgid "qs_activity.floating.dashboard.activity"
 msgstr "Gérer mon activité"
@@ -913,14 +906,11 @@ msgstr ""
 msgid "qs.next"
 msgstr "Etape suivante"
 
-msgid "qs.prev"
-msgstr "Etape précédente"
-
 msgid "qs.activity.edit_info"
 msgstr "Modifier le titre et le thème"
 
 msgid "qs.activity.edit_visibility"
-msgstr "Modifier la visibilité des évènements de l’activité."
+msgstr "Modifier la visibilité de l’activité"
 
 msgid "qs_activity.add_form.community_can_subscribe"
 msgstr "Permettre à la communauté l’inscription aux évènements"
@@ -953,7 +943,7 @@ msgid "qs.activity.delete"
 msgstr "Supprimer l’activité"
 
 msgid "qs_activity.activities.form.delete.warning"
-msgstr "Etes-vous certain de vouloir supprimer cette activité?"
+msgstr "Voulez-vous vraiment supprimer cette activité?"
 
 msgid "qs_activity.activities.form.add.success @activity"
 msgstr "L’activité @activity a bien été créée!"
@@ -965,7 +955,7 @@ msgid "qs_event.events.form.add.success @event"
 msgstr ""
 
 msgid "qs_event.events.form.delete.success @event"
-msgstr ""
+msgstr "L’évènement @event a bien été supprimé!"
 
 msgid ""
 "Unrecognized username or password. <a href=\":password\">Forgot your "
@@ -985,7 +975,7 @@ msgstr ""
 "Vérifier votre boîte de réception, un e-mail vient de vous être envoyé!"
 
 msgid "%name is not recognized as a username or an email address."
-msgstr ""
+msgstr "L’adresse e-mail %name est inconnue de Réseaux Solidaires."
 
 msgid "Further instructions have been sent to your email address."
 msgstr "De plus amples informations vous ont été envoyées par e-mail."
@@ -997,22 +987,22 @@ msgid "qs.auth.communities.dashboard_description"
 msgstr "Choisissez une des options ci-dessous."
 
 msgid "qs.contact @privilege.user.entity.field_firstname.value"
-msgstr ""
+msgstr "Contacter @privilege.user.entity.field_firstname.value"
 
 msgid "qs_activity.activities.form.add.save"
 msgstr "Voir l’activité"
 
 msgid "qs_activity.activities.form.add.save_and_new_event"
-msgstr "Valider et ajouter un évènement"
+msgstr "Valider et créer un évènement"
 
 msgid "qs.activity.nextevent.empty"
 msgstr "Pas de prochaine date pour le moment"
 
 msgid "qs_auth.form.reset.help"
-msgstr ""
+msgstr "Vous pourrez en choisir un nouveau en validant cette requête."
 
 msgid "qs_auth.form.reset.message @mail @expiration_date"
-msgstr ""
+msgstr "Elle ne concerne que l’adresse @mail, et sera disponible jusqu’au @expiration_date."
 
 msgid "qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname"
 msgstr "Remplacement de vos informations de connexion sur @sitename"
@@ -1115,10 +1105,10 @@ msgstr ""
 "Voici le gestionnaire de la communauté @variables.community.name.value."
 
 msgid "qs.community.waiting_approval.request.manger"
-msgstr ""
+msgstr "Il n’y a actuellement aucune demande en attente pour rejoindre votre communauté."
 
 msgid "qs_community.members.empty"
-msgstr ""
+msgstr "Il n’y a actuellement aucune personne membre de votre communauté."
 
 msgid "qs_supervisor.account.community_go"
 msgstr ""
@@ -1152,18 +1142,19 @@ msgstr "Fermer"
 
 msgid "qs.event.contact_description @event.field_contact_name.value"
 msgstr ""
+"La personne responsable de cet évènement est @event.field_contact_name.value."
 
 msgid "qs.event.contact.you_can_contact"
-msgstr ""
+msgstr "Vous pouvez la contacter"
 
 msgid "qs.event.contact.by_phone"
-msgstr ""
+msgstr "par téléphone"
 
 msgid "qs.event.contact.or"
-msgstr ""
+msgstr "ou"
 
 msgid "qs.event.contact.by_email"
-msgstr ""
+msgstr "par e-mail"
 
 msgid "qs.activity.no_events_please_contact @mail_link"
 msgstr ""
@@ -1234,7 +1225,7 @@ msgid "qs_supervisor.account.form.edit.success @firstname, @lastname, @mail"
 msgstr "Vos données personnelles ont bien été mises à jour, @firstname!"
 
 msgid "qs_auth.pass_reset_form.title"
-msgstr ""
+msgstr "Souhaitez-vous réinitialiser votre mot de passe?"
 
 msgid "qs.form.error.username.used"
 msgstr ""
@@ -1298,7 +1289,7 @@ msgid "qs_activity.form.error.date_format_invalid @fieldname"
 msgstr ""
 
 msgid "qs_activity.form.error.date_past @fieldname"
-msgstr ""
+msgstr "La date choisie est déjà passée."
 
 msgid "qs_activity.events.form.add.error.hours.inconsistency @fieldname"
 msgstr "Vérifiez l’heure de votre évènement."
@@ -1316,7 +1307,8 @@ msgid "qs_activity.activities.form.step2"
 msgstr ""
 
 msgid "qs_activity.activities.form.step3.description"
-msgstr "Quel degré de confidentialité souhaitez-vous pour votre activité?"
+msgstr ""
+"Quel degré de confidentialité souhaitez-vous attribuer à votre activité?"
 
 msgid "qs_activity.activities.form.step3"
 msgstr ""
@@ -1355,16 +1347,22 @@ msgid ""
 "A confirmation request to cancel your account has been sent to your email "
 "address."
 msgstr ""
+"Une demande de confirmation d’annulation de votre compte vient de vous être "
+"envoyée par e-mail."
 
 msgid ""
 "There was a problem with your form submission. Please refresh the page and "
 "try again."
 msgstr ""
+"Il y a eu un problème avec la validation de vos données. Merci de recharger "
+"la page et d’essayer à nouveau."
 
 msgid ""
 "There was a problem with your form submission. Please wait @limit seconds "
 "and try again."
 msgstr ""
+"Il y a eu un problème avec la validation de vos données. Merci de patienter "
+"@limit secondes et d’essayer à nouveau."
 
 msgid "qs.activity.add_member"
 msgstr "Ajouter un membre"
@@ -1373,14 +1371,32 @@ msgid "Member"
 msgstr ""
 
 msgid "qs_activity.activities.form.add.member.success @activity"
-msgstr "Vous avez bien ajouté de nouveaux membres à l’activité @activity!"
+msgstr "Vous avez bien ajouté un nouveau membre à l’activité @activity!"
 
 msgid ""
 "qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url"
 msgstr ""
+"Bonjour @firstname @lastname,\n"
+"\n"
+"Vous avez effectué une demande d’annulation de votre compte d’accès à la "
+"plateforme Réseaux Solidaires.\n"
+"\n"
+"\n"
+"Vous pouvez désormais confirmer cette demande en appuyant sur le lien "
+"suivant, ou en le copiant-collant dans votre navigateur internet:\n"
+"\n"
+"@cancel-url\n"
+"\n"
+"ATTENTION: Cette action est irréversible.\n"
+"\n"
+"Si vous n’utilisez pas ce lien, il sera automatiquement échu après un jour.\n"
+"\n"
+"\n"
+"Cordialement, \n"
+"l’équipe Réseaux Solidaires"
 
 msgid "qs.cancel.confirm.expired"
-msgstr ""
+msgstr "Ce lien a expiré, redemandez-en un."
 
 msgid "qs_menu.links.calendar.weekly"
 msgstr "Hebdo"
@@ -1408,9 +1424,11 @@ msgstr "Dans deux semaines"
 
 msgid "qs.activity.date.title_empty @community @start_date @end_date"
 msgstr ""
+"Aucune activité n’est prévue à @community pour la période du @start_date au "
+"@end_date"
 
 msgid "qs.activity.date.link_prev"
-msgstr "Précédents évènements"
+msgstr "Evènements précédents"
 
 msgid "qs.activity.date.link_next"
 msgstr "Prochains évènements"
@@ -1477,7 +1495,7 @@ msgid "qs.contact @subscriber.field_firstname.value"
 msgstr "Contacter @subscriber.field_firstname.value"
 
 msgid "qs_subscription.subscribers.empty"
-msgstr "Il n’y a aucune inscription pour l’instant."
+msgstr "Il n’y a aucune inscription confirmée pour l’instant."
 
 msgid ""
 "qs_subscription.waiting_approval.title @variables.event.title.value "
@@ -1529,6 +1547,8 @@ msgid ""
 "qs.activity.user.collection.title @variables.user.field_firstname.value "
 "@variables.user.field_lastname.value @variables.user.mail.value"
 msgstr ""
+"Voici la liste des activités qui vous concernent, @variables.user."
+"field_firstname.value."
 
 msgid "qs.activity.user.collection.title"
 msgstr "Voici la liste des activités qui vous concernent."
@@ -1554,6 +1574,7 @@ msgid ""
 "qs.subscription.user.collection.title @variables.user.field_firstname.value "
 "@variables.user.field_lastname.value @variables.user.mail.value"
 msgstr ""
+"Voici la liste de vos inscriptions, @variables.user.field_firstname.value."
 
 msgid "qs.subscription.user.collection.title"
 msgstr "Voici la liste des évènements auxquels vous vous êtes inscrit."
@@ -1568,46 +1589,132 @@ msgid "qs_activity.floating.my_subscriptions"
 msgstr "Gérer mes inscriptions"
 
 msgid "qs_supervisor.floating.my_account"
-msgstr "Gérer mes informations"
+msgstr "Gérer mon compte"
 
 msgid "qs.event.calendar"
 msgstr "Voir dans le calendrier"
 
 msgid "qs.community.welcome.body"
-msgstr ""
+msgstr "Vous êtes maintenant connecté(e) à la communauté"
 
 msgid "qs.previous.to_calendar"
 msgstr "Retour au calendrier"
 
 msgid "qs_activity.activities.form.add.save_and_set_default_values"
-msgstr ""
+msgstr "Définir des valeurs par défaut"
+
+msgid "qs_menu.links.account.communities"
+msgstr "Gérer ma communauté"
 
 msgid "qs_activity.events.form.edit.contact_name"
-msgstr ""
+msgstr "Quelle est la personne responsable?"
 
 msgid "qs_activity.events.form.edit.contact_name.placeholder"
-msgstr ""
+msgstr "Ex. Michel Perriard"
 
 msgid "qs_activity.events.form.edit.contact_phone"
-msgstr ""
+msgstr "Quel est son numéro de téléphone?"
 
 msgid "qs_activity.events.form.edit.contact_phone.placeholder"
-msgstr ""
+msgstr "Ex. 079 790 79 79"
 
 msgid "qs_activity.events.form.edit.contact_mail"
-msgstr ""
+msgstr "Quelle est son adresse e-mail?"
 
 msgid "qs_activity.events.form.edit.contact_mail.placeholder"
-msgstr ""
+msgstr "Ex. michel.perriard@re-so.ch"
 
 msgid "qs_activity.activities.form.edit.defaults.venue.placeholder"
-msgstr ""
+msgstr "Ex. Avenue Bergières 10, 1004 Lausanne"
 
 msgid "qs_activity.events.form.add.venue.placeholder"
-msgstr ""
+msgstr "Ex. Avenue Bergières 10, 1004 Lausanne"
 
 msgid "qs_activity.events.form.edit.venue.placeholder"
-msgstr ""
+msgstr "Ex. Avenue Bergières 10, 1004 Lausanne"
+
+msgid "qs.etc"
+msgstr "etc..."
+
+msgid "qs.and"
+msgstr "et"
 
 msgid "qs.previous.to_event"
+msgstr "Retour à l’évènement"
+
+msgid "qs.previous.to_photos_list"
+msgstr "Retour à la galerie"
+
+msgid "qs_menu.links.photos.months"
+msgstr "Afficher les 3 prochains mois"
+
+msgid "qs.community.welcome.body @community"
+msgstr "Vous êtes maintenant connecté(e) à la communauté @community."
+
+msgid "qs.community.welcome.title @firstname @lastname"
+msgstr "Bonjour @firstname @lastname!"
+
+msgid "qs.onboarding.my_account"
+msgstr ""
+"Accédez ici à vos informations personnelles! Vous pourrez y modifier votre mot de passe ou vous connecter à une autre communauté."
+
+msgid "qs.onboarding.menu"
+msgstr ""
+"Ceci est une barre de navigation! C’est un menu vous permettant de naviguer parmi les différentes sections de votre communauté."
+
+msgid "qs.photos.date"
+msgstr ""
+
+msgid "qs.photo.month.empty @community @start_date @end_date"
+msgstr ""
+"Aucune photo n’a été publiée à @community pour la période du @start_date au "
+"@end_date"
+
+msgid "qs.photos.date.sticky.two_weeks_ago"
+msgstr "Il y a deux semaines"
+
+msgid "qs.photos.date.sticky.last_week"
+msgstr "La semaine passée"
+
+msgid "qs.photos.date.sticky.this_week"
+msgstr "Cette semaine"
+
+msgid "qs.photos.date.sticky.tomorrow"
+msgstr "Hier"
+
+msgid "qs.photos.date.sticky.today"
+msgstr "Aujourd’hui"
+
+msgid "qs.photos.date.sticky.from_to @start_date @end_date"
+msgstr "Semaine du @start_date au @end_date"
+
+msgid "qs.photo.theme.filters @community_name @themes_names."
+msgstr ""
+"Voici les photos des activités pour @themes_names, par thème, \n"
+"qui se sont déroulées à @community_name."
+
+msgid "qs.photo.theme.filters @community_name."
+msgstr ""
+"Voici toutes les photos des activités, par thème, qui se sont déroulées à "
+"@community_name."
+
+msgid "qs.photos.view_all"
+msgstr "Toutes les photos"
+
+msgid "qs.photoswipe.prev"
+msgstr ""
+
+msgid "qs.photoswipe.next"
+msgstr ""
+
+msgid "qs.photoswipe.btn.close"
+msgstr ""
+
+msgid "qs.photoswipe.btn.share"
+msgstr ""
+
+msgid "qs.photoswipe.btn.fullscreen"
+msgstr ""
+
+msgid "qs.photoswipe.btn.zoom"
 msgstr ""

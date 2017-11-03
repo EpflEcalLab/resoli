@@ -100,6 +100,9 @@ fi
 
 if [ $SKIP_TESTS -eq 0 ]
 then
+  # Big Pipe cause some block to be rendered with delay and break Behat tests.
+  ../vendor/bin/drush pmu big_pipe -y
+
   printf "\e[1;33m***********************\e[0m\n"
   printf "\e[1;33m* Running Unit Tests. *\e[0m\n"
   printf "\e[1;33m***********************\e[0m\n"
@@ -118,6 +121,10 @@ then
 
   # Kill runserver if one is alive
   ps -ef | grep 'runserver' | grep -v grep | awk '{print $2}' | xargs kill -9
+
+  cd "web"
+  # Enable Big Pipe.
+  ../vendor/bin/drush en big_pipe -y
 
   exit $behat_exit
 fi

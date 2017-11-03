@@ -1,0 +1,11 @@
+uuid: 12fae4eb-d92a-42dd-ab5d-a17f87f0c158
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.photo
+id: node.photo
+target_entity_type_id: node
+target_bundle: photo
+default_langcode: zxx
+language_alterable: false

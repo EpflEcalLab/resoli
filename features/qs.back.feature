@@ -257,3 +257,5 @@ Feature: Back buttons
     Then I am on "/account/1/dashboard"
     Then I should see a "#block-previousnavigation a" element
     And I should see "qs_auth.link.home" link with href "/"
+
+# Photos by Activity

@@ -108,7 +108,7 @@
       }
     }
 
-    [class*=btn-] {
+    &:not(.bg-white) [class*=btn-] {
       border-color: $white;
     }
   }

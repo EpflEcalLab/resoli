@@ -54,3 +54,4 @@ npm-debug.log
 # Ignore nohup created by Behat
 web/nohup.out
 web/localhost
+/privates

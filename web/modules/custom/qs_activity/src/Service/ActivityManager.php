@@ -209,6 +209,82 @@ class ActivityManager {
   }
 
   /**
+   * Get all activities for the $user in the given $community.
+   *
+   * Only the ones where the user can upload photos.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   * @param \Drupal\Core\Session\AccountInterface $user
+   *   The user entity.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Activity. Otherwise an empty array.
+   */
+  public function getByUserPhoto(TermInterface $community, AccountInterface $user) {
+    $query_base = $this->connection->select('node_field_data', 'activity');
+    $query_base->fields('activity', ['nid'])
+      ->condition('activity.type', 'activity')
+      ->condition('activity.status', TRUE);
+
+    $query_base->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
+    $query_base->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+
+    // Get activities where user has at least one privilege higher than member.
+    $query_privileges = clone $query_base;
+
+    $query_privileges->leftJoin('privileges', 'privileges', 'privileges.entity = activity.nid');
+    $query_privileges->condition('privileges.user', $user->id())
+      ->condition('privileges.bundle', 'node')
+      ->condition('privileges.status', TRUE);
+
+    $or = $query_privileges->orConditionGroup();
+    $or->condition('privileges.privilege', 'activity_maintainers');
+    $or->condition('privileges.privilege', 'activity_organizers');
+    $query_privileges->condition($or);
+    $query_privileges->groupBy('activity.nid');
+
+    $rows = $query_privileges->execute()->fetchAll();
+
+    $privileges_activity = [];
+    foreach ($rows as $row) {
+      $privileges_activity[$row->nid] = $row->nid;
+    }
+
+    // Get activities where user has has member privilege &
+    // where photos upload are allowed for member.
+    $query_member = clone $query_base;
+
+    $query_member->leftJoin('privileges', 'privileges', 'privileges.entity = activity.nid');
+    $query_member->condition('privileges.user', $user->id())
+      ->condition('privileges.bundle', 'node')
+      ->condition('privileges.status', TRUE)
+      ->condition('privileges.privilege', 'activity_member');
+
+    $query_member->leftJoin('node__field_member_create_gallery', 'member_create_gallery', 'member_create_gallery.entity_id = activity.nid');
+    $query_member->condition('member_create_gallery.field_member_create_gallery_value', TRUE);
+    $query_member->groupBy('activity.nid');
+
+    $rows = $query_member->execute()->fetchAll();
+
+    $members_activity = [];
+    foreach ($rows as $row) {
+      $members_activity[$row->nid] = $row->nid;
+    }
+
+    // Merge activities to get every ones here user can
+    // upload photos.
+    $nids = array_merge($privileges_activity, $members_activity);
+
+    $activities = NULL;
+    if ($nids) {
+      $activities = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $activities;
+  }
+
+  /**
    * Get all activities in the given date range for the community.
    *
    * @param \Drupal\taxonomy\TermInterface $community

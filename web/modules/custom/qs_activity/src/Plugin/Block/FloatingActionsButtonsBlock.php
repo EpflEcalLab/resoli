@@ -217,9 +217,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Button - "Add Photos" or "My Photos".
     if ($community && in_array($route_name, [
-        'qs_photo.collection.theme',
-        'qs_photo.collection.month',
-      ])) {
+      'qs_photo.collection.theme',
+      'qs_photo.collection.month',
+    ])) {
       // For everybody, show a button "My Photos".
       $icon = 'picture';
       $theme = 'primary';

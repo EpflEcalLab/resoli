@@ -79,11 +79,11 @@ qs_photo.form.add:
 qs_photo.user.activities.collection:
     path: '/photos/{community}/user/{user}'
     defaults:
-      _controller: '\Drupal\qs_activity\Controller\UserController::activities'
+      _controller: '\Drupal\qs_photo\Controller\UserController::activities'
       _title: 'qs_photo.user.activities.collection.title'
     requirements:
       _user_is_logged_in: 'TRUE'
-      _custom_access: '\Drupal\qs_activity\Controller\UserController::access'
+      _custom_access: '\Drupal\qs_photo\Controller\UserController::access'
       community: \d+
       user: \d+
     options:

@@ -1640,25 +1640,27 @@ msgid "qs.and"
 msgstr "et"
 
 msgid "qs.previous.to_event"
-msgstr ""
+msgstr "Retour à l’évènement"
 
 msgid "qs.previous.to_photos_list"
-msgstr ""
+msgstr "Retour à la galerie"
 
 msgid "qs_menu.links.photos.months"
-msgstr ""
+msgstr "Afficher les 3 prochains mois"
 
 msgid "qs.community.welcome.body @community"
-msgstr ""
+msgstr "Vous êtes maintenant connecté(e) à la communauté @community."
 
 msgid "qs.community.welcome.title @firstname @lastname"
-msgstr ""
+msgstr "Bonjour @firstname @lastname!"
 
 msgid "qs.onboarding.my_account"
 msgstr ""
+"Accédez ici à vos informations personnelles! Vous pourrez y modifier votre mot de passe ou vous connecter à une autre communauté."
 
 msgid "qs.onboarding.menu"
 msgstr ""
+"Ceci est une barre de navigation! C’est un menu vous permettant de naviguer parmi les différentes sections de votre communauté."
 
 msgid "qs.photos.date"
 msgstr ""

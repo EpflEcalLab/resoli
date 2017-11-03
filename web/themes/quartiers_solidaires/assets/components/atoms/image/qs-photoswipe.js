@@ -82,7 +82,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
       nodeIndex = 0,
       index;
 
-      console.log(childNodes);
     for (var i = 0; i < numChildNodes; i++) {
       if(childNodes[i].nodeType !== 1) {
         continue;

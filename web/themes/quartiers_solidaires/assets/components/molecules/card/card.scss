@@ -211,8 +211,8 @@ a[href].card-pill-simple {
 
 .card-btn-corner {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: -$card-border-width;
+  right: -$card-border-width;
 }
 
 // Card List Item

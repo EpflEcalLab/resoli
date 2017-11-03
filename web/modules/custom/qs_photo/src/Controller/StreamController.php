@@ -127,6 +127,7 @@ class StreamController extends ControllerBase {
       if (!is_file($image_style_path)) {
         // Create the new image derivative.
         $image_style->createDerivative($file_uri, $image_style_uri);
+        $image_style_path = $this->fso->realpath($image_style_uri);
       }
       $file_download = (object) [
         'path'     => $image_style_path,
@@ -149,12 +150,15 @@ class StreamController extends ControllerBase {
       ]));
 
       $response = new BinaryFileResponse($file_download->path);
+
+      // Create the disposition of the file.
       $response->trustXSendfileTypeHeader();
       $response->setContentDisposition(
         ResponseHeaderBag::DISPOSITION_INLINE,
         $file_download->filename
       );
 
+      // Dispatch request.
       return $response;
     }
     catch (\Exception $e) {

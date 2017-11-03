@@ -9,13 +9,13 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\image\ImageStyleInterface;
+use Drupal\Core\Lock\LockBackendInterface;
 use Drupal\Core\File\FileSystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Drupal\Component\Utility\Crypt;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
-use Drupal\Core\Lock\LockBackendInterface;
+use Drupal\Component\Utility\Crypt;
 
 /**
  * StreamController.

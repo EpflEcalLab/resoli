@@ -294,10 +294,6 @@ class EventEditForm extends EventEditFormBase {
     if (!$this->validateDate($formatted_date, 'd.m.Y')) {
       $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
     }
-    // Assert the date is in the future.
-    elseif ($date < $now) {
-      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_past @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
-    }
 
     // Check hours are realistic.
     if ($start_at >= $end_at) {

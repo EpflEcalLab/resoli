@@ -523,6 +523,7 @@ a[href].card-pill-simple {
     left: -$card-border-width;
     z-index: 10;
     transform: rotateX(180deg) translateZ(1px);
+    background-color: $card-bg;
 
     @include border-radius($card-border-radius - $card-border-width);
 

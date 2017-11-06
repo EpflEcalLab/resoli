@@ -115,8 +115,12 @@ class EventDeleteForm extends EventEditFormBase {
     $event = $this->nodeStorage->load($form_state->getValue('event'));
     $activity = $event->field_activity->entity;
 
-    drupal_set_message($this->t("qs_event.events.form.delete.success @event", [
-      '@event' => $event->getTitle(),
+    drupal_set_message($this->t("qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end", [
+      '@event'      => $event->getTitle(),
+      '@date_start' => $event->field_start_at->date->format('j F Y'),
+      '@hour_start' => $event->field_start_at->date->format('H\hi'),
+      '@date_end'   => $event->field_end_at->date->format('j F Y'),
+      '@hour_end'   => $event->field_end_at->date->format('H\hi'),
     ]));
 
     $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);

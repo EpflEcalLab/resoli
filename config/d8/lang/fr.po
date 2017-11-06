@@ -954,7 +954,7 @@ msgstr "Votre évènement a bien été créé!"
 msgid "qs_event.events.form.add.success @event"
 msgstr ""
 
-msgid "qs_event.events.form.delete.success @event"
+msgid "qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end"
 msgstr "L’évènement @event a bien été supprimé!"
 
 msgid ""

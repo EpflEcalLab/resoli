@@ -1556,7 +1556,10 @@ msgstr "Retour au gestionnaire"
 msgid "qs.previous.to_event_dashboard"
 msgstr "Retour au gestionnaire"
 
-msgid "qs.mp.loading"
+msgid "qs.map.loading"
+msgstr ""
+
+msgid "qs.map.none"
 msgstr ""
 
 msgid "qs.event.register.pending"

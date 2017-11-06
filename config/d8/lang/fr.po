@@ -914,11 +914,11 @@ msgstr "Gérer mon activité"
 msgid "qs_activity.floating.add.event"
 msgstr "Créer un évènement"
 
-msgid "qs_activity.events.form.step1.description"
+msgid "qs_activity.events.form.step1.description @activity"
 msgstr ""
 "Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
-msgid "qs_activity.events.form.step2.description"
+msgid "qs_activity.events.form.step2.description @activity"
 msgstr ""
 "Quelles sont les informations de votre évènement pour l’activité @activity ?"
 

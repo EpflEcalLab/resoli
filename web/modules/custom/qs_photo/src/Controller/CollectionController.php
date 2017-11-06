@@ -143,13 +143,13 @@ class CollectionController extends ControllerBase {
 
     $date_start = $this->calendarBuilder->getFirstMondayMonth($month);
     $date_end = $this->calendarBuilder->getLastSundayMonth($month);
+    $date_start->setTime(00, 00, 00);
+    $date_end->setTime(23, 59, 59);
 
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
     $variables['start'] = $date_start;
     $variables['end'] = $date_end;
-
-    $date_end->setTime(23, 59, 59);
 
     // Get all events in the date range.
     $events = $this->eventManager->getByDate($community, $date_start, $date_end);

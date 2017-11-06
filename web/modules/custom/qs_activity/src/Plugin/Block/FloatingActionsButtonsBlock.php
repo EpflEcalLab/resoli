@@ -111,7 +111,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_community.waiting_approval',
     ])) {
       // For everybody, show a button "My Activities".
-      $icon = 'activities';
+      $icon = 'communities-sm';
       $theme = 'danger';
       $url =
         $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [

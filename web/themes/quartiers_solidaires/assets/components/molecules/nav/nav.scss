@@ -57,7 +57,10 @@
 
   &:not([disabled]):not(.disabled):active,
   &:not([disabled]):not(.disabled).active {
-    border-color: color("primary-darker");
+    width: $navbar-icon-size + $input-btn-border-width;
+    height: $navbar-icon-size + $input-btn-border-width;
+    border-width: 0;
+    box-shadow: 0 0 0 2px inset color("primary-darker");
   }
 
   // With navbar open
@@ -184,7 +187,7 @@
     content: '';
     position: absolute;
     z-index: -1;
-    top: 0;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: $border-width;

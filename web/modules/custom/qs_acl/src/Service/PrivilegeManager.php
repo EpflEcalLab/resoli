@@ -326,9 +326,10 @@ class PrivilegeManager {
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+    $query->leftJoin('user__field_lastname', 'lastname', 'lastname.entity_id = privileges.user');
 
+    $query->orderBy('lastname.field_lastname_value', 'ASC');
     $query->orderBy('users.created', 'ASC');
-    $query->orderBy('users.name', 'ASC');
 
     return $query;
   }

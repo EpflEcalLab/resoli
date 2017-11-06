@@ -1772,5 +1772,8 @@ msgstr ""
 
 msgid "qs.calendar.monthly.lead @community @current_day"
 msgstr ""
-"Voici le calendrier mensuel des activités à venir à @community_name, pour "
+"Voici le calendrier mensuel des activités à venir à @community, pour "
 "tous les thèmes."
+
+msgid "qs.activity.user.you_are @role"
+msgstr ""

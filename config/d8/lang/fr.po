@@ -782,9 +782,7 @@ msgstr ""
 "communauté."
 
 msgid "qs.activity.theme.filters @community_name @themes_names."
-msgstr ""
-"Voici les activités à venir pour @themes_names, par thème, \n"
-"à @community_name."
+msgstr "Voici les activités à venir pour @themes_names, à @community_name."
 
 msgid "qs.activity.nextevent"
 msgstr "Prochain évènement"
@@ -1017,7 +1015,7 @@ msgid "qs_activity.activities.form.add.save_and_new_event"
 msgstr "Valider et créer un évènement"
 
 msgid "qs.activity.nextevent.empty"
-msgstr "Pas de prochaine date pour le moment"
+msgstr "Pas de prochaine date prévue pour le moment"
 
 msgid "qs_auth.form.reset.help"
 msgstr "Vous pourrez en choisir un nouveau en validant cette requête."
@@ -1560,7 +1558,7 @@ msgid "qs.map.loading"
 msgstr ""
 
 msgid "qs.map.none"
-msgstr ""
+msgstr "Aucune carte disponible..."
 
 msgid "qs.event.register.pending"
 msgstr "Inscription non confirmée"
@@ -1617,7 +1615,7 @@ msgid "qs_activity.floating.my_subscriptions"
 msgstr "Gérer mes inscriptions"
 
 msgid "qs_supervisor.floating.my_account"
-msgstr "Gérer mon compte"
+msgstr "Mes informations"
 
 msgid "qs.event.calendar"
 msgstr "Voir dans le calendrier"
@@ -1674,7 +1672,7 @@ msgid "qs.previous.to_photos_list"
 msgstr "Retour à la galerie"
 
 msgid "qs_menu.links.photos.months"
-msgstr "Afficher les 3 prochains mois"
+msgstr "Par date"
 
 msgid "qs.community.welcome.body @community"
 msgstr "Vous êtes maintenant connecté(e) à la communauté @community."
@@ -1729,43 +1727,37 @@ msgstr ""
 "@community_name."
 
 msgid "qs.photos.view_all"
-msgstr "Toutes les photos"
+msgstr "Voir les photos de l’activité"
 
 msgid "qs.photoswipe.prev"
-msgstr ""
+msgstr "Précédente"
 
 msgid "qs.photoswipe.next"
-msgstr ""
+msgstr "Suivante"
 
 msgid "qs.photoswipe.btn.close"
-msgstr ""
+msgstr "Fermer"
 
 msgid "qs.photoswipe.btn.share"
-msgstr ""
+msgstr "Partager"
 
 msgid "qs.photoswipe.btn.fullscreen"
-msgstr ""
+msgstr "Plein écran"
 
 msgid "qs.photoswipe.btn.zoom"
-msgstr ""
-
-msgid "Image generation in progress. Try again shortly."
-msgstr ""
-
-msgid "@user (@uid) stream `@file` (@nid) at @now."
-msgstr ""
+msgstr "Agrandir"
 
 msgid "qs.photo.month.lead @community @month @year"
-msgstr ""
+msgstr "Voici toutes les photos des activités, par date, qui se sont déroulées à @community."
 
 msgid "qs.photo.month.empty @community @month @year"
-msgstr ""
+msgstr "Il n’y a pas de photos à consulter en @month @year, à @community."
 
 msgid "qs.activity.date.lead @community @start_date @end_date"
-msgstr ""
+msgstr "Voici toutes les activités à venir, par date, à @community."
 
 msgid "qs.calendar.weekly.lead @community @current_day"
-msgstr ""
+msgstr "Voici le calendrier hebdomadaire de toutes les activités à venir à @community."
 
 msgid "qs.calendar.monthly.lead @community @current_day"
-msgstr ""
+msgstr "Voici le calendrier mensuel des activités à venir à @community_name, pour tous les thèmes."

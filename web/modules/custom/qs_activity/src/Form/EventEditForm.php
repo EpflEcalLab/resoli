@@ -26,7 +26,9 @@ class EventEditForm extends EventEditFormBase {
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
-    $form['#title'] = $this->t('qs_activity.events.form.edit.title_form');
+    $form['#title'] = $this->t('qs_activity.events.form.edit.title_form @activity', [
+      '@activity' => $event->field_activity->entity->getTitle(),
+    ]);
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
       'class' => [

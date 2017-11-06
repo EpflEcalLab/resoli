@@ -816,7 +816,7 @@ msgstr "Annuler"
 msgid "qs.form.error.empty @fieldname"
 msgstr "Cette information est manquante: « @fieldname »"
 
-msgid "qs_activity.events.form.edit.title_form"
+msgid "qs_activity.events.form.edit.title_form @activity"
 msgstr ""
 "Quelles sont les informations de votre évènement pour l’activité @activity ?"
 

@@ -122,9 +122,11 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
       if ($route_name == 'qs_community.members') {
         $label = $this->t('qs_community.dashboard.members');
+        $icon = 'happy';
       }
       elseif ($route_name == 'qs_community.waiting_approval') {
         $label = $this->t('qs_community.dashboard.waiting_approval');
+        $icon = 'wait';
       }
     }
 

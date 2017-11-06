@@ -46,6 +46,12 @@
   {% endif %}
   {% block header %}{% endblock %}
 
+  {% if page.messages %}
+    <div class="container mt-3">
+      {{ page.messages }}
+    </div>
+  {% endif %}
+
   <a id="main-content" tabindex="-1"></a>
   {% block content %}{{ page.content }}{% endblock %}
 

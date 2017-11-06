@@ -30,7 +30,6 @@ photoswipe:
   css:
     theme:
       build/photoswipe/photoswipe.css: {}
-      build/photoswipe/default-skin/default-skin.css: {}
   js:
     build/photoswipe/photoswipe.min.js: {}
     build/photoswipe/photoswipe-ui-default.min.js: {}

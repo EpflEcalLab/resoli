@@ -12,7 +12,7 @@
     @include icon-size(50px);
 
     svg {
-      fill: rgba($white, 0.14);
+      fill: color('primary-light');
     }
   }
 

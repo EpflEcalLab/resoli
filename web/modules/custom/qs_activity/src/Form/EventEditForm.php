@@ -247,7 +247,7 @@ class EventEditForm extends EventEditFormBase {
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
       $form_state->setErrorByName('[title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['title']['#title']]));
     }
-    
+
     // Assert the mail is valid - only when filled.
     if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('[contact_mail]', $this->t('qs.form.error.mail.malformed'));
@@ -280,7 +280,6 @@ class EventEditForm extends EventEditFormBase {
       $form_state->setErrorByName('[date_fieldset][time_fieldset][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
-    $now = new DrupalDateTime();
     $date = new DrupalDateTime($form_state->getValue('date'));
     $formatted_date = $date->format('d.m.Y');
     try {
@@ -295,10 +294,6 @@ class EventEditForm extends EventEditFormBase {
     // Assert the date is formatted as requested.
     if (!$this->validateDate($formatted_date, 'd.m.Y')) {
       $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
-    }
-    // Assert the date is in the future.
-    elseif ($date < $now) {
-      $form_state->setErrorByName('[date_fieldset][date]', $this->t('qs_activity.form.error.date_past @fieldname', ['@fieldname' => $form['date_fieldset']['date']['#title']]));
     }
 
     // Check hours are realistic.

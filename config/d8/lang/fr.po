@@ -1718,3 +1718,18 @@ msgstr ""
 
 msgid "qs.photoswipe.btn.zoom"
 msgstr ""
+
+msgid "qs.photo.month.lead @community @month @year"
+msgstr ""
+
+msgid "qs.photo.month.empty @community @month @year"
+msgstr ""
+
+msgid "qs.activity.date.lead @community @start_date @end_date"
+msgstr ""
+
+msgid "qs.calendar.weekly.lead @community @current_day"
+msgstr ""
+
+msgid "qs.calendar.monthly.lead @community @current_day"
+msgstr ""

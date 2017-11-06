@@ -1,6 +1,18 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 {% set community_name = variables.community.name.value|trim %}
 
+{% if variables.photos %}
+  <div class="container">
+    <p class="lead text-center mt-5">
+      {{ 'qs.photo.month.lead @community @month @year'|t({
+        '@month': variables.dates.start|bamboo_i18n_format_date('custom', 'F'),
+        '@year': variables.dates.start|date('Y'),
+        '@community': community_name,
+      }) }}
+    </p>
+  </div>
+{% endif %}
+
 {{ bamboo_render_block('qs_photo_monthly_block') }}
 
 {% if variables.photos %}
@@ -131,9 +143,9 @@
 {% else %}
   <div class="container">
     <p class="lead text-center mt-5">
-      {{ 'qs.photo.month.empty @community @start_date @end_date'|t({
-        '@month': variables.dates.start|date('F'),
-        '@year': variables.dates.start|date('F'),
+      {{ 'qs.photo.month.empty @community @month @year'|t({
+        '@month': variables.dates.start|bamboo_i18n_format_date('custom', 'F'),
+        '@year': variables.dates.start|date('Y'),
         '@community': community_name,
       }) }}
     </p>

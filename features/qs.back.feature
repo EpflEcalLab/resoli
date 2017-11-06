@@ -134,7 +134,7 @@ Feature: Back buttons
     Given I am logged in as user "admin"
     When I am on "/events/1/user/1"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_calendar" link with href "/lausanne/calendar/monthly"
+    And I should see "qs.previous.to_calendar" link with href "/lausanne/calendar/weekly"
 
 # Activity Dashboard
   @api

@@ -29,7 +29,7 @@ const multiStep = () => {
         $('<button/>')
           .attr('id', `prev-btn-${id}`)
           .addClass('btn btn-outline-invert btn-icon btn-icon-left align-self-center shadow-to-bottom')
-          .text(Drupal.t('qs.prev'))
+          .text(Drupal.t('qs.previous'))
           .on('click', function(e) {
             e.preventDefault();
 

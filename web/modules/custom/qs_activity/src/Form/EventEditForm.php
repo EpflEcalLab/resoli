@@ -180,6 +180,8 @@ class EventEditForm extends EventEditFormBase {
       '#title'         => $this->t('qs_activity.events.form.edit.contact_mail'),
       '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
       '#type'          => 'email',
+      // Skip drupal email validation.
+      '#validated'     => TRUE,
       '#default_value' => $event->field_contact_mail->value,
     ];
 
@@ -244,8 +246,8 @@ class EventEditForm extends EventEditFormBase {
       $form_state->setErrorByName('[title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['title']['#title']]));
     }
 
-    // Assert the mail is valid.
-    if (!$form_state->getValue('contact_mail') || !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+    // Assert the mail is valid - only when filled.
+    if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('[contact_mail]', $this->t('qs.form.error.mail.malformed'));
     }
 

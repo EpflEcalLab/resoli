@@ -28,8 +28,9 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       'form__modal',
     ];
     $form['#attributes'] = [
-      'title' => $activity->title->value,
+      'title'       => $activity->title->value,
       'description' => $this->t('qs.activity.edit_defaults'),
+      'novalidate'  => 'novalidate',
     ];
 
     $form['group'] = [
@@ -100,6 +101,8 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       '#title'         => $this->t('qs_activity.activities.form.edit.defaults.contact_mail'),
       '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.contact_mail.placeholder'),
       '#type'          => 'email',
+      // Skip drupal email validation.
+      '#validated'     => TRUE,
       '#default_value' => $activity->field_contact_mail->value,
       '#attributes' => [
         'required' => TRUE,
@@ -136,6 +139,9 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     if (!$form_state->getValue('contact_mail') || !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('[group][contact_mail]', $this->t('qs.form.error.mail.malformed'));
     }
+
+    // Add inline errors.
+    $this->applyErrorsInline($form, $form_state);
   }
 
   /**

@@ -216,7 +216,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
         // Go to Calendar.
         case "qs_subscription.user.collection":
-          $url = $this->urlGenerator->generateFromRoute('qs_calendar.collection.monthly', [
+          $url = $this->urlGenerator->generateFromRoute('qs_calendar.collection.weekly', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_calendar');

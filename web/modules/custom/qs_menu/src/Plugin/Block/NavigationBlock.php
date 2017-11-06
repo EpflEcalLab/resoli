@@ -145,7 +145,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ],
       'calendar' => [
         'label' => $this->t('qs_menu.links.calendar'),
-        'url' => $this->urlGenerator->generate('qs_calendar.collection.monthly', [
+        'url' => $this->urlGenerator->generate('qs_calendar.collection.weekly', [
           'community' => $community->id(),
         ]),
         'icon' => 'calendar',

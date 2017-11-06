@@ -975,7 +975,7 @@ msgstr "Votre évènement a bien été créé!"
 msgid "qs_event.events.form.add.success @event"
 msgstr ""
 
-msgid "qs_event.events.form.delete.success @event"
+msgid "qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end"
 msgstr "L’évènement @event a bien été supprimé!"
 
 msgid ""
@@ -1750,4 +1750,19 @@ msgid "Image generation in progress. Try again shortly."
 msgstr ""
 
 msgid "@user (@uid) stream `@file` (@nid) at @now."
+msgstr ""
+
+msgid "qs.photo.month.lead @community @month @year"
+msgstr ""
+
+msgid "qs.photo.month.empty @community @month @year"
+msgstr ""
+
+msgid "qs.activity.date.lead @community @start_date @end_date"
+msgstr ""
+
+msgid "qs.calendar.weekly.lead @community @current_day"
+msgstr ""
+
+msgid "qs.calendar.monthly.lead @community @current_day"
 msgstr ""

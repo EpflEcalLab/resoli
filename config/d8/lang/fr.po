@@ -798,8 +798,8 @@ msgstr "Point de rendez-vous"
 msgid "qs.event.delete"
 msgstr "Supprimer l’évènement"
 
-msgid "qs.event.dashboard_title"
-msgstr "Gérer l’évènement"
+msgid "qs.event.dashboard_title @event"
+msgstr "Gérer l’évènement @event"
 
 msgid "qs.event.dashboard_description"
 msgstr "Modifier l’évènement et gérer les inscriptions."

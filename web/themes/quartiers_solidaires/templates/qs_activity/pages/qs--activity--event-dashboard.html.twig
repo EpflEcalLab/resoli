@@ -3,7 +3,10 @@
 <div class="modal-body">
 
   <div class="text-center mt-3 my-5">
-    <h2>{{ 'qs.event.dashboard_title'|t }}</h2>
+    <h2>{{ 'qs.event.dashboard_title @event'|t({
+          '@event': variables.event.title.value
+        })
+      }}</h2>
     <p>{{ 'qs.event.dashboard_description'|t }}</p>
   </div>
 

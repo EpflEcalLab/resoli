@@ -247,7 +247,7 @@ class EventEditForm extends EventEditFormBase {
     }
 
     // Assert the mail is valid.
-    if (!$form_state->getValue('contact_mail') || !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+    if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('[contact_mail]', $this->t('qs.form.error.mail.malformed'));
     }
 

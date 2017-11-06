@@ -46,9 +46,6 @@ attributes.bg ? 'bg-' ~ attributes.bg
       {% endif %}
       <form{{ attributes.addClass(classes) }}>
         <div class="row">
-           <div class="col-md-10 col-lg-8 mx-auto">{{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}</div>
-        </div>
-        <div class="row">
           <div class="col-md-10 col-lg-8 mx-auto tab-content d-flex flex-column">{{ children }}</div>
         </div>
       </form>

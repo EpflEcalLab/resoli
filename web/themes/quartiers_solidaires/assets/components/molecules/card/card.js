@@ -13,7 +13,12 @@ const card = () => {
 
     // Swap the card to display the other side
     $('[data-toggle=flip]').on('click', function() {
-      $(this).parents('.card-flippable').toggleClass('flip');
+      const $card = $(this).parents('.card-flippable');
+
+      if ($card.length > 0) {
+        $('html, body').animate({ scrollTop: $card.offset().top - 100 }, 200);
+        $card.toggleClass('flip');
+      }
 
       // Load the google map into the card-body.
       if (typeof($(this).prop('hash')) != 'undefined' && $(this).prop('hash').indexOf('#map-') == 0) {

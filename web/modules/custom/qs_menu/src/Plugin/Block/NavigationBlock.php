@@ -120,22 +120,22 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $render['#variables']['menu'] = [
       'activities' => [
         'label' => $this->t('qs_menu.links.activities'),
-        'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
+        'url' => $this->urlGenerator->generate('qs_activity.collection.dates', [
           'community' => $community->id(),
         ]),
         'icon' => 'activities',
         'links' => [
-          'qs_activity.collection.themes' => [
-            'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
-              'community' => $community->id(),
-            ]),
-            'label' => $this->t('qs_menu.links.activities.themes'),
-          ],
           'qs_activity.collection.dates' => [
             'url' => $this->urlGenerator->generate('qs_activity.collection.dates', [
               'community' => $community->id(),
             ]),
             'label' => $this->t('qs_menu.links.activities.date'),
+          ],
+          'qs_activity.collection.themes' => [
+            'url' => $this->urlGenerator->generate('qs_activity.collection.themes', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.activities.themes'),
           ],
         ],
         'activated_by' => [

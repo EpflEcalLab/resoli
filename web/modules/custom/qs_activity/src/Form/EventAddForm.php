@@ -356,7 +356,6 @@ class EventAddForm extends FormBasic {
       $form_state->setErrorByName('[event][step-1][date][date_fieldset][time_fieldset][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
-    $now = new DrupalDateTime();
     $date = new DrupalDateTime($form_state->getValue('date'));
     $formatted_date = $date->format('d.m.Y');
     try {

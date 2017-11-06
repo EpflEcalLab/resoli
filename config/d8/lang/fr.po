@@ -127,6 +127,27 @@ msgctxt "Abbreviated weekday"
 msgid "Sat"
 msgstr "Sam."
 
+msgid "Sun"
+msgstr "Dim"
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Wed"
+msgstr "Mer"
+
+msgid "Thu"
+msgstr "Jeu"
+
+msgid "Fri"
+msgstr "Ven"
+
+msgid "Sat"
+msgstr "Sam"
+
 msgctxt "Abbreviated 1 letter weekday Sunday"
 msgid "S"
 msgstr "D"

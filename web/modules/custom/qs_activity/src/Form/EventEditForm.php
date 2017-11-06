@@ -247,7 +247,7 @@ class EventEditForm extends EventEditFormBase {
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
       $form_state->setErrorByName('[title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['title']['#title']]));
     }
-    
+
     // Assert the mail is valid - only when filled.
     if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('[contact_mail]', $this->t('qs.form.error.mail.malformed'));

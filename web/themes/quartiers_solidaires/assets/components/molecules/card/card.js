@@ -70,16 +70,18 @@ const card = () => {
     // Get the hash in the URL
     const hash = window.location.hash;
 
-    let $card = $('.card:first .card-pill[data-toggle=collapse]');
+    let $card = '';
+    if (hash && hash.includes('card')) {
+      const newHash = hash.replace('card', 'collapse-');
+      $card = $(document).find(`.card-pill[data-toggle=collapse][href="${newHash}"]`);
+    } else {
+      $card = $('.card:first .card-pill[data-toggle=collapse]');
+    }
 
     if ($card.length) {
-      if (hash && hash.includes('card') && $(hash).length) {
-        $card = $(hash).find('a');
-      }
-
       // Always toggle the first card or the one from the URL on load
       $card.trigger('click');
-      // $('html, body').animate({ scrollTop: $card.offset().top }, 200);
+      $('html, body').animate({ scrollTop: $card.offset().top }, 200);
     }
 
   })(jQuery);

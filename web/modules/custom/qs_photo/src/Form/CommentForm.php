@@ -124,11 +124,14 @@ class CommentForm extends FormBasic {
     ];
 
     foreach ($photosParameter as $nid) {
+      $photo = $this->nodeStorage->load($nid);
+
       $form['photo'][$nid] = [
         '#type'     => 'textarea',
         '#required' => FALSE,
         '#theme' => ['textarea__photo'],
         '#placeholder' => $this->t('qs_photo.form.comment.photo_comment_placeholder'),
+        '#default_value' => $photo->body->value,
         '#attributes' => [
           'title' => $this->t('qs_photo.form.comment.photo_comment_title'),
           'photo' => (int) $nid

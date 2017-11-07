@@ -1776,4 +1776,4 @@ msgstr ""
 "tous les thèmes."
 
 msgid "qs.activity.user.you_are @role"
-msgstr ""
+msgstr "Vous êtes @role de cette activité."

@@ -76,18 +76,30 @@ const card = () => {
     const hash = window.location.hash;
 
     let $card = '';
-    if (hash && hash.includes('card')) {
-      const newHash = hash.replace('card', 'collapse-');
-      $card = $(document).find(`.card-pill[data-toggle=collapse][href="${newHash}"]`);
-    } else {
-      $card = $('.card:first .card-pill[data-toggle=collapse]');
+    let triggered = false;
+    function onReady() {
+      const $pills = $(`.card-pill[data-toggle=collapse]`);
+      if ($pills.length > 0 && !triggered) {
+        triggered = true;
+        if (hash && hash.includes('card')) {
+          const newHash = hash.replace('card', 'collapse-');
+          $card = $(document).find(`.card-pill[data-toggle=collapse][href="${newHash}"]`);
+        } else {
+          $card = $('.card:first .card-pill[data-toggle=collapse]');
+        }
+
+        if ($card.length) {
+          // Always toggle the first card or the one from the URL on load
+          $card.trigger('click');
+          $('html, body').animate({ scrollTop: $card.offset().top }, 200);
+        }
+      }
     }
 
-    if ($card.length) {
-      // Always toggle the first card or the one from the URL on load
-      $card.trigger('click');
-      $('html, body').animate({ scrollTop: $card.offset().top }, 200);
-    }
+    // Workaround Bigpipe
+    $(document).on('DOMNodeInserted', function() {
+      onReady();
+    });
 
   })(jQuery);
 };

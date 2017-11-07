@@ -61,8 +61,6 @@ const multiStep = () => {
         $(`#${id} .js-form-submit`)
           .appendTo(currentForm.find(`.modal-footer`));
 
-        $(`#${id} .modal-footer:first`).hide();
-
         // Add step nav at top of form.
         $fieldsets.each(function(index) {
           const currentFieldset = $(this);
@@ -97,7 +95,6 @@ const multiStep = () => {
           const target = $(e.relatedTarget).attr('href');
           currentTab = target ? $(target) : currentForm.find('fieldset:first-of-type');
           nextTab = $(e.target).parent().next().find('a.step-nav-link');
-          console.log(nextTab);
           prevTab = $(e.target).parent().prev().find('a.step-nav-link');
 
           // Toggle buttons depending on current step

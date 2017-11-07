@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override for a 'textarea' #type form element.
+ *
+ * Available variables
+ * - wrapper_attributes: A list of HTML attributes for the wrapper element.
+ * - attributes: A list of HTML attributes for the textarea element.
+ * - resizable: An indicator for whether the textarea is resizable.
+ * - required: An indicator for whether the textarea is required.
+ * - value: The textarea content.
+ *
+ * @see template_preprocess_textarea()
+ */
+#}
+{%
+  set classes = [
+    'form-control',
+  ]
+%}
+<div class="row mb-3">
+  <div class="col-4 col-md-3 col-lg-2 d-flex">
+    <div class="align-self-center">
+      <img class="img-fluid img-bordered shadow-to-bottom" src="{{ path('qs_photo.streamer', {'photo': element['#attributes'].photo, 'image_style': 'qs_thumbnail'}) }}" alt="Generic placeholder image">
+    </div>
+  </div>
+  <div class="col-8 col-md-9 col-lg-10">
+    <div{{ wrapper_attributes }}>
+      <label for="{{ attributes.id }}">{{ element['#attributes'].title }}</label>
+      <textarea{{ attributes.addClass(classes) }}>{{ value }}</textarea>
+    </div>
+  </div>
+</div>

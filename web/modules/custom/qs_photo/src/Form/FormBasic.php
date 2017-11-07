@@ -110,6 +110,16 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Return the file storage.
+   *
+   * @return \Drupal\file\FileStorageInterface
+   *   Return the term storage.
+   */
+  protected function getFileStorage() {
+    return $this->getEntityTypeManager()->getStorage('file');
+  }
+
+  /**
    * Return the user storage.
    *
    * @return \Drupal\user\Entity\User
@@ -149,6 +159,16 @@ abstract class FormBasic extends FormBase {
    */
   protected function getEntityFieldManager() {
     return $this->container->get('entity_field.manager');
+  }
+
+  /**
+   * Lazy loading for the Request Stack.
+   *
+   * @return object|\Symfony\Component\HttpFoundation\RequestStack
+   *   Return the Request Stack.
+   */
+  protected function getRequestStack() {
+    return $this->container->get('request_stack');
   }
 
   /**

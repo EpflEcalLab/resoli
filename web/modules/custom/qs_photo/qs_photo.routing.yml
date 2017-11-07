@@ -110,3 +110,18 @@ qs_photo.user.activities.collection:
           type: entity:taxonomy_term
         user:
           type: entity:user
+
+# Form - Add/edit comments on photos.
+qs_photo.form.comments:
+    path: '/photos/{community}/comment'
+    defaults:
+      _form: '\Drupal\qs_photo\Form\CommentForm'
+      _title: 'qs_photo.form.comments.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Form\CommentForm::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term

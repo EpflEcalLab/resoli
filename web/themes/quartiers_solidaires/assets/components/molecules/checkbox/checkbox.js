@@ -23,7 +23,7 @@ const checkbox = () => {
       // If the ALL button is active and some other themes are selected,
       // uncheck the ALL button
       if ((counter > 0 && $('#js-all-themes').hasClass('active')) || counter === 0) {
-        $('#js-all-themes').toggleClass('active');
+        $('#js-all-themes').removeClass('active');
       }
     }
 
@@ -39,6 +39,10 @@ const checkbox = () => {
 
     // We need to check on load if the button has to be enabled
     toggleAllBtn($('.js-filter-themes .btn.checkbox').find('input[type=checkbox]:checked').length);
+    // (Workaround BigPipe)
+    $(document).on('DOMNodeInserted', function() {
+      toggleAllBtn($('.js-filter-themes .btn.checkbox').find('input[type=checkbox]:checked').length);
+    });
 
     // Very simple checbox toggle
     // Enable by pressing space

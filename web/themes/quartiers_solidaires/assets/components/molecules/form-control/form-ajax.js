@@ -1,9 +1,7 @@
 const formAjax = () => {
   (function ($) {
 
-    const $forms = $('form[data-ajax="true"]');
-
-    $forms.on('submit', function(e) {
+    $(document).on('submit', 'form[data-ajax="true"]', function(e) {
       e.preventDefault();
       const $this = $(this);
 

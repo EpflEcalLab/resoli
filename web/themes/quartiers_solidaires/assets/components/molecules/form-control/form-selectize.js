@@ -35,7 +35,6 @@ const formSelectize = () => {
       }
     });
 
-    const activity_options = $('select.selectize-activity').data('options');
     $('select.selectize-activity').selectize({
       persist: false,
       maxItems: 1,
@@ -46,8 +45,9 @@ const formSelectize = () => {
       sortField: [
         { field: 'title', direction: 'asc' }
       ],
-      options: activity_options,
+      options: $(this).data('options'),
       plugins: ['remove_button'],
+      placeholder: Drupal.t('qs.form.select'),
       render: {
         item: function(item, escape) {
           return '<div>' +
@@ -62,6 +62,18 @@ const formSelectize = () => {
         }
       }
     });
+
+    // We need to call these from the Form API
+    $.fn.selectizeClearOptions = function() {
+      const selectize = this[0].selectize;
+      selectize.clear();
+      selectize.clearOptions();
+    };
+
+    $.fn.selectizeAddOptions = function(data) {
+      const selectize = this[0].selectize;
+      selectize.addOption(data);
+    };
   })(jQuery);
 };
 

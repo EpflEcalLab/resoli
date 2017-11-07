@@ -2,6 +2,8 @@
 
 namespace Drupal\qs_photo\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
@@ -129,11 +131,8 @@ class AddForm extends FormBasic {
       $activities = $this->activityManager->getByUserPhoto($community, $this->currentUser);
     }
 
-    $fallback = ['_none' => $this->t('qs.form.select')];
-    $select_options[] = [
-      'nid' => '_none',
-      'title' => $this->t('qs.form.select'),
-    ];
+    $fallback = [];
+    $select_options = [];
     foreach ($activities as $activity) {
       $fallback[$activity->id()] = $activity->getTitle();
       $select_options[] = [
@@ -148,7 +147,6 @@ class AddForm extends FormBasic {
       '#multiple'      => FALSE,
       '#required' => FALSE,
       '#options'  => $fallback,
-      '#default_value' => 0,
       '#attributes'    => [
         'selectize'    => TRUE,
         'class'        => ['selectize-activity'],
@@ -181,9 +179,17 @@ class AddForm extends FormBasic {
       '#type'      => 'select',
       '#required'  => FALSE,
       '#options'   => ['_none' => $this->t('qs.form.select')],
-      '#prefix'    => '<div id="model_wrapper">',
-      '#suffix'    => '</div>',
-      '#validated' => TRUE,
+      '#attributes'    => [
+        'selectize'    => TRUE,
+        'class'        => [
+          'selectize-activity',
+          'selectize-events',
+        ],
+      ],
+      '#theme_wrappers' => [
+        'form_element',
+        'container__center',
+      ],
     ];
 
     $form['step-3'] = [
@@ -294,6 +300,9 @@ class AddForm extends FormBasic {
     $event_nid = $form_state->getValue('event');
     $event = $this->getNodeStorage()->load($event_nid);
     $activity = $event->field_activity->entity;
+    dump($activity);
+    dump($event);
+    die();
 
     foreach ($this->photos as $photo) {
       $this->getPhotoManager()->create($event, $photo);
@@ -331,23 +340,33 @@ class AddForm extends FormBasic {
    *   The form model field structure.
    */
   public function selectEventAjax(array &$form, FormStateInterface $form_state) {
-    $options = ['_none' => $this->t('qs.form.select')->render()];
+    $select_options[] = [
+      'nid' => '_none',
+      'title' => $this->t('qs.form.select'),
+    ];
 
     $activity_nid = $form_state->getValue('activity');
-    if ($activity_nid != 0) {
 
-      $activity     = $this->getNodeStorage()->load($activity_nid);
+    if ($activity_nid) {
+
+      $activity     = $this->getNodeStorage()->load((int) $activity_nid);
       $events       = $this->getEventManager()->getAllPrev($activity);
 
       if ($events) {
+        $select_options = [];
         foreach ($events as $event) {
-          $options[$event->id()] = $event->getTitle();
+          $select_options[] = [
+            'nid'         => $event->id(),
+            'title'       => $event->getTitle(),
+          ];
         }
       }
-      $form['step-2']['event']['#options'] = $options;
     }
 
-    return $form['step-2']['event'];
+    $response = new AjaxResponse();
+    $response->addCommand(new InvokeCommand('#edit-event', 'selectizeClearOptions'));
+    $response->addCommand(new InvokeCommand('#edit-event', 'selectizeAddOptions', [$select_options]));
+    return $response;
   }
 
 }

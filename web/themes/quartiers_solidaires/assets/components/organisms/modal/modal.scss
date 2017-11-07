@@ -37,11 +37,6 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-
-  // Hack to avoid moving a submit button out of its form parent
-  .modal-footer {
-    margin-bottom: (-$modal-inner-padding);
-  }
 }
 
 .modal-footer {

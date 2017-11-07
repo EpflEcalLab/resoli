@@ -86,8 +86,8 @@
 <div class="container">
   <p class="lead text-center mt-5">
     {{ 'qs.activity.date.title_empty @community @start_date @end_date'|t({
-      '@start_date': variables.start|date('j F Y'),
-      '@end_date': variables.end|date('j F Y'),
+      '@start_date': variables.start|bamboo_i18n_format_date('custom', 'j F Y'),
+      '@end_date': variables.end|bamboo_i18n_format_date('custom', 'j F Y'),
       '@community': community_name,
     }) }}
 </div>

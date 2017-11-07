@@ -370,8 +370,8 @@ class AddForm extends FormBasic {
 
     if ($activity_nid) {
 
-      $activity     = $this->getNodeStorage()->load((int) $activity_nid);
-      $events       = $this->getEventManager()->getAllPrev($activity);
+      $activity = $this->getNodeStorage()->load((int) $activity_nid);
+      $events   = $this->getEventManager()->getAllPrev($activity);
 
       if ($events) {
         $select_options = [];

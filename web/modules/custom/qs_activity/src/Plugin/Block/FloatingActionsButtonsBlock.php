@@ -244,10 +244,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
-    // Add Photo
+    // Add Photo.
     if ($community && in_array($route_name, [
-        'qs_photo.form.add',
-      ])) {
+      'qs_photo.form.add',
+    ])) {
       // For everybody, show a button "My Photos".
       $icon = 'plus';
       $theme = 'secondary';

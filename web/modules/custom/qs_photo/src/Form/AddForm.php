@@ -220,6 +220,9 @@ class AddForm extends FormBasic {
       '#description' => $this->t('qs_photo.add.form.step4.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_photo.add.form.step4'),
+        'class' => [
+          'text-center',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -232,8 +235,14 @@ class AddForm extends FormBasic {
       '#name' => 'publish',
       '#value' => $this->t('qs_photo.add.form.publish'),
       '#attributes' => [
+        'outline' => TRUE,
+        'icon' => 'check',
+        'icon_left' => TRUE,
         'class' => [
           'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mb-3',
         ],
       ],
     ];
@@ -243,8 +252,14 @@ class AddForm extends FormBasic {
       '#name' => 'comment',
       '#value' => $this->t('qs_photo.add.form.comment'),
       '#attributes' => [
+        'outline' => TRUE,
+        'icon' => 'comment',
+        'icon_left' => TRUE,
         'class' => [
           'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mb-3',
         ],
       ],
     ];
@@ -254,8 +269,14 @@ class AddForm extends FormBasic {
       '#name' => 'story',
       '#value' => $this->t('qs_photo.add.form.story'),
       '#attributes' => [
+        'outline' => TRUE,
+        'icon' => 'story',
+        'icon_left' => TRUE,
         'class' => [
           'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mb-3',
         ],
       ],
     ];

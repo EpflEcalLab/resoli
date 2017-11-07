@@ -42,13 +42,17 @@ const formControl = () => {
       el.closest('label').prevAll().addClass('active-alt');
     }
 
-    $('.js-radio-group').on('change', '.form-radio', function() {
+    $(document).on('change', '.js-radio-group .form-radio', function() {
       // Remove all active-alt class
       $(this).closest('.js-radio-group').find('.active-alt').removeClass('active-alt');
       togglePrevRadios($(this));
     });
 
     togglePrevRadios($('.js-radio-group').find('.active'));
+    // Workaround Bigpipe
+    $(document).on('DOMNodeInserted', function() {
+      togglePrevRadios($('.js-radio-group').find('.active'));
+    });
 
   })(jQuery);
 };

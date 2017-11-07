@@ -127,6 +127,27 @@ msgctxt "Abbreviated weekday"
 msgid "Sat"
 msgstr "Sam."
 
+msgid "Sun"
+msgstr "Dim"
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Wed"
+msgstr "Mer"
+
+msgid "Thu"
+msgstr "Jeu"
+
+msgid "Fri"
+msgstr "Ven"
+
+msgid "Sat"
+msgstr "Sam"
+
 msgctxt "Abbreviated 1 letter weekday Sunday"
 msgid "S"
 msgstr "D"
@@ -761,9 +782,7 @@ msgstr ""
 "communauté."
 
 msgid "qs.activity.theme.filters @community_name @themes_names."
-msgstr ""
-"Voici les activités à venir pour @themes_names, par thème, \n"
-"à @community_name."
+msgstr "Voici les activités à venir pour @themes_names, à @community_name."
 
 msgid "qs.activity.nextevent"
 msgstr "Prochain évènement"
@@ -777,8 +796,8 @@ msgstr "Point de rendez-vous"
 msgid "qs.event.delete"
 msgstr "Supprimer l’évènement"
 
-msgid "qs.event.dashboard_title"
-msgstr "Gérer l’évènement"
+msgid "qs.event.dashboard_title @event"
+msgstr "Gérer l’évènement @event"
 
 msgid "qs.event.dashboard_description"
 msgstr "Modifier l’évènement et gérer les inscriptions."
@@ -795,7 +814,7 @@ msgstr "Annuler"
 msgid "qs.form.error.empty @fieldname"
 msgstr "Cette information est manquante: « @fieldname »"
 
-msgid "qs_activity.events.form.edit.title_form"
+msgid "qs_activity.events.form.edit.title_form @activity"
 msgstr ""
 "Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
@@ -895,11 +914,11 @@ msgstr "Gérer mon activité"
 msgid "qs_activity.floating.add.event"
 msgstr "Créer un évènement"
 
-msgid "qs_activity.events.form.step1.description"
+msgid "qs_activity.events.form.step1.description @activity"
 msgstr ""
 "Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
-msgid "qs_activity.events.form.step2.description"
+msgid "qs_activity.events.form.step2.description @activity"
 msgstr ""
 "Quelles sont les informations de votre évènement pour l’activité @activity ?"
 
@@ -954,7 +973,9 @@ msgstr "Votre évènement a bien été créé!"
 msgid "qs_event.events.form.add.success @event"
 msgstr ""
 
-msgid "qs_event.events.form.delete.success @event"
+msgid ""
+"qs_event.events.form.delete.success @event @date_start @date_end @hour_start "
+"@hour_end"
 msgstr "L’évènement @event a bien été supprimé!"
 
 msgid ""
@@ -996,13 +1017,15 @@ msgid "qs_activity.activities.form.add.save_and_new_event"
 msgstr "Valider et créer un évènement"
 
 msgid "qs.activity.nextevent.empty"
-msgstr "Pas de prochaine date pour le moment"
+msgstr "Pas de prochaine date prévue pour le moment"
 
 msgid "qs_auth.form.reset.help"
 msgstr "Vous pourrez en choisir un nouveau en validant cette requête."
 
 msgid "qs_auth.form.reset.message @mail @expiration_date"
-msgstr "Elle ne concerne que l’adresse @mail, et sera disponible jusqu’au @expiration_date."
+msgstr ""
+"Elle ne concerne que l’adresse @mail, et sera disponible jusqu’au "
+"@expiration_date."
 
 msgid "qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname"
 msgstr "Remplacement de vos informations de connexion sur @sitename"
@@ -1105,7 +1128,9 @@ msgstr ""
 "Voici le gestionnaire de la communauté @variables.community.name.value."
 
 msgid "qs.community.waiting_approval.request.manger"
-msgstr "Il n’y a actuellement aucune demande en attente pour rejoindre votre communauté."
+msgstr ""
+"Il n’y a actuellement aucune demande en attente pour rejoindre votre "
+"communauté."
 
 msgid "qs_community.members.empty"
 msgstr "Il n’y a actuellement aucune personne membre de votre communauté."
@@ -1531,8 +1556,11 @@ msgstr "Retour au gestionnaire"
 msgid "qs.previous.to_event_dashboard"
 msgstr "Retour au gestionnaire"
 
-msgid "qs.mp.loading"
+msgid "qs.map.loading"
 msgstr ""
+
+msgid "qs.map.none"
+msgstr "Aucune carte disponible..."
 
 msgid "qs.event.register.pending"
 msgstr "Inscription non confirmée"
@@ -1559,16 +1587,21 @@ msgstr ""
 msgid "qs.activity.goto"
 msgstr "Voir l’activité"
 
-msgid "qs.activity.user.collection.empty"
+msgid ""
+"qs.activity.user.collection.empty <span class=\"text-info\">@member</span> "
+"<span class=\"text-warning\">@maintainer</span>"
 msgstr ""
-"Vous n’êtes actuellement membre ou co-organisateur d’aucune activité. Pour "
-"le devenir, contacter son organisateur en vous rendant sur un évènement de "
+"Vous n’êtes actuellement <span class=\"text-info\">@member</span> ou <span "
+"class=\"text-warning\">@maintainer</span> d’aucune activité. Pour le "
+"devenir, contacter son organisateur en vous rendant sur un évènement de "
 "l’activité désirée."
 
-msgid "qs.activity.become.activity.organizer"
+msgid ""
+"qs.activity.become.activity.organizer <span class=\"text-danger"
+"\">@organizer</span>"
 msgstr ""
-"Si vous désirez devenir organisateur d’activité, contactez votre responsable "
-"de communauté."
+"Si vous désirez devenir <span class=\"text-danger\">@organizer</span> "
+"d’activité, contactez votre responsable de communauté."
 
 msgid ""
 "qs.subscription.user.collection.title @variables.user.field_firstname.value "
@@ -1589,7 +1622,7 @@ msgid "qs_activity.floating.my_subscriptions"
 msgstr "Gérer mes inscriptions"
 
 msgid "qs_supervisor.floating.my_account"
-msgstr "Gérer mon compte"
+msgstr "Mes informations"
 
 msgid "qs.event.calendar"
 msgstr "Voir dans le calendrier"
@@ -1646,7 +1679,7 @@ msgid "qs.previous.to_photos_list"
 msgstr "Retour à la galerie"
 
 msgid "qs_menu.links.photos.months"
-msgstr "Afficher les 3 prochains mois"
+msgstr "Par date"
 
 msgid "qs.community.welcome.body @community"
 msgstr "Vous êtes maintenant connecté(e) à la communauté @community."
@@ -1656,11 +1689,13 @@ msgstr "Bonjour @firstname @lastname!"
 
 msgid "qs.onboarding.my_account"
 msgstr ""
-"Accédez ici à vos informations personnelles! Vous pourrez y modifier votre mot de passe ou vous connecter à une autre communauté."
+"Accédez ici à vos informations personnelles! Vous pourrez y modifier votre "
+"mot de passe ou vous connecter à une autre communauté."
 
 msgid "qs.onboarding.menu"
 msgstr ""
-"Ceci est une barre de navigation! C’est un menu vous permettant de naviguer parmi les différentes sections de votre communauté."
+"Ceci est une barre de navigation! C’est un menu vous permettant de naviguer "
+"parmi les différentes sections de votre communauté."
 
 msgid "qs.photos.date"
 msgstr ""
@@ -1699,22 +1734,46 @@ msgstr ""
 "@community_name."
 
 msgid "qs.photos.view_all"
-msgstr "Toutes les photos"
+msgstr "Voir les photos de l’activité"
 
 msgid "qs.photoswipe.prev"
-msgstr ""
+msgstr "Précédente"
 
 msgid "qs.photoswipe.next"
-msgstr ""
+msgstr "Suivante"
 
 msgid "qs.photoswipe.btn.close"
-msgstr ""
+msgstr "Fermer"
 
 msgid "qs.photoswipe.btn.share"
-msgstr ""
+msgstr "Partager"
 
 msgid "qs.photoswipe.btn.fullscreen"
-msgstr ""
+msgstr "Plein écran"
 
 msgid "qs.photoswipe.btn.zoom"
+msgstr "Agrandir"
+
+msgid "qs.photo.month.lead @community @month @year"
 msgstr ""
+"Voici toutes les photos des activités, par date, qui se sont déroulées à "
+"@community."
+
+msgid "qs.photo.month.empty @community @month @year"
+msgstr "Il n’y a pas de photos à consulter en @month @year, à @community."
+
+msgid "qs.activity.date.lead @community @start_date @end_date"
+msgstr "Voici toutes les activités à venir, par date, à @community."
+
+msgid "qs.calendar.weekly.lead @community @current_day"
+msgstr ""
+"Voici le calendrier hebdomadaire de toutes les activités à venir à "
+"@community."
+
+msgid "qs.calendar.monthly.lead @community @current_day"
+msgstr ""
+"Voici le calendrier mensuel des activités à venir à @community, pour "
+"tous les thèmes."
+
+msgid "qs.activity.user.you_are @role"
+msgstr "Vous êtes @role de cette activité."

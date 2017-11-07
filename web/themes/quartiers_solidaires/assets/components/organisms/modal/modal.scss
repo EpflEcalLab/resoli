@@ -10,10 +10,13 @@
 }
 
 .modal-header {
+  padding-top: 0;
+  padding-bottom: 0;
   flex-direction: column;
   flex-shrink: 0;
 
   .alert {
+    margin-top: $spacer;
     margin-bottom: 0;
 
     .close {
@@ -34,16 +37,21 @@
 .modal-body {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 
-  // Hack to avoid moving a submit button out of its form parent
-  .modal-footer {
-    margin-bottom: (-$modal-inner-padding);
+  .fullpage-wrapper {
+    min-height: auto;
   }
 }
 
 .modal-footer {
   flex-shrink: 0;
+
+  @each $color, $value in $theme-colors {
+    .bg-#{$color} & {
+
+    }
+  }
 }
 
 .modal-full {

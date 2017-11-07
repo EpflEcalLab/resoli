@@ -33,3 +33,7 @@
     }
   }
 }
+
+.pac-container {
+  z-index: $zindex-modal + 10;
+}

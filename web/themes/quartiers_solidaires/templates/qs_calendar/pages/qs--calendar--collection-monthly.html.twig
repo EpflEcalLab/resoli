@@ -1,3 +1,14 @@
+{% set community_name = variables.community.name.value|trim %}
+
+<div class="container">
+  <p class="lead text-center my-5">
+    {{ 'qs.calendar.monthly.lead @community @current_day'|t({
+      '@community': community_name,
+      '@current_day': variables.current_day|bamboo_i18n_format_date('custom', 'j F Y'),
+    }) }}
+  </p>
+</div>
+
 {{ bamboo_render_block('qs_calendar_monthly_block') }}
 
 {% include "@quartiers_solidaires/qs_calendar/partials/events-day-listing.html.twig" %}

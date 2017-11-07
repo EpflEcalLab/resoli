@@ -12,7 +12,8 @@
     @include icon-size(50px);
 
     svg {
-      fill: rgba($white, 0.14);
+      fill: color('primary-light');
+      filter: drop-shadow(0 2px 1px rgba($black, 0.4));
     }
   }
 

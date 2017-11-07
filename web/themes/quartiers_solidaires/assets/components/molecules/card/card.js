@@ -13,7 +13,12 @@ const card = () => {
 
     // Swap the card to display the other side
     $('[data-toggle=flip]').on('click', function() {
-      $(this).parents('.card-flippable').toggleClass('flip');
+      const $card = $(this).parents('.card-flippable');
+
+      if ($card.length > 0) {
+        $('html, body').animate({ scrollTop: $card.offset().top - 100 }, 200);
+        $card.toggleClass('flip');
+      }
 
       // Load the google map into the card-body.
       if (typeof($(this).prop('hash')) != 'undefined' && $(this).prop('hash').indexOf('#map-') == 0) {
@@ -70,17 +75,31 @@ const card = () => {
     // Get the hash in the URL
     const hash = window.location.hash;
 
-    let $card = $('.card:first .card-pill[data-toggle=collapse]');
+    let $card = '';
+    let triggered = false;
+    function onReady() {
+      const $pills = $(`.card-pill[data-toggle=collapse]`);
+      if ($pills.length > 0 && !triggered) {
+        triggered = true;
+        if (hash && hash.includes('card')) {
+          const newHash = hash.replace('card', 'collapse-');
+          $card = $(document).find(`.card-pill[data-toggle=collapse][href="${newHash}"]`);
+        } else {
+          $card = $('.card:first .card-pill[data-toggle=collapse]');
+        }
 
-    if ($card.length) {
-      if (hash && hash.includes('card') && $(hash).length) {
-        $card = $(hash).find('a');
+        if ($card.length) {
+          // Always toggle the first card or the one from the URL on load
+          $card.trigger('click');
+          $('html, body').animate({ scrollTop: $card.offset().top }, 200);
+        }
       }
-
-      // Always toggle the first card or the one from the URL on load
-      $card.trigger('click');
-      // $('html, body').animate({ scrollTop: $card.offset().top }, 200);
     }
+
+    // Workaround Bigpipe
+    $(document).on('DOMNodeInserted', function() {
+      onReady();
+    });
 
   })(jQuery);
 };

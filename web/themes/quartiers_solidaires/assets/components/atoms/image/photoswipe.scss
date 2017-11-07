@@ -297,6 +297,11 @@ a.pswp__share--download:hover {
   bottom: 0;
   width: 100%;
   min-height: 44px;
+
+  .card-body p {
+    max-height: 30vh;
+    overflow-y: auto;
+  }
 }
 
 .pswp__caption__center {
@@ -468,14 +473,12 @@ a.pswp__share--download:hover {
   visibility: visible;
 }
 
-.pswp__top-bar,
-.pswp__caption {
+.pswp__top-bar {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* pswp__ui--fit class is added when main image "fits" between top bar and bottom bar (caption) */
-.pswp__ui--fit .pswp__top-bar,
-.pswp__ui--fit .pswp__caption {
+.pswp__ui--fit .pswp__top-bar {
   background-color: rgba(0, 0, 0, 0.3);
 }
 

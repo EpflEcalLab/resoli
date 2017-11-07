@@ -31,17 +31,17 @@ $max-items: 5;
     // Set z-index, based on max items
     @for $i from 1 through $max-items {
       &:nth-child(#{$i}) {
-        z-index: #{$max-items - $i};
+        z-index: #{$max-items + $i};
 
         @include hover-focus {
-          z-index: #{$max-items - $i};
+          z-index: #{$max-items + $i};
         }
       }
     }
 
     &.active {
       @include plain-hover-focus {
-        z-index: #{$max-items + 1};
+        z-index: #{$max-items + 10};
       }
     }
   }

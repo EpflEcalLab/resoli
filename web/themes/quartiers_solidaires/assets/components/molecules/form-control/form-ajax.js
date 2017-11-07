@@ -1,9 +1,7 @@
 const formAjax = () => {
   (function ($) {
 
-    const $forms = $('form[data-ajax="true"]');
-
-    $forms.on('submit', function(e) {
+    $(document).on('submit', 'form[data-ajax="true"]', function(e) {
       e.preventDefault();
       const $this = $(this);
 
@@ -17,7 +15,6 @@ const formAjax = () => {
             switch (behavior) {
               case 'fadeout-parent':
                 const $parent = $(`#${$this.data('parent')}`);
-                console.log($parent);
                 if ($parent.length > 0) {
                   $parent.toggleClass('card-fadeout');
                 }

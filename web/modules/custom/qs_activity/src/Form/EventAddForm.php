@@ -99,7 +99,9 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-1'] = [
       '#type' => 'fieldset',
-      '#description' => $this->t('qs_activity.events.form.step1.description'),
+      '#description' => $this->t('qs_activity.events.form.step1.description @activity', [
+        '@activity' => $activity->getTitle(),
+      ]),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.events.form.step1'),
       ],
@@ -201,7 +203,9 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-2'] = [
       '#type'  => 'fieldset',
-      '#description' => $this->t('qs_activity.events.form.step2.description'),
+      '#description' => $this->t('qs_activity.events.form.step2.description @activity', [
+        '@activity' => $activity->getTitle(),
+      ]),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.events.form.step2'),
       ],
@@ -260,6 +264,8 @@ class EventAddForm extends FormBasic {
       '#title'         => $this->t('qs_activity.events.form.edit.contact_mail'),
       '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
       '#type'          => 'email',
+      // Skip drupal email validation.
+      '#validated'     => TRUE,
       '#default_value' => $activity->field_contact_mail->value,
     ];
 
@@ -322,8 +328,8 @@ class EventAddForm extends FormBasic {
       $form_state->setErrorByName('[event][step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['title']['#title']]));
     }
 
-    // Assert the mail is valid.
-    if (!$form_state->getValue('contact_mail') || !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+    // Assert the mail is valid - only when filled.
+    if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('[event][step-2][contact_mail]', $this->t('qs.form.error.mail.malformed'));
     }
 
@@ -354,7 +360,6 @@ class EventAddForm extends FormBasic {
       $form_state->setErrorByName('[event][step-1][date][date_fieldset][time_fieldset][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
-    $now = new DrupalDateTime();
     $date = new DrupalDateTime($form_state->getValue('date'));
     $formatted_date = $date->format('d.m.Y');
     try {
@@ -369,10 +374,6 @@ class EventAddForm extends FormBasic {
     // Assert the date is formatted as requested.
     if (!$this->validateDate($formatted_date, 'd.m.Y')) {
       $form_state->setErrorByName('[event][step-1][date][date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
-    }
-    // Assert the date is in the future.
-    elseif ($date < $now) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][date]', $this->t('qs_activity.form.error.date_past @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
     }
 
     // Check hours are realistic.

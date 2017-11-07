@@ -1,52 +1,44 @@
 const checkbox = () => {
   (function ($) {
-    // When clicking the All Themes button, we want to enable / disable ALL the
-    // themes.
-    const $btn_check_all = $('#js-all-themes');
-    const $themes = $('.js-filter-themes .btn.checkbox');
+    // Listen to click events on the ALL button
+    // Always toggle all other checkboxes
+    $(document).on('click', '#js-all-themes', function() {
+      toggleSelected(true);
+    });
 
-    if ($btn_check_all.length > 0) {
-      // Listen to click events on the ALL button
-      // Always toggle all other checkboxes
-      $btn_check_all.on('click', function() {
-        toggleSelected(true);
-      });
+    // We can't listen to `change` event as it would trigger every time
+    $(document).on('click', '.js-filter-themes .btn.checkbox', function() {
 
-      // We can't listen to `change` event as it would trigger every time
-      $themes.on('click', function() {
+      // whether the clicked element will be checked
+      const selfChecked = !$(this).find('input[type=checkbox]').prop('checked');
+      // how many options are currently checked
+      const checkedOptions = $('.js-filter-themes .btn.checkbox').find('input[type=checkbox]:checked');
+      // total of checked options after the change event triggers
+      const counter = selfChecked ? checkedOptions.length + 1 : checkedOptions.length - 1;
 
-        // wether the clicked element will be checked
-        const selfChecked = !$(this).find('input[type=checkbox]').prop('checked');
-        // how many options are currently checked
-        const checkedOptions = $themes.find('input[type=checkbox]:checked');
-        // total of checked options after the change event triggers
-        const counter = selfChecked ? checkedOptions.length + 1 : checkedOptions.length - 1;
+      toggleAllBtn(counter);
+    });
 
-        toggleAllBtn(counter);
-      });
-
-      const toggleAllBtn = (counter) => {
-        // If the ALL button is active and some other themes are selected,
-        // uncheck the ALL button
-        if ((counter > 0 && $btn_check_all.hasClass('active')) || counter === 0) {
-          $btn_check_all.toggleClass('active');
-        }
+    const toggleAllBtn = (counter) => {
+      // If the ALL button is active and some other themes are selected,
+      // uncheck the ALL button
+      if ((counter > 0 && $('#js-all-themes').hasClass('active')) || counter === 0) {
+        $('#js-all-themes').toggleClass('active');
       }
-
-      const toggleSelected = (state) => {
-        // Uncheck all checkboxes when we click on the ALL button
-        $themes.each(function() {
-          const checkbox_checked = $(this).find('input[type=checkbox]').prop('checked');
-          if (checkbox_checked === state) {
-            $(this).button('toggle');
-          }
-        });
-      }
-
-      // We need to check on load if the button has to be enabled
-      toggleAllBtn($themes.find('input[type=checkbox]:checked').length);
     }
 
+    const toggleSelected = (state) => {
+      // Uncheck all checkboxes when we click on the ALL button
+      $('.js-filter-themes .btn.checkbox').each(function() {
+        const checkbox_checked = $(this).find('input[type=checkbox]').prop('checked');
+        if (checkbox_checked === state) {
+          $(this).button('toggle');
+        }
+      });
+    }
+
+    // We need to check on load if the button has to be enabled
+    toggleAllBtn($('.js-filter-themes .btn.checkbox').find('input[type=checkbox]:checked').length);
 
     // Very simple checbox toggle
     // Enable by pressing space

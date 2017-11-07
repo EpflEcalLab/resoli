@@ -15,7 +15,6 @@ const formAjax = () => {
             switch (behavior) {
               case 'fadeout-parent':
                 const $parent = $(`#${$this.data('parent')}`);
-                console.log($parent);
                 if ($parent.length > 0) {
                   $parent.toggleClass('card-fadeout');
                 }

@@ -4,6 +4,7 @@
   position: relative;
   justify-content: space-between;
   counter-reset: step-nav;
+  margin-top: $spacer;
   padding-right: 0;
 
   // Fix issue in Safari 9

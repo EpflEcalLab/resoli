@@ -318,7 +318,7 @@ class AddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // TODO fix "illegal choice" on submit
+    // TODO fix "illegal choice" on submit.
     $event_nid = $form_state->getValue('event');
     $event = $this->getNodeStorage()->load($event_nid);
     $activity = $event->field_activity->entity;

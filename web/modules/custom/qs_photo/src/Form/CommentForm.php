@@ -42,14 +42,14 @@ class CommentForm extends FormBasic {
   protected $nodeStorage;
 
   /**
-   * The Request stack
+   * The Request stack.
    *
    * @var object|\Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
   /**
-   * The file storage
+   * The file storage.
    *
    * @var \Drupal\file\FileStorageInterface
    */
@@ -66,8 +66,8 @@ class CommentForm extends FormBasic {
     $this->acl             = $this->getAcl();
     $this->nodeStorage     = $this->getNodeStorage();
     $this->activityManager = $this->getActivityManager();
-    $this->requestStack = $this->getRequestStack();
-    $this->fileStorage = $this->getFileStorage();
+    $this->requestStack    = $this->getRequestStack();
+    $this->fileStorage     = $this->getFileStorage();
   }
 
   /**
@@ -89,7 +89,7 @@ class CommentForm extends FormBasic {
    *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
-    // TODO manage access
+    // TODO manage access.
     $access = AccessResult::forbidden();
     if ($this->acl->hasAccessCommunity($community)) {
       $access = AccessResult::allowed();
@@ -134,7 +134,7 @@ class CommentForm extends FormBasic {
         '#default_value' => $photo->body->value,
         '#attributes' => [
           'title' => $this->t('qs_photo.form.comment.photo_comment_title'),
-          'photo' => (int) $nid
+          'photo' => (int) $nid,
         ],
       ];
     }
@@ -156,14 +156,14 @@ class CommentForm extends FormBasic {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // TODO implement validateForm
+    // TODO implement validateForm.
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // TODO implement submitForm
+    // TODO implement submitForm.
     dump($form_state);
   }
 

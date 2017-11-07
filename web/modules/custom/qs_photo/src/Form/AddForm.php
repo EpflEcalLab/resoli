@@ -129,15 +129,35 @@ class AddForm extends FormBasic {
       $activities = $this->activityManager->getByUserPhoto($community, $this->currentUser);
     }
 
-    $options = ['_none' => $this->t('qs.form.select')];
+    $fallback = ['_none' => $this->t('qs.form.select')];
+    $select_options[] = [
+      'nid' => '_none',
+      'title' => $this->t('qs.form.select'),
+    ];
     foreach ($activities as $activity) {
-      $options[$activity->id()] = $activity->getTitle();
+      $fallback[$activity->id()] = $activity->getTitle();
+      $select_options[] = [
+        'nid'         => $activity->id(),
+        'title'       => $activity->getTitle(),
+      ];
     }
+
     $form['step-1']['activity'] = [
       '#title'    => $this->t('qs_photo.add.form.activity'),
       '#type'     => 'select',
+      '#multiple'      => FALSE,
       '#required' => FALSE,
-      '#options'  => $options,
+      '#options'  => $fallback,
+      '#default_value' => 0,
+      '#attributes'    => [
+        'selectize'    => TRUE,
+        'class'        => ['selectize-activity'],
+        'data-options' => json_encode($select_options),
+      ],
+      '#theme_wrappers' => [
+        'form_element',
+        'container__center',
+      ],
       '#ajax'     => [
         'callback' => [$this, 'selectEventAjax'],
         'wrapper'  => 'model_wrapper',
@@ -205,18 +225,33 @@ class AddForm extends FormBasic {
       '#type' => 'submit',
       '#name' => 'publish',
       '#value' => $this->t('qs_photo.add.form.publish'),
+      '#attributes' => [
+        'class' => [
+          'js-form-normal',
+        ],
+      ],
     ];
 
     $form['step-4']['comment'] = [
       '#type' => 'submit',
       '#name' => 'comment',
       '#value' => $this->t('qs_photo.add.form.comment'),
+      '#attributes' => [
+        'class' => [
+          'js-form-normal',
+        ],
+      ],
     ];
 
     $form['step-4']['story'] = [
       '#type' => 'submit',
       '#name' => 'story',
       '#value' => $this->t('qs_photo.add.form.story'),
+      '#attributes' => [
+        'class' => [
+          'js-form-normal',
+        ],
+      ],
     ];
 
     return $form;
@@ -296,17 +331,21 @@ class AddForm extends FormBasic {
    *   The form model field structure.
    */
   public function selectEventAjax(array &$form, FormStateInterface $form_state) {
-    $activity_nid = $form_state->getValue('activity');
-    $activity     = $this->getNodeStorage()->load($activity_nid);
-    $events       = $this->getEventManager()->getAllPrev($activity);
-
     $options = ['_none' => $this->t('qs.form.select')->render()];
-    if ($events) {
-      foreach ($events as $event) {
-        $options[$event->id()] = $event->getTitle();
+
+    $activity_nid = $form_state->getValue('activity');
+    if ($activity_nid != 0) {
+
+      $activity     = $this->getNodeStorage()->load($activity_nid);
+      $events       = $this->getEventManager()->getAllPrev($activity);
+
+      if ($events) {
+        foreach ($events as $event) {
+          $options[$event->id()] = $event->getTitle();
+        }
       }
+      $form['step-2']['event']['#options'] = $options;
     }
-    $form['step-2']['event']['#options'] = $options;
 
     return $form['step-2']['event'];
   }

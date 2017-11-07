@@ -79,13 +79,16 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
     case in_array('page__activities__edit', $suggestions):
     case in_array('page__activities__dashboard__members', $suggestions):
     case in_array('page__activities__user', $suggestions):
+    case in_array('page__photos__user', $suggestions):
+    case in_array('page__photos__activity__user', $suggestions):
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'primary';
       break;
 
     case in_array('page__communities__dashboard', $suggestions):
     case in_array('page__communities__dashboard__members', $suggestions):
-    case in_array('page__communities__dashboard__waiting_approval', $suggestions):
+    case in_array('page__communities__dashboard__waiting_approval',
+      $suggestions):
     case in_array('page__activities__delete', $suggestions):
     case in_array('page__events__delete', $suggestions):
       $suggestions[] = 'page__fullmodal';
@@ -95,14 +98,9 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
     case in_array('page__events__dashboard', $suggestions):
     case in_array('page__events__add', $suggestions):
     case in_array('page__events__edit', $suggestions):
+    case in_array('page__photos__add', $suggestions):
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'secondary';
-      break;
-
-    case in_array('page__photos__user', $suggestions):
-    case in_array('page__photos__activity__user', $suggestions):
-      $suggestions[] = 'page__fullmodal';
-      $variables['attributes']['bg'] = 'primary';
       break;
   }
 }

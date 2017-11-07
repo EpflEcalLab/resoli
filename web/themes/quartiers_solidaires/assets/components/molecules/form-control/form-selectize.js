@@ -3,7 +3,7 @@ const formSelectize = () => {
     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
     '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
-    const options = $('select.selectize-members').data('options');
+    const members_options = $('select.selectize-members').data('options');
 
     $('select.selectize-members').selectize({
       persist: false,
@@ -15,7 +15,7 @@ const formSelectize = () => {
       sortField: [
         { field: 'displayname', direction: 'asc' }
       ],
-      options: options,
+      options: members_options,
       plugins: ['remove_button'],
       render: {
         item: function(item, escape) {
@@ -31,6 +31,34 @@ const formSelectize = () => {
           '<span class="label">' + escape(label) + '</span>' +
           (caption ? ' <span class="caption">(' + escape(caption) + ')</span>' : '') +
           '</div>';
+        }
+      }
+    });
+
+    const activity_options = $('select.selectize-activity').data('options');
+    $('select.selectize-activity').selectize({
+      persist: false,
+      maxItems: 1,
+      items: null,
+      valueField: 'nid',
+      labelField: 'title',
+      searchField: ['title'],
+      sortField: [
+        { field: 'title', direction: 'asc' }
+      ],
+      options: activity_options,
+      plugins: ['remove_button'],
+      render: {
+        item: function(item, escape) {
+          return '<div>' +
+            (item.title ? '<span class="title">' + escape(item.title) + '</span>' : '') +
+            '</div>';
+        },
+        option: function(item, escape) {
+          var label = item.title;
+          return '<div>' +
+            '<span class="label">' + escape(label) + '</span>' +
+            '</div>';
         }
       }
     });

@@ -68,6 +68,7 @@ class EventManager {
       ->condition('status', TRUE)
       ->condition('field_activity', $activities_nids, 'IN')
       ->sort('field_start_at', 'ASC')
+      ->range(0, 1)
       ->groupBy('field_activity');
 
     $nids = $query->execute();

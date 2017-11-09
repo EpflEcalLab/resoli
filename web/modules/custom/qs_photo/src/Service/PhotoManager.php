@@ -197,7 +197,9 @@ class PhotoManager {
       $query_privileges->leftJoin('node__field_activity', 'field_activity', 'field_activity.entity_id = event.nid');
       $query_privileges->leftJoin('privileges', 'privileges', 'privileges.entity = field_activity.field_activity_target_id');
       $query_privileges->condition('privileges.status', TRUE)
-        ->condition('privileges.user', $this->currentUser->id());
+        ->condition('privileges.user', $this->currentUser->id())
+        ->condition('privileges.status', 1);
+
       $or = $query_privileges->orConditionGroup();
       $or->condition('privileges.privilege', 'activity_members');
       $or->condition('privileges.privilege', 'activity_maintainers');

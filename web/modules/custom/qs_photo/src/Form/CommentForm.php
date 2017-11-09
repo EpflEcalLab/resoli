@@ -5,7 +5,7 @@ namespace Drupal\qs_photo\Form;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
+use Drupal\node\NodeInterface;
 use Drupal\Core\Session\AccountInterface;
 
 /**
@@ -21,32 +21,11 @@ class CommentForm extends FormBasic {
   private $acl;
 
   /**
-   * Activity Manager Service.
-   *
-   * @var \Drupal\qs_activity\Service\ActivityManager
-   */
-  private $activityManager;
-
-  /**
-   * The current user account proxy.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
-
-  /**
    * The node Storage.
    *
    * @var \Drupal\node\NodeStorageInterface
    */
   protected $nodeStorage;
-
-  /**
-   * The file storage.
-   *
-   * @var \Drupal\file\FileStorageInterface
-   */
-  protected $fileStorage;
 
   /**
    * {@inheritdoc}
@@ -58,8 +37,6 @@ class CommentForm extends FormBasic {
     // From the container, inject services.
     $this->acl             = $this->getAcl();
     $this->nodeStorage     = $this->getNodeStorage();
-    $this->activityManager = $this->getActivityManager();
-    $this->fileStorage     = $this->getFileStorage();
   }
 
   /**
@@ -74,16 +51,20 @@ class CommentForm extends FormBasic {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community.
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function access(AccountInterface $account, TermInterface $community) {
+  public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::allowed();
 
     $photos_params = $this->getRequest()->query->get('photos');
+    if (!$photos_params) {
+      return AccessResult::forbidden();
+    }
+
     $photos = $this->nodeStorage->loadMultiple($photos_params);
 
     // Check write access of every photos.
@@ -101,7 +82,7 @@ class CommentForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
     $form['#attributes']['title'] = $this->t('qs_photo.form.comment.title_form');
     $form['#tree'] = TRUE;
@@ -113,10 +94,10 @@ class CommentForm extends FormBasic {
       'form__modal',
     ];
 
-    // Save the community for submission.
-    $form['community'] = [
+    // Save the activity for submission.
+    $form['activity'] = [
       '#type'  => 'hidden',
-      '#value' => $community->id(),
+      '#value' => $activity->id(),
     ];
 
     foreach ($photos_params as $nid) {
@@ -161,7 +142,7 @@ class CommentForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $community = $form_state->getValue('community');
+    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
     $user = $this->getCurrentUser();
 
     $photos = $form_state->getValue('photos');
@@ -171,12 +152,13 @@ class CommentForm extends FormBasic {
       $photo->save();
     }
 
-    drupal_set_message($this->t("qs_photo.form.comment.success @number", [
+    drupal_set_message($this->t("qs_photo.form.comment.success @number @activity", [
       '@number'   => count($photos),
+      '@activity'   => $activity->getTitle(),
     ]));
 
-    $form_state->setRedirect('qs_photo.user.activities.collection', [
-      'community' => $community,
+    $form_state->setRedirect('qs_photo.user.form.manage', [
+      'activity' => $activity->id(),
       'user' => $user->id(),
     ]);
   }

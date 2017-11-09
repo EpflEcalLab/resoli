@@ -180,8 +180,15 @@ class UserManageForm extends FormBasic {
     $trigger = $form_state->getTriggeringElement();
     switch ($trigger['#name']) {
       case 'comment':
+        $form_state->setRedirect('qs_photo.form.comments', [
+          'activity' => $activity->id(),
+          'photos' => $photos
+        ]);
       case 'delete':
-        $form_state->setRedirect('qs_photo.form.comments', ['community' => $activity->field_community->target_id, 'photos' => $photos]);
+        $form_state->setRedirect('qs_photo.form.delete', [
+          'activity' => $activity->id(),
+          'photos' => $photos
+        ]);
         break;
     }
   }

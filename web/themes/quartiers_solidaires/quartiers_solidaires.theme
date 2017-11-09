@@ -91,6 +91,7 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
       $suggestions):
     case in_array('page__activities__delete', $suggestions):
     case in_array('page__events__delete', $suggestions):
+    case in_array('page__photos__activity__delete', $suggestions):
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'danger';
       break;
@@ -99,7 +100,7 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
     case in_array('page__events__add', $suggestions):
     case in_array('page__events__edit', $suggestions):
     case in_array('page__photos__add', $suggestions):
-    case in_array('page__photos__comment', $suggestions):
+    case in_array('page__photos__activity__comment', $suggestions):
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'secondary';
       break;

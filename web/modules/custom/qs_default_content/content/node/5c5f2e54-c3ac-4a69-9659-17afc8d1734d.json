@@ -205,7 +205,7 @@
     ],
     "field_member_create_gallery": [
         {
-            "value": true
+            "value": false
         }
     ],
     "field_member_create_story": [

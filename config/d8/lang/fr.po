@@ -1864,3 +1864,18 @@ msgstr ""
 
 msgid "qs_photo.floating.manage_photos"
 msgstr ""
+
+msgid "qs_photo.user.form.manage.choose_one"
+msgstr ""
+
+msgid "qs_photo.form.comment.title_form"
+msgstr ""
+
+msgid "qs_photo.form.comment.photo_comment_placeholder"
+msgstr ""
+
+msgid "qs_photo.form.comment.photo_comment_title"
+msgstr ""
+
+msgid "qs_photo.form.add.title"
+msgstr ""

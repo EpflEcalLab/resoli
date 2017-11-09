@@ -224,7 +224,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           break;
 
         // Go to Photos.
-        // TODO add test for this link.
         case "qs_photo.activity":
         case "qs_photo.user.activities.collection":
         case "qs_photo.form.add":
@@ -236,7 +235,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           break;
 
         // Go to My Photos.
-        // TODO add test for this link.
         case "qs_photo.user.form.manage":
           $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
             'community' => $community->id(),
@@ -247,7 +245,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           break;
 
         // Go to Manage Photos.
-        // TODO add test for this link.
         case "qs_photo.form.delete":
         case "qs_photo.form.comments":
           $url = $this->urlGenerator->generateFromRoute('qs_photo.user.form.manage', [

@@ -184,6 +184,8 @@ class UserManageForm extends FormBasic {
           'activity' => $activity->id(),
           'photos' => $photos,
         ]);
+        break;
+
       case 'delete':
         $form_state->setRedirect('qs_photo.form.delete', [
           'activity' => $activity->id(),

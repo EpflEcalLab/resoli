@@ -155,7 +155,7 @@ class CommentForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) { }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
 
   /**
    * {@inheritdoc}
@@ -177,7 +177,7 @@ class CommentForm extends FormBasic {
 
     $form_state->setRedirect('qs_photo.user.activities.collection', [
       'community' => $community,
-      'user' => $user->id()
+      'user' => $user->id(),
     ]);
   }
 

@@ -3,7 +3,6 @@
 namespace Drupal\qs_photo\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
@@ -184,7 +183,6 @@ class UserManageForm extends FormBasic {
       case 'delete':
         $form_state->setRedirect('qs_photo.form.comments', ['community' => $activity->field_community->target_id, 'photos' => $photos]);
         break;
-        break;
     }
   }
 
@@ -199,7 +197,7 @@ class UserManageForm extends FormBasic {
    */
   private function getCheckedPhotos(FormStateInterface $form_state) {
     // Get every checked photos.
-    $photos = array_filter($form_state->getValue('photos'), function($value) {
+    $photos = array_filter($form_state->getValue('photos'), function ($value) {
       return !empty($value);
     });
     return $photos;

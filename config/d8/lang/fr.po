@@ -1879,3 +1879,15 @@ msgstr ""
 
 msgid "qs_photo.form.add.title"
 msgstr ""
+
+msgid "qs_photo.form.comment.success @number @activity"
+msgstr ""
+
+msgid "qs_photo.form.delete.warning"
+msgstr ""
+
+msgid "qs_photo.form.delete.success @activity @number"
+msgstr ""
+
+msgid "qs.previous.to_manage_photos"
+msgstr ""

@@ -42,13 +42,6 @@ class CommentForm extends FormBasic {
   protected $nodeStorage;
 
   /**
-   * The Request stack.
-   *
-   * @var object|\Symfony\Component\HttpFoundation\RequestStack
-   */
-  protected $requestStack;
-
-  /**
    * The file storage.
    *
    * @var \Drupal\file\FileStorageInterface
@@ -66,7 +59,6 @@ class CommentForm extends FormBasic {
     $this->acl             = $this->getAcl();
     $this->nodeStorage     = $this->getNodeStorage();
     $this->activityManager = $this->getActivityManager();
-    $this->requestStack    = $this->getRequestStack();
     $this->fileStorage     = $this->getFileStorage();
   }
 
@@ -89,10 +81,19 @@ class CommentForm extends FormBasic {
    *   The access result.
    */
   public function access(AccountInterface $account, TermInterface $community) {
-    // TODO manage access.
-    $access = AccessResult::forbidden();
-    if ($this->acl->hasAccessCommunity($community)) {
-      $access = AccessResult::allowed();
+    $access = AccessResult::allowed();
+
+    $photos_params = $this->getRequest()->query->get('photos');
+    $photos = $this->nodeStorage->loadMultiple($photos_params);
+
+    // Check write access of every photos.
+    foreach ($photos as $photo) {
+      $activity = $photo->field_event->entity->field_activity->entity;
+
+      if (!$this->acl->hasWriteAccessPhoto($activity)) {
+        $access = AccessResult::forbidden();
+        break;
+      }
     }
     return $access;
   }
@@ -102,15 +103,10 @@ class CommentForm extends FormBasic {
    */
   public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
     $form = parent::buildForm($form, $form_state);
+    $form['#attributes']['title'] = $this->t('qs_photo.form.comment.title_form');
+    $form['#tree'] = TRUE;
 
-    $masterRequest = $this->requestStack->getMasterRequest();
-    $photosParameter = $masterRequest->query->get('photos');
-
-    // Disable caching & HTML5 validation.
-    $form['#cache']['max-age'] = 0;
-    $form['#attributes'] = [
-      'title' => $this->t('qs_photo.form.comment.title_form'),
-    ];
+    $photos_params = $this->getRequest()->query->get('photos');
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
@@ -123,10 +119,10 @@ class CommentForm extends FormBasic {
       '#value' => $community->id(),
     ];
 
-    foreach ($photosParameter as $nid) {
+    foreach ($photos_params as $nid) {
       $photo = $this->nodeStorage->load($nid);
 
-      $form['photo'][$nid] = [
+      $form['photos'][$nid] = [
         '#type'     => 'textarea',
         '#required' => FALSE,
         '#theme' => ['textarea__photo'],
@@ -143,9 +139,13 @@ class CommentForm extends FormBasic {
       '#type' => 'submit',
       '#value' => $this->t('qs.form.submit'),
       '#attributes' => [
-        'outline' => TRUE,
         'icon' => 'check',
+        'modal' => TRUE,
         'icon_left' => TRUE,
+        'outline' => TRUE,
+        'class' => [
+          'shadow-to-bottom',
+        ],
       ],
     ];
 
@@ -155,16 +155,30 @@ class CommentForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    // TODO implement validateForm.
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) { }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // TODO implement submitForm.
-    dump($form_state);
+    $community = $form_state->getValue('community');
+    $user = $this->getCurrentUser();
+
+    $photos = $form_state->getValue('photos');
+    foreach ($photos as $photo_nid => $comment) {
+      $photo = $this->nodeStorage->load($photo_nid);
+      $photo->set('body', $comment);
+      $photo->save();
+    }
+
+    drupal_set_message($this->t("qs_photo.form.comment.success @number", [
+      '@number'   => count($photos),
+    ]));
+
+    $form_state->setRedirect('qs_photo.user.activities.collection', [
+      'community' => $community,
+      'user' => $user->id()
+    ]);
   }
 
 }

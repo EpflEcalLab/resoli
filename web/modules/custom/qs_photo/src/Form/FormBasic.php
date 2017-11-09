@@ -162,16 +162,6 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
-   * Lazy loading for the Request Stack.
-   *
-   * @return object|\Symfony\Component\HttpFoundation\RequestStack
-   *   Return the Request Stack.
-   */
-  protected function getRequestStack() {
-    return $this->container->get('request_stack');
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {

@@ -76,6 +76,11 @@ class UserManageForm extends FormBasic {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL, AccountInterface $user = NULL) {
     $form = parent::buildForm($form, $form_state);
 
+    $form['activity'] = [
+      '#type'  => 'hidden',
+      '#value' => $activity->id(),
+    ];
+
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
@@ -95,17 +100,6 @@ class UserManageForm extends FormBasic {
     foreach ($photos as $photo) {
       $options[$photo->id()] = $photo->getTitle();
     }
-
-    $form['select_all'] = [
-      '#type' => 'link',
-      '#title' => $this->t('qs_photos.photos_select_all'),
-      '#url' => Url::fromRoute('<front>'),
-      '#attributes' => [
-        'class' => [
-          'btn btn-outline-danger btn-outline-invert',
-        ],
-      ],
-    ];
 
     $form['photos'] = [
       '#attributes' => [
@@ -135,6 +129,7 @@ class UserManageForm extends FormBasic {
 
     $form['actions']['comment'] = [
       '#type' => 'submit',
+      '#name' => 'comment',
       '#attributes' => [
         'icon' => 'comment',
         'icon_left' => TRUE,
@@ -148,6 +143,7 @@ class UserManageForm extends FormBasic {
 
     $form['actions']['delete'] = [
       '#type' => 'submit',
+      '#name' => 'delete',
       '#attributes' => [
         'icon' => 'trash',
         'icon_left' => TRUE,
@@ -165,14 +161,48 @@ class UserManageForm extends FormBasic {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // TODO implement validateForm.
+    // Get every checked photos.
+    $photos = $this->getCheckedPhotos($form_state);
+
+    if (empty($photos)) {
+      $form_state->setErrorByName('[photos]', $this->t('qs_photo.user.form.manage.choose_one'));
+    }
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // TODO implement submitForm.
+    $activity = $this->getNodeStorage()->load($form_state->getValue('activity'));
+
+    // Get every checked photos.
+    $photos = $this->getCheckedPhotos($form_state);
+
+    $trigger = $form_state->getTriggeringElement();
+    switch ($trigger['#name']) {
+      case 'comment':
+      case 'delete':
+        $form_state->setRedirect('qs_photo.form.comments', ['community' => $activity->field_community->target_id, 'photos' => $photos]);
+        break;
+        break;
+    }
+  }
+
+  /**
+   * Retrieve checked photos.
+   *
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return array
+   *   Collection of checked photos.
+   */
+  private function getCheckedPhotos(FormStateInterface $form_state) {
+    // Get every checked photos.
+    $photos = array_filter($form_state->getValue('photos'), function($value) {
+      return !empty($value);
+    });
+    return $photos;
   }
 
 }

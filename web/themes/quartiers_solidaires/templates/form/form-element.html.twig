@@ -56,8 +56,10 @@
     title_display not in ['after', 'before'] ? 'form-no-label',
     disabled == 'disabled' ? 'form-disabled',
     type == 'radio' ? 'input-radio mb-0',
-    type == 'checkbox' ? 'input-checkbox w-100',
-  ]
+    type == 'checkbox' ? 'input-checkbox',
+    type == 'checkbox' and element['#attributes'].variant != 'image' ? 'w-100' ,
+    type == 'checkbox' and element['#attributes'].variant == 'image' ? 'col-6 col-sm-4 col-md-3',
+]
 %}
 {%
   set description_classes = [

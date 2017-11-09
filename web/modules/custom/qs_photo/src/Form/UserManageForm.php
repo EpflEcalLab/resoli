@@ -182,12 +182,12 @@ class UserManageForm extends FormBasic {
       case 'comment':
         $form_state->setRedirect('qs_photo.form.comments', [
           'activity' => $activity->id(),
-          'photos' => $photos
+          'photos' => $photos,
         ]);
       case 'delete':
         $form_state->setRedirect('qs_photo.form.delete', [
           'activity' => $activity->id(),
-          'photos' => $photos
+          'photos' => $photos,
         ]);
         break;
     }

@@ -35,8 +35,8 @@ class CommentForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl             = $this->getAcl();
-    $this->nodeStorage     = $this->getNodeStorage();
+    $this->acl         = $this->getAcl();
+    $this->nodeStorage = $this->getNodeStorage();
   }
 
   /**

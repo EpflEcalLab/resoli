@@ -35,8 +35,8 @@ class DeleteForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl             = $this->getAcl();
-    $this->nodeStorage     = $this->getNodeStorage();
+    $this->acl         = $this->getAcl();
+    $this->nodeStorage = $this->getNodeStorage();
   }
 
   /**
@@ -83,7 +83,7 @@ class DeleteForm extends FormBasic {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
-    $form = parent::buildForm($form, $form_state, $event);
+    $form = parent::buildForm($form, $form_state);
     $user = $this->getCurrentUser();
 
     // Save the activity for submission.
@@ -97,7 +97,7 @@ class DeleteForm extends FormBasic {
     ];
 
     $form['#attributes'] = [
-      'title' => $event->title->value,
+      'title' => $activity->getTitle(),
       'description' => $this->t('qs_photo.form.delete.warning'),
     ];
 

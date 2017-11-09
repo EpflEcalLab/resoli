@@ -123,5 +123,20 @@ qs_photo.form.comments:
       community: \d+
     options:
       parameters:
-        community:
-          type: entity:taxonomy_term
+        activity:
+          type: entity:node
+
+# Form - delete photos.
+qs_photo.form.delete:
+    path: '/photos/activity/{activity}/delete'
+    defaults:
+      _form: '\Drupal\qs_photo\Form\DeleteForm'
+      _title: 'qs_photo.form.delete.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Form\DeleteForm::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node

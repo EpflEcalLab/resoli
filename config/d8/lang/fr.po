@@ -308,7 +308,7 @@ msgid "qs.auth.communities.welcome"
 msgstr "Bienvenue! A quelle communauté souhaitez-vous vous connecter?"
 
 msgid "qs.auth.communities.description"
-msgstr "Sélectionnez-en une ci-dessous."
+msgstr "Ce choix peut être facilement modifié à tout instant, dans vos données personnelles, accessibles par le menu principal."
 
 msgid "qs_auth.communities.selector"
 msgstr ""
@@ -570,7 +570,7 @@ msgstr ""
 "La personne responsable de la communauté @variables.community.name.value va "
 "maintenant vérifier votre adhésion. \n"
 "Elle vous informera, par email, lorsque vous pourrez commencer à utiliser "
-"Réseaux Solidaires! Notez que cette validation peut durer quelques minutes, "
+"@sitename! Notez que cette validation peut durer quelques minutes, "
 "comme quelques jours. N’hésitez pas à la contacter pour toute information "
 "complémentaire."
 
@@ -741,7 +741,7 @@ msgid "qs_auth.register_form.step2"
 msgstr ""
 
 msgid "qs_auth.register_form.mail.placeholder"
-msgstr "Ex. catherine.dubuis@prosenectute.ch"
+msgstr "Ex. catherine.dubuis@re-so.ch"
 
 msgid "qs_auth.register_form.mail"
 msgstr "Inscrivez votre adresse e-mail ici"
@@ -846,9 +846,7 @@ msgstr ""
 "rejoindre!"
 
 msgid "qs_auth.register_form.step1.sub_description"
-msgstr ""
-"Ce choix peut être facilement modifié, à tout instant, dans vos réglages "
-"personnels."
+msgstr "Ce choix peut être facilement modifié à tout instant, dans vos données personnelles, accessibles par le menu principal."
 
 msgid "qs_auth.register_form.step2.description"
 msgstr ""
@@ -986,7 +984,7 @@ msgstr ""
 "a>"
 
 msgid "qs_auth.form.pass.name.placeholder"
-msgstr ""
+msgstr "Ex. catherine.dubuis@re-so.ch"
 
 msgid "qs.auth.pass.confirmation.thanks"
 msgstr "Merci pour votre demande."

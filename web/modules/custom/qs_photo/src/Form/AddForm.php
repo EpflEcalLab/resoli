@@ -20,14 +20,14 @@ class AddForm extends FormBasic {
    *
    * @var \Drupal\qs_acl\Service\AccessControl
    */
-  private $acl;
+  protected $acl;
 
   /**
    * Activity Manager Service.
    *
    * @var \Drupal\qs_activity\Service\ActivityManager
    */
-  private $activityManager;
+  protected $activityManager;
 
   /**
    * The current user account proxy.
@@ -142,11 +142,12 @@ class AddForm extends FormBasic {
     }
 
     $form['step-1']['activity'] = [
-      '#title'    => $this->t('qs_photo.add.form.activity'),
-      '#type'     => 'select',
-      '#multiple'      => FALSE,
-      '#required' => FALSE,
-      '#options'  => $fallback,
+      '#title'     => $this->t('qs_photo.add.form.activity'),
+      '#type'      => 'select',
+      '#multiple'  => FALSE,
+      '#required'  => FALSE,
+      '#options'   => $fallback,
+      '#validated' => TRUE,
       '#attributes'    => [
         'selectize'    => TRUE,
         'class'        => ['selectize-activity'],
@@ -158,7 +159,6 @@ class AddForm extends FormBasic {
       ],
       '#ajax'     => [
         'callback' => [$this, 'selectEventAjax'],
-        'wrapper'  => 'model_wrapper',
       ],
     ];
 
@@ -179,6 +179,7 @@ class AddForm extends FormBasic {
       '#type'      => 'select',
       '#required'  => FALSE,
       '#options'   => ['_none' => $this->t('qs.form.select')],
+      '#validated' => TRUE,
       '#attributes'    => [
         'selectize'    => TRUE,
         'class'        => [
@@ -288,9 +289,35 @@ class AddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $files = $this->getRequest()->files->get('files');
+    $event_nid = $form_state->getValue('event');
+    $event = $this->getNodeStorage()->load($event_nid);
 
-    if (empty($files['photos'])) {
+    // Detect illegal event or activity POST.
+    if ($event && $event->bundle() === 'event') {
+      $activity = $event->field_activity->entity;
+    }
+    else {
+      $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.upload.illegal_choice'));
+    }
+
+    // Assert activity is filled.
+    if (!$form_state->getValue('activity')) {
+      $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-1']['activity']['#title']]));
+    }
+
+    // Assert event is filled.
+    if (!$form_state->getValue('event')) {
+      $form_state->setErrorByName('[step-2][event]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-2']['event']['#title']]));
+    }
+
+    // Check write access of activity.
+    if ($activity && $event
+      && !$this->acl->hasWriteAccessPhoto($activity)) {
+      $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.upload.illegal_choice'));
+    }
+
+    $files = $this->getRequest()->files->get('files');
+    if (empty($files['photos']) || empty($files['photos'][0])) {
       $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
     }
     else {
@@ -318,13 +345,14 @@ class AddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // TODO fix "illegal choice" on submit.
     $event_nid = $form_state->getValue('event');
     $event = $this->getNodeStorage()->load($event_nid);
     $activity = $event->field_activity->entity;
 
+    $photos = [];
     foreach ($this->photos as $photo) {
-      $this->getPhotoManager()->create($event, $photo);
+      $node = $this->getPhotoManager()->create($event, $photo);
+      $photos[] = $node->id();
     }
 
     drupal_set_message($this->t("qs_photo.form.add.success @number @event @activity", [
@@ -336,10 +364,13 @@ class AddForm extends FormBasic {
     $trigger = $form_state->getTriggeringElement();
     switch ($trigger['#name']) {
       case 'comment':
-      case 'story':
-        $form_state->setRedirect('qs_photo.activity', ['activity' => $activity->id()]);
+        $form_state->setRedirect('qs_photo.form.comments', [
+          'activity' => $activity->id(),
+          'photos' => $photos,
+        ]);
         break;
 
+      case 'story':
       case 'publish':
       default:
         $form_state->setRedirect('qs_photo.activity', ['activity' => $activity->id()]);

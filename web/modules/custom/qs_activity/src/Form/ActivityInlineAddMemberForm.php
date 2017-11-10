@@ -11,6 +11,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ActivityInlineAddMemberForm extends ActivityEditFormBase {
 
   /**
+   * Fallback select options of members.
+   *
+   * @var array
+   */
+  protected $fallback;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -52,7 +59,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     // Load user entities without privileges.
     $community_members = $this->userStorage->loadMultiple($uids);
     $select_options = [];
-    $fallback = [];
+    $this->fallback = [];
     if (!empty($community_members)) {
       foreach ($community_members as $community_member) {
 
@@ -67,7 +74,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
           'email'       => $community_member->mail->value,
           'displayname' => $community_member->field_firstname->value . ' ' . $community_member->field_lastname->value,
         ];
-        $fallback[$community_member->id()] = !empty($select_options[$community_member->id()]['displayname']) ? $select_options[$community_member->id()]['displayname'] : $community_member->name->value;
+        $this->fallback[$community_member->id()] = !empty($select_options[$community_member->id()]['displayname']) ? $select_options[$community_member->id()]['displayname'] : $community_member->name->value;
       }
     }
 
@@ -76,13 +83,14 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
       '#type'          => 'select',
       '#multiple'      => FALSE,
       '#required'      => FALSE,
-      '#options'       => $fallback,
-      '#default_value' => 0,
+      '#options'       => $this->fallback,
       '#attributes'    => [
+        'placeholder'   => $this->t('qs.activity.add_member.placeholder'),
         'selectize'    => TRUE,
         'class'        => ['selectize-members'],
         'data-options' => json_encode($select_options),
       ],
+      '#validated' => TRUE,
       '#theme_wrappers' => [
         'form_element',
         'container__center',
@@ -117,6 +125,20 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     ];
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Assert the member is valid.
+    if (!$form_state->getValue('member') || empty($form_state->getValue('member'))) {
+      $form_state->setErrorByName('member', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['member']['#title']]));
+    }
+
+    if (!isset($this->fallback[$form_state->getValue('member')])) {
+      $form_state->setErrorByName('member', $this->t('qs.form.error.something_went_wrong'));
+    }
   }
 
   /**

@@ -1964,3 +1964,6 @@ msgstr ""
 
 msgid "qs_photo.form.delete.title"
 msgstr ""
+
+msgid "qs.activity.add_member.placeholder"
+msgstr ""

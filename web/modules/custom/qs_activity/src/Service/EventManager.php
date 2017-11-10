@@ -77,7 +77,7 @@ class EventManager {
     $query->fields('field_activity', ['field_activity_target_id']);
     $query->groupBy('field_activity.field_activity_target_id');
     $query->addExpression('MIN(field_start_at.field_start_at_value)');
-    $query->addExpression('ANY_VALUE(event.nid)', 'nid');
+    $query->addExpression('MIN(event.nid)', 'nid');
 
     $rows = $query->execute()->fetchAll();
 

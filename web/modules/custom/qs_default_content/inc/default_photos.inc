@@ -29,10 +29,6 @@ function qs_default_content_photos() {
   $photo_41->set('field_image', $file);
   $photo_41->save();
 
-  $photo_41 = $nodeStorage->load(41);
-  $photo_41->set('field_image', $file);
-  $photo_41->save();
-
   $photo_42 = $nodeStorage->load(42);
   $photo_42->set('field_image', $file);
   $photo_42->save();

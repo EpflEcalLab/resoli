@@ -1201,7 +1201,7 @@ msgid "qs.event.contribution"
 msgstr "Contribution:"
 
 msgid "qs.error.403.description"
-msgstr ""
+msgstr "Choisissez une des deux options ci-dessous."
 
 msgid "qs.auth.approval.description @variables.community.name.value "
 msgstr ""
@@ -1801,9 +1801,10 @@ msgstr ""
 
 msgid "qs_photo.add.form.step1.description"
 msgstr ""
+"Pour commencer, à quelle activité souhaitez-vous ajouter de nouvelles photos?"
 
 msgid "qs_photo.add.form.step1"
-msgstr ""
+msgstr "Cliquez ci-dessous pour voir les activités disponibles:"
 
 msgid "qs.form.select"
 msgstr ""
@@ -1813,9 +1814,10 @@ msgstr ""
 
 msgid "qs_photo.add.form.step2.description"
 msgstr ""
+"A quel évènement de @activity souhaitez-vous ajouter de nouvelles photos?"
 
 msgid "qs_photo.add.form.step2"
-msgstr ""
+msgstr "Cliquez ci-dessous pour voir les évènements disponibles:"
 
 msgid "qs_photo.add.form.event"
 msgstr ""
@@ -1836,13 +1838,13 @@ msgid "qs_photo.add.form.step4"
 msgstr ""
 
 msgid "qs_photo.add.form.publish"
-msgstr ""
+msgstr "Publier les images"
 
 msgid "qs_photo.add.form.comment"
-msgstr ""
+msgstr "Commenter les images"
 
 msgid "qs_photo.add.form.story"
-msgstr ""
+msgstr "Créer un récit"
 
 msgid "qs.form.upload.at_least_one"
 msgstr ""
@@ -1857,25 +1859,27 @@ msgid "@user (@uid) stream `@file` (@nid) at @now."
 msgstr ""
 
 msgid "qs.previous.to_my_photos"
-msgstr ""
+msgstr "Mes photos"
 
 msgid "qs_photo.floating.my_photos"
-msgstr ""
+msgstr "Mes photos"
 
 msgid "qs_photo.floating.manage_photos"
-msgstr ""
+msgstr "Gérer mes photos"
 
 msgid "qs_photo.user.form.manage.choose_one"
 msgstr ""
 
 msgid "qs_photo.form.comment.title_form"
-msgstr ""
+msgstr "Ecrivez vos commentaires à côté de vos photos!"
 
 msgid "qs_photo.form.comment.photo_comment_placeholder"
 msgstr ""
+"Ex. Lors de cet atelier, Françoise a dû revoir son jugement face au "
+"numérique!"
 
 msgid "qs_photo.form.comment.photo_comment_title"
-msgstr ""
+msgstr "Inscrivez un commentaire ici:"
 
 msgid "qs_photo.form.add.title"
 msgstr ""
@@ -1890,4 +1894,40 @@ msgid "qs_photo.form.delete.success @activity @number"
 msgstr ""
 
 msgid "qs.previous.to_manage_photos"
+msgstr ""
+
+msgid "qs.community.welcome"
+msgstr "Accueil de la communauté"
+
+msgid "qs_activity.collection.dates.title"
+msgstr "Activités par date"
+
+msgid "qs_calendar.collection.weekly.title"
+msgstr "Calendrier hebdo"
+
+msgid "qs_calendar.collection.monthly.title"
+msgstr "Calendrier mensuel"
+
+msgid "qs_photo.collection.monthly.title"
+msgstr "Photos par date"
+
+msgid "qs_photo.collection.themes.title"
+msgstr "Photos par thème"
+
+msgid "qs_activity.activities.members.title"
+msgstr "Gérer les membres"
+
+msgid "qs_subscription.subscribers.title"
+msgstr "Inscriptions confirmées"
+
+msgid "qs_subscription.waiting_approval.title"
+msgstr "Inscriptions en attente"
+
+msgid "qs_activity.events.form.delete.title"
+msgstr "Supprimer l’évènement?"
+
+msgid "qs_subscription.user.collection.title"
+msgstr "Mes inscriptions"
+
+msgid "qs.form.upload.illegal_choice"
 msgstr ""

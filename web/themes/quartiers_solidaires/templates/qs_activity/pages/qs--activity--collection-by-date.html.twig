@@ -96,10 +96,19 @@
 <div class="container">
   <div class="row justify-content-center">
     {% if variables.prev|date('Y-m-d') > 'now'|date('Y-m-d') %}
-      <a class="btn btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.prev|date('Y-m-d'), 'community': variables.community.tid.value}) }}">{{ 'qs.activity.date.link_prev'|t }}</a>
+      <a class="btn btn-icon btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.prev|date('Y-m-d'), 'community': variables.community.tid.value}) }}">
+        {{ macros.icon('chevron-left') }}
+        {{ 'qs.activity.date.link_prev'|t }}
+      </a>
     {% elseif variables.prev|date('Y-m-d') == 'now'|date('Y-m-d') %}
-      <a class="btn btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'community': variables.community.tid.value}) }}">{{ 'qs.activity.date.link_prev'|t }}</a>
+      <a class="btn btn-icon btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'community': variables.community.tid.value}) }}">
+        {{ macros.icon('chevron-left') }}
+        {{ 'qs.activity.date.link_prev'|t }}
+      </a>
     {% endif %}
-    <a class="btn btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.next|date('Y-m-d'), 'community': variables.community.tid.value}) }}">{{ 'qs.activity.date.link_next'|t }}</a>
+    <a class="btn btn-icon btn-icon-right btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.next|date('Y-m-d'), 'community': variables.community.tid.value}) }}">
+      {{ 'qs.activity.date.link_next'|t }}
+      {{ macros.icon('chevron-right') }}
+    </a>
   </div>
 </div>

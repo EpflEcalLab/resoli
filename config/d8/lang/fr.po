@@ -1931,3 +1931,36 @@ msgstr "Mes inscriptions"
 
 msgid "qs.form.upload.illegal_choice"
 msgstr ""
+
+msgid "qs.photos.user.collection.title"
+msgstr ""
+
+msgid "qs.photos.view_activity_photos"
+msgstr ""
+
+msgid "qs.photos.manage_photos"
+msgstr ""
+
+msgid "qs.photos.add_photos"
+msgstr ""
+
+msgid "qs.photo.no_photos"
+msgstr ""
+
+msgid "qs.form.input.upload"
+msgstr ""
+
+msgid "qs_photo.activity.title"
+msgstr ""
+
+msgid "qs_photo.user.form.manage.title"
+msgstr ""
+
+msgid "qs_photo.user.activities.collection.title"
+msgstr ""
+
+msgid "qs_photo.form.comments.title"
+msgstr ""
+
+msgid "qs_photo.form.delete.title"
+msgstr ""

@@ -77,8 +77,8 @@
     <div class="text-center">
 
       <p class="text-secondary">
-        {{ 'qs.activity.nextevent'|t }}:<br>
         {%- if event -%}
+          {{ 'qs.activity.nextevent'|t }}:<br>
           {% set event_date = event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F Y') %}
           {% set event_start_hour = event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') %}
           {% set event_end_hour = event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') %}

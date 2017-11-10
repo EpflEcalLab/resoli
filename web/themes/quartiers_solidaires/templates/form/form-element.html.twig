@@ -57,7 +57,9 @@
     disabled == 'disabled' ? 'form-disabled',
     type == 'radio' ? 'input-radio mb-0',
     type == 'checkbox' ? 'input-checkbox',
-  ]
+    type == 'checkbox' and element['#attributes'].variant != 'image' ? 'w-100' ,
+    type == 'checkbox' and element['#attributes'].variant == 'image' ? 'd-inline-block mr-3',
+]
 %}
 {%
   set description_classes = [

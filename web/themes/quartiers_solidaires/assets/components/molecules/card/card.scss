@@ -233,6 +233,10 @@ a[href].card-pill-simple {
   margin-top: $card-spacer-y;
 }
 
+.card-actions-offset {
+  margin-bottom: -$card-spacer-y;
+}
+
 .card-btn-corner {
   position: absolute;
   bottom: -$card-border-width;

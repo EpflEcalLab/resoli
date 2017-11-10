@@ -59,3 +59,84 @@ qs_photo.streamer:
           type: entity:node
         image_style:
           type: entity:image_style
+
+# Photos add form - Multi-steps forms.
+qs_photo.form.add:
+    path: '/photos/{community}/add'
+    defaults:
+      _form: '\Drupal\qs_photo\Form\AddForm'
+      _title: 'qs_photo.form.add.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Form\AddForm::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# Photos manager form
+qs_photo.user.form.manage:
+    path: '/photos/activity/{activity}/user/{user}'
+    defaults:
+      _form: '\Drupal\qs_photo\Form\UserManageForm'
+      _title: 'qs_photo.user.form.manage.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Form\UserManageForm::access'
+      activity: \d+
+      user: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
+        user:
+          type: entity:user
+
+# User Activities where he can add photo(s).
+qs_photo.user.activities.collection:
+    path: '/photos/{community}/user/{user}'
+    defaults:
+      _controller: '\Drupal\qs_photo\Controller\UserController::activities'
+      _title: 'qs_photo.user.activities.collection.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Controller\UserController::access'
+      community: \d+
+      user: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+        user:
+          type: entity:user
+
+# Form - Add/edit comments on photos.
+qs_photo.form.comments:
+    path: '/photos/activity/{activity}/comment'
+    defaults:
+      _form: '\Drupal\qs_photo\Form\CommentForm'
+      _title: 'qs_photo.form.comments.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Form\CommentForm::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node
+
+# Form - delete photos.
+qs_photo.form.delete:
+    path: '/photos/activity/{activity}/delete'
+    defaults:
+      _form: '\Drupal\qs_photo\Form\DeleteForm'
+      _title: 'qs_photo.form.delete.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_photo\Form\DeleteForm::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node

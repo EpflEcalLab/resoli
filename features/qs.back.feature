@@ -259,3 +259,43 @@ Feature: Back buttons
     And I should see "qs_auth.link.home" link with href "/"
 
 # Photos by Activity
+  Scenario: In the Activity's Photos, I see a back button for Photos by Date
+    Given I am logged in as user "admin"
+    When I am on "/lausanne/activities/atelier-creatif/photos"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_photos_list" link with href "/lausanne/photos/theme"
+
+# My Photos
+  Scenario: In the My Activities, I see a back button for Photos by dates
+    Given I am logged in as user "admin"
+    When I am on "/photos/1/user/1"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_photos_list" link with href "/lausanne/photos/theme"
+
+# Form add Photo
+  Scenario: In the Form add Photo, I see a back button for Photos by dates
+    Given I am logged in as user "admin"
+    When I am on "/photos/1/user/1"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_photos_list" link with href "/lausanne/photos/theme"
+
+# Form manage Photos
+  Scenario: In the Form add Photo, I see a back button for My Photos
+    Given I am logged in as user "admin"
+    When I am on "/photos/activity/2/user/1"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_my_photos" link with href "/photos/1/user/1"
+
+# Form delete Photos
+  Scenario: In the Form add Photo, I see a back button for My Photos
+    Given I am logged in as user "admin"
+    When I am on "/photos/activity/2/delete?photos[42]=42&photos[45]=45"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_manage_photos" link with href "/photos/activity/2/user/1"
+
+# Form comments Photos
+  Scenario: In the Form add Photo, I see a back button for My Photos
+    Given I am logged in as user "admin"
+    When I am on "/photos/activity/2/comment?photos[42]=42&photos[45]=45"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_manage_photos" link with href "/photos/activity/2/user/1"

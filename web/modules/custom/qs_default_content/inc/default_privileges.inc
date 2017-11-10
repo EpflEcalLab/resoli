@@ -526,4 +526,19 @@ function qs_default_content_privileges_activities() {
     'reviewed'  => time(),
   ]);
   $privilege->save();
+
+  // User 8: member+lausanne+organizer+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+    // Activity 2: Activity 2 - Lausanne - Theme N°1.
+    'entity'    => 2,
+    // User 8.
+    'user'      => 8,
+    // approved.
+    'status'    => 1,
+    'privilege' => 'activity_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
 }

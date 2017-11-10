@@ -76,16 +76,16 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        // Load the service required to construct this class.
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        // Load customs services used in this class.
-        $container->get('qs_acl.access_control'),
-        $container->get('current_route_match'),
-        $container->get('url_generator'),
-        $container->get('current_user'),
-        $container->get('qs_activity.activity_manager')
+    // Load the service required to construct this class.
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('current_route_match'),
+      $container->get('url_generator'),
+      $container->get('current_user'),
+      $container->get('qs_activity.activity_manager')
     );
   }
 
@@ -97,6 +97,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     $community = $this->route->getParameter('community');
     $node = $this->route->getParameter('node');
     $activity = $this->route->getParameter('activity');
+
+    if (!$community && $activity && !$activity->get('field_community')->isEmpty()) {
+      $community = $activity->field_community->entity;
+    }
 
     $icon = NULL;
     $url = NULL;
@@ -217,6 +221,42 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
+    // Button - "My Photos".
+    if ($community && in_array($route_name, [
+      'qs_photo.collection.theme',
+      'qs_photo.collection.month',
+      'qs_photo.user.activities.collection',
+      'qs_photo.activity',
+      'qs_photo.user.form.manage',
+      'qs_photo.form.add',
+    ])) {
+      // For everybody, show a button "My Photos".
+      $icon = 'picture';
+      $theme = 'primary';
+      $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
+        'community' => $community->id(),
+        'user' => $this->currentUser->id(),
+      ]);
+      $label = $this->t('qs_photo.floating.my_photos');
+
+      if ($route_name == 'qs_photo.user.form.manage') {
+        $label = $this->t('qs_photo.floating.manage_photos');
+      }
+    }
+
+    // Add Photo.
+    if ($community && in_array($route_name, [
+      'qs_photo.form.add',
+    ])) {
+      // For everybody, show a button "My Photos".
+      $icon = 'plus';
+      $theme = 'secondary';
+      $url = $this->urlGenerator->generateFromRoute('qs_photo.form.add', [
+        'community' => $community->id(),
+      ]);
+      $label = $this->t('qs_photo.form.add.title');
+    }
+
     // Welcome.
     if ($community && in_array($route_name, [
       'qs_community.welcome',
@@ -243,6 +283,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_community.dashboard',
       'qs_community.members',
       'qs_community.waiting_approval',
+      'qs_photo.user.activities.collection',
+      'qs_photo.user.form.manage',
+      'qs_photo.form.add',
     ])) {
       $classes[] = 'active';
     }

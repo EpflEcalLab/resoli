@@ -16,7 +16,7 @@
 }
 
 [data-required] {
-  label:not(.btn) {
+  label:not(.btn):not(.checkbox-image) {
     &:after {
       content: '*';
     }
@@ -36,4 +36,16 @@
 
 .pac-container {
   z-index: $zindex-modal + 10;
+}
+
+.form-control-file {
+
+  input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
 }

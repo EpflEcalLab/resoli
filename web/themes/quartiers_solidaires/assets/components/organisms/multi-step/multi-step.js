@@ -58,7 +58,7 @@ const multiStep = () => {
             '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow"></use></svg></span>'
           );
 
-        $(`#${id} .js-form-submit`)
+        $(`#${id} .js-form-submit:not(.js-form-normal)`)
           .appendTo(currentForm.find(`.modal-footer`));
 
         // Add step nav at top of form.

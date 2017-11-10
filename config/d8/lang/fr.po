@@ -1201,7 +1201,7 @@ msgid "qs.event.contribution"
 msgstr "Contribution:"
 
 msgid "qs.error.403.description"
-msgstr ""
+msgstr "Choisissez une des deux options ci-dessous."
 
 msgid "qs.auth.approval.description @variables.community.name.value "
 msgstr ""
@@ -1772,8 +1772,195 @@ msgstr ""
 
 msgid "qs.calendar.monthly.lead @community @current_day"
 msgstr ""
-"Voici le calendrier mensuel des activités à venir à @community, pour "
-"tous les thèmes."
+"Voici le calendrier mensuel des activités à venir à @community, pour tous "
+"les thèmes."
 
 msgid "qs.activity.user.you_are @role"
 msgstr "Vous êtes @role de cette activité."
+
+msgid "qs_photo.user.form.manage.title_form @activity"
+msgstr ""
+
+msgid "qs_photo.user.form.manage.description_form"
+msgstr ""
+
+msgid "qs_photos.photos_select_all"
+msgstr ""
+
+msgid "qs_photos.photos_select"
+msgstr ""
+
+msgid "qs_photos.photos_comment"
+msgstr ""
+
+msgid "qs_photos.photos_delete"
+msgstr ""
+
+msgid "qs_photo.form.add.title_form"
+msgstr ""
+
+msgid "qs_photo.add.form.step1.description"
+msgstr ""
+"Pour commencer, à quelle activité souhaitez-vous ajouter de nouvelles photos?"
+
+msgid "qs_photo.add.form.step1"
+msgstr "Cliquez ci-dessous pour voir les activités disponibles:"
+
+msgid "qs.form.select"
+msgstr ""
+
+msgid "qs_photo.add.form.activity"
+msgstr ""
+
+msgid "qs_photo.add.form.step2.description"
+msgstr ""
+"A quel évènement de @activity souhaitez-vous ajouter de nouvelles photos?"
+
+msgid "qs_photo.add.form.step2"
+msgstr "Cliquez ci-dessous pour voir les évènements disponibles:"
+
+msgid "qs_photo.add.form.event"
+msgstr ""
+
+msgid "qs_photo.add.form.step3.description"
+msgstr ""
+
+msgid "qs_photo.add.form.step3"
+msgstr ""
+
+msgid "qs_photo.add.form.photos"
+msgstr ""
+
+msgid "qs_photo.add.form.step4.description"
+msgstr ""
+
+msgid "qs_photo.add.form.step4"
+msgstr ""
+
+msgid "qs_photo.add.form.publish"
+msgstr "Publier les images"
+
+msgid "qs_photo.add.form.comment"
+msgstr "Commenter les images"
+
+msgid "qs_photo.add.form.story"
+msgstr "Créer un récit"
+
+msgid "qs.form.upload.at_least_one"
+msgstr ""
+
+msgid "qs_photo.form.add.success @number @event @activity"
+msgstr ""
+
+msgid "Image generation in progress. Try again shortly."
+msgstr ""
+
+msgid "@user (@uid) stream `@file` (@nid) at @now."
+msgstr ""
+
+msgid "qs.previous.to_my_photos"
+msgstr "Mes photos"
+
+msgid "qs_photo.floating.my_photos"
+msgstr "Mes photos"
+
+msgid "qs_photo.floating.manage_photos"
+msgstr "Gérer mes photos"
+
+msgid "qs_photo.user.form.manage.choose_one"
+msgstr ""
+
+msgid "qs_photo.form.comment.title_form"
+msgstr "Ecrivez vos commentaires à côté de vos photos!"
+
+msgid "qs_photo.form.comment.photo_comment_placeholder"
+msgstr ""
+"Ex. Lors de cet atelier, Françoise a dû revoir son jugement face au "
+"numérique!"
+
+msgid "qs_photo.form.comment.photo_comment_title"
+msgstr "Inscrivez un commentaire ici:"
+
+msgid "qs_photo.form.add.title"
+msgstr ""
+
+msgid "qs_photo.form.comment.success @number @activity"
+msgstr ""
+
+msgid "qs_photo.form.delete.warning"
+msgstr ""
+
+msgid "qs_photo.form.delete.success @activity @number"
+msgstr ""
+
+msgid "qs.previous.to_manage_photos"
+msgstr ""
+
+msgid "qs.community.welcome"
+msgstr "Accueil de la communauté"
+
+msgid "qs_activity.collection.dates.title"
+msgstr "Activités par date"
+
+msgid "qs_calendar.collection.weekly.title"
+msgstr "Calendrier hebdo"
+
+msgid "qs_calendar.collection.monthly.title"
+msgstr "Calendrier mensuel"
+
+msgid "qs_photo.collection.monthly.title"
+msgstr "Photos par date"
+
+msgid "qs_photo.collection.themes.title"
+msgstr "Photos par thème"
+
+msgid "qs_activity.activities.members.title"
+msgstr "Gérer les membres"
+
+msgid "qs_subscription.subscribers.title"
+msgstr "Inscriptions confirmées"
+
+msgid "qs_subscription.waiting_approval.title"
+msgstr "Inscriptions en attente"
+
+msgid "qs_activity.events.form.delete.title"
+msgstr "Supprimer l’évènement?"
+
+msgid "qs_subscription.user.collection.title"
+msgstr "Mes inscriptions"
+
+msgid "qs.form.upload.illegal_choice"
+msgstr ""
+
+msgid "qs.photos.user.collection.title"
+msgstr ""
+
+msgid "qs.photos.view_activity_photos"
+msgstr ""
+
+msgid "qs.photos.manage_photos"
+msgstr ""
+
+msgid "qs.photos.add_photos"
+msgstr ""
+
+msgid "qs.photo.no_photos"
+msgstr ""
+
+msgid "qs.form.input.upload"
+msgstr ""
+
+msgid "qs_photo.activity.title"
+msgstr ""
+
+msgid "qs_photo.user.form.manage.title"
+msgstr ""
+
+msgid "qs_photo.user.activities.collection.title"
+msgstr ""
+
+msgid "qs_photo.form.comments.title"
+msgstr ""
+
+msgid "qs_photo.form.delete.title"
+msgstr ""

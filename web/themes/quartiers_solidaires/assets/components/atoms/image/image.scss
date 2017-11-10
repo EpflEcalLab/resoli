@@ -13,6 +13,12 @@
   background-color: darken($teal-100, 10%);
 }
 
+.img-bordered {
+  border: $border-width solid $white;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+}
+
 // Photoswipe
 /////////////
 

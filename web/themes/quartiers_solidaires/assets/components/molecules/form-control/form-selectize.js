@@ -3,7 +3,7 @@ const formSelectize = () => {
     var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
     '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
-    const options = $('select.selectize-members').data('options');
+    const members_options = $('select.selectize-members').data('options');
 
     $('select.selectize-members').selectize({
       persist: false,
@@ -15,7 +15,7 @@ const formSelectize = () => {
       sortField: [
         { field: 'displayname', direction: 'asc' }
       ],
-      options: options,
+      options: members_options,
       plugins: ['remove_button'],
       render: {
         item: function(item, escape) {
@@ -34,6 +34,46 @@ const formSelectize = () => {
         }
       }
     });
+
+    $('select.selectize-activity').selectize({
+      persist: false,
+      maxItems: 1,
+      items: null,
+      valueField: 'nid',
+      labelField: 'title',
+      searchField: ['title'],
+      sortField: [
+        { field: 'title', direction: 'asc' }
+      ],
+      options: $(this).data('options'),
+      plugins: ['remove_button'],
+      placeholder: Drupal.t('qs.form.select'),
+      render: {
+        item: function(item, escape) {
+          return '<div>' +
+            (item.title ? '<span class="title">' + escape(item.title) + '</span>' : '') +
+            '</div>';
+        },
+        option: function(item, escape) {
+          var label = item.title;
+          return '<div>' +
+            '<span class="label">' + escape(label) + '</span>' +
+            '</div>';
+        }
+      }
+    });
+
+    // We need to call these from the Form API
+    $.fn.selectizeClearOptions = function() {
+      const selectize = this[0].selectize;
+      selectize.clear();
+      selectize.clearOptions();
+    };
+
+    $.fn.selectizeAddOptions = function(data) {
+      const selectize = this[0].selectize;
+      selectize.addOption(data);
+    };
   })(jQuery);
 };
 

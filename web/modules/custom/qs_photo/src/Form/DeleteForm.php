@@ -1,0 +1,185 @@
+<?php
+
+namespace Drupal\qs_photo\Form;
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+
+/**
+ * DeleteForm class.
+ */
+class DeleteForm extends FormBasic {
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ContainerInterface $container) {
+    // Initialize the container.
+    parent::__construct($container);
+
+    // From the container, inject services.
+    $this->acl         = $this->getAcl();
+    $this->nodeStorage = $this->getNodeStorage();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'qs_photo_delete_form';
+  }
+
+  /**
+   * Checks access for add photos in the given community.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Run access checks for this account.
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public function access(AccountInterface $account, NodeInterface $activity) {
+    $access = AccessResult::allowed();
+
+    $photos_params = $this->getRequest()->query->get('photos');
+    if (!$photos_params) {
+      return AccessResult::forbidden();
+    }
+
+    $photos = $this->nodeStorage->loadMultiple($photos_params);
+
+    // Check write access of every photos.
+    foreach ($photos as $photo) {
+      $activity = $photo->field_event->entity->field_activity->entity;
+
+      if (!$this->acl->hasWriteAccessPhoto($activity)) {
+        $access = AccessResult::forbidden();
+        break;
+      }
+    }
+    return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+    $form = parent::buildForm($form, $form_state);
+    $user = $this->getCurrentUser();
+
+    $photos_params = $this->getRequest()->query->get('photos');
+    $photos = $this->nodeStorage->loadMultiple($photos_params);
+
+    // Save the activity for submission.
+    $form['activity'] = [
+      '#type'  => 'hidden',
+      '#value' => $activity->id(),
+    ];
+
+    $form['#theme_wrappers'] = [
+      'form__modal',
+    ];
+
+    $form['#attributes'] = [
+      'title' => $activity->getTitle(),
+      'description' => $this->t('qs_photo.form.delete.warning'),
+    ];
+
+    $form['gallery'] = [
+      '#theme' => 'qs_photo_delete_gallery_form',
+      '#variables' => ['photos' => $photos, 'activity' => $activity],
+    ];
+
+    $form['actions'] = [
+      '#type' => 'fieldset',
+      '#theme_wrappers' => [
+        'container__center',
+      ],
+      '#attributes' => [
+        'class' => [
+          'text-center',
+        ],
+      ],
+    ];
+
+    $form['actions']['cancel'] = [
+      '#type' => 'link',
+      '#title' => $this->t('qs.form.cancel'),
+      '#url' => Url::fromRoute('qs_photo.user.form.manage', [
+        'activity' => $activity->id(),
+        'user' => $user->id(),
+      ]),
+      '#attributes' => [
+        'class' => [
+          'btn btn-outline-danger btn-outline-invert',
+        ],
+      ],
+    ];
+
+    $form['actions']['submit'] = [
+      '#type'  => 'submit',
+      '#attributes' => [
+        'class' => [
+          'text-danger',
+        ],
+        'icon' => 'trash',
+        'icon_left' => TRUE,
+        'white' => TRUE,
+      ],
+      '#value' => $this->t('qs.form.delete_submit'),
+    ];
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $user = $this->getCurrentUser();
+    $photos_params = $this->getRequest()->query->get('photos');
+
+    drupal_set_message($this->t("qs_photo.form.delete.success @activity @number", [
+      '@activity' => $activity->getTitle(),
+      '@number'   => count($photos_params),
+    ]));
+
+    $form_state->setRedirect('qs_photo.user.form.manage', [
+      'activity' => $activity->id(),
+      'user' => $user->id(),
+    ]);
+
+    // Delete the photos.
+    $photos = $this->nodeStorage->loadMultiple($photos_params);
+    foreach ($photos as $photo_nid => $comment) {
+      $photo = $this->nodeStorage->load($photo_nid);
+      $photo->delete();
+    }
+  }
+
+}

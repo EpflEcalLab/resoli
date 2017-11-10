@@ -55,25 +55,37 @@ class EventManager {
    */
   public function getNext(array $activities_nids) {
     $now = new DrupalDateTime();
+    $now->setTimezone(new \DateTimeZone('UTC'));
 
     if (!$activities_nids) {
       return NULL;
     }
 
     // Get every activity that belongs to the current community.
-    $query = $this->queryFactory->get('node')
-      ->condition('type', 'event')
-      ->condition('field_start_at', $now, '>=')
-      ->condition('field_end_at', $now, '>=')
-      ->condition('status', TRUE)
-      ->condition('field_activity', $activities_nids, 'IN')
-      ->sort('field_start_at', 'ASC')
-      ->range(0, 1)
-      ->groupBy('field_activity');
+    $query = $this->connection->select('node_field_data', 'event');
+    $query->condition('event.status', TRUE);
 
-    $nids = $query->execute();
-    $events = NULL;
-    if ($nids) {
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.entity_id = event.nid');
+    $query->condition('field_activity.field_activity_target_id', $activities_nids, 'IN');
+
+    $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = event.nid');
+    $query->condition('field_start_at.field_start_at_value', $now->format('c'), '>=');
+
+    $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = event.nid');
+    $query->condition('field_end_at.field_end_at_value', $now->format('c'), '>=');
+
+    $query->fields('field_activity', ['field_activity_target_id']);
+    $query->groupBy('field_activity.field_activity_target_id');
+    $query->addExpression('MIN(field_start_at.field_start_at_value)');
+    $query->addExpression('ANY_VALUE(event.nid)', 'nid');
+
+    $rows = $query->execute()->fetchAll();
+
+    if ($rows) {
+      $nids = [];
+      foreach ($rows as $row) {
+        $nids[] = $row->nid;
+      }
       $events = $this->nodeStorage->loadMultiple($nids);
     }
 

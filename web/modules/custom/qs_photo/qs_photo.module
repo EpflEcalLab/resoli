@@ -41,5 +41,11 @@ function qs_photo_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--photo--monthly',
     ],
+    // Forms themes
+    // ---------------------------------------------------------------------.
+    'qs_photo_delete_gallery_form' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--delete-gallery',
+    ],
   ];
 }

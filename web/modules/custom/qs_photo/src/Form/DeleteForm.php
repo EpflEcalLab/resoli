@@ -86,6 +86,9 @@ class DeleteForm extends FormBasic {
     $form = parent::buildForm($form, $form_state);
     $user = $this->getCurrentUser();
 
+    $photos_params = $this->getRequest()->query->get('photos');
+    $photos = $this->nodeStorage->loadMultiple($photos_params);
+
     // Save the activity for submission.
     $form['activity'] = [
       '#type'  => 'hidden',
@@ -99,6 +102,11 @@ class DeleteForm extends FormBasic {
     $form['#attributes'] = [
       'title' => $activity->getTitle(),
       'description' => $this->t('qs_photo.form.delete.warning'),
+    ];
+
+    $form['gallery'] = [
+      '#theme' => 'qs_photo_delete_gallery_form',
+      '#variables' => ['photos' => $photos, 'activity' => $activity],
     ];
 
     $form['actions'] = [

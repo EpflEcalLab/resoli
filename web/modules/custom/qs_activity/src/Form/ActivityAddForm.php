@@ -302,6 +302,9 @@ class ActivityAddForm extends FormBasic {
       '#description' => $this->t('qs_activity.activities.form.step4.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step4'),
+        'class' => [
+          'text-center',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -309,38 +312,55 @@ class ActivityAddForm extends FormBasic {
       ],
     ];
 
-    $form['activity']['step-4']['redirection'] = [
+    $form['activity']['step-4']['save'] = [
+      '#type' => 'submit',
+      '#name' => 'save',
+      '#value' => $this->t('qs_activity.activities.form.add.save'),
       '#attributes' => [
-        'required' => TRUE,
-        // Enable submit on click via JS.
-        'variant' => 'button',
-        'data-submit' => TRUE,
-        'data-toggle' => 'buttons',
+        'outline'   => TRUE,
+        'icon'      => 'activities',
+        'icon_left' => TRUE,
         'class' => [
+          'js-form-normal',
           'col-md-8',
           'mx-auto',
+          'mb-3',
         ],
-      ],
-      '#type'       => 'radios',
-      '#required'   => FALSE,
-      '#theme_wrappers' => [
-        'radios__buttons',
-      ],
-      '#options'    => [
-        // @codingStandardsIgnoreStart
-        // This adds an icon to the button.
-        0 => $this->t('qs_activity.activities.form.add.save') . '|activities',
-        1 => $this->t('qs_activity.activities.form.add.save_and_set_default_values') . '|pencil',
-        2 => $this->t('qs_activity.activities.form.add.save_and_new_event') . '|plus|secondary',
-        // @codingStandardsIgnoreEnd
       ],
     ];
 
-    $form['activity']['step-4']['actions']['submit'] = [
-      '#type'  => 'submit',
-      '#value' => $this->t('qs.form.submit'),
+    $form['activity']['step-4']['save_and_set_default_values'] = [
+      '#type' => 'submit',
+      '#name' => 'save_and_set_default_values',
+      '#value' => $this->t('qs_activity.activities.form.add.save_and_set_default_values'),
       '#attributes' => [
-        'hidden' => TRUE,
+        'outline'   => TRUE,
+        'icon'      => 'pencil',
+        'icon_left' => TRUE,
+        'class' => [
+          'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mb-3',
+        ],
+      ],
+    ];
+
+    $form['activity']['step-4']['save_and_new_event'] = [
+      '#type' => 'submit',
+      '#name' => 'save_and_new_event',
+      '#value' => $this->t('qs_activity.activities.form.add.save_and_new_event'),
+      '#attributes' => [
+    // 'outline'   => TRUE,.
+        'icon'      => 'plus',
+        'icon_left' => TRUE,
+        'class' => [
+          'btn-secondary',
+          'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mt-5',
+        ],
       ],
     ];
 
@@ -398,23 +418,21 @@ class ActivityAddForm extends FormBasic {
     ]));
 
     // Handle redirection.
-    $redirect_to_event = $form_state->getValue('redirection');
+    $trigger = $form_state->getTriggeringElement();
+    switch ($trigger['#name']) {
+      case 'save_and_new_event':
+        $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
+        break;
 
-    // Checkbox redirection on Form Edit Default values.
-    if ($redirect_to_event == 1) {
-      $form_state->setRedirect('qs_activity.activities.form.edit.defaults', ['activity' => $activity->id()], []);
+      case 'save_and_set_default_values':
+        $form_state->setRedirect('qs_activity.activities.form.edit.defaults', ['activity' => $activity->id()], []);
+        break;
+
+      case 'save':
+      default:
+        $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+        break;
     }
-
-    // Checkbox redirection on Form add event for this newly created activity.
-    elseif ($redirect_to_event == 2) {
-      $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
-    }
-
-    // Checkbox redirection on the newly created activity.
-    else {
-      $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
-    }
-
   }
 
 }

@@ -420,6 +420,11 @@ a[href].card-pill-simple {
   position: absolute;
   bottom: 1rem;
   width: 100%;
+  pointer-events: none;
+
+  .btn {
+    pointer-events: auto;
+  }
 }
 
 // Invert colors with theme colors

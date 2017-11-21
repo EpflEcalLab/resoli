@@ -18,6 +18,11 @@ const formControl = () => {
           componentRestrictions: {country: 'ch'},
         });
 
+        $(el).on('change', function() {
+          $(`input[data-drupal-selector="${inputLat}"]`).val('');
+          $(`input[data-drupal-selector="${inputLng}"]`).val('');
+        });
+
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
           let lat = '';
@@ -28,8 +33,8 @@ const formControl = () => {
             lng = place.geometry.location.lng();
           }
 
-          jQuery(`input[data-drupal-selector="${inputLat}"]`).val(lat);
-          jQuery(`input[data-drupal-selector="${inputLng}"]`).val(lng);
+          $(`input[data-drupal-selector="${inputLat}"]`).val(lat);
+          $(`input[data-drupal-selector="${inputLng}"]`).val(lng);
         });
       });
     }

@@ -157,11 +157,11 @@ class EventEditForm extends EventEditFormBase {
 
     $form['latitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $event->field_venue_lat->value,
+      '#default_value' => $event->field_venue->value ? $event->field_venue_lat->value : NULL,
     ];
     $form['longitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $event->field_venue_long->value,
+      '#default_value' => $event->field_venue->value ? $event->field_venue_long->value : NULL,
     ];
 
     $form['contact_name'] = [

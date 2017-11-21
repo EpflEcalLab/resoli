@@ -15,6 +15,8 @@ const multiStep = () => {
         // Init the step nav above form
         const stepNav = $(`<ul class="step-nav nav nav-tabs col-sm-10 col-md-8 mx-auto" id="stepnav-${id}"></ul>`);
 
+        currentForm.find('.js-hide-in-multistep').hide();
+
         if (modalHeader.length > 0) {
           stepNav.prependTo(modalHeader)
         } else {

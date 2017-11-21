@@ -103,8 +103,10 @@ class ActivityController extends ControllerBase {
 
     // Order photos by events.
     $variables['photos'] = [];
-    foreach ($photos as $photo) {
-      $variables['photos'][$photo->field_event->target_id][] = $photo;
+    if ($photos) {
+      foreach ($photos as $photo) {
+        $variables['photos'][$photo->field_event->target_id][] = $photo;
+      }
     }
 
     return [

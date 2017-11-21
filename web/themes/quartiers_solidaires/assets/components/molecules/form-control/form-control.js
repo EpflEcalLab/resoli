@@ -79,12 +79,16 @@ const formControl = () => {
     }
 
 
+    /**
+     * Files upload
+     */
     $(document).on('change', '.form-control-file input', function() {
       const files = $(this)[0].files;
 
       if (files.length > 0) {
-        const $label = $(this).next('label');
         const $list = $(this).parent().next('.form-control-files-list');
+        // reset list content before continuing
+        $list.html('');
 
         const filesList = $('<ul />');
         for (let i = 0; i < files.length; i++) {

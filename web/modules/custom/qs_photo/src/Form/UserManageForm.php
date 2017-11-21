@@ -96,8 +96,10 @@ class UserManageForm extends FormBasic {
 
     $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
     $options = [];
-    foreach ($photos as $photo) {
-      $options[$photo->id()] = $photo->getTitle();
+    if ($photos) {
+      foreach ($photos as $photo) {
+        $options[$photo->id()] = $photo->getTitle();
+      }
     }
 
     $form['photos'] = [

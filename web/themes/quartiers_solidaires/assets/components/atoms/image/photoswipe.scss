@@ -21,7 +21,7 @@
   background: none;
   cursor: pointer;
   overflow: visible;
-  -webkit-appearance: none;
+  -webkit-appearance: none; // stylelint-disable-line property-no-vendor-prefix
   display: block;
   border: 0;
   padding: 0;
@@ -56,8 +56,8 @@
   height: 44px;
 }
 
-@media (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 105dpi), (min-resolution: 1.1dppx) {
-  /* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */
+@media (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 105dpi), (min-resolution: 1.1dppx) { // stylelint-disable-line media-feature-name-no-vendor-prefix
+  // Serve SVG sprite if browser supports SVG and resolution is more than 105dpi
   .pswp--svg .pswp__button {
     background-image: url('../photoswipe/default-skin/default-skin.svg');
   }
@@ -173,7 +173,7 @@
   z-index: 1600;
   opacity: 0;
   transition: opacity 0.25s ease-out;
-  -webkit-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; // stylelint-disable-line property-no-vendor-prefix
   will-change: opacity;
 }
 
@@ -193,7 +193,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   transform: translateY(6px);
   transition: transform 0.25s;
-  -webkit-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; // stylelint-disable-line property-no-vendor-prefix
   will-change: transform;
 }
 
@@ -250,6 +250,7 @@ a.pswp__share--facebook:hover {
   background: #3e5c9a;
   color: $white;
 }
+
 a.pswp__share--facebook:hover:before {
   border-bottom-color: #3e5c9a;
 }
@@ -415,6 +416,7 @@ a.pswp__share--download:hover {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -443,7 +445,7 @@ a.pswp__share--download:hover {
 /* root element of UI */
 
 .pswp__ui {
-  -webkit-font-smoothing: auto;
+  -webkit-font-smoothing: initial;
   visibility: visible;
   opacity: 1;
   z-index: 1550;
@@ -462,7 +464,7 @@ a.pswp__share--download:hover {
 .pswp__top-bar,
 .pswp--has_mouse .pswp__button--arrow--left,
 .pswp--has_mouse .pswp__button--arrow--right {
-  -webkit-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; // stylelint-disable-line property-no-vendor-prefix
   will-change: opacity;
   transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);
 }

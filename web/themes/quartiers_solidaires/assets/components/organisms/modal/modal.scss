@@ -40,18 +40,12 @@
   overflow-y: auto;
 
   .fullpage-wrapper {
-    min-height: auto;
+    min-height: 0;
   }
 }
 
 .modal-footer {
   flex-shrink: 0;
-
-  @each $color, $value in $theme-colors {
-    .bg-#{$color} & {
-
-    }
-  }
 }
 
 .modal-full {

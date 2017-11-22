@@ -46,6 +46,7 @@
   width: 100%;
   cursor: pointer;
   border-color: $white;
+  overflow: hidden;
 
   .icon {
     display: flex;
@@ -71,6 +72,18 @@
   input:checked {
     ~ .icon {
       opacity: 1;
+    }
+
+    ~ .checkbox-image-overlay:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba($white, 0.5);
+      pointer-events: none;
     }
   }
 }

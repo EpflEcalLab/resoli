@@ -122,6 +122,7 @@ class UserManageForm extends FormBasic {
         'container__center',
       ],
       '#attributes' => [
+        'sticky_footer' => TRUE,
         'class' => [
           'text-center',
         ],

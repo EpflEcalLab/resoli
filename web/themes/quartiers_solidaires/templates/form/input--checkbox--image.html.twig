@@ -17,6 +17,7 @@
 <div class="mb-3">
   <label class="checkbox-image card" for="{{ attributes.id }}">
     <input{{ attributes.addClass(classes) }} />
+    <span class="checkbox-image-overlay"></span>
     {{ macros.icon('check') }}
     <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': element['#return_value'], 'image_style': 'qs_thumbnail'}) }}" alt="{{ element['#title'] }}">
   </label>

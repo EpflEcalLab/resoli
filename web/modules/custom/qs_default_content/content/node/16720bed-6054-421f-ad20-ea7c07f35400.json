@@ -161,8 +161,8 @@
     ],
     "body": [
         {
-            "value": "<p>Lorem <em>ipsum dolor sit amet<\/em> consectetur <strong>adipiscing, elit lobortis pulvinar<\/strong> congue a, facilisis rutrum luctus mi commodo.<\/p>\r\n\r\n<p>Massa sagittis ligula interdum consequat fringilla porttitor molestie fermentum donec, tristique <strong>vulputate dolor suscipit<\/strong> lobortis cum nulla purus, praesent eros mollis maecenas hac ultricies phasellus etiam. Mus magnis lorem arcu cras accumsan urna posuere, volutpat adipiscing penatibus placerat aptent.<\/p>\r\n",
-            "format": "full_html",
+            "value": "Balade champ\u00eatre \u00e0 v\u00e9lo. Rythme d\u00e9tendu, bonne humeur et mollets d\u00e9gourdis pr\u00e9conis\u00e9s! Point de rendez-vous\r\n",
+            "format": "plain_text",
             "summary": "",
             "lang": "zxx"
         }

@@ -223,14 +223,22 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
           break;
 
-        // Go to Photos.
+        // Go to Photos Themes.
         case "qs_photo.activity":
-        case "qs_photo.user.activities.collection":
-        case "qs_photo.form.add":
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.theme', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_photos_list');
+          $theme = 'primary';
+          break;
+
+        // Go to Photos Month.
+        case "qs_photo.user.activities.collection":
+        case "qs_photo.form.add":
+          $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.month', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_photos_month');
           $theme = 'primary';
           break;
 

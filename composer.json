@@ -31,6 +31,7 @@
         "cweagans/composer-patches": "^1.6",
         "drupal-composer/drupal-scaffold": "^2.2",
         "drupal/admin_toolbar": "^1.19",
+        "drupal/allowed_formats": "^1.1",
         "drupal/backerymails": "^1.2",
         "drupal/bamboo_twig": "^3.0",
         "drupal/block_exclude_pages": "^1.2",

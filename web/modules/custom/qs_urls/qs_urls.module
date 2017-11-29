@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * QS Urls hooks.
+ */
+
+require_once 'inc/helpers.inc';
+
+// Includes.
+require_once 'inc/activity.inc';
+require_once 'inc/calendar.inc';
+require_once 'inc/community.inc';
+require_once 'inc/photo.inc';
+require_once 'inc/subscription.inc';
+
+/**
+ * Implements hook_pathauto_alias_alter().
+ *
+ * Generate aliases & redirects based on node alias.
+ */
+function qs_urls_pathauto_alias_alter(&$alias, array &$context) {
+  $moduleHandler = \Drupal::service('module_handler');
+
+  if (isset($context['module']) &&
+  $context['module'] == 'taxonomy' && isset($context['data']['term'])) {
+
+    // Community.
+    if ($moduleHandler->moduleExists('qs_community')) {
+      qs_community_alias($context['data']['term'], $alias, $context['op']);
+    }
+
+    // Activity.
+    if ($moduleHandler->moduleExists('qs_activity')) {
+      qs_activity_alias($context['data']['term'], $alias, $context['op']);
+      qs_activity_redirects($context['data']['term'], $alias, $context['op']);
+    }
+
+    // Calendar.
+    if ($moduleHandler->moduleExists('qs_calendar')) {
+      qs_calendar_alias($context['data']['term'], $alias, $context['op']);
+      qs_calendar_redirects($context['data']['term'], $alias, $context['op']);
+    }
+
+    // Photo.
+    if ($moduleHandler->moduleExists('qs_photo')) {
+      qs_photo_alias($context['data']['term'], $alias, $context['op']);
+      qs_photo_redirects($context['data']['term'], $alias, $context['op']);
+    }
+
+    // Subscription.
+    if ($moduleHandler->moduleExists('qs_subscription')) {
+      qs_subscription_alias($context['data']['term'], $alias, $context['op']);
+    }
+  }
+
+  if (isset($context['module']) &&
+  $context['module'] == 'node' && isset($context['data']['node'])) {
+    // Activities.
+    if ($moduleHandler->moduleExists('qs_activity')) {
+      qs_activity_alias($context['data']['node'], $alias, $context['op']);
+      qs_activity_redirects($context['data']['node'], $alias, $context['op']);
+    }
+
+    // Photo.
+    if ($moduleHandler->moduleExists('qs_photo')) {
+      qs_photo_alias($context['data']['node'], $alias, $context['op']);
+    }
+  }
+}

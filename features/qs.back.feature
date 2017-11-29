@@ -270,14 +270,14 @@ Feature: Back buttons
     Given I am logged in as user "admin"
     When I am on "/photos/1/user/1"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_photos_list" link with href "/lausanne/photos/theme"
+    And I should see "qs.previous.to_photos_month" link with href "/lausanne/photos/month"
 
 # Form add Photo
   Scenario: In the Form add Photo, I see a back button for Photos by dates
     Given I am logged in as user "admin"
     When I am on "/photos/1/user/1"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_photos_list" link with href "/lausanne/photos/theme"
+    And I should see "qs.previous.to_photos_month" link with href "/lausanne/photos/month"
 
 # Form manage Photos
   Scenario: In the Form add Photo, I see a back button for My Photos

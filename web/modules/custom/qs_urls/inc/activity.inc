@@ -6,43 +6,16 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Language\LanguageInterface;
-
-/**
- * Implements hook_pathauto_alias_alter().
- *
- * Generate alias for lessons based on node alias.
- */
-function qs_activity_pathauto_alias_alter(&$alias, array &$context) {
-
-  if (isset($context['module']) &&
-  $context['module'] == 'taxonomy' && isset($context['data']['term'])) {
-    qs_activity_alias($context['data']['term'], $alias, $context['op']);
-  }
-
-  if (isset($context['module']) &&
-  $context['module'] == 'node' && isset($context['data']['node'])) {
-    qs_activity_alias($context['data']['node'], $alias, $context['op']);
-  }
-}
 
 /**
  * Generate alias variant for communities based on taxonomy term alias.
  */
 function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert') {
-  // Load services.
-  $alias_storage = \Drupal::service('path.alias_storage');
-  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
-
   $aliases = [];
 
   switch ($entity->bundle()) {
     case 'communities':
       $aliases = [
-        'activities' => [
-          'route' => '/activities/' . $entity->id() . '/theme',
-          'alias' => '/' . trim($alias, '/') . '/activities',
-        ],
         'activities_by_theme' => [
           'route' => '/activities/' . $entity->id() . '/theme',
           'alias' => '/' . trim($alias, '/') . '/activities/theme',
@@ -60,10 +33,6 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
 
     case 'activity':
       $aliases = [
-        'events' => [
-          'route' => '/node/' . $entity->id(),
-          'alias' => '/' . trim($alias, '/') . '/events',
-        ],
         'events_form_add' => [
           'route' => '/events/' . $entity->id() . '/add',
           'alias' => '/' . trim($alias, '/') . '/events/add',
@@ -125,26 +94,38 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
     return;
   }
 
-  // TODO: translation the alias_suffix before creation/deletion,
-  // on every language.
-  // Generate every alias for the current community alias.
-  foreach ($aliases as $item) {
-    // Generate alias.
-    if ($operation == 'insert' || $operation == 'update' || $operation == 'bulkupdate') {
-      if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE) {
-        $alias_storage->save($item['route'], $item['alias'], $langcode);
-      }
-    }
+  qs_urls_aliases_manager($aliases, $operation);
+}
 
-    // Delete alias on operation delete.
-    if ($operation == 'delete') {
-      if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE) {
-        $alias_storage->delete([
-          'source'   => $item['route'],
-          'alias'    => $item['alias'],
-          'langcode' => $langcode,
-        ]);
-      }
-    }
+/**
+ * Generate redirect variant for given entity.
+ */
+function qs_activity_redirects(EntityInterface $entity, $alias, $operation = 'insert') {
+  $redirects = [];
+
+  switch ($entity->bundle()) {
+    case 'communities':
+      $redirects = [
+        'activities_by_theme' => [
+          'source'   => '/' . trim($alias, '/') . '/activities',
+          'redirect' => '/' . trim($alias, '/') . '/activities/theme',
+        ],
+      ];
+      break;
+
+    case 'activity':
+      $redirects = [
+        'events' => [
+          'source'   => '/' . trim($alias, '/') . '/events',
+          'redirect' => '/' . trim($alias, '/'),
+        ],
+      ];
+      break;
   }
+
+  if (!$redirects) {
+    return;
+  }
+
+  qs_urls_redirects_manager($redirects, $operation);
 }

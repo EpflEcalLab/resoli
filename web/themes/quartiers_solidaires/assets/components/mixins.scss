@@ -165,6 +165,10 @@
       background-color: mix($color, $white, 75%);
       color: $white;
     }
+
+    @include hover-focus {
+      background-color: darken($color, 8%);
+    }
   }
 }
 

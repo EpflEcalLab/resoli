@@ -2012,6 +2012,10 @@ msgid "qs.previous.to_photos_list"
 msgstr "Retour à la galerie"
 
 #:
+msgid "qs.previous.to_photos_month"
+msgstr ""
+
+#:
 msgid "qs_menu.links.photos.months"
 msgstr "Par date"
 

@@ -8,7 +8,7 @@
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Generate alias variant for communities based on taxonomy term alias.
+ * Generate alias variant for subscription based on given entity alias.
  */
 function qs_subscription_alias(EntityInterface $entity, $alias, $operation = 'insert') {
   $aliases = [];

@@ -8,7 +8,7 @@
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Generate alias variant for communities based on taxonomy term alias.
+ * Generate alias variant for activities based on given entity alias.
  */
 function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert') {
   $aliases = [];

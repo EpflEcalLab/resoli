@@ -12,6 +12,12 @@ use Drupal\Core\Language\LanguageInterface;
  *
  * @param array $redirects
  *   A collection of redirect to generate.
+ *   $redirects = [
+ *     'redirect_key'    => [
+ *       'source' => (string) the source url, should not already exists.
+ *       'redirect' => (string) the redirection destination.
+ *     ]
+ *   ].
  * @param string $operation
  *   The operation type such as insert, update, bulkupdate or delete.
  */
@@ -49,7 +55,7 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
       }
     }
 
-    // Delete alias on operation delete.
+    // Delete redirect on operation delete.
     if ($operation == 'delete') {
       $redirect = $redirect_repository->findBySourcePath($item['source'], $langcode);
       if ($redirect !== FALSE) {
@@ -63,7 +69,13 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
  * Generate aliases variant for given collection.
  *
  * @param array $aliases
- *   A collection of alias to generate.
+ *   A collection of aliases to generate.
+ *   $aliases = [
+ *     'alias_key'    => [
+ *       'route' => (string) the source route.
+ *       'alias' => (string) the alias.
+ *     ]
+ *   ].
  * @param string $operation
  *   The operation type such as insert, update, bulkupdate or delete.
  */

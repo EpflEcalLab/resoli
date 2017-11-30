@@ -61,9 +61,7 @@
               {{ page.messages }}
             </div>
           {% endif %}
-          <div class="modal-body">
-            {% block content %}{{ page.content }}{% endblock %}
-          </div>
+          {% block content %}{{ page.content }}{% endblock %}
         </div>
       </div>
     </div>

@@ -5,8 +5,21 @@
 }
 
 .modal-dialog {
-  margin-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: calc(100vh - #{$modal-dialog-margin * 2});
   text-align: left;
+
+  @include media-breakpoint-up(sm) {
+    width: $modal-md;
+    max-height: calc(100vh - #{$modal-dialog-margin-y-sm-up * 2});
+  }
+}
+
+.modal-content {
+  overflow: auto;
+  min-height: 66.6vh;
 }
 
 .modal-header {
@@ -25,11 +38,6 @@
   }
 }
 
-.modal-content {
-  max-height: 85vh;
-  overflow: hidden;
-}
-
 .modal-title {
   font-weight: $font-weight-normal;
 }
@@ -37,7 +45,9 @@
 .modal-body {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   overflow-y: auto;
+  min-height: min-content;
 
   .fullpage-wrapper {
     min-height: 0;
@@ -50,13 +60,17 @@
 
 .modal-full {
   .modal-content {
-    margin-top: 107px;
+    //margin-top: 75px;
+    //margin-bottom: 75px;
     // 100vh - (.modal-dialog margin-bottom value) - (header height) - (floating buttons height)
-    height: calc(95vh - 107px - 55px);
+    //height: calc(95vh - 75px - 75px);
   }
 }
 
 // We sometimes need to have a modal look but it's not really a modal
-.modal.force-show {
-  display: block;
+.modal.force-show,
+.modal-open .modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

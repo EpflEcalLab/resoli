@@ -12,6 +12,7 @@ import formSubmit from 'molecules/form-control/form-submit';
 import formSelectize from 'molecules/form-control/form-selectize';
 import calendar from 'molecules/calendar/calendar';
 import formSubscription from 'molecules/form-control/form-subscription';
+import modal from 'organisms/modal/modal';
 
 svgIcons();
 
@@ -28,5 +29,6 @@ svgIcons();
     checkbox();
     button();
     formSubscription();
+    modal();
   });
 })(jQuery);

@@ -78,27 +78,29 @@ const formControl = () => {
       return bytes.toFixed(1)+' '+units[u];
     }
 
-
     /**
      * Files upload
      */
     $(document).on('change', '.form-control-file input', function() {
       const files = $(this)[0].files;
+      const $list = $(this).parent().next('.form-control-files-list');
+
+      // Check the files list exists.
+      if ($list.length === 0) {
+        return;
+      }
+
+      // reset list content before continuing.
+      $list.html('');
 
       if (files.length > 0) {
-        const $list = $(this).parent().next('.form-control-files-list');
-        // reset list content before continuing
-        $list.html('');
-
         const filesList = $('<ul />');
         for (let i = 0; i < files.length; i++) {
           filesList.append(`<li>${files[i].name} — <strong>${humanFileSize(files[i].size)}</strong></li>`);
         }
         $list.append(filesList)
       }
-
     });
-
   })(jQuery);
 };
 

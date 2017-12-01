@@ -6,7 +6,12 @@ dependencies:
     - field.storage.node.body
     - node.type.photo
   module:
+    - allowed_formats
     - text
+third_party_settings:
+  allowed_formats:
+    plain_text: plain_text
+    full_html: '0'
 id: node.photo.body
 field_name: body
 entity_type: node

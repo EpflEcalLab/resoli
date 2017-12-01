@@ -79,6 +79,14 @@
   }
 
   &.card {
+    .btn {
+      @include icon-size(75%);
+
+      .icon {
+        border: none;
+        opacity: 1;
+      }
+    }
     .btn-circle {
       position: absolute;
       bottom: -$card-border-width;

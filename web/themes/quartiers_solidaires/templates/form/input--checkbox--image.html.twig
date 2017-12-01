@@ -14,11 +14,20 @@
 {% set classes = [
   'custom-control-input',
 ] %}
+
+{% set activityAndComment = element['#title']|split('|') %}
+
 <div class="mb-3">
   <label class="checkbox-image card" for="{{ attributes.id }}">
     <input{{ attributes.addClass(classes) }} />
     <span class="checkbox-image-overlay"></span>
     {{ macros.icon('check') }}
     <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': element['#return_value'], 'image_style': 'qs_thumbnail'}) }}" alt="{{ element['#title'] }}">
+
+    {% if activityAndComment|last %}
+      <a href="{{ path('qs_photo.form.comments', {'activity': activityAndComment|first, 'photos[]': element['#return_value']}) }}" class="btn btn-primary btn-circle card-btn-corner text-white">
+        {{ macros.icon('comment') }}
+      </a>
+    {% endif %}
   </label>
 </div>

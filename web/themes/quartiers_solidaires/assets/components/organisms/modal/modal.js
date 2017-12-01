@@ -6,7 +6,7 @@ const modal = () => {
       $modalFooters.each(function() {
         const _this = $(this);
         // Append the modal-footer after the modal-body
-        _this.closest('.modal-body').after(_this);
+        _this.removeClass('row').closest('.modal-body').after(_this);
 
         // Send the form when cilcking the submit (it's now outside the form)
         _this.on('click', '[type=submit]', function() {

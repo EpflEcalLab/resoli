@@ -81,13 +81,15 @@ class EventManager {
 
     $rows = $query->execute()->fetchAll();
 
-    if ($rows) {
-      $nids = [];
-      foreach ($rows as $row) {
-        $nids[] = $row->nid;
-      }
-      $events = $this->nodeStorage->loadMultiple($nids);
+    if (!$rows) {
+      return NULL;
     }
+
+    $nids = [];
+    foreach ($rows as $row) {
+      $nids[] = $row->nid;
+    }
+    $events = $this->nodeStorage->loadMultiple($nids);
 
     return $events;
   }

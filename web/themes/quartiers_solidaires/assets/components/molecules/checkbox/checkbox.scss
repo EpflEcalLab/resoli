@@ -69,6 +69,14 @@
     }
   }
 
+  .btn-circle { border: 2px solid $white; }
+
+  .btn .icon {
+    width: 60%;
+    border: 0;
+    opacity: 1;
+  }
+
   input:checked {
     ~ .icon {
       opacity: 1;

@@ -31,8 +31,8 @@
         {% set current_week = 'now'|date('W') %}
 
         {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
-          '@start_date': variables.start|date('j F Y'),
-          '@end_date': variables.end|date('j F Y'),
+          '@start_date': variables.start|bamboo_i18n_format_date('custom', 'j F Y'),
+          '@end_date': variables.end|bamboo_i18n_format_date('custom', 'j F Y'),
         }) %}
 
 
@@ -57,8 +57,8 @@
             {% set new_header = 'qs.activity.date.sticky.in_two_weeks'|t %}
           {% elseif week_diff == 3 %}
             {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
-              '@start_date': variables.start|date_modify("next Monday +2 weeks")|date('j F Y'),
-              '@end_date': variables.end|date('j F Y'),
+              '@start_date': variables.start|date_modify("next Monday +2 weeks")|bamboo_i18n_format_date('custom', 'j F Y'),
+              '@end_date': variables.end|bamboo_i18n_format_date('custom', 'j F Y'),
             }) %}
           {% endif %}
         {% endif %}

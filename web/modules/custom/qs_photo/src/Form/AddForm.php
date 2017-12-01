@@ -265,23 +265,23 @@ class AddForm extends FormBasic {
       ],
     ];
 
-    // TODO reenable this when ready
-//    $form['step-4']['story'] = [
-//      '#type' => 'submit',
-//      '#name' => 'story',
-//      '#value' => $this->t('qs_photo.add.form.story'),
-//      '#attributes' => [
-//        'outline' => TRUE,
-//        'icon' => 'story',
-//        'icon_left' => TRUE,
-//        'class' => [
-//          'js-form-normal',
-//          'col-md-8',
-//          'mx-auto',
-//          'mb-3',
-//        ],
-//      ],
-//    ];
+    $form['step-4']['story'] = [
+      '#type' => 'submit',
+      '#name' => 'story',
+      '#value' => $this->t('qs_photo.add.form.story'),
+      '#attributes' => [
+        'outline' => TRUE,
+        'icon' => 'story',
+        'icon_left' => TRUE,
+        'onclick' => 'alert("Cette fonctionnalité n\'est pas encore disponible.");return false;',
+        'class' => [
+          'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mb-3',
+        ],
+      ],
+    ];
 
     return $form;
   }

@@ -46,7 +46,6 @@
   width: 100%;
   cursor: pointer;
   border-color: $white;
-  overflow: hidden;
 
   .icon {
     display: flex;
@@ -69,12 +68,13 @@
     }
   }
 
-  .btn-circle { border: 2px solid $white; }
-
-  .btn .icon {
-    width: 60%;
-    border: 0;
-    opacity: 1;
+  &.card {
+    .btn-circle {
+      position: absolute;
+      bottom: -$card-border-width;
+      right: -$card-border-width;
+      border: $card-border-width solid $white;
+    }
   }
 
   input:checked {

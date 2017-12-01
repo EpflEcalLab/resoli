@@ -8,12 +8,14 @@
 
     <div class="img-grid">
         {% for photo in photos %}
-          <img
-            src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}"
-            class="img-fluid rounded"
-            alt="{{ photo.title.value }}"
-            title="{{ photo.title.value }}"
-          >
+          <div class="img-placeholder rounded">
+            <img
+              src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}"
+              class="img-fluid rounded"
+              alt="{{ photo.title.value }}"
+              title="{{ photo.title.value }}"
+            >
+          </div>
         {% endfor %}
 
         {# Print the placeholders #}

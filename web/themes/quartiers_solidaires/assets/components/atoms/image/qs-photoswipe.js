@@ -148,6 +148,13 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
       // define gallery index (for URL)
       galleryUID: galleryElement.getAttribute('data-pswp-uid'),
 
+      getDoubleTapZoom: function(isMouseClick, item) {
+        if(isMouseClick) {
+          return 1;
+        } else {
+          return item.initialZoomLevel;
+        }
+      },
     };
 
     // PhotoSwipe opened from URL

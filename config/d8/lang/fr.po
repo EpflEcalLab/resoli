@@ -2380,3 +2380,6 @@ msgstr "Choisissez une personne"
 
 msgid "You have tried to use a one-time login link that has either been used or is no longer valid. Please request a new one using the form below."
 msgstr ""
+
+msgid: "qs.comment.copy_to_other"
+msgstr "Appliquer à toutes les images"

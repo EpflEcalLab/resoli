@@ -92,6 +92,7 @@ class CommentForm extends FormBasic {
       'title' => $this->t('qs_photo.form.comment.title_form @activity', ['@activity' => $activity->getTitle()]),
       'class' => [
         'modal-body',
+        'js-comment-form',
       ],
     ];
 

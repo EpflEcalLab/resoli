@@ -404,7 +404,7 @@ class EventAddForm extends FormBasic {
     $data['contact_name']  = $form_state->getValue('contact_name');
     $data['contact_mail']  = $form_state->getValue('contact_mail');
     $data['contact_phone'] = $form_state->getValue('contact_phone');
-    $data['contribution']  = $form_state->getValue('contribution');
+    $data['contribution']  = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
     $data['venue']         = $form_state->getValue('venue');
     $data['venue_lat']     = $form_state->getValue('latitude');
     $data['venue_long']    = $form_state->getValue('longitude');

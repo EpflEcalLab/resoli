@@ -14,7 +14,7 @@
       {% for key, event in variables.events %}
       <li class="card card-list-item" id="card{{ event.nid.value }}">
         <a
-          href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nide.value })}}"
+          href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}"
           class="card-pill"
           id="event{{ activity.nid.value }}"
         >

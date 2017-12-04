@@ -31,7 +31,7 @@
 
 // Positionning
 .over-modal {
-  z-index: $zindex-modal + 5;
+  z-index: $zindex-modal - 5;
 }
 
 // Background helpers

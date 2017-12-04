@@ -273,6 +273,7 @@ class AddForm extends FormBasic {
         'outline' => TRUE,
         'icon' => 'story',
         'icon_left' => TRUE,
+        'onclick' => 'alert("Cette fonctionnalité n\'est pas encore disponible.");return false;',
         'class' => [
           'js-form-normal',
           'col-md-8',

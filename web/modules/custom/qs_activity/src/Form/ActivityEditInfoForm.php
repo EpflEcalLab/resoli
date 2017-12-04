@@ -49,15 +49,13 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $form['#attributes'] = [
       'title' => $activity->title->value,
       'description' => $this->t('qs.activity.edit_info'),
+      'class' => [
+        'modal-body',
+      ],
     ];
 
     $form['step-1'] = [
       '#type' => 'fieldset',
-      '#attributes' => [
-        'class' => [
-          'mb-5',
-        ],
-      ],
       '#theme_wrappers' => [
         'container__center',
       ],
@@ -74,11 +72,6 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
 
     $form['step-2'] = [
       '#type'  => 'fieldset',
-      '#attributes' => [
-        'class' => [
-          'mb-5',
-        ],
-      ],
       '#theme_wrappers' => [
         'container__center',
       ],

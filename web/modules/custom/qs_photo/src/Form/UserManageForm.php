@@ -94,11 +94,13 @@ class UserManageForm extends FormBasic {
       'form__modal',
     ];
 
+    $activity_id = $activity->id();
     $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
     $options = [];
     if ($photos) {
       foreach ($photos as $photo) {
-        $options[$photo->id()] = $photo->getTitle();
+        $hasComment = $photo->body->value ? 'true' : 'false';
+        $options[$photo->id()] = "$activity_id|$hasComment";
       }
     }
 

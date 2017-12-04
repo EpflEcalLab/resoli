@@ -273,7 +273,7 @@ class EventAddForm extends FormBasic {
       '#type'    => 'radios',
       '#options' => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
       '#required'      => FALSE,
-      '#default_value' => 0,
+      '#default_value' => !empty($activity->field_contribution->value) ? 1 : 0,
       '#attributes' => [
         'title'   => $this->t('qs_activity.events.form.add.has_contribution'),
         'no_form_group' => TRUE,
@@ -294,6 +294,7 @@ class EventAddForm extends FormBasic {
       '#attributes'  => ['required' => TRUE],
       '#title'       => $this->t('qs_activity.events.form.add.contribution'),
       '#type'        => 'textfield',
+      '#default_value' => $activity->field_contribution->value,
       '#required'    => FALSE,
       '#states' => [
         'visible' => [
@@ -403,7 +404,7 @@ class EventAddForm extends FormBasic {
     $data['contact_name']  = $form_state->getValue('contact_name');
     $data['contact_mail']  = $form_state->getValue('contact_mail');
     $data['contact_phone'] = $form_state->getValue('contact_phone');
-    $data['contribution']  = $form_state->getValue('contribution');
+    $data['contribution']  = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
     $data['venue']         = $form_state->getValue('venue');
     $data['venue_lat']     = $form_state->getValue('latitude');
     $data['venue_long']    = $form_state->getValue('longitude');

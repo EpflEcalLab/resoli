@@ -2251,7 +2251,7 @@ msgid "qs_photo.user.form.manage.choose_one"
 msgstr "Sélectionnez d’abord au moins une photo!"
 
 #:
-msgid "qs_photo.form.comment.title_form"
+msgid "qs_photo.form.comment.title_form @activity"
 msgstr "Ecrivez vos commentaires à côté de vos photos!"
 
 #:
@@ -2380,3 +2380,6 @@ msgstr "Choisissez une personne"
 
 msgid "You have tried to use a one-time login link that has either been used or is no longer valid. Please request a new one using the form below."
 msgstr ""
+
+msgid: "qs.comment.copy_to_other"
+msgstr "Appliquer à toutes les images"

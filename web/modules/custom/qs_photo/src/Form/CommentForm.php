@@ -87,6 +87,15 @@ class CommentForm extends FormBasic {
     $form['#attributes']['title'] = $this->t('qs_photo.form.comment.title_form');
     $form['#tree'] = TRUE;
 
+    $form['#attributes'] = [
+      'novalidate' => 'novalidate',
+      'title' => $this->t('qs_photo.form.comment.title_form @activity', ['@activity' => $activity->getTitle()]),
+      'class' => [
+        'modal-body',
+        'js-comment-form',
+      ],
+    ];
+
     $photos_params = $this->getRequest()->query->get('photos');
 
     // Apply custom styles to wrapper.

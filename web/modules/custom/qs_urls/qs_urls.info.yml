@@ -1,0 +1,14 @@
+name: Urls
+description: 'Urls, Aliases & Redirects module'
+package: Quartiers Solidaires
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:pathauto
+  - drupal:redirect
+  - drupal:qs_community
+  - drupal:qs_activity
+  - drupal:qs_calendar
+  - drupal:qs_photo
+  - drupal:qs_subscription

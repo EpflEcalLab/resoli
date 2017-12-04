@@ -58,6 +58,7 @@ module:
   qs_supervisor: 0
   qs_themes: 0
   qs_toolbar: 0
+  qs_urls: 0
   rdf: 0
   redirect: 0
   swiftmailer: 0

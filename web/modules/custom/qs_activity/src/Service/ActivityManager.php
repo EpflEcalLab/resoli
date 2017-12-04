@@ -259,7 +259,7 @@ class ActivityManager {
     $query_member->condition('privileges.user', $user->id())
       ->condition('privileges.bundle', 'node')
       ->condition('privileges.status', TRUE)
-      ->condition('privileges.privilege', 'activity_member');
+      ->condition('privileges.privilege', 'activity_members');
 
     $query_member->leftJoin('node__field_member_create_gallery', 'member_create_gallery', 'member_create_gallery.entity_id = activity.nid');
     $query_member->condition('member_create_gallery.field_member_create_gallery_value', TRUE);

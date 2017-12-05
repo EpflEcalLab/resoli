@@ -174,12 +174,24 @@ You can use the Driven Development script to install re-install default values b
   ```php
    $config_directories['sync'] = '../config/d8/sync';
   ```
-  
+
   Set the custom private directory location:
 
   ```php
    $settings['file_private_path'] = '/privates/qs';
   ```
+
+  Be aware that this new private directory (`'/privates/qs'`) mustn't be served
+  by your Apache & the Apache's user need write access on this dir.
+  Finaly, this dir should exists on your file system.
+
+  ```shell
+  mkdir -p /privates/qs && \
+  mkdir -p /privates/qs/photos && \
+  chmod -R 700 /privates/qs
+  ```
+
+  Sometimes, you will need to `chmod -R 777` according your server conf.
 
 1. *(optional)* Update your `web/sites/default/drushrc.php`:
 

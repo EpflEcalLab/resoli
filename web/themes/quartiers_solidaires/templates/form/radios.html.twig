@@ -23,4 +23,11 @@
   <label{{ attributes.addClass(classes) }}>{{ attributes.title|raw }}</label> {%- if required or attributes.required -%} * {%- endif -%}
 </div>
 {% endif %}
-<div{{ attributes }}>{{ children }}</div>
+
+{%
+  set classes = [
+    'radios-wrapper',
+    element['#error'] ? 'is-invalid',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>{{ children }}</div>

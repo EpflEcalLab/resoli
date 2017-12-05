@@ -17,6 +17,7 @@
   'font-weight-bold',
   ]
 %}
+
 {% if attributes.title is not empty or required -%}
 <div{{ required or element['#attributes'].required ? ' data-required' }}>
   <label{{ attributes.addClass(classes).setAttribute('data-toggle', 'buttons') }}>{{ attributes.title|raw }}</label>
@@ -25,7 +26,9 @@
 
 {%
   set classes = [
+    'radios-wrapper',
     attributes.variant == 'button' or element['#attributes'].variant == 'button_theme' ? 'btn-grid',
+    element['#error'] ? 'is-invalid'
   ]
 %}
 <div{{ attributes.addClass(classes).setAttribute('data-toggle', 'buttons') }}>{{ children }}</div>

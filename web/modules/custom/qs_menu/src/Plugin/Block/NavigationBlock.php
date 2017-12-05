@@ -92,6 +92,10 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
           'user',
           'url',
         ],
+        'tags' => [
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'privilege_list:privilege',
+        ],
       ],
     ];
 

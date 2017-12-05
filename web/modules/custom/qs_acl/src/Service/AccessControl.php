@@ -347,7 +347,7 @@ class AccessControl {
     }
 
     // Check activity is allow member to publish photos.
-    if ($activity->field_member_create_gallery->value === TRUE) {
+    if ($activity->field_member_create_gallery->value == TRUE) {
       // Activity Members+ have access to upload photo by default.
       $query = $this->queryFactory->get('privilege')
         ->condition('status', 1)

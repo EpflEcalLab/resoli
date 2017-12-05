@@ -41,5 +41,13 @@
       </div>
     </div>
   </div>
+  {% else %}
+  <div class="container my-auto">
+    <div class="row">
+      <div class="col-sm-10 col-lg-8 mx-auto text-center">
+        <h2 class="h5">{{ 'qs_auth.form.communities.no_community'|t }}</h2>
+      </div>
+    </div>
+  </div>
   {% endif %}
 </div>

@@ -216,6 +216,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         $theme = 'secondary';
       }
       elseif ($route_name == 'qs_activity.activities.form.delete') {
+        $icon = 'trash';
         $label = $this->t('qs.activity.delete');
         $theme = 'danger';
       }

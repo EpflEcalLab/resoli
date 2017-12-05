@@ -87,7 +87,7 @@
         {# Enable the map only when lat & lng are given #}
         {% if event.field_venue_lat.value and event.field_venue_long.value %}
           <div class="card-map" id="map-container-{{ event.nid.value }}" data-lat="{{ event.field_venue_lat.value }}" data-lng="{{ event.field_venue_long.value }}" data-label="{{ event.field_venue.value }}" data-info="<strong>{{ event.title.value }}</strong> <br/>{{ event.field_venue.value }}">
-            {{ 'qs.map.loading'|t }}
+            <div class="align-items-center d-flex h-100 justify-content-center">{{ 'qs.map.loading'|t }}</div>
           </div>
         {% else %}
           <p class="card-text">{{ 'qs.map.none'|t }}</p>

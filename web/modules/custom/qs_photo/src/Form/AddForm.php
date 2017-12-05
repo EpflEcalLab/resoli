@@ -292,6 +292,7 @@ class AddForm extends FormBasic {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $event_nid = $form_state->getValue('event');
     $event = $this->getNodeStorage()->load($event_nid);
+    $activity = NULL;
 
     // Detect illegal event or activity POST.
     if ($event && $event->bundle() === 'event') {

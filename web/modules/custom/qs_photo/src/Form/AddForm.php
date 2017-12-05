@@ -392,7 +392,7 @@ class AddForm extends FormBasic {
    */
   public function selectEventAjax(array &$form, FormStateInterface $form_state) {
     $select_options[] = [
-      'nid' => '_none',
+      'nid'   => '_none',
       'title' => $this->t('qs.form.select'),
     ];
 
@@ -407,8 +407,8 @@ class AddForm extends FormBasic {
         $select_options = [];
         foreach ($events as $event) {
           $select_options[] = [
-            'nid'         => $event->id(),
-            'title'       => $event->getTitle(),
+            'nid'   => $event->id(),
+            'title' => $event->field_start_at->date->format('d.m.Y') . ' - ' . $event->getTitle(),
           ];
         }
       }

@@ -24,7 +24,7 @@
     {{ macros.icon('check') }}
     <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': element['#return_value'], 'image_style': 'qs_thumbnail'}) }}" alt="{{ element['#title'] }}">
 
-    {% if activityAndComment|last %}
+    {% if activityAndComment|last == 'true' %}
       <a href="{{ path('qs_photo.form.comments', {'activity': activityAndComment|first, 'photos[]': element['#return_value']}) }}" class="btn btn-primary btn-circle card-btn-corner text-white">
         {{ macros.icon('comment') }}
       </a>

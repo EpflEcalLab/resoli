@@ -69,9 +69,16 @@ class DeleteForm extends FormBasic {
 
     // Check write access of every photos.
     foreach ($photos as $photo) {
-      $activity = $photo->field_event->entity->field_activity->entity;
+      $event_activity = $photo->field_event->entity->field_activity->entity;
 
-      if (!$this->acl->hasWriteAccessPhoto($activity)) {
+      // The photo doesn't belongs to the same activity as url.
+      if ($event_activity->id() != $activity->id()) {
+        $access = AccessResult::forbidden();
+        break;
+      }
+
+      // Has not write access for photos.
+      if (!$this->acl->hasWriteAccessPhoto($event_activity)) {
         $access = AccessResult::forbidden();
         break;
       }

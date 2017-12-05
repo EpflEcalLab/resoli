@@ -5,7 +5,7 @@ const modal = () => {
 
       $modalFooters.each(function() {
         const _this = $(this);
-        const clone = _this.clone();
+        const clone = _this.clone(true);
         // Append the modal-footer after the modal-body
         _this.addClass('cloned-footer d-none').removeClass('row').closest('.modal-body').after(clone);
 

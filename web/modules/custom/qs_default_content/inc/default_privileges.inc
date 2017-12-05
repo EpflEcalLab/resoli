@@ -414,6 +414,121 @@ function qs_default_content_privileges_community() {
   // declined.
     'status'    => 0,
     'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+
+  // User 20: declined+all.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 20: declined+all.
+    'user'      => 20,
+  // declined.
+    'status'    => 0,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 20: declined+all.
+    'user'      => 20,
+  // declined.
+    'status'    => 0,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 3: geneve.
+    'entity'    => 3,
+  // User 20: declined+all.
+    'user'      => 20,
+  // declined.
+    'status'    => 0,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+
+  // User 21: approval+all.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 21: approval+all.
+    'user'      => 21,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 21: approval+all.
+    'user'      => 21,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 3: geneve.
+    'entity'    => 3,
+  // User 21: approval+all.
+    'user'      => 21,
+  // pending.
+    'status'    => NULL,
+    'privilege' => 'community_members',
+  ]);
+  $privilege->save();
+
+  // User 22: approved+all.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 1: lausanne.
+    'entity'    => 1,
+  // User 22: approved+all.
+    'user'      => 22,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 22: approved+all.
+    'user'      => 22,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 3: geneve.
+    'entity'    => 3,
+  // User 22: approved+all.
+    'user'      => 22,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_members',
     'reviewer'  => 1,
     'reviewed'  => time(),
   ]);

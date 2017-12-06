@@ -30,9 +30,11 @@ Feature: Login Communities
     Given I am logged in as user "declined+all"
     And I am on "/authentication/communities"
     And I should see "qs_auth.form.communities.no_community"
+    And I should see "qs_supervisor.account.dashboard.apply" link with href "authentication/communities/apply"
 
   @api
   Scenario: Login as user whitout any previous appliances to communities, show him a special message instead of communities links
     Given I am logged in as user "nobody"
     And I am on "/authentication/communities"
     And I should see "qs_auth.form.communities.no_community"
+    And I should see "qs_supervisor.account.dashboard.apply" link with href "authentication/communities/apply"

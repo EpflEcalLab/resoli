@@ -25,8 +25,8 @@ const card = () => {
         const event_id = $(this).prop('hash').replace('#map-', '');
         const map_container = $(`#map-container-${event_id}`).first();
         if (map_container.length > 0) {
-          const lat   = map_container.data('lat');
-          const lng   = map_container.data('lng');
+          const lat   = parseFloat(map_container.data('lat'));
+          const lng   = parseFloat(map_container.data('lng'));
           const label = map_container.data('label');
           const info = map_container.data('info');
           const latLng = {lat: lat, lng: lng};

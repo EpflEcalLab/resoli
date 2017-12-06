@@ -186,6 +186,7 @@ class AddForm extends FormBasic {
           'selectize-activity',
           'selectize-events',
         ],
+        'data-sort-field' => '',
       ],
       '#theme_wrappers' => [
         'form_element',
@@ -418,7 +419,7 @@ class AddForm extends FormBasic {
         foreach ($events as $event) {
           $select_options[] = [
             'nid'   => $event->id(),
-            'title' => $event->field_start_at->date->format('d.m.Y') . ' - ' . $event->getTitle(),
+            'title' => $event->field_end_at->date->format('d.m.Y') . ' - ' . $event->getTitle(),
           ];
         }
       }

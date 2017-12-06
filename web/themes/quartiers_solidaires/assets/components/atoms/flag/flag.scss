@@ -1,11 +1,9 @@
 @charset 'utf-8';
 
 .flag {
-  position: relative;
-  top: -1px;
-  left: -1px;
-  padding: 1px;
   color: $body-color;
+  // Fixes a bug with the filter drop-shadow when animated
+  transform: translateZ(0);
 
   svg {
     fill: $white;

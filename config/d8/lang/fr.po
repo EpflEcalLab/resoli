@@ -1338,6 +1338,22 @@ msgstr "Bonjour @firstname @lastname,\n"
 "Cordialement, "
 
 #:
+msgid "qs.mail.welcome.no_approval.body @mail @firstname @lastname @url"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"Merci de vous être enregistré(e) sur la plateforme. \n"
+"\n"
+"\n"
+"Vous pourrez vous connecter à la plateforme en appuyant sur le lien ci-dessous, ou en le copiant-collant dans votre navigateur internet, aussitôt qu’un responsable aura valider votre adhésion:\n"
+"\n"
+"@url\n"
+"\n"
+"Ce lien vous mènera vers une page sur laquelle vous pourrez vous connecter en toute sécurité. Après y avoir inséré votre mot de passe, vous accéderez au contenu de votre communauté.\n"
+"\n"
+"\n"
+"Cordialement, "
+
+#:
 msgid "qs.mail.awaiting.approval.subject @sitename @mail @firstname @lastname"
 msgstr ""
 

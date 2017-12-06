@@ -123,7 +123,9 @@ class DeleteForm extends FormBasic {
       ],
       '#attributes' => [
         'class' => [
-          'text-center',
+          'justify-content-center',
+          'modal-footer sticky-bottom',
+          'mb-4'
         ],
       ],
     ];

@@ -195,7 +195,15 @@ class AddForm extends FormBasic {
 
     $form['step-3'] = [
       '#type' => 'fieldset',
-      '#description' => $this->t('qs_photo.add.form.step3.description'),
+      '#description' =>
+      $this->t('qs_photo.add.form.step3.description') .
+      '<div class="text-center mb-3">' .
+      $this->t('qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution', [
+        '@file_validate_extensions'       => 'png gif jpg jpeg',
+        '@file_validate_size'             => $this->humanFilesize(file_upload_max_size()),
+        '@file_validate_image_resolution' => '2000x2000',
+      ]) .
+      '</div>',
       '#attributes' => [
         'data-step' => $this->t('qs_photo.add.form.step3'),
       ],
@@ -211,8 +219,9 @@ class AddForm extends FormBasic {
       '#multiple'   => TRUE,
       '#required'   => FALSE,
       '#upload_validators' => [
-        'file_validate_extensions' => ['png gif jpg jpeg'],
-        'file_validate_size' => [file_upload_max_size()],
+        'file_validate_extensions'       => ['png gif jpg jpeg'],
+        'file_validate_size'             => [file_upload_max_size()],
+        'file_validate_image_resolution' => ['2000x2000', 0],
       ],
     ];
 
@@ -419,6 +428,23 @@ class AddForm extends FormBasic {
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeClearOptions'));
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeAddOptions', [$select_options]));
     return $response;
+  }
+
+  /**
+   * Get a human readable file size.
+   *
+   * @param int $bytes
+   *   The original file size in bytes.
+   * @param int $decimals
+   *   The number of final decimals.
+   *
+   * @return string
+   *   The human readable file size.
+   */
+  public function humanFilesize($bytes, $decimals = 2) {
+    $size = ['o', 'ko', 'Mo', 'Go', 'To', 'Po', 'Eo', 'Zo', 'Yo'];
+    $factor = floor((strlen($bytes) - 1) / 3);
+    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' [' . @$size[$factor] . ']';
   }
 
 }

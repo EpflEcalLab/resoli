@@ -2386,3 +2386,21 @@ msgstr "Appliquer à toutes les images"
 
 msgid "qs_auth.form.communities.no_community"
 msgstr "Il n'y a pas de communautés disponibles"
+
+msgid "qs.photo.theme.title_empty @community_name"
+msgstr ""
+
+msgid "qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution"
+msgstr ""
+
+msgid "The image was resized to fit within the maximum allowed dimensions of %dimensions pixels."
+msgstr ""
+
+msgid "The selected file %filename cannot be uploaded. Only files with the following extensions are allowed: %extensions."
+msgstr ""
+
+msgid "Only files with the following extensions are allowed: %files-allowed."
+msgstr ""
+
+msgid "The specified file %name could not be uploaded."
+msgstr ""

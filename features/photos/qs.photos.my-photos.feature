@@ -4,21 +4,21 @@ Feature: Dashboard my photos - Activity within the user can manage photos
   I want to make sure the correct activities writable are shown according ACL
 
   @api
-  Scenario: Logged as Member of Fribourg, When I access "My photos
+  Scenario: Logged as Member of Fribourg, When I access "My photos"
     Given I am logged in as user "member+fribourg+approval+lausanne"
     When I am on "/photos/2/user/11"
     And the response status code should be 200
     Then I should see 0 ".card-list .card-list-item" elements
 
   @api
-  Scenario: Logged as Member of Lausanne, When I access "My photos
+  Scenario: Logged as Member of Lausanne, When I access "My photos"
     Given I am logged in as user "member+lausanne"
     When I am on "/photos/1/user/2"
     And the response status code should be 200
-    Then I should see 1 ".card-list .card-list-item" elements
+    Then I should see 0 ".card-list .card-list-item" elements
 
   @api
-  Scenario: Logged as Manager of Lausanne, When I access "My photos
+  Scenario: Logged as Manager of Lausanne, When I access "My photos"
     Given I am logged in as user "manager+lausanne"
     When I am on "/photos/1/user/5"
     And the response status code should be 200
@@ -28,7 +28,7 @@ Feature: Dashboard my photos - Activity within the user can manage photos
     Then I should not see a "#activity5" element
 
   @api
-  Scenario: Logged as Organizer of Lausanne, When I access "My photos
+  Scenario: Logged as Organizer of Lausanne, When I access "My photos"
     Given I am logged in as user "organizer+lausanne"
     When I am on "/photos/1/user/6"
     And the response status code should be 200
@@ -38,7 +38,7 @@ Feature: Dashboard my photos - Activity within the user can manage photos
     Then I should not see a "#activity2" element
 
   @api
-  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, When I access "My photos
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, When I access "My photos"
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/photos/1/user/8"
     And the response status code should be 200

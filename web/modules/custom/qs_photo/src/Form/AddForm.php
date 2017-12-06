@@ -127,7 +127,8 @@ class AddForm extends FormBasic {
       $activities = $this->nodeStorage->loadMultiple($nids);
     }
     else {
-      // Show only activity where user has access.
+      // Show only activity where user has access &
+      // with at least one past event.
       $activities = $this->activityManager->getByUserPhoto($community, $this->currentUser);
     }
 

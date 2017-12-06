@@ -58,4 +58,12 @@ function qs_default_content_photos() {
   $photo_51 = $nodeStorage->load(51);
   $photo_51->field_image->generateSampleItems();
   $photo_51->save();
+
+  $photo_52 = $nodeStorage->load(52);
+  $photo_52->field_image->generateSampleItems();
+  $photo_52->save();
+
+  $photo_53 = $nodeStorage->load(53);
+  $photo_53->field_image->generateSampleItems();
+  $photo_53->save();
 }

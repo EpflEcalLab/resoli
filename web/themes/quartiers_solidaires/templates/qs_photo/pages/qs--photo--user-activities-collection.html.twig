@@ -83,6 +83,7 @@
     </div>
   {% endif %}
 
+  {% if variables.activities %}
   <div class="modal-footer justify-content-center sticky-bottom">
     <div class="text-center">
       <a href="{{ path('qs_photo.form.add', {community: variables.community.tid.value}) }}" class="btn btn-secondary btn-icon shadow-to-bottom">
@@ -91,4 +92,6 @@
       </a>
     </div>
   </div>
+  {% endif %}
+
 </div>

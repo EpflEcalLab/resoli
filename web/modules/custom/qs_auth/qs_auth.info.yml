@@ -1,0 +1,11 @@
+name: qs_auth
+type: module
+description: Authentication & Signup module
+core: 8.x
+package: Quartiers Solidaires
+
+dependencies:
+  - drupal:qs_site
+  - drupal:qs_acl
+  - drupal:mailsystem
+  - drupal:swiftmailer

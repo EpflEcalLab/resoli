@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+// Color contrast, copied from Bootstrap, added parameters
+/* stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after */
+@mixin color-contrast($color, $dark: color(dark), $light: color(light)) {
+  $r: red($color);
+  $g: green($color);
+  $b: blue($color);
+
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+  @if ($yiq >= 150) {
+    color: $dark;
+  } @else {
+    color: $light;
+  }
+}
+
+// Request a color level, copied from Bootstrap, set for custom colors
+@function color-level($color: theme-color("primary"), $level: 0) {
+  $color-base: if($level > 0, #000, #fff);
+
+  @if $level < 0 {
+    // Lighter values need a quick double negative for the Sass math to work
+    @return mix($color-base, $color, $level * -1 * $theme-color-interval);
+  } @else {
+    @return mix($color-base, $color, $level * $theme-color-interval);
+  }
+}
+
+/* stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after */

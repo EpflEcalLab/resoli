@@ -1,0 +1,8 @@
+qs_toolbar.admin:
+    path: '/admin/quartiers-solidaires'
+    defaults:
+        # System Controller that list all links under this parent
+        _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+        _title: 'Quartiers Solidaires'
+    requirements:
+        _permission: 'administer site configuration'

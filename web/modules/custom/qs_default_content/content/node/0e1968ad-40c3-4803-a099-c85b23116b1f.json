@@ -1,0 +1,192 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/lausanne\/activities\/atelier-creatif\/events\/cours-dorigami?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "href": "http:\/\/default\/lausanne\/activities\/atelier-creatif\/events?_format=hal_json"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 15
+        }
+    ],
+    "uuid": [
+        {
+            "value": "0e1968ad-40c3-4803-a099-c85b23116b1f"
+        }
+    ],
+    "vid": [
+        {
+            "value": 85
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "event"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Cours d\u2019Origami",
+            "lang": "zxx"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/lausanne\/activities\/atelier-creatif\/events?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "5c5f2e54-c3ac-4a69-9659-17afc8d1734d"
+                    }
+                ]
+            }
+        ]
+    },
+    "created": [
+        {
+            "value": 1503414519,
+            "lang": "zxx"
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507563513,
+            "lang": "zxx"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": 1507563513
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "<p>Venez apprendre \u00e0 plier de simples feuilles de papier afin de les transformer en somptueuses sculptures! Les le\u00e7ons se d\u00e9roulent en toute convivialit\u00e9 avec un expert de cet art japonais.<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_end_at": [
+        {
+            "value": "2017-10-06T23:20:00"
+        }
+    ],
+    "field_start_at": [
+        {
+            "value": "2017-10-06T23:00:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Avenue du 24-Janvier 11, Renens, Suisse"
+        }
+    ],
+    "field_venue_lat": [
+        {
+            "value": "46.8182"
+        }
+    ],
+    "field_venue_long": [
+        {
+            "value": "8.2275"
+        }
+    ]
+}

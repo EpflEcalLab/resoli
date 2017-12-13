@@ -1,0 +1,7 @@
+{% if variables.url %}
+  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+  <a class="btn btn-icon btn-outline-{{ variables.theme }} shadow-to-right over-modal{{ variables.invert ? ' btn-outline-invert' }}" href="{{ variables.url }}">
+    {{ macros.icon('chevron-left') }}
+    {{ variables.label }}
+  </a>
+{% endif %}

@@ -1,0 +1,9 @@
+uuid: daf407af-6462-4248-b9dc-00e4fdfca766
+langcode: zxx
+status: true
+dependencies: {  }
+name: Themes
+vid: themes
+description: 'Themes of activities '
+hierarchy: 0
+weight: 0

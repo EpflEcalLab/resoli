@@ -1,0 +1,109 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<li class="card card-flippable card-list-item">
+
+  <div class="card-front">
+    {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}
+  </div>
+
+  <div class="collapse" id="collapse-{{ key }}" role="tabpanel" data-parent="#events-accordion">
+    {% include "@quartiers_solidaires/node/partials/card-body.html.twig" %}
+  </div>
+
+  {# Contact info card #}
+  <div class="card-back" id="contact-{{ event.nid.value }}">
+    <div class="card-pill">
+
+      <span class="card-pill-icon">
+        {{ macros.icon('user') }}
+      </span>
+
+      <span class="card-pill-title">
+        <span>
+          {{ event.field_contact_name.value ? event.field_contact_name.value : 'qs.event.contact'|t }}
+        </span>
+      </span>
+
+    </div>
+    <div class="card-body text-center">
+
+      {% if event.field_contact_name.value %}
+        <p class="card-text">
+          {% trans %}qs.event.contact_description {{ event.field_contact_name.value }}{% endtrans %}
+          {% if event.field_contact_phone.value or event.field_contact_mail.value %}{{ 'qs.event.contact.you_can_contact'|t }}{% endif %}
+          {% if event.field_contact_phone.value %}{{ 'qs.event.contact.by_phone'|t }}{% endif %}
+          {% if event.field_contact_phone.value and event.field_contact_mail.value %}{{ 'qs.event.contact.or'|t }}{% endif %}
+          {% if event.field_contact_mail.value %}{{ 'qs.event.contact.by_email'|t }}{% endif %}
+        </p>
+      {% endif %}
+
+      <div class="row">
+        {% if event.field_contact_phone.value %}
+          <div class="col-md-8 mx-auto">
+            <a href="tel:{{ event.field_contact_phone.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
+              {{ macros.icon('phone') }}
+              {{ event.field_contact_phone.value }}
+            </a>
+          </div>
+        {% endif %}
+
+        {% if event.field_contact_mail.value %}
+          <div class="col-md-8 mx-auto">
+            <a href="mailto:{{ event.field_contact_mail.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
+              {{ macros.icon('mail') }}
+              {{ event.field_contact_mail.value }}
+            </a>
+          </div>
+        {% endif %}
+
+        <div class="col-md-8 mx-auto">
+          <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
+            {{ macros.icon('arrow-left') }}
+            {{ 'qs.event.back_to_event'|t }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {# Map info card #}
+  {% if event.field_venue.value %}
+    <div class="card-back {% if event.field_venue_lat.value and event.field_venue_long.value %}card-map-container{% endif %}" id="map-{{ event.nid.value }}">
+      <div class="card-pill">
+
+        <span class="card-pill-icon">
+          {{ macros.icon('meeting') }}
+        </span>
+
+        <span class="card-pill-title">
+          <span>
+            {{ event.field_venue.value }}
+          </span>
+        </span>
+
+      </div>
+      <div class="card-body text-center">
+        {# Enable the map only when lat & lng are given #}
+        {% if event.field_venue_lat.value and event.field_venue_long.value %}
+          <div class="card-map" id="map-container-{{ event.nid.value }}" data-lat="{{ event.field_venue_lat.value }}" data-lng="{{ event.field_venue_long.value }}" data-label="{{ event.field_venue.value }}" data-info="<strong>{{ event.title.value }}</strong> <br/>{{ event.field_venue.value }}">
+            <div class="align-items-center d-flex h-100 justify-content-center">{{ 'qs.map.loading'|t }}</div>
+          </div>
+        {% else %}
+          <p class="card-text">{{ 'qs.map.none'|t }}</p>
+        {% endif %}
+
+        <div class="row {% if event.field_venue_lat.value and event.field_venue_long.value %}card-map-footer{% endif %}">
+          <div class="col-md-8 mx-auto">
+            <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
+              {{ macros.icon('arrow-left') }}
+              {{ 'qs.event.back_to_event'|t }}
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  {% endif %}
+
+</li>

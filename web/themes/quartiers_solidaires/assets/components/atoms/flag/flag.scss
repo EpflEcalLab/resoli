@@ -1,0 +1,51 @@
+@charset 'utf-8';
+
+.flag {
+  position: relative;
+  top: -1px;
+  left: -1px;
+  padding: 1px;
+  color: $body-color;
+
+  svg {
+    fill: $white;
+  }
+
+  @include flag-size(40px);
+}
+
+.flag-shield {
+  margin-top: -3px;
+
+  @include flag-size(43px * 1.1);
+}
+
+.flag-lg {
+  @include flag-size(60px);
+
+  &.flag-shield {
+    @include flag-size(60px * 1.1);
+  }
+}
+
+@each $color, $value in $flag-colors {
+  &.flag-#{$color} {
+    color: $white;
+
+    svg {
+      fill: $value;
+    }
+
+    @if $enable-shadows {
+      filter: drop-shadow(0 0 3px $value);
+    }
+  }
+
+  &.flag-outline-#{$color} {
+    color: $value;
+
+    @if $enable-shadows {
+      filter: drop-shadow(0 0 3px currentColor);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+uuid: b72fe677-f467-49ee-b6b7-e33909292412
+langcode: fr
+status: true
+dependencies:
+  module:
+    - focal_point
+name: qs_thumbnail
+label: 'QS Thumbnail (300x300)'
+effects:
+  57898185-1804-45f6-91e3-1d5a772101e1:
+    uuid: 57898185-1804-45f6-91e3-1d5a772101e1
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 300
+      height: 300
+      crop_type: focal_point

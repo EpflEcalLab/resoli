@@ -1,0 +1,120 @@
+@charset 'utf-8';
+
+$calendar-item-size: 3.125rem;
+
+.calendar-wrapper {
+  text-align: center;
+}
+
+@supports (display: grid) {
+  .calendar {
+    display: inline-grid;
+    grid-template-columns: repeat(7, $calendar-item-size);
+    grid-auto-rows: 1fr;
+    grid-gap: $grid-gutter-width 3rem;
+    margin: 0 auto;
+
+    @include media-breakpoint-only(sm) {
+      grid-gap: ($grid-gutter-width / 2) 1.5rem;
+    }
+
+    @include media-breakpoint-down(xs) {
+      grid-template-columns: repeat(7, 1fr);
+      grid-gap: 2vw;
+    }
+  }
+
+  .calendar-item {
+    min-width: $calendar-item-size;
+    min-height: $calendar-item-size;
+
+    @include media-breakpoint-down(xs) {
+      min-width: 10vw;
+      min-height: 10vw;
+    }
+
+    &.active {
+      width: 7rem;
+      margin-left: ((7rem - $calendar-item-size) / -2); // center it (7 - 3.125) / -2
+
+      @include media-breakpoint-only(sm) {
+        width: 5rem;
+        margin-left: ((5rem - $calendar-item-size) / -2); // center it (4 - 3.125) / 2
+      }
+
+      @include media-breakpoint-down(sm) {
+        width: auto;
+        margin: 0;
+      }
+    }
+  }
+
+  .calendar-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: $calendar-item-size;
+    min-height: $calendar-item-size;
+    color: gray('600');
+
+    @include media-breakpoint-down(xs) {
+      min-width: 10vw;
+      min-height: 10vw;
+    }
+  }
+}
+
+@supports not (display: grid) {
+  .calendar {
+    width: calc(7 * #{$calendar-item-size} + 7 * #{$grid-gutter-width});
+
+    @include make-row();
+
+    display: inline-flex;
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+  }
+
+  .calendar-item {
+    width: 100%;
+    flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    min-width: 20px;
+    max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    height: $calendar-item-size;
+    padding: 0;
+    margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
+
+    @include media-breakpoint-up(md) {
+      flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+
+      &.active {
+        flex-basis: 6.5rem;
+        max-width: 6.5rem;
+        margin-right: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
+        margin-left: calc((6.5rem - #{$calendar-item-size}) / -2 + #{$grid-gutter-width} / 2);
+      }
+    }
+  }
+
+  .calendar-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    min-width: 20px;
+    max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
+    color: gray('600');
+    border: 2px solid transparent;
+
+    @include media-breakpoint-up(md) {
+      flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
+      margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
+    }
+  }
+}

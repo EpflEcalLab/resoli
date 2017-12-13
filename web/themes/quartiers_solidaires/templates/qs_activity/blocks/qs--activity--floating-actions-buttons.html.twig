@@ -1,0 +1,15 @@
+{% if variables.url %}
+  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+  <div class="floating">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col text-center">
+          <a class="btn btn-white {{ variables.icon ? 'btn-icon' }} btn-outline-{{ variables.theme }} shadow-floating mb-3 {{ variables.classes|join(' ') }}" href="{{ variables.url }}">
+            {% if variables.icon %}{{ macros.icon(variables.icon) }}{% endif %}
+            {{ variables.label }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

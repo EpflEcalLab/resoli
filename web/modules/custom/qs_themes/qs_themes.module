@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * QS Themes hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function qs_themes_theme() {
+  return [
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_themes_filter_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--themes--filter',
+    ],
+  ];
+}

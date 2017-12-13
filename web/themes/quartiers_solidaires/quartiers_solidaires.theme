@@ -1,0 +1,112 @@
+<?php
+
+/**
+ * Add the view mode suggestion to taxonomy detail page.
+ */
+function quartiers_solidaires_theme_suggestions_taxonomy_term_alter(&$suggestions, $vars, $hook) {
+  $suggestions[] = $suggestions[0] . '__' . $vars['elements']['#view_mode'];
+}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Add body background colors on some specific route.
+ */
+function quartiers_solidaires_preprocess_html(&$variables) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  if ($is_front = \Drupal::service('path.matcher')->isFrontPage()) {
+    $variables['attributes']['class'][] = 'bg-gradient';
+  }
+
+  // todo add colors to every page which needs them.
+  // todo remove bg-x from templates.html.twig and add them here.
+  switch ($route_name) {
+    case 'system.404':
+    case 'system.403':
+      $variables['attributes']['class'][] = 'bg-gradient';
+    break;
+
+    case 'qs_auth.login':
+    case 'qs_auth.communities.apply':
+    case 'qs_auth.pass':
+    case 'qs_auth.pass.confirmation':
+    case 'qs_auth.pass.reset':
+    case 'qs_auth.pass.reset.login':
+    case 'qs_auth.pass.reset.form':
+    case 'qs_auth.communities':
+    case 'qs_auth.cancel.confirm':
+      $variables['attributes']['class'][] = 'bg-secondary';
+      break;
+
+    case 'qs_auth.approval':
+    case 'qs_community.welcome':
+      $variables['attributes']['class'][] = 'bg-primary';
+      break;
+
+    case 'qs_auth.register':
+    case 'qs_supervisor.account.dashboard':
+    case 'qs_supervisor.account.form.edit':
+      $variables['attributes']['class'][] = 'bg-info';
+      break;
+
+    case '<front>':
+      $variables['attributes']['class'][] = 'bg-primary';
+      break;
+
+  }
+}
+
+/**
+ * Implements template_theme_suggestion_page_alter().
+ *
+ * Create new suggestion for pages & set background colors on some modals.
+ */
+function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
+
+  switch (true) {
+    case in_array('page__communities__welcome', $suggestions):
+      $suggestions[] = 'page__fullpage';
+      break;
+
+    case in_array('page__events__user', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'info';
+      break;
+
+    case in_array('page__activities__dashboard', $suggestions):
+    case in_array('page__activities__add', $suggestions):
+    case in_array('page__activities__edit', $suggestions):
+    case in_array('page__activities__dashboard__members', $suggestions):
+    case in_array('page__activities__user', $suggestions):
+    case in_array('page__photos__user', $suggestions):
+    case in_array('page__photos__activity__user', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'primary';
+      break;
+
+    case in_array('page__communities__dashboard', $suggestions):
+    case in_array('page__communities__dashboard__members', $suggestions):
+    case in_array('page__communities__dashboard__waiting_approval',
+      $suggestions):
+    case in_array('page__activities__delete', $suggestions):
+    case in_array('page__events__delete', $suggestions):
+    case in_array('page__photos__activity__delete', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'danger';
+      break;
+
+    case in_array('page__events__dashboard', $suggestions):
+    case in_array('page__events__add', $suggestions):
+    case in_array('page__events__edit', $suggestions):
+    case in_array('page__photos__add', $suggestions):
+    case in_array('page__photos__activity__comment', $suggestions):
+      $suggestions[] = 'page__fullmodal';
+      $variables['attributes']['bg'] = 'secondary';
+      break;
+  }
+}
+
+function quartiers_solidaires_theme_suggestions_form_element_alter(&$variables) {
+
+}

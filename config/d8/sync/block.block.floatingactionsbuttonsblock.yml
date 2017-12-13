@@ -1,0 +1,26 @@
+uuid: e6c7be1e-8fc4-448b-9cfc-c36f33b993f3
+langcode: fr
+status: true
+dependencies:
+  module:
+    - qs_activity
+    - system
+  theme:
+    - quartiers_solidaires
+id: floatingactionsbuttonsblock
+theme: quartiers_solidaires
+region: floating
+weight: 0
+provider: null
+plugin: qs_activity_floating_actions_buttons_block
+settings:
+  id: qs_activity_floating_actions_buttons_block
+  label: 'Floating actions buttons block'
+  provider: qs_activity
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "*/activities/*\r\n*/activities/theme\r\n*/activities/date\r\n*/calendar/*\r\n*/calendar/monthly\r\n*/calendar/weekly\r\n*/welcome\r\n*/dashboard\r\n*/dashboard/*\r\n*/photos/*"
+    negate: false
+    context_mapping: {  }

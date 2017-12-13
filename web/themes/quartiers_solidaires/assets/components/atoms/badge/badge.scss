@@ -1,0 +1,13 @@
+@charset 'utf-8';
+
+.badge-white {
+  color: $body-color;
+
+  @include badge-variant($white);
+}
+
+.badge-icon {
+  line-height: $input-btn-line-height;
+
+  @extend %btn-icon;
+}

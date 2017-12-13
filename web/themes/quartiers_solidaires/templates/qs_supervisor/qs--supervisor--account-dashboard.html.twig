@@ -1,0 +1,90 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="row">
+    <div class="col my-5">
+      <div class="text-center">
+        <h1 class="h3">{{ 'qs_supervisor.account.personal_info'|t }}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-auto">
+      <h2 class="h3 text-center font-weight-light mb-4">{{ 'qs_supervisor.account.personal_data'|t }}</h2>
+      <dl class="row">
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.firstname'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.field_firstname.value }}</dd>
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.lastname'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.field_lastname.value }}</dd>
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.phone'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.field_phone.value|default('<span class="text-muted">' ~ 'qs_supervisor.account.phone_default'|t ~ '</span>')|raw }}</dd>
+        <dt class="col-sm-3 text-truncate">{{ 'qs_supervisor.account.mail'|t }}</dt>
+        <dd class="col-sm-9">{{ variables.user.mail.value }}</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="text-center mt-2 mb-5">
+    {# Edit account button #}
+    <a
+      class="btn btn-icon btn-icon-right btn-outline-invert mb-2 shadow-to-bottom"
+      href="{{ path('qs_supervisor.account.form.edit', {user: variables.user.uid.value}) }}"
+      title="{{ 'qs_supervisor.account.dashboard.edit'|t }}"
+    >
+      {{ 'qs_supervisor.account.dashboard.edit'|t }}
+      {{ macros.icon('pencil') }}
+    </a>
+    <br>
+    <a class="text-danger" href="{{ path('user.logout') }}">{% trans %}qs_supervisor.account.dashboard.logout{% endtrans %}</a>
+  </div>
+
+  {# List all communities the use is a member of or is waiting for an approval #}
+  <div class="row">
+    <div class="col text-center mb-4">
+      <h2 class="h3 font-weight-light">{{ 'qs_supervisor.account.communities'|t }}</h2>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <ul class="card-list">
+        {% for community in variables.communities %}
+          <li class="card card-list-item">
+            <a href="{{ path('qs_community.welcome', {'community': community.id}) }}" class="card-pill">
+              <span class="card-pill-icon">{{ macros.icon('communities-sm') }}</span>
+              <span class="card-pill-title">
+                <span>{{ community.name.value }}</span>
+              </span>
+              <span class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-auto shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
+                {{ macros.icon('look')}}
+                <span class="sr-only">{{ 'qs_supervisor.account.community_go'|t }}</span>
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+        {% for community in variables.pending %}
+          <li class="card card-list-item card-list-item-primary">
+            <a href="{{ path('qs_auth.approval', {'community': community.id}) }}" class="card-pill">
+              <span class="card-pill-icon">{{ macros.icon('wait') }}</span>
+              <span class="card-pill-title">
+                <span>{{ community.name.value }}</span>
+                <span class="text-primary">{{ 'qs_supervisor.account.community_pending'|t }}</span>
+              </span>
+              <span class="btn btn-outline-primary btn-circle shadow-to-left btn-white ml-auto shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.approval_go'|t }}">
+                {{ macros.icon('look')}}
+                <span class="sr-only">{{ 'qs_supervisor.account.approval_go'|t }}</span>
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col text-center">
+      <a class="btn btn-icon btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.communities.apply') }}">
+        {{ macros.icon('plus') }}
+        {% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}
+      </a>
+    </div>
+  </div>
+</div>

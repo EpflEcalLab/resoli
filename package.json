@@ -1,0 +1,86 @@
+{
+  "name": "quartiers-solidaires",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "index.html",
+  "scripts": {
+    "start": "toolbox serve",
+    "build": "toolbox build",
+    "deploy": "toolbox build styleguide && toolbox deploy",
+    "single": "toolbox single"
+  },
+  "browserslist": [
+    "> 1% in CH",
+    "last 2 versions"
+  ],
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "./node_modules/toolbox-utils/node_modules/eslint-config-airbnb",
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "arrow-body-style": 0,
+      "camelcase": 0,
+      "global-require": 0,
+      "import/extensions": 0,
+      "import/no-unresolved": 0
+    }
+  },
+  "stylelint": {
+    "ignoreFiles": [
+      "web/themes/quartiers_solidaires/assets/config/bootstrap-variables.scss",
+      "web/themes/quartiers_solidaires/assets/config/variables.scss"
+    ],
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "at-rule-no-vendor-prefix": true,
+      "media-feature-name-no-vendor-prefix": true,
+      "property-no-vendor-prefix": true,
+      "selector-no-vendor-prefix": true,
+      "value-no-vendor-prefix": true,
+      "selector-pseudo-element-colon-notation": "single"
+    },
+    "order/order": [
+      "custom-properties",
+      "dollar-variables",
+      "declarations",
+      "at-rules",
+      "rules"
+    ],
+    "order/properties-order": [
+      "content",
+      "display",
+      "flex",
+      "position",
+      "top",
+      "right",
+      "bottom",
+      "left",
+      "float",
+      "width",
+      "height",
+      "margin",
+      "padding",
+      "background",
+      "border",
+      "font-familly",
+      "font-size",
+      "line-height",
+      "font-weight",
+      "font-style",
+      "color",
+      "transform",
+      "transition"
+    ]
+  },
+  "dependencies": {
+    "bootstrap": "4.0.0-beta.2",
+    "jquery": "^3.2.1",
+    "patch-package": "^3.4.0",
+    "photoswipe": "^4.1.2",
+    "popper.js": "^1.11.1",
+    "selectize": "^0.12.4",
+    "toolbox-utils": "^1.1.0"
+  }
+}

@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * QS Supervisor hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function qs_supervisor_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_supervisor_account_dashboard_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--supervisor--account-dashboard',
+    ],
+  ];
+}

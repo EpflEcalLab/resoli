@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override for a 'checkboxes' #type form element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The rendered checkboxes.
+ *
+ * @see template_preprocess_checkboxes()
+ */
+ @todo: remove this file once https://www.drupal.org/node/1819284 is resolved.
+ This is identical to core/modules/system/templates/container.html.twig
+#}
+
+{%
+  set classes = [
+  'font-weight-bold',
+  ]
+%}
+{% if attributes.title is not empty or required -%}
+<div>
+  <label{{ attributes.addClass(classes) }}>{{ attributes.title|raw }}</label> {%- if required or attributes.required -%} * {%- endif -%}
+</div>
+{% endif %}
+
+{%
+  set classes = [
+    'radios-wrapper',
+    element['#error'] ? 'is-invalid',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>{{ children }}</div>

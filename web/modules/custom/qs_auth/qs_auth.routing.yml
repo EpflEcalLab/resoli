@@ -1,0 +1,126 @@
+# Log in
+qs_auth.login:
+  path: '/authentication'
+  defaults:
+      _form: '\Drupal\user\Form\UserLoginForm'
+      _title: 'qs_auth.login'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+
+# User cancel confirmation
+qs_auth.cancel.confirm:
+  path: '/authentication/{user}/cancel/confirm/{timestamp}/{hashed_pass}'
+  defaults:
+    _title: 'qs_auth.cancel.confirm'
+    _controller: '\Drupal\qs_auth\Controller\AccountController::confirmCancel'
+  requirements:
+     # Everybody shoud have access on this page.
+    _access: 'TRUE'
+
+# Forget Password
+qs_auth.pass:
+  path: '/authentication/password'
+  defaults:
+    _form: '\Drupal\user\Form\UserPasswordForm'
+    _title: 'qs_auth.forget_password'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+
+# Forget Password Confirmation
+qs_auth.pass.confirmation:
+  path: '/authentication/password/confirmation'
+  defaults:
+      _controller: '\Drupal\qs_auth\Controller\AccountController::passConfirm'
+      _title: 'qs_auth.pass.confirmation'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+
+# User Reset Login
+qs_auth.pass.reset.login:
+  path: '/authentication/password/reset/{uid}/{timestamp}/{hash}/login'
+  defaults:
+    _controller: '\Drupal\user\Controller\UserController::resetPassLogin'
+    _title: 'user.reset.login'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+    no_cache: TRUE
+
+# User Reset Password
+qs_auth.pass.reset:
+  path: 'authentication/password/reset/{uid}/{timestamp}/{hash}'
+  defaults:
+    _controller: '\Drupal\user\Controller\UserController::resetPass'
+    _title: 'qs_auth.pass.reset'
+  requirements:
+   # Everybody shoud have access on this page.
+    _access: 'TRUE'
+  options:
+    _maintenance_access: TRUE
+    no_cache: TRUE
+
+# User Reset Password
+qs_auth.pass.reset.form:
+  path: 'authentication/password/reset/{uid}'
+  defaults:
+    _controller: '\Drupal\user\Controller\UserController::getResetPassForm'
+    _title: 'qs_auth.pass.reset.form'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+  options:
+    _maintenance_access: TRUE
+    no_cache: TRUE
+
+# Register
+qs_auth.register:
+    path: '/authentication/register'
+    defaults:
+        _form: '\Drupal\qs_auth\Form\RegisterForm'
+        _title: 'qs_auth.register'
+    requirements:
+      _user_is_logged_in: 'FALSE'
+    options:
+      _maintenance_access: FALSE
+
+# Approval
+qs_auth.approval:
+    path: '/authentication/approval/{community}'
+    defaults:
+        _controller: '\Drupal\qs_auth\Controller\ApprovalController::approval'
+        _title: 'qs_auth.approval'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_auth\Controller\ApprovalController::access'
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+# Communities selector page
+qs_auth.communities:
+    path: '/authentication/communities'
+    defaults:
+        _controller: '\Drupal\qs_auth\Controller\AccountController::communities'
+        _title: 'qs_auth.communities.selector'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+    options:
+      _maintenance_access: FALSE
+
+# Communities apply form
+qs_auth.communities.apply:
+    path: '/authentication/communities/apply'
+    defaults:
+        _form: '\Drupal\qs_auth\Form\CommunitiesApplyForm'
+        _title: 'qs_auth.communities.apply'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+    options:
+      _maintenance_access: FALSE

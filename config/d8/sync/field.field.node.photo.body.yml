@@ -1,0 +1,27 @@
+uuid: 402b5cfd-6235-4314-b2b6-ca0c62534d98
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.photo
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    plain_text: plain_text
+    full_html: '0'
+id: node.photo.body
+field_name: body
+entity_type: node
+bundle: photo
+label: Caption
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

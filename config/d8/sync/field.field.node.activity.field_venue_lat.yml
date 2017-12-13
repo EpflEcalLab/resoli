@@ -1,0 +1,25 @@
+uuid: beb08127-832a-49f0-a02a-a83ce6072027
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_venue_lat
+    - node.type.activity
+id: node.activity.field_venue_lat
+field_name: field_venue_lat
+entity_type: node
+bundle: activity
+label: 'Venue - Latitude'
+description: "Range of latitude is -90° and +90°. <br>\r\nFourth decimal place is worth up to 11 m: it can identify a parcel of land."
+required: false
+translatable: true
+default_value:
+  -
+    value: 46.8182
+default_value_callback: ''
+settings:
+  min: !!float -90
+  max: !!float 90
+  prefix: ''
+  suffix: °
+field_type: decimal

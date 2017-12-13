@@ -1,0 +1,15 @@
+uuid: 12023e9c-6455-4613-8bc6-b2e53c70d96e
+langcode: fr
+status: true
+dependencies: {  }
+name: gallery_fullsize
+label: 'Gallery Fullsize (max1920x1080)'
+effects:
+  91fad1a5-ab0d-4d4b-8e9b-7506e44ee34d:
+    uuid: 91fad1a5-ab0d-4d4b-8e9b-7506e44ee34d
+    id: image_scale
+    weight: 1
+    data:
+      width: 1920
+      height: 1080
+      upscale: false

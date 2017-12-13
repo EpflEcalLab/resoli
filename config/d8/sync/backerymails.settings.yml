@@ -1,0 +1,12 @@
+verbose: false
+reroute:
+  status: false
+  recipients: ''
+excludes:
+  customs:
+    - update.status_notify
+  sensitives:
+    - user.password_reset
+_core:
+  default_config_hash: GbbPZdROKX1oBVjxw6ag3kLxSlRdXCbaPv0LsH7eqW4
+langcode: fr

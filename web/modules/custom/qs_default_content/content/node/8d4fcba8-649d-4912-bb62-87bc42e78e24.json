@@ -1,0 +1,228 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/lausanne\/activities\/aperitif\/events?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/field_community": [
+            {
+                "href": "http:\/\/default\/lausanne?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/field_theme": [
+            {
+                "href": "http:\/\/default\/taxonomy\/term\/5?_format=hal_json"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 7
+        }
+    ],
+    "uuid": [
+        {
+            "value": "8d4fcba8-649d-4912-bb62-87bc42e78e24"
+        }
+    ],
+    "vid": [
+        {
+            "value": 77
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "activity"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Aperitif",
+            "lang": "zxx"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3d5e335a-4c68-4168-9a8c-644d438268ef"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/field_community": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/lausanne?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "e8cfc427-c90d-4015-b583-1418974120ed"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/activity\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/taxonomy\/term\/5?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "a6f37a1e-9d93-4a93-9a11-b77adf8cd67e"
+                    }
+                ]
+            }
+        ]
+    },
+    "created": [
+        {
+            "value": 1503413716,
+            "lang": "zxx"
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507563279,
+            "lang": "zxx"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": 1507563279
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "field_community_access_contact": [
+        {
+            "value": true
+        }
+    ],
+    "field_community_access_detail": [
+        {
+            "value": true
+        }
+    ],
+    "field_community_access_gallery": [
+        {
+            "value": false
+        }
+    ],
+    "field_community_access_story": [
+        {
+            "value": false
+        }
+    ],
+    "field_community_can_subscribe": [
+        {
+            "value": false
+        }
+    ],
+    "field_member_create_gallery": [
+        {
+            "value": true
+        }
+    ],
+    "field_member_create_story": [
+        {
+            "value": true
+        }
+    ],
+    "field_venue_lat": [
+        {
+            "value": "46.8182",
+            "lang": "zxx"
+        }
+    ],
+    "field_venue_long": [
+        {
+            "value": "8.2275",
+            "lang": "zxx"
+        }
+    ]
+}

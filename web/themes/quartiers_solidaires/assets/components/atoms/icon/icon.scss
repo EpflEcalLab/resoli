@@ -1,0 +1,48 @@
+@charset 'utf-8';
+
+.icon {
+  display: inline-flex;
+  align-self: center;
+  position: relative;
+  color: inherit;
+  width: $icon-size-base;
+  height: $icon-size-base;
+
+  svg {
+    width: $icon-size-base;
+    height: $icon-size-base;
+    fill: currentColor;
+  }
+
+  &.icon-baseline {
+    svg {
+      position: absolute;
+      bottom: -0.125em;
+    }
+  }
+}
+
+.icon-lg {
+  width: $icon-size-base * 1.2;
+  height: $icon-size-base * 1.2;
+
+  svg {
+    width: $icon-size-base * 1.2;
+    height: $icon-size-base * 1.2;
+  }
+}
+
+.icon-xl {
+  width: $icon-size-base * 3;
+  height: $icon-size-base * 3;
+
+  svg {
+    width: $icon-size-base * 3;
+    height: $icon-size-base * 3;
+  }
+}
+
+// To align icon in paragraph
+.icon-offset {
+  top: 0.4em;
+}

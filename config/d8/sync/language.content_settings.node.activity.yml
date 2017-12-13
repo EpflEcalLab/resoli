@@ -1,0 +1,11 @@
+uuid: f831ae9b-1163-4a47-99ae-c4bc3d4b68c9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.activity
+id: node.activity
+target_entity_type_id: node
+target_bundle: activity
+default_langcode: zxx
+language_alterable: false

@@ -1,0 +1,26 @@
+uuid: e5586ede-a2fe-4c09-b68a-4cc46a943c8e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - qs_themes
+    - system
+  theme:
+    - quartiers_solidaires
+id: themesfilter
+theme: quartiers_solidaires
+region: header
+weight: 0
+provider: null
+plugin: qs_themes_filter_block
+settings:
+  id: qs_themes_filter_block
+  label: 'Themes Filter'
+  provider: qs_themes
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "*/activities/theme\r\n*/photos/theme\r\n/photos/*/theme"
+    negate: false
+    context_mapping: {  }

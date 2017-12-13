@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+{% set classes = [
+  'form',
+  element['#validated'] ? 'was-validated',
+  'my-auto',
+] %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{% set wrapper_class = [
+  attributes.bg ? 'bg-' ~ attributes.bg
+] %}
+<div class="{{ wrapper_class|join(' ') }}">
+  <div class="container fullpage-wrapper py-4">
+
+    {% if element['#top_links'] %}
+    <div class="row justify-content-between">
+      {% for path, link in element['#top_links'] %}
+        <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }} shadow-to-bottom" href="{{ link.params ? path(path, link.params) : path(path) }}">
+          {% if link.options.icon %}
+            {{ macros.icon(link.options.icon) }}
+          {% endif %}
+          {{ link.label }}
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="flex-column justify-content-center my-auto">
+      {% if element['#title'] %}
+        <div class="row mb-5">
+          <div class="col-md-10 col-lg-8 mx-auto text-center">
+            <h1>{{ element['#title'] }}</h1>
+          </div>
+        </div>
+      {% endif %}
+      <form{{ attributes.addClass(classes) }}>
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto tab-content d-flex flex-column">{{ children }}</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

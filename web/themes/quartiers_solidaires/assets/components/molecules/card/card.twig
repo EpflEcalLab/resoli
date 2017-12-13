@@ -1,0 +1,68 @@
+<div class="card-list">
+
+<div class="card card-flippable">
+
+  <div class="card-front">
+    <div class="card-pill">
+      <span class="card-pill-icon">
+        {% include "@atoms/icon/icon.twig" with {icon: 'activities', circle: true} %}
+      </span>
+      <span class="card-pill-title">
+        <span class="size-date"><time datetime="2017-07-22">22 juillet 2017</time></span>
+        <span aria-label="de 13:00 à 13:30"><time datetime="13:00">13:00</time> – <time datetime="13:30">13:30</time></span>
+      </span>
+      {% include "@atoms/flag/flag.twig" with {icon: 'confirmed'} %}
+    </div>
+
+    <div class="card-body pb-1 collapse show">
+      <div class="card-icon">
+        {% include "@atoms/icon/icon.twig" with {icon: 'themes', circle: true} %}
+      </div>
+      <h4 class="card-title">Atelier Générations-Net'</h4>
+      <p class="card-text">Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire.</p>
+
+      <div class="card-actions row">
+        <div class="col-sm-6 mb-3">
+          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
+            {% include "@atoms/icon/icon.twig" with {icon: 'register'} %}
+            S'inscrire à l'événement
+          </button>
+        </div>
+        <div class="col-sm-6 mb-3">
+          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+            {% include "@atoms/icon/icon.twig" with {icon: 'user'} %}
+            Contacter l'organisateur
+          </button>
+        </div>
+        <div class="col-sm-6 mb-3">
+          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+            {% include "@atoms/icon/icon.twig" with {icon: 'meeting'} %}
+            Point de rendez-vous
+          </button>
+        </div>
+        <div class="col-sm-6 mb-3">
+          {% include "@atoms/badge/badge.twig" %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card-back card-secondary">
+    <div class="card-pill">
+      <span class="card-pill-icon">
+        {% include "@atoms/icon/icon.twig" with {icon: 'activities', circle: true} %}
+      </span>
+      <span class="card-pill-title">
+        <span>Philippe Aeberhard</span>
+      </span>
+    </div>
+    <div class="card-body pb-1">
+       <p class="card-text text-center">
+         Le responsable de cet évènement est Philippe. Vous pouvez le contacter par téléphone ou par email.
+       </p>
+    </div>
+    <button data-toggle="flip">asdf</button>
+  </div>
+</div>
+</div>

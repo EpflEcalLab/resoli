@@ -1,0 +1,24 @@
+uuid: 5e3c8a4d-87ef-4c46-b0ce-2976f293a2fd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.themes.field_icon
+    - taxonomy.vocabulary.themes
+  module:
+    - options
+id: taxonomy_term.themes.default
+targetEntityType: taxonomy_term
+bundle: themes
+mode: default
+content:
+  field_icon:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+hidden:
+  description: true
+  langcode: true

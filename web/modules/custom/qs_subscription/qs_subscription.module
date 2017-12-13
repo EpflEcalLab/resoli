@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * QS Subscription hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function qs_subscription_theme() {
+  return [
+    'qs_subscription_subscribers_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--subscription--subscribers',
+    ],
+    'qs_subscription_waiting_approval_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--subscription--waiting-approval',
+    ],
+    'qs_subscription_user_collection_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--subscription--user-collection',
+    ],
+  ];
+}

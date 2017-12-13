@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function qs_photo_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_photo_collection_by_month_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--collection-by-month',
+    ],
+    'qs_photo_collection_by_theme_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--collection-by-theme',
+    ],
+    'qs_photo_collection_by_activity_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--by-activity',
+    ],
+    'qs_photo_user_activities_collection_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--user-activities-collection',
+    ],
+    'qs_photo_user_activity_photos_collection_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--user-activity-photos-collection',
+    ],
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_photo_monthly_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--monthly',
+    ],
+    // Forms themes
+    // ---------------------------------------------------------------------.
+    'qs_photo_delete_gallery_form' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--photo--delete-gallery',
+    ],
+  ];
+}

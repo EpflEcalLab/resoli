@@ -1,0 +1,13 @@
+{% extends "@quartiers_solidaires/node/node.html.twig" %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{% block node_body %}
+<div class="container">
+  <div class="text-center my-5">
+    {{ macros.icon('theme_' ~ node.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-primary']) }}
+    <h1>{{ node.title.value }}</h1>
+  </div>
+  {{ bamboo_render_block('qs_activity_events_collection_block') }}
+</div>
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% if variables.events %}
+  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+  <h2 class="h4 mb-4">{{ 'qs.activity.next_events'|t }}</h2>
+  <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+    {% for key, event in variables.events %}
+      {% include "@quartiers_solidaires/node/card-list-item.html.twig" %}
+    {% endfor %}
+  </ul>
+{% else %}
+  <h2 class="h4 mb-4">
+    {% if node.field_contact_mail is not empty %}
+      {% set mail_link = link(node.field_contact_name.value, 'mailto:' ~ node.field_contact_mail.value, { 'target':['_blank']} )|render %}
+      {% trans %}qs.activity.no_events_please_contact {{ mail_link }}{% endtrans %}
+    {% else %}
+      {{ 'qs.activity.no_events'|t }}
+    {% endif %}
+  </h2>
+{% endif %}

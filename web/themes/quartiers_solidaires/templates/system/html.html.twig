@@ -1,0 +1,114 @@
+{#
+/**
+* @file
+* Default theme implementation to display the basic html structure of a single
+* Drupal page.
+*
+* Variables:
+* - $css: An array of CSS files for the current page.
+* - $language: (object) The language the site is being displayed in.
+*   $language->language contains its textual representation.
+*   $language->dir contains the language direction. It will either be 'ltr' or
+*   'rtl'.
+* - $rdf_namespaces: All the RDF namespace prefixes used in the HTML document.
+* - $grddl_profile: A GRDDL profile allowing agents to extract the RDF data.
+* - $head_title: A modified version of the page title, for use in the TITLE
+*   tag.
+* - $head_title_array: (array) An associative array containing the string parts
+*   that were used to generate the $head_title variable, already prepared to be
+*   output as TITLE tag. The key/value pairs may contain one or more of the
+*   following, depending on conditions:
+*   - title: The title of the current page, if any.
+*   - name: The name of the site.
+*   - slogan: The slogan of the site, if any, and if there is no title.
+* - $head: Markup for the HEAD section (including meta tags, keyword tags, and
+*   so on).
+* - $styles: Style tags necessary to import all CSS files for the page.
+* - $scripts: Script tags necessary to load the JavaScript files and settings
+*   for the page.
+* - $page_top: Initial markup from any modules that have altered the
+*   page. This variable should always be output first, before all other dynamic
+*   content.
+* - $page: The rendered page content.
+* - $page_bottom: Final closing markup from any modules that have altered the
+*   page. This variable should always be output last, after all other dynamic
+*   content.
+* - $classes String of classes that can be used to style contextually through
+*   CSS.
+*
+* @ingroup templates
+*
+* @see bootstrap_preprocess_html()
+* @see template_preprocess()
+* @see template_preprocess_html()
+* @see template_process()
+*/
+#}
+{%
+set body_classes = [
+  logged_in ? 'user-logged-in',
+  not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+  node_type ? 'page-node-type-' ~ node_type|clean_class,
+  db_offline ? 'db-offline',
+  theme.settings.navbar_position ? 'navbar-is-' ~ theme.settings.navbar_position,
+  theme.has_glyphicons ? 'has-glyphicons',
+  'menu-push',
+]
+%}
+<!DOCTYPE html>
+<!--
+    _          _   _     _        _   _
+   / \   _ __ | |_(_)___| |_ __ _| |_(_) __ _ _   _  ___
+  / _ \ | '_ \| __| / __| __/ _` | __| |/ _` | | | |/ _ \
+ / ___ \| | | | |_| \__ \ || (_| | |_| | (_| | |_| |  __/
+/_/   \_\_| |_|\__|_|___/\__\__,_|\__|_|\__, |\__,_|\___|
+                                           |_|
+-->
+<html {{ html_attributes }}>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Favicons -->
+
+<!-- Drupal assets and headers -->
+<head-placeholder token="{{ placeholder_token|raw }}">
+  <title>{{ head_title|safe_join(' | ') }}</title>
+
+  <!-- Google Tag Manager -->
+  <!-- End Google Tag Manager -->
+
+  <css-placeholder token="{{ placeholder_token|raw }}">
+  <script>
+    WebFontConfig = {google: {families: ['Open Sans:400,600']}};
+    (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+      wf.async = true;
+      s.parentNode.insertBefore(wf, s);
+    })(document);
+  </script>
+  <js-placeholder token="{{ placeholder_token|raw }}">
+
+  <!-- https://blogs.msdn.microsoft.com/ieinternals/2011/05/14/stylesheet-limits-in-internet-explorer -->
+  <!-- Bypass Limitation of IE 9 -->
+  <!--[if IE 9]>
+  <link rel="stylesheet" href="/{{ directory }}/build/css/vendors.min.css">
+  <link rel="stylesheet" href="/{{ directory }}/build/css/main.css">
+  <![endif]-->
+
+</head>
+<body{{ attributes.addClass(body_classes) }}>
+  <!-- Google Tag Manager (noscript) -->
+  <!-- End Google Tag Manager (noscript) -->
+  {{ page_top }}
+  {{ page }}
+  {{ page_bottom }}
+
+  <script type="text/javascript">
+    window.svgPath = "/{{ directory }}/build/icons/icons.svg";
+  </script>
+  <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+</body>
+</html>

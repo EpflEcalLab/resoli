@@ -1,0 +1,88 @@
+uuid: 19f5ba9e-bfc9-47ae-86b8-94f75cd5ba83
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.communities.field_community_logo
+    - image.style.thumbnail
+    - taxonomy.vocabulary.communities
+  module:
+    - field_group
+    - image
+    - path
+third_party_settings:
+  field_group:
+    group_tab:
+      children:
+        - name
+        - field_community_logo
+        - path
+      parent_name: group_general
+      weight: 8
+      format_type: tab
+      format_settings:
+        label: General
+        formatter: closed
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: General
+    group_general:
+      children:
+        - group_tab
+        - group_privileges
+      parent_name: ''
+      weight: 5
+      format_type: tabs
+      format_settings:
+        label: Tab
+        direction: vertical
+        id: ''
+        classes: ''
+      label: Tab
+    group_privileges:
+      children:
+        - field_community_organizers
+        - field_community_managers
+        - field_community_members
+      parent_name: group_general
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Privileges
+id: taxonomy_term.communities.default
+targetEntityType: taxonomy_term
+bundle: communities
+mode: default
+content:
+  field_community_logo:
+    weight: 2
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true

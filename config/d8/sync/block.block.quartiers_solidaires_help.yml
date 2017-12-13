@@ -1,0 +1,22 @@
+uuid: 901f9176-a965-417c-8f73-a0197a26b74c
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - quartiers_solidaires
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: quartiers_solidaires_help
+theme: quartiers_solidaires
+region: messages
+weight: -3
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

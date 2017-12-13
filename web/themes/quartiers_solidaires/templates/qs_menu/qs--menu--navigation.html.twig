@@ -1,0 +1,58 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set current_item = variables.current_menu_item %}
+
+<div class="navbar-container">
+  {% set classes = [
+    'btn',
+    'navbar-toggle',
+    not current_item ? 'navbar-toggle-simple',
+    'btn-outline-primary',
+  ] %}
+  <button class="{{ classes|join(' ') }}" title="Afficher ou cacher le menu">
+    {{ macros.icon('wheel') }}
+  </button>
+
+  <div class="navbar-current">
+    <div class="navbar-filters">
+      {% if current_item %}
+        <button class="btn btn-primary btn-icon">
+          {{ macros.icon(current_item.icon) }}
+          <span class="sr-only">{{ 'qs.menu.current_page'|t }}</span>
+          {{ current_item.label }}
+        </button>
+
+        {% for key, link in current_item.links %}
+          {% set active = key == variables.route_name %}
+          {% set classes = [
+            'btn btn-outline-primary navbar-filter',
+            active ? 'active',
+          ] %}
+          <a href="{{ link.url }}" class="{{ classes|join(' ') }}">
+            <span class="sr-only">{{ active ? 'qs.menu.sorted_by'|t : 'qs.menu.sort_by'|t }}</span>
+            {{ link.label }}
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <nav class="navbar">
+    {% for section in variables.menu %}
+      <a href="{{ section.url }}" class="nav-item{{ section.current ? ' active' }}">
+        {{ macros.icon(section.icon ~ '-big') }}
+        {{ section.label }}
+      </a>
+    {% endfor %}
+  </nav>
+
+  <div class="navbar-settings">
+    {% for section in variables.settings %}
+      <a href="{{ section.url }}" class="btn btn-outline-primary btn-icon mx-2{{ section.current ? ' active' }}">
+        {{ macros.icon(section.icon) }}
+        {{ section.label }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="navbar-overlay"></div>
+</div>

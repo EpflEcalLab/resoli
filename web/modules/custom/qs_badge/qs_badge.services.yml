@@ -1,0 +1,4 @@
+services:
+  qs_badge.badge_manager:
+    class: Drupal\qs_badge\Service\BadgeManager
+    arguments: ['@current_user', '@database']

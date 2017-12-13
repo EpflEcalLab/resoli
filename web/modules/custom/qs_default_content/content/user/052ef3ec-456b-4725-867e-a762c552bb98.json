@@ -1,0 +1,73 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/18?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 18
+        }
+    ],
+    "uuid": [
+        {
+            "value": "052ef3ec-456b-4725-867e-a762c552bb98"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "member+lausanne+declined+organizer+lausanne@antistatique.net"
+        }
+    ],
+    "mail": [
+      {
+        "value": "member+lausanne+declined+organizer+lausanne@antistatique.net"
+      }
+    ],
+    "created": [
+        {
+            "value": 1504603679
+        }
+    ],
+    "changed": [
+        {
+            "value": 1504603679,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Paul"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Tergeist"
+        }
+    ],
+    "pass": [
+        {
+            "value": "member+lausanne+declined+organizer+lausanne"
+        }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

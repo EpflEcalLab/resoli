@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{% set labelIcon = element['#title']|split('|') %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{% if labelIcon|length > 1 and attributes.variant == 'button_theme' %}
+  <label class="btn checkbox {{ attributes.checked ? 'active' }}">
+    {{ macros.icon("theme_#{labelIcon[1]}_o") }}
+    <input{{ attributes }} />
+    {{ labelIcon|first }}
+  </label>
+{% else %}
+  {% set classes = [
+    'btn',
+    labelIcon[2] ? 'mt-5 btn-' ~ labelIcon[2] : 'btn-outline-invert',
+    'shadow-to-bottom',
+    'btn-outline-' ~ attributes.color|default('blue'),
+    labelIcon|length > 1 ? 'btn-icon',
+    attributes.checked ? 'active',
+    not attributes.no_block ? 'btn-block',
+    element['#error'] ? 'is-invalid'
+  ] %}
+  <label class="{{ classes|join(' ') }}" tabindex="0">
+    {% if labelIcon|length > 1 %}
+      {{ macros.icon("#{labelIcon[1]}") }}
+    {% endif %}
+    <input{{ attributes }} />
+    {{ labelIcon|first }}
+  </label>
+{% endif %}
+
+

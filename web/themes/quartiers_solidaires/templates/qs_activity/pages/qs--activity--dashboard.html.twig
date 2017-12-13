@@ -1,0 +1,60 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+<div>
+
+  <div class="text-center mt-3 mb-5">
+    {{ macros.icon('theme_' ~ variables.activity.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-white']) }}
+    <h1>{{ variables.activity.title.value }}</h1>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-sm-6 col-lg-4 mx-auto text-center">
+      <ul class="list-unstyled mt-3 mx-auto">
+        <li>
+          {# Edit info Button #}
+          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.info', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('pencil') }}
+            {{ 'qs.activity.edit_info'|t }}
+          </a>
+        </li>
+        <li>
+          {# Edit visibility Button #}
+          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.visibility', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('pencil') }}
+            {{ 'qs.activity.edit_visibility'|t }}
+          </a>
+        </li>
+        <li>
+          {# Edit default values Button #}
+          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.defaults', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('pencil') }}
+            {{ 'qs.activity.edit_default_values'|t }}
+          </a>
+        </li>
+
+        <li>
+          {# Manage members Button #}
+          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.members', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('happy') }}
+            {{ 'qs.activity.members'|t }}
+          </a>
+        </li>
+
+        <li class="my-5">
+          {# Add event Button #}
+          <a class="btn btn-block btn-secondary btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.events.form.add', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('plus') }}
+            {{ 'qs.activity.add_event'|t }}
+          </a>
+        </li>
+
+        <li>
+          {# Delete Button #}
+          <a class="btn btn-block btn-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
+            {{ macros.icon('trash') }}
+            {{ 'qs.activity.delete'|t }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

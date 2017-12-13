@@ -1,0 +1,22 @@
+uuid: fad989cb-6e66-48f5-a884-a9e7f4b904a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - quartiers_solidaires
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: quartiers_solidaires_messages
+theme: quartiers_solidaires
+region: messages
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

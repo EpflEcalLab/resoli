@@ -1,0 +1,95 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="text-center my-5">
+    <h1>{% trans %}qs_subscription.waiting_approval.title {{ variables.event.title.value }} {{ variables.activity.title.value}}{% endtrans %}</h1>
+    <h2>{{ variables.community.name.value }}</h2>
+  </div>
+
+  {% if variables.subscriptions %}
+    {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+    <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
+    {% for subscription in variables.subscriptions %}
+      <li class="card card-list-item" id="card-{{ loop.index0 }}">
+        <a
+          data-toggle="collapse"
+          data-parent="#users-accordion"
+          href="#collapse-{{ loop.index0 }}"
+          class="card-pill collapsed"
+          role="tab"
+          aria-expanded="false"
+          aria-controls="collapse-{{ loop.index0 }}"
+        >
+          <span class="card-pill-icon">
+              {{ macros.icon('user') }}
+            </span>
+          <span class="card-pill-title">
+              {{ subscription.user.entity.field_firstname.value }} {{ subscription.user.entity.field_lastname.value }}
+          </span>
+          <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+            {{ macros.icon('look') }}
+            <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
+          </span>
+        </a>
+
+        <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
+          <div class="card-body pb-0 text-center">
+
+            <h4 class="card-title mb-0">{{ subscription.user.entity.field_firstname.value }} {{ subscription.user.entity.field_lastname.value }}</h4>
+            <h5 class="card-title mt-1">{{ subscription.user.entity.mail.value }}</h5>
+
+            <div class="card-actions row">
+              <div class="col-sm-6 mb-3">
+                <form action="{{ path('qs_subscription.confirm', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                  <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" type="submit" value="{{ 'qs.confirmed'|t }}">
+                    {{ macros.icon('check') }}
+                    {{ 'qs.confirmed'|t }}
+                  </button>
+                </form>
+              </div>
+              <div class="col-sm-6 mb-3">
+                <form action="{{ path('qs_subscription.decline', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" type="submit" value="{{ 'qs.reject'|t }}">
+                    {{ macros.icon('trash') }}
+                    {{ 'qs.reject'|t }}
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="card-actions d-flex justify-content-center mt-4 mb-3">
+              <a href="mailto:{{ subscription.user.entity.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+                {{ macros.icon('mail') }}
+                {% trans %}qs.contact {{ subscription.user.entity.field_firstname.value }}{% endtrans %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% trans %}qs_subscription.waiting_approval.empty{% endtrans %}</p>
+  {% endif %}
+
+  {{ variables.pager }}
+
+  <div class="container">
+    <div class="row mb-3 mt-5">
+      <div class="col-6">
+        {# Go to Subscribers #}
+        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
+          {{ macros.icon('register') }}
+          {{ 'qs.event.subscriptions.subscribers'|t }}
+        </a>
+      </div>
+      <div class="col-6">
+        {# Go to Event Dashboard #}
+        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.dashboard', {event: variables.event.nid.value}) }}">
+          {{ macros.icon('checklist') }}
+          {{ 'qs.previous.to_event_dashboard'|t }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

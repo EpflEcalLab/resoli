@@ -1,0 +1,73 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/6?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 6
+        }
+    ],
+    "uuid": [
+        {
+            "value": "6a14afb5-35ea-4180-bba1-666b7f6860c9"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "organizer+lausanne@antistatique.net"
+        }
+    ],
+    "mail": [
+      {
+        "value": "organizer+lausanne@antistatique.net"
+      }
+    ],
+    "created": [
+        {
+            "value": 1502813391
+        }
+    ],
+    "changed": [
+        {
+            "value": 1502813391,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Gerard"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Mensoif"
+        }
+    ],
+    "pass": [
+        {
+            "value": "organizer+lausanne"
+        }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

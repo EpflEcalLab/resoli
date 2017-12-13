@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+// Fonts
+.wf-active body {
+  font-family: $font-family-base-webfonts;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.link-underline {
+  text-decoration: underline;
+
+  @include hover {
+    text-decoration: underline;
+  }
+}
+
+.lead {
+  @include media-breakpoint-down(sm) {
+    font-size: $lead-font-size * 0.75;
+  }
+}

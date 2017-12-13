@@ -1,0 +1,45 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="text-center my-5">
+    {% if variables.user %}
+      <h1>{% trans %}qs.subscription.user.collection.title {{ variables.user.field_firstname.value }} {{ variables.user.field_lastname.value }} {{ variables.user.mail.value }}{% endtrans %}</h1>
+    {% else %}
+      <h1>{% trans %}qs.subscription.user.collection.title{% endtrans %}</h1>
+    {% endif %}
+  </div>
+
+  {% if variables.events %}
+    <ul class="card-list" data-children=".card-list-item">
+      {% for key, event in variables.events %}
+      <li class="card card-list-item" id="card{{ event.nid.value }}">
+        <a
+          href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}"
+          class="card-pill"
+          id="event{{ activity.nid.value }}"
+        >
+          <span class="card-pill-icon">
+            {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
+          </span>
+          <span class="card-pill-title">{{ event.title.value }}</span>
+
+          {# Subscriptions Badges #}
+          {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
+              {{ macros.badge('warning', 'wait', 'flag-subscription-wait') }}
+          {% endif %}
+          {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
+            {{ macros.badge('info', 'check', 'flag-subscription-confirmed') }}
+          {% endif %}
+
+          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.activity.more'|t }}">
+            {{ macros.icon('look') }}
+            <span class="sr-only d-none d-md-inline">{{ 'qs.event.more'|t }}</span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-center">{{ 'qs.subscription.user.collection.empty'|t }}</p>
+  {% endif %}
+</div>

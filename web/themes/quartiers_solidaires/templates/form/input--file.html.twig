@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="form-control-file text-center">
+  <input{{ attributes }}>
+  <label for="{{ attributes.id }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
+    {{ macros.icon('plus') }}
+    {{ 'qs.form.input.upload'|t }}
+  </label>
+</div>
+<div class="form-control-files-list mt-3">
+  {# here goes the list of files through some JS #}
+</div>

@@ -1,0 +1,25 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="fullpage-wrapper py-4">
+
+  <div class="container text-center mt-5 mb-5">
+    {{ macros.icon('wait-lg', ['icon-xl']) }}
+  </div>
+
+  <div class="container mt-5 mb-auto text-center">
+    <p class="lead">{% trans %}qs.auth.pass.confirmation.thanks{% endtrans %}</p>
+    <p class="lead">{% trans %}qs.auth.pass.confirmation.description{% endtrans %}</p>
+  </div>
+
+  <div class="container text-center">
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_auth.login') }}">
+          {% trans %}qs_auth.login{% endtrans %}
+            {{ macros.icon('plus') }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+

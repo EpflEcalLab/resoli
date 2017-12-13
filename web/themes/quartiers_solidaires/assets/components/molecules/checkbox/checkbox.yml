@@ -1,0 +1,6 @@
+title: Checkbox
+name: checkbox
+wrapper: bg-primary
+variants:
+  - toggle
+  - image

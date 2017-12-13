@@ -1,0 +1,124 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="text-center my-5">
+    {% if variables.user %}
+      <h1>
+        {{ 'qs.activity.user.collection.title @name @email'|t({
+          '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
+          '@email': variables.user.mail.value ? variables.user.mail.value : ''
+        }) }}
+      </h1>
+    {% else %}
+      <h1>{% trans %}qs.activity.user.collection.title{% endtrans %}</h1>
+    {% endif %}
+  </div>
+
+  {% if variables.activities %}
+  <ul class="card-list" id="activities-accordion" role="tablist" data-children=".card-list-item">
+    {% for activity in variables.activities %}
+      <li class="card card-list-item" id="card{{ activity.nid.value }}">
+        <a
+          data-toggle="collapse"
+          data-parent="#activities-accordion"
+          href="#collapse-{{ activity.nid.value }}"
+          class="card-pill collapsed"
+          role="tab"
+          aria-expanded="false"
+          aria-controls="collapse-{{ activity.nid.value }}"
+          id="activity{{ activity.nid.value }}"
+        >
+          <span class="card-pill-icon">
+            {{ macros.icon('theme_' ~ activity.field_theme.entity.field_icon.value) }}
+          </span>
+          <span class="card-pill-title">{{ activity.title.value }}</span>
+
+          {# Privilege Badges #}
+          {% if activity.nid.value in variables.badges.privileges|keys %}
+            {% set privilege = variables.badges.privileges[activity.nid.value]|last %}
+            {% if privilege == 'activity_members' %}
+              {{ macros.badge('info', 'happy', 'flag-privilege-members', 'qs.roles.activity_member'|t) }}
+            {% endif %}
+
+            {% if privilege == 'activity_maintainers' %}
+              {{ macros.badge('warning', 'happy', 'flag-privilege-maintainers', 'qs.roles.activity_maintainer'|t, true) }}
+            {% endif %}
+
+            {% if privilege == 'activity_organizers' %}
+              {{ macros.badge('danger', 'happy', 'flag-privilege-organizers', 'qs.roles.activity_organizer'|t, true) }}
+            {% endif %}
+          {% endif %}
+
+          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.activity.more'|t }}">
+            {{ macros.icon('look') }}
+            <span class="sr-only d-none d-md-inline">{{ 'qs.activity.more'|t }}</span>
+          </span>
+        </a>
+
+        <div class="collapse" id="collapse-{{ activity.nid.value }}" role="tabpanel">
+          <div class="card-body">
+            <div class="card-text text-center">
+              <p>
+                {% if privilege == 'activity_members' %}
+                  {% set roles = 'qs.roles.activity_member'|t %}
+                {% endif %}
+                {% if privilege == 'activity_maintainers' %}
+                  {% set roles = 'qs.roles.activity_maintainer'|t %}
+                {% endif %}
+                {% if privilege == 'activity_organizers' %}
+                  {% set roles = 'qs.roles.activity_organizer'|t %}
+                {% endif %}
+
+                {{ 'qs.activity.user.you_are @role'|t({
+                  '@role': roles
+                }) }}</p>
+            </div>
+            <div class="card-actions d-flex justify-content-center">
+              <a href="{{ path('entity.node.canonical', {node: activity.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
+                {{ macros.icon('activities') }}
+                {{ 'qs.activity.goto'|t }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <div class="text-center">
+      <div class="d-flex justify-content-center mb-4">
+        {{ macros.badge('info', 'happy', 'flag-privilege-members flag-lg', 'qs.roles.activity_member'|t) }}
+        {{ macros.badge('warning', 'happy', 'flag-subscription-maintainers flag-lg', 'qs.roles.activity_maintainer'|t, true) }}
+      </div>
+      <p>
+        {% set member = 'qs.roles.activity_member'|t %}
+        {% set maintainer = 'qs.roles.activity_maintainer'|t %}
+        {% trans %}
+          qs.activity.user.collection.empty <span class="text-info">{{ member }}</span> <span class="text-warning">{{ maintainer }}</span>
+        {% endtrans %}
+      </p>
+    </div>
+  {% endif %}
+
+  {# Button to add activities #}
+  {% if variables.community_has_write_access and variables.community %}
+    <div class="modal-footer justify-content-center sticky-bottom">
+      <a class="btn btn-outline-invert btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
+        {{ macros.icon('plus') }}
+        {% trans %}qs_activity.floating.add.activity{% endtrans %}
+      </a>
+    </div>
+  {% else %}
+    <div class="text-center mt-5">
+      <div class="d-flex justify-content-center mb-4">
+        {{ macros.badge('danger', 'happy', 'flag-privilege-organizers flag-lg p-1', 'qs.roles.activity_organizer'|t, true) }}
+      </div>
+      <p>
+        {% set organizer = 'qs.roles.activity_organizer'|t %}
+        {% trans %}
+        qs.activity.become.activity.organizer <span class="text-danger">{{ organizer }}</span>
+        {% endtrans %}
+      </p>
+    </div>
+  {% endif %}
+</div>

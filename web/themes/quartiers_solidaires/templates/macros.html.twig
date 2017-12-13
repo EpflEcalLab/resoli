@@ -1,0 +1,28 @@
+{% macro icon(icon, classes) %}
+{% spaceless %}
+<span class="icon {{ classes|join(' ') }}" aria-hidden="true">
+  <svg>
+    <use xlink:href="#icon-{{ icon|default('calendar') }}"></use>
+  </svg>
+</span>
+{% endspaceless %}
+{% endmacro %}
+
+{% macro badge(flag, icon, classes, title, shield) %}
+{% spaceless %}
+{% set shield = shield ?? false %}
+{# The `classes` is used by Behat tests to identify flags #}
+{% set classes = [
+  'flag',
+  'flag-' ~ flag,
+  shield ? 'flag-shield',
+  classes,
+] %}
+<div class="{{ classes|join(' ') }}" title="{{ title }}">
+  <svg class="icon " preserveAspectRatio="xMidYMid" aria-hidden="true">
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ shield ? 'shield' : 'flag' }}"></use>
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ icon|default('confirmed') }}"></use>
+  </svg>
+</div>
+{% endspaceless %}
+{% endmacro %}

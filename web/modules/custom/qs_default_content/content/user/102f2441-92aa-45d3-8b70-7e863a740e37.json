@@ -1,0 +1,73 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/7?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 7
+        }
+    ],
+    "uuid": [
+        {
+            "value": "102f2441-92aa-45d3-8b70-7e863a740e37"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "nobody@antistatique.net"
+        }
+    ],
+    "mail": [
+      {
+        "value": "nobody@antistatique.net"
+      }
+    ],
+    "created": [
+        {
+            "value": 1503056940
+        }
+    ],
+    "changed": [
+        {
+            "value": 1503056940,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Axel"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Aire"
+        }
+    ],
+    "pass": [
+      {
+          "value": "nobody"
+      }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

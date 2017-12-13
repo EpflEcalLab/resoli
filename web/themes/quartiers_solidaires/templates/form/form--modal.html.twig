@@ -1,0 +1,17 @@
+<form{{ attributes }}>
+  <div class="container">
+    {% if attributes.icon %}
+      {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+      <div class="text-center my-5">
+        {{ macros.icon(attributes.icon, ['icon-xl']) }}
+      </div>
+    {% endif %}
+    {% if attributes.title %}
+      <h1 class="text-center h4 mt-3">{{ attributes.title|raw }}</h1>
+    {% endif %}
+    {% if attributes.description %}
+      <p class="text-center mb-4">{{ attributes.description }}</p>
+    {% endif %}
+    {{ children }}
+  </div>
+</form>

@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function qs_activity_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_activity_collection_by_theme_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--collection-by-theme',
+    ],
+    'qs_activity_collection_by_date_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--collection-by-date',
+    ],
+    'qs_activity_user_collection_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--user-collection',
+    ],
+    'qs_activity_dashboard_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--dashboard',
+    ],
+    'qs_activity_event_dashboard_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--event-dashboard',
+    ],
+    'qs_activity_members_page' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--members',
+    ],
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_activity_events_collection_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--events-collection',
+    ],
+    'qs_activity_floating_actions_buttons_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--activity--floating-actions-buttons',
+    ],
+
+  ];
+}

@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Contains qs_default_content.install.
+ */
+
+ // Includes.
+require_once 'inc/default_privileges.inc';
+require_once 'inc/default_events.inc';
+require_once 'inc/default_subscriptions.inc';
+require_once 'inc/default_photos.inc';
+
+/**
+ * Implements hook_install().
+ *
+ * Create some approval (pending, accepted, canceled) for tests.
+ */
+function qs_default_content_install() {
+  // @var \Drupal\Core\Entity\EntityTypeManagerInterface
+  $entityManager = \Drupal::service('entity_type.manager');
+  $userStorage = $entityManager->getStorage('user');
+
+  // Update the timezone of the admin user.
+  $admin = $userStorage->load(1);
+  $admin->timezone = 'Europe/Zurich';
+  $admin->save();
+
+  qs_default_content_privileges();
+}
+
+/**
+ * Implements hook_modules_installed().
+ *
+ * Update some content (events) for tests.
+ * Must run after default_content has imported original content.
+ */
+function qs_default_content_modules_installed($modules) {
+  qs_default_content_events();
+  qs_default_content_subscriptions();
+  qs_default_content_photos();
+}

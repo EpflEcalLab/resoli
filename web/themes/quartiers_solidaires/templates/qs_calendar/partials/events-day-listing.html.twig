@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <ul class="card-list">
+
+    <li class="sticky-top bg-white mb-2 py-2 row">
+      <h2 class="col-12 h5 mb-0">{{ variables.current_day|bamboo_i18n_format_date('custom', 'j F Y') }}</h2>
+    </li>
+    {% for key, event in variables.events %}
+      <li class="card card-list-simple-item ">
+        {% embed "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+          {% block card_pill_time %}
+            <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+              {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}
+            </time>
+            –
+            <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+              {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}
+            </time>
+          {% endblock %}
+        {% endembed  %}
+      </li>
+    {% else %}
+      <li>{{ 'qs.calendar.events.collection_empty'|t }}</li>
+    {% endfor %}
+  </ul>
+</div>

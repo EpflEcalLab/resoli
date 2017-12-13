@@ -1,0 +1,109 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="container">
+  <div class="text-center my-5">
+    <h1>{% trans %}qs_community.members.title{% endtrans %}</h1>
+    <h2>{{ variables.community.name.value }}</h2>
+  </div>
+
+  {% if variables.members %}
+    <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
+    {% for member in variables.members %}
+      <li class="card card-list-item" id="card-{{ loop.index0 }}">
+        <a
+          data-toggle="collapse"
+          data-parent="#users-accordion"
+          href="#collapse-{{ loop.index0 }}"
+          class="card-pill collapsed"
+          role="tab"
+          aria-expanded="false"
+          aria-controls="collapse-{{ loop.index0 }}"
+        >
+          <span class="card-pill-icon">
+              {{ macros.icon('user') }}
+            </span>
+          <span class="card-pill-title">
+              {{ member.field_firstname.value }} {{ member.field_lastname.value }}
+          </span>
+          <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+            {{ macros.icon('look') }}
+            <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
+          </span>
+        </a>
+
+        <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
+          <div class="card-body pb-0 text-center">
+
+            <h4 class="card-title mb-0">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
+            <h5 class="card-title mt-1">{{ member.mail.value }}</h5>
+
+            <div class="card-text d-flex justify-content-center flex-wrap">
+              <form id="privilege-{{ loop.index }}" data-ajax="true" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
+                <input type="hidden" name="user" value="{{ member.uid.value }}">
+                <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
+
+                <div class="d-flex flex-wrap justify-content-center">
+                  <div class="btn-group mb-3 mx-2 js-radio-group" role="group" aria-label="{% trans %}qs_community.members.roles{% endtrans %}" data-toggle="buttons">
+                    <label class="btn btn-white btn-outline-invert {% if 'community_members' == member.privileges|last %}active{% endif %}">
+                      <input title="{{ 'qs.roles.community_member'|t }}" variant="button" type="radio" data-submit name="privileges" value="community_members" {% if 'community_members' == member.privileges|last %}checked{% endif %} class="form-radio">
+                      {{ 'qs.roles.community_member'|t }}
+                    </label>
+
+                    <label class="btn btn-white btn-outline-invert {% if 'community_organizers' == member.privileges|last %}active{% endif %}">
+                      <input title="{{ 'qs.roles.community_organizer'|t }}" variant="button" type="radio" data-submit name="privileges" value="community_members|community_organizers" {% if 'community_organizers' == member.privileges|last %}checked{% endif %} class="form-radio">
+                      {{ 'qs.roles.community_organizer'|t }}
+                    </label>
+
+                    <label class="btn btn-white btn-outline-invert {% if 'community_managers' == member.privileges|last %}active{% endif %}">
+                      <input title="{{ 'qs.roles.community_manager'|t }}" variant="button" type="radio" data-submit name="privileges" value="community_members|community_organizers|community_managers" {% if 'community_managers' == member.privileges|last %}checked{% endif %} class="form-radio">
+                      {{ 'qs.roles.community_manager'|t }}
+                    </label>
+                  </div>
+                </div>
+              </form>
+              <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"
+                method="post">
+                <input type="hidden" name="user" value="{{ member.uid.value }}">
+                <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
+                <button class="btn mb-3 mx-2 btn-white btn-outline-invert shadow-to-bottom" type="submit" value="{{ 'qs.roles.community_none'|t }}">
+                  {{ 'qs.roles.community_none'|t }}
+                </button>
+              </form>
+            </div>
+
+            <div class="card-actions d-flex justify-content-center mb-3">
+              <a href="mailto:{{ member.mail.value }}" class="btn btn-outline-invert btn-icon btn-white shadow-to-bottom">
+                {{ macros.icon('mail') }}
+                {% trans %}qs.contact {{ member.field_firstname.value }}{% endtrans %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>{% trans %}qs_community.members.empty{% endtrans %}</p>
+  {% endif %}
+
+  {{ variables.pager }}
+
+  <div class="container">
+    <div class="row mb-3 mt-5">
+      <div class="col-6">
+        {# Go to Waiting Approval #}
+        <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.waiting_approval', {community: variables.community.tid.value}) }}">
+          {{ macros.icon('wait') }}
+          {{ 'qs_community.dashboard.waiting_approval'|t }}
+        </a>
+      </div>
+      <div class="col-6">
+        {# Go to Community Dashboard #}
+        <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
+          {{ macros.icon('checklist') }}
+          {{ 'qs.previous.to_community_dashboard'|t }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

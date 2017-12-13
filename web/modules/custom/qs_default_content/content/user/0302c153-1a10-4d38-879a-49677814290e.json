@@ -1,0 +1,70 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/20?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 20
+        }
+    ],
+    "uuid": [
+        {
+            "value": "0302c153-1a10-4d38-879a-49677814290e"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "declined+all@antistatique.net"
+        }
+    ],
+    "created": [
+        {
+            "value": "2017-12-05T15:54:18+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2017-12-05T15:54:18+00:00",
+            "lang": "fr",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Samira"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Bien"
+        }
+    ],
+    "pass": [
+      {
+          "value": "declined+all"
+      }
+    ],
+    "status": [
+      {
+          "value": 1
+      }
+    ]
+}

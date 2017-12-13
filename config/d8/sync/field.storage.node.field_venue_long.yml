@@ -1,0 +1,20 @@
+uuid: 3fee2a10-fd5d-4243-8337-5b568159a7df
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_venue_long
+field_name: field_venue_long
+entity_type: node
+type: decimal
+settings:
+  precision: 10
+  scale: 4
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

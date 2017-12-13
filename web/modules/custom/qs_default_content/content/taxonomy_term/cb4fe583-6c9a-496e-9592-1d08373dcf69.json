@@ -1,0 +1,59 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/taxonomy\/term\/16?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
+        }
+    },
+    "tid": [
+        {
+            "value": 16
+        }
+    ],
+    "uuid": [
+        {
+            "value": "cb4fe583-6c9a-496e-9592-1d08373dcf69"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "themes"
+        }
+    ],
+    "name": [
+        {
+            "value": "Mouvements & Bien-\u00eatre",
+            "lang": "zxx"
+        }
+    ],
+    "weight": [
+        {
+            "value": 12
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507560008,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "field_icon": [
+        {
+            "value": "mouvementsetbienetre"
+        }
+    ]
+}

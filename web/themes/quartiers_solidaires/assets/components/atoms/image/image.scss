@@ -1,0 +1,50 @@
+@charset 'utf-8';
+
+.img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: ($grid-gutter-width / 2);
+}
+
+.img-placeholder {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  background-color: darken($teal-100, 10%);
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.img-bordered {
+  border: $border-width solid $white;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+}
+
+// Photoswipe
+/////////////
+
+.gallery-item {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+
+  .card {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  figcaption {
+    display: none;
+  }
+}

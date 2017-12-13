@@ -1,0 +1,73 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/9?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 9
+        }
+    ],
+    "uuid": [
+        {
+            "value": "0cebf08f-ec90-4684-b025-d0b4e39b4089"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "member+fribourg+member+lausanne@antistatique.net"
+        }
+    ],
+    "mail": [
+        {
+            "value": "member+fribourg+member+lausanne@antistatique.net"
+        }
+    ],
+    "created": [
+        {
+            "value": 1503057354
+        }
+    ],
+    "changed": [
+        {
+            "value": 1503057354,
+            "lang": "fr"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Larry"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Bambelle"
+        }
+    ],
+    "pass": [
+      {
+          "value": "member+fribourg+member+lausanne"
+      }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

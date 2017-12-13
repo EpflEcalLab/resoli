@@ -1,0 +1,39 @@
+uuid: 60cdde6d-a01c-4f6b-9f2d-2dcf66be5a1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.event.body
+    - node.type.event
+  module:
+    - text
+    - user
+id: node.event.teaser
+targetEntityType: node
+bundle: event
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_activity: true
+  field_contact_mail: true
+  field_contact_name: true
+  field_contact_phone: true
+  field_contribution: true
+  field_end_at: true
+  field_start_at: true
+  field_venue: true
+  field_venue_lat: true
+  field_venue_long: true
+  langcode: true

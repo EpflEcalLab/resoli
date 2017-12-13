@@ -1,0 +1,28 @@
+uuid: 30178187-b601-4e2b-abab-d3f7bbe9b61a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_activity
+    - node.type.activity
+    - node.type.event
+id: node.event.field_activity
+field_name: field_activity
+entity_type: node
+bundle: event
+label: Activity
+description: 'The parent activity this event belongs to.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      activity: activity
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

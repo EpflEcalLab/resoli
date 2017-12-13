@@ -1,0 +1,59 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/taxonomy\/term\/4?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
+        }
+    },
+    "tid": [
+        {
+            "value": 4
+        }
+    ],
+    "uuid": [
+        {
+            "value": "e3a76021-c477-4762-88be-c6d5660c7eab"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "themes"
+        }
+    ],
+    "name": [
+        {
+            "value": "Activit\u00e9s Cr\u00e9atrices",
+            "lang": "zxx"
+        }
+    ],
+    "weight": [
+        {
+            "value": 0
+        }
+    ],
+    "changed": [
+        {
+            "value": 1507559803,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "field_icon": [
+        {
+            "value": "activitescreatrices"
+        }
+    ]
+}

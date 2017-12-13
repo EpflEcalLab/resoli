@@ -1,0 +1,14 @@
+uuid: c10fed5f-6e09-4e8a-bdb3-5e1a91fdf098
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.beginner
+  module:
+    - user
+id: user_remove_role_action.beginner
+label: 'Retirer le rôle Beginner aux utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: beginner

@@ -1,0 +1,82 @@
+@charset 'utf-8';
+
+// Max of 5 items in button group
+$max-items: 5;
+
+.btn-group {
+  max-width: 100%;
+  z-index: 1;
+
+  @include after-shadow(theme-color("secondary"));
+
+  .btn {
+    margin-bottom: 0;
+    padding-right: $input-btn-padding-x * 1.5;
+    padding-left: $input-btn-padding-x * 1.5;
+
+    // &:not(:focus) {
+    //   @include hover {
+    //     box-shadow: none;
+    //   }
+    // }
+
+    @include hover-focus {
+      z-index: initial;
+    }
+
+    + .btn {
+      margin-left: ($input-btn-padding-y * -2 - $input-btn-line-height * $font-size-base);
+    }
+
+    // Set z-index, based on max items
+    @for $i from 1 through $max-items {
+      &:nth-child(#{$i}) {
+        z-index: #{$max-items + $i};
+
+        @include hover-focus {
+          z-index: #{$max-items + $i};
+        }
+      }
+    }
+
+    &.active {
+      @include plain-hover-focus {
+        z-index: #{$max-items + 10};
+      }
+    }
+  }
+
+  @each $color, $value in $theme-colors {
+    &.btn-group-#{$color} {
+      @include after-shadow($value);
+    }
+  }
+
+  [class*=bg-] & {
+    z-index: 1;
+
+    @include after-shadow($body-color);
+  }
+}
+
+.btn-group-lg {
+  .btn + .btn {
+    margin-left: ($input-btn-padding-y-lg * -2 - $input-btn-line-height-lg * $font-size-lg);
+  }
+}
+
+// Override some Bootstrap 4
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  @include border-radius($btn-border-radius);
+}
+
+.btn-group > .btn:first-child {
+  &:not(:last-child):not(.dropdown-toggle) {
+    @include border-right-radius($btn-border-radius);
+  }
+}
+
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .dropdown-toggle:not(:first-child) {
+  @include border-left-radius($btn-border-radius);
+}

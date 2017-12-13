@@ -1,0 +1,33 @@
+uuid: dba2c5b3-3cdd-4c77-b576-6c7c01c5039a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.communities.field_community_logo
+    - taxonomy.vocabulary.communities
+  module:
+    - image
+    - text
+id: taxonomy_term.communities.default
+targetEntityType: taxonomy_term
+bundle: communities
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_community_logo:
+    weight: 4
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  langcode: true

@@ -1,0 +1,273 @@
+@charset 'utf-8';
+
+// Placeholders
+
+// (hack with a mixin to include in media query)
+@mixin btn-circle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  min-height: 40px;
+  padding: $input-btn-padding-y / 2;
+  line-height: 0;
+}
+
+// Button
+/////////
+
+.btn {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @include hover {
+    cursor: pointer;
+  }
+
+  @include media-breakpoint-up(md) {
+    min-width: 160px;
+  }
+
+  &:not([disabled]):not(.disabled):active {
+    transform: scale(0.95);
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    border-color: gray('100');
+    color: color('dark');
+    opacity: 1;
+
+    @include hover {
+      box-shadow: none;
+      cursor: default;
+      color: inherit;
+    }
+  }
+}
+
+.btn-fluid {
+  min-width: auto;
+}
+
+// Themed Buttons
+/////////////////
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    color: $body-color;
+
+    @include hover {
+      color: $body-color;
+      background-color: $white;
+
+      @include floating-shadow($value);
+    }
+
+    @include button-active($color);
+  }
+
+  @if ($color != 'primary') {
+    .btn-#{$color},
+    .btn-outline-#{$color} {
+
+      // Handle shadows on elements
+      @include drop-shadows($value, true);
+
+      &.shadow-floating {
+        @include floating-shadow($value, true);
+      }
+
+      // re-add focus styles from Bootstrap button mixin
+      &:focus,
+      &.focus {
+        box-shadow: 0 0 0 $input-btn-focus-width rgba($value, 0.5);
+      }
+    }
+  }
+
+  .bg-#{$color} {
+    [class*=btn-outline-] {
+      @include drop-shadows(color('dark'), true);
+
+      &:not([disabled]):not(.disabled):active,
+      &:not([disabled]):not(.disabled).active {
+        @include drop-shadows(color('dark'));
+      }
+    }
+  }
+
+  [class*=bg-] {
+    .btn-outline-#{$color} {
+      &:not([disabled]):not(.disabled):active {
+        .icon svg {
+          color: $value;
+        }
+      }
+    }
+
+    &:not(.bg-white) [class*=btn-] {
+      border-color: $white;
+    }
+  }
+}
+
+// Button Icon
+//////////////
+
+// Also used for badges
+%btn-icon {
+  position: relative;
+  padding-right: $input-btn-padding-x;
+  padding-left: $input-btn-padding-x * 1.4;
+
+  // icon is inheriting color from its parent,
+  // please use `fill="currentColor"` in your svg file
+  .icon {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin: 0 ($input-btn-padding-x / 3) 0 ($input-btn-padding-x / 5);
+    transform: translateY(-50%);
+
+    svg {
+      @include transition($btn-transition);
+    }
+  }
+}
+
+.btn-icon {
+  @extend %btn-icon;
+
+  @each $color, $value in $theme-colors {
+    &.btn-outline-#{$color} {
+      .icon svg {
+        color: $value;
+      }
+
+      &:not([disabled]):not(.disabled):active,
+      &:not([disabled]):not(.disabled).active {
+        .icon svg {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &.btn-icon-to-circle {
+    @include media-breakpoint-down(sm) {
+      @include btn-circle;
+
+      .icon {
+        position: static;
+        margin: 0;
+        transform: none;
+
+        svg {
+          color: $body-color;
+        }
+      }
+    }
+  }
+}
+
+.btn-icon-right {
+  padding-right: $input-btn-padding-x * 1.4;
+  padding-left: $input-btn-padding-x * 1.2;
+
+  .icon {
+    margin: 0 ($input-btn-padding-x / 5) 0 ($input-btn-padding-x / 3);
+    left: auto;
+    right: 0;
+  }
+}
+
+// Button Circle
+////////////////
+
+.btn-circle {
+  @include btn-circle;
+  @include icon-size($font-size-base * 1.25);
+}
+
+// Button Invert
+////////////////
+// To put on a colored background, will be with a white border,
+// white text and transparent background
+.btn-outline-invert {
+  color: $white;
+  background-color: transparent;
+  border-color: $white;
+
+  @include hover {
+    color: $white;
+    background-color: transparent;
+    border-color: $white;
+  }
+
+  &[class*=btn-outline-] .icon svg {
+    color: $white;
+  }
+
+  &:focus,
+  &.focus {
+    color: $white;
+    box-shadow: 0 0 0 $input-btn-focus-width rgba($white, 0.5) !important; // This has to be important for buttons in bg-*
+  }
+
+  &:not([disabled]):not(.disabled):active {
+    color: $body-color;
+    background: $white;
+
+    .icon svg {
+      color: $body-color;
+    }
+  }
+
+  &:not([disabled]):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: $body-color;
+    background-color: $white;
+
+    .icon svg {
+      color: $body-color;
+    }
+  }
+
+  // Set color of text based on background when button is active
+  @include button-outline-invert('.bg-primary', color('primary-light'), $white, color('primary-darker'));
+  @include button-outline-invert('.bg-info', lighten(color('info'), 3%), $white, color('info-darker'));
+  @include button-outline-invert('.bg-danger', color('danger-light'), $white, color('danger-darker'));
+  @include button-outline-invert('.bg-secondary', color('secondary-light'), $white, color('secondary-darker'));
+}
+
+// We still need a Button White when the background is lightly colored
+// Can't use the .bg-white class because of the !important blocking
+// us on hover and active states
+.btn-white {
+  background-color: $white;
+}
+
+// Buttons grid
+///////////////
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  margin: 0 auto;
+  max-width: 960px;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .btn {
+    min-width: auto;
+  }
+}

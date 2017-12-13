@@ -1,0 +1,19 @@
+uuid: 32c59383-193a-4150-8da5-91a0df7fc95a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_mail
+    - node.type.activity
+id: node.activity.field_contact_mail
+field_name: field_contact_mail
+entity_type: node
+bundle: activity
+label: 'Contact mail'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

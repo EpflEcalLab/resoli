@@ -1,0 +1,203 @@
+@charset "utf-8";
+
+// Shadow mixins
+////////////////
+
+// Handle drop shadows on elements
+@mixin drop-shadows($color: theme-color("primary"), $with-hover: false) {
+  &.shadow-to-right {
+    @include drop-shadow(bottom, $color);
+
+    @include media-breakpoint-up(md) {
+      @include drop-shadow(right, $color);
+    }
+
+    @if $with-hover {
+      @include hover {
+        @include hover-shadow($color);
+      }
+    }
+  }
+
+  &.shadow-to-left {
+    @include drop-shadow(bottom, $color);
+
+    @include media-breakpoint-up(md) {
+      @include drop-shadow(left, $color);
+    }
+
+    @if $with-hover {
+      @include hover {
+        @include hover-shadow($color);
+      }
+    }
+  }
+
+  &.shadow-to-bottom {
+    @include drop-shadow(bottom, $color);
+
+    @if $with-hover {
+      @include hover {
+        @include hover-shadow($color);
+      }
+    }
+  }
+}
+
+// Adds a shadow to the element, to the direction you want
+/* stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after */
+@mixin drop-shadow($direction: right, $color: theme-color("primary")) {
+  @if $enable-shadows {
+    @if ($direction == right) {
+      box-shadow: 2px 2px 1px 0 rgba($color, 0.4);
+    } @else if ($direction == left) {
+      box-shadow: -2px 2px 1px 0 rgba($color, 0.4);
+    } @else {
+      box-shadow: 0 2px 1px 0 rgba($color, 0.4);
+    }
+  }
+}
+/* stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after */
+
+// Adds a floating shadow effect
+@mixin floating-shadow($color: theme-color("primary"), $with-hover: false) {
+  @if $enable-shadows {
+    box-shadow: 0 0 10px 0 rgba($color, 0.6);
+
+    @if $with-hover {
+      @include hover {
+        box-shadow: 0 0 10px 0 rgba($color, 1);
+      }
+    }
+  }
+}
+
+// Adds a hover shadow (combination of drop and floating shadow)
+@mixin hover-shadow($color: theme-color("primary")) {
+  @if $enable-shadows {
+    box-shadow:
+      0 2px 1px 0 rgba($color, 0.4),
+      0 0 10px 0 rgba($color, 0.4);
+  }
+}
+
+// Adds a shadow to a pseudo-element just below the current element
+// Usefull for button groups
+@mixin after-shadow($color: theme-color("primary"), $border-radius: $btn-border-radius, $with-hover: false) {
+  @if $enable-shadows {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      display: block;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-radius: $border-radius;
+      background-color: rgba($color, 0.3);
+
+      @include drop-shadow(bottom, $color);
+
+      @if $with-hover {
+        @include hover {
+          @include hover-shadow($color);
+        }
+      }
+    }
+  }
+}
+
+// Button mixins
+////////////////
+
+// Button on :active only
+@mixin button-active($color, $color-active: $white) {
+  $dark-color: color("#{$color}-darker");
+  $normal-color: color($color);
+
+  &:not([disabled]):not(.disabled).active {
+    background-color: mix($normal-color, $white, 85%);
+    color: $color-active;
+  }
+
+  &:not([disabled]):not(.disabled):active {
+    border-color: $dark-color;
+    background-color: $dark-color;
+    color: $color-active;
+  }
+
+  &.active-alt {
+    background-color: mix($normal-color, $white, 55%);
+    color: $color-active;
+  }
+}
+
+// Set button-outline-invert color of text and background based on parent background
+@mixin button-outline-invert($background-class, $color, $color-invert: $white, $color-dark: darken($color, 15%)) {
+  #{$background-class} & {
+    background-color: $color;
+
+    &:not([disabled]):not(.disabled):active {
+      color: $color-invert;
+      background-color: $color-dark;
+      border-color: $color-dark;
+
+      .icon svg {
+        color: $color-invert;
+      }
+    }
+
+    &:not([disabled]):not(.disabled).active,
+    .show > &.dropdown-toggle {
+      color: $body-color;
+      background-color: $color-invert;
+      border-color: $color-invert;
+
+      .icon svg {
+        color: $color;
+      }
+    }
+
+    &.active-alt {
+      background-color: mix($color, $white, 75%);
+      color: $white;
+    }
+
+    @include hover-focus {
+      background-color: darken($color, 8%);
+    }
+  }
+}
+
+// Icons & Flags mixins
+///////////////////////
+
+// Sets the size of the icon
+@mixin icon-size($size, $min-size: 0) {
+  .icon,
+  .icon svg {
+    width: $size;
+    height: $size;
+
+    @if ($min-size > 0) {
+      min-width: $min-size;
+      min-height: $min-size;
+    }
+  }
+}
+
+// Sets the size of the flag icon
+@mixin flag-size($size) {
+  svg {
+    width: $size;
+    height: $size;
+  }
+
+  use:last-child {
+    transform: scale(0.6);
+    transform-origin: ($size / 2) ($size / 2.5);
+  }
+}

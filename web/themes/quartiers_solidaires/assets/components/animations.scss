@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+// Bounce
+
+.anim-bounce-top {
+  animation: bounce-top 2s infinite;
+}
+
+.anim-bounce-bottom {
+  animation: bounce-bottom 2s infinite;
+}
+
+@keyframes bounce-top {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(+30px);
+  }
+
+  60% {
+    transform: translateY(+15px);
+  }
+}
+
+@keyframes bounce-bottom {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-30px);
+  }
+
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+// Fade
+
+.anim-fade-in-delay {
+  opacity: 1;
+  animation: fade-in 6s;
+}
+
+@keyframes fade-in {
+  0%,
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+

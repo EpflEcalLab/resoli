@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{%
+  set classes = [
+    attributes.type != 'checkbox' and attributes.type != 'radio' ? 'form-control',
+    element['#error'] ? 'is-invalid'
+  ]
+%}
+{%
+  set data = [
+    attributes['google-autocomplete'] ? 'data-google-autocomplete',
+    attributes['google-input-lat'] ? 'data-google-input-lat='~attributes['google-input-lat'],
+    attributes['google-input-lng'] ? 'data-google-input-lng='~attributes['google-input-lng'],
+  ]
+%}
+<input{{ attributes.addClass(classes).removeClass('form-text') }} {{ data|join(' ') }} />{{ children }}

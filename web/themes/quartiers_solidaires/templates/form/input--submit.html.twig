@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set icon = attributes.icon.__toString %}
+{%
+  set classes = [
+    'btn shadow-to-bottom',
+    not attributes.white and attributes.outline ? 'btn-outline-invert',
+    not attributes.white and not attributes.outline ? 'btn-primary' : attributes.white ? 'btn-white',
+    icon ? 'btn-icon',
+    not attributes.icon_left ? 'btn-icon-right',
+  ]
+%}
+
+{% if attributes.modal %}
+<div class="modal-footer justify-content-center sticky-bottom js-hide-in-multistep {{ attributes.theme ? 'bg-' ~ attributes.theme }}">
+{% endif %}
+
+{% if not icon %}
+  <input{{ attributes.addClass(classes) }} />
+{% else %}
+  <button {{ attributes.addClass(classes) }}>
+    {{ attributes.value }}
+    {{ macros.icon(icon) }}
+  </button>
+{% endif %}
+{{ children }}
+
+{% if attributes.modal %}
+</div>
+{% endif %}

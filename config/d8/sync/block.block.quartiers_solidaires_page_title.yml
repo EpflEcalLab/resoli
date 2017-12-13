@@ -1,0 +1,20 @@
+uuid: 6034b9dc-ad8b-4075-adde-2cb2f95a0270
+langcode: en
+status: true
+dependencies:
+  theme:
+    - quartiers_solidaires
+_core:
+  default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
+id: quartiers_solidaires_page_title
+theme: quartiers_solidaires
+region: pageTitle
+weight: -3
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

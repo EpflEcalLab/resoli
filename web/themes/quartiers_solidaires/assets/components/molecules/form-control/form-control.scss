@@ -1,0 +1,50 @@
+@charset 'utf-8';
+
+.form-group,
+.form-date {
+  label {
+    font-weight: 600;
+  }
+}
+
+.form-control {
+  padding: $input-btn-padding-y ($input-btn-padding-x / 2);
+
+  &[type=time] {
+    padding-right: 0.2rem;
+  }
+}
+
+[data-required] {
+  label:not(.btn):not(.checkbox-image) {
+    &:after {
+      content: '*';
+    }
+  }
+}
+
+[data-toggle=buttons] {
+  .btn {
+    input[type="radio"],
+    input[type="checkbox"] {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+      pointer-events: none;
+    }
+  }
+}
+
+.pac-container {
+  z-index: $zindex-modal + 10;
+}
+
+.form-control-file {
+  input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+}

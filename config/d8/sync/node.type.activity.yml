@@ -1,0 +1,17 @@
+uuid: 663e6068-dcbe-41b8-a98b-536517a36454
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Activity
+type: activity
+description: 'Activity where events will be attached'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

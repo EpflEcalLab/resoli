@@ -1,0 +1,80 @@
+    _          _   _     _        _   _                  
+   / \   _ __ | |_(_)___| |_ __ _| |_(_) __ _ _   _  ___ 
+  / _ \ | '_ \| __| / __| __/ _` | __| |/ _` | | | |/ _ \
+ / ___ \| | | | |_| \__ \ || (_| | |_| | (_| | |_| |  __/
+/_/   \_\_| |_|\__|_|___/\__\__,_|\__|_|\__, |\__,_|\___|
+                                           |_|           
+
+/* TEAM */
+  Digital Strategist : Alberto Gomez
+  Twitter: @kidvaldez
+  From: Lausanne, Switzerland
+
+  Web Software Engineer : Gilles Doge
+  Twitter: @gido
+  Github: gido
+  From: Lausanne, Switzerland
+
+  Software Designer : Marc Friederich
+  Twitter: @zufrieden
+  Github: zufrieden
+  From: Lausanne, Switzerland
+
+  Lead Web Developer: Yann Gouffon
+  Twitter: @Yago_0
+  Github: yago
+  From: Lausanne, Switzerland
+
+  Artistic Director : Guillaume Berry
+  Twitter: @guillaumeberry
+  From: Lausanne, Switzerland - Lyon, France
+
+  Visual Designer : Sepehr Milani
+  Twitter: @donsepito
+  From: Lausanne, Switzerland
+
+  Web Developer: Toni Filser
+  Twitter: @tonifisler
+  Github: tonifisler
+  From: Fribourg, Switzerland
+
+  UX Designer : Noemie Sandoz
+  Twitter: @noemiesandoz
+  From: Payerne, Switzerland
+
+  Project Manager : Ludovic Renevey
+  Twitter: @ludovicrenevey
+  From: Fribourg, Switzerland
+
+  Web Developer: Kevin Wenger
+  Twitter: @wengerk
+  Github: wengerk
+  From: Vevey, Switzerland
+
+  Video Maker : Arnaud Mathier
+  From: Lausanne, Switzerland
+
+  Web Developer: Julien Minguely
+  Gibhub: jminguely
+  From: Fribourg, Switzerland
+  
+  Web Developer: Flavien Knuchel
+  Twitter: @flavienknuchel
+  Github: knuch
+  From: Attalens, Switzerland
+  
+  Project Manager: Camille Létang
+  Twitter: @hagaroyh
+  From: Lausanne, Switzerland
+  
+/* THANKS */
+  Nicolas HENCHOZ: https://people.epfl.ch/nicolas.henchoz
+  David ROULIN: https://github.com/davidroulin
+  Romain COLLAUD: http://collaudromain.cr/eations
+
+/* SITE */
+  Last update: YYYY/MM/DD
+  Language: Drupal 8 / Toolbox
+  Standards: HTML5, CSS3, Drupal, Drupal Best Pratices
+  Components: IST_OF_MAJORS_COMPONENTS_AND_LIBS
+  Software: VSCode, Illustrator, Sketch

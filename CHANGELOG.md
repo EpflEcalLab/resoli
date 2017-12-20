@@ -2,6 +2,7 @@
 
 ## NEXT RELEASE
  - add GMT tag
+ - fix #500 - Delete on cascades
 
 ## 0.1.0 (2017-12-13)
  - production deployment

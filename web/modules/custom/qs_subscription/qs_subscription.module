@@ -24,3 +24,13 @@ function qs_subscription_theme() {
     ],
   ];
 }
+
+/**
+ * Hook Event Entity Delete.
+ *
+ * Remove subscription of this Event to any user when deleted.
+ *
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function qs_subscription_node_delete(EntityInterface $entity) {
+}

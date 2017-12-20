@@ -212,17 +212,19 @@ class ActivityManager {
    * Get all activities for the $user in the given $community.
    *
    * Only the ones where the user can upload photos &
-   * with at leaset one past event.
+   * with at least one past event.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
    * @param \Drupal\Core\Session\AccountInterface $user
    *   The user entity.
+   * @param bool $allowEmptyActivities
+   *   If the method should only return activities without any photos.
    *
    * @return \Drupal\node\NodeInterface[]
    *   A collection of node's Activity. Otherwise an empty array.
    */
-  public function getByUserPhoto(TermInterface $community, AccountInterface $user) {
+  public function getByUserPhoto(TermInterface $community, AccountInterface $user, $allowEmptyActivities = true) {
     $now = new DrupalDateTime();
     $now->setTimezone(new \DateTimeZone('UTC'));
 
@@ -238,6 +240,12 @@ class ActivityManager {
     $query_base->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
     $query_base->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_activity.entity_id');
     $query_base->condition('field_end_at.field_end_at_value', $now->format('c'), '<');
+
+    if (!$allowEmptyActivities) {
+      // Filter to get only activities with or without photos (based on $allowEmptyActivities param).
+      $query_base->leftJoin('node__field_event', 'field_event', 'field_event.field_event_target_id = field_end_at.entity_id');
+      $query_base->isNotNull('field_event.field_event_target_id');
+    }
 
     // Get activities where user has at least one privilege higher than member.
     $query_privileges = clone $query_base;

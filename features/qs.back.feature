@@ -252,11 +252,11 @@ Feature: Back buttons
 
 # Supervisor account
   @api
-  Scenario: Logged a Member of Lausanne, I can't access the account dashboard of another user
+  Scenario: In the User Photos Collection, I don't see a back button and I can logout
     Given I am logged in as user "admin"
     Then I am on "/account/1/dashboard"
-    Then I should see a "#block-previousnavigation a" element
-    And I should see "qs_auth.link.home" link with href "/"
+    Then I should not see a "#block-previousnavigation a" element
+    And I should see "qs_supervisor.account.dashboard.logout" link with href "/user/logout"
 
 # Photos by Activity
   Scenario: In the Activity's Photos, I see a back button for Photos by Date

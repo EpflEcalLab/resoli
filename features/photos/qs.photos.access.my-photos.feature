@@ -18,6 +18,8 @@ Feature: Dashboard my photos Access
     Given I am logged in as user "member+lausanne"
     When I am on "/photos/1/user/2"
     And the response status code should be 200
+    And I should see "qs.photos.user.collection.empty"
+    And I should not see the link ""
 
   @api
   Scenario: Logged as Member of Lausanne, I can't access to "My photos" of someone else

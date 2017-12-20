@@ -352,7 +352,7 @@ msgstr "Inscrivez votre mot de passe ici"
 
 #:
 msgid "qs_auth.form.login.title"
-msgstr "Entrez les informations suivantes pour vous connecter de manière sécurisée à Réseaux Solidaires."
+msgstr "Entrez les informations suivantes pour vous connecter de manière sécurisée à Réseaux Solidaires."
 
 #:
 msgid "qs.form.submit"
@@ -1075,7 +1075,7 @@ msgstr "Afin de vous donner accès à la communauté, indiquez les renseignement
 
 #:
 msgid "qs_auth.register_form.step2.sub_description"
-msgstr "Ces données seront visibles uniquement par vous et votre responsable de communauté."
+msgstr "Ces données seront visibles uniquement par vous et votre responsable de communauté."
 
 #:
 msgid "qs_auth.register_form.step3.description"
@@ -1083,7 +1083,7 @@ msgstr "Excellent! Indiquez à présent vos informations de contact, afin que le
 
 #:
 msgid "qs_auth.register_form.step3.sub_description"
-msgstr "Seules les personnes validées par la communauté pourront voir cette information."
+msgstr "Seules les personnes validées par la communauté pourront voir cette information."
 
 #:
 msgid "qs_auth.register_form.step4.description"
@@ -1610,7 +1610,7 @@ msgstr "Vérifiez l’heure de votre évènement."
 
 #:
 msgid "qs_activity.activities.form.step1.description"
-msgstr "Quel nom voulez-vous donner à votre activité?"
+msgstr "Quel nom voulez-vous donner à votre activité?"
 
 #:
 msgid "qs_activity.activities.form.step1"
@@ -1618,7 +1618,7 @@ msgstr ""
 
 #:
 msgid "qs_activity.activities.form.step2.description"
-msgstr "Quel thème correspond le mieux à votre activité?"
+msgstr "Quel thème correspond le mieux à votre activité?"
 
 #:
 msgid "qs_activity.activities.form.step2"

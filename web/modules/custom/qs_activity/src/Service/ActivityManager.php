@@ -211,7 +211,8 @@ class ActivityManager {
   /**
    * Get all activities for the $user in the given $community.
    *
-   * Only the ones where the user can upload photos.
+   * Only the ones where the user can upload photos &
+   * with at leaset one past event.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
@@ -222,6 +223,9 @@ class ActivityManager {
    *   A collection of node's Activity. Otherwise an empty array.
    */
   public function getByUserPhoto(TermInterface $community, AccountInterface $user) {
+    $now = new DrupalDateTime();
+    $now->setTimezone(new \DateTimeZone('UTC'));
+
     $query_base = $this->connection->select('node_field_data', 'activity');
     $query_base->fields('activity', ['nid'])
       ->condition('activity.type', 'activity')
@@ -229,6 +233,11 @@ class ActivityManager {
 
     $query_base->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
     $query_base->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+
+    // Filter to get only activity with at least one past event.
+    $query_base->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
+    $query_base->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_activity.entity_id');
+    $query_base->condition('field_end_at.field_end_at_value', $now->format('c'), '<');
 
     // Get activities where user has at least one privilege higher than member.
     $query_privileges = clone $query_base;
@@ -251,7 +260,7 @@ class ActivityManager {
       $privileges_activity[$row->nid] = $row->nid;
     }
 
-    // Get activities where user has has member privilege &
+    // Get activities where user has member privilege &
     // where photos upload are allowed for member.
     $query_member = clone $query_base;
 

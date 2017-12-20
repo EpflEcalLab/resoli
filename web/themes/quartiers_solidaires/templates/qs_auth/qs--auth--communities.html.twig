@@ -46,6 +46,10 @@
     <div class="row">
       <div class="col-sm-10 col-lg-8 mx-auto text-center">
         <h2 class="h5">{{ 'qs_auth.form.communities.no_community'|t }}</h2>
+        <a class="btn btn-icon btn-outline-invert shadow-to-bottom mt-3" href="{{ path('qs_auth.communities.apply') }}">
+          {{ macros.icon('plus') }}
+          {{ 'qs_supervisor.account.dashboard.apply'|t }}
+        </a>
       </div>
     </div>
   </div>

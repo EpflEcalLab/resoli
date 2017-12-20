@@ -8,7 +8,7 @@ Feature: Activity photos by event
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/atelier-creatif/photos"
     And the response status code should be 200
-    Then I should see 3 ".gallery-photoswipe" elements
+    Then I should see 1 ".gallery-photoswipe" elements
     Then I should see 7 ".gallery-item" elements
 
   @api
@@ -25,7 +25,7 @@ Feature: Activity photos by event
     When I am on "/lausanne/activities/sorties-theatre/photos"
     And the response status code should be 200
     Then I should see 1 ".gallery-photoswipe" elements
-    Then I should see 1 ".gallery-item" elements
+    Then I should see 3 ".gallery-item" elements
 
   @api
   Scenario: Logged as Member of Lausanne, When accessing the Activity 3 (Sortie Théàtre), I see all photos of this activity
@@ -33,4 +33,4 @@ Feature: Activity photos by event
     When I am on "/lausanne/activities/sorties-theatre/photos"
     And the response status code should be 200
     Then I should see 1 ".gallery-photoswipe" elements
-    Then I should see 1 ".gallery-item" elements
+    Then I should see 3 ".gallery-item" elements

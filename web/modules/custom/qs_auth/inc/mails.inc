@@ -7,6 +7,7 @@
 
 use Drupal\Core\Render\Markup;
 use Drupal\user\UserInterface;
+use Drupal\Core\Url;
 
 /**
  * Mail hook.
@@ -42,10 +43,11 @@ function qs_auth_mail($key, &$message, $params) {
         '@lastname'  => $account->field_lastname->value,
       ]);
 
-      $message['body'][] = Markup::create(t('qs.mail.welcome.no_approval.body @mail @firstname @lastname', [
-        '@mail'           => $account->mail->value,
-        '@firstname'      => $account->field_firstname->value,
-        '@lastname'       => $account->field_lastname->value,
+      $message['body'][] = Markup::create(t('qs.mail.welcome.no_approval.body @mail @firstname @lastname @url', [
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+        '@url'       => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
 
       break;

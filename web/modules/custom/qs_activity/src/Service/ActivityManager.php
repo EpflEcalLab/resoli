@@ -224,7 +224,7 @@ class ActivityManager {
    * @return \Drupal\node\NodeInterface[]
    *   A collection of node's Activity. Otherwise an empty array.
    */
-  public function getByUserPhoto(TermInterface $community, AccountInterface $user, $allowEmptyActivities = true) {
+  public function getByUserPhoto(TermInterface $community, AccountInterface $user, $allowEmptyActivities = TRUE) {
     $now = new DrupalDateTime();
     $now->setTimezone(new \DateTimeZone('UTC'));
 
@@ -242,7 +242,8 @@ class ActivityManager {
     $query_base->condition('field_end_at.field_end_at_value', $now->format('c'), '<');
 
     if (!$allowEmptyActivities) {
-      // Filter to get only activities with or without photos (based on $allowEmptyActivities param).
+      // Filter to get only activities with or without photos
+      // (based on $allowEmptyActivities param).
       $query_base->leftJoin('node__field_event', 'field_event', 'field_event.field_event_target_id = field_end_at.entity_id');
       $query_base->isNotNull('field_event.field_event_target_id');
     }

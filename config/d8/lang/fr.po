@@ -181,6 +181,34 @@ msgid "Sat"
 msgstr "Sam"
 
 #:
+msgid "Su"
+msgstr "Di"
+
+#:
+msgid "Mo"
+msgstr "Lu"
+
+#:
+msgid "Tu"
+msgstr "Ma"
+
+#:
+msgid "We"
+msgstr "Me"
+
+#:
+msgid "Th"
+msgstr "Je"
+
+#:
+msgid "Fr"
+msgstr "Ve"
+
+#:
+msgid "Sa"
+msgstr "Sa"
+
+#:
 msgctxt "Abbreviated 1 letter weekday Sunday"
 msgid "S"
 msgstr "D"

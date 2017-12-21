@@ -1,9 +1,8 @@
 const formComment = () => {
   (function ($) {
-    const $form = $('.js-comment-form');
+    const $textareas = $('.js-comment-form').find('textarea');
 
-    if ($form.length > 0) {
-      const $textareas = $form.find('textarea');
+    if ($textareas.length > 1) {
 
       // Copy the text to each textarea.
       const copyToOthers = text => {

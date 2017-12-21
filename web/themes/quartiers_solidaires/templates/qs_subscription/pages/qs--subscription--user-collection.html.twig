@@ -25,7 +25,7 @@
 
           {# Subscriptions Badges #}
           {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
-              {{ macros.badge('warning', 'wait', 'flag-subscription-wait') }}
+              {{ macros.badge('info', 'wait', 'flag-subscription-wait') }}
           {% endif %}
           {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
             {{ macros.badge('info', 'check', 'flag-subscription-confirmed') }}

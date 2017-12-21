@@ -97,6 +97,7 @@ abstract class EventEditFormBase extends FormBasic {
       '#type'  => 'hidden',
       '#value' => $event->id(),
     ];
+    $form['#attached']['library'][] = 'qs_site/unload';
 
     return $form;
   }

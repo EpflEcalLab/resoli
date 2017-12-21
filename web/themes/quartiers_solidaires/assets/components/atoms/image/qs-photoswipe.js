@@ -141,8 +141,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     options = {
       shareEl: false,
       loop: false,
-      showHideOpacity: true,
-      getThumbBoundsFn: false,
       closeOnScroll: false,
 
       // define gallery index (for URL)

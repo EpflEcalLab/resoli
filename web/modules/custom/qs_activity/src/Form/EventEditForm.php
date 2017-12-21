@@ -222,6 +222,11 @@ class EventEditForm extends EventEditFormBase {
       ],
     ];
 
+    // Fix padding bottom which is broken sometimes & overflow with submit.
+    $form['event']['step-2']['spacer'] = [
+      '#markup' => '<div class="mb-5"></div>',
+    ];
+
     $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#attributes' => [

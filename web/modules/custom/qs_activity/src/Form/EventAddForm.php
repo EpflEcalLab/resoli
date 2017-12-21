@@ -305,6 +305,11 @@ class EventAddForm extends FormBasic {
       ],
     ];
 
+    // Fix padding bottom which is broken sometimes & overflow with submit.
+    $form['event']['step-2']['spacer'] = [
+      '#markup' => '<div class="mb-5"></div>',
+    ];
+
     $form['event']['step-2']['actions']['submit'] = [
       '#type'  => 'submit',
       '#attributes' => [

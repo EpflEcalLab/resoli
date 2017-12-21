@@ -67,6 +67,11 @@
     }
 
     @include button-active($color);
+
+    &.btn-confirm {
+      color: $white;
+      background-color: $value;
+    }
   }
 
   @if ($color != 'primary') {
@@ -149,6 +154,15 @@
 
       &:not([disabled]):not(.disabled):active,
       &:not([disabled]):not(.disabled).active {
+        .icon svg {
+          color: $white;
+        }
+      }
+
+      &.btn-confirm {
+        color: $white;
+        background-color: $value;
+
         .icon svg {
           color: $white;
         }

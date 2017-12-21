@@ -260,7 +260,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'user' => $this->currentUser->id(),
           ], $options);
           $label = $this->t('qs.previous.to_manage_photos');
-          $theme = 'primary';
+          $theme = 'secondary';
           break;
 
         // Go to Homepage.

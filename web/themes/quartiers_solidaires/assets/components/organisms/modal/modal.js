@@ -13,7 +13,7 @@ const modal = () => {
         clone.on('click', '[type=submit]', function() {
           // We have to clone & click instead of form.submit to make it works
           // with Drupal multi-submit handlers.
-          clone.closest('.modal').find(`form #${$(this).attr('id')}`).click();
+          clone.closest('.modal').find(`form #${$(this).attr('id')}`)[0].click();
         })
       });
     });

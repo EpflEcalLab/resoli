@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - improve user supervisor dashboard #202  
  - fix click propagation in photoswipe gallery #497 
 
 ## 0.1.0 (2017-12-13)

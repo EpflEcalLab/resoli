@@ -85,6 +85,7 @@ class EventAddForm extends FormBasic {
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
     ];
+    $form['#attached']['library'][] = 'qs_site/unload';
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [

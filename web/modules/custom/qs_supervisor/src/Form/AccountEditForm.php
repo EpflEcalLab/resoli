@@ -95,6 +95,7 @@ class AccountEditForm extends FormBase {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
+    $form['#attached']['library'][] = 'qs_site/unload';
     $form['#title'] = $this->t('qs_supervisor.account.form.edit_title');
     $form['#top_links'] = [
       'qs_supervisor.account.dashboard' => [

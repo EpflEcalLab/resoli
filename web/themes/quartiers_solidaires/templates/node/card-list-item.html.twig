@@ -7,7 +7,7 @@
   {% set status = 'confirmed' %}
 {% endif %}
 
-<li class="card card-flippable card-list-item" data-status="{{ status }}">
+<li class="card card-flippable card-list-item" data-status="{{ status }}" id="card-event{{ event.nid.value }}">
 
   <div class="card-front">
     {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}

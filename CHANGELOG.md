@@ -8,6 +8,7 @@
  - change focus ring width to 2px instead of .2rem
  - fix small shift when clicking on menu toggle button
  - set event card link to weekly calendar instead of monthly #383
+ - setup favicon! #391
 
 ## 0.1.0 (2017-12-13)
  - production deployment

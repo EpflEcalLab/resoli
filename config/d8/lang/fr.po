@@ -2514,3 +2514,7 @@ msgstr ""
 
 msgid "qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url"
 msgstr ""
+
+#:
+msgid "qs.previous.to_community_welcome"
+msgstr ""

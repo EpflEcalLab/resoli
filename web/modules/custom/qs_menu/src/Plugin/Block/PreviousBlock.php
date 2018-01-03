@@ -124,6 +124,15 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     }
     else {
       switch ($route_name) {
+        // Go to Community Welcome.
+        case "qs_community.dashboard":
+          $url = $this->urlGenerator->generateFromRoute('qs_community.welcome', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_community_welcome');
+          $theme = 'danger';
+          break;
+
         // Go to Community Dashboard.
         case "qs_community.members":
         case "qs_community.waiting_approval":
@@ -131,15 +140,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_community_dashboard');
-          $theme = 'danger';
-          break;
-
-        // Go to Activities Listing.
-        case "qs_community.dashboard":
-          $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
-            'community' => $community->id(),
-          ], $options);
-          $label = $this->t('qs.previous.to_activities_list');
           $theme = 'danger';
           break;
 
@@ -260,13 +260,12 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'user' => $this->currentUser->id(),
           ], $options);
           $label = $this->t('qs.previous.to_manage_photos');
-          $theme = 'primary';
+          $theme = 'secondary';
           break;
 
         // Go to Homepage.
         // TODO add test for this link.
         case "qs_community.welcome":
-        case "qs_supervisor.account.dashboard":
           $url = $this->urlGenerator->generateFromRoute('<front>');
           $label = $this->t('qs_auth.link.home');
           $theme = 'primary';

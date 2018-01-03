@@ -76,7 +76,7 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
 
       // Only generate redirect for existing alias &
       // non already redirected source.
-      if ($alias_storage->aliasExists($item['source'], $langcode) === FALSE && empty($redirect_repository->findBySourcePath($item['source'], $langcode))) {
+      if ($alias_storage->aliasExists($item['source'], $langcode) === FALSE && empty($redirect_repository->findMatchingRedirect(trim($item['source'], '/'), [], $langcode))) {
         $redirect = $redirectStorage->create();
         $redirect->setSource($item['source']);
         $redirect->setRedirect($item['redirect']);
@@ -88,8 +88,8 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
 
     // Delete redirect on operation delete.
     if ($operation == 'delete') {
-      $redirect = $redirect_repository->findBySourcePath($item['source'], $langcode);
-      if ($redirect !== FALSE) {
+      $redirect = $redirect_repository->findMatchingRedirect(trim($item['source'], '/'), [], $langcode);
+      if (!empty($redirect)) {
         $redirect->delete();
       }
     }
@@ -135,7 +135,7 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
 
     // Delete alias on operation delete.
     if ($operation == 'delete') {
-      if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE) {
+      if ($alias_storage->aliasExists($item['alias'], $langcode) === TRUE) {
         $alias_storage->delete([
           'source'   => $item['route'],
           'alias'    => $item['alias'],

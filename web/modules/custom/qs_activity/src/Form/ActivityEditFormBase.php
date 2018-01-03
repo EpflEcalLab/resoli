@@ -77,6 +77,7 @@ abstract class ActivityEditFormBase extends FormBasic {
       '#type'  => 'hidden',
       '#value' => $activity->id(),
     ];
+    $form['#attached']['library'][] = 'qs_site/unload';
 
     return $form;
   }

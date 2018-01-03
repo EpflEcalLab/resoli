@@ -4,7 +4,7 @@ lock '3.5.0'
 set :application, 'quartiers-solidaires'
 set :repo_url, 'git@github.com:antistatique/quartiers-solidaires.git'
 
-server 'antistatique.alwaysdata.net', user: 'quartiers-solidaires', roles: %w{app db web}
+server 'ssh-quartiers-solidaires.alwaysdata.net', user: 'quartiers-solidaires', roles: %w{app db web}
 
 set :app_path, "web"
 set :theme_path, "themes/quartiers_solidaires"

@@ -65,7 +65,7 @@
                 method="post">
                 <input type="hidden" name="user" value="{{ member.uid.value }}">
                 <input type="hidden" name="community" value="{{ variables.community.tid.value }}">
-                <button class="btn mb-3 mx-2 btn-white btn-outline-invert shadow-to-bottom" type="submit" value="{{ 'qs.roles.community_none'|t }}">
+                <button class="btn mb-3 mx-2 btn-white btn-outline-invert shadow-to-bottom" data-confirm="{{ 'qs_community.members.community_none_confirm'|t }}" type="submit" value="{{ 'qs.roles.community_none'|t }}">
                   {{ 'qs.roles.community_none'|t }}
                 </button>
               </form>
@@ -88,7 +88,7 @@
 
   {{ variables.pager }}
 
-  <div class="container">
+  <div class="modal-footer justify-content-center sticky-bottom">
     <div class="row mb-3 mt-5">
       <div class="col-6">
         {# Go to Waiting Approval #}

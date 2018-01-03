@@ -51,13 +51,6 @@ class RequestForm extends FormBase {
   protected $userStorage;
 
   /**
-   * Composes and optionally sends an email message.
-   *
-   * @var \Drupal\Core\Mail\MailManagerInterface
-   */
-  protected $mail;
-
-  /**
    * The renderer.
    *
    * @var \Drupal\Core\Render\RendererInterface
@@ -90,8 +83,6 @@ class RequestForm extends FormBase {
     $this->nodeStorage = $container->get('entity_type.manager')->getStorage('node');
     /* @var \Drupal\qs_subscription\Service\SubscriptionManager */
     $this->subscriptionManager = $container->get('qs_subscription.subscription_manager');
-    /* @var \Drupal\Core\Mail\MailManagerInterface */
-    $this->mail = $container->get('plugin.manager.mail');
     /* @var \Drupal\Core\Render\RendererInterface */
     $this->renderer = $container->get('renderer');
   }
@@ -168,11 +159,11 @@ class RequestForm extends FormBase {
       $event_id = $form_state->getValue('event');
       $event = $this->nodeStorage->load($event_id);
 
+      $this->subscriptionManager->request($event);
+
       drupal_set_message($this->t('qs_subscription.request.form.success @event', [
         '@event' => $event->getTitle(),
       ]));
-
-      $this->subscriptionManager->request($event);
     }
   }
 

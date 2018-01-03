@@ -258,6 +258,17 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $label = $this->t('qs_photo.form.add.title');
     }
 
+    // Comment Photos.
+    if ($activity && in_array($route_name, [
+      'qs_photo.form.comments',
+    ])) {
+      // For everybody, show a button "My Photos".
+      $icon = 'pencil';
+      $theme = 'secondary';
+      $url = '#';
+      $label = $this->t('qs_photo.form.comment.title');
+    }
+
     // Welcome.
     if ($community && in_array($route_name, [
       'qs_community.welcome',
@@ -287,6 +298,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_photo.user.activities.collection',
       'qs_photo.user.form.manage',
       'qs_photo.form.add',
+      'qs_photo.form.comments',
     ])) {
       $classes[] = 'active';
     }

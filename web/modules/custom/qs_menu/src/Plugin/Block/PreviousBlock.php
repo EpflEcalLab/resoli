@@ -260,13 +260,12 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'user' => $this->currentUser->id(),
           ], $options);
           $label = $this->t('qs.previous.to_manage_photos');
-          $theme = 'primary';
+          $theme = 'secondary';
           break;
 
         // Go to Homepage.
         // TODO add test for this link.
         case "qs_community.welcome":
-        case "qs_supervisor.account.dashboard":
           $url = $this->urlGenerator->generateFromRoute('<front>');
           $label = $this->t('qs_auth.link.home');
           $theme = 'primary';

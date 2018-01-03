@@ -52,7 +52,7 @@
               <div class="col-sm-6 mb-3">
                 <form action="{{ path('qs_acl.privilege.confirm') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
                   <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
-                  <button class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.confirmed'|t }}">
+                  <button class="btn btn-secondary btn-icon shadow-to-right btn-block" data-confirm="{{ 'qs_community.waiting_approval.confirmed_confirm'|t }}" type="submit" value="{{ 'qs.confirmed'|t }}">
                     {{ macros.icon('check') }}
                     {{ 'qs.confirmed'|t }}
                   </button>
@@ -61,7 +61,7 @@
               <div class="col-sm-6 mb-3">
                 <form action="{{ path('qs_acl.privilege.decline') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
                   <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
-                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" type="submit" value="{{ 'qs.reject'|t }}">
+                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_community.waiting_approval.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
                     {{ macros.icon('trash') }}
                     {{ 'qs.reject'|t }}
                   </button>
@@ -86,7 +86,7 @@
 
   {{ variables.pager }}
 
-  <div class="container">
+  <div class="modal-footer justify-content-center sticky-bottom">
     <div class="row mb-3 mt-5">
       <div class="col-6">
         {# Go to Members #}

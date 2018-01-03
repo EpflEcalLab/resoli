@@ -23,6 +23,12 @@ const formControl = () => {
           $(`input[data-drupal-selector="${inputLng}"]`).val('');
         });
 
+        $(document).on('keypress', function(e) {
+          if ($('#edit-venue') && e.which == '13') {
+            e.preventDefault();
+          }
+        });
+
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
           let lat = '';

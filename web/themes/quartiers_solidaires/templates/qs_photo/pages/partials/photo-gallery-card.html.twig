@@ -1,0 +1,45 @@
+<figcaption>
+
+  <div class="row">
+    <div class="col-md-8 col-xl-6 mx-auto">
+      <div class="card card-list-simple-item bg-white mb-3">
+        <a
+          data-toggle="collapse"
+          href="#"
+          data-target=".multi-collapse"
+          class="card-pill card-pill-simple"
+          aria-expanded="false"
+          aria-controls="collapse-{{ loop.index }}"
+        >
+                      <span class="card-pill-icon">
+                        {{ macros.icon('theme_' ~ photo.field_event.entity.field_activity.entity.field_theme.entity.field_icon.value) }}
+                      </span>
+          <div class="card-pill-title">
+            <span class="lead">{{ photo.field_event.entity.field_activity.entity.title.value }}</span>
+          </div>
+
+          <span class="size-date ml-auto text-dark">
+                          <time datetime="{{ photo.field_event.entity.field_start_at.date|date('Y-m-d') }}">
+                          {{ photo.field_event.entity.field_start_at.date|bamboo_i18n_format_date('custom', 'j F') }}
+                            <span class="d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">{{ photo.field_event.entity.field_start_at.date|date('Y') }}</span>
+                        </time>
+                      </span>
+
+          <span
+            class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-1"
+            aria-label="{{ 'qs.readmore.about'|t }} {{ photo.field_event.entity.label }}"
+          >
+                        {{ macros.icon('look') }}
+                      </span>
+        </a>
+        <div class="collapse multi-collapse" data-collapse="{{ loop.index }}">
+          <div class="card-body text-center">
+            <h3 class="h5">{{ photo.field_event.entity.title.value }}</h3>
+            <p class="mb-0">{{ photo.body.value }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</figcaption>

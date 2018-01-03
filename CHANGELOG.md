@@ -9,6 +9,7 @@
  - fix small shift when clicking on menu toggle button
  - set event card link to weekly calendar instead of monthly #383
  - setup favicon! #391
+ - add title to Community Apply form #297
 
 ## 0.1.0 (2017-12-13)
  - production deployment

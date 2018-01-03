@@ -9,66 +9,63 @@
   {% if variables.events %}
     <div class="container my-5 gallery-photoswipe"  data-pswp-uid="gallery">
       <div class="row">
-      {% for event in variables.events %}
-        {% if event.nid.value in variables.photos|keys %}
-          <div class="col-12 sticky-top bg-white mb-3">
-            <h2 class="h5 mb-0">
-              <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
-                {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'j F Y') }}
-              </time> - {{ event.title.value }}
-            </h2>
-          </div>
+      {% for event in variables.events if event.nid.value in variables.photos|keys %}
+        <div class="col-12 sticky-top bg-white mb-3">
+          <h2 class="h5 mb-0">
+            <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
+              {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'j F Y') }}
+            </time> - {{ event.title.value }}
+          </h2>
+        </div>
 
-          {% if variables.photos[event.nid.value] %}
-            <div class="col-12">
-              <div class="row">
-                {% for photo in variables.photos[event.nid.value] %}
-                  <div class="col-6 col-sm-4 col-md-3 d-flex mb-3">
-                    <figure
-                      class="gallery-item"
+        {% if variables.photos[event.nid.value] %}
+          <div class="col-12">
+            <div class="row">
+              {% for photo in variables.photos[event.nid.value] %}
+                <div class="col-6 col-sm-4 col-md-3 d-flex mb-3">
+                  <figure
+                    class="gallery-item"
+                  >
+                    {% set ratio = photo.field_image.width / photo.field_image.height %}
+                    {% set target_width = min(1920, photo.field_image.width) %}
+                    {% set target_height = min(1080, photo.field_image.height) %}
+
+                    {% if ratio < 1 %}
+                      {% set target_width = target_height * ratio %}
+                    {% else %}
+                      {% set target_height = target_width / ratio %}
+                    {% endif %}
+
+                    <a
+                      href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}"
+                      class="card"
+                      data-index="{{ loop.index - 1 }}"
+                      data-size="{{ target_width|round }}x{{ target_height|round }}"
                     >
-                      {% set ratio = photo.field_image.width / photo.field_image.height %}
-                      {% set target_width = min(1920, photo.field_image.width) %}
-                      {% set target_height = min(1080, photo.field_image.height) %}
+                      <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
 
-                      {% if ratio < 1 %}
-                        {% set target_width = target_height * ratio %}
-                      {% else %}
-                        {% set target_height = target_width / ratio %}
-                      {% endif %}
-
-                      <a
-                        href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}"
-                        class="card"
-                        data-index="{{ loop.index - 1 }}"
-                        data-size="{{ target_width|round }}x{{ target_height|round }}"
-                      >
-                        <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
-
-                        <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">{{ macros.icon('look') }}</span>
-                      </a>
-                      {% include '@quartiers_solidaires/qs_photo/pages/partials/photo-gallery-card.html.twig' %}
-                    </figure>
-                  </div>
-                {% endfor %}
-              </div>
+                      <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">{{ macros.icon('look') }}</span>
+                    </a>
+                    {% include '@quartiers_solidaires/qs_photo/pages/partials/photo-gallery-card.html.twig' %}
+                  </figure>
+                </div>
+              {% endfor %}
             </div>
-          {% endif %}
-
+          </div>
         {% endif %}
+      {% else %}
+        <div class="col">
+          <p class="lead text-center mt-5">
+            {% if variables.activity.field_contact_mail is not empty %}
+              {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value, { 'target':['_blank']} )|render %}
+              {% trans %}qs.photo.no_photos_please_contact {{ mail_link }}{% endtrans %}
+            {% else %}
+              {{ 'qs.photo.no_photos'|t }}
+            {% endif %}
+          </p>
+        </div>
       {% endfor %}
       </div>
-    </div>
-  {% else %}
-    <div class="container">
-      <p class="lead text-center mt-5">
-        {% if variables.activity.field_contact_mail is not empty %}
-          {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value, { 'target':['_blank']} )|render %}
-          {% trans %}qs.photo.no_photos_please_contact {{ mail_link }}{% endtrans %}
-        {% else %}
-          {{ 'qs.photo.no_photos'|t }}
-        {% endif %}
-      </p>
     </div>
   {% endif %}
 </div>

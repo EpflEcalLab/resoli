@@ -84,6 +84,8 @@ class CommunitiesApplyForm extends FormBase {
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
 
+    $form['#title'] = $this->t('qs_supervisor.account.form.title');
+
     $form['#top_links'] = [
       'qs_supervisor.account.dashboard' => [
         'label' => $this->t('qs_supervisor.account.form.back'),

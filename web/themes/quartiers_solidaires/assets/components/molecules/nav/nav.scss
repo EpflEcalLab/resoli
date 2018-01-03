@@ -57,8 +57,6 @@
 
   &:not([disabled]):not(.disabled):active,
   &:not([disabled]):not(.disabled).active {
-    width: $navbar-icon-size + $input-btn-border-width;
-    height: $navbar-icon-size + $input-btn-border-width;
     border-width: 0;
     box-shadow: 0 0 0 2px inset color("primary-darker");
   }

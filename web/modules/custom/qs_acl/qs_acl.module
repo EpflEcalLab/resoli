@@ -8,6 +8,7 @@
 use Drupal\node\NodeInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
 
 /**
  * Implements hook_node_access().
@@ -25,5 +26,79 @@ function qs_acl_node_access(NodeInterface $node, $operation, AccountInterface $a
     }
 
     return AccessResult::forbidden();
+  }
+}
+
+/**
+ * Hook Community Entity Delete.
+ *
+ * Remove privilges of this community, to any user, when deleted.
+ *
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function qs_acl_taxonomy_term_delete(EntityInterface $entity) {
+  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  $entityTypeManager = \Drupal::service('entity_type.manager');
+  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  $privilegeStorage = $entityTypeManager->getStorage('privilege');
+  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  $privilegeQuery = $privilegeStorage->getQuery();
+
+  $query = $privilegeQuery->condition('bundle', 'taxonomy_term')
+    ->condition('entity', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $privileges = $privilegeStorage->loadMultiple($ids);
+    $privilegeStorage->delete($privileges);
+  }
+}
+
+/**
+ * Hook Activity Entity Delete.
+ *
+ * Remove privilges of this activity, to any user, when deleted.
+ *
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function qs_acl_node_delete(EntityInterface $entity) {
+  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  $entityTypeManager = \Drupal::service('entity_type.manager');
+  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  $privilegeStorage = $entityTypeManager->getStorage('privilege');
+  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  $privilegeQuery = $privilegeStorage->getQuery();
+
+  $query = $privilegeQuery->condition('bundle', 'node')
+    ->condition('entity', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $privileges = $privilegeStorage->loadMultiple($ids);
+    $privilegeStorage->delete($privileges);
+  }
+}
+
+/**
+ * Hook User Entity Delete.
+ *
+ * Remove privilges of this User when deleted.
+ *
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function qs_acl_user_delete(EntityInterface $entity) {
+  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  $entityTypeManager = \Drupal::service('entity_type.manager');
+  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  $privilegeStorage = $entityTypeManager->getStorage('privilege');
+  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  $privilegeQuery = $privilegeStorage->getQuery();
+
+  $query = $privilegeQuery->condition('user', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $privileges = $privilegeStorage->loadMultiple($ids);
+    $privilegeStorage->delete($privileges);
   }
 }

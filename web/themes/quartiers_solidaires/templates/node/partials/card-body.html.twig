@@ -46,12 +46,7 @@
           {{ 'qs.event.register.confirmed'|t }}
       </button>
       {# Register button default #}
-      <form data-status-show="default" action="{{ path('qs_subscription.request', {event: event.nid.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
-        <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block js-btn-subscription" id="subscribe{{ event.nid.value }}" type="submit" value="{{ 'qs.event.register'|t }}">
-            {{ macros.icon('register') }}
-            {{ 'qs.event.register'|t }}
-        </button>
-      </form>
+      {{ qs_site_render_form('qs_subscription', 'RequestForm', {'event': event.nid.value}, 'qs_subscription_request_form_'~event.nid.value) }}
     </div>
     {% endif %}
 

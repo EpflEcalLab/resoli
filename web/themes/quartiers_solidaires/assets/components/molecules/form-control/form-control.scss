@@ -48,3 +48,7 @@
     z-index: -1;
   }
 }
+
+.bg-primary {
+  @include form-validation-state("invalid", theme-color-level('danger', -4));
+}

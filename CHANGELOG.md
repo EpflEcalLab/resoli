@@ -12,6 +12,7 @@
  - add title to Community Apply form #297
  - remove sentence in password recovery page #285
  - set title in purple on Activity and Activiy Photos pages #320
+ - make invalid feedback readable on backgrounds #219
 
 ## 0.1.0 (2017-12-13)
  - production deployment

@@ -57,6 +57,17 @@ class PrivilegeJudgeController extends AjaxControllerBase {
     $privilege_id = $request->request->get('privilege');
     $privilege = $this->privilegeStorage->load($privilege_id);
 
+    $entity = $privilege->getEntity();
+    $user = $privilege->getOwner();
+
+    // Send email to user when communities approval is confirm.
+    if ($entity && $entity->bundle() == 'communities' && $user && $user->entity) {
+      $this->mail->mail('qs_auth', 'user_community_waiting_approval_confirm', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
+        'account'   => $user->entity,
+        'community' => $entity,
+      ]);
+    }
+
     $confirmed = $this->privilegeManager->confirm($privilege);
     return new JsonResponse([
       'status'    => TRUE,
@@ -78,6 +89,17 @@ class PrivilegeJudgeController extends AjaxControllerBase {
   public function decline(Request $request) {
     $privilege_id = $request->request->get('privilege');
     $privilege = $this->privilegeStorage->load($privilege_id);
+
+    $entity = $privilege->getEntity();
+    $user = $privilege->getOwner();
+
+    // Send email to user when communities approval is decline.
+    if ($entity && $entity->bundle() == 'communities' && $user && $user->entity) {
+      $this->mail->mail('qs_auth', 'user_community_waiting_approval_decline', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
+        'account'   => $user->entity,
+        'community' => $entity,
+      ]);
+    }
 
     $declined = $this->privilegeManager->decline($privilege);
     return new JsonResponse([

@@ -7,6 +7,7 @@
  - add some missing empty states in photos section #466
  - change focus ring width to 2px instead of .2rem
  - fix small shift when clicking on menu toggle button
+ - set event card link to weekly calendar instead of monthly #383
 
 ## 0.1.0 (2017-12-13)
  - production deployment

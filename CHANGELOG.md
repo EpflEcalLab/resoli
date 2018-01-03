@@ -10,6 +10,8 @@
  - set event card link to weekly calendar instead of monthly #383
  - setup favicon! #391
  - add title to Community Apply form #297
+ - remove sentence in password recovery page #285
+ - set title in purple on Activity and Activiy Photos pages #320
 
 ## 0.1.0 (2017-12-13)
  - production deployment

@@ -110,7 +110,7 @@ class UserController extends ControllerBase {
     else {
       // Show only activity where user has upload photo access &
       // with at least one past event.
-      $variables['activities'] = $this->activityManager->getByUserPhoto($community, $user);
+      $variables['activities'] = $this->activityManager->getByUserPhoto($community, $user, FALSE);
     }
 
     return [

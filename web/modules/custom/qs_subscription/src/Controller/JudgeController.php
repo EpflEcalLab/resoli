@@ -31,10 +31,10 @@ class JudgeController extends ControllerBase {
   protected $subscriptionManager;
 
   /**
-  * Composes and optionally sends an email message.
-  *
-  * @var \Drupal\Core\Mail\MailManagerInterface
-  */
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
   protected $mail;
 
   /**

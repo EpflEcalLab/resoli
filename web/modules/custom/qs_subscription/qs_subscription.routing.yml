@@ -77,19 +77,3 @@ qs_subscription.decline:
       parameters:
         subscription:
           type: entity:subscription
-
-## AJAX route to request a subscription of event.
-qs_subscription.request:
-    path: '/subscriptions/request/{event}'
-    defaults:
-      _controller: '\Drupal\qs_subscription\Controller\RegisterController::request'
-      _title: 'qs_subscription.request.title'
-    requirements:
-      _user_is_logged_in: 'TRUE'
-      _custom_access: '\Drupal\qs_subscription\Controller\RegisterController::access'
-      event: \d+
-    methods: POST
-    options:
-      parameters:
-        event:
-          type: entity:node

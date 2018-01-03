@@ -7,6 +7,9 @@
 
 use Drupal\Core\Entity\EntityInterface;
 
+// Includes.
+require_once 'inc/mails.inc';
+
 /**
  * Implements hook_theme().
  */

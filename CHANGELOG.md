@@ -17,6 +17,9 @@
  - ensure cleaning of redirects when entities are deleted #496 #470 #39
  - send emails to user when communities approval is confirmed/declined #270
  - close #411 - improve community dashboard return button
+ - add classes to toggle the flag and button visibility in event cards #234
+ - refactoring the subscription workflow to use Drupal Ajax form #234
+ - send email to user when subscription to event is confirmed #234
  - send mail to community managers when new user(s) request access to community #264
 
 ## 0.1.0 (2017-12-13)

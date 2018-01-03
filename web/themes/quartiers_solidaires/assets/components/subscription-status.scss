@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+$status-list: (
+  'default',
+  'pending',
+  'confirmed',
+);
+
+
+// Use the combination of data-status and data-status-show to toggle the visibility of any items.
+// A `data-status-show="pending"` will only be visible inside a `data-status="pending"` element.
+
+[data-status] {
+  [data-status-show] {
+    display: none;
+  }
+}
+
+@each $status in $status-list {
+  [data-status=#{$status}] {
+    [data-status-show=#{$status}] {
+      display: block;
+    }
+  }
+}

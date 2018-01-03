@@ -2503,6 +2503,18 @@ msgstr ""
 msgid "qs_activity.members.ban_confirm"
 msgstr ""
 
+msgid "qs.mail.community.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community"
+msgstr ""
+
+msgid "qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url"
+msgstr ""
+
+msgid "qs.mail.community.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community"
+msgstr ""
+
+msgid "qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url"
+msgstr ""
+
 #:
 msgid "qs.previous.to_community_welcome"
 msgstr ""

@@ -33,27 +33,27 @@
 
   <div class="container my-5">
     <div class="row">
-      {% for activity in variables.activities %}
-        {% if not variables.photos[activity.nid.value] is empty %}
-
-          {% set event = variables.events[activity.nid.value] %}
-          {# Print the theme header if we are on the next one #}
-          {% if (activity.field_theme.target_id != currentTheme) %}
-            {% set currentTheme = activity.field_theme.target_id %}
-            {% if loop.index > 1 %}
-              </div>
-              <div class="row">
-            {% endif %}
-            <div class="col-12 sticky-top bg-white mb-2">
-              {{ bamboo_render_entity('taxonomy_term', activity.field_theme.target_id, 'teaser') }}
+      {% for activity in variables.activities if variables.photos[activity.nid.value] is not empty %}
+        {% set event = variables.events[activity.nid.value] %}
+        {# Print the theme header if we are on the next one #}
+        {% if (activity.field_theme.target_id != currentTheme) %}
+          {% set currentTheme = activity.field_theme.target_id %}
+          {% if loop.index > 1 %}
             </div>
+            <div class="row">
           {% endif %}
-
-          <div class="col-sm-6 d-flex">
-            {% include '@quartiers_solidaires/qs_photo/qs--photo--event-card.html.twig' with {'activity': activity, 'photos': variables.photos[activity.nid.value] } %}
+          <div class="col-12 sticky-top bg-white mb-2">
+            {{ bamboo_render_entity('taxonomy_term', activity.field_theme.target_id, 'teaser') }}
           </div>
-
         {% endif %}
+
+        <div class="col-sm-6 d-flex">
+          {% include '@quartiers_solidaires/qs_photo/qs--photo--event-card.html.twig' with {'activity': activity, 'photos': variables.photos[activity.nid.value] } %}
+        </div>
+      {% else %}
+        <div class="col">
+          <p class="text-center">{{ 'qs.photo.theme.filters.empty'|t }}</p>
+        </div>
       {% endfor %}
     </div>
   </div>

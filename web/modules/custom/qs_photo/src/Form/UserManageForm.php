@@ -118,6 +118,12 @@ class UserManageForm extends FormBasic {
       '#options'       => $options,
     ];
 
+    if (empty($photos)) {
+      $form['empty'] = [
+        '#markup' => '<p class="text-center my-4">' . $this->t('qs_photos.photos_select.empty') . '</p>',
+      ];
+    }
+
     $form['actions'] = [
       '#type' => 'fieldset',
       '#theme_wrappers' => [

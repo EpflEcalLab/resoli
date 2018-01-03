@@ -43,6 +43,15 @@ function qs_acl_taxonomy_term_delete(EntityInterface $entity) {
   $privilegeStorage = $entityTypeManager->getStorage('privilege');
   /* @var \\Drupal\Core\Entity\Query\QueryInterface */
   $privilegeQuery = $privilegeStorage->getQuery();
+
+  $query = $privilegeQuery->condition('bundle', 'taxonomy_term')
+    ->condition('entity', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $privileges = $privilegeStorage->loadMultiple($ids);
+    $privilegeStorage->delete($privileges);
+  }
 }
 
 /**
@@ -53,6 +62,21 @@ function qs_acl_taxonomy_term_delete(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function qs_acl_node_delete(EntityInterface $entity) {
+  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  $entityTypeManager = \Drupal::service('entity_type.manager');
+  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  $privilegeStorage = $entityTypeManager->getStorage('privilege');
+  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  $privilegeQuery = $privilegeStorage->getQuery();
+
+  $query = $privilegeQuery->condition('bundle', 'node')
+    ->condition('entity', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $privileges = $privilegeStorage->loadMultiple($ids);
+    $privilegeStorage->delete($privileges);
+  }
 }
 
 /**
@@ -63,4 +87,18 @@ function qs_acl_node_delete(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function qs_acl_user_delete(EntityInterface $entity) {
+  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  $entityTypeManager = \Drupal::service('entity_type.manager');
+  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  $privilegeStorage = $entityTypeManager->getStorage('privilege');
+  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  $privilegeQuery = $privilegeStorage->getQuery();
+
+  $query = $privilegeQuery->condition('user', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $privileges = $privilegeStorage->loadMultiple($ids);
+    $privilegeStorage->delete($privileges);
+  }
 }

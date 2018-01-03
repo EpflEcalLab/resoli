@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## NEXT RELEASE
  - add GMT tag
- - fix #500 - Delete on cascades
+ - fix #500 - Remove privilegies & subscriptions when deleting entities
 
 ## 0.1.0 (2017-12-13)
  - production deployment

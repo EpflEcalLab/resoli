@@ -45,6 +45,13 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       ],
     ];
 
+    $form['group']['title'] = [
+      '#title'         => $this->t('qs_activity.activities.form.edit.defaults.titlefield'),
+      '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.titlefield.placeholder'),
+      '#type'          => 'textfield',
+      '#default_value' => $activity->field_default_title->value,
+    ];
+
     $form['group']['body'] = [
       '#title'         => $this->t('qs_activity.activities.form.edit.defaults.body'),
       '#placeholder'   => $this->t('qs_activity.activities.form.edit.defaults.body.placeholder'),
@@ -151,6 +158,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     $activity = $this->nodeStorage->load($form_state->getValue('activity'));
 
     $fields = [
+      'field_default_title' => $form_state->getValue('title'),
       'body'                => $form_state->getValue('body'),
       'field_contact_name'  => $form_state->getValue('contact_name'),
       'field_contact_phone' => $form_state->getValue('contact_phone'),

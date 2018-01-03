@@ -663,6 +663,14 @@ msgid "qs_activity.activities.form.edit.visibility.title"
 msgstr "Visibilité de l’activité"
 
 #:
+msgid "qs_activity.activities.form.edit.defaults.titlefield"
+msgstr ""
+
+#:
+msgid "qs_activity.activities.form.edit.defaults.titlefield.placeholder"
+msgstr ""
+
+#:
 msgid "qs_activity.activities.form.edit.defaults.body.placeholder"
 msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
 

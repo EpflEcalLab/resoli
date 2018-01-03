@@ -5,6 +5,8 @@
  * QS Subscription hooks.
  */
 
+use Drupal\Core\Entity\EntityInterface;
+
 /**
  * Implements hook_theme().
  */
@@ -23,4 +25,52 @@ function qs_subscription_theme() {
       'template'  => 'qs--subscription--user-collection',
     ],
   ];
+}
+
+/**
+ * Hook Event Entity Delete.
+ *
+ * Remove subscription of this Event to any user when deleted.
+ *
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function qs_subscription_node_delete(EntityInterface $entity) {
+  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  $entityTypeManager = \Drupal::service('entity_type.manager');
+  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  $subscriptionStorage = $entityTypeManager->getStorage('subscription');
+  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  $subscriptionQuery = $subscriptionStorage->getQuery();
+
+  $query = $subscriptionQuery->condition('entity', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $subscriptions = $subscriptionStorage->loadMultiple($ids);
+    $subscriptionStorage->delete($subscriptions);
+  }
+}
+
+/**
+ * Hook User Entity Delete.
+ *
+ * Remove subscription of this User when deleted.
+ *
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function qs_subscription_user_delete(EntityInterface $entity) {
+  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  $entityTypeManager = \Drupal::service('entity_type.manager');
+  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  $subscriptionStorage = $entityTypeManager->getStorage('subscription');
+  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  $subscriptionQuery = $subscriptionStorage->getQuery();
+
+  $query = $subscriptionQuery->condition('user', $entity->id());
+
+  $ids = $query->execute();
+  if ($ids) {
+    $subscriptions = $subscriptionStorage->loadMultiple($ids);
+    $subscriptionStorage->delete($subscriptions);
+  }
 }

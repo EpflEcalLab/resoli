@@ -5,6 +5,8 @@
  * QS Urls hooks.
  */
 
+use Drupal\Core\Entity\EntityInterface;
+
 require_once 'inc/helpers.inc';
 
 // Includes.
@@ -81,5 +83,68 @@ function qs_urls_pathauto_alias_alter(&$alias, array &$context) {
     if ($moduleHandler->moduleExists('qs_photo')) {
       qs_photo_alias($context['data']['node'], $alias, $context['op']);
     }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Ensure deletion of aliases & redirects based on node.
+ */
+function qs_urls_node_delete(EntityInterface $entity) {
+  $moduleHandler = \Drupal::service('module_handler');
+
+  // Get the base alias of this node.
+  $alias = $entity->toUrl()->toString();
+
+  // Activities.
+  if ($moduleHandler->moduleExists('qs_activity')) {
+    qs_activity_alias($entity, $alias, 'delete');
+    qs_activity_redirects($entity, $alias, 'delete');
+  }
+
+  // Photo.
+  if ($moduleHandler->moduleExists('qs_photo')) {
+    qs_photo_alias($entity, $alias, 'delete');
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ *
+ * Ensure deletion of aliases & redirects based on taxonomy term.
+ */
+function qs_urls_taxonomy_term_delete(EntityInterface $entity) {
+  $moduleHandler = \Drupal::service('module_handler');
+
+  // Get the base alias of this term.
+  $alias = $entity->toUrl()->toString();
+
+  // Community.
+  if ($moduleHandler->moduleExists('qs_community')) {
+    qs_community_alias($entity, $alias, 'delete');
+  }
+
+  // Activity.
+  if ($moduleHandler->moduleExists('qs_activity')) {
+    qs_activity_alias($entity, $alias, 'delete');
+    qs_activity_redirects($entity, $alias, 'delete');
+  }
+
+  // Calendar.
+  if ($moduleHandler->moduleExists('qs_calendar')) {
+    qs_calendar_alias($entity, $alias, 'delete');
+    qs_calendar_redirects($entity, $alias, 'delete');
+  }
+
+  // Photo.
+  if ($moduleHandler->moduleExists('qs_photo')) {
+    qs_photo_alias($entity, $alias, 'delete');
+    qs_photo_redirects($entity, $alias, 'delete');
+  }
+
+  // Subscription.
+  if ($moduleHandler->moduleExists('qs_subscription')) {
+    qs_subscription_alias($entity, $alias, 'delete');
   }
 }

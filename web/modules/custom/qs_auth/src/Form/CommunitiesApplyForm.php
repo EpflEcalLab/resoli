@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
+use Drupal\Core\Mail\MailManagerInterface;
 
 /**
  * CommunitiesApplyForm class.
@@ -34,6 +35,13 @@ class CommunitiesApplyForm extends FormBase {
   private $termStorage;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * The current active user.
    *
    * @var \Drupal\Core\Session\AccountProxyInterface
@@ -48,13 +56,22 @@ class CommunitiesApplyForm extends FormBase {
   private $privilegeManager;
 
   /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManager $privilege_manager, AccountProxyInterface $currentUser) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManager $privilege_manager, AccountProxyInterface $currentUser, MailManagerInterface $mail) {
     $this->acl              = $acl;
     $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
+    $this->userStorage      = $entity_type_manager->getStorage('user');
     $this->privilegeManager = $privilege_manager;
     $this->currentUser      = $currentUser;
+    $this->mail             = $mail;
   }
 
   /**
@@ -65,7 +82,8 @@ class CommunitiesApplyForm extends FormBase {
     $container->get('qs_acl.access_control'),
     $container->get('entity_type.manager'),
     $container->get('qs_acl.privilege_manager'),
-    $container->get('current_user')
+    $container->get('current_user'),
+    $container->get('plugin.manager.mail')
     );
   }
 
@@ -178,17 +196,39 @@ class CommunitiesApplyForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $user = $this->currentUser;
+    $account = $this->userStorage->load($this->currentUser->id());
 
     // Create a Request Privilege as Member for this community.
     $community = $this->termStorage->load($form_state->getValue('community'));
-    $this->privilegeManager->request('community_members', $community, $user);
+    $this->privilegeManager->request('community_members', $community, $this->currentUser);
+
+    // Get all managers of one community.
+    $query = $this->privilegeManager->queryPrivilege($community, 'community_managers');
+    $rows = $query->execute()->fetchAll();
+
+    $ids = [];
+    foreach ($rows as $row) {
+      $ids[] = $row->user;
+    }
+
+    // Load user with community_managers privilege & send them mail.
+    $users = NULL;
+    if ($ids) {
+      $users = $this->userStorage->loadMultiple($ids);
+
+      foreach ($users as $user) {
+        $this->mail->mail('qs_auth', 'auth_community_apply', $user->getEmail(), $user->getPreferredLangcode(), [
+          'account'   => $account,
+          'community' => $community,
+        ]);
+      }
+    }
 
     drupal_set_message($this->t('qs_auth.communities.apply.success @community', [
       '@community' => $community->getName(),
     ]));
 
-    $form_state->setRedirect('qs_supervisor.account.dashboard', ['user' => $user->id()], []);
+    $form_state->setRedirect('qs_supervisor.account.dashboard', ['user' => $account->id()], []);
   }
 
 }

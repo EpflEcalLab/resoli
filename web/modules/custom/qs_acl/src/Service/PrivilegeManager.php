@@ -335,6 +335,30 @@ class PrivilegeManager {
   }
 
   /**
+   * Request the collection of Accounts with given privilege on the entity.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
+   * @param string $privilege
+   *   The required privilege.
+   * @param bool $status
+   *   The required status for the privileges.
+   *
+   * @return \Drupal\Core\Database\Query\SelectInterface
+   *   The database query.
+   */
+  public function queryPrivilege(EntityInterface $entity, $privilege, $status = TRUE) {
+    $query = $this->connection->select('privileges', 'privileges');
+    $query->fields('privileges', ['user', 'id'])
+      ->condition('privileges.bundle', $entity->getEntityTypeId())
+      ->condition('privileges.entity', $entity->id())
+      ->condition('privileges.privilege', $privilege)
+      ->condition('status', $status);
+
+    return $query;
+  }
+
+  /**
    * Check for the given entity IDs, if the user has the requested privileges.
    *
    * @param integer[] $entities

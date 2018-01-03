@@ -20,6 +20,7 @@
  - add classes to toggle the flag and button visibility in event cards #234
  - refactoring the subscription workflow to use Drupal Ajax form #234
  - send email to user when subscription to event is confirmed #234
+ - send mail to community managers when new user(s) request access to community #264
 
 ## 0.1.0 (2017-12-13)
  - production deployment

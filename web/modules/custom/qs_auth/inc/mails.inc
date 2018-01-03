@@ -95,6 +95,28 @@ function qs_auth_mail($key, &$message, $params) {
         '@url'       => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
       break;
+
+    // Sent to all managers of the applied communitiy when user request access.
+    case 'auth_community_apply':
+      $account = $message['params']['account'];
+      $community = $message['params']['community'];
+
+      $message['subject'] = t('qs.mail.community.apply.subject @sitename @mail @firstname @lastname @community', [
+        '@sitename'  => $site->get('name'),
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+        '@community' => $community->getName(),
+      ]);
+
+      $message['body'][0] = Markup::create(t('qs.mail.community.apply.body @mail @firstname @lastname @community @url', [
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+        '@community' => $community->getName(),
+        '@url'       => Url::fromRoute('qs_community.waiting_approval', ['community' => $community->id()], ['absolute' => TRUE])->toString(),
+      ]));
+      break;
   }
 }
 

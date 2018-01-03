@@ -2,6 +2,7 @@
 
 ## NEXT RELEASE
  - add GMT tag
+ - fix #500 - Remove privilegies & subscriptions when deleting entities
  - improve user supervisor dashboard #202  
  - fix click propagation in photoswipe gallery #497 
  - ensure cleaning of redirects when entities are deleted #496 #470 #39

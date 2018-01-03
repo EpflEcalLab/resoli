@@ -1,6 +1,13 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<li class="card card-flippable card-list-item">
+{% set status = 'default' %}
+{% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
+  {% set status = 'pending' %}
+{% elseif event.nid.value in variables.badges.subscriptions.confirmed|keys %}
+  {% set status = 'confirmed' %}
+{% endif %}
+
+<li class="card card-flippable card-list-item" data-status="{{ status }}">
 
   <div class="card-front">
     {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}

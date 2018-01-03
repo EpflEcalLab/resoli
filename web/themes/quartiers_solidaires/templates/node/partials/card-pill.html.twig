@@ -30,13 +30,8 @@
     </span>
   </span>
 
-  {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
-    {{ macros.badge('info', 'wait', 'flag-subscription-wait') }}
-  {% endif %}
-
-  {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
-    {{ macros.badge('info', 'confirmed', 'flag-subscription-confirmed') }}
-  {% endif %}
+  {{ macros.badge('info', 'wait', 'flag-subscription-wait', '', '', 'pending') }}
+  {{ macros.badge('info', 'confirmed', 'flag-subscription-confirmed', '', '', 'confirmed') }}
 
   <span
     class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto"

@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+$status-list: (
+  'default',
+  'pending',
+  'confirmed',
+);
+
+[data-status] {
+  [data-status-show] {
+    display: none;
+  }
+}
+
+@each $status in $status-list {
+  [data-status=#{$status}] {
+    [data-status-show=#{$status}] {
+      display: block;
+    }
+  }
+}

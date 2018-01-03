@@ -60,7 +60,8 @@
             <div class="card-actions d-flex justify-content-center mt-4 mb-3">
               <a href="mailto:{{ subscription.user.entity.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
                 {{ macros.icon('mail') }}
-                {% trans %}qs.contact {{ subscription.user.entity.field_firstname.value }}{% endtrans %}
+                {% set subscription_user = subscription.user.entity.field_firstname.value is not empty ? subscription.user.entity.field_firstname.value : '' %}
+                {% trans %}qs.contact {{ subscription_user }}{% endtrans %}
               </a>
             </div>
           </div>

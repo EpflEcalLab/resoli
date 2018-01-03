@@ -35,24 +35,23 @@
     {# User should be member of the activity OR activity should allow subscription to community members #}
     {% if 'activity_members' in variables.privileges or 'activity_maintainers' in variables.privileges or 'activity_organizers' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
     <div class="col-sm-6 mb-3 mx-auto">
-      {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
-          <button class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
-              {{ macros.icon('wait') }}
-              {{ 'qs.event.register.pending'|t }}
-          </button>
-      {% elseif event.nid.value in variables.badges.subscriptions.confirmed|keys %}
-        <button class="btn btn-info btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.confirmed'|t }}">
-            {{ macros.icon('confirmed') }}
-            {{ 'qs.event.register.confirmed'|t }}
+      {# Register Button "subscription pending" #}
+      <button data-status-show="pending" class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
+          {{ macros.icon('wait') }}
+          {{ 'qs.event.register.pending'|t }}
+      </button>
+      {# Register Button "subscription confirmed" #}
+      <button data-status-show="confirmed" class="btn btn-info btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.confirmed'|t }}">
+          {{ macros.icon('confirmed') }}
+          {{ 'qs.event.register.confirmed'|t }}
+      </button>
+      {# Register button default #}
+      <form data-status-show="default" action="{{ path('qs_subscription.request', {event: event.nid.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+        <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block js-btn-subscription" id="subscribe{{ event.nid.value }}" type="submit" value="{{ 'qs.event.register'|t }}">
+            {{ macros.icon('register') }}
+            {{ 'qs.event.register'|t }}
         </button>
-      {% else %}
-        <form action="{{ path('qs_subscription.request', {event: event.nid.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
-          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block js-btn-subscription" id="subscribe{{ event.nid.value }}" type="submit" value="{{ 'qs.event.register'|t }}">
-              {{ macros.icon('register') }}
-              {{ 'qs.event.register'|t }}
-          </button>
-        </form>
-      {% endif %}
+      </form>
     </div>
     {% endif %}
 

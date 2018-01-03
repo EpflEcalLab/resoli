@@ -33,7 +33,7 @@ function qs_auth_mail($key, &$message, $params) {
 
   switch ($key) {
 
-    // Sended to new user when registering.
+    // Sent to new user when registering.
     case 'register':
       $account = $params['user'];
       $message['subject'] = t('qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname', [
@@ -50,6 +50,50 @@ function qs_auth_mail($key, &$message, $params) {
         '@url'       => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
 
+      break;
+
+    // Sent to user when communitiy request of approval has been confirmed.
+    case 'user_community_waiting_approval_confirm':
+      $account = $message['params']['account'];
+      $community = $message['params']['community'];
+
+      $message['subject'] = t('qs.mail.community.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community', [
+        '@sitename'  => $site->get('name'),
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+        '@community' => $community->getName(),
+      ]);
+
+      $message['body'][0] = Markup::create(t('qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url', [
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+        '@community' => $community->getName(),
+        '@url'      => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+      ]));
+      break;
+
+    // Sent to user when communitiy request of approval has been declined.
+    case 'user_community_waiting_approval_decline':
+      $account = $message['params']['account'];
+      $community = $message['params']['community'];
+
+      $message['subject'] = t('qs.mail.community.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community', [
+        '@sitename'  => $site->get('name'),
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+        '@community' => $community->getName(),
+      ]);
+
+      $message['body'][0] = Markup::create(t('qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url', [
+        '@mail'      => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname'  => $account->field_lastname->value,
+        '@community' => $community->getName(),
+        '@url'       => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+      ]));
       break;
   }
 }

@@ -2,7 +2,7 @@
 
 # Export translations strings from PHP files
 echo "Extracting translations from PHP files..."
-find web/modules/custom -iname "*.php" -or -iname "*.inc" -or -iname "*.module" -or -iname "*.install" | xargs xgettext --language=php --from-code=UTF-8 --keyword=t --join-existing --output=config/d8/lang/fr.po --omit-header --no-location
+find web/modules/custom -iname "*.php" -or -iname "*.inc" -or -iname "*.module" -or -iname "*.install" | xargs xgettext --language=php --from-code=UTF-8 --keyword=t --join-existing --output=config/d8/lang/fr.po --omit-header --no-location --no-wrap
 
 # Run script to export translations from PHP files
 echo "Extracting translations from Twig templates..."
@@ -11,7 +11,7 @@ echo "Temp .po file created."
 
 # Merge PO file with existing translation
 echo "Merging with fr.po file"
-msgcat --use-first config/d8/lang/fr.po config/d8/lang/tmp.po -o config/d8/lang/fr.po
+msgcat --use-first --no-wrap --add-location=full config/d8/lang/fr.po config/d8/lang/tmp.po -o config/d8/lang/fr.po
 
 # Remove temp file
 rm config/d8/lang/tmp.po

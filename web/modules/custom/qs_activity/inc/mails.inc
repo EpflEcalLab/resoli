@@ -57,7 +57,30 @@ function qs_activity_mail($key, &$message, $params) {
 
     // Sent to Subscribed user(s) of event &
     // to all Activity Maintainer(s) et Activity Organizer(s).
-    case 'activity_event_modified':
+    case 'activity_event_updated':
+      $author         = $message['params']['author'];
+      $original_event = $message['params']['original_event'];
+      $updated_event  = $message['params']['updated_event'];
+      $activity       = $updated_event->field_activity->entity;
+
+      $message['subject'] = t('qs.mail.event.updated.subject @sitename @event', [
+        '@sitename' => $site->get('name'),
+        '@event'    => $updated_event->getTitle(),
+      ]);
+
+      $message['body'][] = Markup::create(t('qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end', [
+        '@mail'                => $author->getEmail(),
+        '@firstname'           => $author->field_firstname->value,
+        '@lastname'            => $author->field_lastname->value,
+        '@activity'            => $activity->getTitle(),
+        '@event'               => $updated_event->getTitle(),
+        '@original_date'       => $dateFormatter->format($original_event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
+        '@original_time_start' => $dateFormatter->format($original_event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
+        '@original_time_end'   => $dateFormatter->format($original_event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
+        '@updated_date'        => $dateFormatter->format($updated_event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
+        '@updated_time_start'  => $dateFormatter->format($updated_event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
+        '@updated_time_end'    => $dateFormatter->format($updated_event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
+      ]));
       break;
   }
 }

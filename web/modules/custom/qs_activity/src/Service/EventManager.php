@@ -343,6 +343,64 @@ class EventManager {
   }
 
   /**
+   * Send mail that event has change to subscribers, organizer(s) & maintainers.
+   *
+   * Sent mails to subscribers & all activity_organizers/activity_maintainers.
+   *
+   * @param \Drupal\node\NodeInterface $original_event
+   *   The original event.
+   * @param \Drupal\node\NodeInterface $updated_event
+   *   The updated event.
+   * @param \Drupal\Core\Session\AccountInterface $author
+   *   The author of edition.
+   */
+  public function sendUpdated(NodeInterface $original_event, NodeInterface $updated_event, AccountInterface $author) {
+    $activity = $updated_event->field_activity->entity;
+    $ids = [];
+
+    // Get all organizers of this activities's event.
+    $query_organizers = $this->privilegeManager->queryPrivilege($activity, 'activity_organizers');
+    $rows = $query_organizers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Get all maintainer of this activities's event.
+    $query_maintainers = $this->privilegeManager->queryPrivilege($activity, 'activity_maintainers');
+    $rows = $query_maintainers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Get all subscribed users of event.
+    $query_subscribers = $this->subscriptionManager->querySubscribers($updated_event);
+    $rows = $query_subscribers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Load user with community_managers privilege & send them mail.
+    $users = NULL;
+    if ($ids) {
+      $users = $this->userStorage->loadMultiple($ids);
+
+      // Load the user entity from proxy session.
+      $author = $this->userStorage->load($author->id());
+
+      foreach ($users as $user) {
+        $this->mail->mail('qs_activity', 'activity_event_updated', $user->getEmail(), $user->getPreferredLangcode(), [
+          'author'         => $author,
+          'original_event' => $original_event,
+          'updated_event'  => $updated_event,
+        ]);
+      }
+    }
+  }
+
+  /**
    * Send a mail to alert users about the deletion of event.
    *
    * Sent mails to subscribers & all activity_organizers/activity_maintainers.

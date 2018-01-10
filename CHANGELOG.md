@@ -26,6 +26,9 @@
  - send mail to subscribers of events when event is deleted #381
  - send mail to activity organizers when events is deleted #381
  - send mail to activity maintainers when events is deleted #381
+ - send mail to subscribers of events when event is updated #381
+ - send mail to activity organizers when events is updated #381
+ - send mail to activity maintainers when events is updated #381
 
 ## 0.1.0 (2017-12-13)
  - production deployment

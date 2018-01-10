@@ -196,12 +196,15 @@ class CollectionController extends ControllerBase {
 
     // Load 4 photos by activity.
     $activites = [];
+    $variables['photos'] = [];
     if (!empty($activities_nids)) {
       $activites = $this->nodeStorage->loadMultiple($activities_nids);
       $variables['activities'] = $activites;
       foreach ($activites as $activity) {
         // Get photos by activity.
-        $variables['photos'][$activity->id()] = $this->photoManager->getByActivity($activity, 4);
+        if ($photos = $this->photoManager->getByActivity($activity, 4)) {
+          $variables['photos'][$activity->id()] = $photos;
+        }
       }
     }
 

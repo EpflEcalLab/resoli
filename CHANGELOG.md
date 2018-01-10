@@ -30,6 +30,7 @@
  - add shadow to copy button #491
  - fix empty state messages in photos collection by theme #466
  - fix Firefox glitch when flipping a card #255
+ - remove padding hacks to mitigate Firefox bugs... #255 
 
 ## 0.1.0 (2017-12-13)
  - production deployment

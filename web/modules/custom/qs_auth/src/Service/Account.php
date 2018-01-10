@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\user\UserAuthInterface;
 use Drupal\user\UserInterface;
+use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\qs_acl\Service\PrivilegeManager;
 
@@ -152,6 +153,38 @@ class Account {
   public function sendRegisterEmail(UserInterface $user) {
     $params = ['user' => $user];
     $this->mail->mail('qs_auth', 'register', $user->getEmail(), $user->getPreferredLangcode(), $params);
+  }
+
+  /**
+   * Send mail to all community managers of $community with the new request.
+   *
+   * @param \Drupal\user\UserInterface $account
+   *   The new applier user.
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The impacted community.
+   */
+  public function sendCommunityManagersApplyReq(UserInterface $account, TermInterface $community) {
+    // Get all managers of this community.
+    $query = $this->privilegeManager->queryPrivilege($community, 'community_managers');
+    $rows = $query->execute()->fetchAll();
+
+    $ids = [];
+    foreach ($rows as $row) {
+      $ids[] = $row->user;
+    }
+
+    // Load user with community_managers privilege & send them mail.
+    $users = NULL;
+    if ($ids) {
+      $users = $this->userStorage->loadMultiple($ids);
+
+      foreach ($users as $user) {
+        $this->mail->mail('qs_auth', 'auth_community_apply', $user->getEmail(), $user->getPreferredLangcode(), [
+          'account'   => $account,
+          'community' => $community,
+        ]);
+      }
+    }
   }
 
 }

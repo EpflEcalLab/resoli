@@ -23,6 +23,7 @@
  - send mail to community managers when new user(s) request access to community #264 - via communityApply form
  - send mail to community managers when new user(s) request access to community #264 - via register form
  - set the modal-open wrapper to `position: fixed` to remove scroll inertia on Safari #408
+ - add the role in communities listing of supervisor dashboard #202 
 
 ## 0.1.0 (2017-12-13)
  - production deployment

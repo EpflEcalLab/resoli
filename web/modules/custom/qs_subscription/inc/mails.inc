@@ -14,6 +14,7 @@ use Drupal\Core\Url;
 function qs_subscription_mail($key, &$message, $params) {
   // Load services.
   $configFactory = \Drupal::service('config.factory');
+  $dateFormatter = \Drupal::service('date.formatter');
 
   // Get Drupal Config for site.
   $site = $configFactory->get('system.site');
@@ -48,14 +49,17 @@ function qs_subscription_mail($key, &$message, $params) {
         '@activity'  => $activity->getTitle(),
       ]);
 
-      $message['body'][0] = Markup::create(t('qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @activity @url', [
-        '@mail'      => $account->mail->value,
-        '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
-        '@community' => $community->getName(),
-        '@event'     => $event->getTitle(),
-        '@activity'  => $activity->getTitle(),
-        '@url'       => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+      $message['body'][0] = Markup::create(t('qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
+        '@mail'       => $account->mail->value,
+        '@firstname'  => $account->field_firstname->value,
+        '@lastname'   => $account->field_lastname->value,
+        '@community'  => $community->getName(),
+        '@event'      => $event->getTitle(),
+        '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
+        '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
+        '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
+        '@activity'   => $activity->getTitle(),
+        '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
       break;
   }

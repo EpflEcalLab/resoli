@@ -2526,7 +2526,7 @@ msgid "qs_subscription.request.form.success @event"
 msgstr ""
 
 #:
-msgid "qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @activity @url"
+msgid "qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
 msgstr ""
 
 #:

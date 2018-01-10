@@ -1,0 +1,8 @@
+uuid: 13169c9a-3ed6-4543-a904-c61205961aa3
+langcode: fr
+status: true
+dependencies: {  }
+id: default_short_hours_minutes
+label: 'Default short hours-minutes'
+locked: false
+pattern: H\hi

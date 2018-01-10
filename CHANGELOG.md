@@ -22,6 +22,7 @@
  - send email to user when subscription to event is confirmed #234
  - send mail to community managers when new user(s) request access to community #264
  - set the modal-open wrapper to `position: fixed` to remove scroll inertia on Safari #408
+ - fix translation extractor code and update translations
 
 ## 0.1.0 (2017-12-13)
  - production deployment

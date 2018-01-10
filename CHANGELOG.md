@@ -29,6 +29,7 @@
  - fix translation extractor code and update translations
  - add shadow to copy button #491
  - fix empty state messages in photos collection by theme #466
+ - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome
 
 ## 0.1.0 (2017-12-13)
  - production deployment

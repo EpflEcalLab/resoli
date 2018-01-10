@@ -27,62 +27,68 @@
 
 {% if variables.photos %}
   <div class="container my-5">
-    <div class="row gallery-photoswipe" data-pswp-uid="gallery">
-      {% set current_header = null %}
-
-      {% for key, photo in variables.photos %}
-
-        {% set date = photo.field_event.entity.field_start_at.value|date('Y-m-d') %}
-        {% set week = photo.field_event.entity.field_start_at.value|date('W') %}
+    <div class="gallery-photoswipe" data-pswp-uid="gallery">
+      <div class="row">
+        {% set current_header = null %}
         {% set current_week = 'now'|date('W') %}
 
-        {% set new_header = 'qs.photos.date.sticky.from_to @start_date @end_date'|t({
-          '@start_date': date|date_modify("this week")|date('j F Y'),
-          '@end_date': date|date_modify("this week +6 days")|date('j F Y')
-        }) %}
+        {% for key, photo in variables.photos %}
 
-        {% if 'now'|date('Y-m-d') == date %}
-          {# TODAY #}
-          {% set new_header = 'qs.photos.date.sticky.today'|t %}
+          {% set date = photo.field_event.entity.field_start_at.value|date('Y-m-d') %}
+          {% set week = photo.field_event.entity.field_start_at.value|date('W') %}
 
-        {% elseif 'yesterday'|date('Y-m-d') == date %}
-          {# YESTERDAY #}
-          {% set new_header = 'qs.photos.date.sticky.tomorrow'|t %}
+          {% set new_header = 'qs.photos.date.sticky.from_to @start_date @end_date'|t({
+            '@start_date': date|date_modify("this week")|date('j F Y'),
+            '@end_date': date|date_modify("this week +6 days")|date('j F Y')
+          }) %}
 
-        {% elseif date < 'yesterday'|date('Y-m-d') and current_week == week %}
-          {# THIS WEEK (between day before yesterday and previous Sunday but not last week) #}
-          {% set new_header = 'qs.photos.date.sticky.this_week'|t %}
+          {% if 'now'|date('Y-m-d') == date %}
+            {# TODAY #}
+            {% set new_header = 'qs.photos.date.sticky.today'|t %}
 
-        {% elseif current_week != week %}
-          {# PREVIOUS WEEKS #}
-          {% set week_diff = current_week - week %}
-          {% if week_diff == 1 %}
-            {% set new_header = 'qs.photos.date.sticky.last_week'|t %}
-          {% elseif week_diff == 2 %}
-            {% set new_header = 'qs.photos.date.sticky.two_weeks_ago'|t %}
+          {% elseif 'yesterday'|date('Y-m-d') == date %}
+            {# YESTERDAY #}
+            {% set new_header = 'qs.photos.date.sticky.tomorrow'|t %}
+
+          {% elseif date < 'yesterday'|date('Y-m-d') and current_week == week %}
+            {# THIS WEEK (between day before yesterday and previous Sunday but not last week) #}
+            {% set new_header = 'qs.photos.date.sticky.this_week'|t %}
+
+          {% elseif current_week != week %}
+            {# PREVIOUS WEEKS #}
+            {% set week_diff = current_week - week %}
+            {% if week_diff == 1 %}
+              {% set new_header = 'qs.photos.date.sticky.last_week'|t %}
+            {% elseif week_diff == 2 %}
+              {% set new_header = 'qs.photos.date.sticky.two_weeks_ago'|t %}
+            {% endif %}
           {% endif %}
-        {% endif %}
 
-        {# Write the header if we have a new value #}
-        {% if current_header|render != new_header|render %}
-          {% set current_header = new_header %}
+          {# Write the header if we have a new value #}
+          {% if current_header|render != new_header|render %}
+            {% set current_header = new_header %}
 
-          {% if loop.index > 1 %}
-          {# Close the previous card list #}
+            {# Close the previous card list #}
+            {% if not loop.first %}
+              </div>
+              <div class="row">
+            {% endif %}
+
+            <div class="col-12 sticky-top bg-white mb-3">
+              <h2 class="col-12 h5 mb-0">{{ current_header }}</h2>
             </div>
+
+            {# open the next card list #}
+            </div>
+            <div class="row">
           {% endif %}
 
-          <div class="col-12 sticky-top bg-white mb-3">
-            <h2 class="col-12 h5 mb-0">{{ current_header }}</h2>
+          <div class="col-6 col-sm-4 col-md-3 d-flex mb-3">
+            {% include '@quartiers_solidaires/qs_photo/pages/partials/gallery-item-photoswipe.html.twig' with {'photo': photo, 'loop': loop} %}
           </div>
-          <div class="row col-12 flex-row">
-        {% endif %}
-
-        <div class="col-6 col-sm-4 col-md-3 d-flex mb-3">
-          {% include '@quartiers_solidaires/qs_photo/pages/partials/gallery-item-photoswipe.html.twig' with {'photo': photo, 'loop': loop} %}
+        {% endfor %}
+        {# Close the last card list #}
         </div>
-      {% endfor %}
-      {# Close the last card list #}
       </div>
     </div>
 

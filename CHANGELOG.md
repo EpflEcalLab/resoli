@@ -21,6 +21,7 @@
  - refactoring the subscription workflow to use Drupal Ajax form #234
  - send email to user when subscription to event is confirmed #234
  - send mail to community managers when new user(s) request access to community #264
+ - fix broken image ratio in photoswipe gallery in view by month #444 
 
 ## 0.1.0 (2017-12-13)
  - production deployment

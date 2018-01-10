@@ -49,6 +49,9 @@
   },{
     "src": "web/themes/quartiers_solidaires/assets/components/atoms/image/qs-photoswipe.js",
     "dest": "web/themes/quartiers_solidaires/build/photoswipe"
+  },{
+    "src": "web/themes/quartiers_solidaires/assets/components/molecules/calendar/date.js",
+    "dest": "web/themes/quartiers_solidaires/build/js"
   }],
   "theme": {
     "title": "Réseaux solidaires<br><span><small>Design System</small></span>",

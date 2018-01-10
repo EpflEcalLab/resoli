@@ -2532,3 +2532,9 @@ msgstr ""
 #:
 msgid "qs.mail.subscription.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community @event @activity"
 msgstr ""
+
+msgid "qs.mail.event.deleted.subject @sitename @event"
+msgstr ""
+
+msgid "qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end"
+msgstr ""

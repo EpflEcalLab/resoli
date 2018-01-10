@@ -1,7 +1,7 @@
 services:
   qs_activity.event_manager:
     class: Drupal\qs_activity\Service\EventManager
-    arguments: ['@entity_type.manager', '@entity.query', '@database']
+    arguments: ['@entity_type.manager', '@entity.query', '@database', '@qs_acl.privilege_manager', '@qs_subscription.subscription_manager', '@plugin.manager.mail']
 
   qs_activity.activity_manager:
     class: Drupal\qs_activity\Service\ActivityManager

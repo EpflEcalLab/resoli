@@ -129,6 +129,17 @@ class JudgeController extends ControllerBase {
    *   JSON formatted response. Contains the status & the declined subscription.
    */
   public function decline(Subscription $subscription) {
+    $entity = $subscription->getEntity();
+    $user = $subscription->getOwner();
+
+    // Send email to user when event subscription is approved.
+    if ($entity && $entity->bundle() == 'event' && $user && $user->entity) {
+      $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_decline', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
+        'account' => $user->entity,
+        'event'   => $entity,
+      ]);
+    }
+
     $declined = $this->subscriptionManager->decline($subscription);
     return new JsonResponse([
       'status'       => TRUE,

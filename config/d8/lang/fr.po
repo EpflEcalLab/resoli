@@ -1966,3 +1966,9 @@ msgstr ""
 
 msgid "qs.contact @subscription_user"
 msgstr ""
+
+msgid "qs.mail.subscription.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community @event @activity"
+msgstr ""
+
+msgid "qs.mail.subscription.waiting_approval.decline.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
+msgstr ""

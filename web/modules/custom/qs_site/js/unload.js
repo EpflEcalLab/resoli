@@ -2,12 +2,12 @@
   Drupal.behaviors.unload = {
     attach: function attach(context, settings) {
       // Warning
-      $(window).on('beforeunload', function(){
+      $(window).on('beforeunload', function() {
         return "Any changes will be lost";
       });
 
       // Form Submit
-      $(document).on("submit", "form", function(event){
+      $(document).on("submit", "form", function(event) {
         // disable warning
         $(window).off('beforeunload');
       });

@@ -96,6 +96,15 @@ const card = () => {
       }
     }
 
+    // Make sure the card is unflipped when clicking on the back button
+    // see issue #520
+    $(window).on('hashchange', function() {
+      const hash = window.location.hash;
+      if (hash && hash.includes('card')) {
+        $('.flip').removeClass('flip');
+      }
+    });
+
     // Workaround Bigpipe
     $(document).on('DOMNodeInserted', function() {
       onReady();

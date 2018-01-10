@@ -26,6 +26,7 @@
  - send mail to community managers when new user(s) request access to community #264 - via register form
  - set the modal-open wrapper to `position: fixed` to remove scroll inertia on Safari #408
  - add the role in communities listing of supervisor dashboard #202 
+ - flip the card back when using the browser back button #520
  - remove confirm state text in ajax submit buttons #224
  - fix translation extractor code and update translations
  - add shadow to copy button #491

@@ -3,62 +3,56 @@
 {% set community_name = variables.community.name.value|trim %}
 
 {# Block with current search filters #}
-{% if variables.activities %}
-  <div class="container">
-    <p class="lead text-center mt-5">
-      {%- set count = variables.themes|length -%}
+<div class="container">
+  <p class="lead text-center mt-5">
+    {%- set count = variables.themes|length -%}
 
-      {% if count >= 1 %}
-        {%- set themes_names = '' -%}
-        {% for theme in variables.themes|slice(0,3) %}
-          {% if not loop.first and not loop.last %}
-            {% set themes_names = themes_names ~ ', ' %}
-          {% endif %}
-          {% set themes_names = themes_names ~ theme %}
-          {% if loop.revindex == 2 and count <= 3 %}
-            {% set themes_names = themes_names ~ ' ' ~ 'qs.and'|t ~ ' ' %}
-          {% elseif loop.revindex == 2 %}
-            {% set themes_names = themes_names ~ ', ' %}
-          {% endif %}
-        {% endfor %}
-        {% if count >= 4 %}
-          {% set themes_names = themes_names ~ ', ' ~ 'qs.etc'|t %}
+    {% if variables.photos is not empty and count >= 1 %}
+      {%- set themes_names = '' -%}
+      {% for theme in variables.themes|slice(0,3) %}
+        {% if not loop.first and not loop.last %}
+          {% set themes_names = themes_names ~ ', ' %}
         {% endif %}
-        {%- trans -%}qs.photo.theme.filters {{ community_name }} {{ themes_names }}.{%- endtrans -%}
-      {% else %}
-        {%- trans -%}qs.photo.theme.filters {{ community_name }}.{%- endtrans -%}
+        {% set themes_names = themes_names ~ theme %}
+        {% if loop.revindex == 2 and count <= 3 %}
+          {% set themes_names = themes_names ~ ' ' ~ 'qs.and'|t ~ ' ' %}
+        {% elseif loop.revindex == 2 %}
+          {% set themes_names = themes_names ~ ', ' %}
+        {% endif %}
+      {% endfor %}
+      {% if count >= 4 %}
+        {% set themes_names = themes_names ~ ', ' ~ 'qs.etc'|t %}
       {% endif %}
-    </p>
-  </div>
+      {%- trans -%}qs.photo.theme.filters {{ community_name }} {{ themes_names }}.{%- endtrans -%}
+    {% elseif variables.photos is empty %}
+      {{ 'qs.photo.theme.title_empty @community_name'|t({'@community_name': community_name}) }}
+    {% else %}
+      {%- trans -%}qs.photo.theme.filters {{ community_name }}.{%- endtrans -%}
+    {% endif %}
+  </p>
+</div>
 
+{% if variables.photos is not empty %}
   <div class="container my-5">
     <div class="row">
       {% for activity in variables.activities if variables.photos[activity.nid.value] is not empty %}
-        {% set event = variables.events[activity.nid.value] %}
-        {# Print the theme header if we are on the next one #}
-        {% if (activity.field_theme.target_id != currentTheme) %}
-          {% set currentTheme = activity.field_theme.target_id %}
-          {% if loop.index > 1 %}
-            </div>
-            <div class="row">
-          {% endif %}
-          <div class="col-12 sticky-top bg-white mb-2">
-            {{ bamboo_render_entity('taxonomy_term', activity.field_theme.target_id, 'teaser') }}
-          </div>
-        {% endif %}
+      {% set event = variables.events[activity.nid.value] %}
+      {# Print the theme header if we are on the next one #}
+      {% if (activity.field_theme.target_id != currentTheme) %}
+      {% set currentTheme = activity.field_theme.target_id %}
+      {% if loop.index > 1 %}
+    </div>
+    <div class="row">
+      {% endif %}
+      <div class="col-12 sticky-top bg-white mb-2">
+        {{ bamboo_render_entity('taxonomy_term', activity.field_theme.target_id, 'teaser') }}
+      </div>
+      {% endif %}
 
-        <div class="col-sm-6 d-flex">
-          {% include '@quartiers_solidaires/qs_photo/qs--photo--event-card.html.twig' with {'activity': activity, 'photos': variables.photos[activity.nid.value] } %}
-        </div>
-      {% else %}
-        <div class="col">
-          <p class="text-center">{{ 'qs.photo.theme.filters.empty'|t }}</p>
-        </div>
+      <div class="col-sm-6 d-flex">
+        {% include '@quartiers_solidaires/qs_photo/qs--photo--event-card.html.twig' with {'activity': activity, 'photos': variables.photos[activity.nid.value] } %}
+      </div>
       {% endfor %}
     </div>
-  </div>
-{% else %}
-  <div class="container">
-    <p class="lead text-center mt-5">{% trans %}qs.photo.theme.title_empty {{ community_name }}{% endtrans %}</p>
   </div>
 {% endif %}

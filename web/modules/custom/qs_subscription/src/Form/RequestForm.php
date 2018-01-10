@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\PrependCommand;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -194,6 +195,7 @@ class RequestForm extends FormBase {
     $messages = $this->renderer->renderRoot($status_messages);
     if (!empty($messages)) {
       // Append the bag message(s).
+      $response->addCommand(new PrependCommand('#wrapper-status-messages', $messages));
     }
 
     // TODO InvokeCommand scrollTo the alerts.

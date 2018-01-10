@@ -63,6 +63,38 @@ function qs_subscription_mail($key, &$message, $params) {
       ]));
       break;
 
+    // Sent to organizers & maintainers when event subscription
+    // request has been approved.
+    case 'subscription_event_waiting_approval_confirm_organizers':
+      $user      = $message['params']['user'];
+      $event     = $message['params']['event'];
+      $activity  = $event->field_activity->entity;
+      $community = $activity->field_community->entity;
+
+      $message['subject'] = t('qs.mail.subscription.waiting_approval.confirm_organizers.subject @sitename @mail @firstname @lastname @community @event @activity', [
+        '@sitename'  => $site->get('name'),
+        '@mail'      => $user->mail->value,
+        '@firstname' => $user->field_firstname->value,
+        '@lastname'  => $user->field_lastname->value,
+        '@community' => $community->getName(),
+        '@event'     => $event->getTitle(),
+        '@activity'  => $activity->getTitle(),
+      ]);
+
+      $message['body'][0] = Markup::create(t('qs.mail.subscription.waiting_approval.confirm_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
+        '@mail'       => $user->mail->value,
+        '@firstname'  => $user->field_firstname->value,
+        '@lastname'   => $user->field_lastname->value,
+        '@community'  => $community->getName(),
+        '@event'      => $event->getTitle(),
+        '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
+        '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
+        '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
+        '@activity'   => $activity->getTitle(),
+        '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+      ]));
+      break;
+
     // Sent to user when event subscription request has been declined.
     case 'subscription_event_waiting_approval_decline':
       $account   = $message['params']['account'];
@@ -93,5 +125,6 @@ function qs_subscription_mail($key, &$message, $params) {
         '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
       break;
+
   }
 }

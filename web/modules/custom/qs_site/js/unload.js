@@ -1,4 +1,4 @@
-(function ($, Modernizr, Drupal) {
+(function ($, Drupal) {
   Drupal.behaviors.unload = {
     attach: function attach(context, settings) {
       // Warning
@@ -18,4 +18,4 @@
       }
     }
   };
-})(jQuery, Modernizr, Drupal);
+})(jQuery, Drupal);

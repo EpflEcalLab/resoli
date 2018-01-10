@@ -82,7 +82,11 @@ class AccountController extends ControllerBase {
     $variables['user']        = $user;
     $variables['communities'] = $this->acl->getCommunities($user);
     $variables['pending']     = $this->acl->getPendingApprovalCommunities($user);
-    $variables['privileges']  = $this->badgeManager->getCommunityPrivileges($variables['communities'], $user);
+    $variables['privileges']  = [];
+
+    if ($variables['communities']) {
+      $variables['privileges'] = $this->badgeManager->getCommunityPrivileges($variables['communities'], $user);
+    }
 
     return [
       '#theme'     => 'qs_supervisor_account_dashboard_page',

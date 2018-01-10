@@ -2428,7 +2428,7 @@ msgid "qs_auth.form.communities.no_community"
 msgstr "Vous n’êtes actuellement membre d’aucune communauté."
 
 msgid "qs.photo.theme.title_empty @community_name"
-msgstr ""
+msgstr "Aucune photo d’activité de @community_name ne correspond à votre choix de thème(s)."
 
 msgid "qs.comment.copy_to_other"
 msgstr "Appliquer à toutes les images"

@@ -2532,3 +2532,7 @@ msgstr ""
 #:
 msgid "qs.mail.subscription.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community @event @activity"
 msgstr ""
+
+#:
+msgid "qs_supervisor.account.role @role"
+msgstr "Vous y êtes @role"

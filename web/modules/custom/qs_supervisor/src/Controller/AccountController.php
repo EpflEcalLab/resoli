@@ -3,6 +3,7 @@
 namespace Drupal\qs_supervisor\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\qs_badge\Service\BadgeManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Session\AccountProxyInterface;
@@ -21,10 +22,18 @@ class AccountController extends ControllerBase {
   private $acl;
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_badge\Service\BadgeManager
+   */
+  private $badgeManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl) {
+  public function __construct(AccessControl $acl, BadgeManager $badgeManager) {
     $this->acl = $acl;
+    $this->badgeManager = $badgeManager;
   }
 
   /**
@@ -34,7 +43,8 @@ class AccountController extends ControllerBase {
     // Instantiates this form class.
     return new static(
       // Load customs services used in this class.
-      $container->get('qs_acl.access_control')
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_badge.badge_manager')
     );
   }
 
@@ -72,6 +82,7 @@ class AccountController extends ControllerBase {
     $variables['user']        = $user;
     $variables['communities'] = $this->acl->getCommunities($user);
     $variables['pending']     = $this->acl->getPendingApprovalCommunities($user);
+    $variables['privileges']  = $this->badgeManager->getCommunityPrivileges($variables['communities'], $user);
 
     return [
       '#theme'     => 'qs_supervisor_account_dashboard_page',

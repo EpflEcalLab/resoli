@@ -10,7 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
-use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\qs_auth\Service\Account;
 
 /**
  * CommunitiesApplyForm class.
@@ -56,22 +56,22 @@ class CommunitiesApplyForm extends FormBase {
   private $privilegeManager;
 
   /**
-   * Composes and optionally sends an email message.
+   * The QS account service.
    *
-   * @var \Drupal\Core\Mail\MailManagerInterface
+   * @var \Drupal\qs_auth\Service\Account
    */
-  protected $mail;
+  protected $account;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManager $privilege_manager, AccountProxyInterface $currentUser, MailManagerInterface $mail) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManager $privilege_manager, AccountProxyInterface $currentUser, Account $account) {
     $this->acl              = $acl;
     $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
     $this->userStorage      = $entity_type_manager->getStorage('user');
     $this->privilegeManager = $privilege_manager;
     $this->currentUser      = $currentUser;
-    $this->mail             = $mail;
+    $this->account          = $account;
   }
 
   /**
@@ -83,7 +83,7 @@ class CommunitiesApplyForm extends FormBase {
     $container->get('entity_type.manager'),
     $container->get('qs_acl.privilege_manager'),
     $container->get('current_user'),
-    $container->get('plugin.manager.mail')
+    $container->get('qs_auth.account')
     );
   }
 
@@ -202,27 +202,8 @@ class CommunitiesApplyForm extends FormBase {
     $community = $this->termStorage->load($form_state->getValue('community'));
     $this->privilegeManager->request('community_members', $community, $this->currentUser);
 
-    // Get all managers of one community.
-    $query = $this->privilegeManager->queryPrivilege($community, 'community_managers');
-    $rows = $query->execute()->fetchAll();
-
-    $ids = [];
-    foreach ($rows as $row) {
-      $ids[] = $row->user;
-    }
-
-    // Load user with community_managers privilege & send them mail.
-    $users = NULL;
-    if ($ids) {
-      $users = $this->userStorage->loadMultiple($ids);
-
-      foreach ($users as $user) {
-        $this->mail->mail('qs_auth', 'auth_community_apply', $user->getEmail(), $user->getPreferredLangcode(), [
-          'account'   => $account,
-          'community' => $community,
-        ]);
-      }
-    }
+    // Send to community managers a mail with the new request.
+    $this->account->sendCommunityManagersApplyReq($account, $community);
 
     drupal_set_message($this->t('qs_auth.communities.apply.success @community', [
       '@community' => $community->getName(),

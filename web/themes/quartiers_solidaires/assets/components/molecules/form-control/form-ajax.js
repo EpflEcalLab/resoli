@@ -58,8 +58,6 @@ const formAjax = () => {
                 break;
             }
 
-            // console.log('Submission was successful.');
-            // console.log(data);
           },
           error: function (data) {
               console.error('An error occurred.', data);

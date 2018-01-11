@@ -12,6 +12,14 @@ global-styling:
     - core/drupal
     - core/drupalSettings
 
+date:
+  js:
+    build/js/date.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
+    - core/jquery.ui.datepicker
+
 # Google Map
 google-map:
   version: 3.0

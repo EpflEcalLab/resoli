@@ -17,7 +17,11 @@
               <span class="card-pill-title">
                 <span>{{ community.name.value }}</span>
               </span>
-              <span class="btn btn-outline-invert btn-circle shadow-to-left ml-auto shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
+              <span class="font-weight-light ml-auto mr-4 text-right">
+                {% set role = ('qs.roles.' ~ variables.privileges[community.tid.value]|last)|t|lower %}
+                {% trans %}qs_supervisor.account.role {{ role }}{% endtrans %}
+              </span>
+              <span class="btn btn-outline-invert btn-circle shadow-to-left shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
                 {{ macros.icon('look')}}
                 <span class="sr-only">{{ 'qs_supervisor.account.community_go'|t }}</span>
               </span>
@@ -30,9 +34,9 @@
               <span class="card-pill-icon">{{ macros.icon('wait') }}</span>
               <span class="card-pill-title">
                 <span>{{ community.name.value }}</span>
-                <span class="font-weight-light">{{ 'qs_supervisor.account.community_pending'|t }}</span>
               </span>
-              <span class="btn btn-outline-invert btn-circle shadow-to-left ml-auto shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.approval_go'|t }}">
+                <span class="font-weight-light ml-auto mr-4 text-right">{{ 'qs_supervisor.account.community_pending'|t }}</span>
+              <span class="btn btn-outline-invert btn-circle shadow-to-left shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.approval_go'|t }}">
                 {{ macros.icon('look')}}
                 <span class="sr-only">{{ 'qs_supervisor.account.approval_go'|t }}</span>
               </span>

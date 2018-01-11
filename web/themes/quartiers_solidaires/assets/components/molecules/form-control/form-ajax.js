@@ -10,12 +10,11 @@ const formAjax = () => {
       const text = $this.text();
       const $icon = $this.find('.icon').clone();
       const confirmText = $this.data('confirm');
-console.log($icon);
+
       // Send request if we are in pending state
       if ($this.data('pending')) {
         window.clearTimeout(timer);
         $this
-          .text(Drupal.t('qs.form_confirmed_feedback'))
           .removeData('pending');
         return true;
       }
@@ -42,7 +41,7 @@ console.log($icon);
     $(document).on('submit', 'form[data-ajax="true"]', function(e) {
       e.preventDefault();
       const $this = $(this);
-      
+
       $.ajax({
           type: $this.attr('method'),
           url:  $this.attr('action'),
@@ -59,12 +58,9 @@ console.log($icon);
                 break;
             }
 
-            console.log('Submission was successful.');
-            console.log(data);
           },
           error: function (data) {
-              console.error('An error occurred.');
-              console.log(data);
+              console.error('An error occurred.', data);
           },
       });
     });

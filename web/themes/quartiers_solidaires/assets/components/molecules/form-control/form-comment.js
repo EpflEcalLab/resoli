@@ -12,7 +12,7 @@ const formComment = () => {
       }
 
       // Add a copy button after the first textarea
-      const btn = $(`<button class="btn btn-outline-invert mt-2">${Drupal.t('qs.comment.copy_to_other')}</button>`)
+      const btn = $(`<button class="btn btn-outline-invert shadow-to-bottom mt-2">${Drupal.t('qs.comment.copy_to_other')}</button>`)
         .on('click', function(e) {
           e.preventDefault();
 

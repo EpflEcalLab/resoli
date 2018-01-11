@@ -25,6 +25,7 @@
  - send mail to community managers when new user(s) request access to community #264 - via communityApply form
  - send mail to community managers when new user(s) request access to community #264 - via register form
  - set the modal-open wrapper to `position: fixed` to remove scroll inertia on Safari #408
+ - add the role in communities listing of supervisor dashboard #202 
  - flip the card back when using the browser back button #520
  - remove confirm state text in ajax submit buttons #224
  - fix translation extractor code and update translations
@@ -32,6 +33,9 @@
  - fix empty state messages in photos collection by theme #466
  - send mail to user when subscription to event is declined #377
  - send mail to organizers & maintainers when subscription to event is confirmed #377
+ - fix Firefox glitch when flipping a card #255
+ - remove padding hacks to mitigate Firefox bugs... #255 
+ - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome
 
 ## 0.1.0 (2017-12-13)
  - production deployment

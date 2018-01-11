@@ -181,4 +181,47 @@ class BadgeManager {
     return $privileges;
   }
 
+  /**
+   * From given communities node IDs, return list of privileges for given user.
+   *
+   * @param \Drupal\node\NodeInterface[] $communities
+   *   A collection of activities.
+   * @param \Drupal\user\UserInterface $account
+   *   The user entity.
+   *
+   * @return integer[]
+   *   The collection of activities IDs which have privileges.
+   */
+  public function getCommunityPrivileges(array $communities, UserInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $nids = [];
+    foreach ($communities as $community) {
+      $nids[$community->id()] = $community->id();
+    }
+
+    $query = $this->connection->select('privileges', 'privileges');
+    $query->fields('privileges', ['privilege', 'entity'])
+      ->condition('privileges.entity', $nids, 'in')
+      ->condition('privileges.user', $user->id())
+      ->condition('privileges.status', 1);
+
+    // Order privilege from low to high permissions.
+    // MySQL only.
+    $query->addExpression("find_in_set(privilege, 'community_members,community_organizers,community_managers')", 'order_privileges');
+    $query->orderBy('order_privileges');
+
+    $rows = $query->execute()->fetchAll();
+
+    $privileges = [];
+    foreach ($rows as $row) {
+      $privileges[$row->entity][$row->privilege] = substr($row->privilege, 0, -1);
+    }
+
+    return $privileges;
+  }
+
 }

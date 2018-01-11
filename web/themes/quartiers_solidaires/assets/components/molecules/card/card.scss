@@ -551,6 +551,7 @@ a[href].card-pill-simple {
 
     .collapse {
       top: $card-pill-icon-size; // keep the collapse below the .card-pill
+      opacity: 0;
     }
 
     .card-back:target {

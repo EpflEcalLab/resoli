@@ -37,6 +37,8 @@
  - fix translation extractor code and update translations
  - add shadow to copy button #491
  - fix empty state messages in photos collection by theme #466
+ - send mail to user when subscription to event is declined #377
+ - send mail to organizers & maintainers when subscription to event is confirmed #377
  - fix Firefox glitch when flipping a card #255
  - remove padding hacks to mitigate Firefox bugs... #255 
  - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome

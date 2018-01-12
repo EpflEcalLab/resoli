@@ -5,6 +5,9 @@
  * Legacy Drupal 7 code to implements hooks.
  */
 
+ // Includes.
+require_once 'inc/mails.inc';
+
 /**
  * Implements hook_theme().
  */

@@ -1949,6 +1949,18 @@ msgstr ""
 msgid "qs.mail.subscription.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community @event @activity"
 msgstr ""
 
+msgid "qs.mail.event.deleted.subject @sitename @event"
+msgstr ""
+
+msgid "qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end"
+msgstr ""
+
+msgid "qs.mail.event.updated.subject @sitename @event"
+msgstr ""
+
+msgid "qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end"
+msgstr ""
+
 msgid "qs_supervisor.account.role @role"
 msgstr "Vous y êtes @role"
 

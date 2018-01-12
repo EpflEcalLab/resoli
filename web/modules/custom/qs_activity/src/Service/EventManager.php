@@ -5,9 +5,13 @@ namespace Drupal\qs_activity\Service;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Database\Connection;
+use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\qs_subscription\Service\SubscriptionManager;
+use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Session\AccountInterface;
 
 /**
  * EventManager.
@@ -20,6 +24,13 @@ class EventManager {
    * @var \Drupal\node\NodeStorageInterface
    */
   protected $nodeStorage;
+
+  /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
 
   /**
    * The entity query factory.
@@ -36,12 +47,37 @@ class EventManager {
   protected $connection;
 
   /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  protected $privilegeManager;
+
+  /**
+   * The Subscription Manager.
+   *
+   * @var \Drupal\qs_subscription\Service\SubscriptionManager
+   */
+  protected $subscriptionManager;
+
+  /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
+
+  /**
    * Class constructor.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
-    $this->nodeStorage  = $entity_type_manager->getStorage('node');
-    $this->queryFactory = $query_factory;
-    $this->connection   = $connection;
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail) {
+    $this->nodeStorage         = $entity_type_manager->getStorage('node');
+    $this->userStorage         = $entity_type_manager->getStorage('user');
+    $this->queryFactory        = $query_factory;
+    $this->connection          = $connection;
+    $this->privilegeManager    = $privilege_manager;
+    $this->subscriptionManager = $subscription_manager;
+    $this->mail                = $mail;
   }
 
   /**
@@ -304,6 +340,119 @@ class EventManager {
 
     $event->save();
     return $event;
+  }
+
+  /**
+   * Send mail that event has change to subscribers, organizer(s) & maintainers.
+   *
+   * Sent mails to subscribers & all activity_organizers/activity_maintainers.
+   *
+   * @param \Drupal\node\NodeInterface $original_event
+   *   The original event.
+   * @param \Drupal\node\NodeInterface $updated_event
+   *   The updated event.
+   * @param \Drupal\Core\Session\AccountInterface $author
+   *   The author of edition.
+   */
+  public function sendUpdated(NodeInterface $original_event, NodeInterface $updated_event, AccountInterface $author) {
+    $activity = $updated_event->field_activity->entity;
+    $ids = [];
+
+    // Get all organizers of this activities's event.
+    $query_organizers = $this->privilegeManager->queryPrivilege($activity, 'activity_organizers');
+    $rows = $query_organizers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Get all maintainer of this activities's event.
+    $query_maintainers = $this->privilegeManager->queryPrivilege($activity, 'activity_maintainers');
+    $rows = $query_maintainers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Get all subscribed users of event.
+    $query_subscribers = $this->subscriptionManager->querySubscribers($updated_event);
+    $rows = $query_subscribers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Load user with community_managers privilege & send them mail.
+    $users = NULL;
+    if ($ids) {
+      $users = $this->userStorage->loadMultiple($ids);
+
+      // Load the user entity from proxy session.
+      $author = $this->userStorage->load($author->id());
+
+      foreach ($users as $user) {
+        $this->mail->mail('qs_activity', 'activity_event_updated', $user->getEmail(), $user->getPreferredLangcode(), [
+          'author'         => $author,
+          'original_event' => $original_event,
+          'updated_event'  => $updated_event,
+        ]);
+      }
+    }
+  }
+
+  /**
+   * Send a mail to alert users about the deletion of event.
+   *
+   * Sent mails to subscribers & all activity_organizers/activity_maintainers.
+   *
+   * @param \Drupal\node\NodeInterface $event
+   *   The deleted event.
+   * @param \Drupal\Core\Session\AccountInterface $author
+   *   The author of deletion.
+   */
+  public function sendDeleted(NodeInterface $event, AccountInterface $author) {
+    $activity = $event->field_activity->entity;
+    $ids = [];
+
+    // Get all organizers of this activities's event.
+    $query_organizers = $this->privilegeManager->queryPrivilege($activity, 'activity_organizers');
+    $rows = $query_organizers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Get all maintainer of this activities's event.
+    $query_maintainers = $this->privilegeManager->queryPrivilege($activity, 'activity_maintainers');
+    $rows = $query_maintainers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Get all subscribed users of event.
+    $query_subscribers = $this->subscriptionManager->querySubscribers($event);
+    $rows = $query_subscribers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Load user with community_managers privilege & send them mail.
+    $users = NULL;
+    if ($ids) {
+      $users = $this->userStorage->loadMultiple($ids);
+
+      // Load the user entity from proxy session.
+      $author = $this->userStorage->load($author->id());
+
+      foreach ($users as $user) {
+        $this->mail->mail('qs_activity', 'activity_event_deleted', $user->getEmail(), $user->getPreferredLangcode(), [
+          'author' => $author,
+          'event'  => $event,
+        ]);
+      }
+    }
   }
 
 }

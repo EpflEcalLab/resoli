@@ -4,14 +4,15 @@ namespace Drupal\qs_subscription\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\qs_subscription\Entity\Subscription;
-use Drupal\Core\Mail\MailManagerInterface;
 
 /**
  * JudgeController.
@@ -46,13 +47,21 @@ class JudgeController extends ControllerBase {
   protected $mail;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, AccessControl $acl, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail) {
     $this->acl                 = $acl;
     $this->privilegeManager    = $privilege_manager;
     $this->subscriptionManager = $subscription_manager;
     $this->mail                = $mail;
+    $this->userStorage         = $entity_type_manager->getStorage('user');
   }
 
   /**
@@ -62,6 +71,7 @@ class JudgeController extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
+    $container->get('entity_type.manager'),
     $container->get('qs_acl.access_control'),
     $container->get('qs_acl.privilege_manager'),
     $container->get('qs_subscription.subscription_manager'),

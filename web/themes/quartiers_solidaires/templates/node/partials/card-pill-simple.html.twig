@@ -16,13 +16,8 @@
     </span>
   </span>
 
-  {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
-    {{ macros.badge('info', 'wait', 'flag-subscription-wait') }}
-  {% endif %}
-
-  {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
-    {{ macros.badge('info', 'confirmed', 'flag-subscription-confirmed') }}
-  {% endif %}
+  {# Subscription Badges #}
+  {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
 
   <span class="size-date ml-auto text-dark">
     {% block card_pill_time %}

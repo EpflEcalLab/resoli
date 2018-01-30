@@ -1,7 +1,7 @@
 Feature: Badges - Activities by Date
   Asserts the listing of Activities by Date show subscriptions's badges
   according current users state of subscriptions on the event pill
-  and use the highest privilege on this activities to get the color.
+  and use the highest privilege on this event's activity to get the color.
 
   @api
   Scenario: Logged as Member of Fribourg, I see no badges cause I have no subscription.

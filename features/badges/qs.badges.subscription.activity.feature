@@ -1,6 +1,6 @@
 Feature: Badges - Subscription - Activity
   Asserts the detail page of Activity show badges
-  according current loggedin users highest privilege on events pills.
+  according current users highest privilege on events pills.
 
   @api
   Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°2 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
@@ -82,11 +82,3 @@ Feature: Badges - Subscription - Activity
     Then I should see a "#card-event35[data-status='default']" element
     Then I should see a "#collapse-36" element
     Then I should see a "#card-event36[data-status='default']" element
-
-## Calendar by Month
-
-## Calendar by Week
-
-## My activities
-
-## My subscriptions

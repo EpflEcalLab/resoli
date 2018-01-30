@@ -82,7 +82,7 @@
           {% set event_date = event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F Y') %}
           {% set event_start_hour = event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') %}
           {% set event_end_hour = event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') %}
-          <span class="text-dark">{{ event_date }}<br>{{ event_start_hour }} – {{ event_end_hour }}</span>
+          <span class="text-dark">{{ event_date }}<br>{{ event_start_hour }}&nbsp;–&nbsp;{{ event_end_hour }}</span>
         {% else %}
           <span class="text-dark">{{ 'qs.activity.nextevent.empty'|t }}</span>
         {%- endif -%}

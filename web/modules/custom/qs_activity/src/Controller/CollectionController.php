@@ -152,6 +152,12 @@ class CollectionController extends ControllerBase {
       }
     }
 
+    // Get badges.
+    if (!empty($variables['activities'])) {
+      // From list of Activities get user privileges.
+      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($variables['activities']);
+    }
+
     return [
       '#theme'     => 'qs_activity_collection_by_theme_page',
       '#variables' => $variables,

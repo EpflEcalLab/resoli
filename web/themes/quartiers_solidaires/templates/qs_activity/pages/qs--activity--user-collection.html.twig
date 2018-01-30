@@ -34,20 +34,7 @@
           <span class="card-pill-title">{{ activity.title.value }}</span>
 
           {# Privilege Badges #}
-          {% if activity.nid.value in variables.badges.privileges|keys %}
-            {% set privilege = variables.badges.privileges[activity.nid.value]|last %}
-            {% if privilege == 'activity_members' %}
-              {{ macros.badge('info', 'happy', 'flag-privilege-members', 'qs.roles.activity_member'|t) }}
-            {% endif %}
-
-            {% if privilege == 'activity_maintainers' %}
-              {{ macros.badge('warning', 'happy', 'flag-privilege-maintainers', 'qs.roles.activity_maintainer'|t, true) }}
-            {% endif %}
-
-            {% if privilege == 'activity_organizers' %}
-              {{ macros.badge('danger', 'happy', 'flag-privilege-organizers', 'qs.roles.activity_organizer'|t, true) }}
-            {% endif %}
-          {% endif %}
+          {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege.html.twig' with {'activity': activity, 'badges': variables.badges} %}
 
           <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.activity.more'|t }}">
             {{ macros.icon('look') }}

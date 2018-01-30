@@ -145,7 +145,7 @@ class BadgeManager {
    *  - activity_members,
    *  - activity_maintainers,
    *  - activity_organizers.
-   * It means you get the last el in the array to get the highest privilege.
+   * It means you have the highest privilege in the last index of the array.
    *
    * @param \Drupal\node\NodeInterface[] $activities
    *   A collection of activities.
@@ -182,6 +182,57 @@ class BadgeManager {
     $privileges = [];
     foreach ($rows as $row) {
       $privileges[$row->entity][$row->privilege] = $row->privilege;
+    }
+
+    return $privileges;
+  }
+
+  /**
+   * From given events node IDs, return the list privilege for the user.
+   *
+   * The user's privileges are ordered from lowest to highest.
+   *  - activity_members,
+   *  - activity_maintainers,
+   *  - activity_organizers.
+   * It means you have the highest privilege in the last index of the array.
+   *
+   * @param \Drupal\node\NodeInterface[] $events
+   *   A collection of events.
+   * @param \Drupal\user\UserInterface $account
+   *   The user entity.
+   *
+   * @return integer[]
+   *   The collection of activities IDs which have privileges.
+   */
+  public function getPrivilegesByEvents(array $events, UserInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $nids = [];
+    foreach ($events as $event) {
+      $nids[$event->id()] = $event->id();
+    }
+
+    $query = $this->connection->select('privileges', 'privileges');
+    $query->fields('privileges', ['privilege', 'entity'])
+      ->condition('privileges.user', $user->id())
+      ->condition('privileges.status', 1);
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = privileges.entity');
+    $query->fields('field_activity', ['field_activity_target_id'])
+      ->condition('field_activity.entity_id', $nids, 'in');
+
+    // Order privilege from low to high permissions.
+    // MySQL only.
+    $query->addExpression("find_in_set(privilege, 'activity_members,activity_maintainers,activity_organizers')", 'order_privileges');
+    $query->orderBy('order_privileges');
+
+    $rows = $query->execute()->fetchAll();
+
+    $privileges = [];
+    foreach ($rows as $row) {
+      $privileges[$row->field_activity_target_id][$row->privilege] = $row->privilege;
     }
 
     return $privileges;

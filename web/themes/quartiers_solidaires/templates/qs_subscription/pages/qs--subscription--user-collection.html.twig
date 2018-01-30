@@ -16,7 +16,7 @@
         <a
           href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}"
           class="card-pill"
-          id="event{{ activity.nid.value }}"
+          id="event{{ event.nid.value }}"
         >
           <span class="card-pill-icon">
             {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}

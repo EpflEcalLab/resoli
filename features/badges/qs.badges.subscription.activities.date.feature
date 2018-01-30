@@ -4,7 +4,7 @@ Feature: Badges - Activities by Date
   and use the highest privilege on this event's activity to get the color.
 
   @api
-  Scenario: Logged as Member of Fribourg, I see no badges cause I have no subscription.
+  Scenario: Logged as Member of Fribourg, I should see 0 badges 'cause I have 0 subscriptions.
     Given I am logged in as user "member+fribourg"
     When I am on "/fribourg/activities/date"
     Then I should see 2 ".card-list-simple-item" elements
@@ -35,7 +35,7 @@ Feature: Badges - Activities by Date
     Then I should see 0 ".card-list-simple-item .flag" elements
 
   @api
-    Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I see no badges on cause I have no subscription
+    Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I should see 0 badges 'cause I have 0 subscriptions
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/activities/date"
     And the response status code should be 200

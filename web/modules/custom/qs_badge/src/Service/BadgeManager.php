@@ -141,6 +141,12 @@ class BadgeManager {
   /**
    * From given activities node IDs, return the list privilege for the user.
    *
+   * The user's privileges are ordered from lowest to highest.
+   *  - activity_members,
+   *  - activity_maintainers,
+   *  - activity_organizers.
+   * It means you get the last el in the array to get the highest privilege.
+   *
    * @param \Drupal\node\NodeInterface[] $activities
    *   A collection of activities.
    * @param \Drupal\user\UserInterface $account

@@ -1,13 +1,23 @@
 
 {# Subscription Badges #}
 {% if event.nid.value and badges.subscriptions %}
+
+  {% set theme = 'info' %}
+  {# Adapte the color of badge according user privilege of activity #}
+  {% if event.field_activity.entity.nid.value in badges.privileges|keys %}
+    {% set privilege = badges.privileges[event.field_activity.entity.nid.value]|last %}
+
+    {% if privilege == 'activity_maintainers' %}{% set theme = 'warning' %}{% endif %}
+    {% if privilege == 'activity_organizers' %}{% set theme = 'danger' %}{% endif %}
+  {% endif %}
+
   {# Subscription pendings badge #}
   {% if event.nid.value in badges.subscriptions.pendings|keys %}
-    {{ macros.badge('info', 'wait', 'flag-subscription-wait') }}
+    {{ macros.badge(theme, 'wait', 'flag-subscription-wait') }}
   {% endif %}
 
   {# Subscription confirmed badge #}
   {% if event.nid.value in badges.subscriptions.confirmed|keys %}
-    {{ macros.badge('info', 'confirmed', 'flag-subscription-confirmed') }}
+    {{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed') }}
   {% endif %}
 {% endif %}

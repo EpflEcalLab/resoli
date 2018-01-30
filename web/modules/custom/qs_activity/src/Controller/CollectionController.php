@@ -225,8 +225,11 @@ class CollectionController extends ControllerBase {
     $events = $this->eventManager->getByDate($community, $start, $end);
     $variables['events'] = $events;
 
+    // Get the only next events of each ones.
+    $activities = $this->activityManager->getByDate($community, $start, $end);
+    // $variables['activities'] = $activities;.
     // Get badges.
-    if (!empty($events)) {
+    if (!empty($events) && !empty($activities)) {
       // From a list of Events where current user has pending subscriptions.
       $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($events, NULL);
 
@@ -238,6 +241,9 @@ class CollectionController extends ControllerBase {
 
       // From a list of Events number of subscriptions.
       $variables['badges']['admin']['subscriptions']['confirmed'] = [];
+
+      // From list of Activities get user privileges.
+      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($activities);
     }
 
     return [

@@ -3,8 +3,8 @@
 ## NEXT RELEASE
  - add GMT tag
  - fix #500 - Remove privilegies & subscriptions when deleting entities
- - improve user supervisor dashboard #202  
- - fix click propagation in photoswipe gallery #497 
+ - improve user supervisor dashboard #202
+ - fix click propagation in photoswipe gallery #497
  - add some missing empty states in photos section #466
  - change focus ring width to 2px instead of .2rem
  - fix small shift when clicking on menu toggle button
@@ -20,7 +20,7 @@
  - add classes to toggle the flag and button visibility in event cards #234
  - refactoring the subscription workflow to use Drupal Ajax form #234
  - send email to user when subscription to event is confirmed #234
- - fix broken image ratio in photoswipe gallery in view by month #444 
+ - fix broken image ratio in photoswipe gallery in view by month #444
  - send mail to community managers when new user(s) request access to community #264
  - send mail to community managers when new user(s) request access to community #264 - via communityApply form
  - send mail to community managers when new user(s) request access to community #264 - via register form
@@ -31,7 +31,7 @@
  - send mail to subscribers of events when event is updated #381
  - send mail to activity organizers when events is updated #381
  - send mail to activity maintainers when events is updated #381
- - add the role in communities listing of supervisor dashboard #202 
+ - add the role in communities listing of supervisor dashboard #202
  - flip the card back when using the browser back button #520
  - remove confirm state text in ajax submit buttons #224
  - fix translation extractor code and update translations
@@ -40,9 +40,9 @@
  - send mail to user when subscription to event is declined #377
  - send mail to organizers & maintainers when subscription to event is confirmed #377
  - fix Firefox glitch when flipping a card #255
- - remove padding hacks to mitigate Firefox bugs... #255 
+ - remove padding hacks to mitigate Firefox bugs... #255
  - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome
- - add Privilege's Badge on Activity by Themes
+ - add Privilege's Badge on Activity by Themes (close #318, close #315, close #316)
 
 ## 0.1.0 (2017-12-13)
  - production deployment

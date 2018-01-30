@@ -1,5 +1,5 @@
-Feature: Badges - Activities by Themes
-  Asserts the listing of Activities by Themes show badges
+Feature: Badges - Privilege - Activities by Theme
+  Asserts the listing of Activities by Theme show badges
   according current loggedin users highest privilege on this activity.
 
   @api

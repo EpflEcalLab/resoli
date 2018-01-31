@@ -43,6 +43,7 @@
  - remove padding hacks to mitigate Firefox bugs... #255 
  - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome
  - fix #507 - Google Autocomplete doesn't works when user chose a place & then change to a custom one
+ - fix #501 - Manage community Floating buttons
 
 ## 0.1.0 (2017-12-13)
  - production deployment

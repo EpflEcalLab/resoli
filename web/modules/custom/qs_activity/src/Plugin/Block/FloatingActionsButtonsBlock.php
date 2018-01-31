@@ -118,9 +118,8 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $icon = 'communities-sm';
       $theme = 'danger';
       $url =
-        $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
+        $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
           'community' => $community->id(),
-          'user' => $this->currentUser->id(),
         ]);
       $label = $this->t('qs_menu.links.account.communities');
 

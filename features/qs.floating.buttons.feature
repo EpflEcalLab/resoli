@@ -174,6 +174,32 @@ Feature: Floating actions buttons
     Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/8/dashboard"
 
+# Community Dashboard
+
+  @api
+  Scenario: Logged as Manager of Lausanne, when reaching the Lausanne community dashboard, I must see the "Community Dashboard" button
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/dashboard"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_menu.links.account.communities" link with href "/lausanne/dashboard"
+
+  @api
+  Scenario: Logged as Manager of Lausanne, when reaching the Lausanne community dashboard members, I must see the "Community Dashboard" button
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/dashboard/members"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_community.dashboard.members" link with href "/lausanne/dashboard"
+
+  @api
+  Scenario: Logged as Manager of Lausanne, when reaching the Lausanne community dashboard waiting-approval, I must see the "Community Dashboard" button
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/dashboard/waiting-approval"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_community.dashboard.waiting_approval" link with href "/lausanne/dashboard"
+
 # Photos by Themes
 
 # Photos by Month

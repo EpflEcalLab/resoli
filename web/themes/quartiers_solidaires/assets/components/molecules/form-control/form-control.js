@@ -12,15 +12,30 @@ const formControl = () => {
 
       // Enable the Google Place API for each inputs.
       $inputs.each(function(i, el) {
+        // We will store the user choosen place to check if before submit
+        // he change the autocomplete value whitout choosing from the list
+        // & never trigger the 'place_changed' event.
+        let choosen = '';
+
         const inputLat = $(el).data('googleInputLat');
         const inputLng = $(el).data('googleInputLng');
         const autocomplete = new google.maps.places.Autocomplete(el, {
           componentRestrictions: {country: 'ch'},
         });
 
-        $(el).on('change', function() {
-          $(`input[data-drupal-selector="${inputLat}"]`).val('');
-          $(`input[data-drupal-selector="${inputLng}"]`).val('');
+        /**
+         * Cleanup the lat/lng fields when user chose custom place instead of Google one.
+         */
+        $(el).parents('form').on('submit', function() {
+          // Get the latest google place selected by the user.
+          const place = autocomplete.getPlace();
+
+          // Check if the current input value is the same as previous google selected.
+          // If different, cleanup the lat/lng value cause the user chose a custom address.
+          if ($(el).val() != choosen) {
+            $(`input[data-drupal-selector="${inputLat}"]`).val('');
+            $(`input[data-drupal-selector="${inputLng}"]`).val('');
+          }
         });
 
         $(document).on('keypress', function(e) {
@@ -30,7 +45,8 @@ const formControl = () => {
         });
 
         autocomplete.addListener('place_changed', function() {
-          var place = autocomplete.getPlace();
+          const place = autocomplete.getPlace();
+          choosen = $(el).val();
           let lat = '';
           let lng = '';
 
@@ -48,7 +64,6 @@ const formControl = () => {
     /**
      * Radios group, add class to buttons before the clicked one
      */
-
     function togglePrevRadios(el) {
       el.closest('label').prevAll().addClass('active-alt');
     }

@@ -155,7 +155,7 @@ class JudgeController extends ControllerBase {
 
         foreach ($accounts as $account) {
           $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_confirm_organizers', $account->getEmail(), $account->getPreferredLangcode(), [
-            'user'  => $user,
+            'user'  => $user->entity,
             'event' => $entity,
           ]);
         }

@@ -42,6 +42,8 @@
  - fix Firefox glitch when flipping a card #255
  - remove padding hacks to mitigate Firefox bugs... #255
  - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome
+ - fix #507 - Google Autocomplete doesn't works when user chose a place & then change to a custom one
+ - fix #501 - Manage community Floating buttons
  - add Privilege's Badge on Activity by theme #318,  #315 & #316
  - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
  - add Subscription's Badge, using highest Privilege color, on My Activities #304

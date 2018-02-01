@@ -118,9 +118,8 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $icon = 'communities-sm';
       $theme = 'danger';
       $url =
-        $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
+        $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
           'community' => $community->id(),
-          'user' => $this->currentUser->id(),
         ]);
       $label = $this->t('qs_menu.links.account.communities');
 
@@ -256,6 +255,17 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         'community' => $community->id(),
       ]);
       $label = $this->t('qs_photo.form.add.title');
+    }
+
+    // Delete Photos.
+    if ($activity && in_array($route_name, [
+      'qs_photo.form.delete',
+    ])) {
+      // For everybody, show a button "My Photos".
+      $icon = 'trash';
+      $theme = 'danger';
+      $url = '#';
+      $label = $this->t('qs.photo.delete');
     }
 
     // Comment Photos.

@@ -45,24 +45,8 @@
         <div class="collapse" id="collapse-{{ activity.nid.value }}" role="tabpanel">
           <div class="card-body">
             <div class="card-text text-center">
-              {% if activity.nid.value in variables.badges.privileges|keys %}
-                {% set privilege = variables.badges.privileges[activity.nid.value]|last %}
-                <p>
-                  {% if privilege == 'activity_members' %}
-                    {% set roles = 'qs.roles.activity_member'|t %}
-                  {% endif %}
-                  {% if privilege == 'activity_maintainers' %}
-                    {% set roles = 'qs.roles.activity_maintainer'|t %}
-                  {% endif %}
-                  {% if privilege == 'activity_organizers' %}
-                    {% set roles = 'qs.roles.activity_organizer'|t %}
-                  {% endif %}
-
-                  {{ 'qs.activity.user.you_are @role'|t({
-                    '@role': roles
-                  }) }}
-                </p>
-              {% endif %}
+              {# Privilege Textual Badges #}
+              {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege-textual.html.twig' with {'activity': activity, 'badges': variables.badges} %}
             </div>
             <div class="card-actions d-flex justify-content-center">
               <a href="{{ path('entity.node.canonical', {node: activity.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">

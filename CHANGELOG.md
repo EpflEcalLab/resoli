@@ -45,10 +45,11 @@
  - add Privilege's Badge on Activity by theme #318,  #315 & #316
  - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
  - add Subscription's Badge, using highest Privilege color, on My Activities #304
+ - update Subscripton's Badge, using hiest Privilege color, on Activity page #543
 
 ## 0.1.0 (2017-12-13)
  - production deployment
 
 ## 0.0.0 (2017-07-14)
  - init empty repo
-
+update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309

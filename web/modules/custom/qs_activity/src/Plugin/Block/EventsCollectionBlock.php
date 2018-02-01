@@ -113,6 +113,9 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
 
         // From list of Events number of subscriptions.
         $variables['badges']['admin']['subscriptions']['confirmed'] = [];
+
+        // From list of Activities get user privileges.
+        $variables['badges']['privileges'] = $this->badgeManager->getPrivileges([$variables['activity']]);
       }
     }
 

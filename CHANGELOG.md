@@ -45,7 +45,8 @@
  - add Privilege's Badge on Activity by theme #318,  #315 & #316
  - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
  - add Subscription's Badge, using highest Privilege color, on My Activities #304
- - update Subscripton's Badge, using hiest Privilege color, on Activity page #543
+ - update Subscription's Badge, using highest Privilege color, on Activity page #543
+ - update Subscription's Badge, using highest Privilege color, on Calendar Weekly/Monthly Cards - below Calendar Dots - #387
 
 ## 0.1.0 (2017-12-13)
  - production deployment

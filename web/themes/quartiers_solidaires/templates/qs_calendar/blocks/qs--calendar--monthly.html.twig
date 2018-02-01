@@ -6,6 +6,7 @@
       {% if variables.prev_month|date('Y-m') >= 'now'|date('Y-m') %}
         {% set parameters = variables.prev_month|date('Y-m') == 'now'|date('Y-m') ? {} : {'day': variables.prev_month|date('Y-m-d')} %}
         <a
+          id="calendar-monthly-prev"
           class="btn btn-outline-secondary btn-icon"
           href="{{ path('<current>', parameters) }}"
           aria-label="{{ 'qs.calendar.monthly.goto @month'|t({
@@ -29,6 +30,7 @@
     </div>
     <div class="col">
       <a
+        id="calendar-monthly-next"
         class="btn btn-outline-secondary btn-icon btn-icon-right"
         href="{{ path('<current>', {'day': variables.next_month|date('Y-m-d')}) }}"
         aria-label="{{ 'qs.calendar.monthly.goto @month'|t({

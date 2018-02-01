@@ -6,6 +6,7 @@
       {% if variables.prev_week|date('Y-W') >= 'now'|date('Y-W') %}
         {% set parameters = variables.prev_week|date('Y-W') == 'now'|date('Y-W') ? {} : {'day': variables.prev_week|date('Y-m-d')} %}
         <a
+          id="calendar-weekly-prev"
           class="btn btn-outline-secondary btn-icon"
           href="{{ path('<current>', parameters) }}"
         >
@@ -27,6 +28,7 @@
     </div>
     <div class="col">
       <a
+        id="calendar-weekly-next"
         class="btn btn-outline-secondary btn-icon btn-icon-right"
         href="{{ path('<current>', {'day': variables.next_week|date('Y-m-d')}) }}"
       >

@@ -1,15 +1,3 @@
-# Given I am logged in as user "manager+lausanne"
-# Given I am logged in as user "organizer+lausanne"
-# Given I am logged in as user "member+lausanne+organizer+fribourg"
-# Given I am logged in as user "member+fribourg"
-# Given I am logged in as user "member+lausanne+manager+fribourg"
-
-# When I am on "/activities/1/user/5"
-# When I am on "/activities/1/user/6"
-# When I am on "/activities/1/user/8"
-# When I am on "/activities/2/user/4"
-# When I am on "/activities/2/user/13"
-
 Feature: Badges - Subscription - My Subscriptions
   Asserts My Subscriptions show subscriptions's badges
   according current users state of subscriptions on the event pill

@@ -209,6 +209,9 @@ class CollectionController extends ControllerBase {
     // From list of Events where current user has confirmed subscription.
     $badges['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($events, 1);
 
+    // From list of Activities get user privileges.
+    $badges['privileges'] = $this->badgeManager->getPrivilegesByEvents($events);
+
     // From list of Events number of pending subscriptions.
     $badges['admin']['subscriptions']['pendings'] = [];
 

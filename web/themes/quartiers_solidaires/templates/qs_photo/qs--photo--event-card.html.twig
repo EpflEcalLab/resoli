@@ -2,8 +2,12 @@
 <a
   href="{{ path('qs_photo.activity', {'activity': activity.nid.value}) }}"
   class="card mb-3"
+  id="card-activity{{ activity.nid.value }}"
 >
   <div class="card-body">
+    {# Privilege Badges #}
+    {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege.html.twig' with {'activity': activity, 'badges': badges} %}
+
     <h3 class="mb-3 font-weight-normal text-center">{{ activity.title.value }}</h3>
 
     <div class="img-grid">

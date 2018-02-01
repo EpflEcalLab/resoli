@@ -17,6 +17,10 @@ const formControl = () => {
         // & never trigger the 'place_changed' event.
         let choosen = '';
 
+        // Will store the initial value of this field, used when updating values.
+        // Indeed, if the change the place for a custom one, we never fire the 'place_changed' event-
+        let initial = $(el).val() ;
+
         const inputLat = $(el).data('googleInputLat');
         const inputLng = $(el).data('googleInputLng');
         const autocomplete = new google.maps.places.Autocomplete(el, {
@@ -32,7 +36,7 @@ const formControl = () => {
 
           // Check if the current input value is the same as previous google selected.
           // If different, cleanup the lat/lng value cause the user chose a custom address.
-          if ($(el).val() != choosen) {
+          if ((typeof place != 'undefined' && $(el).val() != choosen) || initial != '' && initial != $(el).val() && typeof place == 'undefined') {
             $(`input[data-drupal-selector="${inputLat}"]`).val('');
             $(`input[data-drupal-selector="${inputLng}"]`).val('');
           }

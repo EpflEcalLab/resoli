@@ -227,7 +227,7 @@ class CollectionController extends ControllerBase {
 
     // Get the only next events of each ones.
     $activities = $this->activityManager->getByDate($community, $start, $end);
-    // $variables['activities'] = $activities;.
+
     // Get badges.
     if (!empty($events) && !empty($activities)) {
       // From a list of Events where current user has pending subscriptions.

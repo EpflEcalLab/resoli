@@ -14,7 +14,6 @@
       {% if privilege == 'activity_organizers' %}{% set theme = 'danger' %}{% endif %}
     {% endif %}
 
-
     {# If user is activity_maintainers or activity_organizers of this event #}
     {# show him guests badges, otherwise show him badges based on his own subscription #}
     {% if privilege == 'activity_maintainers' or privilege == 'activity_organizers' %}

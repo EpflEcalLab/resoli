@@ -49,6 +49,7 @@
  - update Subscription's Badge, using highest Privilege color, on Calendar Weekly/Monthly Cards - below Calendar Dots - #387
  - add Privilege's Badge on My Photos #412
  - add Privilege's Badge on Photos by theme #441, #442 & #443
+ - add 'Direct Subscription' whitout needing request for Organizer of activity #313
 
 ## 0.1.0 (2017-12-13)
  - production deployment

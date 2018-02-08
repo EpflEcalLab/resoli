@@ -4,27 +4,27 @@ Feature: Badges - Subscription - My Subscriptions
   and use the highest privilege on this event's activity to get the color.
 
   @api
-  Scenario: Logged as Manager of Lausanne, I should see my 2 badges of subscriptions. I see my Confirmed/Maintainer badge on the Event N°36 (Victor Vatard - Dire l’inverse, penser le contraire et vice-versa) & my Wait/Maintainer badge on the Event N°37 (Macbeth)
+  Scenario: Logged as Manager of Lausanne, I should see my 2 badges of subscriptions. I see my Confirmed/Maintainer badge on the Event N°36 (Victor Vatard - Dire l’inverse, penser le contraire et vice-versa) & the Guests_Wait/Maintainer badge on the Event N°37 (Macbeth)
   Given I am logged in as user "manager+lausanne"
   When I am on "/events/1/user/5"
   And the response status code should be 200
   Then I should see 2 ".card-list-item" elements
   Then I should see 2 ".card-list-item .flag" elements
   Then I should see 1 "#event36 .flag.flag-warning.flag-subscription-confirmed" elements
-  Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-wait" elements
+  Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
   And I should see "qs.event.user.subscription.confirmed" in the "#card36" element
-  And I should see "qs.event.user.subscription.pending" in the "#card37" element
+  And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
 
   @api
-  Scenario: Logged as Organizer of Lausanne, I should see my 2 badges of subscriptions. I see my Confirmed/Organizer badge on the Event N°37 (Macbeth) & my Confirmed/Organizer badge on the Event N°40 (Accueil Café)
+  Scenario: Logged as Organizer of Lausanne, I should see my 2 badges of subscriptions. I see the Guests_Waiting/Organizer badge on the Event N°37 (Macbeth) & my Confirmed/Organizer badge on the Event N°40 (Accueil Café)
   Given I am logged in as user "organizer+lausanne"
   When I am on "/events/1/user/6"
   And the response status code should be 200
   Then I should see 2 ".card-list-item" elements
   Then I should see 2 ".card-list-item .flag" elements
-  Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-confirmed" elements
+  Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-guests-wait" elements
   Then I should see 1 "#event40 .flag.flag-danger.flag-subscription-confirmed" elements
-  And I should see "qs.event.user.subscription.confirmed" in the "#card37" element
+  And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
   And I should see "qs.event.user.subscription.confirmed" in the "#card40" element
 
   @api

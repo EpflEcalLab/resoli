@@ -10,11 +10,6 @@ Scenario: Logged as Manager of Lausanne, I can access my own subscriptions page 
   And the response status code should be 200
   Then I should see 2 ".card-list-item" elements
   Then I should see a "#card36" element
-  Then I should see a "#card36 .flag" element
-  Then I should see a "#card36 .flag.flag-subscription-confirmed" element
-  Then I should see a "#card37" element
-  Then I should see a "#card37 .flag" element
-  Then I should see a "#card37 .flag.flag-subscription-wait" element
   Then I should not see a "#card38" element
 
 @api
@@ -24,8 +19,6 @@ Scenario: Logged as Member of Lausanne & Manager of Fribourg, I can access my ow
   And the response status code should be 200
   Then I should see 1 ".card-list-item" elements
   Then I should see a "#card29" element
-  Then I should see a "#card29 .flag" element
-  Then I should see a "#card29 .flag.flag-subscription-confirmed" element
 
 @api
 Scenario: Logged as Member of Lausanne & Manager of Fribourg, I can access my own subscriptions page in Lausanne
@@ -42,8 +35,4 @@ Scenario: Logged as Organizer of Lausanne, I can access my own subscriptions pag
   And the response status code should be 200
   Then I should see 2 ".card-list-item" elements
   Then I should see a "#card37" element
-  Then I should see a "#card37 .flag" element
-  Then I should see a "#card37 .flag.flag-subscription-confirmed" element
   Then I should see a "#card40" element
-  Then I should see a "#card40 .flag" element
-  Then I should see a "#card40 .flag.flag-subscription-confirmed" element

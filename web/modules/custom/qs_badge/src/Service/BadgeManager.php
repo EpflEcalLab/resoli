@@ -126,16 +126,55 @@ class BadgeManager {
   /**
    * Count for the given events IDs, if they have subscriptions.
    *
+   * The count remove the current used to avoid false positif when only author
+   * is subscribed.
+   *
    * @param integer[] $events
    *   A collection of $events IDs.
    * @param bool $status
    *   The required status for the subscriptions.
+   * @param \Drupal\user\UserInterface $account
+   *   The user entity.
    *
    * @return array[]
-   *   The collection of events IDs which have subscriptions.
+   *   The collection of events IDs which have number of subscriptions.
    */
-  public function countSubscriptions(array $events, $status = TRUE) {
-    return [];
+  public function countSubscriptions(array $events, $status = TRUE, UserInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $nids = [];
+    foreach ($events as $event) {
+      $nids[$event->id()] = $event->id();
+    }
+
+    $query = $this->connection->select('subscriptions', 'subscriptions');
+    $query->fields('subscriptions', ['entity'])
+      ->condition('subscriptions.entity', $nids, 'in')
+      ->condition('subscriptions.user', $user->id(), '!=')
+      ->groupBy('subscriptions.entity');
+
+    $query->addExpression("COUNT(*)", 'count');
+
+    if ($status) {
+      $query->condition('subscriptions.status', $status);
+    }
+    else {
+      $query->condition('subscriptions.status', NULL, 'is');
+    }
+
+    $rows = $query->execute()->fetchAll();
+
+    $events = [];
+    foreach ($rows as $row) {
+      if ($row->count > 0) {
+        $events[$row->entity] = $row->count;
+      }
+    }
+
+    return $events;
   }
 
   /**

@@ -128,10 +128,16 @@ class UserController extends ControllerBase {
       $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($variables['events'], NULL, $user);
 
       // From list of Events where current user has confirmed subscription.
-      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($variables['events'], 1, $user);
+      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($variables['events'], TRUE, $user);
 
-      // From list of Activities get user privileges.
+      // From list of Events get user privileges by given events.
       $variables['badges']['privileges'] = $this->badgeManager->getPrivilegesByEvents($variables['events'], $user);
+
+      // From list of Events count pending subscriptions by given events.
+      $variables['badges']['subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptions($variables['events'], NULL);
+
+      // From list of Events count confirmed subscriptions by given events.
+      $variables['badges']['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($variables['events'], TRUE);
     }
 
     return [

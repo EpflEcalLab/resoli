@@ -53,6 +53,7 @@
  - add subscription to the author Maintainer of Activity when creating an Event #311
  - add collapsable event card on 'My subscriptions' page
  - add subscription textual information on 'My Subscription' card event body
+ - add Subscription's Badge, using Count of Guests Pending & Confirmed #310, #311, #312 & #313
 
 ## 0.1.0 (2017-12-13)
  - production deployment

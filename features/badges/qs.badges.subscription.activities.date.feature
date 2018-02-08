@@ -11,14 +11,14 @@ Feature: Badges - Activities by Date
     Then I should see 0 ".card-list-item .flag" elements
 
   @api
-  Scenario: Logged as Manager of Lausanne, I see my own badge of Subscription(s) in the Event(s) pill(s) with the color "warning" according my privilege on this events' activity
+  Scenario: Logged as Manager of Lausanne, I see the badge of Subscription(s) Guests_Confirmed in the Event(s) pill(s) with the color "warning" according my privilege on this events' activity
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/date"
     And the response status code should be 200
     Then I should see 9 ".card-list-item" elements
     Then I should see 1 "#event37 .flag" elements
-    Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-wait" elements
-    And I should see "qs.event.user.subscription.pending" in the "#card37" element
+    Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
+    And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
     Then I follow "qs.activity.date.link_next"
     Then I should see 1 ".card-list-item" elements
     Then I should see 1 "#event36 .flag" elements
@@ -26,16 +26,18 @@ Feature: Badges - Activities by Date
     And I should see "qs.event.user.subscription.confirmed" in the "#card36" element
 
   @api
-  Scenario: Logged as Organizer of Lausanne, I see my own badge of Subscription(s) in the Event(s) pill(s) with the color "danger" according my privilege on this events' activity
+  Scenario: Logged as Organizer of Lausanne, I see the badge of Subscription(s) Guests_Waiting in the Event(s) pill(s) with the color "danger" according my privilege on this events' activity
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/date"
     Then I should see 9 ".card-list-item" elements
     Then I should see 1 "#event37 .flag" elements
-    Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-confirmed" elements
-    And I should see "qs.event.user.subscription.confirmed" in the "#card37" element
+    Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-guests-wait" elements
+    And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
     Then I follow "qs.activity.date.link_next"
     Then I should see 1 ".card-list-item" elements
-    Then I should see 0 ".card-list-item .flag" elements
+    Then I should see 1 "#event36 .flag" elements
+    Then I should see 1 "#event36 .flag.flag-danger.flag-subscription-guests-confirmed" elements
+    And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card36" element
 
   @api
     Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I should see 0 badges 'cause I have 0 subscriptions

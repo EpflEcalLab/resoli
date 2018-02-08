@@ -257,11 +257,11 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-2']['latitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $activity->field_venue->value ? $activity->field_venue_lat->value : NULL,
+      '#default_value' => $activity->field_venue_lat->value ? $activity->field_venue_lat->value : NULL,
     ];
     $form['event']['step-2']['longitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $activity->field_venue->value ? $activity->field_venue_long->value : NULL,
+      '#default_value' => $activity->field_venue_long->value ? $activity->field_venue_long->value : NULL,
     ];
 
     $form['event']['step-2']['contact_name'] = [

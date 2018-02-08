@@ -34,16 +34,6 @@ Feature: Badges - Subscription - Calendar - List
   Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-wait" elements
 
   @api
-  Scenario: Logged as Manager of Lausanne, when reaching the Calendar Monthly (next months), I should see my 2 badges of subscriptions. I see my Confirmed/Maintainer badge on the Event N°36 (Sorties Théâtre)
-  Given I am logged in as user "manager+lausanne"
-  When I am on "/lausanne/calendar/monthly"
-  Then I follow "calendar-monthly-next"
-  And the response status code should be 200
-  Then I should see 1 ".card-list-simple-item" elements
-  Then I should see 1 ".card-list-simple-item .flag" elements
-  Then I should see 1 "#event36 .flag.flag-warning.flag-subscription-confirmed" elements
-
-  @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Calendar Weekly, I should see my 1 badge of subscriptions. I see my Confirmed/Organizer badge on the Event N°37 (Sorties Théâtre)
   Given I am logged in as user "organizer+lausanne"
   When I am on "/lausanne/calendar/weekly"

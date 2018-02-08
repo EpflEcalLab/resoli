@@ -12,6 +12,8 @@ Feature: Badges - Subscription - My Subscriptions
   Then I should see 2 ".card-list-item .flag" elements
   Then I should see 1 "#event36 .flag.flag-warning.flag-subscription-confirmed" elements
   Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-wait" elements
+  And I should see "qs.event.user.subscription.confirmed" in the "#card36" element
+  And I should see "qs.event.user.subscription.pending" in the "#card37" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, I should see my 2 badges of subscriptions. I see my Confirmed/Organizer badge on the Event N°37 (Macbeth) & my Confirmed/Organizer badge on the Event N°40 (Accueil Café)
@@ -22,6 +24,8 @@ Feature: Badges - Subscription - My Subscriptions
   Then I should see 2 ".card-list-item .flag" elements
   Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-confirmed" elements
   Then I should see 1 "#event40 .flag.flag-danger.flag-subscription-confirmed" elements
+  And I should see "qs.event.user.subscription.confirmed" in the "#card37" element
+  And I should see "qs.event.user.subscription.confirmed" in the "#card40" element
 
   @api
   Scenario: Logged as Member of Lausanne & Manager of Fribourg, I should see 0 badges 'cause I have 0 subscriptions in Lausanne community.
@@ -38,6 +42,7 @@ Feature: Badges - Subscription - My Subscriptions
   Then I should see 1 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#event29 .flag.flag-info.flag-subscription-confirmed" elements
+  And I should see "qs.event.user.subscription.confirmed" in the "#card29" element
 
   @api
   Scenario: Logged as Member of Fribourg, I should see 0 badges 'cause I have 0 subscriptions in Lausanne community
@@ -45,3 +50,4 @@ Feature: Badges - Subscription - My Subscriptions
   When I am on "/events/2/user/4"
   And the response status code should be 200
   Then I should see 0 ".card-list-item" elements
+

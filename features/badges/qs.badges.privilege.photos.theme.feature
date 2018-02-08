@@ -7,7 +7,7 @@ Feature: Badges - Privilege - Photos by Theme
   Given I am logged in as user "manager+lausanne"
   When I am on "/lausanne/photos/theme"
   And the response status code should be 200
-  Then I should see 3 ".card" elements
+  Then I should see 2 ".card" elements
   Then I should see 2 ".card .flag" elements
   Then I should see 1 "#card-activity2 .flag.flag-privilege-organizers" elements
   Then I should see 1 "#card-activity3 .flag.flag-privilege-maintainers" elements
@@ -27,7 +27,7 @@ Feature: Badges - Privilege - Photos by Theme
   Given I am logged in as user "member+lausanne+organizer+fribourg"
   When I am on "/lausanne/photos/theme"
   And the response status code should be 200
-  Then I should see 3 ".card" elements
+  Then I should see 2 ".card" elements
   Then I should see 1 ".card .flag" elements
   Then I should see 1 "#card-activity2 .flag.flag-privilege-members" elements
 

@@ -95,10 +95,17 @@
       or user.hasPermission('administer nodes')
     %}
     <div class="col-sm-6 mb-3 mx-auto">
-      <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
-        {{ macros.icon('checklist') }}
-        {{ 'qs.event.dashboard'|t }}
-      </a>
+      {% if guests_status == 'pendings_guests' %}
+        <a href="{{ path('qs_subscription.waiting_approval', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+          {{ macros.icon('wait') }}
+          {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests}) }}
+        </a>
+      {% else %}
+        <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+          {{ macros.icon('checklist') }}
+          {{ 'qs.event.dashboard'|t }}
+        </a>
+      {% endif %}
     </div>
     {% endif %}
 

@@ -1,8 +1,13 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 <a
-  href="{{ path('entity.node.canonical', { 'node': event.field_activity.target_id }, {'fragment': 'card' ~ event.nid.value}) }}"
-  class="card-pill card-pill-simple"
+  data-toggle="collapse"
+  data-parent="#events-accordion"
+  href="#collapse-{{ event.nid.value }}"
+  class="card-pill card-pill-simple collapsed"
+  role="tab"
+  aria-expanded="false"
+  aria-controls="collapse-{{ event.nid.value }}"
   id="event{{ event.nid.value }}"
 >
 
@@ -16,8 +21,10 @@
     </span>
   </span>
 
-  {# Subscription Badges #}
-  {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
+  {% block card_pill_badges %}
+    {# Subscription Badges #}
+    {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
+  {% endblock %}
 
   <span class="size-date ml-auto text-dark">
     {% block card_pill_time %}
@@ -33,6 +40,7 @@
     aria-label="{{ 'qs.readmore.about'|t }} {{ event.label }}"
   >
     {{ macros.icon('look') }}
+    <span class="sr-only d-none d-md-inline">{{ 'qs.event.more'|t }}</span>
   </span>
-
 </a>
+

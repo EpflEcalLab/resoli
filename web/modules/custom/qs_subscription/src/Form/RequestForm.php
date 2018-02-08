@@ -136,7 +136,7 @@ class RequestForm extends FormBase {
       '#value' => $this->t('qs.event.register'),
     ];
 
-    // Get the current user privilege to this event.
+    // Get the current user activitiy's privilege to this event.
     $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
     $privileges = reset($privileges_by_events);
 

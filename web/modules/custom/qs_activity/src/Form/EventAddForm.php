@@ -36,6 +36,20 @@ class EventAddForm extends FormBasic {
   protected $eventManager;
 
   /**
+   * The Subscription Manager.
+   *
+   * @var \Drupal\qs_subscription\Service\SubscriptionManager
+   */
+  protected $subscriptionManager;
+
+  /**
+   * The Badge Manager.
+   *
+   * @var \Drupal\qs_badge\Service\BadgeManager
+   */
+  protected $badgeManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -43,9 +57,11 @@ class EventAddForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl          = $this->getAcl();
-    $this->nodeStorage  = $this->getNodeStorage();
-    $this->eventManager = $this->getEventManager();
+    $this->acl                 = $this->getAcl();
+    $this->nodeStorage         = $this->getNodeStorage();
+    $this->eventManager        = $this->getEventManager();
+    $this->subscriptionManager = $this->getSubscriptionManager();
+    $this->badgeManager        = $this->getBadgeManager();
   }
 
   /**
@@ -420,6 +436,18 @@ class EventAddForm extends FormBasic {
     $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
     drupal_set_message($this->t('qs_activity.events.form.add.success'));
     $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
+
+    // Get the current user activitiy's privilege to this event.
+    $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
+    $privileges = reset($privileges_by_events);
+
+    // According the current user roles to the event,
+    // If he's activity_maintainers subscribe him to this new event.
+    if (in_array('activity_maintainers', $privileges)) {
+      // By default, subscribe the author.
+      $subscription = $this->subscriptionManager->request($event);
+      $this->subscriptionManager->confirm($subscription);
+    }
   }
 
 }

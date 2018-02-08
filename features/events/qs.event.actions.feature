@@ -85,7 +85,7 @@ Feature: Event Actions Buttons
     And I should see "qs.event.register" in the "#collapse-18 .card-actions" element
 
   @api
-  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is a public activity
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is not a public activity
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200

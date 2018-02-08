@@ -1,5 +1,15 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set guests_status = 'default' %}
+{% set guests = 0 %}
+{% if event.nid.value in variables.badges.subscriptions.pendings_guests|keys %}
+  {% set guests_status = 'pendings_guests' %}
+  {% set guests = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
+{% elseif event.nid.value in variables.badges.subscriptions.confirmed_guests|keys %}
+  {% set guests_status = 'confirmed_guests' %}
+  {% set guests = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
+{% endif %}
+
 {% set status = 'default' %}
 {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
   {% set status = 'pending' %}

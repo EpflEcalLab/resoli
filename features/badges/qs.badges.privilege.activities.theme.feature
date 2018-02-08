@@ -20,7 +20,7 @@ Feature: Badges - Privilege - Activities by Theme
   Then I should see 10 ".card" elements
   Then I should see 2 ".card .flag" elements
   Then I should see 1 "#card-activity5 .flag.flag-privilege-organizers" elements
-  Then I should see 1 "#card-activity3 .flag.flag-privilege-organizers" elements
+  Then I should see 1 "#card-activity3 .flag.flag-subscription-guests-wait" elements
 
   @api
   Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I should see my badge of privileges. I see my Member badge on the Activity N°2 (Atelier Créatif)

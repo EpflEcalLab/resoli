@@ -178,6 +178,63 @@ class BadgeManager {
   }
 
   /**
+   * Count for the given activities IDs, if they have subscriptions.
+   *
+   * The count remove the current used to avoid false positif when only author
+   * is subscribed.
+   *
+   * @param integer[] $activities
+   *   A collection of $activities IDs.
+   * @param bool $status
+   *   The required status for the subscriptions.
+   * @param \Drupal\user\UserInterface $account
+   *   The user entity.
+   *
+   * @return array[]
+   *   The collection of activities IDs which have number of subscriptions.
+   */
+  public function countSubscriptionsByActivities(array $activities, $status = TRUE, UserInterface $account = NULL) {
+    $user = $this->currentUser;
+    if (!is_null($account)) {
+      $user = $account;
+    }
+
+    $nids = [];
+    foreach ($activities as $activity) {
+      $nids[$activity->id()] = $activity->id();
+    }
+
+    $query = $this->connection->select('subscriptions', 'subscriptions');
+    $query->condition('subscriptions.user', $user->id(), '!=');
+
+    $query->leftJoin('node__field_activity', 'field_activity', 'subscriptions.entity = field_activity.entity_id');
+    $query->condition('field_activity.field_activity_target_id', $nids, 'IN');
+
+    $query->fields('field_activity', ['field_activity_target_id'])
+      ->groupBy('field_activity.field_activity_target_id');
+
+    $query->addExpression("COUNT(*)", 'count');
+
+    if ($status) {
+      $query->condition('subscriptions.status', $status);
+    }
+    else {
+      $query->condition('subscriptions.status', NULL, 'is');
+    }
+
+    $rows = $query->execute()->fetchAll();
+
+    $activities = [];
+    foreach ($rows as $row) {
+      if ($row->count > 0) {
+        $activities[$row->field_activity_target_id] = $row->count;
+      }
+    }
+
+    return $activities;
+  }
+
+  /**
    * From given activities node IDs, return the list privilege for the user.
    *
    * The user's privileges are ordered from lowest to highest.

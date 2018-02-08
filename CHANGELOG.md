@@ -51,6 +51,8 @@
  - add Privilege's Badge on Photos by theme #441, #442 & #443
  - add 'Direct Subscription' whitout needing request for Organizer of activity #313
  - add subscription to the author Maintainer of Activity when creating an Event #311
+ - add collapsable event card on 'My subscriptions' page
+ - add subscription textual information on 'My Subscription' card event body
 
 ## 0.1.0 (2017-12-13)
  - production deployment

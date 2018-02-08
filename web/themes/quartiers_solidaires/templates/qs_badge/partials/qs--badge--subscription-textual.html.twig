@@ -1,0 +1,12 @@
+{# Subscription Textual Badges #}
+{% if event.nid.value and badges.subscriptions %}
+  <p>
+  {% if event.nid.value in badges.subscriptions.pendings|keys %}
+    {{ 'qs.event.user.subscription.pending'|t }}
+  {% endif %}
+
+  {% if event.nid.value in badges.subscriptions.confirmed|keys %}
+    {{ 'qs.event.user.subscription.confirmed'|t }}
+  {% endif %}
+  </p>
+{% endif %}

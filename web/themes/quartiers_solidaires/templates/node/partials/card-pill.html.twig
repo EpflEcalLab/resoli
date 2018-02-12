@@ -31,16 +31,7 @@
   </span>
 
   {% block card_pill_badges %}
-    {% set privilege = variables.badges.privileges[event.field_activity.entity.nid.value]|last %}
-    {% set theme = 'info' %}
-    {% if privilege == 'activity_maintainers' %}
-      {% set theme = 'warning' %}
-    {% endif %}
-    {% if privilege == 'activity_organizers' %}
-      {% set theme = 'danger' %}
-    {% endif %}
-    {{ macros.badge(theme, 'wait', 'flag-subscription-wait', '', '', 'pending') }}
-    {{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', '', '', 'confirmed') }}
+    {% include '@quartiers_solidaires/node/partials/card-pill-badges.html.twig' with {'privileges': variables.badges.privileges} %}
   {% endblock %}
 
   <span

@@ -60,7 +60,7 @@ a.card {
   }
 
   .flag {
-    margin: ($spacer * -2.25) 0 ($spacer * -3) ($card-spacer-x * 2);
+    margin: ($spacer * -2.65) 0 ($spacer * -3) ($card-spacer-x * 2);
 
     @include flag-size(60px);
   }
@@ -400,18 +400,18 @@ a[href].card-pill-simple {
   height: 600px;
 }
 
-.card-map-container {
+.card-back-map .card-body {
+  position: relative;
+  z-index: -1;
+  margin-top: -1rem;
+  padding: 0;
   overflow: hidden;
-
-  @include border-radius($card-border-radius - $card-border-width);
+  border-bottom-right-radius: ($card-border-radius - $card-border-width);
+  border-bottom-left-radius: ($card-border-radius - $card-border-width);
 
   .card-pill {
     position: relative;
     z-index: 100;
-  }
-
-  .card-body {
-    padding: 0;
   }
 }
 
@@ -556,6 +556,10 @@ a[href].card-pill-simple {
 
     .card-back:target {
       position: static;
+    }
+
+    .card-front .flag {
+      opacity: 0;
     }
   }
 }

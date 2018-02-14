@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M37.0606602,7.06066017 C37.6464466,6.47487373 37.6464466,5.52512627 37.0606602,4.93933983 C36.4748737,4.35355339 35.5251263,4.35355339 34.9393398,4.93933983 L14.9393398,24.9393398 C14.3535534,25.5251263 14.3535534,26.4748737 14.9393398,27.0606602 L34.9393398,47.0606602 C35.5251263,47.6464466 36.4748737,47.6464466 37.0606602,47.0606602 C37.6464466,46.4748737 37.6464466,45.5251263 37.0606602,44.9393398 L18.1213203,26 L37.0606602,7.06066017 Z" id="chevron-left" fill="currentColor" fill-rule="nonzero" transform="translate(26.000000, 26.000000) scale(-1, 1) translate(-26.000000, -26.000000) "></path>
-        <g id="export" transform="translate(-247.000000, -93.000000)"></g>
-    </g>
+<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <path d="M14.94 7.06a1.5 1.5 0 0 1 2.12-2.12l20 20a1.5 1.5 0 0 1 0 2.12l-20 20a1.5 1.5 0 0 1-2.12-2.12L33.878 26 14.939 7.06z" fill="currentColor" fill-rule="nonzero"/>
+  </g>
 </svg>

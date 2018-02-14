@@ -1,5 +1,5 @@
 const formAjax = () => {
-  (function ($, Drupal) {
+  (function ($) {
 
     // Handle buttons with confirmation step
     let timer = null;
@@ -64,7 +64,7 @@ const formAjax = () => {
           },
       });
     });
-  })(jQuery, Drupal);
+  })(jQuery);
 };
 
 export default formAjax;

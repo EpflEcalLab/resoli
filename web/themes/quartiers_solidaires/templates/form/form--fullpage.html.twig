@@ -18,7 +18,8 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 {% set wrapper_class = [
-  attributes.bg ? 'bg-' ~ attributes.bg
+  attributes.bg ? 'bg-' ~ attributes.bg,
+  'd-flex flex-column justify-content-between'
 ] %}
 <div class="{{ wrapper_class|join(' ') }}">
   <div class="container fullpage-wrapper py-4">

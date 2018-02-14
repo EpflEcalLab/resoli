@@ -1,0 +1,16 @@
+{# Subscriptions Badges #}
+
+{% if day and badges.privileges and badges.events_subscriptions.confirmed and day|date('Y-m-d') in badges.events_subscriptions.confirmed|keys %}
+
+  {% set theme = 'info' %}
+  {# Adapte the color of badge according user privilege of this day #}
+  {% if day|date('Y-m-d') in badges.privileges|keys %}
+
+    {# Get user Highest privilege #}
+    {% set privilege = badges.privileges[day|date('Y-m-d')]|last %}
+    {% if privilege == 'activity_maintainers' %}{% set theme = 'warning' %}{% endif %}
+    {% if privilege == 'activity_organizers' %}{% set theme = 'danger' %}{% endif %}
+  {% endif %}
+
+  {{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed') }}
+{% endif %}

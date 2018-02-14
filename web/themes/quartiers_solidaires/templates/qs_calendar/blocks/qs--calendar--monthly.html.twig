@@ -70,6 +70,9 @@
           href="{{ path('<current>', parameters) }}"
         >
           {{ day|date('j') }}
+          {% if not is_past %}
+            {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-dots.html.twig' with {'day': day, 'badges': variables.badges} %}
+          {% endif %}
         </a>
         {% else %}
         <span class="{{ classes|join(' ') }} disabled"></span>

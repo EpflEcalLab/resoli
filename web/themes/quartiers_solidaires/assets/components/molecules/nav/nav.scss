@@ -214,6 +214,8 @@
 .navbar-settings {
   position: fixed;
   bottom: -100vh;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 20;
   opacity: 0;
 

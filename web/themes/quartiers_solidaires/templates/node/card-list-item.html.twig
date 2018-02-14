@@ -31,6 +31,7 @@
   {% embed '@quartiers_solidaires/node/partials/card-back.html.twig' with {
     'icon': 'user',
     'title': event.field_contact_name.value ?: 'qs.event.contact'|t,
+    'activity': event.field_activity.entity,
   } %}
     {% block card_back_id %}contact-{{ event.nid.value }}{% endblock %}
 
@@ -80,6 +81,7 @@
     {% embed '@quartiers_solidaires/node/partials/card-back.html.twig' with {
       'icon': 'meeting',
       'title': event.field_venue.value,
+      'activity': event.field_activity.entity,
     } %}
       {% block card_back_id %}map-{{ event.nid.value }}{% endblock %}
 

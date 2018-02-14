@@ -4,6 +4,8 @@ $status-list: (
   'default',
   'pending',
   'confirmed',
+  'pendings_guests',
+  'confirmed_guests',
 );
 
 // Use the combination of data-status and data-status-show to toggle the visibility of any items.

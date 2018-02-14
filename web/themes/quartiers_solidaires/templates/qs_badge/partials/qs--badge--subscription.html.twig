@@ -20,6 +20,7 @@
       {# Pending Guests subscriptions Badge #}
       {% if event.nid.value in badges.subscriptions.pendings_guests|keys %}
         {% set show_user_subscription = FALSE %}
+        {% set theme = 'outline-' ~ theme %}
         {{ macros.badge(theme, 'wait', 'flag-subscription-guests-wait') }}
 
       {# Confirmed Guests subscriptions Badge #}

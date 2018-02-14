@@ -95,7 +95,7 @@
       or user.hasPermission('administer nodes')
     %}
     <div class="col-sm-6 mb-3 mx-auto">
-      {% if guests_status == 'pendings_guests' %}
+      {% if status == 'pendings_guests' %}
         <a href="{{ path('qs_subscription.waiting_approval', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
           {{ macros.icon('wait') }}
           {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests}) }}

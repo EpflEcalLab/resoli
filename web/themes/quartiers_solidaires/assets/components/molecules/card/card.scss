@@ -345,12 +345,12 @@ a[href].card-pill-simple {
         margin-top: (-$card-border-width);
         margin-bottom: (-$card-border-width);
         margin-left: (-$card-border-width);
+      }
 
-        &:not(.card-open) {
-          .card-pill-icon {
-            .icon {
-              background-color: transparent !important;
-            }
+      &:not(.card-open) {
+        .card-pill-icon {
+          .icon {
+            background-color: transparent !important;
           }
         }
       }

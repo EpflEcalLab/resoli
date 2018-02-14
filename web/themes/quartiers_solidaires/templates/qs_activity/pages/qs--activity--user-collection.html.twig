@@ -17,7 +17,7 @@
   {% if variables.activities %}
   <ul class="card-list" id="activities-accordion" role="tablist" data-children=".card-list-item">
     {% for activity in variables.activities %}
-      <li class="card card-list-item" id="card{{ activity.nid.value }}">
+      <li class="card card-list-item shadow-to-bottom" id="card{{ activity.nid.value }}">
         <a
           data-toggle="collapse"
           data-parent="#activities-accordion"

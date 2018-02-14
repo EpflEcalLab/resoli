@@ -104,6 +104,10 @@ a[href].card-pill {
   .card-pill-icon .icon {
     color: theme-color("primary");
   }
+
+  .card:not(.card-open) & .card-pill-title {
+    color: theme-color("primary") !important;
+  }
 }
 
 @include card-pill-bg-gradient(".card-pill-simple");
@@ -127,8 +131,16 @@ a[href].card-pill-simple {
       }
 
       .card-pill-icon .icon {
-        border: $card-border-width solid theme-color("secondary");
         color: theme-color("secondary");
+
+        svg {
+          max-width: 32px;
+          max-height: 32px;
+        }
+      }
+
+      .card-pill-icon:not(.card-pill-icon-lg) .icon {
+        border: $card-border-width solid theme-color("secondary");
       }
 
       .text-dark {
@@ -269,7 +281,7 @@ a[href].card-pill-simple {
     background: none;
     border-color: transparent;
 
-    .card-pill-icon {
+    .card-pill-icon:not(.card-pill-icon-lg) {
       .icon {
         background-color: $card-cap-bg;
         color: color("light");
@@ -334,8 +346,12 @@ a[href].card-pill-simple {
         margin-bottom: (-$card-border-width);
         margin-left: (-$card-border-width);
 
-        .icon {
-          background-color: transparent;
+        &:not(.card-open) {
+          .card-pill-icon {
+            .icon {
+              background-color: transparent !important;
+            }
+          }
         }
       }
 

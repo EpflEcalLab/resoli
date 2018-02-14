@@ -11,7 +11,8 @@
   },
   "browserslist": [
     "> 1% in CH",
-    "last 2 versions"
+    "last 2 versions",
+    "IE 11"
   ],
   "eslintConfig": {
     "parser": "babel-eslint",

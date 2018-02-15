@@ -138,7 +138,7 @@ class RequestForm extends FormBase {
 
     // Get the current user activitiy's privilege to this event.
     $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
-    $privileges = !empty($privileges_by_eventsreset) ? ($privileges_by_events) : $privileges_by_events;
+    $privileges = !empty($privileges_by_events) ? reset($privileges_by_events) : $privileges_by_events;
 
     // According the current user roles to the event,
     // If he's activity_organizers+ subscribe him whitout requesting.

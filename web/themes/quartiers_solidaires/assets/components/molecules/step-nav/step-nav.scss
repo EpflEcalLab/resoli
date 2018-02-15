@@ -2,10 +2,12 @@
 
 .step-nav {
   position: relative;
+  flex-wrap: nowrap;
   justify-content: space-between;
   counter-reset: step-nav;
   margin-top: $spacer;
   padding-right: 0;
+  width: 100%;
 
   // Fix issue in Safari 9
   flex-basis: initial;
@@ -33,8 +35,12 @@
 }
 
 .step-nav-link {
+  line-height: 1.5;
+
   &:after {
     counter-increment: step-nav;
     content: counter(step-nav);
+    display: block;
+    height: 100%;
   }
 }

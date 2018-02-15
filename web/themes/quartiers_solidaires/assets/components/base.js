@@ -13,6 +13,7 @@ import formSelectize from 'molecules/form-control/form-selectize';
 import formComment from 'molecules/form-control/form-comment';
 import calendar from 'molecules/calendar/calendar';
 import modal from 'organisms/modal/modal';
+import ie from 'ie';
 
 svgIcons();
 
@@ -30,5 +31,6 @@ svgIcons();
     button();
     modal();
     formComment();
+    ie();
   });
 })(jQuery);

@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="calendar-wrapper">
-    <div class="calendar">
+    <div class="calendar clearfix">
       {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
         <strong class="calendar-head">{{ day|bamboo_i18n_format_date('custom', 'D') }}</strong>
       {% endfor %}
@@ -69,7 +69,7 @@
           aria-label="{{ day|bamboo_i18n_format_date('custom', 'j F Y') }}"
           href="{{ path('<current>', parameters) }}"
         >
-          {{ day|date('j') }}
+          <span>{{ day|date('j') }}</span>
         </a>
         {% else %}
         <span class="{{ classes|join(' ') }} disabled"></span>

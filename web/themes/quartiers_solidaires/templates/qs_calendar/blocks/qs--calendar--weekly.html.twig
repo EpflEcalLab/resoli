@@ -64,9 +64,10 @@
           aria-label="{{ day|bamboo_i18n_format_date('custom', 'j F Y') }}"
           href="{{ path('<current>', parameters) }}"
         >
-          <span>{{ day|date('j') }}</span>
           {% if not is_past %}
             {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-dots.html.twig' with {'day': day, 'badges': variables.badges} %}
+          {% else %}
+            <span>{{ day|date('j') }}</span>
           {% endif %}
         </a>
       {% endfor %}

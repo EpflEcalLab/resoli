@@ -121,3 +121,25 @@ $calendar-item-size: 3.125rem;
     }
   }
 }
+
+.calendar-item {
+  position: relative;
+  overflow: visible;
+
+  .flag {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-42.5%);
+    pointer-events: none;
+
+    @include flag-size(5rem);
+  }
+
+  .flag-number {
+    position: absolute;
+    z-index: 1;
+    top: 43%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

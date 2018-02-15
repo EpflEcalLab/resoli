@@ -58,6 +58,7 @@
  - add Subscription's Badge, using Count of Guests Pending & Confirmed on events pill #310, #311, #312 & #313
  - add Subscription's Badge, using Count of Guests Pending on Activitiy Teaser Card #317 & #319
  - switch the Event Dashboard button in Activity detail page when Guests Pending
+ - add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
 
 ## 0.1.0 (2017-12-13)
  - production deployment

@@ -57,4 +57,14 @@
       }
     }
   }
+
+  // Fixes Google Maps Autocomplete position. Also see the JS code.
+  #address_container {
+    position: relative;
+  }
+  .pac-container {
+    position: absolute !important;
+    top: 34px !important;
+    left: 1px !important;
+  }
 }

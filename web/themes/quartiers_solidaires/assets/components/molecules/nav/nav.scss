@@ -213,6 +213,7 @@
 
 .navbar-settings {
   position: fixed;
+  display: flex;
   bottom: -100vh;
   left: 50%;
   transform: translateX(-50%);

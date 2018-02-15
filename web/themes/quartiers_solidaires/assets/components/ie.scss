@@ -1,2 +1,21 @@
 @charset "utf-8";
 
+.ie11 {
+  .calendar {
+    display: inline-block;
+    width: 650px;
+
+    & > *:nth-child(7n + 1) {
+      clear: both;
+    }
+  }
+
+  .calendar-head,
+  .calendar-item {
+    display: inline-flex;
+    width: 3.125rem;
+    height: 3.125rem;
+    margin: 0 2% 1%;
+    float: left;
+  }
+}

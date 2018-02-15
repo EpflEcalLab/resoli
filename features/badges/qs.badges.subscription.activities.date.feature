@@ -31,7 +31,7 @@ Feature: Badges - Activities by Date
     When I am on "/lausanne/activities/date"
     Then I should see 9 ".card-list-item" elements
     Then I should see 1 "#event37 .flag" elements
-    Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-guests-wait" elements
+    Then I should see 1 "#event37 .flag.flag-outline-danger.flag-subscription-guests-wait" elements
     And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
     Then I follow "qs.activity.date.link_next"
     Then I should see 1 ".card-list-item" elements

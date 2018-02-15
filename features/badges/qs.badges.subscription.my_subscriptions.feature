@@ -22,7 +22,7 @@ Feature: Badges - Subscription - My Subscriptions
   And the response status code should be 200
   Then I should see 2 ".card-list-item" elements
   Then I should see 2 ".card-list-item .flag" elements
-  Then I should see 1 "#card37 .flag.flag-danger.flag-subscription-guests-wait" elements
+  Then I should see 1 "#card37 .flag.flag-outline-danger.flag-subscription-guests-wait" elements
   Then I should see 1 "#card40 .flag.flag-danger.flag-subscription-confirmed" elements
   And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
   And I should see "qs.event.user.subscription.confirmed" in the "#card40" element

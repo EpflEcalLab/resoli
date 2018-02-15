@@ -21,7 +21,7 @@
 #}
 {% set classes = attributes.class|join(' ') %}
 <div class="row {{ attributes.sticky_footer ? 'modal-footer justify-content-center sticky-bottom' }}">
-  <div class="{% block container_classes %}col-md-10 col-lg-8 col-xl-6 mx-auto{% endblock %} {{ classes }}">
+  <div class="{% block container_classes %}col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3{% endblock %} {{ classes }}">
     {{ children }}
   </div>
 </div>

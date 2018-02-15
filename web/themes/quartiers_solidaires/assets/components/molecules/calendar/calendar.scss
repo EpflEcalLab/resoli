@@ -135,6 +135,10 @@ $calendar-item-size: 3.125rem;
     @include flag-size(5rem);
   }
 
+  .icon {
+    transform: scaleY(1.2);
+  }
+
   .flag-number {
     position: absolute;
     z-index: 1;

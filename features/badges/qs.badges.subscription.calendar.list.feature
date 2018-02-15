@@ -10,7 +10,7 @@ Feature: Badges - Subscription - Calendar - List
   And the response status code should be 200
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
-  Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
+  Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
   And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
 
   @api
@@ -20,7 +20,7 @@ Feature: Badges - Subscription - Calendar - List
   And the response status code should be 200
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
-  Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
+  Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
   And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
 
   @api
@@ -30,7 +30,7 @@ Feature: Badges - Subscription - Calendar - List
   And the response status code should be 200
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
-  Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-guests-wait" elements
+  Then I should see 1 "#card37 .flag.flag-danger.flag-subscription-guests-wait" elements
   And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
 
   @api
@@ -40,7 +40,7 @@ Feature: Badges - Subscription - Calendar - List
   And the response status code should be 200
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
-  Then I should see 1 "#event37 .flag.flag-danger.flag-subscription-guests-wait" elements
+  Then I should see 1 "#card37 .flag.flag-danger.flag-subscription-guests-wait" elements
   And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
 
   @api

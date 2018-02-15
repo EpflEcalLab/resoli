@@ -22,7 +22,7 @@
     {% set guests = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
   {% endif %}
 {% endif %}
-<li class="card card-flippable card-list-item" data-status="{{ guests_status ?? status }}" data-guests="{{ guests }}" id="card-event{{ event.nid.value }}">
+<li class="card card-flippable card-list-item" data-status="{{ guests_status ? guests_status : status }}" data-guests="{{ guests }}" id="card-event{{ event.nid.value }}">
 
   <div class="card-front">
     {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}

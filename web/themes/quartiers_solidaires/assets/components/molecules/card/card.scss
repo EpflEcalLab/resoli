@@ -43,15 +43,14 @@ a.card {
 
 // The card pill displays an icon at the left
 .card-pill {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
   margin: -$card-border-width;
-  color: color("light");
-  font-weight: $font-weight-bold;
-  border-bottom: none;
-  background-color: $card-cap-bg;
   border: $card-border-width solid $card-cap-bg;
+  background-color: $card-cap-bg;
+  font-weight: $font-weight-bold;
+  color: color("light");
 
   @include border-radius($card-border-radius);
 
@@ -97,9 +96,9 @@ a[href].card-pill {
 
 // Variation of the pill with Primary colors
 .card-pill-simple {
-  color: theme-color("primary");
-  font-weight: $font-weight-normal;
   border: 0;
+  font-weight: $font-weight-normal;
+  color: theme-color("primary");
 
   .card-pill-icon .icon {
     color: theme-color("primary");
@@ -254,8 +253,8 @@ a[href].card-pill-simple {
 
 .card-btn-corner {
   position: absolute;
-  bottom: -$card-border-width;
   right: -$card-border-width;
+  bottom: -$card-border-width;
 }
 
 // Card List Item

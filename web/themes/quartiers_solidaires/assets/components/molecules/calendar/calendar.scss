@@ -73,7 +73,7 @@ $calendar-item-size: 3.125rem;
 
     @include make-row();
 
-    display: inline-flex;
+    display: inline-flex; // stylelint-disable-line
 
     @include media-breakpoint-down(sm) {
       width: 100%;
@@ -81,13 +81,13 @@ $calendar-item-size: 3.125rem;
   }
 
   .calendar-item {
-    width: 100%;
     flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    width: 100%;
     min-width: 20px;
     max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     height: $calendar-item-size;
-    padding: 0;
     margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
+    padding: 0;
 
     @include media-breakpoint-up(md) {
       flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
@@ -111,8 +111,8 @@ $calendar-item-size: 3.125rem;
     min-width: 20px;
     max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
-    color: gray('600');
     border: 2px solid transparent;
+    color: gray('600');
 
     @include media-breakpoint-up(md) {
       flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});

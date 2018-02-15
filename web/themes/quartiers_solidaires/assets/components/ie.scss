@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 .ie11 {
+  // Calendar
   .calendar {
     display: inline-block;
     width: 650px;
@@ -17,5 +18,20 @@
     height: 3.125rem;
     margin: 0 2% 1%;
     float: left;
+  }
+
+  // Photos section
+  .img-grid {
+    display: block;
+
+    > * {
+      float: left;
+      width: 45%;
+      margin-right: 5%;
+
+      &:nth-child(2n+1) {
+        margin-right: 5%;
+      }
+    }
   }
 }

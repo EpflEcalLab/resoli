@@ -42,7 +42,7 @@
               {{ macros.icon('theme_' ~ activity.field_theme.entity.field_icon.value) }}
             </span>
 
-            <span class="card-pill-title">{{ activity.title.value }}</span>
+            <span class="card-pill-title mr-auto">{{ activity.title.value }}</span>
 
             {# Privilege Badges #}
             {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege.html.twig' with {'activity': activity, 'badges': variables.badges} %}

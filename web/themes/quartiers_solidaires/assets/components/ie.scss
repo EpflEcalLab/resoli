@@ -41,4 +41,20 @@
       padding: 0 0 100% 0;
     }
   }
+
+  // Themes grid
+  .btn-grid {
+    display: block;
+
+    @include clearfix;
+
+    .btn {
+      float: left;
+      width: 20%;
+
+      &:nth-child(5n+1) {
+        clear: both;
+      }
+    }
+  }
 }

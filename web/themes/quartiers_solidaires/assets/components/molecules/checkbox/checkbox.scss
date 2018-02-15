@@ -9,6 +9,10 @@
     overflow: visible;
     white-space: normal;
 
+    .icon {
+      pointer-events: none;
+    }
+
     @include icon-size(50px);
 
     svg {

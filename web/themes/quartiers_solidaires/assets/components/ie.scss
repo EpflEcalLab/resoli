@@ -1,6 +1,9 @@
 @charset "utf-8";
 
 .ie11 {
+  // Inputs
+  .form-control:-ms-input-placeholder { color: $input-placeholder-color; }
+
   // Calendar
   .calendar {
     display: inline-block;

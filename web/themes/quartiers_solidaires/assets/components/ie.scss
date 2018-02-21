@@ -84,3 +84,10 @@
     backface-visibility: visible;
   }
 }
+
+// only target Edge
+@supports (-ms-ime-align: auto) {
+  .sticky-top {
+    position: relative;
+  }
+}

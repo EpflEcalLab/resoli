@@ -7,7 +7,7 @@
     {# Adapte the color of badge according user privilege of activity #}
     {% if privilege == 'activity_maintainers' %}{% set theme = 'warning' %}{% endif %}
     {% if privilege == 'activity_organizers' %}{% set theme = 'danger' %}{% endif %}
-    {{ macros.badge('outline-info', 'wait', 'flag-subscription-guests-wait') }}
+    {{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-guests-wait') }}
   {% else %}
     {% if privilege == 'activity_members' %}
       {{ macros.badge('info', 'happy', 'flag-privilege-members', 'qs.roles.activity_member'|t) }}

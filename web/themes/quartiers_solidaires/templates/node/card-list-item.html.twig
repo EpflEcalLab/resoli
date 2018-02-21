@@ -10,9 +10,12 @@
 {% endif %}
 
 {% set guests = 0 %}
+
+{# If user is (activity_maintainers and confirmed) or activity_organizers of this activity #}
+{# show him guests badges, otherwise show him badges based on his own subscription #}
 {% if
   'activity_organizers' in variables.privileges
-  or 'activity_maintainers' in variables.privileges
+  or ('activity_maintainers' in variables.privileges and status == 'confirmed')
   or user.hasPermission('administer nodes') %}
   {% if event.nid.value in variables.badges.subscriptions.pendings_guests|keys %}
     {% set guests_status = 'pendings_guests' %}

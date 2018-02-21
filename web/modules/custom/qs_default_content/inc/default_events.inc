@@ -280,4 +280,14 @@ function qs_default_content_events() {
   $dt->modify('+4 hours');
   $event_40->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
   $event_40->save();
+
+  // Event - Activity (3) - in 2 days at 19h00.
+  $event_54 = $nodeStorage->load(54);
+  $dt = new DrupalDateTime();
+  $dt->modify('+2 days')->setTime(19, 20);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_54->set('field_start_at', $dt->format('Y-m-d\TH:i:s'));
+  $dt->modify('+3 hours');
+  $event_54->set('field_end_at', $dt->format('Y-m-d\TH:i:s'));
+  $event_54->save();
 }

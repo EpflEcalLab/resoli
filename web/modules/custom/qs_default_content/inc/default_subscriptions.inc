@@ -111,4 +111,30 @@ function qs_default_content_subscriptions() {
     'reviewed'  => time(),
   ]);
   $subscription->save();
+
+  // Event 54: Activity (3) - in 2 days.
+  // User 5: manager+lausanne.
+  $subscription = $subscriptionStorage->create([
+    // Event 54.
+    'entity'    => 54,
+    // User 5.
+    'user'      => 5,
+    // approved.
+    'status'    => 1,
+    'reviewer'  => 5,
+    'reviewed'  => time(),
+  ]);
+  $subscription->save();
+
+  // Event 54: Activity (3) - in 2 days.
+  // User 13: member+lausanne+manager+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 54.
+    'entity'    => 54,
+    // User 13.
+    'user'      => 13,
+    // pending.
+    'status'    => NULL,
+  ]);
+  $subscription->save();
 }

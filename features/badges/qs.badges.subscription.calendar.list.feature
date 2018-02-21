@@ -4,24 +4,24 @@ Feature: Badges - Subscription - Calendar - List
   and use the highest privilege on this event's activity to get the color.
 
   @api
-  Scenario: Logged as Manager of Lausanne, when reaching the Calendar Weekly, I should see my 1 badge of subscriptions. I see my Guests_Confirmed/Maintainer badge on the Event N°37 (Sorties Théâtre)
+  Scenario: Logged as Manager of Lausanne, when reaching the Calendar Weekly, I should see my 1 badge of subscriptions. I see my Waiting/Maintainer badge on the Event N°37 (Sorties Théâtre). I can't see the Guests_Waiting badge because I'm maintainer but I don't have a confirmed subscription on this event.
   Given I am logged in as user "manager+lausanne"
   When I am on "/lausanne/calendar/weekly"
   And the response status code should be 200
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
-  Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
-  And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
+  Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-wait" elements
+  And I should see "qs.event.user.subscription.pending" in the "#card37" element
 
   @api
-  Scenario: Logged as Manager of Lausanne, when reaching the Calendar Monthly, I should see my 1 badge of subscriptions. I see my Guests_Confirmed/Maintainer badge on the Event N°37 (Sorties Théâtre)
+  Scenario: Logged as Manager of Lausanne, when reaching the Calendar Monthly, I should see my 1 badge of subscriptions. I see the Guests_Waiting/Maintainer badge on the Event N°37 (Sorties Théâtre). I can't see the Guests_Waiting badge because I'm maintainer but I don't have a confirmed subscription on this event.
   Given I am logged in as user "manager+lausanne"
   When I am on "/lausanne/calendar/monthly"
   And the response status code should be 200
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
-  Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-guests-confirmed" elements
-  And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
+  Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-wait" elements
+  And I should see "qs.event.user.subscription.pending" in the "#card37" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Calendar Weekly, I should see my 1 badge of subscriptions. I see the Guests_Waiting/Organizer badge on the Event N°37 (Sorties Théâtre)

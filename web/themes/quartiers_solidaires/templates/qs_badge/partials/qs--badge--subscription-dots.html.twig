@@ -1,6 +1,6 @@
 {# Subscriptions Badges #}
 
-{% if day and badges.privileges and badges.events_subscriptions.confirmed and day|date('Y-m-d') in badges.events_subscriptions.confirmed|keys %}
+{% if day and badges.events_subscriptions.confirmed and day|date('Y-m-d') in badges.events_subscriptions.confirmed|keys %}
 
   {% set theme = 'info' %}
   {# Adapte the color of badge according user privilege of this day #}
@@ -24,7 +24,6 @@
       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ shield ? 'shield' : 'flag' }}"></use>
     </svg>
   </div>
-
 {% else %}
   <span>{{ day|date('j') }}</span>
 {% endif %}

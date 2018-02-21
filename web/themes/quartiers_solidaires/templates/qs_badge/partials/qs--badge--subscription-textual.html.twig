@@ -1,6 +1,7 @@
 {# Subscription Textual Badges #}
 {% if event.nid.value and badges.subscriptions %}
   {% set show_user_subscription = TRUE %}
+  {% set user_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed|keys %}
 
   {% if badges.privileges %}
     {# Get user Highest privilege #}
@@ -11,9 +12,9 @@
       privilege == 'activity_organizers' ? 'text-danger',
     ] %}
 
-    {# If user is activity_maintainers or activity_organizers of this event #}
+    {# If user is (activity_maintainers and confirmed) or activity_organizers of this event #}
     {# show him guests badges, otherwise show him badges based on his own subscription #}
-    {% if privilege == 'activity_maintainers' or privilege == 'activity_organizers' %}
+    {% if (privilege == 'activity_maintainers' and user_subscription_confirmed) or privilege == 'activity_organizers' %}
       {# Pending Guests subscriptions Badge #}
       {% if event.nid.value in badges.subscriptions.pendings_guests|keys %}
         {% set attendees =  badges.subscriptions.pendings_guests[event.nid.value] %}
@@ -33,11 +34,11 @@
     <p class="text-info">
       <strong>
         {% if event.nid.value in badges.subscriptions.pendings|keys %}
-          {{ 'qs.event.user.subscription.pending'|t }}
+          <strong class="{{ theme|join(' ') }}">{{ 'qs.event.user.subscription.pending'|t }}</strong>
         {% endif %}
 
         {% if event.nid.value in badges.subscriptions.confirmed|keys %}
-          {{ 'qs.event.user.subscription.confirmed'|t }}
+          <strong class="{{ theme|join(' ') }}">{{ 'qs.event.user.subscription.confirmed'|t }}</strong>
         {% endif %}
       </strong>
     </p>

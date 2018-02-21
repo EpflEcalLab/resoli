@@ -12,9 +12,9 @@
         {% set roles = 'qs.roles.activity_organizer'|t %}
       {% endif %}
 
-      {{ 'qs.activity.user.you_are @role'|t({
+      <strong>{{ 'qs.activity.user.you_are @role'|t({
         '@role': roles
-      }) }}
+      }) }}</strong>
     </p>
   {% endif %}
 {% endif %}

@@ -2,7 +2,7 @@
 
 .ie11 {
   // Inputs
-  .form-control:-ms-input-placeholder { color: $input-placeholder-color; }
+  .form-control:-ms-input-placeholder { color: $input-placeholder-color; } // stylelint-disable-line selector-no-vendor-prefix
 
   // Calendar
   .calendar {
@@ -17,10 +17,10 @@
   .calendar-head,
   .calendar-item {
     display: inline-flex;
+    float: left;
     width: 3.125rem;
     height: 3.125rem;
     margin: 0 2% 1%;
-    float: left;
   }
 
   // Photos section
@@ -45,7 +45,7 @@
   .gallery-item {
     .card {
       height: 0;
-      padding: 0 0 100% 0;
+      padding: 0 0 100%;
     }
   }
 
@@ -69,9 +69,17 @@
   #address_container {
     position: relative;
   }
+
   .pac-container {
     position: absolute !important;
     top: 34px !important;
     left: 1px !important;
+  }
+
+  // Fixes the backface visibility of the card when flipped
+  .flip.card-flippable .card-back,
+  .flip.card-flippable .card-front,
+  .flip.card-flippable .collapse {
+    backface-visibility: visible;
   }
 }

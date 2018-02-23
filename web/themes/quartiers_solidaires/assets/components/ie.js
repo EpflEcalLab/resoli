@@ -24,6 +24,11 @@ const ie = () => {
         // The fix is finished, stop working.
         window.clearInterval(fixEutocompleteInterval);
       }, 500);
+
+      // Force the map to flip back on btn click. Don't know the reason for that....
+      $('.card-map-footer .btn').on('mousedown', function() {
+        $(this).trigger('click');
+      });
     }
 
     if (ie || /Edge/.test(navigator.userAgent)) {

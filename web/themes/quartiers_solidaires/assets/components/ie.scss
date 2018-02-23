@@ -58,7 +58,6 @@
     .btn {
       float: left;
       width: percentage(1/3);
-      hyphens: auto;
 
       &:nth-child(3n+1) {
         clear: both;

@@ -89,6 +89,9 @@ class ActivityDeleteForm extends ActivityEditFormBase {
       '#value' => $this->t('qs.form.delete_submit'),
     ];
 
+    // Remove unload script
+    $form['#attached']['library'] = [];
+
     return $form;
   }
 

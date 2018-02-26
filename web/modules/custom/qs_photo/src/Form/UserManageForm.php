@@ -164,7 +164,7 @@ class UserManageForm extends FormBasic {
       '#value' => $this->t('qs_photos.photos_delete'),
     ];
 
-    // Remove unload script
+    // Remove unload script.
     $form['#attached']['library'] = [];
 
     return $form;

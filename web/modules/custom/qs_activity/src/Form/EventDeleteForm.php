@@ -88,6 +88,9 @@ class EventDeleteForm extends EventEditFormBase {
       '#value' => $this->t('qs.form.delete_submit'),
     ];
 
+    // Remove unload script.
+    $form['#attached']['library'] = [];
+
     return $form;
   }
 
@@ -114,6 +117,8 @@ class EventDeleteForm extends EventEditFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $event = $this->nodeStorage->load($form_state->getValue('event'));
     $activity = $event->field_activity->entity;
+
+    $this->eventManager->sendDeleted($event, $this->currentUser->getAccount());
 
     drupal_set_message($this->t("qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end", [
       '@event'      => $event->getTitle(),

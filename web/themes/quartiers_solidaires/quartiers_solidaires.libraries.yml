@@ -12,6 +12,14 @@ global-styling:
     - core/drupal
     - core/drupalSettings
 
+date:
+  js:
+    build/js/date.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery.once
+    - core/jquery.ui.datepicker
+
 # Google Map
 google-map:
   version: 3.0
@@ -23,6 +31,12 @@ google-place-autocomplete:
   version: 3.0
   js:
     https://maps.googleapis.com/maps/api/js?key=AIzaSyDCxS2BMP-uAhxYq2PcDKWJBtWc8ZwkBnY&libraries=places: {type: external, defer: true, async: true}
+
+# Polyfill for includes (ie happiness)
+polyfill-io:
+  version: 2.0
+  js:
+    https://cdn.polyfill.io/v2/polyfill.js?features=String.prototype.includes,Array.prototype.find: {type: external}
 
 # Photoswipe
 photoswipe:

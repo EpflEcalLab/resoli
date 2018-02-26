@@ -40,7 +40,7 @@
     {% for section in variables.menu %}
       <a href="{{ section.url }}" class="nav-item{{ section.current ? ' active' }}">
         {{ macros.icon(section.icon ~ '-big') }}
-        {{ section.label }}
+        <span>{{ section.label }}</span>
       </a>
     {% endfor %}
   </nav>

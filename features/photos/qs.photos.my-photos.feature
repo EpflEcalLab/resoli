@@ -64,5 +64,6 @@ Feature: Dashboard my photos - Activity within the user can manage photos
     And the response status code should be 200
     Then I should see 1 ".card-list .card-list-item" elements
     Then I should see a "#activity3" element
+    Then I should not see a "#activity6" element
     And I should see "qs.photos.add_photos" link with href "photos/1/add"
     And I should not see "qs.photos.user.collection.empty"

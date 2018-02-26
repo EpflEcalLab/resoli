@@ -1,0 +1,26 @@
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
+<figure class="gallery-item">
+  {% set ratio = photo.field_image.width / photo.field_image.height %}
+  {% set target_width = min(1920, photo.field_image.width) %}
+  {% set target_height = min(1080, photo.field_image.height) %}
+
+  {% if ratio < 1 %}
+    {% set target_width = target_height * ratio %}
+  {% else %}
+    {% set target_height = target_width / ratio %}
+  {% endif %}
+
+  <a
+    href="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'gallery_fullsize'}) }}"
+    class="card"
+    data-index="{{ loop.index - 1 }}"
+    data-size="{{ target_width|round }}x{{ target_height|round }}"
+  >
+    <span>
+      <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
+    </span>
+
+    <span class="btn btn-outline-secondary btn-circle card-btn-corner bg-white">{{ macros.icon('look') }}</span>
+  </a>
+  {% include '@quartiers_solidaires/qs_photo/pages/partials/photo-gallery-card.html.twig' %}
+</figure>

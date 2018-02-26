@@ -9,8 +9,6 @@
   position: relative;
   z-index: 1;
   display: inline-flex;
-  justify-content: center;
-  align-items: center;
   width: $navbar-icon-size;
   height: $navbar-icon-size;
   min-width: initial;
@@ -57,8 +55,6 @@
 
   &:not([disabled]):not(.disabled):active,
   &:not([disabled]):not(.disabled).active {
-    width: $navbar-icon-size + $input-btn-border-width;
-    height: $navbar-icon-size + $input-btn-border-width;
     border-width: 0;
     box-shadow: 0 0 0 2px inset color("primary-darker");
   }
@@ -217,7 +213,10 @@
 
 .navbar-settings {
   position: fixed;
+  display: flex;
   bottom: -100vh;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 20;
   opacity: 0;
 
@@ -274,7 +273,6 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 17vh;
   height: 15vh;

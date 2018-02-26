@@ -11,7 +11,9 @@
   padding: $input-btn-padding-y ($input-btn-padding-x / 2);
 
   &[type=time] {
-    padding-right: 0.2rem;
+    padding-right: 0.2rem !important;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 }
 
@@ -46,5 +48,15 @@
     overflow: hidden;
     position: absolute;
     z-index: -1;
+  }
+}
+
+.bg-primary {
+  @include form-validation-state("invalid", theme-color-level('danger', -4));
+}
+
+.selectize-input {
+  input {
+    width: 100% !important;
   }
 }

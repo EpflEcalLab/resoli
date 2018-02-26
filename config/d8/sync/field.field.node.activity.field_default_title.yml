@@ -1,0 +1,19 @@
+uuid: edfa1fb6-31c7-4398-ac86-0d91328a9b3d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_default_title
+    - node.type.activity
+id: node.activity.field_default_title
+field_name: field_default_title
+entity_type: node
+bundle: activity
+label: 'Default Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

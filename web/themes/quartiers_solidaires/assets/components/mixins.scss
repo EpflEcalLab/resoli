@@ -169,6 +169,11 @@
     @include hover-focus {
       background-color: darken($color, 8%);
     }
+
+    &.btn-confirm {
+      color: $red;
+      background-color: $white;
+    }
   }
 }
 

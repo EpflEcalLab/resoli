@@ -12,8 +12,8 @@ import formSubmit from 'molecules/form-control/form-submit';
 import formSelectize from 'molecules/form-control/form-selectize';
 import formComment from 'molecules/form-control/form-comment';
 import calendar from 'molecules/calendar/calendar';
-import formSubscription from 'molecules/form-control/form-subscription';
 import modal from 'organisms/modal/modal';
+import ie from 'ie';
 
 svgIcons();
 
@@ -29,8 +29,8 @@ svgIcons();
     calendar();
     checkbox();
     button();
-    formSubscription();
     modal();
     formComment();
+    ie();
   });
 })(jQuery);

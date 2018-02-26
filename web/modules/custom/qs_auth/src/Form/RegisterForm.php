@@ -74,6 +74,7 @@ class RegisterForm extends FormBase {
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
     ];
+    $form['#attached']['library'][] = 'qs_site/unload';
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
@@ -301,7 +302,12 @@ class RegisterForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $user = $this->account->create($form_state->getValues());
+    $community = $this->termStorage->load($form_state->getValue('community'));
+
     $this->account->sendRegisterEmail($user);
+
+    // Send to community managers a mail with the new request.
+    $this->account->sendCommunityManagersApplyReq($user, $community);
 
     drupal_set_message($this->t('qs_auth.form.register.success @firstname, @lastname, @mail', [
       '@firstname' => $user->field_firstname->value,
@@ -309,7 +315,6 @@ class RegisterForm extends FormBase {
       '@mail'      => $user->field_email->value,
     ]));
 
-    $community = $this->termStorage->load($form_state->getValue('community'));
     $form_state->setRedirect('qs_auth.approval', ['community' => $community->id()], []);
   }
 

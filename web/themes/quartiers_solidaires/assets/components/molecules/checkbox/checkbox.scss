@@ -9,6 +9,10 @@
     overflow: visible;
     white-space: normal;
 
+    .icon {
+      pointer-events: none;
+    }
+
     @include icon-size(50px);
 
     svg {
@@ -54,6 +58,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
+    z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -69,13 +74,15 @@
       height: 50px;
     }
 
-    .card-img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-    }
+  }
+
+  .card-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
   }
 
   &.card {
@@ -87,6 +94,7 @@
         opacity: 1;
       }
     }
+
     .btn-circle {
       position: absolute;
       bottom: -$card-border-width;
@@ -104,6 +112,7 @@
       content: '';
       display: block;
       position: absolute;
+      z-index: 1;
       top: 0;
       right: 0;
       bottom: 0;

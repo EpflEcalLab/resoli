@@ -123,7 +123,9 @@ class DeleteForm extends FormBasic {
       ],
       '#attributes' => [
         'class' => [
-          'text-center',
+          'justify-content-center',
+          'modal-footer sticky-bottom',
+          'mb-4',
         ],
       ],
     ];
@@ -154,6 +156,9 @@ class DeleteForm extends FormBasic {
       ],
       '#value' => $this->t('qs.form.delete_submit'),
     ];
+
+    // Remove unload script.
+    $form['#attached']['library'] = [];
 
     return $form;
   }

@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
+use Drupal\qs_auth\Service\Account;
 
 /**
  * CommunitiesApplyForm class.
@@ -34,6 +35,13 @@ class CommunitiesApplyForm extends FormBase {
   private $termStorage;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * The current active user.
    *
    * @var \Drupal\Core\Session\AccountProxyInterface
@@ -48,13 +56,22 @@ class CommunitiesApplyForm extends FormBase {
   private $privilegeManager;
 
   /**
+   * The QS account service.
+   *
+   * @var \Drupal\qs_auth\Service\Account
+   */
+  protected $account;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManager $privilege_manager, AccountProxyInterface $currentUser) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, PrivilegeManager $privilege_manager, AccountProxyInterface $currentUser, Account $account) {
     $this->acl              = $acl;
     $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
+    $this->userStorage      = $entity_type_manager->getStorage('user');
     $this->privilegeManager = $privilege_manager;
     $this->currentUser      = $currentUser;
+    $this->account          = $account;
   }
 
   /**
@@ -65,7 +82,8 @@ class CommunitiesApplyForm extends FormBase {
     $container->get('qs_acl.access_control'),
     $container->get('entity_type.manager'),
     $container->get('qs_acl.privilege_manager'),
-    $container->get('current_user')
+    $container->get('current_user'),
+    $container->get('qs_auth.account')
     );
   }
 
@@ -83,6 +101,8 @@ class CommunitiesApplyForm extends FormBase {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
+
+    $form['#title'] = $this->t('qs_supervisor.account.form.title');
 
     $form['#top_links'] = [
       'qs_supervisor.account.dashboard' => [
@@ -176,17 +196,20 @@ class CommunitiesApplyForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $user = $this->currentUser;
+    $account = $this->userStorage->load($this->currentUser->id());
 
     // Create a Request Privilege as Member for this community.
     $community = $this->termStorage->load($form_state->getValue('community'));
-    $this->privilegeManager->request('community_members', $community, $user);
+    $this->privilegeManager->request('community_members', $community, $this->currentUser);
+
+    // Send to community managers a mail with the new request.
+    $this->account->sendCommunityManagersApplyReq($account, $community);
 
     drupal_set_message($this->t('qs_auth.communities.apply.success @community', [
       '@community' => $community->getName(),
     ]));
 
-    $form_state->setRedirect('qs_supervisor.account.dashboard', ['user' => $user->id()], []);
+    $form_state->setRedirect('qs_supervisor.account.dashboard', ['user' => $account->id()], []);
   }
 
 }

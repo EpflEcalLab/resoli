@@ -16,7 +16,7 @@ const card = () => {
       const $card = $(this).parents('.card-flippable');
 
       if ($card.length > 0) {
-        $('html, body').animate({ scrollTop: $card.offset().top - 100 }, 200);
+        // $('html, body').animate({ scrollTop: $card.offset().top - 100 }, 200);
         $card.toggleClass('flip');
       }
 
@@ -35,7 +35,7 @@ const card = () => {
           setTimeout(function () {
             const map = new google.maps.Map(document.getElementById(map_container.attr('id')), {
               center: latLng,
-              zoom: 12,
+              zoom: 17,
               zoomControl: true,
               mapTypeControl: false,
               scaleControl: false,
@@ -88,13 +88,23 @@ const card = () => {
           $card = $('.card:first .card-pill[data-toggle=collapse]');
         }
 
-        if ($card.length) {
+        if ($card.length > 0) {
           // Always toggle the first card or the one from the URL on load
           $card.trigger('click');
-          $('html, body').animate({ scrollTop: $card.offset().top }, 200);
+          // const top = $card.offset().top;
+          // $('html, body').animate({ scrollTop: top }, 200);
         }
       }
     }
+
+    // Make sure the card is unflipped when clicking on the back button
+    // see issue #520
+    $(window).on('hashchange', function() {
+      const hash = window.location.hash;
+      if (hash && hash.includes('card')) {
+        $('.flip').removeClass('flip');
+      }
+    });
 
     // Workaround Bigpipe
     $(document).on('DOMNodeInserted', function() {

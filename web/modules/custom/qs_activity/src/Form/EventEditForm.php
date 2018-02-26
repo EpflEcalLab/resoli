@@ -82,8 +82,9 @@ class EventEditForm extends EventEditFormBase {
       '#title'         => $this->t('qs_activity.events.form.edit.date'),
       '#type'          => 'date',
       '#required'      => FALSE,
-      '#default_value' => $start_at->format('Y-m-d'),
+      '#default_value' => $start_at->format('d.m.Y'),
       '#size'          => 8,
+      '#date_date_format' => 'd.m.Y',
     ];
 
     $form['date_fieldset']['time_fieldset'] = [
@@ -216,7 +217,7 @@ class EventEditForm extends EventEditFormBase {
       '#required'    => FALSE,
       '#states' => [
         'visible' => [
-          ':input[name="has_contribution"]' => ['value' => 1],
+          ':input[name="has_contribution"]' => ['value' => "1"],
         ],
       ],
     ];
@@ -335,8 +336,16 @@ class EventEditForm extends EventEditFormBase {
     $fields['field_venue_lat']     = $form_state->getValue('latitude');
     $fields['field_venue_long']    = $form_state->getValue('longitude');
 
+    $original_event = clone $event;
+
     // Update new event.
-    $this->eventManager->update($event, $start_at, $end_at, $fields);
+    $updated_event = $this->eventManager->update($event, $start_at, $end_at, $fields);
+
+    // Process this only if the date or time has change form the original event.
+    if ($original_event->field_start_at->date != $updated_event->field_start_at->date || $original_event->field_end_at->date != $updated_event->field_end_at->date) {
+      // Send mail to subscribers, activity organizer(s) & activity maintainers.
+      $this->eventManager->sendUpdated($original_event, $updated_event, $this->currentUser->getAccount());
+    }
 
     drupal_set_message($this->t('qs_activity.events.form.edit.success @event', [
       '@event' => $event->getTitle(),

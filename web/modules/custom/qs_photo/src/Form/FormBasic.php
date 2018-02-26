@@ -168,6 +168,7 @@ abstract class FormBasic extends FormBase {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
+    $form['#attached']['library'][] = 'qs_site/unload';
     return $form;
   }
 

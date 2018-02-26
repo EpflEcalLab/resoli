@@ -1,8 +1,10 @@
-<div class="row col-12 flex-row">
+<div class="row flex-row mb-4">
 {% for photo in variables.photos %}
-  <div class="col-6 col-sm-4 col-md-3 d-flex mb-3">
+  <div class="col-6 col-sm-4 col-md-3">
     <figure class="gallery-item">
-      <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
+      <div>
+        <img class="card-img" src="{{ path('qs_photo.streamer', {'photo': photo.nid.value, 'image_style': 'qs_thumbnail'}) }}" alt="{{ photo.title.value }}" title="{{ photo.title.value }}">
+      </div>
     </figure>
   </div>
 {% endfor %}

@@ -38,24 +38,26 @@
  * @see html.html.twig
  */
 #}
-<main class="fullpage-wrapper" role="main">
-  {% if page.header %}
-    <header class="header container py-3" role="banner">
-      {{ page.header }}
-    </header>
-  {% endif %}
-  {% block header %}{% endblock %}
+<div class="d-flex flex-column justify-content-between">
+  <main class="fullpage-wrapper" role="main">
+    {% if page.header %}
+      <header class="header container py-3" role="banner">
+        {{ page.header }}
+      </header>
+    {% endif %}
+    {% block header %}{% endblock %}
 
-  {% if page.messages %}
-    <div class="container mt-3">
-      {{ page.messages }}
-    </div>
-  {% endif %}
+    {% if page.messages %}
+      <div class="container mt-3">
+        {{ page.messages }}
+      </div>
+    {% endif %}
 
-  <a id="main-content" tabindex="-1"></a>
-  {% block content %}{{ page.content }}{% endblock %}
+    <a id="main-content" tabindex="-1"></a>
+    {% block content %}{{ page.content }}{% endblock %}
 
-  {% if page.floating %}
-    {{ page.floating }}
-  {% endif %}
-</main>
+    {% if page.floating %}
+      {{ page.floating }}
+    {% endif %}
+  </main>
+</div>

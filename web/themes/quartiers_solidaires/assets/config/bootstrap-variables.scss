@@ -273,7 +273,7 @@ $display4-weight:             300 !default;
 $display-line-height:         $headings-line-height !default;
 
 $lead-font-size:              ($font-size-base * 1.6875) !default;
-$lead-font-weight:            300 !default;
+$lead-font-weight:            $font-weight-normal !default;
 
 $small-font-size:             80% !default;
 
@@ -330,7 +330,7 @@ $input-btn-padding-y:         .5rem !default;
 $input-btn-padding-x:         2rem !default;
 $input-btn-line-height:       1.25 !default;
 
-$input-btn-focus-width:       .2rem !default;
+$input-btn-focus-width:       2px !default;
 $input-btn-focus-color:       rgba(theme-color("primary"), .25) !default;
 $input-btn-focus-box-shadow:  0 0 0 $input-btn-focus-width $input-btn-focus-color !default;
 
@@ -355,7 +355,7 @@ $btn-border-radius:           100px !default;
 $btn-border-radius-lg:        500px !default;
 $btn-border-radius-sm:        $border-radius-sm !default;
 
-$btn-transition:              background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+$btn-transition:              background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, border-radius .15s ease-in-out !default;
 
 
 // Forms
@@ -826,7 +826,7 @@ $carousel-transition:               transform .6s ease !default;
 // Close
 
 $close-font-size:                   $font-size-base * 3 !default;
-$close-font-weight:                 $font-weight-light !default;
+$close-font-weight:                 $font-weight-normal !default;
 $close-color:                       $black !default;
 $close-text-shadow:                 none !default;
 

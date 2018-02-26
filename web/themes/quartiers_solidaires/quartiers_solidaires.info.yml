@@ -5,7 +5,11 @@ core: 8.x
 screenshot: screenshot.png
 
 libraries:
+  - quartiers_solidaires/polyfill-io
   - quartiers_solidaires/global-styling
+
+libraries-override:
+  core/drupal.date: quartiers_solidaires/date
 
 stylesheets-remove:
   - core/assets/vendor/normalize-css/normalize.css

@@ -5,3 +5,10 @@ services:
     arguments: ['@current_route_match']
     tags:
       - {name: event_subscriber}
+
+  qs_site.twig.render:
+    class: Drupal\qs_site\TwigExtension\Render
+    calls:
+      - [setContainer, ['@service_container']]
+    tags:
+      - { name: twig.extension }

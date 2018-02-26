@@ -85,6 +85,7 @@ class EventAddForm extends FormBasic {
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
     ];
+    $form['#attached']['library'][] = 'qs_site/unload';
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
@@ -120,7 +121,7 @@ class EventAddForm extends FormBasic {
       '#placeholder'   => $this->t('qs_activity.events.form.add.title.placeholder'),
       '#type'          => 'textfield',
       '#required'      => FALSE,
-      '#default_value' => $activity->title->value,
+      '#default_value' => $activity->field_default_title->value,
     ];
 
     $form['event']['step-1']['date_fieldset'] = [
@@ -150,8 +151,9 @@ class EventAddForm extends FormBasic {
       ],
       '#title'         => $this->t('qs_activity.events.form.add.date'),
       '#type'          => 'date',
-      '#default_value' => $now->format('Y-m-d'),
+      '#default_value' => $now->format('d.m.Y'),
       '#size'          => 8,
+      '#date_date_format' => 'd.m.Y',
     ];
 
     $form['event']['step-1']['date_fieldset']['time_fieldset'] = [
@@ -239,11 +241,11 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-2']['latitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $activity->field_venue->value ? $activity->field_venue_lat->value : NULL,
+      '#default_value' => $activity->field_venue_lat->value ? $activity->field_venue_lat->value : NULL,
     ];
     $form['event']['step-2']['longitude'] = [
       '#type'  => 'hidden',
-      '#default_value' => $activity->field_venue->value ? $activity->field_venue_long->value : NULL,
+      '#default_value' => $activity->field_venue_long->value ? $activity->field_venue_long->value : NULL,
     ];
 
     $form['event']['step-2']['contact_name'] = [
@@ -298,7 +300,7 @@ class EventAddForm extends FormBasic {
       '#required'    => FALSE,
       '#states' => [
         'visible' => [
-          ':input[name="has_contribution"]' => ['value' => 1],
+          ':input[name="has_contribution"]' => ['value' => "1"],
         ],
       ],
     ];

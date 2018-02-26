@@ -671,4 +671,17 @@ function qs_default_content_privileges_activities() {
     'reviewed'  => time(),
   ]);
   $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+    // Activity 6: Activity 6 - Lausanne - Theme N° - Randonnées.
+    'entity'    => 6,
+    // User 9.
+    'user'      => 9,
+    // approved.
+    'status'    => 1,
+    'privilege' => 'activity_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
 }

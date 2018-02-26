@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\Core\Mail\MailManagerInterface;
 
 /**
  * AjaxControllerBase.
@@ -62,9 +63,16 @@ class AjaxControllerBase extends ControllerBase {
   protected $privilegeStorage;
 
   /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(RequestStack $request_stack, AccessControl $acl, PrivilegeManager $privilege_manager) {
+  public function __construct(RequestStack $request_stack, AccessControl $acl, PrivilegeManager $privilege_manager, MailManagerInterface $mail) {
     $this->requestStack     = $request_stack;
     $this->acl              = $acl;
     $this->privilegeManager = $privilege_manager;
@@ -72,6 +80,7 @@ class AjaxControllerBase extends ControllerBase {
     $this->termStorage      = $this->entityTypeManager()->getStorage('taxonomy_term');
     $this->nodeStorage      = $this->entityTypeManager()->getStorage('node');
     $this->userStorage      = $this->entityTypeManager()->getStorage('user');
+    $this->mail             = $mail;
   }
 
   /**
@@ -83,7 +92,8 @@ class AjaxControllerBase extends ControllerBase {
     // Load customs services used in this class.
     $container->get('request_stack'),
     $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager')
+    $container->get('qs_acl.privilege_manager'),
+    $container->get('plugin.manager.mail')
     );
   }
 

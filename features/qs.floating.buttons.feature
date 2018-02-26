@@ -174,8 +174,51 @@ Feature: Floating actions buttons
     Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/8/dashboard"
 
-# Photos by Themes
+# Community Dashboard
+  @api
+  Scenario: Logged as Manager of Lausanne, when reaching the Lausanne community dashboard, I must see the "Community Dashboard" button
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/dashboard"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_menu.links.account.communities" link with href "/lausanne/dashboard"
 
-# Photos by Month
+  @api
+  Scenario: Logged as Manager of Lausanne, when reaching the Lausanne community dashboard members, I must see the "Community Dashboard" button
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/dashboard/members"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_community.dashboard.members" link with href "/lausanne/dashboard"
 
-# Photos by Activity
+  @api
+  Scenario: Logged as Manager of Lausanne, when reaching the Lausanne community dashboard waiting-approval, I must see the "Community Dashboard" button
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/dashboard/waiting-approval"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_community.dashboard.waiting_approval" link with href "/lausanne/dashboard"
+
+# Subscriptions Dashboard
+# Activity Dashboard
+# Event Dashboard
+# Supervisor account
+
+# My Photos
+
+# Form add Photo
+# Form manage Photos
+
+# Form delete Photos
+  Scenario: In the Form delete Photo, I must see the "Delete Photo(s)" button
+    Given I am logged in as user "admin"
+    When I am on "/photos/activity/2/delete?photos[42]=42&photos[45]=45"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.photo.delete" link with href "#"
+
+# Form comments Photos
+  Scenario: In the Form comments Photo, I must see the "Community Dashboard" button
+    Given I am logged in as user "admin"
+    When I am on "/photos/activity/3/comment?photos[50]=50"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs_photo.form.comment.title" link with href "#"

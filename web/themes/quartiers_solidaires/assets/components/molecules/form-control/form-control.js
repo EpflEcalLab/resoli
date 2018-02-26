@@ -1,9 +1,5 @@
 const formControl = () => {
   (function ($) {
-    if (typeof google != 'undefined') {
-      google.maps.event.addDomListener(window, 'load', locationInitialize);
-    }
-
     /**
      *  Location Search by using Google Place Autocomplete.
      */
@@ -19,13 +15,32 @@ const formControl = () => {
 
         // Will store the initial value of this field, used when updating values.
         // Indeed, if the change the place for a custom one, we never fire the 'place_changed' event-
-        let initial = $(el).val() ;
+        let initial = $(el).val();
 
         const inputLat = $(el).data('googleInputLat');
         const inputLng = $(el).data('googleInputLng');
         const autocomplete = new google.maps.places.Autocomplete(el, {
           componentRestrictions: {country: 'ch'},
         });
+
+        // Detect IE 11 to fire the initialization of google map.
+        // stackoverflow.com/questions/21825157/internet-explorer-11-detection
+        const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+        if (isIE11) {
+          // Fix autocomplete position in Windows Phone 8.1. Also see CSS rules.
+          // Wait until the autocomplete element is added to the document.
+          // stackoverflow.com/questions/18259294/google-places-autocomplete-not-working-in-windows-mobile-ie-browser
+          const fixEutocompleteInterval = window.setInterval(function(){
+            const $container = $('body > .pac-container');
+            if ($container.length == 0) return;
+            // Move the autocomplete element just below the input.
+            $container.appendTo($(el).parent());
+            // Add parent as relative.
+            $(el).parent().css('position', 'relative');
+            // The fix is finished, stop working.
+            window.clearInterval(fixEutocompleteInterval);
+          }, 500);
+        }
 
         /**
          * Cleanup the lat/lng fields when user chose custom place instead of Google one.
@@ -63,6 +78,21 @@ const formControl = () => {
           $(`input[data-drupal-selector="${inputLng}"]`).val(lng);
         });
       });
+    }
+
+    if (typeof google != 'undefined') {
+      google.maps.event.addDomListener(window, 'load', locationInitialize);
+
+      // Detect IE 11 to fire the initialization of google map.
+      // stackoverflow.com/questions/21825157/internet-explorer-11-detection
+      const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+
+      // Detect Edge.
+      const ua = window.navigator.userAgent;
+      const isEdge = ua.indexOf('Edge/');
+      if (isIE11 || isEdge > 0) {
+        locationInitialize();
+      }
     }
 
     /**

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## 1.0.0 (2018-02-26)
  - fix #500 - Remove privilegies & subscriptions when deleting entities
  - improve user supervisor dashboard #202
  - fix click propagation in photoswipe gallery #497

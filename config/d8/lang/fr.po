@@ -139,27 +139,6 @@ msgstr "Ven"
 msgid "Sat"
 msgstr "Sam"
 
-msgid "Su"
-msgstr "Di"
-
-msgid "Mo"
-msgstr "Lu"
-
-msgid "Tu"
-msgstr "Ma"
-
-msgid "We"
-msgstr "Me"
-
-msgid "Th"
-msgstr "Je"
-
-msgid "Fr"
-msgstr "Ve"
-
-msgid "Sa"
-msgstr "Sa"
-
 msgctxt "Abbreviated 1 letter weekday Sunday"
 msgid "S"
 msgstr "D"
@@ -296,7 +275,7 @@ msgid "qs_auth.form.login.password"
 msgstr "Inscrivez votre mot de passe ici"
 
 msgid "qs_auth.form.login.title"
-msgstr "Entrez les informations suivantes pour vous connecter de manière sécurisée à Réseaux Solidaires."
+msgstr "Entrez les informations suivantes pour vous connecter de manière sécurisée à Réseaux Solidaires."
 
 msgid "qs.form.submit"
 msgstr "Valider les données"
@@ -443,7 +422,7 @@ msgid "qs_supervisor.account.dashboard.title"
 msgstr "Mes informations"
 
 msgid "qs_auth.form.communities_apply.community"
-msgstr "A quelle communauté souhaitez-vous vous connecter?"
+msgstr "Sélectionnez une communauté ci-dessous"
 
 msgid "qs_auth.communities.apply"
 msgstr "Ajouter une communauté"
@@ -508,12 +487,6 @@ msgstr "Permettre aux membres de l’activité de publier des photos?"
 msgid "qs_activity.activities.form.edit.visibility.title"
 msgstr "Visibilité de l’activité"
 
-msgid "qs_activity.activities.form.edit.defaults.titlefield"
-msgstr ""
-
-msgid "qs_activity.activities.form.edit.defaults.titlefield.placeholder"
-msgstr ""
-
 msgid "qs_activity.activities.form.edit.defaults.body.placeholder"
 msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
 
@@ -551,9 +524,7 @@ msgid "qs_activity.activities.form.delete.title"
 msgstr "Supprimer l’activité"
 
 msgid "qs.activity.theme.filters @community_name."
-msgstr ""
-"Voici toutes les activités à venir, par thème, \n"
-"à @community_name."
+msgstr "Voici toutes les activités à venir, par thème, de @community_name."
 
 msgid "qs.menu.current_page"
 msgstr ""
@@ -631,7 +602,7 @@ msgid "qs_activity.events.form.add.body"
 msgstr "Comment décririez-vous votre évènement?"
 
 msgid "qs_activity.events.form.add.venue"
-msgstr "Où aura lieu votre évènement?"
+msgstr "Quel est le point de rendez-vous?"
 
 msgid "qs_activity.events.form.add.has_contribution"
 msgstr "Votre évènement nécessite-t-il une contribution?"
@@ -658,7 +629,7 @@ msgid "qs_activity.events.form.edit.body"
 msgstr "Comment décririez-vous votre évènement?"
 
 msgid "qs_activity.events.form.edit.venue"
-msgstr "Où aura lieu votre évènement?"
+msgstr "Quel est le point de rendez-vous?"
 
 msgid "qs_activity.events.form.edit.has_contribution"
 msgstr "Votre évènement nécessite-t-il une contribution?"
@@ -721,7 +692,7 @@ msgid "qs_auth.form.register.community"
 msgstr "Sélectionnez une communauté ci-dessous"
 
 msgid "qs_auth.register_form.step1"
-msgstr ""
+msgstr "Choisissez une communauté"
 
 msgid "qs_auth.form.register.firstname.placeholder"
 msgstr "Ex. Catherine"
@@ -736,7 +707,7 @@ msgid "qs_auth.form.register.lastname"
 msgstr "Inscrivez votre nom de famille ici"
 
 msgid "qs_auth.register_form.step2"
-msgstr ""
+msgstr "Vos identifiants"
 
 msgid "qs_auth.register_form.mail.placeholder"
 msgstr "Ex. catherine.dubuis@re-so.ch"
@@ -751,7 +722,7 @@ msgid "qs_auth.register_form.phone"
 msgstr "Inscrivez, si désiré, votre numéro de téléphone ici"
 
 msgid "qs_auth.register_form.step3"
-msgstr ""
+msgstr "Comment vous contacter?"
 
 msgid "qs_auth.form.register.username.placeholder"
 msgstr "Ex. Catherine33"
@@ -772,13 +743,13 @@ msgid "qs_auth.form.register.password_verification"
 msgstr "Confirmez votre mot de passe ici"
 
 msgid "qs_auth.register_form.step4"
-msgstr ""
+msgstr "Protégez votre compte"
 
 msgid "qs_community.waiting_approval.empty"
 msgstr "Il n’y a actuellement aucune demande en attente pour rejoindre votre communauté."
 
 msgid "qs.activity.theme.filters @community_name @themes_names."
-msgstr "Voici les activités à venir pour @themes_names, à @community_name."
+msgstr "Voici les activités à venir, pour @themes_names, de @community_name."
 
 msgid "qs.activity.nextevent"
 msgstr "Prochain évènement"
@@ -811,7 +782,7 @@ msgid "qs.form.error.empty @fieldname"
 msgstr "Cette information est absente: « @fieldname »"
 
 msgid "qs_activity.events.form.edit.title_form @activity"
-msgstr "Créez un nouvel évènement pour votre activité «@activity»."
+msgstr "Modifiez l’évènement de votre activité «@activity»."
 
 msgid "qs.form.error.mail.malformed"
 msgstr "Votre adresse e-mail semble être incorrecte ou absente."
@@ -844,13 +815,13 @@ msgid "qs_auth.register_form.step2.description"
 msgstr "Afin de vous donner accès à la communauté, indiquez les renseignements suivants:"
 
 msgid "qs_auth.register_form.step2.sub_description"
-msgstr "Ces données seront visibles uniquement par vous et votre responsable de communauté."
+msgstr "Ces données seront visibles uniquement par vous et votre responsable de communauté."
 
 msgid "qs_auth.register_form.step3.description"
 msgstr "Excellent! Indiquez à présent vos informations de contact, afin que les autres personnes membres puissent communiquer avec vous!"
 
 msgid "qs_auth.register_form.step3.sub_description"
-msgstr "Seules les personnes validées par la communauté pourront voir cette information."
+msgstr "Seules les personnes validées par la communauté pourront voir cette information."
 
 msgid "qs_auth.register_form.step4.description"
 msgstr "Finalement, choisissez un mot de passe pour que vous, uniquement, puissiez accéder à votre compte."
@@ -1044,11 +1015,11 @@ msgstr ""
 "\n"
 "Merci de vous être enregistré(e) sur la plateforme. \n"
 "\n"
-"Vous pourrez vous y connecter en appuyant sur le lien ci-dessous, ou en le copiant-collant dans votre navigateur internet, aussitôt qu’un responsable aura validé votre adhésion:\n"
+"Vous pourrez vous y connecter en appuyant sur le lien ci-dessous, ou en le copiant-collant dans votre navigateur internet, aussitôt qu’un-e responsable aura validé votre adhésion:\n"
 "\n"
-"@url\n"
+"www.resoli.ch\n"
 "\n"
-"Ce lien vous mènera vers une page sur laquelle vous pourrez vous connecter en toute sécurité. Après y avoir inséré votre mot de passe, vous accéderez au contenu de votre communauté.\n"
+"Ce lien vous mènera vers une page sur laquelle vous pourrez vous connecter en toute sécurité. Après y avoir inséré votre mot de passe, vous accéderez au contenu de votre communauté. Finalement, retrouvez <a href=\"http://collaudromain.cr/documents/resoli/RS_Demarrage.pdf\">sur ce lien</a> un résumé des conditions générales, ainsi qu’un aide-mémoire pour bien démarrer!\n"
 "\n"
 "\n"
 "Cordialement,\n"
@@ -1150,7 +1121,7 @@ msgid "qs.auth.approval.description @variables.community.name.value "
 msgstr ""
 
 msgid "qs.activity.theme.title_empty @community_name"
-msgstr "Aucune activité ne correspond à votre choix de thème(s) à @community_name."
+msgstr "Aucune activité de @community_name ne correspond à votre choix de thème(s)."
 
 msgid "qs_activity.activities.form.add.community_can_subscribe"
 msgstr "Permettre aussi aux membres de la communauté de s’inscrire aux évènements?"
@@ -1212,7 +1183,7 @@ msgid "qs.form.delete_submit"
 msgstr "Oui, supprimer"
 
 msgid "qs_activity.activities.form.delete.error.has_events @activity"
-msgstr "Vous ne pouvez pas supprimer l’activité «@activity» avant d’avoir supprimer ses prochains évènements."
+msgstr "Vous ne pouvez actuellement pas supprimer l’activité «@activity» avant d’avoir annulé tous ses évènements. Si certains d’entre eux se sont déjà déroulés, merci d’écrire un e-mail à contact@resoli.ch"
 
 msgid "qs_activity.activities.form.delete.success @activity"
 msgstr "L’activité «@activity» a bien été supprimée!"
@@ -1236,10 +1207,10 @@ msgid "qs_activity.edit_visibility_form.success @activity"
 msgstr "Les réglages de visibilité de l’activité «@activity» ont bien été validés!"
 
 msgid "qs_activity.events.form.step1"
-msgstr ""
+msgstr "Nouvel évènement"
 
 msgid "qs_activity.events.form.step2"
-msgstr ""
+msgstr "Nouvel évènement"
 
 msgid "qs_activity.events.form.add.error.hours.malformed @fieldname"
 msgstr ""
@@ -1257,28 +1228,28 @@ msgid "qs_activity.events.form.add.error.hours.inconsistency @fieldname"
 msgstr "Vérifiez l’heure de votre évènement."
 
 msgid "qs_activity.activities.form.step1.description"
-msgstr "Quel nom voulez-vous donner à votre activité?"
+msgstr "Quel nom voulez-vous donner à votre activité?"
 
 msgid "qs_activity.activities.form.step1"
-msgstr ""
+msgstr "Nom de l’activité\n"
 
 msgid "qs_activity.activities.form.step2.description"
-msgstr "Quel thème correspond le mieux à votre activité?"
+msgstr "Quel thème correspond le mieux à votre activité?"
 
 msgid "qs_activity.activities.form.step2"
-msgstr ""
+msgstr "Thème de l’activité"
 
 msgid "qs_activity.activities.form.step3.description"
 msgstr "Quel degré de confidentialité souhaitez-vous attribuer à votre activité?"
 
 msgid "qs_activity.activities.form.step3"
-msgstr ""
+msgstr "Degré de confidentialité de l’activité"
 
 msgid "qs_activity.activities.form.step4.description"
 msgstr "Pour terminer la création de votre activité, choisissez une des options ci-dessous!"
 
 msgid "qs_activity.activities.form.step4"
-msgstr ""
+msgstr "Terminer la création de l’activité"
 
 msgid "qs_activity.events.form.delete.error.is_past @event"
 msgstr "L’évènement «@event» ne peut pas être supprimé, car il est déjà passé."
@@ -1347,7 +1318,7 @@ msgid "qs_menu.links.calendar.monthly"
 msgstr "Mensuel"
 
 msgid "qs.activity.date.sticky.from_to @start_date @end_date"
-msgstr "Semaine du @start_date au @end_date"
+msgstr "Semaines du @start_date au @end_date"
 
 msgid "qs.activity.date.sticky.today"
 msgstr "Aujourd’hui"
@@ -1365,7 +1336,7 @@ msgid "qs.activity.date.sticky.in_two_weeks"
 msgstr "Dans deux semaines"
 
 msgid "qs.activity.date.title_empty @community @start_date @end_date"
-msgstr "Aucune activité n’est prévue à @community pour la période du @start_date au @end_date"
+msgstr "Aucune activité de @community n’est prévue pour la période du @start_date au @end_date."
 
 msgid "qs.activity.date.link_prev"
 msgstr "Evènements précédents"
@@ -1518,7 +1489,7 @@ msgid "qs.event.calendar"
 msgstr "Voir dans le calendrier"
 
 msgid "qs.community.welcome.body"
-msgstr "Vous êtes maintenant connecté(e) à la communauté"
+msgstr "Vous êtes connecté(e) à la communauté"
 
 msgid "qs.previous.to_calendar"
 msgstr "Retour au calendrier"
@@ -1572,7 +1543,7 @@ msgid "qs_menu.links.photos.months"
 msgstr "Par date"
 
 msgid "qs.community.welcome.body @community"
-msgstr "Vous êtes maintenant connecté(e) à la communauté @community."
+msgstr "Vous êtes connecté(e) à la communauté @community."
 
 msgid "qs.community.welcome.title @firstname @lastname"
 msgstr "Bonjour @firstname @lastname!"
@@ -1587,7 +1558,7 @@ msgid "qs.photos.date"
 msgstr ""
 
 msgid "qs.photo.month.empty @community @start_date @end_date"
-msgstr "Aucune photo n’a été publiée à @community pour la période du @start_date au @end_date"
+msgstr "Aucune photo de @community n’a été publiée pour la période du @start_date au @end_date."
 
 msgid "qs.photos.date.sticky.two_weeks_ago"
 msgstr "Il y a deux semaines"
@@ -1605,15 +1576,13 @@ msgid "qs.photos.date.sticky.today"
 msgstr "Aujourd’hui"
 
 msgid "qs.photos.date.sticky.from_to @start_date @end_date"
-msgstr "Semaine du @start_date au @end_date"
+msgstr "Semaines du @start_date au @end_date"
 
 msgid "qs.photo.theme.filters @community_name @themes_names."
-msgstr ""
-"Voici les photos des activités pour @themes_names, par thème, \n"
-"qui se sont déroulées à @community_name."
+msgstr "Voici les photos des activités passées de @community_name, pour @themes_names."
 
 msgid "qs.photo.theme.filters @community_name."
-msgstr "Voici toutes les photos des activités, par thème, qui se sont déroulées à @community_name."
+msgstr "Voici toutes les photos des activités de @community_name, par thème."
 
 msgid "qs.photos.view_all"
 msgstr "Voir les photos de l’activité"
@@ -1637,19 +1606,19 @@ msgid "qs.photoswipe.btn.zoom"
 msgstr "Agrandir"
 
 msgid "qs.photo.month.lead @community @month @year"
-msgstr "Voici toutes les photos des activités, par date, qui se sont déroulées à @community."
+msgstr "Voici toutes les photos des activités passées de @community, par date."
 
 msgid "qs.photo.month.empty @community @month @year"
-msgstr "Il n’y a pas de photos à consulter en @month @year, à @community."
+msgstr "Il n’y a pas de photos de @community à consulter en @month @year."
 
 msgid "qs.activity.date.lead @community @start_date @end_date"
-msgstr "Voici toutes les activités à venir, par date, à @community."
+msgstr "Voici toutes les activités à venir, par date, de @community."
 
 msgid "qs.calendar.weekly.lead @community @current_day"
-msgstr "Voici le calendrier hebdomadaire de toutes les activités à venir à @community."
+msgstr "Voici le calendrier hebdomadaire de toutes les activités à venir de @community."
 
 msgid "qs.calendar.monthly.lead @community @current_day"
-msgstr "Voici le calendrier mensuel des activités à venir à @community, pour tous les thèmes."
+msgstr "Voici le calendrier mensuel des activités à venir, pour tous les thèmes, de @community."
 
 msgid "qs.activity.user.you_are @role"
 msgstr "Vous êtes @role de cette activité."
@@ -1746,9 +1715,6 @@ msgstr "Sélectionnez d’abord au moins une photo!"
 
 msgid "qs_photo.form.comment.title_form"
 msgstr "Ecrivez vos commentaires à côté de vos photos!"
-
-msgid "qs_photo.form.comment.title_form @activity"
-msgstr "Ecrivez vos commentaires à côté de vos photos de l’activité «@activity»!"
 
 msgid "qs_photo.form.comment.photo_comment_placeholder"
 msgstr "Ex. Lors de cet atelier, Françoise a dû revoir son jugement face au numérique!"
@@ -1862,7 +1828,7 @@ msgid "qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_s
 msgstr "Formats d’images valides: jpg ou png"
 
 msgid "The image was resized to fit within the maximum allowed dimensions of %dimensions pixels."
-msgstr "Votre image a été redimensionnée pour correspondre à la taille maximale acceptée."
+msgstr "Les images ont été ajustées à la taille maximale autorisée."
 
 msgid "The selected file %filename cannot be uploaded. Only files with the following extensions are allowed: %extensions."
 msgstr "Le fichier %filename ne peut être téléchargé. Seules les images aux formats suivants sont autorisées: %extensions."
@@ -1879,39 +1845,45 @@ msgstr ""
 "\n"
 "Merci de vous être enregistré(e) sur la plateforme. \n"
 "\n"
-"Vous pourrez vous y connecter en appuyant sur le lien ci-dessous, ou en le copiant-collant dans votre navigateur internet, aussitôt qu’un responsable aura validé votre adhésion:\n"
+"Vous pourrez vous y connecter en appuyant sur le lien ci-dessous, ou en le copiant-collant dans votre navigateur internet, aussitôt qu’un-e responsable aura validé votre adhésion:\n"
 "\n"
 "@url\n"
 "\n"
-"Ce lien vous mènera vers une page sur laquelle vous pourrez vous connecter en toute sécurité. Après y avoir inséré votre mot de passe, vous accéderez au contenu de votre communauté.\n"
+"Ce lien vous mènera vers une page sur laquelle vous pourrez vous connecter en toute sécurité. Après y avoir inséré votre mot de passe, vous accéderez au contenu de votre communauté. Finalement, retrouvez <a href=\"http://collaudromain.cr/documents/resoli/RS_Demarrage.pdf\">sur ce lien</a> un résumé des conditions générales, ainsi qu’un aide-mémoire pour bien démarrer!\n"
 "\n"
 "\n"
 "Cordialement,\n"
 "l’équipe Réseaux Solidaires"
+
+msgid "qs_photo.form.comment.title_form @activity"
+msgstr "Ecrivez vos commentaires à côté de vos photos de l’activité «@activity»!"
 
 msgid "qs.photos.user.collection.title @name @email"
 msgstr ""
 
 msgid "qs.photos.user.collection.empty"
 msgstr ""
+"Pour ajouter des photos, vous devez au minimum être membre d’une activité.\n"
+"\n"
+"Celle-ci doit avoir des évènements qui se sont déjà déroulés. Si ce n’est pas le cas, vous pouvez créer des évènements passés dans la section «activités». "
 
 msgid "qs.photo.no_photos_please_contact @mail_link"
 msgstr ""
 
 msgid "qs_community.waiting_approval.confirmed_confirm"
-msgstr ""
+msgstr "Ajouter aux membres?"
 
 msgid "qs_community.waiting_approval.reject_confirm"
-msgstr ""
+msgstr "Supprimer la demande?"
 
 msgid "qs_community.members.community_none_confirm"
-msgstr ""
+msgstr "Confirmer la désinscription?"
 
 msgid "qs_subscription.waiting_approval.confirmed_confirm"
-msgstr ""
+msgstr "Inscrire le membre?"
 
 msgid "qs_subscription.waiting_approval.reject_confirm"
-msgstr ""
+msgstr "Supprimer la demande?"
 
 msgid "qs.event.more"
 msgstr ""
@@ -1920,70 +1892,191 @@ msgid "qs.activity.user.collection.title @name @email"
 msgstr ""
 
 msgid "qs_activity.members.ban_confirm"
-msgstr ""
+msgstr "Confirmer la désinscription?"
 
-msgid "qs_supervisor.account.form.title"
-msgstr ""
+msgid "qs_activity.activities.form.edit.defaults.titlefield"
+msgstr "Titre par défaut"
 
-msgid "qs.mail.community.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community"
-msgstr ""
-
-msgid "qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url"
-msgstr ""
-
-msgid "qs.mail.community.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community"
-msgstr ""
-
-msgid "qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url"
-msgstr ""
-
-msgid "qs.previous.to_community_welcome"
-msgstr ""
-
-msgid "qs_subscription.request.form.success @event"
-msgstr ""
+msgid "qs_activity.activities.form.edit.defaults.titlefield.placeholder"
+msgstr "Ex. Introduction à la recherche sur internet"
 
 msgid "qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
 msgstr ""
+"Bonjour @firstname, \n"
+"\n"
+"votre inscription à l’évènement «@event»  du @date à @time_start de l’activité «@activity» a été validée!\n"
+"\n"
+"Pour de plus amples détails, n’hésitez pas à contacter son organisateur ou organisatrice au travers de la plateforme:\n"
+"@url\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
 
 msgid "qs.mail.subscription.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community @event @activity"
-msgstr ""
+msgstr "Demande d’inscription à l’évènement «@event» confirmée!"
 
-msgid "qs.mail.event.deleted.subject @sitename @event"
-msgstr ""
+msgid "Su"
+msgstr "Di"
 
-msgid "qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end"
-msgstr ""
+msgid "Mo"
+msgstr "Lu"
 
-msgid "qs.mail.event.updated.subject @sitename @event"
-msgstr ""
+msgid "Tu"
+msgstr "Ma"
 
-msgid "qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end"
-msgstr ""
+msgid "We"
+msgstr "Me"
 
-msgid "qs_supervisor.account.role @role"
-msgstr "Vous y êtes @role"
+msgid "Th"
+msgstr "Je"
+
+msgid "Fr"
+msgstr "Ve"
+
+msgid "Sa"
+msgstr "Sa"
+
+msgid "qs_supervisor.account.form.title"
+msgstr "Indiquez la communauté que vous souhaitez rejoindre!"
+
+msgid "qs.mail.community.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community"
+msgstr "Accès refusé à la communauté @community sur @sitename!"
+
+msgid "qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url"
+msgstr ""
+"Bonjour @firstname @lastname,\n"
+"\n"
+"nous avons le regret de vous informer qu’une des personnes responsables de la communauté @community a refusé votre demande d’inscription.\n"
+"\n"
+"Si désiré, vous pouvez à nouveau vous connecter à l’adresse @url en utilisant votre adresse e-mail @mail et faire une nouvelle demande d’inscription à une autre communauté.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
+
+msgid "qs.mail.community.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community"
+msgstr "Accès validé à la communauté @community sur @sitename!"
+
+msgid "qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url"
+msgstr ""
+"Bonjour @firstname @lastname,\n"
+"\n"
+"nous avons le plaisir de vous informer qu’une des personnes responsables de la communauté @community a validé votre demande d’inscription.\n"
+"\n"
+"Vous pouvez dès à présent vous y connecter à l’adresse @url en utilisant votre adresse e-mail @mail.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
+
+msgid "qs.previous.to_community_welcome"
+msgstr "Retour à l’accueil"
+
+msgid "qs_subscription.request.form.success @event"
+msgstr "Votre demande d’inscription à l’évènement «@event» a bien été enregistrée. Vous serez informés par e-mail lorsqu’elle sera confirmée ou refusée."
 
 msgid "qs_photos.photos_select.empty"
-msgstr ""
+msgstr "Il n’y a plus de photos dans cette activité."
 
 msgid "qs.mail.community.apply.subject @sitename @mail @firstname @lastname @community"
-msgstr ""
+msgstr "@firstname @lastname souhaite rejoindre votre communauté @community"
 
 msgid "qs.mail.community.apply.body @mail @firstname @lastname @community @url"
 msgstr ""
+"Bonjour, \n"
+"\n"
+"Vous recevez ce message, car vous faites partie des personnes responsables de la communauté @community. Vous pourrez valider ou refuser la demande de @firstname dans la gestion des membres en attente ou en cliquant simplement sur ce lien: \n"
+"\n"
+"@url \n"
+"\n"
+"Il se peut que cette demande n’y figure plus, dans le cas où une autre personne responsable l’aurait déjà traitée. Pour plus de renseignements, n’hésitez pas à contacter cette personne par e-mail: @mail\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
 
 msgid "qs_photo.form.comment.title"
-msgstr ""
+msgstr "Commenter des photos"
 
 msgid "qs.photo.theme.filters.empty"
 msgstr ""
 
 msgid "qs.contact @subscription_user"
+msgstr "Contacter @subscription_user"
+
+msgid "qs_supervisor.account.role @role"
+msgstr "Vous y êtes @role"
+
+msgid "qs.mail.subscription.waiting_approval.confirm_organizers.subject @sitename @mail @firstname @lastname @community @event @activity"
+msgstr "Confirmation d’inscription pour votre évènement «@event»."
+
+msgid "qs.mail.subscription.waiting_approval.confirm_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
 msgstr ""
+"Bonjour, \n"
+"\n"
+"la demande d’inscription de @firstname @lastname à votre évènement «@event» du @date a bien été validée par une de ses personnes organisatrices. Vous pouvez contacter cette personne par e-mail: @mail\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
 
 msgid "qs.mail.subscription.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community @event @activity"
-msgstr ""
+msgstr "Demande d’inscription à l’évènement «@event» refusée."
 
 msgid "qs.mail.subscription.waiting_approval.decline.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
 msgstr ""
+"Bonjour @firstname, \n"
+"\n"
+"votre demande d’inscription à l’évènement «@event» du @date de l’activité «@activity» n’a pas été validée. N’hésitez pas à contacter son organisateur ou organisatrice.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
+
+msgid "qs.mail.event.deleted.subject @sitename @event"
+msgstr "L’évènement «@event» a été annulé"
+
+msgid "qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end"
+msgstr ""
+"Bonjour, \n"
+"\n"
+"l’évènement «@event» de l’activité «@activity» qui était prévu le @date à @time_start a été annulé par @firstname @lastname. Vous pouvez contacter cette personne par e-mail à l’adresse: @mail\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
+
+msgid "qs.mail.event.updated.subject @sitename @event"
+msgstr "L’évènement «@event» a été modifié"
+
+msgid "qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end"
+msgstr ""
+"Bonjour, \n"
+"\n"
+"l’évènement «@event» de l’activité «@activity» qui était prévu le @original_date, de @original_time_start à @original_time_end a été modifié par @firstname @lastname. Vous pouvez contacter cette personne par e-mail: @mail\n"
+"\n"
+"Merci de noter que désormais, il aura lieu le @updated_date, de @updated_time_start à @updated_time_end\n"
+"\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
+
+msgid "qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @activity @url"
+msgstr ""
+"Bonjour @firstname, \n"
+"\n"
+"votre inscription à l’évènement «@event» de l’activité «@activity» a été validée!\n"
+"\n"
+"Pour de plus amples détails, n’hésitez pas à contacter son organisateur ou organisatrice.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Réseaux Solidaires"
+
+msgid "qs.photo.delete"
+msgstr "Supprimer les photos"
+
+msgid "Last »"
+msgstr "Dernier »"
+
+msgid "Next ›"
+msgstr "Suivant ›"
+
+msgid "‹ Previous"
+msgstr "‹ Précédent"
+
+msgid "« First"
+msgstr "« Premier"

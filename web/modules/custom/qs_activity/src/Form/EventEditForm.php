@@ -217,7 +217,7 @@ class EventEditForm extends EventEditFormBase {
       '#required'    => FALSE,
       '#states' => [
         'visible' => [
-          ':input[name="has_contribution"]' => ['value' => 1],
+          ':input[name="has_contribution"]' => ['value' => "1"],
         ],
       ],
     ];

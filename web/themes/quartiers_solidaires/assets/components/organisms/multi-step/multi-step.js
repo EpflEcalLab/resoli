@@ -30,7 +30,7 @@ const multiStep = () => {
         // Create the "Prev step" button below the form
         $('<button/>')
           .addClass(`btn btn-outline-invert btn-icon btn-icon-left align-self-center shadow-to-bottom prev-btn-${id}`)
-          .text(Drupal.t('qs.previous'))
+          .text(typeof (Drupal) !== 'undefined' ? Drupal.t('qs.previous') : 'previous')
           .on('click', function(e) {
             e.preventDefault();
 
@@ -47,7 +47,7 @@ const multiStep = () => {
         // Create the "Next step" button below the form
         $('<button/>')
           .addClass(`btn btn-outline-invert btn-icon btn-icon-right align-self-center shadow-to-bottom next-btn-${id}`)
-          .text(Drupal.t('qs.next'))
+          .text(typeof (Drupal) !== 'undefined' ? Drupal.t('qs.next') : 'next')
           .on('click', function(e) {
             e.preventDefault();
             // @TODO make it work: disable the nav if current tab pane has required and empty fields

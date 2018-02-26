@@ -43,6 +43,8 @@
  - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome
  - fix #507 - Google Autocomplete doesn't works when user chose a place & then change to a custom one
  - fix #501 - Manage community Floating buttons
+ - fix IE specific cases #534
+ - fix Edge specific cases #566
 
 ## 0.1.1 (2018-02-21)
  - add Google Tag Manager

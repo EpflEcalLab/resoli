@@ -16,7 +16,7 @@ const card = () => {
       const $card = $(this).parents('.card-flippable');
 
       if ($card.length > 0) {
-        $('html, body').animate({ scrollTop: $card.offset().top - 100 }, 200);
+        // $('html, body').animate({ scrollTop: $card.offset().top - 100 }, 200);
         $card.toggleClass('flip');
       }
 
@@ -88,10 +88,11 @@ const card = () => {
           $card = $('.card:first .card-pill[data-toggle=collapse]');
         }
 
-        if ($card.length) {
+        if ($card.length > 0) {
           // Always toggle the first card or the one from the URL on load
           $card.trigger('click');
-          $('html, body').animate({ scrollTop: $card.offset().top }, 200);
+          // const top = $card.offset().top;
+          // $('html, body').animate({ scrollTop: top }, 200);
         }
       }
     }

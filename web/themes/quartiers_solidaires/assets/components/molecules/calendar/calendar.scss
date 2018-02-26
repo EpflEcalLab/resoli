@@ -35,6 +35,7 @@ $calendar-item-size: 3.125rem;
 
     &.active {
       width: 7rem;
+      margin-right: 0;
       margin-left: ((7rem - $calendar-item-size) / -2); // center it (7 - 3.125) / -2
 
       @include media-breakpoint-only(sm) {
@@ -53,8 +54,10 @@ $calendar-item-size: 3.125rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: $calendar-item-size;
-    min-height: $calendar-item-size;
+    float: left;
+    width: $calendar-item-size;
+    height: $calendar-item-size;
+    margin: 0 2% 2%;
     color: gray('600');
 
     @include media-breakpoint-down(xs) {

@@ -15,6 +15,14 @@ const ie = () => {
     }
 
     if (ie) {
+      // Force the map to flip back on btn click.
+      // Don't know the reason for that....
+      $('.card-map-footer .btn').on('mousedown', function() {
+        $(this).trigger('click');
+      });
+    }
+
+    if (ie || /Edge/.test(navigator.userAgent)) {
       // This will fix the flag icons
       const $flags_use = $('.flag use:last-child');
 
@@ -28,16 +36,6 @@ const ie = () => {
           $(this).attr('transform', `scale(${x},${y}) translate(15,15)`);
         }
       });
-
-      // This should fix the google places autocomplete
-      const fixEutocompleteInterval = window.setInterval(function() {
-        const $container = $('body > .pac-container');
-        if ($container.length === 0) return;
-        // Move the autocomplete element just below the input.
-        $container.appendTo($('#address').parent());
-        // The fix is finished, stop working.
-        window.clearInterval(fixEutocompleteInterval);
-      }, 500);
     }
 
   })(jQuery);

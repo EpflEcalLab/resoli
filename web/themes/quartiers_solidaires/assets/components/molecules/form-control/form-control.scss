@@ -54,3 +54,9 @@
 .bg-primary {
   @include form-validation-state("invalid", theme-color-level('danger', -4));
 }
+
+.selectize-input {
+  input {
+    width: 100% !important;
+  }
+}

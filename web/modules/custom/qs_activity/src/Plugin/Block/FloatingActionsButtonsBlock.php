@@ -309,6 +309,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_photo.user.form.manage',
       'qs_photo.form.add',
       'qs_photo.form.comments',
+      'qs_photo.form.delete',
     ])) {
       $classes[] = 'active';
     }

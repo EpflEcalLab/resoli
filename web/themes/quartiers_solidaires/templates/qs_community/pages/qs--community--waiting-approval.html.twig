@@ -86,21 +86,25 @@
 
   {{ variables.pager }}
 
-  <div class="modal-footer justify-content-center sticky-bottom">
+  <div class="modal-footer sticky-bottom d-block">
     <div class="row mb-3 mt-5">
-      <div class="col-6">
-        {# Go to Members #}
-        <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.members', {community: variables.community.tid.value}) }}">
-          {{ macros.icon('happy') }}
-          {{ 'qs_community.dashboard.members'|t }}
-        </a>
-      </div>
-      <div class="col-6">
-        {# Go to Community Dashboard #}
-        <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
-          {{ macros.icon('checklist') }}
-          {{ 'qs.previous.to_community_dashboard'|t }}
-        </a>
+      <div class="col-lg-10 offset-lg-1">
+        <div class="row">
+          <div class="col-6">
+            {# Go to Members #}
+            <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.members', {community: variables.community.tid.value}) }}">
+              {{ macros.icon('happy') }}
+              {{ 'qs_community.dashboard.members'|t }}
+            </a>
+          </div>
+          <div class="col-6">
+            {# Go to Community Dashboard #}
+            <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
+              {{ macros.icon('checklist') }}
+              {{ 'qs.previous.to_community_dashboard'|t }}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

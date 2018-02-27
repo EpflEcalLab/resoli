@@ -1,7 +1,23 @@
 # CHANGELOG
 
 ## NEXT RELEASE
- - add GMT tag
+ - add Privilege's Badge on Activity by theme #318,  #315 & #316
+ - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
+ - add Subscription's Badge, using highest Privilege color, on My Activities #304
+ - update Subscription's Badge, using highest Privilege color, on Activity page #543
+ - update Subscription's Badge, using highest Privilege color, on Calendar Weekly/Monthly Cards - below Calendar Dots - #387
+ - add Privilege's Badge on My Photos #412
+ - add Privilege's Badge on Photos by theme #441, #442 & #443
+ - add 'Direct Subscription' whitout needing request for Organizer of activity #313
+ - add subscription to the author Maintainer of Activity when creating an Event #311
+ - add collapsable event card on 'My subscriptions' page
+ - add subscription textual information on 'My Subscription' card event body
+ - add Subscription's Badge, using Count of Guests Pending & Confirmed on events pill #310, #311, #312 & #313
+ - add Subscription's Badge, using Count of Guests Pending on Activitiy Teaser Card #317 & #319
+ - switch the Event Dashboard button in Activity detail page when Guests Pending
+ - add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
+
+## 1.0.0 (2018-02-26)
  - fix #500 - Remove privilegies & subscriptions when deleting entities
  - improve user supervisor dashboard #202
  - fix click propagation in photoswipe gallery #497
@@ -44,21 +60,12 @@
  - use jQuery UI Calendar by default on all browsers to avoid issues with date format on Chrome
  - fix #507 - Google Autocomplete doesn't works when user chose a place & then change to a custom one
  - fix #501 - Manage community Floating buttons
- - add Privilege's Badge on Activity by theme #318,  #315 & #316
- - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
- - add Subscription's Badge, using highest Privilege color, on My Activities #304
- - update Subscription's Badge, using highest Privilege color, on Activity page #543
- - update Subscription's Badge, using highest Privilege color, on Calendar Weekly/Monthly Cards - below Calendar Dots - #387
- - add Privilege's Badge on My Photos #412
- - add Privilege's Badge on Photos by theme #441, #442 & #443
- - add 'Direct Subscription' whitout needing request for Organizer of activity #313
- - add subscription to the author Maintainer of Activity when creating an Event #311
- - add collapsable event card on 'My subscriptions' page
- - add subscription textual information on 'My Subscription' card event body
- - add Subscription's Badge, using Count of Guests Pending & Confirmed on events pill #310, #311, #312 & #313
- - add Subscription's Badge, using Count of Guests Pending on Activitiy Teaser Card #317 & #319
- - switch the Event Dashboard button in Activity detail page when Guests Pending
- - add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
+ - fix IE specific cases #534
+ - fix Edge specific cases #566
+
+## 0.1.1 (2018-02-21)
+ - add Google Tag Manager
+>>>>>>> dev
 
 ## 0.1.0 (2017-12-13)
  - production deployment

@@ -20,7 +20,7 @@ function qs_default_content_events() {
   $entityManager = \Drupal::service('entity_type.manager');
   $nodeStorage = $entityManager->getStorage('node');
 
-  $now =  new DrupalDateTime();
+  $now = new DrupalDateTime();
 
   // Event - Activity (2) - 2 days ago at 01h00.
   $event_15 = $nodeStorage->load(15);
@@ -292,7 +292,7 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+2 days')->setTime(19, 20);
   if ($dt->format('m') != $now->format('m')) {
-    $dt->modify('last day of '.$now->format('F'));
+    $dt->modify('last day of ' . $now->format('F'));
   }
   $dt->setTimezone(new DateTimeZone('UTC'));
   $event_54->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));

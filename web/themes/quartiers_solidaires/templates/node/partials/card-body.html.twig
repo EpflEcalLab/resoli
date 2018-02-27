@@ -103,6 +103,11 @@
           {{ macros.icon('wait') }}
           {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests}) }}
         </a>
+      {% elseif guests_status == 'confirmed_guests' %}
+        <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+          {{ macros.icon('checklist') }}
+          {{ 'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests}) }}
+        </a>
       {% else %}
         <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
           {{ macros.icon('checklist') }}

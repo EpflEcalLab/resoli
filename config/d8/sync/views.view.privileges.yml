@@ -955,9 +955,30 @@ display:
           plugin_id: string
       sorts: {  }
       title: Privileges
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          content: '<h1>Displaying @start - @end of @total</h1>'
+          plugin_id: result
       footer: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content: 'Aucun contenu disponible.'
+          plugin_id: text_custom
       relationships:
         user:
           id: user

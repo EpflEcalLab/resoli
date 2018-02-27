@@ -21,8 +21,9 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'access content overview'
       cache:
         type: tag
         options: {  }
@@ -736,9 +737,30 @@ display:
           plugin_id: numeric
       sorts: {  }
       title: Subscriptions
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          content: '<h1>Displaying @start - @end of @total</h1>'
+          plugin_id: result
       footer: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content: 'Aucun contenu disponible.'
+          plugin_id: text_custom
       relationships:
         user:
           id: user
@@ -771,6 +793,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.permissions
       tags: {  }
   page_1:
     display_plugin: page
@@ -797,4 +820,5 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.permissions
       tags: {  }

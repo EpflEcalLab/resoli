@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## 1.0.1 (2018-03-01)
  - fix images upload on past events - #576
  - update README.md badges
 

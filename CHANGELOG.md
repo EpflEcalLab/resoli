@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT RELEASE
+ - fix images upload on past events - #576
+ - update README.md badges
+
 ## 1.0.0 (2018-02-26)
  - fix #500 - Remove privilegies & subscriptions when deleting entities
  - improve user supervisor dashboard #202

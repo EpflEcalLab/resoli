@@ -242,8 +242,7 @@ class ActivityManager {
     $query_base->condition('field_end_at.field_end_at_value', $now->format('c'), '<');
 
     if (!$allow_empty_activities) {
-      // Filter to get only activities with or without photos
-      // (based on $allow_empty_activities param).
+      // Filter to get only activities with photos.
       $query_base->leftJoin('node__field_event', 'field_event', 'field_event.field_event_target_id = field_end_at.entity_id');
       $query_base->isNotNull('field_event.field_event_target_id');
     }

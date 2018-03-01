@@ -307,7 +307,7 @@ class PhotoManager {
   public function getWritablePhotoByUser(NodeInterface $activity, AccountInterface $user) {
     // List all photos if user has bypass access.
     if ($this->acl->hasBypass()) {
-      return $this->getByUser($activity, $user);
+      return $this->getByActivity($activity);
     }
 
     // When user has members+ access, list all photos of this activity.
@@ -321,7 +321,7 @@ class PhotoManager {
     $or->condition('privilege', 'activity_maintainers');
     $query->condition($or);
 
-    if ($query->count()->execute() > 0) {
+    if ($query->count()->execute()) {
       return $this->getByActivity($activity);
     }
 

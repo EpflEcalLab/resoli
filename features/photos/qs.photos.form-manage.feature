@@ -40,6 +40,13 @@ Feature: Photos form manage
     Then I should see 2 "form .input-checkbox" elements
 
   @api
+  Scenario: Logged as Manager of Lausanne & Member of Fribourg, When I access to "Manage photos" of Activity N°3 (Sorties Théâtre) - Because Photos are writable by Member+ & I'm a Maintainer of this activity, I should see all photos
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/photos/activity/3/user/5"
+    And the response status code should be 200
+    Then I should see 3 "form .input-checkbox" elements
+
+  @api
   Scenario: Logged as Admin, When I access "Manage photos" of Activity N°3 (Sorties Théâtre), I should see every photos
     Given I am logged in as user "admin"
     When I am on "/photos/activity/3/user/1"

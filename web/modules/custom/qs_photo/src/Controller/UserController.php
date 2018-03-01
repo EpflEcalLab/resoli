@@ -10,6 +10,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Access\AccessResult;
 use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\qs_photo\Service\PhotoManager;
 use Drupal\qs_acl\Service\PrivilegeManager;
 
 /**
@@ -32,6 +33,13 @@ class UserController extends ControllerBase {
   protected $activityManager;
 
   /**
+   * The entity QS Photo Manager.
+   *
+   * @var \Drupal\qs_photo\Service\PhotoManager
+   */
+  protected $photoManager;
+
+  /**
    * The Privilege Manager.
    *
    * @var \Drupal\qs_acl\Service\PrivilegeManager
@@ -41,11 +49,12 @@ class UserController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager) {
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, PhotoManager $photo_manager) {
     $this->acl              = $acl;
     $this->privilegeManager = $privilege_manager;
     $this->nodeStorage      = $this->entityTypeManager()->getStorage('node');
     $this->activityManager  = $activity_manager;
+    $this->photoManager     = $photo_manager;
   }
 
   /**
@@ -57,7 +66,8 @@ class UserController extends ControllerBase {
     // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('qs_acl.privilege_manager'),
-      $container->get('qs_activity.activity_manager')
+      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_photo.photo_manager')
     );
   }
 
@@ -110,7 +120,17 @@ class UserController extends ControllerBase {
     else {
       // Show only activity where user has upload photo access &
       // with at least one past event.
-      $variables['activities'] = $this->activityManager->getByUserPhoto($community, $user, FALSE);
+      $variables['activities'] = $this->activityManager->getByUserPhoto($community, $user, TRUE);
+    }
+
+    // Get number of writable photos by activities.
+    // This may slow down the loading of this page.
+    foreach ($variables['activities'] as $activity) {
+      $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
+      $count_photos = count($photos);
+      if ($count_photos > 0) {
+        $variables['photos_by_activities'][$activity->id()] = $count_photos;
+      }
     }
 
     return [

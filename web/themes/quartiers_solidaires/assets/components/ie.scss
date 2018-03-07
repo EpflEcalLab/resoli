@@ -111,4 +111,14 @@
   .modal-body {
     overflow-y: visible;
   }
+
+  .calendar-item {
+    .flag {
+      left: -20%;
+    }
+
+    .flag-number {
+      left: 42%;
+    }
+  }
 }

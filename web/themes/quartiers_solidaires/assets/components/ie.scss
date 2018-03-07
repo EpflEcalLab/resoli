@@ -17,10 +17,28 @@
   .calendar-head,
   .calendar-item {
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
     float: left;
     width: 3.125rem;
     height: 3.125rem;
     margin: 0 2% 1%;
+  }
+
+  .calendar-item {
+    .flag-number {
+      left: 42%;
+    }
+  }
+
+  .calendar-item {
+    .flag {
+      left: -20%;
+    }
+
+    .flag-number {
+      left: 42%;
+    }
   }
 
   // Photos section

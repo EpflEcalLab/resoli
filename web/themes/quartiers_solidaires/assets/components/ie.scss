@@ -117,6 +117,10 @@
       left: -20%;
     }
 
+    &.active .flag {
+      left: 20%;
+    }
+
     .flag-number {
       left: 42%;
     }

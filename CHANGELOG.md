@@ -16,6 +16,11 @@
  - add Subscription's Badge, using Count of Guests Pending on Activitiy Teaser Card #317 & #319
  - switch the Event Dashboard button in Activity detail page when Guests Pending
  - add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
+ - update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309
+
+## 1.0.1 (2018-03-01)
+ - fix images upload on past events - #576
+ - update README.md badges
 
 ## 1.0.0 (2018-02-26)
  - fix #500 - Remove privilegies & subscriptions when deleting entities
@@ -65,11 +70,9 @@
 
 ## 0.1.1 (2018-02-21)
  - add Google Tag Manager
->>>>>>> dev
 
 ## 0.1.0 (2017-12-13)
  - production deployment
 
 ## 0.0.0 (2017-07-14)
  - init empty repo
-update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309

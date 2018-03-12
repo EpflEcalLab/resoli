@@ -1,9 +1,10 @@
 # Quartiers Solidaires
 Drupal 8 powered.
 
-[ ![Codeship Status for antistatique/quartiers-solidaires](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=master)](https://app.codeship.com/projects/232628)
+| Staging CodeShip-CI | Prod CodeShip-CI |
+|:-------------------:|:----------------:|
+| [ ![Staging CodeShip-CI](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=dev)](https://app.codeship.com/projects/232628) | [ ![Prod CodeShip-CI](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=master)](https://app.codeship.com/projects/232628) |
 
-[ ![Codeship Status for antistatique/quartiers-solidaires](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=dev)](https://app.codeship.com/projects/232628)
 
 ## 🔧 Prerequisites
 

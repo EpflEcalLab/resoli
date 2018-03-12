@@ -1,0 +1,43 @@
+@charset 'utf-8';
+
+.pagination-wrapper {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 -5px;
+}
+
+.page-item {
+  margin: 0 5px;
+
+  > span {
+    display: block;
+    padding: $pagination-padding-y $pagination-padding-x;
+  }
+}
+
+.pagination {
+  justify-content: center;
+
+  // Can't use first-child, there's the a11y title
+  &:nth-child(2) {
+    margin-left: auto;
+  }
+
+  &:last-child {
+    margin-right: auto;
+  }
+
+  .active .btn-outline-invert {
+    background-color: $white;
+  }
+
+  @each $color, $value in $theme-colors {
+    .bg-#{$color} & .active .btn-outline-invert {
+      color: $value;
+    }
+  }
+}
+

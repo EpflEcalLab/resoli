@@ -6,7 +6,7 @@ $calendar-item-size: 3.125rem;
   text-align: center;
 }
 
-@supports (display: grid) {
+@supports (grid-template-columns: auto) {
   .calendar {
     display: inline-grid;
     grid-template-columns: repeat(7, $calendar-item-size);
@@ -109,6 +109,7 @@ $calendar-item-size: 3.125rem;
     justify-content: center;
     flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     min-width: 20px;
+    width: 100%;
     max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
     border: 2px solid transparent;

@@ -1,0 +1,107 @@
+{#
+/**
+ * @file
+ * Theme override to display a pager.
+ *
+ * Available variables:
+ * - items: List of pager items.
+ *   The list is keyed by the following elements:
+ *   - first: Item for the first page; not present on the first page of results.
+ *   - previous: Item for the previous page; not present on the first page
+ *     of results.
+ *   - next: Item for the next page; not present on the last page of results.
+ *   - last: Item for the last page; not present on the last page of results.
+ *   - pages: List of pages, keyed by page number.
+ *   Sub-sub elements:
+ *   items.first, items.previous, items.next, items.last, and each item inside
+ *   items.pages contain the following elements:
+ *   - href: URL with appropriate query parameters for the item.
+ *   - attributes: A keyed list of HTML attributes for the item.
+ *   - text: The visible text used for the item link, such as "‹ Previous"
+ *     or "Next ›".
+ * - current: The page number of the current page.
+ * - ellipses: If there are more pages than the quantity allows, then an
+ *   ellipsis before or after the listed pages may be present.
+ *   - previous: Present if the currently visible list of pages does not start
+ *     at the first page.
+ *   - next: Present if the visible list of pages ends before the last page.
+ *
+ * @see template_preprocess_pager()
+ */
+#}
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
+{% if items %}
+  <nav class="mb-4 pagination-wrapper" aria-labelledby="pagination-heading">
+    <h2 id="pagination-heading" class="sr-only">{{ 'qs.a11y.pager.title'|t }}</h2>
+    <div class="mr-auto">
+      {# Print first item if we are not on the first page. #}
+      {% if items.first and items.first.href != items.previous.href %}
+        <div class="page-item d-none d-md-inline-block">
+          <a href="{{ items.first.href }}" class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-bottom" title="{{ 'qs.pager.goto_first'|t }}"{{ items.first.attributes|without('href', 'title', 'class') }}>
+            {{ macros.icon('arrow-right', 'icon-mirror-horizontal') }}
+            <span class="sr-only">{{ 'qs.pager.a11y.first'|t }}</span>
+            <span>{{ items.first.text|default('qs.pager.first'|t) }}</span>
+          </a>
+        </div>
+      {% endif %}
+      {# Print previous item if we are not on the first page. #}
+      {% if items.previous %}
+        <div class="page-item">
+          <a href="{{ items.previous.href }}" title="{{ 'qs.pager.goto_previous'|t }}" rel="prev" class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-bottom"{{ items.previous.attributes|without('href', 'title', 'rel', 'class') }}>
+            {{ macros.icon('chevron-left') }}
+            <span class="visually-hidden">{{ 'qs.pager.a11y.previous'|t }}</span>
+            <span aria-hidden="true">{{ items.previous.text|default('qs.pager.previous'|t) }}</span>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    <ul class="pagination justify-content-center">
+      {# Add an ellipsis if there are further previous pages. #}
+      {% if ellipses.previous %}
+        <li class="page-item page-item-number" role="presentation"><span class="d-block">&hellip;</span></li>
+      {% endif %}
+      {# Now generate the actual pager piece. #}
+      {% for key, item in items.pages %}
+        <li class="page-item page-item-number{{ current == key ? ' active' }}">
+          {% if current == key %}
+            {% set title = 'qs.pager.current_page'|t %}
+          {% else %}
+            {% set title = 'qs.pager.go_to_page @key'|t({'@key': key}) %}
+          {% endif %}
+          <a href="{{ item.href }}" title="{{ title }}" class="btn btn-outline-invert btn-circle shadow-to-bottom"{{ item.attributes|without('href', 'title', 'class') }}>
+            <span class="sr-only">
+              {{ current == key ? 'qs.pager.current_page'|t : 'qs.pager.page'|t }}
+            </span>
+            {{- key -}}
+          </a>
+        </li>
+      {% endfor %}
+      {# Add an ellipsis if there are further next pages. #}
+      {% if ellipses.next %}
+        <li class="page-item page-item-number" role="presentation"><span class="d-block">&hellip;</span></li>
+      {% endif %}
+    </ul>
+    <div class="ml-auto">
+      {# Print next item if we are not on the last page. #}
+      {% if items.next %}
+        <div class="page-item">
+          <a href="{{ items.next.href }}" title="{{ 'qs.pager.goto_next'|t }}" rel="next" class="btn btn-outline-invert btn-icon btn-icon-right btn-icon-to-circle shadow-to-bottom"{{ items.next.attributes|without('href', 'title', 'rel', 'class') }}>
+            <span class="sr-only">{{ 'qs.pager.a11y.next'|t }}</span>
+            <span aria-hidden="true">{{ items.next.text|default('qs.pager.next'|t) }}</span>
+            {{ macros.icon('chevron-right') }}
+          </a>
+        </div>
+      {% endif %}
+      {# Print last item if we are not on the last page. #}
+      {% if items.last and items.last.href != items.next.href %}
+        <div class="page-item d-none d-md-inline-block">
+          <a href="{{ items.last.href }}" title="{{ 'qs.pager.goto_last'|t }}" class="btn btn-outline-invert btn-icon btn-icon-right btn-icon-to-circle shadow-to-bottom"{{ items.last.attributes|without('href', 'title', 'class') }}>
+            <span class="sr-only">{{ 'qs.pager.a11y.last'|t }}</span>
+            <span aria-hidden="true">{{ items.last.text|default('qs.pager.last'|t) }}</span>
+            {{ macros.icon('arrow-right') }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </nav>
+{% endif %}

@@ -18,6 +18,9 @@
  - add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
  - update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309
 
+## NEXT RELEASE
+ - add pagination #585
+
 ## 1.0.1 (2018-03-01)
  - fix images upload on past events - #576
  - update README.md badges

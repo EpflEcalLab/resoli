@@ -57,20 +57,13 @@ class UserController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-<<<<<<< HEAD
   public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, BadgeManager $badge_manager) {
-=======
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, PhotoManager $photo_manager) {
->>>>>>> feature/pagination
     $this->acl              = $acl;
     $this->privilegeManager = $privilege_manager;
     $this->nodeStorage      = $this->entityTypeManager()->getStorage('node');
     $this->activityManager  = $activity_manager;
-<<<<<<< HEAD
     $this->badgeManager     = $badge_manager;
-=======
     $this->photoManager     = $photo_manager;
->>>>>>> feature/pagination
   }
 
   /**
@@ -83,11 +76,8 @@ class UserController extends ControllerBase {
       $container->get('qs_acl.access_control'),
       $container->get('qs_acl.privilege_manager'),
       $container->get('qs_activity.activity_manager'),
-<<<<<<< HEAD
       $container->get('qs_badge.badge_manager')
-=======
       $container->get('qs_photo.photo_manager')
->>>>>>> feature/pagination
     );
   }
 

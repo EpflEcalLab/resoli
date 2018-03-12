@@ -96,7 +96,7 @@ class MembersController extends ControllerBase {
       '#quantity' => '3',
     ];
     $page = pager_find_page();
-    $query->range($page, $this->configuration['limit']);
+    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
     $rows = $query->execute()->fetchAll();
 
     $uids = [];

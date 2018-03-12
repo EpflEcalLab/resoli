@@ -3,10 +3,16 @@
 namespace Drupal\qs_photo\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_badge\Service\BadgeManager;
 use Drupal\qs_photo\Service\PhotoManager;
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\taxonomy\TermInterface;
+use Drupal\user\UserInterface;
+use Drupal\Core\Access\AccessResult;
 
 /**
  * UserController.

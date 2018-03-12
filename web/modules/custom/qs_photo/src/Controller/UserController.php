@@ -3,16 +3,10 @@
 namespace Drupal\qs_photo\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
-use Drupal\user\UserInterface;
-use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Access\AccessResult;
 use Drupal\qs_activity\Service\ActivityManager;
-use Drupal\qs_photo\Service\PhotoManager;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_badge\Service\BadgeManager;
+use Drupal\qs_photo\Service\PhotoManager;
 
 /**
  * UserController.
@@ -27,25 +21,18 @@ class UserController extends ControllerBase {
   private $acl;
 
   /**
-   * The entity QS Activity Manager.
-   *
-   * @var \Drupal\qs_activity\Service\ActivityManager
-   */
-  protected $activityManager;
-
-  /**
-   * The entity QS Photo Manager.
-   *
-   * @var \Drupal\qs_photo\Service\PhotoManager
-   */
-  protected $photoManager;
-
-  /**
    * The Privilege Manager.
    *
    * @var \Drupal\qs_acl\Service\PrivilegeManager
    */
   private $privilegeManager;
+
+  /**
+   * The entity QS Activity Manager.
+   *
+   * @var \Drupal\qs_activity\Service\ActivityManager
+   */
+  protected $activityManager;
 
   /**
    * The Badge Manager.
@@ -55,9 +42,16 @@ class UserController extends ControllerBase {
   protected $badgeManager;
 
   /**
+   * The entity QS Photo Manager.
+   *
+   * @var \Drupal\qs_photo\Service\PhotoManager
+   */
+  protected $photoManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, BadgeManager $badge_manager) {
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, BadgeManager $badge_manager, PhotoManager $photo_manager) {
     $this->acl              = $acl;
     $this->privilegeManager = $privilege_manager;
     $this->nodeStorage      = $this->entityTypeManager()->getStorage('node');
@@ -76,7 +70,7 @@ class UserController extends ControllerBase {
       $container->get('qs_acl.access_control'),
       $container->get('qs_acl.privilege_manager'),
       $container->get('qs_activity.activity_manager'),
-      $container->get('qs_badge.badge_manager')
+      $container->get('qs_badge.badge_manager'),
       $container->get('qs_photo.photo_manager')
     );
   }

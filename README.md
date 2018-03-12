@@ -193,6 +193,13 @@ You can use the Driven Development script to install re-install default values b
 
   Sometimes, you will need to `chmod -R 777` according your server conf.
 
+  Enable the Mail rerouting to prevent outgoing mails:
+
+  ```shell
+  $config['backerymails.settings']['reroute']['status'] = TRUE;
+  $config['backerymails.settings']['reroute']['recipients'] = 'kevin@antistatique.net';
+  ```
+
 1. *(optional)* Update your `web/sites/default/drushrc.php`:
 
   ```bash

@@ -36,7 +36,7 @@
     {% if 'activity_members' in variables.privileges or 'activity_maintainers' in variables.privileges or 'activity_organizers' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
     <div class="col-sm-6 mb-3 mx-auto">
       {# Register Button "subscription pending" #}
-      <button data-status-show="pending" class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
+      <button data-status-show="pending" class="btn btn-outline-info btn-white btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
           {{ macros.icon('wait') }}
           {{ 'qs.event.register.pending'|t }}
       </button>

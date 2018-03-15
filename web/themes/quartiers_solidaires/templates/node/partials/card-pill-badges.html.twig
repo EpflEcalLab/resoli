@@ -10,7 +10,12 @@
   {% set theme = 'danger' %}
   {% set shield = true %}
 {% endif %}
-{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-wait', '', shield, 'pending') }}
-{{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', '', shield, 'confirmed') }}
-{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-confirmed', '', shield, 'pendings_guests') }}
-{{ macros.badge('outline-' ~ theme, 'confirmed', 'flag-subscription-confirmed', '', shield, 'confirmed_guests') }}
+
+{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-wait', 'qs.event.user.subscription.pending'|t, shield, 'pending') }}
+{{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', 'qs.event.user.subscription.confirmed'|t, shield, 'confirmed') }}
+
+{# Pending Guests subscriptions Badge #}
+{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-guests-wait', 'qs.event.user.subscription.pendings_guests'|t, shield, 'pendings_guests') }}
+
+{# Confirmed Guests subscriptions Badge #}
+{{ macros.badge('outline-' ~ theme, 'confirmed', 'flag-subscription-guests-confirmed', 'qs.event.user.subscription.confirmed_guests'|t, shield, 'confirmed_guests') }}

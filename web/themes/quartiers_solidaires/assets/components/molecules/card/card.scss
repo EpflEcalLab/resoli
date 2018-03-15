@@ -172,6 +172,10 @@ a[href].card-pill-simple {
   width: 11em;
   flex-shrink: 0;
 
+  &:not(:first-child) {
+    margin-left: ($spacer * 0.5);
+  }
+
   @include media-breakpoint-down(sm) {
     width: 7em;
   }
@@ -390,6 +394,10 @@ a[href].card-pill-simple {
 
   .flag {
     @include flag-size(50px);
+  }
+
+  .card-pill-title {
+    margin-right: auto;
   }
 }
 

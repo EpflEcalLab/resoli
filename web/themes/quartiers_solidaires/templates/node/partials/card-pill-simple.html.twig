@@ -17,14 +17,14 @@
   </span>
 
   {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
-    {{ macros.badge('info', 'wait', 'flag-subscription-wait') }}
+    {{ macros.badge('outline-info', 'wait', 'flag-subscription-wait') }}
   {% endif %}
 
   {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
     {{ macros.badge('info', 'confirmed', 'flag-subscription-confirmed') }}
   {% endif %}
 
-  <span class="size-date ml-auto text-dark">
+  <span class="size-date text-dark">
     {% block card_pill_time %}
     <time datetime="{{ event.field_start_at.date|date('Y-m-d') }}">
       {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F') }}

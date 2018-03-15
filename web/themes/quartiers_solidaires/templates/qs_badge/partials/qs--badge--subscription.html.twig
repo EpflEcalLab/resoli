@@ -1,0 +1,47 @@
+
+{# Subscription Badges #}
+{% if event.nid.value and badges.subscriptions  %}
+  {% set show_user_subscription = TRUE %}
+  {% set user_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed|keys %}
+  {% set theme = 'info' %}
+
+  {% if badges.privileges %}
+    {# Get user Highest privilege #}
+    {% set privilege = badges.privileges[event.field_activity.entity.nid.value]|last %}
+
+    {# Adapte the color of badge according user privilege of activity #}
+    {% if event.field_activity.entity.nid.value in badges.privileges|keys %}
+      {% if privilege == 'activity_maintainers' %}{% set theme = 'warning' %}{% endif %}
+      {% if privilege == 'activity_organizers' %}{% set theme = 'danger' %}{% endif %}
+    {% endif %}
+
+    {# If user is (activity_maintainers and confirmed) or activity_organizers of this event #}
+    {# show him guests badges, otherwise show him badges based on his own subscription #}
+    {% if (privilege == 'activity_maintainers' and user_subscription_confirmed) or privilege == 'activity_organizers' %}
+      {# Pending Guests subscriptions Badge #}
+      {% if event.nid.value in badges.subscriptions.pendings_guests|keys %}
+        {% set show_user_subscription = FALSE %}
+        {% set theme = 'outline-' ~ theme %}
+        {{ macros.badge(theme, 'wait', 'flag-subscription-guests-wait') }}
+
+      {# Confirmed Guests subscriptions Badge #}
+      {% elseif event.nid.value in badges.subscriptions.confirmed_guests|keys %}
+        {% set show_user_subscription = FALSE %}
+        {{ macros.badge(theme, 'confirmed', 'flag-subscription-guests-confirmed') }}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% if show_user_subscription %}
+    {# Subscription pendings badge #}
+    {% if event.nid.value in badges.subscriptions.pendings|keys %}
+      {{ macros.badge(theme, 'wait', 'flag-subscription-wait') }}
+    {% endif %}
+
+    {# Subscription confirmed badge #}
+    {% if event.nid.value in badges.subscriptions.confirmed|keys %}
+      {{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed') }}
+    {% endif %}
+  {% endif %}
+
+{% endif %}

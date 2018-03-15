@@ -39,6 +39,7 @@ hidden:
   field_contact_name: true
   field_contact_phone: true
   field_contribution: true
+  field_default_title: true
   field_member_create_gallery: true
   field_member_create_story: true
   field_theme: true

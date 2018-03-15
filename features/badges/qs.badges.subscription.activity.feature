@@ -1,9 +1,8 @@
-Feature: Badges
-  In order to make sure Badges are working for event pills & activities
-  As a bunch of users
-  I want to make sure they are shown like a charm
+Feature: Badges - Subscription - Activity
+  Asserts the Activity page show subscriptions's badges
+  according current users state of subscriptions on the event pill
+  and use the highest privilege on this event's activity to get the color.
 
-## Activity Detail Page
   @api
   Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°2 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
     Given I am logged in as user "manager+lausanne"
@@ -16,11 +15,11 @@ Feature: Badges
     Then I should not see a "#card-event17[data-status='confirmed']" element
 
   @api
-  Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
+  Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a member of this activity and I can see the correct flag "Confirmed Guests"
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 3 ".card-list-item" elements
+    Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
     Then I should see a "#card-event37[data-status='pending']" element
     Then I should see a "#collapse-35" element
@@ -42,13 +41,15 @@ Feature: Badges
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 3 ".card-list-item" elements
+    Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    Then I should see a "#card-event37[data-status='confirmed']" element
+    Then I should see a "#card-event37[data-status='pendings_guests']" element
     Then I should see a "#collapse-35" element
     Then I should see a "#card-event35[data-status='default']" element
+    Then I should see a "#collapse-54" element
+    Then I should see a "#card-event54[data-status='pendings_guests']" element
     Then I should see a "#collapse-36" element
-    Then I should see a "#card-event36[data-status='default']" element
+    Then I should see a "#card-event36[data-status='confirmed_guests']" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can see "register" button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
@@ -73,68 +74,14 @@ Feature: Badges
     Then I should see a "#card-event18[data-status='default']" element
 
   @api
-  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is a public activity
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is not a public activity
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 3 ".card-list-item" elements
+    Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
     Then I should see a "#card-event37[data-status='default']" element
     Then I should see a "#collapse-35" element
     Then I should see a "#card-event35[data-status='default']" element
     Then I should see a "#collapse-36" element
     Then I should see a "#card-event36[data-status='default']" element
-
-## Events by Date lausanne/activities/date
-  @api
-  Scenario: Logged as Member of Fribourg, I see my own badge of Subscription(s) in the Event(s) pill(s)
-    Given I am logged in as user "member+fribourg"
-    When I am on "/fribourg/activities/date"
-    Then I should see 2 ".card-list-simple-item" elements
-    Then I should see 0 ".card-list-simple-item .flag" elements
-
-  @api
-  Scenario: Logged as Manager of Lausanne, I see my own badge of Subscription(s) in the Event(s) pill(s)
-    Given I am logged in as user "manager+lausanne"
-    When I am on "/lausanne/activities/date"
-    And the response status code should be 200
-    Then I should see 9 ".card-list-simple-item" elements
-    Then I should see 1 ".card-list-simple-item .flag" elements
-    Then I should see 1 ".card-list-simple-item .flag.flag-subscription-wait" elements
-    Then I follow "qs.activity.date.link_next"
-    Then I should see 1 ".card-list-simple-item" elements
-    Then I should see 1 ".card-list-simple-item .flag" elements
-    Then I should see 1 ".card-list-simple-item .flag.flag-subscription-confirmed" elements
-
-  @api
-  Scenario: Logged as Organizer of Lausanne, I see my own badge of Subscription(s) in the Event(s) pill(s)
-    Given I am logged in as user "organizer+lausanne"
-    When I am on "/lausanne/activities/date"
-    Then I should see 9 ".card-list-simple-item" elements
-    Then I should see 1 ".card-list-simple-item .flag" elements
-    Then I should see 1 ".card-list-simple-item .flag.flag-subscription-confirmed" elements
-    Then I follow "qs.activity.date.link_next"
-    Then I should see 1 ".card-list-simple-item" elements
-    Then I should see 0 ".card-list-simple-item .flag" elements
-
-  @api
-    Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I see my own badge of Subscription(s) in the Event(s) pill(s)
-    Given I am logged in as user "member+lausanne+organizer+fribourg"
-    When I am on "/lausanne/activities/date"
-    And the response status code should be 200
-    Then I should see 9 ".card-list-simple-item" elements
-    Then I should see 0 ".card-list-simple-item .flag" elements
-    Then I follow "qs.activity.date.link_next"
-    Then I should see 1 ".card-list-simple-item" elements
-    Then I should see 0 ".card-list-simple-item .flag" elements
-    When I am on "/fribourg/activities/date"
-    Then I should see 2 ".card-list-simple-item" elements
-    Then I should see 0 ".card-list-simple-item .flag" elements
-
-## Calendar by Month
-
-## Calendar by Week
-
-## My activities
-
-## My subscriptions

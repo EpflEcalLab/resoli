@@ -35,13 +35,16 @@
     {# User should be member of the activity OR activity should allow subscription to community members #}
     {% if 'activity_members' in variables.privileges or 'activity_maintainers' in variables.privileges or 'activity_organizers' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
     <div class="col-sm-6 mb-3 mx-auto">
+      {% set data_always_show_pending = guests_status in ['pendings_guests', 'confirmed_guests'] and status in ['pending'] %}
+      {% set data_always_show_confirmed = guests_status in ['pendings_guests', 'confirmed_guests'] and status in ['confirmed'] %}
+
       {# Register Button "subscription pending" #}
-      <button data-status-show="pending" class="btn btn-outline-info btn-white btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
+      <button{{ not data_always_show_pending ? ' data-status-show="pending"' }} class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
           {{ macros.icon('wait') }}
           {{ 'qs.event.register.pending'|t }}
       </button>
       {# Register Button "subscription confirmed" #}
-      <button data-status-show="confirmed" class="btn btn-info btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.confirmed'|t }}">
+      <button{{ not data_always_show_confirmed ? ' data-status-show="confirmed"' }} class="btn btn-info btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.confirmed'|t }}">
           {{ macros.icon('confirmed') }}
           {{ 'qs.event.register.confirmed'|t }}
       </button>
@@ -95,10 +98,22 @@
       or user.hasPermission('administer nodes')
     %}
     <div class="col-sm-6 mb-3 mx-auto">
-      <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
-        {{ macros.icon('checklist') }}
-        {{ 'qs.event.dashboard'|t }}
-      </a>
+      {% if guests_status == 'pendings_guests' %}
+        <a href="{{ path('qs_subscription.waiting_approval', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+          {{ macros.icon('wait') }}
+          {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests}) }}
+        </a>
+      {% elseif guests_status == 'confirmed_guests' %}
+        <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+          {{ macros.icon('checklist') }}
+          {{ 'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests}) }}
+        </a>
+      {% else %}
+        <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+          {{ macros.icon('checklist') }}
+          {{ 'qs.event.dashboard'|t }}
+        </a>
+      {% endif %}
     </div>
     {% endif %}
 

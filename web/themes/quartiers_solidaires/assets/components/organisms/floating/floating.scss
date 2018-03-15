@@ -2,9 +2,9 @@
 
 .floating {
   position: fixed;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
   z-index: $zindex-sticky;
   background-image: linear-gradient(to top, rgba($white, 0.5) 60%, rgba($white, 0) 100%);
 
@@ -20,9 +20,9 @@
         z-index: -1;
         bottom: 100%;
         left: 50%;
-        transform: translateX(-50%);
         width: $border-width;
         height: 15vh;
+        transform: translateX(-50%);
       }
 
       @each $color, $value in $theme-colors {

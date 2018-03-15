@@ -21,7 +21,7 @@
   </div>
 
   <div class="container my-5">
-    <ul class="card-list">
+    <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
 
       {% set current_header = null %}
 
@@ -75,8 +75,24 @@
           </li>
         {% endif %}
 
-        <li class="card card-list-simple-item ">
+        <li class="card card-list-item" id="card{{ event.nid.value }}">
           {% include "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+
+          <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel">
+              <div class="card-body">
+                <div class="card-text text-center">
+                  <h4 class="h5 card-title mb-1 mt-0">{{ event.title.value }}</h4>
+                  {# Subscription Textual Badges #}
+                  {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
+                </div>
+                <div class="card-actions d-flex justify-content-center">
+                  <a href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right">
+                    {{ macros.icon('activities') }}
+                    {{ 'qs.event.goto'|t }}
+                  </a>
+                </div>
+              </div>
+            </div>
         </li>
       {% endfor %}
     </ul>

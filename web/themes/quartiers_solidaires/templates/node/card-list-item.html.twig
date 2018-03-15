@@ -1,13 +1,31 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set guests_status = '' %}
 {% set status = 'default' %}
+
 {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
   {% set status = 'pending' %}
 {% elseif event.nid.value in variables.badges.subscriptions.confirmed|keys %}
   {% set status = 'confirmed' %}
 {% endif %}
 
-<li class="card card-flippable card-list-item" data-status="{{ status }}" id="card-event{{ event.nid.value }}">
+{% set guests = 0 %}
+
+{# If user is (activity_maintainers and confirmed) or activity_organizers of this activity #}
+{# show him guests badges, otherwise show him badges based on his own subscription #}
+{% if
+  'activity_organizers' in variables.privileges
+  or ('activity_maintainers' in variables.privileges and status == 'confirmed')
+  or user.hasPermission('administer nodes') %}
+  {% if event.nid.value in variables.badges.subscriptions.pendings_guests|keys %}
+    {% set guests_status = 'pendings_guests' %}
+    {% set guests = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
+  {% elseif event.nid.value in variables.badges.subscriptions.confirmed_guests|keys %}
+    {% set guests_status = 'confirmed_guests' %}
+    {% set guests = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
+  {% endif %}
+{% endif %}
+<li class="card card-flippable card-list-item" data-status="{{ guests_status ? guests_status : status }}" data-guests="{{ guests }}" id="card-event{{ event.nid.value }}">
 
   <div class="card-front">
     {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}
@@ -18,22 +36,14 @@
   </div>
 
   {# Contact info card #}
-  <div class="card-back" id="contact-{{ event.nid.value }}">
-    <div class="card-pill">
+  {% embed '@quartiers_solidaires/node/partials/card-back.html.twig' with {
+    'icon': 'user',
+    'title': event.field_contact_name.value ?: 'qs.event.contact'|t,
+    'activity': event.field_activity.entity,
+  } %}
+    {% block card_back_id %}contact-{{ event.nid.value }}{% endblock %}
 
-      <span class="card-pill-icon">
-        {{ macros.icon('user') }}
-      </span>
-
-      <span class="card-pill-title">
-        <span>
-          {{ event.field_contact_name.value ? event.field_contact_name.value : 'qs.event.contact'|t }}
-        </span>
-      </span>
-
-    </div>
-    <div class="card-body text-center">
-
+    {% block card_back_body %}
       {% if event.field_contact_name.value %}
         <p class="card-text">
           {% trans %}qs.event.contact_description {{ event.field_contact_name.value }}{% endtrans %}
@@ -70,27 +80,24 @@
           </button>
         </div>
       </div>
+    {% endblock %}
 
-    </div>
-  </div>
+  {% endembed %}
 
   {# Map info card #}
   {% if event.field_venue.value %}
-    <div class="card-back {% if event.field_venue_lat.value and event.field_venue_long.value %}card-map-container{% endif %}" id="map-{{ event.nid.value }}">
-      <div class="card-pill">
+    {% embed '@quartiers_solidaires/node/partials/card-back.html.twig' with {
+      'icon': 'meeting',
+      'title': event.field_venue.value,
+      'activity': event.field_activity.entity,
+    } %}
+      {% block card_back_id %}map-{{ event.nid.value }}{% endblock %}
 
-        <span class="card-pill-icon">
-          {{ macros.icon('meeting') }}
-        </span>
+      {% block card_back_class -%}
+        card-back {{ event.field_venue_lat.value and event.field_venue_long.value ? 'card-back-map' }}
+      {%- endblock %}
 
-        <span class="card-pill-title">
-          <span>
-            {{ event.field_venue.value }}
-          </span>
-        </span>
-
-      </div>
-      <div class="card-body text-center">
+      {% block card_back_body %}
         {# Enable the map only when lat & lng are given #}
         {% if event.field_venue_lat.value and event.field_venue_long.value %}
           <div class="card-map" id="map-container-{{ event.nid.value }}" data-lat="{{ event.field_venue_lat.value }}" data-lng="{{ event.field_venue_long.value }}" data-label="{{ event.field_venue.value }}" data-info="<strong>{{ event.title.value }}</strong> <br/>{{ event.field_venue.value }}">
@@ -108,9 +115,10 @@
             </button>
           </div>
         </div>
+      {% endblock %}
 
-      </div>
-    </div>
+
+    {% endembed %}
   {% endif %}
 
 </li>

@@ -49,7 +49,7 @@
 }
 
 .btn-fluid {
-  min-width: auto;
+  min-width: initial;
 }
 
 // Themed Buttons
@@ -192,9 +192,9 @@
   padding-left: $input-btn-padding-x * 1.2;
 
   .icon {
-    margin: 0 ($input-btn-padding-x / 5) 0 ($input-btn-padding-x / 3);
-    left: auto;
     right: 0;
+    left: auto;
+    margin: 0 ($input-btn-padding-x / 5) 0 ($input-btn-padding-x / 3);
   }
 }
 
@@ -232,8 +232,8 @@
   }
 
   &:not([disabled]):not(.disabled):active {
-    color: $body-color;
     background: $white;
+    color: $body-color;
 
     .icon svg {
       color: $body-color;
@@ -282,7 +282,7 @@
   }
 
   .btn {
-    min-width: auto;
+    min-width: initial;
     hyphens: auto;
   }
 }

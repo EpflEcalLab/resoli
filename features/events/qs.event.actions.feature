@@ -18,15 +18,15 @@ Feature: Event Actions Buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 3 ".card-list-item" elements
+    Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    # @todo Change as pending
     And I should see "qs.event.register.pending" in the "#collapse-37 .card-actions" element
     Then I should see a "#collapse-35" element
     And I should see "qs.event.register" in the "#collapse-35 .card-actions" element
     Then I should see a "#collapse-36" element
-    # @todo Change as confirmed
     And I should see "qs.event.register.confirmed" in the "#collapse-36 .card-actions" element
+    Then I should see a "#collapse-54" element
+    And I should see "qs.event.register.confirmed" in the "#collapse-54 .card-actions" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a not member of this activity
@@ -42,14 +42,15 @@ Feature: Event Actions Buttons
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 3 ".card-list-item" elements
+    Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    # @todo Change as confirmed
     And I should see "qs.event.register.confirmed" in the "#collapse-37 .card-actions" element
     Then I should see a "#collapse-35" element
     And I should see "qs.event.register" in the "#collapse-35 .card-actions" element
     Then I should see a "#collapse-36" element
     And I should see "qs.event.register" in the "#collapse-36 .card-actions" element
+    Then I should see a "#collapse-54" element
+    And I should see "qs.event.register" in the "#collapse-54 .card-actions" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, I can see "register" button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
@@ -85,14 +86,16 @@ Feature: Event Actions Buttons
     And I should see "qs.event.register" in the "#collapse-18 .card-actions" element
 
   @api
-  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is a public activity
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is not a public activity
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 3 ".card-list-item" elements
+    Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
     And I should not see "qs.event.register" in the "#collapse-37 .card-actions" element
     Then I should see a "#collapse-35" element
     And I should not see "qs.event.register" in the "#collapse-35 .card-actions" element
     Then I should see a "#collapse-36" element
     And I should not see "qs.event.register" in the "#collapse-36 .card-actions" element
+    Then I should see a "#collapse-54" element
+    And I should not see "qs.event.register" in the "#collapse-54 .card-actions" element

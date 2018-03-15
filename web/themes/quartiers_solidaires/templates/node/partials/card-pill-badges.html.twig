@@ -1,0 +1,14 @@
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
+
+{% set privilege = privileges[event.field_activity.entity.nid.value]|last %}
+{% set theme = 'info' %}
+{% if privilege == 'activity_maintainers' %}
+  {% set theme = 'warning' %}
+{% endif %}
+{% if privilege == 'activity_organizers' %}
+  {% set theme = 'danger' %}
+{% endif %}
+{{ macros.badge(theme, 'wait', 'flag-subscription-wait', '', '', 'pending') }}
+{{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', '', '', 'confirmed') }}
+{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-confirmed', '', '', 'pendings_guests') }}
+{{ macros.badge('outline-' ~ theme, 'confirmed', 'flag-subscription-confirmed', '', '', 'confirmed_guests') }}

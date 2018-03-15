@@ -1,0 +1,20 @@
+{% if activity and badges.privileges %}
+  {% if activity.nid.value in badges.privileges|keys %}
+    {% set privilege = badges.privileges[activity.nid.value]|last %}
+    <p>
+      {% if privilege == 'activity_members' %}
+        {% set roles = 'qs.roles.activity_member'|t %}
+      {% endif %}
+      {% if privilege == 'activity_maintainers' %}
+        {% set roles = 'qs.roles.activity_maintainer'|t %}
+      {% endif %}
+      {% if privilege == 'activity_organizers' %}
+        {% set roles = 'qs.roles.activity_organizer'|t %}
+      {% endif %}
+
+      <strong>{{ 'qs.activity.user.you_are @role'|t({
+        '@role': roles
+      }) }}</strong>
+    </p>
+  {% endif %}
+{% endif %}

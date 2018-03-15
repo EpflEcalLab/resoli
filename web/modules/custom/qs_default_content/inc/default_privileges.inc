@@ -598,6 +598,19 @@ function qs_default_content_privileges_activities() {
     'reviewed'  => time(),
   ]);
   $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 13: Activity 13 - Lausanne - Theme N°1.
+    'entity'    => 13,
+  // User 5.
+    'user'      => 5,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_maintainers',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
 
   // User 6: organizer+lausanne.
   $privilege = $privilegeStorage->create([

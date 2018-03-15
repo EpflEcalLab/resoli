@@ -299,4 +299,14 @@ function qs_default_content_events() {
   $dt->modify('+3 hours');
   $event_54->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
   $event_54->save();
+
+  // Event - Activity (3) - 3 months ago at 15h15.
+  $event_55 = $nodeStorage->load(55);
+  $dt = new DrupalDateTime();
+  $dt->modify('-3 months')->setTime(15, 15);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_55->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $dt->modify('+3 hours');
+  $event_55->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_55->save();
 }

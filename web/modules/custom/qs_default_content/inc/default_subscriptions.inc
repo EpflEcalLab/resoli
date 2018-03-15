@@ -137,4 +137,16 @@ function qs_default_content_subscriptions() {
     'status'    => NULL,
   ]);
   $subscription->save();
+
+  // Event 55: Activity (13) - 3 months ago at 15h15.
+  // User 13: member+lausanne+manager+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 55.
+    'entity'    => 55,
+    // User 13.
+    'user'      => 13,
+    // pending.
+    'status'    => NULL,
+  ]);
+  $subscription->save();
 }

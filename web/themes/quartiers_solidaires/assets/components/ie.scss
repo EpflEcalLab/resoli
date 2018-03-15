@@ -88,10 +88,20 @@
   .pagination-wrapper {
     display: flex;
   }
+
+  .sticky-bottom,
+  .sticky-top {
+    pointer-events: auto;
+  }
 }
 
 // only target Edge
 @supports (-ms-ime-align: auto) {
+  .sticky-bottom,
+  .sticky-top {
+    pointer-events: auto;
+  }
+
   .sticky-top {
     position: relative;
   }

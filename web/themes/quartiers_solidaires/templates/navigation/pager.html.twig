@@ -33,7 +33,7 @@
 {% if items %}
   <nav class="mb-4 pagination-wrapper" aria-labelledby="pagination-heading">
     <h2 id="pagination-heading" class="sr-only">{{ 'qs.a11y.pager.title'|t }}</h2>
-    <div class="d-flex flex-wrap justify-content-end">
+    <div class="d-flex flex-wrap justify-content-start">
       {# Print first item if we are not on the first page. #}
       {% if items.first and items.first.href != items.previous.href %}
         <div class="page-item d-none d-md-inline-block">

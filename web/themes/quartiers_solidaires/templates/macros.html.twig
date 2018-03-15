@@ -16,7 +16,7 @@
 {% set classes = [
   'flag',
   'flag-' ~ flag,
-  shield ? 'flag-shield',
+  shield ? 'flag-shield' : 'flag-default',
   classes,
 ] %}
 <div class="{{ classes|join(' ') }}" title="{{ title }}"{{ data ? ' data-status-show=' ~ data }}>

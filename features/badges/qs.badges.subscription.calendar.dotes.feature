@@ -10,7 +10,7 @@ Feature: Badges - Subscription - Calendar - List
   And the response status code should be 200
   Then I should see 7 ".calendar-item" elements
   Then I should see 1 ".calendar-item .flag" elements
-  Then I should see 1 ".calendar-item .flag.flag-warning.flag-subscription-confirmed" elements
+  Then I should see 1 ".calendar-item .flag.flag-warning.flag-subscription-confirmed.flag-shield" elements
 
   @api
   Scenario: Logged as Manager of Lausanne, when reaching the Calendar Monthly, I should see my 1 badge of subscriptions. I see my Confirmed/Maintainer badge.
@@ -18,7 +18,7 @@ Feature: Badges - Subscription - Calendar - List
   When I am on "/lausanne/calendar/monthly"
   And the response status code should be 200
   Then I should see 1 ".calendar-item .flag" elements
-  Then I should see 1 ".calendar-item .flag.flag-warning.flag-subscription-confirmed" elements
+  Then I should see 1 ".calendar-item .flag.flag-warning.flag-subscription-confirmed.flag-shield" elements
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Calendar Weekly, I should see my 1 badge of subscriptions. I see my Confirmed/Organizer badge.
@@ -27,7 +27,7 @@ Feature: Badges - Subscription - Calendar - List
   And the response status code should be 200
   Then I should see 7 ".calendar-item" elements
   Then I should see 1 ".calendar-item .flag" elements
-  Then I should see 1 ".calendar-item .flag.flag-danger.flag-subscription-confirmed" elements
+  Then I should see 1 ".calendar-item .flag.flag-danger.flag-subscription-confirmed.flag-shield" elements
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Calendar Monthly, I should see my 1 badge of subscriptions. I see my Confirmed/Organizer badge.
@@ -35,7 +35,7 @@ Feature: Badges - Subscription - Calendar - List
   When I am on "/lausanne/calendar/monthly"
   And the response status code should be 200
   Then I should see 1 ".calendar-item .flag" elements
-  Then I should see 1 ".calendar-item .flag.flag-danger.flag-subscription-confirmed" elements
+  Then I should see 1 ".calendar-item .flag.flag-danger.flag-subscription-confirmed.flag-shield" elements
 
   @api
   Scenario: Logged as Member of Lausanne & Manager of Fribourg, when reaching the Calendar Weekly, I should see 0 badges 'cause I have 0 subscriptions in Lausanne community.
@@ -59,7 +59,7 @@ Feature: Badges - Subscription - Calendar - List
   And the response status code should be 200
   Then I should see 7 ".calendar-item" elements
   Then I should see 1 ".calendar-item .flag" elements
-  Then I should see 1 ".calendar-item .flag.flag-info.flag-subscription-confirmed" elements
+  Then I should see 1 ".calendar-item .flag.flag-info.flag-subscription-confirmed.flag-default" elements
 
   @api
   Scenario: Logged as Member of Lausanne & Manager of Fribourg, when reaching the Calendar Monthly, I should see my 1 badge of subscriptions. I see my Confirmed/Member badge.
@@ -67,5 +67,5 @@ Feature: Badges - Subscription - Calendar - List
   When I am on "/fribourg/calendar/monthly"
   And the response status code should be 200
   Then I should see 1 ".calendar-item .flag" elements
-  Then I should see 1 ".calendar-item .flag.flag-info.flag-subscription-confirmed" elements
+  Then I should see 1 ".calendar-item .flag.flag-info.flag-subscription-confirmed.flag-default" elements
 

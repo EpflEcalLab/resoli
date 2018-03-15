@@ -9,9 +9,9 @@ Feature: Badges - Privilege - Activities by Theme
   And the response status code should be 200
   Then I should see 10 ".card" elements
   Then I should see 3 ".card .flag" elements
-  Then I should see 1 "#card-activity2 .flag.flag-danger.flag-privilege-organizers" elements
-  Then I should see 1 "#card-activity3 .flag.flag-outline-warning.flag-subscription-guests-wait" elements
-  Then I should see 1 "#card-activity13 .flag.flag-warning.flag-privilege-maintainers" elements
+  Then I should see 1 "#card-activity2 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
+  Then I should see 1 "#card-activity3 .flag.flag-outline-warning.flag-subscription-guests-wait.flag-shield" elements
+  Then I should see 1 "#card-activity13 .flag.flag-warning.flag-privilege-maintainers.flag-shield" elements
 
   @api
   Scenario: Logged as Organizer of Lausanne, I should see my 2 badges of privileges. I see my Organizer badge on the Activity N°5 (Accueil Café) & my Organizer badge on the Activity N°3 (Sorties Théâtre)
@@ -20,8 +20,8 @@ Feature: Badges - Privilege - Activities by Theme
   And the response status code should be 200
   Then I should see 10 ".card" elements
   Then I should see 2 ".card .flag" elements
-  Then I should see 1 "#card-activity5 .flag.flag-danger.flag-privilege-organizers" elements
-  Then I should see 1 "#card-activity3 .flag.flag-outline-danger.flag-subscription-guests-wait" elements
+  Then I should see 1 "#card-activity5 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
+  Then I should see 1 "#card-activity3 .flag.flag-outline-danger.flag-subscription-guests-wait.flag-shield" elements
 
   @api
   Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I should see my badge of privileges. I see my Member badge on the Activity N°2 (Atelier Créatif)
@@ -30,7 +30,7 @@ Feature: Badges - Privilege - Activities by Theme
   And the response status code should be 200
   Then I should see 10 ".card" elements
   Then I should see 1 ".card .flag" elements
-  Then I should see 1 "#card-activity2 .flag.flag-info.flag-privilege-members" elements
+  Then I should see 1 "#card-activity2 .flag.flag-info.flag-privilege-members.flag-default" elements
 
   @api
   Scenario: Logged as Member of Fribourg, I see no badges cause I have 0 privilege.

@@ -59,7 +59,7 @@ a.card {
   }
 
   .flag {
-    margin: ($spacer * -2.65) auto ($spacer * -3) auto;
+    margin: ($spacer * -2.4) auto ($spacer * -3) auto;
 
     @include media-breakpoint-up(lg) {
       margin-right: ($spacer * 2);
@@ -150,6 +150,7 @@ a[href].card-pill-simple {
 }
 
 .card-pill-title {
+  margin-right: auto;
   overflow: hidden;
   text-overflow: ellipsis;
 
@@ -186,6 +187,10 @@ a[href].card-pill-simple {
   display: inline-block;
   width: 11em;
   flex-shrink: 0;
+
+  &:not(:first-child) {
+    margin-left: ($spacer * 0.5);
+  }
 
   @include media-breakpoint-down(sm) {
     width: 7em;
@@ -409,6 +414,10 @@ a[href].card-pill-simple {
 
   .flag {
     @include flag-size(50px);
+  }
+
+  .card-pill-title {
+    margin-right: auto;
   }
 }
 

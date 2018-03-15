@@ -27,7 +27,7 @@
   {% set classes = [
     'flag',
     'flag-' ~ theme,
-    shield ? 'flag-shield',
+    shield ? 'flag-shield' : 'flag-default',
     'flag-subscription-confirmed',
   ] %}
   <div class="{{ classes|join(' ') }}" title="{{ title }}"{{ data ? ' data-status-show=' ~ data }}>

@@ -9,11 +9,11 @@ Feature: Badges - Privilege - My Activities
   And the response status code should be 200
   Then I should see 3 ".card-list-item" elements
   Then I should see 3 ".card-list-item .flag" elements
-  Then I should see 1 "#activity2 .flag.flag-danger.flag-privilege-organizers" elements
+  Then I should see 1 "#activity2 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card2" element
-  Then I should see 1 "#activity3 .flag.flag-warning.flag-privilege-maintainers" elements
+  Then I should see 1 "#activity3 .flag.flag-warning.flag-privilege-maintainers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_maintainer" in the "#card3" element
-  Then I should see 1 "#activity13 .flag.flag-warning.flag-privilege-maintainers" elements
+  Then I should see 1 "#activity13 .flag.flag-warning.flag-privilege-maintainers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_maintainer" in the "#card13" element
 
   @api
@@ -22,9 +22,9 @@ Feature: Badges - Privilege - My Activities
   When I am on "/activities/1/user/6"
   Then I should see 2 ".card-list-item" elements
   Then I should see 2 ".card-list-item .flag" elements
-  Then I should see 1 "#activity5 .flag.flag-danger.flag-privilege-organizers" elements
+  Then I should see 1 "#activity5 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card5" element
-  Then I should see 1 "#activity3 .flag.flag-danger.flag-privilege-organizers" elements
+  Then I should see 1 "#activity3 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card3" element
 
   @api
@@ -33,7 +33,7 @@ Feature: Badges - Privilege - My Activities
   When I am on "/activities/1/user/8"
   Then I should see 1 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
-  Then I should see 1 "#activity2 .flag.flag-info.flag-privilege-members" elements
+  Then I should see 1 "#activity2 .flag.flag-info.flag-privilege-members.flag-default" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_member" in the "#card2" element
 
   @api

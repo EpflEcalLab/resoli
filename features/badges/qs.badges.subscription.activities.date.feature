@@ -21,7 +21,7 @@ Feature: Badges - Activities by Date
     Then I should see 1 "#event37 .flag" elements
     Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-wait" elements
     Then I should see 1 "#event54 .flag" elements
-    Then I should see 1 "#event54 .flag.flag-outline-warning.flag-subscription-guests-wait" elements
+    Then I should see 1 "#event54 .flag.flag-outline-warning.flag-subscription-guests-wait.flag-shield" elements
     And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card54" element
 
   @api
@@ -33,7 +33,7 @@ Feature: Badges - Activities by Date
     Then I follow "qs.activity.date.link_next"
     Then I should see 1 ".card-list-item" elements
     Then I should see 1 "#event36 .flag" elements
-    Then I should see 1 "#event36 .flag.flag-warning.flag-subscription-confirmed" elements
+    Then I should see 1 "#event36 .flag.flag-warning.flag-subscription-confirmed.flag-shield" elements
     And I should see "qs.event.user.subscription.confirmed" in the "#card36" element
 
   @api
@@ -42,12 +42,12 @@ Feature: Badges - Activities by Date
     When I am on "/lausanne/activities/date"
     Then I should see 10 ".card-list-item" elements
     Then I should see 1 "#event37 .flag" elements
-    Then I should see 1 "#event37 .flag.flag-outline-danger.flag-subscription-guests-wait" elements
+    Then I should see 1 "#event37 .flag.flag-outline-danger.flag-subscription-guests-wait.flag-shield" elements
     And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
     Then I follow "qs.activity.date.link_next"
     Then I should see 1 ".card-list-item" elements
     Then I should see 1 "#event36 .flag" elements
-    Then I should see 1 "#event36 .flag.flag-danger.flag-subscription-guests-confirmed" elements
+    Then I should see 1 "#event36 .flag.flag-danger.flag-subscription-guests-confirmed.flag-shield" elements
     And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card36" element
 
   @api
@@ -71,5 +71,5 @@ Feature: Badges - Activities by Date
     And the response status code should be 200
     Then I should see 2 ".card-list-item" elements
     Then I should see 1 "#event29 .flag" elements
-    Then I should see 1 "#event29 .flag.flag-info.flag-subscription-confirmed" elements
+    Then I should see 1 "#event29 .flag.flag-info.flag-subscription-confirmed.flag-default" elements
     And I should see "qs.event.user.subscription.confirmed" in the "#card29" element

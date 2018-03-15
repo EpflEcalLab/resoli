@@ -157,7 +157,7 @@ class CollectionController extends ControllerBase {
       // From list of Activities get user privileges.
       $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($variables['activities']);
 
-      // From list of Activities count subscriptions by activity.
+      // From list of Activities count pending subscriptions by activity.
       $variables['badges']['activities_subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptionsByActivities($variables['activities'], NULL);
     }
 

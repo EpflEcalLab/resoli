@@ -1,9 +1,18 @@
 const formControl = () => {
   (function ($) {
+    // Use to initialize inputs autocomplete only once.
+    let initialized = false;
+
     /**
      *  Location Search by using Google Place Autocomplete.
      */
     function locationInitialize() {
+      // Initialize inputs only once.
+      if (initialized) {
+        return;
+      }
+      initialized = true;
+
       const $inputs = $('input[data-google-autocomplete]');
 
       // Enable the Google Place API for each inputs.
@@ -156,6 +165,12 @@ const formControl = () => {
         $list.append(filesList)
       }
     });
+
+    // Workaround Bigpipe.
+    $(document).on('DOMNodeInserted', function() {
+      locationInitialize();
+    });
+
   })(jQuery);
 };
 

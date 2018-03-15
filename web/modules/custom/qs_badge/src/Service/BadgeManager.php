@@ -196,7 +196,7 @@ class BadgeManager {
   /**
    * Count for the given events IDs, if they have subscriptions.
    *
-   * The count remove the current used to avoid false positif when only author
+   * The count remove the current user to avoid false positif when only author
    * is subscribed.
    *
    * @param integer[] $events
@@ -250,7 +250,7 @@ class BadgeManager {
   /**
    * Count for the given activities IDs, if they have subscriptions.
    *
-   * The count remove the current used to avoid false positif when only author
+   * The count remove the current user to avoid false positif when only author
    * is subscribed.
    *
    * @param integer[] $activities
@@ -264,6 +264,9 @@ class BadgeManager {
    *   The collection of activities IDs which have number of subscriptions.
    */
   public function countSubscriptionsByActivities(array $activities, $status = TRUE, UserInterface $account = NULL) {
+    $now = new DrupalDateTime();
+    $now->setTimezone(new \DateTimeZone('UTC'));
+
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
@@ -279,6 +282,10 @@ class BadgeManager {
 
     $query->leftJoin('node__field_activity', 'field_activity', 'subscriptions.entity = field_activity.entity_id');
     $query->condition('field_activity.field_activity_target_id', $nids, 'IN');
+
+    // Get only subscriptions of events in the futur.
+    $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = subscriptions.entity');
+    $query->condition('field_end_at.field_end_at_value', $now, '>');
 
     $query->fields('field_activity', ['field_activity_target_id'])
       ->groupBy('field_activity.field_activity_target_id');

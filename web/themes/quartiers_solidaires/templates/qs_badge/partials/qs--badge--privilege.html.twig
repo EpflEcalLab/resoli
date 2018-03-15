@@ -5,9 +5,16 @@
 
   {% if (privilege == 'activity_maintainers' or privilege == 'activity_organizers') and activity.nid.value in badges.activities_subscriptions.pendings_guests|keys %}
     {# Adapte the color of badge according user privilege of activity #}
-    {% if privilege == 'activity_maintainers' %}{% set theme = 'warning' %}{% endif %}
-    {% if privilege == 'activity_organizers' %}{% set theme = 'danger' %}{% endif %}
-    {{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-guests-wait') }}
+    {% if privilege == 'activity_maintainers' %}
+      {% set theme = 'warning' %}
+    {% endif %}
+    {% if privilege == 'activity_organizers' %}
+      {% set theme = 'danger' %}
+    {% endif %}
+
+    {% set shield = privilege in ['activity_maintainers', 'activity_organizers'] %}
+
+    {{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-guests-wait', '', shield) }}
   {% else %}
     {% if privilege == 'activity_members' %}
       {{ macros.badge('info', 'happy', 'flag-privilege-members', 'qs.roles.activity_member'|t) }}

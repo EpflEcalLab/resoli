@@ -39,7 +39,7 @@
       {% set data_always_show_confirmed = guests_status in ['pendings_guests', 'confirmed_guests'] and status in ['confirmed'] %}
 
       {# Register Button "subscription pending" #}
-      <button{{ not data_always_show_pending ? ' data-status-show="pending"' }} class="btn btn-secondary btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
+      <button{{ not data_always_show_pending ? ' data-status-show="pending"' }} class="btn btn-outline-info btn-white btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
           {{ macros.icon('wait') }}
           {{ 'qs.event.register.pending'|t }}
       </button>

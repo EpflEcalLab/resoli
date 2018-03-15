@@ -4,11 +4,13 @@
 {% set theme = 'info' %}
 {% if privilege == 'activity_maintainers' %}
   {% set theme = 'warning' %}
+  {% set shield = true %}
 {% endif %}
 {% if privilege == 'activity_organizers' %}
   {% set theme = 'danger' %}
+  {% set shield = true %}
 {% endif %}
-{{ macros.badge(theme, 'wait', 'flag-subscription-wait', '', '', 'pending') }}
-{{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', '', '', 'confirmed') }}
-{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-confirmed', '', '', 'pendings_guests') }}
-{{ macros.badge('outline-' ~ theme, 'confirmed', 'flag-subscription-confirmed', '', '', 'confirmed_guests') }}
+{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-wait', '', shield, 'pending') }}
+{{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', '', shield, 'confirmed') }}
+{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-confirmed', '', shield, 'pendings_guests') }}
+{{ macros.badge('outline-' ~ theme, 'confirmed', 'flag-subscription-confirmed', '', shield, 'confirmed_guests') }}

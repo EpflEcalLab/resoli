@@ -14,6 +14,11 @@
     }
   }
 
+  .btn-circle {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
   .calendar-head,
   .calendar-item {
     display: inline-flex;
@@ -77,6 +82,11 @@
   .flip.card-flippable .card-front,
   .flip.card-flippable .collapse {
     backface-visibility: visible;
+  }
+
+  // Pagination is buggy with grid
+  .pagination-wrapper {
+    display: flex;
   }
 }
 

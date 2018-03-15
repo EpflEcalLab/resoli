@@ -1,7 +1,6 @@
 @charset 'utf-8';
 
 .pagination-wrapper {
-  display: flex;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   flex-wrap: wrap;

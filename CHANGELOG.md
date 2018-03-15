@@ -19,7 +19,8 @@
  - update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309
  - fix #590 - wrong badges on activities by Theme when activity has event in past with pending subscriptions
  - fix #207 - photos by months - sticky months are not translated
-
+ - fix #584 - fix big_pipe google map autocomplete fields
+ 
 ## NEXT RELEASE
  - add pagination #585
 

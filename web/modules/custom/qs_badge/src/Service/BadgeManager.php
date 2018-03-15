@@ -196,7 +196,7 @@ class BadgeManager {
   /**
    * Count for the given events IDs, if they have subscriptions.
    *
-   * The count remove the current used to avoid false positif when only author
+   * The count remove the current user to avoid false positif when only author
    * is subscribed.
    *
    * @param integer[] $events
@@ -250,7 +250,7 @@ class BadgeManager {
   /**
    * Count for the given activities IDs, if they have subscriptions.
    *
-   * The count remove the current used to avoid false positif when only author
+   * The count remove the current user to avoid false positif when only author
    * is subscribed.
    *
    * @param integer[] $activities

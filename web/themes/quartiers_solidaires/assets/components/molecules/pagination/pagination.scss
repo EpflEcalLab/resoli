@@ -1,0 +1,33 @@
+@charset 'utf-8';
+
+.pagination-wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 -5px;
+}
+
+.page-item {
+  margin: 0 5px;
+
+  > span {
+    display: block;
+    padding: $pagination-padding-y $pagination-padding-x;
+  }
+}
+
+.pagination {
+  justify-content: center;
+
+  .active .btn-outline-invert {
+    background-color: $white;
+  }
+
+  @each $color, $value in $theme-colors {
+    .bg-#{$color} & .active .btn-outline-invert {
+      color: $value;
+    }
+  }
+}
+

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.0.2 (2018-03-16)
+ - setup pagination component #31
+
 ## 1.0.1 (2018-03-01)
  - fix images upload on past events - #576
  - update README.md badges

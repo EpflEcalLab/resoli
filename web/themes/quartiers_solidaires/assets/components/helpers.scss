@@ -75,6 +75,11 @@
     position: sticky;
     bottom: 0;
     z-index: $zindex-sticky;
+    pointer-events: none;
+
+    > * {
+      pointer-events: auto;
+    }
   }
 }
 

@@ -2070,6 +2070,7 @@ msgid "qs.photo.delete"
 msgstr "Supprimer les photos"
 
 msgid "qs.a11y.pager.title"
+<<<<<<< HEAD
 msgstr ""
 
 msgid "qs.pager.goto_first"
@@ -2116,3 +2117,51 @@ msgstr ""
 
 msgid "qs.pager.last"
 msgstr ""
+=======
+msgstr "Pagination"
+
+msgid "qs.pager.goto_first"
+msgstr "Aller à la première page"
+
+msgid "qs.pager.a11y.first"
+msgstr "Première page"
+
+msgid "qs.pager.first"
+msgstr "Première"
+
+msgid "qs.pager.goto_previous"
+msgstr "Aller à la page précédente"
+
+msgid "qs.pager.a11y.previous"
+msgstr "Page précédente"
+
+msgid "qs.pager.previous"
+msgstr "Précédente"
+
+msgid "qs.pager.current_page"
+msgstr "Page actuelle"
+
+msgid "qs.pager.go_to_page @key"
+msgstr "Page @key"
+
+msgid "qs.pager.page"
+msgstr "Page"
+
+msgid "qs.pager.goto_next"
+msgstr "Aller à la page suivante"
+
+msgid "qs.pager.a11y.next"
+msgstr "Page Suivante"
+
+msgid "qs.pager.next"
+msgstr "Suivante"
+
+msgid "qs.pager.goto_last"
+msgstr "Aller à la dernière page"
+
+msgid "qs.pager.a11y.last"
+msgstr "Dernière page"
+
+msgid "qs.pager.last"
+msgstr "Dernière"
+>>>>>>> dev

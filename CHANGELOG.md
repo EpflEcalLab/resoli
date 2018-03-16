@@ -21,8 +21,8 @@
  - fix #207 - photos by months - sticky months are not translated
  - fix #584 - fix big_pipe google map autocomplete fields
  
-## NEXT RELEASE
- - add pagination #585
+## 1.0.2 (2018-03-16)
+ - setup pagination component #31
 
 ## 1.0.1 (2018-03-01)
  - fix images upload on past events - #576

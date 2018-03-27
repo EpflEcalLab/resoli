@@ -142,7 +142,7 @@ class RequestForm extends FormBase {
 
     // According the current user roles to the event,
     // If he's activity_organizers+ subscribe him whitout requesting.
-    if (in_array('activity_organizers', $privileges)) {
+    if (in_array('activity_organizers', $privileges) or in_array('activity_maintainers', $privileges)) {
       $form['submit']['#name'] = 'direct_subscription';
     }
 

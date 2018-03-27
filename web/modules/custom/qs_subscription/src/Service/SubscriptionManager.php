@@ -232,7 +232,7 @@ class SubscriptionManager {
    */
   public function querySubscribers(NodeInterface $event) {
     $query = $this->connection->select('subscriptions', 'subscriptions');
-    $query->fields('subscriptions', ['user'])
+    $query->fields('subscriptions', ['user', 'id'])
       ->condition('subscriptions.status', 1)
       ->condition('subscriptions.entity', $event->id());
 

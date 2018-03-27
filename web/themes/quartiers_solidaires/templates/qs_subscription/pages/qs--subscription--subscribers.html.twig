@@ -6,10 +6,11 @@
     <h2>{{ variables.event.name.value }}</h2>
   </div>
 
-  {% if variables.subscribers %}
+  {% if variables.subscriptions %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
-    {% for subscriber in variables.subscribers %}
+    {% for subscription in variables.subscriptions %}
       <li class="card card-list-item" id="card-{{ loop.index0 }}">
+        {% set user = subscription.user.entity %}
         <a
           data-toggle="collapse"
           data-parent="#users-accordion"
@@ -23,7 +24,7 @@
               {{ macros.icon('user') }}
             </span>
           <span class="card-pill-title">
-              {{ subscriber.field_firstname.value }} {{ subscriber.field_lastname.value }}
+              {{ user.field_firstname.value }} {{ user.field_lastname.value }}
           </span>
           <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
             {{ macros.icon('look') }}
@@ -34,11 +35,22 @@
         <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
           <div class="card-body pb-0 text-center">
 
-            <h4 class="card-title mb-0">{{ subscriber.field_firstname.value }} {{ subscriber.field_lastname.value }}</h4>
-            <h5 class="card-title mt-1">{{ subscriber.mail.value }}</h5>
+            <h4 class="card-title mb-0">{{ user.field_firstname.value }} {{ user.field_lastname.value }}</h4>
+            <h5 class="card-title mt-1">{{ user.mail.value }}</h5>
+
+            <div class="card-actions row">
+              <div class="col-sm-6 offset-sm-3 mb-3">
+                <form action="{{ path('qs_subscription.decline', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_subscription.waiting_approval.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
+                    {{ macros.icon('trash') }}
+                    {{ 'qs.reject'|t }}
+                  </button>
+                </form>
+              </div>
+            </div>
 
              <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-              <a href="mailto:{{ subscriber.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+              <a href="mailto:{{ user.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
                 {{ macros.icon('mail') }}
                 {% trans %}qs.contact {{ subscriber.field_firstname.value }}{% endtrans %}
               </a>

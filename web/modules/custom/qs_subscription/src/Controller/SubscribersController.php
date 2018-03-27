@@ -48,6 +48,7 @@ class SubscribersController extends ControllerBase {
     $this->acl                 = $acl;
     $this->subscriptionManager = $subscription_manager;
     $this->userStorage         = $this->entityTypeManager()->getStorage('user');
+    $this->subscriptionStorage = $this->entityTypeManager()->getStorage('subscription');
   }
 
   /**
@@ -103,17 +104,14 @@ class SubscribersController extends ControllerBase {
     $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
     $rows = $query->execute()->fetchAll();
 
-    $uids = [];
+    $ids = [];
     foreach ($rows as $row) {
-      $uids[$row->user] = $row->user;
+      $ids[] = $row->id;
     }
 
-    // Load user entities.
-    $subscribers = [];
-    if ($uids) {
-      $subscribers = $this->userStorage->loadMultiple($uids);
-    }
-    $variables['subscribers'] = $subscribers;
+    // Load subscriptions entities.
+    $subscriptions = $this->subscriptionStorage->loadMultiple($ids);
+    $variables['subscriptions'] = $subscriptions;
 
     return [
       '#theme'     => 'qs_subscription_subscribers_page',

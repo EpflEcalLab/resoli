@@ -12,6 +12,8 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
 use Drupal\qs_subscription\Entity\Subscription;
 use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
+use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
@@ -40,6 +42,13 @@ class SubscriptionManager {
   protected $nodeStorage;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
    * The entity query factory.
    *
    * @var \Drupal\Core\Entity\Query\QueryFactory
@@ -61,15 +70,32 @@ class SubscriptionManager {
   protected $cacheTagsInvalidator;
 
   /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  protected $privilegeManager;
+
+  /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
+
+  /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection, CacheTagsInvalidatorInterface $cache_tags_invalidator) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection, CacheTagsInvalidatorInterface $cache_tags_invalidator, PrivilegeManager $privilege_manager, MailManagerInterface $mail) {
     $this->currentUser          = $currentUser;
     $this->subscriptionStorage  = $entity_type_manager->getStorage('subscription');
     $this->nodeStorage          = $entity_type_manager->getStorage('node');
+    $this->userStorage          = $entity_type_manager->getStorage('user');
     $this->queryFactory         = $query_factory;
     $this->connection           = $connection;
     $this->cacheTagsInvalidator = $cache_tags_invalidator;
+    $this->privilegeManager     = $privilege_manager;
+    $this->mail                 = $mail;
   }
 
   /**
@@ -87,6 +113,38 @@ class SubscriptionManager {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
+    }
+
+    $activity = $event->field_activity->entity;
+
+    // Get all organizers of this activities's event.
+    $query_organizers = $this->privilegeManager->queryPrivilege($activity, 'activity_organizers');
+    $rows = $query_organizers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Get all maintainer of this activities's event.
+    $query_maintainers = $this->privilegeManager->queryPrivilege($activity, 'activity_maintainers');
+    $rows = $query_maintainers->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $ids[$row->user] = $row->user;
+    }
+
+    // Load user with activity_organizers or activity_maintainers privilege(s)
+    // & send them mail about new event subscription request.
+    $accounts = NULL;
+    if ($ids) {
+      $accounts = $this->userStorage->loadMultiple($ids);
+
+      foreach ($accounts as $account) {
+        $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_request_organizers', $account->getEmail(), $account->getPreferredLangcode(), [
+          'user'  => $user->entity,
+          'event' => $event,
+        ]);
+      }
     }
 
     // Check we don't already have a subscription.

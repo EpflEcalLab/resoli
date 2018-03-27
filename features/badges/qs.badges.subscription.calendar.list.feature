@@ -11,7 +11,10 @@ Feature: Badges - Subscription - Calendar - List
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-wait.flag-shield" elements
-  And I should see "qs.event.user.subscription.pending" in the "#card37" element
+  And the "#card37" element should contain "qs.event.user.subscription.pending</strong>"
+  And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
+  And the "#card37" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card37" element
 
   @api
   Scenario: Logged as Manager of Lausanne, when reaching the Calendar Monthly, I should see my 1 badge of subscriptions. I see the Guests_Waiting/Maintainer badge on the Event N°37 (Sorties Théâtre). I can't see the Guests_Waiting badge because I'm maintainer but I don't have a confirmed subscription on this event.
@@ -21,7 +24,10 @@ Feature: Badges - Subscription - Calendar - List
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#card37 .flag.flag-warning.flag-subscription-wait.flag-shield" elements
-  And I should see "qs.event.user.subscription.pending" in the "#card37" element
+  And the "#card37" element should contain "qs.event.user.subscription.pending</strong>"
+  And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element
+  And the "#card37" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card37" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Calendar Weekly, I should see my 1 badge of subscriptions. I see the Guests_Waiting/Organizer badge on the Event N°37 (Sorties Théâtre)
@@ -31,7 +37,10 @@ Feature: Badges - Subscription - Calendar - List
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#card37 .flag.flag-outline-danger.flag-subscription-guests-wait.flag-shield" elements
+  And the "#card37" element should not contain "qs.event.user.subscription.pending</strong>"
   And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
+  And the "#card37" element should contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card37" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Calendar Monthly, I should see my 1 badge of subscriptions. I see the Guests_Waiting/Organizer badge on the Event N°37 (Sorties Théâtre)
@@ -41,7 +50,10 @@ Feature: Badges - Subscription - Calendar - List
   Then I should see 4 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#card37 .flag.flag-outline-danger.flag-subscription-guests-wait.flag-shield" elements
+  And the "#card37" element should not contain "qs.event.user.subscription.pending</strong>"
   And I should see "qs.event.user.subscription.pendings_guests 1" in the "#card37" element
+  And the "#card37" element should contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card37" element
 
   @api
   Scenario: Logged as Member of Lausanne & Manager of Fribourg, when reaching the Calendar Weekly, I should see 0 badges 'cause I have 0 subscriptions in Lausanne community.
@@ -67,7 +79,10 @@ Feature: Badges - Subscription - Calendar - List
   Then I should see 1 ".card-list-item" elements
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#event29 .flag.flag-info.flag-subscription-confirmed.flag-default" elements
-  And I should see "qs.event.user.subscription.confirmed" in the "#card29" element
+  And the "#card29" element should contain "qs.event.user.subscription.confirmed</strong>"
+  And the "#card29" element should not contain "qs.event.user.subscription.pending</strong>"
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card29" element
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card29" element
 
   @api
   Scenario: Logged as Member of Lausanne & Manager of Fribourg, when reaching the Calendar Weekly, I should see my 1 badge of subscriptions. I see my Member badge on the Event N°29 (Cours Smartphone & Tablette)
@@ -78,3 +93,7 @@ Feature: Badges - Subscription - Calendar - List
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#event29 .flag.flag-info.flag-subscription-confirmed.flag-default" elements
   And I should see "qs.event.user.subscription.confirmed" in the "#card29" element
+  And the "#card29" element should contain "qs.event.user.subscription.confirmed</strong>"
+  And the "#card29" element should not contain "qs.event.user.subscription.pending</strong>"
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card29" element
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card29" element

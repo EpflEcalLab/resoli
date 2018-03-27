@@ -91,6 +91,7 @@ $theme-colors: map-merge((
   secondary: $teal,
   danger:    $red,
   info:      $blue,
+  warning:   $orange,
 ), $theme-colors);
 
 $flag-colors: (

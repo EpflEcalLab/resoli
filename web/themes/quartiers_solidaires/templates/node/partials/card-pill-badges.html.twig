@@ -11,7 +11,7 @@
   {% set shield = true %}
 {% endif %}
 
-{{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-wait', 'qs.event.user.subscription.pending'|t, shield, 'pending') }}
+{{ macros.badge(theme, 'wait', 'flag-subscription-wait', 'qs.event.user.subscription.pending'|t, shield, 'pending') }}
 {{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', 'qs.event.user.subscription.confirmed'|t, shield, 'confirmed') }}
 
 {# Pending Guests subscriptions Badge #}

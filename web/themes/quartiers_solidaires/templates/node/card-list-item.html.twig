@@ -3,9 +3,17 @@
 {% set guests_status = '' %}
 {% set status = 'default' %}
 
-{% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
+{% set user_subscription_confirmed = event.nid.value in variables.badges.subscriptions.confirmed|keys %}
+
+{% set user_subscription_pending = event.nid.value in variables.badges.subscriptions.pendings|keys %}
+
+{% set guest_subscription_pending = event.nid.value in variables.badges.subscriptions.pendings_guests|keys %}
+
+{% set guest_subscription_confirmed = event.nid.value in variables.badges.subscriptions.confirmed_guests|keys %}
+
+{% if user_subscription_pending %}
   {% set status = 'pending' %}
-{% elseif event.nid.value in variables.badges.subscriptions.confirmed|keys %}
+{% elseif user_subscription_confirmed %}
   {% set status = 'confirmed' %}
 {% endif %}
 
@@ -15,17 +23,17 @@
 {# show him guests badges, otherwise show him badges based on his own subscription #}
 {% if
   'activity_organizers' in variables.privileges
-  or ('activity_maintainers' in variables.privileges and status == 'confirmed')
+  or 'activity_maintainers' in variables.privileges
   or user.hasPermission('administer nodes') %}
-  {% if event.nid.value in variables.badges.subscriptions.pendings_guests|keys %}
+  {% if guest_subscription_pending %}
     {% set guests_status = 'pendings_guests' %}
     {% set guests = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
-  {% elseif event.nid.value in variables.badges.subscriptions.confirmed_guests|keys %}
+  {% elseif guest_subscription_confirmed and not user_subscription_pending and not user_subscription_confirmed %}
     {% set guests_status = 'confirmed_guests' %}
     {% set guests = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
   {% endif %}
 {% endif %}
-<li class="card card-flippable card-list-item" data-status="{{ guests_status ? guests_status : status }}" data-guests="{{ guests }}" id="card-event{{ event.nid.value }}">
+<li class="card card-flippable card-list-item" data-status="{{ status }}" data-status-badge="{{ guests_status ? guests_status : status }}" data-guests="{{ guests }}" id="card-event{{ event.nid.value }}">
 
   <div class="card-front">
     {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}

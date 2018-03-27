@@ -1,8 +1,16 @@
 
 {# Subscription Badges #}
 {% if event.nid.value and badges.subscriptions  %}
-  {% set show_user_subscription = TRUE %}
+  {% set show_user_subscription = true %}
+
   {% set user_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed|keys %}
+
+  {% set user_subscription_pending = event.nid.value in badges.subscriptions.pendings|keys %}
+
+  {% set guest_subscription_pending = event.nid.value in badges.subscriptions.pendings_guests|keys %}
+
+  {% set guest_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed_guests|keys %}
+
   {% set theme = 'info' %}
 
   {% if badges.privileges %}
@@ -24,31 +32,31 @@
       {% set shield = privilege in ['activity_maintainers', 'activity_organizers'] %}
     {% endif %}
 
-    {# If user is (activity_maintainers and confirmed) or activity_organizers of this event #}
-    {# show him guests badges, otherwise show him badges based on his own subscription #}
-    {% if (privilege == 'activity_maintainers' and user_subscription_confirmed) or privilege == 'activity_organizers' %}
+    {# If user is activity_maintainers or activity_organizers of this event #}
+    {% if privilege in ['activity_maintainers', 'activity_organizers'] %}
+
       {# Pending Guests subscriptions Badge #}
-      {% if event.nid.value in badges.subscriptions.pendings_guests|keys %}
-        {% set show_user_subscription = FALSE %}
-        {% set theme = 'outline-' ~ theme %}
-        {{ macros.badge(theme, 'wait', 'flag-subscription-guests-wait', 'qs.event.user.subscription.pendings_guests'|t, shield) }}
+      {% if guest_subscription_pending %}
+        {{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-guests-wait', 'qs.event.user.subscription.pendings_guests'|t, shield) }}
+        {% set show_user_subscription = false %}
 
       {# Confirmed Guests subscriptions Badge #}
-      {% elseif event.nid.value in badges.subscriptions.confirmed_guests|keys %}
-        {% set show_user_subscription = FALSE %}
-        {{ macros.badge(theme, 'confirmed', 'flag-subscription-guests-confirmed', 'qs.event.user.subscription.confirmed_guests'|t, shield) }}
+      {% elseif guest_subscription_confirmed and not guest_subscription_pending and not user_subscription_confirmed and not user_subscription_pending %}
+        {{ macros.badge('outline-' ~ theme, 'confirmed', 'flag-subscription-guests-confirmed', 'qs.event.user.subscription.confirmed_guests'|t, shield) }}
+        {% set show_user_subscription = false %}
+
       {% endif %}
     {% endif %}
   {% endif %}
 
   {% if show_user_subscription %}
     {# Subscription pendings badge #}
-    {% if event.nid.value in badges.subscriptions.pendings|keys %}
+    {% if user_subscription_pending %}
       {{ macros.badge(theme, 'wait', 'flag-subscription-wait', 'qs.event.user.subscription.pending'|t, shield) }}
     {% endif %}
 
     {# Subscription confirmed badge #}
-    {% if event.nid.value in badges.subscriptions.confirmed|keys %}
+    {% if user_subscription_confirmed %}
       {{ macros.badge(theme, 'confirmed', 'flag-subscription-confirmed', 'qs.event.user.subscription.confirmed'|t, shield) }}
     {% endif %}
   {% endif %}

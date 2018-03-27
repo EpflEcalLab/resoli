@@ -11,7 +11,7 @@ Feature: Badges - Privilege - My Activities
   Then I should see 3 ".card-list-item .flag" elements
   Then I should see 1 "#activity2 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card2" element
-  Then I should see 1 "#activity3 .flag.flag-warning.flag-privilege-maintainers.flag-shield" elements
+  Then I should see 1 "#activity3 .flag.flag-outline-warning.flag-subscription-guests-wait.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_maintainer" in the "#card3" element
   Then I should see 1 "#activity13 .flag.flag-warning.flag-privilege-maintainers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_maintainer" in the "#card13" element
@@ -24,7 +24,7 @@ Feature: Badges - Privilege - My Activities
   Then I should see 2 ".card-list-item .flag" elements
   Then I should see 1 "#activity5 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card5" element
-  Then I should see 1 "#activity3 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
+  Then I should see 1 "#activity3 .flag.flag-outline-danger.flag-subscription-guests-wait.flag-shield" elements
   And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card3" element
 
   @api

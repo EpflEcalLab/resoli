@@ -1,4 +1,9 @@
-All badges are tested in the Zürich Community to avoid conflict with others.
+
+# Quartiers-Solidaires - Badges
+
+## 👾 Buisness Logic
+
+The following table show you how badges should works .
 
 | Membre (activity_members)                                   |       |         |      |                                            |          |
 |-------------------------------------------------------------|-------|---------|------|--------------------------------------------|----------|

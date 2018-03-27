@@ -27,12 +27,17 @@ All badges are tested in the Zürich Community to avoid conflict with others.
 | Not subscribed with pending guests                          | Orange | x       | ⏳    | X Guest need review                       | -        |
 | Not subscribed with confirmed guests                        | Orange | x       | ✓    | X guests confirmed                         | -        |
 | Not subscribed with pending guests & confirmed guests       | Orange | x       | ⏳    | X Guest need review                        | -       |
+
+Pending subscription is not possible for co-organisator, they are self reviewed
+
+| Co-organisator (activity_maintainers)                       |        |         |      |                                            |          |
+|-------------------------------------------------------------|--------|---------|------|--------------------------------------------|----------|
+| Desc                                                        | Color  | Outline | Icon | Text                                       | Coverage |
 | Pending subscribed alone                                    | Orange  | -       | ⏳    | You wait on review                         | -      |
 | Pending subscribed with pending guests                      | Orange  | x       | ⏳    | You wait on review with X Guest need review | -      |
 | Pending subscribed with confirmed guests                    | Orange  | -       | ⏳    | You wait on review with X guests confirmed | -      |
 | Pending subscribed with pending guests & confirmed guests   | Orange  | x       | ⏳    | You wait on review with X Guest need review | -      |
 
-Pending subscription is not possible for co-organisator, they are self reviewed
 
 | Organisator (activity_organizers)                           |       |         |      |                                                     |          |
 |-------------------------------------------------------------|-------|---------|------|-----------------------------------------------------|----------|
@@ -45,9 +50,14 @@ Pending subscription is not possible for co-organisator, they are self reviewed
 | Not subscribed with pending guests                          | Red   | x       | ⏳    | X Guest need review                                   | -        |
 | Not subscribed with confirmed guests                        | Red   | x       | ✓     | X guests confirmed                                  | -        |
 | Not subscribed with pending guests & confirmed guests       | Red   | x       | ⏳    | X Guest need review                                | -        |
+
+Pending subscription is not possible for organisator, they are self reviewed
+
+| Organisator (activity_organizers)                           |       |         |      |                                                     |          |
+|-------------------------------------------------------------|-------|---------|------|-----------------------------------------------------|----------|
+| Desc                                                        | Color  | Outline | Icon | Text                                       | Coverage |
 | Pending subscribed alone                                    | Red  | -       | ⏳    | You wait on review                         | -      |
 | Pending subscribed with pending guests                      | Red  | x       | ⏳    | You wait on review with X Guest need review | -      |
 | Pending subscribed with confirmed guests                    | Red  | -       | ⏳    | You wait on review with X guests confirmed | -      |
 | Pending subscribed with pending guests & confirmed guests   | Red  | x       | ⏳    | You wait on review with X Guest need review | -      |
 
-Pending subscription is not possible for organisator, they are self reviewed

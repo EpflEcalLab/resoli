@@ -32,6 +32,12 @@
   }
 }
 
+.calendar-item {
+  .flag-info {
+    margin-top: -3px;
+  }
+}
+
 @each $color, $value in $flag-colors {
   &.flag-#{$color} {
     color: $white;

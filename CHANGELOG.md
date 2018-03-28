@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.0.3 (2018-03-28)
+ - apply patch - Remote Code Execution - SA-CORE-2018-002
+
 ## 1.0.2 (2018-03-16)
  - setup pagination component #31
 

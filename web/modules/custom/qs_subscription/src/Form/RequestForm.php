@@ -113,9 +113,23 @@ class RequestForm extends FormBase {
       '#value' => $params['event'],
     ];
 
+    // Generate unique name to avoid Drupal conflict with ajax same name.
+    $name = 'request_subscription_' . $event->id();
+
+    // Get the current user activitiy's privilege to this event.
+    $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
+    $privileges = !empty($privileges_by_events) ? reset($privileges_by_events) : $privileges_by_events;
+
+    // According the current user roles to the event,
+    // If he's activity_organizers+ subscribe him whitout requesting.
+    if (in_array('activity_organizers', $privileges) || in_array('activity_maintainers', $privileges)) {
+      $name = 'direct_subscription_' . $event->id();
+    }
+
     $form['submit'] = [
-      '#name' => 'request_subscription',
-      '#type'  => 'submit',
+      '#id'   => $name . '_submit',
+      '#name' => $name,
+      '#type' => 'submit',
       '#attributes' => [
         'data-status-show' => 'default',
         'icon' => 'register',
@@ -130,21 +144,10 @@ class RequestForm extends FormBase {
       ],
       '#ajax'        => [
         'callback' => [$this, 'respondToAjax'],
-        'event'    => 'click',
-        'progress' => [],
+        'progress' => ['type' => 'none'],
       ],
       '#value' => $this->t('qs.event.register'),
     ];
-
-    // Get the current user activitiy's privilege to this event.
-    $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
-    $privileges = !empty($privileges_by_events) ? reset($privileges_by_events) : $privileges_by_events;
-
-    // According the current user roles to the event,
-    // If he's activity_organizers+ subscribe him whitout requesting.
-    if (in_array('activity_organizers', $privileges) or in_array('activity_maintainers', $privileges)) {
-      $form['submit']['#name'] = 'direct_subscription';
-    }
 
     return $form;
   }
@@ -159,10 +162,7 @@ class RequestForm extends FormBase {
     // Get the related activity.
     $activity = $event->field_activity->entity;
 
-    if (!$event || !$activity) {
-      $form_state->setErrorByName('', $this->t('qs.form.error.something_went_wrong'));
-    }
-    elseif (!$this->acl->hasSubscribeAccessEvent($activity)) {
+    if (!$event || !$activity || !$this->acl->hasSubscribeAccessEvent($activity)) {
       $form_state->setErrorByName('', $this->t('qs.form.error.something_went_wrong'));
     }
   }
@@ -177,15 +177,16 @@ class RequestForm extends FormBase {
     $event_id = $form_state->getValue('event');
     $event = $this->nodeStorage->load($event_id);
 
-    if ($trigger['#name'] === 'request_subscription') {
+    // Processing the submission as a standard request.
+    if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
       $this->subscriptionManager->request($event);
 
       drupal_set_message($this->t('qs_subscription.request.form.success @event', [
         '@event' => $event->getTitle(),
       ]));
     }
-
-    if ($trigger['#name'] === 'direct_subscription') {
+    // Processing the submission as a direct request. Organizers or maintainers.
+    elseif (strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
       $subscription = $this->subscriptionManager->request($event);
       $this->subscriptionManager->confirm($subscription);
 
@@ -194,6 +195,9 @@ class RequestForm extends FormBase {
       ]));
     }
 
+    drupal_set_message($this->t('qs_subscription.request.form.success @event', [
+      '@event' => $event->getTitle(),
+    ]));
   }
 
   /**
@@ -210,22 +214,29 @@ class RequestForm extends FormBase {
   public function respondToAjax(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
 
+    // Avoid submit on error & show them.
+    if ($form_state->hasAnyErrors()) {
+      $form_state->setRebuild();
+      // Create the bag message render array.
+      $status_messages = ['#type' => 'status_messages'];
+      $messages = $this->renderer->renderRoot($status_messages);
+      if (!empty($messages)) {
+        // Append the bag message(s).
+        $response->addCommand(new PrependCommand('#wrapper-status-messages', $messages));
+      }
+      return $response;
+    }
+
     // Handle redirection.
     $trigger = $form_state->getTriggeringElement();
 
-    // Process the submit only when no errors, but keep runing for the messages.
-    if (!$form_state->hasAnyErrors()) {
-      $this->submitForm($form, $form_state);
+    $event_id = $form_state->getValue('event');
 
-      $event_id = $form_state->getValue('event');
-
-      if ($trigger['#name'] === 'request_subscription') {
-        $response->addCommand(new InvokeCommand('#card-event' . $event_id, 'attr', ['data-status', 'pending']));
-
-      }
-      elseif ($trigger['#name'] === 'direct_subscription') {
-        $response->addCommand(new InvokeCommand('#card-event' . $event_id, 'attr', ['data-status', 'confirmed']));
-      }
+    if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
+      $response->addCommand(new InvokeCommand('#card-event' . $event_id, 'attr', ['data-status', 'pending']));
+    }
+    elseif (strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
+      $response->addCommand(new InvokeCommand('#card-event' . $event_id, 'attr', ['data-status', 'confirmed']));
     }
 
     // Create the bag message render array.
@@ -234,10 +245,6 @@ class RequestForm extends FormBase {
     if (!empty($messages)) {
       // Append the bag message(s).
       $response->addCommand(new PrependCommand('#wrapper-status-messages', $messages));
-    }
-
-    // TODO InvokeCommand scrollTo the alerts.
-    if ($form_state->hasAnyErrors()) {
     }
 
     return $response;

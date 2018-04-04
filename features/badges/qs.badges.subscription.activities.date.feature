@@ -20,6 +20,7 @@ Feature: Badges - Activities by Date
     Then I should see 10 ".card-list-item" elements
     Then I should see 1 "#event37 .flag" elements
     Then I should see 1 "#event37 .flag.flag-warning.flag-subscription-wait" elements
+    # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
     And the "#card37" element should contain "qs.event.user.subscription.pending</strong>"
     And the "#card37" element should not contain "qs.event.user.subscription.confirmed</strong>"
     And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card37" element

@@ -18,16 +18,12 @@
 
   {# Show own user subscription state, alwayse #}
   <p>
-  {% if user_subscription_pending or user_subscription_confirmed %}
-    <strong>
-      {% if user_subscription_pending %}
-        {{ 'qs.event.user.subscription.pending'|t }}
-      {% endif %}
+  {% if user_subscription_pending %}
+    <strong>{{ 'qs.event.user.subscription.pending'|t }}</strong><br>
+  {% endif %}
 
-      {% if user_subscription_confirmed %}
-        {{ 'qs.event.user.subscription.confirmed'|t }}
-      {% endif %}
-    </strong><br>
+  {% if user_subscription_confirmed %}
+    <strong>{{ 'qs.event.user.subscription.confirmed'|t }}</strong><br>
   {% endif %}
 
   {% if badges.privileges %}

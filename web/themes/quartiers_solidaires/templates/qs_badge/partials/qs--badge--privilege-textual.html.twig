@@ -7,8 +7,6 @@
     {# Adapte the color of text according user privilege of activity #}
     {% set theme = [
       'd-block',
-      privilege == 'activity_maintainers' ? 'text-warning',
-      privilege == 'activity_organizers' ? 'text-danger',
     ] %}
 
     <p>

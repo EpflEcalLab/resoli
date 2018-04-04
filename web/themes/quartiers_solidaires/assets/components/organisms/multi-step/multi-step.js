@@ -1,8 +1,9 @@
 const multiStep = () => {
-  (function ($) {
+  (function ($, Drupal) {
     const $form = $('.form-multistep');
+    let processed = false;
 
-    if ($form.length > 0) {
+    function handleMultisteps() {
       $form.each(function() {
         const currentForm = $(this);
         const id = currentForm.attr('id');
@@ -18,7 +19,7 @@ const multiStep = () => {
         currentForm.find('.js-hide-in-multistep').hide();
 
         if (modalHeader.length > 0) {
-          stepNav.prependTo(modalHeader)
+          stepNav.prependTo(modalHeader);
         } else {
           stepNav.prependTo(currentForm);
         }
@@ -52,7 +53,7 @@ const multiStep = () => {
             e.preventDefault();
             // @TODO make it work: disable the nav if current tab pane has required and empty fields
             // if (checkRequired(currentTab)) {
-              nextTab.tab('show');
+            nextTab.tab('show');
             // };
           })
           .appendTo(currentForm.find(`.modal-footer`))
@@ -127,7 +128,18 @@ const multiStep = () => {
         $(`a[href="#${tabWithError}"]`).tab('show');
       }
     }
-  })(jQuery);
+
+    if ($form.length > 0 && !processed) {
+      processed = true;
+      handleMultisteps();
+    }
+
+    $(document).on('DOMNodeInserted', function() {
+      if (!processed) {
+        handleMultisteps();
+      }
+    });
+  })(jQuery, Drupal);
 };
 
 export default multiStep;

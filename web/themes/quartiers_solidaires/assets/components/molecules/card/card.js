@@ -79,7 +79,7 @@ const card = () => {
 
       // Collapse all the other collapses on the page
       const parent = $(e.currentTarget).data('parent');
-      if (parent.match("^#events-accordion")) {
+      if (parent && parent.match("^#events-accordion")) {
         $.each($('[id*=events-accordion]'), function() {
           const $collapse = $(this).find('.collapse');
 

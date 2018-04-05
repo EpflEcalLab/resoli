@@ -121,7 +121,7 @@
           {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests}) }}
         </a>
       {% elseif guests_status == 'confirmed_guests' %}
-        <a data-status-guest-show="confirmed_guests" href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn {{ theme|join(' ') }} btn-icon btn-white shadow-to-left btn-block">
+        <a data-status-guest-show="confirmed_guests" href="{{ path('qs_subscription.subscribers', {event: event.nid.value}) }}" class="btn {{ theme|join(' ') }} btn-icon btn-white shadow-to-left btn-block">
           {{ macros.icon('checklist') }}
           {{ 'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests}) }}
         </a>

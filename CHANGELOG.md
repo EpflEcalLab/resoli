@@ -20,6 +20,7 @@
  - fix #590 - wrong badges on activities by Theme when activity has event in past with pending subscriptions
  - fix #207 - photos by months - sticky months are not translated
  - fix #584 - fix big_pipe google map autocomplete fields
+ - add Masquerade module
  
 ## 1.0.3 (2018-03-28)
  - apply patch - Remote Code Execution - SA-CORE-2018-002

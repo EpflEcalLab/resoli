@@ -2122,3 +2122,6 @@ msgstr ""
 
 msgid "qs.mail.subscription.waiting_approval.request_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
 msgstr ""
+
+msgid "qs.masquerade.unmasquerade"
+msgstr "Revenir en admin"

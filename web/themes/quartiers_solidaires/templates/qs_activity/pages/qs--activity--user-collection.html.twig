@@ -69,7 +69,7 @@
         {% set member = 'qs.roles.activity_member'|t %}
         {% set maintainer = 'qs.roles.activity_maintainer'|t %}
         {% trans %}
-          qs.activity.user.collection.empty <span class="text-info">{{ member }}</span> <span class="text-warning">{{ maintainer }}</span>
+          qs.activity.user.collection.empty {{ member }} {{ maintainer }}
         {% endtrans %}
       </p>
     </div>
@@ -91,7 +91,7 @@
       <p>
         {% set organizer = 'qs.roles.activity_organizer'|t %}
         {% trans %}
-        qs.activity.become.activity.organizer <span class="text-danger">{{ organizer }}</span>
+        qs.activity.become.activity.organizer {{ organizer }}
         {% endtrans %}
       </p>
     </div>

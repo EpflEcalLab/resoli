@@ -63,12 +63,32 @@ const card = () => {
       }
     });
 
-    // Update the hash in URL on collapse
     $('.card .collapse').on('show.bs.collapse', function(e) {
+
+      // Update the hash in URL on collapse
       const id = $(e.currentTarget).attr('id');
       if (id) {
         const card_id = id.replace('collapse-', '');
-        window.location.hash = `card${card_id}`;
+
+        if (history.pushState) {
+          history.replaceState(null, null, `#card${card_id}`);
+        } else {
+          window.location.hash = `card${card_id}`;
+        }
+      }
+
+      // Collapse all the other collapses on the page
+      const parent = $(e.currentTarget).data('parent');
+      if (parent && parent.match("^#events-accordion")) {
+        $.each($('[id*=events-accordion]'), function() {
+          const $collapse = $(this).find('.collapse');
+
+          if ('#' + $collapse.attr('id') === parent) {
+            return;
+          }
+
+          $collapse.collapse('hide');
+        });
       }
     });
 

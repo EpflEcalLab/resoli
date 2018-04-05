@@ -233,10 +233,10 @@ class RequestForm extends FormBase {
     $event_id = $form_state->getValue('event');
 
     if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
-      $response->addCommand(new InvokeCommand('#card-event' . $event_id, 'attr', ['data-status', 'pending']));
+      $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'pending']));
     }
     elseif (strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
-      $response->addCommand(new InvokeCommand('#card-event' . $event_id, 'attr', ['data-status', 'confirmed']));
+      $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'confirmed']));
     }
 
     // Create the bag message render array.

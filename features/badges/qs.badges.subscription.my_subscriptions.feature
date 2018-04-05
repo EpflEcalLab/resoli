@@ -55,3 +55,24 @@ Feature: Badges - Subscription - My Subscriptions
   And the response status code should be 200
   Then I should see 0 ".card-list-item" elements
 
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I see my Organizer badge on the Activity N°57 (Monopoly) & my 2 Member badges on the Activity N°56 (Escalade) & Activity N°61 (Ginguettes)
+  Given I am logged in as user "member2+fribourg"
+  When I am on "/events/2/user/23"
+  And the response status code should be 200
+  Then I should see 3 ".card-list-item" elements
+  Then I should see 3 ".card-list-item .flag" elements
+  Then I should see 1 "#card59 .flag.flag-info.flag-subscription-confirmed.flag-default" elements
+  And I should see "qs.event.user.subscription.confirmed" in the "#card59" element
+  Then I should see 1 "#card61 .flag.flag-warning.flag-subscription-confirmed.flag-shield" elements
+  And I should see "qs.event.user.subscription.confirmed" in the "#card61" element
+  Then I should see 1 "#card63 .flag.flag-info.flag-subscription-confirmed.flag-default" elements
+  And I should see "qs.event.user.subscription.confirmed" in the "#card63" element
+
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I should see 0 badges 'cause I have 0 subscriptions in Fribourg community
+  Given I am logged in as user "member+fribourg+organizer+fribourg"
+  When I am on "/events/2/user/16"
+  And the response status code should be 200
+  Then I should see 0 ".card-list-item" elements
+

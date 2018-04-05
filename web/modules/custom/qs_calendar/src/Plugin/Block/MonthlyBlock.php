@@ -59,11 +59,8 @@ class MonthlyBlock extends PeriodBlockBase {
     // Count for every days between two dates how many events occure by day.
     $variables['events'] = $this->badgeManager->countEventsByDates($community, $date_start, $date_end);
 
-    // From 2 dates, get Events with confirmed subscription ordered by day.
-    $variables['badges']['events_subscriptions']['confirmed'] = $this->badgeManager->getSubscriptionByDates($community, $date_start, $date_end, TRUE);
-
-    // From 2 dates, get highest privilege by day.
-    $variables['badges']['privileges'] = $this->badgeManager->getPrivilegesByDates($community, $date_start, $date_end);
+    // Get Badges for Dotes.
+    $variables['badges'] = $this->getDotesBadges($community, $date_start, $date_end);
 
     return [
       '#theme'     => 'qs_calendar_monthly_block',

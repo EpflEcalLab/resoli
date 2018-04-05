@@ -348,6 +348,46 @@ function qs_default_content_privileges_community() {
   ]);
   $privilege->save();
 
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+    // Activity 56: Escalade - Fribourg.
+    'entity'    => 56,
+  // User 16: member+fribourg+organizer+fribourg.
+    'user'      => 16,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_organizers',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+    // Activity 57: Monopoly - Fribourg.
+    'entity'    => 57,
+  // User 16: member+fribourg+organizer+fribourg.
+    'user'      => 16,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_organizers',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+    // Activity 62: Ginguettes - Fribourg.
+    'entity'    => 62,
+  // User 16: member+fribourg+organizer+fribourg.
+    'user'      => 16,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_organizers',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+
   // User 17: declined+organizer+lausanne.
   $privilege = $privilegeStorage->create([
     'bundle'    => 'taxonomy_term',
@@ -693,6 +733,49 @@ function qs_default_content_privileges_activities() {
     // approved.
     'status'    => 1,
     'privilege' => 'activity_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+
+  // User 23: member2+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'taxonomy_term',
+  // Community 2: fribourg.
+    'entity'    => 2,
+  // User 23: member2+fribourg.
+    'user'      => 23,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'community_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+
+  // User 23: member2+fribourg.
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 56: Escalade - Fribourg.
+    'entity'    => 56,
+  // User 23: member2+fribourg.
+    'user'      => 23,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_members',
+    'reviewer'  => 1,
+    'reviewed'  => time(),
+  ]);
+  $privilege->save();
+  $privilege = $privilegeStorage->create([
+    'bundle'    => 'node',
+  // Activity 57: Monopoly - Fribourg.
+    'entity'    => 57,
+  // User 23: member2+fribourg.
+    'user'      => 23,
+  // approved.
+    'status'    => 1,
+    'privilege' => 'activity_maintainers',
     'reviewer'  => 1,
     'reviewed'  => time(),
   ]);

@@ -91,3 +91,58 @@ Feature: Badges - Subscription - Activity
     Then I should see a "#card35[data-status='default'][data-status-badge='default']" element
     Then I should see a "#collapse-36" element
     Then I should see a "#card36[data-status='default'][data-status-badge='default']" element
+
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I can't see "register" button in the Events of the Activity N°57 (Monopoly - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/monopoly"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-61" element
+    Then I should see a "#card61[data-status='confirmed'][data-status-badge='confirmed']" element
+
+ @api
+  Scenario: Logged as Member N°2 of Fribourg, I can't see "register" button in the Events of the Activity N°61 (Ginguettes - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/ginguettes"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-63" element
+    Then I should see a "#card63[data-status='confirmed'][data-status-badge='confirmed']" element
+
+ @api
+  Scenario: Logged as Member N°2 of Fribourg, I can't see "register" button in the Events of the Activity N°56 (Escalade - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/escalade"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-59" element
+    Then I should see a "#card59[data-status='confirmed'][data-status-badge='confirmed']" element
+
+
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°57 (Monopoly - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/monopoly"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-61" element
+    Then I should see a "#card61[data-status='default'][data-status-badge='confirmed_guests']" element
+
+ @api
+  Scenario: Logged as Member & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°61 (Ginguettes - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/ginguettes"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-63" element
+    Then I should see a "#card63[data-status='default'][data-status-badge='confirmed_guests']" element
+
+ @api
+  Scenario: Logged as Member & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°56 (Escalade - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/escalade"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-59" element
+    Then I should see a "#card59[data-status='default'][data-status-badge='confirmed_guests']" element

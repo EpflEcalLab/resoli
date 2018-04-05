@@ -48,3 +48,19 @@ Feature: Badges - Privilege - My Photos
   And the response status code should be 200
   Then I should see 0 ".card-list-item" elements
   Then I should see 0 ".card-list-item .flag" elements
+
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I see no badges cause I have 0 photos.
+  Given I am logged in as user "member2+fribourg"
+  When I am on "/photos/2/user/23"
+  And the response status code should be 200
+  Then I should see 0 ".card-list-item" elements
+  Then I should see 0 ".card-list-item .flag" elements
+
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I see no badges cause I have 0 photos.
+  Given I am logged in as user "member+fribourg+organizer+fribourg"
+  When I am on "/photos/2/user/16"
+  And the response status code should be 200
+  Then I should see 0 ".card-list-item" elements
+  Then I should see 0 ".card-list-item .flag" elements

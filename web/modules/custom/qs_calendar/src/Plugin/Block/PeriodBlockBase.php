@@ -8,6 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_calendar\Service\CalendarBuilder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\qs_badge\Service\BadgeManager;
+use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Period Block Base.
@@ -60,6 +62,39 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
         $container->get('request_stack'),
         $container->get('qs_badge.badge_manager')
     );
+  }
+
+  /**
+   * Get Badges of Highest Privilegies where user has confirmed subscription(s).
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
+   *   The start date.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
+   *   The end date.
+   *
+   * @return array[]
+   *   collection of dates containing privilegies, where user has subscriptions.
+   */
+  protected function getDotesBadges(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end) {
+    $badges = [];
+
+    // From 2 dates, get Events with confirmed subscription ordered by day.
+    $badges['events_subscriptions']['confirmed'] = $this->badgeManager->getSubscriptionByDates($community, $date_start, $date_end, TRUE);
+
+    // Get all confirmed events in a single array
+    $events_confirmed = [];
+    foreach ($badges['events_subscriptions']['confirmed'] as $date => $events) {
+      $events_confirmed = array_merge($events_confirmed, $events);
+    }
+
+    // From confirmed events, get privileges.
+    if ($events_confirmed) {
+      $badges['privileges'] = $this->badgeManager->getPrivilegesByEventsByDates($events_confirmed);
+    }
+
+    return $badges;
   }
 
 }

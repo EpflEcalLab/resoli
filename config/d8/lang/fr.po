@@ -2125,3 +2125,9 @@ msgstr ""
 
 msgid "qs.masquerade.unmasquerade"
 msgstr "Revenir en admin"
+
+msgid "qs_subscription.subscribers.reject"
+msgstr ""
+
+msgid "qs_subscription.subscribers.reject_confirm"
+msgstr ""

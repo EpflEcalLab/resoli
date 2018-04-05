@@ -97,7 +97,8 @@
       or user.hasPermission('administer nodes')
     %}
 
-    {% set privilege = variables.privileges|last %}
+    {# Get user Highest privilege #}
+    {% set privilege = variables.badges.privileges[variables.activity.nid.value]|last %}
 
     {% set theme = [
       privilege != 'activity_maintainers' and privilege != 'activity_organizers' ? 'btn-outline-default',

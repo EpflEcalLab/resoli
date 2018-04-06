@@ -51,8 +51,9 @@ class WeeklyBlock extends PeriodBlockBase {
 
     $variables['current_day'] = $day;
 
-    $date_start         = $this->calendarBuilder->getMondayWeek($day);
-    $date_end           = $this->calendarBuilder->getSundayWeek($day);
+    $date_start = $this->calendarBuilder->getMondayWeek($day);
+    $date_end   = $this->calendarBuilder->getSundayWeek($day);
+    $date_end->setTime(23, 59, 59);
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
     // Count for every days between two dates how many events occure by day.

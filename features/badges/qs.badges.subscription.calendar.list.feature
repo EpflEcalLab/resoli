@@ -211,3 +211,87 @@ Feature: Badges - Subscription - Calendar - List
   And the "#card59" element should not contain "qs.event.user.subscription.pending</strong>"
   And I should not see "qs.event.user.subscription.pendings_guests" in the "#card59" element
   And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card59" element
+
+  @api
+  Scenario: Logged as Member of Lausanne & Manager of Fribourg, when reaching the Calendar Weekly, I should see 0 badges 'cause I have 0 subscriptions in Lausanne community.
+  Given I am logged in as user "member+lausanne+manager+fribourg"
+  When I am on "/lausanne/calendar/weekly"
+  And the response status code should be 200
+  Then I should see 4 ".card-list-item" elements
+  Then I should see 0 ".card-list-item .flag" elements
+
+  @api
+  Scenario: Logged as Member of Member of Fribourg, when reaching the Calendar Monthly, I should see 0 badges 'cause I have 0 subscriptions in Fribourg community.
+  Given I am logged in as user "member+fribourg"
+  When I am on "/fribourg/calendar/monthly"
+  And the response status code should be 200
+  Then I should see 4 ".card-list-item" elements
+  Then I should see 0 ".card-list-item .flag" elements
+  Then I should see 1 "#event61" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card61" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card61" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card61" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card61" element
+  Then I should see 1 "#event63" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card63" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card63" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card63" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card63" element
+  Then I should see 1 "#event29" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card29" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card29" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card29" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card29" element
+  Then I should see 1 "#event59" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card59" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card59" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card59" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card59" element
+  Then I should see 1 "#event61" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card61" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card61" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card61" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card61" element
+
+  @api
+  Scenario: Logged as Member of Member of Fribourg, when reaching the Calendar Weekly, I should see 0 badges 'cause I have 0 subscriptions in Fribourg community.
+  Given I am logged in as user "member+fribourg"
+  When I am on "/fribourg/calendar/weekly"
+  And the response status code should be 200
+  Then I should see 4 ".card-list-item" elements
+  Then I should see 0 ".card-list-item .flag" elements
+  Then I should see 1 "#event61" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card61" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card61" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card61" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card61" element
+  Then I should see 1 "#event63" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card63" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card63" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card63" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card63" element
+  Then I should see 1 "#event29" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card29" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card29" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card29" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card29" element
+  Then I should see 1 "#event59" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card59" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card59" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card59" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card59" element
+  Then I should see 1 "#event61" elements
+  # the </strong> is to avoid matching "qs.event.user.subscription.pendings_guests"
+  And the "#card61" element should not contain "qs.event.user.subscription.pending</strong>"
+  And the "#card61" element should not contain "qs.event.user.subscription.confirmed</strong>"
+  And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card61" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card61" element

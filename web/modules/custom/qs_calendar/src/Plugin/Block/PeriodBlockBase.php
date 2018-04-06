@@ -85,7 +85,7 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
 
     // Get all confirmed events in a single array.
     $events_confirmed = [];
-    foreach ($badges['events_subscriptions']['confirmed'] as $date => $events) {
+    foreach ($badges['events_subscriptions']['confirmed'] as $events) {
       $events_confirmed = array_merge($events_confirmed, $events);
     }
 

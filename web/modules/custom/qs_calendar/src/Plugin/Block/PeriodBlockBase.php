@@ -83,7 +83,7 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
     // From 2 dates, get Events with confirmed subscription ordered by day.
     $badges['events_subscriptions']['confirmed'] = $this->badgeManager->getSubscriptionByDates($community, $date_start, $date_end, TRUE);
 
-    // Get all confirmed events in a single array
+    // Get all confirmed events in a single array.
     $events_confirmed = [];
     foreach ($badges['events_subscriptions']['confirmed'] as $date => $events) {
       $events_confirmed = array_merge($events_confirmed, $events);

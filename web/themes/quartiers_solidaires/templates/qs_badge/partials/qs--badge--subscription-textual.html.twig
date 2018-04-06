@@ -39,7 +39,8 @@
   {% endif %}
 
   {# Confirmed Guests subscriptions Badge #}
-  {% if guest_subscription_confirmed and not guest_subscription_pending %}
+  {# Only visible for confirmed subscriber(s) or activity_maintainers+ #}
+  {% if guest_subscription_confirmed and not guest_subscription_pending and (user_subscription_confirmed or privilege == 'activity_organizers' or privilege == 'activity_maintainers')  %}
     {% set attendees = badges.subscriptions.confirmed_guests[event.nid.value] %}
     <strong>{{ 'qs.event.user.subscription.confirmed_guests @count'|t({'@count': attendees}) }}</strong>
   {% endif %}

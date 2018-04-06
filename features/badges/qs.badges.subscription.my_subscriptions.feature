@@ -47,6 +47,7 @@ Feature: Badges - Subscription - My Subscriptions
   Then I should see 1 ".card-list-item .flag" elements
   Then I should see 1 "#card29 .flag.flag-info.flag-subscription-confirmed.flag-default" elements
   And I should see "qs.event.user.subscription.confirmed" in the "#card29" element
+  And I should not see "qs.event.user.subscription.pendings_guests" in the "#card29" element
 
   @api
   Scenario: Logged as Member of Fribourg, I should see 0 badges 'cause I have 0 subscriptions in Lausanne community

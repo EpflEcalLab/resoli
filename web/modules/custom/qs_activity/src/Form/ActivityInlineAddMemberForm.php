@@ -48,13 +48,28 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     $community = $options['activity']->field_community->entity;
 
     $form['#attributes'] = [
-      'title'       => $options['activity']->title->value,
+      'title' => $options['activity']->title->value,
     ];
 
-    $query = $this->privilegeManager->queryMembersWithPrivileges($community);
+    // Get every users with at least 1 privilege on the activity.
+    $query = $this->privilegeManager->queryMembersWithPrivileges($options['activity'], NULL);
+    $activity_members = [];
+    if ($query) {
+      $rows = $query->execute()->fetchAll();
+      foreach ($rows as $row) {
+        $activity_members[$row->user] = $row->user;
+      }
+    }
+
+    // Get every users with at least 1 privilege on the community
+    // & also remove users already added in the activity.
+    $query = $this->privilegeManager->queryMembersWithPrivileges($community, NULL);
     $rows = $query->execute()->fetchAll();
     foreach ($rows as $row) {
-      $uids[] = $row->user;
+      // Remove users showed on the page and passed in options to avoid.
+      if (!isset($activity_members[$row->user])) {
+        $uids[] = $row->user;
+      }
     }
     // Load user entities without privileges.
     $community_members = $this->userStorage->loadMultiple($uids);
@@ -62,12 +77,6 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     $this->fallback = [];
     if (!empty($community_members)) {
       foreach ($community_members as $community_member) {
-
-        // Remove users showed on the page and passed in options to avoid
-        // confusion.
-        if (isset($options['members'][$community_member->id()])) {
-          continue;
-        }
 
         $select_options[] = [
           'uid'         => $community_member->id(),

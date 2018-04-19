@@ -22,6 +22,7 @@
  - fix #207 - photos by months - sticky months are not translated
  - fix #584 - fix big_pipe google map autocomplete fields
  - add Masquerade module
+ - fix pager #610 & #31 - following pagers wasn't working: Members of Activity, Members of Community & Form ActivityInlineAddMember
  
 ## 1.0.3 (2018-03-28)
  - apply patch - Remote Code Execution - SA-CORE-2018-002

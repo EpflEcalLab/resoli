@@ -126,6 +126,15 @@ class RequestForm extends FormBase {
       $name = 'direct_subscription_' . $event->id();
     }
 
+    // Determine the color of the button based on privileges.
+    $btn_theme = 'btn-outline-secondary';
+    if (in_array('activity_maintainers', $privileges)) {
+      $btn_theme = 'btn-outline-warning';
+    }
+    elseif (in_array('activity_organizers', $privileges)) {
+      $btn_theme = 'btn-outline-danger';
+    }
+
     $form['submit'] = [
       '#id'   => $name . '_submit',
       '#name' => $name,
@@ -137,7 +146,7 @@ class RequestForm extends FormBase {
         'theme' => 'secondary',
         'class' => [
           'shadow-to-right',
-          'btn-outline-secondary',
+          $btn_theme,
           'btn-block',
           'btn-white',
         ],

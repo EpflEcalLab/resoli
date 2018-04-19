@@ -113,17 +113,30 @@
       </a>
     </div>
 
-    {% if guests_status == 'pendings_guests' or guests_status == 'confirmed_guests' %}
+    {% if
+    'activity_organizers' in variables.privileges
+    or 'activity_maintainers' in variables.privileges
+    or user.hasPermission('administer nodes') %}
+      {% if guest_subscription_pending or user_subscription_pending %}
+        {% set guests_status_btn = 'pendings_guests' %}
+        {% set guests_btn = variables.badges.subscriptions.pendings_guests[event.nid.value] ?? 1 %}
+      {% elseif guest_subscription_confirmed or user_subscription_confirmed %}
+        {% set guests_status_btn = 'confirmed_guests' %}
+        {% set guests_btn = variables.badges.subscriptions.confirmed_guests[event.nid.value] ?? 1 %}
+      {% endif %}
+    {% endif %}
+
+    {% if guests_status_btn == 'pendings_guests' or guests_status_btn == 'confirmed_guests' %}
     <div class="col-sm-6 mb-3 mx-auto">
-      {% if guests_status == 'pendings_guests' %}
+      {% if guests_status_btn == 'pendings_guests' %}
         <a data-status-guest-show="pendings_guests" href="{{ path('qs_subscription.waiting_approval', {event: event.nid.value}) }}" class="btn {{ theme|join(' ') }} btn-icon btn-white shadow-to-left btn-block">
           {{ macros.icon('wait') }}
-          {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests}) }}
+          {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests_btn}) }}
         </a>
-      {% elseif guests_status == 'confirmed_guests' %}
+      {% elseif guests_status_btn == 'confirmed_guests' %}
         <a data-status-guest-show="confirmed_guests" href="{{ path('qs_subscription.subscribers', {event: event.nid.value}) }}" class="btn {{ theme|join(' ') }} btn-icon btn-white shadow-to-left btn-block">
           {{ macros.icon('checklist') }}
-          {{ 'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests}) }}
+          {{ 'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests_btn}) }}
         </a>
       {% endif %}
     </div>

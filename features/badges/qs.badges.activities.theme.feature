@@ -51,7 +51,7 @@ Feature: Badges - Privilege - Activities by Theme
   Then I should see 1 "#card-activity57 .flag.flag-warning.flag-privilege-maintainers.flag-shield" elements
 
   @api
-  Scenario: Logged as Member & Organizer of Fribourg, I should see my 3 badges of privileges. I see all my 3 Organizer badges on the Activity N°57 (Monopoly), Activity N°56 (Escalade) &  Activity N°62 (Ginguettes)
+  Scenario: Logged as Member & Organizer of Fribourg, I should see my 3 badges of privileges. I see all my 3 Organizer badges on the Activity N°57 (Monopoly), Activity N°56 (Escalade) & Activity N°62 (Ginguettes)
   Given I am logged in as user "member+fribourg+organizer+fribourg"
   When I am on "/fribourg/activities/theme"
   And the response status code should be 200

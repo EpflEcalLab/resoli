@@ -57,7 +57,7 @@ Feature: Badges - Subscription - My Subscriptions
   Then I should see 0 ".card-list-item" elements
 
   @api
-  Scenario: Logged as Member N°2 of Fribourg, I see my Organizer badge on the Activity N°57 (Monopoly) & my 2 Member badges on the Activity N°56 (Escalade) & Activity N°61 (Ginguettes)
+  Scenario: Logged as Member N°2 of Fribourg, I see my Organizer badge on the Activity N°57 (Monopoly) & my 2 Member badges on the Activity N°56 (Escalade) & Activity N°62 (Ginguettes)
   Given I am logged in as user "member2+fribourg"
   When I am on "/events/2/user/23"
   And the response status code should be 200

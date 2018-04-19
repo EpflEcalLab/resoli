@@ -109,7 +109,7 @@ Feature: Badges - Subscription - Calendar - List
 
 
   @api
-  Scenario: Logged as Member N°2 of Fribourg, when reaching the Calendar Weekly, I should see my 13badge of subscriptions. I see my Organizer badge on the Activity N°57 (Monopoly) & my 2 Member badges on the Activity N°56 (Escalade) & Activity N°61 (Ginguettes)
+  Scenario: Logged as Member N°2 of Fribourg, when reaching the Calendar Weekly, I should see my 13badge of subscriptions. I see my Organizer badge on the Activity N°57 (Monopoly) & my 2 Member badges on the Activity N°56 (Escalade) & Activity N°62 (Ginguettes)
   Given I am logged in as user "member2+fribourg"
   When I am on "/fribourg/calendar/weekly"
   And the response status code should be 200
@@ -135,7 +135,7 @@ Feature: Badges - Subscription - Calendar - List
   And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card59" element
 
   @api
-  Scenario: Logged as Member N°2 of Fribourg, when reaching the Calendar Weekly, I should see my 13badge of subscriptions. I see my Organizer badge on the Activity N°57 (Monopoly) & my 2 Member badges on the Activity N°56 (Escalade) & Activity N°61 (Ginguettes)
+  Scenario: Logged as Member N°2 of Fribourg, when reaching the Calendar Weekly, I should see my 13badge of subscriptions. I see my Organizer badge on the Activity N°57 (Monopoly) & my 2 Member badges on the Activity N°56 (Escalade) & Activity N°62 (Ginguettes)
   Given I am logged in as user "member2+fribourg"
   When I am on "/fribourg/calendar/weekly"
   And the response status code should be 200
@@ -161,7 +161,7 @@ Feature: Badges - Subscription - Calendar - List
   And I should not see "qs.event.user.subscription.confirmed_guests" in the "#card59" element
 
   @api
-  Scenario: Logged as Member & Organizer of Fribourg, when reaching the Calendar Weekly, I should see my 3 badge of subscriptions. I see my 3 Organizer badges on the Activity N°57 (Monopoly), the Activity N°56 (Escalade) & Activity N°61 (Ginguettes)
+  Scenario: Logged as Member & Organizer of Fribourg, when reaching the Calendar Weekly, I should see my 3 badge of subscriptions. I see my 3 Organizer badges on the Activity N°57 (Monopoly), the Activity N°56 (Escalade) & Activity N°62 (Ginguettes)
   Given I am logged in as user "member+fribourg+organizer+fribourg"
   When I am on "/fribourg/calendar/weekly"
   And the response status code should be 200
@@ -187,7 +187,7 @@ Feature: Badges - Subscription - Calendar - List
   And I should see "qs.event.user.subscription.confirmed_guests 1" in the "#card59" element
 
   @api
-  Scenario: Logged as Member & Organizer of Fribourg, when reaching the Calendar Weekly, I should see my 3 badge of subscriptions. I see my 3 Organizer badges on the Activity N°57 (Monopoly), the Activity N°56 (Escalade) & Activity N°61 (Ginguettes)
+  Scenario: Logged as Member & Organizer of Fribourg, when reaching the Calendar Weekly, I should see my 3 badge of subscriptions. I see my 3 Organizer badges on the Activity N°57 (Monopoly), the Activity N°56 (Escalade) & Activity N°62 (Ginguettes)
   Given I am logged in as user "member+fribourg+organizer+fribourg"
   When I am on "/fribourg/calendar/weekly"
   And the response status code should be 200

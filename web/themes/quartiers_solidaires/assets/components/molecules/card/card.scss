@@ -377,7 +377,11 @@ a[href].card-pill-simple {
         }
 
         .card-pill-title {
-          color: $value;
+          color: $body-color;
+
+          .lead {
+            color: $value;
+          }
         }
 
         .card-pill-icon {

@@ -26,7 +26,6 @@
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
   text-align: center;
-  -webkit-font-smoothing: none;
 
   @include border-radius($alert-border-radius);
   @include drop-shadow('bottom', color('dark'));

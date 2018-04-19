@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - change confirmed icon for event registering #598
  - increase size of activity in activity user collection and in photos collection #545
  - fix card pill flag position on medium and small screens #588
  - make all cards close when opening one in calendar view #596

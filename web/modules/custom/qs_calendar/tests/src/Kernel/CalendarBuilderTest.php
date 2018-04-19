@@ -11,6 +11,8 @@ use Drupal\Core\Datetime\DrupalDateTime;
  *
  * Be careful, 2016 is a bissextile year - see tests it :D
  *
+ * @group qs
+ * @group qs_kernel
  * @group qs_calendar
  * @group qs_calendar_kernel
  */

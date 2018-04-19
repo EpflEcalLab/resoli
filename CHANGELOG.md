@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - increase size of activity in activity user collection and in photos collection #545
+ - fix card pill flag position on medium and small screens #588
+ - make all cards close when opening one in calendar view #596
  - add Privilege's Badge on Activity by theme #318,  #315 & #316
  - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
  - add Subscription's Badge, using highest Privilege color, on My Activities #304

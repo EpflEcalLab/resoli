@@ -167,6 +167,10 @@ a[href].card-pill-simple {
     }
   }
 
+  .lead {
+    line-height: 1.1;
+  }
+
   // Make sure when we're centering the text, the icon is not pushing things in
   // one direction
   &.mx-auto {
@@ -373,7 +377,7 @@ a[href].card-pill-simple {
         }
 
         .card-pill-title {
-          color: $body-color;
+          color: $value;
         }
 
         .card-pill-icon {

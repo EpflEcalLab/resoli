@@ -117,10 +117,10 @@
     'activity_organizers' in variables.privileges
     or 'activity_maintainers' in variables.privileges
     or user.hasPermission('administer nodes') %}
-      {% if guest_subscription_pending or user_subscription_pending %}
+      {% if guest_subscription_pending %}
         {% set guests_status_btn = 'pendings_guests' %}
         {% set guests_btn = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
-      {% elseif guest_subscription_confirmed or user_subscription_confirmed %}
+      {% elseif guest_subscription_confirmed %}
         {% set guests_status_btn = 'confirmed_guests' %}
         {% set guests_btn = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
       {% endif %}

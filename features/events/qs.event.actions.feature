@@ -15,7 +15,6 @@ Feature: Event Actions Buttons
     And I should see "qs.event.register" in the "#collapse-17 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-17 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-17 .card-actions" element
-    And the "#collapse-17 .card-actions .btn.btn-outline-danger.btn-white" element should contain "qs.event.dashboard"
     And I should see 0 "#collapse-17 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-17 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='pendings_guests']" elements
 
@@ -26,16 +25,16 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    Then I should see 5 "#collapse-37 .card-actions .col-sm-6" elements
+    Then I should see 6 "#collapse-37 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.register.pending" in the "#collapse-37 .card-actions" element
     And the "#collapse-37 .card-actions .btn.btn-outline-info.btn-white[data-status-show='pending']" element should contain "qs.event.register.pending"
     And I should see "qs.event.dashboard" in the "#collapse-37 .card-actions" element
-    And the "#collapse-37 .card-actions .btn.btn-outline-warning.btn-white" element should contain "qs.event.dashboard"
-    And I should see 0 "#collapse-37 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" elements
+    And I should see 1 "#collapse-37 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-37 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='pendings_guests']" elements
+    And the "#collapse-37 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" element should contain "qs.event.dashboard.shortcut.confirmed 1"
     Then I should see a "#collapse-35" element
     Then I should see 4 "#collapse-35 .card-actions .col-sm-6" elements
     And I should not see "qs.event.contact" in the "#collapse-35 .card-actions" element
@@ -44,14 +43,12 @@ Feature: Event Actions Buttons
     And I should see "qs.event.register" in the "#collapse-35 .card-actions" element
     And the "#collapse-35 .card-actions .btn.btn-outline-secondary.btn-white[data-status-show='default']" element should contain "qs.event.register"
     And I should see "qs.event.dashboard" in the "#collapse-35 .card-actions" element
-    And the "#collapse-35 .card-actions .btn.btn-outline-warning.btn-white" element should contain "qs.event.dashboard"
     And I should see 0 "#collapse-35 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-35 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='pendings_guests']" elements
     Then I should see a "#collapse-36" element
     Then I should see 5 "#collapse-36 .card-actions .col-sm-6" elements
     And I should see "qs.event.register.confirmed" in the "#collapse-36 .card-actions" element
     And the "#collapse-36 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
-    And the "#collapse-36 .card-actions .btn.btn-outline-warning.btn-white" element should contain "qs.event.dashboard"
     And I should see "qs.event.dashboard" in the "#collapse-36 .card-actions" element
     And I should see 0 "#collapse-36 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-36 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='pendings_guests']" elements
@@ -62,7 +59,6 @@ Feature: Event Actions Buttons
     And I should see "qs.event.location" in the "#collapse-54 .card-actions" element
     And I should see "qs.event.register.confirmed" in the "#collapse-54 .card-actions" element
     And the "#collapse-54 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
-    And the "#collapse-54 .card-actions .btn.btn-outline-warning.btn-white" element should contain "qs.event.dashboard"
     And I should see "qs.event.dashboard" in the "#collapse-54 .card-actions" element
     And the "#collapse-54 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='pendings_guests']" element should contain "qs.event.dashboard.shortcut.waiting_approval 1"
     And I should see 0 "#collapse-54 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -98,7 +94,6 @@ Feature: Event Actions Buttons
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.register.confirmed" in the "#collapse-37 .card-actions" element
     And the "#collapse-37 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
-    And the "#collapse-37 .card-actions .btn.btn-outline-danger.btn-white" element should contain "qs.event.dashboard"
     And I should see "qs.event.dashboard" in the "#collapse-37 .card-actions" element
     And the "#collapse-37 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" element should contain "qs.event.dashboard.shortcut.waiting_approval 1"
     And I should see 0 "#collapse-37 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -107,7 +102,6 @@ Feature: Event Actions Buttons
     And I should see "qs.event.register" in the "#collapse-35 .card-actions" element
     And the "#collapse-35 .card-actions .btn.btn-outline-secondary.btn-white[data-status-show='default']" element should contain "qs.event.register"
     And I should see "qs.event.dashboard" in the "#collapse-35 .card-actions" element
-    And the "#collapse-35 .card-actions .btn.btn-outline-danger.btn-white" element should contain "qs.event.dashboard"
     And I should see 0 "#collapse-35 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-35 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements
     Then I should see a "#collapse-36" element
@@ -120,7 +114,6 @@ Feature: Event Actions Buttons
     And I should see "qs.event.dashboard" in the "#collapse-36 .card-actions" element
     And I should see "qs.event.dashboard.shortcut.confirmed 1" in the "#collapse-36 .card-actions" element
     And the "#collapse-36 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
-    And the "#collapse-36 .card-actions .btn.btn-outline-danger.btn-white" element should contain "qs.event.dashboard"
     And the "#collapse-36 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" element should contain "qs.event.dashboard.shortcut.confirmed 1"
     And I should see 0 "#collapse-36 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements
     Then I should see a "#collapse-54" element
@@ -132,7 +125,6 @@ Feature: Event Actions Buttons
     And I should see "qs.event.dashboard" in the "#collapse-54 .card-actions" element
     And I should see "qs.event.dashboard.shortcut.waiting_approval 1" in the "#collapse-54 .card-actions" element
     And the "#collapse-54 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
-    And the "#collapse-54 .card-actions .btn.btn-outline-danger.btn-white" element should contain "qs.event.dashboard"
     And the "#collapse-54 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" element should contain "qs.event.dashboard.shortcut.waiting_approval 1"
     And I should see 0 "#collapse-54 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
 

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## NEXT RELEASE
+ - add the sponsors on homepage
+
 ## 1.0.3 (2018-03-28)
  - apply patch - Remote Code Execution - SA-CORE-2018-002
 

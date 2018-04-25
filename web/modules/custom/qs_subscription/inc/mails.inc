@@ -90,7 +90,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@activity'   => $activity->getTitle(),
-        '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+        '@url'        => Url::fromRoute('qs_subscription.waiting_approval', ['event' => $event->id()], ['absolute' => TRUE])->toString(),
       ]));
       break;
 

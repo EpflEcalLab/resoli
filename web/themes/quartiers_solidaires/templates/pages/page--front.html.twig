@@ -17,10 +17,18 @@
     {% endif %}
     <div class="container my-auto">
       <div class="row">
-        <div class="col-6 mx-auto">
+        <div class="col-6 mx-auto mb-5">
           <a href="{{ bamboo_has_role('authenticated') ? path('qs_auth.communities') : path('qs_auth.login') }}">
             <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="Réseaux Solidaires">
           </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center small">
+          <p class="text-white">
+            {{ 'qs.partners.sponsored_by_sponsor'|t }}<br>
+            {{ 'qs.partners.technology_by_antistatique'|t }}
+          </p>
         </div>
       </div>
     </div>

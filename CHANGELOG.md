@@ -2,7 +2,33 @@
 
 ## NEXT RELEASE
  - add the sponsors on homepage
-
+ - change confirmed icon for event registering #598
+ - increase size of activity in activity user collection and in photos collection #545
+ - fix card pill flag position on medium and small screens #588
+ - make all cards close when opening one in calendar view #596
+ - add Privilege's Badge on Activity by theme #318,  #315 & #316
+ - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
+ - add Subscription's Badge, using highest Privilege color, on My Activities #304
+ - update Subscription's Badge, using highest Privilege color, on Activity page #543
+ - update Subscription's Badge, using highest Privilege color, on Calendar Weekly/Monthly Cards - below Calendar Dots - #387
+ - add Privilege's Badge on My Photos #412
+ - add Privilege's Badge on Photos by theme #441, #442 & #443
+ - add Privilege's Badge on Members of Activity #349
+ - add 'Direct Subscription' whitout needing request for Organizer of activity #313
+ - add subscription to the author Maintainer of Activity when creating an Event #311
+ - add collapsable event card on 'My subscriptions' page
+ - add subscription textual information on 'My Subscription' card event body
+ - add Subscription's Badge, using Count of Guests Pending & Confirmed on events pill #310, #311, #312 & #313
+ - add Subscription's Badge, using Count of Guests Pending on Activitiy Teaser Card #317 & #319
+ - switch the Event Dashboard button in Activity detail page when Guests Pending
+ - add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
+ - update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309
+ - fix #590 - wrong badges on activities by Theme when activity has event in past with pending subscriptions
+ - fix #207 - photos by months - sticky months are not translated
+ - fix #584 - fix big_pipe google map autocomplete fields
+ - add Masquerade module
+ - fix pager #610 & #31 - following pagers wasn't working: Members of Activity, Members of Community & Form ActivityInlineAddMember
+ 
 ## 1.0.3 (2018-03-28)
  - apply patch - Remote Code Execution - SA-CORE-2018-002
 
@@ -67,4 +93,3 @@
 
 ## 0.0.0 (2017-07-14)
  - init empty repo
-

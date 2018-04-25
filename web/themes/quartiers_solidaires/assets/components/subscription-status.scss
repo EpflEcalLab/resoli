@@ -4,6 +4,8 @@ $status-list: (
   'default',
   'pending',
   'confirmed',
+  'pendings_guests',
+  'confirmed_guests',
 );
 
 // Use the combination of data-status and data-status-show to toggle the visibility of any items.
@@ -15,9 +17,21 @@ $status-list: (
   }
 }
 
+[data-status-badge] {
+  [data-status-badge-show] {
+    display: none;
+  }
+}
+
 @each $status in $status-list {
   [data-status=#{$status}] {
     [data-status-show=#{$status}] {
+      display: block;
+    }
+  }
+
+  [data-status-badge=#{$status}] {
+    [data-status-badge-show=#{$status}] {
       display: block;
     }
   }

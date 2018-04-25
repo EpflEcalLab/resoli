@@ -26,9 +26,9 @@ class JudgeController extends ControllerBase {
   protected $acl;
 
   /**
-   * The Subscription Manager.
+   * The Privilege Manager.
    *
-   * @var \Drupal\qs_subscription\Service\SubscriptionManager
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
    */
   protected $privilegeManager;
 

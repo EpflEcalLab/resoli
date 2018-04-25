@@ -1,0 +1,148 @@
+Feature: Badges - Subscription - Activity
+  Asserts the Activity page show subscriptions's badges
+  according current users state of subscriptions on the event pill
+  and use the highest privilege on this event's activity to get the color.
+
+  @api
+  Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°2 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/activities/atelier-creatif"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#card17" element
+    Then I should see a "#card17[data-status='default'][data-status-badge='default']" element
+    Then I should not see a "#card17[data-status='pending']" element
+    Then I should not see a "#card17[data-status='confirmed']" element
+    Then I should not see a "#card17[data-status-badge='pending']" element
+    Then I should not see a "#card17[data-status-badge='confirmed']" element
+    Then I should not see a "#card17[data-status-badge='confirmed_guests']" element
+    Then I should not see a "#card17[data-status-badge='pendings_guests']" element
+
+  @api
+  Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a member of this activity and I can see the correct flag "Confirmed Guests"
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/lausanne/activities/sorties-theatre"
+    And the response status code should be 200
+    Then I should see 4 ".card-list-item" elements
+    Then I should see a "#collapse-37" element
+    Then I should see a "#card37[data-status='pending'][data-status-badge='pending']" element
+    Then I should see a "#collapse-35" element
+    Then I should see a "#card35[data-status='default'][data-status-badge='default']" element
+    Then I should see a "#collapse-36" element
+    Then I should see a "#card36[data-status='confirmed'][data-status-badge='confirmed']" element
+    Then I should see a "#collapse-54" element
+    Then I should see a "#card54[data-status='confirmed'][data-status-badge='pendings_guests']" element
+
+  @api
+  Scenario: Logged as Organizer of Lausanne, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a not member of this activity
+    Given I am logged in as user "organizer+lausanne"
+    When I am on "/lausanne/activities/atelier-creatif"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-17" element
+    Then I should see a "#card17[data-status='default'][data-status-badge='default']" element
+
+  @api
+  Scenario: Logged as Organizer of Lausanne, I can see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
+    Given I am logged in as user "organizer+lausanne"
+    When I am on "/lausanne/activities/sorties-theatre"
+    And the response status code should be 200
+    Then I should see 4 ".card-list-item" elements
+    Then I should see a "#collapse-37" element
+    Then I should see a "#card37[data-status='confirmed'][data-status-badge='pendings_guests']" element
+    Then I should see a "#collapse-35" element
+    Then I should see a "#card35[data-status='default'][data-status-badge='default']" element
+    Then I should see a "#collapse-54" element
+    Then I should see a "#card54[data-status='default'][data-status-badge='pendings_guests']" element
+    Then I should see a "#collapse-36" element
+    Then I should see a "#card36[data-status='default'][data-status-badge='confirmed_guests']" element
+
+  @api
+  Scenario: Logged as Organizer of Lausanne, I can see "register" button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
+    Given I am logged in as user "organizer+lausanne"
+    When I am on "/lausanne/activities/atelier-bougies"
+    And the response status code should be 200
+    Then I should see 2 ".card-list-item" elements
+    Then I should see a "#collapse-22" element
+    Then I should see a "#card22[data-status='default'][data-status-badge='default']" element
+    Then I should see a "#collapse-18" element
+    Then I should see a "#card18[data-status='default'][data-status-badge='default']" element
+
+  @api
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can see "register" button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/lausanne/activities/atelier-bougies"
+    And the response status code should be 200
+    Then I should see 2 ".card-list-item" elements
+    Then I should see a "#collapse-22" element
+    Then I should see a "#card22[data-status='default'][data-status-badge='default']" element
+    Then I should see a "#collapse-18" element
+    Then I should see a "#card18[data-status='default'][data-status-badge='default']" element
+
+  @api
+  Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is not a public activity
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/lausanne/activities/sorties-theatre"
+    And the response status code should be 200
+    Then I should see 4 ".card-list-item" elements
+    Then I should see a "#collapse-37" element
+    Then I should see a "#card37[data-status='default'][data-status-badge='default']" element
+    Then I should see a "#collapse-35" element
+    Then I should see a "#card35[data-status='default'][data-status-badge='default']" element
+    Then I should see a "#collapse-36" element
+    Then I should see a "#card36[data-status='default'][data-status-badge='default']" element
+
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I can't see "register" button in the Events of the Activity N°57 (Monopoly - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/monopoly"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-61" element
+    Then I should see a "#card61[data-status='confirmed'][data-status-badge='confirmed']" element
+
+ @api
+  Scenario: Logged as Member N°2 of Fribourg, I can't see "register" button in the Events of the Activity N°61 (Ginguettes - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/ginguettes"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-63" element
+    Then I should see a "#card63[data-status='confirmed'][data-status-badge='confirmed']" element
+
+ @api
+  Scenario: Logged as Member N°2 of Fribourg, I can't see "register" button in the Events of the Activity N°56 (Escalade - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/escalade"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-59" element
+    Then I should see a "#card59[data-status='confirmed'][data-status-badge='confirmed']" element
+
+
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°57 (Monopoly - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/monopoly"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-61" element
+    Then I should see a "#card61[data-status='default'][data-status-badge='confirmed_guests']" element
+
+ @api
+  Scenario: Logged as Member & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°61 (Ginguettes - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/ginguettes"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-63" element
+    Then I should see a "#card63[data-status='default'][data-status-badge='confirmed_guests']" element
+
+ @api
+  Scenario: Logged as Member & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°56 (Escalade - Fribourg), because I'm already registered instead I see the confirmation message
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/escalade"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-59" element
+    Then I should see a "#card59[data-status='default'][data-status-badge='confirmed_guests']" element

@@ -30,8 +30,9 @@
     </span>
   </span>
 
-  {{ macros.badge('info', 'wait', 'flag-subscription-wait', '', '', 'pending') }}
-  {{ macros.badge('info', 'confirmed', 'flag-subscription-confirmed', '', '', 'confirmed') }}
+  {% block card_pill_badges %}
+    {% include '@quartiers_solidaires/node/partials/card-pill-badges.html.twig' with {'privileges': variables.badges.privileges} %}
+  {% endblock %}
 
   <span
     class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto"

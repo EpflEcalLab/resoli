@@ -14,7 +14,7 @@
 }
 
 .modal-dialog {
-  width: 100%;
+  width: calc(100% - #{$grid-gutter-width});
   height: 75vh;
   max-height: calc(100vh - 150px);
   text-align: left;

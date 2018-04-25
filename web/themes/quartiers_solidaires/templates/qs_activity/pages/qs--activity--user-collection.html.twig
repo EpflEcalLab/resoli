@@ -17,7 +17,7 @@
   {% if variables.activities %}
   <ul class="card-list" id="activities-accordion" role="tablist" data-children=".card-list-item">
     {% for activity in variables.activities %}
-      <li class="card card-list-item" id="card{{ activity.nid.value }}">
+      <li class="card card-list-item shadow-to-bottom" id="card{{ activity.nid.value }}">
         <a
           data-toggle="collapse"
           data-parent="#activities-accordion"
@@ -31,25 +31,14 @@
           <span class="card-pill-icon">
             {{ macros.icon('theme_' ~ activity.field_theme.entity.field_icon.value) }}
           </span>
-          <span class="card-pill-title">{{ activity.title.value }}</span>
+          <span class="card-pill-title">
+            <span class="lead">{{ activity.title.value }}</span>
+          </span>
 
           {# Privilege Badges #}
-          {% if activity.nid.value in variables.badges.privileges|keys %}
-            {% set privilege = variables.badges.privileges[activity.nid.value]|last %}
-            {% if privilege == 'activity_members' %}
-              {{ macros.badge('info', 'happy', 'flag-privilege-members', 'qs.roles.activity_member'|t) }}
-            {% endif %}
+          {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege.html.twig' with {'activity': activity, 'badges': variables.badges} %}
 
-            {% if privilege == 'activity_maintainers' %}
-              {{ macros.badge('warning', 'happy', 'flag-privilege-maintainers', 'qs.roles.activity_maintainer'|t, true) }}
-            {% endif %}
-
-            {% if privilege == 'activity_organizers' %}
-              {{ macros.badge('danger', 'happy', 'flag-privilege-organizers', 'qs.roles.activity_organizer'|t, true) }}
-            {% endif %}
-          {% endif %}
-
-          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.activity.more'|t }}">
+          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white" aria-label="{{ 'qs.activity.more'|t }}">
             {{ macros.icon('look') }}
             <span class="sr-only d-none d-md-inline">{{ 'qs.activity.more'|t }}</span>
           </span>
@@ -58,20 +47,8 @@
         <div class="collapse" id="collapse-{{ activity.nid.value }}" role="tabpanel">
           <div class="card-body">
             <div class="card-text text-center">
-              <p>
-                {% if privilege == 'activity_members' %}
-                  {% set roles = 'qs.roles.activity_member'|t %}
-                {% endif %}
-                {% if privilege == 'activity_maintainers' %}
-                  {% set roles = 'qs.roles.activity_maintainer'|t %}
-                {% endif %}
-                {% if privilege == 'activity_organizers' %}
-                  {% set roles = 'qs.roles.activity_organizer'|t %}
-                {% endif %}
-
-                {{ 'qs.activity.user.you_are @role'|t({
-                  '@role': roles
-                }) }}</p>
+              {# Privilege Textual Badges #}
+              {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege-textual.html.twig' with {'activity': activity, 'badges': variables.badges} %}
             </div>
             <div class="card-actions d-flex justify-content-center">
               <a href="{{ path('entity.node.canonical', {node: activity.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
@@ -83,7 +60,7 @@
         </div>
       </li>
     {% endfor %}
-    </ul>
+  </ul>
   {% else %}
     <div class="text-center">
       <div class="d-flex justify-content-center mb-4">
@@ -94,7 +71,7 @@
         {% set member = 'qs.roles.activity_member'|t %}
         {% set maintainer = 'qs.roles.activity_maintainer'|t %}
         {% trans %}
-          qs.activity.user.collection.empty <span class="text-info">{{ member }}</span> <span class="text-warning">{{ maintainer }}</span>
+          qs.activity.user.collection.empty {{ member }} {{ maintainer }}
         {% endtrans %}
       </p>
     </div>
@@ -116,7 +93,7 @@
       <p>
         {% set organizer = 'qs.roles.activity_organizer'|t %}
         {% trans %}
-        qs.activity.become.activity.organizer <span class="text-danger">{{ organizer }}</span>
+        qs.activity.become.activity.organizer {{ organizer }}
         {% endtrans %}
       </p>
     </div>

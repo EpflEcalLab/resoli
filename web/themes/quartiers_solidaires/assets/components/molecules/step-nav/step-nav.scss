@@ -20,12 +20,12 @@
     position: absolute;
     z-index: 0;
     top: 50%;
-    left: $spacer;
     right: $spacer;
+    left: $spacer;
     width: calc(100% - #{$spacer * 2});
     height: $border-width;
-    transform: translateY(-50%);
     background: $white;
+    transform: translateY(-50%);
   }
 }
 

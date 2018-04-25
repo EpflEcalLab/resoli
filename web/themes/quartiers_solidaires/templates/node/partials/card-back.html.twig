@@ -1,0 +1,24 @@
+{# Basic template for card-back component. Used in card-list-item #}
+<div class="{% block card_back_class %}card-back{% endblock %}" id="{% block card_back_id %}{% endblock %}">
+
+  <div class="card-pill">
+    <span class="card-pill-icon">
+      {{ macros.icon(icon) }}
+    </span>
+
+    <span class="card-pill-title">
+      <span>
+        {{ title }}
+      </span>
+    </span>
+
+    {% block card_pill_badges %}
+      {% include '@quartiers_solidaires/node/partials/card-pill-badges.html.twig' with {'privileges': variables.badges.privileges} %}
+    {% endblock %}
+  </div>
+  <div class="card-body text-center">
+    {% block card_back_body %}
+      CARD BACK BODY MISSING
+    {% endblock %}
+  </div>
+</div>

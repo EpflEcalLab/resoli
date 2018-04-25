@@ -16,10 +16,10 @@
 {% set classes = [
   'flag',
   'flag-' ~ flag,
-  shield ? 'flag-shield',
+  shield ? 'flag-shield' : 'flag-default',
   classes,
 ] %}
-  <div class="{{ classes|join(' ') }}" title="{{ title }}"{{ data ? ' data-status-show=' ~ data }}>
+<div class="{{ classes|join(' ') }}" title="{{ title }}"{{ data ? ' data-status-badge-show=' ~ data }}>
   <svg class="icon " preserveAspectRatio="xMidYMid" aria-hidden="true">
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ shield ? 'shield' : 'flag' }}"></use>
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ icon|default('confirmed') }}"></use>

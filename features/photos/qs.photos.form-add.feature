@@ -26,8 +26,11 @@ Feature: Form add photos
     Given I am logged in as user "admin"
     When I am on "/photos/2/add"
     And the response status code should be 200
-    Then I should see 1 "select#edit-activity option" elements
+    Then I should see 4 "select#edit-activity option" elements
     And I should see a "option[value='11']" element
+    And I should see a "option[value='56']" element
+    And I should see a "option[value='57']" element
+    And I should see a "option[value='62']" element
 
   @api
   Scenario: Logged as Admin, When I access "Form add photos" in Genève
@@ -57,9 +60,10 @@ Feature: Form add photos
     Given I am logged in as user "manager+lausanne"
     When I am on "/photos/1/add"
     And the response status code should be 200
-    Then I should see 2 "select#edit-activity option" elements
+    Then I should see 3 "select#edit-activity option" elements
     And I should see a "option[value='2']" element
     And I should see a "option[value='3']" element
+    And I should see a "option[value='13']" element
 
   @api
   Scenario: Logged as Organizer of Lausanne, When I access "Form add photos"

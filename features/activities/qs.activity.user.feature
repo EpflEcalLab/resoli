@@ -17,9 +17,10 @@ Scenario: Logged as Manager of Lausanne, I can access my own activities page in 
   Given I am logged in as user "manager+lausanne"
   When I am on "/activities/1/user/5"
   And the response status code should be 200
-  Then I should see 2 ".card-list-item" elements
+  Then I should see 3 ".card-list-item" elements
   Then I should see a "#activity2" element
   Then I should see a "#activity3" element
+  Then I should see a "#activity13" element
   And I should not see "qs.activity.become.activity.organizer"
 
 @api

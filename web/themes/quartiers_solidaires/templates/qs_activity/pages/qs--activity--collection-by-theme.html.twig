@@ -49,7 +49,7 @@
        {% endif %}
 
         <div class="col-sm-6 col-lg-4 d-flex">
-          {% include "@quartiers_solidaires/node/node--activity--teaser.html.twig" with {node: activity, event: event} %}
+          {% include "@quartiers_solidaires/node/node--activity--teaser.html.twig" with {node: activity, event: event, badges: variables.badges} %}
         </div>
 
       {% endfor %}

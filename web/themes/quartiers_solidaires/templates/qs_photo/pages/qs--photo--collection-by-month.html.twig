@@ -38,8 +38,8 @@
           {% set week = photo.field_event.entity.field_start_at.value|date('W') %}
 
           {% set new_header = 'qs.photos.date.sticky.from_to @start_date @end_date'|t({
-            '@start_date': date|date_modify("this week")|date('j F Y'),
-            '@end_date': date|date_modify("this week +6 days")|date('j F Y')
+            '@start_date': date|date_modify("this week")|bamboo_i18n_format_date('custom', 'j F Y'),
+            '@end_date': date|date_modify("this week +6 days")|bamboo_i18n_format_date('custom', 'j F Y')
           }) %}
 
           {% if 'now'|date('Y-m-d') == date %}

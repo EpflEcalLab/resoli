@@ -1,0 +1,34 @@
+{# User Privilege Badges #}
+{% if privileges %}
+  {# Get user Highest privilege #}
+  {% set privilege = privileges|last %}
+
+  {# Adapte the color of badge according user privilege of activity #}
+  {% set roles = 'qs.roles.activity_member'|t %}
+  {% if privilege == 'activity_maintainers' %}
+    {% set theme = 'warning' %}
+    {% set roles = 'qs.roles.activity_maintainer'|t %}
+  {% endif %}
+  {% if privilege == 'activity_organizers' %}
+    {% set theme = 'danger' %}
+    {% set roles = 'qs.roles.activity_organizer'|t %}
+  {% endif %}
+
+  {% if privilege == 'activity_members' %}
+    {{ macros.badge('info', 'happy', 'flag-privilege-members', 'qs.activity.user.you_are @role'|t({
+      '@role': roles
+    })) }}
+  {% endif %}
+
+  {% if privilege == 'activity_maintainers' %}
+    {{ macros.badge('warning', 'happy', 'flag-privilege-maintainers', 'qs.activity.user.you_are @role'|t({
+      '@role': roles
+    }), true) }}
+  {% endif %}
+
+  {% if privilege == 'activity_organizers' %}
+    {{ macros.badge('danger', 'happy', 'flag-privilege-organizers', 'qs.activity.user.you_are @role'|t({
+      '@role': roles
+    }), true) }}
+  {% endif %}
+{% endif %}

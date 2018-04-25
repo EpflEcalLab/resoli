@@ -50,7 +50,7 @@
       {% endif %}
 
       <div class="col-sm-6 d-flex">
-        {% include '@quartiers_solidaires/qs_photo/qs--photo--event-card.html.twig' with {'activity': activity, 'photos': variables.photos[activity.nid.value] } %}
+        {% include '@quartiers_solidaires/qs_photo/qs--photo--event-card.html.twig' with {'activity': activity, 'photos': variables.photos[activity.nid.value], 'badges': variables.badges} %}
       </div>
       {% endfor %}
     </div>

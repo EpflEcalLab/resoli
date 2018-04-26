@@ -1,6 +1,9 @@
 # CHANGELOG
 
-## 1.0.3 (2018-03-28)
+## 1.0.4 (2018-04-26)
+ - Apply Remote Code Exectiion - SA-CORE-2018-004
+
+## 1.0.3 (2018-03-28)
  - apply patch - Remote Code Execution - SA-CORE-2018-002
 
 ## 1.0.2 (2018-03-16)

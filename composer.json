@@ -108,7 +108,8 @@
         },
         "patches": {
           "drupal/core": {
-            "Remote Code Execution - SA-CORE-2018-002": "./patches/sa-core-2018-002.patch"
+            "Remote Code Execution - SA-CORE-2018-002": "./patches/sa-core-2018-002.patch",
+            "Remote Code Execution - SA-CORE-2018-004": "./patches/sa-core-2018-004.patch"
           }
         }
     }

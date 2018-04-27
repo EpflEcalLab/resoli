@@ -15,10 +15,13 @@ import calendar from 'molecules/calendar/calendar';
 import modal from 'organisms/modal/modal';
 import floating from 'organisms/floating/floating';
 import ie from 'ie';
+import {preventAutoScroll} from 'layout';
 
 svgIcons();
 
 (function($) {
+  preventAutoScroll();
+
   $(document).ready(function() {
     card();
     nav();

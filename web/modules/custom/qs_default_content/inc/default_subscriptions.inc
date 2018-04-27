@@ -111,4 +111,112 @@ function qs_default_content_subscriptions() {
     'reviewed'  => time(),
   ]);
   $subscription->save();
+
+  // Event 54: Activity (3) - in 2 days.
+  // User 5: manager+lausanne.
+  $subscription = $subscriptionStorage->create([
+    // Event 54.
+    'entity'    => 54,
+    // User 5.
+    'user'      => 5,
+    // approved.
+    'status'    => 1,
+    'reviewer'  => 5,
+    'reviewed'  => time(),
+  ]);
+  $subscription->save();
+
+  // Event 54: Activity (3) - in 2 days.
+  // User 13: member+lausanne+manager+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 54.
+    'entity'    => 54,
+    // User 13.
+    'user'      => 13,
+    // pending.
+    'status'    => NULL,
+  ]);
+  $subscription->save();
+
+  // Event 55: Activity (13) - 3 months ago at 15h15.
+  // User 13: member+lausanne+manager+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 55.
+    'entity'    => 55,
+    // User 13.
+    'user'      => 13,
+    // pending.
+    'status'    => NULL,
+  ]);
+  $subscription->save();
+
+  // Event 58: Activity (56) - 3 months ago at 18h12.
+  // User 23: member2+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 58.
+    'entity'    => 58,
+    // User 23.
+    'user'      => 23,
+    // approved.
+    'status'    => 1,
+    'reviewer'  => 5,
+    'reviewed'  => time(),
+  ]);
+  $subscription->save();
+
+  // Event 59: Activity (56) - Today in 2 hour.
+  // User 23: member2+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 59.
+    'entity'    => 59,
+    // User 23.
+    'user'      => 23,
+    // approved.
+    'status'    => 1,
+    'reviewer'  => 5,
+    'reviewed'  => time(),
+  ]);
+  $subscription->save();
+
+  // Event 60: Activity (57) - 3 months ago at 16h19.
+  // User 23: member2+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 60.
+    'entity'    => 60,
+    // User 23.
+    'user'      => 23,
+    // approved.
+    'status'    => 1,
+    'reviewer'  => 5,
+    'reviewed'  => time(),
+  ]);
+  $subscription->save();
+
+  // Event 61: Activity (57) - Today in 30 minutes.
+  // User 23: member2+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 61.
+    'entity'    => 61,
+    // User 23.
+    'user'      => 23,
+    // approved.
+    'status'    => 1,
+    'reviewer'  => 5,
+    'reviewed'  => time(),
+  ]);
+  $subscription->save();
+
+  // Event 63: Activity (62) - Today in 44 minutes.
+  // User 23: member2+fribourg.
+  $subscription = $subscriptionStorage->create([
+    // Event 63.
+    'entity'    => 63,
+    // User 23.
+    'user'      => 23,
+    // approved.
+    'status'    => 1,
+    'reviewer'  => 5,
+    'reviewed'  => time(),
+  ]);
+  $subscription->save();
 }

@@ -143,6 +143,26 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Lazy loading for the Quartiers-Solidaires Subscription Manager service.
+   *
+   * @return \Drupal\qs_subscription\Service\SubscriptionManager
+   *   Return the Quartiers-Solidaires Subscription Manager.
+   */
+  protected function getSubscriptionManager() {
+    return $this->container->get('qs_subscription.subscription_manager');
+  }
+
+  /**
+   * Lazy loading for the Quartiers-Solidaires Subscription Manager service.
+   *
+   * @return \Drupal\qs_subscription\Service\SubscriptionManager
+   *   Return the Quartiers-Solidaires Subscription Manager.
+   */
+  protected function getBadgeManager() {
+    return $this->container->get('qs_badge.badge_manager');
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {

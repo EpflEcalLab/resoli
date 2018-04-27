@@ -209,11 +209,14 @@ class CollectionController extends ControllerBase {
     // From list of Events where current user has confirmed subscription.
     $badges['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($events, 1);
 
-    // From list of Events number of pending subscriptions.
-    $badges['admin']['subscriptions']['pendings'] = [];
+    // From list of Events get user privileges.
+    $badges['privileges'] = $this->badgeManager->getPrivilegesByEvents($events);
 
-    // From list of Events number of subscriptions.
-    $badges['admin']['subscriptions']['confirmed'] = [];
+    // From list of Events count pending subscriptions by given events.
+    $badges['subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptions($events, NULL);
+
+    // From list of Events count confirmed subscriptions by given events.
+    $badges['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($events, TRUE);
 
     return $badges;
   }

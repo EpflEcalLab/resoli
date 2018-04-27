@@ -15,17 +15,8 @@ const ie = () => {
     }
 
     if (ie) {
-      // This should fix the google places autocomplete
-      const fixEutocompleteInterval = window.setInterval(function() {
-        const $container = $('body > .pac-container');
-        if ($container.length === 0) return;
-        // Move the autocomplete element just below the input.
-        $container.appendTo($('#address').parent());
-        // The fix is finished, stop working.
-        window.clearInterval(fixEutocompleteInterval);
-      }, 500);
-
-      // Force the map to flip back on btn click. Don't know the reason for that....
+      // Force the map to flip back on btn click.
+      // Don't know the reason for that....
       $('.card-map-footer .btn').on('mousedown', function() {
         $(this).trigger('click');
       });

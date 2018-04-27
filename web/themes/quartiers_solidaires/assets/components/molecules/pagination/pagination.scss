@@ -22,12 +22,7 @@
 
   .active .btn-outline-invert {
     background-color: $white;
-  }
-
-  @each $color, $value in $theme-colors {
-    .bg-#{$color} & .active .btn-outline-invert {
-      color: $value;
-    }
+    color: $black;
   }
 }
 

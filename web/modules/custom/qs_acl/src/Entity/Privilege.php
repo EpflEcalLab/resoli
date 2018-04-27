@@ -23,11 +23,21 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * @ContentEntityType(
  *   id = "privilege",
  *   label = @Translation("Privilege"),
+ *   handlers = {
+ *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "views_data"   = "Drupal\views\EntityViewsData",
+ *     "form" = {
+ *       "default" = "Drupal\Core\Entity\ContentEntityForm",
+ *     },
+ *   },
  *   base_table = "privileges",
  *   admin_permission = "administer privilege entity",
  *   fieldable = false,
  *   entity_keys = {
  *     "id" = "id"
+ *   },
+ *   links = {
+ *     "collection" = "/admin/content/privileges",
  *   },
  * )
  */

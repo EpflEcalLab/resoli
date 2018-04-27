@@ -251,13 +251,18 @@ class PrivilegeManager {
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
+   * @param int $pager
+   *   The limit of members. NULL to get all users.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryMembersWithPrivileges(EntityInterface $entity) {
+  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50) {
+    // We have to get paginated users before getting privileges by users
+    // because a user could have 1 or many privileges (so it's not paginable).
+    // Query user(s) with privilege(s) in the given entity.
     $query = $this->connection->select('privileges', 'privileges');
-    $query->fields('privileges', ['user', 'privilege'])
+    $query->fields('privileges', ['user'])
       ->condition('privileges.status', 1)
       ->condition('privileges.bundle', $entity->getEntityTypeId())
       ->condition('privileges.entity', $entity->id());
@@ -269,6 +274,35 @@ class PrivilegeManager {
 
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
+    $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+    $query->groupBy('privileges.user');
+
+    if ($pager) {
+      $ids = $query->execute()->fetchAll();
+      pager_default_initialize(count($ids), $pager);
+      $page = pager_find_page();
+      $query->range($page * $pager, $pager);
+    }
+
+    $rows = $query->execute()->fetchAll();
+    $uids = [];
+    foreach ($rows as $row) {
+      $uids[] = $row->user;
+    }
+
+    if (!$uids) {
+      return NULL;
+    }
+
+    // Query the privileges of this users.
+    $query = $this->connection->select('privileges', 'privileges');
+    $query->fields('privileges', ['user', 'privilege'])
+      ->condition('privileges.status', 1)
+      ->condition('privileges.user', $uids, 'IN')
+      ->condition('privileges.bundle', $entity->getEntityTypeId())
+      ->condition('privileges.entity', $entity->id());
+
+    // Join the users data for filters criteria.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
 
     $query->orderBy('users.name', 'ASC');

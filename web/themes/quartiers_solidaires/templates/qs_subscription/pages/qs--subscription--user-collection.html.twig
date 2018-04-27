@@ -10,32 +10,49 @@
   </div>
 
   {% if variables.events %}
-    <ul class="card-list" data-children=".card-list-item">
+    <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
       {% for key, event in variables.events %}
       <li class="card card-list-item" id="card{{ event.nid.value }}">
         <a
-          href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}"
-          class="card-pill"
-          id="event{{ activity.nid.value }}"
+          data-toggle="collapse"
+          data-parent="#events-accordion"
+          href="#collapse-{{ event.nid.value }}"
+          class="card-pill collapsed"
+          role="tab"
+          aria-expanded="false"
+          aria-controls="collapse-{{ event.nid.value }}"
+          id="event{{ event.nid.value }}"
         >
           <span class="card-pill-icon">
             {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
           </span>
-          <span class="card-pill-title">{{ event.title.value }}</span>
+          <span class="card-pill-title">{{ event.field_activity.entity.title.value }}</span>
 
-          {# Subscriptions Badges #}
-          {% if event.nid.value in variables.badges.subscriptions.pendings|keys %}
-              {{ macros.badge('info', 'wait', 'flag-subscription-wait') }}
-          {% endif %}
-          {% if event.nid.value in variables.badges.subscriptions.confirmed|keys %}
-            {{ macros.badge('info', 'check', 'flag-subscription-confirmed') }}
-          {% endif %}
+          {# Subscription Badges #}
+          {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
 
-          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.activity.more'|t }}">
+          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white" aria-label="{{ 'qs.activity.more'|t }}">
             {{ macros.icon('look') }}
             <span class="sr-only d-none d-md-inline">{{ 'qs.event.more'|t }}</span>
           </span>
         </a>
+
+        <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel">
+          <div class="card-body">
+            <div class="card-text text-center">
+              <h4 class="card-title mb-2">{{ event.title.value }}</h4>
+              {# Subscription Textual Badges #}
+              {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
+            </div>
+
+            <div class="card-actions d-flex justify-content-center">
+              <a href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
+                {{ macros.icon('activities') }}
+                {{ 'qs.event.goto'|t }}
+              </a>
+            </div>
+          </div>
+        </div>
       </li>
       {% endfor %}
     </ul>

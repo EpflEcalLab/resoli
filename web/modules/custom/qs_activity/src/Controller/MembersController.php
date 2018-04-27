@@ -86,19 +86,29 @@ class MembersController extends ControllerBase {
    * Members page.
    */
   public function members(NodeInterface $activity) {
-    $variables['activity'] = $activity;
+    $render = [
+      '#theme'     => 'qs_activity_members_page',
+      '#variables' => ['activity' => $activity],
+      '#cache' => [
+        'tags' => [
+          // Invalidated whenever any community is updated, deleted or created.
+          'user_list:user',
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'privilege_list:privilege',
+        ],
+      ],
+    ];
 
-    $query = $this->privilegeManager->queryMembersWithPrivileges($activity);
-    $ids = $query->execute()->fetchAll();
-    pager_default_initialize(count($ids), $this->configuration['limit']);
-    $variables['pager'] = [
+    $query = $this->privilegeManager->queryMembersWithPrivileges($activity, $this->configuration['limit']);
+    if (!$query) {
+      return $render;
+    }
+    $render['#variables']['pager'] = [
       '#type'     => 'pager',
       '#quantity' => '3',
     ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
-    $rows = $query->execute()->fetchAll();
 
+    $rows = $query->execute()->fetchAll();
     $uids = [];
     $privileges = [];
     foreach ($rows as $row) {
@@ -114,20 +124,9 @@ class MembersController extends ControllerBase {
       $activity_member->privileges = $privileges[$activity_member->id()];
     }
 
-    $variables['members'] = $activity_members;
+    $render['#variables']['members'] = $activity_members;
 
-    return [
-      '#theme'     => 'qs_activity_members_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'tags' => [
-          // Invalidated whenever any community is updated, deleted or created.
-          'user_list:user',
-          // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege_list:privilege',
-        ],
-      ],
-    ];
+    return $render;
   }
 
 }

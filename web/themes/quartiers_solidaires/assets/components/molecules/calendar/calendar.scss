@@ -6,7 +6,7 @@ $calendar-item-size: 3.125rem;
   text-align: center;
 }
 
-@supports (display: grid) {
+@supports (grid-template-columns: auto) {
   .calendar {
     display: inline-grid;
     grid-template-columns: repeat(7, $calendar-item-size);
@@ -73,7 +73,7 @@ $calendar-item-size: 3.125rem;
 
     @include make-row();
 
-    display: inline-flex;
+    display: inline-flex; // stylelint-disable-line
 
     @include media-breakpoint-down(sm) {
       width: 100%;
@@ -81,13 +81,13 @@ $calendar-item-size: 3.125rem;
   }
 
   .calendar-item {
-    width: 100%;
     flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
+    width: 100%;
     min-width: 20px;
     max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     height: $calendar-item-size;
-    padding: 0;
     margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
+    padding: 0;
 
     @include media-breakpoint-up(md) {
       flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
@@ -109,15 +109,42 @@ $calendar-item-size: 3.125rem;
     justify-content: center;
     flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     min-width: 20px;
+    width: 100%;
     max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width / 2});
     margin: ($grid-gutter-width / 6) ($grid-gutter-width / 4);
-    color: gray('600');
     border: 2px solid transparent;
+    color: gray('600');
 
     @include media-breakpoint-up(md) {
       flex: 0 0 calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
       max-width: calc(#{percentage(1 / 7)} - #{$grid-gutter-width});
       margin: ($grid-gutter-width / 4) ($grid-gutter-width / 2);
     }
+  }
+}
+
+.calendar-item {
+  position: relative;
+  overflow: visible;
+
+  .flag {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-42.5%);
+    pointer-events: none;
+
+    @include flag-size(5rem);
+  }
+
+  .icon {
+    transform: scaleY(1.2);
+  }
+
+  .flag-number {
+    position: absolute;
+    z-index: 1;
+    top: 43%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

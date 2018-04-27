@@ -1,5 +1,7 @@
 const card = () => {
   (function ($) {
+    let isFirstCard = true;
+
     // Toggle card body on card-pill header click
     $(document).on('show.bs.collapse hide.bs.collapse', function(e) {
       $(e.target).parents('.card').toggleClass('card-open');
@@ -67,7 +69,7 @@ const card = () => {
 
       // Update the hash in URL on collapse
       const id = $(e.currentTarget).attr('id');
-      if (id) {
+      if (id && !isFirstCard) {
         const card_id = id.replace('collapse-', '');
 
         if (history.pushState) {
@@ -76,6 +78,9 @@ const card = () => {
           window.location.hash = `card${card_id}`;
         }
       }
+
+      // Once we run this, we won't be on the first card anymore
+      isFirstCard = false;
 
       // Collapse all the other collapses on the page
       const parent = $(e.currentTarget).data('parent');
@@ -104,8 +109,10 @@ const card = () => {
         if (hash && hash.includes('card')) {
           const newHash = hash.replace('card', 'collapse-');
           $card = $(document).find(`.card-pill[data-toggle=collapse][href="${newHash}"]`);
+          isFirstCard = false;
         } else {
           $card = $('.card:first .card-pill[data-toggle=collapse]');
+          isFirstCard = true;
         }
 
         if ($card.length > 0) {

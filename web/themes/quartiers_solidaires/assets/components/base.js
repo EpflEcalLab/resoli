@@ -15,7 +15,7 @@ import calendar from 'molecules/calendar/calendar';
 import modal from 'organisms/modal/modal';
 import floating from 'organisms/floating/floating';
 import ie from 'ie';
-import {preventAutoScroll} from 'layout';
+import { layout, preventAutoScroll } from 'layout';
 
 svgIcons();
 
@@ -37,5 +37,6 @@ svgIcons();
     formComment();
     ie();
     floating();
+    layout();
   });
 })(jQuery);

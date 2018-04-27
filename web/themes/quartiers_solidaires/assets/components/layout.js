@@ -1,5 +1,8 @@
 export const layout = () => {
-
+  /* Enable active states on all of the elements.
+  This can be a bit slow on huge pages so it might be worth restricting it to certain elements instead of document in the future.
+  */
+  document.addEventListener('touchstart', function(){}, true);
 };
 
 export const preventAutoScroll = () => {

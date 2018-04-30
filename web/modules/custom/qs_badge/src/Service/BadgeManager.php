@@ -361,7 +361,7 @@ class BadgeManager {
   }
 
   /**
-   * Get the list privilege for the user for every days between two dates.
+   * From events nodes, return the list of privilege for the user by day.
    *
    * The user's privileges are ordered from lowest to highest.
    *  - activity_members,
@@ -369,42 +369,34 @@ class BadgeManager {
    *  - activity_organizers.
    * It means you have the highest privilege in the last index of the array.
    *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community entity.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
-   *   The start date.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
-   *   The end date.
+   * @param \Drupal\node\NodeInterface[] $events
+   *   A collection of events.
    * @param \Drupal\user\UserInterface $account
    *   The user entity.
    *
-   * @return array[]
-   *   A collection of dates where it occur an event with subscriptions.
-   *   Otherwise an empty array.
+   * @return integer[]
+   *   The collection of activities IDs which have privileges.
    */
-  public function getPrivilegesByDates(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end, UserInterface $account = NULL) {
+  public function getPrivilegesByEventsByDates(array $events, UserInterface $account = NULL) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
     }
 
-    $query = $this->connection->select('node_field_data', 'event');
-    $query->fields('event', ['nid'])
-      ->condition('event.type', 'event')
-      ->condition('event.status', TRUE);
+    $nids = [];
+    foreach ($events as $event) {
+      $nids[$event->id()] = $event->id();
+    }
 
-    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.entity_id = event.nid');
-    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = field_activity.field_activity_target_id');
-    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
-
-    $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = event.nid');
-    $query->condition('field_start_at.field_start_at_value', [$date_start->format('c'), $date_end->format('c')], 'BETWEEN');
-
-    $query->leftJoin('privileges', 'privileges', 'privileges.entity = field_activity.field_activity_target_id');
-    $query->fields('privileges', ['privilege'])
+    $query = $this->connection->select('privileges', 'privileges');
+    $query->fields('privileges', ['privilege', 'entity'])
       ->condition('privileges.user', $user->id())
       ->condition('privileges.status', 1);
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = privileges.entity');
+    $query->fields('field_activity', ['field_activity_target_id'])
+      ->condition('field_activity.entity_id', $nids, 'in');
 
+    $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = field_activity.entity_id');
     $query->addExpression("DATE_FORMAT(field_start_at.field_start_at_value, '%Y-%m-%d')", 'formated_day');
 
     // Order privilege from low to high permissions.

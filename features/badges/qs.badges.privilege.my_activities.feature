@@ -51,3 +51,29 @@ Feature: Badges - Privilege - My Activities
   And the response status code should be 200
   Then I should see 0 ".card-list-item" elements
   Then I should see 0 ".card-list-item .flag" elements
+
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I should see my 2 badges of privileges. I see my Organizer badge on the Activity N°57 (Monopoly) & my Member badge on the Activity N°56 (Escalade)
+  Given I am logged in as user "member2+fribourg"
+  When I am on "/activities/2/user/23"
+  And the response status code should be 200
+  Then I should see 2 ".card-list-item" elements
+  Then I should see 2 ".card-list-item .flag" elements
+  Then I should see 1 "#activity56 .flag.flag-info.flag-privilege-members.flag-default" elements
+  And I should see "qs.activity.user.you_are qs.roles.activity_maintainer" in the "#card57" element
+  Then I should see 1 "#activity57 .flag.flag-warning.flag-privilege-maintainers.flag-shield" elements
+  And I should see "qs.activity.user.you_are qs.roles.activity_member" in the "#card56" element
+
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I should see my 2 badges of privileges. I see my Organizer badge on the Activity N°57 (Monopoly) & my Member badge on the Activity N°56 (Escalade)
+  Given I am logged in as user "member+fribourg+organizer+fribourg"
+  When I am on "/activities/2/user/16"
+  And the response status code should be 200
+  Then I should see 3 ".card-list-item" elements
+  Then I should see 3 ".card-list-item .flag" elements
+  Then I should see 1 "#activity56 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
+  And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card56" element
+  Then I should see 1 "#activity57 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
+  And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card57" element
+  Then I should see 1 "#activity62 .flag.flag-danger.flag-privilege-organizers.flag-shield" elements
+  And I should see "qs.activity.user.you_are qs.roles.activity_organizer" in the "#card62" element

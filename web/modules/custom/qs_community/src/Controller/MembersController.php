@@ -86,18 +86,29 @@ class MembersController extends ControllerBase {
    */
   public function members(TermInterface $community) {
     $variables['community'] = $community;
+    $render = [
+      '#theme'     => 'qs_community_members_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'tags' => [
+          // Invalidated whenever any community is updated, deleted or created.
+          'user_list:user',
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'privilege_list:privilege',
+        ],
+      ],
+    ];
 
-    $query = $this->privilegeManager->queryMembersWithPrivileges($community);
-    $ids = $query->execute()->fetchAll();
-    pager_default_initialize(count($ids), $this->configuration['limit']);
-    $variables['pager'] = [
+    $query = $this->privilegeManager->queryMembersWithPrivileges($community, $this->configuration['limit']);
+    if (!$query) {
+      return $render;
+    }
+    $render['#variables']['pager'] = [
       '#type'     => 'pager',
       '#quantity' => '3',
     ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
-    $rows = $query->execute()->fetchAll();
 
+    $rows = $query->execute()->fetchAll();
     $uids = [];
     $privileges = [];
     foreach ($rows as $row) {
@@ -113,20 +124,9 @@ class MembersController extends ControllerBase {
       $community_member->privileges = $privileges[$community_member->id()];
     }
 
-    $variables['members'] = $community_members;
+    $render['#variables']['members'] = $community_members;
 
-    return [
-      '#theme'     => 'qs_community_members_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'tags' => [
-          // Invalidated whenever any community is updated, deleted or created.
-          'user_list:user',
-          // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege_list:privilege',
-        ],
-      ],
-    ];
+    return $render;
   }
 
 }

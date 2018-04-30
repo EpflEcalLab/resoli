@@ -1,5 +1,7 @@
 const card = () => {
   (function ($) {
+    let isFirstCard = true;
+
     // Toggle card body on card-pill header click
     $(document).on('show.bs.collapse hide.bs.collapse', function(e) {
       $(e.target).parents('.card').toggleClass('card-open');
@@ -63,12 +65,35 @@ const card = () => {
       }
     });
 
-    // Update the hash in URL on collapse
     $('.card .collapse').on('show.bs.collapse', function(e) {
+
+      // Update the hash in URL on collapse
       const id = $(e.currentTarget).attr('id');
-      if (id) {
+      if (id && !isFirstCard) {
         const card_id = id.replace('collapse-', '');
-        window.location.hash = `card${card_id}`;
+
+        if (history.pushState) {
+          history.replaceState(null, null, `#card${card_id}`);
+        } else {
+          window.location.hash = `card${card_id}`;
+        }
+      }
+
+      // Once we run this, we won't be on the first card anymore
+      isFirstCard = false;
+
+      // Collapse all the other collapses on the page
+      const parent = $(e.currentTarget).data('parent');
+      if (parent && parent.match("^#events-accordion")) {
+        $.each($('[id*=events-accordion]'), function() {
+          const $collapse = $(this).find('.collapse');
+
+          if ('#' + $collapse.attr('id') === parent) {
+            return;
+          }
+
+          $collapse.collapse('hide');
+        });
       }
     });
 
@@ -84,8 +109,10 @@ const card = () => {
         if (hash && hash.includes('card')) {
           const newHash = hash.replace('card', 'collapse-');
           $card = $(document).find(`.card-pill[data-toggle=collapse][href="${newHash}"]`);
+          isFirstCard = false;
         } else {
           $card = $('.card:first .card-pill[data-toggle=collapse]');
+          isFirstCard = true;
         }
 
         if ($card.length > 0) {

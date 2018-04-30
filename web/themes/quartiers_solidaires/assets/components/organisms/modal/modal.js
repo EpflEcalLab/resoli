@@ -1,6 +1,6 @@
 const modal = () => {
   (function ($) {
-    $(window).on('load', function() {
+    function cloneFooters() {
       const $modalFooters = $('.modal-body .modal-footer:not(.cloned-footer)');
 
       $modalFooters.each(function() {
@@ -16,8 +16,16 @@ const modal = () => {
           if (clone.parent('form').length == 0) {
             clone.closest('.modal').find(`form #${$(this).attr('id')}`)[0].click();
           }
-        })
+        });
       });
+    }
+
+    $(window).on('load', function() {
+      cloneFooters();
+    });
+
+    $(document).on('DOMNodeInserted', function() {
+      cloneFooters();
     });
   })(jQuery);
 };

@@ -1,46 +1,49 @@
 {# Subscription Textual Badges #}
 {% if event.nid.value and badges.subscriptions %}
-  {% set show_user_subscription = TRUE %}
+
   {% set user_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed|keys %}
 
+  {% set user_subscription_pending = event.nid.value in badges.subscriptions.pendings|keys %}
+
+  {% set guest_subscription_pending = event.nid.value in badges.subscriptions.pendings_guests|keys %}
+
+  {% set guest_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed_guests|keys %}
+
+  {# Adapte the color of text according user privilege of activity #}
   {% if badges.privileges %}
     {# Get user Highest privilege #}
     {% set privilege = badges.privileges[event.field_activity.entity.nid.value]|last %}
 
-    {% set theme = [
-      privilege == 'activity_maintainers' ? 'text-warning',
-      privilege == 'activity_organizers' ? 'text-danger',
-    ] %}
+  {% endif %}
 
+  {# Show own user subscription state, alwayse #}
+  <p>
+  {% if user_subscription_pending %}
+    <strong>{{ 'qs.event.user.subscription.pending'|t }}</strong><br>
+  {% endif %}
+
+  {% if user_subscription_confirmed %}
+    <strong>{{ 'qs.event.user.subscription.confirmed'|t }}</strong><br>
+  {% endif %}
+
+  {% if badges.privileges %}
     {# If user is (activity_maintainers and confirmed) or activity_organizers of this event #}
-    {# show him guests badges, otherwise show him badges based on his own subscription #}
+    {# show him number of pending guests #}
     {% if (privilege == 'activity_maintainers' and user_subscription_confirmed) or privilege == 'activity_organizers' %}
       {# Pending Guests subscriptions Badge #}
-      {% if event.nid.value in badges.subscriptions.pendings_guests|keys %}
-        {% set attendees =  badges.subscriptions.pendings_guests[event.nid.value] %}
+      {% if guest_subscription_pending %}
+        {% set attendees = badges.subscriptions.pendings_guests[event.nid.value] %}
         <strong class="{{ theme|join(' ') }}">{{ 'qs.event.user.subscription.pendings_guests @count'|t({'@count': attendees}) }}</strong>
-        {% set show_user_subscription = FALSE %}
-
-      {# Confirmed Guests subscriptions Badge #}
-      {% elseif event.nid.value in badges.subscriptions.confirmed_guests|keys %}
-        {% set attendees = badges.subscriptions.confirmed_guests[event.nid.value] %}
-        <strong class="{{ theme|join(' ') }}">{{ 'qs.event.user.subscription.confirmed_guests @count'|t({'@count': attendees}) }}</strong>
-        {% set show_user_subscription = FALSE %}
       {% endif %}
     {% endif %}
   {% endif %}
 
-  {% if show_user_subscription %}
-    <p class="text-info">
-      <strong>
-        {% if event.nid.value in badges.subscriptions.pendings|keys %}
-          <strong class="{{ theme|join(' ') }}">{{ 'qs.event.user.subscription.pending'|t }}</strong>
-        {% endif %}
-
-        {% if event.nid.value in badges.subscriptions.confirmed|keys %}
-          <strong class="{{ theme|join(' ') }}">{{ 'qs.event.user.subscription.confirmed'|t }}</strong>
-        {% endif %}
-      </strong>
-    </p>
+  {# Confirmed Guests subscriptions Badge #}
+  {# Only visible for confirmed subscriber(s) or activity_maintainers+ #}
+  {% if guest_subscription_confirmed and not guest_subscription_pending and (user_subscription_confirmed or privilege == 'activity_organizers' or privilege == 'activity_maintainers')  %}
+    {% set attendees = badges.subscriptions.confirmed_guests[event.nid.value] %}
+    <strong>{{ 'qs.event.user.subscription.confirmed_guests @count'|t({'@count': attendees}) }}</strong>
   {% endif %}
+  </p>
+
 {% endif %}

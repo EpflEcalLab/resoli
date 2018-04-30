@@ -6,7 +6,7 @@
     <h2 class="h5">{{ variables.activity.title.value }}</h2>
   </div>
 
-  {{ bamboo_render_form('qs_activity', 'ActivityInlineAddMemberForm', {'activity': variables.activity, 'members': variables.members}) }}
+  {{ bamboo_render_form('qs_activity', 'ActivityInlineAddMemberForm', {'activity': variables.activity}) }}
 
   {% if variables.members %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
@@ -27,7 +27,11 @@
           <span class="card-pill-title">
               {{ member.field_firstname.value }} {{ member.field_lastname.value }}
           </span>
-          <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+
+          {# Privilege Badges #}
+          {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege-user.html.twig' with {'privileges': member.privileges} %}
+
+          <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left" aria-label="{{ 'qs.user.more'|t }}">
             {{ macros.icon('look') }}
             <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
           </span>

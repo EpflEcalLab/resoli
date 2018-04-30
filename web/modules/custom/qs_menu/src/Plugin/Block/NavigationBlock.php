@@ -9,6 +9,7 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Routing\UrlGeneratorInterface;
+use Drupal\masquerade\Masquerade;
 
 /**
  * Navigation Block.
@@ -49,14 +50,22 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
   protected $urlGenerator;
 
   /**
+   * The Masquerade Service.
+   *
+   * @var \Drupal\masquerade\Masquerade
+   */
+  private $masquerade;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, AccountProxyInterface $currentUser, UrlGeneratorInterface $url_generator) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, AccountProxyInterface $currentUser, UrlGeneratorInterface $url_generator, Masquerade $masquerade) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->acl          = $acl;
     $this->route        = $route;
     $this->currentUser  = $currentUser;
     $this->urlGenerator = $url_generator;
+    $this->masquerade   = $masquerade;
   }
 
   /**
@@ -73,7 +82,8 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
         $container->get('qs_acl.access_control'),
         $container->get('current_route_match'),
         $container->get('current_user'),
-        $container->get('url_generator')
+        $container->get('url_generator'),
+        $container->get('masquerade')
     );
   }
 
@@ -237,6 +247,15 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
         ],
       ];
     }
+
+    if ($this->masquerade->isMasquerading()) {
+      $render['#variables']['settings']['unmasquerade'] = [
+        'label' => $this->t('qs.masquerade.unmasquerade'),
+        'url'   => $this->urlGenerator->generate('masquerade.unmasquerade'),
+        'icon'  => 'power',
+      ];
+    }
+
     $current_item = NULL;
     foreach ($render['#variables']['menu'] as $key => $item) {
       if (in_array($variables['route_name'], $item['activated_by'])) {

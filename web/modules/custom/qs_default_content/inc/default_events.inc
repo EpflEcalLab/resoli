@@ -300,13 +300,53 @@ function qs_default_content_events() {
   $event_54->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
   $event_54->save();
 
-  // Event - Activity (3) - 3 months ago at 15h15.
-  $event_55 = $nodeStorage->load(55);
+  // Event - Activity (56) - 3 months ago at 18h12.
+  $event_58 = $nodeStorage->load(58);
   $dt = new DrupalDateTime();
-  $dt->modify('-3 months')->setTime(15, 15);
+  $dt->modify('-3 months')->setTime(18, 12);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_55->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
-  $dt->modify('+3 hours');
-  $event_55->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
-  $event_55->save();
+  $event_58->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $dt->modify('+1 hours');
+  $event_58->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_58->save();
+
+  // Event - Activity (56) - Today in 2 hour.
+  $event_59 = $nodeStorage->load(59);
+  $dt = new DrupalDateTime();
+  $dt->modify('+2 hour');
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_59->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $dt->modify('+48 minutes');
+  $event_59->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_59->save();
+
+  // Event - Activity (57) - 3 months ago at 16h19.
+  $event_60 = $nodeStorage->load(60);
+  $dt = new DrupalDateTime();
+  $dt->modify('-3 months')->setTime(16, 19);
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_60->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $dt->modify('+4 hours');
+  $event_60->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_60->save();
+
+  // Event - Activity (57) - Today in 30 minutes.
+  $event_61 = $nodeStorage->load(61);
+  $dt = new DrupalDateTime();
+  $dt->modify('+30 minutes');
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_61->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $dt->modify('+90 minutes');
+  $event_61->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_61->save();
+
+  // Event - Activity (62) - Today in 44 minutes.
+  $event_63 = $nodeStorage->load(63);
+  $dt = new DrupalDateTime();
+  $dt->modify('+44 minutes');
+  $dt->setTimezone(new DateTimeZone('UTC'));
+  $event_63->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $dt->modify('+91 minutes');
+  $event_63->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_63->save();
 }

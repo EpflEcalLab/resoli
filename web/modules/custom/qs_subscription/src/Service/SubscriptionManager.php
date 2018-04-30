@@ -139,9 +139,12 @@ class SubscriptionManager {
     if ($ids) {
       $accounts = $this->userStorage->loadMultiple($ids);
 
+      // Load the user entity from proxy session.
+      $author = $this->userStorage->load($user->id());
+
       foreach ($accounts as $account) {
         $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_request_organizers', $account->getEmail(), $account->getPreferredLangcode(), [
-          'user'  => $user->entity,
+          'user'  => $author,
           'event' => $event,
         ]);
       }

@@ -93,6 +93,16 @@
 @include text-emphasis-variant('.text-gray', $gray-700);
 @include text-emphasis-variant('.text-warning', color("warning"));
 
+// Make sure the links inside .text-white are all white.
+// We avoid adding the classes in string translations that way (homepage sponsors)
+.text-white a {
+  color: $white !important;
+
+  @include hover-focus-active {
+    color: $white !important;
+  }
+}
+
 // Click helpers
 .pointers-none {
   pointer-events: none;

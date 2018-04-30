@@ -17,9 +17,21 @@ $status-list: (
   }
 }
 
+[data-status-badge] {
+  [data-status-badge-show] {
+    display: none;
+  }
+}
+
 @each $status in $status-list {
   [data-status=#{$status}] {
     [data-status-show=#{$status}] {
+      display: block;
+    }
+  }
+
+  [data-status-badge=#{$status}] {
+    [data-status-badge-show=#{$status}] {
       display: block;
     }
   }

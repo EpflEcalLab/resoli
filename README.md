@@ -370,6 +370,7 @@ Eg. `/path/to/webroot/sites/simpletest/browser_output`.
 Customs modules:
 
  - [Antistatique - Easy Breadcrumb](./web/modules/custom/antistatique/antistatique_easy_breadcrumb/README.md)
+ - [Quartiers-Solidaires - Badges](./web/modules/custom/qs_badge/README.md)
 
 ## 🚑 Troubleshootings
 

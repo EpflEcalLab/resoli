@@ -41,9 +41,9 @@
             <div class="card-actions row">
               <div class="col-sm-6 offset-sm-3 mb-3">
                 <form action="{{ path('qs_subscription.decline', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
-                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_subscription.waiting_approval.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
+                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_subscription.subscribers.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
                     {{ macros.icon('trash') }}
-                    {{ 'qs.reject'|t }}
+                    {{ 'qs_subscription.subscribers.reject'|t }}
                   </button>
                 </form>
               </div>

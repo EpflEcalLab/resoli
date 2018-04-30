@@ -59,7 +59,7 @@ a.card {
   }
 
   .flag {
-    margin: ($spacer * -2.4) auto ($spacer * -3) auto;
+    margin: ($spacer * -2.4) ($spacer * 0.5) ($spacer * -3) auto;
 
     @include media-breakpoint-up(lg) {
       margin-right: ($spacer * 2);
@@ -165,6 +165,10 @@ a[href].card-pill-simple {
         margin-right: $card-spacer-x;
       }
     }
+  }
+
+  .lead {
+    line-height: 1.1;
   }
 
   // Make sure when we're centering the text, the icon is not pushing things in
@@ -374,6 +378,10 @@ a[href].card-pill-simple {
 
         .card-pill-title {
           color: $body-color;
+
+          .lead {
+            color: $value;
+          }
         }
 
         .card-pill-icon {

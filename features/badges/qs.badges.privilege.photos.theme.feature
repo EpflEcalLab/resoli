@@ -37,3 +37,17 @@ Feature: Badges - Privilege - Photos by Theme
   When I am on "/fribourg/photos/theme"
   And the response status code should be 200
   Then I should see 0 ".card" elements
+
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I see no badges 'cause I belongs to no events which already have photos.
+  Given I am logged in as user "member2+fribourg"
+  When I am on "/fribourg/photos/theme"
+  And the response status code should be 200
+  Then I should see 0 ".card" elements
+
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I see no badges 'cause I belongs to no events which already have photos.
+  Given I am logged in as user "member+fribourg+organizer+fribourg"
+  When I am on "/fribourg/photos/theme"
+  And the response status code should be 200
+  Then I should see 0 ".card" elements

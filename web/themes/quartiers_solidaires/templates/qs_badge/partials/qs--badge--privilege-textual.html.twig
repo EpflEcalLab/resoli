@@ -1,6 +1,14 @@
 {% if activity and badges.privileges %}
   {% if activity.nid.value in badges.privileges|keys %}
+
+    {# Get user Highest privilege #}
     {% set privilege = badges.privileges[activity.nid.value]|last %}
+
+    {# Adapte the color of text according user privilege of activity #}
+    {% set theme = [
+      'd-block',
+    ] %}
+
     <p>
       {% if privilege == 'activity_members' %}
         {% set roles = 'qs.roles.activity_member'|t %}
@@ -12,7 +20,7 @@
         {% set roles = 'qs.roles.activity_organizer'|t %}
       {% endif %}
 
-      <strong>{{ 'qs.activity.user.you_are @role'|t({
+      <strong class="{{ theme|join(' ') }}">{{ 'qs.activity.user.you_are @role'|t({
         '@role': roles
       }) }}</strong>
     </p>

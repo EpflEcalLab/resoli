@@ -31,7 +31,9 @@
           <span class="card-pill-icon">
             {{ macros.icon('theme_' ~ activity.field_theme.entity.field_icon.value) }}
           </span>
-          <span class="card-pill-title">{{ activity.title.value }}</span>
+          <span class="card-pill-title">
+            <span class="lead">{{ activity.title.value }}</span>
+          </span>
 
           {# Privilege Badges #}
           {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege.html.twig' with {'activity': activity, 'badges': variables.badges} %}
@@ -69,7 +71,7 @@
         {% set member = 'qs.roles.activity_member'|t %}
         {% set maintainer = 'qs.roles.activity_maintainer'|t %}
         {% trans %}
-          qs.activity.user.collection.empty <span class="text-info">{{ member }}</span> <span class="text-warning">{{ maintainer }}</span>
+          qs.activity.user.collection.empty {{ member }} {{ maintainer }}
         {% endtrans %}
       </p>
     </div>
@@ -91,7 +93,7 @@
       <p>
         {% set organizer = 'qs.roles.activity_organizer'|t %}
         {% trans %}
-        qs.activity.become.activity.organizer <span class="text-danger">{{ organizer }}</span>
+        qs.activity.become.activity.organizer {{ organizer }}
         {% endtrans %}
       </p>
     </div>

@@ -66,9 +66,10 @@
         {# Write the header if we have a new value #}
         {% if current_header|render != new_header|render %}
           {% set current_header = new_header %}
+          {% set accordion_id = 'events-accordion' ~ loop.index  %}
           {% if loop.index > 1 %}
             </ul>
-            <ul class="card-list">
+            <ul class="card-list" id="{{ accordion_id }}" data-children=".card-list-item">
           {% endif %}
           <li class="sticky-top bg-white mb-2 py-2 row">
             <h2 class="col-12 h5 mb-0">{{ current_header }}</h2>
@@ -78,7 +79,7 @@
         <li class="card card-list-item" id="card{{ event.nid.value }}">
           {% include "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
 
-          <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel">
+          <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#{{ accordion_id }}">
               <div class="card-body">
                 <div class="card-text text-center">
                   <h4 class="h5 card-title mb-1 mt-0">{{ event.title.value }}</h4>

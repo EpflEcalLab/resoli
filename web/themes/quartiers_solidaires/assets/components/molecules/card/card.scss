@@ -43,15 +43,14 @@ a.card {
 
 // The card pill displays an icon at the left
 .card-pill {
-  position: relative;
   display: flex;
+  position: relative;
   align-items: center;
   margin: -$card-border-width;
-  color: color("light");
-  font-weight: $font-weight-bold;
-  border-bottom: none;
-  background-color: $card-cap-bg;
   border: $card-border-width solid $card-cap-bg;
+  background-color: $card-cap-bg;
+  font-weight: $font-weight-bold;
+  color: color("light");
 
   @include border-radius($card-border-radius);
 
@@ -60,7 +59,11 @@ a.card {
   }
 
   .flag {
-    margin: ($spacer * -2.25) 0 ($spacer * -3) ($card-spacer-x * 2);
+    margin: ($spacer * -2.4) ($spacer * 0.5) ($spacer * -3) auto;
+
+    @include media-breakpoint-up(lg) {
+      margin-right: ($spacer * 2);
+    }
 
     @include flag-size(60px);
   }
@@ -93,12 +96,16 @@ a[href].card-pill {
 
 // Variation of the pill with Primary colors
 .card-pill-simple {
-  color: theme-color("primary");
-  font-weight: $font-weight-normal;
   border: 0;
+  font-weight: $font-weight-normal;
+  color: theme-color("primary");
 
   .card-pill-icon .icon {
     color: theme-color("primary");
+  }
+
+  .card:not(.card-open) & .card-pill-title {
+    color: theme-color("primary") !important;
   }
 }
 
@@ -123,8 +130,16 @@ a[href].card-pill-simple {
       }
 
       .card-pill-icon .icon {
-        border: $card-border-width solid theme-color("secondary");
         color: theme-color("secondary");
+
+        svg {
+          max-width: 32px;
+          max-height: 32px;
+        }
+      }
+
+      .card-pill-icon:not(.card-pill-icon-lg) .icon {
+        border: $card-border-width solid theme-color("secondary");
       }
 
       .text-dark {
@@ -135,6 +150,7 @@ a[href].card-pill-simple {
 }
 
 .card-pill-title {
+  margin-right: auto;
   overflow: hidden;
   text-overflow: ellipsis;
 
@@ -149,6 +165,10 @@ a[href].card-pill-simple {
         margin-right: $card-spacer-x;
       }
     }
+  }
+
+  .lead {
+    line-height: 1.1;
   }
 
   // Make sure when we're centering the text, the icon is not pushing things in
@@ -171,6 +191,10 @@ a[href].card-pill-simple {
   display: inline-block;
   width: 11em;
   flex-shrink: 0;
+
+  &:not(:first-child) {
+    margin-left: ($spacer * 0.5);
+  }
 
   @include media-breakpoint-down(sm) {
     width: 7em;
@@ -238,8 +262,8 @@ a[href].card-pill-simple {
 
 .card-btn-corner {
   position: absolute;
-  bottom: -$card-border-width;
   right: -$card-border-width;
+  bottom: -$card-border-width;
 }
 
 // Card List Item
@@ -265,7 +289,7 @@ a[href].card-pill-simple {
     background: none;
     border-color: transparent;
 
-    .card-pill-icon {
+    .card-pill-icon:not(.card-pill-icon-lg) {
       .icon {
         background-color: $card-cap-bg;
         color: color("light");
@@ -295,7 +319,7 @@ a[href].card-pill-simple {
       border: $card-border-width solid $card-cap-bg;
 
       .btn {
-        display: none;
+        opacity: 0;
       }
     }
   }
@@ -329,9 +353,13 @@ a[href].card-pill-simple {
         margin-top: (-$card-border-width);
         margin-bottom: (-$card-border-width);
         margin-left: (-$card-border-width);
+      }
 
-        .icon {
-          background-color: transparent;
+      &:not(.card-open) {
+        .card-pill-icon {
+          .icon {
+            background-color: transparent !important;
+          }
         }
       }
 
@@ -350,6 +378,10 @@ a[href].card-pill-simple {
 
         .card-pill-title {
           color: $body-color;
+
+          .lead {
+            color: $value;
+          }
         }
 
         .card-pill-icon {
@@ -391,6 +423,10 @@ a[href].card-pill-simple {
   .flag {
     @include flag-size(50px);
   }
+
+  .card-pill-title {
+    margin-right: auto;
+  }
 }
 
 .card-map {
@@ -400,18 +436,18 @@ a[href].card-pill-simple {
   height: 600px;
 }
 
-.card-map-container {
+.card-back-map .card-body {
+  position: relative;
+  z-index: -1;
+  margin-top: -1rem;
+  padding: 0;
   overflow: hidden;
-
-  @include border-radius($card-border-radius - $card-border-width);
+  border-bottom-right-radius: ($card-border-radius - $card-border-width);
+  border-bottom-left-radius: ($card-border-radius - $card-border-width);
 
   .card-pill {
     position: relative;
     z-index: 100;
-  }
-
-  .card-body {
-    padding: 0;
   }
 }
 
@@ -556,6 +592,10 @@ a[href].card-pill-simple {
 
     .card-back:target {
       position: static;
+    }
+
+    .card-front .flag {
+      opacity: 0;
     }
   }
 }

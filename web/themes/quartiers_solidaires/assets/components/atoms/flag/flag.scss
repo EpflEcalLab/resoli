@@ -10,6 +10,12 @@
   }
 
   @include flag-size(40px);
+
+  .card > & {
+    position: absolute;
+    top: -5px;
+    right: ($grid-gutter-width / 2);
+  }
 }
 
 .flag-shield {
@@ -23,6 +29,12 @@
 
   &.flag-shield {
     @include flag-size(60px * 1.1);
+  }
+}
+
+.calendar-item {
+  .flag-info {
+    margin-top: -3px;
   }
 }
 

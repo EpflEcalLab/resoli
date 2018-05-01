@@ -1,0 +1,206 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre\/events\/mariage-et-chatiment?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre?_format=hal_json"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 54
+        }
+    ],
+    "uuid": [
+        {
+            "value": "a65592c3-0343-4352-81af-b1ab32fa1336"
+        }
+    ],
+    "vid": [
+        {
+            "value": 134
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "event"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2018-02-21T10:24:01+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "720798cb-a22d-46bf-9623-0c89e58574cc"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "720798cb-a22d-46bf-9623-0c89e58574cc"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/lausanne\/activities\/sorties-theatre?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Mariage et ch\u00e2timent",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2018-02-21T10:24:01+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2018-02-21T10:24:01+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "<p>De David Pharao, mise en sc\u00e8ne Jean-Luc Moreau<br \/>\r\nAvec Daniel Russo, Laurent Gamelon, Zo\u00e9 Nonn\u2026<\/p>\r\n\r\n<p id=\"_description2\" itemprop=\"description\"><em>Mariage et ch\u00e2timent<\/em>, une pi\u00e8ce de David Pharao mise en sc\u00e8ne par Jean-Luc Moreau \u00e0 d\u00e9couvrir au Th\u00e9\u00e2tre de Beausobre \u00e0 Morges le 6 mars 2018.<br \/>\r\n<br \/>\r\nAlors qu\u2019il s\u2019appr\u00eate \u00e0 \u00eatre t\u00e9moin au mariage de son meilleur ami avec une Miss M\u00e9t\u00e9o, \u00c9douard apprend qu\u2019il doit s\u2019absenter pour r\u00e9pondre \u00e0 une obligation professionnelle de derni\u00e8re minute. Incapable d\u2019avouer la v\u00e9rit\u00e9 \u00e0 ses proches, \u00c9douard d\u00e9cide d\u2019inventer un \u00e9norme mensonge, sans se douter que cette petite l\u00e2chet\u00e9 va se retourner contre lui et prendre une tournure dramatique.<br \/>\r\n<br \/>\r\nToutes les v\u00e9rit\u00e9s sont-elles bonnes \u00e0 dire? C\u2019est l\u2019enjeu de cette com\u00e9die qui m\u00eale quiproquos et faux-semblants dans une joyeuse pagaille. Il y a du Bourvil et du Louis de Fun\u00e8s dans le duo que forment Daniel Russo et Laurent Gamelon. Entre les deux com\u00e9diens aux personnalit\u00e9s compl\u00e9mentaires et attachantes, la complicit\u00e9 est palpable. De malentendus tragiques en rebondissements d\u00e9lirants, on rit autant qu\u2019on est touch\u00e9 par cet hymne mordant \u00e0 l\u2019amiti\u00e9.<\/p>\r\n",
+            "format": "full_html",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_mail": [
+        {
+            "value": "manager+lausanne@antistatique.net"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Juda Bricot",
+            "lang": "zxx"
+        }
+    ],
+    "field_end_at": [
+        {
+            "value": "2018-02-22T23:00:00"
+        }
+    ],
+    "field_start_at": [
+        {
+            "value": "2018-02-23T18:00:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Th\u00e9\u00e2tre de Beausobre  2, avenue de Vertou  1110 Morges"
+        }
+    ],
+    "field_venue_lat": [
+        {
+            "value": "46.8182"
+        }
+    ],
+    "field_venue_long": [
+        {
+            "value": "8.2275"
+        }
+    ]
+}

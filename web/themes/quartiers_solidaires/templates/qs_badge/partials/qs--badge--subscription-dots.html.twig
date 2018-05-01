@@ -1,0 +1,41 @@
+{# Subscriptions Badges #}
+{% if day and badges.events_subscriptions.confirmed and day|date('Y-m-d') in badges.events_subscriptions.confirmed|keys %}
+
+  {% set theme = 'info' %}
+  {# Adapte the color of badge according user privilege of this day #}
+  {% if day|date('Y-m-d') in badges.privileges|keys %}
+
+    {# Get user Highest privilege #}
+    {% set privilege = badges.privileges[day|date('Y-m-d')]|last %}
+    {% set roles = 'qs.roles.activity_member'|t %}
+    {% if privilege == 'activity_maintainers' %}
+      {% set theme = 'warning' %}
+      {% set roles = 'qs.roles.activity_maintainer'|t %}
+    {% endif %}
+    {% if privilege == 'activity_organizers' %}
+      {% set theme = 'danger' %}
+      {% set roles = 'qs.roles.activity_organizer'|t %}
+    {% endif %}
+  {% endif %}
+
+  {% set title = 'qs.activity.user.you_are @role'|t({
+    '@role': roles
+  }) %}
+
+  {% set shield = privilege in ['activity_maintainers', 'activity_organizers'] %}
+
+  {% set classes = [
+    'flag',
+    'flag-' ~ theme,
+    shield ? 'flag-shield' : 'flag-default',
+    'flag-subscription-confirmed',
+  ] %}
+  <div class="{{ classes|join(' ') }}" title="{{ title }}"{{ data ? ' data-status-show=' ~ data }}>
+    <div class="flag-number">{{ day|date('j') }}</div>
+    <svg class="icon " preserveAspectRatio="xMidYMid" aria-hidden="true">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ shield ? 'shield' : 'flag' }}"></use>
+    </svg>
+  </div>
+{% else %}
+  <span>{{ day|date('j') }}</span>
+{% endif %}

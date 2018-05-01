@@ -1,0 +1,200 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fribourg\/activities\/monopoly\/events\/monopol-pokemon?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/event"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "href": "http:\/\/default\/fribourg\/activities\/monopoly?_format=hal_json"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 60
+        }
+    ],
+    "uuid": [
+        {
+            "value": "27a5e517-0af2-4e63-b74f-496b11b32876"
+        }
+    ],
+    "vid": [
+        {
+            "value": 142
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "event"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2018-04-05T09:33:04+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "59c31453-5ea8-49f2-bf81-00a7d44a2948"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "59c31453-5ea8-49f2-bf81-00a7d44a2948"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/event\/field_activity": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/fribourg\/activities\/monopoly?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/activity"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "54d76066-ae8b-475e-b8d9-68d9577166c2"
+                    }
+                ]
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Monopol Pok\u00e9mon",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2018-04-05T09:33:04+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2018-04-05T09:33:04+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "I wanna be the very best\r\nLike no one ever was\r\nTo catch them is my real test\r\nTo train them is my cause13\r\n\r\nI will travel across the land\r\nSearching far and wide\r\nTeach pok\u00e9mon to understand\r\nThe power that's inside2\r\n\r\nPok\u00e9mon! Gotta catch 'em all\r\nIt's you and me\r\nI know it's my destiny\r\nPok\u00e9mon! Oh, you're my best friend\r\nIn a world we must defend",
+            "format": null,
+            "summary": null,
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_mail": [
+        {
+            "value": "member+fribourg+organizer+fribourg@antistatique.net"
+        }
+    ],
+    "field_end_at": [
+        {
+            "value": "2018-04-05T10:32:00"
+        }
+    ],
+    "field_start_at": [
+        {
+            "value": "2018-04-05T09:32:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Bern, Switzerland"
+        }
+    ],
+    "field_venue_lat": [
+        {
+            "value": "46.9480"
+        }
+    ],
+    "field_venue_long": [
+        {
+            "value": "7.4474"
+        }
+    ]
+}

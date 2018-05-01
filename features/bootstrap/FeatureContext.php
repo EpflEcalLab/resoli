@@ -45,6 +45,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
         'username' => 'member+fribourg@antistatique.net',
         'pass'     => 'member+fribourg',
     ],
+    'member2+fribourg' => [
+        'username' => 'member2+fribourg@antistatique.net',
+        'pass'     => 'member2+fribourg',
+    ],
     'member+lausanne+organizer+fribourg' => [
         'username' => 'member+lausanne+organizer+fribourg@antistatique.net',
         'pass'     => 'member+lausanne+organizer+fribourg',

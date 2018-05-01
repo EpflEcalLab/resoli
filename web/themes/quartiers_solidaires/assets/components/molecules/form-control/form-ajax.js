@@ -53,6 +53,14 @@ const formAjax = () => {
               case 'fadeout-parent':
                 const $parent = $(`#${$this.data('parent')}`);
                 if ($parent.length > 0) {
+                  // When animation is finished, remove element from DOM.
+                  $parent.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function(e) {
+                    if ($(this).hasClass('card-fadeout')) {
+                      $(this).remove();
+                    }
+                    $(this).off(e);
+                  });
+                  // Toggle animation.
                   $parent.toggleClass('card-fadeout');
                 }
                 break;

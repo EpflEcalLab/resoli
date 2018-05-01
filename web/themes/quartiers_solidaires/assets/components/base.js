@@ -13,11 +13,15 @@ import formSelectize from 'molecules/form-control/form-selectize';
 import formComment from 'molecules/form-control/form-comment';
 import calendar from 'molecules/calendar/calendar';
 import modal from 'organisms/modal/modal';
+import floating from 'organisms/floating/floating';
 import ie from 'ie';
+import { layout, preventAutoScroll } from 'layout';
 
 svgIcons();
 
 (function($) {
+  preventAutoScroll();
+
   $(document).ready(function() {
     card();
     nav();
@@ -32,5 +36,7 @@ svgIcons();
     modal();
     formComment();
     ie();
+    floating();
+    layout();
   });
 })(jQuery);

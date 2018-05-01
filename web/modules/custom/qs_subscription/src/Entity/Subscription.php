@@ -20,11 +20,21 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
  * @ContentEntityType(
  *   id = "subscription",
  *   label = @Translation("Subscription"),
+ *   handlers = {
+ *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "views_data"   = "Drupal\views\EntityViewsData",
+ *     "form" = {
+ *       "default" = "Drupal\Core\Entity\ContentEntityForm",
+ *     },
+ *   },
  *   base_table = "subscriptions",
  *   admin_permission = "administer subscription entity",
  *   fieldable = false,
  *   entity_keys = {
  *     "id" = "id"
+ *   },
+ *   links = {
+ *     "collection" = "/admin/content/subscriptions",
  *   },
  * )
  */

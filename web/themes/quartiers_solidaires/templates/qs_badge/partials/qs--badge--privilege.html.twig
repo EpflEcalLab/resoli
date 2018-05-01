@@ -1,0 +1,41 @@
+{# Privilege Badges #}
+{% if activity.nid.value and badges.privileges and activity.nid.value in badges.privileges|keys%}
+  {# Get user Highest privilege #}
+  {% set privilege = badges.privileges[activity.nid.value]|last %}
+
+  {# Adapte the color of badge according user privilege of activity #}
+  {% set roles = 'qs.roles.activity_member'|t %}
+  {% if privilege == 'activity_maintainers' %}
+    {% set theme = 'warning' %}
+    {% set roles = 'qs.roles.activity_maintainer'|t %}
+  {% endif %}
+  {% if privilege == 'activity_organizers' %}
+    {% set theme = 'danger' %}
+    {% set roles = 'qs.roles.activity_organizer'|t %}
+  {% endif %}
+
+  {% if (privilege == 'activity_maintainers' or privilege == 'activity_organizers') and activity.nid.value in badges.activities_subscriptions.pendings_guests|keys %}
+
+    {% set shield = privilege in ['activity_maintainers', 'activity_organizers'] %}
+
+    {{ macros.badge('outline-' ~ theme, 'wait', 'flag-subscription-guests-wait', 'qs.event.user.subscription.pendings_guests'|t, shield) }}
+  {% else %}
+    {% if privilege == 'activity_members' %}
+      {{ macros.badge('info', 'happy', 'flag-privilege-members', 'qs.activity.user.you_are @role'|t({
+        '@role': roles
+      })) }}
+    {% endif %}
+
+    {% if privilege == 'activity_maintainers' %}
+      {{ macros.badge('warning', 'happy', 'flag-privilege-maintainers', 'qs.activity.user.you_are @role'|t({
+        '@role': roles
+      }), true) }}
+    {% endif %}
+
+    {% if privilege == 'activity_organizers' %}
+      {{ macros.badge('danger', 'happy', 'flag-privilege-organizers', 'qs.activity.user.you_are @role'|t({
+        '@role': roles
+      }), true) }}
+    {% endif %}
+  {% endif %}
+{% endif %}

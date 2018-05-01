@@ -1,0 +1,70 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/fr\/user\/23?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+        }
+    },
+    "uid": [
+        {
+            "value": 23
+        }
+    ],
+    "uuid": [
+        {
+            "value": "19e12c7f-1c2f-42bd-886d-29281fb30dd6"
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        }
+    ],
+    "name": [
+        {
+            "value": "member2+fribourg@antistatique.net"
+        }
+    ],
+    "created": [
+        {
+            "value": "2018-04-05T10:05:03+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2018-04-05T10:05:03+00:00",
+            "lang": "fr",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        }
+    ],
+    "field_firstname": [
+        {
+            "value": "Abel"
+        }
+    ],
+    "field_lastname": [
+        {
+            "value": "Auboisdormant"
+        }
+    ],
+    "pass": [
+        {
+            "value": "member2+fribourg"
+        }
+    ],
+    "status": [
+        {
+            "value": 1
+        }
+    ]
+}

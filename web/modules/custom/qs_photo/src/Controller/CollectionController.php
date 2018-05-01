@@ -14,6 +14,7 @@ use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\qs_activity\Service\EventManager;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\qs_badge\Service\BadgeManager;
 
 /**
  * CollectionController.
@@ -70,17 +71,24 @@ class CollectionController extends ControllerBase {
   protected $termStorage;
 
   /**
+   * The Badge Manager.
+   *
+   * @var \Drupal\qs_badge\Service\BadgeManager
+   */
+  protected $badgeManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PhotoManager $photo_manager, CalendarBuilder $calendar_builder, ActivityManager $activity_manager, EventManager $event_manager) {
+  public function __construct(AccessControl $acl, PhotoManager $photo_manager, CalendarBuilder $calendar_builder, ActivityManager $activity_manager, EventManager $event_manager, BadgeManager $badge_manager) {
     $this->acl             = $acl;
     $this->photoManager    = $photo_manager;
     $this->calendarBuilder = $calendar_builder;
     $this->activityManager = $activity_manager;
     $this->eventManager    = $event_manager;
     $this->nodeStorage     = $this->entityTypeManager()->getStorage('node');
-    $this->termStorage     = $this->entityTypeManager()
-      ->getStorage('taxonomy_term');
+    $this->termStorage     = $this->entityTypeManager()->getStorage('taxonomy_term');
+    $this->badgeManager    = $badge_manager;
   }
 
   /**
@@ -94,7 +102,8 @@ class CollectionController extends ControllerBase {
       $container->get('qs_photo.photo_manager'),
       $container->get('qs_calendar.calendar_builder'),
       $container->get('qs_activity.activity_manager'),
-      $container->get('qs_activity.event_manager')
+      $container->get('qs_activity.event_manager'),
+      $container->get('qs_badge.badge_manager')
     );
   }
 
@@ -206,6 +215,12 @@ class CollectionController extends ControllerBase {
           $variables['photos'][$activity->id()] = $photos;
         }
       }
+    }
+
+    // Get badges.
+    if (!empty($variables['activities'])) {
+      // From list of Activities get user privileges.
+      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($variables['activities']);
     }
 
     return [

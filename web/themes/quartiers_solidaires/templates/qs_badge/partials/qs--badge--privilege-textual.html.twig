@@ -1,0 +1,28 @@
+{% if activity and badges.privileges %}
+  {% if activity.nid.value in badges.privileges|keys %}
+
+    {# Get user Highest privilege #}
+    {% set privilege = badges.privileges[activity.nid.value]|last %}
+
+    {# Adapte the color of text according user privilege of activity #}
+    {% set theme = [
+      'd-block',
+    ] %}
+
+    <p>
+      {% if privilege == 'activity_members' %}
+        {% set roles = 'qs.roles.activity_member'|t %}
+      {% endif %}
+      {% if privilege == 'activity_maintainers' %}
+        {% set roles = 'qs.roles.activity_maintainer'|t %}
+      {% endif %}
+      {% if privilege == 'activity_organizers' %}
+        {% set roles = 'qs.roles.activity_organizer'|t %}
+      {% endif %}
+
+      <strong class="{{ theme|join(' ') }}">{{ 'qs.activity.user.you_are @role'|t({
+        '@role': roles
+      }) }}</strong>
+    </p>
+  {% endif %}
+{% endif %}

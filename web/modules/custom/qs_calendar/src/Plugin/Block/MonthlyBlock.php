@@ -52,12 +52,16 @@ class MonthlyBlock extends PeriodBlockBase {
 
     $variables['current_day'] = $day;
 
-    $date_start         = $this->calendarBuilder->getFirstMondayMonthFullWeek($day);
-    $date_end           = $this->calendarBuilder->getLastSundayMonthFullWeek($day);
+    $date_start = $this->calendarBuilder->getFirstMondayMonthFullWeek($day);
+    $date_end   = $this->calendarBuilder->getLastSundayMonthFullWeek($day);
+    $date_end->setTime(23, 59, 59);
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
     // Count for every days between two dates how many events occure by day.
     $variables['events'] = $this->badgeManager->countEventsByDates($community, $date_start, $date_end);
+
+    // Get Badges for Dotes.
+    $variables['badges'] = $this->getDotesBadges($community, $date_start, $date_end);
 
     return [
       '#theme'     => 'qs_calendar_monthly_block',

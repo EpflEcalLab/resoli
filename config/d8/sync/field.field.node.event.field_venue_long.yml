@@ -13,9 +13,7 @@ label: 'Venue - Longitude'
 description: "Range of latitude is -180° and +180°. <br>\r\nFourth decimal place is worth up to 11 m: it can identify a parcel of land."
 required: false
 translatable: false
-default_value:
-  -
-    value: 8.2275
+default_value: {  }
 default_value_callback: ''
 settings:
   min: !!float -180

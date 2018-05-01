@@ -9,8 +9,6 @@
  *
  * @see template_preprocess_checkboxes()
  */
- @todo: remove this file once https://www.drupal.org/node/1819284 is resolved.
- This is identical to core/modules/system/templates/container.html.twig
 #}
 {%
   set classes = [
@@ -31,4 +29,4 @@
     element['#error'] ? 'is-invalid'
   ]
 %}
-<div{{ attributes.addClass(classes).setAttribute('data-toggle', 'buttons') }}>{{ children }}</div>
+<div{{ attributes.addClass(classes).addClass('mb-5').setAttribute('data-toggle', 'buttons') }}>{{ children }}</div>

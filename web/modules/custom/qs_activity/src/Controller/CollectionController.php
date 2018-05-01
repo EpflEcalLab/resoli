@@ -152,6 +152,15 @@ class CollectionController extends ControllerBase {
       }
     }
 
+    // Get badges.
+    if (!empty($variables['activities'])) {
+      // From list of Activities get user privileges.
+      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($variables['activities']);
+
+      // From list of Activities count pending subscriptions by activity.
+      $variables['badges']['activities_subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptionsByActivities($variables['activities'], NULL);
+    }
+
     return [
       '#theme'     => 'qs_activity_collection_by_theme_page',
       '#variables' => $variables,
@@ -219,19 +228,25 @@ class CollectionController extends ControllerBase {
     $events = $this->eventManager->getByDate($community, $start, $end);
     $variables['events'] = $events;
 
+    // Get the only next events of each ones.
+    $activities = $this->activityManager->getByDate($community, $start, $end);
+
     // Get badges.
-    if (!empty($events)) {
+    if (!empty($events) && !empty($activities)) {
       // From a list of Events where current user has pending subscriptions.
       $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($events, NULL);
 
       // From a list of Events where current user has confirmed subscription.
-      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($events, 1);
+      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($events, TRUE);
 
-      // From a list of Events number of pending subscriptions.
-      $variables['badges']['admin']['subscriptions']['pendings'] = [];
+      // From list of Activities get user privileges.
+      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($activities);
 
-      // From a list of Events number of subscriptions.
-      $variables['badges']['admin']['subscriptions']['confirmed'] = [];
+      // From list of Events count pending subscriptions by given events.
+      $variables['badges']['subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptions($events, NULL);
+
+      // From list of Events count confirmed subscriptions by given events.
+      $variables['badges']['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($events, TRUE);
     }
 
     return [

@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## 1.1.0 (2018-04-26)
  - add the sponsors on homepage
  - change confirmed icon for event registering #598
  - increase size of activity in activity user collection and in photos collection #545

@@ -191,6 +191,9 @@ class ActivityAddForm extends FormBasic {
       '#description' => $this->t('qs_activity.activities.form.step3.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step3'),
+        'class' => [
+          'mb-4',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',

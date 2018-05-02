@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1 (2018-05-02)
+ - add white border to btn-info buttons #598
+ - add spacing below visibility buttons in ActivityAddForm #398
+
 ## 1.1.0 (2018-04-26)
  - add the sponsors on homepage
  - change confirmed icon for event registering #598

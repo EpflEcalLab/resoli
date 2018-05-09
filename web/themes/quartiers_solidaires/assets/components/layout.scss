@@ -16,3 +16,7 @@
 #toolbar-administration {
   z-index: ($zindex-tooltip * 2);
 }
+
+body.toolbar-fixed .toolbar-oriented .toolbar-bar {
+  z-index: ($zindex-tooltip * 2);
+}

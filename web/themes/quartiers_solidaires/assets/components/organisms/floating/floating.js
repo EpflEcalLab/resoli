@@ -5,10 +5,16 @@ const floating = () => {
     let elements = $('.sticky-bottom, .sticky-top');
     Stickyfill.add(elements);
 
-    $(document).on('DOMNodeInserted', function() {
-      elements = $('.sticky-bottom, .sticky-top');
+    $(document).on('DOMNodeInserted', function(e) {
+      // Resticky only new elements of inserted target or himself.
+      const elements = $(e.target).find('.sticky-bottom, .sticky-top').addBack('.sticky-bottom, .sticky-top');
       Stickyfill.add(elements);
-      Stickyfill.refreshAll();
+
+      // Refresh only newly added sticky element.
+      elements.forEach(element => {
+        const sticky = new Stickyfill.Sticky(element);
+        sticky.refresh();
+      });
     });
 
   })(jQuery);

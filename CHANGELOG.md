@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.2 (2018-05-14)
+ - update to Drupal 8.5.3
+ - fix IE 11 regression, sticky polyfill crash #620
+
 ## 1.1.1 (2018-05-02)
  - add white border to btn-info buttons #598
  - add spacing below visibility buttons in ActivityAddForm #398

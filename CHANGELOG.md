@@ -2,6 +2,7 @@
 
 ## NEXT RELEASE
  - add mailjet as SMTP mail provider.
+ - add german (de) language
 
 ## 1.1.2 (2018-05-14)
  - update to Drupal 8.5.3

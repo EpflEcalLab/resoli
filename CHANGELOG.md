@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.3 (2018-06-28)
+ - add mailjet as SMTP mail provider.
+ - update to Drupal 8.5.4
+
 ## 1.1.2 (2018-05-14)
  - update to Drupal 8.5.3
  - fix IE 11 regression, sticky polyfill crash #620

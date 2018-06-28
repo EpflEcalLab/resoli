@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## 1.1.3 (2018-06-28)
  - add mailjet as SMTP mail provider.
  - update to Drupal 8.5.4
 

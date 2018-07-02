@@ -1,11 +1,17 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/taxonomy\/term\/4?_format=hal_json"
+            "href": "http:\/\/default\/fr\/taxonomy\/term\/4?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
-        }
+        },
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/themes\/content_translation_uid": [
+            {
+                "href": "http:\/\/default\/en\/user\/1?_format=hal_json",
+                "lang": "de"
+            }
+        ]
     },
     "tid": [
         {
@@ -19,8 +25,12 @@
     ],
     "langcode": [
         {
-            "value": "zxx",
-            "lang": "zxx"
+            "value": "fr",
+            "lang": "fr"
+        },
+        {
+            "value": "de",
+            "lang": "de"
         }
     ],
     "vid": [
@@ -31,7 +41,11 @@
     "name": [
         {
             "value": "Activit\u00e9s Cr\u00e9atrices",
-            "lang": "zxx"
+            "lang": "fr"
+        },
+        {
+            "value": "Kreative Aktivit\u00e4ten",
+            "lang": "de"
         }
     ],
     "weight": [
@@ -41,14 +55,81 @@
     ],
     "changed": [
         {
-            "value": 1507559803,
-            "lang": "zxx"
+            "value": "2018-07-02T14:34:30+00:00",
+            "lang": "fr",
+            "format": "Y-m-d\\TH:i:sP"
+        },
+        {
+            "value": "2018-07-02T14:59:43+00:00",
+            "lang": "de",
+            "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "default_langcode": [
         {
             "value": true,
-            "lang": "zxx"
+            "lang": "fr"
+        },
+        {
+            "value": false,
+            "lang": "de"
+        }
+    ],
+    "content_translation_source": [
+        {
+            "value": "und",
+            "lang": "fr"
+        },
+        {
+            "value": "fr",
+            "lang": "de"
+        }
+    ],
+    "content_translation_outdated": [
+        {
+            "value": false,
+            "lang": "fr"
+        },
+        {
+            "value": false,
+            "lang": "de"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/themes\/content_translation_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/default\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "ab33e0b1-6698-41f0-8d7a-7819406c035a"
+                    }
+                ],
+                "lang": "de"
+            }
+        ]
+    },
+    "content_translation_status": [
+        {
+            "value": true,
+            "lang": "fr"
+        },
+        {
+            "value": true,
+            "lang": "de"
+        }
+    ],
+    "content_translation_created": [
+        {
+            "value": "2018-07-02T14:59:43+00:00",
+            "lang": "de",
+            "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "field_icon": [

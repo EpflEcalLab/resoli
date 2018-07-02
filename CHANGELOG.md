@@ -1,8 +1,12 @@
 # CHANGELOG
 
-## NEXT RELEASE
- - add mailjet as SMTP mail provider.
+## NEXT RELEASE
  - add german (de) language
+ - make Taxonomy "Themes" translatable with fallback in Default Site Lang (FR) - #627
+
+## 1.1.3 (2018-06-28)
+ - add mailjet as SMTP mail provider.
+ - update to Drupal 8.5.4
 
 ## 1.1.2 (2018-05-14)
  - update to Drupal 8.5.3

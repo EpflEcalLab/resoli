@@ -209,7 +209,7 @@
                   <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/qs-'~message.langcode~'-logo-black.png') }}" width="200" height="100" alt="{{ bamboo_config_get('system.site', 'name') }}">
               </td>
               <td align="right" style="vertical-align: top;">
-                {{ "now"|date("Y-m-d")|bamboo_i18n_format_date("custom", "d F Y", 'Europe/Zurich', message.langcode) }}
+                {{ "now"|date("Y-m-d")|bamboo_i18n_format_date("default_medium_date_only", 'Europe/Zurich', message.langcode) }}
               </td>
 
               <!-- spacer-side -->

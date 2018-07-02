@@ -17,15 +17,17 @@
   <span class="card-pill-title">
     <span class="size-date">
       <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
-        {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F Y') }}
+        {{ event.field_start_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
       </time>
     </span>
     <span class="d-none d-sm-inline">
-      <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
-        {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}
+      <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d H:i') }}">
+        {# Special use-case for German, we strip the "Uhr" of the start date #}
+        {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+        {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
       </time>
-      – <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
-        {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}
+      – <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'Y-m-d H:i') }}">
+        {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
       </time>
     </span>
   </span>

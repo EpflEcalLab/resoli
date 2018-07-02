@@ -2,6 +2,7 @@
 
 # Kill runserver if one is alive
 ps -ef | grep 'runserver' | grep -v grep | awk '{print $2}' | xargs kill -9
+ps -ef | grep 'd8-rs-router.php' | grep -v grep | awk '{print $2}' | xargs kill -9
 
 scriptDir=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 
@@ -127,6 +128,7 @@ then
 
   # Kill runserver if one is alive
   ps -ef | grep 'runserver' | grep -v grep | awk '{print $2}' | xargs kill -9
+  ps -ef | grep 'd8-rs-router.php' | grep -v grep | awk '{print $2}' | xargs kill -9
 
   cd "web"
   # Enable Big Pipe.

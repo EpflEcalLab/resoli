@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 
 /**
  * FilterForm.
@@ -35,6 +36,13 @@ class FilterForm extends FormBase {
   private $termStorage;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {
@@ -44,10 +52,11 @@ class FilterForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccountProxyInterface $currentUser, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(AccountProxyInterface $currentUser, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager) {
     $this->currentUser = $currentUser;
     $this->requestStack = $request_stack;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -58,7 +67,8 @@ class FilterForm extends FormBase {
     return new static(
         $container->get('current_user'),
         $container->get('request_stack'),
-        $container->get('entity_type.manager')
+        $container->get('entity_type.manager'),
+        $container->get('language_manager')
     );
   }
 
@@ -66,6 +76,9 @@ class FilterForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    // Get the current language.
+    $currentLang = $this->languageManager->getCurrentLanguage();
+
     $form['#method'] = 'GET';
 
     // The request should be took at the last moment, avoid it on constructor.
@@ -82,6 +95,10 @@ class FilterForm extends FormBase {
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
     foreach ($themes as $theme) {
+      // Check if has translation.
+      if ($theme->hasTranslation($currentLang->getId())) {
+        $theme = $theme->getTranslation($currentLang->getId());
+      }
       $options[$theme->id()] = $theme->getName() . '|' . $theme->field_icon->value;
     }
 

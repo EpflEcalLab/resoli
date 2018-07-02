@@ -13,6 +13,7 @@ use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\qs_badge\Service\BadgeManager;
 use Drupal\qs_activity\Service\EventManager;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
@@ -70,9 +71,16 @@ class CollectionController extends ControllerBase {
   protected $requestStack;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager, BadgeManager $badge_manager, RequestStack $request_stack) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager, BadgeManager $badge_manager, RequestStack $request_stack, LanguageManagerInterface $language_manager) {
     $this->acl             = $acl;
     $this->nodeStorage     = $entity_type_manager->getStorage('node');
     $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
@@ -80,6 +88,7 @@ class CollectionController extends ControllerBase {
     $this->eventManager    = $event_manager;
     $this->badgeManager    = $badge_manager;
     $this->requestStack    = $request_stack;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -94,7 +103,8 @@ class CollectionController extends ControllerBase {
     $container->get('qs_activity.activity_manager'),
     $container->get('qs_activity.event_manager'),
     $container->get('qs_badge.badge_manager'),
-    $container->get('request_stack')
+    $container->get('request_stack'),
+    $container->get('language_manager')
     );
   }
 
@@ -123,6 +133,9 @@ class CollectionController extends ControllerBase {
    * Collection by themes.
    */
   public function themes(TermInterface $community) {
+    // Get the current language.
+    $currentLang = $this->languageManager->getCurrentLanguage();
+
     // Query to retrieve all activities by theme.
     $activities_nids = $this->activityManager->getThemed($community);
     $variables = ['community' => $community];
@@ -135,6 +148,10 @@ class CollectionController extends ControllerBase {
     if ($filtered_themes) {
       $themes = $this->termStorage->loadMultiple($filtered_themes);
       foreach ($themes as $theme) {
+        // Check if has translation.
+        if ($theme->hasTranslation($currentLang->getId())) {
+          $theme = $theme->getTranslation($currentLang->getId());
+        }
         $variables['themes'][] = $theme->getName();
       }
     }

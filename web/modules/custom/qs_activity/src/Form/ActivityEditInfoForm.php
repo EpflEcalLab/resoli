@@ -19,6 +19,13 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
   private $termStorage;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -26,7 +33,8 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->termStorage = $this->getTermStorage();
+    $this->termStorage     = $this->getTermStorage();
+    $this->languageManager = $this->getLanguageManager();
   }
 
   /**
@@ -40,6 +48,8 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+    // Get the current language.
+    $currentLang = $this->languageManager->getCurrentLanguage();
 
     $form = parent::buildForm($form, $form_state, $activity);
 
@@ -81,6 +91,10 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
     foreach ($themes as $theme) {
+      // Check if has translation.
+      if ($theme->hasTranslation($currentLang->getId())) {
+        $theme = $theme->getTranslation($currentLang->getId());
+      }
       $options[$theme->id()] = $theme->getName() . '|' . $theme->field_icon->value;
     }
     $form['step-2']['theme'] = [

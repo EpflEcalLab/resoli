@@ -1,7 +1,7 @@
 {
     "_links": {
         "self": {
-            "href": "http:\/\/default\/taxonomy\/term\/18?_format=hal_json"
+            "href": "http:\/\/default\/fr\/taxonomy\/term\/18?_format=hal_json"
         },
         "type": {
             "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/themes"
@@ -19,8 +19,8 @@
     ],
     "langcode": [
         {
-            "value": "zxx",
-            "lang": "zxx"
+            "value": "fr",
+            "lang": "fr"
         }
     ],
     "vid": [
@@ -31,7 +31,7 @@
     "name": [
         {
             "value": "Divers",
-            "lang": "zxx"
+            "lang": "fr"
         }
     ],
     "weight": [
@@ -41,14 +41,33 @@
     ],
     "changed": [
         {
-            "value": 1507560008,
-            "lang": "zxx"
+            "value": "2018-07-02T14:38:51+00:00",
+            "lang": "fr",
+            "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "default_langcode": [
         {
             "value": true,
-            "lang": "zxx"
+            "lang": "fr"
+        }
+    ],
+    "content_translation_source": [
+        {
+            "value": "und",
+            "lang": "fr"
+        }
+    ],
+    "content_translation_outdated": [
+        {
+            "value": false,
+            "lang": "fr"
+        }
+    ],
+    "content_translation_status": [
+        {
+            "value": true,
+            "lang": "fr"
         }
     ],
     "field_icon": [

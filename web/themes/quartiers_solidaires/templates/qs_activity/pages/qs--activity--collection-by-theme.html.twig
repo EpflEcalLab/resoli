@@ -44,7 +44,8 @@
           <div class="row">
         {% endif %}
           <div class="col-12 sticky-top bg-white mb-2">
-            {{ bamboo_render_entity('taxonomy_term', activity.field_theme.target_id, 'teaser') }}
+            {% set theme = activity.field_theme.entity.hasTranslation(bamboo_i18n_current_lang()) ? activity.field_theme.entity.translation(bamboo_i18n_current_lang()) : activity.field_theme.entity %}
+            {{ bamboo_render_entity('taxonomy_term', theme.id, 'teaser') }}
           </div>
        {% endif %}
 

@@ -17,7 +17,7 @@
         or variables.privileges is not empty
       )
     %}
-      {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value, { 'target':['_blank']} )|render %}
+      {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value)|render %}
       {% trans %}qs.activity.no_events_please_contact {{ mail_link }}{% endtrans %}
     {% else %}
       {{ 'qs.activity.no_events'|t }}

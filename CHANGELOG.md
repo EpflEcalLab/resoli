@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## 1.1.4 (2018-07-05)
  - add german (de) language
  - make Taxonomy "Themes" translatable with fallback in Default Site Lang (FR) - #627
  - update logo - #629

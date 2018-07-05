@@ -143,6 +143,16 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Lazy loading for The language Manager service.
+   *
+   * @return \Drupal\Core\Language\LanguageManagerInterface
+   *   Return The language manager.
+   */
+  protected function getLanguageManager() {
+    return $this->container->get('language_manager');
+  }
+
+  /**
    * Lazy loading for the Quartiers-Solidaires Subscription Manager service.
    *
    * @return \Drupal\qs_subscription\Service\SubscriptionManager

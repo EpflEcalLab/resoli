@@ -27,7 +27,7 @@ display:
           label: 'Entity ID'
           separator: ', '
         created:
-          label: 'Sended at'
+          label: 'Sent at'
           separator: ', '
         module:
           label: Module

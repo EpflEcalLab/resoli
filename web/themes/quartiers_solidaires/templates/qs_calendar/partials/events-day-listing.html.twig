@@ -3,21 +3,23 @@
 <div class="container my-5">
   <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
     <li class="sticky-top bg-white mb-2 py-2 row">
-      <h2 class="col-12 h5 mb-0">{{ variables.current_day|bamboo_i18n_format_date('custom', 'j F Y') }}</h2>
+      <h2 class="col-12 h5 mb-0">{{ variables.current_day|bamboo_i18n_format_date('default_medium_date_only') }}</h2>
     </li>
     {% for key, event in variables.events %}
       <li class="card card-list-item" id="card{{ event.nid.value }}">
         {% embed "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
           {% block card_pill_time %}
             <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
-              {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}
+              {# Special use-case for German, we strip the "Uhr" of the start date #}
+              {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+              {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
             </time>
             –
             <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
-              {{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}
+              {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
             </time>
           {% endblock %}
-        {% endembed  %}
+        {% endembed %}
 
         <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#events-accordion">
           <div class="card-body">

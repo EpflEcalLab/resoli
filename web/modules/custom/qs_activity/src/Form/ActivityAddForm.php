@@ -62,6 +62,13 @@ class ActivityAddForm extends FormBasic {
   protected $entityFieldManager;
 
   /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -76,6 +83,7 @@ class ActivityAddForm extends FormBasic {
     $this->privilegeManager   = $this->getPrivilegeManager();
     $this->currentUser        = $this->getCurrentUser();
     $this->entityFieldManager = $this->getEntityFieldManager();
+    $this->languageManager    = $this->getLanguageManager();
   }
 
   /**
@@ -108,6 +116,9 @@ class ActivityAddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
+    // Get the current language.
+    $currentLang = $this->languageManager->getCurrentLanguage();
+
     $form = parent::buildForm($form, $form_state);
 
     // Disable caching & HTML5 validation.
@@ -164,6 +175,10 @@ class ActivityAddForm extends FormBasic {
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
     foreach ($themes as $theme) {
+      // Check if has translation.
+      if ($theme->hasTranslation($currentLang->getId())) {
+        $theme = $theme->getTranslation($currentLang->getId());
+      }
       $options[$theme->id()] = $theme->getName() . '|' . $theme->field_icon->value;
     }
 

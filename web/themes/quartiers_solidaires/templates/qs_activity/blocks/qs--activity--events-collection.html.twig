@@ -8,8 +8,16 @@
   </ul>
 {% else %}
   <h2 class="h4 mb-4">
-    {% if node.field_contact_mail is not empty %}
-      {% set mail_link = link(node.field_contact_name.value, 'mailto:' ~ node.field_contact_mail.value, { 'target':['_blank']} )|render %}
+    {# Display the contact message only if the user has any privilege
+    or is allowed to access from field_community_access_contact #}
+    {% if
+      variables.activity.field_contact_mail is not empty
+      and (
+        variables.activity.field_community_access_contact.value
+        or variables.privileges is not empty
+      )
+    %}
+      {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value)|render %}
       {% trans %}qs.activity.no_events_please_contact {{ mail_link }}{% endtrans %}
     {% else %}
       {{ 'qs.activity.no_events'|t }}

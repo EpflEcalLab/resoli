@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## NEXT RELEASE
+ - add german (de) language
+ - make Taxonomy "Themes" translatable with fallback in Default Site Lang (FR) - #627
+ - update logo - #629
+
 ## 1.1.3 (2018-06-28)
  - add mailjet as SMTP mail provider.
  - update to Drupal 8.5.4

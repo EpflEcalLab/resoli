@@ -28,7 +28,7 @@
   <span class="size-date text-dark">
     {% block card_pill_time %}
     <time datetime="{{ event.field_start_at.date|date('Y-m-d') }}">
-      {{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'j F') }}
+      {{ event.field_start_at.date|bamboo_i18n_format_date('default_medium_date_only_no_year') }}
       <span class="d-none d-md-inline-block d-lg-inline-block d-xl-inline-block">{{ event.field_start_at.date|date('Y') }}</span>
     </time>
     {% endblock %}

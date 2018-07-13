@@ -64,15 +64,18 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     // Get every users with at least 1 privilege on the community
     // & also remove users already added in the activity.
     $query = $this->privilegeManager->queryMembersWithPrivileges($community, NULL);
-    $rows = $query->execute()->fetchAll();
-    foreach ($rows as $row) {
-      // Remove users showed on the page and passed in options to avoid.
-      if (!isset($activity_members[$row->user])) {
-        $uids[] = $row->user;
+    $uids = [];
+    if ($query) {
+      $rows = $query->execute()->fetchAll();
+      foreach ($rows as $row) {
+        // Remove users showed on the page and passed in options to avoid.
+        if (!isset($activity_members[$row->user])) {
+          $uids[] = $row->user;
+        }
       }
     }
     // Load user entities without privileges.
-    $community_members = $this->userStorage->loadMultiple($uids);
+    $community_members = !empty($uids) ? $this->userStorage->loadMultiple($uids) : [];
     $select_options = [];
     $this->fallback = [];
     if (!empty($community_members)) {

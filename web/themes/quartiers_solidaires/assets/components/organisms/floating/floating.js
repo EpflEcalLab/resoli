@@ -11,10 +11,12 @@ const floating = () => {
       Stickyfill.add(elements);
 
       // Refresh only newly added sticky element.
-      elements.forEach(element => {
-        const sticky = new Stickyfill.Sticky(element);
-        sticky.refresh();
-      });
+      if (elements.length) {
+        elements.forEach(element => {
+          const sticky = new Stickyfill.Sticky(element);
+          sticky.refresh();
+        });
+      }
     });
 
   })(jQuery);

@@ -78,12 +78,14 @@
 
   {{ variables.pager }}
 
-  <div class="container text-center mt-5">
-    <a class="btn btn-outline-secondary btn-outline-invert btn-icon shadow-to-bottom" href="mailto:?bcc={{ emails|join(',') }}">
-      {{ macros.icon('mail') }}
-      {{ 'qs.contact_all'|t }}
-    </a>
-  </div>
+  {% if emails|length %}
+    <div class="container text-center mt-5">
+      <a class="btn btn-outline-secondary btn-outline-invert btn-icon shadow-to-bottom" href="mailto:?bcc={{ emails|join(',') }}">
+        {{ macros.icon('mail') }}
+        {{ 'qs.contact_all'|t }}
+      </a>
+    </div>
+  {% endif %}
 
   <div class="container">
     <div class="row mb-3 mt-3">

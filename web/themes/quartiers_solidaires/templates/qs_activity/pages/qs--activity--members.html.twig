@@ -91,12 +91,14 @@
       </li>
     {% endfor %}
     </ul>
-    <p class="text-center">
-      <a class="btn btn-primary btn-icon shadow-to-bottom" href="mailto:?bcc={{ emails|join(',') }}">
-        {{ macros.icon('mail') }}
-        {{ 'qs.contact_all'|t }}
-      </a>
-    </p>
+    {% if emails|length %}
+      <p class="text-center">
+        <a class="btn btn-primary btn-icon shadow-to-bottom" href="mailto:?bcc={{ emails|join(',') }}">
+          {{ macros.icon('mail') }}
+          {{ 'qs.contact_all'|t }}
+        </a>
+      </p>
+    {% endif %}
   {% else %}
     <p>{% trans %}qs_activity.members.empty{% endtrans %}</p>
   {% endif %}

@@ -4,8 +4,18 @@
  - fix mail body encoded quote - #152
  - add module "Image Effects" which allow Image Styles to Automatically use EXIF Image Orientation - #606
  - improve members listing by ordering them using Lastname instead of Name (mail) - #570
- - fix Activitiy CTA buttons visibilities - #157 
+ - fix Activity CTA buttons visibilities - #517 
  - improve organizers subscriptions by removing "waiting approval" mail to others organizers - #613
+ - enable English - #635
+ - add language switcher - #634
+ - add warning screen on mobile - #481
+ - add phone button in confirmend subscriptions list - #397
+ - add Image Effects for Exif Orientation - #606
+ - fix mail body encoded quote - #152
+ - improve members listing by ordering them using Lastname instead of Name (mail) - #570
+ - add "email to all" button in listings (activity members, event subscribers, event pending subscribers) - #477
+ - add gradient behind modal-footer in modal-forms - #390
+ - fix scrolling issue in Firefox with scrollable flex inside flex container - #539
 
 ## 1.1.4 (2018-07-05)
  - add german (de) language

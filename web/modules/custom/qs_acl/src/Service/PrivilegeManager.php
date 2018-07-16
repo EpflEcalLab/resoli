@@ -304,8 +304,9 @@ class PrivilegeManager {
 
     // Join the users data for filters criteria.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+    $query->leftJoin('user__field_lastname', 'lastname', 'lastname.entity_id = privileges.user');
 
-    $query->orderBy('users.name', 'ASC');
+    $query->orderBy('lastname.field_lastname_value', 'ASC');
 
     // Order privilege from low to high permissions.
     // MySQL only.
@@ -319,7 +320,7 @@ class PrivilegeManager {
 
     $query->groupBy('privileges.privilege');
     $query->groupBy('privileges.user');
-    $query->groupBy('users.name');
+    $query->groupBy('lastname.field_lastname_value');
 
     return $query;
   }

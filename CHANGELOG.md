@@ -3,6 +3,7 @@
 ## NEXT RELEASE
  - fix mail body encoded quote - #152
  - add module "Image Effects" which allow Image Styles to Automatically use EXIF Image Orientation - #606
+ - improve members listing by ordering them using Lastname instead of Name (mail) - #570
 
 ## 1.1.4 (2018-07-05)
  - add german (de) language

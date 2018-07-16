@@ -66,6 +66,14 @@
 
 .modal-footer {
   flex-shrink: 0;
+
+  &.sticky-bottom {
+    @each $color, $value in $theme-colors {
+      .bg-#{$color} & {
+        background-image: linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
+      }
+    }
+  }
 }
 
 // We sometimes need to have a modal look but it's not really a modal

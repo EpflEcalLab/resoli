@@ -83,6 +83,12 @@
   }
 }
 
+// We need a small fix for some cases where the height of a content
+// inside a flex wrapper is not calculated correctly.
+.min-height-0 {
+  min-height: 0;
+}
+
 // override Bootstrap rounded class
 .rounded {
   border-radius: $spacer !important;

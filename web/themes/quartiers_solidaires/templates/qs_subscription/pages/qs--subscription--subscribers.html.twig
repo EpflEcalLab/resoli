@@ -1,5 +1,7 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set emails = [] %}
+
 <div class="container">
   <div class="text-center my-5">
     <h1>{% trans %}qs_subscription.subscribers.title {{ variables.event.title.value }} {{ variables.activity.title.value}}{% endtrans %}</h1>
@@ -11,6 +13,7 @@
     {% for subscription in variables.subscriptions %}
       <li class="card card-list-item" id="card-{{ loop.index0 }}">
         {% set user = subscription.user.entity %}
+        {% set emails = emails|merge([user.mail.value]) %}
         <a
           data-toggle="collapse"
           data-parent="#users-accordion"
@@ -72,8 +75,15 @@
 
   {{ variables.pager }}
 
+  <div class="container text-center mt-5">
+    <a class="btn btn-outline-secondary btn-outline-invert btn-icon shadow-to-bottom" href="mailto:?bcc={{ emails|join(',') }}">
+      {{ macros.icon('mail') }}
+      {{ 'qs.contact_all'|t }}
+    </a>
+  </div>
+
   <div class="container">
-    <div class="row mb-3 mt-5">
+    <div class="row mb-3 mt-3">
       <div class="col-6">
         {# Go to Waiting Approval #}
         <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">

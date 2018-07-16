@@ -105,11 +105,13 @@ class SubscriptionManager {
    *   The event.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Account for who we will request the subscription.
+   * @param bool $mail_to_organizers
+   *   Does the organizer(s) will receive the "waiting approval" mail ?
    *
    * @return \Drupal\Core\Entity\EntityInterface
    *   The created subscription request.
    */
-  public function request(NodeInterface $event, AccountInterface $account = NULL) {
+  public function request(NodeInterface $event, AccountInterface $account = NULL, $mail_to_organizers = TRUE) {
     $user = $this->currentUser;
     if (!is_null($account)) {
       $user = $account;
@@ -136,7 +138,7 @@ class SubscriptionManager {
     // Load user with activity_organizers or activity_maintainers privilege(s)
     // & send them mail about new event subscription request.
     $accounts = NULL;
-    if ($ids) {
+    if ($ids && $mail_to_organizers) {
       $accounts = $this->userStorage->loadMultiple($ids);
 
       // Load the user entity from proxy session.

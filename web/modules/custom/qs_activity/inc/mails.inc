@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Render\Markup;
+use Drupal\Component\Render\FormattableMarkup;
 
 /**
  * Mail hook.
@@ -47,8 +48,8 @@ function qs_activity_mail($key, &$message, $params) {
         '@mail'       => $author->getEmail(),
         '@firstname'  => $author->field_firstname->value,
         '@lastname'   => $author->field_lastname->value,
-        '@activity'   => $activity->getTitle(),
-        '@event'      => $event->getTitle(),
+        '@activity'   => new FormattableMarkup($activity->getTitle(), []),
+        '@event'      => new FormattableMarkup($event->getTitle(), []),
         '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
@@ -72,8 +73,8 @@ function qs_activity_mail($key, &$message, $params) {
         '@mail'                => $author->getEmail(),
         '@firstname'           => $author->field_firstname->value,
         '@lastname'            => $author->field_lastname->value,
-        '@activity'            => $activity->getTitle(),
-        '@event'               => $updated_event->getTitle(),
+        '@activity'            => new FormattableMarkup($activity->getTitle(), []),
+        '@event'               => new FormattableMarkup($updated_event->getTitle(), []),
         '@original_date'       => $dateFormatter->format($original_event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@original_time_start' => $dateFormatter->format($original_event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@original_time_end'   => $dateFormatter->format($original_event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),

@@ -7,6 +7,7 @@
 
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
+use Drupal\Component\Render\FormattableMarkup;
 
 /**
  * Mail hook.
@@ -45,8 +46,8 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname' => $account->field_firstname->value,
         '@lastname'  => $account->field_lastname->value,
         '@community' => $community->getName(),
-        '@event'     => $event->getTitle(),
-        '@activity'  => $activity->getTitle(),
+        '@event'     => new FormattableMarkup($event->getTitle(), []),
+        '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
       $message['body'][0] = Markup::create(t('qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
@@ -54,11 +55,11 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname'  => $account->field_firstname->value,
         '@lastname'   => $account->field_lastname->value,
         '@community'  => $community->getName(),
-        '@event'      => $event->getTitle(),
+        '@event'      => new FormattableMarkup($event->getTitle(), []),
         '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
-        '@activity'   => $activity->getTitle(),
+        '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
       break;
@@ -76,8 +77,8 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname' => $user->field_firstname->value,
         '@lastname'  => $user->field_lastname->value,
         '@community' => $community->getName(),
-        '@event'     => $event->getTitle(),
-        '@activity'  => $activity->getTitle(),
+        '@event'     => new FormattableMarkup($event->getTitle(), []),
+        '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
       $message['body'][0] = Markup::create(t('qs.mail.subscription.waiting_approval.request_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
@@ -85,11 +86,11 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname'  => $user->field_firstname->value,
         '@lastname'   => $user->field_lastname->value,
         '@community'  => $community->getName(),
-        '@event'      => $event->getTitle(),
+        '@event'      => new FormattableMarkup($event->getTitle(), []),
         '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
-        '@activity'   => $activity->getTitle(),
+        '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('qs_subscription.waiting_approval', ['event' => $event->id()], ['absolute' => TRUE])->toString(),
       ]));
       break;
@@ -108,8 +109,8 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname' => $user->field_firstname->value,
         '@lastname'  => $user->field_lastname->value,
         '@community' => $community->getName(),
-        '@event'     => $event->getTitle(),
-        '@activity'  => $activity->getTitle(),
+        '@event'     => new FormattableMarkup($event->getTitle(), []),
+        '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
       $message['body'][0] = Markup::create(t('qs.mail.subscription.waiting_approval.confirm_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
@@ -117,11 +118,11 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname'  => $user->field_firstname->value,
         '@lastname'   => $user->field_lastname->value,
         '@community'  => $community->getName(),
-        '@event'      => $event->getTitle(),
+        '@event'      => new FormattableMarkup($event->getTitle(), []),
         '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
-        '@activity'   => $activity->getTitle(),
+        '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
       break;
@@ -139,8 +140,8 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname' => $account->field_firstname->value,
         '@lastname'  => $account->field_lastname->value,
         '@community' => $community->getName(),
-        '@event'     => $event->getTitle(),
-        '@activity'  => $activity->getTitle(),
+        '@event'     => new FormattableMarkup($event->getTitle(), []),
+        '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
       $message['body'][0] = Markup::create(t('qs.mail.subscription.waiting_approval.decline.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
@@ -148,11 +149,11 @@ function qs_subscription_mail($key, &$message, $params) {
         '@firstname'  => $account->field_firstname->value,
         '@lastname'   => $account->field_lastname->value,
         '@community'  => $community->getName(),
-        '@event'      => $event->getTitle(),
+        '@event'      => new FormattableMarkup($event->getTitle(), []),
         '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
-        '@activity'   => $activity->getTitle(),
+        '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ]));
       break;

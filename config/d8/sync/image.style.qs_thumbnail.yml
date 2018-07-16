@@ -4,14 +4,21 @@ status: true
 dependencies:
   module:
     - focal_point
+    - image_effects
 name: qs_thumbnail
 label: 'QS Thumbnail (300x300)'
 effects:
   57898185-1804-45f6-91e3-1d5a772101e1:
     uuid: 57898185-1804-45f6-91e3-1d5a772101e1
     id: focal_point_scale_and_crop
-    weight: 1
+    weight: -9
     data:
       width: 300
       height: 300
       crop_type: focal_point
+  872a2ea7-c3dc-4cb1-93cf-e68811a45fa6:
+    uuid: 872a2ea7-c3dc-4cb1-93cf-e68811a45fa6
+    id: image_effects_auto_orient
+    weight: -10
+    data:
+      scan_exif: true

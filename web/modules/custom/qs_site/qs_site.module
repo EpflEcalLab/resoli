@@ -68,7 +68,9 @@ function qs_site_query_random_alter($query) {
   $query->orderRandom();
 }
 
-
+/**
+ * Implements hook_theme().
+ */
 function qs_site_theme() {
   return [
     'qs_site_langswitcher_block' => [

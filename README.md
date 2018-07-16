@@ -462,19 +462,3 @@ You have to register the Drupal and DrupalPractice Standard with PHPCS:
 ## 🕙 Crons
 
 ### Crontab
-
-## 🔐 Security
-
-For security reason, every Photos are stored in a Private folder.
-You have to update your `web/sites/default/settings.php`:
-
-  ```bash
-  $ vim web/sites/default/settings.php
-  ```
-
-  ```php
-  $settings['file_private_path'] = '/privates/qs';
-  ```
-
-Be sure to use a folder outside of your apache server to avoid security breach.
-Don't forget, this new private folder must be writable by your apache server owner.

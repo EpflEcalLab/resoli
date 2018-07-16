@@ -1,5 +1,7 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set emails = [] %}
+
 <div class="container modal-body">
   <div class="text-center">
     <h1 class="h4">{% trans %}qs_activity.members.title{% endtrans %}</h1>
@@ -11,6 +13,7 @@
   {% if variables.members %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
     {% for member in variables.members %}
+      {% set emails = emails|merge([member.mail.value]) %}
       <li class="card card-list-item" id="card{{ member.uid.value }}">
         <a
           data-toggle="collapse"
@@ -88,6 +91,12 @@
       </li>
     {% endfor %}
     </ul>
+    <p class="text-center">
+      <a class="btn btn-primary btn-icon shadow-to-bottom" href="mailto:?bcc={{ emails|join(',') }}">
+        {{ macros.icon('mail') }}
+        {{ 'qs.contact_all'|t }}
+      </a>
+    </p>
   {% else %}
     <p>{% trans %}qs_activity.members.empty{% endtrans %}</p>
   {% endif %}

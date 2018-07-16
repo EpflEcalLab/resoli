@@ -50,10 +50,16 @@
             </div>
 
              <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-              <a href="mailto:{{ user.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+              <a href="mailto:{{ user.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom mx-2">
                 {{ macros.icon('mail') }}
                 {% trans %}qs.contact {{ subscriber.field_firstname.value }}{% endtrans %}
               </a>
+               {% if user.field_phone.value %}
+                 <a href="tel:{{ user.field_phone.value|replace({' ': ''}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom mx-2">
+                   {{ macros.icon('phone') }}
+                   {% trans %}qs.contact {{ subscriber.field_firstname.value }}{% endtrans %}
+                 </a>
+               {% endif %}
             </div>
           </div>
         </div>

@@ -41,6 +41,7 @@
         "drupal/field_group": "^1.0@RC",
         "drupal/focal_point": "^1.0@beta",
         "drupal/honeypot": "^1.27",
+        "drupal/image_effects": "^2.1",
         "drupal/mailsystem": "^4.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/metatag": "^1.1",

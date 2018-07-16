@@ -58,6 +58,8 @@
     {% if
       display_contact
       and ('activity_members' in variables.privileges
+      or 'activity_organizers' in variables.privileges
+      or 'activity_maintainers' in variables.privileges
       or variables.activity.field_community_access_contact.value)
     %}
     <div class="col-sm-6 mb-3 mx-auto">
@@ -71,7 +73,10 @@
     {# Location button #}
     {# User should have some privileges OR activity should allow community to access details #}
     {% if event.field_venue.value
-      and variables.activity.field_community_access_detail.value
+      and ('activity_members' in variables.privileges
+      or 'activity_organizers' in variables.privileges
+      or 'activity_maintainers' in variables.privileges
+      or variables.activity.field_community_access_detail.value)
     %}
       <div class="col-sm-6 mb-3 mx-auto">
         <a href="#map-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">

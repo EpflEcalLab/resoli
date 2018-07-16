@@ -68,7 +68,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "59c31453-5ea8-49f2-bf81-00a7d44a2948"
+                        "value": "658fe2f5-fe7d-48cb-abe1-d1eb004f9d57"
                     }
                 ]
             }
@@ -85,7 +85,7 @@
                 },
                 "uuid": [
                     {
-                        "value": "59c31453-5ea8-49f2-bf81-00a7d44a2948"
+                        "value": "658fe2f5-fe7d-48cb-abe1-d1eb004f9d57"
                     }
                 ],
                 "lang": "zxx"
@@ -130,7 +130,7 @@
     ],
     "changed": [
         {
-            "value": "2018-04-05T09:33:58+00:00",
+            "value": "2018-07-16T14:03:51+00:00",
             "lang": "zxx",
             "format": "Y-m-d\\TH:i:sP"
         }
@@ -163,6 +163,7 @@
         {
             "value": "The Wizard: Between the time when the oceans drank Atlantis and the rise of the sons of Aryas, there was an age undreamed of. And unto this, Conan, destined to wear the jeweled crown of Aquilonia upon a troubled brow. It is I, his chronicler, who alone can tell thee of his saga. ",
             "format": null,
+            "processed": "<p>The Wizard: Between the time when the oceans drank Atlantis and the rise of the sons of Aryas, there was an age undreamed of. And unto this, Conan, destined to wear the jeweled crown of Aquilonia upon a troubled brow. It is I, his chronicler, who alone can tell thee of his saga.<\/p>\n",
             "summary": null,
             "lang": "zxx"
         }
@@ -174,12 +175,27 @@
     ],
     "field_end_at": [
         {
-            "value": "2018-04-05T10:33:00"
+            "value": "2018-07-16T14:42:00"
         }
     ],
     "field_start_at": [
         {
-            "value": "2018-04-05T09:33:00"
+            "value": "2018-07-16T13:12:00"
+        }
+    ],
+    "field_venue": [
+        {
+            "value": "Antistatique, Rue de S\u00e9beillon, Lausanne, Switzerland"
+        }
+    ],
+    "field_venue_lat": [
+        {
+            "value": "46.5233"
+        }
+    ],
+    "field_venue_long": [
+        {
+            "value": "6.6153"
         }
     ]
 }

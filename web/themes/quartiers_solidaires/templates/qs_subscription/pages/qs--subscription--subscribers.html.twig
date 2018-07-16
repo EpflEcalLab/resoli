@@ -75,17 +75,8 @@
 
   {{ variables.pager }}
 
-  {% if emails|length %}
-    <div class="container text-center mt-5">
-      <a class="btn btn-outline-secondary btn-outline-invert btn-icon shadow-to-bottom" href="mailto:?bcc={{ emails|join(',') }}">
-        {{ macros.icon('mail') }}
-        {{ 'qs.contact_all'|t }}
-      </a>
-    </div>
-  {% endif %}
-
   <div class="container">
-    <div class="row mb-3 mt-3">
+    <div class="row mb-3 mt-5">
       <div class="col-6">
         {# Go to Waiting Approval #}
         <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">
@@ -94,11 +85,13 @@
         </a>
       </div>
       <div class="col-6">
-        {# Go to Event Dashboard #}
-        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.dashboard', {event: variables.event.nid.value}) }}">
-          {{ macros.icon('checklist') }}
-          {{ 'qs.previous.to_event_dashboard'|t }}
-        </a>
+        {% if emails|length %}
+          {# Contact all members #}
+          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ emails|join(',') }}">
+            {{ macros.icon('mail') }}
+            {{ 'qs.contact_all'|t }}
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

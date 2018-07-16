@@ -97,11 +97,13 @@
         </a>
       </div>
       <div class="col-6">
-        {# Go to Event Dashboard #}
-        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.dashboard', {event: variables.event.nid.value}) }}">
-          {{ macros.icon('checklist') }}
-          {{ 'qs.previous.to_event_dashboard'|t }}
-        </a>
+        {% if emails|length %}
+          {# Contact all pending members #}
+          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ emails|join(',') }}">
+            {{ macros.icon('mail') }}
+            {{ 'qs.contact_all'|t }}
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

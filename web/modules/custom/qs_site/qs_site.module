@@ -67,3 +67,13 @@ function qs_site_theme_suggestions_page_alter(array &$suggestions, array $variab
 function qs_site_query_random_alter($query) {
   $query->orderRandom();
 }
+
+
+function qs_site_theme() {
+  return [
+    'qs_site_langswitcher_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'block--langswitcher',
+    ],
+  ];
+}

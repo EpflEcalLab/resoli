@@ -52,7 +52,6 @@ class AuthRedirect implements EventSubscriberInterface {
     $events[KernelEvents::REQUEST][] = ['cancelRedirect'];
     $events[KernelEvents::REQUEST][] = ['passRedirect'];
     $events[KernelEvents::REQUEST][] = ['resetRedirect'];
-    $events[KernelEvents::REQUEST][] = ['logoutRedirect'];
     return $events;
   }
 
@@ -69,21 +68,6 @@ class AuthRedirect implements EventSubscriberInterface {
     if ($this->routeMatch->getRouteName() == 'user.login') {
       $destination = Url::fromRoute('qs_auth.login');
       $event->setResponse(new RedirectResponse($destination->toString()));
-    }
-  }
-
-  /**
-   * Redirect logout.
-   *
-   * If the user goes to user/logout and the demo mode is active, forbid it!
-   *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
-   *   Event subscriber.
-   */
-  public function logoutRedirect(GetResponseEvent $event) {
-    $config = $this->config->get('qs_auth.settings');
-    if ($this->routeMatch->getRouteName() == 'user.logout' and $config->get('demo_mode') !== 0) {
-      $event->setResponse(new RedirectResponse('/system/403'));
     }
   }
 

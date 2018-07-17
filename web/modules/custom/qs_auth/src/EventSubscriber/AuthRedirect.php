@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_auth\EventSubscriber;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -23,13 +24,23 @@ class AuthRedirect implements EventSubscriberInterface {
   protected $routeMatch;
 
   /**
+   * The config.
+   *
+   * @var \Drupal\qs_auth\EventSubscriber\ConfigFactoryInterface
+   */
+  protected $config;
+
+  /**
    * Class constructor.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The current route match.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory.
    */
-  public function __construct(RouteMatchInterface $route_match) {
+  public function __construct(RouteMatchInterface $route_match, ConfigFactoryInterface $config_factory) {
     $this->routeMatch = $route_match;
+    $this->config = $config_factory;
   }
 
   /**
@@ -41,6 +52,7 @@ class AuthRedirect implements EventSubscriberInterface {
     $events[KernelEvents::REQUEST][] = ['cancelRedirect'];
     $events[KernelEvents::REQUEST][] = ['passRedirect'];
     $events[KernelEvents::REQUEST][] = ['resetRedirect'];
+    $events[KernelEvents::REQUEST][] = ['logoutRedirect'];
     return $events;
   }
 
@@ -57,6 +69,21 @@ class AuthRedirect implements EventSubscriberInterface {
     if ($this->routeMatch->getRouteName() == 'user.login') {
       $destination = Url::fromRoute('qs_auth.login');
       $event->setResponse(new RedirectResponse($destination->toString()));
+    }
+  }
+
+  /**
+   * Redirect logout.
+   *
+   * If the user goes to user/logout and the demo mode is active, forbid it!
+   *
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   *   Event subscriber.
+   */
+  public function logoutRedirect(GetResponseEvent $event) {
+    $config = $this->config->get('qs_auth.settings');
+    if ($this->routeMatch->getRouteName() == 'user.logout' and $config->get('demo_mode') !== 0) {
+      $event->setResponse(new RedirectResponse('/system/403'));
     }
   }
 

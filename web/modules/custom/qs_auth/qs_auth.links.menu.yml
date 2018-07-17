@@ -1,0 +1,5 @@
+qs_auth.qs_auth_settings_form:
+  title: 'Settings'
+  route_name: qs_auth.qs_auth_settings_form
+  description: 'The settings for Quartiers Solidaires website.'
+  parent: qs_toolbar.admin

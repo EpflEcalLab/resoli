@@ -124,3 +124,13 @@ qs_auth.communities.apply:
       _user_is_logged_in: 'TRUE'
     options:
       _maintenance_access: FALSE
+
+qs_auth.qs_auth_settings_form:
+  path: '/admin/quartiers-solidaires/settings'
+  defaults:
+    _form: '\Drupal\qs_auth\Form\SettingsForm'
+    _title: 'Settings'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE

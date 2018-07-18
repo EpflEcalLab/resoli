@@ -88,17 +88,21 @@
       </li>
     {% endfor %}
     </ul>
-    {% if variables.mailto %}
-      <p class="text-center">
-        <a class="btn btn-primary btn-icon shadow-to-bottom" href="mailto:?bcc={{ variables.mailto|join(',') }}">
-          {{ macros.icon('mail') }}
-          {{ 'qs.contact_all'|t }}
-        </a>
-      </p>
-    {% endif %}
   {% else %}
     <p>{% trans %}qs_activity.members.empty{% endtrans %}</p>
   {% endif %}
 
-  {{ variables.pager }}
+  <div class="modal-footer sticky-bottom">
+    <div class="container flex-grow">
+      {% if variables.mailto %}
+        <p class="text-center">
+          <a class="btn btn-primary btn-icon shadow-to-bottom" href="mailto:?bcc={{ variables.mailto|join(',') }}">
+            {{ macros.icon('mail') }}
+            {{ 'qs.contact_all'|t }}
+          </a>
+        </p>
+      {% endif %}
+      {{ variables.pager }}
+    </div>
+  </div>
 </div>

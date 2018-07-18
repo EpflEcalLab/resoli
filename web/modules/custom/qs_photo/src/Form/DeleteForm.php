@@ -122,10 +122,9 @@ class DeleteForm extends FormBasic {
         'container__center',
       ],
       '#attributes' => [
+        'sticky_footer' => TRUE,
         'class' => [
-          'justify-content-center',
-          'modal-footer sticky-bottom',
-          'mb-4',
+          'text-center',
         ],
       ],
     ];

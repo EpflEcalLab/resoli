@@ -51,6 +51,9 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
       'title' => $options['activity']->title->value,
     ];
 
+    // Remove the unload library.
+    unset($form['#attached']);
+
     // Get every users with at least 1 privilege on the activity.
     $query = $this->privilegeManager->queryMembersWithPrivileges($options['activity'], NULL);
     $activity_members = [];

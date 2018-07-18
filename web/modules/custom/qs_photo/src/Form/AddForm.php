@@ -65,6 +65,7 @@ class AddForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
+    $this->currentUser     = $this->getCurrentUser();
     $this->acl             = $this->getAcl();
     $this->nodeStorage     = $this->getNodeStorage();
     $this->fileStorage     = $this->getFileStorage();

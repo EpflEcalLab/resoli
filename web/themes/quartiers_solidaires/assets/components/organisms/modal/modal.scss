@@ -68,6 +68,9 @@
   flex-shrink: 0;
 
   &.sticky-bottom {
+    border-bottom-right-radius: $border-radius-lg;
+    border-bottom-left-radius: $border-radius-lg;
+
     @each $color, $value in $theme-colors {
       .bg-#{$color} & {
         background-image: linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);

@@ -118,7 +118,7 @@ set body_classes = [
   {{ page }}
 
   {% import '@quartiers_solidaires/macros.html.twig' as macros %}
-  <div class="mobile-overlay bg-gradient">
+  <div class="alert alert-mobile bg-gradient alert-dismissible" role="alert">
     <div class="fullpage-wrapper">
       <div class="container my-auto">
         <div class="row">
@@ -133,6 +133,11 @@ set body_classes = [
           {{ macros.icon('tablet', 'icon-xl') }}
         </p>
         <p class="font-weight-light h2 text-white text-center">{{ 'qs.available_on_mobile_only'|t }}</p>
+        <div class="text-center">
+          <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

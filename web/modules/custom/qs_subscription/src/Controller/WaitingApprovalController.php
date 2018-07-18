@@ -95,12 +95,12 @@ class WaitingApprovalController extends ControllerBase {
     $query = $this->subscriptionManager->queryWaitingApproval($event);
     $rows = $query->execute()->fetchAll();
 
-   // Get all members to mailto before pagination.
-   $mailto = [];
-   foreach ($rows as $row) {
-     $mailto[$row->user] = $row->mail;
-   }
-   $variables['mailto'] = $mailto;
+    // Get all members to mailto before pagination.
+    $mailto = [];
+    foreach ($rows as $row) {
+      $mailto[$row->user] = $row->mail;
+    }
+    $variables['mailto'] = $mailto;
 
     pager_default_initialize(count($rows), $this->configuration['limit']);
     $variables['pager'] = [

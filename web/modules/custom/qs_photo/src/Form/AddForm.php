@@ -341,90 +341,81 @@ class AddForm extends FormBasic {
       $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.upload.illegal_choice'));
     }
 
-    $files = $this->getRequest()->files->get('files');
-    if (empty($files['photos']) || empty($files['photos'][0])) {
-      $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
+    $all_files = $this->getRequest()->files->get('files', []);
+    $file_upload = $all_files['photos'];
+
+    // Prepare uploaded files info. Representation is slightly different
+    // for multiple uploads and we fix that here.
+    $uploaded_files = $file_upload;
+    if (!is_array($file_upload)) {
+      $uploaded_files = [$file_upload];
     }
-    else {
-      $all_files = $this->getRequest()->files->get('files', []);
-      $file_upload = $all_files['photos'];
 
-      // Prepare uploaded files info. Representation is slightly different
-      // for multiple uploads and we fix that here.
-      $uploaded_files = $file_upload;
-      if (!is_array($file_upload)) {
-        $uploaded_files = [$file_upload];
-      }
+    // Ensure we have the file uploaded.
+    if (!$uploaded_files) {
+      $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
+      return;
+    }
 
-      // Ensure we have the file uploaded.
-      if (!$uploaded_files) {
-        $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
-        return;
-      }
-
-      $files = [];
-      foreach ($uploaded_files as $i => $file_info) {
-        // Check for file upload errors and return FALSE for this file if a
-        // lower level system error occurred. For a complete list of errors:
-        // See http://php.net/manual/features.file-upload.errors.php.
-        switch ($file_info->getError()) {
-          case UPLOAD_ERR_INI_SIZE:
-          case UPLOAD_ERR_FORM_SIZE:
-            $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because it exceeds %maxsize, the maximum allowed size for uploads.', ['%file' => $file_info->getFilename(), '%maxsize' => format_size(file_upload_max_size())]), 'error');
-            $files[$i] = FALSE;
-            continue;
-
-          case UPLOAD_ERR_PARTIAL:
-          case UPLOAD_ERR_NO_FILE:
-            $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because the upload did not complete.', ['%file' => $file_info->getFilename()]), 'error');
-            $files[$i] = FALSE;
-            continue;
-
-          case UPLOAD_ERR_OK:
-            // Final check that this is a valid upload, if it isn't, use the
-            // default error handler.
-            if (is_uploaded_file($file_info->getRealPath())) {
-              break;
-            }
-
-            // Unknown error.
-          default:
-            drupal_set_message($this->t('The file %file could not be saved. An unknown error has occurred.', ['%file' => $file_info->getFilename()]), 'error');
-            $files[$i] = FALSE;
-            continue;
-        }
-
-        // Begin building file entity.
-        $file = $this->fileStorage->create([
-          'filename' => $file_info->getClientOriginalName(),
-          'uri'      => $file_info->getRealPath(),
-          'filesize' => $file_info->getSize(),
-        ]);
-
-        // Custome max width/height validations to prevent GD library to crash.
-        list($width, $height) = explode('x', $form['step-3']['photos']['#upload_validators']['qs_file_validate_image_resolution'][0]);
-        $image = $this->imageFactory->get($file->getFileUri());
-        if ($image->getWidth() > $width || $image->getHeight() > $height) {
-          $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because it exceeds the maximum size of %widthx%height.', [
-            '%file'   => $file_info->getClientOriginalName(),
-            '%width'  => $width,
-            '%height' => $height,
-          ]), 'error');
-        }
-
-        // Apply Drupal validators to asserts the images fit our requirements.
-        // We can't use the `file_validate_image_resolution` because it will
-        // alter the file size & remove original EXIF.
-        $errors = file_validate($file, $form['step-3']['photos']['#upload_validators']);
-        if (!$errors) {
+    foreach ($uploaded_files as $file_info) {
+      // Check for file upload errors and return FALSE for this file if a
+      // lower level system error occurred. For a complete list of errors:
+      // See http://php.net/manual/features.file-upload.errors.php.
+      switch ($file_info->getError()) {
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+          $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because it exceeds %maxsize, the maximum allowed size for uploads.', ['%file' => $file_info->getFilename(), '%maxsize' => format_size(file_upload_max_size())]), 'error');
           continue;
-        }
 
-        // Show Drupal validators errors messages.
-        $form_state->setErrorByName('[step-3][photos]', $this->t('The specified file %name could not be uploaded.', ['%name' => $file_info->getClientOriginalName()]));
-        foreach ($errors as $error) {
-          $form_state->setErrorByName('[step-3][photos]', $error->render());
-        }
+        case UPLOAD_ERR_PARTIAL:
+        case UPLOAD_ERR_NO_FILE:
+          $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because the upload did not complete.', ['%file' => $file_info->getFilename()]), 'error');
+          continue;
+
+        case UPLOAD_ERR_OK:
+          // Final check that this is a valid upload, if it isn't, use the
+          // default error handler.
+          if (is_uploaded_file($file_info->getRealPath())) {
+            $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved. An unknown error has occurred.', ['%file' => $file_info->getFilename()]), 'error');
+            return;
+          }
+
+        default:
+          // Unknown error.
+          $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved. An unknown error has occurred.', ['%file' => $file_info->getFilename()]), 'error');
+          continue;
+      }
+
+      // Begin building file entity.
+      $file = $this->fileStorage->create([
+        'filename' => $file_info->getClientOriginalName(),
+        'uri'      => $file_info->getRealPath(),
+        'filesize' => $file_info->getSize(),
+      ]);
+
+      // Custome max width/height validations to prevent GD library to crash.
+      list($width, $height) = explode('x', $form['step-3']['photos']['#upload_validators']['qs_file_validate_image_resolution'][0]);
+      $image = $this->imageFactory->get($file->getFileUri());
+      if ($image->getWidth() > $width || $image->getHeight() > $height) {
+        $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because it exceeds the maximum size of %widthx%height.', [
+          '%file'   => $file_info->getClientOriginalName(),
+          '%width'  => $width,
+          '%height' => $height,
+        ]), 'error');
+      }
+
+      // Apply Drupal validators to asserts the images fit our requirements.
+      // We can't use the `file_validate_image_resolution` because it will
+      // alter the file size & remove original EXIF.
+      $errors = file_validate($file, $form['step-3']['photos']['#upload_validators']);
+      if (!$errors) {
+        continue;
+      }
+
+      // Show Drupal validators errors messages.
+      $form_state->setErrorByName('[step-3][photos]', $this->t('The specified file %name could not be uploaded.', ['%name' => $file_info->getClientOriginalName()]));
+      foreach ($errors as $error) {
+        $form_state->setErrorByName('[step-3][photos]', $error->render());
       }
     }
   }

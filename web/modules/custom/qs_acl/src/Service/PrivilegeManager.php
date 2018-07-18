@@ -304,6 +304,7 @@ class PrivilegeManager {
 
     // Join the users data for filters criteria.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+    $query->fields('users', ['mail']);
     $query->leftJoin('user__field_lastname', 'lastname', 'lastname.entity_id = privileges.user');
 
     $query->orderBy('lastname.field_lastname_value', 'ASC');
@@ -321,6 +322,7 @@ class PrivilegeManager {
     $query->groupBy('privileges.privilege');
     $query->groupBy('privileges.user');
     $query->groupBy('lastname.field_lastname_value');
+    $query->groupBy('users.mail');
 
     return $query;
   }

@@ -244,6 +244,7 @@ class SubscriptionManager {
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
     $query->leftJoin('users_field_data', 'users', 'users.uid = subscriptions.user');
+    $query->fields('users', ['mail']);
 
     $query->orderBy('users.name', 'ASC');
 
@@ -268,6 +269,7 @@ class SubscriptionManager {
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
     $query->leftJoin('users_field_data', 'users', 'users.uid = subscriptions.user');
+    $query->fields('users', ['mail']);
 
     $query->orderBy('users.created', 'ASC');
     $query->orderBy('users.name', 'ASC');

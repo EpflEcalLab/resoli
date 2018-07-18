@@ -274,8 +274,15 @@ class PrivilegeManager {
 
     // Join the users data for filters criteria.
     // TODO: Add Filter block by name, firstname, lastname.
-    $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+    $query->leftJoin('user__field_firstname', 'firstname', 'firstname.entity_id = privileges.user');
+    $query->leftJoin('user__field_lastname', 'lastname', 'lastname.entity_id = privileges.user');
+
+    $query->orderBy('firstname.field_firstname_value', 'ASC');
+    $query->orderBy('lastname.field_lastname_value', 'ASC');
+
     $query->groupBy('privileges.user');
+    $query->groupBy('firstname.field_firstname_value');
+    $query->groupBy('lastname.field_lastname_value');
 
     if ($pager) {
       $ids = $query->execute()->fetchAll();
@@ -305,8 +312,10 @@ class PrivilegeManager {
     // Join the users data for filters criteria.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
     $query->fields('users', ['mail']);
+    $query->leftJoin('user__field_firstname', 'firstname', 'firstname.entity_id = privileges.user');
     $query->leftJoin('user__field_lastname', 'lastname', 'lastname.entity_id = privileges.user');
 
+    $query->orderBy('firstname.field_firstname_value', 'ASC');
     $query->orderBy('lastname.field_lastname_value', 'ASC');
 
     // Order privilege from low to high permissions.
@@ -321,6 +330,7 @@ class PrivilegeManager {
 
     $query->groupBy('privileges.privilege');
     $query->groupBy('privileges.user');
+    $query->groupBy('firstname.field_firstname_value');
     $query->groupBy('lastname.field_lastname_value');
     $query->groupBy('users.mail');
 

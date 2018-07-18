@@ -34,6 +34,12 @@ body.toolbar-fixed .toolbar-oriented .toolbar-bar {
 }
 
 @include media-breakpoint-down(xs) {
+  #toolbar-administration {
+    position: relative;
+    top: -39px;
+    z-index: 9999991;
+  }
+
   .mobile-overlay {
     display: block;
   }

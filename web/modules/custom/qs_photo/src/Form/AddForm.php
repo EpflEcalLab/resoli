@@ -44,6 +44,20 @@ class AddForm extends FormBasic {
   protected $nodeStorage;
 
   /**
+   * The file Storage.
+   *
+   * @var \Drupal\file\FileStorageInterface
+   */
+  protected $fileStorage;
+
+  /**
+   * The image factory.
+   *
+   * @var \Drupal\Core\Image\ImageFactory
+   */
+  protected $imageFactory;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -51,9 +65,12 @@ class AddForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
+    $this->currentUser     = $this->getCurrentUser();
     $this->acl             = $this->getAcl();
     $this->nodeStorage     = $this->getNodeStorage();
+    $this->fileStorage     = $this->getFileStorage();
     $this->activityManager = $this->getActivityManager();
+    $this->imageFactory    = $this->getImageFactory();
   }
 
   /**
@@ -87,12 +104,6 @@ class AddForm extends FormBasic {
    */
   public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
     $form = parent::buildForm($form, $form_state);
-
-    // From the container, inject services.
-    $this->acl             = $this->getAcl();
-    $this->activityManager = $this->getActivityManager();
-    $this->nodeStorage     = $this->getNodeStorage();
-    $this->currentUser     = $this->getCurrentUser();
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
@@ -203,7 +214,7 @@ class AddForm extends FormBasic {
       $this->t('qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution', [
         '@file_validate_extensions'       => 'png gif jpg jpeg',
         '@file_validate_size'             => $this->humanFilesize(file_upload_max_size()),
-        '@file_validate_image_resolution' => '2000x2000',
+        '@file_validate_image_resolution' => '5000x5000',
       ]) .
       '</div>',
       '#attributes' => [
@@ -221,9 +232,11 @@ class AddForm extends FormBasic {
       '#multiple'   => TRUE,
       '#required'   => FALSE,
       '#upload_validators' => [
-        'file_validate_extensions'       => ['png gif jpg jpeg'],
-        'file_validate_size'             => [file_upload_max_size()],
-        'file_validate_image_resolution' => ['2000x2000', 0],
+        'file_validate_extensions'          => ['png gif jpg jpeg'],
+        'file_validate_size'                => [file_upload_max_size()],
+        // We don't use the Drupal file_validate_image_resolution
+        // because this will alter the original image & remove original EXIF.
+        'qs_file_validate_image_resolution' => ['5000x5000'],
       ],
     ];
 
@@ -329,27 +342,81 @@ class AddForm extends FormBasic {
       $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.upload.illegal_choice'));
     }
 
-    $files = $this->getRequest()->files->get('files');
-    if (empty($files['photos']) || empty($files['photos'][0])) {
-      $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
+    $all_files = $this->getRequest()->files->get('files', []);
+    $file_upload = $all_files['photos'];
+
+    // Prepare uploaded files info. Representation is slightly different
+    // for multiple uploads and we fix that here.
+    $uploaded_files = $file_upload;
+    if (!is_array($file_upload)) {
+      $uploaded_files = [$file_upload];
     }
-    else {
-      $this->photos = file_save_upload(
-        'photos',
-        $form['step-3']['photos']['#upload_validators'],
-        'private://photos'
-      );
-      // Ensure we have the file uploaded.
-      if ($this->photos === NULL) {
-        $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
-      }
-      else {
-        foreach ($this->photos as $file) {
-          if (!$file) {
-            $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.error.something_went_wrong'));
-            break;
+
+    // Ensure we have the file uploaded.
+    if (!$uploaded_files) {
+      $form_state->setErrorByName('[step-3][photos]', $this->t('qs.form.upload.at_least_one'));
+      return;
+    }
+
+    foreach ($uploaded_files as $file_info) {
+      // Check for file upload errors and return FALSE for this file if a
+      // lower level system error occurred. For a complete list of errors:
+      // See http://php.net/manual/features.file-upload.errors.php.
+      switch ($file_info->getError()) {
+        case UPLOAD_ERR_INI_SIZE:
+        case UPLOAD_ERR_FORM_SIZE:
+          $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because it exceeds %maxsize, the maximum allowed size for uploads.', ['%file' => $file_info->getFilename(), '%maxsize' => format_size(file_upload_max_size())]), 'error');
+          continue;
+
+        case UPLOAD_ERR_PARTIAL:
+        case UPLOAD_ERR_NO_FILE:
+          $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because the upload did not complete.', ['%file' => $file_info->getFilename()]), 'error');
+          continue;
+
+        case UPLOAD_ERR_OK:
+          // Final check that this is a valid upload, if it isn't, use the
+          // default error handler.
+          if (is_uploaded_file($file_info->getRealPath())) {
+            $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved. An unknown error has occurred.', ['%file' => $file_info->getFilename()]), 'error');
+            return;
           }
-        }
+
+        default:
+          // Unknown error.
+          $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved. An unknown error has occurred.', ['%file' => $file_info->getFilename()]), 'error');
+          continue;
+      }
+
+      // Begin building file entity.
+      $file = $this->fileStorage->create([
+        'filename' => $file_info->getClientOriginalName(),
+        'uri'      => $file_info->getRealPath(),
+        'filesize' => $file_info->getSize(),
+      ]);
+
+      // Custome max width/height validations to prevent GD library to crash.
+      list($width, $height) = explode('x', $form['step-3']['photos']['#upload_validators']['qs_file_validate_image_resolution'][0]);
+      $image = $this->imageFactory->get($file->getFileUri());
+      if ($image->getWidth() > $width || $image->getHeight() > $height) {
+        $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved because it exceeds the maximum size of %widthx%height.', [
+          '%file'   => $file_info->getClientOriginalName(),
+          '%width'  => $width,
+          '%height' => $height,
+        ]), 'error');
+      }
+
+      // Apply Drupal validators to asserts the images fit our requirements.
+      // We can't use the `file_validate_image_resolution` because it will
+      // alter the file size & remove original EXIF.
+      $errors = file_validate($file, $form['step-3']['photos']['#upload_validators']);
+      if (!$errors) {
+        continue;
+      }
+
+      // Show Drupal validators errors messages.
+      $form_state->setErrorByName('[step-3][photos]', $this->t('The specified file %name could not be uploaded.', ['%name' => $file_info->getClientOriginalName()]));
+      foreach ($errors as $error) {
+        $form_state->setErrorByName('[step-3][photos]', $error->render());
       }
     }
   }
@@ -362,16 +429,19 @@ class AddForm extends FormBasic {
     $event = $this->getNodeStorage()->load($event_nid);
     $activity = $event->field_activity->entity;
 
-    $photos = [];
-    foreach ($this->photos as $photo) {
+    // Save the uploaded images on the private folder.
+    $photos = file_save_upload('photos', [], 'private://photos');
+
+    $nodes = [];
+    foreach ($photos as $photo) {
       $node = $this->getPhotoManager()->create($event, $photo);
-      $photos[] = $node->id();
+      $nodes[] = $node->id();
     }
 
     drupal_set_message($this->t("qs_photo.form.add.success @number @event @activity", [
       '@activity' => $activity->getTitle(),
       '@event'    => $event->getTitle(),
-      '@number'   => count($this->photos),
+      '@number'   => count($nodes),
     ]));
 
     $trigger = $form_state->getTriggeringElement();
@@ -379,7 +449,7 @@ class AddForm extends FormBasic {
       case 'comment':
         $form_state->setRedirect('qs_photo.form.comments', [
           'activity' => $activity->id(),
-          'photos' => $photos,
+          'photos'   => $nodes,
         ]);
         break;
 

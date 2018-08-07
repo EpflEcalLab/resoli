@@ -376,10 +376,11 @@ class AddForm extends FormBasic {
         case UPLOAD_ERR_OK:
           // Final check that this is a valid upload, if it isn't, use the
           // default error handler.
-          if (is_uploaded_file($file_info->getRealPath())) {
+          if (!is_uploaded_file($file_info->getRealPath())) {
             $form_state->setErrorByName('[step-3][photos]', $this->t('The file %file could not be saved. An unknown error has occurred.', ['%file' => $file_info->getFilename()]), 'error');
             return;
           }
+          break;
 
         default:
           // Unknown error.

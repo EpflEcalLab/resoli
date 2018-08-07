@@ -108,6 +108,9 @@
             "drush/contrib/{$name}": ["type:drupal-drush"]
         },
         "patches": {
+          "drupal/core": {
+            "Unable to run tests due to the fatal error (https://www.drupal.org/project/drupal/issues/2921661)": "https://www.drupal.org/files/issues/2018-07-04/2921661-86-8.6.x.patch"
+          }
         }
     }
 }

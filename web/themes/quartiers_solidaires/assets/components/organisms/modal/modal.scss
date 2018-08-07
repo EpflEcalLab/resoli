@@ -55,6 +55,7 @@
 .modal-body {
   display: flex;
   flex-direction: column;
+  flex: 1 0 auto;
   justify-content: center;
   overflow-y: auto;
   min-height: min-content;
@@ -73,9 +74,13 @@
 
     @each $color, $value in $theme-colors {
       .bg-#{$color} & {
-        background-image: linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
+        background: transparent linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
       }
     }
+  }
+
+  .container & {
+    border-radius: 0;
   }
 }
 

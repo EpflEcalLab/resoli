@@ -359,6 +359,10 @@ class AddForm extends FormBasic {
     }
 
     foreach ($uploaded_files as $file_info) {
+      // Make sure we don't have empty $file_info.
+      if (!$file_info) {
+        return;
+      }
       // Check for file upload errors and return FALSE for this file if a
       // lower level system error occurred. For a complete list of errors:
       // See http://php.net/manual/features.file-upload.errors.php.

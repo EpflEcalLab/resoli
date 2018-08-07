@@ -16,6 +16,7 @@
  - add "email to all" button in listings (activity members, event subscribers, event pending subscribers) - #477
  - add gradient behind modal-footer in modal-forms - #390
  - fix scrolling issue in Firefox with scrollable flex inside flex container - #539
+ - update to Drupal 8.5.6
 
 ## 1.1.4 (2018-07-05)
  - add german (de) language

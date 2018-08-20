@@ -153,6 +153,7 @@ a[href].card-pill-simple {
   margin-right: auto;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 
   span {
     white-space: nowrap;

@@ -189,15 +189,15 @@ a[href].card-pill-simple {
 
 .size-date {
   display: inline-block;
-  width: 11em;
+  width: auto;
   flex-shrink: 0;
 
   &:not(:first-child) {
     margin-left: ($spacer * 0.5);
   }
 
-  @include media-breakpoint-down(sm) {
-    width: 7em;
+  @include media-breakpoint-up(md) {
+    width: 11em;
   }
 
   time {

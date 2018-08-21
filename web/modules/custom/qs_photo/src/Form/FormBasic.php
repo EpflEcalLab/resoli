@@ -162,6 +162,18 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Lazy loading for the Entity Field Manager.
+   *
+   * Manages the discovery of entity fields.
+   *
+   * @return \Drupal\Core\Entity\EntityFieldManagerInterface
+   *   Return the Entity Field Manager.
+   */
+  protected function getImageFactory() {
+    return $this->container->get('image.factory');
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {

@@ -234,7 +234,6 @@ class EventEditForm extends EventEditFormBase {
         'modal' => TRUE,
         'icon_left' => TRUE,
         'outline' => TRUE,
-        'theme' => 'secondary',
         'class' => [
           'shadow-to-bottom',
         ],

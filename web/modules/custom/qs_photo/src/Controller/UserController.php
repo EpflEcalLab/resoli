@@ -116,42 +116,12 @@ class UserController extends ControllerBase {
    *   Render array of account activities.
    */
   public function activities(TermInterface $community, UserInterface $user) {
-    $variables['community'] = $community;
-
-    // We are browsing as an account with AccessBypass, add user info to page.
-    $variables['user'] = $user;
-    $variables['current_user'] = $this->currentUser()->id() === $user->id();
-
-    if ($this->acl->hasBypass()) {
-      // Show every activities for bypass user.
-      $nids = $this->activityManager->getThemed($community);
-      $variables['activities'] = $this->nodeStorage->loadMultiple($nids);
-    }
-    else {
-      // Show only activity where user has upload photo access &
-      // with at least one past event.
-      $variables['activities'] = $this->activityManager->getByUserPhoto($community, $user, TRUE);
-    }
-
-    // Get number of writable photos by activities.
-    // This may slow down the loading of this page.
-    foreach ($variables['activities'] as $activity) {
-      $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
-      $count_photos = count($photos);
-      if ($count_photos > 0) {
-        $variables['photos_by_activities'][$activity->id()] = $count_photos;
-      }
-    }
-
-    // Get badges.
-    if (!empty($variables['activities'])) {
-      // From list of Activities get user privileges.
-      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($variables['activities'], $user);
-    }
-
-    return [
+    $render = [
       '#theme'     => 'qs_photo_user_activities_collection_page',
-      '#variables' => $variables,
+      '#variables' => [
+        'community'  => $community,
+        'activities' => [],
+      ],
       '#cache' => [
         'contexts' => [
           'user',
@@ -163,6 +133,47 @@ class UserController extends ControllerBase {
         ],
       ],
     ];
+
+    $render['#variables']['user'] = $user;
+    $render['#variables']['current_user'] = $this->currentUser()->id() === $user->id();
+    $activities = [];
+    if ($this->acl->hasBypass()) {
+      // Show every activities for bypass user.
+      $nids = $this->activityManager->getThemed($community);
+      $activities = $this->nodeStorage->loadMultiple($nids);
+    }
+    else {
+      // Show only activity where user has upload photo access &
+      // with at least one past event.
+      $activities = $this->activityManager->getByUserPhoto($community, $user, TRUE);
+    }
+
+    if (empty($activities)) {
+      return $render;
+    }
+
+    $render['#variables']['activities'] = $activities;
+
+    // Get number of writable photos by activities.
+    // This may slow down the loading of this page.
+    foreach ($activities as $activity) {
+      $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
+
+      // When not photos are writable avoid to count them.
+      if (empty($photos)) {
+        continue;
+      }
+
+      $count_photos = count($photos);
+      if ($count_photos > 0) {
+        $render['#variables']['photos_by_activities'][$activity->id()] = $count_photos;
+      }
+    }
+
+    // Get badges - From list of Activities get user privileges.
+    $render['#variables']['badges']['privileges'] = $this->badgeManager->getPrivileges($activities, $user);
+
+    return $render;
   }
 
 }

@@ -28,6 +28,11 @@
             "value": "approval+all@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "approval+all@antistatique.net"
+      }
+    ],
     "created": [
         {
             "value": "2017-12-05T15:54:41+00:00",

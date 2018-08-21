@@ -1,0 +1,7 @@
+
+{% for lang in variables.languages %}
+  <a class="{{ variables.language.id == lang.id ? 'font-weight-bold' }}" href="{{ path('<current>', {}, {'language': lang}) }}">
+    {{ lang.name }}
+  </a>
+  {% if not loop.last %} – {% endif %}
+{% endfor %}

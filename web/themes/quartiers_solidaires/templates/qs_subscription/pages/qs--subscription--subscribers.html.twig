@@ -50,10 +50,16 @@
             </div>
 
              <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-              <a href="mailto:{{ user.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
+              <a href="mailto:{{ user.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom mx-2">
                 {{ macros.icon('mail') }}
-                {% trans %}qs.contact {{ subscriber.field_firstname.value }}{% endtrans %}
+                {{ user.mail.value }}
               </a>
+               {% if user.field_phone.value %}
+                 <a href="tel:{{ user.field_phone.value|replace({' ': ''}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom mx-2">
+                   {{ macros.icon('phone') }}
+                   {{ user.field_phone.value }}
+                 </a>
+               {% endif %}
             </div>
           </div>
         </div>
@@ -76,11 +82,13 @@
         </a>
       </div>
       <div class="col-6">
-        {# Go to Event Dashboard #}
-        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_activity.events.dashboard', {event: variables.event.nid.value}) }}">
-          {{ macros.icon('checklist') }}
-          {{ 'qs.previous.to_event_dashboard'|t }}
-        </a>
+        {% if variables.mailto %}
+          {# Contact all members #}
+          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ variables.mailto|join(',') }}">
+            {{ macros.icon('mail') }}
+            {{ 'qs.contact_all'|t }}
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

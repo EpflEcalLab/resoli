@@ -41,6 +41,7 @@
         "drupal/field_group": "^1.0@RC",
         "drupal/focal_point": "^1.0@beta",
         "drupal/honeypot": "^1.27",
+        "drupal/image_effects": "^2.1",
         "drupal/mailsystem": "^4.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/metatag": "^1.1",
@@ -107,6 +108,9 @@
             "drush/contrib/{$name}": ["type:drupal-drush"]
         },
         "patches": {
+          "drupal/core": {
+            "Unable to run tests due to the fatal error (https://www.drupal.org/project/drupal/issues/2921661)": "https://www.drupal.org/files/issues/2018-07-04/2921661-86-8.6.x.patch"
+          }
         }
     }
 }

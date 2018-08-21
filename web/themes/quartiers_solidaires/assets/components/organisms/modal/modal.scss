@@ -55,6 +55,7 @@
 .modal-body {
   display: flex;
   flex-direction: column;
+  flex: 1 0 auto;
   justify-content: center;
   overflow-y: auto;
   min-height: min-content;
@@ -66,6 +67,21 @@
 
 .modal-footer {
   flex-shrink: 0;
+
+  &.sticky-bottom {
+    border-bottom-right-radius: $border-radius-lg;
+    border-bottom-left-radius: $border-radius-lg;
+
+    @each $color, $value in $theme-colors {
+      .bg-#{$color} & {
+        background: transparent linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
+      }
+    }
+  }
+
+  .container & {
+    border-radius: 0;
+  }
 }
 
 // We sometimes need to have a modal look but it's not really a modal

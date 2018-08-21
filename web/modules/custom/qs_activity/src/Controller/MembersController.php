@@ -126,6 +126,15 @@ class MembersController extends ControllerBase {
 
     $render['#variables']['members'] = $activity_members;
 
+    // Get all members to mailto.
+    $mailto = [];
+    $query_members = $this->privilegeManager->queryMembersWithPrivileges($activity, NULL);
+    $rows = $query_members->execute()->fetchAll();
+    foreach ($rows as $row) {
+      $mailto[$row->user] = $row->mail;
+    }
+    $render['#variables']['mailto'] = $mailto;
+
     return $render;
   }
 

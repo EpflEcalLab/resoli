@@ -145,7 +145,7 @@ class UserManageForm extends FormBasic {
         'icon_left' => TRUE,
         'outline' => TRUE,
         'class' => [
-          'shadow-to-bottom',
+          'shadow-to-bottom mb-2',
         ],
       ],
       '#value' => $this->t('qs_photos.photos_comment'),
@@ -158,7 +158,7 @@ class UserManageForm extends FormBasic {
         'icon' => 'trash',
         'icon_left' => TRUE,
         'class' => [
-          'btn-danger',
+          'btn-danger mb-2',
         ],
       ],
       '#value' => $this->t('qs_photos.photos_delete'),

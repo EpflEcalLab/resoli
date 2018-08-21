@@ -184,20 +184,21 @@ class RequestForm extends FormBase {
       drupal_set_message($this->t('qs_subscription.request.form.success @event', [
         '@event' => $event->getTitle(),
       ]));
+
+      drupal_set_message($this->t('qs_subscription.request.form.success @event', [
+        '@event' => $event->getTitle(),
+      ]));
     }
     // Processing the submission as a direct request. Organizers or maintainers.
     elseif (strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
-      $subscription = $this->subscriptionManager->request($event);
+      // Send a request but don't send mails to organizer(s).
+      $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
       $this->subscriptionManager->confirm($subscription);
 
       drupal_set_message($this->t('qs_subscription.direct_request.form.success @event', [
         '@event' => $event->getTitle(),
       ]));
     }
-
-    drupal_set_message($this->t('qs_subscription.request.form.success @event', [
-      '@event' => $event->getTitle(),
-    ]));
   }
 
   /**

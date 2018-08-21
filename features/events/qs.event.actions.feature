@@ -3,9 +3,9 @@ Feature: Event Actions Buttons
   As a bunch of users
   I want to make sure the access & access bypass are working like a charm
 
-## Subscribe button - on detail page of activity
+# Subscribe button - on detail page of activity
   @api
-  Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°2 (Activity - Lausanne - Theme N°1), because I'm a member of this activity
+  Scenario: Logged as Manager of Lausanne, I can see "register" button in the Events of the Activity N°2 (Atelier Scooby-Doo), because I'm a member of this activity
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
@@ -253,3 +253,98 @@ Feature: Event Actions Buttons
     And I should see 0 "#collapse-54 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-54 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements
 
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I should see all the CTA buttons in the Events of the Activity N°56 (Escalade), because I'm a Organizer of this activity.
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/escalade"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-59" element
+    Then I should see 6 "#collapse-59 .card-actions .col-sm-6" elements
+    And the "#collapse-59 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
+    And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.contact" in the "#collapse-59 .card-actions" element
+    And the "#collapse-59 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" element should contain "qs.event.dashboard.shortcut.confirmed 1"
+
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I should see all some CTA buttons in the Events of the Activity N°56 (Escalade), because I'm a the Member of this activity.
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/escalade"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-59" element
+    Then I should see 4 "#collapse-59 .card-actions .col-sm-6" elements
+    And the "#collapse-59 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
+    And I should see "qs.event.contact" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
+    And I should not see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
+    And I should see 0 "#collapse-59 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
+    And I should see 0 "#collapse-59 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements
+
+  @api
+  Scenario: Logged as Member of Fribourg, I should see only 2 CTA buttons in the Events of the Activity N°56 (Escalade), because I'm not a the Member of this activity.
+    Given I am logged in as user "member+fribourg"
+    When I am on "/fribourg/activities/escalade"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-59" element
+    Then I should see 2 "#collapse-59 .card-actions .col-sm-6" elements
+    And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
+    And I should not see "qs.event.contact" in the "#collapse-59 .card-actions" element
+    And I should not see "qs.event.register" in the "#collapse-59 .card-actions" element
+    And I should not see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
+    And I should see 0 "#collapse-59 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
+    And I should see 0 "#collapse-59 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements
+
+  # @todo: Fix according - #517
+  @api
+  Scenario: Logged as Member & Organizer of Fribourg, I should see all the CTA buttons in the Events of the Activity N°57 (Monopoly), because I'm a Organizer of this activity.
+    Given I am logged in as user "member+fribourg+organizer+fribourg"
+    When I am on "/fribourg/activities/monopoly"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-61" element
+    Then I should see 6 "#collapse-61 .card-actions .col-sm-6" elements
+    And the "#collapse-61 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
+    And I should see "qs.event.location" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.contact" in the "#collapse-61 .card-actions" element
+    And the "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" element should contain "qs.event.dashboard.shortcut.confirmed 1"
+
+  @api
+  Scenario: Logged as Member N°2 of Fribourg, I should see all some CTA buttons in the Events of the Activity N°57 (Monopoly), because I'm a the Member of this activity.
+    Given I am logged in as user "member2+fribourg"
+    When I am on "/fribourg/activities/monopoly"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-61" element
+    Then I should see 5 "#collapse-61 .card-actions .col-sm-6" elements
+    And the "#collapse-61 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
+    And I should see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.contact" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.location" in the "#collapse-61 .card-actions" element
+    And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
+    And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements
+
+  @api
+  Scenario: Logged as Member of Fribourg, I should see only 2 CTA buttons in the Events of the Activity N°57 (Monopoly), because I'm not a the Member of this activity.
+    Given I am logged in as user "member+fribourg"
+    When I am on "/fribourg/activities/monopoly"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-61" element
+    Then I should see 1 "#collapse-61 .card-actions .col-sm-6" elements
+    And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should not see "qs.event.location" in the "#collapse-61 .card-actions" element
+    And I should not see "qs.event.contact" in the "#collapse-61 .card-actions" element
+    And I should not see "qs.event.register" in the "#collapse-61 .card-actions" element
+    And I should not see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
+    And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
+    And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements

@@ -155,4 +155,16 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
       throw new ElementNotFoundException($this->getSession(), 'link', 'href', $href);
     }
   }
+
+  /**
+   * @Given I should not see :label link
+   */
+  public function iShouldNotSeeLinkWithHref($label) {
+    $link = $this->getSession()->getPage()->findLink($label);
+
+    if (null !== $link) {
+        throw new Exception(t('Link "@label" was found.', ['@label' => $label]));
+    }
+  }
+
 }

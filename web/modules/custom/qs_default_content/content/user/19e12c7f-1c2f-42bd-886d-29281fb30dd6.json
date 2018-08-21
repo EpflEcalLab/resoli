@@ -28,6 +28,11 @@
             "value": "member2+fribourg@antistatique.net"
         }
     ],
+    "mail": [
+      {
+        "value": "member2+fribourg@antistatique.net"
+      }
+    ],
     "created": [
         {
             "value": "2018-04-05T10:05:03+00:00",

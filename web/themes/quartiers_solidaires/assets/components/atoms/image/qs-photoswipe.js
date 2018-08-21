@@ -185,6 +185,20 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 
     // Pass data to PhotoSwipe and initialize it
     gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+
+    // Some images are not sized correctly (EXIF is wrong and the image_effects
+    // module fixed this), we need to recalculate the height and width of all
+    // images before showing them, thus making sure nothing is deformed.
+    gallery.listen('gettingData', function (index, item) {
+      var img = new Image();
+      img.onload = function () {
+        item.w = this.width;
+        item.h = this.height;
+        gallery.updateSize(true);
+      };
+      img.src = item.src;
+    });
+
     gallery.init();
   };
 

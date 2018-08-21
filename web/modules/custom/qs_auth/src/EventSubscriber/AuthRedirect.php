@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_auth\EventSubscriber;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -23,13 +24,23 @@ class AuthRedirect implements EventSubscriberInterface {
   protected $routeMatch;
 
   /**
+   * The config.
+   *
+   * @var \Drupal\qs_auth\EventSubscriber\ConfigFactoryInterface
+   */
+  protected $config;
+
+  /**
    * Class constructor.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
    *   The current route match.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory.
    */
-  public function __construct(RouteMatchInterface $route_match) {
+  public function __construct(RouteMatchInterface $route_match, ConfigFactoryInterface $config_factory) {
     $this->routeMatch = $route_match;
+    $this->config = $config_factory;
   }
 
   /**

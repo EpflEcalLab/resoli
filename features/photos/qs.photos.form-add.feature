@@ -3,7 +3,6 @@ Feature: Form add photos
   As a bunch of users
   I want to make sure the correct activities writable are shown in Selectize Step 1
 
-
   @api
   Scenario: Logged as Admin, When I access "Form add photos" in Lausanne
     Given I am logged in as user "admin"

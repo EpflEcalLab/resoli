@@ -1,5 +1,10 @@
-#!/usr/bin/env bash
-
+#!/bin/sh
+#
+# Run PHPUnit tests for local or development purpose.
+# Author: Kevin Wenger
+#
+# Run as `./behat.sh`
+#
 # Kill runserver if one is alive
 ps -ef | grep 'runserver' | grep -v grep | awk '{print $2}' | xargs kill -9
 ps -ef | grep 'd8-rs-router.php' | grep -v grep | awk '{print $2}' | xargs kill -9
@@ -103,18 +108,6 @@ if [ $SKIP_TESTS -eq 0 ]
 then
   # Big Pipe cause some block to be rendered with delay and break Behat tests.
   ../vendor/bin/drush pmu big_pipe -y
-
-  printf "\e[1;33m***********************\e[0m\n"
-  printf "\e[1;33m* Running Unit Tests. *\e[0m\n"
-  printf "\e[1;33m***********************\e[0m\n"
-
-  SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" SIMPLETEST_BASE_URL='http://127.0.0.1:8888' ../vendor/bin/phpunit -c core --group qs --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error --stop-on-failure
-  phpunit_exit=$?
-
-  if [ $phpunit_exit -ne 0 ]
-  then
-    exit $phpunit_exit
-  fi
 
   printf "\e[1;33m************************\e[0m\n"
   printf "\e[1;33m* Running Behat Tests. *\e[0m\n"

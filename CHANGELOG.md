@@ -1,5 +1,9 @@
 # CHANGELOG
 
+
+## NEXT RELEASE
+ - update to drupal 8.6.1
+
 ## 1.2.0 (2018-08-21)
  - fix mail body encoded quote #152
  - add module "Image Effects" which allow Image Styles to Automatically use EXIF Image Orientation #606

@@ -82,7 +82,7 @@ fi
 n=0
 until [ $n -ge 3 ]; do
   ../vendor/bin/drush config-import -y --source='../config/d8/sync/'
-  n=$[$n+1]
+  n=$((n + 1))
   # delay 3s.
   sleep 3
 done

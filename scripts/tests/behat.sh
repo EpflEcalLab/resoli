@@ -51,10 +51,6 @@ then
   BEHAT_DATABASE="sqlite://localhost//tmp/development-qs.sqlite"
 fi
 
-cd $scriptDir
-
-cd "../../"
-
 if [ $SKIP_DEPEDENCIES -eq 0 ]
 then
   printf "\e[1;34m*************************\e[0m\n"

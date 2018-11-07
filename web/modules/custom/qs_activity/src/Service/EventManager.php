@@ -12,6 +12,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 /**
  * EventManager.
@@ -105,15 +106,16 @@ class EventManager {
     $query->condition('field_activity.field_activity_target_id', $activities_nids, 'IN');
 
     $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = event.nid');
-    $query->condition('field_start_at.field_start_at_value', $now->format('c'), '>=');
+    $query->condition('field_start_at.field_start_at_value', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '>=');
 
     $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = event.nid');
-    $query->condition('field_end_at.field_end_at_value', $now->format('c'), '>=');
+    $query->condition('field_end_at.field_end_at_value', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '>=');
 
     $query->fields('field_activity', ['field_activity_target_id']);
+    $query->fields('event', ['nid']);
     $query->groupBy('field_activity.field_activity_target_id');
+    $query->groupBy('event.nid');
     $query->addExpression('MIN(field_start_at.field_start_at_value)');
-    $query->addExpression('MIN(event.nid)', 'nid');
 
     $rows = $query->execute()->fetchAll();
 
@@ -125,9 +127,7 @@ class EventManager {
     foreach ($rows as $row) {
       $nids[] = $row->nid;
     }
-    $events = $this->nodeStorage->loadMultiple($nids);
-
-    return $events;
+    return $this->nodeStorage->loadMultiple($nids);
   }
 
   /**

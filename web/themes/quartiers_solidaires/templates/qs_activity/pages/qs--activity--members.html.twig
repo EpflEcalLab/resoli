@@ -96,7 +96,7 @@
     <div class="container flex-grow">
       {% if variables.mailto %}
         <p class="text-center">
-          <a class="btn btn-primary btn-icon shadow-to-bottom" href="mailto:?bcc={{ variables.mailto|join(',') }}">
+          <a class="btn btn-primary btn-icon shadow-to-bottom btn-outline-invert" href="mailto:?bcc={{ variables.mailto|join(',') }}">
             {{ macros.icon('mail') }}
             {{ 'qs.contact_all'|t }}
           </a>

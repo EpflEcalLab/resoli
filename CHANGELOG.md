@@ -1,8 +1,14 @@
 # CHANGELOG
 
-
 ## NEXT RELEASE
  - update to drupal 8.6.1
+
+## 1.2.2 (2018+11-07)
+ - add new tests bash files
+ - get the true next events - close #647
+
+## 1.2.1 (2018-11-07)
+ - remove the baseline of "Pro Senectute" on sponsors.svg 
 
 ## 1.2.0 (2018-08-21)
  - fix mail body encoded quote #152

@@ -115,16 +115,6 @@
             }
         ]
     },
-    "content_translation_status": [
-        {
-            "value": true,
-            "lang": "fr"
-        },
-        {
-            "value": true,
-            "lang": "de"
-        }
-    ],
     "content_translation_created": [
         {
             "value": "2018-07-02T14:59:43+00:00",

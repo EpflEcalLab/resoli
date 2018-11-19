@@ -69,14 +69,9 @@ function qs_photo_theme() {
  *   there is no restriction on size.
  *
  * @return array
- *   An empty array if the file meets the specified dimensions, was resized
- *   successfully to meet those requirements or is not an image. If the image
- *   does not meet the requirements or an attempt to resize it fails, an array
+ *   An empty array if the file meets the specified dimensions,
+ *   or is not an image. If the imagedoes not meet the requirements, an array
  *   containing the error message will be returned.
- *
- * @return array
- *   An empty array if the file size is below limits or an array containing an
- *   error message if it's not.
  *
  * @see file_validate_image_resolution()
  */

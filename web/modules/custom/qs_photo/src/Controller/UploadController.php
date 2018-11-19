@@ -79,8 +79,7 @@ class UploadController extends ControllerBase {
    *
    * Custom access checker does not have access to Request. So inject the
    * RequestStack.
-   *
-   * @see https://www.drupal.org/project/drupal/issues/2786941
+   * see https://www.drupal.org/project/drupal/issues/2786941
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   The currently logged in account.

@@ -99,50 +99,64 @@ class AddForm extends FormBasic {
     // Uppy locals strings.
     $this->uppyLocale = [
       'strings' => [
-        // Used as the screen reader label for the plus (+) button that shows the “Add more files” screen.
+        // Used as the screen reader label for the plus (+) button that shows
+        // the “Add more files” screen.
         'addMoreFiles' => $this->t('qs.uppy.add_more_files'),
-        // When `inline: true`, used as the screen reader label for the dashboard area.
+        // When `inline: true`, used as the screen reader label for the
+        // dashboard area.
         'dashboardTitle' => $this->t('qs.uppy.dashboard_title'),
-        // Shown in the Informer when a link to a file was copied to the clipboard.
+        // Shown in the Informer when a link to a file was copied to
+        // the clipboard.
         'copyLinkToClipboardSuccess' => $this->t('qs.uppy.copy_link_clipboard_success'),
-        // Used when a link cannot be copied automatically — the user has to select the text from the
+        // Used when a link cannot be copied automatically - the user has to
+        // select the text from the
         // input element below this string.
         'copyLinkToClipboardFallback' => $this->t('qs.uppy.copy_link_clipboard_fallback'),
-        // Used as the hover title and screen reader label for buttons that copy a file link.
+        // Used as the hover title and screen reader label for buttons that
+        // copy a file link.
         'copyLink' => $this->t('qs.uppy.copy_link'),
-        // Used as the label for buttons that accept and close panels (remote providers or metadata editor)
+        // Used as the label for buttons that accept and close panels
+        // (remote providers or metadata editor)
         'done' => $this->t('qs.uppy.done'),
         // Used as the screen reader label for buttons that remove a file.
         'removeFile' => $this->t('qs.uppy.remove_file'),
-        // Used as the screen reader label for buttons that open the metadata editor panel for a file.
+        // Used as the screen reader label for buttons that open the metadata
+        // editor panel for a file.
         'editFile' => $this->t('qs.uppy.edit_file'),
-        // Shown in the panel header for the metadata editor. Rendered as "Editing image.png".
+        // Shown in the panel header for the metadata editor. Rendered as
+        // "Editing image.png".
         'editing' => $this->t('qs.uppy.editing %{file}'),
-        // Text for a button shown on the file preview, used to edit file metadata.
+        // Text for a button shown on the file preview, used to edit file
+        // metadata.
         'edit' => $this->t('qs.uppy.edit'),
-        // Used as the screen reader label for the button that saves metadata edits and returns to the
+        // Used as the screen reader label for the button that saves metadata
+        // edits and returns to the
         // file list view.
         'finishEditingFile' => $this->t('qs.uppy.finish_editing_file'),
-        // Used as the label for the tab button that opens the system file selection dialog.
+        // Used as the label for the tab button that opens the system file
+        // selection dialog.
         'myDevice' => $this->t('qs.uppy.my_device'),
-        // Shown in the main dashboard area when no files have been selected, and one or more
-        // remote provider plugins are in use. %{browse} is replaced with a link that opens the system
-        // file selection dialog.
+        // Shown in the main dashboard area when no files have been selected,
+        // and one or more remote provider plugins are in use. %{browse} is
+        // replaced with a link that opens the system file selection dialog.
         'dropPasteImport' => $this->t('qs.uppy.drop_past_import %{browse}'),
-        // Shown in the main dashboard area when no files have been selected, and no provider
-        // plugins are in use. %{browse} is replaced with a link that opens the system
-        // file selection dialog.
+        // Shown in the main dashboard area when no files have been selected,
+        // and no provider plugins are in use. %{browse} is replaced with a
+        // link that opens the system file selection dialog.
         'dropPaste' => $this->t('qs.uppy.drop_paste %{browse}'),
         // This string is clickable and opens the system file selection dialog.
         'browse' => $this->t('qs.uppy.browse'),
-        // Used as the hover text and screen reader label for file progress indicators when
-        // they have been fully uploaded.
+        // Used as the hover text and screen reader label for file progress
+        // indicators when they have been fully uploaded.
         'uploadComplete' => $this->t('qs.uppy.upload_complete'),
-        // Used as the hover text and screen reader label for the buttons to resume paused uploads.
+        // Used as the hover text and screen reader label for the buttons to
+        // resume paused uploads.
         'resumeUpload' => $this->t('qs.uppy.upload_resume'),
-        // Used as the hover text and screen reader label for the buttons to pause uploads.
+        // Used as the hover text and screen reader label for the buttons to
+        // pause uploads.
         'pauseUpload' => $this->t('qs.uppy.upload_pause'),
-        // Used as the hover text and screen reader label for the buttons to retry failed uploads.
+        // Used as the hover text and screen reader label for the buttons to
+        // retry failed uploads.
         'retryUpload' => $this->t('qs.uppy.upload_retry'),
         'back' => $this->t('qs.uppy.back'),
 
@@ -168,30 +182,37 @@ class AddForm extends FormBasic {
         'retry' => $this->t('qs.uppy.retry'),
         // Used as the label for the button that cancels an upload.
         'cancel' => $this->t('qs.uppy.cancel'),
-        // Used as the screen reader label for the button that retries an upload.
+        // Used as the screen reader label for the button that retries
+        // an upload.
         'retryUpload' => $this->t('qs.uppy.retry_upload'),
         // Used as the screen reader label for the button that pauses an upload.
         'pauseUpload' => $this->t('qs.uppy.pause_upload'),
-        // Used as the screen reader label for the button that resumes a paused upload.
+        // Used as the screen reader label for the button that resumes a
+        // paused upload.
         'resumeUpload' => $this->t('qs.uppy.resume_upload'),
-        // Used as the screen reader label for the button that cancels an upload.
+        // Used as the screen reader label for the button that cancels
+        // an upload.
         'cancelUpload' => $this->t('qs.uppy_cancel_upload'),
-        // When `showProgressDetails` is set, shows the number of files that have been fully uploaded so far.
+        // When `showProgressDetails` is set, shows the number of files that
+        // have been fully uploaded so far.
         'filesUploadedOfTotal' => [
           '0' => $this->t('qs.uppy.file_uploaded_of_total %{complete} %{smart_count}'),
           '1' => $this->t('qs.uppy.files_uploaded_of_total %{complete} %{smart_count}'),
         ],
-        // When `showProgressDetails` is set, shows the amount of bytes that have been uploaded so far.
+        // When `showProgressDetails` is set, shows the amount of bytes that
+        // have been uploaded so far.
         'dataUploadedOfTotal' => $this->t('qs.uppy.uploaded_of_total %{complete} %{total}'),
-        // When `showProgressDetails` is set, shows an estimation of how long the upload will take to complete.
+        // When `showProgressDetails` is set, shows an estimation of how long
+        // the upload will take to complete.
         'xTimeLeft' => $this->t('qs.uppy.xtime_left %{time}'),
         // Used as the label for the button that starts an upload.
         'uploadXFiles' => [
           '0' => $this->t('qs.uppy.upload_file %{smart_count}'),
           '1' => $this->t('qs.uppy.upload_files %{smart_count}'),
         ],
-        // Used as the label for the button that starts an upload, if another upload has been started in the past
-        // and new files were added later.
+        // Used as the label for the button that starts an upload, if
+        // another upload has been started in the past and new files were
+        // added later.
         'uploadXNewFiles' => [
           '0' => $this->t('qs.uppy.upload_new_file %{smart_count}'),
           '1' => $this->t('qs.uppy.upload_new_files %{smart_count}'),

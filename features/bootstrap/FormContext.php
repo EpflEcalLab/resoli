@@ -29,7 +29,7 @@ class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
    */
   public function createPrivateFolder() {
     $fso = \Drupal::service('file_system');
-    $private_path = $fso->realpath('private://');
+    $private_path = $fso->realpath('private://'.$folder);
 
     if (!is_dir($private_path)) {
       throw new \Exception(sprintf('Value "%s" is not a directory.', $private_path));

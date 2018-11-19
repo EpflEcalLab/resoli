@@ -5,6 +5,7 @@ default:
         - FeatureContext
         - DemoContext
         - JsonContext
+        - PhotosContext
         - FormContext:
             base_url: http://127.0.0.1:8888
         - Drupal\DrupalExtension\Context\DrupalContext

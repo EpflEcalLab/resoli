@@ -74,7 +74,7 @@ class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
    * @Then /^I send "([^"]*)" request to "([^"]*)"$/
    */
   public function iSendUpload($method, $url) {
-    /** @var \Guzzle\Http\Client $client */
+    /** @var \Symfony\Component\BrowserKit\Client $client */
     $client = $this->getSession()->getDriver()->getClient();
     $client->request($method, $this->baseUrl . $url, [], [
       'files' => $this->attachments,

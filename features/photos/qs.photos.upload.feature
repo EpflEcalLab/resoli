@@ -1,12 +1,6 @@
 Feature: Upload photo via POST on Drupal\qs_photo\Controller\UploadController
 
   @api @photos
-  Scenario: I can't use the uploader whitout being connected
-    Then create "1" file "text" to be uploaded
-    Then I send "POST" request to "/backend/photos/upload"
-    And the response status code should be 404
-
-  @api @photos
   Scenario: I can upload file in an event I have access
     Given I am logged in as user "admin"
     Then create "1" file "png" to be uploaded

@@ -100,6 +100,9 @@ class AddForm extends FormBasic {
     $this->uppyLocale = [
       'strings' => [
         // Used as the screen reader label for the plus (+) button that shows
+        // the “Adding more files” screen.
+        'addingMoreFiles' => $this->t('qs.uppy.adding_more_files'),
+        // Used as the screen reader label for the plus (+) button that shows
         // the “Add more files” screen.
         'addMoreFiles' => $this->t('qs.uppy.add_more_files'),
         // When `inline: true`, used as the screen reader label for the

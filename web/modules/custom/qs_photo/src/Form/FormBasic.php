@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
+use Mimey\MimeTypes;
 
 /**
  * FormBasic class.
@@ -182,6 +183,27 @@ abstract class FormBasic extends FormBase {
     $form['#attributes']['novalidate'] = 'novalidate';
     $form['#attached']['library'][] = 'qs_site/unload';
     return $form;
+  }
+
+  /**
+   * Transform given extensions into array of Mime Types.
+   *
+   * @param string $extensions
+   *   List of extensions separated by space, whitout prefix dot (.)
+   *
+   * @return array
+   *   The array of Mime Types.
+   */
+  protected function getMimeTypesFromExt($extensions) {
+    $mimes = new MimeTypes();
+    $mime_types = [];
+    $extensions = explode(" ", $this->extensions);
+    foreach ($extensions as $extension) {
+      $extension_mime_types = $mimes->getAllMimeTypes($extension);
+      $mime_types = array_merge($mime_types, $extension_mime_types);
+    }
+
+    return $mime_types;
   }
 
 }

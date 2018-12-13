@@ -153,6 +153,8 @@ class PhotoManager {
   /**
    * From given events, get photos according ACL.
    *
+   * The photos will be ordered from present to past.
+   *
    * @param \Drupal\node\NodeInterface[] $events
    *   Events collection to filter by ACL.
    *
@@ -231,7 +233,7 @@ class PhotoManager {
     $query->condition('field_event.field_event_target_id', $nids, 'IN');
 
     $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_event.field_event_target_id');
-    $query->orderBy('field_end_at.field_end_at_value', 'ASC');
+    $query->orderBy('field_end_at.field_end_at_value', 'DESC');
 
     $rows = $query->execute()->fetchAll();
 

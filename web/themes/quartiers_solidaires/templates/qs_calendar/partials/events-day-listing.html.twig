@@ -1,9 +1,21 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set is_today = variables.current_day|date('Y-m-d') == 'now'|date('Y-m-d') %}
+{% set is_tomorrow = variables.current_day|date('Y-m-d') == 'tomorrow'|date('Y-m-d') %}
+
 <div class="container my-5">
   <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
     <li class="sticky-top bg-white mb-2 py-2 row">
-      <h2 class="col-12 h5 mb-0">{{ variables.current_day|bamboo_i18n_format_date('default_medium_date_only') }}</h2>
+      <h2 class="col-12 h5 mb-0">
+        {{ variables.current_day|bamboo_i18n_format_date('default_medium_date_only') }}
+
+        {% if is_today %}
+          <small>({{ 'qs.calendar.today'|t }})</small>
+        {% endif %}
+        {% if is_tomorrow %}
+          <small>({{ 'qs.calendar.tomorrow'|t }})</small>
+        {% endif %}
+      </h2>
     </li>
     {% for key, event in variables.events %}
       <li class="card card-list-item" id="card{{ event.nid.value }}">

@@ -213,6 +213,9 @@ class ActivityManager {
    *
    * Only the ones where the user can upload photos &
    * with at least one past event.
+   * An event is considered as "Past" when it finish today.
+   * To summarize, the return collection contain all Activities w/ event that
+   * ends today.
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
@@ -225,8 +228,9 @@ class ActivityManager {
    *   A collection of node's Activity. Otherwise an empty array.
    */
   public function getByUserPhoto(TermInterface $community, AccountInterface $user, $allow_empty_activities = TRUE) {
-    $now = new DrupalDateTime();
-    $now->setTimezone(new \DateTimeZone('UTC'));
+    $today = new DrupalDateTime();
+    $today->setTimezone(new \DateTimeZone('UTC'));
+    $today->setTime(23, 59, 59);
 
     $query_base = $this->connection->select('node_field_data', 'activity');
     $query_base->fields('activity', ['nid'])
@@ -236,10 +240,10 @@ class ActivityManager {
     $query_base->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
     $query_base->condition('field_community.field_community_target_id', [$community->id()], 'IN');
 
-    // Filter to get only activity with at least one past event.
+    // Filter to get only activity with at least one past event or today.
     $query_base->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
     $query_base->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_activity.entity_id');
-    $query_base->condition('field_end_at.field_end_at_value', $now->format('c'), '<');
+    $query_base->condition('field_end_at.field_end_at_value', $today->format('c'), '<');
 
     if (!$allow_empty_activities) {
       // Filter to get only activities with photos.

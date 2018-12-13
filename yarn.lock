@@ -19,6 +19,215 @@
     normalize-path "^2.0.1"
     through2 "^2.0.3"
 
+"@uppy/aws-s3-multipart@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/aws-s3-multipart/-/aws-s3-multipart-0.28.0.tgz#a0c8071a91333de554c6ec86944aee99c6c220dc"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/utils" "0.28.0"
+    resolve-url "^0.2.1"
+
+"@uppy/aws-s3@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/aws-s3/-/aws-s3-0.28.0.tgz#1a7c0b3eea1de55a84d44269b685921f4d0e0a72"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/utils" "0.28.0"
+    "@uppy/xhr-upload" "0.28.0"
+    resolve-url "^0.2.1"
+
+"@uppy/companion-client@0.27.2":
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/@uppy/companion-client/-/companion-client-0.27.2.tgz#526572b5129d7786c06368e8def5bc46c5980048"
+  dependencies:
+    namespace-emitter "^2.0.1"
+
+"@uppy/core@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-0.28.0.tgz#a9baae85f73bf127763cf7a95cf9b837e95bb938"
+  dependencies:
+    "@uppy/store-default" "0.27.0"
+    "@uppy/utils" "0.28.0"
+    cuid "^2.1.1"
+    lodash.throttle "^4.1.1"
+    mime-match "^1.0.2"
+    namespace-emitter "^2.0.1"
+    preact "^8.2.9"
+    prettier-bytes "^1.0.4"
+
+"@uppy/dashboard@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/dashboard/-/dashboard-0.28.0.tgz#27521459772e0f3784ad2bddde576900bb19c15b"
+  dependencies:
+    "@uppy/informer" "0.28.0"
+    "@uppy/provider-views" "0.28.0"
+    "@uppy/status-bar" "0.28.0"
+    "@uppy/thumbnail-generator" "0.28.0"
+    "@uppy/utils" "0.28.0"
+    classnames "^2.2.6"
+    drag-drop "2.13.3"
+    lodash.throttle "^4.1.1"
+    preact "^8.2.9"
+    preact-css-transition-group "^1.3.0"
+    prettier-bytes "^1.0.4"
+    resize-observer-polyfill "^1.5.0"
+
+"@uppy/drag-drop@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/drag-drop/-/drag-drop-0.28.0.tgz#dc6d4e4a2badf036f5a8ea8d6fda29c974f12ed8"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    drag-drop "2.13.3"
+    preact "^8.2.9"
+
+"@uppy/dropbox@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/dropbox/-/dropbox-0.28.0.tgz#5521e1879418cf123d4726b8db3395fb1f048d31"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/provider-views" "0.28.0"
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/file-input@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/file-input/-/file-input-0.28.0.tgz#905136bb0cd3cac4e92902a9d94ed3dd9594b383"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/form@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/form/-/form-0.28.0.tgz#c4ccae8f1786dfa33adbc52e3740a4eb654aeb30"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    get-form-data "^2.0.0"
+
+"@uppy/golden-retriever@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/golden-retriever/-/golden-retriever-0.28.0.tgz#4770b1077771712372344d0ec9425a07bc212478"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    prettier-bytes "^1.0.4"
+
+"@uppy/google-drive@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/google-drive/-/google-drive-0.28.0.tgz#ca7f783b0d821dca31b75fef6c0a0e305a3673d1"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/provider-views" "0.28.0"
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/informer@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/informer/-/informer-0.28.0.tgz#f79f1577706aa43807ab2152e4837d29ae5a4541"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/instagram@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/instagram/-/instagram-0.28.0.tgz#290be1937e74b266c410757fef79ccb0642b043c"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/provider-views" "0.28.0"
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/progress-bar@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/progress-bar/-/progress-bar-0.28.0.tgz#7e2fa500ee1de22dc3d22a34482b6d8ab472f254"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/provider-views@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/provider-views/-/provider-views-0.28.0.tgz#ff6f96a5b91a00295fa4d146e794cf36a8aa9dca"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    classnames "^2.2.6"
+    preact "^8.2.9"
+
+"@uppy/redux-dev-tools@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/redux-dev-tools/-/redux-dev-tools-0.28.0.tgz#d0ffd6ff65be443291f30044f90566a26d360913"
+
+"@uppy/status-bar@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/status-bar/-/status-bar-0.28.0.tgz#4b98ff8c0626fc3af14562586d13fe849f3fad05"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    classnames "^2.2.6"
+    lodash.throttle "^4.1.1"
+    preact "^8.2.9"
+    prettier-bytes "^1.0.4"
+
+"@uppy/store-default@0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@uppy/store-default/-/store-default-0.27.0.tgz#3afeb640352d142fe1b15d6e73b1034626ab4ced"
+
+"@uppy/store-redux@0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@uppy/store-redux/-/store-redux-0.27.0.tgz#529f9e3bf5d6fe71388411c42e5786ee56fa88a0"
+  dependencies:
+    cuid "^2.1.1"
+
+"@uppy/thumbnail-generator@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/thumbnail-generator/-/thumbnail-generator-0.28.0.tgz#7750f27c97207afaac0e3bbd4be7f4bb920357cd"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+
+"@uppy/transloadit@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/transloadit/-/transloadit-0.28.0.tgz#dc508d228b5387e153233bc078d279a776584b55"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/provider-views" "0.28.0"
+    "@uppy/tus" "0.28.0"
+    "@uppy/utils" "0.28.0"
+    component-emitter "^1.2.1"
+    socket.io-client "^2.1.1"
+
+"@uppy/tus@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/tus/-/tus-0.28.0.tgz#97a81c503a7ea72caaf21091347ad48a49d26a8f"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/utils" "0.28.0"
+    tus-js-client "^1.5.1"
+
+"@uppy/url@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/url/-/url-0.28.0.tgz#970895776821da84149624fa93f359d36f419d14"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/utils@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-0.28.0.tgz#7a511fd24bf95ca529571bc7cc0cac80abbfa732"
+  dependencies:
+    lodash.throttle "^4.1.1"
+
+"@uppy/webcam@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/webcam/-/webcam-0.28.0.tgz#700b38cee2950708c081dd97e3f05571bf1f8bdc"
+  dependencies:
+    "@uppy/utils" "0.28.0"
+    preact "^8.2.9"
+
+"@uppy/xhr-upload@0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@uppy/xhr-upload/-/xhr-upload-0.28.0.tgz#add62f43d80007a3df964da6d3ccee40d304b7af"
+  dependencies:
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/utils" "0.28.0"
+    cuid "^2.1.1"
+
 JSONStream@^0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-0.8.4.tgz#91657dfe6ff857483066132b4618b62e8f4887bd"
@@ -1039,6 +1248,10 @@ bindings@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
 
+blob-to-buffer@^1.0.2:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/blob-to-buffer/-/blob-to-buffer-1.2.8.tgz#78eeeb332f1280ed0ca6fb2b60693a8c6d36903a"
+
 blob@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/blob/-/blob-0.0.4.tgz#bcf13052ca54463f30f9fc7e95b9a47630a94921"
@@ -1343,6 +1556,10 @@ buffer-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/buffer-equal/-/buffer-equal-1.0.0.tgz#59616b498304d556abd466966b22eeda3eca5fbe"
 
+buffer-from@^0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-0.1.2.tgz#15f4b9bcef012044df31142c14333caf6e0260d0"
+
 buffer-indexof@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-indexof/-/buffer-indexof-1.1.1.tgz#52fabcc6a606d1a00302802648ef68f639da268c"
@@ -1597,6 +1814,10 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
+
+classnames@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
 
 cli-boxes@^1.0.0:
   version "1.0.0"
@@ -2173,6 +2394,10 @@ cubic2quad@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/cubic2quad/-/cubic2quad-1.1.1.tgz#69b19c61a3f5b41ecf2f1d5fae8fb03415aa8b15"
 
+cuid@^2.1.1:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/cuid/-/cuid-2.1.4.tgz#e1178eb92a05ef9364b29a9942feed36d3604cdd"
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
@@ -2516,6 +2741,14 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
+drag-drop@2.13.3:
+  version "2.13.3"
+  resolved "https://registry.yarnpkg.com/drag-drop/-/drag-drop-2.13.3.tgz#e4dc518ad1eddf33c53cb46759a32dd73f37dfd9"
+  dependencies:
+    blob-to-buffer "^1.0.2"
+    flatten "^1.0.2"
+    run-parallel "^1.0.0"
+
 duplexer2@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/duplexer2/-/duplexer2-0.0.2.tgz#c614dcf67e2fb14995a91711e5a617e8a60a31db"
@@ -2621,6 +2854,22 @@ end-of-stream@^1.0.0, end-of-stream@^1.1.0:
 engine.io-client@~3.1.0:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/engine.io-client/-/engine.io-client-3.1.5.tgz#85de17666560327ef1817978f6e3f8101ded2c47"
+  dependencies:
+    component-emitter "1.2.1"
+    component-inherit "0.0.3"
+    debug "~3.1.0"
+    engine.io-parser "~2.1.1"
+    has-cors "1.1.0"
+    indexof "0.0.1"
+    parseqs "0.0.5"
+    parseuri "0.0.5"
+    ws "~3.3.1"
+    xmlhttprequest-ssl "~1.5.4"
+    yeast "0.1.2"
+
+engine.io-client@~3.2.0:
+  version "3.2.1"
+  resolved "http://registry.npmjs.org/engine.io-client/-/engine.io-client-3.2.1.tgz#6f54c0475de487158a1a7c77d10178708b6add36"
   dependencies:
     component-emitter "1.2.1"
     component-inherit "0.0.3"
@@ -3497,6 +3746,10 @@ generate-object-property@^1.1.0:
 get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
+
+get-form-data@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/get-form-data/-/get-form-data-2.0.0.tgz#f211018ea617cc54678522235f0e2a9025d89411"
 
 get-stdin@^4.0.1:
   version "4.0.1"
@@ -5453,6 +5706,10 @@ lodash.templatesettings@~2.4.1:
     lodash._reinterpolate "~2.4.1"
     lodash.escape "~2.4.1"
 
+lodash.throttle@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+
 lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
@@ -5691,6 +5948,12 @@ miller-rabin@^4.0.0:
   version "1.33.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.33.0.tgz#a3492050a5cb9b63450541e39d9788d2272783db"
 
+mime-match@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/mime-match/-/mime-match-1.0.2.tgz#3f87c31e9af1a5fd485fb9db134428b23bbb7ba8"
+  dependencies:
+    wildcard "^1.1.0"
+
 mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.16, mime-types@~2.1.17, mime-types@~2.1.18, mime-types@~2.1.7:
   version "2.1.18"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.18.tgz#6f323f60a83d11146f831ff11fd66e2fe5503bb8"
@@ -5833,6 +6096,10 @@ mute-stream@0.0.5:
 mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
+
+namespace-emitter@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/namespace-emitter/-/namespace-emitter-2.0.1.tgz#978d51361c61313b4e6b8cf6f3853d08dfa2b17c"
 
 nan@^2.1.0, nan@^2.3.0, nan@^2.3.2:
   version "2.9.2"
@@ -6899,6 +7166,14 @@ postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.13, postcss@^6.0.17, postcss@^6.0.1
     source-map "^0.6.1"
     supports-color "^5.2.0"
 
+preact-css-transition-group@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/preact-css-transition-group/-/preact-css-transition-group-1.3.0.tgz#06fe468b26f7802e95b829a762db0bc199aef399"
+
+preact@^8.2.9:
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-8.3.1.tgz#ed34f79d09edc5efd32a378a3416ef5dc531e3ac"
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -6910,6 +7185,10 @@ prepend-http@^1.0.0, prepend-http@^1.0.1:
 preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
+
+prettier-bytes@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/prettier-bytes/-/prettier-bytes-1.0.4.tgz#994b02aa46f699c50b6257b5faaa7fe2557e62d6"
 
 pretty-bytes@^3.0.1:
   version "3.0.1"
@@ -7045,6 +7324,10 @@ querystring@0.2.0, querystring@^0.2.0:
 querystringify@0.0.x:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-0.0.4.tgz#0cf7f84f9463ff0ae51c4c4b142d95be37724d9c"
+
+querystringify@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.0.tgz#7ded8dfbf7879dcc60d0a644ac6754b283ad17ef"
 
 querystringify@~1.0.0:
   version "1.0.0"
@@ -7440,9 +7723,13 @@ require-uncached@^1.0.2, require-uncached@^1.0.3:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
-requires-port@1.0.x, requires-port@1.x.x, requires-port@~1.0.0:
+requires-port@1.0.x, requires-port@1.x.x, requires-port@^1.0.0, requires-port@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+
+resize-observer-polyfill@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.0.tgz#660ff1d9712a2382baa2cad450a4716209f9ca69"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -7547,6 +7834,10 @@ run-async@^2.2.0:
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.3.0.tgz#0371ab4ae0bdd720d4166d7dfda64ff7a445a6c0"
   dependencies:
     is-promise "^2.1.0"
+
+run-parallel@^1.0.0:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.9.tgz#c9dd3a7cf9f4b2c4b6244e173a6ed866e61dd679"
 
 rx-lite-aggregates@^4.0.8:
   version "4.0.8"
@@ -7897,6 +8188,25 @@ socket.io-client@2.0.4:
     socket.io-parser "~3.1.1"
     to-array "0.1.4"
 
+socket.io-client@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-2.1.1.tgz#dcb38103436ab4578ddb026638ae2f21b623671f"
+  dependencies:
+    backo2 "1.0.2"
+    base64-arraybuffer "0.1.5"
+    component-bind "1.0.0"
+    component-emitter "1.2.1"
+    debug "~3.1.0"
+    engine.io-client "~3.2.0"
+    has-binary2 "~1.0.2"
+    has-cors "1.1.0"
+    indexof "0.0.1"
+    object-component "0.0.3"
+    parseqs "0.0.5"
+    parseuri "0.0.5"
+    socket.io-parser "~3.2.0"
+    to-array "0.1.4"
+
 socket.io-parser@~3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/socket.io-parser/-/socket.io-parser-3.1.3.tgz#ed2da5ee79f10955036e3da413bfd7f1e4d86c8e"
@@ -7904,6 +8214,14 @@ socket.io-parser@~3.1.1:
     component-emitter "1.2.1"
     debug "~3.1.0"
     has-binary2 "~1.0.2"
+    isarray "2.0.1"
+
+socket.io-parser@~3.2.0:
+  version "3.2.0"
+  resolved "http://registry.npmjs.org/socket.io-parser/-/socket.io-parser-3.2.0.tgz#e7c6228b6aa1f814e6148aea325b51aa9499e077"
+  dependencies:
+    component-emitter "1.2.1"
+    debug "~3.1.0"
     isarray "2.0.1"
 
 socket.io@2.0.4:
@@ -8797,6 +9115,15 @@ tunnel-agent@~0.4.1:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/tunnel-agent/-/tunnel-agent-0.4.3.tgz#6373db76909fe570e08d73583365ed828a74eeeb"
 
+tus-js-client@^1.5.1:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/tus-js-client/-/tus-js-client-1.5.2.tgz#fa6f0804c3fae9315480fd29f4ed9f3926002bc1"
+  dependencies:
+    buffer-from "^0.1.1"
+    extend "^3.0.0"
+    lodash.throttle "^4.1.1"
+    url-parse "^1.4.3"
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
@@ -8954,6 +9281,36 @@ update-notifier@^2.2.0:
     semver-diff "^2.0.0"
     xdg-basedir "^3.0.0"
 
+uppy@^0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/uppy/-/uppy-0.28.0.tgz#0378b692bd84227f23184a81227082920f299bbc"
+  dependencies:
+    "@uppy/aws-s3" "0.28.0"
+    "@uppy/aws-s3-multipart" "0.28.0"
+    "@uppy/companion-client" "0.27.2"
+    "@uppy/core" "0.28.0"
+    "@uppy/dashboard" "0.28.0"
+    "@uppy/drag-drop" "0.28.0"
+    "@uppy/dropbox" "0.28.0"
+    "@uppy/file-input" "0.28.0"
+    "@uppy/form" "0.28.0"
+    "@uppy/golden-retriever" "0.28.0"
+    "@uppy/google-drive" "0.28.0"
+    "@uppy/informer" "0.28.0"
+    "@uppy/instagram" "0.28.0"
+    "@uppy/progress-bar" "0.28.0"
+    "@uppy/provider-views" "0.28.0"
+    "@uppy/redux-dev-tools" "0.28.0"
+    "@uppy/status-bar" "0.28.0"
+    "@uppy/store-default" "0.27.0"
+    "@uppy/store-redux" "0.27.0"
+    "@uppy/thumbnail-generator" "0.28.0"
+    "@uppy/transloadit" "0.28.0"
+    "@uppy/tus" "0.28.0"
+    "@uppy/url" "0.28.0"
+    "@uppy/webcam" "0.28.0"
+    "@uppy/xhr-upload" "0.28.0"
+
 urix@^0.1.0, urix@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
@@ -8977,6 +9334,13 @@ url-parse@^1.1.8:
   dependencies:
     querystringify "~1.0.0"
     requires-port "~1.0.0"
+
+url-parse@^1.4.3:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.4.tgz#cac1556e95faa0303691fec5cf9d5a1bc34648f8"
+  dependencies:
+    querystringify "^2.0.0"
+    requires-port "^1.0.0"
 
 url@^0.11.0, url@~0.11.0:
   version "0.11.0"
@@ -9322,6 +9686,10 @@ widest-line@^2.0.0:
   resolved "https://registry.yarnpkg.com/widest-line/-/widest-line-2.0.0.tgz#0142a4e8a243f8882c0233aa0e0281aa76152273"
   dependencies:
     string-width "^2.1.1"
+
+wildcard@^1.1.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-1.1.2.tgz#a7020453084d8cd2efe70ba9d3696263de1710a5"
 
 window-size@0.1.0:
   version "0.1.0"

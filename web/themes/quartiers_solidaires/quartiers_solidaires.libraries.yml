@@ -52,3 +52,17 @@ photoswipe:
     - core/jquery
     - core/drupal
     - core/drupalSettings
+
+# Uppy uploader
+uppy:
+  version: 0.28.0
+  css:
+    theme:
+      build/uppy/uppy.min.css: {}
+  js:
+    build/uppy/uppy.min.js: {}
+    build/uppy/qs-uppy.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings

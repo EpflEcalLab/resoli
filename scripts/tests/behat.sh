@@ -14,6 +14,7 @@ scriptDir=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 SKIP_DEPEDENCIES=0
 SKIP_TESTS=0
 SKIP_INTERACTION=0
+PRIVATE_FILES=''
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -28,6 +29,9 @@ while [ $# -gt 0 ]; do
       ;;
     --skip-interaction=*)
       SKIP_INTERACTION="-y"
+      ;;
+    --private-files=*)
+      PRIVATE_FILES="${1#*=}"
       ;;
     *)
       printf "\e[1;91m***************************\e[0m\n"
@@ -98,6 +102,20 @@ done
 if [ $SKIP_TESTS -eq 0 ]
 then
   nohup bash -c "php ../vendor/bin/drush runserver &" && sleep 3;
+fi
+
+# Set the Privates Files settings which need to be in the settings.php file
+if [ -d "$PRIVATE_FILES" ] && [ -f ./sites/default/settings.php ]
+then
+  printf "\e[1;34m*************************\e[0m\n"
+  printf "\e[1;34m* Override Settings.php *\e[0m\n"
+  printf "\e[1;34m*************************\e[0m\n"
+  chmod -R 777 ./sites/default/settings.php
+
+  printf "\e[1;93m* $settings['file_private_path'] = '$PRIVATE_FILES'; *\e[0m\n"
+  echo "\$settings['file_private_path'] = '$PRIVATE_FILES';" >> ./sites/default/settings.php
+
+  ../vendor/bin/drush cr
 fi
 
 if [ $SKIP_TESTS -eq 0 ]

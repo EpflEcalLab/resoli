@@ -28,7 +28,6 @@ class BadgeManager {
    */
   protected $connection;
 
-
   /**
    * The node Storage.
    *

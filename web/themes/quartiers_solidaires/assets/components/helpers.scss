@@ -38,6 +38,11 @@
 @include bg-variant('.bg-primary', color("primary"));
 @include bg-variant('.bg-primary-light', color("primary-lighter"));
 
+// Opacity helpers
+.opacity-50 {
+  opacity: 0.5;
+}
+
 // Light colors on colored backgrounds
 .bg-secondary,
 .bg-info,

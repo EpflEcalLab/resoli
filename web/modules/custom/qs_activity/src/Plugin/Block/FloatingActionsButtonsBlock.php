@@ -197,6 +197,12 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         ]);
         $label = $this->t('qs_activity.floating.dashboard.activity');
       }
+      else {
+        $icon = 'mail';
+        $theme = 'primary';
+        $url = 'mailto:' . $act->field_contact_mail->value;
+        $label = $act->field_contact_mail->value;
+      }
 
       if ($route_name == 'qs_activity.activities.form.edit.info') {
         $label = $this->t('qs.activity.edit_info');

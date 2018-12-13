@@ -283,7 +283,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     if ($community && in_array($route_name, [
       'qs_community.welcome',
     ])) {
-      $icon = 'activities';
+      $icon = 'user';
       $theme = 'invert';
       $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
         'user' => $this->currentUser->id(),

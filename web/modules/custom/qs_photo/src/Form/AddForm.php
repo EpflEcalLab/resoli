@@ -556,6 +556,8 @@ class AddForm extends FormBasic {
    *   The form model field structure.
    */
   public function selectEventAjax(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+
     $select_options[] = [
       'nid'   => '_none',
       'title' => $this->t('qs.form.select'),
@@ -577,9 +579,17 @@ class AddForm extends FormBasic {
           ];
         }
       }
+
+      // Update the Step 2 description with activity name.
+      $response->addCommand(new InvokeCommand('#qs-photo-add-form', 'updateStepDescription',
+        [
+          '#edit-step-2',
+          $this->t('qs_photo.add.form.step2.description @activity',
+            ['@activity' => $activity->getTitle()]),
+        ]
+      ));
     }
 
-    $response = new AjaxResponse();
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeClearOptions'));
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeAddOptions', [$select_options]));
     return $response;

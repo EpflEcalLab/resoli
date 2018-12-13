@@ -3,6 +3,26 @@ const multiStep = () => {
     const $form = $('.form-multistep');
     let processed = false;
 
+    /**
+     * Update the step description dynamically.
+     *
+     * @param step string
+     *   The step ID to search for.
+     * @param description string
+     *   The description to replace by.
+     */
+    $.fn.updateStepDescription = function(step, description) {
+      const currentForm = $(this);
+      const $fieldsets = currentForm.find('[data-step]');
+
+      const $lead = $fieldsets.closest(step).find('.lead');
+      if ($lead.length <= 0) {
+        return;
+      }
+
+      $lead.html(description);
+    };
+
     function handleMultisteps() {
       $form.each(function() {
         const currentForm = $(this);

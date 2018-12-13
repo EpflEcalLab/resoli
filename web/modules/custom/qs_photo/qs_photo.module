@@ -5,6 +5,8 @@
  * Legacy Drupal 7 code to implements hooks.
  */
 
+use Drupal\file\FileInterface;
+
 /**
  * Implements hook_theme().
  */
@@ -45,4 +47,68 @@ function qs_photo_theme() {
       'template'  => 'qs--photo--delete-gallery',
     ],
   ];
+}
+
+/**
+ * Verifies that image dimensions are within the specified maximum and minimum.
+ *
+ * Non-image files will be ignored.
+ * By opposition of file_validate_image_resolution, this validator will not
+ * affect the original EXIF.
+ *
+ * @param \Drupal\file\FileInterface $file
+ *   A file entity. This function may resize the file affecting its size.
+ * @param string|int $maximum_dimensions
+ *   (optional) A string in the form WIDTHxHEIGHT; for example, '640x480' or
+ *   '85x85'. If an image toolkit is installed, the image will be resized down
+ *   to these dimensions. A value of zero (the default) indicates no restriction
+ *   on size, so no resizing will be attempted.
+ * @param string|int $minimum_dimensions
+ *   (optional) A string in the form WIDTHxHEIGHT. This will check that the
+ *   image meets a minimum size. A value of zero (the default) indicates that
+ *   there is no restriction on size.
+ *
+ * @return array
+ *   An empty array if the file meets the specified dimensions,
+ *   or is not an image. If the imagedoes not meet the requirements, an array
+ *   containing the error message will be returned.
+ *
+ * @see file_validate_image_resolution()
+ */
+function file_validate_image_max_resolution(FileInterface $file, $maximum_dimensions = 0, $minimum_dimensions = 0) {
+  $errors = [];
+
+  // Check first that the file is an image.
+  $image_factory = \Drupal::service('image.factory');
+  $image = $image_factory->get($file->getFileUri());
+
+  if (!$image->isValid()) {
+    return $errors;
+  }
+
+  if ($maximum_dimensions) {
+    // Check that it is smaller than the given dimensions.
+    list($width, $height) = explode('x', $maximum_dimensions);
+    if ($image->getWidth() > $width || $image->getHeight() > $height) {
+      $errors[] = t('The image is too large. The maximum dimensions are %dimensions pixels and the image size is %widthx%height pixels.', [
+        '%dimensions' => $maximum_dimensions,
+        '%width'      => $image->getWidth(),
+        '%height'     => $image->getHeight(),
+      ]);
+    }
+  }
+
+  if ($minimum_dimensions) {
+    // Check that it is larger than the given dimensions.
+    list($width, $height) = explode('x', $minimum_dimensions);
+    if ($image->getWidth() < $width || $image->getHeight() < $height) {
+      $errors[] = t('The image is too small. The minimum dimensions are %dimensions pixels and the image size is %widthx%height pixels.', [
+        '%dimensions' => $minimum_dimensions,
+        '%width'      => $image->getWidth(),
+        '%height'     => $image->getHeight(),
+      ]);
+    }
+  }
+
+  return $errors;
 }

@@ -52,6 +52,12 @@
   },{
     "src": "web/themes/quartiers_solidaires/assets/components/molecules/calendar/date.js",
     "dest": "web/themes/quartiers_solidaires/build/js"
+  },{
+    "src": "node_modules/uppy/dist/*",
+    "dest": "web/themes/quartiers_solidaires/build/uppy"
+  },{
+    "src": "web/themes/quartiers_solidaires/assets/components/molecules/form-control/qs-uppy.js",
+    "dest": "web/themes/quartiers_solidaires/build/uppy"
   }],
   "theme": {
     "title": "Réseaux solidaires<br><span><small>Design System</small></span>",

@@ -120,7 +120,7 @@ Maintaining code quality by adding the custom post-commit hook to yours.
 
 ## 🔥 Behavior Driven Development using Behat
 
-For isolation test databases, you should run Behat using our custom script `scripts/behat/drupal`.
+For isolation test databases, you should run Behat using our custom script `scripts/tests/behat.sh`.
 
 ### Quick & dirty
 
@@ -134,7 +134,7 @@ in the root of your project.
 You can use the Driven Development script to install re-install default values by running:
 
   ```bash
-  ./scripts/behat/drupal --skip-dependencies=1 --skip-tests=1 --skip-interaction=1
+  ./scripts/tests/behat.sh --skip-dependencies=1 --skip-tests=1 --skip-interaction=1
   ```
 
 ## 🚛 Install
@@ -280,6 +280,22 @@ We use Capistrano to deploy:
 
 For tests you need a working database connection and for browser tests
 your Drupal installation needs to be reachable via a web server.
+
+### Quick & dirty
+
+You can use the Driven Development script to run our PHPUnit scripts:
+
+  ```bash
+  ./scripts/tests/phpunit.sh
+  ```
+
+You can also add a `--group` parameter to limit the scoop to a given group.
+
+  ```bash
+  ./scripts/tests/phpunit.sh --group qs
+  ```
+
+### Complete documentation
 
 Copy the phpunit config file:
 

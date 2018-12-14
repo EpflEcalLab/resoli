@@ -181,7 +181,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // Button "Add Event".
       if ($this->acl->hasWriteAccessEvent($act)) {
         $icon = 'plus';
-        $theme = 'primary';
+        $theme = 'secondary';
         $url = $this->urlGenerator->generateFromRoute('qs_activity.events.form.add', [
           'activity' => $act->id(),
         ]);

@@ -45,7 +45,8 @@
 
 .modal-content {
   height: 100%;
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-title {
@@ -57,7 +58,8 @@
   flex-direction: column;
   flex: 1 0 auto;
   justify-content: center;
-  overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   min-height: min-content;
 
   .fullpage-wrapper {
@@ -67,6 +69,7 @@
 
 .modal-footer {
   flex-shrink: 0;
+  border-radius: $border-radius-lg;
 
   @include media-breakpoint-down(xs) {
     flex-wrap: wrap;
@@ -86,10 +89,6 @@
         background: transparent linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
       }
     }
-  }
-
-  .container & {
-    border-radius: 0;
   }
 }
 

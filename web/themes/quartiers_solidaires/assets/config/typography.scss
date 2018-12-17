@@ -26,7 +26,14 @@
 
 h2,
 .h2 {
-  @include media-breakpoint-only(xs) {
+  @include media-breakpoint-down(xs) {
     font-size: $h2-font-size * 0.8;
+  }
+}
+
+h4,
+.h4 {
+  @include media-breakpoint-down(xs) {
+    font-size: $h4-font-size * 0.8;
   }
 }

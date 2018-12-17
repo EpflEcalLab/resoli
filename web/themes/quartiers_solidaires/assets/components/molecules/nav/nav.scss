@@ -234,9 +234,12 @@
 
   @include media-breakpoint-up(sm) {
     position: fixed;
-    flex-direction: row;
     bottom: -100vh;
     left: 50%;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
     transform: translateX(-50%);
   }
 
@@ -254,12 +257,9 @@
   }
 
   .btn {
+    margin-bottom: ($spacer / 2);
     background-color: color("primary-lightest");
     color: theme-color("primary");
-
-    @include media-breakpoint-down(xs) {
-      margin-bottom: ($grid-gutter-width / 2);
-    }
   }
 
   .bg-primary & {

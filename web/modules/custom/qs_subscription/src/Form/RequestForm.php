@@ -2,12 +2,14 @@
 
 namespace Drupal\qs_subscription\Form;
 
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\PrependCommand;
+use Kint;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -126,12 +128,16 @@ class RequestForm extends FormBase {
       $name = 'direct_subscription_' . $event->id();
     }
 
+    // Will get used in the Ajax callback.
+    $ajax_class = $name . '_confirm';
+
     $form['submit'] = [
       '#id'   => $name . '_submit',
       '#name' => $name,
       '#type' => 'submit',
       '#attributes' => [
         'data-status-show' => 'default',
+        'data-confirm' => $this->t('qs.event.register.confirm'),
         'icon' => 'register',
         'icon_left' => TRUE,
         'theme' => 'secondary',
@@ -140,14 +146,19 @@ class RequestForm extends FormBase {
           'btn-outline-secondary',
           'btn-block',
           'btn-white',
+          $ajax_class,
         ],
       ],
-      '#ajax'        => [
+      '#ajax' => [
         'callback' => [$this, 'respondToAjax'],
         'progress' => ['type' => 'none'],
       ],
       '#value' => $this->t('qs.event.register'),
     ];
+
+    // Load the library to handle the two-steps button.
+    $form['submit']['#attached']['library'][] = 'qs_subscription/subscription';
+    $form['submit']['#attached']['drupalSettings']['subscriptionConfirm'] = $ajax_class;
 
     return $form;
   }
@@ -173,9 +184,7 @@ class RequestForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Handle redirection.
     $trigger = $form_state->getTriggeringElement();
-
-    $event_id = $form_state->getValue('event');
-    $event = $this->nodeStorage->load($event_id);
+    $event = $this->nodeStorage->load($form_state->getValue('event'));
 
     // Processing the submission as a standard request.
     if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
@@ -209,11 +218,14 @@ class RequestForm extends FormBase {
    * @param Drupal\Core\Form\FormStateInterface $form_state
    *   Form state information.
    *
-   * @return \Drupal\Core\Ajax\AjaxResponse
+   * @return array|\Drupal\Core\Ajax\AjaxResponse
    *   Response object.
    */
   public function respondToAjax(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
+
+    $form_state->setRebuild(FALSE);
+    $send = FALSE;
 
     // Avoid submit on error & show them.
     if ($form_state->hasAnyErrors()) {
@@ -235,9 +247,11 @@ class RequestForm extends FormBase {
 
     if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
       $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'pending']));
+      $send = TRUE;
     }
     elseif (strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
       $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'confirmed']));
+      $send = TRUE;
     }
 
     // Create the bag message render array.
@@ -246,6 +260,12 @@ class RequestForm extends FormBase {
     if (!empty($messages)) {
       // Append the bag message(s).
       $response->addCommand(new PrependCommand('#wrapper-status-messages', $messages));
+    }
+
+    // Make sure we don't call SubmitForm if the form should not be sent yet.
+    if (!$send) {
+      $form_state->setRebuild();
+      return $form;
     }
 
     return $response;

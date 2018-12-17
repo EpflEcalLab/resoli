@@ -1,6 +1,5 @@
 const formAjax = () => {
   (function ($) {
-
     // Handle buttons with confirmation step
     let timer = null;
     const delay = 2500;

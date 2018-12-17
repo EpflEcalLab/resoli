@@ -1,0 +1,9 @@
+subscription:
+  js:
+    js/subscription.js: {}
+  dependencies:
+  - core/drupal
+  - core/drupalSettings
+  - core/drupal.ajax
+  - core/jquery
+  - core/jquery.once

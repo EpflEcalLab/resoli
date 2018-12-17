@@ -3,10 +3,10 @@
 <div class="d-flex flex-column justify-content-between">
   <div class="fullpage-wrapper py-4">
     <div class="container">
-      <div class="row justify-content-between">
-        <a class="btn btn-outline-secondary btn-outline-invert shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
+      <div class="d-flex justify-content-between mb-3">
+        <a class="mx-2 btn btn-outline-secondary btn-outline-invert btn-icon-to-circle shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
           {{ macros.icon('chevron-left') }}
-          {{ 'qs_auth.link.home'|t }}
+          <span class="d-none d-sm-inline">{{ 'qs_auth.link.home'|t }}</span>
         </a>
       </div>
     </div>

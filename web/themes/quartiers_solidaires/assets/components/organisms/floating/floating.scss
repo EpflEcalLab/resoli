@@ -1,12 +1,15 @@
 @charset 'utf-8';
 
 .floating {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: $zindex-sticky;
   background-image: linear-gradient(to top, rgba($white, 0.5) 60%, rgba($white, 0) 100%);
+
+  @include media-breakpoint-up(sm) {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-sticky;
+  }
 
   .modal-open.modal-full & {
     z-index: ($zindex-modal-backdrop + 1);
@@ -45,5 +48,7 @@
 }
 
 .floating-offset {
-  margin-bottom: 75px;
+  @include media-breakpoint-up(sm) {
+    margin-bottom: 75px;
+  }
 }

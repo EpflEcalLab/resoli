@@ -23,3 +23,10 @@
     font-size: $lead-font-size * 0.75;
   }
 }
+
+h2,
+.h2 {
+  @include media-breakpoint-only(xs) {
+    font-size: $h2-font-size * 0.8;
+  }
+}

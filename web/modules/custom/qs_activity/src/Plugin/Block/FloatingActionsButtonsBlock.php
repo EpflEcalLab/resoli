@@ -102,6 +102,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $community = $activity->field_community->entity;
     }
 
+    $variables['buttons'] = [];
     $icon = NULL;
     $url = NULL;
     $label = $this->t('qs.previous');
@@ -323,11 +324,31 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $classes[] = 'active';
     }
 
-    $variables['url'] = $url;
-    $variables['label'] = $label;
-    $variables['theme'] = $theme;
-    $variables['icon'] = $icon;
-    $variables['classes'] = $classes;
+    $variables['buttons'][] = [
+      'url' => $url,
+      'label' => $label,
+      'theme' => $theme,
+      'icon' => $icon,
+      'classes' => $classes,
+    ];
+
+    //
+    // Add a second button if needed.
+    //
+
+
+    // Welcome screen second button.
+    if ($community && $this->acl->hasAdminAccessCommunity($community) && in_array($route_name, [
+        'qs_community.welcome',
+      ])) {
+      $variables['buttons'][] = [
+        'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
+        'label' => $this->t('qs_menu.links.account.communities'),
+        'theme' => 'invert',
+        'icon' => 'communities-sm',
+        'classes' => $classes,
+      ];
+    }
 
     return [
       '#theme'     => 'qs_activity_floating_actions_buttons_block',

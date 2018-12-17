@@ -50,8 +50,8 @@ const multiStep = () => {
 
         // Create the "Prev step" button below the form
         $('<button/>')
-          .addClass(`btn btn-outline-invert btn-icon btn-icon-left align-self-center shadow-to-bottom prev-btn-${id}`)
-          .text(typeof (Drupal) !== 'undefined' ? Drupal.t('qs.previous') : 'previous')
+          .addClass(`btn btn-outline-invert btn-circle btn-icon-left align-self-center shadow-to-bottom prev-btn-${id}`)
+          .html(typeof (Drupal) !== 'undefined' ? `<span class="d-none d-sm-inline">${Drupal.t('qs.previous')}</span>` : `<span class="d-none d-sm-inline">previous</span>`)
           .on('click', function(e) {
             e.preventDefault();
 

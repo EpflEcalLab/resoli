@@ -68,6 +68,15 @@
 .modal-footer {
   flex-shrink: 0;
 
+  @include media-breakpoint-down(xs) {
+    flex-wrap: wrap;
+
+    > *:not('.btn-circle') {
+      flex: 1 1 auto;
+      margin-bottom: $spacer * 0.5;
+    }
+  }
+
   &.sticky-bottom {
     border-bottom-right-radius: $border-radius-lg;
     border-bottom-left-radius: $border-radius-lg;

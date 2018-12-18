@@ -1,9 +1,9 @@
-{% if variables.buttons is not empty %}
+{% if variables.buttons is not empty and variables.buttons|first.url %}
   {% import "@quartiers_solidaires/macros.html.twig" as macros %}
   <div class="floating">
     <div class="container">
       <div class="d-flex flex-wrap justify-content-center">
-        {% for button in variables.buttons %}
+        {% for button in variables.buttons if button.url %}
           {% set btn_classes = [
             'btn btn-white shadow-floating mb-3 mx-2',
             'btn-xs-grow',

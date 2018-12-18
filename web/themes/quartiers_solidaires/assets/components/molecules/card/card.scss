@@ -46,6 +46,7 @@ a.card {
   display: flex;
   position: relative;
   align-items: center;
+  justify-content: space-between;
   margin: -$card-border-width;
   border: $card-border-width solid $card-cap-bg;
   background-color: $card-cap-bg;

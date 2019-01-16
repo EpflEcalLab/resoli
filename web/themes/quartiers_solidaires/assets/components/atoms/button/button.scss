@@ -25,6 +25,11 @@
     cursor: pointer;
   }
 
+  @include media-breakpoint-down(xs) {
+    padding-right: ($input-btn-padding-x / 2);
+    padding-left: ($input-btn-padding-x / 2);
+  }
+
   @include media-breakpoint-up(md) {
     min-width: 160px;
   }
@@ -50,6 +55,13 @@
 
 .btn-fluid {
   min-width: initial;
+}
+
+// Grow on mobile, needed to read properly certain buttons.
+.btn-xs-grow {
+  @include media-breakpoint-down(xs) {
+    flex: 1 1 auto;
+  }
 }
 
 // Themed Buttons
@@ -183,10 +195,6 @@
         position: static;
         margin: 0;
         transform: none;
-
-        svg {
-          color: $body-color;
-        }
       }
     }
   }

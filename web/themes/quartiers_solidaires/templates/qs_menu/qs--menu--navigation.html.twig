@@ -15,10 +15,10 @@
   <div class="navbar-current">
     <div class="navbar-filters">
       {% if current_item %}
-        <button class="btn btn-primary btn-icon">
+        <button class="btn btn-primary btn-icon btn-icon-to-circle">
           {{ macros.icon(current_item.icon) }}
           <span class="sr-only">{{ 'qs.menu.current_page'|t }}</span>
-          {{ current_item.label }}
+          <span class="d-none d-sm-inline">{{ current_item.label }}</span>
         </button>
 
         {% for key, link in current_item.links %}

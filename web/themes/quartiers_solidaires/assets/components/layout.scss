@@ -1,5 +1,23 @@
 @charset "utf-8";
 
+html {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
+}
+
+.dialog-off-canvas-main-canvas {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
+}
+
 .header {
   > .row > * {
     // basic column properties

@@ -335,12 +335,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     //
     // Add a second button if needed.
     //
-
-
     // Welcome screen second button.
     if ($community && $this->acl->hasAdminAccessCommunity($community) && in_array($route_name, [
-        'qs_community.welcome',
-      ])) {
+      'qs_community.welcome',
+    ])) {
       $variables['buttons'][] = [
         'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
         'label' => $this->t('qs_menu.links.account.communities'),

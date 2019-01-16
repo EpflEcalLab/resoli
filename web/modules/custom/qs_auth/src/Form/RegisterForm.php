@@ -87,6 +87,7 @@ class RegisterForm extends FormBase {
         'label' => $this->t('qs_auth.link.home'),
         'options' => [
           'icon' => 'chevron-left',
+          'hide_xs' => TRUE,
         ],
       ],
       'qs_auth.login' => [

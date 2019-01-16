@@ -44,6 +44,7 @@
 {% for type, messages in message_list %}
 {%
   set classes = [
+    'mt-3',
     'alert',
     'alert-' ~ status_classes[type],
     'alert-dismissible',

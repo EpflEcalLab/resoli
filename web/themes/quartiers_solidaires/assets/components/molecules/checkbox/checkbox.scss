@@ -3,14 +3,26 @@
 .checkbox {
   &.btn {
     display: inline-flex;
-    flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
+    padding-left: 0;
     font-weight: $font-weight-normal;
     overflow: visible;
     white-space: normal;
+    text-align: left;
+
+    @include media-breakpoint-up(sm) {
+      flex-direction: column;
+      text-align: center;
+    }
 
     .icon {
       pointer-events: none;
+      margin-right: ($spacer / 2);
+
+      @include media-breakpoint-up(sm) {
+        margin-right: 0;
+      }
     }
 
     @include icon-size(50px);

@@ -117,6 +117,14 @@ Feature: Floating actions buttons
     Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_activity.floating.add.event" link with href "/lausanne/activities/sorties-theatre/events/add"
 
+  @api
+  Scenario: Logged as Member of Lausanne, when reaching the Activity N°3, I must see the "Contact @name @email" button
+    Given I am logged in as user "member+lausanne"
+    When I am on "/lausanne/activities/sorties-theatre"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.contact.author Jean Neige jean.neige@example.com" link with href "mailto:jean.neige@example.com"
+
 ## Community Welcome
   @api
   Scenario: Logged as Admin, when reaching any community welcome, I must see the "Community Dashboard" button

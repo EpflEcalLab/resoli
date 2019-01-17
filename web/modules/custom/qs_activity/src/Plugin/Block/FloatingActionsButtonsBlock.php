@@ -198,7 +198,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         ]);
         $label = $this->t('qs_activity.floating.dashboard.activity');
       }
-      
+
       // Button "Contact @name @email".
       if ($act->field_contact_mail->value && !$this->acl->hasWriteAccessEvent($act) && !$this->acl->hasAdminAccessActivity($act)) {
         $icon  = 'mail';

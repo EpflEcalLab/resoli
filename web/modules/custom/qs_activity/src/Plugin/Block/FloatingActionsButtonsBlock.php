@@ -176,7 +176,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $label = $this->t('qs_activity.floating.my_subscriptions');
     }
 
-    // Button - "Add Event" or "Activity Dashboard".
+    // Button - "Add Event" or "Activity Dashboard" or "Contact @name @email".
     if (($node && $node->bundle() == 'activity') || $activity) {
       $act = $node ? $node : $activity;
       // Button "Add Event".
@@ -198,7 +198,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         ]);
         $label = $this->t('qs_activity.floating.dashboard.activity');
       }
-      elseif ($act->field_contact_mail->value) {
+      
+      // Button "Contact @name @email".
+      if ($act->field_contact_mail->value && !$this->acl->hasWriteAccessEvent($act) && !$this->acl->hasAdminAccessActivity($act)) {
         $icon  = 'mail';
         $theme = 'primary';
         $url   = 'mailto:' . $act->field_contact_mail->value;

@@ -3,6 +3,7 @@
 namespace Drupal\qs_photo\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -355,6 +356,9 @@ class AddForm extends FormBasic {
         'form_element',
         'container__center',
       ],
+      '#ajax'     => [
+        'callback' => [$this, 'showUppy'],
+      ],
     ];
 
     $form['step-3'] = [
@@ -383,6 +387,7 @@ class AddForm extends FormBasic {
       '#uppy'       => TRUE,
       '#multiple'   => TRUE,
       '#required'   => FALSE,
+      '#hide'       => TRUE,
       '#data' => [
         'data-callback-fields'    => self::UPPY_FILES,
         'data-locale'             => json_encode($this->uppyLocale),
@@ -552,7 +557,7 @@ class AddForm extends FormBasic {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    *
-   * @return array
+   * @return \Drupal\Core\Ajax\AjaxResponse
    *   The form model field structure.
    */
   public function selectEventAjax(array &$form, FormStateInterface $form_state) {
@@ -592,6 +597,23 @@ class AddForm extends FormBasic {
 
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeClearOptions'));
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeAddOptions', [$select_options]));
+    return $response;
+  }
+
+  /**
+   * Show the Upply uploader.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The form model field structure.
+   */
+  public function showUppy(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    $response->addCommand(new CssCommand('#uppy-uploader-hidden', ['display' => 'block']));
     return $response;
   }
 

@@ -30,7 +30,7 @@
     <span class="form-control-label">{{ attributes.label|raw }}</span>
   {% endif %}
 
-  <div class="form-uppy-handler">
+  <div class="form-uppy-handler" {{ element['#hide'] ? 'id="uppy-uploader-hidden" style="display: none;"' }}>
     {{ 'qs.form.input.upload'|t }}
 
     {% for data, value in element['#data'] %}

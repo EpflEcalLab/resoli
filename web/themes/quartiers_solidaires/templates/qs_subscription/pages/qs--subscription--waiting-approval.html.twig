@@ -75,24 +75,23 @@
 
   {{ variables.pager }}
 
-  <div class="container">
-    <div class="row mb-3 mt-3">
-      <div class="col-6">
-        {# Go to Subscribers #}
-        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
-          {{ macros.icon('register') }}
-          {{ 'qs.event.subscriptions.subscribers'|t }}
+  <div class="row mb-3 mt-3">
+    <div class="col-sm-6">
+      {# Go to Subscribers #}
+      <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
+        {{ macros.icon('register') }}
+        {{ 'qs.event.subscriptions.subscribers'|t }}
+      </a>
+    </div>
+    <div class="col-sm-6">
+      {% if variables.mailto %}
+        {# Contact all pending members #}
+        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ variables.mailto|join(',') }}">
+          {{ macros.icon('mail') }}
+          {{ 'qs.contact_all'|t }}
         </a>
-      </div>
-      <div class="col-6">
-        {% if variables.mailto %}
-          {# Contact all pending members #}
-          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ variables.mailto|join(',') }}">
-            {{ macros.icon('mail') }}
-            {{ 'qs.contact_all'|t }}
-          </a>
-        {% endif %}
-      </div>
+      {% endif %}
     </div>
   </div>
+
 </div>

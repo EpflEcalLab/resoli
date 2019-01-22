@@ -22,6 +22,7 @@
 // Card border radius has to be smaller to correspond to the card-pill
 .card {
   width: 100%;
+  backface-visibility: hidden;
 
   @include border-radius($card-border-radius - $card-border-width);
 }
@@ -210,7 +211,11 @@ a[href].card-pill-simple {
 // The icon, pushed against the left border
 .card-pill-icon {
   line-height: 0;
-  margin-right: $card-spacer-x;
+  margin-right: ($card-spacer-x / 2);
+
+  @include media-breakpoint-up(sm) {
+    margin-right: $card-spacer-x;
+  }
 
   .icon {
     justify-content: center;

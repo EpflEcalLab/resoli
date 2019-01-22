@@ -309,7 +309,7 @@
   border: $border-width solid theme-color("primary");
   font-weight: 600;
 
-  @include media-breakpoint-only(xs) {
+  @include media-breakpoint-down(sm) {
     min-height: 60px;
 
     &:not(:last-child) {
@@ -317,7 +317,7 @@
     }
 
     .icon {
-      padding-right: ($grid-gutter-width / 2);
+      padding-right: ($grid-gutter-width);
     }
   }
 
@@ -338,7 +338,7 @@
 
   @include button-variant(color("primary-light"), theme-color("primary"), theme-color("primary"));
   @include drop-shadow(bottom);
-  @include icon-size(6vh, 38px);
+  @include icon-size(7vh, 38px);
 
   // Override background-color set in button variant
   background-color: color("primary-lightest");

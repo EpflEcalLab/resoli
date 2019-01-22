@@ -139,6 +139,7 @@ class DeleteForm extends FormBasic {
       '#attributes' => [
         'class' => [
           'btn btn-outline-danger btn-outline-invert',
+          'mb-2',
         ],
       ],
     ];
@@ -148,6 +149,7 @@ class DeleteForm extends FormBasic {
       '#attributes' => [
         'class' => [
           'text-danger',
+          'mb-2',
         ],
         'icon' => 'trash',
         'icon_left' => TRUE,

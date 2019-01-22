@@ -147,6 +147,7 @@
 .checkbox-toggle-container {
   display: flex;
   align-items: center;
+  backface-visibility: hidden;
 
   @include media-breakpoint-down(xs) {
     justify-content: space-between;

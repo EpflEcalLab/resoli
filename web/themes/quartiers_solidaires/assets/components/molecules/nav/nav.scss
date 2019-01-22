@@ -247,7 +247,7 @@
     display: flex;
     position: fixed;
     opacity: 1;
-    bottom: ($grid-gutter-width / 2);
+    bottom: ($spacer / 2);
     pointer-events: initial;
 
     @include transition(

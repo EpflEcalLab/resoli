@@ -10,6 +10,7 @@ use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\qs_acl\Service\PrivilegeManager;
 
 /**
  * Floating actions buttons Block.
@@ -59,15 +60,23 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
   protected $activityManager;
 
   /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  protected $privilegeManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, UrlGeneratorInterface $urlGenerator, AccountProxyInterface $current_user, ActivityManager $activity_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, UrlGeneratorInterface $urlGenerator, AccountProxyInterface $current_user, ActivityManager $activity_manager, PrivilegeManager $privilege_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->acl             = $acl;
-    $this->route           = $route;
-    $this->urlGenerator    = $urlGenerator;
-    $this->currentUser     = $current_user;
-    $this->activityManager = $activity_manager;
+    $this->acl              = $acl;
+    $this->route            = $route;
+    $this->urlGenerator     = $urlGenerator;
+    $this->currentUser      = $current_user;
+    $this->activityManager  = $activity_manager;
+    $this->privilegeManager = $privilege_manager;
   }
 
   /**
@@ -85,7 +94,8 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $container->get('current_route_match'),
       $container->get('url_generator'),
       $container->get('current_user'),
-      $container->get('qs_activity.activity_manager')
+      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_acl.privilege_manager')
     );
   }
 
@@ -199,15 +209,37 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         $label = $this->t('qs_activity.floating.dashboard.activity');
       }
 
-      // Button "Contact @name @email".
-      if ($act->field_contact_mail->value && !$this->acl->hasWriteAccessEvent($act) && !$this->acl->hasAdminAccessActivity($act)) {
-        $icon  = 'mail';
-        $theme = 'primary';
-        $url   = 'mailto:' . $act->field_contact_mail->value;
-        $label = $this->t('qs_activity.floating.contact.author @name @email', [
-          '@name'  => $act->field_contact_name->value,
-          '@email' => $act->field_contact_mail->value,
-        ]);
+      // Button "Contact Organizer(s) & Maintainer(s)".
+      if (!$this->acl->hasWriteAccessEvent($act) && !$this->acl->hasAdminAccessActivity($act)) {
+        $officials_mails = [];
+
+        // Get all organizers's mails of this activity.
+        $query_organizers = $this->privilegeManager->queryPrivilege($act, 'activity_organizers');
+        $query_organizers->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+        $query_organizers->fields('users', ['mail']);
+        $rows = $query_organizers->execute()->fetchAll();
+
+        foreach ($rows as $row) {
+          $officials_mails[$row->user] = $row->mail;
+        }
+
+        // Get all maintainers's mails of this activity.
+        $query_maintainers = $this->privilegeManager->queryPrivilege($act, 'activity_maintainers');
+        $query_maintainers->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+        $query_maintainers->fields('users', ['mail']);
+        $rows = $query_maintainers->execute()->fetchAll();
+
+        foreach ($rows as $row) {
+          $officials_mails[$row->user] = $row->mail;
+        }
+
+        // Don't show any button if no officials exists.
+        if (!empty($officials_mails)) {
+          $icon  = 'mail';
+          $theme = 'primaty';
+          $url   = 'mailto:' . implod($officials_mails, ',');
+          $label = $this->t('qs_activity.floating.contact.organizers_and_maintainers');
+        }
       }
 
       if ($route_name == 'qs_activity.activities.form.edit.info') {

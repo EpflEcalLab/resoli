@@ -77,7 +77,8 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
-    Then I should see 0 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:manager+lausanne@antistatique.net"
 
   @api
   Scenario: Logged as Member of Lausanne, when reaching the Activity N°4, I don't see any floating button
@@ -91,7 +92,8 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/accueil-cafe"
     And the response status code should be 200
-    Then I should see 0 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:organizer+lausanne@antistatique.net"
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Activity N°2, I must see the "Activity Dashboard" button
@@ -123,7 +125,7 @@ Feature: Floating actions buttons
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
     Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
-    And I should see "qs_activity.floating.contact.author Jean Neige jean.neige@example.com" link with href "mailto:jean.neige@example.com"
+    And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:organizer+lausanne@antistatique.net,manager+lausanne@antistatique.net"
 
 ## Community Welcome
   @api

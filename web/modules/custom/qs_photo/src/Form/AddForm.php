@@ -100,6 +100,7 @@ class AddForm extends FormBasic {
     // Uppy locals strings.
     $this->uppyLocale = [
       'strings' => [
+        'youCanOnlyUploadFileTypes' => $this->t('qs.uppy.can_only_upload_file_types'),
         // Used as the screen reader label for the plus (+) button that shows
         // the “Adding more files” screen.
         'addingMoreFiles' => $this->t('qs.uppy.adding_more_files'),
@@ -220,6 +221,14 @@ class AddForm extends FormBasic {
         'uploadXNewFiles' => [
           '0' => $this->t('qs.uppy.upload_new_file %{smart_count}'),
           '1' => $this->t('qs.uppy.upload_new_files %{smart_count}'),
+        ],
+        'uploadingXFiles' => [
+          '0' => $this->t('qs.uppy.uploading_new_file %{smart_count}'),
+          '1' => $this->t('qs.uppy.uploading_new_files %{smart_count}'),
+        ],
+        'youCanOnlyUploadX' => [
+          '0' => $this->t('qs.uppy.can_only_upload_x_file %{smart_count}'),
+          '1' => $this->t('qs.uppy.can_only_upload_x_files %{smart_count}'),
         ],
       ],
     ];

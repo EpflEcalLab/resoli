@@ -21,6 +21,7 @@
       id: 'uppy',
       debug: false,
       autoProceed: true,
+      locale,
       restrictions: {
         maxFileSize: filesize,
         maxNumberOfFiles: false,

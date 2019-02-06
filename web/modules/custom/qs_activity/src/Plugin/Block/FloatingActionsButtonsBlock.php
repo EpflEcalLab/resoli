@@ -237,7 +237,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         if (!empty($officials_mails)) {
           $icon  = 'mail';
           $theme = 'primaty';
-          $url   = 'mailto:' . implod($officials_mails, ',');
+          $url   = 'mailto:' . implode(',', $officials_mails);
           $label = $this->t('qs_activity.floating.contact.organizers_and_maintainers');
         }
       }

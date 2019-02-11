@@ -14,11 +14,11 @@
           <li class="card card-list-item">
             <a href="{{ path('qs_community.welcome', {'community': community.id}) }}" class="card-pill">
               <span class="card-pill-icon">{{ macros.icon('communities-sm') }}</span>
-              <span class="d-flex flex-column flex-sm-row">
+              <span class="d-flex flex-column flex-md-row w-100">
                 <span class="card-pill-title">
                   <span>{{ community.name.value }}</span>
                 </span>
-                <span class="font-weight-light ml-auto mr-4 text-sm-right">
+                <span class="font-weight-light ml-auto mr-4 text-md-right">
                   {% set role = ('qs.roles.' ~ variables.privileges[community.tid.value]|last)|t|lower %}
                   {% trans %}qs_supervisor.account.role {{ role }}{% endtrans %}
                 </span>

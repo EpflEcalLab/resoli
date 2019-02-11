@@ -189,7 +189,7 @@
   }
 
   &.btn-icon-to-circle {
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(xs) {
       @include btn-circle;
 
       .icon {

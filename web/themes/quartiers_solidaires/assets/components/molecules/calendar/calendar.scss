@@ -3,6 +3,8 @@
 $calendar-item-size: 3.125rem;
 
 .calendar-wrapper {
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
@@ -20,7 +22,7 @@ $calendar-item-size: 3.125rem;
 
     @include media-breakpoint-down(xs) {
       grid-template-columns: repeat(7, 1fr);
-      grid-gap: 0.5vw;
+      grid-gap: 1vw;
     }
   }
 
@@ -29,14 +31,15 @@ $calendar-item-size: 3.125rem;
     min-height: $calendar-item-size;
 
     @include media-breakpoint-down(xs) {
-      min-width: 3vw;
-      min-height: 3vw;
+      min-width: 3.5vw;
+      min-height: 3.5vw;
     }
 
     &.active {
       width: 7rem;
       margin-right: 0;
       margin-left: ((7rem - $calendar-item-size) / -2); // center it (7 - 3.125) / -2
+      max-width: none;
 
       @include media-breakpoint-only(sm) {
         width: 5rem;

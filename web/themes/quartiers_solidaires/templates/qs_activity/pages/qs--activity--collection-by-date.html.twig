@@ -83,7 +83,7 @@
           <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#{{ accordion_id }}">
               <div class="card-body">
                 <div class="card-text text-center">
-                  <p class="d-md-none">{{ event.field_activity.entity.title.value }}</p>
+                  <p class="d-sm-none text-primary">{{ event.field_activity.entity.title.value }}</p>
                   <h4 class="h5 card-title mb-1 mt-0">{{ event.title.value }}</h4>
                   {# Subscription Textual Badges #}
                   {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}

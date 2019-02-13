@@ -104,7 +104,14 @@
         background: transparent linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
       }
     }
+
+    .container > &,
+    .container-fluid > & {
+      margin-right: ($grid-gutter-width / -2);
+      margin-left: ($grid-gutter-width / -2);
+    }
   }
+
 }
 
 // We sometimes need to have a modal look but it's not really a modal

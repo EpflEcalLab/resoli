@@ -236,7 +236,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         // Don't show any button if no officials exists.
         if (!empty($officials_mails)) {
           $icon  = 'mail';
-          $theme = 'primaty';
+          $theme = 'primary';
           $url   = 'mailto:' . implode(',', $officials_mails);
           $label = $this->t('qs_activity.floating.contact.organizers_and_maintainers');
         }

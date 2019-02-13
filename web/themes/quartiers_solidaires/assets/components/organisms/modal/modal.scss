@@ -31,6 +31,7 @@
   justify-content: stretch;
   width: calc(100% - #{$grid-gutter-width});
   min-height: 65vh;
+  height: 100%;
   text-align: left;
   margin-right: ($grid-gutter-width / 2);
   margin-left: ($grid-gutter-width / 2);

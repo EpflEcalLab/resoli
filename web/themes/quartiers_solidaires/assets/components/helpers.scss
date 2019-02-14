@@ -55,7 +55,8 @@
   }
 }
 
-.bg-gradient {
+.bg-gradient,
+.maintenance-page {
   background: $purple-400 linear-gradient(to top, $purple-400, #934bcb, $blue, #66d4ea, #5cdac2);
 }
 

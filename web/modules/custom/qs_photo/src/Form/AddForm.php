@@ -230,6 +230,8 @@ class AddForm extends FormBasic {
           '0' => $this->t('qs.uppy.can_only_upload_x_file %{smart_count}'),
           '1' => $this->t('qs.uppy.can_only_upload_x_files %{smart_count}'),
         ],
+        'exceedsSize'    => $this->t('qs.uppy.exceeds_size'),
+        'failedToUpload' => $this->t('qs.uppy.failed_to_upload %{file}'),
       ],
     ];
   }

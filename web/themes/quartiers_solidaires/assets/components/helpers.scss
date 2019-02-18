@@ -38,6 +38,11 @@
 @include bg-variant('.bg-primary', color("primary"));
 @include bg-variant('.bg-primary-light', color("primary-lighter"));
 
+// Opacity helpers
+.opacity-50 {
+  opacity: 0.5;
+}
+
 // Light colors on colored backgrounds
 .bg-secondary,
 .bg-info,
@@ -50,14 +55,20 @@
   }
 }
 
-.bg-gradient {
-  background-image: linear-gradient(to top, $purple-400, #934bcb, $blue, #66d4ea, #5cdac2);
+.bg-gradient,
+.maintenance-page {
+  background: $purple-400 linear-gradient(to top, $purple-400, #934bcb, $blue, #66d4ea, #5cdac2);
 }
 
 .fullpage-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  flex: 1 1 auto;
+  min-height: 80vh;
+
+  @include media-breakpoint-up(md) {
+    min-height: 100vh;
+  }
 }
 
 .flex-grow {
@@ -92,6 +103,10 @@
 // override Bootstrap rounded class
 .rounded {
   border-radius: $spacer !important;
+}
+
+.rounded-0 {
+  border-radius: 0 !important;
 }
 
 // Text helpers

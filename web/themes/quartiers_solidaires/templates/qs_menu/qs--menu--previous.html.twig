@@ -1,7 +1,13 @@
 {% if variables.url %}
   {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-  <a class="btn btn-icon btn-outline-{{ variables.theme }} shadow-to-right over-modal{{ variables.invert ? ' btn-outline-invert' }}" href="{{ variables.url }}">
+  {% set btn_classes = [
+    'btn btn-icon shadow-to-right over-modal',
+    'btn-outline-' ~ variables.theme,
+    variables.invert ? 'btn-outline-invert',
+    'btn-icon-to-circle',
+  ] %}
+  <a class="{{ btn_classes|join(' ') }}" href="{{ variables.url }}">
     {{ macros.icon('chevron-left') }}
-    {{ variables.label }}
+    <span class="d-none d-sm-inline">{{ variables.label }}</span>
   </a>
 {% endif %}

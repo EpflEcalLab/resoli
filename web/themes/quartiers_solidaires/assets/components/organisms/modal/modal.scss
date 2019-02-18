@@ -1,22 +1,37 @@
 @charset 'utf-8';
 
 .modal:not(.fade) {
-  margin-top: 75px;
-  margin-bottom: 75px;
+  @include media-breakpoint-down(xs) {
+    position: relative;
+  }
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 75px;
+    margin-bottom: 75px;
+  }
 }
 
 .modal-open {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
+  @include media-breakpoint-up(sm) {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  .modal {
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .modal-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
   width: calc(100% - #{$grid-gutter-width});
-  height: 75vh;
-  max-height: calc(100vh - 150px);
+  min-height: 65vh;
+  height: 100%;
   text-align: left;
   margin-right: ($grid-gutter-width / 2);
   margin-left: ($grid-gutter-width / 2);
@@ -44,8 +59,10 @@
 }
 
 .modal-content {
+  flex: 1 0 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-title {
@@ -57,7 +74,8 @@
   flex-direction: column;
   flex: 1 0 auto;
   justify-content: center;
-  overflow-y: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   min-height: min-content;
 
   .fullpage-wrapper {
@@ -67,6 +85,16 @@
 
 .modal-footer {
   flex-shrink: 0;
+  border-radius: $border-radius-lg;
+
+  @include media-breakpoint-down(xs) {
+    flex-wrap: wrap;
+
+    > *:not('.btn-circle') {
+      flex: 1 1 auto;
+      margin-bottom: $spacer * 0.5;
+    }
+  }
 
   &.sticky-bottom {
     border-bottom-right-radius: $border-radius-lg;
@@ -77,11 +105,14 @@
         background: transparent linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
       }
     }
+
+    .container > &,
+    .container-fluid > & {
+      margin-right: ($grid-gutter-width / -2);
+      margin-left: ($grid-gutter-width / -2);
+    }
   }
 
-  .container & {
-    border-radius: 0;
-  }
 }
 
 // We sometimes need to have a modal look but it's not really a modal

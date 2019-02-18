@@ -20,9 +20,15 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 100%;
 
   @include hover {
     cursor: pointer;
+  }
+
+  @include media-breakpoint-down(xs) {
+    padding-right: ($input-btn-padding-x / 2);
+    padding-left: ($input-btn-padding-x / 2);
   }
 
   @include media-breakpoint-up(md) {
@@ -50,6 +56,13 @@
 
 .btn-fluid {
   min-width: initial;
+}
+
+// Grow on mobile, needed to read properly certain buttons.
+.btn-xs-grow {
+  @include media-breakpoint-down(xs) {
+    flex: 1 1 auto;
+  }
 }
 
 // Themed Buttons
@@ -176,17 +189,13 @@
   }
 
   &.btn-icon-to-circle {
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(xs) {
       @include btn-circle;
 
       .icon {
         position: static;
         margin: 0;
         transform: none;
-
-        svg {
-          color: $body-color;
-        }
       }
     }
   }

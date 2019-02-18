@@ -15,11 +15,13 @@
     const allowedFileTypes = $handler_input.data('allowedFileTypes');
     const locale = $handler_input.data('locale');
     const callbackFields = $handler_input.data('callbackFields');
+    const hide = $handler_input.data('hide');
 
     const uppy = Uppy.Core({
       id: 'uppy',
       debug: false,
       autoProceed: true,
+      locale,
       restrictions: {
         maxFileSize: filesize,
         maxNumberOfFiles: false,

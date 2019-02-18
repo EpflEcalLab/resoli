@@ -10,6 +10,7 @@ use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\qs_acl\Service\PrivilegeManager;
 
 /**
  * Floating actions buttons Block.
@@ -59,15 +60,23 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
   protected $activityManager;
 
   /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  protected $privilegeManager;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, UrlGeneratorInterface $urlGenerator, AccountProxyInterface $current_user, ActivityManager $activity_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, UrlGeneratorInterface $urlGenerator, AccountProxyInterface $current_user, ActivityManager $activity_manager, PrivilegeManager $privilege_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->acl             = $acl;
-    $this->route           = $route;
-    $this->urlGenerator    = $urlGenerator;
-    $this->currentUser     = $current_user;
-    $this->activityManager = $activity_manager;
+    $this->acl              = $acl;
+    $this->route            = $route;
+    $this->urlGenerator     = $urlGenerator;
+    $this->currentUser      = $current_user;
+    $this->activityManager  = $activity_manager;
+    $this->privilegeManager = $privilege_manager;
   }
 
   /**
@@ -85,7 +94,8 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $container->get('current_route_match'),
       $container->get('url_generator'),
       $container->get('current_user'),
-      $container->get('qs_activity.activity_manager')
+      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_acl.privilege_manager')
     );
   }
 
@@ -102,6 +112,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $community = $activity->field_community->entity;
     }
 
+    $variables['buttons'] = [];
     $icon = NULL;
     $url = NULL;
     $label = $this->t('qs.previous');
@@ -175,13 +186,13 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $label = $this->t('qs_activity.floating.my_subscriptions');
     }
 
-    // Button - "Add Event" or "Activity Dashboard".
+    // Button - "Add Event" or "Activity Dashboard" or "Contact @name @email".
     if (($node && $node->bundle() == 'activity') || $activity) {
       $act = $node ? $node : $activity;
       // Button "Add Event".
       if ($this->acl->hasWriteAccessEvent($act)) {
         $icon = 'plus';
-        $theme = 'primary';
+        $theme = 'secondary';
         $url = $this->urlGenerator->generateFromRoute('qs_activity.events.form.add', [
           'activity' => $act->id(),
         ]);
@@ -196,6 +207,39 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
           'activity' => $act->id(),
         ]);
         $label = $this->t('qs_activity.floating.dashboard.activity');
+      }
+
+      // Button "Contact Organizer(s) & Maintainer(s)".
+      if (!$this->acl->hasWriteAccessEvent($act) && !$this->acl->hasAdminAccessActivity($act)) {
+        $officials_mails = [];
+
+        // Get all organizers's mails of this activity.
+        $query_organizers = $this->privilegeManager->queryPrivilege($act, 'activity_organizers');
+        $query_organizers->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+        $query_organizers->fields('users', ['mail']);
+        $rows = $query_organizers->execute()->fetchAll();
+
+        foreach ($rows as $row) {
+          $officials_mails[$row->user] = $row->mail;
+        }
+
+        // Get all maintainers's mails of this activity.
+        $query_maintainers = $this->privilegeManager->queryPrivilege($act, 'activity_maintainers');
+        $query_maintainers->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
+        $query_maintainers->fields('users', ['mail']);
+        $rows = $query_maintainers->execute()->fetchAll();
+
+        foreach ($rows as $row) {
+          $officials_mails[$row->user] = $row->mail;
+        }
+
+        // Don't show any button if no officials exists.
+        if (!empty($officials_mails)) {
+          $icon  = 'mail';
+          $theme = 'primary';
+          $url   = 'mailto:' . implode(',', $officials_mails);
+          $label = $this->t('qs_activity.floating.contact.organizers_and_maintainers');
+        }
       }
 
       if ($route_name == 'qs_activity.activities.form.edit.info') {
@@ -283,7 +327,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     if ($community && in_array($route_name, [
       'qs_community.welcome',
     ])) {
-      $icon = 'activities';
+      $icon = 'user';
       $theme = 'invert';
       $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
         'user' => $this->currentUser->id(),
@@ -314,11 +358,29 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       $classes[] = 'active';
     }
 
-    $variables['url'] = $url;
-    $variables['label'] = $label;
-    $variables['theme'] = $theme;
-    $variables['icon'] = $icon;
-    $variables['classes'] = $classes;
+    $variables['buttons'][] = [
+      'url' => $url,
+      'label' => $label,
+      'theme' => $theme,
+      'icon' => $icon,
+      'classes' => $classes,
+    ];
+
+    //
+    // Add a second button if needed.
+    //
+    // Welcome screen second button.
+    if ($community && $this->acl->hasAdminAccessCommunity($community) && in_array($route_name, [
+      'qs_community.welcome',
+    ])) {
+      $variables['buttons'][] = [
+        'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
+        'label' => $this->t('qs_menu.links.account.communities'),
+        'theme' => 'invert',
+        'icon' => 'communities-sm',
+        'classes' => $classes,
+      ];
+    }
 
     return [
       '#theme'     => 'qs_activity_floating_actions_buttons_block',

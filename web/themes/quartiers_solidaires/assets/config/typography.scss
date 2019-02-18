@@ -23,3 +23,30 @@
     font-size: $lead-font-size * 0.75;
   }
 }
+
+h1,
+.h1 {
+  @include media-breakpoint-down(xs) {
+    font-size: $h1-font-size * 0.6;
+  }
+}
+
+h2,
+.h2 {
+  @include media-breakpoint-down(xs) {
+    font-size: $h2-font-size * 0.7;
+  }
+}
+
+h4,
+.h4 {
+  @include media-breakpoint-down(xs) {
+    font-size: $h4-font-size * 0.8;
+  }
+}
+
+.display-1 {
+  @include media-breakpoint-down(sm) {
+    font-size: $display1-size / 2;
+  }
+}

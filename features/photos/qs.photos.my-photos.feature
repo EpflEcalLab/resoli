@@ -58,8 +58,8 @@ Feature: Dashboard my photos - Activity within the user can manage photos
     When I am on "/photos/1/user/2"
     And the response status code should be 200
     Then I should see 0 ".card-list .card-list-item" elements
-    And I should not see "qs.photos.add_photos"
-    And I should see "qs.photos.user.collection.empty"
+    And I should see "qs.photos.add_photos"
+    And I should not see "qs.photos.user.collection.empty"
 
   @api
   Scenario: Logged as Manager of Lausanne, When I access "My photos"

@@ -77,7 +77,8 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
-    Then I should see 0 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:manager+lausanne@antistatique.net"
 
   @api
   Scenario: Logged as Member of Lausanne, when reaching the Activity N°4, I don't see any floating button
@@ -91,7 +92,8 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/accueil-cafe"
     And the response status code should be 200
-    Then I should see 0 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:organizer+lausanne@antistatique.net"
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Activity N°2, I must see the "Activity Dashboard" button
@@ -117,22 +119,33 @@ Feature: Floating actions buttons
     Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_activity.floating.add.event" link with href "/lausanne/activities/sorties-theatre/events/add"
 
+  @api
+  Scenario: Logged as Member of Lausanne, when reaching the Activity N°3, I must see the "Contact @name @email" button
+    Given I am logged in as user "member+lausanne"
+    When I am on "/lausanne/activities/sorties-theatre"
+    And the response status code should be 200
+    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:organizer+lausanne@antistatique.net,manager+lausanne@antistatique.net"
+
 ## Community Welcome
   @api
   Scenario: Logged as Admin, when reaching any community welcome, I must see the "Community Dashboard" button
     Given I am logged in as user "admin"
     When I am on "/lausanne/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/1/dashboard"
+    And I should see "qs_menu.links.account.communities" link with href "/lausanne/dashboard"
     When I am on "/fribourg/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/1/dashboard"
+    And I should see "qs_menu.links.account.communities" link with href "/fribourg/dashboard"
     When I am on "/geneve/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/1/dashboard"
+    And I should see "qs_menu.links.account.communities" link with href "/geneve/dashboard"
 
   @api
   Scenario: Logged as Member of Lausanne, when reaching the Lausanne account dashboard, I must see the "Supervisor Dashboard" button
@@ -147,8 +160,9 @@ Feature: Floating actions buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/5/dashboard"
+    And I should see "qs_menu.links.account.communities" link with href "/lausanne/dashboard"
 
   @api
   Scenario: Logged as Organizer of Lausanne, when reaching the Lausanne account dashboard, I must see the "Supervisor Dashboard" button

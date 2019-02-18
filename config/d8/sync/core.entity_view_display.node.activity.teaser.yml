@@ -5,6 +5,23 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.activity.body
+    - field.field.node.activity.field_community
+    - field.field.node.activity.field_community_access_contact
+    - field.field.node.activity.field_community_access_detail
+    - field.field.node.activity.field_community_access_gallery
+    - field.field.node.activity.field_community_access_story
+    - field.field.node.activity.field_community_can_subscribe
+    - field.field.node.activity.field_contact_mail
+    - field.field.node.activity.field_contact_name
+    - field.field.node.activity.field_contact_phone
+    - field.field.node.activity.field_contribution
+    - field.field.node.activity.field_default_title
+    - field.field.node.activity.field_member_create_gallery
+    - field.field.node.activity.field_member_create_story
+    - field.field.node.activity.field_theme
+    - field.field.node.activity.field_venue
+    - field.field.node.activity.field_venue_lat
+    - field.field.node.activity.field_venue_long
     - node.type.activity
   module:
     - text
@@ -25,6 +42,8 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_activity_maintainers: true
   field_activity_members: true

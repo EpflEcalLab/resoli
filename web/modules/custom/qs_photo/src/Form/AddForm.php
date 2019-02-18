@@ -3,6 +3,7 @@
 namespace Drupal\qs_photo\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -99,6 +100,7 @@ class AddForm extends FormBasic {
     // Uppy locals strings.
     $this->uppyLocale = [
       'strings' => [
+        'youCanOnlyUploadFileTypes' => $this->t('qs.uppy.can_only_upload_file_types'),
         // Used as the screen reader label for the plus (+) button that shows
         // the “Adding more files” screen.
         'addingMoreFiles' => $this->t('qs.uppy.adding_more_files'),
@@ -220,6 +222,16 @@ class AddForm extends FormBasic {
           '0' => $this->t('qs.uppy.upload_new_file %{smart_count}'),
           '1' => $this->t('qs.uppy.upload_new_files %{smart_count}'),
         ],
+        'uploadingXFiles' => [
+          '0' => $this->t('qs.uppy.uploading_new_file %{smart_count}'),
+          '1' => $this->t('qs.uppy.uploading_new_files %{smart_count}'),
+        ],
+        'youCanOnlyUploadX' => [
+          '0' => $this->t('qs.uppy.can_only_upload_x_file %{smart_count}'),
+          '1' => $this->t('qs.uppy.can_only_upload_x_files %{smart_count}'),
+        ],
+        'exceedsSize'    => $this->t('qs.uppy.exceeds_size'),
+        'failedToUpload' => $this->t('qs.uppy.failed_to_upload %{file}'),
       ],
     ];
   }
@@ -355,6 +367,9 @@ class AddForm extends FormBasic {
         'form_element',
         'container__center',
       ],
+      '#ajax'     => [
+        'callback' => [$this, 'showUppy'],
+      ],
     ];
 
     $form['step-3'] = [
@@ -383,6 +398,7 @@ class AddForm extends FormBasic {
       '#uppy'       => TRUE,
       '#multiple'   => TRUE,
       '#required'   => FALSE,
+      '#hide'       => TRUE,
       '#data' => [
         'data-callback-fields'    => self::UPPY_FILES,
         'data-locale'             => json_encode($this->uppyLocale),
@@ -552,10 +568,12 @@ class AddForm extends FormBasic {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    *
-   * @return array
+   * @return \Drupal\Core\Ajax\AjaxResponse
    *   The form model field structure.
    */
   public function selectEventAjax(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+
     $select_options[] = [
       'nid'   => '_none',
       'title' => $this->t('qs.form.select'),
@@ -577,11 +595,36 @@ class AddForm extends FormBasic {
           ];
         }
       }
+
+      // Update the Step 2 description with activity name.
+      $response->addCommand(new InvokeCommand('#qs-photo-add-form', 'updateStepDescription',
+        [
+          '#edit-step-2',
+          $this->t('qs_photo.add.form.step2.description @activity',
+            ['@activity' => $activity->getTitle()]),
+        ]
+      ));
     }
 
-    $response = new AjaxResponse();
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeClearOptions'));
     $response->addCommand(new InvokeCommand('#edit-event', 'selectizeAddOptions', [$select_options]));
+    return $response;
+  }
+
+  /**
+   * Show the Upply uploader.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The form model field structure.
+   */
+  public function showUppy(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    $response->addCommand(new CssCommand('#uppy-uploader-hidden', ['display' => 'block']));
     return $response;
   }
 

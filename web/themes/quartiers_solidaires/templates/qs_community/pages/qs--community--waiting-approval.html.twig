@@ -28,7 +28,7 @@
           </span>
           <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
             {{ macros.icon('look') }}
-            <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
+            <span class="d-none d-sm-inline">{{ 'qs.user.more'|t }}</span>
           </span>
         </a>
 
@@ -86,18 +86,18 @@
 
   {{ variables.pager }}
 
-  <div class="modal-footer sticky-bottom d-block">
+  <div class="modal-footer sticky-bottom d-block row">
     <div class="row mb-3">
       <div class="col-lg-10 offset-lg-1">
         <div class="row">
-          <div class="col-6">
+          <div class="col-sm-6">
             {# Go to Members #}
             <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.members', {community: variables.community.tid.value}) }}">
               {{ macros.icon('happy') }}
               {{ 'qs_community.dashboard.members'|t }}
             </a>
           </div>
-          <div class="col-6">
+          <div class="col-sm-6">
             {# Go to Community Dashboard #}
             <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
               {{ macros.icon('checklist') }}

@@ -110,7 +110,12 @@
   padding-right: $input-btn-padding-x / 1.5;
   padding-left: $input-btn-padding-x / 1.5;
   min-width: 0;
+  max-width: 45vw;
   border-color: $purple;
+
+  @include media-breakpoint-up(sm) {
+    max-width: 100%;
+  }
 
   &:not([disabled]):not(.disabled):active,
   &:not([disabled]):not(.disabled).active {
@@ -151,6 +156,8 @@
 }
 
 .navbar-current {
+  max-width: 33vw;
+
   .open & {
     z-index: -1;
   }
@@ -172,6 +179,13 @@
   overflow: hidden;
   opacity: 0;
   transform: translateX(-50%);
+
+  @include media-breakpoint-down(xs) {
+    //top: -42px;
+    //left: -50vw;
+    //margin-bottom: ($spacer * 2);
+    //transform: translateX(50vw);
+  }
 
   @include transition(
     height 0.3s ease 0.1s,
@@ -195,8 +209,14 @@
 
   // Styles of navbar when navbar is open
   .open & {
+    //position: relative;
     opacity: 1;
-    height: 65vh;
+    height: auto;
+    //height: auto;
+
+    @include media-breakpoint-up(md) {
+      height: 65vh;
+    }
 
     @include transition(
       height 0s ease,
@@ -212,17 +232,30 @@
 }
 
 .navbar-settings {
-  display: flex;
-  position: fixed;
-  bottom: -100vh;
-  left: 50%;
-  transform: translateX(-50%);
+  display: none;
+  flex-direction: column;
+  position: absolute;
   z-index: 20;
   opacity: 0;
+  pointer-events: none;
+
+  @include media-breakpoint-up(md) {
+    position: fixed;
+    bottom: -100vh;
+    left: 50%;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    transform: translateX(-50%);
+  }
 
   .open & {
+    display: flex;
+    position: fixed;
     opacity: 1;
-    bottom: ($grid-gutter-width / 2);
+    bottom: ($spacer / 2);
+    pointer-events: initial;
 
     @include transition(
       height 0s ease,
@@ -231,6 +264,7 @@
   }
 
   .btn {
+    margin-bottom: ($spacer / 2);
     background-color: color("primary-lightest");
     color: theme-color("primary");
   }
@@ -272,16 +306,34 @@
 .nav-item {
   display: flex;
   position: relative;
-  flex-direction: column;
   align-items: center;
-  width: 17vh;
-  height: 15vh;
+  width: 100%;
+  height: auto;
   min-width: 100px;
   min-height: 100px;
+  padding: 0 ($grid-gutter-width / 2);
   border-radius: $border-radius-lg;
   border: $border-width solid theme-color("primary");
-  padding-bottom: 2vh;
   font-weight: 600;
+
+  @include media-breakpoint-down(sm) {
+    min-height: 60px;
+
+    &:not(:last-child) {
+      margin-bottom: ($grid-gutter-width / 2);
+    }
+
+    .icon {
+      padding-right: ($grid-gutter-width);
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    flex-direction: column;
+    width: 17vh;
+    height: 15vh;
+    padding: 0 0 2vh;
+  }
 
   @include transition(top 0.1s ease-out, background-color 0.2s ease-out);
 
@@ -293,7 +345,7 @@
 
   @include button-variant(color("primary-light"), theme-color("primary"), theme-color("primary"));
   @include drop-shadow(bottom);
-  @include icon-size(6vh, 38px);
+  @include icon-size(7vh, 38px);
 
   // Override background-color set in button variant
   background-color: color("primary-lightest");

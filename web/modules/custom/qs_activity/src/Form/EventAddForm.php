@@ -311,6 +311,7 @@ class EventAddForm extends FormBasic {
     $form['event']['step-2']['contribution'] = [
       '#attributes'  => ['required' => TRUE],
       '#title'       => $this->t('qs_activity.events.form.add.contribution'),
+      '#placeholder' => $this->t('qs_activity.events.form.add.contribution.placeholder'),
       '#type'        => 'textfield',
       '#default_value' => $activity->field_contribution->value,
       '#required'    => FALSE,

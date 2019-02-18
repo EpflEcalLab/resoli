@@ -3,6 +3,26 @@ const multiStep = () => {
     const $form = $('.form-multistep');
     let processed = false;
 
+    /**
+     * Update the step description dynamically.
+     *
+     * @param step string
+     *   The step ID to search for.
+     * @param description string
+     *   The description to replace by.
+     */
+    $.fn.updateStepDescription = function(step, description) {
+      const currentForm = $(this);
+      const $fieldsets = currentForm.find('[data-step]');
+
+      const $lead = $fieldsets.closest(step).find('.lead');
+      if ($lead.length <= 0) {
+        return;
+      }
+
+      $lead.html(description);
+    };
+
     function handleMultisteps() {
       $form.each(function() {
         const currentForm = $(this);
@@ -30,8 +50,8 @@ const multiStep = () => {
 
         // Create the "Prev step" button below the form
         $('<button/>')
-          .addClass(`btn btn-outline-invert btn-icon btn-icon-left align-self-center shadow-to-bottom prev-btn-${id}`)
-          .text(typeof (Drupal) !== 'undefined' ? Drupal.t('qs.previous') : 'previous')
+          .addClass(`btn btn-outline-invert btn-icon btn-icon-to-circle align-self-center shadow-to-bottom prev-btn-${id}`)
+          .html(typeof (Drupal) !== 'undefined' ? `<span class="d-none d-sm-inline">${Drupal.t('qs.previous')}</span>` : `<span class="d-none d-sm-inline">previous</span>`)
           .on('click', function(e) {
             e.preventDefault();
 

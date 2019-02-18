@@ -71,7 +71,11 @@
  */
 #}
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-<a href="{{ path('entity.node.canonical', {node: node.nid.value}) }}" class="card mb-4  shadow-to-bottom-secondary" id="card-activity{{ node.nid.value }}">
+{% set classes = [
+  'card mb-4  shadow-to-bottom-secondary',
+  not event ? 'opacity-50',
+] %}
+<a href="{{ path('entity.node.canonical', {node: node.nid.value}) }}" class="{{ classes|join(' ') }}" id="card-activity{{ node.nid.value }}">
 
   {# Privilege Badges #}
   {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--privilege.html.twig' with {'activity': node, 'badges': badges} %}

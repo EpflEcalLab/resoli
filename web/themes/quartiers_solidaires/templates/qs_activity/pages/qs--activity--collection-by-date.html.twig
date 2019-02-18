@@ -24,43 +24,32 @@
     <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
 
       {% set current_header = null %}
+      {% set previous_event_week = null %}
 
       {% for key, event in variables.events %}
-        {% set date = event.field_start_at.value|date('Y-m-d') %}
-        {% set week = event.field_start_at.value|date('W') %}
+        {% set event_date = event.field_start_at.value|date('Y-m-d') %}
+        {% set event_week = event.field_start_at.value|date('W') %}
         {% set current_week = 'now'|date('W') %}
 
-        {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
-          '@start_date': variables.start|bamboo_i18n_format_date('custom', 'j F Y'),
-          '@end_date': variables.end|bamboo_i18n_format_date('custom', 'j F Y'),
-        }) %}
-
-
-        {% if 'now'|date('Y-m-d') == date %}
+        {% if 'now'|date('Y-m-d') == event_date %}
           {# TODAY #}
           {% set new_header = 'qs.activity.date.sticky.today'|t %}
 
-        {% elseif 'tomorrow'|date('Y-m-d') == date %}
+        {% elseif 'tomorrow'|date('Y-m-d') == event_date %}
           {# TOMORROW #}
           {% set new_header = 'qs.activity.date.sticky.tomorrow'|t %}
 
-        {% elseif date > 'tomorrow'|date('Y-m-d') and current_week == week %}
+        {% elseif event_date > 'tomorrow'|date('Y-m-d') and current_week == event_week %}
           {# THIS WEEK (between day after tomorrow and next Sunday but not next week) #}
           {% set new_header = 'qs.activity.date.sticky.this_week'|t %}
 
-        {% elseif current_week != week %}
-          {# FOLLOWING WEEKS #}
-          {% set week_diff = week - current_week %}
-          {% if week_diff == 1 %}
-            {% set new_header = 'qs.activity.date.sticky.next_week'|t %}
-          {% elseif week_diff == 2 %}
-            {% set new_header = 'qs.activity.date.sticky.in_two_weeks'|t %}
-          {% elseif week_diff == 3 %}
-            {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
-              '@start_date': variables.start|date_modify("next Monday +2 weeks")|bamboo_i18n_format_date('custom', 'j F Y'),
-              '@end_date': variables.end|bamboo_i18n_format_date('custom', 'j F Y'),
-            }) %}
-          {% endif %}
+        {% elseif event_week - previous_event_week >= 2 %}
+          {% set previous_event_week = event.field_start_at.value|date('W') %}
+
+          {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
+            '@start_date': event.field_start_at.value|date_modify('monday this week')|bamboo_i18n_format_date('custom', 'j F Y'),
+            '@end_date': event.field_start_at.value|date_modify('sunday this week + 1 week')|bamboo_i18n_format_date('custom', 'j F Y'),
+          }) %}
         {% endif %}
 
         {# Write the header if we have a new value #}
@@ -82,6 +71,7 @@
           <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#{{ accordion_id }}">
               <div class="card-body">
                 <div class="card-text text-center">
+                  <p class="d-sm-none text-primary">{{ event.field_activity.entity.title.value }}</p>
                   <h4 class="h5 card-title mb-1 mt-0">{{ event.title.value }}</h4>
                   {# Subscription Textual Badges #}
                   {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
@@ -110,20 +100,20 @@
 </div>
 {% endif %}
 
-<div class="container">
-  <div class="row justify-content-center">
+<div class="container mb-4">
+  <div class="d-flex justify-content-center">
     {% if variables.prev|date('Y-m-d') > 'now'|date('Y-m-d') %}
-      <a class="btn btn-icon btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.prev|date('Y-m-d'), 'community': variables.community.tid.value}) }}">
+      <a class="btn btn-icon btn-outline-primary shadow-to-bottom btn-icon-to-circle mx-2" href="{{ path('qs_activity.collection.dates', {'date': variables.prev|date('Y-m-d'), 'community': variables.community.tid.value}) }}">
         {{ macros.icon('chevron-left') }}
-        {{ 'qs.activity.date.link_prev'|t }}
+        <span class="d-none d-sm-inline">{{ 'qs.activity.date.link_prev'|t }}</span>
       </a>
     {% elseif variables.prev|date('Y-m-d') == 'now'|date('Y-m-d') %}
-      <a class="btn btn-icon btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'community': variables.community.tid.value}) }}">
+      <a class="btn btn-icon btn-outline-primary shadow-to-bottom btn-icon-to-circle mx-2" href="{{ path('qs_activity.collection.dates', {'community': variables.community.tid.value}) }}">
         {{ macros.icon('chevron-left') }}
-        {{ 'qs.activity.date.link_prev'|t }}
+        <span class="d-none d-sm-inline">{{ 'qs.activity.date.link_prev'|t }}</span>
       </a>
     {% endif %}
-    <a class="btn btn-icon btn-icon-right btn-outline-primary shadow-to-bottom mx-3" href="{{ path('qs_activity.collection.dates', {'date': variables.next|date('Y-m-d'), 'community': variables.community.tid.value}) }}">
+    <a class="btn btn-icon btn-icon-right btn-outline-primary btn-xs-grow shadow-to-bottom mx-2" href="{{ path('qs_activity.collection.dates', {'date': variables.next|date('Y-m-d'), 'community': variables.community.tid.value}) }}">
       {{ 'qs.activity.date.link_next'|t }}
       {{ macros.icon('chevron-right') }}
     </a>

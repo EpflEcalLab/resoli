@@ -52,7 +52,7 @@ Feature: Form add photos
     Given I am logged in as user "member+lausanne"
     When I am on "/photos/1/add"
     And the response status code should be 200
-    Then I should see 0 "select#edit-activity option" elements
+    Then I should see 1 "select#edit-activity option" elements
 
   @api
   Scenario: Logged as Manager of Lausanne, When I access "Form add photos"

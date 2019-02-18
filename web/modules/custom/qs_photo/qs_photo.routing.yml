@@ -140,3 +140,12 @@ qs_photo.form.delete:
       parameters:
         activity:
           type: entity:node
+
+# Files Upload
+qs_photo.file.upload:
+    path: '/backend/photos/upload'
+    defaults:
+      _controller: '\Drupal\qs_photo\Controller\UploadController::upload'
+    methods: [POST]
+    requirements:
+      _custom_access: '\Drupal\qs_photo\Controller\UploadController::access'

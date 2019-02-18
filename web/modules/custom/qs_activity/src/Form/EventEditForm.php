@@ -212,6 +212,7 @@ class EventEditForm extends EventEditFormBase {
     $form['contribution'] = [
       '#attributes'    => ['required' => TRUE],
       '#title'         => $this->t('qs_activity.events.form.edit.contribution'),
+      '#placeholder'   => $this->t('qs_activity.events.form.edit.contribution.placeholder'),
       '#type'          => 'textfield',
       '#default_value' => $event->field_contribution->value,
       '#required'    => FALSE,

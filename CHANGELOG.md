@@ -1,6 +1,27 @@
 # CHANGELOG
 
-## 1.2.2 (2018+11-07)
+## 1.3.0 (2019-02-18)
+ - update to Drupal 8.6.9
+ - responsivness all the way
+ - change icon in "Mes informations" button on welcome dashboard #651
+ - fade out activity card teasers if they have no events #653 
+ - allow upload of today's photos #578
+ - add Photos Dashboard – Activity's name in strings #429
+ - calendar – Today/Tomorrow
+ - photos by date – Newest to Oldest
+ - improve label of activity's page, contact manager #321
+ - create/edit event – Contribution placeholder is missing #630
+ - create event – Floating button icon #360 
+ - add possibility to have multiple buttons in floating action buttons #651 
+ - add contrast to toggle buttons #652 
+ - add confirmation step to subscription button #651 
+ - fix date display for weeks with more than 4 weeks #674
+ - hide uppy until we select an event #671
+ - fix a lot of issues in responsive mode #664
+ - change photos order by date – Newest to Oldest #519
+ - add calendar – Today/Tomorrow #384
+
+## 1.2.2 (2018-11-07)
  - add new tests bash files
  - get the true next events - close #647
 

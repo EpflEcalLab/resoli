@@ -14,12 +14,14 @@
           <li class="card card-list-item">
             <a href="{{ path('qs_community.welcome', {'community': community.id}) }}" class="card-pill">
               <span class="card-pill-icon">{{ macros.icon('communities-sm') }}</span>
-              <span class="card-pill-title">
-                <span>{{ community.name.value }}</span>
-              </span>
-              <span class="font-weight-light ml-auto mr-4 text-right">
-                {% set role = ('qs.roles.' ~ variables.privileges[community.tid.value]|last)|t|lower %}
-                {% trans %}qs_supervisor.account.role {{ role }}{% endtrans %}
+              <span class="d-flex flex-column flex-sm-row w-100">
+                <span class="card-pill-title">
+                  <span>{{ community.name.value }}</span>
+                </span>
+                <span class="font-weight-light ml-auto mr-4 text-md-right">
+                  {% set role = ('qs.roles.' ~ variables.privileges[community.tid.value]|last)|t|lower %}
+                  {% trans %}qs_supervisor.account.role {{ role }}{% endtrans %}
+                </span>
               </span>
               <span class="btn btn-outline-invert btn-circle shadow-to-left shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
                 {{ macros.icon('look')}}
@@ -59,13 +61,13 @@
       <h2 class="h3 text-center font-weight-light mb-4">{{ 'qs_supervisor.account.personal_info'|t }}</h2>
       <dl class="row">
         <dt class="col-sm-6 text-truncate text-sm-right">{{ 'qs_supervisor.account.firstname'|t }}</dt>
-        <dd class="col-sm-6">{{ variables.user.field_firstname.value }}</dd>
+        <dd class="col-sm-6 text-truncate">{{ variables.user.field_firstname.value }}</dd>
         <dt class="col-sm-6 text-truncate text-sm-right">{{ 'qs_supervisor.account.lastname'|t }}</dt>
-        <dd class="col-sm-6">{{ variables.user.field_lastname.value }}</dd>
+        <dd class="col-sm-6 text-truncate">{{ variables.user.field_lastname.value }}</dd>
         <dt class="col-sm-6 text-truncate text-sm-right">{{ 'qs_supervisor.account.phone'|t }}</dt>
-        <dd class="col-sm-6">{{ variables.user.field_phone.value|default('<span class="text-muted">' ~ 'qs_supervisor.account.phone_default'|t ~ '</span>')|raw }}</dd>
+        <dd class="col-sm-6 text-truncate">{{ variables.user.field_phone.value|default('<span class="text-muted">' ~ 'qs_supervisor.account.phone_default'|t ~ '</span>')|raw }}</dd>
         <dt class="col-sm-6 text-truncate text-sm-right">{{ 'qs_supervisor.account.mail'|t }}</dt>
-        <dd class="col-sm-6">{{ variables.user.mail.value }}</dd>
+        <dd class="col-sm-6 text-truncate">{{ variables.user.mail.value }}</dd>
       </dl>
     </div>
   </div>

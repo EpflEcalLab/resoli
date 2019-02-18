@@ -7,14 +7,14 @@
         {% set parameters = variables.prev_month|date('Y-m') == 'now'|date('Y-m') ? {} : {'day': variables.prev_month|date('Y-m-d')} %}
         <a
           id="calendar-monthly-prev"
-          class="btn btn-outline-secondary btn-icon"
+          class="btn btn-outline-secondary btn-icon btn-icon-to-circle"
           href="{{ path('<current>', parameters) }}"
           aria-label="{{ 'qs.calendar.monthly.goto @month'|t({
             '@month': variables.prev_month|bamboo_i18n_format_date('custom', 'F')
           }) }}"
         >
           {{macros.icon('chevron-left')}}
-          {{ variables.prev_month|bamboo_i18n_format_date('custom', 'F') }}
+          <span class="d-none d-sm-inline">{{ variables.prev_month|bamboo_i18n_format_date('custom', 'F') }}</span>
         </a>
       {% endif %}
     </div>
@@ -31,14 +31,14 @@
     <div class="col">
       <a
         id="calendar-monthly-next"
-        class="btn btn-outline-secondary btn-icon btn-icon-right"
+        class="btn btn-outline-secondary btn-icon btn-icon-to-circle btn-icon-right"
         href="{{ path('<current>', {'day': variables.next_month|date('Y-m-d')}) }}"
         aria-label="{{ 'qs.calendar.monthly.goto @month'|t({
           '@month': variables.next_month|bamboo_i18n_format_date('custom', 'F')
         }) }}"
       >
         {{macros.icon('chevron-right')}}
-        {{ variables.next_month|bamboo_i18n_format_date('custom', 'F') }}
+        <span class="d-none d-sm-inline">{{ variables.next_month|bamboo_i18n_format_date('custom', 'F') }}</span>
       </a>
     </div>
   </div>

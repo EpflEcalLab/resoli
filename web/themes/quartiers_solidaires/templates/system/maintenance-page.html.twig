@@ -1,47 +1,25 @@
-{#
-/**
- * @file
- * Theme override to display a single Drupal page while offline.
- *
- * All available variables are mirrored in page.html.twig.
- * Some may be blank but they are provided for consistency.
- *
- * @see template_preprocess_maintenance_page()
- */
-#}
-<header role="banner">
-  {% if logo %}
-    <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">
-      <img src="{{ logo }}" alt="{{ 'Home'|t }}"/>
-    </a>
-  {% endif %}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-  {% if site_name or site_slogan %}
-    {% if site_name %}
-      <h1>
-        <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a>
-      </h1>
-    {% endif %}
+{% extends "@quartiers_solidaires/pages/page.html.twig" %}
 
-    {% if site_slogan %}
-      <div>{{ site_slogan }}</div>
-    {% endif %}
-  {% endif %}
-</header>
-
-<main role="main">
-  {% if title %}
-    <h1>{{ title }}</h1>
-  {% endif %}
-
-  {{ page.highlighted }}
-  {{ page.messages }}
-
-  {{ page.content }}
-</main>
-
-{% if page.footer %}
-  <footer role="contentinfo">
-    {{ page.footer }}
-  </footer>
-{% endif %}
+{% block content %}
+<div class="d-flex flex-column justify-content-between">
+  <div class="fullpage-wrapper">
+    <div class="container mt-5">
+      <div class="row align-items-center mb-auto">
+        <div class="col-6 col-md-3 mx-auto">
+          <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="Réseaux Solidaires">
+        </div>
+      </div>
+    </div>
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-6 mx-auto text-center text-white">
+          <h1 class="h2 font-weight-bold">{{ 'qs.maintenance.title'|t }}</h1>
+          <p>{{ page.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

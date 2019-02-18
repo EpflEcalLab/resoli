@@ -25,6 +25,7 @@ function qs_auth_form_alter(&$form, $form_state, $form_id) {
         'label' => t('qs_auth.link.login'),
         'options' => [
           'icon' => 'chevron-left',
+          'hide_xs' => TRUE,
         ],
       ],
       '<front>' => [

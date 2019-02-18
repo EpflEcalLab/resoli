@@ -28,7 +28,7 @@
           </span>
           <span class="btn btn-outline-secondary btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
             {{ macros.icon('look') }}
-            <span class="d-none d-md-inline">{{ 'qs.user.more'|t }}</span>
+            <span class="d-none d-sm-inline">{{ 'qs.user.more'|t }}</span>
           </span>
         </a>
 
@@ -72,26 +72,25 @@
 
   {{ variables.pager }}
 
-  <div class="container">
-    <div class="row mb-3 mt-5">
-      <div class="col-6">
-        {# Go to Waiting Approval #}
-        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">
-          {{ macros.icon('wait') }}
-          {{ 'qs.event.subscriptions.waiting_approval'|t }}
+  <div class="row mb-3 mt-5">
+    <div class="col-sm-6">
+      {# Go to Waiting Approval #}
+      <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">
+        {{ macros.icon('wait') }}
+        {{ 'qs.event.subscriptions.waiting_approval'|t }}
+      </a>
+    </div>
+    <div class="col-sm-6">
+      {% if variables.mailto %}
+        {# Contact all members #}
+        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ variables.mailto|join(',') }}">
+          {{ macros.icon('mail') }}
+          {{ 'qs.contact_all'|t }}
         </a>
-      </div>
-      <div class="col-6">
-        {% if variables.mailto %}
-          {# Contact all members #}
-          <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ variables.mailto|join(',') }}">
-            {{ macros.icon('mail') }}
-            {{ 'qs.contact_all'|t }}
-          </a>
-        {% endif %}
-      </div>
+      {% endif %}
     </div>
   </div>
+
 </div>
 
 

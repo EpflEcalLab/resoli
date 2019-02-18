@@ -203,6 +203,23 @@
             "value": false
         }
     ],
+    "field_contact_mail": [
+        {
+            "value": "jean.neige@example.com",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Jean Neige"
+        }
+    ],
+    "field_contact_phone": [
+        {
+            "value": "012 345 67 89",
+            "lang": "zxx"
+        }
+    ],
     "field_member_create_gallery": [
         {
             "value": true

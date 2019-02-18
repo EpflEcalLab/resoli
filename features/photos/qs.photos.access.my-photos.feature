@@ -14,9 +14,9 @@ Feature: Dashboard my photos Access
     And the response status code should be 200
 
   @api
-  Scenario: Logged as Member of Lausanne, I can access to "My photos"
-    Given I am logged in as user "member+lausanne"
-    When I am on "/photos/1/user/2"
+  Scenario: Logged as Member of Fribourg, I can access to "My photos"
+    Given I am logged in as user "member+fribourg"
+    When I am on "/photos/2/user/4"
     And the response status code should be 200
     And I should see "qs.photos.user.collection.empty"
     And I should not see the link "qs.photos.add_photos"

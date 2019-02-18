@@ -205,6 +205,10 @@ class EventManager {
   /**
    * Get all the previous event for the given activity.
    *
+   * An event is considered as "Past" when it finish today.
+   * To summarize, the return collection contain all Activities w/ event that
+   * ends today.
+   *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity which we want the retrieve past events.
    *
@@ -212,12 +216,14 @@ class EventManager {
    *   A collection of node's Event. Otherwise an empty array.
    */
   public function getAllPrev(NodeInterface $activity) {
-    $now = new DrupalDateTime();
+    $today = new DrupalDateTime();
+    $today->setTimezone(new \DateTimeZone('UTC'));
+    $today->setTime(23, 59, 59);
 
     // Get every activity that belongs to the current community.
     $query = $this->queryFactory->get('node')
       ->condition('type', 'event')
-      ->condition('field_end_at', $now, '<')
+      ->condition('field_end_at', $today->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<')
       ->condition('status', TRUE)
       ->condition('field_activity', $activity->id())
       ->sort('field_end_at', 'DESC');

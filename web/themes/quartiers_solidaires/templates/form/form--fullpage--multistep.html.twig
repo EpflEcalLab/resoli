@@ -20,13 +20,18 @@
 <div class="d-flex flex-column flex-grow">
   {% if element['#top_links'] %}
   <div class="container mt-3">
-    <div class="row justify-content-between mb-4">
+    <div class="d-flex flex-wrap justify-content-between mb-4">
       {% for path, link in element['#top_links'] %}
-        <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }} shadow-to-bottom" href="{{ link.params ? path(path, link.params) : path(path) }}">
+        {% set btn_classes = [
+          'mx-2 mb-2 mx-sm-0 btn btn-outline-secondary btn-outline-invert shadow-to-bottom',
+          link.options.icon ? 'btn-icon',
+          link.options.hide_xs ? 'btn-icon-to-circle' : 'btn-xs-grow',
+        ] %}
+        <a class="{{ btn_classes|join(' ') }}" href="{{ link.params ? path(path, link.params) : path(path) }}" title="{{ link.label }}">
           {% if link.options.icon %}
             {{ macros.icon(link.options.icon) }}
           {% endif %}
-          {{ link.label }}
+          <span class="{{ link.options.hide_xs ? 'd-none d-sm-inline' }}">{{ link.label }}</span>
         </a>
       {% endfor %}
     </div>

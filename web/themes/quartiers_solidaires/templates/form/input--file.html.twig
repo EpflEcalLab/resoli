@@ -12,13 +12,30 @@
 #}
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="form-control-file text-center">
-  <input{{ attributes }}>
-  <label for="{{ attributes.id }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
-    {{ macros.icon('plus') }}
+{% if not element['#uppy'] %}
+  <div class="form-control-file text-center">
+    <input{{ attributes }}>
+    <label for="{{ attributes.id }}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
+      {{ macros.icon('plus') }}
+      {{ 'qs.form.input.upload'|t }}
+    </label>
+  </div>
+  <div class="form-control-files-list mt-3">
+    {# here goes the list of files through some JS #}
+  </div>
+{% endif %}
+
+{% if element['#uppy'] %}
+  {% if attributes.label is not empty %}
+    <span class="form-control-label">{{ attributes.label|raw }}</span>
+  {% endif %}
+
+  <div class="form-uppy-handler" {{ element['#hide'] ? 'id="uppy-uploader-hidden" style="display: none;"' }}>
     {{ 'qs.form.input.upload'|t }}
-  </label>
-</div>
-<div class="form-control-files-list mt-3">
-  {# here goes the list of files through some JS #}
-</div>
+
+    {% for data, value in element['#data'] %}
+      {% set attr = attributes.setAttribute(data, value) %}
+    {% endfor %}
+    <input{{ attributes }} />{{ children }}
+  </div>
+{% endif %}

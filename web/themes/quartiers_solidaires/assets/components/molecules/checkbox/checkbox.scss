@@ -3,14 +3,26 @@
 .checkbox {
   &.btn {
     display: inline-flex;
-    flex-direction: column;
     justify-content: flex-start;
+    align-items: center;
+    padding-left: 0;
     font-weight: $font-weight-normal;
     overflow: visible;
     white-space: normal;
+    text-align: left;
+
+    @include media-breakpoint-up(sm) {
+      flex-direction: column;
+      text-align: center;
+    }
 
     .icon {
       pointer-events: none;
+      margin-right: ($spacer / 2);
+
+      @include media-breakpoint-up(sm) {
+        margin-right: 0;
+      }
     }
 
     @include icon-size(50px);
@@ -182,6 +194,7 @@
       left: -$border-width;
       width: $spacer * 2.5;
       height: $spacer * 2.5;
+      padding: $border-width;
       background: theme-color('primary');
       border-radius: 50%;
       transition:
@@ -198,6 +211,7 @@
       right: -$border-width;
       width: $spacer * 2.5;
       height: $spacer * 2.5;
+      padding: $border-width;
       transition:
         left 0.3s ease,
         right 0.3s ease;
@@ -245,16 +259,19 @@
 @each $color, $value in $theme-colors {
   .bg-#{$color} {
     .checkbox-toggle + .checkbox-toggle-btn {
-      background-color: mix($value, $white, 85%);
+      background-color: darken(desaturate($value, 0.44), 10.59);
       border-color: $white;
 
       &:after {
         content: svg-cross($value);
         background-color: $white;
+        @if $enable-shadows {
+          box-shadow: 2px 0 1px 0 rgba($black, 0.5);
+        }
       }
 
       &:before {
-        content: svg-check($white);
+        content: svg-check(lighten(desaturate(adjust-hue($value, -3), 12.53), 17.45));
       }
 
       &:active {
@@ -265,10 +282,13 @@
     .checkbox-toggle:checked + .checkbox-toggle-btn {
       &:after {
         content: svg-check($value);
+        @if $enable-shadows {
+          box-shadow: -2px 0 1px 0 rgba($black, 0.5);
+        }
       }
 
       &:before {
-        content: svg-cross($white);
+        content: svg-cross(lighten(desaturate(adjust-hue($value, -3), 12.53), 17.45));
       }
     }
   }

@@ -116,32 +116,6 @@ set body_classes = [
   <!-- End Google Tag Manager (noscript) -->
   {{ page_top }}
   {{ page }}
-
-  {% import '@quartiers_solidaires/macros.html.twig' as macros %}
-  <div class="alert alert-mobile bg-gradient alert-dismissible" role="alert">
-    <div class="fullpage-wrapper">
-      <div class="container my-auto">
-        <div class="row">
-          <div class="col-6 mx-auto mb-5">
-            <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="{{ head_title|safe_join(' ') }}">
-          </div>
-        </div>
-      </div>
-      <div class="container mb-4">
-        <p class="h4 text-center text-white mb-4">
-          {{ macros.icon('desktop', 'icon-xl') }}
-          {{ macros.icon('tablet', 'icon-xl') }}
-        </p>
-        <p class="font-weight-light h2 text-white text-center">{{ 'qs.available_on_mobile_only'|t }}</p>
-        <div class="text-center">
-          <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   {{ page_bottom }}
 
   <script type="text/javascript">

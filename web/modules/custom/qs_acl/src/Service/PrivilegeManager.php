@@ -400,7 +400,7 @@ class PrivilegeManager {
       ->condition('privileges.bundle', $entity->getEntityTypeId())
       ->condition('privileges.entity', $entity->id())
       ->condition('privileges.privilege', $privilege)
-      ->condition('status', $status);
+      ->condition('privileges.status', $status);
 
     return $query;
   }

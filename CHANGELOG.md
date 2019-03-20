@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT RELEASE
+ - fix masquerade button on navigation - close #684
+ - babelify the subscription.js which was uncompatible with IE or some Apple device - close #683
+ - update phpunit workflow & scripts
+ - add base for future PHPUnit tests
+ - fix EventManager::getNext - close #647
+
 ## 1.3.0 (2019-02-18)
  - update to Drupal 8.6.9
  - responsivness all the way

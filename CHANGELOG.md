@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## 1.3.1 (2019-03-27)
  - fix masquerade button on navigation - close #684
  - babelify the subscription.js which was uncompatible with IE or some Apple device - close #683
  - update phpunit workflow & scripts
@@ -11,17 +11,17 @@
  - update to Drupal 8.6.9
  - responsivness all the way
  - change icon in "Mes informations" button on welcome dashboard #651
- - fade out activity card teasers if they have no events #653 
+ - fade out activity card teasers if they have no events #653
  - allow upload of today's photos #578
  - add Photos Dashboard – Activity's name in strings #429
  - calendar – Today/Tomorrow
  - photos by date – Newest to Oldest
  - improve label of activity's page, contact manager #321
  - create/edit event – Contribution placeholder is missing #630
- - create event – Floating button icon #360 
- - add possibility to have multiple buttons in floating action buttons #651 
- - add contrast to toggle buttons #652 
- - add confirmation step to subscription button #651 
+ - create event – Floating button icon #360
+ - add possibility to have multiple buttons in floating action buttons #651
+ - add contrast to toggle buttons #652
+ - add confirmation step to subscription button #651
  - fix date display for weeks with more than 4 weeks #674
  - hide uppy until we select an event #671
  - fix a lot of issues in responsive mode #664
@@ -32,14 +32,14 @@
  - add new tests bash files
  - get the true next events - close #647
 
-## 1.2.1 (2018-11-07)
- - remove the baseline of "Pro Senectute" on sponsors.svg 
+## 1.2.1 (2018-11-07)
+ - remove the baseline of "Pro Senectute" on sponsors.svg
 
 ## 1.2.0 (2018-08-21)
  - fix mail body encoded quote #152
  - add module "Image Effects" which allow Image Styles to Automatically use EXIF Image Orientation #606
  - improve members listing by ordering them using Lastname instead of Name (mail) #570
- - fix Activity CTA buttons visibilities #517 
+ - fix Activity CTA buttons visibilities #517
  - improve organizers subscriptions by removing "waiting approval" mail to others organizers #613
  - enable English #635
  - add language switcher #634
@@ -99,7 +99,7 @@
  - fix #584 - fix big_pipe google map autocomplete fields
  - add Masquerade module
  - fix pager #610 & #31 - following pagers wasn't working: Members of Activity, Members of Community & Form ActivityInlineAddMember
- 
+
 ## 1.0.4 (2018-04-26)
  - Apply Remote Code Exectiion - SA-CORE-2018-004
 

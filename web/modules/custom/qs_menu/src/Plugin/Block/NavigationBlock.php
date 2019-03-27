@@ -101,6 +101,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
         'contexts' => [
           'user',
           'url',
+          'session.is_masquerading',
         ],
         'tags' => [
           // Invalidated whenever any Privilege is updated, deleted or created.

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.3.2 (2019-03-27)
+ - fix tests process on Codeship
+
 ## 1.3.1 (2019-03-27)
  - fix masquerade button on navigation - close #684
  - babelify the subscription.js which was uncompatible with IE or some Apple device - close #683

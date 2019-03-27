@@ -129,7 +129,6 @@ then
 
   cd ".."
 
-  set -e
   BEHAT_PARAMS='{"gherkin" : {"cache" : null}}' ./vendor/bin/behat --colors --strict
   behat_exit=$?
 
@@ -143,4 +142,3 @@ then
 
   exit $behat_exit
 fi
-

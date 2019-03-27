@@ -113,9 +113,12 @@ class EventManager {
 
     $query->fields('field_activity', ['field_activity_target_id']);
     $query->fields('event', ['nid']);
-    $query->groupBy('field_activity.field_activity_target_id');
-    $query->groupBy('event.nid');
     $query->addExpression('MIN(field_start_at.field_start_at_value)');
+    $query->groupBy('event.nid');
+    $query->groupBy('field_start_at.field_start_at_value');
+    $query->groupBy('field_activity.field_activity_target_id');
+    $query->orderBy('field_start_at.field_start_at_value', 'ASC');
+    $query->orderBy('field_activity.field_activity_target_id', 'ASC');
 
     $rows = $query->execute()->fetchAll();
 
@@ -125,7 +128,13 @@ class EventManager {
 
     $nids = [];
     foreach ($rows as $row) {
-      $nids[] = $row->nid;
+      // Take only 1 event (the first one - which is the closest to now)
+      // by activity.
+      if (isset($nids[$row->field_activity_target_id])) {
+        continue;
+      }
+
+      $nids[$row->field_activity_target_id] = $row->nid;
     }
     return $this->nodeStorage->loadMultiple($nids);
   }

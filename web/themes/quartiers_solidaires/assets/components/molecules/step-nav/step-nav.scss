@@ -14,7 +14,7 @@
 
   @include list-unstyled;
 
-  &:after {
+  &:before {
     content: '';
     display: block;
     position: absolute;
@@ -27,11 +27,27 @@
     background: $white;
     transform: translateY(-50%);
   }
+
+  .ie11 & {
+    width: 100vw;
+  }
 }
 
 .step-nav-item {
   position: relative;
   z-index: 1;
+
+  .ie11 & {
+    margin: 0 auto;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 .step-nav-link {

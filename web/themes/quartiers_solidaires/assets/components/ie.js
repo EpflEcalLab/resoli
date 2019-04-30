@@ -1,3 +1,5 @@
+import { polyfill } from 'es6-promise';
+
 const ie = () => {
   (function ($) {
     // Detect IE like a boss
@@ -20,6 +22,8 @@ const ie = () => {
       $('.card-map-footer .btn').on('mousedown', function() {
         $(this).trigger('click');
       });
+
+      polyfill();
     }
 
     if (ie || /Edge/.test(navigator.userAgent)) {

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.3 (2019-05-02)
+ - fix IE11 - close #687
+ - add date of event on 'My subscriptions' page - close #688
+
 ## 1.3.2 (2019-03-27)
  - fix tests process on Codeship
 

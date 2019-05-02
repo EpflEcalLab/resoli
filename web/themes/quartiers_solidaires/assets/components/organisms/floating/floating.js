@@ -11,7 +11,7 @@ const floating = () => {
       Stickyfill.add(elements);
 
       // Refresh only newly added sticky element.
-      if (elements.length) {
+      if (elements.length > 0) {
         elements.forEach(element => {
           const sticky = new Stickyfill.Sticky(element);
           sticky.refresh();

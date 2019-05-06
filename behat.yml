@@ -6,6 +6,8 @@ default:
       paths: [%paths.base%/behat/Features]
       contexts:
         # See composer.json `autoload-dev`
+        - Drupal\Behat\Context\Drupal\DatabaseContext:
+            dump_path: %paths.base%/dump/behat
         - Drupal\Behat\Context\Drupal\ElementContext
         - Drupal\Behat\Context\Drupal\DebugContext:
             log_path: %paths.base%/log/behat

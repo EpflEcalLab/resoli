@@ -16,6 +16,7 @@ scriptDir=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 DEFAULT_CONTENT="qs_default_content"
 MAILCATCHER="127.0.0.1:10025"
 LOG="./log/behat"
+DB_DUMP="./dump/behat"
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -63,6 +64,10 @@ fi
 # Create log directory when not exists.
 mkdir -p "$LOG"
 chmod -R 777 "$LOG"
+
+# Create database dump directory when not exists.
+mkdir -p "$DB_DUMP"
+chmod -R 777 "$DB_DUMP"
 
 nohup bash -c "./vendor/bin/drush runserver &" && sleep 3;
 

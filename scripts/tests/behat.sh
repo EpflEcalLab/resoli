@@ -57,7 +57,8 @@ then
 fi
 
 # Big Pipe cause some block to be rendered with delay and break Behat tests.
-./vendor/bin/drush pmu big_pipe -y
+# Honeypot prevent Behat to use some form.
+./vendor/bin/drush pmu honeypot big_pipe -y
 
 # Create log directory when not exists.
 mkdir -p "$LOG"
@@ -85,8 +86,8 @@ then
   ./vendor/bin/drush pmu default_content $DEFAULT_CONTENT -y
 fi
 
-# Re-enable Big Pipe.
-./vendor/bin/drush en big_pipe -y
+# Re-enable Big Pipe & Honeypot.
+./vendor/bin/drush en honeypot big_pipe -y
 
 exit $behat_exit
 

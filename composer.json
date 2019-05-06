@@ -110,9 +110,6 @@
         },
         "patches": {
           "drupal/core": {
-            "Updating Drupal 8.6.x to twig 1.40.0 causes twig exceptions - https://www.drupal.org/project/drupal/issues/3051269": "https://www.drupal.org/files/issues/2019-04-29/3051269-45_0.patch",
-            "Updating twig/twig to v1.38.2 (included in Drupal 8.6.11) causes fatal error when embed tags are used in templates - https://www.drupal.org/project/drupal/issues/3040210": "https://www.drupal.org/files/issues/2019-03-14/3040210-PASS.patch"
-
           }
         }
     }

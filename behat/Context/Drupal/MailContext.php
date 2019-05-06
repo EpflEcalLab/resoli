@@ -43,15 +43,6 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
   }
 
   /**
-   * Assert we found a mail with subject "Welcome!".
-   *
-   * @Then /^a welcome mail should be sent$/
-   */
-  public function testTrait() {
-    $this->findMail(Message::SUBJECT_CRITERIA, 'Welcome!');
-  }
-
-  /**
    * Verify if mail has been sent with parameters to and subject.
    *
    * @param string $to
@@ -92,7 +83,7 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
   /**
    * Purge mails.
    *
-   * @When /^I purge mails$/
+   * @AfterScenario @mail
    */
   public function purge() {
     $this->getMailCatcherClient()->purge();
@@ -125,62 +116,12 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
   }
 
   /**
-   * Assert a confirmation mail is in the inbox & follow the link inside.
-   *
-   * @Then I check email confirmation with subject :value
-   */
-  public function iCheckEmailConfirmation($value) {
-    $message = $this->findMail(Message::CONTAINS_CRITERIA, $value);
-    $this->currentMessage = $message;
-
-    $dom = new DOMDocument();
-
-    @$dom->loadHTML($this->currentMessage->getContent());
-    $links = $dom->getElementsByTagName('a');
-
-    foreach ($links as $link) {
-      if (strpos($link->getAttribute('href'), 'authentication') !== FALSE) {
-        $linkToFollow = str_replace($this->baseUrl, '', $link->getAttribute('href'));
-        $this->visitPath($linkToFollow);
-      }
-    }
-  }
-
-  /**
-   * Assert a reset password mail is in the inbox & follow the link inside.
-   *
-   * @Then I check email reset password with subject :value and email :email
-   */
-  public function iCheckEmailResetPassword($value, $email) {
-    $message = $this->findMail(Message::CONTAINS_CRITERIA, $value);
-    $this->currentMessage = $message;
-
-    $dom = new DOMDocument();
-
-    @$dom->loadHTML($this->currentMessage->getContent());
-    $links = $dom->getElementsByTagName('a');
-
-    foreach ($links as $link) {
-      if (strpos($link->getAttribute('href'), 'authentication/setpassword') !== FALSE) {
-        $linkToFollow = str_replace($this->baseUrl, '', $link->getAttribute('href'));
-        $this->visitPath($linkToFollow);
-      }
-
-      if (strpos($link->getAttribute('href'), 'authentication/setpassword') !== FALSE) {
-        $this->getSession()->getPage()->fillField('password', $email);
-        $this->getSession()->getPage()->pressButton('edit-submit');
-      }
-    }
-  }
-
-  /**
    * Open a mail with a given subject.
    *
    * @When /^I open mail with subject "([^"]+)"$/
    */
   public function openMailSubject($value) {
     $message = $this->findMail(Message::SUBJECT_CRITERIA, $value);
-
     $this->currentMessage = $message;
   }
 

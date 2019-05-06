@@ -35,9 +35,8 @@
         "drupal/backerymails": "^1.2",
         "drupal/bamboo_twig": "^3.0",
         "drupal/block_exclude_pages": "^1.2",
-        "drupal/console": "~1.0",
+        "drupal/console": "^1.0.2",
         "drupal/core": "~8.0",
-        "drupal/default_content": "~1.0",
         "drupal/field_group": "^1.0@RC",
         "drupal/focal_point": "^1.0@beta",
         "drupal/honeypot": "^1.27",
@@ -48,20 +47,23 @@
         "drupal/pathauto": "^1.0",
         "drupal/redirect": "^1.0@beta",
         "drupal/swiftmailer": "^1.0@beta",
-        "drush/drush": "~8.0",
+        "drush/drush": "^9.0.0",
         "ralouphie/mimey": "^2.0",
         "symfony/property-access": "^3.3",
-        "webflo/drupal-finder": "^0.3.0",
+        "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3"
     },
     "require-dev": {
+        "alexandresalome/mailcatcher": "^1.2",
         "behat/behat": "~3.3.0",
         "behat/gherkin": "4.4.5",
+        "drupal/default_content": "^1.0@alpha",
         "drupal/devel": "^1.0",
-        "drupal/drupal-extension": "^3.3",
+        "drupal/drupal-extension": "^3.4",
         "phpmd/phpmd": "^2.6",
         "sebastian/phpcpd": "^2.0",
         "squizlabs/php_codesniffer": "^2.7",
+        "wapmorgan/php-code-fixer": "^2.0",
         "webflo/drupal-core-require-dev": "^8.6.1"
     },
     "conflict": {
@@ -76,6 +78,11 @@
         "classmap": [
             "scripts/composer/ScriptHandler.php"
         ]
+    },
+    "autoload-dev": {
+      "psr-4": {
+          "Drupal\\Behat\\": "behat"
+      }
     },
     "scripts": {
         "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",

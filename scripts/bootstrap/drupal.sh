@@ -84,20 +84,20 @@ cd "web"
 ../vendor/bin/drush config-set system.site uuid "$UUID" -y
 
 # Sometimes Drupal 8.4.x import configs in wrong orders.
-# So we repeat the config-import max. 4 times on successives fails.
-attempt=0
-until ../vendor/bin/drush config-import -y --source="$CONFIG_DIR"; do
-  attempt=$(( attempt+1 ))
-  if [ "$attempt" -ge 4 ]; then
-    exit 1
-  fi
+# So we repeat the config-import max. 3 times on successives fails.
+n=0
+until [ $n -ge 4 ]; do
+  ../vendor/bin/drush config-import -y --source='../config/d8/sync/'
+  n=$((n + 1))
+  # delay 3s.
+  sleep 3
 done
 
 ../vendor/bin/drush updatedb -y
 
 # Fix Sitename bugged keep display "| Drupal"
 # @see https://www.drupal.org/node/2851877
-../vendor/bin/drush ev '\Drupal::languageManager()->getLanguageConfigOverrideStorage("fr")->delete("system.site");'
+../vendor/bin/drush eval "\Drupal::languageManager()->getLanguageConfigOverrideStorage('fr')->delete('system.site');"
 
 # Set the Privates Files settings which need to be in the settings.php file
 if [ -f ./sites/default/settings.php ]

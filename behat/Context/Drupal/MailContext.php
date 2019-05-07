@@ -159,6 +159,11 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
   }
 
   /**
+   * Ensure a given number of mail have been catched.
+   *
+   * @param int $count
+   *   The expected number of mail(s).
+   *
    * @Then /^(?P<count>\d+) mails? should be sent$/
    */
   public function verifyMailsSent($count) {

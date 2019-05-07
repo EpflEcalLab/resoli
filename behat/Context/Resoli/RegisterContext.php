@@ -14,6 +14,9 @@ class RegisterContext extends RawDrupalContext implements SnippetAcceptingContex
   /**
    * Fill the Register Form.
    *
+   * @param \Behat\Gherkin\Node\TableNode $fields
+   *   The fields value to use.
+   *
    * @Given I fill the Register form with:
    */
   public function fillTheRegisterForm(TableNode $fields) {

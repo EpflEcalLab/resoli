@@ -118,4 +118,30 @@ class ActivityFormsContext extends RawDrupalContext implements SnippetAcceptingC
     }
   }
 
+  /**
+   * Fill the Activity Defaults Values Form.
+   *
+   * @param string $community
+   *   The community slug of activity to edit.
+   * @param string $activity
+   *   The activity slug to edit.
+   * @param \Behat\Gherkin\Node\TableNode $fields
+   *   The fields value to use.
+   *
+   * @Given I fill the Activity Defaults Values form :activity of :community with:
+   */
+  public function fillActivityDefaultsForm($community, $activity, TableNode $fields) {
+    $this->visitPath("/$community/activities/$activity/edit/defaults");
+
+    foreach ($fields->getHash() as $field) {
+      $this->getSession()->getPage()->fillField('edit-title', $field['title']);
+      $this->getSession()->getPage()->fillField('edit-body', $field['body']);
+      $this->getSession()->getPage()->fillField('edit-venue', $field['venue']);
+      $this->getSession()->getPage()->fillField('edit-contribution', $field['contribution']);
+      $this->getSession()->getPage()->fillField('edit-contact-name', $field['contact-name']);
+      $this->getSession()->getPage()->fillField('edit-contact-phone', $field['contact-phone']);
+      $this->getSession()->getPage()->fillField('edit-contact-mail', $field['contact-mail']);
+    }
+  }
+
 }

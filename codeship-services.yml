@@ -1,0 +1,66 @@
+# Application
+php: &php
+  build:
+    context: .
+    dockerfile: .codeship/Dockerfile.php
+  cached: true
+  default_cache_branch: dev
+
+node: &node
+  build:
+    context: .
+    dockerfile: .codeship/Dockerfile.node
+  cached: true
+  default_cache_branch: dev
+  volumes:
+    - ./.codeship/build:/var/www/.codeship/build
+
+test: &test
+  <<: *php
+  command: docker-as-wait --mysql -- docker-as-drupal apache-server --cache
+  depends_on:
+    - db
+  environment:
+    DATABASE_URL: mysql://drupal:drupal@db/drupal_test
+    SMTP_HOST: mail:1025
+    PRIVATE_FILES: /var/www/web/sites/default/files/private
+    DEFAULT_CONTENT: qs_default_content
+    BEHAT_PROFILE: docker
+  volumes:
+    - ./.codeship/build/styleguide:/var/www/web/themes/quartiers_solidaires/build
+    - ./.codeship/backups:/var/backups
+    - /var/www/web/sites/default/files
+    - /var/www/web/sites/simpletest
+
+behat:
+  <<: *test
+  depends_on:
+    - test
+    - db
+    - mail
+  volumes_from:
+    - test
+
+# Database
+db:
+  image: mariadb:10.1
+  environment:
+    MYSQL_USER: drupal
+    MYSQL_PASSWORD: drupal
+    MYSQL_DATABASE: drupal\_%
+    MYSQL_ROOT_PASSWORD: root
+
+# Mail
+mail:
+  image: schickling/mailcatcher
+
+# Deploy
+deploy:
+  build:
+    context: .
+    dockerfile: .codeship/Dockerfile.deploy
+  cached: true
+  default_cache_branch: dev
+  # encrypted_env_file: .codeship/env.encrypted
+  volumes:
+    - ./.codeship/build/styleguide:/app/web/themes/quartiers_solidaires/build

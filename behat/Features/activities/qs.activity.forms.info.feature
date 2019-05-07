@@ -10,7 +10,7 @@ Feature: Activity Information Form
     Then the "edit-theme-5" checkbox should be checked
 
   @api @preserveDatabase
-  Scenario: When reaching the Information form of Activity, the fields should be prefilled with entity values
+  Scenario: When editting the Information form of Activity, the values should be alterd & stored in the database
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Information form "accueil-cafe" of "lausanne" with:
       | title | theme |

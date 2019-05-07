@@ -1,0 +1,84 @@
+version: '3.6'
+
+services:
+  # Drupal development server
+  dev:
+    build: .
+    command: docker-as-wait --mysql -- docker-as-drupal apache-server
+    depends_on:
+      - db
+      - mail
+    environment:
+      DATABASE_URL: mysql://drupal:drupal@db/drupal_development
+      SMTP_HOST: mail:1025
+      PRIVATE_FILES: /var/www/web/sites/default/files/private
+      DEFAULT_CONTENT: qs_default_content
+    restart: "no"
+    volumes:
+      - backups:/var/backups
+      # Drupal
+      - ./composer.json:/var/www/composer.json:cached
+      - ./composer.lock:/var/www/composer.lock:cached
+      - ./config:/var/www/config:cached
+      - ./web/modules/custom:/var/www/web/modules/custom:cached
+      # Styleguide
+      - ./package.json:/var/www/package.json:cached
+      - ./yarn.lock:/var/www/yarn.lock:cached
+      - ./web/themes/quartiers_solidaires:/var/www/web/themes/quartiers_solidaires:cached
+      # Files
+      - ./web/sites/default/files:/var/www/web/sites/default/files:delegated
+      # Behat
+      - ./behat:/var/www/behat:cached
+      - ./behat.yml:/var/www/behat.yml:cached
+      - backups:/var/backups
+
+  # Drupal test server
+  test:
+    build: .
+    command: docker-as-wait --mysql -- docker-as-drupal apache-server
+    depends_on:
+      - db
+      - mail
+    environment:
+      DATABASE_URL: mysql://drupal:drupal@db/drupal_test
+      SMTP_HOST: mail:1025
+      PRIVATE_FILES: /var/www/web/sites/default/files/private
+      DEFAULT_CONTENT: qs_default_content
+      BEHAT_PROFILE: docker
+      PHPUNIT_DEFAULT_GROUP: qs
+    restart: "no"
+    volumes:
+      - backups:/var/backups
+      # Drupal
+      - ./composer.json:/var/www/composer.json:cached
+      - ./composer.lock:/var/www/composer.lock:cached
+      - ./config:/var/www/config:cached
+      - ./web/modules/custom:/var/www/web/modules/custom:cached
+      # Styleguide
+      - ./package.json:/var/www/package.json:cached
+      - ./yarn.lock:/var/www/yarn.lock:cached
+      - ./web/themes/quartiers_solidaires:/var/www/web/themes/quartiers_solidaires:cached
+      # Behat
+      - ./behat:/var/www/behat:cached
+      - ./behat.yml:/var/www/behat.yml:cached
+
+  # Database
+  db:
+    image: mariadb:10.1
+    environment:
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: drupal\_%
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    volumes:
+      - database:/var/lib/mysql
+
+  # Mail
+  mail:
+    image: schickling/mailcatcher
+    restart: always
+
+volumes:
+  database:
+  backups:

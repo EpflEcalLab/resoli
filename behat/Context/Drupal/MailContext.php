@@ -158,4 +158,16 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
     }
   }
 
+  /**
+   * @Then /^(?P<count>\d+) mails? should be sent$/
+   */
+  public function verifyMailsSent($count) {
+    $count = (int) $count;
+    $actual = $this->getMailCatcherClient()->getMessageCount();
+
+    if ($count !== $actual) {
+      throw new \InvalidArgumentException(sprintf('Expected %d mails to be sent, got %d.', $count, $actual));
+    }
+  }
+
 }

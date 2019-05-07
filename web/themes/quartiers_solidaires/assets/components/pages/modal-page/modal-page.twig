@@ -1,0 +1,66 @@
+<div class="modal-open modal-full">
+
+  {% include '@organisms/header/header.twig' %}
+
+  <main role="main">
+    <a id="main-content" tabindex="-1"></a>
+
+    <div class="modal modal-full force-show">
+      <div class="modal-dialog">
+        <div class="modal-content bg-primary">
+
+          {% block modal_header %}
+            <div class="modal-header container">
+              <div class="w-100">
+
+              </div>
+            </div>
+          {% endblock %}
+
+          <div class="container">
+            <div class="text-center my-5">
+              <h1>{% block title %}Page title{% endblock %}
+              </h1>
+            </div>
+
+            {% block modal_content %}
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
+            {% endblock %}
+
+
+            {% block modal_footer %}
+              <div class="modal-footer justify-content-center sticky-bottom">
+                <a class="btn btn-outline-invert btn-icon shadow-floating mb-3" href="#">
+                  <span class="icon " aria-hidden="true">
+                    {% include '@atoms/icon/icon.twig' with {icon: 'plus'} %}
+                  </span>
+                  Add activity
+                </a>
+              </div>
+            {% endblock %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="floating">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-center">
+        <a class="btn btn-white shadow-floating mb-3 mx-2 btn-xs-grow btn-icon btn-outline-primary active" href="#">
+          {% include '@atoms/icon/icon.twig' with {icon: 'activities'} %}
+          My activities
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop show"></div>
+</div>

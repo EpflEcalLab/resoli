@@ -60,9 +60,23 @@
 
 .modal-content {
   flex: 1 0 100%;
+  position: static;
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+
+  &[class*=bg-] {
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $modal-inner-padding;
+      background-image: linear-gradient(to bottom, theme-color('primary') 20%, rgba(theme-color('primary'), 0) 100%);
+    }
+  }
 }
 
 .modal-title {

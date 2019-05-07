@@ -1,9 +1,9 @@
 <?php
 
+namespace Drupal\Behat\Context\Resoli;
+
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Drupal\Component\Utility\Random;
-use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines application features from the specific context.
@@ -30,4 +30,5 @@ class PhotosContext extends RawDrupalContext implements SnippetAcceptingContext 
     file_prepare_directory($private_path, FILE_MODIFY_PERMISSIONS);
     file_save_htaccess($private_path, TRUE);
   }
+
 }

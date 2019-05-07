@@ -57,6 +57,11 @@ nohup bash -c "php ../vendor/bin/drush runserver &" && sleep 3;
 ../vendor/bin/phpunit -c core --group $PHPUNIT_GROUP --exclude-group $PHPUNIT_EXCLUDE_GROUP --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error --stop-on-failure
 phpunit_exit=$?
 
+if [ $phpunit_exit -ne 0 ]
+then
+  exit $phpunit_exit
+fi
+
 # Kill runserver (drush 8 or drush 9) if one is alive.
 ps -ef | grep 'runserver' | grep -v grep | awk '{print $2}' | xargs kill -9
 ps -ef | grep 'd8-rs-router.php' | grep -v grep | awk '{print $2}' | xargs kill -9

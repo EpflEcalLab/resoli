@@ -1,5 +1,7 @@
 <?php
 
+namespace Drupal\Behat\Context\Drupal;
+
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 
@@ -9,41 +11,51 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 class JsonContext extends RawDrupalContext implements SnippetAcceptingContext {
 
   /**
-   * @Given /^the JSON response should contain field "([^"]*)"$/
+   * Ensure the JSON response contain the given field.
    *
    * @param string $name
+   *   The field name.
+   *
+   * @Given /^the JSON response should contain field "([^"]*)"$/
    *
    * @throws \Exception
    */
-  public function theResponseHasAField($name) {
+  public function theResponseHasField($name) {
     if (!array_key_exists($name, $this->getResponseData())) {
       throw new \Exception("Field '{$name}' not found in response.");
     }
   }
 
   /**
-   * @Then /^in JSON response there is no field called "([^"]*)"$/
+   * Ensure the JSON response does not contain the given field.
    *
    * @param string $name
+   *   The field name.
+   *
+   * @Then /^in JSON response there is no field called "([^"]*)"$/
    *
    * @throws \Exception
    */
-  public function theResponseShouldNotHaveAField($name) {
+  public function theResponseShouldNotHaveField($name) {
     if (array_key_exists($name, $this->getResponseData())) {
       throw new \Exception("Field '{$name}' should not have been found in response, but was.");
     }
   }
 
   /**
-   * @Then /^the field "([^"]+)" in the JSON response should contain "([^"]*)"$/
+   * Ensure the JSON response contain the given field with a specific value.
    *
    * @param string $name
+   *   The field name.
    * @param string $value
+   *   The field value.
+   *
+   * @Then /^the field "([^"]+)" in the JSON response should contain "([^"]*)"$/
    *
    * @throws \Exception
    */
   public function valueOfTheFieldContain($name, $value) {
-    $this->theResponseHasAField($name);
+    $this->theResponseHasField($name);
 
     $data = $this->getResponseData();
     if (strpos($data[$name], $value) === FALSE) {
@@ -57,14 +69,20 @@ class JsonContext extends RawDrupalContext implements SnippetAcceptingContext {
   }
 
   /**
+   * Get the response body.
+   *
    * @return string
+   *   The response body.
    */
   public function getResponseBody() {
     return (string) $this->getSession()->getDriver()->getContent();
   }
 
   /**
+   * Get the response body decoded as JSON.
+   *
    * @return mixed
+   *   The response.
    */
   public function getResponseData() {
     return $this->decodeJson($this->getResponseBody());
@@ -77,6 +95,7 @@ class JsonContext extends RawDrupalContext implements SnippetAcceptingContext {
    *   A JSON string.
    *
    * @return mixed
+   *   The decoded string.
    *
    * @throws \Exception
    *
@@ -84,11 +103,12 @@ class JsonContext extends RawDrupalContext implements SnippetAcceptingContext {
    */
   protected function decodeJson($string) {
     $json = json_decode($string, TRUE);
-    switch (json_last_error()) {
-      case JSON_ERROR_NONE:
-        return $json;
 
-      break;
+    if (json_last_error() === JSON_ERROR_NONE) {
+      return $json;
+    }
+
+    switch (json_last_error()) {
       case JSON_ERROR_DEPTH:
         $message = 'Maximum stack depth exceeded';
         break;
@@ -113,6 +133,7 @@ class JsonContext extends RawDrupalContext implements SnippetAcceptingContext {
         $message = 'Unknown error';
         break;
     }
+
     throw new \Exception('JSON decoding error: ' . $message);
   }
 

@@ -18,6 +18,7 @@ default:
         - Drupal\Behat\Context\Drupal\JsonContext:
 
         # Resoli Contexts
+        - Drupal\Behat\Context\Resoli\RegisterContext
         - Drupal\Behat\Context\Resoli\LoginContext
         - Drupal\Behat\Context\Resoli\DemoContext
         - Drupal\Behat\Context\Resoli\PhotosContext

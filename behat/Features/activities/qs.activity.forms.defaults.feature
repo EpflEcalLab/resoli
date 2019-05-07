@@ -1,7 +1,5 @@
 Feature: Activity Defaults Form
 
-I fill the Activity Defaults Values form :activity of :community with:
-
   @api
   Scenario: When reaching the Defaults Values form of Activity, the fields should be prefilled with entity values
     Given I am logged in as user "organizer+lausanne"

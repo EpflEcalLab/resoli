@@ -5,7 +5,7 @@
  * Mail hook.
  */
 
-use Drupal\Core\Render\Markup;
+use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\user\UserInterface;
 use Drupal\Core\Url;
 
@@ -43,7 +43,7 @@ function qs_auth_mail($key, &$message, $params) {
         '@lastname'  => $account->field_lastname->value,
       ]);
 
-      $message['body'][] = Markup::create(t('qs.mail.welcome.no_approval.body @mail @firstname @lastname @url', [
+      $message['body'][] = MailFormatHelper::wrapMail(t('qs.mail.welcome.no_approval.body @mail @firstname @lastname @url', [
         '@mail'      => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
         '@lastname'  => $account->field_lastname->value,
@@ -65,7 +65,7 @@ function qs_auth_mail($key, &$message, $params) {
         '@community' => $community->getName(),
       ]);
 
-      $message['body'][0] = Markup::create(t('qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url', [
+      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url', [
         '@mail'      => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
         '@lastname'  => $account->field_lastname->value,
@@ -87,7 +87,7 @@ function qs_auth_mail($key, &$message, $params) {
         '@community' => $community->getName(),
       ]);
 
-      $message['body'][0] = Markup::create(t('qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url', [
+      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url', [
         '@mail'      => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
         '@lastname'  => $account->field_lastname->value,
@@ -109,7 +109,7 @@ function qs_auth_mail($key, &$message, $params) {
         '@community' => $community->getName(),
       ]);
 
-      $message['body'][0] = Markup::create(t('qs.mail.community.apply.body @mail @firstname @lastname @community @url', [
+      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.community.apply.body @mail @firstname @lastname @community @url', [
         '@mail'      => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
         '@lastname'  => $account->field_lastname->value,
@@ -158,7 +158,7 @@ function qs_auth_mail_alter(&$message) {
         '@lastname'  => $account->field_lastname->value,
       ]);
 
-      $message['body'][0] = Markup::create(t('qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url', [
+      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url', [
         '@mail'       => $account->mail->value,
         '@firstname'  => $account->field_firstname->value,
         '@lastname'   => $account->field_lastname->value,
@@ -175,7 +175,7 @@ function qs_auth_mail_alter(&$message) {
         '@lastname'  => $account->field_lastname->value,
       ]);
 
-      $message['body'][0] = Markup::create(t('qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login', [
+      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login', [
         '@mail'           => $account->mail->value,
         '@firstname'      => $account->field_firstname->value,
         '@lastname'       => $account->field_lastname->value,

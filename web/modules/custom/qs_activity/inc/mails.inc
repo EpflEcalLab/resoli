@@ -5,7 +5,7 @@
  * Mail hook.
  */
 
-use Drupal\Core\Render\Markup;
+use Drupal\Core\Mail\MailFormatHelper;
 use Drupal\Component\Render\FormattableMarkup;
 
 /**
@@ -44,7 +44,7 @@ function qs_activity_mail($key, &$message, $params) {
         '@event'    => $event->getTitle(),
       ]);
 
-      $message['body'][] = Markup::create(t('qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end', [
+      $message['body'][] = MailFormatHelper::wrapMail(t('qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end', [
         '@mail'       => $author->getEmail(),
         '@firstname'  => $author->field_firstname->value,
         '@lastname'   => $author->field_lastname->value,
@@ -69,7 +69,7 @@ function qs_activity_mail($key, &$message, $params) {
         '@event'    => $updated_event->getTitle(),
       ]);
 
-      $message['body'][] = Markup::create(t('qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end', [
+      $message['body'][] = MailFormatHelper::wrapMail(t('qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end', [
         '@mail'                => $author->getEmail(),
         '@firstname'           => $author->field_firstname->value,
         '@lastname'            => $author->field_lastname->value,

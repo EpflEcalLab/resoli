@@ -5,7 +5,7 @@
  * Mail hook.
  */
 
-use Drupal\Core\Mail\MailFormatHelper;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use Drupal\Component\Render\FormattableMarkup;
 
@@ -50,7 +50,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
-      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
+      $message['body'][0] = Markup::create(nl2br(t('qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
         '@mail'       => $account->mail->value,
         '@firstname'  => $account->field_firstname->value,
         '@lastname'   => $account->field_lastname->value,
@@ -61,7 +61,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
-      ]));
+      ])));
       break;
 
     // Sent to organizers & maintainers when some ask for event subscription.
@@ -81,7 +81,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
-      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.subscription.waiting_approval.request_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
+      $message['body'][0] = Markup::create(nl2br(t('qs.mail.subscription.waiting_approval.request_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
         '@mail'       => $user->mail->value,
         '@firstname'  => $user->field_firstname->value,
         '@lastname'   => $user->field_lastname->value,
@@ -92,7 +92,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('qs_subscription.waiting_approval', ['event' => $event->id()], ['absolute' => TRUE])->toString(),
-      ]));
+      ])));
       break;
 
     // Sent to organizers & maintainers when event subscription
@@ -113,7 +113,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
-      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.subscription.waiting_approval.confirm_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
+      $message['body'][0] = Markup::create(nl2br(t('qs.mail.subscription.waiting_approval.confirm_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
         '@mail'       => $user->mail->value,
         '@firstname'  => $user->field_firstname->value,
         '@lastname'   => $user->field_lastname->value,
@@ -124,7 +124,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
-      ]));
+      ])));
       break;
 
     // Sent to user when event subscription request has been declined.
@@ -144,7 +144,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@activity'  => new FormattableMarkup($activity->getTitle(), []),
       ]);
 
-      $message['body'][0] = MailFormatHelper::wrapMail(t('qs.mail.subscription.waiting_approval.decline.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
+      $message['body'][0] = Markup::create(nl2br(t('qs.mail.subscription.waiting_approval.decline.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url', [
         '@mail'       => $account->mail->value,
         '@firstname'  => $account->field_firstname->value,
         '@lastname'   => $account->field_lastname->value,
@@ -155,7 +155,7 @@ function qs_subscription_mail($key, &$message, $params) {
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@activity'   => new FormattableMarkup($activity->getTitle(), []),
         '@url'        => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
-      ]));
+      ])));
       break;
 
   }

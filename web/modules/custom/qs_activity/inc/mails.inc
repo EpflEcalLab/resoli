@@ -5,7 +5,7 @@
  * Mail hook.
  */
 
-use Drupal\Core\Mail\MailFormatHelper;
+use Drupal\Core\Render\Markup;
 use Drupal\Component\Render\FormattableMarkup;
 
 /**
@@ -44,7 +44,7 @@ function qs_activity_mail($key, &$message, $params) {
         '@event'    => $event->getTitle(),
       ]);
 
-      $message['body'][] = MailFormatHelper::wrapMail(t('qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end', [
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end', [
         '@mail'       => $author->getEmail(),
         '@firstname'  => $author->field_firstname->value,
         '@lastname'   => $author->field_lastname->value,
@@ -53,7 +53,7 @@ function qs_activity_mail($key, &$message, $params) {
         '@date'       => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@time_start' => $dateFormatter->format($event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@time_end'   => $dateFormatter->format($event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
-      ]));
+      ])));
       break;
 
     // Sent to Subscribed user(s) of event &
@@ -69,7 +69,7 @@ function qs_activity_mail($key, &$message, $params) {
         '@event'    => $updated_event->getTitle(),
       ]);
 
-      $message['body'][] = MailFormatHelper::wrapMail(t('qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end', [
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end', [
         '@mail'                => $author->getEmail(),
         '@firstname'           => $author->field_firstname->value,
         '@lastname'            => $author->field_lastname->value,
@@ -81,7 +81,7 @@ function qs_activity_mail($key, &$message, $params) {
         '@updated_date'        => $dateFormatter->format($updated_event->field_start_at->date->getTimestamp(), 'default_medium_date_only'),
         '@updated_time_start'  => $dateFormatter->format($updated_event->field_start_at->date->getTimestamp(), 'default_short_hours_minutes'),
         '@updated_time_end'    => $dateFormatter->format($updated_event->field_end_at->date->getTimestamp(), 'default_short_hours_minutes'),
-      ]));
+      ])));
       break;
   }
 }

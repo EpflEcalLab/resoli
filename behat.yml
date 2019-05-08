@@ -24,6 +24,7 @@ default:
         - Drupal\Behat\Context\Resoli\PhotosContext
         - Drupal\Behat\Context\Resoli\AccountFormContext
         - Drupal\Behat\Context\Resoli\ActivityFormsContext
+        - Drupal\Behat\Context\Resoli\EventFormsContext
 
         # Drupal Extension Contexts
         - Drupal\DrupalExtension\Context\DrupalContext

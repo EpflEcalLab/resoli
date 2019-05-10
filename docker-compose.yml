@@ -49,6 +49,7 @@ services:
       TEST_DISABLE_MODULES: >-
         big_pipe
         honeypot
+      TEST_USER: www-data
       DEFAULT_CONTENT: qs_default_content
       BEHAT_PROFILE: docker
       PHPUNIT_DEFAULT_GROUP: qs

@@ -22,7 +22,7 @@
           steps:
             - name: Behat
               service: behat
-              command: docker-as-wait --mysql test:8888 -- docker-as-drupal behat --skip-db-reset
+              command: docker-as-wait --mysql test:8888 -- docker-as-drupal behat --user=www-data --skip-db-reset
     - name: Unit
       service: test
       command: docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=qs

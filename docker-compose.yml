@@ -46,6 +46,9 @@ services:
       REQUIRED_DIRECTORIES: >-
         /var/www/log/behat
         /var/www/dump/behat
+      TEST_DISABLE_MODULES: >-
+        big_pipe
+        honeypot
       DEFAULT_CONTENT: qs_default_content
       BEHAT_PROFILE: docker
       PHPUNIT_DEFAULT_GROUP: qs

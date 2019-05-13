@@ -245,9 +245,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // if ($route_name == 'qs_activity.activities.form.edit.info') {
       //   $label = $this->t('qs.activity.edit_info');
       // }
-      elseif ($route_name == 'qs_activity.activities.form.edit.visibility') {
-        $label = $this->t('qs.activity.edit_visibility');
-      }
+      // elseif ($route_name == 'qs_activity.activities.form.edit.visibility') {
+      //   $label = $this->t('qs.activity.edit_visibility');
+      // }
       // elseif ($route_name == 'qs_activity.activities.form.edit.defaults') {
       //   $label = $this->t('qs.activity.edit_default_values');
       // }
@@ -341,7 +341,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_activity.user.collection',
       'qs_activity.activities.dashboard',
       // 'qs_activity.activities.form.edit.info',
-      'qs_activity.activities.form.edit.visibility',
+      // 'qs_activity.activities.form.edit.visibility',
       // 'qs_activity.activities.form.edit.defaults',
       'qs_activity.activities.members',
 //      'qs_activity.events.form.add',

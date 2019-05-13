@@ -5,7 +5,7 @@
 
     {% set classes = [
       'modal-content',
-      modal_bg ? 'bg-' ~ modal_bg,
+      modal_bg ? 'bg-' ~ modal_bg : 'bg-warning',
     ] %}
     {% set modal_attributes = create_attribute().addClass(classes) %}
     <div{{ modal_attributes }}>
@@ -62,5 +62,5 @@
     label: bamboo_config_get('system.site', 'name'),
   }] %}
 
-  {{ macros.floating_buttons(floating_buttons, modal_bg, path('<current>')) }}
+  {{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
 {% endblock %}

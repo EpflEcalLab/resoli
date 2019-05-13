@@ -152,13 +152,13 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_activity.user.collection',
     ])) {
       // For everybody, show a button "My Activities".
-      $icon = 'activities';
-      $theme = 'primary';
-      $url = $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
-        'community' => $community->id(),
-        'user' => $this->currentUser->id(),
-      ]);
-      $label = $this->t('qs_activity.floating.my_activities');
+//      $icon = 'activities';
+//      $theme = 'primary';
+//      $url = $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
+//        'community' => $community->id(),
+//        'user' => $this->currentUser->id(),
+//      ]);
+//      $label = $this->t('qs_activity.floating.my_activities');
 
       // When the user has write access on the community & never add activities
       // Display a shortcut link "Add Activity".
@@ -338,7 +338,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     // Display as active on these routes.
     if (in_array($route_name, [
       'qs_activity.activities.form.add',
-      'qs_activity.user.collection',
+      // 'qs_activity.user.collection',
       'qs_activity.activities.dashboard',
       // 'qs_activity.activities.form.edit.info',
       'qs_activity.activities.form.edit.visibility',

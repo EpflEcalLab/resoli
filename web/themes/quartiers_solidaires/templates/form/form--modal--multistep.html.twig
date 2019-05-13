@@ -7,8 +7,6 @@
 {% set floating_buttons = element['#floating_buttons'] %}
 
 {% block modal_content %}
-  <form{{ attributes }}>
-    {{ children }}
-  </form>
+  {% include '@quartiers_solidaires/form/form--multistep.html.twig' %}
 {% endblock %}
 

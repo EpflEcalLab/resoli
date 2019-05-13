@@ -31,7 +31,9 @@ class EventEditForm extends EventEditFormBase {
       'title' => $this->t('qs_activity.events.form.edit.title_form @activity', [
         '@activity' => $event->field_activity->entity->getTitle(),
       ]),
+      'theme' => 'secondary',
     ];
+
     $form['#floating_buttons'][] = [
       'label' => $this->t('qs.activity.edit_event'),
       'icon' => 'pencil',

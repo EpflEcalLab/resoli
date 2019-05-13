@@ -189,15 +189,15 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     // Button - "Add Event" or "Activity Dashboard" or "Contact @name @email".
     if (($node && $node->bundle() == 'activity') || $activity) {
       $act = $node ? $node : $activity;
-      // Button "Add Event".
-      if ($this->acl->hasWriteAccessEvent($act)) {
-        $icon = 'plus';
-        $theme = 'secondary';
-        $url = $this->urlGenerator->generateFromRoute('qs_activity.events.form.add', [
-          'activity' => $act->id(),
-        ]);
-        $label = $this->t('qs_activity.floating.add.event');
-      }
+//      // Button "Add Event".
+//      if ($this->acl->hasWriteAccessEvent($act)) {
+//        $icon = 'plus';
+//        $theme = 'secondary';
+//        $url = $this->urlGenerator->generateFromRoute('qs_activity.events.form.add', [
+//          'activity' => $act->id(),
+//        ]);
+//        $label = $this->t('qs_activity.floating.add.event');
+//      }
 
       // Button "Activity Dashboard".
       // if ($this->acl->hasAdminAccessActivity($act)) {
@@ -254,10 +254,10 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       elseif ($route_name == 'qs_activity.activities.members') {
         $label = $this->t('qs.activity.members');
       }
-      elseif ($route_name == 'qs_activity.events.form.add') {
-        $label = $this->t('qs.activity.add_event');
-        $theme = 'secondary';
-      }
+//      elseif ($route_name == 'qs_activity.events.form.add') {
+//        $label = $this->t('qs.activity.add_event');
+//        $theme = 'secondary';
+//      }
       // elseif ($route_name == 'qs_activity.activities.form.delete') {
       //   $icon = 'trash';
       //   $label = $this->t('qs.activity.delete');
@@ -344,7 +344,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_activity.activities.form.edit.visibility',
       // 'qs_activity.activities.form.edit.defaults',
       'qs_activity.activities.members',
-      'qs_activity.events.form.add',
+//      'qs_activity.events.form.add',
       'qs_activity.activities.form.delete',
       'qs_community.dashboard',
       'qs_community.members',

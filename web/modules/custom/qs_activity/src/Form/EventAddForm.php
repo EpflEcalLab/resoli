@@ -100,12 +100,19 @@ class EventAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
+      'theme' => 'secondary',
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
 
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs_activity.floating.add.event'),
+      'icon' => 'plus',
+      'active' => TRUE,
+    ];
+
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
-      'form__fullpage__multistep',
+      'form__modal__multistep',
     ];
 
     // Save the activity for submission.

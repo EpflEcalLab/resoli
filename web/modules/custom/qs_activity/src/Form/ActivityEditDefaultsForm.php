@@ -34,6 +34,12 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       'theme'       => 'primary',
     ];
 
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.activity.edit_default_values'),
+      'icon' => 'activities',
+      'active' => TRUE,
+    ];
+
     $form['group'] = [
       '#type' => 'fieldset',
       '#attributes' => [

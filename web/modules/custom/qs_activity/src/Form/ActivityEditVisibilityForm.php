@@ -28,8 +28,15 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
       'form__modal',
     ];
     $form['#attributes'] = [
-      'title' => $activity->title->value,
+      'title'       => $activity->title->value,
       'description' => $this->t('qs.activity.edit_visibility'),
+      'theme'       => 'primary',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.activity.edit_visibility'),
+      'icon' => 'activities',
+      'active' => TRUE,
     ];
 
     $form['step-1'] = [

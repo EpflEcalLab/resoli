@@ -40,7 +40,7 @@
 
             <div class="card-actions row">
               <div class="col-sm-6 mb-3">
-                <form action="{{ path('qs_subscription.confirm', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                <form action="{{ path('qs_subscription.confirm', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post" id="qs-subscription-confirm-{{ subscription.id.value }}">
                   <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-confirm="{{ 'qs_subscription.waiting_approval.confirmed_confirm'|t }}" type="submit" value="{{ 'qs.confirmed'|t }}">
                     {{ macros.icon('check') }}
                     {{ 'qs.confirmed'|t }}
@@ -48,7 +48,7 @@
                 </form>
               </div>
               <div class="col-sm-6 mb-3">
-                <form action="{{ path('qs_subscription.decline', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                <form action="{{ path('qs_subscription.decline', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post" id="qs-subscription-decline-{{ subscription.id.value }}">
                   <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_subscription.waiting_approval.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
                     {{ macros.icon('trash') }}
                     {{ 'qs.reject'|t }}

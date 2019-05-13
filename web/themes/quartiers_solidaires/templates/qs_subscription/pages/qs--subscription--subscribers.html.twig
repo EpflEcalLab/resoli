@@ -6,6 +6,14 @@
   '@variables.activity.title.value': variables.activity.title.value,
 }) %}
 {% set modal_subtitle = variables.event.name.value %}
+{% set modal_bg = 'secondary' %}
+{% set floating_buttons = [
+  {
+    label: 'qs_subscription.floating.subscribers'|t,
+    icon: 'register',
+    active: true,
+  }
+] %}
 
 {% block modal_content %}
 

@@ -7,6 +7,14 @@
   '@variables.activity.title.value': variables.activity.title.value,
 }) %}
 {% set modal_subtitle = variables.community.name.value %}
+{% set modal_bg = 'secondary' %}
+{% set floating_buttons = [
+  {
+    label: 'qs_subscription.floating.waiting_approval'|t,
+    icon: 'wait',
+    active: true,
+  }
+] %}
 
 {% block modal_content %}
 

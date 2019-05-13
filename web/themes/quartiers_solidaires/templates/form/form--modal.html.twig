@@ -1,17 +1,14 @@
-{% set classes = [
-  'd-flex',
-  'flex-column',
-  'flex-grow',
-  'justify-content-center',
-] %}
-<form{{ attributes.addClass(classes) }}>
-  {% embed '@quartiers_solidaires/modals/modal.html.twig' with {
-    modal_title_sm: attributes.title|raw,
-    modal_title_icon: attributes.icon,
-    modal_subtitle: attributes.description,
-  } %}
+{% extends "@quartiers_solidaires/modals/modal.html.twig" %}
 
-  {% endembed %}
+{% set modal_bg = attributes.theme ?? 'secondary' %}
+{% set modal_title_sm = attributes.title|raw %}
+{% set modal_title_icon = attributes.icon %}
+{% set modal_subtitle = attributes.description %}
+{% set floating_buttons = element['#floating_buttons'] %}
 
-  {{ children }}
-</form>
+{% block modal_content %}
+  <form{{ attributes }}>
+    {{ children }}
+  </form>
+{% endblock %}
+

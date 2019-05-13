@@ -1,3 +1,5 @@
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
+
 <div class="modal modal-full force-show">
   <div class="modal-dialog">
 
@@ -5,8 +7,8 @@
       'modal-content',
       modal_bg ? 'bg-' ~ modal_bg,
     ] %}
-    {% set attributes = create_attribute().addClass(classes) %}
-    <div{{ attributes }}>
+    {% set modal_attributes = create_attribute().addClass(classes) %}
+    <div{{ modal_attributes }}>
 
       {# Display status messages. #}
       {% set messages = bamboo_render_entity('block', 'quartiers_solidaires_messages')|render %}

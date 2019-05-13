@@ -174,9 +174,9 @@ class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
   /**
    * Checks, that form field with specified id has specified pattern.
    *
-   * Example: Then the "#edit-username" field should contain "([0-5][0-9])"
+   * Example: Then the "#edit-username" field should match regex "/([0-5][0-9])/"
    *
-   * @Then the :field field should be formatted :regex
+   * @Then the :field field should match regex :regex
    */
   public function assertFieldFromatted($field, $regex) {
     $field = $this->getSession()->getPage()->find('css', $field);

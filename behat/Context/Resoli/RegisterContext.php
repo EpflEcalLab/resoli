@@ -8,11 +8,17 @@ use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines register features from the specific context.
+ *
+ * @codingStandardsIgnoreFile
  */
 class RegisterContext extends RawDrupalContext implements SnippetAcceptingContext {
 
   /**
    * Fill the Register Form.
+   *
+   * Example: I fill the Register form with:
+   *           | community | firstname | lastname | mail             | phone         | password |
+   *           | 1         | John      | Doe      | mail@example.org | +01 234 56 78 | qwertz   |
    *
    * @param \Behat\Gherkin\Node\TableNode $fields
    *   The fields value to use.

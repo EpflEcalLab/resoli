@@ -10,11 +10,17 @@ use DateTimeZone;
 
 /**
  * Defines event features from the specific context.
+ *
+ * @codingStandardsIgnoreFile
  */
 class EventFormsContext extends RawDrupalContext implements SnippetAcceptingContext {
 
   /**
    * Fill the Event Add Form.
+   *
+   * Example: I fill the Add Event form "accueil-cafe" of "lausanne" with:
+   *           | title | date | start-at | end-at | body  | venue | contact-name | contact-phone | contact-mail     | contribution |
+   *           | Foo   | now  | 12:00    | 15:00  | Lorem | Bar   | John Doe     | +01 234 56 78 | mail@example.org | 25 CHF       |
    *
    * @param string $community
    *   The community slug of activity to edit.
@@ -48,6 +54,10 @@ class EventFormsContext extends RawDrupalContext implements SnippetAcceptingCont
 
   /**
    * Fill the Event Edit Form.
+   *
+   * Example: I fill the Edit Event "accueil-cafe-1" form on activity "accueil-cafe" of "lausanne" with:
+   *           | title | date | start-at | end-at | body  | venue | contact-name | contact-phone | contact-mail     | contribution |
+   *           | Foo   | now  | 12:00    | 15:00  | Lorem | Bar   | John Doe     | +01 234 56 78 | mail@example.org | 25 CHF       |
    *
    * @param string $community
    *   The community slug of event to edit.

@@ -8,11 +8,17 @@ use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines activity features from the specific context.
+ *
+ * @codingStandardsIgnoreFile
  */
 class ActivityFormsContext extends RawDrupalContext implements SnippetAcceptingContext {
 
   /**
    * Fill the Activity Add Form.
+   *
+   * Example: I fill the Add Activity form of "Lausanne" with:
+   *           | title    | theme |
+   *           | Art Fair | 4     |
    *
    * @param string $community
    *   The community slug to add an activity.
@@ -32,6 +38,10 @@ class ActivityFormsContext extends RawDrupalContext implements SnippetAcceptingC
 
   /**
    * Fill the Activity General Information Form.
+   *
+   * Example: I fill the Activity Information form "accueil-cafe" of "lausanne" with:
+   *           | title       | theme |
+   *           | Lorem Ipsum | 4     |
    *
    * @param string $community
    *   The community slug of activity to edit.
@@ -53,6 +63,10 @@ class ActivityFormsContext extends RawDrupalContext implements SnippetAcceptingC
 
   /**
    * Fill the Activity Visibility Form.
+   *
+   * Example: I fill the Activity Visibility form "accueil-cafe" of "lausanne" with:
+   *           | community-can-subscribe | community-access-contact | community-access-detail | community-access-story | member-create-story | community-access-gallery | member-create-gallery |
+   *           | 1 | 1 | 1 | 0 | 1 | 0 | 1 |
    *
    * @param string $community
    *   The community slug of activity to edit.
@@ -120,6 +134,10 @@ class ActivityFormsContext extends RawDrupalContext implements SnippetAcceptingC
 
   /**
    * Fill the Activity Defaults Values Form.
+   *
+   * Example: I fill the Activity Defaults Values form "accueil-cafe" of "lausanne" with:
+   *           | title | body  | venue | contribution | contact-name | contact-phone | contact-mail     |
+   *           | Foo   | Lorem | Bar   | 20 CHF       | John Doe     | +01 234 56 78 | mail@example.org |
    *
    * @param string $community
    *   The community slug of activity to edit.

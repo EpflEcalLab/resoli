@@ -10,6 +10,8 @@ use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines application features from the specific context.
+ *
+ * @codingStandardsIgnoreFile
  */
 class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
 

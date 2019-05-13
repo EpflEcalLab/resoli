@@ -2,26 +2,21 @@
 
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{% block modal_content %}
-  <div class="text-center mb-5 mt-3">
-    {% if variables.user %}
-      {% if variables.current_user %}
-        <h1>
-          {{ 'qs.photos.user.collection.title'|t }}
-        </h1>
-      {% else %}
-        <h1>
-          {{ 'qs.photos.user.collection.title @name @email'|t({
-            '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
-            '@email': variables.user.mail.value ? variables.user.mail.value : ''
-          }) }}
-        </h1>
-      {% endif %}
-    {% else %}
-      <h1>{% trans %}qs.activity.user.collection.title{% endtrans %}</h1>
-    {% endif %}
-  </div>
+{% set modal_title = 'qs.activity.user.collection.title'|t %}
+{% if variables.user %}
+  {% if variables.current_user %}
+    {% set modal_title = 'qs.photos.user.collection.title'|t %}
+  {% else %}
+    {% set modal_title = 'qs.photos.user.collection.title @name @email'|t({
+      '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
+      '@email': variables.user.mail.value ? variables.user.mail.value : ''
+    }) %}
+  {% endif %}
+{% endif %}
+{% set modal_bg = 'primary' %}
+{# TODO add floating buttons #}
 
+{% block modal_content %}
   <div class="text-center mb-5">
     {{ macros.icon('picture-big', 'icon-xl') }}
   </div>

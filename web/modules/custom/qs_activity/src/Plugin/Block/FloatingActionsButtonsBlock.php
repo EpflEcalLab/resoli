@@ -200,14 +200,14 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 //      }
 
       // Button "Activity Dashboard".
-      if ($this->acl->hasAdminAccessActivity($act)) {
-        $icon = 'activities';
-        $theme = 'primary';
-        $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
-          'activity' => $act->id(),
-        ]);
-        $label = $this->t('qs_activity.floating.dashboard.activity');
-      }
+      // if ($this->acl->hasAdminAccessActivity($act)) {
+      //   $icon = 'activities';
+      //   $theme = 'primary';
+      //   $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
+      //     'activity' => $act->id(),
+      //   ]);
+      //   $label = $this->t('qs_activity.floating.dashboard.activity');
+      // }
 
       // Button "Contact Organizer(s) & Maintainer(s)".
       if (!$this->acl->hasWriteAccessEvent($act) && !$this->acl->hasAdminAccessActivity($act)) {
@@ -242,9 +242,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         }
       }
 
-      if ($route_name == 'qs_activity.activities.form.edit.info') {
-        $label = $this->t('qs.activity.edit_info');
-      }
+      // if ($route_name == 'qs_activity.activities.form.edit.info') {
+      //   $label = $this->t('qs.activity.edit_info');
+      // }
       elseif ($route_name == 'qs_activity.activities.form.edit.visibility') {
         $label = $this->t('qs.activity.edit_visibility');
       }
@@ -258,11 +258,11 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 //        $label = $this->t('qs.activity.add_event');
 //        $theme = 'secondary';
 //      }
-      elseif ($route_name == 'qs_activity.activities.form.delete') {
-        $icon = 'trash';
-        $label = $this->t('qs.activity.delete');
-        $theme = 'danger';
-      }
+      // elseif ($route_name == 'qs_activity.activities.form.delete') {
+      //   $icon = 'trash';
+      //   $label = $this->t('qs.activity.delete');
+      //   $theme = 'danger';
+      // }
     }
 
     // Button - "My Photos".

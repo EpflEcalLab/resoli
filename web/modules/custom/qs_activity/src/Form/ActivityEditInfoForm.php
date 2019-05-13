@@ -61,6 +61,12 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
       'description' => $this->t('qs.activity.edit_info'),
     ];
 
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.activity.edit_info'),
+      'icon' => 'activities',
+      'active' => TRUE,
+    ];
+
     $form['step-1'] = [
       '#type' => 'fieldset',
       '#theme_wrappers' => [

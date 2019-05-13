@@ -48,9 +48,16 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     ];
 
     $form['#attributes'] = [
-      'title' => $activity->title->value,
+      'title'       => $activity->title->value,
       'description' => $this->t('qs_activity.activities.form.delete.warning'),
+      'icon'        => 'trash',
+      'theme'       => 'danger',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.activity.delete'),
       'icon' => 'trash',
+      'active' => TRUE,
     ];
 
     $form['actions'] = [

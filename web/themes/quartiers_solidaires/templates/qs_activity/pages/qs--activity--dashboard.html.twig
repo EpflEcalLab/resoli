@@ -1,8 +1,18 @@
 {% extends "@quartiers_solidaires/modals/modal.html.twig" %}
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set modal_bg = 'primary' %}
+
 {% set modal_title = variables.activity.title.value %}
 {% set modal_title_icon = 'theme_' ~ variables.activity.field_theme.entity.field_icon.value ~ '_lg' %}
+
+{% set floating_buttons = [
+  {
+    label: 'qs_activity.floating.dashboard.activity'|t,
+    icon: 'activities',
+    active: true,
+  }
+] %}
 
 {% block modal_content %}
 

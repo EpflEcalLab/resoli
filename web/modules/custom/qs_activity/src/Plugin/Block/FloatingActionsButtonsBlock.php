@@ -17,6 +17,7 @@ use Drupal\qs_acl\Service\PrivilegeManager;
  *
  * Expose the Floating actions buttons to access privileged pages.
  *
+ * @codingStandardsIgnoreFile
  * @Block(
  *   id = "qs_activity_floating_actions_buttons_block",
  *   admin_label = @Translation("Floating actions buttons"),

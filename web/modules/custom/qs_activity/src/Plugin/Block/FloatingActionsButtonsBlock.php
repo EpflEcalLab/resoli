@@ -200,14 +200,14 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
 
       // Button "Activity Dashboard".
-      if ($this->acl->hasAdminAccessActivity($act)) {
-        $icon = 'activities';
-        $theme = 'primary';
-        $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
-          'activity' => $act->id(),
-        ]);
-        $label = $this->t('qs_activity.floating.dashboard.activity');
-      }
+      // if ($this->acl->hasAdminAccessActivity($act)) {
+      //   $icon = 'activities';
+      //   $theme = 'primary';
+      //   $url = $this->urlGenerator->generateFromRoute('qs_activity.activities.dashboard', [
+      //     'activity' => $act->id(),
+      //   ]);
+      //   $label = $this->t('qs_activity.floating.dashboard.activity');
+      // }
 
       // Button "Contact Organizer(s) & Maintainer(s)".
       if (!$this->acl->hasWriteAccessEvent($act) && !$this->acl->hasAdminAccessActivity($act)) {

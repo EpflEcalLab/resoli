@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.3.4 (2019-05-13)
+ - fix mail layout paragraphs issue - close #691
+
 ## 1.3.3 (2019-05-02)
  - fix IE11 - close #687
  - add date of event on 'My subscriptions' page - close #688

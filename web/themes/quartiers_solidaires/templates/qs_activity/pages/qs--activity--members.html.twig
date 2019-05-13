@@ -1,7 +1,16 @@
 {% extends "@quartiers_solidaires/modals/modal.html.twig" %}
 
+{% set modal_bg = 'primary' %}
 {% set modal_title_sm = 'qs_activity.members.title'|t %}
 {% set modal_subtitle = variables.activity.title.value %}
+
+{% set floating_buttons = [
+  {
+    label: 'qs.activity.members'|t,
+    icon: 'activities',
+    active: true,
+  }
+] %}
 
 {% block modal_content %}
   {{ bamboo_render_form('qs_activity', 'ActivityInlineAddMemberForm', {'activity': variables.activity}) }}

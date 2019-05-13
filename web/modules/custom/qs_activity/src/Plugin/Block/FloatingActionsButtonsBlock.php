@@ -242,9 +242,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
         }
       }
 
-      if ($route_name == 'qs_activity.activities.form.edit.info') {
-        $label = $this->t('qs.activity.edit_info');
-      }
+      // if ($route_name == 'qs_activity.activities.form.edit.info') {
+      //   $label = $this->t('qs.activity.edit_info');
+      // }
       elseif ($route_name == 'qs_activity.activities.form.edit.visibility') {
         $label = $this->t('qs.activity.edit_visibility');
       }

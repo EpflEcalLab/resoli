@@ -3,7 +3,7 @@ Feature: Event Edit Form
   @api
   Scenario: When reaching the Edit form of Event, the fields should be prefilled with entity values
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/lausanne/activities/accueil-cafe/events/accueil-cafe-1/edit"
+    When I am on "/events/21/edit"
     Then I should see 17 "#qs-activity-event-edit-form input" elements
     And the "edit-title" field should contain "Accueil Café"
     And the "#edit-date" field should be formatted "/[0-9]{2}.[0-9]{2}.[0-9]{4}/"

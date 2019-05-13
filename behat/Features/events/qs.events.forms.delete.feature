@@ -11,7 +11,7 @@ Feature: Event Delete Form
   @api @preserveDatabase @mail
   Scenario: When deleting an Event with subscribers, a mail should warn them
     Given I am logged in as user "admin"
-    When I am on "/lausanne/activities/accueil-cafe/events/accueil-cafe-2/delete"
+    When I am on "/events/40/delete"
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe"
     And I should see "qs_event.events.form.delete.success Accueil Café" in the ".alert" element

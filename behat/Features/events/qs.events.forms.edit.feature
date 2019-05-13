@@ -20,7 +20,7 @@ Feature: Event Edit Form
     Then the "edit-has-contribution-0" checkbox should be checked
     Then the "edit-has-contribution-1" checkbox should not be checked
 
-  @api @preserveDatabase
+  @api @preserveDatabase @mail
   Scenario: When editting the Edit form of Event, once saved I should be redirected on the Event dashboard
     Given I am logged in as user "organizer+lausanne"
     When I fill the Edit Event "accueil-cafe-1" form on activity "accueil-cafe" of "lausanne" with:
@@ -30,7 +30,7 @@ Feature: Event Edit Form
     Then the url should match "/lausanne/activities/accueil-cafe/events/accueil-cafe-1/dashboard"
     And I should see "qs_activity.events.form.edit.success Accueil Café" in the ".alert" element
 
-  @api @preserveDatabase
+  @api @preserveDatabase @mail
   Scenario: When editting an Event, the values should be alterd & stored in the database
     Given I am logged in as user "organizer+lausanne"
     When I fill the Edit Event "accueil-cafe-1" form on activity "accueil-cafe" of "lausanne" with:
@@ -50,15 +50,6 @@ Feature: Event Edit Form
     Then the "edit-has-contribution-0" checkbox should not be checked
     Then the "edit-has-contribution-1" checkbox should be checked
     And the "edit-contribution" field should contain "25 CHF"
-
- @api @preserveDatabase @mail
-  Scenario: When editting an Event whitout any other Organizers or Subscribers, no mail should be sent
-    Given I am logged in as user "organizer+lausanne"
-    When I fill the Edit Event "accueil-cafe-1" form on activity "accueil-cafe" of "lausanne" with:
-      | title | date| start-at | end-at | body | venue | contact-name | contact-phone | contact-mail | contribution |
-      | Accueil Café (edited) | now | 19:12 | 22:15 | Lorem Ipsum | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
-    And I press "edit-submit"
-    And 0 mails should be sent
 
   @api @preserveDatabase @mail
   Scenario: When editting an Event with some other Organizers, a mail should warn them of any changes (even me)

@@ -31,6 +31,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       'title'       => $activity->title->value,
       'description' => $this->t('qs.activity.edit_defaults'),
       'novalidate'  => 'novalidate',
+      'theme'       => 'primary',
     ];
 
     $form['group'] = [

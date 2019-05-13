@@ -59,9 +59,6 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $form['#attributes'] = [
       'title' => $activity->title->value,
       'description' => $this->t('qs.activity.edit_info'),
-      'class' => [
-        'modal-body',
-      ],
     ];
 
     $form['step-1'] = [

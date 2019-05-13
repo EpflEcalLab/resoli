@@ -4,8 +4,8 @@
 
 {# Block with current search filters #}
 {% if variables.activities %}
-  <div class="container">
-    <p class="lead text-center mt-5">
+  <div class="container my-5">
+    <p class="lead text-center">
       {%- set count = variables.themes|length -%}
 
       {% if count >= 1 %}
@@ -29,10 +29,8 @@
         {%- trans -%}qs.activity.theme.filters {{ community_name }}.{%- endtrans -%}
       {% endif %}
     </p>
-  </div>
 
-  <div class="container my-5">
-    <div class="row">
+    <div class="row mt-5">
       {% for activity in variables.activities %}
        {% set event = variables.events[activity.nid.value] %}
 

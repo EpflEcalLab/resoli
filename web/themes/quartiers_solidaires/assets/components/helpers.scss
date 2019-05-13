@@ -75,12 +75,6 @@
   flex-grow: 1;
 }
 
-.sticky-top {
-  // We sometimes have a small pixel gap on top...
-  top: -1px;
-  padding-top: 1px;
-}
-
 .sticky-bottom {
   @supports (position: sticky) {
     position: sticky;
@@ -98,6 +92,10 @@
 // inside a flex wrapper is not calculated correctly.
 .min-height-0 {
   min-height: 0;
+}
+
+.min-height-100 {
+  min-height: 100%;
 }
 
 // override Bootstrap rounded class

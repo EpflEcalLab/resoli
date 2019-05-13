@@ -1,60 +1,46 @@
+{% extends "@quartiers_solidaires/modals/modal.html.twig" %}
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-<div class="container">
 
-  <div class="text-center mt-3 mb-5">
-    {{ macros.icon('theme_' ~ variables.activity.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-white']) }}
-    <h1>{{ variables.activity.title.value }}</h1>
-  </div>
+{% set modal_title = variables.activity.title.value %}
+{% set modal_title_icon = 'theme_' ~ variables.activity.field_theme.entity.field_icon.value ~ '_lg' %}
 
-  <div class="row mb-5">
-    <div class="col-sm-8 col-lg-6 mx-auto text-center">
-      <ul class="list-unstyled mt-3 mx-auto">
-        <li>
-          {# Edit info Button #}
-          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.info', {'activity': variables.activity.id}) }}">
-            {{ macros.icon('pencil') }}
-            {{ 'qs.activity.edit_info'|t }}
-          </a>
-        </li>
-        <li>
-          {# Edit visibility Button #}
-          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.visibility', {'activity': variables.activity.id}) }}">
-            {{ macros.icon('pencil') }}
-            {{ 'qs.activity.edit_visibility'|t }}
-          </a>
-        </li>
-        <li>
-          {# Edit default values Button #}
-          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.edit.defaults', {'activity': variables.activity.id}) }}">
-            {{ macros.icon('pencil') }}
-            {{ 'qs.activity.edit_default_values'|t }}
-          </a>
-        </li>
+{% block modal_content %}
 
-        <li>
-          {# Manage members Button #}
-          <a class="btn btn-block btn-outline-primary btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.members', {'activity': variables.activity.id}) }}">
-            {{ macros.icon('happy') }}
-            {{ 'qs.activity.members'|t }}
-          </a>
-        </li>
+  {% set btn_default_classes = 'btn-outline-invert' %}
+  {% set params = {'activity': variables.activity.id} %}
+  {% set buttons = {
+    'Edit info Button': {
+      label: 'qs.activity.edit_info'|t,
+      path: 'qs_activity.activities.form.edit.info',
+    },
+    'Edit visibility Button': {
+      label: 'qs.activity.edit_visibility'|t,
+      path: 'qs_activity.activities.form.edit.visibility',
+    },
+    'Edit default values Button': {
+      label: 'qs.activity.edit_default_values'|t,
+      path: 'qs_activity.activities.form.edit.defaults',
+    },
+    'Manage members Button': {
+      label: 'qs.activity.members'|t,
+      path: 'qs_activity.activities.members',
+      icon: 'happy',
+    },
+    'Add event Button': {
+      label: 'qs.activity.add_event'|t,
+      path: 'qs_activity.events.form.add',
+      icon: 'plus',
+      classes: 'btn-secondary',
+      list_classes: 'mt-5'
+    },
+    'Delete Button': {
+      label: 'qs.activity.delete'|t,
+      path: 'qs_activity.activities.form.delete',
+      icon: 'trash',
+      classes: 'btn-danger',
+      list_classes: 'mt-5'
+    },
+  } %}
+  {{ macros.list_buttons(buttons, btn_default_classes, params) }}
 
-        <li class="my-5">
-          {# Add event Button #}
-          <a class="btn btn-block btn-secondary btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.events.form.add', {'activity': variables.activity.id}) }}">
-            {{ macros.icon('plus') }}
-            {{ 'qs.activity.add_event'|t }}
-          </a>
-        </li>
-
-        <li>
-          {# Delete Button #}
-          <a class="btn btn-block btn-danger btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_activity.activities.form.delete', {'activity': variables.activity.id}) }}">
-            {{ macros.icon('trash') }}
-            {{ 'qs.activity.delete'|t }}
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+{% endblock %}

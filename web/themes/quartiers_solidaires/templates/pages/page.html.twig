@@ -38,11 +38,8 @@
  * @see html.html.twig
  */
 #}
-{% if page.header %}
-<header class="header container py-3" role="banner">
-  {{ page.header }}
-</header>
-{% endif %}
+{{ page.header }}
+
 {% block header %}{% endblock %}
 
 {% if page.messages %}

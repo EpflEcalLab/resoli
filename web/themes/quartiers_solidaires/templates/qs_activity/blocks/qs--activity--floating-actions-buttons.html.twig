@@ -5,6 +5,7 @@
       <div class="d-flex flex-wrap justify-content-center">
         {% for button in variables.buttons if button.url %}
           {% set btn_classes = [
+            'd-flex',
             'btn btn-white shadow-floating mb-3 mx-2',
             'btn-xs-grow',
             button.icon ? 'btn-icon',
@@ -15,7 +16,9 @@
             class="{{ btn_classes|join(' ') }}"
             href="{{ button.url }}">
             {% if button.icon %}{{ macros.icon(button.icon) }}{% endif %}
-            {{ button.label }}
+            <span class="text-truncate">
+              {{ button.label }}
+            </span>
           </a>
         {% endfor %}
       </div>

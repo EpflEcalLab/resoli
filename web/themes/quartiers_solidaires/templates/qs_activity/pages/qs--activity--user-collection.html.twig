@@ -1,6 +1,6 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="container">
+<div class="container d-flex flex-column min-height-100">
   <div class="text-center my-5">
     {% if variables.user %}
       <h1>
@@ -10,7 +10,7 @@
         }) }}
       </h1>
     {% else %}
-      <h1>{% trans %}qs.activity.user.collection.title{% endtrans %}</h1>
+      <h1>{{ 'qs.activity.user.collection.title'|t }}</h1>
     {% endif %}
   </div>
 
@@ -68,21 +68,20 @@
         {{ macros.badge('warning', 'happy', 'flag-subscription-maintainers flag-lg', 'qs.roles.activity_maintainer'|t, true) }}
       </div>
       <p>
-        {% set member = 'qs.roles.activity_member'|t %}
-        {% set maintainer = 'qs.roles.activity_maintainer'|t %}
-        {% trans %}
-          qs.activity.user.collection.empty {{ member }} {{ maintainer }}
-        {% endtrans %}
+        {{ 'qs.activity.user.collection.empty @member @maintainer'|t({
+          '@member': 'qs.roles.activity_member'|t,
+          '@maintainer': 'qs.roles.activity_maintainer'|t
+        }) }}
       </p>
     </div>
   {% endif %}
 
   {# Button to add activities #}
   {% if variables.community_has_write_access and variables.community %}
-    <div class="modal-footer justify-content-center sticky-bottom">
+    <div class="modal-footer justify-content-center sticky-bottom mt-auto">
       <a class="btn btn-outline-invert btn-icon shadow-floating mb-3" href="{{ path('qs_activity.activities.form.add', {community: variables.community.tid.value}) }}">
         {{ macros.icon('plus') }}
-        {% trans %}qs_activity.floating.add.activity{% endtrans %}
+        {{ 'qs_activity.floating.add.activity'|t }}
       </a>
     </div>
   {% else %}
@@ -91,10 +90,9 @@
         {{ macros.badge('danger', 'happy', 'flag-privilege-organizers flag-lg p-1', 'qs.roles.activity_organizer'|t, true) }}
       </div>
       <p>
-        {% set organizer = 'qs.roles.activity_organizer'|t %}
-        {% trans %}
-        qs.activity.become.activity.organizer {{ organizer }}
-        {% endtrans %}
+        {{ 'qs.activity.become.activity.organizer @organizer'|t({
+          '@organizer': 'qs.roles.activity_organizer'|t
+        }) }}
       </p>
     </div>
   {% endif %}

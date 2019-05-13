@@ -36,3 +36,61 @@
     </a>
   </div>
 {% endmacro %}
+
+{% macro list_buttons(buttons, btn_default_classes, params, btn_base_classes) %}
+  <div class="row mb-5">
+    <div class="col-sm-8 col-lg-6 mx-auto text-center">
+      <ul class="list-unstyled mx-auto">
+        {% for button in buttons %}
+          {{ _self.list_button(button, btn_default_classes, params, btn_base_classes) }}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endmacro %}
+
+{#
+  button: {label, path, list_classes, classes, icon}
+#}
+{% macro list_button(button, btn_default_classes, params, btn_base_classes) %}
+  {% set attributes = create_attribute().addClass(button.list_classes) %}
+  <li{{ attributes }}>
+    <a
+      class="{{ btn_base_classes ?? 'btn btn-block btn-icon mb-2 shadow-to-bottom' }} {{ button.classes ?? btn_default_classes }}"
+      href="{{ path(button.path, params) }}">
+      {{ _self.icon(button.icon ?? 'pencil') }}
+      {{ button.label }}
+    </a>
+  </li>
+{% endmacro %}
+
+{% macro floating_buttons(buttons, default_theme, default_url) %}
+  <div class="floating">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-center">
+        {% for button in buttons %}
+          {{ _self.floating_button(button.label, button.url ?? default_url, button.icon, button.active, button.theme ?? default_theme, button.classes) }}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+
+{% macro floating_button(label, url, icon, active, theme, classes) %}
+  {% set btn_classes = [
+    'd-flex',
+    'btn btn-white shadow-floating mb-3 mx-2',
+    'btn-xs-grow',
+    icon ? 'btn-icon',
+    'btn-outline-' ~ theme,
+    active ? 'active',
+  ] %}
+  <a
+    class="{{ btn_classes|merge(classes|default([]))|join(' ') }}"
+    href="{{ url }}"
+  >
+    {{ icon ? _self.icon(icon) }}
+    <span class="text-truncate">{{ label }}</span>
+  </a>
+{% endmacro %}

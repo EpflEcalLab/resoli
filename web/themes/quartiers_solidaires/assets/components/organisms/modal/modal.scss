@@ -6,7 +6,7 @@
   }
 
   @include media-breakpoint-up(sm) {
-    margin-top: 75px;
+    margin-top: 91px;
     margin-bottom: 75px;
   }
 }
@@ -42,6 +42,51 @@
   }
 }
 
+.modal-content {
+  flex: 1 0 100%;
+  position: static;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &[class*=bg-] {
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      width: 100%;
+      height: $border-radius-lg;
+    }
+
+    &:before {
+      top: 0;
+      border-top-left-radius: $border-radius-lg;
+      border-top-right-radius: $border-radius-lg;
+    }
+
+    &:after {
+      bottom: 0;
+      border-bottom-left-radius: $border-radius-lg;
+      border-bottom-right-radius: $border-radius-lg;
+    }
+  }
+
+  @each $color, $value in $theme-colors {
+    &.bg-#{$color} {
+      &:before {
+        background-image: linear-gradient(to bottom, $value 20%, rgba($value, 0) 100%);
+      }
+
+      &:after {
+        background-image: linear-gradient(to top, $value 20%, rgba($value, 0) 100%);
+      }
+    }
+  }
+}
+
 .modal-header {
   padding-top: 0;
   padding-bottom: 0;
@@ -56,39 +101,11 @@
       margin: 0;
     }
   }
-}
 
-.modal-content {
-  flex: 1 0 100%;
-  position: static;
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  &.sticky-top:after {
+    @extend .modal-content[class*=bg-]:before;
 
-  &[class*=bg-] {
-    &:before,
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: $border-radius-lg;
-    }
-
-    &:before {
-      top: 0;
-      border-top-left-radius: $border-radius-lg;
-      border-top-right-radius: $border-radius-lg;
-      background-image: linear-gradient(to bottom, theme-color('primary') 20%, rgba(theme-color('primary'), 0) 100%);
-    }
-
-    &:after {
-      bottom: 0;
-      background-image: linear-gradient(to top, theme-color('primary') 20%, rgba(theme-color('primary'), 0) 100%);
-      border-bottom-left-radius: $border-radius-lg;
-      border-bottom-right-radius: $border-radius-lg;
-    }
+    top: 100%;
   }
 }
 

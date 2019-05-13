@@ -19,7 +19,9 @@
 <div class="row justify-content-between">
   {% for path, link in element['#top_links'] %}
     <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }} shadow-to-bottom" href="{{ link.params ? path(path, link.params) : path(path) }}">
-      {{ macros.icon(link.options.icon) }}
+      {% if link.options.icon %}
+        {{ macros.icon(link.options.icon) }}
+      {% endif %}
       {{ link.label }}
     </a>
   {% endfor %}

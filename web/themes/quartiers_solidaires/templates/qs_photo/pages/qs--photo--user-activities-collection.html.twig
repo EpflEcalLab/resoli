@@ -1,6 +1,8 @@
+{% extends "@quartiers_solidaires/modals/modal.html.twig" %}
+
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="container">
+{% block modal_content %}
   <div class="text-center mb-5 mt-3">
     {% if variables.user %}
       {% if variables.current_user %}
@@ -86,21 +88,21 @@
     <div class="text-center mb-5">
       <p>
         {% trans %}
-        qs.photos.user.collection.empty
+          qs.photos.user.collection.empty
         {% endtrans %}
       </p>
     </div>
   {% endif %}
 
+{% endblock %}
+
+{% block modal_footer %}
   {% if variables.activities %}
-  <div class="modal-footer justify-content-center sticky-bottom">
     <div class="text-center">
       <a href="{{ path('qs_photo.form.add', {community: variables.community.tid.value}) }}" class="btn btn-secondary btn-icon shadow-to-bottom">
         {{ macros.icon('plus') }}
         {{ 'qs.photos.add_photos'|t }}
       </a>
     </div>
-  </div>
   {% endif %}
-
-</div>
+{% endblock %}

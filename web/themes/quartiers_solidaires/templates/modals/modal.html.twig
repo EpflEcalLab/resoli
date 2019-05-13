@@ -1,0 +1,64 @@
+<div class="modal modal-full force-show">
+  <div class="modal-dialog">
+
+    {% set classes = [
+      'modal-content',
+      modal_bg ? 'bg-' ~ modal_bg,
+    ] %}
+    {% set attributes = create_attribute().addClass(classes) %}
+    <div{{ attributes }}>
+
+      {# Display status messages. #}
+      {% set messages = bamboo_render_entity('block', 'quartiers_solidaires_messages')|render %}
+      {% if messages is not empty %}
+        <div class="modal-header container">
+          {{ messages }}
+        </div>
+      {% endif %}
+
+      {# Modal header #}
+      <div class="container min-height-100 d-flex flex-column">
+        {% if block('modal_header') is not empty %}
+          <div class="modal-header sticky-top bg-primary text-center">
+            {% block modal_header %}{% endblock %}
+          </div>
+        {% endif %}
+
+        {# Pass modal_title_icon and modal_title to display the title with a big icon #}
+        {% if modal_title or modal_title_sm %}
+          {% block modal_title %}
+            <div class="text-center mx-auto mt-3 mb-5">
+              {{ modal_title_icon ? macros.icon(modal_title_icon, ['icon-xl', 'text-white']) }}
+              {% if modal_title %}
+                <h1{{ not modal_title_icon ? ' class="mt-5"' }}>{{ modal_title }}</h1>
+              {% elseif modal_title_sm %}
+                <h1 class="{{ not modal_title_icon ? 'mt-5 ' }}h4">{{ modal_title_sm }}</h1>
+              {% endif %}
+              {% if modal_subtitle %}
+                <p class="text-center mb-4">{{ modal_subtitle }}</p>
+              {% endif %}
+            </div>
+          {% endblock %}
+        {% endif %}
+
+        {% block modal_content %}{% endblock %}
+
+        {% if block('modal_footer') is not empty %}
+          <div class="modal-footer justify-content-center sticky-bottom">
+            {% block modal_footer %}{% endblock %}
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+{% block modal_floating %}
+  {% set floating_buttons = floating_buttons ?? [{
+    label: bamboo_config_get('system.site', 'name'),
+  }] %}
+
+  {{ macros.floating_buttons(floating_buttons, modal_bg, path('<current>')) }}
+{% endblock %}

@@ -11,7 +11,14 @@
   {% set modal_title = 'qs.subscription.user.collection.title'|t %}
 {% endif %}
 {% set modal_bg = 'info' %}
-{# TODO add floating buttons #}
+
+{% set floating_buttons = [
+  {
+    label: 'qs_activity.floating.my_subscriptions'|t,
+    icon: 'checkflag',
+    active: true,
+  }
+] %}
 
 {% block modal_content %}
   {% if variables.events %}

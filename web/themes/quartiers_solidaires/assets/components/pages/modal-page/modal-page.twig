@@ -12,17 +12,14 @@
           {% block modal_header %}
             <div class="modal-header container">
               <div class="w-100">
-
+                <div class="text-center my-5">
+                  <h1>{% block title %}Page title{% endblock %}</h1>
+                </div>
               </div>
             </div>
           {% endblock %}
 
           <div class="container">
-            <div class="text-center my-5">
-              <h1>{% block title %}Page title{% endblock %}
-              </h1>
-            </div>
-
             {% block modal_content %}
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
@@ -32,19 +29,18 @@
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A architecto, aut consequatur distinctio eos et eum eveniet ex illo nemo nobis possimus quibusdam quis quisquam quod suscipit, tempora, voluptate voluptatum? Cum deserunt natus nobis numquam. Ab alias aperiam aspernatur atque beatae consequuntur culpa debitis facere facilis harum id impedit laborum magni maiores minima, molestias officia omnis optio provident quasi quos rerum sed sunt unde vero! Ad exercitationem provident repellat repudiandae tempora? Accusamus consequuntur, cum, eos fugiat harum ipsam iure molestiae quas quia quos repudiandae suscipit totam. Atque fuga fugit hic, iste labore magni odio odit quos sed sunt veritatis vero?</p>
             {% endblock %}
-
-
-            {% block modal_footer %}
-              <div class="modal-footer justify-content-center sticky-bottom">
-                <a class="btn btn-outline-invert btn-icon shadow-floating mb-3" href="#">
-                  <span class="icon " aria-hidden="true">
-                    {% include '@atoms/icon/icon.twig' with {icon: 'plus'} %}
-                  </span>
-                  Add activity
-                </a>
-              </div>
-            {% endblock %}
           </div>
+
+          {% block modal_footer %}
+            <div class="modal-footer justify-content-center sticky-bottom">
+              <a class="btn btn-outline-invert btn-icon shadow-floating mb-3" href="#">
+                <span class="icon " aria-hidden="true">
+                  {% include '@atoms/icon/icon.twig' with {icon: 'plus'} %}
+                </span>
+                Add activity
+              </a>
+            </div>
+          {% endblock %}
 
         </div>
       </div>

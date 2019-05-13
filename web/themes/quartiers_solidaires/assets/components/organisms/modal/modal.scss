@@ -66,15 +66,28 @@
   -webkit-overflow-scrolling: touch;
 
   &[class*=bg-] {
+    &:before,
     &:after {
       content: '';
       display: block;
       position: absolute;
-      top: 0;
       left: 0;
       width: 100%;
-      height: $modal-inner-padding;
+      height: $border-radius-lg;
+    }
+
+    &:before {
+      top: 0;
+      border-top-left-radius: $border-radius-lg;
+      border-top-right-radius: $border-radius-lg;
       background-image: linear-gradient(to bottom, theme-color('primary') 20%, rgba(theme-color('primary'), 0) 100%);
+    }
+
+    &:after {
+      bottom: 0;
+      background-image: linear-gradient(to top, theme-color('primary') 20%, rgba(theme-color('primary'), 0) 100%);
+      border-bottom-left-radius: $border-radius-lg;
+      border-bottom-right-radius: $border-radius-lg;
     }
   }
 }
@@ -114,19 +127,12 @@
     border-bottom-right-radius: $border-radius-lg;
     border-bottom-left-radius: $border-radius-lg;
 
-    @each $color, $value in $theme-colors {
-      .bg-#{$color} & {
-        background: transparent linear-gradient(to top, rgba($value, 1) 20%, rgba($value, 0) 100%);
-      }
-    }
-
     .container > &,
     .container-fluid > & {
       margin-right: ($grid-gutter-width / -2);
       margin-left: ($grid-gutter-width / -2);
     }
   }
-
 }
 
 // We sometimes need to have a modal look but it's not really a modal

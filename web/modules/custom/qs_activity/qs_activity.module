@@ -45,10 +45,13 @@ function qs_activity_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--activity--events-collection',
     ],
-    'qs_activity_floating_actions_buttons_block' => [
+    'qs_activity_collection_floating_actions_buttons_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--floating-actions-buttons',
+      'template'  => 'qs--activity--collection-floating-btn',
     ],
-
+    // 'qs_activity_floating_actions_buttons_block' => [
+    //   'variables' => ['variables' => []],
+    //   'template'  => 'qs--activity--floating-actions-buttons',
+    // ],.
   ];
 }

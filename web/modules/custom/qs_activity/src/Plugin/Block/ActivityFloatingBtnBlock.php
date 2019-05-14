@@ -102,7 +102,10 @@ class ActivityFloatingBtnBlock extends BlockBase implements ContainerFactoryPlug
     $entity = $node ? $node : $activity;
 
     // "Contact Organizer(s) & Maintainer(s)" floating button.
-    $variables['floating_buttons']['action'] = $this->contactAction($entity);
+    $action = $this->contactAction($entity);
+    if ($action) {
+      $variables['floating_buttons']['action'] = $action;
+    }
 
     // "Add Event" floating button.
     // When the user has write access on the activity, replace the

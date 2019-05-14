@@ -36,6 +36,7 @@
             {% set button = {
               path: 'qs_auth.approval',
               icon: 'wait',
+              label: community.name.value,
             } %}
             {{ macros.list_button(button, btn_default_classes, {'community': community.id}) }}
           {% endfor %}

@@ -1,4 +1,4 @@
-{% extends "@quartiers_solidaires/modals/modal.html.twig" %}
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
 
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
@@ -16,24 +16,22 @@
 ] %}
 
 {% block modal_content %}
-  <div class="row">
-    <div class="col-sm-6 col-lg-4 mx-auto text-center">
-      <ul class="list-unstyled mt-3 mx-auto">
-        <li>
-          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_community.members', {community: variables.community.tid.value}) }}">
-            {{ macros.icon('happy') }}
-            {{ 'qs_community.dashboard.members'|t }}
-          </a>
-        </li>
-        <li>
-          <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_community.waiting_approval', {community: variables.community.tid.value}) }}">
-            {{ macros.icon('wait') }}
-            {{ 'qs_community.dashboard.waiting_approval'|t }}
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  {% set btn_default_classes = 'btn-outline-danger btn-outline-invert' %}
+  {% set params = {community: variables.community.tid.value} %}
+  {% set buttons = {
+    'Community members': {
+      label: 'qs_community.dashboard.members'|t,
+      icon: 'happy',
+      path: 'qs_community.members',
+    },
+    'Community membery waiting approval': {
+      label: 'qs_community.dashboard.waiting_approval'|t,
+      icon: 'wait',
+      path: 'qs_community.members',
+    },
+  } %}
+
+  {{ macros.list_buttons(buttons, btn_default_classes, params) }}
 {% endblock %}
 
 

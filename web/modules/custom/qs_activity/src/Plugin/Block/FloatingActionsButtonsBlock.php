@@ -268,11 +268,11 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Button - "My Photos".
     if ($community && in_array($route_name, [
-      'qs_photo.collection.theme',
-      'qs_photo.collection.month',
+      // 'qs_photo.collection.theme',
+      // 'qs_photo.collection.month',
       // 'qs_photo.user.activities.collection',
-      'qs_photo.activity',
-      'qs_photo.user.form.manage',
+      // 'qs_photo.activity',
+      // 'qs_photo.user.form.manage',
 //      'qs_photo.form.add',
     ])) {
 
@@ -351,11 +351,11 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // 'qs_community.dashboard',
       // 'qs_community.members',
       // 'qs_community.waiting_approval',
-      'qs_photo.user.activities.collection',
-      'qs_photo.user.form.manage',
+      // 'qs_photo.user.activities.collection',
+      // 'qs_photo.user.form.manage',
 //      'qs_photo.form.add',
-      'qs_photo.form.comments',
-      'qs_photo.form.delete',
+      // 'qs_photo.form.comments',
+      // 'qs_photo.form.delete',
     ])) {
       $classes[] = 'active';
     }

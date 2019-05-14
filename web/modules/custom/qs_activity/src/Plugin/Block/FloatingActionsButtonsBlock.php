@@ -149,8 +149,8 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     if ($community && in_array($route_name, [
       'qs_activity.collection.themes',
       'qs_activity.collection.dates',
-      'qs_activity.activities.form.add',
-      'qs_activity.user.collection',
+      // 'qs_activity.activities.form.add',
+      // 'qs_activity.user.collection',
     ])) {
       // For everybody, show a button "My Activities".
 //      $icon = 'activities';
@@ -339,7 +339,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Display as active on these routes.
     if (in_array($route_name, [
-      'qs_activity.activities.form.add',
+      // 'qs_activity.activities.form.add',
       // 'qs_activity.user.collection',
       // 'qs_activity.activities.dashboard',
       // 'qs_activity.activities.form.edit.info',

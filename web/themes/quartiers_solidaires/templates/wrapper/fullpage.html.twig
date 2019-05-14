@@ -1,9 +1,11 @@
-<div class="fullpage-wrapper py-4">
-  <div class="container">
-    <div class="d-flex justify-content-between mb-3">
-      {% block fullpage_back_buttons %}{% endblock %}
+<div class="d-flex flex-column justify-content-center flex-grow py-4">
+  {% if block('fullpage_back_buttons') is not empty %}
+    <div class="container">
+      <div class="d-flex justify-content-between mb-3">
+        {% block fullpage_back_buttons %}{% endblock %}
+      </div>
     </div>
-  </div>
+  {% endif %}
 
   <div class="container my-auto">
     {% block fullpage_content_wrapper %}

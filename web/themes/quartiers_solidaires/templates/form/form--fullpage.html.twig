@@ -1,61 +1,31 @@
-{#
-/**
- * @file
- * Theme override for a 'form' element.
- *
- * Available variables
- * - attributes: A list of HTML attributes for the wrapper element.
- * - children: The child elements of the form.
- *
- * @see template_preprocess_form()
- */
-#}
-{% set classes = [
-  'form',
-  element['#validated'] ? 'was-validated',
-  'my-auto',
-] %}
-{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% extends "@quartiers_solidaires/wrapper/fullpage.html.twig" %}
 
-{% set wrapper_class = [
-  attributes.bg ? 'bg-' ~ attributes.bg,
-  'd-flex flex-column justify-content-between'
-] %}
-<div class="{{ wrapper_class|join(' ') }}">
-  <div class="container fullpage-wrapper py-4">
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
 
-    {% if element['#top_links'] %}
-    <div class="d-flex flex-wrap justify-content-between">
-      {% for path, link in element['#top_links'] %}
-        {% set btn_classes = [
-          'mx-2 mb-2 btn btn-outline-secondary btn-outline-invert shadow-to-bottom',
-          link.options.icon ? 'btn-icon',
-          link.options.hide_xs ? 'btn-icon-to-circle' : 'btn-xs-grow',
-        ] %}
-        <a class="{{ btn_classes|join(' ') }}" href="{{ link.params ? path(path, link.params) : path(path) }}" title="{{ link.label }}">
-          {% if link.options.icon %}
-            {{ macros.icon(link.options.icon) }}
-          {% endif %}
-          <span class="{{ link.options.hide_xs ? 'd-none d-sm-inline' }}">{{ link.label }}</span>
-        </a>
-      {% endfor %}
-    </div>
-    {% endif %}
+{% block fullpage_back_buttons %}
+  {% if element['#top_links'] %}
+    {% for path, link in element['#top_links'] %}
+      {% set btn_classes = 'mb-2 btn-outline-secondary btn-outline-invert' %}
+      {% set url = link.params ? path(path, link.params) : path(path) %}
+      {{ macros.back_button(link.label, url, btn_classes, link.icon) }}
+    {% endfor %}
+  {% endif %}
+{% endblock %}
 
-    <div class="flex-column justify-content-center my-auto">
-      {% if element['#title'] %}
-        <div class="row mb-5">
-          <div class="col-md-10 col-lg-8 mx-auto text-center">
-            <h1>{{ element['#title'] }}</h1>
-          </div>
-        </div>
-      {% endif %}
-      <form{{ attributes.addClass(classes) }}>
-        <div class="row">
-          <div class="col-md-10 col-lg-8 mx-auto tab-content d-flex flex-column">{{ children }}</div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+
+{% block fullpage_content %}
+  {% set classes = [
+    'form',
+    element['#validated'] ? 'was-validated',
+  ] %}
+
+  {% if element['#title'] %}
+    <h1 class="mb-5">{{ element['#title'] }}</h1>
+  {% endif %}
+
+  <form{{ attributes.addClass(classes) }}>
+    {{ children }}
+  </form>
+{% endblock %}
+
 

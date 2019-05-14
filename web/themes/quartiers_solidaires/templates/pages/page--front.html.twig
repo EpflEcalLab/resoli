@@ -1,81 +1,45 @@
+{% extends "@quartiers_solidaires/pages/page--fullpage.html.twig" %}
+
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{# You are not logged in #}
-<div class="d-flex flex-column justify-content-between flex-grow">
-  <div class="fullpage-wrapper">
-    <div class="container mt-5">
-      <div class="row align-items-center mb-auto">
-        <div class="col text-center">
-          <img class="img-fluid" src="/{{ directory }}/build/svg/sponsors.svg" alt="Réseaux Solidaires">
-        </div>
+{% block content %}
+  <div class="container mt-5">
+    <div class="row align-items-center mb-auto">
+      <div class="col text-center">
+        <img class="img-fluid" src="/{{ directory }}/build/svg/sponsors.svg" alt="{{ 'Sponsors: Pro Senectute & EPFL Ecal Lab'|t }}">
       </div>
     </div>
-    {% if page.messages %}
-      <div class="container mt-5">
-        {{ page.messages }}
-      </div>
-    {% endif %}
-    <div class="container my-auto">
-      <div class="row">
-        <div class="col-6 mx-auto mb-5">
-          <a href="{{ bamboo_has_role('authenticated') ? path('qs_auth.communities') : path('qs_auth.login') }}">
-            <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="Réseaux Solidaires">
-          </a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mx-auto text-center small">
-          <p class="text-white">
-            {{ 'qs.partners.sponsored_by_sponsor'|t }}<br>
-            {{ 'qs.partners.technology_by_antistatique'|t }}
-          </p>
-
-          {# Display language switcher #}
-          <p class="text-white">
-            {{ bamboo_render_block('qs_site_langswitcher_block') }}
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="floating-offset"></div>
-
-    {% include '@quartiers_solidaires/block/partials/qs--auth--floating-buttons.html.twig' %}
-
-    {% block modal_floating %}
-      {# Anonymous floating buttons. #}
-      {% set floating_buttons = [{
-        label: 'qs_auth.register'|t,
-        url: path('qs_auth.register'),
-        icon: 'plus',
-        classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-      },{
-        label: 'qs_auth.login'|t,
-        url: path('qs_auth.login'),
-        icon: 'arrow',
-        classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-      }] %}
-
-      {# Authenticated floating buttons. #}
-      {% if bamboo_has_role('authenticated') %}
-        {% set floating_buttons = [] %}
-        {% if not bamboo_config_get('qs_auth.settings', 'demo_mode') %}
-          {% set floating_buttons = floating_buttons|merge([{
-            label: 'qs_auth.logout'|t,
-            url: path('user.logout'),
-            icon: 'power',
-            classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-          }]) %}
-        {% endif %}
-
-        {% set floating_buttons = floating_buttons|merge([{
-          label: 'qs_auth.communities'|t,
-          url: path('qs_auth.communities'),
-          icon: 'arrow',
-          classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-        }]) %}
-      {% endif %}
-
-      {{ macros.floating_buttons(floating_buttons, modal_bg|default('primary'), path('<current>')) }}
-    {% endblock %}
   </div>
-</div>
+
+  {% if page.messages %}
+    <div class="container mt-5">
+      {{ page.messages }}
+    </div>
+  {% endif %}
+
+  <div class="container my-auto">
+    <div class="row">
+      <div class="col-6 mx-auto mb-5">
+        <a href="{{ bamboo_has_role('authenticated') ? path('qs_auth.communities') : path('qs_auth.login') }}">
+          <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="Réseaux Solidaires">
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center small">
+        <p class="text-white">
+          {{ 'qs.partners.sponsored_by_sponsor'|t }}<br>
+          {{ 'qs.partners.technology_by_antistatique'|t }}
+        </p>
+
+        {# Display language switcher #}
+        <p class="text-white">
+          {{ bamboo_render_block('qs_site_langswitcher_block') }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {% include '@quartiers_solidaires/block/partials/qs--auth--floating-buttons.html.twig' %}
+{% endblock %}

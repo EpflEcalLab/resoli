@@ -32,3 +32,11 @@
     {#<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-big-bottom"></use>#}
   {#</svg>#}
 {#</div>#}
+
+{% block floating %}
+  {% set floating_buttons = floating_buttons ?? [{
+    label: bamboo_config_get('system.site', 'name'),
+  }] %}
+
+  {{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
+{% endblock %}

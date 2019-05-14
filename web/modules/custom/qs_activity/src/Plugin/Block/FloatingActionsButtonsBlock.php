@@ -326,16 +326,16 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     // }
 
     // Welcome.
-    if ($community && in_array($route_name, [
-      'qs_community.welcome',
-    ])) {
-      $icon = 'user';
-      $theme = 'invert';
-      $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
-        'user' => $this->currentUser->id(),
-      ]);
-      $label = $this->t('qs_supervisor.floating.my_account');
-    }
+    // if ($community && in_array($route_name, [
+    //   'qs_community.welcome',
+    // ])) {
+    //   $icon = 'user';
+    //   $theme = 'invert';
+    //   $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
+    //     'user' => $this->currentUser->id(),
+    //   ]);
+    //   $label = $this->t('qs_supervisor.floating.my_account');
+    // }
 
     // Display as active on these routes.
     if (in_array($route_name, [
@@ -372,17 +372,17 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     // Add a second button if needed.
     //
     // Welcome screen second button.
-    if ($community && $this->acl->hasAdminAccessCommunity($community) && in_array($route_name, [
-      'qs_community.welcome',
-    ])) {
-      $variables['buttons'][] = [
-        'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
-        'label' => $this->t('qs_menu.links.account.communities'),
-        'theme' => 'invert',
-        'icon' => 'communities-sm',
-        'classes' => $classes,
-      ];
-    }
+    // if ($community && $this->acl->hasAdminAccessCommunity($community) && in_array($route_name, [
+    //   'qs_community.welcome',
+    // ])) {
+    //   $variables['buttons'][] = [
+    //     'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
+    //     'label' => $this->t('qs_menu.links.account.communities'),
+    //     'theme' => 'invert',
+    //     'icon' => 'communities-sm',
+    //     'classes' => $classes,
+    //   ];
+    // }
 
     return [
       '#theme'     => 'qs_activity_floating_actions_buttons_block',

@@ -125,12 +125,13 @@ class ActivityAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
+      'theme' => 'primary',
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
-      'form__fullpage__multistep',
+      'form__modal__multistep',
     ];
 
     // Save the community for submission.

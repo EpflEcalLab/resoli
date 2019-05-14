@@ -76,7 +76,6 @@
   </div>
 {% endmacro %}
 
-
 {% macro floating_button(label, url, icon, active, theme, classes) %}
   {% set btn_classes = [
     'd-flex',
@@ -92,5 +91,12 @@
   >
     {{ icon ? _self.icon(icon) }}
     <span class="text-truncate mx-auto">{{ label }}</span>
+  </a>
+{% endmacro %}
+
+{% macro back_button(label, url, classes, icon, default_classes) %}
+  <a class="{{ default_classes ?? 'btn btn-icon-to-circle shadow-to-bottom btn-icon mx-2' }} {{ classes }}" href="{{ url }}">
+    {{ _self.icon(icon ?? 'chevron-left') }}
+    <span class="d-none d-sm-inline">{{ label }}</span>
   </a>
 {% endmacro %}

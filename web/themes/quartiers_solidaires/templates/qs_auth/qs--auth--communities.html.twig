@@ -1,59 +1,56 @@
+{% extends "@quartiers_solidaires/wrapper/fullpage.html.twig" %}
+
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="d-flex flex-column justify-content-between">
-  <div class="fullpage-wrapper py-4">
-    <div class="container">
-      <div class="d-flex justify-content-between mb-3">
-        <a class="mx-2 btn btn-outline-secondary btn-outline-invert btn-icon-to-circle shadow-to-bottom btn-icon" href="{{ path('<front>') }}">
-          {{ macros.icon('chevron-left') }}
-          <span class="d-none d-sm-inline">{{ 'qs_auth.link.home'|t }}</span>
+{% block fullpage_back_buttons %}
+  {{ macros.back_button('qs_auth.link.home'|t, path('<front>'), 'btn-outline-secondary btn-outline-invert') }}
+{% endblock %}
+
+{% block fullpage_content_wrapper %}
+  {% if variables.communities or variables.pending %}
+    <div class="row">
+      <div class="col-sm-10 col-lg-8 mx-auto text-center">
+        <h2>{{ 'qs.auth.communities.welcome'|t }}</h2>
+        <p>{{ 'qs.auth.communities.description'|t }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 mx-auto text-center">
+        <div class="mt-4">
+          {{ macros.icon('communities-big', ['icon-xl']) }}
+        </div>
+
+        <ul class="list-unstyled mt-3">
+          {# List user communities #}
+          {% for community in variables.communities %}
+            <li>
+              <a class="btn btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_community.welcome', {'community': community.id}) }}">
+                {{ community.name.value }}
+              </a>
+            </li>
+          {% endfor %}
+
+          {# List user pending communities. #}
+          {% set btn_default_classes = 'btn-outline-secondary btn-outline-invert' %}
+          {% for community in variables.pending %}
+            {% set button = {
+              path: 'qs_auth.approval',
+              icon: 'wait',
+            } %}
+            {{ macros.list_button(button, btn_default_classes, {'community': community.id}) }}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% else %}
+    <div class="row">
+      <div class="col-sm-10 col-lg-8 mx-auto text-center">
+        <h2 class="h5">{{ 'qs_auth.form.communities.no_community'|t }}</h2>
+        <a class="btn btn-icon btn-outline-invert shadow-to-bottom mt-3" href="{{ path('qs_auth.communities.apply') }}">
+          {{ macros.icon('plus') }}
+          {{ 'qs_supervisor.account.dashboard.apply'|t }}
         </a>
       </div>
     </div>
-
-    {% if variables.communities or variables.pending %}
-    <div class="container my-auto">
-      <div class="row">
-        <div class="col-sm-10 col-lg-8 mx-auto text-center">
-          <h2>{{ 'qs.auth.communities.welcome'|t }}</h2>
-          <p>{{ 'qs.auth.communities.description'|t }}</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-lg-4 mx-auto text-center">
-          <div class="mt-4">
-            {{ macros.icon('communities-big', ['icon-xl']) }}
-          </div>
-          <ul class="list-unstyled mt-3">
-            {% for community in variables.communities %}
-            <li>
-              <a class="btn btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_community.welcome', {'community': community.id}) }}">{{ community.name.value }}</a>
-            </li>
-            {% endfor %}
-            {% for community in variables.pending %}
-              <li>
-                <a class="btn btn-icon btn-block btn-outline-secondary btn-outline-invert mb-2 shadow-to-bottom" href="{{ path('qs_auth.approval', {'community': community.id}) }}">
-                  {{ macros.icon('wait') }}
-                  {{ community.name.value }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-    {% else %}
-    <div class="container my-auto">
-      <div class="row">
-        <div class="col-sm-10 col-lg-8 mx-auto text-center">
-          <h2 class="h5">{{ 'qs_auth.form.communities.no_community'|t }}</h2>
-          <a class="btn btn-icon btn-outline-invert shadow-to-bottom mt-3" href="{{ path('qs_auth.communities.apply') }}">
-            {{ macros.icon('plus') }}
-            {{ 'qs_supervisor.account.dashboard.apply'|t }}
-          </a>
-        </div>
-      </div>
-    </div>
-    {% endif %}
-  </div>
-</div>
+  {% endif %}
+{% endblock %}

@@ -67,7 +67,7 @@
 {% macro floating_buttons(buttons, default_theme, default_url) %}
   <div class="floating">
     <div class="container">
-      <div class="d-flex flex-wrap justify-content-center">
+      <div class="d-flex flex-wrap flex-md-nowrap justify-content-center">
         {% for button in buttons %}
           {{ _self.floating_button(button.label, button.url ?? default_url, button.icon, button.active, button.theme ?? default_theme, button.classes) }}
         {% endfor %}
@@ -80,7 +80,7 @@
 {% macro floating_button(label, url, icon, active, theme, classes) %}
   {% set btn_classes = [
     'd-flex',
-    'btn btn-white shadow-floating mb-3 mx-2',
+    'btn shadow-floating mb-3 mx-2',
     'btn-xs-grow',
     icon ? 'btn-icon',
     'btn-outline-' ~ theme,
@@ -91,6 +91,6 @@
     href="{{ url }}"
   >
     {{ icon ? _self.icon(icon) }}
-    <span class="text-truncate">{{ label }}</span>
+    <span class="text-truncate mx-auto">{{ label }}</span>
   </a>
 {% endmacro %}

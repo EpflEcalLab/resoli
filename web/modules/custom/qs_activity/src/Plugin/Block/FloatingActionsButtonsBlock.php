@@ -173,19 +173,19 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
-    // Button - "My Subscriptions".
-    if ($community && in_array($route_name, [
-      'qs_calendar.collection.monthly',
-      'qs_calendar.collection.weekly',
-    ])) {
-      $icon = 'checkflag';
-      $theme = 'info';
-      $url = $this->urlGenerator->generateFromRoute('qs_subscription.user.collection', [
-        'community' => $community->id(),
-        'user' => $this->currentUser->id(),
-      ]);
-      $label = $this->t('qs_activity.floating.my_subscriptions');
-    }
+    // // Button - "My Subscriptions".
+    // if ($community && in_array($route_name, [
+    //   'qs_calendar.collection.monthly',
+    //   'qs_calendar.collection.weekly',
+    // ])) {
+    //   $icon = 'checkflag';
+    //   $theme = 'info';
+    //   $url = $this->urlGenerator->generateFromRoute('qs_subscription.user.collection', [
+    //     'community' => $community->id(),
+    //     'user' => $this->currentUser->id(),
+    //   ]);
+    //   $label = $this->t('qs_activity.floating.my_subscriptions');
+    // }
 
     // Button - "Add Event" or "Activity Dashboard" or "Contact @name @email".
     if (($node && $node->bundle() == 'activity') || $activity) {

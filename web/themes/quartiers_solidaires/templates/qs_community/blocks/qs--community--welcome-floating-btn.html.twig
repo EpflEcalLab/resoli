@@ -1,0 +1,15 @@
+
+{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
+
+{% block floating_buttons %}
+  {% set user = bamboo_load_currentuser() %}
+
+  {% set floating_buttons = [{
+    label: 'qs_supervisor.floating.my_account'|t,
+    theme: 'invert',
+    icon: 'user',
+    url: path('qs_supervisor.account.dashboard', {'user': user.id}),
+  }]|merge(variables.floating_buttons) %}
+
+  {{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
+{% endblock %}

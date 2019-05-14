@@ -1,8 +1,8 @@
 <div class="d-flex flex-column justify-content-between">
   <main class="fullpage-wrapper" role="main">
-    {{ page.header }}
-
-    {% block header %}{% endblock %}
+    {% block header %}
+      {{ page.header }}
+    {% endblock %}
 
     {% if page.messages %}
       <div class="container">

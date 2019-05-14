@@ -1,63 +1,31 @@
-{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
-<div class="d-flex justify-content-center flex-column">
-  <div class="fullpage-wrapper">
-    <div class="container mt-5">
-      <div class="row align-items-center mb-auto">
-        <div class="col-6 col-md-3 mx-auto">
-          <a href="{{ bamboo_has_role('authenticated') ? path('qs_auth.communities') : path('qs_auth.login') }}">
-            <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="Réseaux Solidaires">
-          </a>
-        </div>
-      </div>
-    </div>
-    {% if page.messages %}
-      <div class="container mt-5">
-        {{ page.messages }}
-      </div>
-    {% endif %}
-    <div class="container my-auto">
-      <div class="row">
-        <div class="col-6 mx-auto text-center text-white">
-          <h1 class="display-1 font-weight-bold">{{ 'qs.error.403.title'|t }}</h1>
-          <p>{{ 'qs.error.403.description'|t }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="floating-offset"></div>
-    <div class="floating">
-      <div class="container">
-        <div class="row mb-3">
-          {% if bamboo_has_role('authenticated') %}
-            <div class="col-sm-6 mb-2">
-              {% if not bamboo_config_get('qs_auth.settings', 'demo_mode') %}
-                <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('user.logout') }}">
-                  {% trans %}qs_auth.logout{% endtrans %}
-                  {{ macros.icon('minus') }}
-                </a>
-              {% endif %}
-            </div>
-            <div class="col-sm-6 mb-2">
-              <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.communities') }}">
-                {% trans %}qs_auth.communities{% endtrans %}
-                {{ macros.icon('arrow') }}
-              </a>
-            </div>
-          {% else %}
-            <div class="col-sm-6 mb-2">
-              <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.register') }}">
-                {% trans %}qs_auth.register{% endtrans %}
-                {{ macros.icon('plus') }}
-              </a>
-            </div>
-            <div class="col-sm-6 mb-2">
-              <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.login') }}">
-                {% trans %}qs_auth.login{% endtrans %}
-                {{ macros.icon('arrow') }}
-              </a>
-            </div>
-          {% endif %}
-        </div>
+{% extends "@quartiers_solidaires/pages/page--fullpage.html.twig" %}
+
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{# You are not logged in #}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-center flex-column mt-5">
+    <div class="row align-items-center mb-auto">
+      <div class="col-6 col-md-3 mx-auto">
+        <a href="{{ bamboo_has_role('authenticated') ? path('qs_auth.communities') : path('qs_auth.login') }}">
+          <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="{{ 'Réseaux Solidaires'|t }}">
+        </a>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="my-auto">
+    {{ page.messages }}
+
+    <div class="row">
+      <div class="col-6 mx-auto text-center text-white">
+        <h1 class="display-1 font-weight-bold">{{ 'qs.error.403.title'|t }}</h1>
+        <p>{{ 'qs.error.403.description'|t }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

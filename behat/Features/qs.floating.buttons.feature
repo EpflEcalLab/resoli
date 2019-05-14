@@ -9,7 +9,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/theme"
     And the response status code should be 200
-    Then I should see 1 ".floating a" elements
+    Then I should see 1 ".floating a[href='/fr/activities/1/user/2']" elements
     And I should see "qs_activity.floating.my_activities" link with href "/activities/1/user/2"
 
   @api
@@ -17,7 +17,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/activities/theme"
     And the response status code should be 200
-    Then I should see 1 ".floating a" elements
+    Then I should see 1 ".floating a[href='/fr/activities/1/user/8']" elements
     And I should see "qs_activity.floating.my_activities" link with href "/activities/1/user/8"
 
   @api
@@ -25,7 +25,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/fribourg/activities/theme"
     And the response status code should be 200
-    Then I should see 1 ".floating a" elements
+    Then I should see 1 ".floating a[href='/fr/fribourg/activities/add']" elements
     And I should see "qs_activity.floating.add.activity" link with href "/fribourg/activities/add"
 
 ## Activities by date(s) page
@@ -228,11 +228,11 @@ Feature: Floating actions buttons
     Given I am logged in as user "admin"
     When I am on "/photos/activity/2/delete?photos[42]=42&photos[45]=45"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.photo.delete" link with href "#"
+    And I should see "qs.photo.delete" link with href "fr/photos/activity/2/delete"
 
 # Form comments Photos
   Scenario: In the Form comments Photo, I must see the "Community Dashboard" button
     Given I am logged in as user "admin"
     When I am on "/photos/activity/3/comment?photos[50]=50"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs_photo.form.comment.title" link with href "#"
+    And I should see "qs_photo.form.comment.title" link with href "fr/photos/activity/3/comment"

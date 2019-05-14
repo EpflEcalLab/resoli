@@ -303,16 +303,16 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 //      $label = $this->t('qs_photo.form.add.title');
 //    }
 
-    // Delete Photos.
-    if ($activity && in_array($route_name, [
-      'qs_photo.form.delete',
-    ])) {
-      // For everybody, show a button "My Photos".
-      $icon = 'trash';
-      $theme = 'danger';
-      $url = '#';
-      $label = $this->t('qs.photo.delete');
-    }
+    // // Delete Photos.
+    // if ($activity && in_array($route_name, [
+    //   'qs_photo.form.delete',
+    // ])) {
+    //   // For everybody, show a button "My Photos".
+    //   $icon = 'trash';
+    //   $theme = 'danger';
+    //   $url = '#';
+    //   $label = $this->t('qs.photo.delete');
+    // }
 
     // // Comment Photos.
     // if ($activity && in_array($route_name, [

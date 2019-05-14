@@ -24,40 +24,7 @@
       </div>
     </div>
     <div class="floating-offset"></div>
-    <div class="floating">
-      <div class="container">
-        <div class="row mb-3">
-          {% if bamboo_has_role('authenticated') %}
-            <div class="col-sm-6 mb-2">
-              {% if not bamboo_config_get('qs_auth.settings', 'demo_mode') %}
-                <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('user.logout') }}">
-                  {% trans %}qs_auth.logout{% endtrans %}
-                  {{ macros.icon('minus') }}
-                </a>
-              {% endif %}
-            </div>
-            <div class="col-sm-6 mb-2">
-              <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.communities') }}">
-                {% trans %}qs_auth.communities{% endtrans %}
-                {{ macros.icon('arrow') }}
-              </a>
-            </div>
-          {% else %}
-            <div class="col-sm-6 mb-2">
-              <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.register') }}">
-                {% trans %}qs_auth.register{% endtrans %}
-                {{ macros.icon('plus') }}
-              </a>
-            </div>
-            <div class="col-sm-6 mb-2">
-              <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.login') }}">
-                {% trans %}qs_auth.login{% endtrans %}
-                {{ macros.icon('arrow') }}
-              </a>
-            </div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
+
+    {% include '@quartiers_solidaires/block/partials/qs--auth--floating-buttons.html.twig' %}
   </div>
 </div>

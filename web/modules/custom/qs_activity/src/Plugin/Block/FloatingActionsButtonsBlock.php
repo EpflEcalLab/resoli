@@ -285,9 +285,9 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // ]);
       // $label = $this->t('qs_photo.floating.my_photos');
 
-      if ($route_name == 'qs_photo.user.form.manage') {
-        $label = $this->t('qs_photo.floating.manage_photos');
-      }
+      // if ($route_name == 'qs_photo.user.form.manage') {
+      //   $label = $this->t('qs_photo.floating.manage_photos');
+      // }
     }
 
     // Add Photo.

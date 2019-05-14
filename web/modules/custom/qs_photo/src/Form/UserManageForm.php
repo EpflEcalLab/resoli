@@ -92,6 +92,12 @@ class UserManageForm extends FormBasic {
       'form__modal',
     ];
 
+    $form['#floating_buttons'][] = [
+      'icon'   => 'picture',
+      'label'  => $this->t('qs_photo.user.form.manage.title'),
+      'active' => TRUE,
+    ];
+
     $activity_id = $activity->id();
     $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
     $options = [];

@@ -270,19 +270,20 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     if ($community && in_array($route_name, [
       'qs_photo.collection.theme',
       'qs_photo.collection.month',
-      'qs_photo.user.activities.collection',
+      // 'qs_photo.user.activities.collection',
       'qs_photo.activity',
       'qs_photo.user.form.manage',
 //      'qs_photo.form.add',
     ])) {
+
       // For everybody, show a button "My Photos".
-      $icon = 'picture';
-      $theme = 'primary';
-      $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
-        'community' => $community->id(),
-        'user' => $this->currentUser->id(),
-      ]);
-      $label = $this->t('qs_photo.floating.my_photos');
+      // $icon = 'picture';
+      // $theme = 'primary';
+      // $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
+      //   'community' => $community->id(),
+      //   'user' => $this->currentUser->id(),
+      // ]);
+      // $label = $this->t('qs_photo.floating.my_photos');
 
       if ($route_name == 'qs_photo.user.form.manage') {
         $label = $this->t('qs_photo.floating.manage_photos');

@@ -14,7 +14,14 @@
   {% endif %}
 {% endif %}
 {% set modal_bg = 'primary' %}
-{# TODO add floating buttons #}
+
+{% set floating_buttons = [
+  {
+    label: 'qs_photo.floating.my_photos'|t,
+    icon: 'picture',
+    active: true,
+  }
+] %}
 
 {% block modal_content %}
   <div class="text-center mb-5">

@@ -2,12 +2,17 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 {% block node_body %}
-<div class="container">
-  <div class="text-center my-5">
-    {{ macros.icon('theme_' ~ node.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-primary']) }}
-    <h1 class="h2 text-primary mt-3">{{ node.title.value }}</h1>
+  <div class="container">
+    <div class="text-center my-5">
+      {{ macros.icon('theme_' ~ node.field_theme.entity.field_icon.value ~ '_lg', ['icon-xl', 'text-primary']) }}
+      <h1 class="h2 text-primary mt-3">{{ node.title.value }}</h1>
+    </div>
+    {{ bamboo_render_block('qs_activity_events_collection_block') }}
   </div>
-  {{ bamboo_render_block('qs_activity_events_collection_block') }}
-</div>
+
+  {# Floating buttons #}
+  {% block modal_floating %}
+    {{ bamboo_render_block('qs_activity_floating_actions_buttons_block') }}
+  {% endblock %}
 {% endblock %}
 

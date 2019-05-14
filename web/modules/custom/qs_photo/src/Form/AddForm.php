@@ -270,11 +270,15 @@ class AddForm extends FormBasic {
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
-    $form['#title'] = $this->t('qs_photo.form.add.title_form');
+    $form['#attributes']['theme'] = 'secondary';
+    $form['#floating_buttons'][] = [
+      'icon' => 'plus',
+      'label' => $this->t('qs_photo.form.add.title'),
+    ];
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
-      'form__fullpage__multistep',
+      'form__modal__multistep',
     ];
 
     // Save the community for submission.

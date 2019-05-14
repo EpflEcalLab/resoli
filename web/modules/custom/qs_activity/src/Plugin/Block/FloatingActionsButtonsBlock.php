@@ -273,7 +273,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       'qs_photo.user.activities.collection',
       'qs_photo.activity',
       'qs_photo.user.form.manage',
-      'qs_photo.form.add',
+//      'qs_photo.form.add',
     ])) {
       // For everybody, show a button "My Photos".
       $icon = 'picture';
@@ -290,17 +290,17 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     }
 
     // Add Photo.
-    if ($community && in_array($route_name, [
-      'qs_photo.form.add',
-    ])) {
-      // For everybody, show a button "My Photos".
-      $icon = 'plus';
-      $theme = 'secondary';
-      $url = $this->urlGenerator->generateFromRoute('qs_photo.form.add', [
-        'community' => $community->id(),
-      ]);
-      $label = $this->t('qs_photo.form.add.title');
-    }
+//    if ($community && in_array($route_name, [
+//      'qs_photo.form.add',
+//    ])) {
+//      // For everybody, show a button "My Photos".
+//      $icon = 'plus';
+//      $theme = 'secondary';
+//      $url = $this->urlGenerator->generateFromRoute('qs_photo.form.add', [
+//        'community' => $community->id(),
+//      ]);
+//      $label = $this->t('qs_photo.form.add.title');
+//    }
 
     // Delete Photos.
     if ($activity && in_array($route_name, [
@@ -352,7 +352,7 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // 'qs_community.waiting_approval',
       'qs_photo.user.activities.collection',
       'qs_photo.user.form.manage',
-      'qs_photo.form.add',
+//      'qs_photo.form.add',
       'qs_photo.form.comments',
       'qs_photo.form.delete',
     ])) {

@@ -40,42 +40,5 @@
     <div class="floating-offset"></div>
 
     {% include '@quartiers_solidaires/block/partials/qs--auth--floating-buttons.html.twig' %}
-
-    {% block modal_floating %}
-      {# Anonymous floating buttons. #}
-      {% set floating_buttons = [{
-        label: 'qs_auth.register'|t,
-        url: path('qs_auth.register'),
-        icon: 'plus',
-        classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-      },{
-        label: 'qs_auth.login'|t,
-        url: path('qs_auth.login'),
-        icon: 'arrow',
-        classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-      }] %}
-
-      {# Authenticated floating buttons. #}
-      {% if bamboo_has_role('authenticated') %}
-        {% set floating_buttons = [] %}
-        {% if not bamboo_config_get('qs_auth.settings', 'demo_mode') %}
-          {% set floating_buttons = floating_buttons|merge([{
-            label: 'qs_auth.logout'|t,
-            url: path('user.logout'),
-            icon: 'power',
-            classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-          }]) %}
-        {% endif %}
-
-        {% set floating_buttons = floating_buttons|merge([{
-          label: 'qs_auth.communities'|t,
-          url: path('qs_auth.communities'),
-          icon: 'arrow',
-          classes: ['btn-outline-invert w-100 btn-icon-right shadow-to-bottom'],
-        }]) %}
-      {% endif %}
-
-      {{ macros.floating_buttons(floating_buttons, modal_bg|default('primary'), path('<current>')) }}
-    {% endblock %}
   </div>
 </div>

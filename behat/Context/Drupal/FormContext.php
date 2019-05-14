@@ -10,6 +10,8 @@ use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines application features from the specific context.
+ *
+ * @codingStandardsIgnoreFile
  */
 class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
 
@@ -169,6 +171,27 @@ class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
     $client->request($method, $this->baseUrl . $url, [], [
       'files' => $this->attachments,
     ]);
+  }
+
+  /**
+   * Checks, that form field with specified id has specified pattern.
+   *
+   * Example: Then the "#edit-username" field should match regex "/([0-5][0-9])/"
+   *
+   * @Then the :field field should match regex :regex
+   */
+  public function assertFieldFromatted($field, $regex) {
+    $field = $this->getSession()->getPage()->find('css', $field);
+    if (NULL === $field) {
+      throw new \Exception(sprintf('The field "%s" was not found in the page %s', $field, $this->getSession()->getCurrentUrl()));
+    }
+
+    $value = $field->getValue();
+    $matches = preg_match($regex, $value, $matches);
+
+    if ($matches !== 1) {
+      throw new \Exception(sprintf('The value "%s" does not match the pattern %s', $value, $regex));
+    }
   }
 
 }

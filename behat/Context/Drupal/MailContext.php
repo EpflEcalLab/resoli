@@ -83,6 +83,7 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
   /**
    * Purge mails.
    *
+   * @BeforeScenario @mail
    * @AfterScenario @mail
    */
   public function purge() {

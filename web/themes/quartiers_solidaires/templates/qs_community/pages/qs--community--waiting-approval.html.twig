@@ -50,7 +50,8 @@
 
             <div class="card-actions row">
               <div class="col-sm-6 mb-3">
-                <form action="{{ path('qs_acl.privilege.confirm') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                <form action="{{ path('qs_acl.privilege.confirm') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post"
+                id="qs-acl-privilege-confirm-{{ privilege.id.value }}">
                   <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
                   <button class="btn btn-secondary btn-icon shadow-to-right btn-block" data-confirm="{{ 'qs_community.waiting_approval.confirmed_confirm'|t }}" type="submit" value="{{ 'qs.confirmed'|t }}">
                     {{ macros.icon('check') }}
@@ -59,7 +60,7 @@
                 </form>
               </div>
               <div class="col-sm-6 mb-3">
-                <form action="{{ path('qs_acl.privilege.decline') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post">
+                <form action="{{ path('qs_acl.privilege.decline') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post" id="qs-acl-privilege-decline-{{ privilege.id.value }}">
                   <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
                   <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_community.waiting_approval.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
                     {{ macros.icon('trash') }}

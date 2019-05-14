@@ -122,27 +122,27 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Button - "Community Dashboard".
     if ($community && in_array($route_name, [
-      'qs_community.dashboard',
-      'qs_community.members',
-      'qs_community.waiting_approval',
+      // 'qs_community.dashboard',
+      // 'qs_community.members',
+      // 'qs_community.waiting_approval',
     ])) {
       // For everybody, show a button "My Activities".
-      $icon = 'communities-sm';
-      $theme = 'danger';
-      $url =
-        $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
-          'community' => $community->id(),
-        ]);
-      $label = $this->t('qs_menu.links.account.communities');
+      // $icon = 'communities-sm';
+      // $theme = 'danger';
+      // $url =
+      //   $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
+      //     'community' => $community->id(),
+      //   ]);
+      // $label = $this->t('qs_menu.links.account.communities');
 
-      if ($route_name == 'qs_community.members') {
-        $label = $this->t('qs_community.dashboard.members');
-        $icon = 'happy';
-      }
-      elseif ($route_name == 'qs_community.waiting_approval') {
-        $label = $this->t('qs_community.dashboard.waiting_approval');
-        $icon = 'wait';
-      }
+      // if ($route_name == 'qs_community.members') {
+      //   $label = $this->t('qs_community.dashboard.members');
+      //   $icon = 'happy';
+      // }
+      // elseif ($route_name == 'qs_community.waiting_approval') {
+      //   $label = $this->t('qs_community.dashboard.waiting_approval');
+      //   $icon = 'wait';
+      // }
     }
 
     // Button - "Add Activity" or "My Activities".
@@ -340,16 +340,16 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     if (in_array($route_name, [
       'qs_activity.activities.form.add',
       // 'qs_activity.user.collection',
-      'qs_activity.activities.dashboard',
+      // 'qs_activity.activities.dashboard',
       // 'qs_activity.activities.form.edit.info',
       // 'qs_activity.activities.form.edit.visibility',
       // 'qs_activity.activities.form.edit.defaults',
       // 'qs_activity.activities.members',
 //      'qs_activity.events.form.add',
-      'qs_activity.activities.form.delete',
-      'qs_community.dashboard',
-      'qs_community.members',
-      'qs_community.waiting_approval',
+      // 'qs_activity.activities.form.delete',
+      // 'qs_community.dashboard',
+      // 'qs_community.members',
+      // 'qs_community.waiting_approval',
       'qs_photo.user.activities.collection',
       'qs_photo.user.form.manage',
       'qs_photo.form.add',

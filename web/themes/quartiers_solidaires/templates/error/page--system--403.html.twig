@@ -22,8 +22,12 @@
 
     <div class="row">
       <div class="col-6 mx-auto text-center text-white">
-        <h1 class="display-1 font-weight-bold">{{ 'qs.error.403.title'|t }}</h1>
-        <p>{{ 'qs.error.403.description'|t }}</p>
+        <h1 class="display-1 font-weight-bold">
+          {{ title ?? 'qs.error.403.title'|t }}
+        </h1>
+        <p>
+          {{ description ?? 'qs.error.403.description'|t }}
+        </p>
       </div>
     </div>
   </div>

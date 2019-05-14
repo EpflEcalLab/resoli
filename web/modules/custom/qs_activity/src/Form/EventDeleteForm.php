@@ -48,10 +48,10 @@ class EventDeleteForm extends EventEditFormBase {
     ];
 
     $form['#attributes'] = [
-      'title' => $event->title->value,
+      'title'       => $event->title->value,
       'description' => $this->t('qs_activity.events.form.delete.warning'),
       'icon'        => 'trash',
-      'theme' => 'danger',
+      'theme'       => 'danger',
     ];
 
     $form['#floating_buttons'][] = [

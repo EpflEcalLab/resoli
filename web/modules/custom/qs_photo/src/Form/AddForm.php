@@ -272,8 +272,9 @@ class AddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['theme'] = 'secondary';
     $form['#floating_buttons'][] = [
-      'icon' => 'plus',
-      'label' => $this->t('qs_photo.form.add.title'),
+      'icon'   => 'plus',
+      'label'  => $this->t('qs_photo.form.add.title'),
+      'active' => TRUE,
     ];
 
     // Apply custom styles to wrapper.

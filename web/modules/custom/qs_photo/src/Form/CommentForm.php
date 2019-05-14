@@ -101,6 +101,13 @@ class CommentForm extends FormBasic {
         'modal-body',
         'js-comment-form',
       ],
+      'theme' => 'secondary',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'icon'   => 'pencil',
+      'label'  => $this->t('qs_photo.form.comment.title'),
+      'active' => TRUE,
     ];
 
     $photos_params = $this->getRequest()->query->get('photos');

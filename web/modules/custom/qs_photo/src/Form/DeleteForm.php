@@ -107,8 +107,16 @@ class DeleteForm extends FormBasic {
     ];
 
     $form['#attributes'] = [
-      'title' => $activity->getTitle(),
+      'title'       => $activity->getTitle(),
       'description' => $this->t('qs_photo.form.delete.warning'),
+      'icon'        => 'trash',
+      'theme'       => 'danger',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'icon'   => 'trash',
+      'label'  => $this->t('qs.photo.delete'),
+      'active' => TRUE,
     ];
 
     $form['gallery'] = [

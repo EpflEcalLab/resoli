@@ -1,3 +1,5 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
+
 {% set community_name = variables.community.name.value|trim %}
 
 <div class="container">
@@ -12,3 +14,15 @@
 {{ bamboo_render_block('qs_calendar_weekly_block') }}
 
 {% include "@quartiers_solidaires/qs_calendar/partials/events-day-listing.html.twig" %}
+
+{% set user = bamboo_load_currentuser() %}
+{% set floating_buttons = [{
+  label: 'qs_activity.floating.my_subscriptions'|t,
+  icon: 'checkflag',
+  theme: 'info',
+  url: path('qs_subscription.user.collection', {
+    community: variables.community.id,
+    user: user.id,
+  })
+}] %}
+{{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}

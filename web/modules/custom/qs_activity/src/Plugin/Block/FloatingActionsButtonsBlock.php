@@ -173,19 +173,19 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       }
     }
 
-    // Button - "My Subscriptions".
-    if ($community && in_array($route_name, [
-      'qs_calendar.collection.monthly',
-      'qs_calendar.collection.weekly',
-    ])) {
-      $icon = 'checkflag';
-      $theme = 'info';
-      $url = $this->urlGenerator->generateFromRoute('qs_subscription.user.collection', [
-        'community' => $community->id(),
-        'user' => $this->currentUser->id(),
-      ]);
-      $label = $this->t('qs_activity.floating.my_subscriptions');
-    }
+    // // Button - "My Subscriptions".
+    // if ($community && in_array($route_name, [
+    //   'qs_calendar.collection.monthly',
+    //   'qs_calendar.collection.weekly',
+    // ])) {
+    //   $icon = 'checkflag';
+    //   $theme = 'info';
+    //   $url = $this->urlGenerator->generateFromRoute('qs_subscription.user.collection', [
+    //     'community' => $community->id(),
+    //     'user' => $this->currentUser->id(),
+    //   ]);
+    //   $label = $this->t('qs_activity.floating.my_subscriptions');
+    // }
 
     // Button - "Add Event" or "Activity Dashboard" or "Contact @name @email".
     if (($node && $node->bundle() == 'activity') || $activity) {
@@ -268,25 +268,26 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 
     // Button - "My Photos".
     if ($community && in_array($route_name, [
-      'qs_photo.collection.theme',
-      'qs_photo.collection.month',
-      'qs_photo.user.activities.collection',
-      'qs_photo.activity',
-      'qs_photo.user.form.manage',
+      // 'qs_photo.collection.theme',
+      // 'qs_photo.collection.month',
+      // 'qs_photo.user.activities.collection',
+      // 'qs_photo.activity',
+      // 'qs_photo.user.form.manage',
 //      'qs_photo.form.add',
     ])) {
-      // For everybody, show a button "My Photos".
-      $icon = 'picture';
-      $theme = 'primary';
-      $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
-        'community' => $community->id(),
-        'user' => $this->currentUser->id(),
-      ]);
-      $label = $this->t('qs_photo.floating.my_photos');
 
-      if ($route_name == 'qs_photo.user.form.manage') {
-        $label = $this->t('qs_photo.floating.manage_photos');
-      }
+      // For everybody, show a button "My Photos".
+      // $icon = 'picture';
+      // $theme = 'primary';
+      // $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
+      //   'community' => $community->id(),
+      //   'user' => $this->currentUser->id(),
+      // ]);
+      // $label = $this->t('qs_photo.floating.my_photos');
+
+      // if ($route_name == 'qs_photo.user.form.manage') {
+      //   $label = $this->t('qs_photo.floating.manage_photos');
+      // }
     }
 
     // Add Photo.
@@ -302,39 +303,39 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
 //      $label = $this->t('qs_photo.form.add.title');
 //    }
 
-    // Delete Photos.
-    if ($activity && in_array($route_name, [
-      'qs_photo.form.delete',
-    ])) {
-      // For everybody, show a button "My Photos".
-      $icon = 'trash';
-      $theme = 'danger';
-      $url = '#';
-      $label = $this->t('qs.photo.delete');
-    }
+    // // Delete Photos.
+    // if ($activity && in_array($route_name, [
+    //   'qs_photo.form.delete',
+    // ])) {
+    //   // For everybody, show a button "My Photos".
+    //   $icon = 'trash';
+    //   $theme = 'danger';
+    //   $url = '#';
+    //   $label = $this->t('qs.photo.delete');
+    // }
 
-    // Comment Photos.
-    if ($activity && in_array($route_name, [
-      'qs_photo.form.comments',
-    ])) {
-      // For everybody, show a button "My Photos".
-      $icon = 'pencil';
-      $theme = 'secondary';
-      $url = '#';
-      $label = $this->t('qs_photo.form.comment.title');
-    }
+    // // Comment Photos.
+    // if ($activity && in_array($route_name, [
+    //   'qs_photo.form.comments',
+    // ])) {
+    //   // For everybody, show a button "My Photos".
+    //   $icon = 'pencil';
+    //   $theme = 'secondary';
+    //   $url = '#';
+    //   $label = $this->t('qs_photo.form.comment.title');
+    // }
 
     // Welcome.
-    if ($community && in_array($route_name, [
-      'qs_community.welcome',
-    ])) {
-      $icon = 'user';
-      $theme = 'invert';
-      $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
-        'user' => $this->currentUser->id(),
-      ]);
-      $label = $this->t('qs_supervisor.floating.my_account');
-    }
+    // if ($community && in_array($route_name, [
+    //   'qs_community.welcome',
+    // ])) {
+    //   $icon = 'user';
+    //   $theme = 'invert';
+    //   $url = $this->urlGenerator->generateFromRoute('qs_supervisor.account.dashboard', [
+    //     'user' => $this->currentUser->id(),
+    //   ]);
+    //   $label = $this->t('qs_supervisor.floating.my_account');
+    // }
 
     // Display as active on these routes.
     if (in_array($route_name, [
@@ -350,11 +351,11 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
       // 'qs_community.dashboard',
       // 'qs_community.members',
       // 'qs_community.waiting_approval',
-      'qs_photo.user.activities.collection',
-      'qs_photo.user.form.manage',
+      // 'qs_photo.user.activities.collection',
+      // 'qs_photo.user.form.manage',
 //      'qs_photo.form.add',
-      'qs_photo.form.comments',
-      'qs_photo.form.delete',
+      // 'qs_photo.form.comments',
+      // 'qs_photo.form.delete',
     ])) {
       $classes[] = 'active';
     }
@@ -371,17 +372,17 @@ class FloatingActionsButtonsBlock extends BlockBase implements ContainerFactoryP
     // Add a second button if needed.
     //
     // Welcome screen second button.
-    if ($community && $this->acl->hasAdminAccessCommunity($community) && in_array($route_name, [
-      'qs_community.welcome',
-    ])) {
-      $variables['buttons'][] = [
-        'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
-        'label' => $this->t('qs_menu.links.account.communities'),
-        'theme' => 'invert',
-        'icon' => 'communities-sm',
-        'classes' => $classes,
-      ];
-    }
+    // if ($community && $this->acl->hasAdminAccessCommunity($community) && in_array($route_name, [
+    //   'qs_community.welcome',
+    // ])) {
+    //   $variables['buttons'][] = [
+    //     'url' => $this->urlGenerator->generate('qs_community.dashboard', ['community' => $community->id()]),
+    //     'label' => $this->t('qs_menu.links.account.communities'),
+    //     'theme' => 'invert',
+    //     'icon' => 'communities-sm',
+    //     'classes' => $classes,
+    //   ];
+    // }
 
     return [
       '#theme'     => 'qs_activity_floating_actions_buttons_block',

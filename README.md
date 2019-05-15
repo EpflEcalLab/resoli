@@ -10,12 +10,14 @@ Drupal 8 powered.
 
 First of all, you need to have the following tools installed globally on your environment:
 
+  * docker
   * composer
   * drush
   * npm
   * yarn
 
-don't forget to add bins to your path such:
+you can only install docker, but yarn is recommended if you work actively on styleguide.
+If you don't use docker as environment, don't forget to add bins to your path such:
 
   * php
   * mysql
@@ -29,6 +31,82 @@ To run any drush command, you need to be on a hight bootstrapped drupal director
   ```
 
 On common errors, see the Troubleshootings section.
+
+## 🐳 Docker
+
+### Project setup
+
+````bash
+cp docker-compose.override-example.yml docker-compose.override.yml
+```
+
+Update any values as needed, example when you already use the 8080 port:
+
+```yaml
+  # Drupal development server
+  dev:
+    ports:
+      - "8081:80"
+```
+
+Another example when you already have a local MySQL server using port 3306:
+
+```yaml
+  # Database
+  db:
+    ports:
+      - "13306:3306"
+```
+
+### Project boostrap
+
+Build project imgaes (and pull recent development image), start docker services, then run
+drupal bootsrap script (get a coffee, this will take some time...).
+
+```bash
+docker-compose build --pull
+docker-compose up --build -d
+docker-compose exec dev docker-as-wait --mysql -- docker-as-drupal bootstrap
+```
+
+### (optional) Get the productions files and database
+
+Local Drupal site files directory is mounted in Docker dev container, you can sync them with
+production by using capistrano tasks.
+
+```bash
+bundle exec cap production files:download
+bundle exec cap production files:dump
+docker-compose exec dev docker-as-drupal db-restore --file=/var/www/web/sites/default/files/production_dump.sql
+```
+
+### Docker Tips
+
+```bash
+docker-compose exec dev docker-as-drupal --help
+```
+
+Only directories like custom modules, styleguide, and config related are mounted in Docker
+container (dev container have files too). If you need to rebuild the image and container, you can
+use `up` command again with the service to update.
+
+```bash
+docker-compose up -d --build --no-deps dev
+```
+
+You can run tests in docker.
+
+```bash
+docker-compose exec test docker-as-drupal behat
+docker-compose exec test docker-as-drupal phpunit
+```
+
+You can reset database, and optionnaly load default content.
+
+```bash
+docker-compose exec dev docker-as-drupal db-reset --with-default-content
+```
+
 
 ## 🏋️ Export/Import all translations to a PO file
 

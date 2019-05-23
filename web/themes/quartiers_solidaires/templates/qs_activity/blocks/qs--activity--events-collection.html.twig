@@ -43,6 +43,7 @@
         {# show him guests badges, otherwise show him badges based on his own subscription #}
         {% set guests = 0 %}
         {% if can_manage_activity or user.hasPermission('administer nodes') %}
+          {% set guests_status = false %}
           {% if guest_subscription_pending %}
             {% set guests_status = 'pendings_guests' %}
             {% set guests = subscriptions.pendings_guests[key] %}

@@ -121,3 +121,52 @@
     {% endif %}
   </div>
 {% endmacro %}
+
+{% macro radios_buttons_form(radios, action, id, hiddens, label, ban) %}
+  <form id="{{ id }}" data-ajax="true" action="{{ action }}" class="" method="post">
+    {% block hiddens %}
+      {% for hidden in hiddens %}
+        <input type="hidden" name="{{ hidden.name }}" value="{{ hidden.value }}">
+      {% endfor %}
+    {% endblock %}
+
+
+    <div class="d-flex flex-wrap justify-content-center">
+      <div class="btn-group mb-3 mx-2 js-radio-group" role="group" aria-label="{{ label }}" data-toggle="buttons">
+
+        {% for radio in radios %}
+          {{ _self.radio_button(radio.active, radio.title, radio.value) }}
+        {% endfor %}
+
+      </div>
+    </div>
+  </form>
+  {% if ban %}
+    <form action="{{ ban.action }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="{{ ban.parent }}" method="post">
+      {{ block('hiddens') }}
+      <button class="btn mb-3 mx-2 btn-outline-invert btn-fluid shadow-to-bottom" data-confirm="{{ ban.confirm }}" type="submit" value="{{ ban.value }}">
+        {{ ban.value }}
+      </button>
+    </form>
+  {% endif %}
+{% endmacro %}
+
+{% macro radio_button(active, title, value) %}
+  {% set classes = [
+    'btn btn-outline-invert btn-fluid',
+    active ? 'active',
+  ] %}
+  {% set input_attributes = create_attribute({
+    'type': 'radio',
+    'name': 'privileges',
+    'title': title,
+    'data-submit': 'true',
+    'value': value,
+    'class': 'form-radio',
+    checked: active ? 'true' : 'false',
+  }) %}
+  <label class="{{ classes|join(' ') }}">
+    <input{{ input_attributes }}>
+    {{ title }}
+  </label>
+{% endmacro %}

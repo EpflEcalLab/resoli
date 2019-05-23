@@ -3,6 +3,7 @@
 {% set id = event.nid.value %}
 {% if id and badges.subscriptions  %}
   {% set show_user_subscription = true %}
+  {% set theme = 'info' %}
 
   {% set user_subscription_confirmed = id in badges.subscriptions.confirmed|keys %}
   {% set user_subscription_pending = id in badges.subscriptions.pendings|keys %}
@@ -16,7 +17,6 @@
     {% set privilege = badges.privileges[activity_id]|last %}
 
     {# Adapt the color of badge according to user privilege for activity #}
-    {% set theme = 'info' %}
     {% set roles = 'qs.roles.activity_member'|t %}
     {% set shield = false %}
     {% if activity_id in badges.privileges|keys %}

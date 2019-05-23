@@ -178,9 +178,9 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
    * @param \Drupal\node\NodeInterface $activity
    *   The communitiy to seed activities into.
    * @param \Drupal\Core\Datetime\DrupalDateTime $min_date_start
-   *   The minimum start date for generated events
+   *   The minimum start date for generated events.
    * @param \Drupal\Core\Datetime\DrupalDateTime $max_date_end
-   *   The maximum end date for generated events
+   *   The maximum end date for generated events.
    * @param int $number
    *   Number of activities to generate.
    *
@@ -211,4 +211,5 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
     }
     return $events;
   }
+
 }

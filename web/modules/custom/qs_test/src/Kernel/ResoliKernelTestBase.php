@@ -75,7 +75,7 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
    * Prepare Community Taxonomy fields.
    */
   protected function setupCommunities() {
-    $vocabulary = $this->createVocabulary('communities');
+    $this->createVocabulary('communities');
   }
 
   /**

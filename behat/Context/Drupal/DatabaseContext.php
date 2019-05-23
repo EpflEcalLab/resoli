@@ -30,7 +30,7 @@ class DatabaseContext extends RawDrupalContext implements SnippetAcceptingContex
   public function __construct($dump_path) {
     // Create the directory if not already exists.
     if (!is_dir($dump_path)) {
-        mkdir($dump_path, 0777, TRUE);
+      mkdir($dump_path, 0777, TRUE);
     }
 
     $this->dumpPath = $dump_path;

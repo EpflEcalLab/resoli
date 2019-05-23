@@ -9,12 +9,12 @@
 {% endif %}
 
 <main role="main" class="{{ page.floating ? 'floating-offset' }}">
-    <a id="main-content" tabindex="-1"></a>
-    {% block content %}{{ page.content }}{% endblock %}
+  <a id="main-content" tabindex="-1"></a>
+  {% block content %}{{ page.content }}{% endblock %}
 </main>
 
 {% if page.footer %}
-    <footer role="contentinfo">
-        {{ page.footer }}
-    </footer>
+  <footer role="contentinfo">
+    {{ page.footer }}
+  </footer>
 {% endif %}

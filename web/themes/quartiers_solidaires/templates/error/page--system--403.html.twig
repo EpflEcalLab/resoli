@@ -7,7 +7,7 @@
 {% block header %}{% endblock %}
 
 {% block content %}
-  <div class="d-flex justify-content-center flex-column mt-5">
+  <div class="d-flex justify-content-center flex-column mt-5 container">
     <div class="row align-items-center mb-auto">
       <div class="col-6 col-md-3 mx-auto">
         <a href="{{ bamboo_has_role('authenticated') ? path('qs_auth.communities') : path('qs_auth.login') }}">
@@ -17,13 +17,17 @@
     </div>
   </div>
 
-  <div class="my-auto">
+  <div class="my-auto container">
     {{ page.messages }}
 
     <div class="row">
       <div class="col-6 mx-auto text-center text-white">
-        <h1 class="display-1 font-weight-bold">{{ 'qs.error.403.title'|t }}</h1>
-        <p>{{ 'qs.error.403.description'|t }}</p>
+        <h1 class="display-1 font-weight-bold">
+          {{ title ?? 'qs.error.403.title'|t }}
+        </h1>
+        <p>
+          {{ description ?? 'qs.error.403.description'|t }}
+        </p>
       </div>
     </div>
   </div>

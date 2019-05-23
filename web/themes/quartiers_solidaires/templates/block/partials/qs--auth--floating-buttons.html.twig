@@ -1,6 +1,6 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{% block modal_floating %}
+{% block floating %}
   {# Anonymous floating buttons. #}
   {% set floating_buttons = [{
     label: 'qs_auth.register'|t,
@@ -34,5 +34,6 @@
     }]) %}
   {% endif %}
 
+  <div class="floating-offset"></div>
   {{ macros.floating_buttons(floating_buttons, modal_bg|default('primary'), path('<current>')) }}
 {% endblock %}

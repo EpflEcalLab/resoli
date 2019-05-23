@@ -21,54 +21,21 @@
   </div>
 
   <div class="container my-5">
-    <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+    {% embed '@quartiers_solidaires/node/partials/card-list.html.twig' with {card_list_id: 'events-accordion'} %}
+      {% block card_list_items %}
 
-      {% set current_header = null %}
-      {% set previous_event_week = null %}
+        {% set current_header = null %}
+        {% set previous_event_week = null %}
 
-      {% for key, event in variables.events %}
-        {% set event_date = event.field_start_at.value|date('Y-m-d') %}
-        {% set event_week = event.field_start_at.value|date('W') %}
-        {% set current_week = 'now'|date('W') %}
+        {% for key, event in variables.events %}
 
-        {% if 'now'|date('Y-m-d') == event_date %}
-          {# TODAY #}
-          {% set new_header = 'qs.activity.date.sticky.today'|t %}
+          {% include '@quartiers_solidaires/node/partials/card-list-header.html.twig' %}
 
-        {% elseif 'tomorrow'|date('Y-m-d') == event_date %}
-          {# TOMORROW #}
-          {% set new_header = 'qs.activity.date.sticky.tomorrow'|t %}
+          <li class="card card-list-item" id="card{{ event.nid.value }}">
 
-        {% elseif event_date > 'tomorrow'|date('Y-m-d') and current_week == event_week %}
-          {# THIS WEEK (between day after tomorrow and next Sunday but not next week) #}
-          {% set new_header = 'qs.activity.date.sticky.this_week'|t %}
+            {% include "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
 
-        {% elseif event_week - previous_event_week >= 2 %}
-          {% set previous_event_week = event.field_start_at.value|date('W') %}
-
-          {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
-            '@start_date': event.field_start_at.value|date_modify('monday this week')|bamboo_i18n_format_date('custom', 'j F Y'),
-            '@end_date': event.field_start_at.value|date_modify('sunday this week + 1 week')|bamboo_i18n_format_date('custom', 'j F Y'),
-          }) %}
-        {% endif %}
-
-        {# Write the header if we have a new value #}
-        {% if current_header|render != new_header|render %}
-          {% set current_header = new_header %}
-          {% set accordion_id = 'events-accordion' ~ loop.index  %}
-          {% if loop.index > 1 %}
-            </ul>
-            <ul class="card-list" id="{{ accordion_id }}" data-children=".card-list-item">
-          {% endif %}
-          <li class="sticky-top bg-white mb-2 py-2 row">
-            <h2 class="col-12 h5 mb-0">{{ current_header }}</h2>
-          </li>
-        {% endif %}
-
-        <li class="card card-list-item" id="card{{ event.nid.value }}">
-          {% include "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
-
-          <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#{{ accordion_id }}">
+            <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#{{ accordion_id }}">
               <div class="card-body">
                 <div class="card-text text-center">
                   <p class="d-sm-none text-primary">{{ event.field_activity.entity.title.value }}</p>
@@ -77,17 +44,19 @@
                   {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
                 </div>
                 <div class="card-actions d-flex justify-content-center">
-                  <a href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right">
+                  <a
+                    href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value }) }}"
+                    class="btn btn-outline-secondary btn-icon btn-white shadow-to-right">
                     {{ macros.icon('activities') }}
                     {{ 'qs.event.goto'|t }}
                   </a>
                 </div>
               </div>
             </div>
-        </li>
-      {% endfor %}
-    </ul>
-
+          </li>
+        {% endfor %}
+      {% endblock %}
+    {% endembed %}
   </div>
 {% else %}
 <div class="container">

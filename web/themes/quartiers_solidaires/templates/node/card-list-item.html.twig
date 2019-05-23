@@ -30,30 +30,9 @@
       {% endif %}
 
       <div class="row">
-        {% if contact_phone %}
-          <div class="col-md-8 mx-auto">
-            <a href="tel:{{ contact_phone }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
-              {{ macros.icon('phone') }}
-              {{ contact_phone }}
-            </a>
-          </div>
-        {% endif %}
-
-        {% if contact_mail %}
-          <div class="col-md-8 mx-auto">
-            <a href="mailto:{{ contact_mail }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
-              {{ macros.icon('mail') }}
-              {{ contact_mail }}
-            </a>
-          </div>
-        {% endif %}
-
-        <div class="col-md-8 mx-auto">
-          <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
-            {{ macros.icon('arrow-left') }}
-            {{ 'qs.event.back_to_event'|t }}
-          </button>
-        </div>
+        {{ contact_phone ? macros.card_back_button(contact_phone, "tel:#{contact_phone}", 'phone') }}
+        {{ contact_mail ? macros.card_back_button(contact_mail, "mailto:#{contact_mail}", 'mail') }}
+        {{ macros.card_back_button('qs.event.back_to_event'|t, false) }}
       </div>
     {% endblock %}
 
@@ -83,15 +62,11 @@
         {% endif %}
 
         <div class="row {% if event.field_venue_lat.value and event.field_venue_long.value %}card-map-footer{% endif %}">
-          <div class="col-md-8 mx-auto">
-            <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
-              {{ macros.icon('arrow-left') }}
-              {{ 'qs.event.back_to_event'|t }}
-            </button>
-          </div>
+          {{ macros.card_back_button('qs.event.back_to_event'|t, false) }}
         </div>
       {% endblock %}
     {% endembed %}
   {% endif %}
 
 </li>
+

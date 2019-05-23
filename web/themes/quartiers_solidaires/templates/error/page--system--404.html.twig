@@ -1,30 +1,4 @@
-{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
-<div class="d-flex flex-column justify-content-between">
-  <div class="fullpage-wrapper">
-    <div class="container mt-5">
-      <div class="row align-items-center mb-auto">
-        <div class="col-6 col-md-3 mx-auto">
-          <a href="{{ bamboo_has_role('authenticated') ? path('qs_auth.communities') : path('qs_auth.login') }}">
-            <img class="img-fluid" src="/{{ directory }}/build/svg/reseaux-solidaires.svg" alt="Réseaux Solidaires">
-          </a>
-        </div>
-      </div>
-    </div>
-    {% if page.messages %}
-      <div class="container mt-5">
-        {{ page.messages }}
-      </div>
-    {% endif %}
-    <div class="container my-auto">
-      <div class="row">
-        <div class="col-6 mx-auto text-center text-white">
-          <h1 class="display-1 font-weight-bold">{{ 'qs.error.404.title'|t }}</h1>
-          <p>{{ 'qs.error.404.decription'|t }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="floating-offset"></div>
+{% extends "@quartiers_solidaires/error/page--system--403.html.twig" %}
 
-    {% include '@quartiers_solidaires/block/partials/qs--auth--floating-buttons.html.twig' %}
-  </div>
-</div>
+{% set title = 'qs.error.404.title'|t %}
+{% set description = 'qs.error.404.description'|t %}

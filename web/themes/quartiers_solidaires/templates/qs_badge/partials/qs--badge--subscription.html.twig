@@ -1,25 +1,25 @@
 
 {# Subscription Badges #}
-{% if event.nid.value and badges.subscriptions  %}
+{% set id = event.nid.value %}
+{% if id and badges.subscriptions  %}
   {% set show_user_subscription = true %}
 
-  {% set user_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed|keys %}
+  {% set user_subscription_confirmed = id in badges.subscriptions.confirmed|keys %}
+  {% set user_subscription_pending = id in badges.subscriptions.pendings|keys %}
+  {% set guest_subscription_pending = id in badges.subscriptions.pendings_guests|keys %}
+  {% set guest_subscription_confirmed = id in badges.subscriptions.confirmed_guests|keys %}
 
-  {% set user_subscription_pending = event.nid.value in badges.subscriptions.pendings|keys %}
-
-  {% set guest_subscription_pending = event.nid.value in badges.subscriptions.pendings_guests|keys %}
-
-  {% set guest_subscription_confirmed = event.nid.value in badges.subscriptions.confirmed_guests|keys %}
-
-  {% set theme = 'info' %}
+  {% set activity_id = event.field_activity.entity.nid.value %}
 
   {% if badges.privileges %}
     {# Get user Highest privilege #}
-    {% set privilege = badges.privileges[event.field_activity.entity.nid.value]|last %}
+    {% set privilege = badges.privileges[activity_id]|last %}
 
-    {# Adapte the color of badge according user privilege of activity #}
+    {# Adapt the color of badge according to user privilege for activity #}
+    {% set theme = 'info' %}
     {% set roles = 'qs.roles.activity_member'|t %}
-    {% if event.field_activity.entity.nid.value in badges.privileges|keys %}
+    {% set shield = false %}
+    {% if activity_id in badges.privileges|keys %}
       {% if privilege == 'activity_maintainers' %}
         {% set theme = 'warning' %}
         {% set roles = 'qs.roles.activity_maintainer'|t %}

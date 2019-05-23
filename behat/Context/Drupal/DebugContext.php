@@ -28,6 +28,11 @@ class DebugContext extends RawDrupalContext implements SnippetAcceptingContext {
    * context constructor through behat.yml.
    */
   public function __construct($log_path) {
+    // Create the directory if not already exists.
+    if (!is_dir($log_path)) {
+        mkdir($log_path, 0777, TRUE);
+    }
+
     $this->logPath = $log_path;
   }
 

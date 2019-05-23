@@ -28,6 +28,11 @@ class DatabaseContext extends RawDrupalContext implements SnippetAcceptingContex
    * context constructor through behat.yml.
    */
   public function __construct($dump_path) {
+    // Create the directory if not already exists.
+    if (!is_dir($dump_path)) {
+        mkdir($dump_path, 0777, TRUE);
+    }
+
     $this->dumpPath = $dump_path;
   }
 

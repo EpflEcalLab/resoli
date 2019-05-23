@@ -57,3 +57,35 @@ default:
       purge_before_scenario: true
   gherkin:
     cache: ~
+docker:
+  suites:
+    default:
+      contexts:
+        # See composer.json `autoload-dev`
+        - Drupal\Behat\Context\Drupal\DatabaseContext:
+            dump_path: %paths.base%/dump/behat
+        - Drupal\Behat\Context\Drupal\ElementContext
+        - Drupal\Behat\Context\Drupal\DebugContext:
+            log_path: %paths.base%/log/behat
+        - Drupal\Behat\Context\Drupal\FormContext:
+            base_url: http://test:8888
+        - Drupal\Behat\Context\Drupal\MailContext:
+            base_url: http://test:8888
+        - Drupal\Behat\Context\Drupal\JsonContext:
+
+        # Resoli Contexts
+        - Drupal\Behat\Context\Resoli\RegisterContext
+        - Drupal\Behat\Context\Resoli\LoginContext
+        - Drupal\Behat\Context\Resoli\DemoContext
+        - Drupal\Behat\Context\Resoli\PhotosContext
+
+        # Drupal Extension Contexts
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://test:8888
+    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
+      url: http://mail:1080

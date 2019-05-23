@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "index.html",
   "engines": {
-    "node": ">=8"
+    "node": "9"
   },
   "scripts": {
     "start": "toolbox serve",

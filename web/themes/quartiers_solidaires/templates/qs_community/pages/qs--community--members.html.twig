@@ -78,7 +78,7 @@
               <div class="card-actions d-flex justify-content-center mb-3">
                 <a href="mailto:{{ member.mail.value }}" class="btn btn-outline-invert btn-icon btn-white shadow-to-bottom">
                   {{ macros.icon('mail') }}
-                  {% trans %}qs.contact {{ member.field_firstname.value }}{% endtrans %}
+                  {{ 'qs.contact @member.field_firstname.value'|t({'@member.field_firstname.value': member.field_firstname.value}) }}
                 </a>
               </div>
             </div>

@@ -3,7 +3,6 @@
 namespace Drupal\qs_test;
 
 use Drupal\Core\Session\AnonymousUserSession;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\user\Entity\Role;
 use Drupal\user\Entity\User;
 

@@ -4,14 +4,11 @@ namespace Drupal\qs_test\Kernel;
 
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
-use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
-use Drupal\qs_test\ProductTestTrait;
 use Drupal\qs_test\UserTestTrait;
 use Drupal\qs_test\NodeTestTrait;
 use Drupal\taxonomy\TermInterface;
-use Drupal\node\NodeInterface;
 
 /**
  * Provides a base class for Quartiers Solidaires functional tests.
@@ -128,7 +125,7 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
   /**
    * Seed some communities for testing.
    *
-   * @param integer $number
+   * @param int $number
    *   Number of communities to generate.
    *
    * @return \Drupal\taxonomy\TermInterface[]
@@ -152,7 +149,7 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
    *
    * @param Drupal\taxonomy\TermInterface $community
    *   The communitiy to seed activities into.
-   * @param integer $number
+   * @param int $number
    *   Number of activities to generate.
    *
    * @return \Drupal\node\NodeInterface[]

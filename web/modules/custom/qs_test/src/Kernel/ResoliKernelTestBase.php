@@ -4,11 +4,14 @@ namespace Drupal\qs_test\Kernel;
 
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
+use Drupal\taxonomy\TermInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\qs_test\UserTestTrait;
 use Drupal\qs_test\NodeTestTrait;
-use Drupal\taxonomy\TermInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 /**
  * Provides a base class for Quartiers Solidaires functional tests.
@@ -169,4 +172,43 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
     return $activities;
   }
 
+  /**
+   * Seed some events into the given community for testing.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The communitiy to seed activities into.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $min_date_start
+   *   The minimum start date for generated events
+   * @param \Drupal\Core\Datetime\DrupalDateTime $max_date_end
+   *   The maximum end date for generated events
+   * @param int $number
+   *   Number of activities to generate.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of events keyed by entity ID.
+   */
+  protected function seedEvents(NodeInterface $activity, DrupalDateTime $min_date_start, DrupalDateTime $max_date_end, $number) {
+    $events = [];
+    for ($i = 0; $i < $number; $i++) {
+
+      $random_timestamp = mt_rand($min_date_start->getTimestamp(), $max_date_end->getTimestamp());
+      $start_at = new DrupalDateTime();
+      $start_at->setTimestamp($random_timestamp);
+
+      $random_timestamp = mt_rand($start_at->getTimestamp(), $max_date_end->getTimestamp());
+      $end_at = new DrupalDateTime();
+      $end_at->setTimestamp($random_timestamp);
+
+      $entity = $this->entityTypeManager->getStorage('node')->create([
+        'type' => 'event',
+        'field_activity' => $activity->id(),
+        'title' => $this->randomString(),
+        'field_start_at' => $start_at->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
+        'field_end_at' => $end_at->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
+      ]);
+      $entity->save();
+      $events[$entity->id()] = $entity;
+    }
+    return $events;
+  }
 }

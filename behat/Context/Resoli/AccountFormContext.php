@@ -28,6 +28,7 @@ class AccountFormContext extends RawDrupalContext implements SnippetAcceptingCon
   public function fillTheAccountForm(TableNode $fields) {
     foreach ($fields->getHash() as $field) {
       $this->visitPath('/account/' . $field['user'] . '/edit');
+      $this->getSession()->getPage()->fillField('edit-mail', $field['mail']);
       $this->getSession()->getPage()->fillField('edit-firstname', $field['firstname']);
       $this->getSession()->getPage()->fillField('edit-lastname', $field['lastname']);
       $this->getSession()->getPage()->fillField('edit-phone', $field['phone']);

@@ -1,3 +1,4 @@
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
 {% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
 
 {% set modal_bg = 'primary' %}
@@ -52,32 +53,33 @@
 
               <div class="card-text">
                 <div class="d-flex flex-wrap justify-content-center">
-                  <form id="privilege-{{ loop.index }}" data-ajax="true" action="{{ path('qs_acl.privilege.toggle') }}" class="" method="post">
-                    <input type="hidden" name="user" value="{{ member.uid.value }}">
-                    <input type="hidden" name="activity" value="{{ variables.activity.nid.value }}">
-
-                    <div class="d-flex flex-wrap justify-content-center">
-                      <div class="btn-group mb-3 mx-2 js-radio-group" role="group" aria-label="{{ 'qs_activity.members.roles'|t }}" data-toggle="buttons">
-
-                        {% set active = 'activity_members' == member.privileges|last %}
-                        {{ _self.radio_special(active, 'qs.roles.activity_member'|t, 'activity_members') }}
-
-                        {% set active = 'activity_maintainers' == member.privileges|last %}
-                        {{ _self.radio_special(active, 'qs.roles.activity_maintainer'|t, 'activity_members|activity_maintainers') }}
-
-                        {% set active = 'activity_organizers' == member.privileges|last %}
-                        {{ _self.radio_special(active, 'qs.roles.activity_organizer'|t, 'activity_members|activity_maintainers|activity_organizers') }}
-
-                      </div>
-                    </div>
-                  </form>
-                  <form action="{{ path('qs_acl.privilege.ban') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card{{ member.uid.value }}" method="post">
-                    <input type="hidden" name="user" value="{{ member.uid.value }}">
-                    <input type="hidden" name="activity" value="{{ variables.activity.nid.value }}">
-                    <button class="btn mb-3 mx-2 btn-outline-invert btn-fluid shadow-to-bottom" data-confirm="{{ 'qs_activity.members.ban_confirm'|t }}" type="submit" value="{{ 'qs.roles.activity_none'|t }}">
-                      {{ 'qs.roles.activity_none'|t }}
-                    </button>
-                  </form>
+                  {% set radios = [{
+                    active: 'activity_members' == member.privileges|last,
+                    title: 'qs.roles.activity_member'|t,
+                    value: 'activity_members',
+                  }, {
+                    active: 'activity_maintainers' == member.privileges|last,
+                    title: 'qs.roles.activity_maintainer'|t,
+                    value: 'activity_members|activity_maintainers',
+                  }, {
+                    active: 'activity_organizers' == member.privileges|last,
+                    title: 'qs.roles.activity_organizer'|t,
+                    value: 'activity_members|activity_maintainers|activity_organizers',
+                  }] %}
+                  {% set hiddens = [{
+                    name: 'user',
+                    value: member.uid.value,
+                  }, {
+                    name: 'activity',
+                    value: variables.activity.nid.value,
+                  }] %}
+                  {% set ban = {
+                    action: path('qs_acl.privilege.ban'),
+                    parent: 'card'~member.uid.value,
+                    confirm: 'qs_activity.members.ban_confirm'|t,
+                    value: 'qs.roles.activity_none'|t,
+                  } %}
+                  {{ macros.radios_buttons_form(radios, path('qs_acl.privilege.toggle'), 'privilege-' ~ loop.index, hiddens, 'qs_activity.members.roles'|t, ban) }}
                 </div>
               </div>
 
@@ -112,24 +114,4 @@
     </div>
   </div>
 {% endblock %}
-
-{% macro radio_special(active, title, value) %}
-  {% set classes = [
-    'btn btn-outline-invert btn-fluid',
-    active ? 'active',
-  ] %}
-  {% set input_attributes = create_attribute({
-    'type': 'radio',
-    'name': 'privileges',
-    'title': title,
-    'data-submit': 'true',
-    'value': value,
-    'class': 'form-radio',
-    checked: active ? 'true' : 'false',
-  }) %}
-  <label class="{{ classes|join(' ') }}">
-    <input{{ input_attributes }}>
-    {{ title }}
-  </label>
-{% endmacro %}
 

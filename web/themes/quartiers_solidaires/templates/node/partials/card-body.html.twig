@@ -66,6 +66,8 @@
       'left'
     ) }}
 
+    {% set params = {event: event.nid.value} %}
+
     {# Edit button #}
     {# User should be organizer OR maintainer of the activity OR admin #}
     {% if can_manage_activity or user.hasPermission('administer nodes') %}
@@ -74,7 +76,7 @@
 
       {{ macros.card_button(
         'qs.event.dashboard'|t,
-        path('qs_activity.events.dashboard', {event: event.nid.value}),
+        path('qs_activity.events.dashboard', params),
         'checklist',
         'right'
       ) }}
@@ -87,24 +89,22 @@
       {% endif %}
 
       {% if guest_subscription_pending %}
-        {% set guests_status_btn = 'pendings_guests' %}
         {% set guests_btn = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
 
         {{ macros.card_button(
           'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests_btn}),
-          path('qs_subscription.waiting_approval', {event: event.nid.value}),
+          path('qs_subscription.waiting_approval', params),
           'wait',
           'left',
           'data-status-guest-show="pendings_guests"',
           theme
         ) }}
       {% elseif guest_subscription_confirmed %}
-        {% set guests_status_btn = 'confirmed_guests' %}
         {% set guests_btn = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
 
         {{ macros.card_button(
           'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests_btn}),
-          path('qs_subscription.subscribers', {event: event.nid.value}),
+          path('qs_subscription.subscribers', params),
           'checklist',
           'left',
           'data-status-guest-show="confirmed_guests"',

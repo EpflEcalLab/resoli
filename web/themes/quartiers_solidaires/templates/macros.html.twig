@@ -100,3 +100,24 @@
     <span class="d-none d-sm-inline">{{ label }}</span>
   </a>
 {% endmacro %}
+
+{% macro card_back_button(label, url, icon, classes, default_classes) %}
+  {% set attributes = create_attribute()
+    .addClass(default_classes ?? 'btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom')
+    .addClass(classes)
+  %}
+  <div class="col-md-8 mx-auto">
+    {% if url %}
+      <a{{ attributes }} href="{{ url }}">
+        {% block btn_content %}
+          {{ _self.icon(icon|default('arrow-left')) }}
+          {{ label }}
+        {% endblock %}
+      </a>
+    {% else %}
+      <button{{ attributes }} data-toggle="flip">
+        {{ block('btn_content') }}
+      </button>
+    {% endif %}
+  </div>
+{% endmacro %}

@@ -278,108 +278,44 @@ We use Capistrano to deploy:
 
 ## 🏆 Tests
 
-For tests you need a working database connection and for browser tests
-your Drupal installation needs to be reachable via a web server.
+```bash
+./scripts/tests/phpunit.sh [-g group] [-x exclude-group]
+./scripts/tests/behat.sh
+```
 
-### Quick & dirty
+### Kernel tests
 
-You can use the Driven Development script to run our PHPUnit scripts:
+```bash
+./vendor/bin/phpunit -x qs_functional
+```
 
-  ```bash
-  ./scripts/tests/phpunit.sh
-  ```
+### Browser tests
 
-You can also add a `--group` parameter to limit the scoop to a given group.
+1. *(optional)* Bootstrap your Drupal if you don't already have a working env.
 
-  ```bash
-  ./scripts/tests/phpunit.sh --group qs
-  ```
+```bash
+./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
+```
 
-### Complete documentation
+1. Then you can run functional tests
 
-Copy the phpunit config file:
+```bash
+./vendor/bin/phpunit -g qs_functional
+```
 
-  ```bash
-  $ cd core
-  $ cp phpunit.xml.dist phpunit.xml
-  ```
+### Behat
 
-You must provide `SIMPLETEST_BASE_URL`, Eg. `http://localhost`.
-You must provide `SIMPLETEST_DB`,
-Eg. `sqlite://localhost/build/editor_advanced_image.sqlite`.
+1. *(optional)* Bootstrap your Drupal if you don't already have a working env.
 
-Run tests using PHPUnit
+```bash
+./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
+```
 
-  ```bash
-  # You must be on the drupal-root folder - usually /web.
-  $ cd web
-  $ ../vendor/bin/phpunit -c core \
-  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
-  ```
+1. Then you can run functional tests
 
-### Unit
-
-  ```bash
-  # You must be on the drupal-root folder - usually /web.
-  $ cd web
-  $ ../vendor/bin/phpunit -c core --group [UNIT-GROUP] \
-  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
-  ```
-
-### Kernel
-
-  ```bash
-  # You must be on the drupal-root folder - usually /web.
-  $ cd web
-  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
-  SIMPLETEST_BASE_URL='http://d8.dev' \
-  ../vendor/bin/phpunit -c core --group [KERNEL-GROUP] \
-  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
-  ```
-
-### Functional
-
-  ```bash
-  # You must be on the drupal-root folder - usually /web.
-  $ cd web
-  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
-  SIMPLETEST_BASE_URL='http://d8.dev' \
-  ../vendor/bin/phpunit -c core --group [FUNCTIONAL-GROUP] \
-  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
-  ```
-
-### WebBase
-
-  ```bash
-  # You must be on the drupal-root folder - usually /web.
-  $ cd web
-  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
-  SIMPLETEST_BASE_URL='http://d8.dev' \
-  ../vendor/bin/phpunit -c core --group [WEBBASE-GROUP] \
-  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
-  ```
-
-### Javascript
-
-  ```bash
-  phantomjs --ssl-protocol=any --ignore-ssl-errors=true \
-  vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768&
-  ```
-
-  ```bash
-  # You must be on the drupal-root folder - usually /web.
-  $ cd web
-  $ SIMPLETEST_DB="sqlite://localhost//tmp/test.sqlite" \
-  SIMPLETEST_BASE_URL='http://d8.dev' \
-  ../vendor/bin/phpunit -c core --testsuite functional-javascript \
-  --group [JS-GROUP] \
-  --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error
-  ```
-
-### Debug
-
-You must provide a `BROWSERTEST_OUTPUT_DIRECTORY`,
-Eg. `/path/to/webroot/sites/simpletest/browser_output`.
+```bash
+./vendor/bin/behat
+```
 
 ## 📋 Documentations
 

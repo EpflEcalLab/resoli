@@ -30,7 +30,7 @@
 
 {% macro card_button(text, url, icon, direction, attrs, theme) %}
   <div class="col-sm-6 mb-3 mx-auto">
-    <a href="{{ url }}" class="btn btn-outline-{{ theme|default('secondary') }} btn-icon btn-white shadow-to-{{ direction|default('right') }} btn-block" {{ attrs }}>
+    <a href="{{ url }}" class="btn btn-outline-{{ theme|default('secondary') }} btn-icon btn-white shadow-to-{{ direction|default('right') }} btn-block" {{ attrs|raw }}>
       {{ _self.icon(icon) }}
       {{ text }}
     </a>

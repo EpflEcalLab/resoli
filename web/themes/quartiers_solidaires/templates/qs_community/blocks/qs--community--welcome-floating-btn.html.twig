@@ -9,7 +9,7 @@
     theme: 'invert',
     icon: 'user',
     url: path('qs_supervisor.account.dashboard', {'user': user.id}),
-  }]|merge(variables.floating_buttons) %}
+  }]|merge(variables.floating_buttons|default([])) %}
 
   {{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
 {% endblock %}

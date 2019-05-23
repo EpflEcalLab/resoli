@@ -9,7 +9,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/theme"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a[href='/fr/activities/1/user/2']" elements
     And I should see "qs_activity.floating.my_activities" link with href "/activities/1/user/2"
 
   @api
@@ -17,7 +17,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/activities/theme"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a[href='/fr/activities/1/user/8']" elements
     And I should see "qs_activity.floating.my_activities" link with href "/activities/1/user/8"
 
   @api
@@ -25,7 +25,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/fribourg/activities/theme"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a[href='/fr/fribourg/activities/add']" elements
     And I should see "qs_activity.floating.add.activity" link with href "/fribourg/activities/add"
 
 ## Activities by date(s) page
@@ -34,7 +34,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/date"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.my_activities" link with href "/activities/1/user/2"
 
   @api
@@ -42,7 +42,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/activities/date"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.my_activities" link with href "/activities/1/user/8"
 
   @api
@@ -50,7 +50,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/fribourg/activities/date"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.add.activity" link with href "/fribourg/activities/add"
 
 ## Calendar by week page
@@ -59,7 +59,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/calendar/weekly"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.my_subscriptions" link with href "/events/1/user/2"
 
 ## Calendar by month page
@@ -68,7 +68,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/calendar/monthly"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.my_subscriptions" link with href "/events/1/user/2"
 
 ## Activity detail page
@@ -77,7 +77,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:manager+lausanne@antistatique.net"
 
   @api
@@ -85,14 +85,14 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/atelier-bougies"
     And the response status code should be 200
-    Then I should see 0 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 0 ".floating a" elements
 
   @api
   Scenario: Logged as Member of Lausanne, when reaching the Activity N°5, I don't see any floating button
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/accueil-cafe"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:organizer+lausanne@antistatique.net"
 
   @api
@@ -100,7 +100,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/accueil-cafe"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.dashboard.activity" link with href "/lausanne/activities/accueil-cafe/dashboard"
 
   @api
@@ -108,7 +108,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/atelier-creatif"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.dashboard.activity" link with href "/lausanne/activities/atelier-creatif/dashboard"
 
   @api
@@ -116,7 +116,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.add.event" link with href "/lausanne/activities/sorties-theatre/events/add"
 
   @api
@@ -124,7 +124,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/activities/sorties-theatre"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_activity.floating.contact.organizers_and_maintainers" link with href "mailto:organizer+lausanne@antistatique.net,manager+lausanne@antistatique.net"
 
 ## Community Welcome
@@ -133,17 +133,17 @@ Feature: Floating actions buttons
     Given I am logged in as user "admin"
     When I am on "/lausanne/welcome"
     And the response status code should be 200
-    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/1/dashboard"
     And I should see "qs_menu.links.account.communities" link with href "/lausanne/dashboard"
     When I am on "/fribourg/welcome"
     And the response status code should be 200
-    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/1/dashboard"
     And I should see "qs_menu.links.account.communities" link with href "/fribourg/dashboard"
     When I am on "/geneve/welcome"
     And the response status code should be 200
-    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/1/dashboard"
     And I should see "qs_menu.links.account.communities" link with href "/geneve/dashboard"
 
@@ -152,7 +152,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne"
     When I am on "/lausanne/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/2/dashboard"
 
   @api
@@ -160,7 +160,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/welcome"
     And the response status code should be 200
-    Then I should see 2 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 2 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/5/dashboard"
     And I should see "qs_menu.links.account.communities" link with href "/lausanne/dashboard"
 
@@ -169,7 +169,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/6/dashboard"
 
   @api
@@ -177,7 +177,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/lausanne/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/8/dashboard"
 
   @api
@@ -185,7 +185,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/fribourg/welcome"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_supervisor.floating.my_account" link with href "/account/8/dashboard"
 
 # Community Dashboard
@@ -194,7 +194,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/dashboard"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_menu.links.account.communities" link with href "/lausanne/dashboard"
 
   @api
@@ -202,7 +202,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/dashboard/members"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_community.dashboard.members" link with href "/lausanne/dashboard"
 
   @api
@@ -210,7 +210,7 @@ Feature: Floating actions buttons
     Given I am logged in as user "manager+lausanne"
     When I am on "/lausanne/dashboard/waiting-approval"
     And the response status code should be 200
-    Then I should see 1 "#block-floatingactionsbuttonsblock a" elements
+    Then I should see 1 ".floating a" elements
     And I should see "qs_community.dashboard.waiting_approval" link with href "/lausanne/dashboard"
 
 # Subscriptions Dashboard
@@ -228,11 +228,11 @@ Feature: Floating actions buttons
     Given I am logged in as user "admin"
     When I am on "/photos/activity/2/delete?photos[42]=42&photos[45]=45"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.photo.delete" link with href "#"
+    And I should see "qs.photo.delete" link with href "fr/photos/activity/2/delete"
 
 # Form comments Photos
   Scenario: In the Form comments Photo, I must see the "Community Dashboard" button
     Given I am logged in as user "admin"
     When I am on "/photos/activity/3/comment?photos[50]=50"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs_photo.form.comment.title" link with href "#"
+    And I should see "qs_photo.form.comment.title" link with href "fr/photos/activity/3/comment"

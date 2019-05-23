@@ -12,7 +12,6 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * @group qs_kernel
  * @group qs_badge
  * @group qs_badge_kernel
- * @group kevin
  */
 class BadgeManagerTest extends ResoliKernelTestBase {
 
@@ -50,7 +49,6 @@ class BadgeManagerTest extends ResoliKernelTestBase {
 
   /**
    * @covers ::countEventsByDates
-   * @group kevin
    */
   public function testCountEventsByDatesDontMixCommunities() {
     $communities = $this->seedCommunities(2);

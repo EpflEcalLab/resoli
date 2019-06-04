@@ -28,6 +28,21 @@ qs_subscription.subscribers:
         event:
           type: entity:node
 
+## Export of subscribers by Event.
+qs_subscription.subscribers.export:
+    path: '/events/{event}/dashboard/subscribers/export'
+    defaults:
+      _controller: '\Drupal\qs_subscription\Controller\SubscribersController::export'
+      _title: 'qs_subscription.subscribers.export.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_subscription\Controller\SubscribersController::access'
+      event: \d+
+    options:
+      parameters:
+        event:
+          type: entity:node
+
 # User Subscriptions
 qs_subscription.user.collection:
     path: '/events/{community}/user/{user}'

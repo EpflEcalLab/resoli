@@ -86,6 +86,7 @@
 {% endblock %}
 
 {% block modal_footer %}
+ HEAD
   {% set modal_footer_button_classes = 'btn-outline-secondary btn-outline-invert' %}
   {# Go to Waiting Approval #}
   {% set modal_footer_buttons = [
@@ -104,6 +105,18 @@
         label: 'qs.contact_all'|t,
         icon: 'mail',
         url: 'mailto:?bcc=' ~ variables.mailto|join(','),
+        classes: modal_footer_button_classes,
+      },
+    ]) %}
+  {% endif %}
+
+  {# Download #}
+  {% if variables.subscriptions %}
+    {% set modal_footer_buttons = modal_footer_buttons|merge([
+      {
+        label: 'qs_subscription.subscribers.export.download'|t,
+        icon: 'download',
+        url: path('qs_subscription.subscribers.export', {event: variables.event.nid.value}),
         classes: modal_footer_button_classes,
       },
     ]) %}

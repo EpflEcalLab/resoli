@@ -210,3 +210,18 @@ qs_activity.activities.members:
       parameters:
         activity:
           type: entity:node
+
+## Export of Members by Activity.
+qs_activity.activities.members.export:
+    path: '/activities/{activity}/dashboard/members/export'
+    defaults:
+      _controller: '\Drupal\qs_activity\Controller\MembersController::export'
+      _title: 'qs_activity.activities.members.export.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_activity\Controller\MembersController::access'
+      activity: \d+
+    options:
+      parameters:
+        activity:
+          type: entity:node

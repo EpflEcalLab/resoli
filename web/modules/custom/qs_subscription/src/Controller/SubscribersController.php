@@ -147,7 +147,7 @@ class SubscribersController extends ControllerBase {
   }
 
   /**
-   * Subscribers export.
+   * Export the complete list of subscribed account to the event.
    */
   public function export(NodeInterface $event) {
     $activity = $event->field_activity->entity;

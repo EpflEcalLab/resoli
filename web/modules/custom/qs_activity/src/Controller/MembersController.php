@@ -195,18 +195,18 @@ class MembersController extends ControllerBase {
       foreach ($member->privileges as $privilege) {
         $acl = '';
         switch ($privilege) {
-            case 'activity_maintainer':
-              $acl = $this->t('qs.roles.activity_maintainer');
-              break;
+          case 'activity_maintainer':
+            $acl = $this->t('qs.roles.activity_maintainer');
+            break;
 
-            case 'activity_organizer':
-              $acl = $this->t('qs.roles.activity_organizer');
-              break;
+          case 'activity_organizer':
+            $acl = $this->t('qs.roles.activity_organizer');
+            break;
 
-            default:
-            case 'activity_member':
-              $acl = $this->t('qs.roles.activity_member');
-              break;
+          default:
+          case 'activity_member':
+            $acl = $this->t('qs.roles.activity_member');
+            break;
         }
 
         $this->excelExporter->addRow([

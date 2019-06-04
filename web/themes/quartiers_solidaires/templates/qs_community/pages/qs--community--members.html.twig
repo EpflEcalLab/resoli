@@ -109,5 +109,18 @@
       classes: modal_footer_button_classes,
     },
   ] %}
+
+  {# Download #}
+  {% if variables.members %}
+    {% set modal_footer_buttons = modal_footer_buttons|merge([
+      {
+        label: 'qs_community.members.export.download'|t,
+        icon: 'download',
+        url: path('qs_community.members.export', {community: variables.community.tid.value}),
+        classes: modal_footer_button_classes,
+      },
+    ]) %}
+  {% endif %}
+
   {{ macros.modal_footer_buttons(modal_footer_buttons) }}
 {% endblock %}

@@ -58,14 +58,6 @@ class Excel {
 
     $this->spreadsheet->getDefaultStyle()->getFont()->setName('Calibri');
     $this->spreadsheet->getDefaultStyle()->getFont()->setSize(10);
-
-    $highest_col = $worksheet->getHighestColumn();
-    $highest_col_index = Coordinate::columnIndexFromString($highest_col);
-    for ($i = 1; $i < $highest_col_index; $i++) {
-      $worksheet
-        ->getColumnDimension(Coordinate::stringFromColumnIndex($i))
-        ->setWidth('auto');
-    }
   }
 
   /**
@@ -78,6 +70,15 @@ class Excel {
 
     // Merge the title into one single cell.
     $worksheet->mergeCells('A1:' . $worksheet->getHighestColumn() . '1');
+
+    $highest_col = $worksheet->getHighestColumn();
+    $highest_col_index = Coordinate::columnIndexFromString($highest_col);
+
+    for ($i = 1; $i <= $highest_col_index; $i++) {
+      $worksheet
+        ->getColumnDimension(Coordinate::stringFromColumnIndex($i))
+        ->setWidth(40);
+    }
   }
 
   /**

@@ -40,11 +40,12 @@ class Excel {
    */
   public function setTitle($title) {
     $worksheet = $this->spreadsheet->getActiveSheet();
+    $safe_title = htmlspecialchars_decode($title, ENT_QUOTES);
 
     $this->spreadsheet->getProperties()
-      ->setTitle($title);
+      ->setTitle($safe_title);
 
-    $worksheet->setCellValue('A1', $title);
+    $worksheet->setCellValue('A1', $safe_title);
     $worksheet->getStyle('A1')->getFont()->setBold(TRUE);
     $worksheet->getStyle('A1')->getFont()->setSize(20);
   }
@@ -93,7 +94,9 @@ class Excel {
       $cell = $worksheet->getCellByColumnAndRow($i++, '3');
       $cell->getStyle()->getFont()->setBold(TRUE);
       $cell->getStyle()->getFont()->setSize(16);
-      $cell->setValue($item);
+
+      $safe_string = htmlspecialchars_decode($item, ENT_QUOTES);
+      $cell->setValue($safe_string);
     }
   }
 
@@ -122,7 +125,8 @@ class Excel {
           break;
 
         default:
-          $cell->setValue($item);
+          $safe_string = htmlspecialchars_decode($item, ENT_QUOTES);
+          $cell->setValue($safe_string);
           break;
       }
 

@@ -10,6 +10,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Drupal\Component\Utility\Html;
+use Drupal\Component\Datetime\DateTimePlus;
 
 /**
  * Excel exporter for Quartiers-Solidaires.
@@ -54,8 +55,6 @@ class Excel {
    * Set the default styles.
    */
   public function normalize() {
-    $worksheet = $this->spreadsheet->getActiveSheet();
-
     $this->spreadsheet->getDefaultStyle()->getFont()->setName('Calibri');
     $this->spreadsheet->getDefaultStyle()->getFont()->setSize(10);
   }
@@ -117,10 +116,10 @@ class Excel {
       $cell = $worksheet->getCellByColumnAndRow($col++, $row);
 
       switch (TRUE) {
-        case $item instanceof \DateTime:
+        case $item instanceof DateTimePlus:
           // Set the number format mask so that the excel timestamp will be
           // displayed as a human-readable date/time.
-          $date = Date::PHPToExcel($item);
+          $date = Date::PHPToExcel($item->getTimestamp());
           $cell->getStyle()->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_DATE_DATETIME);
           $cell->setValue($date);
           break;

@@ -440,7 +440,7 @@ class EventAddForm extends FormBasic {
     $data['venue_lat']     = $form_state->getValue('latitude');
     $data['venue_long']    = $form_state->getValue('longitude');
 
-    // // Create the new event.
+    // Create the new event.
     $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
     drupal_set_message($this->t('qs_activity.events.form.add.success'));
     $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);

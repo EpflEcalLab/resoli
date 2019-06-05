@@ -178,6 +178,7 @@ class SubscribersController extends ControllerBase {
       $this->t('qs_subscription.subscribers.export.header.firstname.label')->render(),
       $this->t('qs_subscription.subscribers.export.header.lastname.label')->render(),
       $this->t('qs_subscription.subscribers.export.header.mail.label')->render(),
+      $this->t('qs_subscription.subscribers.export.header.phone.label')->render(),
       $this->t('qs_subscription.subscribers.export.header.date.label')->render(),
     ]);
 
@@ -189,6 +190,7 @@ class SubscribersController extends ControllerBase {
         $subscription->getOwner()->entity->field_firstname->value,
         $subscription->getOwner()->entity->field_lastname->value,
         $subscription->getOwner()->entity->getEmail(),
+        $subscription->getOwner()->entity->field_phone->value,
         $created,
       ]);
     }

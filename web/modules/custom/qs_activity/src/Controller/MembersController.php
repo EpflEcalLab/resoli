@@ -189,6 +189,7 @@ class MembersController extends ControllerBase {
       $this->t('qs_activity.activities.members.export.header.firstname.label')->render(),
       $this->t('qs_activity.activities.members.export.header.lastname.label')->render(),
       $this->t('qs_activity.activities.members.export.header.mail.label')->render(),
+      $this->t('qs_activity.activities.members.export.header.phone.label')->render(),
     ]);
 
     foreach ($activity_members as $member) {
@@ -214,6 +215,7 @@ class MembersController extends ControllerBase {
           $member->field_firstname->value,
           $member->field_lastname->value,
           $member->getEmail(),
+          $member->field_phone->value,
         ]);
       }
 

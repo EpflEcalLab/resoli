@@ -109,19 +109,6 @@
       classes: modal_footer_button_classes,
     },
   ] %}
-  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
-{% endblock %}
-
-{% block modal_footer %}
-  {% set modal_footer_button_classes = 'btn-primary btn-outline-invert' %}
-  {% set modal_footer_buttons = [
-    {
-      label: 'qs.contact_all'|t,
-      icon: 'mail',
-      url: 'mailto:?bcc=' ~ variables.mailto|join(','),
-      classes: modal_footer_button_classes,
-    },
-  ] %}
 
   {% if variables.members %}
     {% set modal_footer_buttons = modal_footer_buttons|merge([

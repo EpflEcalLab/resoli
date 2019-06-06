@@ -115,6 +115,7 @@ class RegisterForm extends FormBase {
         'sub_description' => $this->t('qs_auth.register_form.step1.sub_description'),
         'class' => [
           'tab-pane',
+          'container-fluid',
         ],
         'role' => 'tabpanel',
       ],
@@ -150,6 +151,9 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step2'),
         'sub_description' => $this->t('qs_auth.register_form.step2.sub_description'),
+        'class' => [
+          'container-fluid',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -179,6 +183,9 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step3'),
         'sub_description' => $this->t('qs_auth.register_form.step3.sub_description'),
+        'class' => [
+          'container-fluid',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -207,6 +214,9 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step4'),
         'sub_description' => $this->t('qs_auth.register_form.step4.sub_description'),
+        'class' => [
+          'container-fluid',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',

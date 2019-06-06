@@ -9,6 +9,7 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * MembersController.
@@ -84,8 +85,10 @@ class MembersController extends ControllerBase {
   /**
    * Members page.
    */
-  public function members(TermInterface $community) {
+  public function members(Request $request, TermInterface $community) {
+    $keywords = $request->get('keywords');
     $variables['community'] = $community;
+
     $render = [
       '#theme'     => 'qs_community_members_page',
       '#variables' => $variables,
@@ -99,7 +102,16 @@ class MembersController extends ControllerBase {
       ],
     ];
 
-    $query = $this->privilegeManager->queryMembersWithPrivileges($community, $this->configuration['limit']);
+    $filters = [];
+    if (!empty($keywords)) {
+      $filters = [
+        'mail' => $keywords,
+        'firstname' => $keywords,
+        'lastname' => $keywords,
+      ];
+    }
+
+    $query = $this->privilegeManager->queryMembersWithPrivileges($community, $this->configuration['limit'], $filters);
     if (!$query) {
       return $render;
     }

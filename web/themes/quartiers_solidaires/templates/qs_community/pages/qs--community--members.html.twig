@@ -14,6 +14,8 @@
 ] %}
 
 {% block modal_content %}
+  {{ bamboo_render_form('qs_community', 'MembersFilterForm') }}
+
   {% if variables.members %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
       {% for member in variables.members %}

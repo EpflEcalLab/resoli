@@ -82,30 +82,33 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>{{ 'qs_subscription.waiting_approval.empty'|t }}</p>
+    <p class="text-center">{{ 'qs_subscription.waiting_approval.empty'|t }}</p>
   {% endif %}
 
     {{ variables.pager }}
 {% endblock %}
 
 {% block modal_footer %}
-  <div class="row mb-3 mt-3">
-    <div class="col-sm-6">
-      {# Go to Subscribers #}
-      <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.subscribers', {event: variables.event.nid.value}) }}">
-        {{ macros.icon('register') }}
-        {{ 'qs.event.subscriptions.subscribers'|t }}
-      </a>
-    </div>
-    <div class="col-sm-6">
-      {% if variables.mailto %}
-        {# Contact all pending members #}
-        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ variables.mailto|join(',') }}">
-          {{ macros.icon('mail') }}
-          {{ 'qs.contact_all'|t }}
-        </a>
-      {% endif %}
-    </div>
-  </div>
-{% endblock %}
+  {% set modal_footer_button_classes = 'btn-outline-secondary btn-outline-invert' %}
+  {% set modal_footer_buttons = [
+    {
+      label: 'qs.event.subscriptions.subscribers'|t,
+      icon: 'register',
+      url: path('qs_subscription.subscribers', {event: variables.event.nid.value}),
+      classes: modal_footer_button_classes,
+    },
+  ] %}
 
+  {# Contact all pending members #}
+  {% if variables.mailto %}
+    {% set modal_footer_buttons = modal_footer_buttons|merge([
+      {
+        label: 'qs.contact_all'|t,
+        icon: 'mail',
+        url: 'mailto:?bcc=' ~ variables.mailto|join(',')
+      },
+    ]) %}
+  {% endif %}
+
+  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
+{% endblock %}

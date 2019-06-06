@@ -100,11 +100,15 @@
 
 {% block modal_footer %}
   {% if variables.activities %}
-    <div class="text-center">
-      <a href="{{ path('qs_photo.form.add', {community: variables.community.tid.value}) }}" class="btn btn-secondary btn-icon shadow-to-bottom">
-        {{ macros.icon('plus') }}
-        {{ 'qs.photos.add_photos'|t }}
-      </a>
-    </div>
+    {% set modal_footer_button_classes = 'btn-secondary' %}
+    {% set modal_footer_buttons = [
+      {
+        label: 'qs.photos.add_photos'|t,
+        icon: 'plus',
+        url: path('qs_photo.form.add', {community: variables.community.tid.value}),
+        classes: modal_footer_button_classes,
+      },
+    ] %}
+    {{ macros.modal_footer_buttons(modal_footer_buttons) }}
   {% endif %}
 {% endblock %}

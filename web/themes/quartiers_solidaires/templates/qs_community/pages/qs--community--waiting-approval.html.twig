@@ -96,26 +96,24 @@
 {% endblock %}
 
 {% block modal_footer %}
-  <div class="row mb-3">
-    <div class="col-lg-10 offset-lg-1">
-      <div class="row">
-        <div class="col-sm-6">
-          {# Go to Members #}
-          <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.members', {community: variables.community.tid.value}) }}">
-            {{ macros.icon('happy') }}
-            {{ 'qs_community.dashboard.members'|t }}
-          </a>
-        </div>
-        <div class="col-sm-6">
-          {# Go to Community Dashboard #}
-          <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
-            {{ macros.icon('checklist') }}
-            {{ 'qs.previous.to_community_dashboard'|t }}
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% set modal_footer_button_classes = 'btn-outline-danger btn-outline-invert' %}
+  {# Go to Members #}
+  {# Go to Community Dashboard #}
+  {% set modal_footer_buttons = [
+    {
+      label: 'qs_community.dashboard.members'|t,
+      icon: 'happy',
+      url: path('qs_community.members', {community: variables.community.tid.value}),
+      classes: modal_footer_button_classes,
+    },
+    {
+      label: 'qs.previous.to_community_dashboard'|t,
+      icon: 'checklist',
+      url:path('qs_community.dashboard', {community: variables.community.tid.value}),
+      classes: modal_footer_button_classes,
+    },
+  ] %}
+  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
 {% endblock %}
 
 

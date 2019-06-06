@@ -171,3 +171,30 @@
     {{ title }}
   </label>
 {% endmacro %}
+
+{% macro modal_footer_buttons(buttons, default_classes) %}
+  <div class="d-flex flex-wrap justify-content-center mb-3 mt-3">
+    {% for button in buttons %}
+      {{ _self.modal_footer_button(button, default_classes) }}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro modal_footer_button(button, default_classes) %}
+  {% set default_classes = default_classes|default([
+    'btn',
+    button.icon ? 'btn-icon',
+    'shadow-to-bottom',
+    'mx-2',
+    'mb-2',
+  ]) %}
+  {% set attributes = create_attribute({
+    'class': button.classes,
+    'href': button.url,
+  }) %}
+  <a{{ attributes.addClass(default_classes) }}>
+    {{ _self.icon(button.icon) }}
+    {{ button.label }}
+  </a>
+{% endmacro %}
+

@@ -86,25 +86,30 @@
 {% endblock %}
 
 {% block modal_footer %}
-  <div class="row mb-3 mt-5">
-    <div class="col-sm-6">
-      {# Go to Waiting Approval #}
-      <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_subscription.waiting_approval', {event: variables.event.nid.value}) }}">
-        {{ macros.icon('wait') }}
-        {{ 'qs.event.subscriptions.waiting_approval'|t }}
-      </a>
-    </div>
-    <div class="col-sm-6">
-      {% if variables.mailto %}
-        {# Contact all members #}
-        <a class="btn btn-outline-secondary btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="mailto:?bcc={{ variables.mailto|join(',') }}">
-          {{ macros.icon('mail') }}
-          {{ 'qs.contact_all'|t }}
-        </a>
-      {% endif %}
-    </div>
-  </div>
-{% endblock %}
+  {% set modal_footer_button_classes = 'btn-outline-secondary btn-outline-invert' %}
+  {# Go to Waiting Approval #}
+  {% set modal_footer_buttons = [
+    {
+      label: 'qs.event.subscriptions.waiting_approval'|t,
+      icon: 'wait',
+      url: path('qs_subscription.waiting_approval', {event: variables.event.nid.value}),
+      classes: modal_footer_button_classes,
+    },
+  ] %}
 
+  {# Contact all members #}
+  {% if variables.mailto %}
+    {% set modal_footer_buttons = modal_footer_buttons|merge([
+      {
+        label: 'qs.contact_all'|t,
+        icon: 'mail',
+        url: 'mailto:?bcc=' ~ variables.mailto|join(','),
+        classes: modal_footer_button_classes,
+      },
+    ]) %}
+  {% endif %}
+
+  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
+{% endblock %}
 
 

@@ -100,18 +100,15 @@
 {% endblock %}
 
 {% block modal_footer %}
-  <div class="modal-footer sticky-bottom">
-    <div class="container flex-grow">
-      {% if variables.mailto %}
-        <p class="text-center">
-          <a class="btn btn-primary btn-icon shadow-to-bottom btn-outline-invert" href="mailto:?bcc={{ variables.mailto|join(',') }}">
-            {{ macros.icon('mail') }}
-            {{ 'qs.contact_all'|t }}
-          </a>
-        </p>
-      {% endif %}
-      {{ variables.pager }}
-    </div>
-  </div>
+  {% set modal_footer_button_classes = 'btn-primary btn-outline-invert' %}
+  {% set modal_footer_buttons = [
+    {
+      label: 'qs.contact_all'|t,
+      icon: 'mail',
+      url: 'mailto:?bcc=' ~ variables.mailto|join(','),
+      classes: modal_footer_button_classes,
+    },
+  ] %}
+  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
 {% endblock %}
 

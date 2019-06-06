@@ -30,7 +30,7 @@ Feature: Activity Defaults Form
       | title | body | venue | contribution | contact-name | contact-phone | contact-mail |
       | Accueil Café (defaults) | Body (defaults) | Venue (defaults) | 20 CHF | John | +01 234 56 78 | john.doe@example.org |
     And I press "edit-submit"
-    And 0 mails should be sent
+    And 0 mail should be sent
 
   @api @preserveDatabase
   Scenario: When editting the Defaults Values form of Activity, the values should be alterd & stored in the database

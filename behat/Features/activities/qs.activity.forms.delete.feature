@@ -23,4 +23,4 @@ Feature: Activity Delete Form
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/theme"
     And I should see "qs_activity.activities.form.delete.success Rencontres Réseaux Solidaires" in the ".alert" element
-    And 0 mails should be sent
+    And 0 mail should be sent

@@ -15,5 +15,5 @@ Feature: Event Delete Form
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe"
     And I should see "qs_event.events.form.delete.success Accueil Café" in the ".alert" element
-    And 1 mails should be sent
+    And 1 mail should be sent
     Then A mail as been sent to "organizer+lausanne@antistatique.net" with subject "qs.mail.event.deleted.subject Resoli Accueil Café"

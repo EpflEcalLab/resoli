@@ -29,7 +29,7 @@ Feature: Activity Visibility Form
       | community-can-subscribe | community-access-contact | community-access-detail | community-access-story | member-create-story | community-access-gallery | member-create-gallery |
       | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
     And I press "edit-submit"
-    And 0 mails should be sent
+    And 0 mail should be sent
 
   @api @preserveDatabase
   Scenario: When editting the Visibility form of Activity, the values should be alterd & stored in the database

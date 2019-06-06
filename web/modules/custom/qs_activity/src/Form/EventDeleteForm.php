@@ -107,7 +107,7 @@ class EventDeleteForm extends EventEditFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $event = $this->nodeStorage->load($form_state->get('event'));
     $now = new DrupalDateTime();
 
     // Assert the event has not started.
@@ -124,7 +124,7 @@ class EventDeleteForm extends EventEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $event = $this->nodeStorage->load($form_state->get('event'));
     $activity = $event->field_activity->entity;
 
     $this->eventManager->sendDeleted($event, $this->currentUser->getAccount());

@@ -170,9 +170,9 @@ class MembersController extends ControllerBase {
     // Load user entities without privileges.
     $activity_members = $this->userStorage->loadMultiple($uids);
 
-    // Add privileges to users.
+    // Add highest privilege by users.
     foreach ($activity_members as $activity_member) {
-      $activity_member->privileges = $privileges[$activity_member->id()];
+      $activity_member->privilege = end($privileges[$activity_member->id()]);
     }
 
     $this->excelExporter->init();
@@ -193,31 +193,29 @@ class MembersController extends ControllerBase {
     ]);
 
     foreach ($activity_members as $member) {
-      foreach ($member->privileges as $privilege) {
-        $acl = '';
-        switch ($privilege) {
-          case 'activity_maintainer':
-            $acl = $this->t('qs.roles.activity_maintainer');
-            break;
+      $privilege = '';
+      switch ($member->privilege) {
+        case 'activity_maintainers':
+          $privilege = $this->t('qs.roles.activity_maintainer');
+          break;
 
-          case 'activity_organizer':
-            $acl = $this->t('qs.roles.activity_organizer');
-            break;
+        case 'activity_organizers':
+          $privilege = $this->t('qs.roles.activity_organizer');
+          break;
 
-          default:
-          case 'activity_member':
-            $acl = $this->t('qs.roles.activity_member');
-            break;
-        }
-
-        $this->excelExporter->addRow([
-          $acl,
-          $member->field_firstname->value,
-          $member->field_lastname->value,
-          $member->getEmail(),
-          $member->field_phone->value,
-        ]);
+        default:
+        case 'activity_members':
+          $privilege = $this->t('qs.roles.activity_member');
+          break;
       }
+
+      $this->excelExporter->addRow([
+        $privilege,
+        $member->field_firstname->value,
+        $member->field_lastname->value,
+        $member->getEmail(),
+        $member->field_phone->value,
+      ]);
 
     }
     $this->excelExporter->finalize();

@@ -182,8 +182,13 @@ class MembersController extends ControllerBase {
       '@activity' => $activity->getTitle(),
       '@date' => $now->format('d-m-Y'),
     ]);
+    $summary = $this->t('qs_activity.activities.members.export.summary @total', [
+      '@total' => count($activity_members),
+    ]);
+    $disclaimer = $this->t('qs_activity.activities.members.export.disclaimer');
 
     $this->excelExporter->setTitle($title->render());
+    $this->excelExporter->setSummary($summary->render());
     $this->excelExporter->addHeader([
       $this->t('qs_activity.activities.members.export.header.privilege.label')->render(),
       $this->t('qs_activity.activities.members.export.header.firstname.label')->render(),
@@ -218,6 +223,7 @@ class MembersController extends ControllerBase {
       ]);
 
     }
+    $this->excelExporter->setFooter($disclaimer->render());
     $this->excelExporter->finalize();
 
     return $this->excelExporter->download();

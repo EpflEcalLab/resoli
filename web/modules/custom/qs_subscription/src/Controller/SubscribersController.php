@@ -172,8 +172,13 @@ class SubscribersController extends ControllerBase {
       '@activity' => $activity->getTitle(),
       '@date'     => $now->format('d-m-Y'),
     ]);
+    $summary = $this->t('qs_subscription.subscribers.export.summary @total', [
+      '@total' => count($subscriptions),
+    ]);
+    $disclaimer = $this->t('qs_subscription.subscribers.export.disclaimer');
 
     $this->excelExporter->setTitle($title->render());
+    $this->excelExporter->setSummary($summary->render());
     $this->excelExporter->addHeader([
       $this->t('qs_subscription.subscribers.export.header.firstname.label')->render(),
       $this->t('qs_subscription.subscribers.export.header.lastname.label')->render(),
@@ -194,6 +199,7 @@ class SubscribersController extends ControllerBase {
         $created,
       ]);
     }
+    $this->excelExporter->setFooter($disclaimer->render());
     $this->excelExporter->finalize();
 
     return $this->excelExporter->download();

@@ -103,8 +103,13 @@ class EventsController extends ControllerBase {
       '@community' => $community->getName(),
       '@date' => $now->format('d-m-Y'),
     ]);
+    $summary = $this->t('qs_community.events.export.summary @total', [
+      '@total' => count($events),
+    ]);
+    $disclaimer = $this->t('qs_community.events.export.disclaimer');
 
     $this->excelExporter->setTitle($title->render());
+    $this->excelExporter->setSummary($summary->render());
     $this->excelExporter->addHeader([
       $this->t('qs_community.events.export.header.activity.label')->render(),
       $this->t('qs_community.events.export.header.event.label')->render(),
@@ -129,6 +134,7 @@ class EventsController extends ControllerBase {
         $event->field_contact_phone->value,
       ]);
     }
+    $this->excelExporter->setFooter($disclaimer->render());
     $this->excelExporter->finalize();
 
     return $this->excelExporter->download();

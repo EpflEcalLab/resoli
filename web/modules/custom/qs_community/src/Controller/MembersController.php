@@ -173,8 +173,13 @@ class MembersController extends ControllerBase {
       '@community' => $community->getName(),
       '@date' => $now->format('d-m-Y'),
     ]);
+    $summary = $this->t('qs_community.members.export.summary @total', [
+      '@total' => count($community_members),
+    ]);
+    $disclaimer = $this->t('qs_community.members.export.disclaimer');
 
     $this->excelExporter->setTitle($title->render());
+    $this->excelExporter->setSummary($summary->render());
     $this->excelExporter->addHeader([
       $this->t('qs_community.members.export.header.privilege.label')->render(),
       $this->t('qs_community.members.export.header.firstname.label')->render(),
@@ -209,6 +214,7 @@ class MembersController extends ControllerBase {
       ]);
 
     }
+    $this->excelExporter->setFooter($disclaimer->render());
     $this->excelExporter->finalize();
 
     return $this->excelExporter->download();

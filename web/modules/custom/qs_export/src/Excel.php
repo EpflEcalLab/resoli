@@ -27,6 +27,39 @@ class Excel {
   private $spreadsheet;
 
   /**
+   * Reminder if the spreadsheet has a title.
+   *
+   * @var array
+   */
+  private $title = [
+    'visible' => FALSE,
+    'col' => 'A',
+    'row' => '1',
+  ];
+
+  /**
+   * Reminder if the spreadsheet has a summary.
+   *
+   * @var array
+   */
+  private $summary = [
+    'visible' => FALSE,
+    'col' => 'A',
+    'row' => '2',
+  ];
+
+  /**
+   * Reminder if the spreadsheet has a summary.
+   *
+   * @var array
+   */
+  private $footer = [
+    'visible' => FALSE,
+    'col' => 'A',
+    'row' => NULL,
+  ];
+
+  /**
    * Initialize the spreadsheet.
    */
   public function init() {
@@ -40,15 +73,53 @@ class Excel {
    *   The caption to use.
    */
   public function setTitle($title) {
+    $this->title['visible'] = TRUE;
+
     $worksheet = $this->spreadsheet->getActiveSheet();
     $safe_title = htmlspecialchars_decode($title, ENT_QUOTES);
 
     $this->spreadsheet->getProperties()
       ->setTitle($safe_title);
 
-    $worksheet->setCellValue('A1', $safe_title);
-    $worksheet->getStyle('A1')->getFont()->setBold(TRUE);
-    $worksheet->getStyle('A1')->getFont()->setSize(20);
+    $worksheet->setCellValue($this->title['col'] . $this->title['row'], $safe_title);
+    $worksheet->getStyle($this->title['col'] . $this->title['row'])->getFont()->setBold(TRUE);
+    $worksheet->getStyle($this->title['col'] . $this->title['row'])->getFont()->setSize(20);
+  }
+
+  /**
+   * Set the summary.
+   *
+   * @param string $summary
+   *   The summary to use.
+   */
+  public function setSummary($summary) {
+    $this->summary['visible'] = TRUE;
+
+    $worksheet = $this->spreadsheet->getActiveSheet();
+    $safe_summary = htmlspecialchars_decode($summary, ENT_QUOTES);
+
+    $worksheet->setCellValue($this->summary['col'] . $this->summary['row'], $safe_summary);
+    $worksheet->getStyle($this->summary['col'] . $this->summary['row'])->getFont()->setSize(11);
+  }
+
+  /**
+   * Set the footer.
+   *
+   * @param string $footer
+   *   The footer to use.
+   */
+  public function setFooter($footer) {
+    $this->footer['visible'] = TRUE;
+
+    $worksheet = $this->spreadsheet->getActiveSheet();
+    $safe_footer = htmlspecialchars_decode($footer, ENT_QUOTES);
+
+    $this->footer['row'] = $worksheet->getHighestRow() + 3;
+
+    $worksheet->setCellValue($this->footer['col'] . $this->footer['row'], $safe_footer);
+    $worksheet->getStyle($this->footer['col'] . $this->footer['row'])->getFont()->setItalic(TRUE);
+    $worksheet->getStyle($this->footer['col'] . $this->footer['row'])->getFont()->getColor()->setARGB('535353');
+    $worksheet->getStyle($this->footer['col'] . $this->footer['row'])->getFont()->setSize(9);
   }
 
   /**
@@ -68,7 +139,15 @@ class Excel {
     $worksheet = $this->spreadsheet->getActiveSheet();
 
     // Merge the title into one single cell.
-    $worksheet->mergeCells('A1:' . $worksheet->getHighestColumn() . '1');
+    if ($this->title['visible']) {
+      $worksheet->mergeCells($this->title['col'] . $this->title['row'] . ':' . $worksheet->getHighestColumn() . $this->title['row']);
+    }
+    if ($this->summary['visible']) {
+      $worksheet->mergeCells($this->summary['col'] . $this->summary['row'] . ':' . $worksheet->getHighestColumn() . $this->summary['row']);
+    }
+    if ($this->footer['visible']) {
+      $worksheet->mergeCells($this->footer['col'] . $this->footer['row'] . ':' . $worksheet->getHighestColumn() . $this->footer['row']);
+    }
 
     $highest_col = $worksheet->getHighestColumn();
     $highest_col_index = Coordinate::columnIndexFromString($highest_col);
@@ -88,10 +167,11 @@ class Excel {
    */
   public function addHeader(array $items) {
     $worksheet = $this->spreadsheet->getActiveSheet();
+    $row = $worksheet->getHighestRow() + 2;
 
     $i = 1;
     foreach ($items as $item) {
-      $cell = $worksheet->getCellByColumnAndRow($i++, '3');
+      $cell = $worksheet->getCellByColumnAndRow($i++, $row);
       $cell->getStyle()->getFont()->setBold(TRUE);
       $cell->getStyle()->getFont()->setSize(16);
 

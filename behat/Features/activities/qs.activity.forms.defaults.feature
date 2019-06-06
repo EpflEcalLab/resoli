@@ -4,7 +4,7 @@ Feature: Activity Defaults Form
   Scenario: When reaching the Defaults Values form of Activity, the fields should be prefilled with entity values
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/accueil-cafe/edit/defaults"
-    Then I should see 12 "#qs-activity-edit-defaults-form input" elements
+    Then I should see 11 "#qs-activity-edit-defaults-form input" elements
     And the "edit-title" field should contain ""
     And the "edit-body" field should contain ""
     And the "edit-venue" field should contain ""
@@ -30,7 +30,7 @@ Feature: Activity Defaults Form
       | title | body | venue | contribution | contact-name | contact-phone | contact-mail |
       | Accueil Café (defaults) | Body (defaults) | Venue (defaults) | 20 CHF | John | +01 234 56 78 | john.doe@example.org |
     And I press "edit-submit"
-    And 0 mails should be sent
+    And 0 mail should be sent
 
   @api @preserveDatabase
   Scenario: When editting the Defaults Values form of Activity, the values should be alterd & stored in the database

@@ -3,6 +3,10 @@ const modal = () => {
     function cloneFooters() {
       const $modalFooters = $('.modal-body .modal-footer:not(.cloned-footer)');
 
+      if ($modalFooters.length === 0) {
+        return;
+      }
+
       $modalFooters.each(function() {
         const _this = $(this);
         const clone = _this.clone(true).removeClass('row');

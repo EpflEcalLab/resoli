@@ -75,10 +75,8 @@ class UserManageForm extends FormBasic {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL, AccountInterface $user = NULL) {
     $form = parent::buildForm($form, $form_state);
 
-    $form['activity'] = [
-      '#type'  => 'hidden',
-      '#value' => $activity->id(),
-    ];
+    // Save the activity for submission.
+    $form_state->set('activity', $activity->id());
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
@@ -190,7 +188,7 @@ class UserManageForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->getNodeStorage()->load($form_state->getValue('activity'));
+    $activity = $this->getNodeStorage()->load($form_state->get('activity'));
 
     // Get every checked photos.
     $photos = $this->getCheckedPhotos($form_state);

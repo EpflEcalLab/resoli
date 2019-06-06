@@ -9,3 +9,4 @@ dependencies:
   - drupal:qs_acl
   - drupal:qs_auth
   - drupal:qs_badge
+  - drupal:qs_export

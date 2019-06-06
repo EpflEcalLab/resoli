@@ -4,7 +4,7 @@ Feature: Activity Information Form
   Scenario: When reaching the Information form of Activity, the fields should be prefilled with entity values
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/accueil-cafe/edit/info"
-    Then I should see 20 "#qs-activity-edit-info-form input" elements
+    Then I should see 19 "#qs-activity-edit-info-form input" elements
     Then I should see 15 "#edit-theme input" elements
     And the "edit-title" field should contain "Accueil Café"
     Then the "edit-theme-5" checkbox should be checked
@@ -25,7 +25,7 @@ Feature: Activity Information Form
       | title | theme |
       | Accueil Café (edited) | 4 |
     And I press "edit-submit"
-    And 0 mails should be sent
+    And 0 mail should be sent
 
   @api @preserveDatabase
   Scenario: When editting the Information form of Activity, the values should be alterd & stored in the database

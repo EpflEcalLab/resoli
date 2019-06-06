@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\qs_export\Excel;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,12 +44,20 @@ class MembersController extends ControllerBase {
   protected $userStorage;
 
   /**
+   * The QS Excel exporter.
+   *
+   * @var \Drupal\qs_export\Excel
+   */
+  protected $excelExporter;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager) {
-    $this->acl              = $acl;
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, Excel $excel_exporter) {
+    $this->acl = $acl;
     $this->privilegeManager = $privilege_manager;
-    $this->userStorage      = $this->entityTypeManager()->getStorage('user');
+    $this->userStorage = $this->entityTypeManager()->getStorage('user');
+    $this->excelExporter = $excel_exporter;
   }
 
   /**
@@ -59,7 +68,8 @@ class MembersController extends ControllerBase {
     return new static(
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager')
+    $container->get('qs_acl.privilege_manager'),
+    $container->get('qs_export.excel')
     );
   }
 
@@ -139,6 +149,86 @@ class MembersController extends ControllerBase {
     $render['#variables']['members'] = $community_members;
 
     return $render;
+  }
+
+  /**
+   * Export the complete list of members by community.
+   *
+   * A member may appear multiple time, as they may have more than 1 privilege.
+   */
+  public function export(TermInterface $community) {
+    $now = new DrupalDateTime();
+
+    $query = $this->privilegeManager->queryMembersWithPrivileges($community);
+    $rows = $query->execute()->fetchAll();
+
+    $uids = [];
+    $privileges = [];
+    foreach ($rows as $row) {
+      $uids[] = $row->user;
+      $privileges[$row->user][] = $row->privilege;
+    }
+
+    // Load user entities without privileges.
+    $community_members = $this->userStorage->loadMultiple($uids);
+
+    // Add highest privileges by users.
+    foreach ($community_members as $community_member) {
+      $community_member->privilege = end($privileges[$community_member->id()]);
+    }
+
+    $this->excelExporter->init();
+    $this->excelExporter->normalize();
+
+    $title = $this->t('qs_community.members.export.title @community @date', [
+      '@community' => $community->getName(),
+      '@date' => $now->format('d-m-Y'),
+    ]);
+    $summary = $this->t('qs_community.members.export.summary @total', [
+      '@total' => count($community_members),
+    ]);
+    $disclaimer = $this->t('qs_community.members.export.disclaimer');
+
+    $this->excelExporter->setTitle($title->render());
+    $this->excelExporter->setSummary($summary->render());
+    $this->excelExporter->addHeader([
+      $this->t('qs_community.members.export.header.privilege.label')->render(),
+      $this->t('qs_community.members.export.header.firstname.label')->render(),
+      $this->t('qs_community.members.export.header.lastname.label')->render(),
+      $this->t('qs_community.members.export.header.mail.label')->render(),
+      $this->t('qs_community.members.export.header.phone.label')->render(),
+    ]);
+
+    foreach ($community_members as $member) {
+      $privilege = '';
+      switch ($member->privilege) {
+        case 'community_managers':
+          $privilege = $this->t('qs.roles.community_manager');
+          break;
+
+        case 'community_organizers':
+          $privilege = $this->t('qs.roles.community_organizer');
+          break;
+
+        default:
+        case 'community_members':
+          $privilege = $this->t('qs.roles.community_member');
+          break;
+      }
+
+      $this->excelExporter->addRow([
+        $privilege,
+        $member->field_firstname->value,
+        $member->field_lastname->value,
+        $member->getEmail(),
+        $member->field_phone->value,
+      ]);
+
+    }
+    $this->excelExporter->setFooter($disclaimer->render());
+    $this->excelExporter->finalize();
+
+    return $this->excelExporter->download();
   }
 
 }

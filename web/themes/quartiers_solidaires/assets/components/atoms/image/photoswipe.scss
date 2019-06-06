@@ -301,14 +301,26 @@ a.pswp__share--download:hover {
   width: 100%;
   min-height: 44px;
 
-  .card-body p {
+  .card-body {
     max-height: 30vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
 .pswp__caption__center {
   @include make-container();
+}
+
+.pswp__caption--outside {
+  position: fixed;
+  z-index: 99999999;
+  pointer-events: none;
+  min-height: 0;
+
+  .card {
+    pointer-events: initial;
+  }
 }
 
 .pswp__caption--empty {

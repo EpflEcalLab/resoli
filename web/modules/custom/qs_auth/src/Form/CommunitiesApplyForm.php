@@ -153,12 +153,21 @@ class CommunitiesApplyForm extends FormBase {
         ],
       ];
 
+      $form['actions'] = [
+        '#type' => 'actions',
+        '#attributes' => [
+          'class' => [
+            'sticky-bottom',
+          ],
+        ],
+      ];
       $form['actions']['submit'] = [
-        '#type'  => 'submit',
+        '#type' => 'submit',
         '#attributes' => [
           'class' => [
             'align-self-center',
             'mt-5',
+            'mb-3',
           ],
           'icon' => 'check',
         ],

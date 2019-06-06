@@ -48,6 +48,7 @@
         "drupal/redirect": "^1.0@beta",
         "drupal/swiftmailer": "^1.0@beta",
         "drush/drush": "^9.0.0",
+        "phpoffice/phpspreadsheet": "^1.7",
         "ralouphie/mimey": "^2.0",
         "symfony/property-access": "^3.3",
         "webflo/drupal-finder": "^1.0.0",

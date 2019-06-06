@@ -116,10 +116,7 @@ class EventAddForm extends FormBasic {
     ];
 
     // Save the activity for submission.
-    $form['activity'] = [
-      '#type'  => 'hidden',
-      '#value' => $activity->id(),
-    ];
+    $form_state->set('activity', $activity->id());
 
     $form['event']['step-1'] = [
       '#type' => 'fieldset',
@@ -262,6 +259,7 @@ class EventAddForm extends FormBasic {
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
+    // Hidden fields which will be updated via Javascript.
     $form['event']['step-2']['latitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_lat->value ? $activity->field_venue_lat->value : NULL,
@@ -421,7 +419,7 @@ class EventAddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
 
     // Format dates.
     $date = new DrupalDateTime($form_state->getValue('date'));

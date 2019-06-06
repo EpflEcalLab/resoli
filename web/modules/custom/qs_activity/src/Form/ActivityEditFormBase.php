@@ -72,11 +72,9 @@ abstract class ActivityEditFormBase extends FormBasic {
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
 
-    // Save the community for submission.
-    $form['activity'] = [
-      '#type'  => 'hidden',
-      '#value' => $activity->id(),
-    ];
+    // Save the activity for submission.
+    $form_state->set('activity', $activity->id());
+
     $form['#attached']['library'][] = 'qs_site/unload';
 
     return $form;

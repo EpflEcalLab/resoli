@@ -34,7 +34,7 @@
           <p class="lead text-center mt-5">
             {% if variables.activity.field_contact_mail is not empty %}
               {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value, { 'target':['_blank']} )|render %}
-              {% trans %}qs.photo.no_photos_please_contact {{ mail_link }}{% endtrans %}
+              {{ 'qs.photo.no_photos_please_contact @mail_link'|t({'@mail_link': mail_link}) }}
             {% else %}
               {{ 'qs.photo.no_photos'|t }}
             {% endif %}

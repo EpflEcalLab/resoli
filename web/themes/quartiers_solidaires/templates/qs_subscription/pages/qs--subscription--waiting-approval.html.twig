@@ -73,7 +73,7 @@
                 <a href="mailto:{{ subscription.user.entity.mail.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-bottom">
                   {{ macros.icon('mail') }}
                   {% set subscription_user = subscription.user.entity.field_firstname.value is not empty ? subscription.user.entity.field_firstname.value : '' %}
-                  {% trans %}qs.contact {{ subscription_user }}{% endtrans %}
+                  {{ 'qs.contact @subscription_user'|t({'@subscription_user': subscription_user}) }}
                 </a>
               </div>
             </div>
@@ -82,7 +82,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>{% trans %}qs_subscription.waiting_approval.empty{% endtrans %}</p>
+    <p>{{ 'qs_subscription.waiting_approval.empty'|t }}</p>
   {% endif %}
 
     {{ variables.pager }}

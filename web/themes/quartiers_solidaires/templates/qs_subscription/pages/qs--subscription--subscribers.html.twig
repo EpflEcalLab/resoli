@@ -78,7 +78,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>{% trans %}qs_subscription.subscribers.empty{% endtrans %}</p>
+    <p>{{ 'qs_subscription.subscribers.empty'|t }}</p>
   {% endif %}
 
   {{ variables.pager }}

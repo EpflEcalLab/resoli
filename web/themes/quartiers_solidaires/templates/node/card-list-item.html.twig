@@ -21,7 +21,7 @@
     {% block card_back_body %}
       {% if contact_name %}
         <p class="card-text">
-          {% trans %}qs.event.contact_description {{ contact_name }}{% endtrans %}
+          {{ 'qs.event.contact_description @contact_name'|t({'@contact_name': contact_name}) }}
           {{ contact_phone or contact_mail ? 'qs.event.contact.you_can_contact'|t }}
           {{ contact_phone ? 'qs.event.contact.by_phone'|t }}
           {{ contact_phone and contact_mail ? 'qs.event.contact.or'|t }}

@@ -56,7 +56,7 @@
   </div>
 {% else %}
 <div class="container">
-  <p class="lead text-center mt-5">{% trans %}qs.activity.theme.title_empty {{ community_name }}{% endtrans %}</p>
+  <p class="lead text-center mt-5">{{ 'qs.activity.theme.title_empty @community_name'|t({'@community_name': community_name}) }}</p>
 </div>
 {% endif %}
 

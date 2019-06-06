@@ -100,6 +100,7 @@ class ActivityFloatingBtnBlock extends BlockBase implements ContainerFactoryPlug
     $node = $this->route->getParameter('node');
     $activity = $this->route->getParameter('activity');
     $entity = $node ? $node : $activity;
+    $variables = [];
 
     // "Contact Organizer(s) & Maintainer(s)" floating button.
     $action = $this->contactAction($entity);

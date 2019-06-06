@@ -14,8 +14,6 @@ use Drupal\qs_auth\Service\Account;
 
 /**
  * CommunitiesApplyForm class.
- *
- * @TODO: Code the form for appliance.
  */
 class CommunitiesApplyForm extends FormBase {
   use InlineErrorFormTrait;

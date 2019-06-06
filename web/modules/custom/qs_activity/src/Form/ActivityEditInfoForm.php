@@ -59,9 +59,13 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $form['#attributes'] = [
       'title' => $activity->title->value,
       'description' => $this->t('qs.activity.edit_info'),
-      'class' => [
-        'modal-body',
-      ],
+      'theme'       => 'primary',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.activity.edit_info'),
+      'icon' => 'activities',
+      'active' => TRUE,
     ];
 
     $form['step-1'] = [

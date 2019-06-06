@@ -10,6 +10,39 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1 0 100%;
+
+  &[class*=bg-] {
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      width: 100%;
+      height: $border-radius-lg;
+    }
+
+    &:before {
+      top: 0;
+    }
+
+    &:after {
+      bottom: 0;
+    }
+  }
+
+  @each $color, $value in $theme-colors {
+    &.bg-#{$color} {
+      &:before {
+        background-image: linear-gradient(to bottom, $value 20%, rgba($value, 0) 100%);
+      }
+
+      &:after {
+        background-image: linear-gradient(to top, $value 20%, rgba($value, 0) 100%);
+      }
+    }
+  }
 }
 
 .dialog-off-canvas-main-canvas {

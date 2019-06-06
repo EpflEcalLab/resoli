@@ -1,11 +1,9 @@
 <?php
 
-namespace Drupal\Tests\wd_loan\Kernel\Creditum;
+namespace Drupal\Tests\wd_loan\Kernel;
 
-use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 use Drupal\node\NodeInterface;
-use Drupal\qs_test\NodeTestTrait;
-use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
+use Drupal\qs_test\Kernel\ResoliKernelTestBase;
 
 /**
  * @coversDefaultClass \Drupal\qs_activity\Service\EventManager
@@ -15,16 +13,7 @@ use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
  * @group qs_activity
  * @group qs_activity_kernel
  */
-class EventManagerTest extends EntityKernelTestBase {
-  use NodeTestTrait;
-  use EntityReferenceTestTrait;
-
-  /**
-   * Entity type manager service.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
+class EventManagerTest extends ResoliKernelTestBase {
 
   /**
    * The entity QS Event Manager.
@@ -39,15 +28,7 @@ class EventManagerTest extends EntityKernelTestBase {
    * @var array
    */
   public static $modules = [
-    'user',
-    'system',
-    'field',
-    'datetime',
-    'text',
-    'node',
-    'qs_acl',
     'qs_subscription',
-    'qs_test',
     'qs_activity',
   ];
 
@@ -57,26 +38,10 @@ class EventManagerTest extends EntityKernelTestBase {
   protected function setUp() {
     parent::setUp();
 
+    $this->setupActivities();
+    $this->setupEvents();
+
     $this->eventManager = $this->container->get('qs_activity.event_manager');
-    $this->entityTypeManager = $this->container->get('entity_type.manager');
-
-    $this->createNodeType('activity');
-    $this->createNodeType('event');
-
-    $this->createNodeField('field_start_at', 'datetime', 'event');
-    $this->createNodeField('field_end_at', 'datetime', 'event');
-
-    // Create The activity field link between Event & Activity.
-    $this->createEntityReferenceField(
-      'node',
-      'event',
-      'field_activity',
-      NULL,
-      'node',
-      'default',
-      [],
-      1
-    );
   }
 
   /**

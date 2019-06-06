@@ -10,12 +10,14 @@ Drupal 8 powered.
 
 First of all, you need to have the following tools installed globally on your environment:
 
+  * docker
   * composer
   * drush
   * npm
   * yarn
 
-don't forget to add bins to your path such:
+you can only install docker, but yarn is recommended if you work actively on styleguide.
+If you don't use docker as environment, don't forget to add bins to your path such:
 
   * php
   * mysql
@@ -29,6 +31,82 @@ To run any drush command, you need to be on a hight bootstrapped drupal director
   ```
 
 On common errors, see the Troubleshootings section.
+
+## 🐳 Docker
+
+### Project setup
+
+````bash
+cp docker-compose.override-example.yml docker-compose.override.yml
+```
+
+Update any values as needed, example when you already use the 8080 port:
+
+```yaml
+  # Drupal development server
+  dev:
+    ports:
+      - "8081:80"
+```
+
+Another example when you already have a local MySQL server using port 3306:
+
+```yaml
+  # Database
+  db:
+    ports:
+      - "13306:3306"
+```
+
+### Project boostrap
+
+Build project imgaes (and pull recent development image), start docker services, then run
+drupal bootsrap script (get a coffee, this will take some time...).
+
+```bash
+docker-compose build --pull
+docker-compose up --build -d
+docker-compose exec dev docker-as-wait --mysql -- docker-as-drupal bootstrap
+```
+
+### (optional) Get the productions files and database
+
+Local Drupal site files directory is mounted in Docker dev container, you can sync them with
+production by using capistrano tasks.
+
+```bash
+bundle exec cap production files:download
+bundle exec cap production files:dump
+docker-compose exec dev docker-as-drupal db-restore --file=/var/www/web/sites/default/files/production_dump.sql
+```
+
+### Docker Tips
+
+```bash
+docker-compose exec dev docker-as-drupal --help
+```
+
+Only directories like custom modules, styleguide, and config related are mounted in Docker
+container (dev container have files too). If you need to rebuild the image and container, you can
+use `up` command again with the service to update.
+
+```bash
+docker-compose up -d --build --no-deps dev
+```
+
+You can run tests in docker.
+
+```bash
+docker-compose exec test docker-as-drupal behat
+docker-compose exec test docker-as-drupal phpunit
+```
+
+You can reset database, and optionnaly load default content.
+
+```bash
+docker-compose exec dev docker-as-drupal db-reset --with-default-content
+```
+
 
 ## 🏋️ Export/Import all translations to a PO file
 
@@ -118,6 +196,12 @@ Maintaining code quality by adding the custom post-commit hook to yours.
   $ cat ./scripts/hooks/post-commit >> ./.git/hooks/post-commit
   ```
 
+### Check all (code standards, code duplication & PHP mess detector) with Docker
+
+  ```bash
+  docker-conpose exec dev docker-as-drupal quality-check
+  ```
+
 ## 🔥 Behavior Driven Development using Behat
 
 For isolation test databases, you should run Behat using our custom script `scripts/tests/behat.sh`.
@@ -129,6 +213,12 @@ For isolation test databases, you should run Behat using our custom script `scri
 1. Keep this command line open and run `./vendor/bin/behat`
 in the root of your project.
 
+### Using docker
+
+1. Laucnh Docker environment with `docker-compose up -d --build`
+
+1. Run `docker-compose exec test docker-as-wait --mysql -- docker-as-drupal behat`
+
 ### Re-install default values
 
 You can use the Driven Development script to install re-install default values by running:
@@ -137,7 +227,16 @@ You can use the Driven Development script to install re-install default values b
   ./scripts/tests/behat.sh --skip-dependencies=1 --skip-tests=1 --skip-interaction=1
   ```
 
-## 🚛 Install
+Or in docker:
+
+  ```bash
+  docker-compose exec dev docker-as-drupal db-reset
+  ```
+
+## 🚛 Install localy
+
+Refer to Docker project bootstrap section for more information how install with docker, but in resume
+you must run `docker-compose exec dev docker-as-drupal bootsrap` command.
 
 1. Setup your virtualhost (like `http://qs.dev`) to serve `/web`.
 
@@ -234,6 +333,13 @@ You can use the Driven Development script to install re-install default values b
   $ drush cr
   ```
 
+Or on Docker environement:
+
+  ```bash
+  docker-compose up -d --build dev test
+  docker-compose exec dev docker-as-drupal db-update
+  ```
+
 ## 🎨 Build the theme
 
 The main styleguide of **Quartiers Solidaires** is inside this project under `themes/quartiers_solidaires/assets/`.
@@ -254,6 +360,14 @@ You can generate only the built assets for production by running:
   ```
 
 For more help about Toolbox, the [official documentation](http://frontend.github.io/toolbox/toolbox/#build-the-styleguide) is your best friend.
+
+###Build on Docker
+
+>ou can build locally without any issue, but use following command to do it in Docker environment.
+
+  ```bash
+   docker-compose exec dev yarn build
+  ```
 
 ## 🚀 Deploy
 
@@ -289,6 +403,12 @@ We use Capistrano to deploy:
 ./vendor/bin/phpunit -x qs_functional
 ```
 
+Or on Docker:
+
+```bash
+docker-compose exec test docker-as-drupal phpunit
+```
+
 ### Browser tests
 
 1. *(optional)* Bootstrap your Drupal if you don't already have a working env.
@@ -297,10 +417,22 @@ We use Capistrano to deploy:
 ./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
 ```
 
+Or on Docker:
+
+```bash
+docker-compose exec dev docker-as-drupal bootstrap
+```
+
 1. Then you can run functional tests
 
 ```bash
 ./vendor/bin/phpunit -g qs_functional
+```
+
+Or on Docker:
+
+```bash
+docker-compose exec test docker-as-drupal phpunit --group=qs_functional
 ```
 
 ### Behat
@@ -311,10 +443,22 @@ We use Capistrano to deploy:
 ./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
 ```
 
+Or on Docker:
+
+```bash
+docker-compose exec dev docker-as-drupal bootstrap
+```
+
 1. Then you can run functional tests
 
 ```bash
 ./vendor/bin/behat
+```
+
+Or on Docker:
+
+```bash
+docker-compose exec test docker-as-drupal behat
 ```
 
 ## 📋 Documentations
@@ -408,6 +552,36 @@ You have to register the Drupal and DrupalPractice Standard with PHPCS:
   ```bash
   $ ./vendor/bin/phpcs --config-set installed_paths [absolute-path-to-vendor]/drupal/coder/coder_sniffer
   ```
+
+### Bootstrapping via Docker crash
+
+```
+ERROR: for kudelski_dev_1  Cannot start service dev: driver failed programming external connectivity Creating kudelski_test_1    ... done
+starting userland proxy: Bind for 0.0.0.0:8080 failed: port is already allocated
+```
+
+```
+ERROR: for dev  Cannot start service dev: driver failed programming external connectivity on endpoint kudelski_dev_1 (62326d0a5590025826f90f9b22f43b809853f40df9dd3955b973868a44328ec4): Error starting userland proxy: Bind for 0.0.0.0:8080 failed: port is already allocated
+ERROR: Encountered errors while bringing up the project.
+```
+
+You have to update the docker-compose.override.yml to change the port binding. It seems you already use the port 8080
+on your computer. (use docker-compose.override-example.yml as defailt)
+
+```yaml
+services:
+  # Drupal development server
+  dev:
+    image: antistatique/php-dev:7.2-node11
+    ports:
+      - "8081:80"
+```
+
+### Drush give me an error "Missing scheme in URL ''"
+It seems you don't use an old-school local environment but Docker.
+
+Read section about setup Docker, then, you have to prepend every command with `docker-compose exec dev` to
+run them on the Docker environment OR open a shell in docker using `docker-compose exec dev bash`.
 
 ## 💻 Drush Commands
 

@@ -1,68 +1,93 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="container">
-  <div class="text-center my-5">
-    {% if variables.user %}
-      <h1>{% trans %}qs.subscription.user.collection.title {{ variables.user.field_firstname.value }} {{ variables.user.field_lastname.value }} {{ variables.user.mail.value }}{% endtrans %}</h1>
-    {% else %}
-      <h1>{% trans %}qs.subscription.user.collection.title{% endtrans %}</h1>
-    {% endif %}
-  </div>
+{% if variables.user %}
+  {% set modal_title = 'qs.subscription.user.collection.title @variables.user.field_firstname.value @variables.user.field_lastname.value'|t({
+    '@variables.user.field_firstname.value': variables.user.field_firstname.value,
+    '@variables.user.field_lastname.value': variables.user.field_lastname.value,
+  }) %}
+{% else %}
+  {% set modal_title = 'qs.subscription.user.collection.title'|t %}
+{% endif %}
+{% set modal_bg = 'info' %}
 
+{% set floating_buttons = [
+  {
+    label: 'qs_activity.floating.my_subscriptions'|t,
+    icon: 'checkflag',
+    active: true,
+  }
+] %}
+
+{% block modal_content %}
   {% if variables.events %}
     <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
       {% for key, event in variables.events %}
-      <li class="card card-list-item" id="card{{ event.nid.value }}">
-        <a
-          data-toggle="collapse"
-          data-parent="#events-accordion"
-          href="#collapse-{{ event.nid.value }}"
-          class="card-pill collapsed"
-          role="tab"
-          aria-expanded="false"
-          aria-controls="collapse-{{ event.nid.value }}"
-          id="event{{ event.nid.value }}"
-        >
-          <span class="card-pill-icon">
-            {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
-          </span>
-          <span class="card-pill-title">{{ event.field_activity.entity.title.value }}</span>
+        <li class="card card-list-item" id="card{{ event.nid.value }}">
+          <a
+            data-toggle="collapse"
+            data-parent="#events-accordion"
+            href="#collapse-{{ event.nid.value }}"
+            class="card-pill collapsed"
+            role="tab"
+            aria-expanded="false"
+            aria-controls="collapse-{{ event.nid.value }}"
+            id="event{{ event.nid.value }}"
+          >
+            <span class="card-pill-icon">
+              {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
+            </span>
+            <span class="card-pill-title">{{ event.field_activity.entity.title.value }}</span>
 
-          {# Subscription Badges #}
-          {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
+            {# Subscription Badges #}
+            {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
 
-          <span class="card-pill-date size-date">
-            <time datetime="{{ event.field_start_at.date|date('Y-m-d') }}">
-              {{ event.field_start_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
-            </time>
-          </span>
+            {# Date #}
+            <span class="card-pill-date size-date">
+              <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
+                {{ event.field_start_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
+              </time>
+            </span>
 
-          <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white" aria-label="{{ 'qs.activity.more'|t }}">
+            {# Hours #}
+            <span class="card-pill-date d-none d-sm-inline">
+              <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d H:i') }}">
+                {# Special use-case for German, we strip the "Uhr" of the start date #}
+                {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+                {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
+              </time>
+              – <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'Y-m-d H:i') }}">
+                {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
+              </time>
+            </span>
+
+            <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white" aria-label="{{ 'qs.activity.more'|t }}">
             {{ macros.icon('look') }}
             <span class="sr-only d-none d-md-inline">{{ 'qs.event.more'|t }}</span>
           </span>
-        </a>
+          </a>
 
-        <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel">
-          <div class="card-body">
-            <div class="card-text text-center">
-              <h4 class="card-title mb-2">{{ event.title.value }}</h4>
-              {# Subscription Textual Badges #}
-              {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
-            </div>
+          <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel">
+            <div class="card-body">
+              <div class="card-text text-center">
+                <h4 class="card-title mb-2">{{ event.title.value }}</h4>
+                {# Subscription Textual Badges #}
+                {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
+              </div>
 
-            <div class="card-actions d-flex justify-content-center">
-              <a href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
-                {{ macros.icon('activities') }}
-                {{ 'qs.event.goto'|t }}
-              </a>
+              <div class="card-actions d-flex justify-content-center">
+                <a href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value}, {'fragment': 'card' ~ event.nid.value })}}" class="btn btn-outline-invert btn-icon shadow-to-bottom">
+                  {{ macros.icon('activities') }}
+                  {{ 'qs.event.goto'|t }}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
+        </li>
       {% endfor %}
     </ul>
   {% else %}
     <p class="text-center">{{ 'qs.subscription.user.collection.empty'|t }}</p>
   {% endif %}
-</div>
+{% endblock %}

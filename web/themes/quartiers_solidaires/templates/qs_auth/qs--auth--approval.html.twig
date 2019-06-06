@@ -17,13 +17,13 @@
     </div>
 
     <div class="container mt-5 mb-auto text-center">
-      <p class="lead">{% trans %}qs.auth.approval.thanks{% endtrans %}</p>
-      <p class="lead">{% trans %}qs.auth.approval.description {{ variables.community.name.value }} {% endtrans %}</p>
+      <p class="lead">{{ 'qs.auth.approval.thanks'|t }}</p>
+      <p class="lead">{{ 'qs.auth.approval.description @variables.community.name.value'|t({'@variables.community.name.value': variables.community.name.value}) }}</p>
     </div>
 
     <div class="container text-center">
       {{ macros.icon('wait') }}
-      <p class="mt-3">{% trans %}qs.auth.approval.short{% endtrans %}</p>
+      <p class="mt-3">{{ 'qs.auth.approval.short'|t }}</p>
     </div>
 
   </div>

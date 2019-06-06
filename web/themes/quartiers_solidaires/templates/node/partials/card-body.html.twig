@@ -1,5 +1,9 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set display_contact = event.field_contact_mail.value is not empty or event.field_contact_phone.value is not empty or event.field_contact_name.value is not empty %}
+
+{% set contribution = event.field_contribution.value %}
+
 <div class="card-body pb-0 text-center">
 
   <h4 class="card-title">{{ event.label }}</h4>
@@ -7,145 +11,107 @@
   <div class="card-text">
     {# Body #}
     {# User should have some privileges OR activity should allow community to access details #}
-    {% if variables.privileges is not empty or variables.activity.field_community_access_detail.value %}
+    {% if has_activity_privilege or community_can_view_detail %}
       {{ event.body.value|raw }}
     {% else %}
-      <p>
-        {{ 'qs.event.not_accessible'|t }}
-      </p>
+      <p>{{ 'qs.event.not_accessible'|t }}</p>
     {% endif %}
+
     {# Contribution #}
     {# User should be member of the activity OR activity should allow subscription to community members #}
-    {% if
-    ('activity_members' in variables.privileges
-    or 'activity_organizers' in variables.privileges
-    or 'activity_maintainers' in variables.privileges
-    or variables.activity.field_community_can_subscribe.value)
-    and event.field_contribution.value
-    %}
-      <p class="text-primary">
-        {{ macros.icon('money', 'icon-offset') }}
-        {{ 'qs.event.contribution'|t }} {{ event.field_contribution.value }}
-      </p>
+    {% if (has_activity_privilege or community_can_subscribe) and contribution %}
+      {% include '@quartiers_solidaires/node/partials/card-body-contribution.html.twig' %}
     {% endif %}
   </div>
 
   <div class="card-actions row">
     {# Register button #}
     {# User should be member of the activity OR activity should allow subscription to community members #}
-    {% if 'activity_members' in variables.privileges or 'activity_maintainers' in variables.privileges or 'activity_organizers' in variables.privileges or variables.activity.field_community_can_subscribe.value %}
-    <div class="col-sm-6 mb-3 mx-auto">
-      {# Register Button "subscription pending" #}
-      <button data-status-show="pending" class="btn btn-outline-info btn-white btn-icon shadow-to-right btn-block" type="submit" value="{{ 'qs.event.register.pending'|t }}">
-          {{ macros.icon('wait') }}
-          {{ 'qs.event.register.pending'|t }}
-      </button>
-
-      {# Register Button "subscription confirmed" #}
-      <button data-status-show="confirmed" class="btn btn-info btn-icon shadow-to-bottom btn-block mt-0" type="submit" value="{{ 'qs.event.register.confirmed'|t }}">
-          {{ macros.icon('checkflag') }}
-          {{ 'qs.event.register.confirmed'|t }}
-      </button>
-
-      {# Register button default #}
-      {{ qs_site_render_form('qs_subscription', 'RequestForm', {'event': event.nid.value}, 'qs_subscription_request_form_'~event.nid.value) }}
-    </div>
+    {% if has_activity_privilege or community_can_subscribe %}
+      {% include '@quartiers_solidaires/node/partials/card-body-register.html.twig' %}
     {% endif %}
 
     {# Contact button #}
     {# User should be member of the activity OR activity should allow access to community members #}
-    {% set display_contact = event.field_contact_mail.value or event.field_contact_phone.value or event.field_contact_name.value %}
-    {% if
-      display_contact
-      and ('activity_members' in variables.privileges
-      or 'activity_organizers' in variables.privileges
-      or 'activity_maintainers' in variables.privileges
-      or variables.activity.field_community_access_contact.value)
-    %}
-    <div class="col-sm-6 mb-3 mx-auto">
-      <a href="#contact-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
-        {{ macros.icon('user') }}
-        {{ 'qs.event.contact'|t }}
-      </a>
-    </div>
+    {% if display_contact and (has_activity_privilege or community_can_view_contact) %}
+      {{ macros.card_button(
+        'qs.event.contact'|t,
+        '#contact-' ~ event.nid.value,
+        'user',
+        'left',
+        'data-toggle=flip'
+      ) }}
     {% endif %}
 
     {# Location button #}
     {# User should have some privileges OR activity should allow community to access details #}
-    {% if event.field_venue.value
-      and ('activity_members' in variables.privileges
-      or 'activity_organizers' in variables.privileges
-      or 'activity_maintainers' in variables.privileges
-      or variables.activity.field_community_access_detail.value)
-    %}
-      <div class="col-sm-6 mb-3 mx-auto">
-        <a href="#map-{{ event.nid.value }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
-          {{ macros.icon('meeting') }}
-          {{ 'qs.event.location'|t }}
-        </a>
-      </div>
+    {% if event.field_venue.value and (has_activity_privilege or community_can_view_detail) %}
+      {{ macros.card_button(
+        'qs.event.location'|t,
+        '#map-' ~ event.nid.value,
+        'meeting',
+        null,
+        'data-toggle=flip'
+      ) }}
     {% endif %}
 
     {# Calendar #}
-    <div class="col-sm-6 mb-3 mx-auto">
-      <a href="{{ path('qs_calendar.collection.weekly', {community: variables.activity.field_community.entity.tid.value, 'day': event.field_start_at.date|date('Y-m-d') }, {'fragment': 'card' ~ event.nid.value }) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
-        {{ macros.icon('calendar') }}
-        {{ 'qs.event.calendar'|t }}
-      </a>
-    </div>
+    {{ macros.card_button(
+      'qs.event.calendar'|t,
+      path('qs_calendar.collection.weekly', {
+        community: variables.activity.field_community.entity.tid.value,
+        'day': event.field_start_at.date|date('Y-m-d')
+      }, { 'fragment': 'card' ~ event.nid.value }),
+      'calendar',
+      'left'
+    ) }}
+
+    {% set params = {event: event.nid.value} %}
 
     {# Edit button #}
     {# User should be organizer OR maintainer of the activity OR admin #}
-    {% if
-      'activity_organizers' in variables.privileges
-      or 'activity_maintainers' in variables.privileges
-      or user.hasPermission('administer nodes')
-    %}
+    {% if can_manage_activity or user.hasPermission('administer nodes') %}
+      {# Get user Highest privilege #}
+      {% set privilege = variables.badges.privileges[variables.activity.nid.value]|last %}
 
-    {# Get user Highest privilege #}
-    {% set privilege = variables.badges.privileges[variables.activity.nid.value]|last %}
+      {{ macros.card_button(
+        'qs.event.dashboard'|t,
+        path('qs_activity.events.dashboard', params),
+        'checklist',
+        'right'
+      ) }}
 
-    {% set theme = [
-      privilege != 'activity_maintainers' and privilege != 'activity_organizers' ? 'btn-outline-secondary',
-      privilege == 'activity_maintainers' ? 'btn-outline-warning',
-      privilege == 'activity_organizers' ? 'btn-outline-danger',
-    ] %}
+      {% set theme = 'secondary' %}
+      {% if privilege == 'activity_maintainers' %}
+        {% set theme = 'warning' %}
+      {% elseif privilege == 'activity_organizers' %}
+        {% set theme = 'danger' %}
+      {% endif %}
 
-    <div class="col-sm-6 mb-3 mx-auto">
-      <a href="{{ path('qs_activity.events.dashboard', {event: event.nid.value}) }}" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
-        {{ macros.icon('checklist') }}
-        {{ 'qs.event.dashboard'|t }}
-      </a>
-    </div>
-
-    {% if
-    'activity_organizers' in variables.privileges
-    or 'activity_maintainers' in variables.privileges
-    or user.hasPermission('administer nodes') %}
       {% if guest_subscription_pending %}
-        {% set guests_status_btn = 'pendings_guests' %}
         {% set guests_btn = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
-      {% elseif guest_subscription_confirmed %}
-        {% set guests_status_btn = 'confirmed_guests' %}
-        {% set guests_btn = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
-      {% endif %}
-    {% endif %}
 
-    {% if guests_status_btn == 'pendings_guests' or guests_status_btn == 'confirmed_guests' %}
-    <div class="col-sm-6 mb-3 mx-auto">
-      {% if guests_status_btn == 'pendings_guests' %}
-        <a data-status-guest-show="pendings_guests" href="{{ path('qs_subscription.waiting_approval', {event: event.nid.value}) }}" class="btn {{ theme|join(' ') }} btn-icon btn-white shadow-to-left btn-block">
-          {{ macros.icon('wait') }}
-          {{ 'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests_btn}) }}
-        </a>
-      {% elseif guests_status_btn == 'confirmed_guests' %}
-        <a data-status-guest-show="confirmed_guests" href="{{ path('qs_subscription.subscribers', {event: event.nid.value}) }}" class="btn {{ theme|join(' ') }} btn-icon btn-white shadow-to-left btn-block">
-          {{ macros.icon('checklist') }}
-          {{ 'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests_btn}) }}
-        </a>
+        {{ macros.card_button(
+          'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests_btn}),
+          path('qs_subscription.waiting_approval', params),
+          'wait',
+          'left',
+          'data-status-guest-show="pendings_guests"',
+          theme
+        ) }}
+      {% elseif guest_subscription_confirmed %}
+        {% set guests_btn = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
+
+        {{ macros.card_button(
+          'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests_btn}),
+          path('qs_subscription.subscribers', params),
+          'checklist',
+          'left',
+          'data-status-guest-show="confirmed_guests"',
+          theme
+        ) }}
       {% endif %}
-    </div>
-    {% endif %}
+
     {% endif %}
 
   </div>

@@ -1,112 +1,119 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="container">
-  <div class="text-center my-5">
-    <h1>{% trans %}qs_community.waiting_approval.title{% endtrans %}</h1>
-    <h2>{{ variables.community.name.value }}</h2>
-  </div>
+{% set modal_bg = 'danger' %}
+{% set modal_title = 'qs_community.waiting_approval.title'|t %}
+{% set modal_subtitle = variables.community.name.value %}
+{% set floating_buttons = [
+  {
+    label: 'qs_community.dashboard.waiting_approval'|t,
+    icon: 'wait',
+    active: true,
+  }
+] %}
 
+{% block modal_content %}
   {% if variables.privileges %}
     {% import "@quartiers_solidaires/macros.html.twig" as macros %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
-    {% for privilege in variables.privileges %}
-      <li class="card card-list-item" id="card-{{ loop.index0 }}">
-        <a
-          data-toggle="collapse"
-          data-parent="#users-accordion"
-          href="#collapse-{{ loop.index0 }}"
-          class="card-pill collapsed"
-          role="tab"
-          aria-expanded="false"
-          aria-controls="collapse-{{ loop.index0 }}"
-        >
-          <span class="card-pill-icon">
-              {{ macros.icon('user') }}
+      {% for privilege in variables.privileges %}
+        <li class="card card-list-item" id="card-{{ loop.index0 }}">
+          <a
+            data-toggle="collapse"
+            data-parent="#users-accordion"
+            href="#collapse-{{ loop.index0 }}"
+            class="card-pill collapsed"
+            role="tab"
+            aria-expanded="false"
+            aria-controls="collapse-{{ loop.index0 }}"
+          >
+            <span class="card-pill-icon">
+                {{ macros.icon('user') }}
+              </span>
+            <span class="card-pill-title">
+                {{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}
             </span>
-          <span class="card-pill-title">
-              {{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}
-          </span>
-          <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
-            {{ macros.icon('look') }}
-            <span class="d-none d-sm-inline">{{ 'qs.user.more'|t }}</span>
-          </span>
-        </a>
+            <span class="btn btn-outline-invert btn-icon btn-icon-to-circle shadow-to-left btn-white ml-auto" aria-label="{{ 'qs.user.more'|t }}">
+              {{ macros.icon('look') }}
+              <span class="d-none d-sm-inline">{{ 'qs.user.more'|t }}</span>
+            </span>
+          </a>
 
-        <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
-          <div class="card-body pb-0 text-center">
+          <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
+            <div class="card-body pb-0 text-center">
 
-            <h4 class="card-title mb-0">{{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}</h4>
-            <h5 class="card-title mt-1">{{ privilege.user.entity.mail.value }}</h5>
+              <h4 class="card-title mb-0">{{ privilege.user.entity.field_firstname.value }} {{ privilege.user.entity.field_lastname.value }}</h4>
+              <h5 class="card-title mt-1">{{ privilege.user.entity.mail.value }}</h5>
 
-            <div class="card-text mb-4">
-              {% if privilege.privilege.value == 'community_managers' %}
-                {% trans %}qs.community.waiting_approval.request.manger{% endtrans %}
-              {% elseif privilege.privilege.value == 'community_organizers' %}
-                {% trans %}qs.community.waiting_approval.request.organizer{% endtrans %}
-              {% elseif privilege.privilege.value == 'community_members' %}
-                {% trans %}qs.community.waiting_approval.request.member{% endtrans %}
-              {% endif %}
-            </div>
-
-            <div class="card-actions row">
-              <div class="col-sm-6 mb-3">
-                <form action="{{ path('qs_acl.privilege.confirm') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post"
-                id="qs-acl-privilege-confirm-{{ privilege.id.value }}">
-                  <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
-                  <button class="btn btn-secondary btn-icon shadow-to-right btn-block" data-confirm="{{ 'qs_community.waiting_approval.confirmed_confirm'|t }}" type="submit" value="{{ 'qs.confirmed'|t }}">
-                    {{ macros.icon('check') }}
-                    {{ 'qs.confirmed'|t }}
-                  </button>
-                </form>
+              <div class="card-text mb-4">
+                {% if privilege.privilege.value == 'community_managers' %}
+                  {{ 'qs.community.waiting_approval.request.manger'|t }}
+                {% elseif privilege.privilege.value == 'community_organizers' %}
+                  {{ 'qs.community.waiting_approval.request.organizer'|t }}
+                {% elseif privilege.privilege.value == 'community_members' %}
+                  {{ 'qs.community.waiting_approval.request.member'|t }}
+                {% endif %}
               </div>
-              <div class="col-sm-6 mb-3">
-                <form action="{{ path('qs_acl.privilege.decline') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post" id="qs-acl-privilege-decline-{{ privilege.id.value }}">
-                  <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
-                  <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_community.waiting_approval.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
-                    {{ macros.icon('trash') }}
-                    {{ 'qs.reject'|t }}
-                  </button>
-                </form>
-              </div>
-            </div>
 
-            <div class="card-actions d-flex justify-content-center mt-4 mb-3">
-              <a href="mailto:{{ privilege.user.entity.mail.value }}" class="btn btn-outline-invert btn-icon btn-white shadow-to-bottom">
-                {{ macros.icon('mail') }}
-                {% trans %}qs.contact {{ privilege.user.entity.field_firstname.value }}{% endtrans %}
-              </a>
+              <div class="card-actions row">
+                <div class="col-sm-6 mb-3">
+                  <form action="{{ path('qs_acl.privilege.confirm') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post" id="qs-acl-privilege-confirm-{{ privilege.id.value }}">
+                    <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
+                    <button class="btn btn-secondary btn-icon shadow-to-right btn-block" data-confirm="{{ 'qs_community.waiting_approval.confirmed_confirm'|t }}" type="submit" value="{{ 'qs.confirmed'|t }}">
+                      {{ macros.icon('check') }}
+                      {{ 'qs.confirmed'|t }}
+                    </button>
+                  </form>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <form action="{{ path('qs_acl.privilege.decline') }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}"  method="post" id="qs-acl-privilege-decline-{{ privilege.id.value }}">
+                    <input type="hidden" name="privilege" value="{{ privilege.id.value }}">
+                    <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_community.waiting_approval.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
+                      {{ macros.icon('trash') }}
+                      {{ 'qs.reject'|t }}
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="card-actions d-flex justify-content-center mt-4 mb-3">
+                <a href="mailto:{{ privilege.user.entity.mail.value }}" class="btn btn-outline-invert btn-icon btn-white shadow-to-bottom">
+                  {{ macros.icon('mail') }}
+                  {{ 'qs.contact @privilege.user.entity.field_firstname.value'|t({'@privilege.user.entity.field_firstname.value': privilege.user.entity.field_firstname.value}) }}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-    {% endfor %}
+        </li>
+      {% endfor %}
     </ul>
   {% else %}
-    <p>{% trans %}qs_community.waiting_approval.empty{% endtrans %}</p>
+    <p>{{ 'qs_community.waiting_approval.empty'|t }}</p>
   {% endif %}
 
   {{ variables.pager }}
+{% endblock %}
 
-  <div class="modal-footer sticky-bottom d-block row">
-    <div class="row mb-3">
-      <div class="col-lg-10 offset-lg-1">
-        <div class="row">
-          <div class="col-sm-6">
-            {# Go to Members #}
-            <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.members', {community: variables.community.tid.value}) }}">
-              {{ macros.icon('happy') }}
-              {{ 'qs_community.dashboard.members'|t }}
-            </a>
-          </div>
-          <div class="col-sm-6">
-            {# Go to Community Dashboard #}
-            <a class="btn btn-outline-danger btn-outline-invert btn-icon btn-block shadow-to-bottom mb-2" href="{{ path('qs_community.dashboard', {community: variables.community.tid.value}) }}">
-              {{ macros.icon('checklist') }}
-              {{ 'qs.previous.to_community_dashboard'|t }}
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% block modal_footer %}
+  {% set modal_footer_button_classes = 'btn-outline-danger btn-outline-invert' %}
+  {# Go to Members #}
+  {# Go to Community Dashboard #}
+  {% set modal_footer_buttons = [
+    {
+      label: 'qs_community.dashboard.members'|t,
+      icon: 'happy',
+      url: path('qs_community.members', {community: variables.community.tid.value}),
+      classes: modal_footer_button_classes,
+    },
+    {
+      label: 'qs.previous.to_community_dashboard'|t,
+      icon: 'checklist',
+      url:path('qs_community.dashboard', {community: variables.community.tid.value}),
+      classes: modal_footer_button_classes,
+    },
+  ] %}
+  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
+{% endblock %}
+
+

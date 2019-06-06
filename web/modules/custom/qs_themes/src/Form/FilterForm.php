@@ -87,9 +87,6 @@ class FilterForm extends FormBase {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
-    $form['#theme_wrappers'] = [
-      'form__modal',
-    ];
 
     // Get all themes for options.
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);

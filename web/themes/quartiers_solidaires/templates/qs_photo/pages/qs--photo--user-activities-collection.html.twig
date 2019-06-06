@@ -1,25 +1,29 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="container">
-  <div class="text-center mb-5 mt-3">
-    {% if variables.user %}
-      {% if variables.current_user %}
-        <h1>
-          {{ 'qs.photos.user.collection.title'|t }}
-        </h1>
-      {% else %}
-        <h1>
-          {{ 'qs.photos.user.collection.title @name @email'|t({
-            '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
-            '@email': variables.user.mail.value ? variables.user.mail.value : ''
-          }) }}
-        </h1>
-      {% endif %}
-    {% else %}
-      <h1>{% trans %}qs.activity.user.collection.title{% endtrans %}</h1>
-    {% endif %}
-  </div>
+{% set modal_title = 'qs.activity.user.collection.title'|t %}
+{% if variables.user %}
+  {% if variables.current_user %}
+    {% set modal_title = 'qs.photos.user.collection.title'|t %}
+  {% else %}
+    {% set modal_title = 'qs.photos.user.collection.title @name @email'|t({
+      '@name': variables.user.field_firstname.value ~ ' ' ~ variables.user.field_lastname.value,
+      '@email': variables.user.mail.value ? variables.user.mail.value : ''
+    }) %}
+  {% endif %}
+{% endif %}
+{% set modal_bg = 'primary' %}
 
+{% set floating_buttons = [
+  {
+    label: 'qs_photo.floating.my_photos'|t,
+    icon: 'picture',
+    active: true,
+  }
+] %}
+
+{% block modal_content %}
   <div class="text-center mb-5">
     {{ macros.icon('picture-big', 'icon-xl') }}
   </div>
@@ -86,21 +90,25 @@
     <div class="text-center mb-5">
       <p>
         {% trans %}
-        qs.photos.user.collection.empty
+          qs.photos.user.collection.empty
         {% endtrans %}
       </p>
     </div>
   {% endif %}
 
-  {% if variables.activities %}
-  <div class="modal-footer justify-content-center sticky-bottom">
-    <div class="text-center">
-      <a href="{{ path('qs_photo.form.add', {community: variables.community.tid.value}) }}" class="btn btn-secondary btn-icon shadow-to-bottom">
-        {{ macros.icon('plus') }}
-        {{ 'qs.photos.add_photos'|t }}
-      </a>
-    </div>
-  </div>
-  {% endif %}
+{% endblock %}
 
-</div>
+{% block modal_footer %}
+  {% if variables.activities %}
+    {% set modal_footer_button_classes = 'btn-secondary' %}
+    {% set modal_footer_buttons = [
+      {
+        label: 'qs.photos.add_photos'|t,
+        icon: 'plus',
+        url: path('qs_photo.form.add', {community: variables.community.tid.value}),
+        classes: modal_footer_button_classes,
+      },
+    ] %}
+    {{ macros.modal_footer_buttons(modal_footer_buttons) }}
+  {% endif %}
+{% endblock %}

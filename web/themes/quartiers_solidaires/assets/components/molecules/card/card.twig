@@ -1,68 +1,95 @@
 <div class="card-list">
+  <div class="card card-flippable card-list-item card-open" data-status="pending" data-status-badge="pending" data-guests="0" id="card37">
 
-<div class="card card-flippable">
+    <div class="card-front">
 
-  <div class="card-front">
-    <div class="card-pill">
-      <span class="card-pill-icon">
-        {% include "@atoms/icon/icon.twig" with {icon: 'activities', circle: true} %}
-      </span>
-      <span class="card-pill-title">
-        <span class="size-date"><time datetime="2017-07-22">22 juillet 2017</time></span>
-        <span aria-label="de 13:00 à 13:30"><time datetime="13:00">13:00</time> – <time datetime="13:30">13:30</time></span>
-      </span>
-      {% include "@atoms/flag/flag.twig" with {icon: 'confirmed'} %}
+      <a class="card-pill" data-toggle="collapse" href="#collapse-37" role="tab" aria-expanded="true" aria-controls="collapse-37" id="event37">
+        <span class="card-pill-icon">
+          {% include "@atoms/icon/icon.twig" with {icon: 'theme_culture'} %}
+        </span>
+          <span class="card-pill-title">
+          <span class="size-date"><time datetime="2017-07-22">22 juillet 2017</time></span>
+          <span class="d-none d-sm-inline">
+            <time datetime="2019-05-01 23:00">23:00</time> – <time datetime="2019-05-01 23:12">23:12</time>
+          </span>
+        </span>
+
+        {% include "@atoms/flag/flag.twig" with {icon: 'wait', classes: ['flag-warning flag-shield flag-subscription-wait'], shield: true} %}
+      </a>
     </div>
 
-    <div class="card-body pb-1 collapse show">
-      <div class="card-icon">
-        {% include "@atoms/icon/icon.twig" with {icon: 'themes', circle: true} %}
+    <div class="collapse show" id="collapse-37" role="tabpanel" data-parent="#events-accordion">
+
+      <div class="card-body pb-0 text-center">
+        <h4 class="card-title">Macbeth</h4>
+        <div class="card-text">
+          <p>Après quelques infidélités à son auteur fétiche, Valentin Rossier revient à ses premières amours et présente "la pièce écossaise", celle dont on ne doit pas prononcer le nom dans un théâtre.&nbsp;Macbeth… Vision sombre de l’humanité, où l’oppression est vouée à succéder à l’oppression, où la frontière entre le visible et l’invisible se dissout. Transposé dans l’environnement aseptisé et glaçant d’un palace cinq étoiles,&nbsp;Macbeth&nbsp;ne dérogera cependant à aucune tradition shakespearienne: meurtre, trahison et folie!</p>
+
+          <p class="text-primary">
+            {% include "@atoms/icon/icon.twig" with {icon: 'money', classes: 'icon-offset'} %}
+            Contribution CHF 20.-
+          </p>
+        </div>
+
+        <div class="card-actions row">
+          <div class="col-sm-6 mb-3 mx-auto">
+            <button data-status-show="pending" class="btn btn-outline-info btn-white btn-icon shadow-to-right btn-block">
+              {% include "@atoms/icon/icon.twig" with {icon: 'wait'} %}
+              qs.event.register.pending
+            </button>
+
+            <button data-status-show="confirmed" class="btn btn-info btn-icon shadow-to-bottom btn-block mt-0">
+              {% include "@atoms/icon/icon.twig" with {icon: 'checkflag'} %}
+              qs.event.register.confirmed
+            </button>
+
+            <form>
+              <input data-drupal-selector="edit-event" type="hidden" name="event" value="37" class="form-control">
+              <button data-status-show="default" class="shadow-to-right btn-outline-secondary btn-block btn-white direct_subscription_37_confirm button js-form-submit form-submit btn shadow-to-bottom btn-primary btn-icon">
+                qs.event.register
+                {% include "@atoms/icon/icon.twig" with {icon: 'register'} %}
+              </button>
+            </form>
+
+          </div>
+
+          <div class="col-sm-6 mb-3 mx-auto">
+            <a href="#contact-37" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
+              {% include "@atoms/icon/icon.twig" with {icon: 'user'} %}
+              qs.event.contact
+            </a>
+          </div>
+
+          <div class="col-sm-6 mb-3 mx-auto">
+            <a href="#map-37" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block" data-toggle="flip">
+              {% include "@atoms/icon/icon.twig" with {icon: 'meeting'} %}
+              qs.event.location
+            </a>
+          </div>
+
+          <div class="col-sm-6 mb-3 mx-auto">
+            <a href="#" class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
+              {% include "@atoms/icon/icon.twig" with {icon: 'calendar'} %}
+              qs.event.calendar
+            </a>
+          </div>
+
+          <div class="col-sm-6 mb-3 mx-auto">
+            <a href="#" class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
+              {% include "@atoms/icon/icon.twig" with {icon: 'checklist'} %}
+              qs.event.dashboard
+            </a>
+          </div>
+
+          <div class="col-sm-6 mb-3 mx-auto">
+            <a data-status-guest-show="confirmed_guests" href="#" class="btn  btn-outline-warning  btn-icon btn-white shadow-to-left btn-block">
+              {% include "@atoms/icon/icon.twig" with {icon: 'checklist'} %}
+              qs.event.dashboard.shortcut.confirmed 1
+            </a>
+          </div>
+        </div>
+
       </div>
-      <h4 class="card-title">Atelier Générations-Net'</h4>
-      <p class="card-text">Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire.</p>
-
-      <div class="card-actions row">
-        <div class="col-sm-6 mb-3">
-          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block" data-toggle="flip">
-            {% include "@atoms/icon/icon.twig" with {icon: 'register'} %}
-            S'inscrire à l'événement
-          </button>
-        </div>
-        <div class="col-sm-6 mb-3">
-          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-right btn-block">
-            {% include "@atoms/icon/icon.twig" with {icon: 'user'} %}
-            Contacter l'organisateur
-          </button>
-        </div>
-        <div class="col-sm-6 mb-3">
-          <button class="btn btn-outline-secondary btn-icon btn-white shadow-to-left btn-block">
-            {% include "@atoms/icon/icon.twig" with {icon: 'meeting'} %}
-            Point de rendez-vous
-          </button>
-        </div>
-        <div class="col-sm-6 mb-3">
-          {% include "@atoms/badge/badge.twig" %}
-        </div>
-      </div>
     </div>
-
   </div>
-
-  <div class="card-back card-secondary">
-    <div class="card-pill">
-      <span class="card-pill-icon">
-        {% include "@atoms/icon/icon.twig" with {icon: 'activities', circle: true} %}
-      </span>
-      <span class="card-pill-title">
-        <span>Philippe Aeberhard</span>
-      </span>
-    </div>
-    <div class="card-body pb-1">
-       <p class="card-text text-center">
-         Le responsable de cet évènement est Philippe. Vous pouvez le contacter par téléphone ou par email.
-       </p>
-    </div>
-    <button data-toggle="flip">asdf</button>
-  </div>
-</div>
 </div>

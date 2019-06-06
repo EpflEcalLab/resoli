@@ -34,7 +34,7 @@
           <p class="lead text-center mt-5">
             {% if variables.activity.field_contact_mail is not empty %}
               {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value, { 'target':['_blank']} )|render %}
-              {% trans %}qs.photo.no_photos_please_contact {{ mail_link }}{% endtrans %}
+              {{ 'qs.photo.no_photos_please_contact @mail_link'|t({'@mail_link': mail_link}) }}
             {% else %}
               {{ 'qs.photo.no_photos'|t }}
             {% endif %}
@@ -45,5 +45,18 @@
     </div>
   {% endif %}
 </div>
+
+{# Floating Buttons #}
+{% set user = bamboo_load_currentuser() %}
+{% set floating_buttons = [{
+  label: 'qs_photo.floating.my_photos'|t,
+  icon: 'picture',
+  theme: 'primary',
+  url: path('qs_photo.user.activities.collection', {
+    community: variables.activity.field_community.target_id,
+    user: user.id,
+  })
+}] %}
+{{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
 
 {% include '@quartiers_solidaires/misc/photoswipe-wrapper.html.twig' %}

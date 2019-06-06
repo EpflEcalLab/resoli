@@ -69,5 +69,5 @@ Feature: Event Edit Form
       | title | date| start-at | end-at | body | venue | contact-name | contact-phone | contact-mail | contribution |
       | Cours iOS (edited) | +1 week | 19:12 | 22:15 | Lorem Ipsum | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 250 CHF |
     And I press "edit-submit"
-    And 1 mails should be sent
+    And 1 mail should be sent
     Then A mail as been sent to "member+lausanne+manager+fribourg@antistatique.net" with subject "qs.mail.event.updated.subject Resoli Cours iOS (edited)"

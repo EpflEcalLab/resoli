@@ -37,7 +37,7 @@ printf "\e[1;33m* Running PHPUnit Tests. *\e[0m\n"
 printf "\e[1;33m**************************\e[0m\n"
 
 export SYMFONY_DEPRECATIONS_HELPER=weak
-export SIMPLETEST_DB="sqlite://tmp//tmp/qs.sqlite"
+export SIMPLETEST_DB="mysql://root:root@localhost/qs_test"
 export SIMPLETEST_BASE_URL='http://127.0.0.1:8888'
 export BROWSERTEST_OUTPUT_DIRECTORY='./web/sites/default/files/tests'
 

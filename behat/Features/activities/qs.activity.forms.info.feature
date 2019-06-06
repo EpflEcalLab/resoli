@@ -25,7 +25,7 @@ Feature: Activity Information Form
       | title | theme |
       | Accueil Café (edited) | 4 |
     And I press "edit-submit"
-    And 0 mails should be sent
+    And 0 mail should be sent
 
   @api @preserveDatabase
   Scenario: When editting the Information form of Activity, the values should be alterd & stored in the database

@@ -20,7 +20,7 @@
                 </span>
                 <span class="font-weight-light ml-auto mr-4 text-md-right">
                   {% set role = ('qs.roles.' ~ variables.privileges[community.tid.value]|last)|t|lower %}
-                  {% trans %}qs_supervisor.account.role {{ role }}{% endtrans %}
+                  {{ 'qs_supervisor.account.role @role'|t({'@role': role}) }}
                 </span>
               </span>
               <span class="btn btn-outline-invert btn-circle shadow-to-left shadow-to-bottom" aria-label="{{ 'qs_supervisor.account.community_go'|t }}">
@@ -52,7 +52,7 @@
     <div class="col text-center">
       <a class="btn btn-icon btn-outline-invert shadow-to-bottom" href="{{ path('qs_auth.communities.apply') }}">
         {{ macros.icon('plus') }}
-        {% trans %}qs_supervisor.account.dashboard.apply{% endtrans %}
+        {{ 'qs_supervisor.account.dashboard.apply'|t }}
       </a>
     </div>
   </div>

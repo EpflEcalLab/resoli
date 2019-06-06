@@ -3,7 +3,7 @@
   {# Get user Highest privilege #}
   {% set privilege = privileges|last %}
 
-  {# Adapte the color of badge according user privilege of activity #}
+  {# Adapt the color of badge according to user privilege for activity #}
   {% set roles = 'qs.roles.activity_member'|t %}
   {% if privilege == 'activity_maintainers' %}
     {% set theme = 'warning' %}

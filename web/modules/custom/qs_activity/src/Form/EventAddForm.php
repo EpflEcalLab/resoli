@@ -100,12 +100,19 @@ class EventAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
+      'theme' => 'secondary',
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
 
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs_activity.floating.add.event'),
+      'icon' => 'plus',
+      'active' => TRUE,
+    ];
+
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
-      'form__fullpage__multistep',
+      'form__modal__multistep',
     ];
 
     // Save the activity for submission.
@@ -433,7 +440,7 @@ class EventAddForm extends FormBasic {
     $data['venue_lat']     = $form_state->getValue('latitude');
     $data['venue_long']    = $form_state->getValue('longitude');
 
-    // // Create the new event.
+    // Create the new event.
     $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
     drupal_set_message($this->t('qs_activity.events.form.add.success'));
     $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
@@ -443,10 +450,12 @@ class EventAddForm extends FormBasic {
     $privileges = reset($privileges_by_events);
 
     // According the current user roles to the event,
-    // If he's activity_maintainers subscribe him to this new event.
-    if (in_array('activity_maintainers', $privileges)) {
-      // By default, subscribe the author.
-      $subscription = $this->subscriptionManager->request($event);
+    // If he's activity_maintainers and not activity_organizers, then
+    // subscribe him to this new event.
+    if (in_array('activity_maintainers', $privileges) && !in_array('activity_organizers', $privileges)) {
+      // By default, subscribe every activity_maintainers (co-organizers) to
+      // there events.
+      $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
       $this->subscriptionManager->confirm($subscription);
     }
   }

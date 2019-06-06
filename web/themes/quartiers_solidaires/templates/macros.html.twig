@@ -27,3 +27,174 @@
 </div>
 {% endspaceless %}
 {% endmacro %}
+
+{% macro card_button(text, url, icon, direction, attrs, theme) %}
+  <div class="col-sm-6 mb-3 mx-auto">
+    <a href="{{ url }}" class="btn btn-outline-{{ theme|default('secondary') }} btn-icon btn-white shadow-to-{{ direction|default('right') }} btn-block" {{ attrs|raw }}>
+      {{ _self.icon(icon) }}
+      {{ text }}
+    </a>
+  </div>
+{% endmacro %}
+
+{% macro list_buttons(buttons, btn_default_classes, params, btn_base_classes) %}
+  <div class="row mb-5">
+    <div class="col-sm-8 col-lg-6 mx-auto text-center">
+      <ul class="list-unstyled mx-auto">
+        {% for button in buttons %}
+          {{ _self.list_button(button, btn_default_classes, params, btn_base_classes) }}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endmacro %}
+
+{#
+  button: {label, path, list_classes, classes, icon}
+#}
+{% macro list_button(button, btn_default_classes, params, btn_base_classes) %}
+  {% set attributes = create_attribute().addClass(button.list_classes) %}
+  <li{{ attributes }}>
+    <a
+      class="{{ btn_base_classes ?? 'btn btn-block btn-icon mb-2 shadow-to-bottom' }} {{ button.classes ?? btn_default_classes }}"
+      href="{{ path(button.path, params) }}">
+      {{ _self.icon(button.icon ?? 'pencil') }}
+      {{ button.label }}
+    </a>
+  </li>
+{% endmacro %}
+
+{% macro floating_buttons(buttons, default_theme, default_url) %}
+  <div class="floating-offset"></div>
+  <div class="floating">
+    <div class="container">
+      <div class="d-flex flex-wrap flex-md-nowrap justify-content-center">
+        {% for button in buttons %}
+          {{ _self.floating_button(button.label, button.url ?? default_url, button.icon, button.active, button.theme ?? default_theme, button.classes) }}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro floating_button(label, url, icon, active, theme, classes) %}
+  {% set btn_classes = [
+    'd-flex',
+    'btn shadow-floating mb-3 mx-2',
+    'btn-xs-grow',
+    icon ? 'btn-icon',
+    'btn-outline-' ~ theme,
+    active ? 'active',
+  ] %}
+  <a
+    class="{{ btn_classes|merge(classes|default([]))|join(' ') }}"
+    href="{{ url }}"
+  >
+    {{ icon ? _self.icon(icon) }}
+    <span class="text-truncate mx-auto">{{ label }}</span>
+  </a>
+{% endmacro %}
+
+{% macro back_button(label, url, classes, icon, default_classes) %}
+  <a class="{{ default_classes ?? 'btn btn-icon-to-circle shadow-to-bottom btn-icon mx-2' }} {{ classes }}" href="{{ url }}">
+    {{ _self.icon(icon ?? 'chevron-left') }}
+    <span class="d-none d-sm-inline">{{ label }}</span>
+  </a>
+{% endmacro %}
+
+{% macro card_back_button(label, url, icon, classes, default_classes) %}
+  {% set attributes = create_attribute()
+    .addClass(default_classes ?? 'btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom')
+    .addClass(classes)
+  %}
+  <div class="col-md-8 mx-auto">
+    {% if url %}
+      <a{{ attributes }} href="{{ url }}">
+        {% block btn_content %}
+          {{ _self.icon(icon|default('arrow-left')) }}
+          {{ label }}
+        {% endblock %}
+      </a>
+    {% else %}
+      <button{{ attributes }} data-toggle="flip">
+        {{ block('btn_content') }}
+      </button>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro radios_buttons_form(radios, action, id, hiddens, label, ban) %}
+  <form id="{{ id }}" data-ajax="true" action="{{ action }}" class="" method="post">
+    {% block hiddens %}
+      {% for hidden in hiddens %}
+        <input type="hidden" name="{{ hidden.name }}" value="{{ hidden.value }}">
+      {% endfor %}
+    {% endblock %}
+
+
+    <div class="d-flex flex-wrap justify-content-center">
+      <div class="btn-group mb-3 mx-2 js-radio-group" role="group" aria-label="{{ label }}" data-toggle="buttons">
+
+        {% for radio in radios %}
+          {{ _self.radio_button(radio.active, radio.title, radio.value) }}
+        {% endfor %}
+
+      </div>
+    </div>
+  </form>
+  {% if ban %}
+    <form action="{{ ban.action }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="{{ ban.parent }}" method="post">
+      {{ block('hiddens') }}
+      <button class="btn mb-3 mx-2 btn-outline-invert btn-fluid shadow-to-bottom" data-confirm="{{ ban.confirm }}" type="submit" value="{{ ban.value }}">
+        {{ ban.value }}
+      </button>
+    </form>
+  {% endif %}
+{% endmacro %}
+
+{% macro radio_button(active, title, value) %}
+  {% set classes = [
+    'btn btn-outline-invert btn-fluid',
+    active ? 'active',
+  ] %}
+  {% set input_attributes = create_attribute({
+    'type': 'radio',
+    'name': 'privileges',
+    'title': title,
+    'data-submit': 'true',
+    'value': value,
+    'class': 'form-radio',
+    checked: active ? 'true' : 'false',
+  }) %}
+  <label class="{{ classes|join(' ') }}">
+    <input{{ input_attributes }}>
+    {{ title }}
+  </label>
+{% endmacro %}
+
+{% macro modal_footer_buttons(buttons, default_classes) %}
+  <div class="d-flex flex-wrap justify-content-center mb-3 mt-3">
+    {% for button in buttons %}
+      {{ _self.modal_footer_button(button, default_classes) }}
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro modal_footer_button(button, default_classes) %}
+  {% set default_classes = default_classes|default([
+    'btn',
+    button.icon ? 'btn-icon',
+    'shadow-to-bottom',
+    'mx-2',
+    'mb-2',
+  ]) %}
+  {% set attributes = create_attribute({
+    'class': button.classes,
+    'href': button.url,
+  }) %}
+  <a{{ attributes.addClass(default_classes) }}>
+    {{ _self.icon(button.icon) }}
+    {{ button.label }}
+  </a>
+{% endmacro %}
+

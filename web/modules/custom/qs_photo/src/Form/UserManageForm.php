@@ -86,12 +86,16 @@ class UserManageForm extends FormBasic {
       'novalidate' => 'novalidate',
       'title' => $this->t('qs_photo.user.form.manage.title_form @activity', ['@activity' => $activity->getTitle()]),
       'description' => $this->t('qs_photo.user.form.manage.description_form'),
-      'class' => [
-        'modal-body',
-      ],
+      'theme' => 'primary',
     ];
     $form['#theme_wrappers'] = [
       'form__modal',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'icon'   => 'picture',
+      'label'  => $this->t('qs_photo.user.form.manage.title'),
+      'active' => TRUE,
     ];
 
     $activity_id = $activity->id();

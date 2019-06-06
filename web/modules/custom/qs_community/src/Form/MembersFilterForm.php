@@ -61,7 +61,7 @@ class MembersFilterForm extends FormBase {
     $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#attributes' => [
-        'icon' => 'plus',
+        'icon' => 'check',
         'icon_left' => TRUE,
         'outline' => TRUE,
         'class' => [

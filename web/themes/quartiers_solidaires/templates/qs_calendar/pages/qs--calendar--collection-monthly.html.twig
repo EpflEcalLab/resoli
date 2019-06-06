@@ -1,28 +1,12 @@
-{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
+{% extends "@quartiers_solidaires/qs_calendar/pages/qs--calendar--collection-weekly.html.twig" %}
 
-{% set community_name = variables.community.name.value|trim %}
+{% block lead_text %}
+  {{ 'qs.calendar.monthly.lead @community @current_day'|t({
+    '@community': community_name,
+    '@current_day': variables.current_day|bamboo_i18n_format_date('custom', 'j F Y'),
+  }) }}
+{% endblock %}
 
-<div class="container">
-  <p class="lead text-center my-5">
-    {{ 'qs.calendar.monthly.lead @community @current_day'|t({
-      '@community': community_name,
-      '@current_day': variables.current_day|bamboo_i18n_format_date('custom', 'j F Y'),
-    }) }}
-  </p>
-</div>
-
-{{ bamboo_render_block('qs_calendar_monthly_block') }}
-
-{% include "@quartiers_solidaires/qs_calendar/partials/events-day-listing.html.twig" %}
-
-{% set user = bamboo_load_currentuser() %}
-{% set floating_buttons = [{
-  label: 'qs_activity.floating.my_subscriptions'|t,
-  icon: 'checkflag',
-  theme: 'info',
-  url: path('qs_subscription.user.collection', {
-    community: variables.community.id,
-    user: user.id,
-  })
-}] %}
-{{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
+{% block calendar %}
+  {{ bamboo_render_block('qs_calendar_monthly_block') }}
+{% endblock %}

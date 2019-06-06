@@ -314,7 +314,9 @@ a.pswp__share--download:hover {
 
 .pswp__caption--outside {
   position: fixed;
+  z-index: 99999999;
   pointer-events: none;
+  min-height: 0;
 
   .card {
     pointer-events: initial;

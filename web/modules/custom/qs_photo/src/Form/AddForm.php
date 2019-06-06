@@ -282,12 +282,6 @@ class AddForm extends FormBasic {
       'form__modal__multistep',
     ];
 
-    // Save the community for submission.
-    $form['community'] = [
-      '#type'  => 'hidden',
-      '#value' => $community->id(),
-    ];
-
     $form['step-1'] = [
       '#type' => 'fieldset',
       '#description' => $this->t('qs_photo.add.form.step1.description'),

@@ -93,10 +93,7 @@ abstract class EventEditFormBase extends FormBasic {
     $form = parent::buildForm($form, $form_state);
 
     // Save the event for submission.
-    $form['event'] = [
-      '#type'  => 'hidden',
-      '#value' => $event->id(),
-    ];
+    $form_state->set('event', $event->id());
     $form['#attached']['library'][] = 'qs_site/unload';
 
     return $form;

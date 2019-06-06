@@ -113,10 +113,7 @@ class AccountEditForm extends FormBase {
     ];
 
     // Save the user for submission.
-    $form['user'] = [
-      '#type'  => 'hidden',
-      '#value' => $user->id(),
-    ];
+    $form_state->set('user', $user->id());
 
     $form['credentials'] = [
       '#type'  => 'fieldset',
@@ -213,13 +210,13 @@ class AccountEditForm extends FormBase {
 
     // Check email is unique as mail.
     $accounts = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
-    if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
+    if ($accounts && !isset($accounts[$form_state->get('user')])) {
       $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
     }
 
     // Check email is unique as username.
     $accounts = $this->userStorage->loadByProperties(['name' => $form_state->getValue('mail')]);
-    if ($accounts && !isset($accounts[$form_state->getValue('user')])) {
+    if ($accounts && !isset($accounts[$form_state->get('user')])) {
       $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
     }
 
@@ -236,7 +233,7 @@ class AccountEditForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $user = $this->userStorage->load($form_state->getValue('user'));
+    $user = $this->userStorage->load($form_state->get('user'));
 
     // Prepare fields.
     $fields['mail']            = $form_state->getValue('mail');

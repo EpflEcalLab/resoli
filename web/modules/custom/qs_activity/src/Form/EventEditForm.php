@@ -160,6 +160,7 @@ class EventEditForm extends EventEditFormBase {
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
+    // Hidden fields which will be updated via Javascript.
     $form['latitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $event->field_venue->value ? $event->field_venue_lat->value : NULL,
@@ -319,7 +320,7 @@ class EventEditForm extends EventEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $event = $this->nodeStorage->load($form_state->get('event'));
 
     // Format dates.
     $date = new DrupalDateTime($form_state->getValue('date'));

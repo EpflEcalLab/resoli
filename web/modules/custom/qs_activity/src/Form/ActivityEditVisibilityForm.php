@@ -175,7 +175,7 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
 
     // Format authorizations for creations.
     $fields = [

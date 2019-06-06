@@ -106,7 +106,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
 
     // Assert the activity has no event.
     $events = $this->eventManager->getAll($activity);
@@ -122,7 +122,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
     $community = $activity->field_community->entity;
 
     drupal_set_message($this->t("qs_activity.activities.form.delete.success @activity", [

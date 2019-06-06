@@ -161,9 +161,9 @@ class MembersController extends ControllerBase {
     // Load user entities without privileges.
     $community_members = $this->userStorage->loadMultiple($uids);
 
-    // Add privileges to users.
+    // Add highest privileges by users.
     foreach ($community_members as $community_member) {
-      $community_member->privileges = $privileges[$community_member->id()];
+      $community_member->privilege = end($privileges[$community_member->id()]);
     }
 
     $this->excelExporter->init();
@@ -184,31 +184,29 @@ class MembersController extends ControllerBase {
     ]);
 
     foreach ($community_members as $member) {
-      foreach ($member->privileges as $privilege) {
-        $acl = '';
-        switch ($privilege) {
-          case 'community_managers':
-            $acl = $this->t('qs.roles.community_manager');
-            break;
+      $privilege = '';
+      switch ($member->privilege) {
+        case 'community_managers':
+          $privilege = $this->t('qs.roles.community_manager');
+          break;
 
-          case 'community_organizers':
-            $acl = $this->t('qs.roles.community_organizer');
-            break;
+        case 'community_organizers':
+          $privilege = $this->t('qs.roles.community_organizer');
+          break;
 
-          default:
-          case 'community_members':
-            $acl = $this->t('qs.roles.community_member');
-            break;
-        }
-
-        $this->excelExporter->addRow([
-          $acl,
-          $member->field_firstname->value,
-          $member->field_lastname->value,
-          $member->getEmail(),
-          $member->field_phone->value,
-        ]);
+        default:
+        case 'community_members':
+          $privilege = $this->t('qs.roles.community_member');
+          break;
       }
+
+      $this->excelExporter->addRow([
+        $privilege,
+        $member->field_firstname->value,
+        $member->field_lastname->value,
+        $member->getEmail(),
+        $member->field_phone->value,
+      ]);
 
     }
     $this->excelExporter->finalize();

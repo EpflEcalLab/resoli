@@ -9,7 +9,9 @@ use Drupal\qs_site\Form\InlineErrorFormTrait;
 use Mimey\MimeTypes;
 
 /**
- * FormBasic class.
+ * Base form handler for photos CRUD forms.
+ *
+ * @internal
  */
 abstract class FormBasic extends FormBase {
   use InlineErrorFormTrait;

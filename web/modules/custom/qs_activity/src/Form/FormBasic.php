@@ -9,7 +9,9 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
 
 /**
- * FormBasic class.
+ * Base form handler for activity/event CRUD forms.
+ *
+ * @internal
  */
 abstract class FormBasic extends FormBase {
   use InlineErrorFormTrait;

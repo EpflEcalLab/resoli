@@ -14,7 +14,8 @@ Feature: Forget Password
     Given I am on "/authentication/password"
     When I fill in "edit-name" with "Batman"
     And I press "edit-submit"
-    And I should see "batman is not recognized as a username or an email address." in the ".alert" element
+    And I should see "1 error has been found: qs_auth.form.pass.name.label" in the ".alert" element
+    And I should see "Batman is not recognized as a username or an email address." in the ".invalid-feedback" element
 
   @mail
   Scenario: When filling the forget password it should redirect me on the confirmation page & send the one-time-login mail.

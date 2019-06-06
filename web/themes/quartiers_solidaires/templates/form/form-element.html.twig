@@ -100,9 +100,9 @@
   {% if label_display == 'after' and type != 'radio' and type != 'checkbox' %}
     {{ label }}
   {% endif %}
-  {% if element['#error'] %}
+  {% if errors %}
     <div class="invalid-feedback">
-      {{ element['#error']|raw }}
+      {{ errors }}
     </div>
   {% endif %}
   {% if description_display in ['after', 'invisible'] and description.content %}

@@ -7,15 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_auth\Service\Account;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\qs_site\Form\InlineErrorFormTrait;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * RegisterForm class.
  */
 class RegisterForm extends FormBase {
-  use InlineErrorFormTrait;
-
   /**
    * The QS account service.
    *
@@ -251,63 +248,55 @@ class RegisterForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the community is valid.
     if (!$form_state->getValue('community') || empty($form_state->getValue('community'))) {
-      $form_state->setErrorByName('[register][step-1][community]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-1']['community']['#attributes']['title']]));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-1']['community']['#attributes']['title']]));
     }
 
     // Assert the firstname is valid.
     if (!$form_state->getValue('firstname') || empty($form_state->getValue('firstname'))) {
-      $form_state->setErrorByName('[register][step-2][firstname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['firstname']['#title']]));
+      $form_state->setErrorByName('firstname', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['firstname']['#title']]));
     }
 
     // Assert the lastname is valid.
     if (!$form_state->getValue('lastname') || empty($form_state->getValue('lastname'))) {
-      $form_state->setErrorByName('[register][step-2][lastname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['lastname']['#title']]));
+      $form_state->setErrorByName('lastname', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-2']['lastname']['#title']]));
     }
 
     // Assert the password is valid.
     if (!$form_state->getValue('password') || empty($form_state->getValue('password'))) {
-      $form_state->setErrorByName('[register][step-4][password]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password']['#title']]));
+      $form_state->setErrorByName('password', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password']['#title']]));
     }
 
     // Assert the mail is valid.
     if (!$form_state->getValue('mail') || !filter_var($form_state->getValue('mail'), FILTER_VALIDATE_EMAIL)) {
-      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail.malformed'));
+      $form_state->setErrorByName('mail', $this->t('qs.form.error.mail.malformed'));
     }
 
     // Check email is uniq. as mail.
     $account = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($account) {
-      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.mail.used'));
+      $form_state->setErrorByName('mail', $this->t('qs.form.error.mail.used'));
     }
 
     // Check email is uniq. as username.
     $account = $this->userStorage->loadByProperties(['name' => $form_state->getValue('mail')]);
     if ($account) {
-      $form_state->setErrorByName('[register][step-3][mail]', $this->t('qs.form.error.username.used'));
+      $form_state->setErrorByName('mail', $this->t('qs.form.error.username.used'));
     }
 
     // Check username is Drupal compliant.
     if ($violation = user_validate_name($form_state->getValue('mail'))) {
-      $form_state->setErrorByName('[register][step-3][mail]', $violation);
-    }
-
-    // Assert the password is valid.
-    if (!$form_state->getValue('password') || empty($form_state->getValue('password'))) {
-      $form_state->setErrorByName('[register][step-4][password]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password']['#title']]));
+      $form_state->setErrorByName('mail', $violation);
     }
 
     // Assert the password_verification is valid.
     if (!$form_state->getValue('password_verification') || empty($form_state->getValue('password_verification'))) {
-      $form_state->setErrorByName('[register][step-4][password_verification]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password_verification']['#title']]));
+      $form_state->setErrorByName('password_verification', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['register']['step-4']['password_verification']['#title']]));
     }
 
     // Assert the password_verification is equal to password.
     if ($form_state->getValue('password') !== $form_state->getValue('password_verification')) {
-      $form_state->setErrorByName('[register][step-4][password_verification]', $this->t('qs_auth.form.register.error.password_verification.invalid'));
+      $form_state->setErrorByName('password_verification', $this->t('qs_auth.form.register.error.password_verification.invalid'));
     }
-
-    // Add inline errors.
-    $this->applyErrorsInline($form, $form_state);
   }
 
   /**

@@ -9,16 +9,12 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\PrivilegeManager;
-use Drupal\qs_site\Form\InlineErrorFormTrait;
 use Drupal\qs_auth\Service\Account;
 
 /**
  * CommunitiesApplyForm class.
- *
- * @TODO: Code the form for appliance.
  */
 class CommunitiesApplyForm extends FormBase {
-  use InlineErrorFormTrait;
 
   /**
    * Access Control Service.
@@ -188,7 +184,7 @@ class CommunitiesApplyForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the community is valid.
     if (!$form_state->getValue('community') || empty($form_state->getValue('community'))) {
-      $form_state->setErrorByName('[community]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['community']['#attributes']['title']]));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['community']['#attributes']['title']]));
     }
   }
 

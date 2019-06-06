@@ -180,7 +180,7 @@ class UserManageForm extends FormBasic {
     $photos = $this->getCheckedPhotos($form_state);
 
     if (empty($photos)) {
-      $form_state->setErrorByName('[photos]', $this->t('qs_photo.user.form.manage.choose_one'));
+      $form_state->setErrorByName('form', $this->t('qs_photo.user.form.manage.choose_one'));
     }
   }
 

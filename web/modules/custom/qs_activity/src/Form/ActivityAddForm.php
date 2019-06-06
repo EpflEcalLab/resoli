@@ -396,16 +396,13 @@ class ActivityAddForm extends FormBasic {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
-      $form_state->setErrorByName('[activity][step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-1']['title']['#title']]));
+      $form_state->setErrorByName('title', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-1']['title']['#title']]));
     }
 
     // Assert the theme is valid.
     if (!$form_state->getValue('theme') || empty($form_state->getValue('theme'))) {
-      $form_state->setErrorByName('[activity][step-2][theme]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-2']['theme']['#attributes']['title']]));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-2']['theme']['#attributes']['title']]));
     }
-
-    // Add inline errors.
-    $this->applyErrorsInline($form, $form_state);
   }
 
   /**

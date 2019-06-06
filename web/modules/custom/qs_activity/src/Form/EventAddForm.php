@@ -355,39 +355,39 @@ class EventAddForm extends FormBasic {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
-      $form_state->setErrorByName('[event][step-1][title]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['title']['#title']]));
+      $form_state->setErrorByName('title', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['title']['#title']]));
     }
 
     // Assert the mail is valid - only when filled.
     if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
-      $form_state->setErrorByName('[event][step-2][contact_mail]', $this->t('qs.form.error.mail.malformed'));
+      $form_state->setErrorByName('contact_mail', $this->t('qs.form.error.mail.malformed'));
     }
 
     // Date validation
     // ===============.
     // Assert the date is valid.
     if (!$form_state->getValue('date') || empty($form_state->getValue('date'))) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][date]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
     }
 
     // Assert the start is valid.
     if (!$form_state->getValue('start_at') || empty($form_state->getValue('start_at'))) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][time_fieldset][start_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Assert the end is valid.
     if (!$form_state->getValue('end_at') || empty($form_state->getValue('end_at'))) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][time_fieldset][end_at]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
     // Assert the start is formatted as requested.
     if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('start_at'))) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
 
     // Assert the end is formatted as requested.
     if (!preg_match('/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/', $form_state->getValue('end_at'))) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][time_fieldset][end_at]', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs_activity.events.form.add.error.hours.malformed @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at']['#title']]));
     }
 
     $date = new DrupalDateTime($form_state->getValue('date'));
@@ -397,22 +397,19 @@ class EventAddForm extends FormBasic {
       $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
     }
     catch (\Exception $e) {
-      $form_state->setErrorByName('[event]', $this->t('qs.form.error.something_went_wrong'));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.something_went_wrong'));
       return;
     }
 
     // Assert the date is formatted as requested.
     if (!$this->validateDate($formatted_date, 'd.m.Y')) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][date]', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs_activity.form.error.date_format_invalid @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['date']['#title']]));
     }
 
     // Check hours are realistic.
     if ($start_at >= $end_at) {
-      $form_state->setErrorByName('[event][step-1][date][date_fieldset][time_fieldset][start_at]', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
-
-    // Add inline errors.
-    $this->applyErrorsInline($form, $form_state);
   }
 
   /**

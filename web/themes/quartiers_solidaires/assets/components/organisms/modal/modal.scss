@@ -160,6 +160,10 @@
   justify-content: center;
 }
 
+.modal.force-show {
+  overflow: hidden;
+}
+
 .modal-real {
   &.show {
     display: flex !important;

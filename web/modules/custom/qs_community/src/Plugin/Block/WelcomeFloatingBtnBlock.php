@@ -79,6 +79,7 @@ class WelcomeFloatingBtnBlock extends BlockBase implements ContainerFactoryPlugi
    */
   public function build($params = []) {
     $community = $this->route->getParameter('community');
+    $variables = [];
 
     // Show the "Manage Community" button only to people with the proper ACL.
     if ($community && $this->acl->hasAdminAccessCommunity($community)) {

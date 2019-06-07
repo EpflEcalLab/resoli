@@ -11,6 +11,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_export\Excel;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * SubscribersController.
@@ -159,6 +160,11 @@ class SubscribersController extends ControllerBase {
     $ids = [];
     foreach ($rows as $row) {
       $ids[] = $row->id;
+    }
+
+    // When nothing can be downloaded, return a 404.
+    if (empty($ids)) {
+      throw new NotFoundHttpException();
     }
 
     // Load subscriptions entities.

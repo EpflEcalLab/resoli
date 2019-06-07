@@ -11,6 +11,7 @@ use Drupal\qs_export\Excel;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * MembersController.
@@ -158,6 +159,12 @@ class MembersController extends ControllerBase {
     $now = new DrupalDateTime();
 
     $query = $this->privilegeManager->queryMembersWithPrivileges($activity);
+
+    // When nothing can be downloaded, return a 404.
+    if (!$query) {
+      throw new NotFoundHttpException();
+    }
+
     $rows = $query->execute()->fetchAll();
 
     $uids = [];

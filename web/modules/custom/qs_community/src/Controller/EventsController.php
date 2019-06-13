@@ -116,7 +116,7 @@ class EventsController extends ControllerBase {
       $this->t('qs_community.events.export.header.date_start.label')->render(),
       $this->t('qs_community.events.export.header.date_end.label')->render(),
       $this->t('qs_community.events.export.header.venue.label')->render(),
-      $this->t('qs_community.events.export.header.organizer.label')->render(),
+      $this->t('qs_community.events.export.header.contribution.label')->render(),
       $this->t('qs_community.events.export.header.organizer_mail.label')->render(),
       $this->t('qs_community.events.export.header.organizer_phone.label')->render(),
     ]);
@@ -129,6 +129,7 @@ class EventsController extends ControllerBase {
         $event->field_start_at->date,
         $event->field_end_at->date,
         $event->field_venue->value,
+        $event->field_contribution->value,
         $event->field_contact_name->value,
         $event->field_contact_mail->value,
         $event->field_contact_phone->value,

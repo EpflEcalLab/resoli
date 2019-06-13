@@ -80,9 +80,9 @@ class EventsController extends ControllerBase {
   }
 
   /**
-   * Export the complete list of members by community.
+   * Export the complete list of events by community.
    *
-   * A member may appear multiple time, as they may have more than 1 privilege.
+   * For performance reason, we only fetch the next 6 months events.
    */
   public function export(TermInterface $community) {
     $now = new DrupalDateTime();

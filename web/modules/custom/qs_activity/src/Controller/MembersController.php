@@ -153,7 +153,7 @@ class MembersController extends ControllerBase {
   /**
    * Export the complete list of members by activity.
    *
-   * A member may appear multiple time, as they may have more than one access.
+   * A member appear only one time, his highest privilege is shown.
    */
   public function export(NodeInterface $activity) {
     $now = new DrupalDateTime();

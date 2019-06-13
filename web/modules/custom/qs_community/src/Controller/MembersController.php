@@ -155,7 +155,7 @@ class MembersController extends ControllerBase {
   /**
    * Export the complete list of members by community.
    *
-   * A member may appear multiple time, as they may have more than 1 privilege.
+   * A member appear only one time, his highest privilege is shown.
    */
   public function export(TermInterface $community) {
     $now = new DrupalDateTime();

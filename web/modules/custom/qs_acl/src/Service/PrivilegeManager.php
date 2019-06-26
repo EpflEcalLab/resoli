@@ -372,7 +372,7 @@ class PrivilegeManager {
   private function addContainsCondition(ConditionInterface $condition, $field, $sentence) {
     preg_match_all('/\w+/', $sentence, $matches);
 
-    if (!isset($matches[0])) {
+    if (!isset($matches[0]) || empty($matches[0])) {
       return;
     }
 

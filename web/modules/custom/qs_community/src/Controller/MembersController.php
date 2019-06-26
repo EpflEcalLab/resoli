@@ -113,13 +113,21 @@ class MembersController extends ControllerBase {
       ],
     ];
 
-    $filters = [];
+    $filters = [
+      'mail' => '',
+      'firstname' => '',
+      'lastname' => '',
+    ];
     if (!empty($keywords)) {
-      $filters = [
-        'mail' => $keywords,
-        'firstname' => $keywords,
-        'lastname' => $keywords,
-      ];
+      // Get sentence to filters by field.
+      $filters = array_map(function () use ($keywords) {
+        // Get only the words to prevent crashing SQL Like.
+        preg_match_all('/\w+/', $keywords, $matches);
+        if (!isset($matches[0]) || empty($matches[0])) {
+          return '';
+        }
+        return implode(' ', $matches[0]);
+      }, $filters);
     }
 
     $query = $this->privilegeManager->queryMembersWithPrivileges($community, $this->configuration['limit'], $filters);

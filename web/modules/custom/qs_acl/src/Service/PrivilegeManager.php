@@ -275,6 +275,11 @@ class PrivilegeManager {
     // Remove current user from the list.
     $query->condition('privileges.user', $this->currentUser->id(), '<>');
 
+    // Remove empty filters to prevent SQL issue.
+    $filters = array_filter($filters, function ($item) {
+      return !empty($item);
+    });
+
     // Add filters criteria to the search query.
     if (!empty($filters)) {
       $filters_conditions = $query->orConditionGroup();

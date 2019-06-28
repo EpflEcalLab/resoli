@@ -31,6 +31,13 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
       'title'       => $activity->title->value,
       'description' => $this->t('qs.activity.edit_defaults'),
       'novalidate'  => 'novalidate',
+      'theme'       => 'primary',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.activity.edit_default_values'),
+      'icon' => 'activities',
+      'active' => TRUE,
     ];
 
     $form['group'] = [
@@ -73,7 +80,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     ];
     $form['group']['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
-    // Save the community for submission.
+    // Hidden fields which will be updated via Javascript.
     $form['group']['latitude'] = [
       '#type'  => 'hidden',
       '#default_value' => $activity->field_venue_lat->value,
@@ -155,7 +162,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
 
     $fields = [
       'field_default_title' => $form_state->getValue('title'),

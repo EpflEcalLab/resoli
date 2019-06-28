@@ -1,21 +1,36 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set base_id = base_id|default('calendar-weekly') %}
+{% set prev = prev|default(variables.prev_week) %}
+{% set next = next|default(variables.next_week) %}
+{% set compare = compare|default('Y-W') %}
+
 <div class="container">
   <div class="row mt-3">
+
+    {# Previous button #}
     <div class="col text-right">
-      {% if variables.prev_week|date('Y-W') >= 'now'|date('Y-W') %}
-        {% set parameters = variables.prev_week|date('Y-W') == 'now'|date('Y-W') ? {} : {'day': variables.prev_week|date('Y-m-d')} %}
-        <a
-          id="calendar-weekly-prev"
-          class="btn btn-outline-secondary btn-icon btn-icon-to-circle"
-          href="{{ path('<current>', parameters) }}"
-        >
+      {% if prev|date(compare) >= 'now'|date(compare) %}
+        {% set parameters = prev|date(compare) == 'now'|date(compare) ? {} : {'day': prev|date('Y-m-d')} %}
+        {% set attributes = create_attribute({
+          'id': base_id ~ '-prev',
+          'class': 'btn btn-outline-secondary btn-icon btn-icon-to-circle',
+          'href': path('<current>', parameters),
+          'aria-label': aria_label ? 'qs.calendar.monthly.goto @month'|t({
+            '@month': prev|bamboo_i18n_format_date('custom', 'F')
+          })
+        }) %}
+        <a{{ attributes }}>
           {{macros.icon('chevron-left')}}
-          <span class="sr-only">{{ 'qs.calendar.weekly.week'|t }}</span>
-          <span class="d-none d-sm-inline">{{ 'qs.calendar.weekly.previous'|t }}</span>
+          {% block previous_btn %}
+            <span class="sr-only">{{ 'qs.calendar.weekly.previous'|t }} {{ 'qs.calendar.weekly.week'|t }}</span>
+            <span class="d-none d-sm-inline">{{ 'qs.calendar.weekly.previous'|t }}</span>
+          {% endblock %}
         </a>
       {% endif %}
     </div>
+
+    {# Title #}
     <div class="col mx-auto text-center">
       <h2>
         {{ variables.current_day|bamboo_i18n_format_date('custom', 'F Y') }}
@@ -26,51 +41,66 @@
         {% endif %}
       </p>
     </div>
+
+    {# Next button #}
     <div class="col">
-      <a
-        id="calendar-weekly-next"
-        class="btn btn-outline-secondary btn-icon btn-icon-to-circle btn-icon-right"
-        href="{{ path('<current>', {'day': variables.next_week|date('Y-m-d')}) }}"
-      >
+      {% set attributes = create_attribute({
+        'id': base_id ~ '-next',
+        'class': 'btn btn-outline-secondary btn-icon btn-icon-to-circle btn-icon-right',
+        'href': path('<current>', {'day': next|date('Y-m-d')}),
+        'aria-label': aria_label ? 'qs.calendar.monthly.goto @month'|t({
+          '@month': variables.next_month|bamboo_i18n_format_date('custom', 'F')
+        })
+      }) %}
+      <a{{ attributes }}>
         {{macros.icon('chevron-right')}}
-        <span class="sr-only">{{ 'qs.calendar.weekly.week'|t }}</span>
-        <span class="d-none d-sm-inline">{{ 'qs.calendar.weekly.next'|t }}</span>
+        {% block next_btn %}
+          <span class="sr-only">{{ 'qs.calendar.weekly.week'|t }}</span>
+          <span class="d-none d-sm-inline">{{ 'qs.calendar.weekly.next'|t }}</span>
+        {% endblock %}
       </a>
     </div>
   </div>
 
+  {# Calendar view #}
   <div class="calendar-wrapper">
     <div class="calendar clearfix">
       {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
         <strong class="calendar-head">{{ day|bamboo_i18n_format_date('custom', 'D') }}</strong>
       {% endfor %}
 
-      {% for day in variables.dates %}
-        {% set is_today = day|date('Y-m-d') == 'now'|date('Y-m-d') %}
-        {% set is_active = day|date('Y-m-d') == variables.current_day|date('Y-m-d') %}
-        {% set is_past = day|date('Y-m-d') < 'now'|date('Y-m-d') %}
+      {% block calendar_dates %}
+        {% for day in variables.dates %}
+          {% set is_today = day|date('Y-m-d') == 'now'|date('Y-m-d') %}
+          {% set is_active = day|date('Y-m-d') == variables.current_day|date('Y-m-d') %}
+          {% set is_past = day|date('Y-m-d') < 'now'|date('Y-m-d') %}
 
-        {% set classes = [
-          'calendar-item btn btn-circle shadow-to-bottom',
-          is_today ? 'btn-outline-secondary' : 'btn-outline-primary',
-          is_active ? 'active',
-          not is_today and (is_past or day|date('Y-m-d') not in variables.events|keys) ? 'disabled',
+          {% set classes = [
+            'calendar-item btn btn-circle shadow-to-bottom',
+            is_today ? 'btn-outline-secondary' : 'btn-outline-primary',
+            is_active ? 'active',
+            not is_today and (is_past or day|date('Y-m-d') not in variables.events|keys) ? 'disabled',
           ] %}
 
-        {% set parameters = is_today ? {} : {'day': day|date('Y-m-d')} %}
+          {% set parameters = is_today ? {} : {'day': day|date('Y-m-d')} %}
 
-        <a
-          class="{{ classes|join(' ') }}"
-          aria-label="{{ day|bamboo_i18n_format_date('custom', 'j F Y') }}"
-          href="{{ path('<current>', parameters) }}"
-        >
-          {% if not is_past %}
-            {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-dots.html.twig' with {'day': day, 'badges': variables.badges} %}
-          {% else %}
-            <span>{{ day|date('j') }}</span>
-          {% endif %}
-        </a>
-      {% endfor %}
+          {% block calendar_dot %}
+            <a
+              class="{{ classes|join(' ') }}"
+              aria-label="{{ day|bamboo_i18n_format_date('custom', 'j F Y') }}"
+
+            >
+              {% if not is_past %}
+                {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-dots.html.twig' with {'day': day, 'badges': variables.badges} %}
+              {% else %}
+                <span>{{ day|date('j') }}</span>
+              {% endif %}
+            </a>
+          {% endblock %}
+
+        {% endfor %}
+      {% endblock %}
+
     </div>
   </div>
 

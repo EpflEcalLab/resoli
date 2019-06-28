@@ -1,39 +1,6 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-{% set guests_status = '' %}
-{% set status = 'default' %}
-
-{% set user_subscription_confirmed = event.nid.value in variables.badges.subscriptions.confirmed|keys %}
-
-{% set user_subscription_pending = event.nid.value in variables.badges.subscriptions.pendings|keys %}
-
-{% set guest_subscription_pending = event.nid.value in variables.badges.subscriptions.pendings_guests|keys %}
-
-{% set guest_subscription_confirmed = event.nid.value in variables.badges.subscriptions.confirmed_guests|keys %}
-
-{% if user_subscription_pending %}
-  {% set status = 'pending' %}
-{% elseif user_subscription_confirmed %}
-  {% set status = 'confirmed' %}
-{% endif %}
-
-{% set guests = 0 %}
-
-{# If user is (activity_maintainers and confirmed) or activity_organizers of this activity #}
-{# show him guests badges, otherwise show him badges based on his own subscription #}
-{% if
-  'activity_organizers' in variables.privileges
-  or 'activity_maintainers' in variables.privileges
-  or user.hasPermission('administer nodes') %}
-  {% if guest_subscription_pending %}
-    {% set guests_status = 'pendings_guests' %}
-    {% set guests = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
-  {% elseif guest_subscription_confirmed and not user_subscription_pending and not user_subscription_confirmed %}
-    {% set guests_status = 'confirmed_guests' %}
-    {% set guests = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
-  {% endif %}
-{% endif %}
-<li class="card card-flippable card-list-item" data-status="{{ status }}" data-status-badge="{{ guests_status ? guests_status : status }}" data-guests="{{ guests }}" id="card{{ event.nid.value }}">
+<li class="card card-flippable card-list-item" data-status="{{ status }}" data-status-badge="{{ guests_status|default(status) }}" data-guests="{{ guests }}" id="card{{ key }}">
 
   <div class="card-front">
     {% include "@quartiers_solidaires/node/partials/card-pill.html.twig" %}
@@ -46,47 +13,26 @@
   {# Contact info card #}
   {% embed '@quartiers_solidaires/node/partials/card-back.html.twig' with {
     'icon': 'user',
-    'title': event.field_contact_name.value ?: 'qs.event.contact'|t,
+    'title': contact_name ?: 'qs.event.contact'|t,
     'activity': event.field_activity.entity,
   } %}
-    {% block card_back_id %}contact-{{ event.nid.value }}{% endblock %}
+    {% block card_back_id %}contact-{{ key }}{% endblock %}
 
     {% block card_back_body %}
-      {% if event.field_contact_name.value %}
+      {% if contact_name %}
         <p class="card-text">
-          {% trans %}qs.event.contact_description {{ event.field_contact_name.value }}{% endtrans %}
-          {% if event.field_contact_phone.value or event.field_contact_mail.value %}{{ 'qs.event.contact.you_can_contact'|t }}{% endif %}
-          {% if event.field_contact_phone.value %}{{ 'qs.event.contact.by_phone'|t }}{% endif %}
-          {% if event.field_contact_phone.value and event.field_contact_mail.value %}{{ 'qs.event.contact.or'|t }}{% endif %}
-          {% if event.field_contact_mail.value %}{{ 'qs.event.contact.by_email'|t }}{% endif %}
+          {{ 'qs.event.contact_description @contact_name'|t({'@contact_name': contact_name}) }}
+          {{ contact_phone or contact_mail ? 'qs.event.contact.you_can_contact'|t }}
+          {{ contact_phone ? 'qs.event.contact.by_phone'|t }}
+          {{ contact_phone and contact_mail ? 'qs.event.contact.or'|t }}
+          {{ contact_mail ? 'qs.event.contact.by_email'|t }}
         </p>
       {% endif %}
 
       <div class="row">
-        {% if event.field_contact_phone.value %}
-          <div class="col-md-8 mx-auto">
-            <a href="tel:{{ event.field_contact_phone.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
-              {{ macros.icon('phone') }}
-              {{ event.field_contact_phone.value }}
-            </a>
-          </div>
-        {% endif %}
-
-        {% if event.field_contact_mail.value %}
-          <div class="col-md-8 mx-auto">
-            <a href="mailto:{{ event.field_contact_mail.value }}" class="btn-block btn btn-icon btn-outline-secondary btn-white mb-3 shadow-to-bottom">
-              {{ macros.icon('mail') }}
-              {{ event.field_contact_mail.value }}
-            </a>
-          </div>
-        {% endif %}
-
-        <div class="col-md-8 mx-auto">
-          <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
-            {{ macros.icon('arrow-left') }}
-            {{ 'qs.event.back_to_event'|t }}
-          </button>
-        </div>
+        {{ contact_phone ? macros.card_back_button(contact_phone, "tel:#{contact_phone}", 'phone') }}
+        {{ contact_mail ? macros.card_back_button(contact_mail, "mailto:#{contact_mail}", 'mail') }}
+        {{ macros.card_back_button('qs.event.back_to_event'|t, false) }}
       </div>
     {% endblock %}
 
@@ -99,7 +45,7 @@
       'title': event.field_venue.value,
       'activity': event.field_activity.entity,
     } %}
-      {% block card_back_id %}map-{{ event.nid.value }}{% endblock %}
+      {% block card_back_id %}map-{{ key }}{% endblock %}
 
       {% block card_back_class -%}
         card-back {{ event.field_venue_lat.value and event.field_venue_long.value ? 'card-back-map' }}
@@ -108,7 +54,7 @@
       {% block card_back_body %}
         {# Enable the map only when lat & lng are given #}
         {% if event.field_venue_lat.value and event.field_venue_long.value %}
-          <div class="card-map" id="map-container-{{ event.nid.value }}" data-lat="{{ event.field_venue_lat.value }}" data-lng="{{ event.field_venue_long.value }}" data-label="{{ event.field_venue.value }}" data-info="<strong>{{ event.title.value }}</strong> <br/>{{ event.field_venue.value }}">
+          <div class="card-map" id="map-container-{{ key }}" data-lat="{{ event.field_venue_lat.value }}" data-lng="{{ event.field_venue_long.value }}" data-label="{{ event.field_venue.value }}" data-info="<strong>{{ event.title.value }}</strong> <br/>{{ event.field_venue.value }}">
             <div class="align-items-center d-flex h-100 justify-content-center">{{ 'qs.map.loading'|t }}</div>
           </div>
         {% else %}
@@ -116,17 +62,11 @@
         {% endif %}
 
         <div class="row {% if event.field_venue_lat.value and event.field_venue_long.value %}card-map-footer{% endif %}">
-          <div class="col-md-8 mx-auto">
-            <button class="btn btn-icon btn-outline-secondary btn-white align-self-center mt-4 shadow-to-bottom" data-toggle="flip">
-              {{ macros.icon('arrow-left') }}
-              {{ 'qs.event.back_to_event'|t }}
-            </button>
-          </div>
+          {{ macros.card_back_button('qs.event.back_to_event'|t, false) }}
         </div>
       {% endblock %}
-
-
     {% endembed %}
   {% endif %}
 
 </li>
+

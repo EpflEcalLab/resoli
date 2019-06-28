@@ -96,3 +96,17 @@
 
   {% include '@quartiers_solidaires/misc/photoswipe-wrapper.html.twig' %}
 {% endif %}
+
+{# Floating Buttons #}
+{% set user = bamboo_load_currentuser() %}
+{% set floating_buttons = [{
+  label: 'qs_photo.floating.my_photos'|t,
+  icon: 'picture',
+  theme: 'primary',
+  url: path('qs_photo.user.activities.collection', {
+    community: variables.community.id,
+    user: user.id,
+  })
+}] %}
+{{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
+

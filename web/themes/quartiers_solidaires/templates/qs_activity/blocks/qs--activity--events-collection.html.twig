@@ -1,24 +1,75 @@
+{% set subscriptions = variables.badges.subscriptions %}
+{% set privileges = variables.privileges %}
+
+{% set activity_maintainer = 'activity_maintainers' in privileges %}
+{% set activity_member = 'activity_members' in privileges %}
+{% set activity_organizer = 'activity_organizers' in privileges %}
+{% set has_activity_privilege = activity_member or activity_maintainer or activity_organizer %}
+{% set can_manage_activity = activity_maintainer or activity_organizer %}
+
+{% set community_can_subscribe = variables.activity.field_community_can_subscribe.value %}
+{% set community_can_view_detail = variables.activity.field_community_access_detail.value %}
+{% set community_can_view_contact = variables.activity.field_community_access_contact.value %}
+
+{% set activity_member = 'activity_members' in privileges %}
+{% set activity_organizer = 'activity_organizers' in privileges %}
+{% set can_manage_activity = activity_maintainer or activity_organizer %}
+
+
 {% if variables.events %}
-  {% import "@quartiers_solidaires/macros.html.twig" as macros %}
   <h2 class="h4 mb-4">{{ 'qs.activity.next_events'|t }}</h2>
-  <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
-    {% for key, event in variables.events %}
-      {% include "@quartiers_solidaires/node/card-list-item.html.twig" %}
-    {% endfor %}
-  </ul>
+
+  {% embed '@quartiers_solidaires/node/partials/card-list.html.twig' with {card_list_id: 'events-accordion'} %}
+    {% block card_list_items %}
+      {% for key, event in variables.events %}
+
+        {% set contact_name = event.field_contact_name.value %}
+        {% set contact_phone = event.field_contact_phone.value %}
+        {% set contact_mail = event.field_contact_mail.value %}
+
+        {% set user_subscription_confirmed = key in subscriptions.confirmed|keys %}
+        {% set user_subscription_pending = key in subscriptions.pendings|keys %}
+        {% set guest_subscription_pending = key in subscriptions.pendings_guests|keys %}
+        {% set guest_subscription_confirmed = key in subscriptions.confirmed_guests|keys %}
+
+        {% set status = 'default' %}
+        {% if user_subscription_pending %}
+          {% set status = 'pending' %}
+        {% elseif user_subscription_confirmed %}
+          {% set status = 'confirmed' %}
+        {% endif %}
+
+        {# If user is (activity_maintainers and confirmed) or activity_organizers of this activity #}
+        {# show him guests badges, otherwise show him badges based on his own subscription #}
+        {% set guests = 0 %}
+        {% if can_manage_activity or user.hasPermission('administer nodes') %}
+          {% set guests_status = false %}
+          {% if guest_subscription_pending %}
+            {% set guests_status = 'pendings_guests' %}
+            {% set guests = subscriptions.pendings_guests[key] %}
+          {% elseif guest_subscription_confirmed and not user_subscription_pending and not user_subscription_confirmed %}
+            {% set guests_status = 'confirmed_guests' %}
+            {% set guests = subscriptions.confirmed_guests[key] %}
+          {% endif %}
+        {% endif %}
+
+        {% include "@quartiers_solidaires/node/card-list-item.html.twig" %}
+      {% endfor %}
+    {% endblock %}
+  {% endembed %}
+
 {% else %}
-  <h2 class="h4 mb-4">
+
+  <h2 class="h4 mb-4 text-center">
     {# Display the contact message only if the user has any privilege
     or is allowed to access from field_community_access_contact #}
     {% if
-      variables.activity.field_contact_mail is not empty
-      and (
-        variables.activity.field_community_access_contact.value
-        or variables.privileges is not empty
-      )
+      variables.activity.field_contact_mail.value is not empty
+      and (community_can_view_contact or variables.privileges is not empty)
     %}
-      {% set mail_link = link(variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value)|render %}
-      {% trans %}qs.activity.no_events_please_contact {{ mail_link }}{% endtrans %}
+      {{ 'qs.activity.no_events_please_contact @mail_link'|t({
+        '@mail_link': link( variables.activity.field_contact_name.value, 'mailto:' ~ variables.activity.field_contact_mail.value )|render
+      }) }}
     {% else %}
       {{ 'qs.activity.no_events'|t }}
     {% endif %}

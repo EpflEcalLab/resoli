@@ -28,5 +28,11 @@ function qs_community_theme() {
       'variables' => ['variables' => []],
       'template'  => 'qs--community--waiting-approval',
     ],
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_community_welcome_floating_actions_buttons_block' => [
+      'variables' => ['variables' => []],
+      'template'  => 'qs--community--welcome-floating-btn',
+    ],
   ];
 }

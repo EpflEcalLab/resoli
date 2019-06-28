@@ -1,31 +1,43 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
-<div class="modal-body">
-  <div class="container">
+{% set modal_bg = 'danger' %}
+{% set modal_title = 'qs.auth.communities.dashboard_title @variables.community.name.value'|t({
+  '@variables.community.name.value': variables.community.name.value,
+})%}
+{% set modal_subtitle = 'qs.auth.communities.dashboard_description'|t %}
+{% set floating_buttons = [
+  {
+    label: 'qs_menu.links.account.communities'|t,
+    icon: 'communities-sm',
+    active: true,
+  }
+] %}
 
-    <div class="text-center mt-3 mb-5">
-      <h2>{% trans %}qs.auth.communities.dashboard_title {{ variables.community.name.value }}{% endtrans %}</h2>
-      <p>{{ 'qs.auth.communities.dashboard_description'|t }}</p>
-    </div>
+{% block modal_content %}
+  {% set btn_default_classes = 'btn-outline-danger btn-outline-invert' %}
+  {% set params = {community: variables.community.tid.value} %}
+  {% set buttons = {
+    'Community members': {
+      label: 'qs_community.dashboard.members'|t,
+      icon: 'happy',
+      path: 'qs_community.members',
+    },
+    'Community membery waiting approval': {
+      label: 'qs_community.dashboard.waiting_approval'|t,
+      icon: 'wait',
+      path: 'qs_community.waiting_approval',
+    },
+    'Community events export': {
+      label: 'qs_community.events.export.download'|t,
+      icon: 'download',
+      path: 'qs_community.events.export',
+    },
+  } %}
 
-    <div class="row">
-      <div class="col-sm-6 col-lg-4 mx-auto text-center">
-        <ul class="list-unstyled mt-3 mx-auto">
-          <li>
-            <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_community.members', {community: variables.community.tid.value}) }}">
-              {{ macros.icon('happy') }}
-              {{ 'qs_community.dashboard.members'|t }}
-            </a>
-          </li>
-          <li>
-            <a class="btn btn-block btn-outline-danger btn-outline-invert btn-icon mb-2 shadow-to-bottom" href="{{ path('qs_community.waiting_approval', {community: variables.community.tid.value}) }}">
-              {{ macros.icon('wait') }}
-              {{ 'qs_community.dashboard.waiting_approval'|t }}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  {{ macros.list_buttons(buttons, btn_default_classes, params) }}
+{% endblock %}
 
-  </div>
-</div>
+
+

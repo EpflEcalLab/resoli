@@ -1,14 +1,12 @@
-{% set community_name = variables.community.name.value|trim %}
+{% extends "@quartiers_solidaires/qs_calendar/pages/qs--calendar--collection-weekly.html.twig" %}
 
-<div class="container">
-  <p class="lead text-center my-5">
-    {{ 'qs.calendar.monthly.lead @community @current_day'|t({
-      '@community': community_name,
-      '@current_day': variables.current_day|bamboo_i18n_format_date('custom', 'j F Y'),
-    }) }}
-  </p>
-</div>
+{% block lead_text %}
+  {{ 'qs.calendar.monthly.lead @community @current_day'|t({
+    '@community': community_name,
+    '@current_day': variables.current_day|bamboo_i18n_format_date('custom', 'j F Y'),
+  }) }}
+{% endblock %}
 
-{{ bamboo_render_block('qs_calendar_monthly_block') }}
-
-{% include "@quartiers_solidaires/qs_calendar/partials/events-day-listing.html.twig" %}
+{% block calendar %}
+  {{ bamboo_render_block('qs_calendar_monthly_block') }}
+{% endblock %}

@@ -5,11 +5,14 @@
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 0;
     font-weight: $font-weight-normal;
     overflow: visible;
     white-space: normal;
     text-align: left;
+
+    @include media-breakpoint-down(xs) {
+      padding-left: 0;
+    }
 
     @include media-breakpoint-up(sm) {
       flex-direction: column;

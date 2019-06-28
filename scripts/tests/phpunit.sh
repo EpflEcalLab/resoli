@@ -37,7 +37,7 @@ printf "\e[1;33m* Running PHPUnit Tests. *\e[0m\n"
 printf "\e[1;33m**************************\e[0m\n"
 
 export SYMFONY_DEPRECATIONS_HELPER=weak
-export SIMPLETEST_DB="sqlite://tmp//tmp/qs.sqlite"
+export SIMPLETEST_DB="mysql://root:root@localhost/qs_test"
 export SIMPLETEST_BASE_URL='http://127.0.0.1:8888'
 export BROWSERTEST_OUTPUT_DIRECTORY='./web/sites/default/files/tests'
 
@@ -56,6 +56,11 @@ nohup bash -c "php ../vendor/bin/drush runserver &" && sleep 3;
 
 ../vendor/bin/phpunit -c core --group $PHPUNIT_GROUP --exclude-group $PHPUNIT_EXCLUDE_GROUP --printer="\Drupal\Tests\Listeners\HtmlOutputPrinter" --stop-on-error --stop-on-failure
 phpunit_exit=$?
+
+if [ $phpunit_exit -ne 0 ]
+then
+  exit $phpunit_exit
+fi
 
 # Kill runserver (drush 8 or drush 9) if one is alive.
 ps -ef | grep 'runserver' | grep -v grep | awk '{print $2}' | xargs kill -9

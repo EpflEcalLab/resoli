@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\qs_auth\Service\Account;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\qs_site\Form\InlineErrorFormTrait;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
  * RegisterForm class.
@@ -37,12 +38,20 @@ class RegisterForm extends FormBase {
   protected $userStorage;
 
   /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(Account $account, EntityTypeManagerInterface $entity_type_manager) {
-    $this->account     = $account;
-    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
-    $this->userStorage = $entity_type_manager->getStorage('user');
+  public function __construct(Account $account, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler) {
+    $this->account       = $account;
+    $this->termStorage   = $entity_type_manager->getStorage('taxonomy_term');
+    $this->userStorage   = $entity_type_manager->getStorage('user');
+    $this->moduleHandler = $module_handler;
   }
 
   /**
@@ -50,8 +59,9 @@ class RegisterForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-    $container->get('qs_auth.account'),
-    $container->get('entity_type.manager')
+      $container->get('qs_auth.account'),
+      $container->get('entity_type.manager'),
+      $container->get('module_handler')
     );
   }
 
@@ -67,7 +77,9 @@ class RegisterForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL) {
     // Honeypot.
-    honeypot_add_form_protection($form, $form_state, ['honeypot', 'time_restriction']);
+    if ($this->moduleHandler->moduleExists('honeypot')) {
+      honeypot_add_form_protection($form, $form_state, ['honeypot', 'time_restriction']);
+    }
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
@@ -103,6 +115,7 @@ class RegisterForm extends FormBase {
         'sub_description' => $this->t('qs_auth.register_form.step1.sub_description'),
         'class' => [
           'tab-pane',
+          'container-fluid',
         ],
         'role' => 'tabpanel',
       ],
@@ -138,6 +151,9 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step2'),
         'sub_description' => $this->t('qs_auth.register_form.step2.sub_description'),
+        'class' => [
+          'container-fluid',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -167,6 +183,9 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step3'),
         'sub_description' => $this->t('qs_auth.register_form.step3.sub_description'),
+        'class' => [
+          'container-fluid',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -195,6 +214,9 @@ class RegisterForm extends FormBase {
       '#attributes' => [
         'data-step' => $this->t('qs_auth.register_form.step4'),
         'sub_description' => $this->t('qs_auth.register_form.step4.sub_description'),
+        'class' => [
+          'container-fluid',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',

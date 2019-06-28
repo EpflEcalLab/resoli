@@ -186,6 +186,21 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
     // Pass data to PhotoSwipe and initialize it
     gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
 
+    var captionWrapper = document.querySelector('.pswp__caption--outside');
+    var captionEl = captionWrapper.querySelector('.pswp__caption__center');
+    var originalCaptionEl = document.querySelector('.pswp__caption .pswp__caption__center');
+
+    gallery.listen('afterChange', function () {
+      captionEl.innerHTML = gallery.currItem.title;
+      originalCaptionEl.innerHTML = '';
+      captionWrapper.style.opacity = 1;
+    });
+
+    gallery.listen('close', function () {
+      captionEl.innerHTML = '';
+      captionWrapper.style.opacity = 0;
+    });
+
     // Some images are not sized correctly (EXIF is wrong and the image_effects
     // module fixed this), we need to recalculate the height and width of all
     // images before showing them, thus making sure nothing is deformed.

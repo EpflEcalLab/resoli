@@ -9,6 +9,9 @@ use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
+use Drupal\qs_export\Excel;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * SubscribersController.
@@ -42,13 +45,21 @@ class SubscribersController extends ControllerBase {
   protected $userStorage;
 
   /**
+   * The QS Excel exporter.
+   *
+   * @var \Drupal\qs_export\Excel
+   */
+  protected $excelExporter;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager) {
-    $this->acl                 = $acl;
+  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager, Excel $excel_exporter) {
+    $this->acl = $acl;
     $this->subscriptionManager = $subscription_manager;
-    $this->userStorage         = $this->entityTypeManager()->getStorage('user');
+    $this->userStorage = $this->entityTypeManager()->getStorage('user');
     $this->subscriptionStorage = $this->entityTypeManager()->getStorage('subscription');
+    $this->excelExporter = $excel_exporter;
   }
 
   /**
@@ -59,7 +70,8 @@ class SubscribersController extends ControllerBase {
     return new static(
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
-    $container->get('qs_subscription.subscription_manager')
+    $container->get('qs_subscription.subscription_manager'),
+    $container->get('qs_export.excel')
     );
   }
 
@@ -133,6 +145,70 @@ class SubscribersController extends ControllerBase {
         ],
       ],
     ];
+  }
+
+  /**
+   * Export the complete list of subscribed account to the event.
+   */
+  public function export(NodeInterface $event) {
+    $activity = $event->field_activity->entity;
+    $now = new DrupalDateTime();
+
+    $query = $this->subscriptionManager->querySubscribers($event);
+    $rows = $query->execute()->fetchAll();
+
+    $ids = [];
+    foreach ($rows as $row) {
+      $ids[] = $row->id;
+    }
+
+    // When nothing can be downloaded, return a 404.
+    if (empty($ids)) {
+      throw new NotFoundHttpException();
+    }
+
+    // Load subscriptions entities.
+    $subscriptions = $this->subscriptionStorage->loadMultiple($ids);
+
+    $this->excelExporter->init();
+    $this->excelExporter->normalize();
+
+    $title = $this->t('qs_subscription.subscribers.export.title @event @activity @date', [
+      '@event'    => $event->getTitle(),
+      '@activity' => $activity->getTitle(),
+      '@date'     => $now->format('d-m-Y'),
+    ]);
+    $summary = $this->t('qs_subscription.subscribers.export.summary @total', [
+      '@total' => count($subscriptions),
+    ]);
+    $disclaimer = $this->t('qs_subscription.subscribers.export.disclaimer');
+
+    $this->excelExporter->setTitle($title->render());
+    $this->excelExporter->setSummary($summary->render());
+    $this->excelExporter->addHeader([
+      $this->t('qs_subscription.subscribers.export.header.firstname.label')->render(),
+      $this->t('qs_subscription.subscribers.export.header.lastname.label')->render(),
+      $this->t('qs_subscription.subscribers.export.header.mail.label')->render(),
+      $this->t('qs_subscription.subscribers.export.header.phone.label')->render(),
+      $this->t('qs_subscription.subscribers.export.header.date.label')->render(),
+    ]);
+
+    foreach ($subscriptions as $subscription) {
+      $created = DrupalDateTime::createFromTimestamp($subscription->created->value);
+      $created->setTimezone(new \DateTimeZone('UTC'));
+
+      $this->excelExporter->addRow([
+        $subscription->getOwner()->entity->field_firstname->value,
+        $subscription->getOwner()->entity->field_lastname->value,
+        $subscription->getOwner()->entity->getEmail(),
+        $subscription->getOwner()->entity->field_phone->value,
+        $created,
+      ]);
+    }
+    $this->excelExporter->setFooter($disclaimer->render());
+    $this->excelExporter->finalize();
+
+    return $this->excelExporter->download();
   }
 
 }

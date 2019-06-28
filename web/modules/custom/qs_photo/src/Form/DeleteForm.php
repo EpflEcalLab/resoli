@@ -97,18 +97,23 @@ class DeleteForm extends FormBasic {
     $photos = $this->nodeStorage->loadMultiple($photos_params);
 
     // Save the activity for submission.
-    $form['activity'] = [
-      '#type'  => 'hidden',
-      '#value' => $activity->id(),
-    ];
+    $form_state->set('activity', $activity->id());
 
     $form['#theme_wrappers'] = [
       'form__modal',
     ];
 
     $form['#attributes'] = [
-      'title' => $activity->getTitle(),
+      'title'       => $activity->getTitle(),
       'description' => $this->t('qs_photo.form.delete.warning'),
+      'icon'        => 'trash',
+      'theme'       => 'danger',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'icon'   => 'trash',
+      'label'  => $this->t('qs.photo.delete'),
+      'active' => TRUE,
     ];
 
     $form['gallery'] = [
@@ -173,7 +178,7 @@ class DeleteForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
     $user = $this->getCurrentUser();
     $photos_params = $this->getRequest()->query->get('photos');
 

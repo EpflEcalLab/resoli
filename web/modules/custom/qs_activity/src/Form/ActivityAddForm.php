@@ -125,19 +125,23 @@ class ActivityAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
+      'theme'      => 'primary',
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
 
+    $form['#floating_buttons'][] = [
+      'icon'   => 'happy',
+      'label'  => $this->t('qs_activity.floating.my_activities'),
+      'active' => TRUE,
+    ];
+
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
-      'form__fullpage__multistep',
+      'form__modal__multistep',
     ];
 
     // Save the community for submission.
-    $form['community'] = [
-      '#type'  => 'hidden',
-      '#value' => $community->id(),
-    ];
+    $form_state->set('community', $community->id());
 
     $form['activity']['step-1'] = [
       '#type' => 'fieldset',
@@ -408,7 +412,7 @@ class ActivityAddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $community = $this->termStorage->load($form_state->getValue('community'));
+    $community = $this->termStorage->load($form_state->get('community'));
     $user = $this->userStorage->load($this->currentUser->id());
 
     // Format authorizations for creations.

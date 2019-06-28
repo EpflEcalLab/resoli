@@ -71,6 +71,7 @@
 @each $color, $value in $theme-colors {
   .btn-outline-#{$color} {
     color: $body-color;
+    background-color: $white;
 
     @include hover {
       color: $body-color;

@@ -1,0 +1,12 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
+{% set modal_bg = attributes.theme ?? 'warning' %}
+{% set modal_title_sm = attributes.title|raw %}
+{% set modal_title_icon = attributes.icon %}
+{% set modal_subtitle = attributes.description %}
+{% set floating_buttons = element['#floating_buttons'] %}
+
+{% block modal_content %}
+  {% include '@quartiers_solidaires/form/form--multistep.html.twig' %}
+{% endblock %}
+

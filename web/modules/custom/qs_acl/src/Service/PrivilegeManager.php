@@ -10,6 +10,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\qs_acl\Entity\Privilege;
 use Drupal\Core\Database\Query\SelectInterface;
+use Drupal\Core\Database\Query\ConditionInterface;
 
 /**
  * PrivilegeManager.
@@ -253,11 +254,13 @@ class PrivilegeManager {
    *   The Drupal Content Entity for the privilege.
    * @param int $pager
    *   The limit of members. NULL to get all users.
+   * @param array $filters
+   *   Conditions to apply on the search.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50) {
+  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50, array $filters = []) {
     // We have to get paginated users before getting privileges by users
     // because a user could have 1 or many privileges (so it's not paginable).
     // Query user(s) with privilege(s) in the given entity.
@@ -272,8 +275,29 @@ class PrivilegeManager {
     // Remove current user from the list.
     $query->condition('privileges.user', $this->currentUser->id(), '<>');
 
-    // Join the users data for filters criteria.
-    // TODO: Add Filter block by name, firstname, lastname.
+    // Remove empty filters to prevent SQL issue.
+    $filters = array_filter($filters, function ($item) {
+      return !empty($item);
+    });
+
+    // Add filters criteria to the search query.
+    if (!empty($filters)) {
+      $filters_conditions = $query->orConditionGroup();
+      if (isset($filters['firstname']) && !empty($filters['firstname'])) {
+        $this->addContainsCondition($filters_conditions, 'firstname.field_firstname_value', $filters['firstname']);
+      }
+      if (isset($filters['lastname']) && !empty($filters['lastname'])) {
+        $this->addContainsCondition($filters_conditions, 'lastname.field_lastname_value', $filters['lastname']);
+      }
+      if (isset($filters['mail']) && !empty($filters['mail'])) {
+        // Join the users data for filters criteria.
+        $query->leftJoin('users_field_data', 'user', 'user.uid = privileges.user');
+        $this->addContainsCondition($filters_conditions, 'user.mail', $filters['mail']);
+      }
+      $query->condition($filters_conditions);
+    }
+
+    // Join the users data for filters & sorting.
     $query->leftJoin('user__field_firstname', 'firstname', 'firstname.entity_id = privileges.user');
     $query->leftJoin('user__field_lastname', 'lastname', 'lastname.entity_id = privileges.user');
 
@@ -335,6 +359,34 @@ class PrivilegeManager {
     $query->groupBy('users.mail');
 
     return $query;
+  }
+
+  /**
+   * Alter the condition to search for every words on the sentence.
+   *
+   * Alter the given condition to add multiple OR Condition for every words of
+   * the sentence.
+   *
+   * @param \Drupal\Core\Database\Query\ConditionInterface $condition
+   *   The condition to alter.
+   * @param string $field
+   *   The field name to search on.
+   * @param string $sentence
+   *   The sentence containing words.
+   */
+  private function addContainsCondition(ConditionInterface $condition, $field, $sentence) {
+    preg_match_all('/\w+/', $sentence, $matches);
+
+    if (!isset($matches[0]) || empty($matches[0])) {
+      return;
+    }
+
+    $words = $matches[0];
+    $or = $condition->orConditionGroup();
+    foreach ($words as $word) {
+      $or->condition($field, '%' . $word . '%', 'LIKE');
+    }
+    $condition->condition($or);
   }
 
   /**

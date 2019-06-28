@@ -1,0 +1,43 @@
+- name: Running tests
+  type: parallel
+  exclude: '^\d+\.\d+\.\d+$'
+  steps:
+    - name: Behaviour
+      type: serial
+      steps:
+        - name: Bootstrap
+          type: parallel
+          steps:
+            - name: Drupal
+              service: test
+              command: docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only
+            - name: Styleguide
+              service: node
+              command: >-
+                bash -c "rm -rf /var/www/.codeship/build/styleguide &&
+                  yarn build --production &&
+                  mv /var/www/web/themes/quartiers_solidaires/build /var/www/.codeship/build/styleguide"
+        - name: Features
+          type: serial
+          steps:
+            - name: Behat
+              service: behat
+              command: docker-as-wait --mysql test:8888 -- docker-as-drupal behat --user=www-data --skip-db-reset
+    - name: Unit
+      service: test
+      command: docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=qs
+    - name: Code quality
+      service: php
+      command: docker-as-drupal quality-check
+- name: Running deploy
+  type: serial
+  tag: "^(dev|master)$"
+  steps:
+    - name: Deploy to staging
+      tag: dev
+      service: deploy
+      command: cap staging deploy
+    - name: Deploy to production
+      tag: master
+      service: deploy
+      command: cap production deploy

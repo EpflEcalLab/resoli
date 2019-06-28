@@ -1,0 +1,3 @@
+services:
+  qs_export.excel:
+    class: Drupal\qs_export\Excel

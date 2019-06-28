@@ -139,4 +139,22 @@ namespace :files do
       end
     end
   end
+
+  desc "Download database dump"
+  task :dump do
+    backup_destination = "#{shared_path}/backups/#{fetch(:stage)}_dump.sql"
+    local_file = "#{(fetch(:app_path))}/sites/default/files/#{fetch(:stage)}_dump.sql.gz"
+
+    on roles(:app) do
+      within release_path.join(fetch(:app_path)) do
+        execute :mkdir, '-p', "#{shared_path}/backups"
+        execute :drush, 'sql-dump', '--gzip', "--skip-tables-list=\"\"", "--result-file=\"#{backup_destination}\""
+        download! "#{backup_destination}.gz", local_file
+      end
+    end
+
+    run_locally do
+      execute :gunzip, local_file
+    end
+  end
 end

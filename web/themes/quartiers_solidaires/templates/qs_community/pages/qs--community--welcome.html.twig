@@ -1,5 +1,6 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{# Help arrow top. #}
 <div class="arrow-onboarding arrow-onboarding-top" aria-hidden="true">
   <svg preserveAspectRatio="xMidYMid" aria-hidden="true">
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-big-top"></use>
@@ -9,6 +10,7 @@
   {{ 'qs.onboarding.menu'|t }}
 </div>
 
+{# Title and subtitle #}
 <div class="text-center my-auto">
   <div class="col-md-10 col-lg-8 mx-auto mb-5">
     {{ macros.icon('communities-big', {'classes': 'icon-xl mb-5'}) }}
@@ -18,17 +20,14 @@
         '@lastname': variables.user.field_lastname|first.value,
       }) }}
     </h1>
-    {{ 'qs.community.welcome.body @community'|t({
-      '@community': variables.community.name.value
-    }) }}
+    <p>
+      {{ 'qs.community.welcome.body @community'|t({
+        '@community': variables.community.name.value
+      }) }}
+    </p>
   </div>
 </div>
 
-{#<div class="text-onboarding text-onboarding-bottom text-center anim-fade-in-delay">#}
-  {#{{ 'qs.onboarding.my_account'|t }}#}
-{#</div>#}
-{#<div class="arrow-onboarding arrow-onboarding-bottom" aria-hidden="true">#}
-  {#<svg preserveAspectRatio="xMidYMid" aria-hidden="true">#}
-    {#<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-big-bottom"></use>#}
-  {#</svg>#}
-{#</div>#}
+{% block modal_floating %}
+  {{ bamboo_render_block('qs_community_welcome_floating_actions_buttons_block') }}
+{% endblock %}

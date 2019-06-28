@@ -11,10 +11,10 @@
  */
 #}
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
 {% set classes = [
   'form-multistep',
   element['#validated'] ? 'was-validated',
-  'container',
 ] %}
 
 <div class="d-flex flex-column flex-grow">
@@ -39,6 +39,6 @@
   {% endif %}
 
   <form{{ attributes.addClass(classes) }}>
-    <div class="tab-content d-flex flex-column modal-body">{{ children }}</div>
+    <div class="tab-content d-flex flex-column">{{ children }}</div>
   </form>
 </div>

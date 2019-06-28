@@ -107,11 +107,8 @@ class RequestForm extends FormBase {
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['novalidate'] = 'novalidate';
 
-    // A hidden field can't be altered, Drupal assert it.
-    $form['event'] = [
-      '#type'  => 'hidden',
-      '#value' => $params['event'],
-    ];
+    // Save the event for submission.
+    $form_state->set('event', $params['event']);
 
     // Generate unique name to avoid Drupal conflict with ajax same name.
     $name = 'request_subscription_' . $event->id();
@@ -165,7 +162,7 @@ class RequestForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $event_id = $form_state->getValue('event');
+    $event_id = $form_state->get('event');
     $event = $this->nodeStorage->load($event_id);
 
     // Get the related activity.
@@ -182,7 +179,7 @@ class RequestForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Handle redirection.
     $trigger = $form_state->getTriggeringElement();
-    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $event = $this->nodeStorage->load($form_state->get('event'));
 
     // Processing the submission as a standard request.
     if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
@@ -241,7 +238,7 @@ class RequestForm extends FormBase {
     // Handle redirection.
     $trigger = $form_state->getTriggeringElement();
 
-    $event_id = $form_state->getValue('event');
+    $event_id = $form_state->get('event');
 
     if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
       $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'pending']));

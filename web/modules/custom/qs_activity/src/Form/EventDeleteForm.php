@@ -48,8 +48,17 @@ class EventDeleteForm extends EventEditFormBase {
     ];
 
     $form['#attributes'] = [
-      'title' => $event->title->value,
+      'title'       => $event->title->value,
       'description' => $this->t('qs_activity.events.form.delete.warning'),
+      'icon'        => 'trash',
+      'theme'       => 'danger',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.event.delete'),
+      'icon' => 'trash',
+      'active' => TRUE,
+      'theme' => 'danger',
     ];
 
     $form['actions'] = [
@@ -98,7 +107,7 @@ class EventDeleteForm extends EventEditFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $event = $this->nodeStorage->load($form_state->get('event'));
     $now = new DrupalDateTime();
 
     // Assert the event has not started.
@@ -115,7 +124,7 @@ class EventDeleteForm extends EventEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $event = $this->nodeStorage->load($form_state->getValue('event'));
+    $event = $this->nodeStorage->load($form_state->get('event'));
     $activity = $event->field_activity->entity;
 
     $this->eventManager->sendDeleted($event, $this->currentUser->getAccount());

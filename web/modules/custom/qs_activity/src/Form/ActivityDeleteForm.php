@@ -48,9 +48,16 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     ];
 
     $form['#attributes'] = [
-      'title' => $activity->title->value,
+      'title'       => $activity->title->value,
       'description' => $this->t('qs_activity.activities.form.delete.warning'),
+      'icon'        => 'trash',
+      'theme'       => 'danger',
+    ];
+
+    $form['#floating_buttons'][] = [
+      'label' => $this->t('qs.activity.delete'),
       'icon' => 'trash',
+      'active' => TRUE,
     ];
 
     $form['actions'] = [
@@ -99,7 +106,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
 
     // Assert the activity has no event.
     $events = $this->eventManager->getAll($activity);
@@ -115,7 +122,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->getValue('activity'));
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
     $community = $activity->field_community->entity;
 
     drupal_set_message($this->t("qs_activity.activities.form.delete.success @activity", [

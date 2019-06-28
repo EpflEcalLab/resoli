@@ -56,3 +56,33 @@ qs_community.members:
       parameters:
         community:
           type: entity:taxonomy_term
+
+## Export of Members by Community.
+qs_community.members.export:
+    path: '/communities/{community}/dashboard/members/export'
+    defaults:
+      _controller: '\Drupal\qs_community\Controller\MembersController::export'
+      _title: 'qs_community.members.export.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_community\Controller\MembersController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term
+
+## Export of Events by Community.
+qs_community.events.export:
+    path: '/communities/{community}/dashboard/events/export'
+    defaults:
+      _controller: '\Drupal\qs_community\Controller\EventsController::export'
+      _title: 'qs_community.members.export.title'
+    requirements:
+      _user_is_logged_in: 'TRUE'
+      _custom_access: '\Drupal\qs_community\Controller\EventsController::access'
+      community: \d+
+    options:
+      parameters:
+        community:
+          type: entity:taxonomy_term

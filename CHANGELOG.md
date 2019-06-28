@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## 1.4.0 (2019-06-29)
+ - refactoring of Floating buttons
+ - refactoring of Cards HTML markup & skeletton
+ - refactor global pages markup & skeletton
+ - refactor radio buttons for privileges
+ - refactor twig calendars
+ - refactor all trans to |t in twig templates
+ - refactore hidden form field - #703,#705
+ - add search on members of community - close #45i,#704
+ - add export of futur events of community #686
+ - add export of member by activity #678
+ - add export of member by community #678
+ - add export of subscriber user by event #678
+ - add gradient scroll to long pages #661
+ - add export of #699
+ - add hours on 'My Subscriptions' pill - close #688
+ - add new rules when organizer/co-organizer create an event - #675
+ - fix hiding of caption when photoswipe is closed #677
+ - fix auto-subscriptions of organizers/co-organizers - #700
+ - fix community dashboards - #710
+ - fix minor frontend flaws #707, #686
+ - tests process improved with Base Class & Trait
+ - tests export/download of Excel files #708
+ - tests Forms on Behat - close #696
+ - tests improved on BadgeManager::countEventsByDates
+ - setup Codeship Pro
+ - setup Docker
+
 ## 1.3.4 (2019-05-13)
  - fix mail layout paragraphs issue - close #691
 

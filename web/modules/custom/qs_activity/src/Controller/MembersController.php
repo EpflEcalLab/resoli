@@ -11,6 +11,7 @@ use Drupal\qs_export\Excel;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * MembersController.
@@ -152,12 +153,18 @@ class MembersController extends ControllerBase {
   /**
    * Export the complete list of members by activity.
    *
-   * A member may appear multiple time, as they may have more than one access.
+   * A member appear only one time, his highest privilege is shown.
    */
   public function export(NodeInterface $activity) {
     $now = new DrupalDateTime();
 
     $query = $this->privilegeManager->queryMembersWithPrivileges($activity);
+
+    // When nothing can be downloaded, return a 404.
+    if (!$query) {
+      throw new NotFoundHttpException();
+    }
+
     $rows = $query->execute()->fetchAll();
 
     $uids = [];

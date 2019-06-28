@@ -275,6 +275,11 @@ class PrivilegeManager {
     // Remove current user from the list.
     $query->condition('privileges.user', $this->currentUser->id(), '<>');
 
+    // Remove empty filters to prevent SQL issue.
+    $filters = array_filter($filters, function ($item) {
+      return !empty($item);
+    });
+
     // Add filters criteria to the search query.
     if (!empty($filters)) {
       $filters_conditions = $query->orConditionGroup();
@@ -372,7 +377,7 @@ class PrivilegeManager {
   private function addContainsCondition(ConditionInterface $condition, $field, $sentence) {
     preg_match_all('/\w+/', $sentence, $matches);
 
-    if (!isset($matches[0])) {
+    if (!isset($matches[0]) || empty($matches[0])) {
       return;
     }
 

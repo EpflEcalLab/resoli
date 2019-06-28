@@ -25,7 +25,7 @@ class WatchdogContext extends RawDrupalContext {
   /**
    * Search in the watchdog table if any error has been raised.
    *
-   * @AfterScenario
+   * @AfterStep
    */
   public function detectWatchdog() {
     $connection = \Drupal::service('database');
@@ -46,7 +46,7 @@ class WatchdogContext extends RawDrupalContext {
       print_r($log);
     }
 
-    throw new \Exception('PHP errors logged to watchdog in this scenario.');
+    throw new \Exception('PHP errors logged to watchdog in this step.');
   }
 
 }

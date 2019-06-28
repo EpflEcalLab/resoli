@@ -77,7 +77,7 @@
 
 .sticky-bottom {
   @supports (position: sticky) {
-    position: sticky;
+    position: sticky !important;
     bottom: 0;
     z-index: $zindex-sticky;
     pointer-events: none;

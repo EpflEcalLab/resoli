@@ -109,6 +109,19 @@
       classes: modal_footer_button_classes,
     },
   ] %}
+
+  {% if variables.members %}
+    {% set modal_footer_buttons = modal_footer_buttons|merge([
+      {
+        label: 'qs_activity.activities.members.export.download'|t,
+        icon: 'download',
+        url: path('qs_activity.activities.members.export', {activity: variables.activity.nid.value}),
+        classes: modal_footer_button_classes,
+      },
+    ]) %}
+  {% endif %}
+
   {{ macros.modal_footer_buttons(modal_footer_buttons) }}
+  {{ variables.pager }}
 {% endblock %}
 

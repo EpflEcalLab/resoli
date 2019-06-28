@@ -159,3 +159,17 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.modal.force-show {
+  overflow: hidden;
+}
+
+.modal-real {
+  &.show {
+    display: flex !important;
+  }
+
+  .modal-dialog {
+    height: auto;
+  }
+}

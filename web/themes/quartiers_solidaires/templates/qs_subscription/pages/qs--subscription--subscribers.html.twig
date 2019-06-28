@@ -109,6 +109,18 @@
     ]) %}
   {% endif %}
 
+  {# Download #}
+  {% if variables.subscriptions %}
+    {% set modal_footer_buttons = modal_footer_buttons|merge([
+      {
+        label: 'qs_subscription.subscribers.export.download'|t,
+        icon: 'download',
+        url: path('qs_subscription.subscribers.export', {event: variables.event.nid.value}),
+        classes: modal_footer_button_classes,
+      },
+    ]) %}
+  {% endif %}
+
   {{ macros.modal_footer_buttons(modal_footer_buttons) }}
 {% endblock %}
 

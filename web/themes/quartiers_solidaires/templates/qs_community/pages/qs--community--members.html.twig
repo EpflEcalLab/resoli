@@ -14,6 +14,8 @@
 ] %}
 
 {% block modal_content %}
+  {{ bamboo_render_form('qs_community', 'MembersFilterForm') }}
+
   {% if variables.members %}
     <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
       {% for member in variables.members %}
@@ -87,7 +89,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>{{ 'qs_community.members.empty'|t }}</p>
+    <p class="text-center">{{ 'qs_community.members.empty'|t }}</p>
   {% endif %}
 
   {{ variables.pager }}
@@ -109,5 +111,18 @@
       classes: modal_footer_button_classes,
     },
   ] %}
+
+  {# Download #}
+  {% if variables.members %}
+    {% set modal_footer_buttons = modal_footer_buttons|merge([
+      {
+        label: 'qs_community.members.export.download'|t,
+        icon: 'download',
+        url: path('qs_community.members.export', {community: variables.community.tid.value}),
+        classes: modal_footer_button_classes,
+      },
+    ]) %}
+  {% endif %}
+
   {{ macros.modal_footer_buttons(modal_footer_buttons) }}
 {% endblock %}

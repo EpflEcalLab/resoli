@@ -8,7 +8,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
- * FormBasic class.
+ * Base form handler for activity/event CRUD forms.
+ *
+ * @internal
  */
 abstract class FormBasic extends FormBase {
   /**

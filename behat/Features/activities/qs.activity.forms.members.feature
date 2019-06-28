@@ -28,7 +28,7 @@ Feature: Activity Members Form
     When I am on "/lausanne/activities/accueil-cafe/dashboard/members"
     And I select "member+fribourg+member+lausanne@antistatique.net" from "edit-member"
     And I press "edit-submit"
-    And 0 mails should be sent
+    And 0 mail should be sent
 
   @api @preserveDatabase
   Scenario: When adding a Member to the Activity, the new member should be shown on the liste

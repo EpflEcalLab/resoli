@@ -8,7 +8,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Mimey\MimeTypes;
 
 /**
- * FormBasic class.
+ * Base form handler for photos CRUD forms.
+ *
+ * @internal
  */
 abstract class FormBasic extends FormBase {
   /**

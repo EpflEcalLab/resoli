@@ -26,6 +26,9 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
     ],
     'qs_auth.register' => [
       'label' => t('qs_auth.link.register'),
+      'options' => [
+        'icon' => 'plus',
+      ],
     ],
   ];
 

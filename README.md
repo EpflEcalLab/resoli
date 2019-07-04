@@ -66,7 +66,15 @@ drupal bootsrap script (get a coffee, this will take some time...).
 ```bash
 docker-compose build --pull
 docker-compose up --build -d
-docker-compose exec dev docker-as-wait --mysql -- docker-as-drupal bootstrap
+docker-compose exec dev docker-as-drupal bootstrap
+```
+
+### When it's not the first time
+
+```bash
+docker-compose build --pull
+docker-compose up --build -d
+docker-compose exec dev drush cr (or any other drush command you need)
 ```
 
 ### (optional) Get the productions files and database
@@ -80,33 +88,11 @@ bundle exec cap production files:dump
 docker-compose exec dev docker-as-drupal db-restore --file=/var/www/web/sites/default/files/production_dump.sql
 ```
 
-### Docker Tips
+### Docker helpT & tips
 
 ```bash
 docker-compose exec dev docker-as-drupal --help
 ```
-
-Only directories like custom modules, styleguide, and config related are mounted in Docker
-container (dev container have files too). If you need to rebuild the image and container, you can
-use `up` command again with the service to update.
-
-```bash
-docker-compose up -d --build --no-deps dev
-```
-
-You can run tests in docker.
-
-```bash
-docker-compose exec test docker-as-drupal behat
-docker-compose exec test docker-as-drupal phpunit
-```
-
-You can reset database, and optionnaly load default content.
-
-```bash
-docker-compose exec dev docker-as-drupal db-reset --with-default-content
-```
-
 
 ## 🏋️ Export/Import all translations to a PO file
 
@@ -392,74 +378,64 @@ We use Capistrano to deploy:
 
 ## 🏆 Tests
 
-```bash
-./scripts/tests/phpunit.sh [-g group] [-x exclude-group]
-./scripts/tests/behat.sh
-```
+  ```bash
+  ./scripts/tests/phpunit.sh [-g group] [-x exclude-group]
+  ./scripts/tests/behat.sh
+  ```
 
 ### Kernel tests
 
-```bash
-./vendor/bin/phpunit -x qs_functional
-```
-
-Or on Docker:
-
-```bash
-docker-compose exec test docker-as-drupal phpunit
-```
+  ```bash
+  ./vendor/bin/phpunit -x wd_functional
+  ```
 
 ### Browser tests
 
 1. *(optional)* Bootstrap your Drupal if you don't already have a working env.
 
-```bash
-./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
-```
-
-Or on Docker:
-
-```bash
-docker-compose exec dev docker-as-drupal bootstrap
-```
+  ```bash
+  ./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
+  ```
 
 1. Then you can run functional tests
 
-```bash
-./vendor/bin/phpunit -g qs_functional
-```
-
-Or on Docker:
-
-```bash
-docker-compose exec test docker-as-drupal phpunit --group=qs_functional
-```
+  ```bash
+  ./vendor/bin/phpunit -g wd_functional
+  ```
 
 ### Behat
 
 1. *(optional)* Bootstrap your Drupal if you don't already have a working env.
 
-```bash
-./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
-```
-
-Or on Docker:
-
-```bash
-docker-compose exec dev docker-as-drupal bootstrap
-```
+  ```bash
+  ./scripts/bootstrap/drupal.sh [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
+  ```
 
 1. Then you can run functional tests
 
-```bash
-./vendor/bin/behat
-```
+  ```bash
+  ./vendor/bin/behat
+  ```
 
-Or on Docker:
+### Docker
 
-```bash
-docker-compose exec test docker-as-drupal behat
-```
+1. Run a shell on your Docker test env.
+
+  ```bash
+  docker-compose exec test bash
+  ```
+
+1. Once connected via ssh on you Docker test, you may run any `docker-as-drupal` commands
+
+  ```bash
+  docker-as-drupal [behat|phpunit|nightwatch]
+  ```
+
+You also may use the direct access - whitout opening a bash on the Docket test env. using:
+
+  ```bash
+  docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
+  ```
 
 ## 📋 Documentations
 

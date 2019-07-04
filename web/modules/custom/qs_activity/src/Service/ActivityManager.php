@@ -297,7 +297,7 @@ class ActivityManager {
     // upload photos.
     $nids = array_merge($privileges_activity, $members_activity);
 
-    $activities = NULL;
+    $activities = [];
     if ($nids) {
       $activities = $this->nodeStorage->loadMultiple($nids);
     }

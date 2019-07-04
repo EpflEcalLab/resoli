@@ -112,6 +112,9 @@
         },
         "patches": {
           "drupal/core": {
+          },
+          "drupal/swiftmailer": {
+            "[2948607] - Error after updating to beta2": "https://www.drupal.org/files/issues/2019-02-14/2948607-17.patch"
           }
         }
     }

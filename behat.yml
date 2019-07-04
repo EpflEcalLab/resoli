@@ -16,6 +16,7 @@ default:
         - Drupal\Behat\Context\Drupal\MailContext:
             base_url: http://127.0.0.1:8888
         - Drupal\Behat\Context\Drupal\JsonContext:
+        - Drupal\Behat\Context\Drupal\WatchdogContext:
 
         # Resoli Contexts
         - Drupal\Behat\Context\Resoli\RegisterContext
@@ -72,6 +73,7 @@ docker:
         - Drupal\Behat\Context\Drupal\MailContext:
             base_url: http://test:8888
         - Drupal\Behat\Context\Drupal\JsonContext:
+        - Drupal\Behat\Context\Drupal\WatchdogContext:
 
         # Resoli Contexts
         - Drupal\Behat\Context\Resoli\RegisterContext

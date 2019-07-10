@@ -88,7 +88,7 @@
             <a
               class="{{ classes|join(' ') }}"
               aria-label="{{ day|bamboo_i18n_format_date('custom', 'j F Y') }}"
-
+              href="{{ path('<current>', parameters) }}"
             >
               {% if not is_past %}
                 {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-dots.html.twig' with {'day': day, 'badges': variables.badges} %}

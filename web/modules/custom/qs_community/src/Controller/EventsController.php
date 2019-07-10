@@ -80,9 +80,9 @@ class EventsController extends ControllerBase {
   }
 
   /**
-   * Export the complete list of members by community.
+   * Export the complete list of events by community.
    *
-   * A member may appear multiple time, as they may have more than 1 privilege.
+   * For performance reason, we only fetch the next 6 months events.
    */
   public function export(TermInterface $community) {
     $now = new DrupalDateTime();
@@ -116,7 +116,8 @@ class EventsController extends ControllerBase {
       $this->t('qs_community.events.export.header.date_start.label')->render(),
       $this->t('qs_community.events.export.header.date_end.label')->render(),
       $this->t('qs_community.events.export.header.venue.label')->render(),
-      $this->t('qs_community.events.export.header.organizer.label')->render(),
+      $this->t('qs_community.events.export.header.contribution.label')->render(),
+      $this->t('qs_community.events.export.header.organizer_name.label')->render(),
       $this->t('qs_community.events.export.header.organizer_mail.label')->render(),
       $this->t('qs_community.events.export.header.organizer_phone.label')->render(),
     ]);
@@ -129,6 +130,7 @@ class EventsController extends ControllerBase {
         $event->field_start_at->date,
         $event->field_end_at->date,
         $event->field_venue->value,
+        $event->field_contribution->value,
         $event->field_contact_name->value,
         $event->field_contact_mail->value,
         $event->field_contact_phone->value,

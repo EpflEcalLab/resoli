@@ -113,14 +113,19 @@ class MembersController extends ControllerBase {
       ],
     ];
 
-    $filters = [];
-    if (!empty($keywords)) {
-      $filters = [
-        'mail' => $keywords,
-        'firstname' => $keywords,
-        'lastname' => $keywords,
-      ];
-    }
+    $filters = [
+      'mail' => '',
+      'firstname' => '',
+      'lastname' => '',
+    ];
+    // Get sentence to filters by field.
+    $filters = array_map(function () use ($keywords) {
+      // Get only the words to prevent crashing SQL Like.
+      preg_match_all('/\w+/', $keywords, $matches);
+      if (isset($matches[0]) && !empty($matches[0])) {
+        return implode(' ', $matches[0]);
+      }
+    }, $filters);
 
     $query = $this->privilegeManager->queryMembersWithPrivileges($community, $this->configuration['limit'], $filters);
     if (!$query) {
@@ -155,7 +160,7 @@ class MembersController extends ControllerBase {
   /**
    * Export the complete list of members by community.
    *
-   * A member may appear multiple time, as they may have more than 1 privilege.
+   * A member appear only one time, his highest privilege is shown.
    */
   public function export(TermInterface $community) {
     $now = new DrupalDateTime();

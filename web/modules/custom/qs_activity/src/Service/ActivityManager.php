@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_activity\Service;
 
+use DateTimeZone;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Database\Connection;
@@ -351,6 +352,46 @@ class ActivityManager {
     }
 
     return $activities;
+  }
+
+  /**
+   * Get all dates you need to create a monthly display of events.
+   *
+   * @param \DateTime $start_date
+   *   The start date to calculate everything from.
+   *
+   * @return array
+   *   The start date, the end date, the next date and the prev date.
+   */
+  public static function getPaginationFromDate(\DateTime $start_date) {
+
+    $start_date->setTimezone(new DateTimeZone('UTC'));
+    $start = clone $start_date;
+
+    $start
+      ->modify('Monday this week')
+      ->setTime(0, 0);
+
+    $end = clone $start;
+    // We need the end date to Sunday in 4 weeks.
+    $end
+      ->modify('next Sunday +3 weeks')
+      ->setTime(23, 59, 59);
+
+    $prev = clone $start;
+    $prev->modify('-4 weeks');
+
+    $next = clone $end;
+    $next
+      ->setTime(0, 0)
+      ->modify('next day');
+
+    return [
+      'start' => $start,
+      'end' => $end,
+      'prev' => $prev,
+      'next' => $next,
+    ];
   }
 
 }

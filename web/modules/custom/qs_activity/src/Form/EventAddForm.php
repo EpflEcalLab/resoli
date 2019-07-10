@@ -450,7 +450,7 @@ class EventAddForm extends FormBasic {
     // According the current user roles to the event,
     // If he's activity_maintainers and not activity_organizers, then
     // subscribe him to this new event.
-    if (in_array('activity_maintainers', $privileges) && !in_array('activity_organizers', $privileges)) {
+    if ($privileges && in_array('activity_maintainers', $privileges) && !in_array('activity_organizers', $privileges)) {
       // By default, subscribe every activity_maintainers (co-organizers) to
       // there events.
       $subscription = $this->subscriptionManager->request($event, NULL, FALSE);

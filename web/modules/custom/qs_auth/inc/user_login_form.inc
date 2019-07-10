@@ -29,6 +29,11 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
       'options' => [
         'icon' => 'plus',
       ],
+      'attributes' => [
+        'class' => [
+          'btn-icon-right',
+        ],
+      ],
     ],
   ];
 

@@ -381,6 +381,12 @@ class ActivityManager {
     $prev = clone $start;
     $prev->modify('-4 weeks');
 
+    // Make sure the prev is never before today when start date is not today.
+    $now = new \DateTime();
+    if ($now->diff($prev)->invert && $start_date->diff($now)->d > 0) {
+      $prev = $now;
+    }
+
     $next = clone $end;
     $next
       ->setTime(0, 0)

@@ -103,7 +103,7 @@ const card = () => {
     let $card = '';
     let triggered = false;
     function onReady() {
-      const $pills = $(`.card-pill[data-toggle=collapse]`);
+      const $pills = $('.card-pill[data-toggle=collapse]');
       if ($pills.length > 0 && !triggered) {
         triggered = true;
         if (hash && hash.includes('card')) {
@@ -137,6 +137,7 @@ const card = () => {
     $(document).on('DOMNodeInserted', function() {
       onReady();
     });
+    onReady();
 
   })(jQuery);
 };

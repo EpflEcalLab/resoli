@@ -362,10 +362,10 @@ class ActivityManager {
    *
    * @return array
    *   The start date, the end date, the next date and the prev date.
+   *
+   * @throws \Exception
    */
   public static function getPaginationFromDate(\DateTime $start_date) {
-
-    $start_date->setTimezone(new DateTimeZone('UTC'));
     $start = clone $start_date;
 
     $start

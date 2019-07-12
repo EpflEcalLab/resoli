@@ -26,10 +26,10 @@ class ActivityManagerTest extends UnitTestCase {
   public function testGetPaginationFromDate($start_date, $expected) {
     $dates = ActivityManager::getPaginationFromDate($start_date);
 
-    $this->assertEquals($expected['start'], $dates['start'], 'Start date should be the same.');
-    $this->assertEquals($expected['end'], $dates['end'], 'End date should be the same.');
-    $this->assertEquals($expected['prev'], $dates['prev'], 'Previous date should be the same.');
-    $this->assertEquals($expected['next'], $dates['next'], 'Next date should be the same.');
+    $this->assertEquals($expected['start']->format('YmdHi'), $dates['start']->format('YmdHi'), 'Start date is the Monday of the given date or today if start is in the past.');
+    $this->assertEquals($expected['end']->format('YmdHi'), $dates['end']->format('YmdHi'), 'End date is the Sunday (23:59:59) 4 weeks after the start date.');
+    $this->assertEquals($expected['prev']->format('YmdHi'), $dates['prev']->format('YmdHi'), 'Previous date is 4 weeks before the start date.');
+    $this->assertEquals($expected['next']->format('YmdHi'), $dates['next']->format('YmdHi'), 'Next date is 4 weeks after the end date.');
     $this->assertContainsOnlyInstancesOf(DateTime::class, $dates);
   }
 
@@ -38,52 +38,46 @@ class ActivityManagerTest extends UnitTestCase {
    *
    * @return array
    *   The start date and the expected results.
+   *
+   * @throws \Exception
    */
   public function getPaginationFromDateProvider() {
+    $now = new DateTime();
     return [
-      'TODAY, 10 juillet 2019' => [
-        new DateTime('July 10, 2019 10:32 UTC'),
+      'TODAY' => [
+        $now,
         [
-          'start' => new DateTime('July 8, 2019 00:00 UTC'),
-          'end' => new DateTime('August 4, 2019 23:59:59 UTC'),
-          'prev' => new DateTime('June 10, 2019 00:00 UTC'),
-          'next' => new DateTime('August 5, 2019 00:00 UTC'),
+          'start' => new DateTime('Monday this week 00:00'),
+          'end' => new DateTime('Sunday this week +3 weeks 23:59:59'),
+          'prev' => new DateTime('Monday this week -4 weeks 00:00'),
+          'next' => new DateTime('next Monday +3 weeks 00:00'),
         ],
       ],
-      'PREVIOUS DATE, 10 juin 2019' => [
-        new DateTime('June 10, 2019 00:00 UTC'),
+      'PREVIOUS DATE' => [
+        new DateTime('Monday this week -4 weeks'),
         [
-          'start' => new DateTime('June 10, 2019 00:00 UTC'),
-          'end' => new DateTime('July 7, 2019 23:59:59 UTC'),
-          'prev' => new DateTime('May 13, 2019 00:00 UTC'),
-          'next' => new DateTime('July 8, 2019 00:00 UTC'),
+          'start' => new DateTime('Monday this week 00:00'),
+          'end' => new DateTime('Sunday this week +3 weeks 23:59:59'),
+          'prev' => new DateTime('Monday this week -4 weeks 00:00'),
+          'next' => new DateTime('next Monday +3 weeks 00:00'),
         ],
       ],
-      'NEXT DATE, 5 août 2019' => [
-        new DateTime('August 5, 2019 00:00 UTC'),
+      'NEXT DATE' => [
+        new DateTime('next Monday +3 weeks 00:00'),
         [
-          'start' => new DateTime('August 5, 2019 00:00 UTC'),
-          'end' => new DateTime('September 1, 2019 23:59:59 UTC'),
-          'prev' => new DateTime('July 8, 2019 00:00 UTC'),
-          'next' => new DateTime('September 2, 2019 00:00 UTC'),
+          'start' => new DateTime('next Monday +3 weeks 00:00'),
+          'end' => new DateTime('next Sunday +7 weeks 23:59:59'),
+          'prev' => $now,
+          'next' => new DateTime('next Monday +7 weeks 00:00'),
         ],
       ],
-      '12 février 2019, not UTC' => [
-        new DateTime('February 12, 2019 12:45'),
+      'NEXT DATE + 1 day' => [
+        new DateTime('next Thursday +3 weeks 00:00'),
         [
-          'start' => new DateTime('February 11, 2019 00:00 UTC'),
-          'end' => new DateTime('March 10, 2019 23:59:59 UTC'),
-          'prev' => new DateTime('January 14, 2019 00:00 UTC'),
-          'next' => new DateTime('March 11, 2019 00:00 UTC'),
-        ],
-      ],
-      '28 décembre 2016' => [
-        new DateTime('December 28, 2016 18:05'),
-        [
-          'start' => new DateTime('December 26, 2016 00:00 UTC'),
-          'end' => new DateTime('January 22, 2017 23:59:59 UTC'),
-          'prev' => new DateTime('November 28, 2016 00:00 UTC'),
-          'next' => new DateTime('January 23, 2017 00:00 UTC'),
+          'start' => new DateTime('next Monday +3 weeks 00:00'),
+          'end' => new DateTime('next Sunday +7 weeks 23:59:59'),
+          'prev' => $now,
+          'next' => new DateTime('next Monday +7 weeks 00:00'),
         ],
       ],
     ];

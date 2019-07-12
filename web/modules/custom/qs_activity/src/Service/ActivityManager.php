@@ -367,6 +367,13 @@ class ActivityManager {
    */
   public static function getPaginationFromDate(\DateTime $start_date) {
     $start = clone $start_date;
+    $now = new \DateTime();
+    $now_formatted = $now->format('Ymd');
+
+    // If the start date is in the past, force the date to today.
+    if ($start_date->format('Ymd') < $now_formatted) {
+      $start = clone $now;
+    }
 
     $start
       ->modify('Monday this week')
@@ -381,10 +388,13 @@ class ActivityManager {
     $prev = clone $start;
     $prev->modify('-4 weeks');
 
-    // Make sure the prev is never before today when start date is not today.
+    // Make sure the prev is never before today when start date is in the future.
     $now = new \DateTime();
-    if ($now->diff($prev)->invert && $start_date->diff($now)->d > 0) {
-      $prev = $now;
+    if (
+      $prev->format('Ymd') < $now_formatted &&
+      $start_date->format('Ymd') > $now_formatted
+    ) {
+      $prev = clone $now;
     }
 
     $next = clone $end;

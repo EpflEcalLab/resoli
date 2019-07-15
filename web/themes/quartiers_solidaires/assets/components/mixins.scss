@@ -137,7 +137,8 @@
 
 // Set button-outline-invert color of text and background based on parent background
 @mixin button-outline-invert($background-class, $color, $color-invert: $white, $color-dark: darken($color, 15%)) {
-  #{$background-class} & {
+  #{$background-class} &,
+  #{$background-class} + .modal-footer & {
     background-color: $color;
 
     &:not([disabled]):not(.disabled):active {

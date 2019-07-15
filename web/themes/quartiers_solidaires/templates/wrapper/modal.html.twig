@@ -44,15 +44,16 @@
         {% endif %}
 
         {% block modal_content %}{% endblock %}
-
-        {% if block('modal_footer') is not empty %}
-          <div class="modal-footer justify-content-center sticky-bottom">
-            {% block modal_footer %}{% endblock %}
-          </div>
-        {% endif %}
       </div>
-
     </div>
+
+    {% if block('modal_footer') is not empty %}
+      <div class="modal-footer justify-content-center sticky-bottom">
+        <div class="container">
+          {% block modal_footer %}{% endblock %}
+        </div>
+      </div>
+    {% endif %}
 
   </div>
 </div>

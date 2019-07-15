@@ -63,16 +63,16 @@ class ActivityManagerTest extends UnitTestCase {
         ],
       ],
       'NEXT DATE' => [
-        new DateTime('next Monday +3 weeks 00:00'),
+        new DateTime('Monday next week +3 weeks 00:00'),
         [
           'start' => new DateTime('next Monday +3 weeks 00:00'),
           'end' => new DateTime('next Sunday +7 weeks 23:59:59'),
-          'prev' => $now,
+          'prev' => $now->setTime(0, 0),
           'next' => new DateTime('next Monday +7 weeks 00:00'),
         ],
       ],
       'NEXT DATE + 1 day' => [
-        new DateTime('next Thursday +3 weeks 00:00'),
+        new DateTime('Thursday next week +3 weeks 00:00'),
         [
           'start' => new DateTime('next Monday +3 weeks 00:00'),
           'end' => new DateTime('next Sunday +7 weeks 23:59:59'),

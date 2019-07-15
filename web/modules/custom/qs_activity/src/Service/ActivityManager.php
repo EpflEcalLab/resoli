@@ -2,7 +2,6 @@
 
 namespace Drupal\qs_activity\Service;
 
-use DateTimeZone;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Database\Connection;
@@ -388,7 +387,8 @@ class ActivityManager {
     $prev = clone $start;
     $prev->modify('-4 weeks');
 
-    // Make sure the prev is never before today when start date is in the future.
+    // Make sure the prev is never before today when start date is in the
+    // future.
     $now = new \DateTime();
     if (
       $prev->format('Ymd') < $now_formatted &&

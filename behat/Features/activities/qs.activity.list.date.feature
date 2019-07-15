@@ -20,14 +20,12 @@ Feature: Activities by Date list
     And I should see "qs.activity.date.link_prev"
 
   @api
-  Scenario: On the Fribourg listing page with a custom old date, I should see the correct elements and buttons.
+  Scenario: On the Fribourg listing page with a custom old date, I should see the same as today.
     Given I am logged in as user "member+fribourg"
     When I am on "/fribourg/activities/date?date=2016-08-10"
+    Then I should see 5 ".card-list-item" elements
     And I should see "qs.activity.date.link_next"
-    And I should see "qs.activity.date.link_prev"
-    And I should see "qs.activity.date.title_empty Fribourg 8 August 2016 4 September 2016"
-    And I follow "qs.activity.date.link_next"
-    And I should see "qs.activity.date.title_empty Fribourg 5 September 2016 2 October 2016"
+    But I should not see "qs.activity.date.link_prev"
 
   @api
   Scenario: On the Lausanne listing, I should see the correct elements and buttons.

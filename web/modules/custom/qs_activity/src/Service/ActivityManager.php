@@ -361,6 +361,7 @@ class ActivityManager {
    *
    * @return array
    *   The start date, the end date, the next date and the prev date.
+   *   We return DateTime to be able to unit-test this easily.
    *
    * @throws \Exception
    */
@@ -404,6 +405,7 @@ class ActivityManager {
       ->setTime(0, 0)
       ->modify('next day');
 
+    // We return DateTime to be able to unit-test this easily.
     return [
       'start' => $start,
       'end' => $end,

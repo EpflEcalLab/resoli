@@ -49,6 +49,7 @@
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
 
   &[class*=bg-] {
     &:before,

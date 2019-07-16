@@ -385,7 +385,9 @@ class ActivityManager {
       ->setTime(23, 59, 59);
 
     $prev = clone $start;
-    $prev->modify('-4 weeks');
+    $prev
+      ->modify('-4 weeks')
+      ->setTime(0, 0);
 
     // Make sure the prev is never before today when start date is in the
     // future.

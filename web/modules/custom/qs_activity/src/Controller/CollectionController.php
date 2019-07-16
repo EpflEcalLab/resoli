@@ -234,7 +234,7 @@ class CollectionController extends ControllerBase {
     $events = $this->eventManager->getByDate($community, $dates['start'], $dates['end']);
     $variables['events'] = $events;
 
-    // Get the only next events of each ones.
+    // Get the only next activities of each ones.
     $activities = $this->activityManager->getByDate($community, $dates['start'], $dates['end']);
 
     // Get badges.

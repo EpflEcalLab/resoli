@@ -211,14 +211,11 @@ class CollectionController extends ControllerBase {
 
     // Get pagination date.
     $pagination_date = $master_request->query->get('date');
-    $start_date = new DrupalDateTime();
-    if ($pagination_date) {
-      try {
-        $start_date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
-      }
-      catch (\Exception $e) {
-        $start_date = new DrupalDateTime();
-      }
+    try {
+      $start_date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
+    }
+    catch (\Exception $e) {
+      $start_date = new DrupalDateTime();
     }
 
     // Get pagination dates.

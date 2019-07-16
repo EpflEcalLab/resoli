@@ -19,7 +19,6 @@ class ActivityManagerTest extends UnitTestCase {
   /**
    * Test the pagination dates.
    *
-   * @group toto
    * @covers ::getPaginationFromDate
    * @dataProvider getPaginationFromDateProvider
    */

@@ -19,7 +19,7 @@
       {% endif %}
 
       {# Modal header #}
-      <div class="container flex-grow d-flex flex-column justify-content-center">
+      <div class="container flex-grow d-flex flex-column justify-content-center h-100">
         {% if block('modal_header') is not empty %}
           <div class="modal-header sticky-top bg-primary text-center">
             {% block modal_header %}{% endblock %}
@@ -44,15 +44,16 @@
         {% endif %}
 
         {% block modal_content %}{% endblock %}
-
-        {% if block('modal_footer') is not empty %}
-          <div class="modal-footer justify-content-center sticky-bottom">
-            {% block modal_footer %}{% endblock %}
-          </div>
-        {% endif %}
       </div>
-
     </div>
+
+    {% if block('modal_footer') is not empty %}
+      <div class="modal-footer justify-content-center sticky-bottom">
+        <div class="container">
+          {% block modal_footer %}{% endblock %}
+        </div>
+      </div>
+    {% endif %}
 
   </div>
 </div>

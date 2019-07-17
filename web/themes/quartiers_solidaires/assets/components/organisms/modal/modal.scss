@@ -43,11 +43,13 @@
 }
 
 .modal-content {
+  display: block;
   flex: 1 0 100%;
   position: static;
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  -webkit-backface-visibility: hidden;
 
   &[class*=bg-] {
     &:before,
@@ -130,6 +132,14 @@
 .modal-footer {
   flex-shrink: 0;
   border-radius: $border-radius-lg;
+
+  * {
+    pointer-events: none;
+  }
+
+  .btn {
+    pointer-events: auto;
+  }
 
   @include media-breakpoint-down(xs) {
     flex-wrap: wrap;

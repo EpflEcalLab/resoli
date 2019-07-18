@@ -49,9 +49,16 @@
           {% elseif event_week - previous_event_week >= 2 %}
             {% set previous_event_week = event.field_start_at.value|date('W') %}
 
+            {# Ensure the end date is not greather than fetched events. #}
+            {% set end_date = event.field_start_at.value|date_modify('sunday this week + 1 week') %}
+
+            {% if end_date.timestamp > variables.end.getTimestamp %}
+              {% set end_date = variables.end %}
+            {% endif %}
+
             {% set new_header = 'qs.activity.date.sticky.from_to @start_date @end_date'|t({
               '@start_date': event.field_start_at.value|date_modify('monday this week')|bamboo_i18n_format_date('custom', 'j F Y'),
-              '@end_date': event.field_start_at.value|date_modify('sunday this week + 1 week')|bamboo_i18n_format_date('custom', 'j F Y'),
+              '@end_date': end_date|bamboo_i18n_format_date('custom', 'j F Y'),
             }) %}
           {% endif %}
 

@@ -367,7 +367,7 @@ class ActivityManager {
    */
   public static function getPaginationFromDate(\DateTime $start_date) {
     $start = clone $start_date;
-    $now = new \DateTime();
+    $now = self::getNow();
     $now_formatted = $now->format('Ymd');
 
     // If the start date is in the past, force the date to today.
@@ -392,12 +392,12 @@ class ActivityManager {
 
     // Make sure the prev is never before today when start date is in the
     // future.
-    $now = new \DateTime();
     if (
       $prev->format('Ymd') < $now_formatted &&
       $start_date->format('Ymd') > $now_formatted
     ) {
-      $prev = clone $now;
+      $prev = self::getNow();
+      $prev->setTime(0, 0);
     }
 
     $next = clone $end;
@@ -412,6 +412,18 @@ class ActivityManager {
       'prev' => $prev,
       'next' => $next,
     ];
+  }
+
+  /**
+   * Get a new DateTime object.
+   *
+   * This method exists to be able to mock the now on unit tests.
+   *
+   * @return \DateTime
+   *   A DateTime object representing now.
+   */
+  protected static function getNow() {
+    return new \DateTime();
   }
 
 }

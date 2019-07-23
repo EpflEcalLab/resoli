@@ -43,7 +43,8 @@
 }
 
 .modal-content {
-  display: block;
+  display: flex;
+  flex-direction: column;
   flex: 1 0 100%;
   position: static;
   height: 100%;
@@ -122,6 +123,7 @@
   justify-content: center;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   min-height: min-content;
 
   .fullpage-wrapper {
@@ -138,6 +140,8 @@
   }
 
   .btn {
+    position: relative;
+    z-index: 2;
     pointer-events: auto;
   }
 

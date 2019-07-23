@@ -10,21 +10,11 @@
     {% set modal_attributes = create_attribute().addClass(classes) %}
     <div{{ modal_attributes }}>
 
-      {# Display status messages. #}
-      {% set messages = bamboo_render_entity('block', 'quartiers_solidaires_messages')|render %}
-      {% if messages is not empty %}
-        <div class="modal-header container">
-          {{ messages }}
-        </div>
-      {% endif %}
-
       {# Modal header #}
-      <div class="container flex-grow d-flex flex-column justify-content-center h-100">
-        {% if block('modal_header') is not empty %}
-          <div class="modal-header sticky-top bg-primary text-center">
-            {% block modal_header %}{% endblock %}
-          </div>
-        {% endif %}
+      <div class="container">
+        <div class="modal-header sticky-top text-center">
+          {% block modal_header %}{% endblock %}
+        </div>
 
         {# Pass modal_title_icon and modal_title to display the title with a big icon #}
         {% if modal_title or modal_title_sm %}
@@ -43,18 +33,20 @@
           {% endblock %}
         {% endif %}
 
+        {# Display status messages. #}
+        {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}
+
         {% block modal_content %}{% endblock %}
+
+        {% if block('modal_footer') is not empty %}
+          <div class="modal-footer justify-content-center">
+            <div class="container">
+              {% block modal_footer %}{% endblock %}
+            </div>
+          </div>
+        {% endif %}
       </div>
     </div>
-
-    {% if block('modal_footer') is not empty %}
-      <div class="modal-footer justify-content-center sticky-bottom">
-        <div class="container">
-          {% block modal_footer %}{% endblock %}
-        </div>
-      </div>
-    {% endif %}
-
   </div>
 </div>
 

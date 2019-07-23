@@ -137,7 +137,8 @@
 
 // Set button-outline-invert color of text and background based on parent background
 @mixin button-outline-invert($background-class, $color, $color-invert: $white, $color-dark: darken($color, 15%)) {
-  #{$background-class} & {
+  #{$background-class} &,
+  #{$background-class} + .modal-footer & {
     background-color: $color;
 
     &:not([disabled]):not(.disabled):active {
@@ -204,5 +205,20 @@
   use:last-child {
     transform: scale(0.6);
     transform-origin: ($size / 2) ($size / 2.5);
+  }
+}
+
+@mixin bg-fade() {
+  @each $color, $value in $theme-colors {
+    .bg-#{$color} &,
+    &.bg-#{$color} {
+      &:before {
+        background-image: linear-gradient(to bottom, $value 20%, rgba($value, 0) 100%);
+      }
+
+      &:after {
+        background-image: linear-gradient(to top, $value 20%, rgba($value, 0) 100%);
+      }
+    }
   }
 }

@@ -14,9 +14,9 @@
             - name: Styleguide
               service: node
               command: >-
-                bash -c "rm -rf /var/www/.codeship/build/styleguide &&
-                  yarn build --production &&
-                  mv /var/www/web/themes/quartiers_solidaires/build /var/www/.codeship/build/styleguide"
+                bash -c "yarn build --production &&
+                  mkdir -p /var/www/.codeship/build/styleguide &&
+                  mv /var/www/web/themes/quartiers_solidaires/build/* /var/www/.codeship/build/styleguide/"
         - name: Features
           type: serial
           steps:

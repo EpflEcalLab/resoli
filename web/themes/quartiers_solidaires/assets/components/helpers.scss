@@ -34,6 +34,10 @@
   z-index: $zindex-modal - 5;
 }
 
+.z-index-modal {
+  z-index: $zindex-modal;
+}
+
 // Background helpers
 @include bg-variant('.bg-primary', color("primary"));
 @include bg-variant('.bg-primary-light', color("primary-lighter"));

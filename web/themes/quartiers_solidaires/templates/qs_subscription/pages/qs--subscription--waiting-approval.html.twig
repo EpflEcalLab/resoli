@@ -105,7 +105,8 @@
       {
         label: 'qs.contact_all'|t,
         icon: 'mail',
-        url: 'mailto:?bcc=' ~ variables.mailto|join(',')
+        url: 'mailto:?bcc=' ~ variables.mailto|join(','),
+        classes: modal_footer_button_classes,
       },
     ]) %}
   {% endif %}

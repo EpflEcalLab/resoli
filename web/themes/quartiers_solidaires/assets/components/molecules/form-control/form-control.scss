@@ -64,3 +64,13 @@
 .uppy-Dashboard {
   color: $body-color;
 }
+
+.form-select {
+  &[class*=selectize] {
+    z-index: $zindex-popover;
+  }
+}
+.selectize-dropdown {
+  margin-bottom: $spacer;
+}
+manager+lausanne@antistatique.net

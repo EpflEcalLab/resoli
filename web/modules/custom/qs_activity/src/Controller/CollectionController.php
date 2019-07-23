@@ -219,7 +219,7 @@ class CollectionController extends ControllerBase {
     }
 
     // Get pagination dates.
-    $dates = ActivityManager::getPaginationFromDate($start_date->getPhpDateTime());
+    $dates = $this->activityManager->getPaginationFromDate($start_date->getPhpDateTime());
     // Transform dates to DrupalDateTime objects.
     $dates = array_map(function ($date) {
       /** @var \DateTime $date */

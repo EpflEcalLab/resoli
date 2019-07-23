@@ -365,9 +365,9 @@ class ActivityManager {
    *
    * @throws \Exception
    */
-  public static function getPaginationFromDate(\DateTime $start_date) {
+  public function getPaginationFromDate(\DateTime $start_date) {
     $start = clone $start_date;
-    $now = self::getNow();
+    $now = $this->getNow();
     $now_formatted = $now->format('Ymd');
 
     // If the start date is in the past, force the date to today.
@@ -396,7 +396,7 @@ class ActivityManager {
       $prev->format('Ymd') < $now_formatted &&
       $start_date->format('Ymd') > $now_formatted
     ) {
-      $prev = self::getNow();
+      $prev = $this->getNow();
       $prev->setTime(0, 0);
     }
 
@@ -422,7 +422,7 @@ class ActivityManager {
    * @return \DateTime
    *   A DateTime object representing now.
    */
-  protected static function getNow() {
+  protected function getNow() {
     return new \DateTime();
   }
 

@@ -174,12 +174,6 @@
     }
 
     @include bg-fade();
-
-    .container > &,
-    .container-fluid > & {
-      margin-right: ($grid-gutter-width / -2);
-      margin-left: ($grid-gutter-width / -2);
-    }
   }
 }
 

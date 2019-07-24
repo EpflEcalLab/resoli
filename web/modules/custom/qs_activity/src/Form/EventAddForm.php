@@ -149,7 +149,6 @@ class EventAddForm extends FormBasic {
       '#attributes' => [
         'class' => [
           'flex-wrap',
-          'row',
         ],
       ],
       '#theme_wrappers' => [

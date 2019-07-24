@@ -225,7 +225,7 @@
     );
 
     &:after {
-      height: 90%;
+      height: 80%;
 
       @include transition(height 0.34s ease-out);
     }

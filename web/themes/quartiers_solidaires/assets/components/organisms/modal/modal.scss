@@ -45,6 +45,7 @@
 .modal-content {
   position: static;
   height: 100%;
+  flex-grow: 1;
 
   &[class*=bg-] {
     &:before,
@@ -86,6 +87,10 @@
   > * {
     min-height: min-content; // Will fix overflow on Safari.
   }
+}
+
+@include ie11('.modal-scroller > .container') {
+  min-width: 800px !important;
 }
 
 .modal-header {

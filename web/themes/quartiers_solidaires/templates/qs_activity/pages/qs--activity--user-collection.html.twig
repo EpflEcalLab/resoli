@@ -21,7 +21,7 @@
 
 {% block modal_content %}
     {% if variables.activities %}
-    <ul class="card-list" id="activities-accordion" role="tablist" data-children=".card-list-item">
+    <ul class="card-list mb-auto" id="activities-accordion" role="tablist" data-children=".card-list-item">
       {% for activity in variables.activities %}
         <li class="card card-list-item shadow-to-bottom" id="card{{ activity.nid.value }}">
           <a
@@ -91,7 +91,7 @@
       </a>
     </div>
   {% else %}
-    <div class="text-center mt-5">
+    <div class="text-center mt-5 mb-auto">
       <div class="d-flex justify-content-center mb-4">
         {{ macros.badge('danger', 'happy', 'flag-privilege-organizers flag-lg p-1', 'qs.roles.activity_organizer'|t, true) }}
       </div>

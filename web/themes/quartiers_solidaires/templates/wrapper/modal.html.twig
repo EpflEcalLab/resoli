@@ -7,44 +7,48 @@
       'modal-content',
       modal_bg ? 'bg-' ~ modal_bg : 'bg-warning',
     ] %}
-    {% set modal_attributes = create_attribute().addClass(classes) %}
-    <div{{ modal_attributes }}>
+    <div{{ create_attribute().addClass(classes) }}>
 
-      {# Modal header #}
-      <div class="container my-auto">
-        <div class="modal-header sticky-top text-center">
-          {% block modal_header %}{% endblock %}
-        </div>
-
-        {# Pass modal_title_icon and modal_title to display the title with a big icon #}
-        {% if modal_title or modal_title_sm %}
-          {% block modal_title %}
-            <div class="text-center mx-auto mt-3 mb-5">
-              {{ modal_title_icon ? macros.icon(modal_title_icon, ['icon-xl', 'text-white']) }}
-              {% if modal_title %}
-                <h1{{ not modal_title_icon ? ' class="mt-5"' }}>{{ modal_title }}</h1>
-              {% elseif modal_title_sm %}
-                <h1 class="{{ not modal_title_icon ? 'mt-5 ' }}h4">{{ modal_title_sm }}</h1>
-              {% endif %}
-              {% if modal_subtitle %}
-                <p class="text-center mb-4">{{ modal_subtitle }}</p>
-              {% endif %}
-            </div>
-          {% endblock %}
-        {% endif %}
-
-        {# Display status messages. #}
-        {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}
-
-        {% block modal_content %}{% endblock %}
-
-        {% if block('modal_footer') is not empty %}
-          <div class="modal-footer justify-content-center">
-            <div class="container">
-              {% block modal_footer %}{% endblock %}
-            </div>
+      {# Modal content #}
+      <div class="modal-scroller d-flex flex-column flex-grow">
+        <div class="container d-flex flex-column flex-grow">
+          {# Modal header #}
+          <div class="modal-header sticky-top text-center justify-content-center">
+            {% block modal_header %}{% endblock %}
           </div>
-        {% endif %}
+
+          {# Pass modal_title_icon and modal_title to display the title with a big icon #}
+          {% if modal_title or modal_title_sm %}
+            {% block modal_title %}
+              <div class="text-center mx-auto mt-auto pt-3 mb-5">
+                {{ modal_title_icon ? macros.icon(modal_title_icon, ['icon-xl', 'text-white']) }}
+                {% if modal_title %}
+                  <h1{{ not modal_title_icon ? ' class="mt-5"' }}>{{ modal_title }}</h1>
+                {% elseif modal_title_sm %}
+                  <h1 class="{{ not modal_title_icon ? 'mt-5 ' }}h4">{{ modal_title_sm }}</h1>
+                {% endif %}
+                {% if modal_subtitle %}
+                  <p class="text-center mb-4">{{ modal_subtitle }}</p>
+                {% endif %}
+              </div>
+            {% endblock %}
+          {% endif %}
+
+          {# Display status messages. #}
+          {{ bamboo_render_entity('block', 'quartiers_solidaires_messages') }}
+
+          {# Modal content #}
+          {% block modal_content %}{% endblock %}
+
+          {# Modal footer #}
+          {% if block('modal_footer') is not empty %}
+            <div class="modal-footer justify-content-center sticky-bottom">
+              <div class="container">
+                {% block modal_footer %}{% endblock %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>

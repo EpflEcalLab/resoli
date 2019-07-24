@@ -7,7 +7,7 @@
 {% set floating_buttons = element['#floating_buttons'] %}
 
 {% block modal_content %}
-  <form{{ attributes }}>
+  <form{{ attributes.addClass('my-auto') }}>
     {{ children }}
   </form>
 {% endblock %}

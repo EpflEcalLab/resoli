@@ -43,14 +43,9 @@
 }
 
 .modal-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1 0 100%;
   position: static;
   height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  -webkit-backface-visibility: hidden;
+  flex-grow: 1;
 
   &[class*=bg-] {
     &:before,
@@ -77,7 +72,25 @@
     }
   }
 
+  .form {
+    min-height: min-content;
+  }
+
   @include bg-fade();
+}
+
+.modal-scroller {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translate3d(0,0,0);
+
+  > * {
+    min-height: min-content; // Will fix overflow on Safari.
+  }
+}
+
+@include ie11('.modal-scroller > .container') {
+  min-width: 800px !important;
 }
 
 .modal-header {
@@ -156,17 +169,17 @@
     &:after {
       @extend .modal-content[class*=bg-]:after;
 
-      height: 130%;
+      height: 110%;
+      border-radius: 0;
     }
 
     @include bg-fade();
-
-    .container > &,
-    .container-fluid > & {
-      margin-right: ($grid-gutter-width / -2);
-      margin-left: ($grid-gutter-width / -2);
-    }
   }
+}
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
 }
 
 // We sometimes need to have a modal look but it's not really a modal

@@ -17,7 +17,7 @@
   {{ bamboo_render_form('qs_activity', 'ActivityInlineAddMemberForm', {'activity': variables.activity}) }}
 
   {% if variables.members %}
-    <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
+    <ul class="card-list mb-auto" id="users-accordion" role="tablist" data-children=".card-list-item">
       {% for member in variables.members %}
         <li class="card card-list-item" id="card{{ member.uid.value }}">
           <a
@@ -95,7 +95,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>{{ 'qs_activity.members.empty'|t }}</p>
+    <p class="mb-auto">{{ 'qs_activity.members.empty'|t }}</p>
   {% endif %}
 {% endblock %}
 

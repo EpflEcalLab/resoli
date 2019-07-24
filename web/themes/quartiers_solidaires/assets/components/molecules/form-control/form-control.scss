@@ -58,6 +58,7 @@
 .selectize-input {
   input {
     width: 100% !important;
+    font-size: $font-size-base;
   }
 }
 
@@ -73,4 +74,11 @@
 
 .selectize-dropdown {
   margin-bottom: $spacer;
+  font-size: $font-size-base;
+}
+
+.selectize-dropdown-content {
+  > div {
+    padding: ($dropdown-item-padding-y * 2) $dropdown-item-padding-x;
+  }
 }

@@ -29,7 +29,7 @@
   </div>
 
   {% if variables.activities %}
-    <ul class="card-list" id="activities-accordion" role="tablist" data-children=".card-list-item">
+    <ul class="card-list mb-auto" id="activities-accordion" role="tablist" data-children=".card-list-item">
       {% for activity in variables.activities if activity.nid.value in variables.photos_by_activities|keys %}
         <li class="card card-list-item" id="card{{ activity.nid.value }}">
           <a
@@ -87,7 +87,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <div class="text-center mb-5">
+    <div class="text-center mb-auto">
       <p>
         {% trans %}
           qs.photos.user.collection.empty

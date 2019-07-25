@@ -25,7 +25,7 @@
                 {% if modal_title %}
                   <h1{{ not modal_title_icon ? ' class="mt-5"' }}>{{ modal_title }}</h1>
                 {% elseif modal_title_sm %}
-                  <h1 class="{{ not modal_title_icon ? 'mt-5 ' }}h4">{{ modal_title_sm }}</h1>
+                  <h1 class="{{ not modal_title_icon ? 'mt-5 ' }}h4">{{ modal_title_sm|raw }}</h1>
                 {% endif %}
                 {% if modal_subtitle %}
                   <p class="text-center mb-4">{{ modal_subtitle }}</p>

@@ -11,7 +11,7 @@ const multiStep = () => {
      * @param description string
      *   The description to replace by.
      */
-    $.fn.updateStepDescription = function(step, description) {
+    $.fn.updateStepDescription = function (step, description) {
       const currentForm = $(this);
       const $fieldsets = currentForm.find('[data-step]');
 
@@ -24,7 +24,7 @@ const multiStep = () => {
     };
 
     function handleMultisteps() {
-      $form.each(function() {
+      $form.each(function () {
         const currentForm = $(this);
         const id = currentForm.attr('id');
         const modalHeader = currentForm.closest('.modal-content').find('.modal-header');
@@ -44,15 +44,14 @@ const multiStep = () => {
           stepNav.prependTo(currentForm);
         }
 
-        $('<div/>')
-          .addClass('modal-footer justify-content-center sticky-bottom')
-          .appendTo(currentForm.find(`.tab-content`));
+        const footer = $('<div/>')
+          .addClass('modal-footer justify-content-center sticky-bottom');
 
         // Create the "Prev step" button below the form
         $('<button/>')
           .addClass(`btn btn-outline-invert btn-icon btn-icon-to-circle align-self-center shadow-to-bottom prev-btn-${id}`)
-          .html(typeof (Drupal) !== 'undefined' ? `<span class="d-none d-sm-inline">${Drupal.t('qs.previous')}</span>` : `<span class="d-none d-sm-inline">previous</span>`)
-          .on('click', function(e) {
+          .html(typeof (Drupal) !== 'undefined' ? `<span class="d-none d-sm-inline">${Drupal.t('qs.previous')}</span>` : '<span class="d-none d-sm-inline">previous</span>')
+          .on('click', (e) => {
             e.preventDefault();
 
             // @TODO make it work: disable the nav if current tab pane has required and empty fields
@@ -60,50 +59,50 @@ const multiStep = () => {
             prevTab.tab('show');
             // };
           })
-          .appendTo(currentForm.find(`.modal-footer`))
+          .appendTo(footer)
           .append(
-            '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow-left"></use></svg></span>'
+            '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow-left"></use></svg></span>',
           );
 
         // Create the "Next step" button below the form
         $('<button/>')
           .addClass(`btn btn-outline-invert btn-icon btn-icon-right align-self-center shadow-to-bottom next-btn-${id}`)
           .text(typeof (Drupal) !== 'undefined' ? Drupal.t('qs.next') : 'next')
-          .on('click', function(e) {
+          .on('click', (e) => {
             e.preventDefault();
             // @TODO make it work: disable the nav if current tab pane has required and empty fields
             // if (checkRequired(currentTab)) {
             nextTab.tab('show');
             // };
           })
-          .appendTo(currentForm.find(`.modal-footer`))
+          .appendTo(footer)
           .append(
-            '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow"></use></svg></span>'
+            '<span class="icon" aria-hidden="true"><svg><use xlink:href="#icon-arrow"></use></svg></span>',
           );
 
         $(`#${id} .js-form-submit:not(.js-form-normal)`)
-          .appendTo(currentForm.find(`.modal-footer`));
+          .appendTo(footer);
+
+        footer.appendTo(currentForm.find('.tab-content'));
 
         // Add step nav at top of form.
-        $fieldsets.each(function(index) {
+        $fieldsets.each(function (index) {
           const currentFieldset = $(this);
-          const $parent = currentFieldset.parents('.form-multistep');
           const stepLabel = currentFieldset.data('step');
           const fieldsetId = currentFieldset.attr('id');
-          const nextFieldsetId = $(this).next('fieldset').attr('id');
 
           // Generate link to step
           const $link = $('<a/>', {
-            'class': 'step-nav-link btn btn-outline-invert btn-circle shadow-to-bottom',
-            'href': `#${fieldsetId}`,
-            'title': stepLabel,
+            class: 'step-nav-link btn btn-outline-invert btn-circle shadow-to-bottom',
+            href: `#${fieldsetId}`,
+            title: stepLabel,
             'aria-label': stepLabel,
-            'id': `steptab-${fieldsetId}`,
+            id: `steptab-${fieldsetId}`,
             'aria-controls': fieldsetId,
             'aria-selected': 'false',
             'data-toggle': 'tab',
             'data-last': index + 1 === $fieldsets.length ? 'true' : 'false',
-            'role': 'tab',
+            role: 'tab',
           });
 
           // Append the step nav to the form
@@ -114,7 +113,7 @@ const multiStep = () => {
         });
 
         // show next tab on click
-        $('a.step-nav-link').on('show.bs.tab', function(e) {
+        $('a.step-nav-link').on('show.bs.tab', (e) => {
           const target = $(e.relatedTarget).attr('href');
           currentTab = target ? $(target) : currentForm.find('fieldset:first-of-type');
           nextTab = $(e.target).parent().next().find('a.step-nav-link');
@@ -154,12 +153,12 @@ const multiStep = () => {
       handleMultisteps();
     }
 
-    $(document).on('DOMNodeInserted', function() {
+    $(document).on('DOMNodeInserted', () => {
       if (!processed) {
         handleMultisteps();
       }
     });
-  })(jQuery, Drupal);
+  }(jQuery, Drupal));
 };
 
 export default multiStep;

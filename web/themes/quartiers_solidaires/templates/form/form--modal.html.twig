@@ -1,13 +1,13 @@
 {% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
 
-{% set modal_bg = attributes.theme ?? 'warning' %}
-{% set modal_title_sm = attributes.title|raw %}
-{% set modal_title_icon = attributes.icon %}
-{% set modal_subtitle = attributes.description %}
+{% set modal_bg = attributes.theme.__toString ?? 'warning' %}
+{% set modal_title_sm = attributes.title.__toString %}
+{% set modal_title_icon = attributes.icon.__toString %}
+{% set modal_subtitle = attributes.description.__toString %}
 {% set floating_buttons = element['#floating_buttons'] %}
 
 {% block modal_content %}
-  <form{{ attributes }}>
+  <form{{ attributes.addClass('my-auto') }}>
     {{ children }}
   </form>
 {% endblock %}

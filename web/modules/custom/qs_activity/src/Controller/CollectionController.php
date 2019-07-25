@@ -211,42 +211,28 @@ class CollectionController extends ControllerBase {
 
     // Get pagination date.
     $pagination_date = $master_request->query->get('date');
-    $date = new DrupalDateTime();
-    if ($pagination_date) {
-      try {
-        $date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
-      }
-      catch (\Exception $e) {
-        $date = new DrupalDateTime();
-      }
+    try {
+      $start_date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
+    }
+    catch (\Exception $e) {
+      $start_date = new DrupalDateTime();
     }
 
-    $start = clone $date;
-    $start->setTime(0, 0);
-
-    $end = clone $start;
-    // We need the date in 4 weeks but not including the day in EXACTLY 4 weeks,
-    // i.e. just the second before :)
-    $end->modify('+3 weeks +6 days');
-    $end->setTime(23, 59, 59);
-
-    $prev = clone $start;
-    $prev->modify('-4 weeks');
-
-    $next = clone $end;
-    $next->modify('next day');
-
-    $variables['start'] = $start;
-    $variables['end'] = $end;
-    $variables['prev'] = $prev;
-    $variables['next'] = $next;
+    // Get pagination dates.
+    $dates = $this->activityManager->getPaginationFromDate($start_date->getPhpDateTime());
+    // Transform dates to DrupalDateTime objects.
+    $dates = array_map(function ($date) {
+      /** @var \DateTime $date */
+      return DrupalDateTime::createFromTimestamp($date->getTimestamp());
+    }, $dates);
+    $variables = array_merge($variables, $dates);
 
     // Get the only next events of each ones.
-    $events = $this->eventManager->getByDate($community, $start, $end);
+    $events = $this->eventManager->getByDate($community, $dates['start'], $dates['end']);
     $variables['events'] = $events;
 
-    // Get the only next events of each ones.
-    $activities = $this->activityManager->getByDate($community, $start, $end);
+    // Get the only next activities of each ones.
+    $activities = $this->activityManager->getByDate($community, $dates['start'], $dates['end']);
 
     // Get badges.
     if (!empty($events) && !empty($activities)) {

@@ -353,4 +353,77 @@ class ActivityManager {
     return $activities;
   }
 
+  /**
+   * Get all dates you need to create a monthly display of events.
+   *
+   * @param \DateTime $start_date
+   *   The start date to calculate everything from.
+   *
+   * @return array
+   *   The start date, the end date, the next date and the prev date.
+   *   We return DateTime to be able to unit-test this easily.
+   *
+   * @throws \Exception
+   */
+  public function getPaginationFromDate(\DateTime $start_date) {
+    $start = clone $start_date;
+    $now = $this->getNow();
+    $now_formatted = $now->format('Ymd');
+
+    // If the start date is in the past, force the date to today.
+    if ($start_date->format('Ymd') < $now_formatted) {
+      $start = clone $now;
+    }
+
+    $start
+      ->modify('Monday this week')
+      ->setTime(0, 0);
+
+    $end = clone $start;
+    // We need the end date to Sunday in 4 weeks.
+    $end
+      ->modify('next Sunday +3 weeks')
+      ->setTime(23, 59, 59);
+
+    $prev = clone $start;
+    $prev
+      ->modify('-4 weeks')
+      ->setTime(0, 0);
+
+    // Make sure the prev is never before today when start date is in the
+    // future.
+    if (
+      $prev->format('Ymd') < $now_formatted &&
+      $start_date->format('Ymd') > $now_formatted
+    ) {
+      $prev = $this->getNow();
+      $prev->setTime(0, 0);
+    }
+
+    $next = clone $end;
+    $next
+      ->setTime(0, 0)
+      ->modify('next day');
+
+    // We return DateTime to be able to unit-test this easily.
+    return [
+      'start' => $start,
+      'end' => $end,
+      'prev' => $prev,
+      'next' => $next,
+    ];
+  }
+
+  /**
+   * Get a new DateTime object.
+   *
+   * This method exists to be able to mock the now on unit tests.
+   *
+   * @return \DateTime
+   *   A DateTime object representing now.
+   */
+  protected function getNow() {
+    return new \DateTime();
+  }
+
 }

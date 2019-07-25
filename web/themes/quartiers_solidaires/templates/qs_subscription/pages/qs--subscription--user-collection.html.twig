@@ -22,7 +22,7 @@
 
 {% block modal_content %}
   {% if variables.events %}
-    <ul class="card-list" id="events-accordion" role="tablist" data-children=".card-list-item">
+    <ul class="card-list mb-auto" id="events-accordion" role="tablist" data-children=".card-list-item">
       {% for key, event in variables.events %}
         <li class="card card-list-item" id="card{{ event.nid.value }}">
           <a
@@ -88,6 +88,6 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p class="text-center">{{ 'qs.subscription.user.collection.empty'|t }}</p>
+    <p class="text-center mb-auto">{{ 'qs.subscription.user.collection.empty'|t }}</p>
   {% endif %}
 {% endblock %}

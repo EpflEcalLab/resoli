@@ -58,7 +58,13 @@ const formSelectize = () => {
               '<span class="label">' + escape(label) + '</span>' +
               '</div>';
           }
-        }
+        },
+        onDropdownClose: function () {
+          $('.selectize-dropdown-content').empty();
+        },
+        onBlur: function () {
+          $('.selectize-dropdown-content').empty();
+        },
       };
 
       // Process the sort field according data attribute.

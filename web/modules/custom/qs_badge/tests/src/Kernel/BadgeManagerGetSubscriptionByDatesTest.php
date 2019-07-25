@@ -12,7 +12,6 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * @group qs_kernel
  * @group qs_badge
  * @group qs_badge_kernel
- * @group kevin
  */
 class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase {
 

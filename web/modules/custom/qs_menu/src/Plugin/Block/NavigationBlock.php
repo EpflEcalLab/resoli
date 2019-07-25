@@ -183,25 +183,6 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
           'qs_calendar.collection.monthly',
         ],
       ],
-      'stories' => [
-        'label' => $this->t('qs_menu.links.stories'),
-        'url' => "javascript:alert('This feature is not yet availaible.')",
-        'icon' => 'stories',
-        'links' => [
-          'qs_activity.collection.themes' => [
-            'url' => $this->urlGenerator->generate('<front>'),
-            'label' => $this->t('qs_menu.links.stories.themes'),
-          ],
-          // @TODO temp link to not have a broken nav:
-          'qs_activity.collection.date' => [
-            'url' => $this->urlGenerator->generate('<front>'),
-            'label' => $this->t('qs_menu.links.stories.date'),
-          ],
-        ],
-        'activated_by' => [
-          '<front>',
-        ],
-      ],
       'photos' => [
         'label' => $this->t('qs_menu.links.photos'),
         'url' => $this->urlGenerator->generate('qs_photo.collection.month', [

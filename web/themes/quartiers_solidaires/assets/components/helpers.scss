@@ -34,6 +34,10 @@
   z-index: $zindex-modal - 5;
 }
 
+.z-index-modal {
+  z-index: $zindex-modal;
+}
+
 // Background helpers
 @include bg-variant('.bg-primary', color("primary"));
 @include bg-variant('.bg-primary-light', color("primary-lighter"));
@@ -86,6 +90,14 @@
       pointer-events: auto;
     }
   }
+}
+
+@include ie11('.sticky-bottom') {
+  position: relative;
+}
+
+@include ie11('.sticky-top') {
+  position: relative;
 }
 
 // We need a small fix for some cases where the height of a content

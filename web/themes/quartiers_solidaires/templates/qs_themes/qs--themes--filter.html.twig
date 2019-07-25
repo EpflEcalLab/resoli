@@ -8,19 +8,21 @@
 <div class="modal fade modal-real" id="themesModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content bg-primary">
-      <div class="modal-header justify-content-center">
-        <h4 class="modal-title mx-auto mt-3 text-center">{{ 'qs.themes.filter_title'|t }}</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid p-0">
-          <div class="text-sm-center" data-toggle="buttons">
-            <label class="btn checkbox active" id="js-all-themes">
-              {{ macros.icon('theme_all_o') }}
-              <input type="radio" name="allthemes" value="all" checked="checked">
-              {{ 'qs.themes.filter_all'|t }}
-            </label>
+      <div class="modal-scroller d-flex flex-column flex-grow">
+        <div class="container d-flex flex-column flex-grow">
+          <div class="modal-header justify-content-center">
+            <h4 class="modal-title mx-auto mt-3 text-center">{{ 'qs.themes.filter_title'|t }}</h4>
           </div>
-          {{ bamboo_render_form('qs_themes', 'FilterForm') }}
+          <div class="modal-body p-0">
+            <div class="text-sm-center" data-toggle="buttons">
+              <label class="btn checkbox active" id="js-all-themes">
+                {{ macros.icon('theme_all_o') }}
+                <input type="radio" name="allthemes" value="all" checked="checked">
+                {{ 'qs.themes.filter_all'|t }}
+              </label>
+            </div>
+            {{ bamboo_render_form('qs_themes', 'FilterForm') }}
+          </div>
         </div>
       </div>
     </div>

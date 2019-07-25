@@ -288,6 +288,9 @@ class AddForm extends FormBasic {
       '#description' => $this->t('qs_photo.add.form.step1.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_photo.add.form.step1'),
+        'class' => [
+          'pb-5',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',
@@ -342,6 +345,9 @@ class AddForm extends FormBasic {
       '#description' => $this->t('qs_photo.add.form.step2.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_photo.add.form.step2'),
+        'class' => [
+          'pb-5',
+        ],
       ],
       '#theme_wrappers' => [
         'container__center',

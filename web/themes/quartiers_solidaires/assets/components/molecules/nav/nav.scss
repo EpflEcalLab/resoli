@@ -215,7 +215,8 @@
     //height: auto;
 
     @include media-breakpoint-up(md) {
-      height: 65vh;
+      height: 49vh;
+      min-height: 320px;
     }
 
     @include transition(
@@ -224,7 +225,7 @@
     );
 
     &:after {
-      height: 90%;
+      height: 80%;
 
       @include transition(height 0.34s ease-out);
     }

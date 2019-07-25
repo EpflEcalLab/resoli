@@ -256,11 +256,13 @@ class PrivilegeManager {
    *   The limit of members. NULL to get all users.
    * @param array $filters
    *   Conditions to apply on the search.
+   * @param bool $exclude_current_user
+   *   Does the current logged in user should be present in the fetching list.
    *
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50, array $filters = []) {
+  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50, array $filters = [], $exclude_current_user = TRUE) {
     // We have to get paginated users before getting privileges by users
     // because a user could have 1 or many privileges (so it's not paginable).
     // Query user(s) with privilege(s) in the given entity.
@@ -273,7 +275,9 @@ class PrivilegeManager {
     $this->alterQueryHasOneRole($query, $entity);
 
     // Remove current user from the list.
-    $query->condition('privileges.user', $this->currentUser->id(), '<>');
+    if ($exclude_current_user) {
+      $query->condition('privileges.user', $this->currentUser->id(), '<>');
+    }
 
     // Remove empty filters to prevent SQL issue.
     $filters = array_filter($filters, function ($item) {

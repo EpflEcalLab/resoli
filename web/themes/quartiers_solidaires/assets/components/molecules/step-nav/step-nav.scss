@@ -2,6 +2,7 @@
 
 .step-nav {
   position: relative;
+  z-index: 1;
   flex-wrap: nowrap;
   justify-content: space-between;
   counter-reset: step-nav;

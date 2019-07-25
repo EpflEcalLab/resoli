@@ -13,6 +13,8 @@
 {% set classes = [
   'form-multistep',
   element['#validated'] ? 'was-validated',
+  'my-auto',
+  'w-100',
 ] %}
 
 {% if element['#top_links'] %}
@@ -30,6 +32,6 @@
 
 <form{{ attributes.addClass(classes) }}>
   <div class="row">
-    <div class="col tab-content d-flex flex-column justify-content-center">{{ children }}</div>
+    <div class="col tab-content">{{ children }}</div>
   </div>
 </form>

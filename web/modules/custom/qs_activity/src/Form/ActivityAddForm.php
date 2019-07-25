@@ -327,6 +327,7 @@ class ActivityAddForm extends FormBasic {
         'data-step' => $this->t('qs_activity.activities.form.step4'),
         'class' => [
           'text-center',
+          'pb-4',
         ],
       ],
       '#theme_wrappers' => [

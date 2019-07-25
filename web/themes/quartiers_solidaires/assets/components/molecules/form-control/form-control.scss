@@ -58,9 +58,27 @@
 .selectize-input {
   input {
     width: 100% !important;
+    font-size: $font-size-base;
   }
 }
 
 .uppy-Dashboard {
   color: $body-color;
+}
+
+.form-select {
+  &[class*=selectize] {
+    z-index: $zindex-popover;
+  }
+}
+
+.selectize-dropdown {
+  margin-bottom: $spacer;
+  font-size: $font-size-base;
+}
+
+.selectize-dropdown-content {
+  > div {
+    padding: ($dropdown-item-padding-y * 2) $dropdown-item-padding-x;
+  }
 }

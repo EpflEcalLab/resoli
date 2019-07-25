@@ -43,11 +43,9 @@
 }
 
 .modal-content {
-  flex: 1 0 100%;
   position: static;
   height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  flex-grow: 1;
 
   &[class*=bg-] {
     &:before,
@@ -74,17 +72,24 @@
     }
   }
 
-  @each $color, $value in $theme-colors {
-    &.bg-#{$color} {
-      &:before {
-        background-image: linear-gradient(to bottom, $value 20%, rgba($value, 0) 100%);
-      }
-
-      &:after {
-        background-image: linear-gradient(to top, $value 20%, rgba($value, 0) 100%);
-      }
-    }
+  .form {
+    min-height: min-content;
   }
+
+  @include bg-fade();
+}
+
+.modal-scroller {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  > * {
+    min-height: min-content; // Will fix overflow on Safari.
+  }
+}
+
+@include ie11('.modal-scroller > .container') {
+  min-width: 800px !important;
 }
 
 .modal-header {
@@ -102,10 +107,14 @@
     }
   }
 
-  &.sticky-top:after {
-    @extend .modal-content[class*=bg-]:before;
+  &.sticky-top {
+    &:before {
+      @extend .modal-content[class*=bg-]:before;
 
-    top: 100%;
+      height: 100%;
+    }
+
+    @include bg-fade();
   }
 }
 
@@ -120,6 +129,7 @@
   justify-content: center;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   min-height: min-content;
 
   .fullpage-wrapper {
@@ -131,6 +141,16 @@
   flex-shrink: 0;
   border-radius: $border-radius-lg;
 
+  * {
+    pointer-events: none;
+  }
+
+  .btn {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+  }
+
   @include media-breakpoint-down(xs) {
     flex-wrap: wrap;
 
@@ -141,15 +161,24 @@
   }
 
   &.sticky-bottom {
+    z-index: $zindex-sticky;
     border-bottom-right-radius: $border-radius-lg;
     border-bottom-left-radius: $border-radius-lg;
 
-    .container > &,
-    .container-fluid > & {
-      margin-right: ($grid-gutter-width / -2);
-      margin-left: ($grid-gutter-width / -2);
+    &:after {
+      @extend .modal-content[class*=bg-]:after;
+
+      height: 110%;
+      border-radius: 0;
     }
+
+    @include bg-fade();
   }
+}
+
+.tab-content {
+  display: flex;
+  flex-direction: column;
 }
 
 // We sometimes need to have a modal look but it's not really a modal

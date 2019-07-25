@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 1.4.1 (2019-07-25)
+ - fix encoding issues in photos section, close #152
+ - fix some modal issues in themes filter and in event/activity add forms #722
+ - fix IE and Edge issues, fix some other alignment problems #733 #735
+ - fix scroll in modals on iOS? #734
+ - fixes refactoring frontend (#716) 
+ - fix menu spacing, close #714
+ - fix dates of activities by date - close #674
+ - fix #729 - Add photos button has no more outline
+ - fix wrong dates in activities view (#726)
+ - force rendering in GPU to mitigate scrolling issue #721
+ - fix card not showing on first load, close #718
+ - fix unclickable dots of calendar - close #719
+ - fix export of members by community - close #727 #728
+ - fix z-index dropdown selector on modal - close #711
+ - fix button contact-all on subscription waiting approvals - close #717
+
 ## 1.4.0 (2019-06-29)
  - refactoring of Floating buttons
  - refactoring of Cards HTML markup & skeletton

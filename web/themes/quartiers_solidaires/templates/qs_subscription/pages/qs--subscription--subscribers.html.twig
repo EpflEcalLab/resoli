@@ -18,7 +18,7 @@
 {% block modal_content %}
 
   {% if variables.subscriptions %}
-    <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
+    <ul class="card-list mb-auto" id="users-accordion" role="tablist" data-children=".card-list-item">
       {% for subscription in variables.subscriptions %}
         <li class="card card-list-item" id="card-{{ loop.index0 }}">
           {% set user = subscription.user.entity %}
@@ -78,7 +78,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p>{{ 'qs_subscription.subscribers.empty'|t }}</p>
+    <p class="mb-auto">{{ 'qs_subscription.subscribers.empty'|t }}</p>
   {% endif %}
 
   {{ variables.pager }}

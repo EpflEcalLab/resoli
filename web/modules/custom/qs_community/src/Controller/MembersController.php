@@ -165,7 +165,7 @@ class MembersController extends ControllerBase {
   public function export(TermInterface $community) {
     $now = new DrupalDateTime();
 
-    $query = $this->privilegeManager->queryMembersWithPrivileges($community);
+    $query = $this->privilegeManager->queryMembersWithPrivileges($community, NULL, [], FALSE);
     $rows = $query->execute()->fetchAll();
 
     $uids = [];

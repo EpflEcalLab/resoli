@@ -20,7 +20,7 @@
 
   {% if variables.subscriptions %}
     {% import "@quartiers_solidaires/macros.html.twig" as macros %}
-    <ul class="card-list" id="users-accordion" role="tablist" data-children=".card-list-item">
+    <ul class="card-list mb-auto" id="users-accordion" role="tablist" data-children=".card-list-item">
       {% for subscription in variables.subscriptions %}
         <li class="card card-list-item" id="card-{{ loop.index0 }}">
           <a
@@ -82,7 +82,7 @@
       {% endfor %}
     </ul>
   {% else %}
-    <p class="text-center">{{ 'qs_subscription.waiting_approval.empty'|t }}</p>
+    <p class="text-center mb-auto">{{ 'qs_subscription.waiting_approval.empty'|t }}</p>
   {% endif %}
 
     {{ variables.pager }}
@@ -105,7 +105,8 @@
       {
         label: 'qs.contact_all'|t,
         icon: 'mail',
-        url: 'mailto:?bcc=' ~ variables.mailto|join(',')
+        url: 'mailto:?bcc=' ~ variables.mailto|join(','),
+        classes: modal_footer_button_classes,
       },
     ]) %}
   {% endif %}

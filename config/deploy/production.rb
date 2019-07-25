@@ -4,7 +4,7 @@ set :deploy_to, '/home/quartiers-solidaires/www/www.resoli.ch'
 # set a branch for this release
 set :branch, 'master'
 
-before "styleguide:deploy_build", "styleguide:build_local"
+before "styleguide:deploy_build", "styleguide:build_local" unless ENV['CI_NAME']
 
 # Map composer and drush commands
 # NOTE: If stage have different deploy_to

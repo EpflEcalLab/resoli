@@ -101,7 +101,7 @@
     {{ label }}
   {% endif %}
   {% if errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback {% if element['#attributes'].force_feedback %}d-block{% endif %}">
       {{ errors }}
     </div>
   {% endif %}

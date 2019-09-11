@@ -11,6 +11,8 @@ use Drupal\Core\Link;
  * Alter Drupal login form with custom markup and submission.
  */
 function qs_auth_form_user_login_form_alter(&$form, $form_state) {
+  $form['#disable_inline_form_errors'] = TRUE;
+
   $form['#theme_wrappers'] = [
     'form__fullpage',
   ];

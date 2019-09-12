@@ -9,6 +9,6 @@ Feature: Login
     When I fill in "edit-name" with "Batman"
     Then I fill in "edit-pass" with "RobinMyLove"
     And I press "edit-submit"
-    And I should see "1 error has been found: qs_auth.form.login.name" in the ".alert" element
-    And I should see "Unrecognized username or password. Forgot your password?" in the ".invalid-feedback" element
+    And I should see "Unrecognized username or password." in the ".alert" element
+    And I should see "Forgot your password?" in the ".alert" element
     And the response status code should be 200

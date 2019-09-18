@@ -192,7 +192,7 @@ class RegisterForm extends FormBase {
 
     $form['register']['step-3']['mail'] = [
       '#type'     => 'email',
-      '#attributes'  => ['required' => TRUE],
+      '#attributes'  => ['required' => TRUE, 'force_feedback' => TRUE],
       '#title'       => $this->t('qs_auth.register_form.mail'),
       '#placeholder' => $this->t('qs_auth.register_form.mail.placeholder'),
       '#required' => FALSE,

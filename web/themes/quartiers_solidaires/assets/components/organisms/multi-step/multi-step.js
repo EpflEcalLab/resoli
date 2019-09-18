@@ -23,6 +23,37 @@ const multiStep = () => {
       $lead.html(description);
     };
 
+    /**
+     * Handle the click on IFE Summary message for multi-step form.
+     *
+     * This method will show the proper tab when clicking an anchor link hidden
+     * inside a step of any multi-step form.
+     */
+    function handleSummaryMessage() {
+      $('.alert-danger .item-list__comma-list a')
+        .on('click', (e) => {
+          if ($form.length <= 0 || !$form.hasClass('was-validated')) {
+            return;
+          }
+
+          // Prevent default action
+          e.preventDefault();
+
+          const anchor = $(e.currentTarget).attr('href');
+
+          // Check if the link anchor is found inside the form.
+          // are any errors in the form and display the corresponding tab
+          const tabOfAnchor = $form.find(anchor).first().closest('.tab-pane').attr('id');
+
+          if (tabOfAnchor) {
+            $(`a[href="#${tabOfAnchor}"]`).tab('show');
+          } else {
+            // Execute default action.
+            e.currentTarget.click();
+          }
+      });
+    }
+
     function handleMultisteps() {
       $form.each(function () {
         const currentForm = $(this);
@@ -158,6 +189,9 @@ const multiStep = () => {
         handleMultisteps();
       }
     });
+
+    handleSummaryMessage();
+
   }(jQuery, Drupal));
 };
 

@@ -138,3 +138,16 @@
 .pointers-none {
   pointer-events: none;
 }
+
+// Responsive font-size
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .text#{$infix}-size-small      { font-size: $small-font-size; }
+    .text#{$infix}-size-base    { font-size: $font-size-base; }
+    .text#{$infix}-size-sm     { font-size: $font-size-sm; }
+    .text#{$infix}-size-lg        { font-size: $font-size-lg; }
+  }
+}

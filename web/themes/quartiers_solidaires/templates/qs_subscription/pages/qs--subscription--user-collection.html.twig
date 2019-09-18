@@ -44,14 +44,14 @@
             {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
 
             {# Date #}
-            <span class="card-pill-date size-date">
+            <span class="card-pill-date size-date mr-3 mr-md-0">
               <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
                 {{ event.field_start_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
               </time>
             </span>
 
             {# Hours #}
-            <span class="card-pill-date d-none d-sm-inline">
+            <span class="card-pill-date d-none d-md-inline mr-3">
               <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'Y-m-d H:i') }}">
                 {# Special use-case for German, we strip the "Uhr" of the start date #}
                 {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
@@ -71,9 +71,21 @@
           <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel">
             <div class="card-body">
               <div class="card-text text-center">
-                <h4 class="card-title mb-2">{{ event.title.value }}</h4>
-                {# Subscription Textual Badges #}
-                {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
+                <h4 class="h5 card-title mb-1 mt-0">{{ event.title.value }}</h4>
+                <p class="d-md-none mb-3">
+                  <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+                  {# Special use-case for German, we strip the "Uhr" of the start date #}
+                  {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+                  {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
+                </time>
+                –
+                <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+                  {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
+                </time>
+              </p>
+
+              {# Subscription Textual Badges #}
+              {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
               </div>
 
               <div class="card-actions d-flex justify-content-center">

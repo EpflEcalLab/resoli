@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.4.2 (2019-09-18)
+ - fix fade-out of parent cards on ajax-submitted form - close #739
+
 ## 1.4.1 (2019-07-25)
  - fix encoding issues in photos section, close #152
  - fix some modal issues in themes filter and in event/activity add forms #722

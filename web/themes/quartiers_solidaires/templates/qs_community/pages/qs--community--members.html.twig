@@ -19,15 +19,15 @@
   {% if variables.members %}
     <ul class="card-list mb-auto" id="users-accordion" role="tablist" data-children=".card-list-item">
       {% for member in variables.members %}
-        <li class="card card-list-item" id="card-{{ loop.index0 }}">
+        <li class="card card-list-item" id="card{{ member.uid.value }}">
           <a
             data-toggle="collapse"
             data-parent="#users-accordion"
-            href="#collapse-{{ loop.index0 }}"
+            href="#collapse-{{ member.uid.value }}"
             class="card-pill collapsed"
             role="tab"
             aria-expanded="false"
-            aria-controls="collapse-{{ loop.index0 }}"
+            aria-controls="collapse-{{ member.uid.value }}"
           >
             <span class="card-pill-icon">
                 {{ macros.icon('user') }}
@@ -41,7 +41,7 @@
             </span>
           </a>
 
-          <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
+          <div class="collapse" id="collapse-{{ member.uid.value }}" role="tabpanel">
             <div class="card-body pb-0 text-center">
 
               <h4 class="card-title mb-0">{{ member.field_firstname.value }} {{ member.field_lastname.value }}</h4>
@@ -70,7 +70,7 @@
                 }] %}
                 {% set ban = {
                   action: path('qs_acl.privilege.ban'),
-                  parent: 'card-'~member.uid.value,
+                  parent: 'card'~member.uid.value,
                   confirm: 'qs_community.members.community_none_confirm'|t,
                   value: 'qs.roles.community_none'|t,
                 } %}

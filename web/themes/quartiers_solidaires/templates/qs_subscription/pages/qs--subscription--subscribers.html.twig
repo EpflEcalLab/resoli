@@ -20,16 +20,16 @@
   {% if variables.subscriptions %}
     <ul class="card-list mb-auto" id="users-accordion" role="tablist" data-children=".card-list-item">
       {% for subscription in variables.subscriptions %}
-        <li class="card card-list-item" id="card-{{ loop.index0 }}">
-          {% set user = subscription.user.entity %}
+        {% set user = subscription.user.entity %}
+        <li class="card card-list-item" id="card{{ user.uid.value }}">
           <a
             data-toggle="collapse"
             data-parent="#users-accordion"
-            href="#collapse-{{ loop.index0 }}"
+            href="#collapse-{{ user.uid.value }}"
             class="card-pill collapsed"
             role="tab"
             aria-expanded="false"
-            aria-controls="collapse-{{ loop.index0 }}"
+            aria-controls="collapse-{{ user.uid.value }}"
           >
             <span class="card-pill-icon">
                 {{ macros.icon('user') }}
@@ -43,7 +43,7 @@
             </span>
           </a>
 
-          <div class="collapse" id="collapse-{{ loop.index0 }}" role="tabpanel">
+          <div class="collapse" id="collapse-{{ user.uid.value }}" role="tabpanel">
             <div class="card-body pb-0 text-center">
 
               <h4 class="card-title mb-0">{{ user.field_firstname.value }} {{ user.field_lastname.value }}</h4>
@@ -51,7 +51,7 @@
 
               <div class="card-actions row">
                 <div class="col-sm-6 offset-sm-3 mb-3">
-                  <form action="{{ path('qs_subscription.decline', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card-{{ loop.index0 }}" method="post" id="qs-subscription-decline-{{ subscription.id.value }}">
+                  <form action="{{ path('qs_subscription.decline', {subscription: subscription.id.value}) }}" data-ajax="true" data-behavior="fadeout-parent" data-parent="card{{ user.uid.value }}" method="post" id="qs-subscription-decline-{{ subscription.id.value }}">
                     <button class="btn btn-outline-danger btn-icon btn-white shadow-to-left btn-block" data-confirm="{{ 'qs_subscription.subscribers.reject_confirm'|t }}" type="submit" value="{{ 'qs.reject'|t }}">
                       {{ macros.icon('trash') }}
                       {{ 'qs_subscription.subscribers.reject'|t }}

@@ -20,16 +20,18 @@
     {% for key, event in variables.events %}
       <li class="card card-list-item" id="card{{ event.nid.value }}">
         {% embed "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+          {% block card_pill_date %}{% endblock %}
+
           {% block card_pill_time %}
-            <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
-              {# Special use-case for German, we strip the "Uhr" of the start date #}
-              {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
-              {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
-            </time>
-            –
-            <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
-              {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
-            </time>
+          <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+            {# Special use-case for German, we strip the "Uhr" of the start date #}
+            {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+            {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
+          </time>
+          –
+          <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+            {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
+          </time>
           {% endblock %}
         {% endembed %}
 

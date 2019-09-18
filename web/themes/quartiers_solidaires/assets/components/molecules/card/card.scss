@@ -189,6 +189,7 @@ a[href].card-pill-simple {
   }
 }
 
+.size-time,
 .size-date {
   display: inline-block;
   width: auto;
@@ -204,6 +205,12 @@ a[href].card-pill-simple {
 
   time {
     white-space: nowrap;
+  }
+}
+
+.size-time {
+  @include media-breakpoint-up(md) {
+    width: 8em;
   }
 }
 

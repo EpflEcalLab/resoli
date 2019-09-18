@@ -6,9 +6,21 @@
 
 <div class="card-body pb-0 text-center">
 
-  <h4 class="card-title">{{ event.label }}</h4>
+  <h4 class="h5 card-title mb-1 mt-0">{{ event.label }}</h4>
 
-  <div class="card-text">
+  <p class="d-md-none text-primary mb-0">
+    <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+      {# Special use-case for German, we strip the "Uhr" of the start date #}
+      {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+      {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
+    </time>
+    –
+    <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+      {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
+    </time>
+  </p>
+
+  <div class="card-text mt-3">
     {# Body #}
     {# User should have some privileges OR activity should allow community to access details #}
     {% if has_activity_privilege or community_can_view_detail %}

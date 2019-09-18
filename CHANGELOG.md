@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.4.2 (2019-09-11)
+## 1.4.2 (2019-09-18)
  - fix fade-out of parent cards on ajax-submitted form - close #739
 
 ## 1.4.1 (2019-07-25)

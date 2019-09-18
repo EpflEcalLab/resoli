@@ -45,7 +45,7 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['title'] = [
-      '#attributes'    => ['required' => TRUE],
+      '#attributes'    => ['required' => TRUE, 'force_feedback' => TRUE],
       '#title'         => $this->t('qs_activity.events.form.edit.title'),
       '#placeholder'   => $this->t('qs_activity.events.form.edit.title.placeholder'),
       '#type'          => 'textfield',

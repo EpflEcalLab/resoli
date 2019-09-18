@@ -27,7 +27,7 @@
 {%
   set classes = [
     'radios-wrapper',
-    errors ? 'is-invalid',
+    element['#errors'] ? 'is-invalid',
   ]
 %}
 <div{{ attributes.addClass(classes) }}>{{ children }}</div>

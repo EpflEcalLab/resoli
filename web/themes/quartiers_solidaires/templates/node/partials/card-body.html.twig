@@ -8,6 +8,7 @@
 
   <h4 class="h5 card-title mb-1 mt-0">{{ event.label }}</h4>
 
+  {# Event hours display on mobile only #}
   <p class="d-md-none text-primary mb-0">
     <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
       {# Special use-case for German, we strip the "Uhr" of the start date #}

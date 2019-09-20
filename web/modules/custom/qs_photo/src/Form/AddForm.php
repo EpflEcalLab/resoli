@@ -271,6 +271,7 @@ class AddForm extends FormBasic {
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
     $form['#attributes']['theme'] = 'secondary';
+    $form['#disable_inline_form_errors'] = TRUE;
     $form['#floating_buttons'][] = [
       'icon'   => 'plus',
       'label'  => $this->t('qs_photo.form.add.title'),
@@ -497,23 +498,23 @@ class AddForm extends FormBasic {
       $activity = $event->field_activity->entity;
     }
     else {
-      $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.upload.illegal_choice'));
+      $form_state->setErrorByName('activity', $this->t('qs.form.upload.illegal_choice'));
     }
 
     // Assert activity is filled.
     if (!$form_state->getValue('activity')) {
-      $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-1']['activity']['#title']]));
+      $form_state->setErrorByName('activity', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-1']['activity']['#title']]));
     }
 
     // Assert event is filled.
     if (!$form_state->getValue('event')) {
-      $form_state->setErrorByName('[step-2][event]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-2']['event']['#title']]));
+      $form_state->setErrorByName('event', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-2']['event']['#title']]));
     }
 
     // Check write access of activity.
     if ($activity && $event
       && !$this->acl->hasWriteAccessPhoto($activity)) {
-      $form_state->setErrorByName('[step-1][activity]', $this->t('qs.form.upload.illegal_choice'));
+      $form_state->setErrorByName('activity', $this->t('qs.form.upload.illegal_choice'));
     }
   }
 

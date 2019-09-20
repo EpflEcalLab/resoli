@@ -5,7 +5,6 @@ namespace Drupal\qs_photo\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_site\Form\InlineErrorFormTrait;
 use Mimey\MimeTypes;
 
 /**
@@ -14,8 +13,11 @@ use Mimey\MimeTypes;
  * @internal
  */
 abstract class FormBasic extends FormBase {
-  use InlineErrorFormTrait;
-
+  /**
+   * Holds the container instance.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface
+   */
   protected $container;
 
   /**

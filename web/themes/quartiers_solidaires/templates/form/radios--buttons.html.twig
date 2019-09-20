@@ -26,7 +26,7 @@
   set classes = [
     'radios-wrapper',
     attributes.variant == 'button' or element['#attributes'].variant == 'button_theme' ? 'btn-grid',
-    element['#error'] ? 'is-invalid'
+    element['#errors'] ? 'is-invalid'
   ]
 %}
 <div{{ attributes.addClass(classes).addClass('mb-5').setAttribute('data-toggle', 'buttons') }}>{{ children }}</div>

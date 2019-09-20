@@ -13,6 +13,8 @@
  */
 function qs_auth_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'user_pass' || $form_id == 'user_pass_reset') {
+    $form['#disable_inline_form_errors'] = TRUE;
+
     $form['#theme_wrappers'] = [
       'form__fullpage',
     ];

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.4.3 (2019-09-25)
+ - improve responsivness especially smartphones visual design - close #741
+
 ## 1.4.2 (2019-09-18)
  - fix fade-out of parent cards on ajax-submitted form - close #739
 

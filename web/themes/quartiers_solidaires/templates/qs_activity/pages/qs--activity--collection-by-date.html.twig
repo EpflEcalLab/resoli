@@ -83,8 +83,28 @@
             <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#{{ accordion_id }}">
               <div class="card-body">
                 <div class="card-text text-center">
-                  <p class="d-sm-none text-primary">{{ event.field_activity.entity.title.value }}</p>
                   <h4 class="h5 card-title mb-1 mt-0">{{ event.title.value }}</h4>
+
+                  {# Event date display on mobile only #}
+                  <div class="d-sm-none">
+                    <time datetime="{{ event.field_start_at.date|date('Y-m-d') }}">
+                      {{ event.field_start_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
+                    </time>
+                  </div>
+
+                  {# Event hours display on mobile only #}
+                  <div class="d-sm-none mb-0">
+                    <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+                      {# Special use-case for German, we strip the "Uhr" of the start date #}
+                      {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+                      {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
+                    </time>
+                    –
+                    <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+                      {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
+                    </time>
+                  </div>
+
                   {# Subscription Textual Badges #}
                   {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
                 </div>

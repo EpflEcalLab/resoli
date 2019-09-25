@@ -20,7 +20,13 @@
     {% for key, event in variables.events %}
       <li class="card card-list-item" id="card{{ event.nid.value }}">
         {% embed "@quartiers_solidaires/node/partials/card-pill-simple.html.twig" %}
+          {% block card_pill_date %}
+            {# Remove the date for this pill #}
+          {% endblock %}
+
           {% block card_pill_time %}
+          {# Event hours display on small device and upper #}
+          <span class="size-time text-dark d-none d-sm-inline">
             <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
               {# Special use-case for German, we strip the "Uhr" of the start date #}
               {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
@@ -30,13 +36,28 @@
             <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
               {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
             </time>
+          </span>
           {% endblock %}
         {% endembed %}
 
         <div class="collapse" id="collapse-{{ event.nid.value }}" role="tabpanel" data-parent="#events-accordion">
           <div class="card-body">
             <div class="card-text text-center">
-              <h4 class="card-title mb-2">{{ event.title.value }}</h4>
+              <h4 class="h5 card-title mb-1 mt-0">{{ event.title.value }}</h4>
+
+              {# Event hours display on mobile only #}
+              <div class="d-sm-none mb-0">
+                <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+                  {# Special use-case for German, we strip the "Uhr" of the start date #}
+                  {% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+                  {{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
+                </time>
+                –
+                <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+                  {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
+                </time>
+              </div>
+
               {# Subscription Textual Badges #}
               {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription-textual.html.twig' with {'event': event, 'badges': variables.badges} %}
             </div>

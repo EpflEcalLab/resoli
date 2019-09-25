@@ -14,7 +14,7 @@
     {{ macros.icon('theme_' ~ event.field_activity.entity.field_theme.entity.field_icon.value) }}
   </span>
 
-  <span class="card-pill-title d-none d-sm-inline">
+  <span class="card-pill-title">
     <span class="lead">
       {{ event.field_activity.entity.title.value }}
     </span>
@@ -25,13 +25,29 @@
     {% include '@quartiers_solidaires/qs_badge/partials/qs--badge--subscription.html.twig' with {'event': event, 'badges': variables.badges} %}
   {% endblock %}
 
-  <span class="size-date text-dark">
-    {% block card_pill_time %}
+  {% block card_pill_date %}
+  {# Event date display on small device and upper #}
+  <span class="size-date d-none d-sm-inline text-dark mr-3 mr-md-0">
     <time datetime="{{ event.field_start_at.date|date('Y-m-d') }}">
       {{ event.field_start_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
     </time>
-    {% endblock %}
   </span>
+  {% endblock %}
+
+  {% block card_pill_time %}
+  {# Event hours display on small device and upper #}
+  <span class="size-time d-none d-sm-inline text-dark">
+    <time datetime="{{ event.field_start_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+      {# Special use-case for German, we strip the "Uhr" of the start date #}
+{% set start_date = event.field_start_at.date|bamboo_i18n_format_date('default_short_hours_minutes') %}
+{{ bamboo_i18n_current_lang() == 'de' ? start_date|replace({'Uhr': ''}) : start_date }}
+    </time>
+    –
+    <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'H\\hi') }}">
+      {{ event.field_end_at.date|bamboo_i18n_format_date('default_short_hours_minutes') }}
+    </time>
+  </span>
+  {% endblock %}
 
   <span
     class="btn btn-outline-secondary btn-circle shadow-to-left btn-white ml-1"

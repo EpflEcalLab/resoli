@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## NEXT RELEASE
+ - remove InlineErrorFormTrait to use Core Inline Form Error - close #702
+
 ## 1.4.3 (2019-09-25)
  - improve responsivness especially smartphones visual design - close #741
 

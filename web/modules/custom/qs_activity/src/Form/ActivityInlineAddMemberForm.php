@@ -148,11 +148,11 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the member is valid.
     if (!$form_state->getValue('member') || empty($form_state->getValue('member'))) {
-      $form_state->setErrorByName('member', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['member']['#title']]));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['member']['#title']]));
     }
 
     if (!isset($this->fallback[$form_state->getValue('member')])) {
-      $form_state->setErrorByName('member', $this->t('qs.form.error.something_went_wrong'));
+      $form_state->setErrorByName('form', $this->t('qs.form.error.something_went_wrong'));
     }
   }
 

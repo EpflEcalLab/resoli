@@ -77,7 +77,7 @@ module Slackistrano
     # Override the deployer helper to pull the full name from the password file.
     # See https://github.com/phallstrom/slackistrano/blob/master/lib/slackistrano/messaging/helpers.rb
     def deployer
-      Etc.getpwnam(ENV['USER']).gecos
+      ENV['CI_COMMITTER_NAME'] || ENV['USER']
     end
   end
 end

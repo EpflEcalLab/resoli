@@ -10,15 +10,12 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_auth\Service\Account;
-use Drupal\qs_site\Form\InlineErrorFormTrait;
 use Drupal\user\UserInterface;
 
 /**
  * AccountEditForm Class.
  */
 class AccountEditForm extends FormBase {
-  use InlineErrorFormTrait;
-
   /**
    * Access Control Service.
    *
@@ -195,38 +192,35 @@ class AccountEditForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the firstname is valid.
     if (!$form_state->getValue('firstname') || empty($form_state->getValue('firstname'))) {
-      $form_state->setErrorByName('[personnal][firstname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['firstname']['#title']]));
+      $form_state->setErrorByName('firstname', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['firstname']['#title']]));
     }
 
     // Assert the lastname is valid.
     if (!$form_state->getValue('lastname') || empty($form_state->getValue('lastname'))) {
-      $form_state->setErrorByName('[personnal][lastname]', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['lastname']['#title']]));
+      $form_state->setErrorByName('lastname', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['personnal']['lastname']['#title']]));
     }
 
     // Assert the mail is valid.
     if (!$form_state->getValue('mail') || !filter_var($form_state->getValue('mail'), FILTER_VALIDATE_EMAIL)) {
-      $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.malformed'));
+      $form_state->setErrorByName('mail', $this->t('qs.form.error.mail.malformed'));
     }
 
     // Check email is unique as mail.
     $accounts = $this->userStorage->loadByProperties(['mail' => $form_state->getValue('mail')]);
     if ($accounts && !isset($accounts[$form_state->get('user')])) {
-      $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
+      $form_state->setErrorByName('mail', $this->t('qs.form.error.mail.used'));
     }
 
     // Check email is unique as username.
     $accounts = $this->userStorage->loadByProperties(['name' => $form_state->getValue('mail')]);
     if ($accounts && !isset($accounts[$form_state->get('user')])) {
-      $form_state->setErrorByName('[credentials][mail]', $this->t('qs.form.error.mail.used'));
+      $form_state->setErrorByName('mail', $this->t('qs.form.error.mail.used'));
     }
 
     // Check username is Drupal compliant.
     if ($violation = user_validate_name($form_state->getValue('mail'))) {
-      $form_state->setErrorByName('[credentials][mail]', $violation);
+      $form_state->setErrorByName('mail', $violation);
     }
-
-    // Add inline errors.
-    $this->applyErrorsInline($form, $form_state);
   }
 
   /**

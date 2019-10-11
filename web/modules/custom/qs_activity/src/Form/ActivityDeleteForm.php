@@ -113,9 +113,6 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     if (!empty($events)) {
       $form_state->setError($form, $this->t("qs_activity.activities.form.delete.error.has_events @activity", ['@activity' => $activity->toLink($activity->getTitle())->toString()]));
     }
-
-    // Add inline errors.
-    $this->applyErrorsInline($form, $form_state);
   }
 
   /**

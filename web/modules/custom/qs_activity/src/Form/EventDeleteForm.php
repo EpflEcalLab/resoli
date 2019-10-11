@@ -115,9 +115,7 @@ class EventDeleteForm extends EventEditFormBase {
       $form_state->setError($form, $this->t("qs_activity.events.form.delete.error.is_past @event", ['@event' => $event->toLink($event->getTitle())->toString()]));
     }
 
-    // TODO Assert the event has no subscriber(s).
-    // Add inline errors.
-    $this->applyErrorsInline($form, $form_state);
+    // @todo Assert the event has no subscriber(s).
   }
 
   /**

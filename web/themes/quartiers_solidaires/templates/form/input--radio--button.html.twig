@@ -28,7 +28,7 @@
     labelIcon|length > 1 ? 'btn-icon',
     attributes.checked ? 'active',
     not attributes.no_block ? 'btn-block',
-    element['#error'] ? 'is-invalid'
+    element['#errors'] ? 'is-invalid'
   ] %}
   <label class="{{ classes|join(' ') }}" tabindex="0">
     {% if labelIcon|length > 1 %}

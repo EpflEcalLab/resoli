@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## TODO NEXT RELEASE
+ - Update to php 7.2
+ - Rebuild shitty New Relic see doc: 
+
+## NEXT RELEASE
+ - update to Drupal 8.7.10
+
 ## 1.4.4 (2019-10-11)
  - remove InlineErrorFormTrait to use Core Inline Form Error - close #702
 

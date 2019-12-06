@@ -1,4 +1,4 @@
-FROM antistatique/php-dev:7.1
+FROM antistatique/php-dev:7.2
 
 WORKDIR /var/www
 
@@ -16,6 +16,9 @@ RUN set -eux; \
 COPY . ./
 
 RUN set -eux; \
-  \
-  composer install --prefer-dist --no-progress --no-suggest --no-interaction; \
-  composer clear-cache;
+\
+jq 'del(.. |."patches_applied"? | select(. != null))' ./vendor/composer/installed.json > ./vendor/composer/installed.json.new; \
+mv ./vendor/composer/installed.json.new ./vendor/composer/installed.json; \
+\
+composer install --prefer-dist --no-progress --no-suggest --no-interaction; \
+composer clear-cache;

@@ -30,7 +30,6 @@ services:
       # Behat
       - ./behat:/var/www/behat:cached
       - ./behat.yml:/var/www/behat.yml:cached
-      - backups:/var/backups
 
   # Drupal test server
   test:

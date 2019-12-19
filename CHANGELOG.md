@@ -5,7 +5,7 @@
  - Rebuild shitty New Relic see doc: 
 
 ## NEXT RELEASE
- - update to Drupal 8.7.10
+ - update to Drupal 8.7.11
 
 ## 1.4.4 (2019-10-11)
  - remove InlineErrorFormTrait to use Core Inline Form Error - close #702

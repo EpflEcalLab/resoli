@@ -176,7 +176,7 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
    * Seed some events into the given community for testing.
    *
    * @param \Drupal\node\NodeInterface $activity
-   *   The communitiy to seed activities into.
+   *   The community to seed activities into.
    * @param \Drupal\Core\Datetime\DrupalDateTime $min_date_start
    *   The minimum start date for generated events.
    * @param \Drupal\Core\Datetime\DrupalDateTime $max_date_end
@@ -186,6 +186,10 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
    *
    * @return \Drupal\node\NodeInterface[]
    *   A collection of events keyed by entity ID.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   protected function seedEvents(NodeInterface $activity, DrupalDateTime $min_date_start, DrupalDateTime $max_date_end, $number) {
     $events = [];

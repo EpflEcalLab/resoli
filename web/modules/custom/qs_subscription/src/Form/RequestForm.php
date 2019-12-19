@@ -4,7 +4,6 @@ namespace Drupal\qs_subscription\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\PrependCommand;
@@ -28,6 +27,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * https://drupal.stackexchange.com/a/223273/63886
  */
 class RequestForm extends FormBase {
+
+  /**
+   * The form Dynamic Unique ID.
+   *
+   * @var string
+   */
   protected $uniqueId;
 
   /**
@@ -118,7 +123,7 @@ class RequestForm extends FormBase {
     $privileges = !empty($privileges_by_events) ? reset($privileges_by_events) : $privileges_by_events;
 
     // According the current user roles to the event,
-    // If he's activity_organizers+ subscribe him whitout requesting.
+    // If it's activity_organizers+ subscribe it without requesting.
     if (in_array('activity_organizers', $privileges) || in_array('activity_maintainers', $privileges)) {
       $name = 'direct_subscription_' . $event->id();
     }

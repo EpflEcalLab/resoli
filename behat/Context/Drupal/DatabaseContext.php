@@ -11,6 +11,11 @@ use Drupal\Component\Utility\Random;
  */
 class DatabaseContext extends RawDrupalContext implements SnippetAcceptingContext {
 
+  /**
+   * The database dump.
+   *
+   * @var string|null
+   */
   protected static $dump = NULL;
 
   /**

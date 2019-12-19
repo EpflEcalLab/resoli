@@ -327,7 +327,7 @@ class PhotoManager {
       return $this->getByActivity($activity);
     }
 
-    // If the user has only member access, list only his photos.
+    // If the user has only member access, list only its photos.
     $query = $this->privilegeStorage->getAggregateQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
@@ -388,10 +388,12 @@ class PhotoManager {
    * @param \Drupal\node\NodeInterface $event
    *   The event.
    * @param mixed $file
-   *   Uploaded $file.
+   *   Uploaded file.
    *
    * @return \Drupal\node\NodeInterface
    *   The created photo.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function create(NodeInterface $event, $file) {
     $photo = $this->nodeStorage->create([
@@ -403,6 +405,7 @@ class PhotoManager {
       'uid'         => $this->currentUser->id(),
     ]);
     $photo->save();
+
     return $photo;
   }
 

@@ -145,7 +145,7 @@ class Account {
   }
 
   /**
-   * Send mail to new account mail to confirm his identity.
+   * Send mail to new account mail to confirm itsMembersControll identity.
    *
    * @param \Drupal\user\UserInterface $user
    *   The user to send register mail.

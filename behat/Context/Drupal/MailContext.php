@@ -132,7 +132,7 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
    * @Then I should see link with href :href in mail
    *
    * @throws Exception
-   * @throws ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function seeLinkInMail($href) {
     $message = $this->getCurrentMessage();

@@ -72,7 +72,7 @@ class AccountController extends ControllerBase {
   /**
    * Communities page.
    *
-   * This page is shown when the user has more than 1 community where he's a
+   * This page is shown when the user has more than 1 community where it's a
    * certified member.
    *
    * @TODO: Code the page with link of community, appliance link,

@@ -16,7 +16,7 @@ class ElementContext extends RawDrupalContext implements SnippetAcceptingContext
    *
    * @Given I should see :label link with href :href
    *
-   * @throws ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iShouldSeeLinkWithHref($label, $href) {
     $link = $this->getSession()->getPage()->findLink($label);
@@ -35,12 +35,12 @@ class ElementContext extends RawDrupalContext implements SnippetAcceptingContext
    *
    * @Given I should not see :label link
    *
-   * @throws ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iShouldNotSeeLinkWithHref($label) {
     $link = $this->getSession()->getPage()->findLink($label);
     if (NULL !== $link) {
-      throw new Exception(t('Link "@label" was found.', ['@label' => $label]));
+      throw new Exception('Link "' . $label . '" was found.');
     }
   }
 
@@ -49,7 +49,7 @@ class ElementContext extends RawDrupalContext implements SnippetAcceptingContext
    *
    * @Given /^the page title should be "([^"]*)"$/
    *
-   * @throws ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function thePageTitleShouldBe($expectedTitle) {
     $title = $this->getSession()->getPage()->find('css', '.page-title')->getText();
@@ -64,7 +64,7 @@ class ElementContext extends RawDrupalContext implements SnippetAcceptingContext
    *
    * @Then I follow the link :element element
    *
-   * @throws ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iClickTheLinkElement($selector) {
     $element = $this->getSession()->getPage()->find('css', $selector);
@@ -80,7 +80,7 @@ class ElementContext extends RawDrupalContext implements SnippetAcceptingContext
    *
    * @Then I should see a disabled :item
    *
-   * @throws ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function assertIsDisabled($selector) {
     $element = $this->getSession()->getPage()->find('css', $selector);

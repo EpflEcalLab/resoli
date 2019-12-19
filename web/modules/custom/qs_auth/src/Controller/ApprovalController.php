@@ -34,9 +34,9 @@ class ApprovalController extends ControllerBase {
   /**
    * Approval page.
    *
-   * This page is shown when the user access to a community which he previously
-   * applied but which he's not a certified member.
-   * He must be reviewed by a Manager of this community.
+   * This page is shown when the user access to a community which it previously
+   * applied but which it's not a certified member.
+   * It must be reviewed by a Manager of this community.
    */
   public function approval(TermInterface $community) {
     $variables['community'] = $community;

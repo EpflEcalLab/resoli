@@ -6,6 +6,7 @@
 
 ## NEXT RELEASE
  - update to Drupal 8.7.11
+ - fix dual step bug when multiple forms - close #748
 
 ## 1.4.4 (2019-10-11)
  - remove InlineErrorFormTrait to use Core Inline Form Error - close #702

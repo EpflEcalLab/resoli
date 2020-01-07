@@ -35,7 +35,7 @@
         var defer = $.Deferred();
         var text = $el.text();
         var $icon = $el.find('.icon').clone();
-        var confirmText = $el.data('confirm'); // Send request if we are in pending state
+        var confirmText = $el.attr('data-confirm'); // Send request if we are in pending state
 
         if ($el.data('pending')) {
           window.clearTimeout(timer);
@@ -84,7 +84,7 @@
        */
       function subscriptionConfirm(context, settings) {
         if (typeof settings.subscriptionConfirm !== 'undefined') {
-          $(context).find(".".concat(settings.subscriptionConfirm)).once('ajax-confirm').each(function () {
+          $(context).find('[data-confirm]').each(function () {
             var ajax = findAjaxInstance(this);
             var $this = $(this);
 

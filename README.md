@@ -36,7 +36,7 @@ On common errors, see the Troubleshootings section.
 
 ### Project setup
 
-````bash
+```bash
 cp docker-compose.override-example.yml docker-compose.override.yml
 ```
 

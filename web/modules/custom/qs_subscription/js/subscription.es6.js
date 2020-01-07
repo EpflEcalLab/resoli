@@ -32,7 +32,7 @@
         const defer = $.Deferred();
         const text = $el.text();
         const $icon = $el.find('.icon').clone();
-        const confirmText = $el.data('confirm');
+        const confirmText = $el.attr('data-confirm');
 
         // Send request if we are in pending state
         if ($el.data('pending')) {
@@ -93,7 +93,7 @@
        */
       function subscriptionConfirm(context, settings) {
         if (typeof settings.subscriptionConfirm !== 'undefined') {
-          $(context).find(`.${settings.subscriptionConfirm}`).once('ajax-confirm').each(function () {
+          $(context).find('[data-confirm]').each(function () {
             const ajax = findAjaxInstance(this);
             const $this = $(this);
             if (ajax) {

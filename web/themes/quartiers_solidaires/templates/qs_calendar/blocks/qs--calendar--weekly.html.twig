@@ -8,9 +8,14 @@
 <div class="container">
   <div class="row mt-3">
 
+    {# End of Year Weeknumber may break the previous button. #}
+    {# Example, the Monday 30.12.2019 is the Weeknumber 01 of 2020 and not Weeknumber 53 of 2019. #}
+    {# See https://unix.stackexchange.com/questions/482032/date-command-gives-wrong-week-number-for-dec-31 #}
+    {% set edge_case_prev = prev|date('Y') == 'now'|date('Y') and prev|date('W') == '1' and 'now'|date('W') >= '52' %}
+
     {# Previous button #}
     <div class="col text-right">
-      {% if prev|date(compare) >= 'now'|date(compare) %}
+      {% if prev|date(compare) >= 'now'|date(compare) or edge_case_prev %}
         {% set parameters = prev|date(compare) == 'now'|date(compare) ? {} : {'day': prev|date('Y-m-d')} %}
         {% set attributes = create_attribute({
           'id': base_id ~ '-prev',

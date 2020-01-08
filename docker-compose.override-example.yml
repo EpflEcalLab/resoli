@@ -17,3 +17,8 @@ services:
   db:
     ports:
       - "3306:3306"
+
+  # Email
+  mail:
+    ports:
+      - "1080:1080"

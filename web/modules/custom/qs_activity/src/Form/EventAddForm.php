@@ -444,8 +444,8 @@ class EventAddForm extends FormBasic {
     $privileges = reset($privileges_by_events);
 
     // According the current user roles to the event,
-    // If he's activity_maintainers and not activity_organizers, then
-    // subscribe him to this new event.
+    // If it's activity_maintainers and not activity_organizers, then
+    // subscribe it to this new event.
     if ($privileges && in_array('activity_maintainers', $privileges) && !in_array('activity_organizers', $privileges)) {
       // By default, subscribe every activity_maintainers (co-organizers) to
       // there events.

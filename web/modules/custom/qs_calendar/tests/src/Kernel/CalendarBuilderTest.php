@@ -3,7 +3,6 @@
 namespace Drupal\Tests\qs_calendar\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\qs_calendar\Service\CalendarBuilder;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**

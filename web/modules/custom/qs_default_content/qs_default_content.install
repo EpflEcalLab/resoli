@@ -5,7 +5,7 @@
  * Contains qs_default_content.install.
  */
 
- // Includes.
+// Includes.
 require_once 'inc/default_privileges.inc';
 require_once 'inc/default_events.inc';
 require_once 'inc/default_subscriptions.inc';

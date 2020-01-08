@@ -5,5 +5,4 @@ dependencies: {  }
 name: Communities
 vid: communities
 description: 'Communities member will belongs to.'
-hierarchy: 0
 weight: 0

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## NEXT RELEASE
+ - fix end-of-year previous button - close #747
+
 ## 1.5.0 (2020-01-08)
  - update to Drupal 8.7.11
  - fix dual step bug when multiple forms - close #748

@@ -25,6 +25,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Tabs
+      region: content
     group_general:
       children:
         - title
@@ -41,6 +42,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: General
+      region: content
 id: node.photo.default
 targetEntityType: node
 bundle: photo

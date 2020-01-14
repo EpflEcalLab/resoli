@@ -1,7 +1,11 @@
 # CHANGELOG
 
+## TODO NEXT RELEASE
+ - change settings.php on production to use new "$config_directories['sync'] = '../config/d8/sync';" key
+
 ## NEXT RELEASE
  - fix end-of-year previous button - close #747
+ - update to Drupal 8.8 
 
 ## 1.5.0 (2020-01-08)
  - update to Drupal 8.7.11

@@ -7,7 +7,6 @@ set :repo_url, 'git@github.com:antistatique/quartiers-solidaires.git'
 server 'ssh-quartiers-solidaires.alwaysdata.net', user: 'quartiers-solidaires', roles: %w{app db web}
 
 set :app_path, "web"
-set :config_path, "config/d8/sync"
 set :theme_path, "themes/quartiers_solidaires"
 set :build_path, "build"
 
@@ -74,8 +73,6 @@ namespace :deploy do
   # Sometimes (due to Webform) we have to run the drush cim twice.
   after :updated, "drupal:config:import"
   after :updated, "drupal:updatedb"
-  # Uncomment only on version of Drupal below 8.7.x
-  # after :updated, "drupal:entup"
   after :updated, "drupal:cache:clear"
 
   after :updated, "drupal:maintenance:off"

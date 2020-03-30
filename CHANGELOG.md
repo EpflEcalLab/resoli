@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## TODO NEXT RELEASE
- - change settings.php on production to use new "$config_directories['sync'] = '../config/d8/sync';" key
+ - change settings.php on production to use new "$settings['config_sync_directory'] = '../config/d8/sync';" key
 
 ## NEXT RELEASE
  - fix end-of-year previous button - close #747

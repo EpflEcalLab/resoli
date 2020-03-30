@@ -7,6 +7,7 @@ set :repo_url, 'git@github.com:antistatique/quartiers-solidaires.git'
 server 'ssh-quartiers-solidaires.alwaysdata.net', user: 'quartiers-solidaires', roles: %w{app db web}
 
 set :app_path, "web"
+set :config_path, "config/d8/sync"
 set :theme_path, "themes/quartiers_solidaires"
 set :build_path, "build"
 
@@ -34,6 +35,13 @@ set :log_level, :debug
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
+# Default value for keep_backups is 5
+set :keep_backups, 3
+
+set :ssh_options, {
+  forward_agent: true
+}
+
 set :slackistrano, {
   klass: Slackistrano::CustomMessaging,
   channel: '#dev-notifications',
@@ -48,15 +56,32 @@ set :slackistrano, {
 # Rake::Task['deploy:updated'];
 
 namespace :deploy do
+  after "deploy:check:directories", "drupal:db:backup:check"
+  before :starting, "drupal:db:backup"
+  before :failed, "drupal:db:rollback"
+  before :cleanup, "drupal:db:backup:cleanup"
+
   after :updated, "styleguide:deploy_build"
 
+  after :updated, "drupal:maintenance:on"
   # Must updatedb before import configurations, E.g. when composer install new
   # version of Drupal and need updatedb scheme before importing new config.
-  after :updated, "drupal:updatedb"
+  # This is executed without raise on error, because sometimes we need to do drush config-import before updatedb.
+  after :updated, "drupal:updatedb:silence"
+  # Remove the cache after the database update
+  after :updated, "drupal:cache:clear"
+  after :updated, "drupal:config:import"
+  # Sometimes (due to Webform) we have to run the drush cim twice.
   after :updated, "drupal:config:import"
   after :updated, "drupal:updatedb"
+  # Uncomment only on version of Drupal below 8.7.x
+  # after :updated, "drupal:entup"
   after :updated, "drupal:cache:clear"
-  after :updated, "drupal:set_permissions"
+
+  after :updated, "drupal:maintenance:off"
+
+  after :updated, "drupal:permissions:recommended"
+  after :updated, "drupal:permissions:writable_shared"
 
   before :cleanup, :fix_permission do
     on roles(:app) do
@@ -70,6 +95,34 @@ namespace :deploy do
           execute :chmod, '-R' ,'ug+w', directories_str
         end
       end
+    end
+  end
+
+  task :bootstrap do
+    on roles(:app) do
+      is_symbolic_link = File.symlink?("#{current_path}")
+      if !is_symbolic_link
+        info "Recursively delete the current directory #{current_path} to prevent fail on symlink creation."
+        execute :rm, "-rf", "#{current_path}"
+      end
+    end
+
+    Rake::Task['drupal:db:backup'].clear
+    Rake::Task['drupal:db:rollback'].clear
+    Rake::Task['drupal:maintenance:on'].enhance [Rake::Task['drupal:bootstrap']]
+    invoke 'deploy'
+  end
+end
+
+after 'drupal:bootstrap', :fix_drupal_install do
+  on roles(:app) do
+    within release_path.join(fetch(:app_path)) do
+      execute :drush, %(ev '\Drupal::entityManager()->getStorage("shortcut_set")->load("default")->delete();')
+      execute :drush, %(ev '
+        $user = user_load_by_name("#{fetch(:drupal_admin_username)}");
+        $user->set("preferred_admin_langcode", "en");
+        $user->save();
+      ')
     end
   end
 end

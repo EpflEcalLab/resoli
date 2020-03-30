@@ -5,7 +5,7 @@
 
 ## NEXT RELEASE
  - fix end-of-year previous button - close #747
- - update to Drupal 8.8 - #753
+ - update Drupal from 8.7.x to 8.8 - #753
  - update modules - #750
 
 ## 1.5.0 (2020-01-08)

@@ -1,11 +1,11 @@
-FROM antistatique/php-dev:7.2-node9
+FROM antistatique/php-dev:7.3-node9
 
 WORKDIR /var/www
 
 ADD ./composer.json ./composer.lock ./
 RUN set -eux; \
   \
-  composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest --no-interaction; \
+  composer install --prefer-dist --no-scripts --no-progress --no-suggest --no-interaction; \
   composer clear-cache
 
 ADD ./package.json ./yarn.lock ./

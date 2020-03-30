@@ -2,13 +2,14 @@
 
 ## NEXT RELEASE
  - fix end-of-year previous button - close #747
+ - update modules - #750
 
-## 1.5.0 (2020-01-08)
+## 1.5.0 (2020-01-08)
  - update to Drupal 8.7.11
  - fix dual step bug when multiple forms - close #748
  - rebuild New Relic for PHP 7.2 on Alwaysdata
 
-## 1.4.4 (2019-10-11)
+## 1.4.4 (2019-10-11)
  - remove InlineErrorFormTrait to use Core Inline Form Error - close #702
 
 ## 1.4.3 (2019-09-25)

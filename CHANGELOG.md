@@ -27,7 +27,7 @@
  - fix some modal issues in themes filter and in event/activity add forms #722
  - fix IE and Edge issues, fix some other alignment problems #733 #735
  - fix scroll in modals on iOS? #734
- - fixes refactoring frontend (#716) 
+ - fixes refactoring frontend (#716)
  - fix menu spacing, close #714
  - fix dates of activities by date - close #674
  - fix #729 - Add photos button has no more outline

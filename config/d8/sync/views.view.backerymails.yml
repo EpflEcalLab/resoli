@@ -16,7 +16,6 @@ description: Backerymails
 tag: backerymails
 base_table: backerymails_sended_mail
 base_field: id
-core: 8.x
 display:
   default:
     display_plugin: default

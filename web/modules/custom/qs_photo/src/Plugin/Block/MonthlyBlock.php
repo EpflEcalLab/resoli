@@ -30,7 +30,7 @@ class MonthlyBlock extends PeriodBlockBase {
     $month = new DrupalDateTime();
     if ($pagination_month) {
       try {
-        $month = DrupalDateTime::createFromFormat('Y-m-01', $pagination_month);
+        $month = DrupalDateTime::createFromFormat('Y-m-d', $pagination_month);
       }
       catch (\Exception $e) {
         $month = new DrupalDateTime();

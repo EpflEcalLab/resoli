@@ -2,6 +2,7 @@
 
 ## NEXT RELEASE
  - fix end-of-year previous button - close #747
+ - fix date pager bugged on february - close #758
 
 ## 1.5.0 (2020-01-08)
  - update to Drupal 8.7.11

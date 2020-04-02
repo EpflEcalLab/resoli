@@ -2,6 +2,7 @@
 
 ## TODO NEXT RELEASE
  - change settings.php on production to use new "$settings['config_sync_directory'] = '../config/d8/sync';" key
+ - update the PHP environment to PHP 7.3 and update NewRelic
 
 ## NEXT RELEASE
  - fix end-of-year previous button - close #747

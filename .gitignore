@@ -64,3 +64,4 @@ web/nohup.out
 
 # Ignore output for debugging tests
 web/localhost
+/.gitattributes

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## TODO NEXT RELEASE
+ - change settings.php on production to use new "$settings['config_sync_directory'] = '../config/d8/sync';" key
+ - update the PHP environment to PHP 7.3 and update NewRelic
+
+## NEXT RELEASE
+ - update Drupal from 8.7.x to 8.8 - #753
+ - update modules - #750
+
 ## 1.5.1 (2020-04-01)
  - fix end-of-year previous button - close #747
  - fix date pager bugged on february - close #758
@@ -23,7 +31,7 @@
  - fix some modal issues in themes filter and in event/activity add forms #722
  - fix IE and Edge issues, fix some other alignment problems #733 #735
  - fix scroll in modals on iOS? #734
- - fixes refactoring frontend (#716) 
+ - fixes refactoring frontend (#716)
  - fix menu spacing, close #714
  - fix dates of activities by date - close #674
  - fix #729 - Add photos button has no more outline

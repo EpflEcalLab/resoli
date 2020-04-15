@@ -28,6 +28,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: General
+      region: content
     group_general:
       children:
         - group_tab
@@ -41,6 +42,7 @@ third_party_settings:
         id: ''
         classes: ''
       label: Tab
+      region: content
     group_privileges:
       children:
         - field_community_organizers
@@ -56,6 +58,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Privileges
+      region: content
 id: taxonomy_term.communities.default
 targetEntityType: taxonomy_term
 bundle: communities

@@ -25,6 +25,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Tabs
+      region: content
     group_general:
       children:
         - title
@@ -41,6 +42,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: General
+      region: content
 id: node.photo.default
 targetEntityType: node
 bundle: photo
@@ -53,6 +55,7 @@ content:
       rows: 9
       summary_rows: 3
       placeholder: ''
+      show_summary: false
     third_party_settings: {  }
     region: content
   field_event:
@@ -61,6 +64,7 @@ content:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content

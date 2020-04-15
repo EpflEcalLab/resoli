@@ -1,10 +1,6 @@
 # CHANGELOG
 
-## TODO NEXT RELEASE
- - change settings.php on production to use new "$settings['config_sync_directory'] = '../config/d8/sync';" key
- - update the PHP environment to PHP 7.3 and update NewRelic
-
-## NEXT RELEASE
+## 1.5.2 (2020-04-15)
  - update Drupal from 8.7.x to 8.8 - #753
  - update modules - #750
  - add NewRelic module

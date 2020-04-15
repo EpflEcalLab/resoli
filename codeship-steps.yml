@@ -36,8 +36,8 @@
     - name: Deploy to staging
       tag: dev
       service: deploy
-      command: cap staging deploy
+      command: bundle exec cap staging deploy
     - name: Deploy to production
       tag: master
       service: deploy
-      command: cap production deploy
+      command: bundle exec cap production deploy

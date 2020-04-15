@@ -7,6 +7,7 @@
 ## NEXT RELEASE
  - update Drupal from 8.7.x to 8.8 - #753
  - update modules - #750
+ - add NewRelic module
 
 ## 1.5.1 (2020-04-01)
  - fix end-of-year previous button - close #747

@@ -23,6 +23,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Tabs
+      region: content
     group_general:
       children:
         - field_icon
@@ -39,6 +40,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: General
+      region: content
 id: taxonomy_term.themes.default
 targetEntityType: taxonomy_term
 bundle: themes
@@ -78,6 +80,13 @@ content:
     weight: 6
     region: content
     settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
     third_party_settings: {  }
   translation:
     weight: 10

@@ -1,4 +1,4 @@
-FROM antistatique/php-dev:7.2
+FROM antistatique/php-dev:7.3
 
 WORKDIR /var/www
 
@@ -10,7 +10,7 @@ RUN set -eux; \
 ADD ./composer.json ./composer.lock ./
 RUN set -eux; \
   \
-  composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest --no-interaction; \
+  composer install --prefer-dist --no-scripts --no-progress --no-suggest --no-interaction; \
   composer clear-cache
 
 COPY . ./

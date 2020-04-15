@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for Quartiers Solidaires.
+ */
+
+use Drupal\Core\Entity\EntityStorageException;
+
+/**
+ * Fix "node.body" && "user.user_picture" fields needs to be updated.
+ */
+function qs_site_update_8001() {
+  try {
+    $entityUpdateManager = \Drupal::service('entity.definition_update_manager');
+    $entityUpdateManager->applyUpdates();
+  }
+  catch (EntityStorageException $e) {
+    print_r($e);
+  }
+}

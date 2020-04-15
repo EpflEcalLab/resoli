@@ -24,6 +24,7 @@ third_party_settings:
         classes: ''
         direction: vertical
       label: Tabs
+      region: content
     group_credentials:
       children:
         - account
@@ -39,6 +40,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Credentials
+      region: content
     group_informations:
       children:
         - field_firstname
@@ -54,6 +56,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: Informations
+      region: content
 _core:
   default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
 id: user.user.default

@@ -51,6 +51,7 @@ module:
   node: 0
   options: 0
   path: 0
+  path_alias: 0
   pathauto: 0
   qs_acl: 0
   qs_activity: 0

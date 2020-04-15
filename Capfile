@@ -7,6 +7,8 @@ require 'capistrano/deploy'
 # Composer is needed to install drush on the server
 require 'capistrano/composer'
 
+require 'capistrano/antistatique'
+require 'capdrupal'
 require 'slackistrano/capistrano'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined

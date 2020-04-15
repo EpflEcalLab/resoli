@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.5.3 (2020-04-15)
+ - update composer lock
+
 ## 1.5.2 (2020-04-15)
  - update Drupal from 8.7.x to 8.8 - #753
  - update modules - #750

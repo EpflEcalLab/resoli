@@ -2,6 +2,7 @@
 
 ## 1.5.3 (2020-04-15)
  - update composer lock
+ - update composer used in Alwaysdata from 1.5.5 -> 1.10.5
 
 ## 1.5.2 (2020-04-15)
  - update Drupal from 8.7.x to 8.8 - #753

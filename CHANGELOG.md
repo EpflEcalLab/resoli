@@ -5,9 +5,12 @@
  - update the PHP environment to PHP 7.3 and update NewRelic
 
 ## NEXT RELEASE
- - fix end-of-year previous button - close #747
  - update Drupal from 8.7.x to 8.8 - #753
  - update modules - #750
+
+## 1.5.1 (2020-04-01)
+ - fix end-of-year previous button - close #747
+ - fix date pager bugged on february - close #758
 
 ## 1.5.0 (2020-01-08)
  - update to Drupal 8.7.11

@@ -1,4 +1,4 @@
-FROM antistatique/php-dev:7.3-node9
+FROM antistatique/php-dev:7.2-node9
 
 WORKDIR /var/www
 

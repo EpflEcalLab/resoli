@@ -4,6 +4,9 @@
  - update Drupal from 8.8.4 to 8.9.3 with all dependencies
  - update drupal/image_effects (2.3.0 => 3.0.0) with all dependencies
 
+## 1.5.4 (2020-10-19)
+ - Apply patch to be compatible with Apache 2.4 and avoid double compression with brotli
+
 ## 1.5.3 (2020-04-15)
  - update composer lock
  - update composer used in Alwaysdata from 1.5.5 -> 1.10.5

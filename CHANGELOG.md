@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.5.4 (2020-10-19)
+ - Apply patch to be compatible with Apache 2.4 and avoid double compression with brotli
+
 ## 1.5.3 (2020-04-15)
  - update composer lock
 

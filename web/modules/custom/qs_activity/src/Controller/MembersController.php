@@ -222,11 +222,13 @@ class MembersController extends ControllerBase {
       }
 
       $this->excelExporter->addRow([
-        $privilege,
-        $member->field_firstname->value,
-        $member->field_lastname->value,
-        $member->getEmail(),
-        $member->field_phone->value,
+        ['value' => $privilege],
+        ['value' => $member->field_firstname->value],
+        ['value' => $member->field_lastname->value],
+        ['value' => $member->getEmail()],
+        ['value' => $member->field_phone->value],
+      ], [
+        'odd-even-background' => TRUE,
       ]);
 
     }

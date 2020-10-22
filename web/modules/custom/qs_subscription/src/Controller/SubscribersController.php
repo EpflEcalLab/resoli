@@ -198,11 +198,13 @@ class SubscribersController extends ControllerBase {
       $created->setTimezone(new \DateTimeZone('UTC'));
 
       $this->excelExporter->addRow([
-        $subscription->getOwner()->entity->field_firstname->value,
-        $subscription->getOwner()->entity->field_lastname->value,
-        $subscription->getOwner()->entity->getEmail(),
-        $subscription->getOwner()->entity->field_phone->value,
-        $created,
+        ['value' => $subscription->getOwner()->entity->field_firstname->value],
+        ['value' => $subscription->getOwner()->entity->field_lastname->value],
+        ['value' => $subscription->getOwner()->entity->getEmail()],
+        ['value' => $subscription->getOwner()->entity->field_phone->value],
+        ['value' => $created],
+      ], [
+        'odd-even-background' => TRUE,
       ]);
     }
     $this->excelExporter->setFooter($disclaimer->render());

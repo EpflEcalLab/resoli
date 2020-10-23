@@ -120,7 +120,7 @@ class EventsController extends ControllerBase {
       // Set a Rich text for timetable with partial bold content.
       $timetable = new RichText();
       $bold_timetable = $timetable->createTextRun($event->field_start_at->date->format('d.m.Y'));
-      $bold_timetable->getFont()->setBold(true);
+      $bold_timetable->getFont()->setBold(TRUE);
       $timetable->createText(sprintf(' %s - %s', $event->field_start_at->date->format('H:i'), $event->field_end_at->date->format('H:i')));
 
       // Set a HTML text for contact with new line.
@@ -147,6 +147,13 @@ class EventsController extends ControllerBase {
     }
     $this->excelExporter->finalize();
     $this->excelExporter->lastRowBorder();
+
+    $this->excelExporter->selColDimensions([
+      'A' => ['width' => 48],
+      'B' => ['width' => 48],
+      'C' => ['width' => 68],
+      'D' => ['width' => 48],
+    ]);
 
     return $this->excelExporter->download();
   }

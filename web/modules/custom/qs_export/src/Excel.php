@@ -100,6 +100,23 @@ class Excel {
   }
 
   /**
+   * Set the Speadsheet columns dimensions.
+   *
+   * @param array $dimensions
+   *   Collection of dimension keyed by column letter and dimension values.
+   */
+  public function selColDimensions(array $dimensions): void {
+    $worksheet = $this->spreadsheet->getActiveSheet();
+
+    foreach ($dimensions as $column => $dimension) {
+      if ($dimension['width']) {
+        $worksheet->getColumnDimension($column)->setAutoSize(FALSE);
+        $worksheet->getColumnDimension($column)->setWidth($dimension['width']);
+      }
+    }
+  }
+
+  /**
    * Set the summary.
    *
    * @param string $summary

@@ -41,7 +41,7 @@
         "drupal/field_group": "^3.0",
         "drupal/focal_point": "^1.0@beta",
         "drupal/honeypot": "^1.27",
-        "drupal/image_effects": "^2.1",
+        "drupal/image_effects": "^3.0",
         "drupal/mailsystem": "^4.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/metatag": "^1.1",
@@ -49,7 +49,7 @@
         "drupal/pathauto": "^1.0",
         "drupal/recaptcha": "^3.0",
         "drupal/redirect": "^1.0@beta",
-        "drupal/swiftmailer": "^1.0@beta",
+        "drupal/swiftmailer": "^2.0",
         "drush/drush": "^10.0.0",
         "egulias/email-validator": "^2.1.11",
         "phpoffice/phpspreadsheet": "^1.7",
@@ -105,9 +105,6 @@
         },
         "enable-patching": true,
         "patches": {
-          "drupal/swiftmailer": {
-            "[2948607] - Error after updating to beta2": "https://www.drupal.org/files/issues/2019-02-14/2948607-17.patch"
-          }
         }
     }
 }

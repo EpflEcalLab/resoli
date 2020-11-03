@@ -4,6 +4,7 @@
  - update Drupal from 8.8.4 to 8.9.3 with all dependencies
  - update drupal/image_effects (2.3.0 => 3.0.0) with all dependencies
  - update to Node 10
+ - improve the Event Export into Excel file styling #763
 
 ## 1.5.4 (2020-10-19)
  - Apply patch to be compatible with Apache 2.4 and avoid double compression with brotli

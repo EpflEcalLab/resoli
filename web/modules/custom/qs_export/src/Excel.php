@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_export;
 
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -67,6 +68,10 @@ class Excel {
    */
   public function init() {
     $this->spreadsheet = new Spreadsheet();
+
+    $worksheet = $this->spreadsheet->getActiveSheet();
+    $worksheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+    $worksheet->getPageSetup()->setFitToWidth(1);
   }
 
   /**

@@ -253,6 +253,10 @@ class Excel {
       $cell->setValue($safe_string);
     }
 
+    if (isset($styles['repeat'])) {
+      $worksheet->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd($row,$row);
+    }
+
     $worksheet->getRowDimension($row)->setRowHeight(23);
   }
 

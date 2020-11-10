@@ -77,6 +77,21 @@ docker-compose up --build -d
 docker-compose exec dev drush cr (or any other drush command you need)
 ```
 
+#### reCaptcha configurations
+
+To protect the subscription form, we decided to use reCaptcha from Google.
+To be used properly, you need to setup both `` and `` keys in your `settings.php`.
+
+As the recipient for the contact form in a property details page is not the agent, you should set the value(s) here.
+
+```php
+/**
+ * reCaptcha by Google credentials.
+ */
+$config['recaptcha.settings.yml']['site_key'] = 'RECAPTCHA-SITE-KEY';
+$config['recaptcha.settings.yml']['secret_key'] = 'RECAPTCHA-SECRET-KEY';
+```
+
 ### (optional) Get the productions files and database
 
 Local Drupal site files directory is mounted in Docker dev container, you can sync them with

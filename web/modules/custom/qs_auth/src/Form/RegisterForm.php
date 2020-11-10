@@ -237,6 +237,13 @@ class RegisterForm extends FormBase {
       '#required' => FALSE,
     ];
 
+    if ($this->moduleHandler->moduleExists('captcha')) {
+      $form['register']['step-4']['captcha'] = [
+        '#type'         => 'captcha',
+        '#captcha_type' => 'recaptcha/reCAPTCHA',
+      ];
+    }
+
     $form['actions']['submit'] = [
       '#type'  => 'submit',
       '#attributes' => [

@@ -121,7 +121,7 @@ class EventsController extends ControllerBase {
       $timetable = new RichText();
       $bold_timetable = $timetable->createTextRun($event->field_start_at->date->format('d.m.Y'));
       $bold_timetable->getFont()->setBold(TRUE);
-      $timetable->createText(sprintf(' %s - %s', $event->field_start_at->date->format('H:i'), $event->field_end_at->date->format('H:i')));
+      $timetable->createText(sprintf(' %s - %s', $event->field_start_at->date->format('H\hi'), $event->field_end_at->date->format('H\hi')));
 
       // Set a HTML text for contact with new line.
       $contact = [];

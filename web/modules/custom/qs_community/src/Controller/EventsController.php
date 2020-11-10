@@ -129,7 +129,7 @@ class EventsController extends ControllerBase {
         $contact[] = $event->field_contact_name->value;
       }
       if ($event->field_contact_name->value) {
-        $contact[] = '<br> . $event->field_contact_phone->value';
+        $contact[] = '<br>' . $event->field_contact_phone->value;
       }
       $contact_html = new Html();
       $contact_html = $contact_html->toRichTextObject(implode(', ', $contact));

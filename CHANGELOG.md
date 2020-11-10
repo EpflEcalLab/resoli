@@ -5,6 +5,7 @@
  - update drupal/image_effects (2.3.0 => 3.0.0) with all dependencies
  - update to Node 10
  - improve the Event Export into Excel file styling #763
+ - add a captcha on subscription form to avoid spam #768
 
 ## 1.5.4 (2020-10-19)
  - Apply patch to be compatible with Apache 2.4 and avoid double compression with brotli

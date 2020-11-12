@@ -2,6 +2,8 @@
 
 ## NEXT RELEASE
  - update Drupal from 8.8.4 to 8.9.3 with all dependencies
+ - update Drupal from 8.9.3 to 8.9.7
+ - update Drupal from 8.9.7 to 8.9.8 with all dependencies
  - update drupal/image_effects (2.3.0 => 3.0.0) with all dependencies
  - update to Node 10
  - improve the Event Export into Excel file styling #763

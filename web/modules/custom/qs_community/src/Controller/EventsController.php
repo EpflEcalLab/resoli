@@ -107,13 +107,13 @@ class EventsController extends ControllerBase {
       '@date' => $now->format('d-m-Y'),
     ]);
 
-    $this->excelExporter->setSpreadsheetTitle($title->render());
+    $this->excelExporter->setTitle($title->render());
     $this->excelExporter->addHeader([
       $this->t('qs_community.events.export.header.event.label')->render(),
       $this->t('qs_community.events.export.header.timetable.label')->render(),
       $this->t('qs_community.events.export.header.venue.label')->render(),
       $this->t('qs_community.events.export.header.contact')->render(),
-    ], 0, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => true]);
+    ], 1, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => true]);
 
     foreach ($events as $event) {
 
@@ -129,10 +129,12 @@ class EventsController extends ControllerBase {
         $contact[] = $event->field_contact_name->value;
       }
       if ($event->field_contact_name->value) {
-        $contact[] = '<br>' . $event->field_contact_phone->value;
+        $contact[] = '<br />' . $event->field_contact_phone->value;
       }
       $contact_html = new Html();
-      $contact_html = $contact_html->toRichTextObject(implode(', ', $contact));
+      if (!empty($contact)) {
+        $contact_html = $contact_html->toRichTextObject(implode(', ', $contact));
+      }
 
       $this->excelExporter->addRow([
         ['value' => $event->getTitle()],
@@ -152,7 +154,7 @@ class EventsController extends ControllerBase {
       'A' => ['width' => 48],
       'B' => ['width' => 48],
       'C' => ['width' => 68],
-      'D' => ['width' => 48],
+      'D' => ['width' => 68],
     ]);
 
     return $this->excelExporter->download();

@@ -113,7 +113,7 @@ class EventsController extends ControllerBase {
       $this->t('qs_community.events.export.header.timetable.label')->render(),
       $this->t('qs_community.events.export.header.venue.label')->render(),
       $this->t('qs_community.events.export.header.contact')->render(),
-    ], 1, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => true]);
+    ], 2, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => true]);
 
     foreach ($events as $event) {
 

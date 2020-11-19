@@ -8,6 +8,7 @@
  - update to Node 10
  - improve the Event Export into Excel file styling #763
  - add a captcha on subscription form to avoid spam #768
+ - update Drupal from 8.9.8 to 8.9.9 (SA-CORE-2020-012)
 
 ## 1.5.4 (2020-10-19)
  - Apply patch to be compatible with Apache 2.4 and avoid double compression with brotli

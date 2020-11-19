@@ -3,6 +3,9 @@
 namespace Drupal\qs_community\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use PhpOffice\PhpSpreadsheet\Helper\Html;
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\qs_acl\Service\AccessControl;
@@ -103,41 +106,57 @@ class EventsController extends ControllerBase {
       '@community' => $community->getName(),
       '@date' => $now->format('d-m-Y'),
     ]);
-    $summary = $this->t('qs_community.events.export.summary @total', [
-      '@total' => count($events),
-    ]);
-    $disclaimer = $this->t('qs_community.events.export.disclaimer');
 
     $this->excelExporter->setTitle($title->render());
-    $this->excelExporter->setSummary($summary->render());
     $this->excelExporter->addHeader([
-      $this->t('qs_community.events.export.header.activity.label')->render(),
       $this->t('qs_community.events.export.header.event.label')->render(),
-      $this->t('qs_community.events.export.header.date_start.label')->render(),
-      $this->t('qs_community.events.export.header.date_end.label')->render(),
+      $this->t('qs_community.events.export.header.timetable.label')->render(),
       $this->t('qs_community.events.export.header.venue.label')->render(),
-      $this->t('qs_community.events.export.header.contribution.label')->render(),
-      $this->t('qs_community.events.export.header.organizer_name.label')->render(),
-      $this->t('qs_community.events.export.header.organizer_mail.label')->render(),
-      $this->t('qs_community.events.export.header.organizer_phone.label')->render(),
-    ]);
+      $this->t('qs_community.events.export.header.contact')->render(),
+    ], 2, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => true]);
 
     foreach ($events as $event) {
-      $activity = $event->field_activity->entity;
+
+      // Set a Rich text for timetable with partial bold content.
+      $timetable = new RichText();
+      $bold_timetable = $timetable->createTextRun($event->field_start_at->date->format('d.m.Y'));
+      $bold_timetable->getFont()->setBold(TRUE);
+      $timetable->createText(sprintf(' %s - %s', $event->field_start_at->date->format('H\hi'), $event->field_end_at->date->format('H\hi')));
+
+      // Set a HTML text for contact with new line.
+      $contact = [];
+      if (!$event->get('field_contact_name')->isEmpty()) {
+        $contact[] = $event->field_contact_name->value;
+      }
+      if (!$event->get('field_contact_phone')->isEmpty()) {
+        $contact[] = '<br />' . $event->field_contact_phone->value;
+      }
+      $contact_html = new Html();
+      if (!empty($contact)) {
+        $contact_html = $contact_html->toRichTextObject(implode(', ', $contact));
+      }
+
       $this->excelExporter->addRow([
-        $activity->getTitle(),
-        $event->getTitle(),
-        $event->field_start_at->date,
-        $event->field_end_at->date,
-        $event->field_venue->value,
-        $event->field_contribution->value,
-        $event->field_contact_name->value,
-        $event->field_contact_mail->value,
-        $event->field_contact_phone->value,
+        ['value' => $event->getTitle()],
+        ['value' => $timetable],
+        ['value' => $event->field_venue->value],
+        ['value' => $contact_html],
+      ], [
+        'txt-wrap' => TRUE,
+        'odd-even-background' => TRUE,
+        'v-alignment' => Alignment::VERTICAL_CENTER,
+        'h-alignment' => Alignment::HORIZONTAL_CENTER,
       ]);
     }
-    $this->excelExporter->setFooter($disclaimer->render());
     $this->excelExporter->finalize();
+    $this->excelExporter->lastRowBorder();
+
+    $this->excelExporter->selColDimensions([
+      'A' => ['width' => 48],
+      'B' => ['width' => 48],
+      'C' => ['width' => 68],
+      'D' => ['width' => 68],
+    ]);
 
     return $this->excelExporter->download();
   }

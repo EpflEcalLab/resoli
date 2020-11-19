@@ -2,8 +2,12 @@
 
 namespace Drupal\qs_export;
 
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -64,6 +68,22 @@ class Excel {
    */
   public function init() {
     $this->spreadsheet = new Spreadsheet();
+
+    $worksheet = $this->spreadsheet->getActiveSheet();
+    $worksheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+    $worksheet->getPageSetup()->setFitToWidth(1);
+  }
+
+  /**
+   * Set the Spreadsheet title.
+   *
+   * @param string $title
+   *   The caption to use.
+   */
+  public function setSpreadsheetTitle($title): void {
+    $safe_title = htmlspecialchars_decode($title, ENT_QUOTES);
+    $this->spreadsheet->getProperties()
+      ->setTitle($safe_title);
   }
 
   /**
@@ -72,18 +92,33 @@ class Excel {
    * @param string $title
    *   The caption to use.
    */
-  public function setTitle($title) {
+  public function setTitle($title): void {
+    $this->setSpreadsheetTitle($title);
+    $safe_title = htmlspecialchars_decode($title, ENT_QUOTES);
+
     $this->title['visible'] = TRUE;
 
     $worksheet = $this->spreadsheet->getActiveSheet();
-    $safe_title = htmlspecialchars_decode($title, ENT_QUOTES);
-
-    $this->spreadsheet->getProperties()
-      ->setTitle($safe_title);
-
     $worksheet->setCellValue($this->title['col'] . $this->title['row'], $safe_title);
     $worksheet->getStyle($this->title['col'] . $this->title['row'])->getFont()->setBold(TRUE);
     $worksheet->getStyle($this->title['col'] . $this->title['row'])->getFont()->setSize(20);
+  }
+
+  /**
+   * Set the Speadsheet columns dimensions.
+   *
+   * @param array $dimensions
+   *   Collection of dimension keyed by column letter and dimension values.
+   */
+  public function selColDimensions(array $dimensions): void {
+    $worksheet = $this->spreadsheet->getActiveSheet();
+
+    foreach ($dimensions as $column => $dimension) {
+      if ($dimension['width']) {
+        $worksheet->getColumnDimension($column)->setAutoSize(FALSE);
+        $worksheet->getColumnDimension($column)->setWidth($dimension['width']);
+      }
+    }
   }
 
   /**
@@ -160,24 +195,69 @@ class Excel {
   }
 
   /**
+   * Style the last row to add a bottom border to it.
+   */
+  public function lastRowBorder(): void {
+    $worksheet = $this->spreadsheet->getActiveSheet();
+
+    $last_row = $worksheet->getHighestRow();
+    $highest_col = $worksheet->getHighestColumn();
+    $highest_col_index = Coordinate::columnIndexFromString($highest_col);
+
+    for ($col = 1; $col <= $highest_col_index; ++$col) {
+      $cell = $worksheet->getCellByColumnAndRow($col, $last_row);
+      $cell->getStyle()->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
+    }
+  }
+
+  /**
    * Add a header to the spreadsheet.
    *
    * @param array $items
    *   The values of the header.
+   * @param int $offset
+   *   The header starting row offset.
+   * @param array|null $styles
+   *   Styles that will applied to the header.
+   *
+   * @throws \PhpOffice\PhpSpreadsheet\Exception
    */
-  public function addHeader(array $items) {
+  public function addHeader(array $items, int $offset = 2, ?array $styles = []) {
     $worksheet = $this->spreadsheet->getActiveSheet();
-    $row = $worksheet->getHighestRow() + 2;
+    $row = $worksheet->getHighestRow() + $offset;
 
     $i = 1;
     foreach ($items as $item) {
       $cell = $worksheet->getCellByColumnAndRow($i++, $row);
       $cell->getStyle()->getFont()->setBold(TRUE);
-      $cell->getStyle()->getFont()->setSize(16);
+      $cell->getStyle()->getFont()->setSize(18);
+
+      if (isset($styles['foreground'])) {
+        $cell->getStyle()->getFont()->getColor()->setARGB($styles['foreground']);
+      }
+
+      $cell->getStyle()->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
+      $cell->getStyle()->getBorders()->getTop()->setBorderStyle(Border::BORDER_MEDIUM);
+      $cell->getStyle()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+      $cell->getStyle()->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+      if (isset($styles['background'])) {
+        $cell->getStyle()
+          ->getFill()
+          ->setFillType(Fill::FILL_SOLID)
+          ->getStartColor()
+          ->setARGB($styles['background']);
+      }
 
       $safe_string = htmlspecialchars_decode($item, ENT_QUOTES);
       $cell->setValue($safe_string);
     }
+
+    if (isset($styles['repeat'])) {
+      $worksheet->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd($row,$row);
+    }
+
+    $worksheet->getRowDimension($row)->setRowHeight(23);
   }
 
   /**
@@ -185,8 +265,10 @@ class Excel {
    *
    * @param array $items
    *   The values of the row.
+   * @param array|null $styles
+   *   The global styles for each rows, that can be overridden per row.
    */
-  public function addRow(array $items) {
+  public function addRow(array $items, ?array $styles = []): void {
     $worksheet = $this->spreadsheet->getActiveSheet();
 
     $col = 1;
@@ -194,29 +276,54 @@ class Excel {
 
     foreach ($items as $item) {
       $cell = $worksheet->getCellByColumnAndRow($col++, $row);
+      $cell->getStyle()->getFont()->setSize(12);
+
+      // Get the raw values to write.
+      $content = $item['value'];
+      if (isset($item['styles'])) {
+        $styles = array_merge($styles, $item['styles']);
+      }
 
       switch (TRUE) {
-        case $item instanceof DateTimePlus:
+        case $content instanceof DateTimePlus:
           // Set the number format mask so that the excel timestamp will be
           // displayed as a human-readable date/time.
-          $date = Date::PHPToExcel($item->getTimestamp());
+          $date = Date::PHPToExcel($content->getTimestamp());
           $cell->getStyle()->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_DATE_DATETIME);
           $cell->setValue($date);
           break;
 
+        case $content instanceof RichText:
+          $cell->setValue($content);
+          break;
+
         default:
-          $safe_string = htmlspecialchars_decode($item, ENT_QUOTES);
+          $safe_string = htmlspecialchars_decode($content, ENT_QUOTES);
           $cell->setValue($safe_string);
           break;
       }
 
+      if (isset($styles['txt-wrap'])) {
+        $cell->getStyle()->getAlignment()->setWrapText(true);
+      }
+
+      // Vertical align using the global style.
+      if (isset($styles['v-alignment'])) {
+        $cell->getStyle()->getAlignment()->setVertical($styles['v-alignment']);
+      }
+
+      // Horizontal align using the global style.
+      if (isset($styles['h-alignment'])) {
+        $cell->getStyle()->getAlignment()->setHorizontal($styles['v-alignment']);
+      }
+
       // Odd & Even colors.
-      if ($row % 2) {
-        $cell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('EBEBEB');
+      if (isset($styles['odd-even-background']) && $row % 2) {
+        $cell->getStyle()->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('d9d9d9');
       }
     }
 
-    $worksheet->getRowDimension($row)->setRowHeight(20);
+    $worksheet->getRowDimension($row)->setRowHeight(32);
   }
 
   /**

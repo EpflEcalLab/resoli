@@ -125,10 +125,10 @@ class EventsController extends ControllerBase {
 
       // Set a HTML text for contact with new line.
       $contact = [];
-      if ($event->field_contact_name->value) {
+      if (!$event->get('field_contact_name')->isEmpty()) {
         $contact[] = $event->field_contact_name->value;
       }
-      if ($event->field_contact_name->value) {
+      if (!$event->get('field_contact_phone')->isEmpty()) {
         $contact[] = '<br />' . $event->field_contact_phone->value;
       }
       $contact_html = new Html();

@@ -15,6 +15,7 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Datetime\DateTimePlus;
+use PhpOffice\PhpSpreadsheet\Helper\Html as PhpSpreadsheetHtml;
 
 /**
  * Excel exporter for Quartiers-Solidaires.
@@ -280,6 +281,8 @@ class Excel {
 
       // Get the raw values to write.
       $content = $item['value'];
+
+      // Merge the Cell styles with the global row styles.
       if (isset($item['styles'])) {
         $styles = array_merge($styles, $item['styles']);
       }
@@ -295,6 +298,10 @@ class Excel {
 
         case $content instanceof RichText:
           $cell->setValue($content);
+          break;
+
+        // Skip unprocessable content.
+        case $content instanceof PhpSpreadsheetHtml:
           break;
 
         default:

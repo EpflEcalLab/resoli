@@ -280,6 +280,9 @@ class Excel {
 
       // Get the raw values to write.
       $content = $item['value'];
+      if (isset($item['styles'])) {
+        $styles = array_merge($styles, $item['styles']);
+      }
 
       switch (TRUE) {
         case $content instanceof DateTimePlus:
@@ -298,6 +301,10 @@ class Excel {
           $safe_string = htmlspecialchars_decode($content, ENT_QUOTES);
           $cell->setValue($safe_string);
           break;
+      }
+
+      if (isset($styles['txt-wrap'])) {
+        $cell->getStyle()->getAlignment()->setWrapText(true);
       }
 
       // Vertical align using the global style.

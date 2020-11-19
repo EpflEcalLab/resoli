@@ -142,6 +142,7 @@ class EventsController extends ControllerBase {
         ['value' => $event->field_venue->value],
         ['value' => $contact_html],
       ], [
+        'txt-wrap' => TRUE,
         'odd-even-background' => TRUE,
         'v-alignment' => Alignment::VERTICAL_CENTER,
         'h-alignment' => Alignment::HORIZONTAL_CENTER,

@@ -1,6 +1,8 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+
+## 1.5.5 (2020-11-19)
  - update Drupal from 8.8.4 to 8.9.3 with all dependencies
  - update Drupal from 8.9.3 to 8.9.7
  - update Drupal from 8.9.7 to 8.9.8 with all dependencies

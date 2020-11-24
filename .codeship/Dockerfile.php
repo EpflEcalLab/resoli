@@ -7,6 +7,10 @@ RUN set -eux; \
   sed -ri -e 's!\ErrorLog .+\.log!ErrorLog /dev/null!g' /etc/apache2/apache2.conf /etc/apache2/**/*.conf; \
   sed -ri -e 's!\CustomLog .+\.log!CustomLog /dev/null!g' /etc/apache2/apache2.conf /etc/apache2/**/*.conf
 
+# Keep composer version 1 until drupal-console-extend-plugin has not been updated.
+# @see https://github.com/hechoendrupal/drupal-console-extend-plugin/pull/25
+RUN composer self-update --1
+
 ADD ./composer.json ./composer.lock ./
 RUN set -eux; \
   \

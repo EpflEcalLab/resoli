@@ -1,6 +1,10 @@
-FROM antistatique/php-dev:7.3-node10
+FROM antistatique/php-dev:7.4-node10
 
 WORKDIR /var/www
+
+# Keep composer version 1 until drupal-console-extend-plugin has not been updated.
+# @see https://github.com/hechoendrupal/drupal-console-extend-plugin/pull/25
+RUN composer self-update --1
 
 ADD ./composer.json ./composer.lock ./
 RUN set -eux; \

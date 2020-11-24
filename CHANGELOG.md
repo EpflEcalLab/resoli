@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - update Docker to PHP7.4, Node 10 & MariaDB 10.4
 
 ## 1.5.6 (2020-11-19)
  - fix Event Export into Excel file which trigger crash on empty column "Contact"

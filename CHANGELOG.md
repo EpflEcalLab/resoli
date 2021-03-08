@@ -2,6 +2,7 @@
 
 ## NEXT RELEASE
  - update Docker to PHP7.4, Node 10 & MariaDB 10.4
+ - update Drupal from 8.9.7 to 8.9.13 with all dependencies
 
 ## 1.5.6 (2020-11-19)
  - fix Event Export into Excel file which trigger crash on empty column "Contact"

@@ -2,13 +2,13 @@
 
 namespace Drupal\qs_community\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\taxonomy\TermInterface;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * WelcomeController.
@@ -46,19 +46,6 @@ class WelcomeController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('current_user'),
-    $container->get('entity_type.manager')
-    );
-  }
-
-  /**
    * Checks access for Welcome.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
@@ -77,6 +64,19 @@ class WelcomeController extends ControllerBase {
     }
 
     return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control'),
+    $container->get('current_user'),
+    $container->get('entity_type.manager')
+    );
   }
 
   /**

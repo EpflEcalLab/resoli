@@ -33,6 +33,7 @@ function qs_community_alias(EntityInterface $entity, $alias, $operation = 'inser
           'alias' => '/' . trim($alias, '/') . '/dashboard/members',
         ],
       ];
+
       break;
   }
 

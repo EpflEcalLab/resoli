@@ -2,9 +2,9 @@
 
 namespace Drupal\qs_activity\Form;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * EventEditForm class.
@@ -14,14 +14,7 @@ class EventEditForm extends EventEditFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
-    return 'qs_activity_event_edit_form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $event = NULL) {
     $form = parent::buildForm($form, $form_state, $event);
 
     // Disable caching & HTML5 validation.
@@ -45,11 +38,11 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['title'] = [
-      '#attributes'    => ['required' => TRUE, 'force_feedback' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.edit.title'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.title.placeholder'),
-      '#type'          => 'textfield',
-      '#required'      => FALSE,
+      '#attributes' => ['required' => TRUE, 'force_feedback' => TRUE],
+      '#title' => $this->t('qs_activity.events.form.edit.title'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.title.placeholder'),
+      '#type' => 'textfield',
+      '#required' => FALSE,
       '#default_value' => $event->title->value,
     ];
 
@@ -76,18 +69,18 @@ class EventEditForm extends EventEditFormBase {
       '#attributes' => [
         'type' => 'date',
         'required' => TRUE,
-        'class'          => [
+        'class' => [
           'flex-grow',
           'px-3',
           'mb-2',
         ],
         'icon' => 'calendar',
       ],
-      '#title'         => $this->t('qs_activity.events.form.edit.date'),
-      '#type'          => 'date',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.events.form.edit.date'),
+      '#type' => 'date',
+      '#required' => FALSE,
       '#default_value' => $start_at->format('d.m.Y'),
-      '#size'          => 8,
+      '#size' => 8,
       '#date_date_format' => 'd.m.Y',
     ];
 
@@ -106,7 +99,7 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['date_fieldset']['time_fieldset']['start_at'] = [
-      '#attributes'    => [
+      '#attributes' => [
         'type' => 'time',
         'required' => TRUE,
         'class' => [
@@ -115,15 +108,15 @@ class EventEditForm extends EventEditFormBase {
         ],
         'icon' => 'watch',
       ],
-      '#title'         => $this->t('qs_activity.events.form.edit.start_at'),
-      '#type'          => 'date',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.events.form.edit.start_at'),
+      '#type' => 'date',
+      '#required' => FALSE,
       '#default_value' => $start_at->format('H:i'),
-      '#size'          => 5,
+      '#size' => 5,
     ];
 
     $form['date_fieldset']['time_fieldset']['end_at'] = [
-      '#attributes'    => [
+      '#attributes' => [
         'type' => 'time',
         'required' => TRUE,
         'class' => [
@@ -131,19 +124,19 @@ class EventEditForm extends EventEditFormBase {
           'px-3',
         ],
       ],
-      '#title'         => $this->t('qs_activity.events.form.edit.end_at'),
-      '#type'          => 'date',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.events.form.edit.end_at'),
+      '#type' => 'date',
+      '#required' => FALSE,
       '#default_value' => $end_at->format('H:i'),
-      '#size'          => 5,
+      '#size' => 5,
     ];
 
     $form['body'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.edit.body'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.body.placeholder'),
-      '#type'          => 'textarea',
-      '#required'      => FALSE,
+      '#attributes' => ['required' => TRUE],
+      '#title' => $this->t('qs_activity.events.form.edit.body'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.body.placeholder'),
+      '#type' => 'textarea',
+      '#required' => FALSE,
       '#default_value' => $event->body->value,
     ];
 
@@ -153,53 +146,53 @@ class EventEditForm extends EventEditFormBase {
         'google-input-lat' => 'edit-latitude',
         'google-input-lng' => 'edit-longitude',
       ],
-      '#title'         => $this->t('qs_activity.events.form.edit.venue'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.venue.placeholder'),
-      '#type'          => 'textfield',
+      '#title' => $this->t('qs_activity.events.form.edit.venue'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.venue.placeholder'),
+      '#type' => 'textfield',
       '#default_value' => $event->field_venue->value,
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
     // Hidden fields which will be updated via Javascript.
     $form['latitude'] = [
-      '#type'  => 'hidden',
+      '#type' => 'hidden',
       '#default_value' => $event->field_venue->value ? $event->field_venue_lat->value : NULL,
     ];
     $form['longitude'] = [
-      '#type'  => 'hidden',
+      '#type' => 'hidden',
       '#default_value' => $event->field_venue->value ? $event->field_venue_long->value : NULL,
     ];
 
     $form['contact_name'] = [
-      '#title'         => $this->t('qs_activity.events.form.edit.contact_name'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_name.placeholder'),
-      '#type'          => 'textfield',
+      '#title' => $this->t('qs_activity.events.form.edit.contact_name'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.contact_name.placeholder'),
+      '#type' => 'textfield',
       '#default_value' => $event->field_contact_name->value,
     ];
 
     $form['contact_phone'] = [
-      '#title'         => $this->t('qs_activity.events.form.edit.contact_phone'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_phone.placeholder'),
-      '#type'          => 'tel',
+      '#title' => $this->t('qs_activity.events.form.edit.contact_phone'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.contact_phone.placeholder'),
+      '#type' => 'tel',
       '#default_value' => $event->field_contact_phone->value,
     ];
 
     $form['contact_mail'] = [
-      '#title'         => $this->t('qs_activity.events.form.edit.contact_mail'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
-      '#type'          => 'email',
+      '#title' => $this->t('qs_activity.events.form.edit.contact_mail'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
+      '#type' => 'email',
       // Skip drupal email validation.
-      '#validated'     => TRUE,
+      '#validated' => TRUE,
       '#default_value' => $event->field_contact_mail->value,
     ];
 
     $form['has_contribution'] = [
-      '#type'        => 'radios',
-      '#options'     => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
-      '#required'      => FALSE,
+      '#type' => 'radios',
+      '#options' => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
+      '#required' => FALSE,
       '#default_value' => $event->get('field_contribution')->isEmpty() ? 0 : 1,
       '#attributes' => [
-        'title'   => $this->t('qs_activity.events.form.add.has_contribution'),
+        'title' => $this->t('qs_activity.events.form.add.has_contribution'),
         'no_form_group' => TRUE,
         'data-toggle' => 'buttons',
         'color' => 'secondary',
@@ -215,15 +208,15 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['contribution'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.edit.contribution'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.contribution.placeholder'),
-      '#type'          => 'textfield',
+      '#attributes' => ['required' => TRUE],
+      '#title' => $this->t('qs_activity.events.form.edit.contribution'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.contribution.placeholder'),
+      '#type' => 'textfield',
       '#default_value' => $event->field_contribution->value,
-      '#required'    => FALSE,
+      '#required' => FALSE,
       '#states' => [
         'visible' => [
-          ':input[name="has_contribution"]' => ['value' => "1"],
+          ':input[name="has_contribution"]' => ['value' => '1'],
         ],
       ],
     ];
@@ -234,7 +227,7 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'icon' => 'check',
         'modal' => TRUE,
@@ -253,6 +246,56 @@ class EventEditForm extends EventEditFormBase {
   /**
    * {@inheritdoc}
    */
+  public function getFormId() {
+    return 'qs_activity_event_edit_form';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $event = $this->nodeStorage->load($form_state->get('event'));
+
+    // Format dates.
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
+
+    $contribution = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
+
+    // Prepare fields.
+    $fields['title'] = $form_state->getValue('title');
+    $fields['body'] = $form_state->getValue('body');
+    $fields['field_contact_name'] = $form_state->getValue('contact_name');
+    $fields['field_contact_mail'] = $form_state->getValue('contact_mail');
+    $fields['field_contact_phone'] = $form_state->getValue('contact_phone');
+    $fields['field_contribution'] = $contribution;
+    $fields['field_venue'] = $form_state->getValue('venue');
+    $fields['field_venue_lat'] = $form_state->getValue('latitude');
+    $fields['field_venue_long'] = $form_state->getValue('longitude');
+
+    $original_event = clone $event;
+
+    // Update new event.
+    $updated_event = $this->eventManager->update($event, $start_at, $end_at, $fields);
+
+    // Process this only if the date or time has change form the original event.
+    if ($original_event->field_start_at->date !== $updated_event->field_start_at->date || $original_event->field_end_at->date !== $updated_event->field_end_at->date) {
+      // Send mail to subscribers, activity organizer(s) & activity maintainers.
+      $this->eventManager->sendUpdated($original_event, $updated_event, $this->currentUser->getAccount());
+    }
+
+    drupal_set_message($this->t('qs_activity.events.form.edit.success @event', [
+      '@event' => $event->getTitle(),
+    ]));
+
+    $form_state->setRedirect('qs_activity.events.dashboard', ['event' => $event->id()], []);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
@@ -260,7 +303,7 @@ class EventEditForm extends EventEditFormBase {
     }
 
     // Assert the mail is valid - only when filled.
-    if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+    if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), \FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('contact_mail', $this->t('qs.form.error.mail.malformed'));
     }
 
@@ -293,12 +336,14 @@ class EventEditForm extends EventEditFormBase {
 
     $date = new DrupalDateTime($form_state->getValue('date'));
     $formatted_date = $date->format('d.m.Y');
+
     try {
       $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
       $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
     }
     catch (\Exception $e) {
       $form_state->setErrorByName('form', $this->t('qs.form.error.something_went_wrong'));
+
       return;
     }
 
@@ -311,49 +356,6 @@ class EventEditForm extends EventEditFormBase {
     if ($start_at >= $end_at) {
       $form_state->setErrorByName('form', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['date_fieldset']['time_fieldset']['start_at']['#title']]));
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $event = $this->nodeStorage->load($form_state->get('event'));
-
-    // Format dates.
-    $date = new DrupalDateTime($form_state->getValue('date'));
-    $formatted_date = $date->format('d.m.Y');
-    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
-    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
-
-    $contribution = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
-
-    // Prepare fields.
-    $fields['title']               = $form_state->getValue('title');
-    $fields['body']                = $form_state->getValue('body');
-    $fields['field_contact_name']  = $form_state->getValue('contact_name');
-    $fields['field_contact_mail']  = $form_state->getValue('contact_mail');
-    $fields['field_contact_phone'] = $form_state->getValue('contact_phone');
-    $fields['field_contribution']  = $contribution;
-    $fields['field_venue']         = $form_state->getValue('venue');
-    $fields['field_venue_lat']     = $form_state->getValue('latitude');
-    $fields['field_venue_long']    = $form_state->getValue('longitude');
-
-    $original_event = clone $event;
-
-    // Update new event.
-    $updated_event = $this->eventManager->update($event, $start_at, $end_at, $fields);
-
-    // Process this only if the date or time has change form the original event.
-    if ($original_event->field_start_at->date != $updated_event->field_start_at->date || $original_event->field_end_at->date != $updated_event->field_end_at->date) {
-      // Send mail to subscribers, activity organizer(s) & activity maintainers.
-      $this->eventManager->sendUpdated($original_event, $updated_event, $this->currentUser->getAccount());
-    }
-
-    drupal_set_message($this->t('qs_activity.events.form.edit.success @event', [
-      '@event' => $event->getTitle(),
-    ]));
-
-    $form_state->setRedirect('qs_activity.events.dashboard', ['event' => $event->id()], []);
   }
 
 }

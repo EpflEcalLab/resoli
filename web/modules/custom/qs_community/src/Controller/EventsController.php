@@ -2,30 +2,23 @@
 
 namespace Drupal\qs_community\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_activity\Service\EventManager;
+use Drupal\qs_export\Excel;
+use Drupal\taxonomy\TermInterface;
 use PhpOffice\PhpSpreadsheet\Helper\Html;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\qs_activity\Service\EventManager;
-use Drupal\qs_export\Excel;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Events Controller by Community.
  */
 class EventsController extends ControllerBase {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
 
   /**
    * The entity QS Event Manager.
@@ -42,25 +35,19 @@ class EventsController extends ControllerBase {
   protected $excelExporter;
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(AccessControl $acl, EventManager $event_manager, Excel $excel_exporter) {
     $this->acl = $acl;
     $this->eventManager = $event_manager;
     $this->excelExporter = $excel_exporter;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_activity.event_manager'),
-    $container->get('qs_export.excel')
-    );
   }
 
   /**
@@ -76,10 +63,25 @@ class EventsController extends ControllerBase {
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasAdminAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control'),
+    $container->get('qs_activity.event_manager'),
+    $container->get('qs_export.excel')
+    );
   }
 
   /**
@@ -113,7 +115,7 @@ class EventsController extends ControllerBase {
       $this->t('qs_community.events.export.header.timetable.label')->render(),
       $this->t('qs_community.events.export.header.venue.label')->render(),
       $this->t('qs_community.events.export.header.contact')->render(),
-    ], 2, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => true]);
+    ], 2, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => TRUE]);
 
     foreach ($events as $event) {
 
@@ -125,13 +127,16 @@ class EventsController extends ControllerBase {
 
       // Set a HTML text for contact with new line.
       $contact = [];
+
       if (!$event->get('field_contact_name')->isEmpty()) {
         $contact[] = $event->field_contact_name->value;
       }
+
       if (!$event->get('field_contact_phone')->isEmpty()) {
         $contact[] = '<br />' . $event->field_contact_phone->value;
       }
       $contact_html = new Html();
+
       if (!empty($contact)) {
         $contact_html = $contact_html->toRichTextObject(implode(', ', $contact));
       }

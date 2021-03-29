@@ -2,45 +2,24 @@
 
 namespace Drupal\qs_activity\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\qs_activity\Service\ActivityManager;
-use Drupal\qs_badge\Service\BadgeManager;
-use Drupal\qs_activity\Service\EventManager;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_activity\Service\ActivityManager;
+use Drupal\qs_activity\Service\EventManager;
+use Drupal\qs_badge\Service\BadgeManager;
+use Drupal\taxonomy\TermInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * CollectionController.
  */
 class CollectionController extends ControllerBase {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The node Storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
-
-  /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  protected $termStorage;
 
   /**
    * The entity QS Activity Manager.
@@ -50,13 +29,6 @@ class CollectionController extends ControllerBase {
   protected $activityManager;
 
   /**
-   * The entity QS Event Manager.
-   *
-   * @var \Drupal\qs_activity\Service\EventManager
-   */
-  protected $eventManager;
-
-  /**
    * The Badge Manager.
    *
    * @var \Drupal\qs_badge\Service\BadgeManager
@@ -64,11 +36,11 @@ class CollectionController extends ControllerBase {
   protected $badgeManager;
 
   /**
-   * Request stack that controls the lifecycle of requests.
+   * The entity QS Event Manager.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\qs_activity\Service\EventManager
    */
-  protected $requestStack;
+  protected $eventManager;
 
   /**
    * The language manager.
@@ -78,34 +50,45 @@ class CollectionController extends ControllerBase {
   protected $languageManager;
 
   /**
-   * {@inheritdoc}
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager, BadgeManager $badge_manager, RequestStack $request_stack, LanguageManagerInterface $language_manager) {
-    $this->acl             = $acl;
-    $this->nodeStorage     = $entity_type_manager->getStorage('node');
-    $this->termStorage     = $entity_type_manager->getStorage('taxonomy_term');
-    $this->activityManager = $activity_manager;
-    $this->eventManager    = $event_manager;
-    $this->badgeManager    = $badge_manager;
-    $this->requestStack    = $request_stack;
-    $this->languageManager = $language_manager;
-  }
+  protected $nodeStorage;
+
+  /**
+   * Request stack that controls the lifecycle of requests.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  protected $termStorage;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('qs_activity.activity_manager'),
-    $container->get('qs_activity.event_manager'),
-    $container->get('qs_badge.badge_manager'),
-    $container->get('request_stack'),
-    $container->get('language_manager')
-    );
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, ActivityManager $activity_manager, EventManager $event_manager, BadgeManager $badge_manager, RequestStack $request_stack, LanguageManagerInterface $language_manager) {
+    $this->acl = $acl;
+    $this->nodeStorage = $entity_type_manager->getStorage('node');
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+    $this->activityManager = $activity_manager;
+    $this->eventManager = $event_manager;
+    $this->badgeManager = $badge_manager;
+    $this->requestStack = $request_stack;
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -130,6 +113,111 @@ class CollectionController extends ControllerBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control'),
+    $container->get('entity_type.manager'),
+    $container->get('qs_activity.activity_manager'),
+    $container->get('qs_activity.event_manager'),
+    $container->get('qs_badge.badge_manager'),
+    $container->get('request_stack'),
+    $container->get('language_manager')
+    );
+  }
+
+  /**
+   * Collection by dates.
+   */
+  public function dates(TermInterface $community) {
+    $variables = ['community' => $community];
+
+    // The request should be took at the last moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
+    // Get pagination date.
+    $pagination_date = $master_request->query->get('date');
+
+    try {
+      $start_date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
+    }
+    catch (\Exception $e) {
+      $start_date = new DrupalDateTime();
+    }
+
+    // Get pagination dates.
+    $dates = $this->activityManager->getPaginationFromDate($start_date->getPhpDateTime());
+    // Transform dates to DrupalDateTime objects.
+    $dates = array_map(static function ($date) {
+      /** @var \DateTime $date */
+      return DrupalDateTime::createFromTimestamp($date->getTimestamp());
+    }, $dates);
+    $variables = array_merge($variables, $dates);
+
+    // Get the only next events of each ones.
+    $events = $this->eventManager->getByDate($community, $dates['start'], $dates['end']);
+    $variables['events'] = $events;
+
+    // Get the only next activities of each ones.
+    $activities = $this->activityManager->getByDate($community, $dates['start'], $dates['end']);
+
+    // Get badges.
+    if (!empty($events) && !empty($activities)) {
+      // From a list of Events where current user has pending subscriptions.
+      $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($events, NULL);
+
+      // From a list of Events where current user has confirmed subscription.
+      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($events, TRUE);
+
+      // From list of Activities get user privileges.
+      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($activities);
+
+      // From list of Events count pending subscriptions by given events.
+      $variables['badges']['subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptions($events, NULL);
+
+      // From list of Events count confirmed subscriptions by given events.
+      $variables['badges']['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($events, TRUE);
+    }
+
+    return [
+      '#theme' => 'qs_activity_collection_by_date_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+          'url.query_args',
+        ],
+        'tags' => $this->getCacheTags($variables['events']),
+      ],
+    ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags(?array $nodes = NULL) {
+    $tags = [
+      // Invalidated whenever any Event is updated, deleted or created.
+      'node_list:event',
+      // Invalidated whenever any Community is updated, deleted or created.
+      'taxonomy_term_list:communities',
+      // Invalidated whenever any Privilege is updated, deleted or created.
+      'privilege_list:privilege',
+    ];
+
+    if ($nodes) {
+      foreach ($nodes as $node) {
+        $tags[] = 'node:' . $node->id();
+      }
+    }
+
+    return $tags;
+  }
+
+  /**
    * Collection by themes.
    */
   public function themes(TermInterface $community) {
@@ -145,8 +233,10 @@ class CollectionController extends ControllerBase {
 
     // Get filters themes.
     $filtered_themes = $master_request->query->get('themes');
+
     if ($filtered_themes) {
       $themes = $this->termStorage->loadMultiple($filtered_themes);
+
       foreach ($themes as $theme) {
         // Check if has translation.
         if ($theme->hasTranslation($currentLang->getId())) {
@@ -179,7 +269,7 @@ class CollectionController extends ControllerBase {
     }
 
     return [
-      '#theme'     => 'qs_activity_collection_by_theme_page',
+      '#theme' => 'qs_activity_collection_by_theme_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [
@@ -198,91 +288,6 @@ class CollectionController extends ControllerBase {
         ],
       ],
     ];
-  }
-
-  /**
-   * Collection by dates.
-   */
-  public function dates(TermInterface $community) {
-    $variables = ['community' => $community];
-
-    // The request should be took at the last moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
-
-    // Get pagination date.
-    $pagination_date = $master_request->query->get('date');
-    try {
-      $start_date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
-    }
-    catch (\Exception $e) {
-      $start_date = new DrupalDateTime();
-    }
-
-    // Get pagination dates.
-    $dates = $this->activityManager->getPaginationFromDate($start_date->getPhpDateTime());
-    // Transform dates to DrupalDateTime objects.
-    $dates = array_map(function ($date) {
-      /** @var \DateTime $date */
-      return DrupalDateTime::createFromTimestamp($date->getTimestamp());
-    }, $dates);
-    $variables = array_merge($variables, $dates);
-
-    // Get the only next events of each ones.
-    $events = $this->eventManager->getByDate($community, $dates['start'], $dates['end']);
-    $variables['events'] = $events;
-
-    // Get the only next activities of each ones.
-    $activities = $this->activityManager->getByDate($community, $dates['start'], $dates['end']);
-
-    // Get badges.
-    if (!empty($events) && !empty($activities)) {
-      // From a list of Events where current user has pending subscriptions.
-      $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($events, NULL);
-
-      // From a list of Events where current user has confirmed subscription.
-      $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($events, TRUE);
-
-      // From list of Activities get user privileges.
-      $variables['badges']['privileges'] = $this->badgeManager->getPrivileges($activities);
-
-      // From list of Events count pending subscriptions by given events.
-      $variables['badges']['subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptions($events, NULL);
-
-      // From list of Events count confirmed subscriptions by given events.
-      $variables['badges']['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($events, TRUE);
-    }
-
-    return [
-      '#theme'     => 'qs_activity_collection_by_date_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url.query_args',
-        ],
-        'tags' => $this->getCacheTags($variables['events']),
-      ],
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheTags(array $nodes = NULL) {
-    $tags = [
-      // Invalidated whenever any Event is updated, deleted or created.
-      'node_list:event',
-      // Invalidated whenever any Community is updated, deleted or created.
-      'taxonomy_term_list:communities',
-      // Invalidated whenever any Privilege is updated, deleted or created.
-      'privilege_list:privilege',
-    ];
-    if ($nodes) {
-      foreach ($nodes as $node) {
-        $tags[] = 'node:' . $node->id();
-      }
-    }
-    return $tags;
   }
 
 }

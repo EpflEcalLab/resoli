@@ -2,13 +2,13 @@
 
 namespace Drupal\qs_supervisor\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\qs_badge\Service\BadgeManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_badge\Service\BadgeManager;
 use Drupal\user\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * AccountController.
@@ -37,18 +37,6 @@ class AccountController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-      // Load customs services used in this class.
-      $container->get('qs_acl.access_control'),
-      $container->get('qs_badge.badge_manager')
-    );
-  }
-
-  /**
    * Checks access.
    *
    * @param \Drupal\Core\Session\AccountProxyInterface $account
@@ -70,6 +58,18 @@ class AccountController extends ControllerBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_badge.badge_manager')
+    );
+  }
+
+  /**
    * Account dashboard page.
    *
    * @param \Drupal\user\UserInterface $user
@@ -79,17 +79,17 @@ class AccountController extends ControllerBase {
    *   Render array of account dashboard.
    */
   public function dashboard(UserInterface $user) {
-    $variables['user']        = $user;
+    $variables['user'] = $user;
     $variables['communities'] = $this->acl->getCommunities($user);
-    $variables['pending']     = $this->acl->getPendingApprovalCommunities($user);
-    $variables['privileges']  = [];
+    $variables['pending'] = $this->acl->getPendingApprovalCommunities($user);
+    $variables['privileges'] = [];
 
     if ($variables['communities']) {
       $variables['privileges'] = $this->badgeManager->getCommunityPrivileges($variables['communities'], $user);
     }
 
     return [
-      '#theme'     => 'qs_supervisor_account_dashboard_page',
+      '#theme' => 'qs_supervisor_account_dashboard_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

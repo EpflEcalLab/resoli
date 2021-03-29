@@ -2,10 +2,10 @@
 
 namespace Drupal\qs_activity\Form;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
  * Base form handler for activity/event CRUD forms.
@@ -25,6 +25,17 @@ abstract class FormBasic extends FormBase {
    */
   public function __construct(ContainerInterface $container) {
     $this->container = $container;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    // Disable caching & HTML5 validation.
+    $form['#cache']['max-age'] = 0;
+    $form['#attributes']['novalidate'] = 'novalidate';
+
+    return $form;
   }
 
   /**
@@ -55,63 +66,13 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
-   * Lazy loading for the Quartiers-Solidaires Event Manager service.
+   * Lazy loading for the Quartiers-Solidaires Subscription Manager service.
    *
-   * @return \Drupal\Core\Routing\UrlGeneratorInterface
-   *   Return the Quartiers-Solidaires Event Manager.
+   * @return \Drupal\qs_subscription\Service\SubscriptionManager
+   *   Return the Quartiers-Solidaires Subscription Manager.
    */
-  protected function getEventManager() {
-    return $this->container->get('qs_activity.event_manager');
-  }
-
-  /**
-   * Lazy loading for the Drupal URL Generator service.
-   *
-   * @return \Drupal\Core\Routing\UrlGeneratorInterface
-   *   Return the Drupal URL Generator.
-   */
-  protected function getUrlGenerator() {
-    return $this->container->get('url_generator');
-  }
-
-  /**
-   * Lazy loading for the Drupal entity type manager.
-   *
-   * @return \Drupal\Core\Entity\EntityTypeManagerInterface
-   *   Return the Drupal entity type manager.
-   */
-  protected function getEntityTypeManager() {
-    return $this->container->get('entity_type.manager');
-  }
-
-  /**
-   * Return the node storage.
-   *
-   * @return \Drupal\node\NodeStorageInterface
-   *   Return the node storage.
-   */
-  protected function getNodeStorage() {
-    return $this->getEntityTypeManager()->getStorage('node');
-  }
-
-  /**
-   * Return the term storage.
-   *
-   * @return \Drupal\taxonomy\TermStorageInterface
-   *   Return the term storage.
-   */
-  protected function getTermStorage() {
-    return $this->getEntityTypeManager()->getStorage('taxonomy_term');
-  }
-
-  /**
-   * Return the user storage.
-   *
-   * @return \Drupal\user\Entity\User
-   *   Return the user storage.
-   */
-  protected function getUserStorage() {
-    return $this->getEntityTypeManager()->getStorage('user');
+  protected function getBadgeManager() {
+    return $this->container->get('qs_badge.badge_manager');
   }
 
   /**
@@ -122,16 +83,6 @@ abstract class FormBasic extends FormBase {
    */
   protected function getCurrentUser() {
     return $this->container->get('current_user');
-  }
-
-  /**
-   * Lazy loading for the Quartiers-Solidaires Privilege Manager service.
-   *
-   * @return \Drupal\qs_acl\Service\PrivilegeManager
-   *   Return the Quartiers-Solidaires Privilege Manager.
-   */
-  protected function getPrivilegeManager() {
-    return $this->container->get('qs_acl.privilege_manager');
   }
 
   /**
@@ -147,6 +98,26 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Lazy loading for the Drupal entity type manager.
+   *
+   * @return \Drupal\Core\Entity\EntityTypeManagerInterface
+   *   Return the Drupal entity type manager.
+   */
+  protected function getEntityTypeManager() {
+    return $this->container->get('entity_type.manager');
+  }
+
+  /**
+   * Lazy loading for the Quartiers-Solidaires Event Manager service.
+   *
+   * @return \Drupal\Core\Routing\UrlGeneratorInterface
+   *   Return the Quartiers-Solidaires Event Manager.
+   */
+  protected function getEventManager() {
+    return $this->container->get('qs_activity.event_manager');
+  }
+
+  /**
    * Lazy loading for The language Manager service.
    *
    * @return \Drupal\Core\Language\LanguageManagerInterface
@@ -154,6 +125,26 @@ abstract class FormBasic extends FormBase {
    */
   protected function getLanguageManager() {
     return $this->container->get('language_manager');
+  }
+
+  /**
+   * Return the node storage.
+   *
+   * @return \Drupal\node\NodeStorageInterface
+   *   Return the node storage.
+   */
+  protected function getNodeStorage() {
+    return $this->getEntityTypeManager()->getStorage('node');
+  }
+
+  /**
+   * Lazy loading for the Quartiers-Solidaires Privilege Manager service.
+   *
+   * @return \Drupal\qs_acl\Service\PrivilegeManager
+   *   Return the Quartiers-Solidaires Privilege Manager.
+   */
+  protected function getPrivilegeManager() {
+    return $this->container->get('qs_acl.privilege_manager');
   }
 
   /**
@@ -167,23 +158,33 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
-   * Lazy loading for the Quartiers-Solidaires Subscription Manager service.
+   * Return the term storage.
    *
-   * @return \Drupal\qs_subscription\Service\SubscriptionManager
-   *   Return the Quartiers-Solidaires Subscription Manager.
+   * @return \Drupal\taxonomy\TermStorageInterface
+   *   Return the term storage.
    */
-  protected function getBadgeManager() {
-    return $this->container->get('qs_badge.badge_manager');
+  protected function getTermStorage() {
+    return $this->getEntityTypeManager()->getStorage('taxonomy_term');
   }
 
   /**
-   * {@inheritdoc}
+   * Lazy loading for the Drupal URL Generator service.
+   *
+   * @return \Drupal\Core\Routing\UrlGeneratorInterface
+   *   Return the Drupal URL Generator.
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-    // Disable caching & HTML5 validation.
-    $form['#cache']['max-age'] = 0;
-    $form['#attributes']['novalidate'] = 'novalidate';
-    return $form;
+  protected function getUrlGenerator() {
+    return $this->container->get('url_generator');
+  }
+
+  /**
+   * Return the user storage.
+   *
+   * @return \Drupal\user\Entity\User
+   *   Return the user storage.
+   */
+  protected function getUserStorage() {
+    return $this->getEntityTypeManager()->getStorage('user');
   }
 
   /**
@@ -200,7 +201,8 @@ abstract class FormBasic extends FormBase {
   protected function validateDate($date, $format = 'Y-m-d H:i:s') {
     try {
       $d = DrupalDateTime::createFromFormat($format, $date);
-      return $d && $d->format($format) == $date;
+
+      return $d && $d->format($format) === $date;
     }
     catch (\Exception $e) {
       return FALSE;

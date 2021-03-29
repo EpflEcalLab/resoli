@@ -3,26 +3,20 @@
 namespace Drupal\qs_site\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Language\LanguageManager;
 
 /**
  * Provides an 'Header Lang Block' block.
  *
  * @Block(
- *   id = "qs_site_langswitcher_block",
- *   admin_label = @Translation("Language Switcher Block"),
+ *     id="qs_site_langswitcher_block",
+ *     admin_label=@Translation("Language Switcher Block"),
  * )
  */
 class LangSwitcherBlock extends BlockBase implements ContainerFactoryPluginInterface {
-  /**
-   * The Current Route.
-   *
-   * @var \Drupal\Core\Routing\CurrentRouteMatch
-   */
-  protected $route;
 
   /**
    * The language manager.
@@ -30,6 +24,12 @@ class LangSwitcherBlock extends BlockBase implements ContainerFactoryPluginInter
    * @var \Drupal\language\ConfigurableLanguageManagerInterface
    */
   protected $languageManager;
+  /**
+   * The Current Route.
+   *
+   * @var \Drupal\Core\Routing\CurrentRouteMatch
+   */
+  protected $route;
 
   /**
    * RelatedVideosBlock constructor.
@@ -40,6 +40,27 @@ class LangSwitcherBlock extends BlockBase implements ContainerFactoryPluginInter
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->route = $route;
     $this->languageManager = $language_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function build() {
+    $variables = [];
+
+    // Lang menu.
+    $variables['language'] = $this->languageManager->getCurrentLanguage();
+    $variables['languages'] = $this->languageManager->getLanguages();
+
+    return [
+      '#theme' => 'qs_site_langswitcher_block',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'url',
+        ],
+      ],
+    ];
   }
 
   /**
@@ -56,27 +77,6 @@ class LangSwitcherBlock extends BlockBase implements ContainerFactoryPluginInter
       $container->get('current_route_match'),
       $container->get('language_manager')
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function build() {
-    $variables = [];
-
-    // Lang menu.
-    $variables['language'] = $this->languageManager->getCurrentLanguage();
-    $variables['languages'] = $this->languageManager->getLanguages();
-
-    return [
-      '#theme'     => 'qs_site_langswitcher_block',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'url',
-        ],
-      ],
-    ];
   }
 
 }

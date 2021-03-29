@@ -17,41 +17,41 @@ function qs_activity_theme() {
     // ---------------------------------------------------------------------.
     'qs_activity_collection_by_theme_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--collection-by-theme',
+      'template' => 'qs--activity--collection-by-theme',
     ],
     'qs_activity_collection_by_date_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--collection-by-date',
+      'template' => 'qs--activity--collection-by-date',
     ],
     'qs_activity_user_collection_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--user-collection',
+      'template' => 'qs--activity--user-collection',
     ],
     'qs_activity_dashboard_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--dashboard',
+      'template' => 'qs--activity--dashboard',
     ],
     'qs_activity_event_dashboard_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--event-dashboard',
+      'template' => 'qs--activity--event-dashboard',
     ],
     'qs_activity_members_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--members',
+      'template' => 'qs--activity--members',
     ],
     // Blocks themes
     // ---------------------------------------------------------------------.
     'qs_activity_events_collection_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--events-collection',
+      'template' => 'qs--activity--events-collection',
     ],
     'qs_activity_collection_floating_actions_buttons_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--collection-floating-btn',
+      'template' => 'qs--activity--collection-floating-btn',
     ],
     'qs_activity_floating_actions_buttons_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--activity--floating-btn',
+      'template' => 'qs--activity--floating-btn',
     ],
   ];
 }

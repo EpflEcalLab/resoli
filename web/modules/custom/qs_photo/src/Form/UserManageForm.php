@@ -2,12 +2,12 @@
 
 namespace Drupal\qs_photo\Form;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\user\UserInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * UserManageForm class.
@@ -36,15 +36,8 @@ class UserManageForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl          = $this->getAcl();
+    $this->acl = $this->getAcl();
     $this->photoManager = $this->getPhotoManager();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_photo_user_manage_form';
   }
 
   /**
@@ -66,13 +59,14 @@ class UserManageForm extends FormBasic {
     if ($this->acl->hasAccessAccountDashboard($user, $account) && $this->acl->hasWriteAccessPhoto($activity, $user)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL, AccountInterface $user = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $activity = NULL, ?AccountInterface $user = NULL) {
     $form = parent::buildForm($form, $form_state);
 
     // Save the activity for submission.
@@ -91,33 +85,34 @@ class UserManageForm extends FormBasic {
     ];
 
     $form['#floating_buttons'][] = [
-      'icon'   => 'picture',
-      'label'  => $this->t('qs_photo.user.form.manage.title'),
+      'icon' => 'picture',
+      'label' => $this->t('qs_photo.user.form.manage.title'),
       'active' => TRUE,
     ];
 
     $activity_id = $activity->id();
     $photos = $this->photoManager->getWritablePhotoByUser($activity, $user);
     $options = [];
+
     if ($photos) {
       foreach ($photos as $photo) {
         $hasComment = $photo->body->value ? 'true' : 'false';
-        $options[$photo->id()] = "$activity_id|$hasComment";
+        $options[$photo->id()] = "{$activity_id}|{$hasComment}";
       }
     }
 
     $form['photos'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title'    => $this->t('qs_photos.photos_select'),
+        'title' => $this->t('qs_photos.photos_select'),
         'variant' => 'image',
       ],
       '#theme_wrappers' => [
         'checkboxes__image',
       ],
-      '#type'          => 'checkboxes',
-      '#required'      => FALSE,
-      '#options'       => $options,
+      '#type' => 'checkboxes',
+      '#required' => FALSE,
+      '#options' => $options,
     ];
 
     if (empty($photos)) {
@@ -175,13 +170,8 @@ class UserManageForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    // Get every checked photos.
-    $photos = $this->getCheckedPhotos($form_state);
-
-    if (empty($photos)) {
-      $form_state->setErrorByName('form', $this->t('qs_photo.user.form.manage.choose_one'));
-    }
+  public function getFormId() {
+    return 'qs_photo_user_manage_form';
   }
 
   /**
@@ -194,12 +184,14 @@ class UserManageForm extends FormBasic {
     $photos = $this->getCheckedPhotos($form_state);
 
     $trigger = $form_state->getTriggeringElement();
+
     switch ($trigger['#name']) {
       case 'comment':
         $form_state->setRedirect('qs_photo.form.comments', [
           'activity' => $activity->id(),
           'photos' => $photos,
         ]);
+
         break;
 
       case 'delete':
@@ -207,7 +199,20 @@ class UserManageForm extends FormBasic {
           'activity' => $activity->id(),
           'photos' => $photos,
         ]);
+
         break;
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Get every checked photos.
+    $photos = $this->getCheckedPhotos($form_state);
+
+    if (empty($photos)) {
+      $form_state->setErrorByName('form', $this->t('qs_photo.user.form.manage.choose_one'));
     }
   }
 
@@ -222,9 +227,10 @@ class UserManageForm extends FormBasic {
    */
   private function getCheckedPhotos(FormStateInterface $form_state) {
     // Get every checked photos.
-    $photos = array_filter($form_state->getValue('photos'), function ($value) {
+    $photos = array_filter($form_state->getValue('photos'), static function ($value) {
       return !empty($value);
     });
+
     return $photos;
   }
 

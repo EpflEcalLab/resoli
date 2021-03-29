@@ -16,35 +16,35 @@ function qs_photo_theme() {
     // ---------------------------------------------------------------------.
     'qs_photo_collection_by_month_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--photo--collection-by-month',
+      'template' => 'qs--photo--collection-by-month',
     ],
     'qs_photo_collection_by_theme_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--photo--collection-by-theme',
+      'template' => 'qs--photo--collection-by-theme',
     ],
     'qs_photo_collection_by_activity_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--photo--by-activity',
+      'template' => 'qs--photo--by-activity',
     ],
     'qs_photo_user_activities_collection_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--photo--user-activities-collection',
+      'template' => 'qs--photo--user-activities-collection',
     ],
     'qs_photo_user_activity_photos_collection_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--photo--user-activity-photos-collection',
+      'template' => 'qs--photo--user-activity-photos-collection',
     ],
     // Blocks themes
     // ---------------------------------------------------------------------.
     'qs_photo_monthly_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--photo--monthly',
+      'template' => 'qs--photo--monthly',
     ],
     // Forms themes
     // ---------------------------------------------------------------------.
     'qs_photo_delete_gallery_form' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--photo--delete-gallery',
+      'template' => 'qs--photo--delete-gallery',
     ],
   ];
 }
@@ -58,12 +58,12 @@ function qs_photo_theme() {
  *
  * @param \Drupal\file\FileInterface $file
  *   A file entity. This function may resize the file affecting its size.
- * @param string|int $maximum_dimensions
+ * @param int|string $maximum_dimensions
  *   (optional) A string in the form WIDTHxHEIGHT; for example, '640x480' or
  *   '85x85'. If an image toolkit is installed, the image will be resized down
  *   to these dimensions. A value of zero (the default) indicates no restriction
  *   on size, so no resizing will be attempted.
- * @param string|int $minimum_dimensions
+ * @param int|string $minimum_dimensions
  *   (optional) A string in the form WIDTHxHEIGHT. This will check that the
  *   image meets a minimum size. A value of zero (the default) indicates that
  *   there is no restriction on size.
@@ -89,11 +89,12 @@ function file_validate_image_max_resolution(FileInterface $file, $maximum_dimens
   if ($maximum_dimensions) {
     // Check that it is smaller than the given dimensions.
     list($width, $height) = explode('x', $maximum_dimensions);
+
     if ($image->getWidth() > $width || $image->getHeight() > $height) {
       $errors[] = t('The image is too large. The maximum dimensions are %dimensions pixels and the image size is %widthx%height pixels.', [
         '%dimensions' => $maximum_dimensions,
-        '%width'      => $image->getWidth(),
-        '%height'     => $image->getHeight(),
+        '%width' => $image->getWidth(),
+        '%height' => $image->getHeight(),
       ]);
     }
   }
@@ -101,11 +102,12 @@ function file_validate_image_max_resolution(FileInterface $file, $maximum_dimens
   if ($minimum_dimensions) {
     // Check that it is larger than the given dimensions.
     list($width, $height) = explode('x', $minimum_dimensions);
+
     if ($image->getWidth() < $width || $image->getHeight() < $height) {
       $errors[] = t('The image is too small. The minimum dimensions are %dimensions pixels and the image size is %widthx%height pixels.', [
         '%dimensions' => $minimum_dimensions,
-        '%width'      => $image->getWidth(),
-        '%height'     => $image->getHeight(),
+        '%width' => $image->getWidth(),
+        '%height' => $image->getHeight(),
       ]);
     }
   }

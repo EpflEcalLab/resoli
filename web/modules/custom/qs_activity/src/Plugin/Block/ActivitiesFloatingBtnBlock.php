@@ -2,16 +2,16 @@
 
 namespace Drupal\qs_activity\Plugin\Block;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Url;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_activity\Service\ActivityManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Activities Floating actions buttons Block.
@@ -20,32 +20,11 @@ use Drupal\Core\Url;
  *
  * @codingStandardsIgnoreFile
  * @Block(
- *   id = "qs_activity_collection_floating_actions_buttons_block",
- *   admin_label = @Translation("Activities Collection Floating actions buttons"),
+ *     id="qs_activity_collection_floating_actions_buttons_block",
+ *     admin_label=@Translation("Activities Collection Floating actions buttons"),
  * )
  */
 class ActivitiesFloatingBtnBlock extends BlockBase implements ContainerFactoryPluginInterface {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The current route.
-   *
-   * @var \Drupal\Core\Routing\CurrentRouteMatch
-   */
-  protected $route;
-
-  /**
-   * The current active user.
-   *
-   * @var \Drupal\Core\Session\AccountProxyInterface
-   */
-  private $currentUser;
 
   /**
    * The entity QS Activity Manager.
@@ -55,14 +34,87 @@ class ActivitiesFloatingBtnBlock extends BlockBase implements ContainerFactoryPl
   protected $activityManager;
 
   /**
+   * The current route.
+   *
+   * @var \Drupal\Core\Routing\CurrentRouteMatch
+   */
+  protected $route;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The current active user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  private $currentUser;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessControl $acl, CurrentRouteMatch $route, AccountProxyInterface $current_user, ActivityManager $activity_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->acl              = $acl;
-    $this->route            = $route;
-    $this->currentUser      = $current_user;
-    $this->activityManager  = $activity_manager;
+    $this->acl = $acl;
+    $this->route = $route;
+    $this->currentUser = $current_user;
+    $this->activityManager = $activity_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function build($params = []) {
+    $community = $this->route->getParameter('community');
+    $activity = $this->route->getParameter('activity');
+
+    if (!$community && $activity && !$activity->get('field_community')->isEmpty()) {
+      $community = $activity->field_community->entity;
+    }
+
+    // "My Activities" floating buttons.
+    $variables['floating_buttons']['action'] = [
+      'url' => Url::fromRoute('qs_activity.user.collection', [
+        'community' => $community->id(),
+        'user' => $this->currentUser->id(),
+      ]),
+      'label' => $this->t('qs_activity.floating.my_activities'),
+      'theme' => 'primary',
+      'icon' => 'activities',
+    ];
+
+    // "Add Activity" floating buttons.
+    // When the user has write access on the community & never add activities
+    // Replace the "My Activities" action by the "Add Activity" action.
+    if (\count($this->activityManager->getByUser($community, $this->currentUser)) <= 0 && $this->acl->hasWriteAccessCommunity($community)) {
+      $variables['floating_buttons']['action'] = [
+        'url' => Url::fromRoute('qs_activity.activities.form.add', [
+          'community' => $community->id(),
+        ]),
+        'label' => $this->t('qs_activity.floating.add.activity'),
+        'theme' => 'primary',
+        'icon' => 'plus',
+      ];
+    }
+
+    return [
+      '#theme' => 'qs_activity_collection_floating_actions_buttons_block',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+          'url',
+        ],
+        'tags' => [
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'privilege_list:privilege',
+        ],
+      ],
+    ];
   }
 
   /**
@@ -92,7 +144,8 @@ class ActivitiesFloatingBtnBlock extends BlockBase implements ContainerFactoryPl
     }
 
     $community = $this->route->getParameter('community');
-    $activity  = $this->route->getParameter('activity');
+    $activity = $this->route->getParameter('activity');
+
     if (!$community && $activity && !$activity->get('field_community')->isEmpty()) {
       $community = $activity->field_community->entity;
     }
@@ -102,57 +155,6 @@ class ActivitiesFloatingBtnBlock extends BlockBase implements ContainerFactoryPl
     }
 
     return AccessResult::allowed();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function build($params = []) {
-    $community = $this->route->getParameter('community');
-    $activity  = $this->route->getParameter('activity');
-    if (!$community && $activity && !$activity->get('field_community')->isEmpty()) {
-      $community = $activity->field_community->entity;
-    }
-
-    // "My Activities" floating buttons.
-    $variables['floating_buttons']['action'] = [
-      'url'     => Url::fromRoute('qs_activity.user.collection', [
-        'community' => $community->id(),
-        'user'      => $this->currentUser->id(),
-      ]),
-      'label'   => $this->t('qs_activity.floating.my_activities'),
-      'theme'   => 'primary',
-      'icon'    => 'activities',
-    ];
-
-    // "Add Activity" floating buttons.
-    // When the user has write access on the community & never add activities
-    // Replace the "My Activities" action by the "Add Activity" action.
-    if (count($this->activityManager->getByUser($community, $this->currentUser)) <= 0 && $this->acl->hasWriteAccessCommunity($community)) {
-      $variables['floating_buttons']['action'] = [
-        'url' => Url::fromRoute('qs_activity.activities.form.add', [
-          'community' => $community->id(),
-        ]),
-        'label' => $this->t('qs_activity.floating.add.activity'),
-        'theme' => 'primary',
-        'icon'  => 'plus',
-      ];
-    }
-
-    return [
-      '#theme'     => 'qs_activity_collection_floating_actions_buttons_block',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url',
-        ],
-        'tags' => [
-          // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege_list:privilege',
-        ],
-      ],
-    ];
   }
 
 }

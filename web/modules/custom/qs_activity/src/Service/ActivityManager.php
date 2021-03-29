@@ -2,19 +2,26 @@
 
 namespace Drupal\qs_activity\Service;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\Database\Connection;
-use Drupal\taxonomy\TermInterface;
-use Drupal\node\NodeInterface;
-use Drupal\user\UserInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
+use Drupal\user\UserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * ActivityManager.
  */
 class ActivityManager {
+
+  /**
+   * The database connection to use.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
   /**
    * The node Storage.
    *
@@ -30,70 +37,12 @@ class ActivityManager {
   protected $requestStack;
 
   /**
-   * The database connection to use.
-   *
-   * @var \Drupal\Core\Database\Connection
-   */
-  protected $connection;
-
-  /**
    * Class constructor.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, RequestStack $request_stack, Connection $connection) {
-    $this->nodeStorage  = $entity_type_manager->getStorage('node');
+    $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->requestStack = $request_stack;
-    $this->connection   = $connection;
-  }
-
-  /**
-   * Get all activities for the given community, filtred by theme if requested.
-   *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community entity.
-   *
-   * @return integer[]
-   *   A collection of Activity NID.
-   */
-  public function getThemed(TermInterface $community) {
-    // The request should be took at the latest moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
-
-    $query = $this->connection->select('node_field_data', 'activity');
-    $query->fields('activity', ['nid', 'title'])
-      ->condition('activity.type', 'activity')
-      ->condition('activity.status', TRUE);
-
-    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
-    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
-
-    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
-    $query->leftJoin('node__field_theme', 'field_theme', 'field_theme.entity_id = activity.nid');
-
-    $query->groupBy('activity.nid');
-    $query->groupBy('activity.title');
-    $query->groupBy('field_theme.field_theme_target_id');
-
-    // Apply filter by theme if requested.
-    $themes = $master_request->query->get('themes');
-    if ($themes) {
-      $or_themes = $query->orConditionGroup();
-      foreach ($themes as $theme) {
-        $or_themes->condition('field_theme.field_theme_target_id', $theme);
-      }
-      $query->condition($or_themes);
-    }
-
-    $query->orderBy('field_theme.field_theme_target_id');
-    $query->orderBy('activity.title', 'ASC');
-
-    $rows = $query->execute()->fetchAll();
-
-    $nids = [];
-    foreach ($rows as $row) {
-      $nids[] = $row->nid;
-    }
-
-    return $nids;
+    $this->connection = $connection;
   }
 
   /**
@@ -113,15 +62,15 @@ class ActivityManager {
    * @return \Drupal\node\NodeInterface
    *   The created activity.
    */
-  public function create($title, array $themes, array $authorizations, TermInterface $community, UserInterface $user = NULL) {
+  public function create($title, array $themes, array $authorizations, TermInterface $community, ?UserInterface $user = NULL) {
     $activity = $this->nodeStorage->create([
-      'type'                => 'activity',
-      'status'              => TRUE,
-      'title'               => $title,
-      'field_theme'         => $themes,
-      'field_community'     => $community->id(),
-      'field_contact_name'  => $user ? $user->field_firstname->value . ' ' . $user->field_lastname->value : '',
-      'field_contact_mail'  => $user ? $user->mail->value : '',
+      'type' => 'activity',
+      'status' => TRUE,
+      'title' => $title,
+      'field_theme' => $themes,
+      'field_community' => $community->id(),
+      'field_contact_name' => $user ? $user->field_firstname->value . ' ' . $user->field_lastname->value : '',
+      'field_contact_mail' => $user ? $user->mail->value : '',
       'field_contact_phone' => $user ? $user->field_phone->value : '',
     ]);
 
@@ -131,31 +80,58 @@ class ActivityManager {
       }
     }
     $activity->save();
+
     return $activity;
   }
 
   /**
-   * Update an Activity.
+   * Get all activities in the given date range for the community.
    *
-   * Only update given fields.
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
+   *   The start date.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
+   *   The end date.
    *
-   * @param \Drupal\node\NodeInterface $activity
-   *   The activity to update.
-   * @param array $fields
-   *   The fields to update with the new value.
-   *
-   * @return \Drupal\node\NodeInterface
-   *   The updated activity.
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of node's Activity. Otherwise an empty array.
    */
-  public function update(NodeInterface $activity, array $fields) {
-    foreach ($fields as $key => $value) {
-      if ($activity->hasField($key)) {
-        $activity->set($key, $value);
-      }
+  public function getByDate(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end) {
+    // Get all activities in the community in the date range.
+    $query = $this->connection->select('node_field_data', 'activity');
+    $query->fields('activity', ['nid'])
+      ->condition('activity.type', 'activity')
+      ->condition('activity.status', TRUE);
+
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
+    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
+
+    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+
+    $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_activity.entity_id');
+    $query->condition('field_end_at.field_end_at_value', [
+      $date_start->format('c'),
+      $date_end->format('c'),
+    ], 'BETWEEN');
+
+    $query->groupBy('activity.nid');
+
+    $rows = $query->execute()->fetchAll();
+
+    $nids = [];
+
+    foreach ($rows as $row) {
+      $nids[] = $row->nid;
     }
 
-    $activity->save();
-    return $activity;
+    $activities = [];
+
+    if ($nids) {
+      $activities = $this->nodeStorage->loadMultiple($nids);
+    }
+
+    return $activities;
   }
 
   /**
@@ -196,11 +172,13 @@ class ActivityManager {
     $rows = $query->execute()->fetchAll();
 
     $nids = [];
+
     foreach ($rows as $row) {
       $nids[] = $row->nid;
     }
 
     $activities = [];
+
     if ($nids) {
       $activities = $this->nodeStorage->loadMultiple($nids);
     }
@@ -268,6 +246,7 @@ class ActivityManager {
     $rows = $query_privileges->execute()->fetchAll();
 
     $privileges_activity = [];
+
     foreach ($rows as $row) {
       $privileges_activity[$row->nid] = $row->nid;
     }
@@ -289,6 +268,7 @@ class ActivityManager {
     $rows = $query_member->execute()->fetchAll();
 
     $members_activity = [];
+
     foreach ($rows as $row) {
       $members_activity[$row->nid] = $row->nid;
     }
@@ -298,54 +278,7 @@ class ActivityManager {
     $nids = array_merge($privileges_activity, $members_activity);
 
     $activities = [];
-    if ($nids) {
-      $activities = $this->nodeStorage->loadMultiple($nids);
-    }
 
-    return $activities;
-  }
-
-  /**
-   * Get all activities in the given date range for the community.
-   *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community entity.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
-   *   The start date.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
-   *   The end date.
-   *
-   * @return \Drupal\node\NodeInterface[]
-   *   A collection of node's Activity. Otherwise an empty array.
-   */
-  public function getByDate(TermInterface $community, DrupalDateTime $date_start, DrupalDateTime $date_end) {
-    // Get all activities in the community in the date range.
-    $query = $this->connection->select('node_field_data', 'activity');
-    $query->fields('activity', ['nid'])
-      ->condition('activity.type', 'activity')
-      ->condition('activity.status', TRUE);
-
-    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
-    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
-
-    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
-
-    $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_activity.entity_id');
-    $query->condition('field_end_at.field_end_at_value', [
-      $date_start->format('c'),
-      $date_end->format('c'),
-    ], 'BETWEEN');
-
-    $query->groupBy('activity.nid');
-
-    $rows = $query->execute()->fetchAll();
-
-    $nids = [];
-    foreach ($rows as $row) {
-      $nids[] = $row->nid;
-    }
-
-    $activities = [];
     if ($nids) {
       $activities = $this->nodeStorage->loadMultiple($nids);
     }
@@ -359,11 +292,11 @@ class ActivityManager {
    * @param \DateTime $start_date
    *   The start date to calculate everything from.
    *
+   * @throws \Exception
+   *
    * @return array
    *   The start date, the end date, the next date and the prev date.
    *   We return DateTime to be able to unit-test this easily.
-   *
-   * @throws \Exception
    */
   public function getPaginationFromDate(\DateTime $start_date) {
     $start = clone $start_date;
@@ -412,6 +345,85 @@ class ActivityManager {
       'prev' => $prev,
       'next' => $next,
     ];
+  }
+
+  /**
+   * Get all activities for the given community, filtred by theme if requested.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   *
+   * @return int[]
+   *   A collection of Activity NID.
+   */
+  public function getThemed(TermInterface $community) {
+    // The request should be took at the latest moment, avoid it on constructor.
+    $master_request = $this->requestStack->getMasterRequest();
+
+    $query = $this->connection->select('node_field_data', 'activity');
+    $query->fields('activity', ['nid', 'title'])
+      ->condition('activity.type', 'activity')
+      ->condition('activity.status', TRUE);
+
+    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = activity.nid');
+    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+
+    $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.field_activity_target_id = activity.nid');
+    $query->leftJoin('node__field_theme', 'field_theme', 'field_theme.entity_id = activity.nid');
+
+    $query->groupBy('activity.nid');
+    $query->groupBy('activity.title');
+    $query->groupBy('field_theme.field_theme_target_id');
+
+    // Apply filter by theme if requested.
+    $themes = $master_request->query->get('themes');
+
+    if ($themes) {
+      $or_themes = $query->orConditionGroup();
+
+      foreach ($themes as $theme) {
+        $or_themes->condition('field_theme.field_theme_target_id', $theme);
+      }
+      $query->condition($or_themes);
+    }
+
+    $query->orderBy('field_theme.field_theme_target_id');
+    $query->orderBy('activity.title', 'ASC');
+
+    $rows = $query->execute()->fetchAll();
+
+    $nids = [];
+
+    foreach ($rows as $row) {
+      $nids[] = $row->nid;
+    }
+
+    return $nids;
+  }
+
+  /**
+   * Update an Activity.
+   *
+   * Only update given fields.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity to update.
+   * @param array $fields
+   *   The fields to update with the new value.
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The updated activity.
+   */
+  public function update(NodeInterface $activity, array $fields) {
+    foreach ($fields as $key => $value) {
+      if ($activity->hasField($key)) {
+        $activity->set($key, $value);
+      }
+    }
+
+    $activity->save();
+
+    return $activity;
   }
 
   /**

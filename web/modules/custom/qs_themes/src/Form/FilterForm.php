@@ -2,13 +2,13 @@
 
 namespace Drupal\qs_themes\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Session\AccountProxyInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Session\AccountProxyInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * FilterForm.
@@ -20,6 +20,13 @@ class FilterForm extends FormBase {
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
+
+  /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
 
   /**
    * Request stack that controls the lifecycle of requests.
@@ -36,20 +43,6 @@ class FilterForm extends FormBase {
   private $termStorage;
 
   /**
-   * The language manager.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_themes_filter_form';
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function __construct(AccountProxyInterface $currentUser, RequestStack $request_stack, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager) {
@@ -57,19 +50,6 @@ class FilterForm extends FormBase {
     $this->requestStack = $request_stack;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->languageManager = $language_manager;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-        $container->get('current_user'),
-        $container->get('request_stack'),
-        $container->get('entity_type.manager'),
-        $container->get('language_manager')
-    );
   }
 
   /**
@@ -91,6 +71,7 @@ class FilterForm extends FormBase {
     // Get all themes for options.
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
+
     foreach ($themes as $theme) {
       // Check if has translation.
       if ($theme->hasTranslation($currentLang->getId())) {
@@ -102,9 +83,9 @@ class FilterForm extends FormBase {
     // Get all selected themes for options.
     $filtered_themes = $master_request->query->get('themes') ?: [];
     $form['themes'] = [
-      '#type'          => 'checkboxes',
-      '#required'      => FALSE,
-      '#options'       => $options,
+      '#type' => 'checkboxes',
+      '#required' => FALSE,
+      '#options' => $options,
       '#default_value' => $filtered_themes,
       '#theme_wrappers' => [
         'checkboxes__buttons',
@@ -117,7 +98,7 @@ class FilterForm extends FormBase {
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#value' => $this->t('qs_themes.filter_form.submit'),
       '#attributes' => [
         'modal' => TRUE,
@@ -133,14 +114,33 @@ class FilterForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+        $container->get('current_user'),
+        $container->get('request_stack'),
+        $container->get('entity_type.manager'),
+        $container->get('language_manager')
+    );
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'qs_themes_filter_form';
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
   }
 
 }

@@ -2,34 +2,20 @@
 
 namespace Drupal\qs_photo\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\qs_photo\Service\PhotoManager;
-use Drupal\qs_activity\Service\EventManager;
-use Symfony\Component\HttpFoundation\Request;
 use Drupal\node\NodeInterface;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_activity\Service\EventManager;
+use Drupal\qs_photo\Service\PhotoManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * ActivityController.
  */
 class ActivityController extends ControllerBase {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The entity QS Photo Manager.
-   *
-   * @var \Drupal\qs_photo\Service\PhotoManager
-   */
-  protected $photoManager;
 
   /**
    * The entity QS Event Manager.
@@ -46,26 +32,27 @@ class ActivityController extends ControllerBase {
   protected $nodeStorage;
 
   /**
-   * {@inheritdoc}
+   * The entity QS Photo Manager.
+   *
+   * @var \Drupal\qs_photo\Service\PhotoManager
    */
-  public function __construct(AccessControl $acl, PhotoManager $photo_manager, EventManager $event_manager) {
-    $this->acl          = $acl;
-    $this->photoManager = $photo_manager;
-    $this->eventManager = $event_manager;
-    $this->nodeStorage  = $this->entityTypeManager()->getStorage('node');
-  }
+  protected $photoManager;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-      $container->get('qs_acl.access_control'),
-      $container->get('qs_photo.photo_manager'),
-      $container->get('qs_activity.event_manager')
-    );
+  public function __construct(AccessControl $acl, PhotoManager $photo_manager, EventManager $event_manager) {
+    $this->acl = $acl;
+    $this->photoManager = $photo_manager;
+    $this->eventManager = $event_manager;
+    $this->nodeStorage = $this->entityTypeManager()->getStorage('node');
   }
 
   /**
@@ -103,6 +90,7 @@ class ActivityController extends ControllerBase {
 
     // Order photos by events.
     $variables['photos'] = [];
+
     if ($photos) {
       foreach ($photos as $photo) {
         $variables['photos'][$photo->field_event->target_id][] = $photo;
@@ -110,7 +98,7 @@ class ActivityController extends ControllerBase {
     }
 
     return [
-      '#theme'     => 'qs_photo_collection_by_activity_page',
+      '#theme' => 'qs_photo_collection_by_activity_page',
       '#variables' => $variables,
       '#attached' => [
         'library' => [
@@ -130,7 +118,20 @@ class ActivityController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function getCacheTags(NodeInterface $activity, array $photos = NULL) {
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_photo.photo_manager'),
+      $container->get('qs_activity.event_manager')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags(NodeInterface $activity, ?array $photos = NULL) {
     $tags[] = 'node:' . $activity->id();
     $tags = [
       // Invalidated whenever any Photo is updated, deleted or created.
@@ -138,11 +139,13 @@ class ActivityController extends ControllerBase {
       // Invalidated whenever any Privilege is updated, deleted or created.
       'privilege_list:privilege',
     ];
+
     if ($photos) {
       foreach ($photos as $photo) {
         $tags[] = 'node:' . $photo->id();
       }
     }
+
     return $tags;
   }
 

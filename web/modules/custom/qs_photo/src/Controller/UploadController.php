@@ -2,36 +2,22 @@
 
 namespace Drupal\qs_photo\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Drupal\Core\Access\AccessResult;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Drupal\Core\Messenger\MessengerTrait;
-use Drupal\Core\Messenger\MessengerInterface;
 
 /**
  * UploadController.
  */
 class UploadController extends ControllerBase {
   use MessengerTrait;
-
-  /**
-   * The request stack.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
-   */
-  protected $requestStack;
-
-  /**
-   * The node Storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
 
   /**
    * Access Control Service.
@@ -48,6 +34,20 @@ class UploadController extends ControllerBase {
   protected $extensions = 'png gif jpg jpeg';
 
   /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * The request stack.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
    * Construct a new UploadController object.
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
@@ -61,17 +61,6 @@ class UploadController extends ControllerBase {
     $this->requestStack = $request_stack;
     $this->acl = $acl;
     $this->nodeStorage = $this->entityTypeManager()->getStorage('node');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-      $container->get('request_stack'),
-      $container->get('qs_acl.access_control')
-    );
   }
 
   /**
@@ -97,7 +86,8 @@ class UploadController extends ControllerBase {
     }
 
     $event = $this->nodeStorage->load($request->get('event'));
-    if (!$event || $event->bundle() != 'event') {
+
+    if (!$event || $event->bundle() !== 'event') {
       return AccessResult::forbidden();
     }
 
@@ -112,6 +102,17 @@ class UploadController extends ControllerBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+      $container->get('request_stack'),
+      $container->get('qs_acl.access_control')
+    );
+  }
+
+  /**
    * Upload function.
    *
    * @return \Symfony\Component\HttpFoundation\JsonResponse
@@ -119,8 +120,8 @@ class UploadController extends ControllerBase {
    */
   public function upload(Request $request) {
     $upload_validators = [
-      'file_validate_extensions'           => [$this->extensions],
-      'file_validate_size'                 => [file_upload_max_size()],
+      'file_validate_extensions' => [$this->extensions],
+      'file_validate_size' => [file_upload_max_size()],
       'file_validate_image_max_resolution' => ['5000x5000'],
     ];
 
@@ -135,6 +136,7 @@ class UploadController extends ControllerBase {
     // Return error(s) to Uppy.
     if ($messages && !empty($messages)) {
       $errors = [];
+
       foreach ($messages as $error) {
         $errors[] = strip_tags($error->__toString());
       }
@@ -146,16 +148,17 @@ class UploadController extends ControllerBase {
 
     // Return the file which will be processed later.
     $data = [];
+
     foreach ($files as $file) {
       $data[] = [
-        'fid'  => $file->fid->value,
+        'fid' => $file->fid->value,
         'uuid' => $file->uuid->value,
       ];
     }
 
     return new JsonResponse([
       'success' => TRUE,
-      'data'    => $data,
+      'data' => $data,
     ]);
   }
 

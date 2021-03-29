@@ -2,35 +2,21 @@
 
 namespace Drupal\qs_calendar\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_activity\Service\EventManager;
 use Drupal\qs_badge\Service\BadgeManager;
-use Drupal\Core\Datetime\DrupalDateTime;
-use Symfony\Component\HttpFoundation\Request;
 use Drupal\taxonomy\TermInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * CollectionController.
  */
 class CollectionController extends ControllerBase {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The entity QS Event Manager.
-   *
-   * @var \Drupal\qs_activity\Service\EventManager
-   */
-  protected $eventManager;
 
   /**
    * The Badge Manager.
@@ -40,25 +26,26 @@ class CollectionController extends ControllerBase {
   protected $badgeManager;
 
   /**
-   * {@inheritdoc}
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
    */
-  public function __construct(AccessControl $acl, EventManager $event_manager, BadgeManager $badge_manager) {
-    $this->acl          = $acl;
-    $this->eventManager = $event_manager;
-    $this->badgeManager = $badge_manager;
-  }
+  protected $eventManager;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_activity.event_manager'),
-    $container->get('qs_badge.badge_manager')
-    );
+  public function __construct(AccessControl $acl, EventManager $event_manager, BadgeManager $badge_manager) {
+    $this->acl = $acl;
+    $this->eventManager = $event_manager;
+    $this->badgeManager = $badge_manager;
   }
 
   /**
@@ -85,7 +72,20 @@ class CollectionController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function getCacheTags(array $nodes = NULL) {
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control'),
+    $container->get('qs_activity.event_manager'),
+    $container->get('qs_badge.badge_manager')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags(?array $nodes = NULL) {
     $tags = [
       // Invalidated whenever any Event is updated, deleted or created.
       'node_list:event',
@@ -94,41 +94,14 @@ class CollectionController extends ControllerBase {
       // Invalidated whenever any Privilege is updated, deleted or created.
       'privilege_list:privilege',
     ];
+
     if ($nodes) {
       foreach ($nodes as $node) {
         $tags[] = 'node:' . $node->id();
       }
     }
+
     return $tags;
-  }
-
-  /**
-   * Collection by week.
-   */
-  public function weekly(Request $request, TermInterface $community) {
-    $variables = ['community' => $community];
-    $variables['events'] = $this->getEventsByDay($request, $community);
-
-    // Get badges.
-    if (!empty($variables['events'])) {
-      $variables['badges'] = $this->getBadges($variables['events']);
-    }
-
-    // Get day from parameter.
-    $current_day = $request->query->get('day');
-    $variables['current_day'] = $current_day ?: new DrupalDateTime();
-
-    return [
-      '#theme'     => 'qs_calendar_collection_weekly_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url.query_args',
-        ],
-        'tags' => $this->getCacheTags($variables['events']),
-      ],
-    ];
   }
 
   /**
@@ -148,7 +121,7 @@ class CollectionController extends ControllerBase {
     $variables['current_day'] = $current_day ?: new DrupalDateTime();
 
     return [
-      '#theme'     => 'qs_calendar_collection_monthly_page',
+      '#theme' => 'qs_calendar_collection_monthly_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [
@@ -161,37 +134,32 @@ class CollectionController extends ControllerBase {
   }
 
   /**
-   * Get every events for the given community & day in GET parameter.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The current request.
-   * @param Drupal\taxonomy\TermInterface $community
-   *   The community entity.
-   *
-   * @return Drupal\node\NodeInterface[]
-   *   A collection of node's Event. Otherwise an empty array.
+   * Collection by week.
    */
-  protected function getEventsByDay(Request $request, TermInterface $community) {
-    // Get pagination day.
-    $pagination_day = $request->query->get('day');
-    $day = new DrupalDateTime();
-    if ($pagination_day) {
-      try {
-        $day = DrupalDateTime::createFromFormat('Y-m-d', $pagination_day);
-      }
-      catch (\Exception $e) {
-        $day = new DrupalDateTime();
-      }
+  public function weekly(Request $request, TermInterface $community) {
+    $variables = ['community' => $community];
+    $variables['events'] = $this->getEventsByDay($request, $community);
+
+    // Get badges.
+    if (!empty($variables['events'])) {
+      $variables['badges'] = $this->getBadges($variables['events']);
     }
 
-    $day_start = clone $day;
-    $day_start->setTime(0, 0);
+    // Get day from parameter.
+    $current_day = $request->query->get('day');
+    $variables['current_day'] = $current_day ?: new DrupalDateTime();
 
-    $day_end = clone $day;
-    $day_end->setTime(23, 59, 59);
-
-    // Get the only next events of each ones.
-    return $this->eventManager->getByDate($community, $day_start, $day_end);
+    return [
+      '#theme' => 'qs_calendar_collection_weekly_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+          'url.query_args',
+        ],
+        'tags' => $this->getCacheTags($variables['events']),
+      ],
+    ];
   }
 
   /**
@@ -200,7 +168,7 @@ class CollectionController extends ControllerBase {
    * @param Drupal\node\NodeInterface[] $events
    *   A collection of events.
    *
-   * @return integer[]
+   * @return int[]
    *   The collection of events IDs which have subscriptions.
    */
   protected function getBadges(array $events) {
@@ -219,6 +187,41 @@ class CollectionController extends ControllerBase {
     $badges['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($events, TRUE);
 
     return $badges;
+  }
+
+  /**
+   * Get every events for the given community & day in GET parameter.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   * @param Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   *
+   * @return Drupal\node\NodeInterface[]
+   *   A collection of node's Event. Otherwise an empty array.
+   */
+  protected function getEventsByDay(Request $request, TermInterface $community) {
+    // Get pagination day.
+    $pagination_day = $request->query->get('day');
+    $day = new DrupalDateTime();
+
+    if ($pagination_day) {
+      try {
+        $day = DrupalDateTime::createFromFormat('Y-m-d', $pagination_day);
+      }
+      catch (\Exception $e) {
+        $day = new DrupalDateTime();
+      }
+    }
+
+    $day_start = clone $day;
+    $day_start->setTime(0, 0);
+
+    $day_end = clone $day;
+    $day_end->setTime(23, 59, 59);
+
+    // Get the only next events of each ones.
+    return $this->eventManager->getByDate($community, $day_start, $day_end);
   }
 
 }

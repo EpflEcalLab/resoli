@@ -14,25 +14,25 @@ function qs_community_theme() {
     // ---------------------------------------------------------------------.
     'qs_community_welcome_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--community--welcome',
+      'template' => 'qs--community--welcome',
     ],
     'qs_community_dashboard_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--community--dashboard',
+      'template' => 'qs--community--dashboard',
     ],
     'qs_community_members_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--community--members',
+      'template' => 'qs--community--members',
     ],
     'qs_community_waiting_approval_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--community--waiting-approval',
+      'template' => 'qs--community--waiting-approval',
     ],
     // Pages themes
     // ---------------------------------------------------------------------.
     'qs_community_welcome_floating_actions_buttons_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--community--welcome-floating-btn',
+      'template' => 'qs--community--welcome-floating-btn',
     ],
   ];
 }

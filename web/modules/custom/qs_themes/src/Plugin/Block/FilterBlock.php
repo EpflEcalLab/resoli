@@ -3,10 +3,10 @@
 namespace Drupal\qs_themes\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
  * Filter Theme Block.
@@ -16,8 +16,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  * It will then reload the page & add the GET parameter themes[].
  *
  * @Block(
- *   id = "qs_themes_filter_block",
- *   admin_label = @Translation("Themes Filter"),
+ *     id="qs_themes_filter_block",
+ *     admin_label=@Translation("Themes Filter"),
  * )
  */
 class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -47,20 +47,6 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    // Instantiates this form class.
-    return new static(
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        $container->get('request_stack'),
-        $container->get('entity_type.manager')
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function build($params = []) {
     $variables = ['filtered' => NULL];
 
@@ -74,7 +60,7 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
     }
 
     return [
-      '#theme'     => 'qs_themes_filter_block',
+      '#theme' => 'qs_themes_filter_block',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [
@@ -88,6 +74,20 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
         ],
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    // Instantiates this form class.
+    return new static(
+        $configuration,
+        $plugin_id,
+        $plugin_definition,
+        $container->get('request_stack'),
+        $container->get('entity_type.manager')
+    );
   }
 
 }

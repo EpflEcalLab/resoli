@@ -3,9 +3,9 @@
 namespace Drupal\qs_activity\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * ActivityDeleteForm class.
@@ -33,14 +33,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
-    return 'qs_activity_delete_form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state, $activity);
 
     $form['#theme_wrappers'] = [
@@ -48,10 +41,10 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     ];
 
     $form['#attributes'] = [
-      'title'       => $activity->title->value,
+      'title' => $activity->title->value,
       'description' => $this->t('qs_activity.activities.form.delete.warning'),
-      'icon'        => 'trash',
-      'theme'       => 'danger',
+      'icon' => 'trash',
+      'theme' => 'danger',
     ];
 
     $form['#floating_buttons'][] = [
@@ -84,7 +77,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'class' => [
           'text-danger',
@@ -105,14 +98,8 @@ class ActivityDeleteForm extends ActivityEditFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->get('activity'));
-
-    // Assert the activity has no event.
-    $events = $this->eventManager->getAll($activity);
-    if (!empty($events)) {
-      $form_state->setError($form, $this->t("qs_activity.activities.form.delete.error.has_events @activity", ['@activity' => $activity->toLink($activity->getTitle())->toString()]));
-    }
+  public function getFormId() {
+    return 'qs_activity_delete_form';
   }
 
   /**
@@ -122,7 +109,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     $activity = $this->nodeStorage->load($form_state->get('activity'));
     $community = $activity->field_community->entity;
 
-    drupal_set_message($this->t("qs_activity.activities.form.delete.success @activity", [
+    drupal_set_message($this->t('qs_activity.activities.form.delete.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 
@@ -130,6 +117,20 @@ class ActivityDeleteForm extends ActivityEditFormBase {
 
     // Delete the activity.
     $activity = $activity->delete();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
+
+    // Assert the activity has no event.
+    $events = $this->eventManager->getAll($activity);
+
+    if (!empty($events)) {
+      $form_state->setError($form, $this->t('qs_activity.activities.form.delete.error.has_events @activity', ['@activity' => $activity->toLink($activity->getTitle())->toString()]));
+    }
   }
 
 }

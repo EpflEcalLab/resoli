@@ -2,17 +2,17 @@
 
 namespace Drupal\qs_subscription\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\qs_subscription\Service\SubscriptionManager;
-use Drupal\qs_acl\Service\PrivilegeManager;
-use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_subscription\Entity\Subscription;
+use Drupal\qs_subscription\Service\SubscriptionManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * JudgeController.
@@ -24,6 +24,13 @@ class JudgeController extends ControllerBase {
    * @var \Drupal\qs_acl\Service\AccessControl
    */
   protected $acl;
+
+  /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
 
   /**
    * The Privilege Manager.
@@ -40,13 +47,6 @@ class JudgeController extends ControllerBase {
   protected $subscriptionManager;
 
   /**
-   * Composes and optionally sends an email message.
-   *
-   * @var \Drupal\Core\Mail\MailManagerInterface
-   */
-  protected $mail;
-
-  /**
    * The user Storage.
    *
    * @var \Drupal\user\UserStorageInterface
@@ -57,26 +57,11 @@ class JudgeController extends ControllerBase {
    * {@inheritdoc}
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager, AccessControl $acl, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail) {
-    $this->acl                 = $acl;
-    $this->privilegeManager    = $privilege_manager;
+    $this->acl = $acl;
+    $this->privilegeManager = $privilege_manager;
     $this->subscriptionManager = $subscription_manager;
-    $this->mail                = $mail;
-    $this->userStorage         = $entity_type_manager->getStorage('user');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('entity_type.manager'),
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager'),
-    $container->get('qs_subscription.subscription_manager'),
-    $container->get('plugin.manager.mail')
-    );
+    $this->mail = $mail;
+    $this->userStorage = $entity_type_manager->getStorage('user');
   }
 
   /**
@@ -94,12 +79,14 @@ class JudgeController extends ControllerBase {
     $access = AccessResult::forbidden();
 
     $event = $subscription->getEntity();
-    if ($event->bundle() != 'event') {
+
+    if ($event->bundle() !== 'event') {
       return $access;
     }
 
     // Get the related activity.
     $activity = $event->field_activity->entity;
+
     if ($activity && $this->acl->hasWriteAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
@@ -123,10 +110,10 @@ class JudgeController extends ControllerBase {
     $user = $subscription->getOwner();
 
     // Send email to user when event subscription is approved.
-    if ($entity && $entity->bundle() == 'event' && $user && $user->entity) {
+    if ($entity && $entity->bundle() === 'event' && $user && $user->entity) {
       $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_confirm', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
         'account' => $user->entity,
-        'event'   => $entity,
+        'event' => $entity,
       ]);
 
       $activity = $entity->field_activity->entity;
@@ -150,12 +137,13 @@ class JudgeController extends ControllerBase {
       // Load user with activity_organizers or activity_maintainers privilege(s)
       // & send them mail.
       $accounts = NULL;
+
       if ($ids) {
         $accounts = $this->userStorage->loadMultiple($ids);
 
         foreach ($accounts as $account) {
           $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_confirm_organizers', $account->getEmail(), $account->getPreferredLangcode(), [
-            'user'  => $user->entity,
+            'user' => $user->entity,
             'event' => $entity,
           ]);
         }
@@ -163,10 +151,26 @@ class JudgeController extends ControllerBase {
     }
 
     $confirmed = $this->subscriptionManager->confirm($subscription);
+
     return new JsonResponse([
-      'status'       => TRUE,
+      'status' => TRUE,
       'subscription' => $confirmed->toArray(),
     ]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('entity_type.manager'),
+    $container->get('qs_acl.access_control'),
+    $container->get('qs_acl.privilege_manager'),
+    $container->get('qs_subscription.subscription_manager'),
+    $container->get('plugin.manager.mail')
+    );
   }
 
   /**
@@ -185,16 +189,17 @@ class JudgeController extends ControllerBase {
     $user = $subscription->getOwner();
 
     // Send email to user when event subscription is approved.
-    if ($entity && $entity->bundle() == 'event' && $user && $user->entity) {
+    if ($entity && $entity->bundle() === 'event' && $user && $user->entity) {
       $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_decline', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
         'account' => $user->entity,
-        'event'   => $entity,
+        'event' => $entity,
       ]);
     }
 
     $declined = $this->subscriptionManager->decline($subscription);
+
     return new JsonResponse([
-      'status'       => TRUE,
+      'status' => TRUE,
       'subscription' => $declined->toArray(),
     ]);
   }

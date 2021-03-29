@@ -2,11 +2,11 @@
 
 namespace Drupal\qs_activity\Form;
 
-use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\node\NodeInterface;
-use Drupal\Core\Url;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * EventDeleteForm class.
@@ -33,14 +33,7 @@ class EventDeleteForm extends EventEditFormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
-    return 'qs_activity_event_delete_form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $event = NULL) {
     $form = parent::buildForm($form, $form_state, $event);
 
     $form['#theme_wrappers'] = [
@@ -48,10 +41,10 @@ class EventDeleteForm extends EventEditFormBase {
     ];
 
     $form['#attributes'] = [
-      'title'       => $event->title->value,
+      'title' => $event->title->value,
       'description' => $this->t('qs_activity.events.form.delete.warning'),
-      'icon'        => 'trash',
-      'theme'       => 'danger',
+      'icon' => 'trash',
+      'theme' => 'danger',
     ];
 
     $form['#floating_buttons'][] = [
@@ -85,7 +78,7 @@ class EventDeleteForm extends EventEditFormBase {
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'class' => [
           'text-danger',
@@ -106,16 +99,8 @@ class EventDeleteForm extends EventEditFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    $event = $this->nodeStorage->load($form_state->get('event'));
-    $now = new DrupalDateTime();
-
-    // Assert the event has not started.
-    if ($event->field_start_at->date <= $now) {
-      $form_state->setError($form, $this->t("qs_activity.events.form.delete.error.is_past @event", ['@event' => $event->toLink($event->getTitle())->toString()]));
-    }
-
-    // @todo Assert the event has no subscriber(s).
+  public function getFormId() {
+    return 'qs_activity_event_delete_form';
   }
 
   /**
@@ -127,18 +112,33 @@ class EventDeleteForm extends EventEditFormBase {
 
     $this->eventManager->sendDeleted($event, $this->currentUser->getAccount());
 
-    drupal_set_message($this->t("qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end", [
-      '@event'      => $event->getTitle(),
+    drupal_set_message($this->t('qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end', [
+      '@event' => $event->getTitle(),
       '@date_start' => $event->field_start_at->date->format('j F Y'),
       '@hour_start' => $event->field_start_at->date->format('H\hi'),
-      '@date_end'   => $event->field_end_at->date->format('j F Y'),
-      '@hour_end'   => $event->field_end_at->date->format('H\hi'),
+      '@date_end' => $event->field_end_at->date->format('j F Y'),
+      '@hour_end' => $event->field_end_at->date->format('H\hi'),
     ]));
 
     $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
 
     // Delete the event.
     $event = $event->delete();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $event = $this->nodeStorage->load($form_state->get('event'));
+    $now = new DrupalDateTime();
+
+    // Assert the event has not started.
+    if ($event->field_start_at->date <= $now) {
+      $form_state->setError($form, $this->t('qs_activity.events.form.delete.error.is_past @event', ['@event' => $event->toLink($event->getTitle())->toString()]));
+    }
+
+    // @todo Assert the event has no subscriber(s).
   }
 
 }

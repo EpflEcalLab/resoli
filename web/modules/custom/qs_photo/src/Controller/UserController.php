@@ -2,36 +2,22 @@
 
 namespace Drupal\qs_photo\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\AccessControl;
-use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\qs_badge\Service\BadgeManager;
 use Drupal\qs_photo\Service\PhotoManager;
-use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
-use Drupal\Core\Access\AccessResult;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * UserController.
  */
 class UserController extends ControllerBase {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The Privilege Manager.
-   *
-   * @var \Drupal\qs_acl\Service\PrivilegeManager
-   */
-  private $privilegeManager;
 
   /**
    * The entity QS Activity Manager.
@@ -55,30 +41,29 @@ class UserController extends ControllerBase {
   protected $photoManager;
 
   /**
-   * {@inheritdoc}
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, BadgeManager $badge_manager, PhotoManager $photo_manager) {
-    $this->acl              = $acl;
-    $this->privilegeManager = $privilege_manager;
-    $this->nodeStorage      = $this->entityTypeManager()->getStorage('node');
-    $this->activityManager  = $activity_manager;
-    $this->badgeManager     = $badge_manager;
-    $this->photoManager     = $photo_manager;
-  }
+  private $acl;
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  private $privilegeManager;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-      $container->get('qs_acl.access_control'),
-      $container->get('qs_acl.privilege_manager'),
-      $container->get('qs_activity.activity_manager'),
-      $container->get('qs_badge.badge_manager'),
-      $container->get('qs_photo.photo_manager')
-    );
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, ActivityManager $activity_manager, BadgeManager $badge_manager, PhotoManager $photo_manager) {
+    $this->acl = $acl;
+    $this->privilegeManager = $privilege_manager;
+    $this->nodeStorage = $this->entityTypeManager()->getStorage('node');
+    $this->activityManager = $activity_manager;
+    $this->badgeManager = $badge_manager;
+    $this->photoManager = $photo_manager;
   }
 
   /**
@@ -117,9 +102,9 @@ class UserController extends ControllerBase {
    */
   public function activities(TermInterface $community, UserInterface $user) {
     $render = [
-      '#theme'     => 'qs_photo_user_activities_collection_page',
+      '#theme' => 'qs_photo_user_activities_collection_page',
       '#variables' => [
-        'community'  => $community,
+        'community' => $community,
         'activities' => [],
       ],
       '#cache' => [
@@ -137,6 +122,7 @@ class UserController extends ControllerBase {
     $render['#variables']['user'] = $user;
     $render['#variables']['current_user'] = $this->currentUser()->id() === $user->id();
     $activities = [];
+
     if ($this->acl->hasBypass()) {
       // Show every activities for bypass user.
       $nids = $this->activityManager->getThemed($community);
@@ -164,7 +150,8 @@ class UserController extends ControllerBase {
         continue;
       }
 
-      $count_photos = count($photos);
+      $count_photos = \count($photos);
+
       if ($count_photos > 0) {
         $render['#variables']['photos_by_activities'][$activity->id()] = $count_photos;
       }
@@ -174,6 +161,21 @@ class UserController extends ControllerBase {
     $render['#variables']['badges']['privileges'] = $this->badgeManager->getPrivileges($activities, $user);
 
     return $render;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_badge.badge_manager'),
+      $container->get('qs_photo.photo_manager')
+    );
   }
 
 }

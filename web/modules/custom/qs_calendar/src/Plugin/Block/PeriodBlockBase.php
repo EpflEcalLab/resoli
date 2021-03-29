@@ -3,18 +3,25 @@
 namespace Drupal\qs_calendar\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_calendar\Service\CalendarBuilder;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Drupal\qs_badge\Service\BadgeManager;
-use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\qs_badge\Service\BadgeManager;
+use Drupal\qs_calendar\Service\CalendarBuilder;
+use Drupal\taxonomy\TermInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Period Block Base.
  */
 abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The QS Badge Manager.
+   *
+   * @var \Drupal\qs_badge\Service\BadgeManager
+   */
+  protected $badgeManager;
 
   /**
    * The Calendar builder.
@@ -31,20 +38,13 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
   protected $requestStack;
 
   /**
-   * The QS Badge Manager.
-   *
-   * @var \Drupal\qs_badge\Service\BadgeManager
-   */
-  protected $badgeManager;
-
-  /**
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, CalendarBuilder $calendar_builder, RequestStack $request_stack, BadgeManager $badge_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->calendarBuilder = $calendar_builder;
-    $this->requestStack    = $request_stack;
-    $this->badgeManager    = $badge_manager;
+    $this->requestStack = $request_stack;
+    $this->badgeManager = $badge_manager;
   }
 
   /**
@@ -85,6 +85,7 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
 
     // Get all confirmed events in a single array.
     $events_confirmed = [];
+
     foreach ($badges['events_subscriptions']['confirmed'] as $events) {
       $events_confirmed = array_merge($events_confirmed, $events);
     }

@@ -2,49 +2,21 @@
 
 namespace Drupal\qs_subscription\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
-use Drupal\user\UserInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Access\AccessResult;
-use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_badge\Service\BadgeManager;
+use Drupal\qs_subscription\Service\SubscriptionManager;
+use Drupal\taxonomy\TermInterface;
+use Drupal\user\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * UserController.
  */
 class UserController extends ControllerBase {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The node Storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
-
-  /**
-   * The Subscription Manager.
-   *
-   * @var \Drupal\qs_subscription\Service\SubscriptionManager
-   */
-  private $subscriptionManager;
-
-  /**
-   * The Privilege Manager.
-   *
-   * @var \Drupal\qs_acl\Service\PrivilegeManager
-   */
-  private $privilegeManager;
 
   /**
    * The Badge Manager.
@@ -54,28 +26,42 @@ class UserController extends ControllerBase {
   protected $badgeManager;
 
   /**
-   * {@inheritdoc}
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, BadgeManager $badge_manager) {
-    $this->acl                 = $acl;
-    $this->privilegeManager    = $privilege_manager;
-    $this->nodeStorage         = $this->entityTypeManager()->getStorage('node');
-    $this->subscriptionManager = $subscription_manager;
-    $this->badgeManager        = $badge_manager;
-  }
+  protected $nodeStorage;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  private $privilegeManager;
+
+  /**
+   * The Subscription Manager.
+   *
+   * @var \Drupal\qs_subscription\Service\SubscriptionManager
+   */
+  private $subscriptionManager;
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-      // Load customs services used in this class.
-      $container->get('qs_acl.access_control'),
-      $container->get('qs_acl.privilege_manager'),
-      $container->get('qs_subscription.subscription_manager'),
-      $container->get('qs_badge.badge_manager')
-    );
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, BadgeManager $badge_manager) {
+    $this->acl = $acl;
+    $this->privilegeManager = $privilege_manager;
+    $this->nodeStorage = $this->entityTypeManager()->getStorage('node');
+    $this->subscriptionManager = $subscription_manager;
+    $this->badgeManager = $badge_manager;
   }
 
   /**
@@ -102,6 +88,20 @@ class UserController extends ControllerBase {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('qs_subscription.subscription_manager'),
+      $container->get('qs_badge.badge_manager')
+    );
+  }
+
+  /**
    * Account subscriptions page.
    *
    * @param \Drupal\taxonomy\TermInterface $community
@@ -116,7 +116,7 @@ class UserController extends ControllerBase {
     $variables['community'] = $community;
 
     // We are browsing as an account with AccessBypass, add user info to page.
-    if ($this->currentUser()->id() != $user->id()) {
+    if ($this->currentUser()->id() !== $user->id()) {
       $variables['user'] = $user;
     }
 
@@ -141,7 +141,7 @@ class UserController extends ControllerBase {
     }
 
     return [
-      '#theme'     => 'qs_subscription_user_collection_page',
+      '#theme' => 'qs_subscription_user_collection_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

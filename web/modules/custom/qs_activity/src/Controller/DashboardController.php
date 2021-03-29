@@ -2,12 +2,12 @@
 
 namespace Drupal\qs_activity\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * DashboardController.
@@ -29,17 +29,6 @@ class DashboardController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control')
-    );
-  }
-
-  /**
    * Checks access.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
@@ -52,10 +41,23 @@ class DashboardController extends ControllerBase {
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasAdminAccessActivity($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control')
+    );
   }
 
   /**
@@ -63,7 +65,7 @@ class DashboardController extends ControllerBase {
    */
   public function dashboard(NodeInterface $activity) {
     return [
-      '#theme'     => 'qs_activity_dashboard_page',
+      '#theme' => 'qs_activity_dashboard_page',
       '#variables' => ['activity' => $activity],
       '#cache' => [
         'tags' => [

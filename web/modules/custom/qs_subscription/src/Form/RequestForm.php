@@ -2,11 +2,11 @@
 
 namespace Drupal\qs_subscription\Form;
 
-use Drupal\Core\Form\FormBase;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Ajax\PrependCommand;
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -29,11 +29,39 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class RequestForm extends FormBase {
 
   /**
+   * The Badge Manager.
+   *
+   * @var \Drupal\qs_badge\Service\BadgeManager
+   */
+  protected $badgeManager;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * The renderer.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
    * The form Dynamic Unique ID.
    *
    * @var string
    */
   protected $uniqueId;
+
+  /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
 
   /**
    * Access Control Service.
@@ -50,55 +78,20 @@ class RequestForm extends FormBase {
   private $subscriptionManager;
 
   /**
-   * The user Storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected $userStorage;
-
-  /**
-   * The renderer.
-   *
-   * @var \Drupal\Core\Render\RendererInterface
-   */
-  protected $renderer;
-
-  /**
-   * The node Storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
-
-  /**
-   * The Badge Manager.
-   *
-   * @var \Drupal\qs_badge\Service\BadgeManager
-   */
-  protected $badgeManager;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return $this->uniqueId;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function __construct($unique_id, ContainerInterface $container) {
     $this->uniqueId = $unique_id;
 
-    /* @var \Drupal\qs_acl\Service\AccessControl */
+    /** @var \Drupal\qs_acl\Service\AccessControl */
     $this->acl = $container->get('qs_acl.access_control');
-    /* @var \Drupal\node\NodeStorageInterface */
+    /** @var \Drupal\node\NodeStorageInterface */
     $this->nodeStorage = $container->get('entity_type.manager')->getStorage('node');
-    /* @var \Drupal\qs_subscription\Service\SubscriptionManager */
+    /** @var \Drupal\qs_subscription\Service\SubscriptionManager */
     $this->subscriptionManager = $container->get('qs_subscription.subscription_manager');
-    /* @var \Drupal\Core\Render\RendererInterface */
+    /** @var \Drupal\Core\Render\RendererInterface */
     $this->renderer = $container->get('renderer');
-    /* @var \Drupal\qs_badge\Service\BadgeManager */
+    /** @var \Drupal\qs_badge\Service\BadgeManager */
     $this->badgeManager = $container->get('qs_badge.badge_manager');
   }
 
@@ -124,7 +117,7 @@ class RequestForm extends FormBase {
 
     // According the current user roles to the event,
     // If it's activity_organizers+ subscribe it without requesting.
-    if (in_array('activity_organizers', $privileges) || in_array('activity_maintainers', $privileges)) {
+    if (\in_array('activity_organizers', $privileges, TRUE) || \in_array('activity_maintainers', $privileges, TRUE)) {
       $name = 'direct_subscription_' . $event->id();
     }
 
@@ -132,7 +125,7 @@ class RequestForm extends FormBase {
     $ajax_class = $name . '_confirm';
 
     $form['submit'] = [
-      '#id'   => $name . '_submit',
+      '#id' => $name . '_submit',
       '#name' => $name,
       '#type' => 'submit',
       '#attributes' => [
@@ -166,48 +159,8 @@ class RequestForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    $event_id = $form_state->get('event');
-    $event = $this->nodeStorage->load($event_id);
-
-    // Get the related activity.
-    $activity = $event->field_activity->entity;
-
-    if (!$event || !$activity || !$this->acl->hasSubscribeAccessEvent($activity)) {
-      $form_state->setErrorByName('', $this->t('qs.form.error.something_went_wrong'));
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Handle redirection.
-    $trigger = $form_state->getTriggeringElement();
-    $event = $this->nodeStorage->load($form_state->get('event'));
-
-    // Processing the submission as a standard request.
-    if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
-      $this->subscriptionManager->request($event);
-
-      drupal_set_message($this->t('qs_subscription.request.form.success @event', [
-        '@event' => $event->getTitle(),
-      ]));
-
-      drupal_set_message($this->t('qs_subscription.request.form.success @event', [
-        '@event' => $event->getTitle(),
-      ]));
-    }
-    // Processing the submission as a direct request. Organizers or maintainers.
-    elseif (strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
-      // Send a request but don't send mails to organizer(s).
-      $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
-      $this->subscriptionManager->confirm($subscription);
-
-      drupal_set_message($this->t('qs_subscription.direct_request.form.success @event', [
-        '@event' => $event->getTitle(),
-      ]));
-    }
+  public function getFormId() {
+    return $this->uniqueId;
   }
 
   /**
@@ -233,10 +186,12 @@ class RequestForm extends FormBase {
       // Create the bag message render array.
       $status_messages = ['#type' => 'status_messages'];
       $messages = $this->renderer->renderRoot($status_messages);
+
       if (!empty($messages)) {
         // Append the bag message(s).
         $response->addCommand(new PrependCommand('#wrapper-status-messages', $messages));
       }
+
       return $response;
     }
 
@@ -245,11 +200,11 @@ class RequestForm extends FormBase {
 
     $event_id = $form_state->get('event');
 
-    if (strpos($trigger['#name'], 'request_subscription') !== FALSE) {
+    if (mb_strpos($trigger['#name'], 'request_subscription') !== FALSE) {
       $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'pending']));
       $send = TRUE;
     }
-    elseif (strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
+    elseif (mb_strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
       $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'confirmed']));
       $send = TRUE;
     }
@@ -257,6 +212,7 @@ class RequestForm extends FormBase {
     // Create the bag message render array.
     $status_messages = ['#type' => 'status_messages'];
     $messages = $this->renderer->renderRoot($status_messages);
+
     if (!empty($messages)) {
       // Append the bag message(s).
       $response->addCommand(new PrependCommand('#wrapper-status-messages', $messages));
@@ -265,10 +221,58 @@ class RequestForm extends FormBase {
     // Make sure we don't call SubmitForm if the form should not be sent yet.
     if (!$send) {
       $form_state->setRebuild();
+
       return $form;
     }
 
     return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    // Handle redirection.
+    $trigger = $form_state->getTriggeringElement();
+    $event = $this->nodeStorage->load($form_state->get('event'));
+
+    // Processing the submission as a standard request.
+    if (mb_strpos($trigger['#name'], 'request_subscription') !== FALSE) {
+      $this->subscriptionManager->request($event);
+
+      drupal_set_message($this->t('qs_subscription.request.form.success @event', [
+        '@event' => $event->getTitle(),
+      ]));
+
+      drupal_set_message($this->t('qs_subscription.request.form.success @event', [
+        '@event' => $event->getTitle(),
+      ]));
+    }
+    // Processing the submission as a direct request. Organizers or maintainers.
+    elseif (mb_strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
+      // Send a request but don't send mails to organizer(s).
+      $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
+      $this->subscriptionManager->confirm($subscription);
+
+      drupal_set_message($this->t('qs_subscription.direct_request.form.success @event', [
+        '@event' => $event->getTitle(),
+      ]));
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $event_id = $form_state->get('event');
+    $event = $this->nodeStorage->load($event_id);
+
+    // Get the related activity.
+    $activity = $event->field_activity->entity;
+
+    if (!$event || !$activity || !$this->acl->hasSubscribeAccessEvent($activity)) {
+      $form_state->setErrorByName('', $this->t('qs.form.error.something_went_wrong'));
+    }
   }
 
 }

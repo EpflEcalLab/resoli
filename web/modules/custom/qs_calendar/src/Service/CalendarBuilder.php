@@ -5,15 +5,9 @@ namespace Drupal\qs_calendar\Service;
 use Drupal\Core\Datetime\DrupalDateTime;
 
 /**
- * CalendarBuilder.
+ * A CalendarBuilder that help building weekly/monthly calendars.
  */
 class CalendarBuilder {
-
-  /**
-   * Class constructor.
-   */
-  public function __construct() {
-  }
 
   /**
    * Generate an iterator of dates between 2 dates.

@@ -10,7 +10,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * UserManageForm class.
+ * List of manageable photos for the user.
  */
 class UserManageForm extends FormBasic {
 

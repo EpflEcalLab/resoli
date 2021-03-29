@@ -13,7 +13,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Entity\Privilege;
 
 /**
- * PrivilegeManager.
+ * The Privilege Manager.
  */
 class PrivilegeManager {
 
@@ -145,7 +145,7 @@ class PrivilegeManager {
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return \Drupal\qs_acl\Entity\Privilege[]
@@ -198,7 +198,7 @@ class PrivilegeManager {
    *   A collection of privileges.
    * @param bool $status
    *   The required status for the privileges.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return array[]
@@ -444,7 +444,7 @@ class PrivilegeManager {
    *   The requested string privilege.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   Account for who we will request de privilege.
    *
    * @return \Drupal\Core\Entity\EntityInterface

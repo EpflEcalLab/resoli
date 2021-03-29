@@ -155,6 +155,7 @@ class Excel {
           $cell->setValue($content);
 
           break;
+
         // Skip unprocessable content.
         case $content instanceof PhpSpreadsheetHtml:
           break;
@@ -202,8 +203,8 @@ class Excel {
 
     $response = new StreamedResponse(
       static function () use ($writer) {
-          $writer->save('php://output');
-        }
+        $writer->save('php://output');
+      }
     );
 
     $response->headers->set('Content-Type', 'application/vnd.ms-excel');

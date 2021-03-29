@@ -10,7 +10,10 @@ use Drupal\qs_acl\Service\AccessControl;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * EventDashboardController.
+ * Dashboard to manage one event.
+ *
+ * The dashboard list operations the user can operate on the event with
+ * its privilege in that activity (member with some privileges).
  */
 class EventDashboardController extends ControllerBase {
 

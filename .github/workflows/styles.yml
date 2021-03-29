@@ -72,3 +72,4 @@ jobs:
       - uses: actions/checkout@master
       - run: composer install --no-progress --prefer-dist
       - run: ./vendor/bin/drupal-check -dvvv ./web/modules/custom ./behat ./web/themes --no-progress --format=checkstyle | cs2pr
+        continue-on-error: true

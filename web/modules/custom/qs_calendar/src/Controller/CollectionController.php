@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * CollectionController.
+ * Collection of events by months or by weeks display in a calendar.
  */
 class CollectionController extends ControllerBase {
 

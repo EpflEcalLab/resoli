@@ -14,7 +14,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * UserController.
+ * Dashboard that list activities of one user.
  */
 class UserController extends ControllerBase {
 

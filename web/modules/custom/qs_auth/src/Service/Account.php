@@ -11,7 +11,7 @@ use Drupal\user\UserAuthInterface;
 use Drupal\user\UserInterface;
 
 /**
- * Service Account.
+ * The Service Account.
  */
 class Account {
 

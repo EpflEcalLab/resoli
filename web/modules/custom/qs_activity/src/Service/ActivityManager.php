@@ -12,7 +12,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * ActivityManager.
+ * The Activity Manager.
  */
 class ActivityManager {
 
@@ -56,7 +56,7 @@ class ActivityManager {
    *   The list of authorizations & the boolean value.
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
-   * @param \Drupal\user\UserInterface $user
+   * @param \Drupal\user\UserInterface|null $user
    *   The user entity.
    *
    * @return \Drupal\node\NodeInterface

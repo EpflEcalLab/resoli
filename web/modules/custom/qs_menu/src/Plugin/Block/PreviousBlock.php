@@ -118,6 +118,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'danger';
 
           break;
+
         // Go to Community Dashboard.
         case 'qs_community.members':
         case 'qs_community.waiting_approval':
@@ -137,6 +138,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to Activity.
         case 'qs_activity.activities.dashboard':
           $options = [];
@@ -151,6 +153,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to My Activities.
         case 'qs_activity.activities.form.add':
           $url = $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
@@ -161,6 +164,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to Activity Dashboard.
         case 'qs_activity.activities.form.edit.info':
         case 'qs_activity.activities.form.edit.visibility':
@@ -179,6 +183,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to Event Dashboard.
         case 'qs_activity.events.form.edit':
         case 'qs_subscription.subscribers':
@@ -204,6 +209,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'secondary';
 
           break;
+
         // Go to Calendar.
         case 'qs_subscription.user.collection':
           $url = $this->urlGenerator->generateFromRoute('qs_calendar.collection.weekly', [
@@ -213,6 +219,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to Photos Themes.
         case 'qs_photo.activity':
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.theme', [
@@ -222,6 +229,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to Photos Month.
         case 'qs_photo.user.activities.collection':
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.month', [
@@ -231,6 +239,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to My Photos.
         case 'qs_photo.user.form.manage':
         case 'qs_photo.form.add':
@@ -242,6 +251,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'primary';
 
           break;
+
         // Go to Manage Photos.
         case 'qs_photo.form.delete':
         case 'qs_photo.form.comments':
@@ -253,6 +263,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           $theme = 'secondary';
 
           break;
+
         // Go to Homepage.
         // @todo add test for this link.
         case 'qs_community.welcome':

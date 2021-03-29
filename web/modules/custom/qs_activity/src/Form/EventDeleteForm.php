@@ -9,7 +9,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * EventDeleteForm class.
+ * Form to delete event.
  */
 class EventDeleteForm extends EventEditFormBase {
   /**

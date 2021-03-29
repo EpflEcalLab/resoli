@@ -7,7 +7,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityEditInfoForm class.
+ * Activity form to update basics information.
  */
 class ActivityEditInfoForm extends ActivityEditFormBase {
 

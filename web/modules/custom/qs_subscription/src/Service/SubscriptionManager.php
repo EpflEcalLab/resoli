@@ -17,7 +17,7 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
 
 /**
- * SubscriptionManager.
+ * The Subscription Manager.
  */
 class SubscriptionManager {
 
@@ -255,7 +255,7 @@ class SubscriptionManager {
    *
    * @param \Drupal\node\NodeInterface $event
    *   The event.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   Account for who we will request the subscription.
    * @param bool $mail_to_organizers
    *   Does the organizer(s) will receive the "waiting approval" mail ?

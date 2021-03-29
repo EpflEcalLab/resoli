@@ -11,7 +11,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * AccountController.
+ * A user dashboard listing its communities and the user data.
  */
 class AccountController extends ControllerBase {
   /**

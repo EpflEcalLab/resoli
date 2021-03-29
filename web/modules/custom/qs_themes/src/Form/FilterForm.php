@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * FilterForm.
+ * A theme filter form that add the chosen theme as GET param to the route.
  */
 class FilterForm extends FormBase {
   /**

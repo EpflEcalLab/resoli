@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Events Controller by Community.
+ * Collection of events for one community.
  */
 class EventsController extends ControllerBase {
 

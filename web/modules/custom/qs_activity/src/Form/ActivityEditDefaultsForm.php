@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 
 /**
- * ActivityEditDefaultsForm class.
+ * Activity form to update default values.
  */
 class ActivityEditDefaultsForm extends ActivityEditFormBase {
 

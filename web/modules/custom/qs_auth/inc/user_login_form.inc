@@ -109,7 +109,6 @@ function qs_auth_user_login_form_submit($form, $form_state) {
       return;
     }
     // Otherwise go to the form communities to apply.
-
     $form_state->setRedirect('qs_auth.communities.apply', [], []);
 
     return;

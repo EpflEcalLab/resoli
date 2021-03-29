@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * MembersController.
+ * Dashboard that list the members of one activity.
  */
 class MembersController extends ControllerBase {
 

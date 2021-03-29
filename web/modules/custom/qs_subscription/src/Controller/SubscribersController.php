@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * SubscribersController.
+ * Collection of subscriptions for an event.
  */
 class SubscribersController extends ControllerBase {
 

@@ -18,7 +18,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 /**
- * StreamController.
+ * Stream one image to be displayed in <img> tag.
+ *
+ * The stream is necessary to avoid direct access on image file in order tp
+ * to protect files with access checking.
  */
 class StreamController extends ControllerBase {
 
@@ -129,7 +132,7 @@ class StreamController extends ControllerBase {
         if (!$lock_acquired) {
           // Tell client to retry again in 3 seconds. Currently no browsers are
           // known to support Retry-After.
-          throw new ServiceUnavailableHttpException(3, $this->t('Image generation in progress. Try again shortly.'));
+          throw new ServiceUnavailableHttpException(3, 'Image generation in progress. Try again shortly.');
         }
 
         if (!empty($lock_acquired)) {

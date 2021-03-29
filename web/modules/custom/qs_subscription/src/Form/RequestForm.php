@@ -201,11 +201,17 @@ class RequestForm extends FormBase {
     $event_id = $form_state->get('event');
 
     if (mb_strpos($trigger['#name'], 'request_subscription') !== FALSE) {
-      $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'pending']));
+      $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', [
+        'data-status',
+        'pending',
+      ]));
       $send = TRUE;
     }
     elseif (mb_strpos($trigger['#name'], 'direct_subscription') !== FALSE) {
-      $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', ['data-status', 'confirmed']));
+      $response->addCommand(new InvokeCommand('#card' . $event_id, 'attr', [
+        'data-status',
+        'confirmed',
+      ]));
       $send = TRUE;
     }
 

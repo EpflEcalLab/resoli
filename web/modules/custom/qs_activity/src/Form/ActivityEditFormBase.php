@@ -9,7 +9,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityEditFormBase class.
+ * Activity edit form base.
  */
 abstract class ActivityEditFormBase extends FormBasic {
 

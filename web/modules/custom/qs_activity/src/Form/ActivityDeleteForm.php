@@ -8,7 +8,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityDeleteForm class.
+ * Form to delete an activity.
  */
 class ActivityDeleteForm extends ActivityEditFormBase {
 

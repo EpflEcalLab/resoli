@@ -56,6 +56,7 @@ function qs_activity_mail($key, &$message, $params) {
       ])));
 
       break;
+
     // Sent to Subscribed user(s) of event &
     // to all Activity Maintainer(s) et Activity Organizer(s).
     case 'activity_event_updated':

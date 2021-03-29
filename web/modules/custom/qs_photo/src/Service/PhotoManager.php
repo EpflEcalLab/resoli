@@ -10,7 +10,7 @@ use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
 
 /**
- * PhotoManager.
+ * The Photo Manager.
  */
 class PhotoManager {
 

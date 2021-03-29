@@ -9,7 +9,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * EventEditFormBase class.
+ * Base form of editable event.
  */
 abstract class EventEditFormBase extends FormBasic {
 

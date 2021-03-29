@@ -12,7 +12,7 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
 
 /**
- * AccessControl.
+ * The Access Control manager.
  */
 class AccessControl {
 
@@ -59,7 +59,7 @@ class AccessControl {
    * This only retrieve relation as Member or Organizer or Managers.
    * It doesn't get pending request.
    *
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   Drupal Entity User.
    *
    * @return \Drupal\taxonomy\TermInterface[]
@@ -106,7 +106,7 @@ class AccessControl {
   /**
    * Get pending approval communities for a given user.
    *
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   Drupal Entity User.
    *
    * @return \Drupal\taxonomy\TermInterface[]
@@ -172,7 +172,7 @@ class AccessControl {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -198,7 +198,7 @@ class AccessControl {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access of photos.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -240,7 +240,7 @@ class AccessControl {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -278,7 +278,7 @@ class AccessControl {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -316,9 +316,9 @@ class AccessControl {
    *
    * This method has security implications.
    *
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
-   * @param \Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Entity\EntityInterface|null $entity
    *   The entity.
    *
    * @return bool
@@ -354,7 +354,7 @@ class AccessControl {
    * as Member or Organizer or Managers.
    * It doesn't get pending request.
    *
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -379,7 +379,7 @@ class AccessControl {
    * as Member or Organizer or Managers.
    * It doesn't get pending request.
    *
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -402,7 +402,7 @@ class AccessControl {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -468,7 +468,7 @@ class AccessControl {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -507,7 +507,7 @@ class AccessControl {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -546,7 +546,7 @@ class AccessControl {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check upload access of photos.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -602,7 +602,7 @@ class AccessControl {
   /**
    * Check if the given user or the current logged one has the role beginner.
    *
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
@@ -629,7 +629,7 @@ class AccessControl {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool

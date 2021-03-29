@@ -9,7 +9,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * CommentForm class.
+ * Form to comment photos by batch.
  */
 class CommentForm extends FormBasic {
 

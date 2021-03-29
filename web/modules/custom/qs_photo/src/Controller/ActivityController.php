@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * ActivityController.
+ * Collection of photos by activity > events.
  */
 class ActivityController extends ControllerBase {
 

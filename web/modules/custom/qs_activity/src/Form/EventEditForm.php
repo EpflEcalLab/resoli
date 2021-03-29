@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 
 /**
- * EventEditForm class.
+ * Form to edit event.
  */
 class EventEditForm extends EventEditFormBase {
 

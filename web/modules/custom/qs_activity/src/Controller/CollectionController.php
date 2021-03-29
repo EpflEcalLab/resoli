@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * CollectionController.
+ * Expose the route to list activities > events by Theme or Date.
  */
 class CollectionController extends ControllerBase {
 

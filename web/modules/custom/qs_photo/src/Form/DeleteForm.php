@@ -10,7 +10,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * DeleteForm class.
+ * Form to remove photos by batch.
  */
 class DeleteForm extends FormBasic {
 

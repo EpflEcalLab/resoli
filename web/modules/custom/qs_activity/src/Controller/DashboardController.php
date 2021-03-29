@@ -10,7 +10,10 @@ use Drupal\qs_acl\Service\AccessControl;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * DashboardController.
+ * Dashboard to manage one activity.
+ *
+ * The dashboard list operations the user can operate on the activity according
+ * its privilege in that same activity.
  */
 class DashboardController extends ControllerBase {
 

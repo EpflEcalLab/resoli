@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\NodeInterface;
 
 /**
- * ActivityEditVisibilityForm class.
+ * Activity form to update visibilities rules.
  */
 class ActivityEditVisibilityForm extends ActivityEditFormBase {
 

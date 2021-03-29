@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * AjaxControllerBase.
+ * Base class for Ajax Controllers.
  */
 class AjaxControllerBase extends ControllerBase {
 

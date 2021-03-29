@@ -10,7 +10,7 @@ use Drupal\qs_auth\Service\Account;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * RegisterForm class.
+ * The registration form.
  */
 class RegisterForm extends FormBase {
   /**
@@ -57,7 +57,10 @@ class RegisterForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL) {
     // Honeypot.
     if ($this->moduleHandler->moduleExists('honeypot')) {
-      honeypot_add_form_protection($form, $form_state, ['honeypot', 'time_restriction']);
+      honeypot_add_form_protection($form, $form_state, [
+        'honeypot',
+        'time_restriction',
+      ]);
     }
 
     // Disable caching & HTML5 validation.

@@ -6,7 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class SettingsForm.
+ * A Drupal admin form to configure authentication module.
  */
 class SettingsForm extends ConfigFormBase {
 

@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * MembersController.
+ * Collection of members for one community.
  */
 class MembersController extends ControllerBase {
 

@@ -14,7 +14,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * UserController.
+ * Collection of subscription of the current user.
  */
 class UserController extends ControllerBase {
 

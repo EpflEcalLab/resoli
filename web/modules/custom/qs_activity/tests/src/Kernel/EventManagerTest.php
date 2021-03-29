@@ -121,7 +121,10 @@ final class EventManagerTest extends ResoliKernelTestBase {
     self::assertEquals($event_3->id(), $next_event[$event_3->id()]->id());
 
     // Get the closest event from now for each given activity.
-    $next_event = $this->eventManager->getNext([$activity_1->id(), $activity_2->id()]);
+    $next_event = $this->eventManager->getNext([
+      $activity_1->id(),
+      $activity_2->id(),
+    ]);
 
     self::assertCount(2, $next_event);
     self::assertContainsOnlyInstancesOf(NodeInterface::class, $next_event);

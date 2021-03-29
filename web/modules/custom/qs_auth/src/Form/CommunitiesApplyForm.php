@@ -12,7 +12,7 @@ use Drupal\qs_auth\Service\Account;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * CommunitiesApplyForm class.
+ * A form allowing appliance to a community.
  */
 class CommunitiesApplyForm extends FormBase {
 

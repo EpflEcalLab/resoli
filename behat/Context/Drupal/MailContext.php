@@ -5,16 +5,13 @@ namespace Drupal\Behat\Context\Drupal;
 use Alex\MailCatcher\Behat\MailCatcherAwareInterface;
 use Alex\MailCatcher\Behat\MailCatcherTrait;
 use Alex\MailCatcher\Message;
-use Behat\Behat\Context\Context;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Mink\Exception\ElementNotFoundException;
-use DOMDocument;
-use DOMXPath;
 
 /**
  * Defines mails application features from the specific context.
  */
-class MailContext extends RawDrupalContext implements Context, MailCatcherAwareInterface {
+class MailContext extends RawDrupalContext implements MailCatcherAwareInterface {
   use MailCatcherTrait;
 
   /**
@@ -55,7 +52,10 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
    * @Then A mail as been sent to :to with subject :suject
    */
   public function aMailAsBeenSentToWithSubject($to, $subject) {
-    $message = $this->getMailCatcherClient()->searchOne([Message::TO_CRITERIA => $to, Message::SUBJECT_CRITERIA => $subject]);
+    $message = $this->getMailCatcherClient()->searchOne([
+      Message::TO_CRITERIA => $to,
+      Message::SUBJECT_CRITERIA => $subject,
+    ]);
 
     if (empty($message)) {
       throw new \Exception(sprintf("No mail to '%s' with subject '%s' was found on the inbox", $to, $subject));
@@ -137,9 +137,9 @@ class MailContext extends RawDrupalContext implements Context, MailCatcherAwareI
   public function seeLinkInMail($href) {
     $message = $this->getCurrentMessage();
 
-    $dom = new DOMDocument();
+    $dom = new \DOMDocument();
     @$dom->loadHTML($message->getContent());
-    $xpath = new DOMXPath($dom);
+    $xpath = new \DOMXPath($dom);
 
     $entries = $xpath->query("//a[contains(@href, '$href')]");
     if ($entries->length == 0) {

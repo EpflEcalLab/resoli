@@ -13,7 +13,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
- * AccountController.
+ * Landing page for use to choose which communities to go on.
+ *
+ * This page is shown when the user has more than 1 community to go after login.
  */
 class AccountController extends ControllerBase {
 

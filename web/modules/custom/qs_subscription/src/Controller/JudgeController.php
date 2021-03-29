@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * JudgeController.
+ * A controller exposing endpoint to confirm or cancel decline subscription.
  */
 class JudgeController extends ControllerBase {
   /**

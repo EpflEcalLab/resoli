@@ -15,7 +15,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * UserController.
+ * Collection of activities with manageable photos of the current user.
  */
 class UserController extends ControllerBase {
 

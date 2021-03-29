@@ -64,6 +64,7 @@ function qs_subscription_mail($key, &$message, $params) {
       ])));
 
       break;
+
     // Sent to organizers & maintainers when some ask for event subscription.
     case 'subscription_event_waiting_approval_request_organizers':
       $user = $message['params']['user'];
@@ -95,6 +96,7 @@ function qs_subscription_mail($key, &$message, $params) {
       ])));
 
       break;
+
     // Sent to organizers & maintainers when event subscription
     // request has been approved.
     case 'subscription_event_waiting_approval_confirm_organizers':
@@ -127,6 +129,7 @@ function qs_subscription_mail($key, &$message, $params) {
       ])));
 
       break;
+
     // Sent to user when event subscription request has been declined.
     case 'subscription_event_waiting_approval_decline':
       $account = $message['params']['account'];

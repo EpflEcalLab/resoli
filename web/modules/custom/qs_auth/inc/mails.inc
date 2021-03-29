@@ -50,6 +50,7 @@ function qs_auth_mail($key, &$message, $params) {
       ])));
 
       break;
+
     // Sent to user when communitiy request of approval has been confirmed.
     case 'user_community_waiting_approval_confirm':
       $account = $message['params']['account'];
@@ -72,6 +73,7 @@ function qs_auth_mail($key, &$message, $params) {
       ])));
 
       break;
+
     // Sent to user when communitiy request of approval has been declined.
     case 'user_community_waiting_approval_decline':
       $account = $message['params']['account'];
@@ -94,6 +96,7 @@ function qs_auth_mail($key, &$message, $params) {
       ])));
 
       break;
+
     // Sent to all managers of the applied communitiy when user request access.
     case 'auth_community_apply':
       $account = $message['params']['account'];
@@ -206,7 +209,10 @@ function qs_auth_mail_alter(&$message) {
 function qs_user_cancel_url(UserInterface $account, array $options = []) {
   $timestamp = REQUEST_TIME;
   $langcode = isset($options['langcode']) ? $options['langcode'] : $account->getPreferredLangcode();
-  $url_options = ['absolute' => TRUE, 'language' => \Drupal::languageManager()->getLanguage($langcode)];
+  $url_options = [
+    'absolute' => TRUE,
+    'language' => \Drupal::languageManager()->getLanguage($langcode),
+  ];
 
   return \Drupal::url('qs_auth.cancel.confirm', [
     'user' => $account->id(),

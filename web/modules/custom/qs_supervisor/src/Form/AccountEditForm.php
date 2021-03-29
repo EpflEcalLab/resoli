@@ -13,7 +13,7 @@ use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * AccountEditForm Class.
+ * A user edit form.
  */
 class AccountEditForm extends FormBase {
 

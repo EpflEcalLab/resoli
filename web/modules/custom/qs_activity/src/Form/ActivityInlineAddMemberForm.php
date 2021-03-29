@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityInlineAddMemberForm class.
+ * Activity form use by privileged user to manually add member to an activity.
  */
 class ActivityInlineAddMemberForm extends ActivityEditFormBase {
 

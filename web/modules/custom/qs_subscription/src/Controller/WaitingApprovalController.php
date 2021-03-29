@@ -11,7 +11,7 @@ use Drupal\qs_subscription\Service\SubscriptionManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * WaitingApprovalController.
+ * Collection of pending subscriptions for an event.
  */
 class WaitingApprovalController extends ControllerBase {
 

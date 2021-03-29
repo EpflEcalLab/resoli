@@ -15,7 +15,7 @@ use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\taxonomy\TermInterface;
 
 /**
- * EventManager.
+ * The Event Manager.
  */
 class EventManager {
 
@@ -90,8 +90,10 @@ class EventManager {
    *   The start date.
    * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
    *   The end date.
-   * @param array $data
+   * @param array|null $data
    *   Optional data to override default activity value.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    *
    * @return \Drupal\node\NodeInterface
    *   The created event.
@@ -249,7 +251,10 @@ class EventManager {
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
 
     $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = event.nid');
-    $query->condition('field_start_at.field_start_at_value', [$date_start->format('c'), $date_end->format('c')], 'BETWEEN');
+    $query->condition('field_start_at.field_start_at_value', [
+      $date_start->format('c'),
+      $date_end->format('c'),
+    ], 'BETWEEN');
 
     $query->orderBy('field_start_at.field_start_at_value', 'ASC');
 

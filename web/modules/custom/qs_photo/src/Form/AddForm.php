@@ -13,7 +13,7 @@ use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * PhotoAddForm class.
+ * Form to add photo(s) vua uppy into a given activity > event.
  */
 class AddForm extends FormBasic {
 
@@ -500,7 +500,7 @@ class AddForm extends FormBasic {
    */
   public function humanFilesize($bytes, $decimals = 2) {
     $size = ['o', 'ko', 'Mo', 'Go', 'To', 'Po', 'Eo', 'Zo', 'Yo'];
-    $factor = floor((\mb_strlen($bytes) - 1) / 3);
+    $factor = floor((mb_strlen($bytes) - 1) / 3);
 
     return sprintf("%.{$decimals}f", $bytes / 1024 ** $factor) . ' [' . $size[$factor] . ']';
   }

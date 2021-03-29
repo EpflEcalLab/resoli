@@ -9,7 +9,7 @@ use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityAddForm class.
+ * Form to create new activity on a community.
  */
 class ActivityAddForm extends FormBasic {
 

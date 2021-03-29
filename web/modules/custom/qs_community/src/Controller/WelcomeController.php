@@ -11,7 +11,7 @@ use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * WelcomeController.
+ * A welcome controller displaying the menu and the first user-tips.
  */
 class WelcomeController extends ControllerBase {
 

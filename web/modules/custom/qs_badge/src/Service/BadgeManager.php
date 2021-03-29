@@ -10,7 +10,7 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
 
 /**
- * BadgeManager.
+ * The badge manager.
  */
 class BadgeManager {
 
@@ -68,7 +68,10 @@ class BadgeManager {
 
     $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = event.nid');
 
-    $query->condition('field_start_at.field_start_at_value', [$date_start->format('c'), $date_end->format('c')], 'BETWEEN');
+    $query->condition('field_start_at.field_start_at_value', [
+      $date_start->format('c'),
+      $date_end->format('c'),
+    ], 'BETWEEN');
 
     $query->addExpression("DATE_FORMAT(field_start_at.field_start_at_value, '%Y-%m-%d')", 'formated_day');
     $query->addExpression('COUNT(*)', 'count');
@@ -97,7 +100,7 @@ class BadgeManager {
    *   A collection of $events IDs.
    * @param bool $status
    *   The required status for the subscriptions.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return array[]
@@ -154,7 +157,7 @@ class BadgeManager {
    *   A collection of $activities IDs.
    * @param bool $status
    *   The required status for the subscriptions.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return array[]
@@ -216,7 +219,7 @@ class BadgeManager {
    *
    * @param \Drupal\node\NodeInterface[] $communities
    *   A collection of activities.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return int[]
@@ -268,7 +271,7 @@ class BadgeManager {
    *
    * @param \Drupal\node\NodeInterface[] $activities
    *   A collection of activities.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return int[]
@@ -320,7 +323,7 @@ class BadgeManager {
    *
    * @param \Drupal\node\NodeInterface[] $events
    *   A collection of events.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return int[]
@@ -374,7 +377,7 @@ class BadgeManager {
    *
    * @param \Drupal\node\NodeInterface[] $events
    *   A collection of events.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return int[]
@@ -428,7 +431,7 @@ class BadgeManager {
    *   A collection of events.
    * @param bool $status
    *   The required status for the subscriptions.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return int[]
@@ -481,7 +484,7 @@ class BadgeManager {
    *   The end date.
    * @param bool $status
    *   The required status for the subscriptions.
-   * @param \Drupal\user\UserInterface $account
+   * @param \Drupal\user\UserInterface|null $account
    *   The user entity.
    *
    * @return array[]
@@ -505,7 +508,10 @@ class BadgeManager {
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
 
     $query->leftJoin('node__field_start_at', 'field_start_at', 'field_start_at.entity_id = event.nid');
-    $query->condition('field_start_at.field_start_at_value', [$date_start->format('c'), $date_end->format('c')], 'BETWEEN');
+    $query->condition('field_start_at.field_start_at_value', [
+      $date_start->format('c'),
+      $date_end->format('c'),
+    ], 'BETWEEN');
 
     $query->leftJoin('subscriptions', 'subscriptions', 'subscriptions.entity = event.nid');
     $query->condition('subscriptions.user', $user->id());

@@ -10,7 +10,7 @@ use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * EventAddForm class.
+ * Form to create event on activity.
  */
 class EventAddForm extends FormBasic {
 

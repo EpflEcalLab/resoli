@@ -11,7 +11,10 @@ use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * WaitingApprovalController.
+ * A waiting page when someone try to access to an activity homepage.
+ *
+ * The waiting page is only shown when the user have a pending for approval
+ * access to the community.
  */
 class WaitingApprovalController extends ControllerBase {
 

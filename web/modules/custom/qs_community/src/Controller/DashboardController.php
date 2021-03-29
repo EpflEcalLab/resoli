@@ -10,7 +10,10 @@ use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * DashboardController.
+ * Dashboard to manage one community.
+ *
+ * The dashboard list operations the user can achieve on the community with
+ * its privilege in that community.
  */
 class DashboardController extends ControllerBase {
 

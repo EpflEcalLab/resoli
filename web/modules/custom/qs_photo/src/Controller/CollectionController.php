@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * CollectionController.
+ * Collection of photos by months or by themes.
  */
 class CollectionController extends ControllerBase {
 

@@ -135,7 +135,7 @@ final class ActivityManagerTest extends UnitTestCase {
    * @covers ::getPaginationFromDate
    * @dataProvider getPaginationFromDateProvider
    */
-  public function testGetPaginationFromDate(Datetime $now, Datetime $start_date, $expected) {
+  public function testGetPaginationFromDate(\Datetime $now, \Datetime $start_date, $expected) {
     $this->activityManager->expects(self::any())
       ->method('getNow')
       ->willReturn($now);

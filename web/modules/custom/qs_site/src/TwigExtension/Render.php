@@ -27,16 +27,6 @@ class Render extends \Twig_Extension {
   }
 
   /**
-   * Provides an interface for form building and processing.
-   *
-   * @return \Drupal\Core\Form\FormBuilderInterface
-   *   Return the interface for form building and processing.
-   */
-  protected function getFormBuilder() {
-    return $this->container->get('form_builder');
-  }
-
-  /**
    * Load a given form with or whitout parameters.
    *
    * @param string $module
@@ -48,13 +38,24 @@ class Render extends \Twig_Extension {
    * @param string $form_id
    *   (optional) The form unique ID.
    *
-   * @return null|array
+   * @return array|null
    *   A render array for the form or NULL if the form does not exist.
    */
   public function renderForm($module, $form, array $params = [], $form_id = NULL) {
     $class = 'Drupal\\' . $module . '\\Form\\' . $form;
     $form = new $class($form_id, $this->container);
+
     return $this->getFormBuilder()->getForm($form, $params);
+  }
+
+  /**
+   * Provides an interface for form building and processing.
+   *
+   * @return \Drupal\Core\Form\FormBuilderInterface
+   *   Return the interface for form building and processing.
+   */
+  protected function getFormBuilder() {
+    return $this->container->get('form_builder');
   }
 
 }

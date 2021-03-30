@@ -3,20 +3,13 @@
 namespace Drupal\qs_activity\Form;
 
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityEditInfoForm class.
+ * Activity form to update basics information.
  */
 class ActivityEditInfoForm extends ActivityEditFormBase {
-
-  /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  private $termStorage;
 
   /**
    * The language manager.
@@ -26,6 +19,13 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
   protected $languageManager;
 
   /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -33,21 +33,14 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->termStorage     = $this->getTermStorage();
+    $this->termStorage = $this->getTermStorage();
     $this->languageManager = $this->getLanguageManager();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
-    return 'qs_activity_edit_info_form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $activity = NULL) {
     // Get the current language.
     $currentLang = $this->languageManager->getCurrentLanguage();
 
@@ -59,7 +52,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $form['#attributes'] = [
       'title' => $activity->title->value,
       'description' => $this->t('qs.activity.edit_info'),
-      'theme'       => 'primary',
+      'theme' => 'primary',
     ];
 
     $form['#floating_buttons'][] = [
@@ -76,16 +69,16 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     ];
 
     $form['step-1']['title'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.activities.form.edit.info.title'),
-      '#placeholder'   => $this->t('qs_activity.activities.form.edit.info.title.placeholder'),
-      '#type'          => 'textfield',
-      '#required'      => FALSE,
+      '#attributes' => ['required' => TRUE],
+      '#title' => $this->t('qs_activity.activities.form.edit.info.title'),
+      '#placeholder' => $this->t('qs_activity.activities.form.edit.info.title.placeholder'),
+      '#type' => 'textfield',
+      '#required' => FALSE,
       '#default_value' => $activity->getTitle(),
     ];
 
     $form['step-2'] = [
-      '#type'  => 'fieldset',
+      '#type' => 'fieldset',
       '#theme_wrappers' => [
         'container__center',
       ],
@@ -94,6 +87,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     // Get all themes for options.
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
+
     foreach ($themes as $theme) {
       // Check if has translation.
       if ($theme->hasTranslation($currentLang->getId())) {
@@ -104,7 +98,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $form['step-2']['theme'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title'    => $this->t('qs_activity.activities.form.edit.info.theme'),
+        'title' => $this->t('qs_activity.activities.form.edit.info.theme'),
         'variant' => 'button_theme',
         'data-toggle' => 'buttons',
         'no_form_group' => TRUE,
@@ -112,14 +106,14 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
       '#theme_wrappers' => [
         'radios__buttons',
       ],
-      '#type'          => 'radios',
-      '#required'      => FALSE,
-      '#options'       => $options,
+      '#type' => 'radios',
+      '#required' => FALSE,
+      '#options' => $options,
       '#default_value' => $activity->field_theme->target_id,
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'icon' => 'check',
         'modal' => TRUE,
@@ -138,6 +132,34 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
   /**
    * {@inheritdoc}
    */
+  public function getFormId() {
+    return 'qs_activity_edit_info_form';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
+
+    $fields = [
+      'title' => $form_state->getValue('title'),
+      'field_theme' => [$form_state->getValue('theme')],
+    ];
+
+    // Update the activity.
+    $activity = $this->activityManager->update($activity, $fields);
+
+    drupal_set_message($this->t('qs_activity.activities.form.edit.info.success @activity', [
+      '@activity' => $activity->getTitle(),
+    ]));
+
+    $form_state->setRedirect('qs_activity.activities.dashboard', ['activity' => $activity->id()], []);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
@@ -148,27 +170,6 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     if (!$form_state->getValue('theme') || empty($form_state->getValue('theme'))) {
       $form_state->setErrorByName('theme', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['step-2']['theme']['#attributes']['title']]));
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->get('activity'));
-
-    $fields = [
-      'title'  => $form_state->getValue('title'),
-      'field_theme' => [$form_state->getValue('theme')],
-    ];
-
-    // Update the activity.
-    $activity = $this->activityManager->update($activity, $fields);
-
-    drupal_set_message($this->t("qs_activity.activities.form.edit.info.success @activity", [
-      '@activity' => $activity->getTitle(),
-    ]));
-
-    $form_state->setRedirect('qs_activity.activities.dashboard', ['activity' => $activity->id()], []);
   }
 
 }

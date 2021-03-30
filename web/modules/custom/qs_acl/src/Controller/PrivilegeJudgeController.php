@@ -35,7 +35,8 @@ class PrivilegeJudgeController extends AjaxControllerBase {
     }
 
     $community = $privilege->getEntity();
-    if ($community->bundle() == 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
+
+    if ($community->bundle() === 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
 
@@ -61,16 +62,17 @@ class PrivilegeJudgeController extends AjaxControllerBase {
     $user = $privilege->getOwner();
 
     // Send email to user when communities approval is confirm.
-    if ($entity && $entity->bundle() == 'communities' && $user && $user->entity) {
+    if ($entity && $entity->bundle() === 'communities' && $user && $user->entity) {
       $this->mail->mail('qs_auth', 'user_community_waiting_approval_confirm', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
-        'account'   => $user->entity,
+        'account' => $user->entity,
         'community' => $entity,
       ]);
     }
 
     $confirmed = $this->privilegeManager->confirm($privilege);
+
     return new JsonResponse([
-      'status'    => TRUE,
+      'status' => TRUE,
       'privilege' => $confirmed->toArray(),
     ]);
   }
@@ -94,16 +96,17 @@ class PrivilegeJudgeController extends AjaxControllerBase {
     $user = $privilege->getOwner();
 
     // Send email to user when communities approval is decline.
-    if ($entity && $entity->bundle() == 'communities' && $user && $user->entity) {
+    if ($entity && $entity->bundle() === 'communities' && $user && $user->entity) {
       $this->mail->mail('qs_auth', 'user_community_waiting_approval_decline', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
-        'account'   => $user->entity,
+        'account' => $user->entity,
         'community' => $entity,
       ]);
     }
 
     $declined = $this->privilegeManager->decline($privilege);
+
     return new JsonResponse([
-      'status'    => TRUE,
+      'status' => TRUE,
       'privilege' => $declined->toArray(),
     ]);
   }

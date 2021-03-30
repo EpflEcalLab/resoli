@@ -2,45 +2,17 @@
 
 namespace Drupal\qs_activity\Form;
 
-use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * EventAddForm class.
+ * Form to create event on activity.
  */
 class EventAddForm extends FormBasic {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The node Storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
-
-  /**
-   * The entity QS Event Manager.
-   *
-   * @var \Drupal\qs_activity\Service\EventManager
-   */
-  protected $eventManager;
-
-  /**
-   * The Subscription Manager.
-   *
-   * @var \Drupal\qs_subscription\Service\SubscriptionManager
-   */
-  protected $subscriptionManager;
 
   /**
    * The Badge Manager.
@@ -50,6 +22,34 @@ class EventAddForm extends FormBasic {
   protected $badgeManager;
 
   /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * The Subscription Manager.
+   *
+   * @var \Drupal\qs_subscription\Service\SubscriptionManager
+   */
+  protected $subscriptionManager;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -57,18 +57,11 @@ class EventAddForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl                 = $this->getAcl();
-    $this->nodeStorage         = $this->getNodeStorage();
-    $this->eventManager        = $this->getEventManager();
+    $this->acl = $this->getAcl();
+    $this->nodeStorage = $this->getNodeStorage();
+    $this->eventManager = $this->getEventManager();
     $this->subscriptionManager = $this->getSubscriptionManager();
-    $this->badgeManager        = $this->getBadgeManager();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_activity_event_add_form';
+    $this->badgeManager = $this->getBadgeManager();
   }
 
   /**
@@ -84,16 +77,18 @@ class EventAddForm extends FormBasic {
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasWriteAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
 
     // Disable caching & HTML5 validation.
@@ -133,14 +128,14 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-1']['title'] = [
-      '#attributes'    => [
+      '#attributes' => [
         'required' => TRUE,
         'icon' => 'theme_' . $activity->field_theme->entity->field_icon->value,
       ],
-      '#title'         => $this->t('qs_activity.events.form.add.title'),
-      '#placeholder'   => $this->t('qs_activity.events.form.add.title.placeholder'),
-      '#type'          => 'textfield',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.events.form.add.title'),
+      '#placeholder' => $this->t('qs_activity.events.form.add.title.placeholder'),
+      '#type' => 'textfield',
+      '#required' => FALSE,
       '#default_value' => $activity->field_default_title->value,
     ];
 
@@ -161,17 +156,17 @@ class EventAddForm extends FormBasic {
       '#attributes' => [
         'type' => 'date',
         'required' => TRUE,
-        'class'          => [
+        'class' => [
           'flex-grow',
           'px-3',
           'mb-2',
         ],
         'icon' => 'calendar',
       ],
-      '#title'         => $this->t('qs_activity.events.form.add.date'),
-      '#type'          => 'date',
+      '#title' => $this->t('qs_activity.events.form.add.date'),
+      '#type' => 'date',
       '#default_value' => $now->format('d.m.Y'),
-      '#size'          => 8,
+      '#size' => 8,
       '#date_date_format' => 'd.m.Y',
     ];
 
@@ -190,7 +185,7 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at'] = [
-      '#attributes'    => [
+      '#attributes' => [
         'type' => 'time',
         'required' => TRUE,
         'class' => [
@@ -199,15 +194,15 @@ class EventAddForm extends FormBasic {
         ],
         'icon' => 'watch',
       ],
-      '#title'         => $this->t('qs_activity.events.form.add.start_at'),
-      '#type'          => 'date',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.events.form.add.start_at'),
+      '#type' => 'date',
+      '#required' => FALSE,
       '#default_value' => $now->format('H:i'),
-      '#size'          => 5,
+      '#size' => 5,
     ];
 
     $form['event']['step-1']['date_fieldset']['time_fieldset']['end_at'] = [
-      '#attributes'    => [
+      '#attributes' => [
         'type' => 'time',
         'required' => TRUE,
         'class' => [
@@ -215,15 +210,15 @@ class EventAddForm extends FormBasic {
           'px-3',
         ],
       ],
-      '#title'         => $this->t('qs_activity.events.form.add.end_at'),
-      '#type'          => 'date',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.events.form.add.end_at'),
+      '#type' => 'date',
+      '#required' => FALSE,
       '#default_value' => $now->modify('+1 hour')->format('H:i'),
-      '#size'          => 5,
+      '#size' => 5,
     ];
 
     $form['event']['step-2'] = [
-      '#type'  => 'fieldset',
+      '#type' => 'fieldset',
       '#description' => $this->t('qs_activity.events.form.step2.description @activity', [
         '@activity' => $activity->getTitle(),
       ]),
@@ -237,11 +232,11 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-2']['body'] = [
-      '#attributes'    => ['required' => TRUE],
-      '#title'         => $this->t('qs_activity.events.form.add.body'),
-      '#placeholder'   => $this->t('qs_activity.events.form.add.body.placeholder'),
-      '#type'          => 'textarea',
-      '#required'      => FALSE,
+      '#attributes' => ['required' => TRUE],
+      '#title' => $this->t('qs_activity.events.form.add.body'),
+      '#placeholder' => $this->t('qs_activity.events.form.add.body.placeholder'),
+      '#type' => 'textarea',
+      '#required' => FALSE,
       '#default_value' => $activity->body->value,
     ];
 
@@ -251,53 +246,53 @@ class EventAddForm extends FormBasic {
         'google-input-lat' => 'edit-latitude',
         'google-input-lng' => 'edit-longitude',
       ],
-      '#title'         => $this->t('qs_activity.events.form.add.venue'),
-      '#placeholder'   => $this->t('qs_activity.events.form.add.venue.placeholder'),
-      '#type'          => 'textfield',
+      '#title' => $this->t('qs_activity.events.form.add.venue'),
+      '#placeholder' => $this->t('qs_activity.events.form.add.venue.placeholder'),
+      '#type' => 'textfield',
       '#default_value' => $activity->field_venue->value,
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/google-place-autocomplete';
 
     // Hidden fields which will be updated via Javascript.
     $form['event']['step-2']['latitude'] = [
-      '#type'  => 'hidden',
+      '#type' => 'hidden',
       '#default_value' => $activity->field_venue_lat->value ? $activity->field_venue_lat->value : NULL,
     ];
     $form['event']['step-2']['longitude'] = [
-      '#type'  => 'hidden',
+      '#type' => 'hidden',
       '#default_value' => $activity->field_venue_long->value ? $activity->field_venue_long->value : NULL,
     ];
 
     $form['event']['step-2']['contact_name'] = [
-      '#title'         => $this->t('qs_activity.events.form.edit.contact_name'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_name.placeholder'),
-      '#type'          => 'textfield',
+      '#title' => $this->t('qs_activity.events.form.edit.contact_name'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.contact_name.placeholder'),
+      '#type' => 'textfield',
       '#default_value' => $activity->field_contact_name->value,
     ];
 
     $form['event']['step-2']['contact_phone'] = [
-      '#title'         => $this->t('qs_activity.events.form.edit.contact_phone'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_phone.placeholder'),
-      '#type'          => 'tel',
+      '#title' => $this->t('qs_activity.events.form.edit.contact_phone'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.contact_phone.placeholder'),
+      '#type' => 'tel',
       '#default_value' => $activity->field_contact_phone->value,
     ];
 
     $form['event']['step-2']['contact_mail'] = [
-      '#title'         => $this->t('qs_activity.events.form.edit.contact_mail'),
-      '#placeholder'   => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
-      '#type'          => 'email',
+      '#title' => $this->t('qs_activity.events.form.edit.contact_mail'),
+      '#placeholder' => $this->t('qs_activity.events.form.edit.contact_mail.placeholder'),
+      '#type' => 'email',
       // Skip drupal email validation.
-      '#validated'     => TRUE,
+      '#validated' => TRUE,
       '#default_value' => $activity->field_contact_mail->value,
     ];
 
     $form['event']['step-2']['has_contribution'] = [
-      '#type'    => 'radios',
+      '#type' => 'radios',
       '#options' => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
-      '#required'      => FALSE,
+      '#required' => FALSE,
       '#default_value' => !empty($activity->field_contribution->value) ? 1 : 0,
       '#attributes' => [
-        'title'   => $this->t('qs_activity.events.form.add.has_contribution'),
+        'title' => $this->t('qs_activity.events.form.add.has_contribution'),
         'no_form_group' => TRUE,
         'data-toggle' => 'buttons',
         'color' => 'danger',
@@ -313,15 +308,15 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-2']['contribution'] = [
-      '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_activity.events.form.add.contribution'),
+      '#attributes' => ['required' => TRUE],
+      '#title' => $this->t('qs_activity.events.form.add.contribution'),
       '#placeholder' => $this->t('qs_activity.events.form.add.contribution.placeholder'),
-      '#type'        => 'textfield',
+      '#type' => 'textfield',
       '#default_value' => $activity->field_contribution->value,
-      '#required'    => FALSE,
+      '#required' => FALSE,
       '#states' => [
         'visible' => [
-          ':input[name="has_contribution"]' => ['value' => "1"],
+          ':input[name="has_contribution"]' => ['value' => '1'],
         ],
       ],
     ];
@@ -332,7 +327,7 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-2']['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'icon' => 'check',
         'modal' => TRUE,
@@ -351,6 +346,56 @@ class EventAddForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
+  public function getFormId() {
+    return 'qs_activity_event_add_form';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $activity = $this->nodeStorage->load($form_state->get('activity'));
+
+    // Format dates.
+    $date = new DrupalDateTime($form_state->getValue('date'));
+    $formatted_date = $date->format('d.m.Y');
+    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
+    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
+
+    // Prepare data.
+    $data['title'] = $form_state->getValue('title');
+    $data['body'] = $form_state->getValue('body');
+    $data['contact_name'] = $form_state->getValue('contact_name');
+    $data['contact_mail'] = $form_state->getValue('contact_mail');
+    $data['contact_phone'] = $form_state->getValue('contact_phone');
+    $data['contribution'] = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
+    $data['venue'] = $form_state->getValue('venue');
+    $data['venue_lat'] = $form_state->getValue('latitude');
+    $data['venue_long'] = $form_state->getValue('longitude');
+
+    // Create the new event.
+    $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
+    drupal_set_message($this->t('qs_activity.events.form.add.success'));
+    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
+
+    // Get the current user activitiy's privilege to this event.
+    $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
+    $privileges = reset($privileges_by_events);
+
+    // According the current user roles to the event,
+    // If it's activity_maintainers and not activity_organizers, then
+    // subscribe it to this new event.
+    if ($privileges && \in_array('activity_maintainers', $privileges, TRUE) && !\in_array('activity_organizers', $privileges, TRUE)) {
+      // By default, subscribe every activity_maintainers (co-organizers) to
+      // there events.
+      $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
+      $this->subscriptionManager->confirm($subscription);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Assert the title is valid.
     if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
@@ -358,7 +403,7 @@ class EventAddForm extends FormBasic {
     }
 
     // Assert the mail is valid - only when filled.
-    if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), FILTER_VALIDATE_EMAIL)) {
+    if ($form_state->getValue('contact_mail') && !filter_var($form_state->getValue('contact_mail'), \FILTER_VALIDATE_EMAIL)) {
       $form_state->setErrorByName('contact_mail', $this->t('qs.form.error.mail.malformed'));
     }
 
@@ -391,12 +436,14 @@ class EventAddForm extends FormBasic {
 
     $date = new DrupalDateTime($form_state->getValue('date'));
     $formatted_date = $date->format('d.m.Y');
+
     try {
       $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
       $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
     }
     catch (\Exception $e) {
       $form_state->setErrorByName('form', $this->t('qs.form.error.something_went_wrong'));
+
       return;
     }
 
@@ -408,49 +455,6 @@ class EventAddForm extends FormBasic {
     // Check hours are realistic.
     if ($start_at >= $end_at) {
       $form_state->setErrorByName('form', $this->t('qs_activity.events.form.add.error.hours.inconsistency @fieldname', ['@fieldname' => $form['event']['step-1']['date_fieldset']['time_fieldset']['start_at']['#title']]));
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    $activity = $this->nodeStorage->load($form_state->get('activity'));
-
-    // Format dates.
-    $date = new DrupalDateTime($form_state->getValue('date'));
-    $formatted_date = $date->format('d.m.Y');
-    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
-    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
-
-    // Prepare data.
-    $data['title']         = $form_state->getValue('title');
-    $data['body']          = $form_state->getValue('body');
-    $data['contact_name']  = $form_state->getValue('contact_name');
-    $data['contact_mail']  = $form_state->getValue('contact_mail');
-    $data['contact_phone'] = $form_state->getValue('contact_phone');
-    $data['contribution']  = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
-    $data['venue']         = $form_state->getValue('venue');
-    $data['venue_lat']     = $form_state->getValue('latitude');
-    $data['venue_long']    = $form_state->getValue('longitude');
-
-    // Create the new event.
-    $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
-    drupal_set_message($this->t('qs_activity.events.form.add.success'));
-    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
-
-    // Get the current user activitiy's privilege to this event.
-    $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
-    $privileges = reset($privileges_by_events);
-
-    // According the current user roles to the event,
-    // If it's activity_maintainers and not activity_organizers, then
-    // subscribe it to this new event.
-    if ($privileges && in_array('activity_maintainers', $privileges) && !in_array('activity_organizers', $privileges)) {
-      // By default, subscribe every activity_maintainers (co-organizers) to
-      // there events.
-      $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
-      $this->subscriptionManager->confirm($subscription);
     }
   }
 

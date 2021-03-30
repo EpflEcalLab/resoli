@@ -2,12 +2,12 @@
 
 namespace Drupal\qs_activity\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Subscribe to KernelEvents::REQUEST.
@@ -33,12 +33,21 @@ class RedirectSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * Redirect Community canonical access.
+   *
+   * It verify the current route is Community canonical access then
+   * redirect on the activities page.
+   *
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   *   Event subscriber.
    */
-  public static function getSubscribedEvents() {
-    $events[KernelEvents::REQUEST][] = ['communityRedirect'];
-    $events[KernelEvents::REQUEST][] = ['eventRedirect'];
-    return $events;
+  public function communityRedirect(GetResponseEvent $event) {
+    $term = $this->routeMatch->getParameter('taxonomy_term');
+
+    if ($this->routeMatch->getRouteName() === 'entity.taxonomy_term.canonical' && $term->bundle() === 'communities') {
+      $destination = Url::fromRoute('qs_community.welcome', ['community' => $term->id()]);
+      $event->setResponse(new RedirectResponse($destination->toString()));
+    }
   }
 
   /**
@@ -52,27 +61,21 @@ class RedirectSubscriber implements EventSubscriberInterface {
    */
   public function eventRedirect(GetResponseEvent $event) {
     $node = $this->routeMatch->getParameter('node');
-    if ($this->routeMatch->getRouteName() == 'entity.node.canonical' && $node->bundle() === 'event') {
+
+    if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'event') {
       $destination = Url::fromRoute('entity.node.canonical', ['node' => $node->field_activity->target_id]);
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
   }
 
   /**
-   * Redirect Community canonical access.
-   *
-   * It verify the current route is Community canonical access then
-   * redirect on the activities page.
-   *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
-   *   Event subscriber.
+   * {@inheritdoc}
    */
-  public function communityRedirect(GetResponseEvent $event) {
-    $term = $this->routeMatch->getParameter('taxonomy_term');
-    if ($this->routeMatch->getRouteName() == 'entity.taxonomy_term.canonical' && $term->bundle() === 'communities') {
-      $destination = Url::fromRoute('qs_community.welcome', ['community' => $term->id()]);
-      $event->setResponse(new RedirectResponse($destination->toString()));
-    }
+  public static function getSubscribedEvents() {
+    $events[KernelEvents::REQUEST][] = ['communityRedirect'];
+    $events[KernelEvents::REQUEST][] = ['eventRedirect'];
+
+    return $events;
   }
 
 }

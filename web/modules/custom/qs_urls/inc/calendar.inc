@@ -25,6 +25,7 @@ function qs_calendar_alias(EntityInterface $entity, $alias, $operation = 'insert
           'alias' => '/' . trim($alias, '/') . '/calendar/monthly',
         ],
       ];
+
       break;
   }
 
@@ -49,6 +50,7 @@ function qs_calendar_redirects(EntityInterface $entity, $alias, $operation = 'in
           'redirect' => '/' . trim($alias, '/') . '/calendar/weekly',
         ],
       ];
+
       break;
   }
 

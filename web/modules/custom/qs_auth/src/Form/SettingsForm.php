@@ -6,25 +6,9 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class SettingsForm.
+ * A Drupal admin form to configure authentication module.
  */
 class SettingsForm extends ConfigFormBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getEditableConfigNames() {
-    return [
-      'qs_auth.settings',
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_auth_settings_form';
-  }
 
   /**
    * {@inheritdoc}
@@ -38,7 +22,15 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Will disable the logout buttons.'),
       '#default_value' => $config->get('demo_mode'),
     ];
+
     return parent::buildForm($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'qs_auth_settings_form';
   }
 
   /**
@@ -50,6 +42,15 @@ class SettingsForm extends ConfigFormBase {
     $this->config('qs_auth.settings')
       ->set('demo_mode', $form_state->getValue('demo_mode'))
       ->save();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getEditableConfigNames() {
+    return [
+      'qs_auth.settings',
+    ];
   }
 
 }

@@ -2,12 +2,12 @@
 
 namespace Drupal\qs_site\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Drupal\Core\Url;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Provide custom Entity Access.
@@ -22,6 +22,15 @@ class EntityAccess implements EventSubscriberInterface {
   protected $routeMatch;
 
   /**
+   * Disabled $disabledVocabularies terms vid.
+   *
+   * @var array
+   */
+  private $disabledVocabularies = [
+    'themes',
+  ];
+
+  /**
    * Class constructor.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
@@ -32,19 +41,11 @@ class EntityAccess implements EventSubscriberInterface {
   }
 
   /**
-   * Disabled $disabledVocabularies terms vid.
-   *
-   * @var array
-   */
-  private $disabledVocabularies = [
-    'themes',
-  ];
-
-  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
     $events[KernelEvents::REQUEST][] = ['isDisabledTaxonomy'];
+
     return $events;
   }
 
@@ -58,7 +59,7 @@ class EntityAccess implements EventSubscriberInterface {
     $term = $this->routeMatch->getParameter('taxonomy_term');
     $route_name = $this->routeMatch->getRouteName();
 
-    if ($route_name == 'entity.taxonomy_term.canonical' && in_array($term->vid->target_id, $this->disabledVocabularies)) {
+    if ($route_name === 'entity.taxonomy_term.canonical' && \in_array($term->vid->target_id, $this->disabledVocabularies, TRUE)) {
       $dest = Url::fromRoute('<front>')->toString();
       $event->setResponse(RedirectResponse::create($dest));
     }

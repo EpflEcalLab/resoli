@@ -78,14 +78,14 @@ services:
       MYSQL_PASSWORD: drupal
       MYSQL_DATABASE: drupal_%
       MYSQL_ROOT_PASSWORD: root
-    restart: always
+    restart: unless-stopped
     volumes:
       - database:/var/lib/mysql
 
   # Mail
   mail:
     image: schickling/mailcatcher
-    restart: always
+    restart: unless-stopped
 
 volumes:
   database:

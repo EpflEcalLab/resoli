@@ -29,23 +29,81 @@ class PrivilegeGodController extends AjaxControllerBase {
 
     $user_id = $request->request->get('user');
     $user = $this->userStorage->load($user_id);
+
     if (!$user) {
       return AccessResult::forbidden();
     }
 
     $community_id = $request->request->get('community');
     $community = $this->termStorage->load($community_id);
-    if ($community && $community->bundle() == 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
+
+    if ($community && $community->bundle() === 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
 
     // Check access for activity.
     $activity_id = $request->request->get('activity');
     $activity = $this->nodeStorage->load($activity_id);
-    if ($activity && $activity->bundle() == 'activity' && $this->acl->hasAdminAccessActivity($activity)) {
+
+    if ($activity && $activity->bundle() === 'activity' && $this->acl->hasAdminAccessActivity($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
+  }
+
+  /**
+   * Decline all the privilege for the entity & the account.
+   *
+   * This AJAX call is called from the members dashboard only.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   JSON formatted response. Contains status & declined privileges.
+   */
+  public function ban(Request $request) {
+    $user_id = $request->request->get('user');
+    $user = $this->userStorage->load($user_id);
+    $entity = NULL;
+
+    if ($community_id = $request->request->get('community')) {
+      $entity = $this->termStorage->load($community_id);
+    }
+
+    if ($activity_id = $request->request->get('activity')) {
+      $entity = $this->nodeStorage->load($activity_id);
+    }
+
+    if (!$entity) {
+      return new JsonResponse(['status' => FALSE]);
+    }
+
+    // Check if a privilege already exists.
+    $privileges = $this->privilegeStorage->loadByProperties([
+      'bundle' => $entity->getEntityTypeId(),
+      'entity' => $entity->id(),
+      'user' => $user->id(),
+    ]);
+
+    if (!$privileges) {
+      return new JsonResponse([
+        'status' => TRUE,
+        'privilege' => [],
+      ]);
+    }
+
+    $declined = [];
+
+    foreach ($privileges as $privilege) {
+      $declined[] = $this->privilegeManager->decline($privilege)->toArray();
+    }
+
+    return new JsonResponse([
+      'status' => TRUE,
+      'privileges' => $declined,
+    ]);
   }
 
   /**
@@ -69,7 +127,7 @@ class PrivilegeGodController extends AjaxControllerBase {
     }
 
     $user_id = $request->request->get('user');
-    $user    = $this->userStorage->load($user_id);
+    $user = $this->userStorage->load($user_id);
 
     $community_id = $request->request->get('community');
     $community = $this->termStorage->load($community_id);
@@ -84,18 +142,18 @@ class PrivilegeGodController extends AjaxControllerBase {
     if ($community) {
       $entity = $community;
       $roles = [
-        'community_members'    => 0,
+        'community_members' => 0,
         'community_organizers' => 0,
-        'community_managers'   => 0,
+        'community_managers' => 0,
       ];
     }
 
     if ($activity) {
       $entity = $activity;
       $roles = [
-        'activity_members'     => 0,
+        'activity_members' => 0,
         'activity_maintainers' => 0,
-        'activity_organizers'  => 0,
+        'activity_organizers' => 0,
       ];
     }
 
@@ -106,12 +164,13 @@ class PrivilegeGodController extends AjaxControllerBase {
     }
 
     $updated = [];
+
     foreach ($roles as $role => $status) {
       $privileges = $this->privilegeStorage->loadByProperties([
         'privilege' => $role,
-        'bundle'    => $entity->getEntityTypeId(),
-        'entity'    => $entity->id(),
-        'user'      => $user->id(),
+        'bundle' => $entity->getEntityTypeId(),
+        'entity' => $entity->id(),
+        'user' => $user->id(),
       ]);
       $privilege = reset($privileges);
 
@@ -126,61 +185,8 @@ class PrivilegeGodController extends AjaxControllerBase {
     }
 
     return new JsonResponse([
-      'status'    => TRUE,
+      'status' => TRUE,
       'privilege' => $updated,
-    ]);
-  }
-
-  /**
-   * Decline all the privilege for the entity & the account.
-   *
-   * This AJAX call is called from the members dashboard only.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The current request.
-   *
-   * @return \Symfony\Component\HttpFoundation\JsonResponse
-   *   JSON formatted response. Contains status & declined privileges.
-   */
-  public function ban(Request $request) {
-    $user_id = $request->request->get('user');
-    $user    = $this->userStorage->load($user_id);
-    $entity  = NULL;
-
-    if ($community_id = $request->request->get('community')) {
-      $entity = $this->termStorage->load($community_id);
-    }
-
-    if ($activity_id = $request->request->get('activity')) {
-      $entity = $this->nodeStorage->load($activity_id);
-    }
-
-    if (!$entity) {
-      return new JsonResponse(['status' => FALSE]);
-    }
-
-    // Check if a privilege already exists.
-    $privileges = $this->privilegeStorage->loadByProperties([
-      'bundle' => $entity->getEntityTypeId(),
-      'entity' => $entity->id(),
-      'user'   => $user->id(),
-    ]);
-
-    if (!$privileges) {
-      return new JsonResponse([
-        'status'    => TRUE,
-        'privilege' => [],
-      ]);
-    }
-
-    $declined = [];
-    foreach ($privileges as $privilege) {
-      $declined[] = $this->privilegeManager->decline($privilege)->toArray();
-    }
-
-    return new JsonResponse([
-      'status'     => TRUE,
-      'privileges' => $declined,
     ]);
   }
 

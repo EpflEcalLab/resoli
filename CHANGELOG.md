@@ -2,6 +2,12 @@
 
 ## NEXT RELEASE
  - update Docker to PHP7.4, Node 10 & MariaDB 10.4
+ - update Drupal from 8.9.7 to 8.9.13 with all dependencies
+ - modernize the Code Styles integration
+ - disable Code Styles PHPMD & PHPCDP for now
+ - move Code Styles checking from Codeship to Github Actions
+ - update Bundle from 1.16.0 => 2.1.4
+ - update Capistrano deployment steps
 
 ## 1.5.6 (2020-11-19)
  - fix Event Export into Excel file which trigger crash on empty column "Contact"

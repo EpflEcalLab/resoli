@@ -2,13 +2,17 @@
 
 namespace Drupal\qs_auth\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\taxonomy\TermInterface;
 
 /**
- * ApprovalController.
+ * The waiting for approval by community manager.
+ *
+ * This page is shown when the user access to a community which it previously
+ * applied but which it's not a certified member.
+ * It must be reviewed by a Manager of this community.
  */
 class ApprovalController extends ControllerBase {
 
@@ -25,9 +29,11 @@ class ApprovalController extends ControllerBase {
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
-    if ($community->bundle() == 'communities') {
+
+    if ($community->bundle() === 'communities') {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 

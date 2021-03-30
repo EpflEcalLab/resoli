@@ -5,10 +5,10 @@
  * Legacy Drupal 7 code to implements hooks.
  */
 
-use Drupal\node\NodeInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_node_access().
@@ -19,8 +19,9 @@ use Drupal\Core\Entity\EntityInterface;
 function qs_acl_node_access(NodeInterface $node, $operation, AccountInterface $account) {
   $acl = \Drupal::service('qs_acl.access_control');
 
-  if ($operation == 'view' && $node->bundle() == 'activity') {
+  if ($operation === 'view' && $node->bundle() === 'activity') {
     $community = $node->field_community->entity;
+
     if ($acl->hasAccessCommunity($community)) {
       return AccessResult::allowed();
     }
@@ -37,17 +38,18 @@ function qs_acl_node_access(NodeInterface $node, $operation, AccountInterface $a
  * Implements hook_ENTITY_TYPE_delete().
  */
 function qs_acl_taxonomy_term_delete(EntityInterface $entity) {
-  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
   $entityTypeManager = \Drupal::service('entity_type.manager');
-  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $privilegeStorage = $entityTypeManager->getStorage('privilege');
-  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  /** @var \Drupal\Core\Entity\Query\QueryInterface */
   $privilegeQuery = $privilegeStorage->getQuery();
 
   $query = $privilegeQuery->condition('bundle', 'taxonomy_term')
     ->condition('entity', $entity->id());
 
   $ids = $query->execute();
+
   if ($ids) {
     $privileges = $privilegeStorage->loadMultiple($ids);
     $privilegeStorage->delete($privileges);
@@ -62,17 +64,18 @@ function qs_acl_taxonomy_term_delete(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function qs_acl_node_delete(EntityInterface $entity) {
-  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
   $entityTypeManager = \Drupal::service('entity_type.manager');
-  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $privilegeStorage = $entityTypeManager->getStorage('privilege');
-  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  /** @var \Drupal\Core\Entity\Query\QueryInterface */
   $privilegeQuery = $privilegeStorage->getQuery();
 
   $query = $privilegeQuery->condition('bundle', 'node')
     ->condition('entity', $entity->id());
 
   $ids = $query->execute();
+
   if ($ids) {
     $privileges = $privilegeStorage->loadMultiple($ids);
     $privilegeStorage->delete($privileges);
@@ -87,16 +90,17 @@ function qs_acl_node_delete(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function qs_acl_user_delete(EntityInterface $entity) {
-  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
   $entityTypeManager = \Drupal::service('entity_type.manager');
-  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $privilegeStorage = $entityTypeManager->getStorage('privilege');
-  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  /** @var \Drupal\Core\Entity\Query\QueryInterface */
   $privilegeQuery = $privilegeStorage->getQuery();
 
   $query = $privilegeQuery->condition('user', $entity->id());
 
   $ids = $query->execute();
+
   if ($ids) {
     $privileges = $privilegeStorage->loadMultiple($ids);
     $privilegeStorage->delete($privileges);

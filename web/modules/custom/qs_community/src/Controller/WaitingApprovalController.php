@@ -2,24 +2,21 @@
 
 namespace Drupal\qs_community\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
+use Drupal\taxonomy\TermInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * WaitingApprovalController.
+ * A waiting page when someone try to access to an activity homepage.
+ *
+ * The waiting page is only shown when the user have a pending for approval
+ * access to the community.
  */
 class WaitingApprovalController extends ControllerBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  private $configuration = ['limit' => 50];
-
 
   /**
    * Access Control Service.
@@ -27,6 +24,11 @@ class WaitingApprovalController extends ControllerBase {
    * @var \Drupal\qs_acl\Service\AccessControl
    */
   private $acl;
+
+  /**
+   * {@inheritdoc}
+   */
+  private $configuration = ['limit' => 50];
 
   /**
    * The Privilege Manager.
@@ -46,21 +48,9 @@ class WaitingApprovalController extends ControllerBase {
    * {@inheritdoc}
    */
   public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager) {
-    $this->acl              = $acl;
+    $this->acl = $acl;
     $this->privilegeManager = $privilege_manager;
     $this->privilegeStorage = $this->entityTypeManager()->getStorage('privilege');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager')
-    );
   }
 
   /**
@@ -76,10 +66,24 @@ class WaitingApprovalController extends ControllerBase {
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasAdminAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control'),
+    $container->get('qs_acl.privilege_manager')
+    );
   }
 
   /**
@@ -90,9 +94,9 @@ class WaitingApprovalController extends ControllerBase {
     $query = $this->privilegeManager->queryWaitingApproval($community);
 
     $ids = $query->execute()->fetchAll();
-    pager_default_initialize(count($ids), $this->configuration['limit']);
+    pager_default_initialize(\count($ids), $this->configuration['limit']);
     $variables['pager'] = [
-      '#type'     => 'pager',
+      '#type' => 'pager',
       '#quantity' => '3',
     ];
     $page = pager_find_page();
@@ -101,6 +105,7 @@ class WaitingApprovalController extends ControllerBase {
     $rows = $query->execute()->fetchAll();
 
     $ids = [];
+
     foreach ($rows as $row) {
       $ids[] = $row->id;
     }
@@ -110,7 +115,7 @@ class WaitingApprovalController extends ControllerBase {
     $variables['privileges'] = $privileges;
 
     return [
-      '#theme'     => 'qs_community_waiting_approval_page',
+      '#theme' => 'qs_community_waiting_approval_page',
       '#variables' => $variables,
       '#cache' => [
         'tags' => [

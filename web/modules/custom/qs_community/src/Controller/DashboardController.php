@@ -2,15 +2,18 @@
 
 namespace Drupal\qs_community\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
-use Drupal\qs_acl\Service\AccessControl;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\taxonomy\TermInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * DashboardController.
+ * Dashboard to manage one community.
+ *
+ * The dashboard list operations the user can achieve on the community with
+ * its privilege in that community.
  */
 class DashboardController extends ControllerBase {
 
@@ -29,17 +32,6 @@ class DashboardController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control')
-    );
-  }
-
-  /**
    * Checks access.
    *
    * @param \Drupal\Core\Session\AccountInterface $account
@@ -52,10 +44,23 @@ class DashboardController extends ControllerBase {
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasAdminAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control')
+    );
   }
 
   /**
@@ -63,7 +68,7 @@ class DashboardController extends ControllerBase {
    */
   public function dashboard(TermInterface $community) {
     return [
-      '#theme'     => 'qs_community_dashboard_page',
+      '#theme' => 'qs_community_dashboard_page',
       '#variables' => ['community' => $community],
       '#cache' => [
         'tags' => [

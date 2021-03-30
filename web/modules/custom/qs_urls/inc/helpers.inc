@@ -5,8 +5,8 @@
  * Contains helper functions to generate aliases & redirects.
  */
 
-use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Language\LanguageInterface;
 
 /**
  * Check to ensure a path alias is unique and add suffix variants if necessary.
@@ -29,7 +29,7 @@ function qs_alias_uniquifier(EntityInterface $entity, $alias, $langcode = Langua
   // Get the entity URL, such as node/x or taxonomy/term/y.
   $source = $entity->toUrl()->toString();
 
-  // @var \Drupal\pathauto\AliasUniquifierInterface
+  /** @var \Drupal\pathauto\AliasUniquifierInterface */
   $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
 
   // If the alias already exists, generate a new, hopefully unique, variant.
@@ -59,7 +59,7 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
 
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
 
-  // @var \Drupal\Core\Entity\EntityTypeManagerInterface
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
   $entityManager = \Drupal::service('entity_type.manager');
   $redirectStorage = $entityManager->getStorage('redirect');
 
@@ -67,12 +67,12 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
   $redirect_repository = \Drupal::service('redirect.repository');
   $alias_storage = \Drupal::service('path.alias_storage');
 
-  // TODO: translation the redirect_suffix before creation/deletion,
+  // @todo translation the redirect_suffix before creation/deletion,
   // on every language.
   // Generate every redirect for the given aliases.
   foreach ($redirects as $item) {
     // Generate redirect.
-    if ($operation == 'insert' || $operation == 'update' || $operation == 'bulkupdate') {
+    if ($operation === 'insert' || $operation === 'update' || $operation === 'bulkupdate') {
 
       // Only generate redirect for existing alias &
       // non already redirected source.
@@ -87,8 +87,9 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
     }
 
     // Delete redirect on operation delete.
-    if ($operation == 'delete') {
+    if ($operation === 'delete') {
       $redirect = $redirect_repository->findMatchingRedirect(trim($item['source'], '/'), [], $langcode);
+
       if (!empty($redirect)) {
         $redirect->delete();
       }
@@ -120,12 +121,12 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
   // Load services.
   $alias_storage = \Drupal::service('path.alias_storage');
 
-  // TODO: translation the alias_suffix before creation/deletion,
+  // @todo translation the alias_suffix before creation/deletion,
   // on every language.
   // Generate every alias for the given aliases.
   foreach ($aliases as $item) {
     // Generate alias.
-    if ($operation == 'insert' || $operation == 'update' || $operation == 'bulkupdate') {
+    if ($operation === 'insert' || $operation === 'update' || $operation === 'bulkupdate') {
       // Only generate alias for non-existing alias &
       // route which has not already an alias.
       if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE && $alias_storage->lookupPathAlias($item['route'], $langcode) === FALSE) {
@@ -134,11 +135,11 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
     }
 
     // Delete alias on operation delete.
-    if ($operation == 'delete') {
+    if ($operation === 'delete') {
       if ($alias_storage->aliasExists($item['alias'], $langcode) === TRUE) {
         $alias_storage->delete([
-          'source'   => $item['route'],
-          'alias'    => $item['alias'],
+          'source' => $item['route'],
+          'alias' => $item['alias'],
           'langcode' => $langcode,
         ]);
       }

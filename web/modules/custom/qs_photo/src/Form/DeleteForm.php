@@ -4,21 +4,15 @@ namespace Drupal\qs_photo\Form;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * DeleteForm class.
+ * Form to remove photos by batch.
  */
 class DeleteForm extends FormBasic {
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
 
   /**
    * The node Storage.
@@ -26,6 +20,12 @@ class DeleteForm extends FormBasic {
    * @var \Drupal\node\NodeStorageInterface
    */
   protected $nodeStorage;
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
 
   /**
    * {@inheritdoc}
@@ -35,15 +35,8 @@ class DeleteForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl         = $this->getAcl();
+    $this->acl = $this->getAcl();
     $this->nodeStorage = $this->getNodeStorage();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_photo_delete_form';
   }
 
   /**
@@ -61,6 +54,7 @@ class DeleteForm extends FormBasic {
     $access = AccessResult::allowed();
 
     $photos_params = $this->getRequest()->query->get('photos');
+
     if (!$photos_params) {
       return AccessResult::forbidden();
     }
@@ -72,24 +66,27 @@ class DeleteForm extends FormBasic {
       $event_activity = $photo->field_event->entity->field_activity->entity;
 
       // The photo doesn't belongs to the same activity as url.
-      if ($event_activity->id() != $activity->id()) {
+      if ($event_activity->id() !== $activity->id()) {
         $access = AccessResult::forbidden();
+
         break;
       }
 
       // Has not write access for photos.
       if (!$this->acl->hasWriteAccessPhoto($event_activity)) {
         $access = AccessResult::forbidden();
+
         break;
       }
     }
+
     return $access;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
     $user = $this->getCurrentUser();
 
@@ -104,15 +101,15 @@ class DeleteForm extends FormBasic {
     ];
 
     $form['#attributes'] = [
-      'title'       => $activity->getTitle(),
+      'title' => $activity->getTitle(),
       'description' => $this->t('qs_photo.form.delete.warning'),
-      'icon'        => 'trash',
-      'theme'       => 'danger',
+      'icon' => 'trash',
+      'theme' => 'danger',
     ];
 
     $form['#floating_buttons'][] = [
-      'icon'   => 'trash',
-      'label'  => $this->t('qs.photo.delete'),
+      'icon' => 'trash',
+      'label' => $this->t('qs.photo.delete'),
       'active' => TRUE,
     ];
 
@@ -150,7 +147,7 @@ class DeleteForm extends FormBasic {
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'class' => [
           'text-danger',
@@ -172,7 +169,9 @@ class DeleteForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {}
+  public function getFormId() {
+    return 'qs_photo_delete_form';
+  }
 
   /**
    * {@inheritdoc}
@@ -182,9 +181,9 @@ class DeleteForm extends FormBasic {
     $user = $this->getCurrentUser();
     $photos_params = $this->getRequest()->query->get('photos');
 
-    drupal_set_message($this->t("qs_photo.form.delete.success @activity @number", [
+    drupal_set_message($this->t('qs_photo.form.delete.success @activity @number', [
       '@activity' => $activity->getTitle(),
-      '@number'   => count($photos_params),
+      '@number' => \count($photos_params),
     ]));
 
     $form_state->setRedirect('qs_photo.user.form.manage', [
@@ -194,10 +193,17 @@ class DeleteForm extends FormBasic {
 
     // Delete the photos.
     $photos = $this->nodeStorage->loadMultiple($photos_params);
+
     foreach ($photos as $photo_nid => $comment) {
       $photo = $this->nodeStorage->load($photo_nid);
       $photo->delete();
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
   }
 
 }

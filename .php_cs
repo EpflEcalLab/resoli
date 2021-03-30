@@ -20,5 +20,6 @@ $config = Drupal8::create()
 
 $rules = $config->getRules();
 $rules['global_namespace_import'] = FALSE;
+$rules['no_extra_blank_lines'] = ['extra'];
 $config->setRules($rules);
 return $config;

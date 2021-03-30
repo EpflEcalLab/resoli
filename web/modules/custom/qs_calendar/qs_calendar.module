@@ -14,21 +14,21 @@ function qs_calendar_theme() {
     // ---------------------------------------------------------------------.
     'qs_calendar_collection_weekly_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--calendar--collection-weekly',
+      'template' => 'qs--calendar--collection-weekly',
     ],
     'qs_calendar_collection_monthly_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--calendar--collection-monthly',
+      'template' => 'qs--calendar--collection-monthly',
     ],
     // Blocks themes
     // ---------------------------------------------------------------------.
     'qs_calendar_weekly_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--calendar--weekly',
+      'template' => 'qs--calendar--weekly',
     ],
     'qs_calendar_monthly_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--calendar--monthly',
+      'template' => 'qs--calendar--monthly',
     ],
   ];
 }

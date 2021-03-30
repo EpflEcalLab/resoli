@@ -2,15 +2,18 @@
 
 namespace Drupal\qs_activity\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * EventDashboardController.
+ * Dashboard to manage one event.
+ *
+ * The dashboard list operations the user can operate on the event with
+ * its privilege in that activity (member with some privileges).
  */
 class EventDashboardController extends ControllerBase {
 
@@ -26,17 +29,6 @@ class EventDashboardController extends ControllerBase {
    */
   public function __construct(AccessControl $acl) {
     $this->acl = $acl;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control')
-    );
   }
 
   /**
@@ -59,7 +51,19 @@ class EventDashboardController extends ControllerBase {
     if ($activity && $this->acl->hasWriteAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control')
+    );
   }
 
   /**
@@ -67,7 +71,7 @@ class EventDashboardController extends ControllerBase {
    */
   public function dashboard(NodeInterface $event) {
     return [
-      '#theme'     => 'qs_activity_event_dashboard_page',
+      '#theme' => 'qs_activity_event_dashboard_page',
       '#variables' => ['event' => $event],
       '#cache' => [
         'tags' => [

@@ -19,14 +19,14 @@ trait UserTestTrait {
   public function setupAnonymous() {
     // Create anonymous user role.
     $role = Role::create([
-      'id'    => 'anonymous',
+      'id' => 'anonymous',
       'label' => 'anonymous',
     ]);
     $role->save();
 
     // Insert the anonymous user into the database.
     User::create([
-      'uid'  => 0,
+      'uid' => 0,
       'name' => '',
     ])->save();
 

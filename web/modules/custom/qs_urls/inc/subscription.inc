@@ -25,6 +25,7 @@ function qs_subscription_alias(EntityInterface $entity, $alias, $operation = 'in
           'alias' => '/' . trim($alias, '/') . '/dashboard/subscribers',
         ],
       ];
+
       break;
   }
 

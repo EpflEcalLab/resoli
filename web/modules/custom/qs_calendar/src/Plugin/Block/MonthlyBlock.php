@@ -8,8 +8,8 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * Calendar Monthly.
  *
  * @Block(
- *   id = "qs_calendar_monthly_block",
- *   admin_label = @Translation("Calendar Monthly"),
+ *     id="qs_calendar_monthly_block",
+ *     admin_label=@Translation("Calendar Monthly"),
  * )
  */
 class MonthlyBlock extends PeriodBlockBase {
@@ -30,6 +30,7 @@ class MonthlyBlock extends PeriodBlockBase {
     $pagination_day = $master_request->query->get('day');
 
     $day = new DrupalDateTime();
+
     if ($pagination_day) {
       try {
         $day = DrupalDateTime::createFromFormat('Y-m-d', $pagination_day);
@@ -53,7 +54,7 @@ class MonthlyBlock extends PeriodBlockBase {
     $variables['current_day'] = $day;
 
     $date_start = $this->calendarBuilder->getFirstMondayMonthFullWeek($day);
-    $date_end   = $this->calendarBuilder->getLastSundayMonthFullWeek($day);
+    $date_end = $this->calendarBuilder->getLastSundayMonthFullWeek($day);
     $date_end->setTime(23, 59, 59);
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
@@ -64,7 +65,7 @@ class MonthlyBlock extends PeriodBlockBase {
     $variables['badges'] = $this->getDotesBadges($community, $date_start, $date_end);
 
     return [
-      '#theme'     => 'qs_calendar_monthly_block',
+      '#theme' => 'qs_calendar_monthly_block',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

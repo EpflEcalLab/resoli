@@ -3,57 +3,16 @@
 namespace Drupal\qs_test;
 
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\taxonomy\Entity\Vocabulary;
-use Drupal\taxonomy\Entity\Term;
-use Drupal\filter\Entity\FilterFormat;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\filter\Entity\FilterFormat;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
  * Provides common helper methods for Taxonomy module tests.
  */
 trait TaxonomyTestTrait {
-
-  /**
-   * Create the default Fiter Format necessary for taxonomy terms.
-   */
-  public function setupTaxonomy() {
-    $filter_formats = filter_formats();
-    $format = array_pop($filter_formats);
-
-    if (!empty($format)) {
-      return;
-    }
-
-    $format = FilterFormat::create([
-      'format' => 'test',
-      'weight' => 1,
-      'filters' => [
-        'filter_html_escape' => ['status' => TRUE],
-      ],
-    ]);
-    $format->save();
-  }
-
-  /**
-   * Returns a new vocabulary with random properties.
-   */
-  public function createVocabulary($vid = NULL) {
-    if (!$vid) {
-      $vid = mb_strtolower($this->randomMachineName());
-    }
-
-    // Create a vocabulary.
-    $vocabulary = Vocabulary::create([
-      'name'        => $this->randomMachineName(),
-      'description' => $this->randomMachineName(),
-      'vid'         => $vid,
-      'langcode'    => LanguageInterface::LANGCODE_NOT_SPECIFIED,
-      'weight'      => mt_rand(0, 10),
-    ]);
-    $vocabulary->save();
-    return $vocabulary;
-  }
 
   /**
    * Returns a new term with random properties in vocabulary $vid.
@@ -82,6 +41,7 @@ trait TaxonomyTestTrait {
       'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
     ]);
     $term->save();
+
     return $term;
   }
 
@@ -99,18 +59,60 @@ trait TaxonomyTestTrait {
    */
   public function createTermField($name, $type, $vocabulary, array $settings = []) {
     $field_storage = FieldStorageConfig::create([
-      'field_name'  => $name,
+      'field_name' => $name,
       'entity_type' => 'taxonomy_term',
-      'type'        => $type,
-      'settings'    => $settings,
+      'type' => $type,
+      'settings' => $settings,
     ]);
     $field_storage->save();
     $instance = FieldConfig::create([
       'field_storage' => $field_storage,
-      'bundle'        => $vocabulary,
-      'label'         => $this->randomMachineName(),
+      'bundle' => $vocabulary,
+      'label' => $this->randomMachineName(),
     ]);
     $instance->save();
+  }
+
+  /**
+   * Returns a new vocabulary with random properties.
+   */
+  public function createVocabulary($vid = NULL) {
+    if (!$vid) {
+      $vid = mb_strtolower($this->randomMachineName());
+    }
+
+    // Create a vocabulary.
+    $vocabulary = Vocabulary::create([
+      'name' => $this->randomMachineName(),
+      'description' => $this->randomMachineName(),
+      'vid' => $vid,
+      'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
+      'weight' => mt_rand(0, 10),
+    ]);
+    $vocabulary->save();
+
+    return $vocabulary;
+  }
+
+  /**
+   * Create the default Fiter Format necessary for taxonomy terms.
+   */
+  public function setupTaxonomy() {
+    $filter_formats = filter_formats();
+    $format = array_pop($filter_formats);
+
+    if (!empty($format)) {
+      return;
+    }
+
+    $format = FilterFormat::create([
+      'format' => 'test',
+      'weight' => 1,
+      'filters' => [
+        'filter_html_escape' => ['status' => TRUE],
+      ],
+    ]);
+    $format->save();
   }
 
 }

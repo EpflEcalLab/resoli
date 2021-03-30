@@ -12,15 +12,10 @@ use Drupal\qs_test\Kernel\ResoliKernelTestBase;
  * @group qs_kernel
  * @group qs_activity
  * @group qs_activity_kernel
+ *
+ * @internal
  */
-class EventManagerTest extends ResoliKernelTestBase {
-
-  /**
-   * The entity QS Event Manager.
-   *
-   * @var \Drupal\qs_activity\Service\EventManager
-   */
-  protected $eventManager;
+final class EventManagerTest extends ResoliKernelTestBase {
 
   /**
    * Modules to enable.
@@ -31,6 +26,13 @@ class EventManagerTest extends ResoliKernelTestBase {
     'qs_subscription',
     'qs_activity',
   ];
+
+  /**
+   * The entity QS Event Manager.
+   *
+   * @var \Drupal\qs_activity\Service\EventManager
+   */
+  protected $eventManager;
 
   /**
    * {@inheritdoc}
@@ -62,71 +64,74 @@ class EventManagerTest extends ResoliKernelTestBase {
 
     // Past Event.
     $event_1 = $this->entityTypeManager->getStorage('node')->create([
-      'type'           => 'event',
-      'title'          => 'event-1',
+      'type' => 'event',
+      'title' => 'event-1',
       'field_activity' => $activity_1->id(),
       'field_start_at' => '2018-01-20T00:00:00',
-      'field_end_at'   => '2018-01-20T02:00:00',
+      'field_end_at' => '2018-01-20T02:00:00',
     ]);
     $event_1->save();
 
     // Far Futur Event.
     $event_2 = $this->entityTypeManager->getStorage('node')->create([
-      'type'           => 'event',
-      'title'          => 'event-2',
+      'type' => 'event',
+      'title' => 'event-2',
       'field_activity' => $activity_1->id(),
       'field_start_at' => '2028-01-20T14:00:00',
-      'field_end_at'   => '2028-01-20T18:00:00',
+      'field_end_at' => '2028-01-20T18:00:00',
     ]);
     $event_2->save();
 
     // Very Close Futur Event.
     $event_3 = $this->entityTypeManager->getStorage('node')->create([
-      'type'           => 'event',
-      'title'          => 'event-3',
+      'type' => 'event',
+      'title' => 'event-3',
       'field_activity' => $activity_1->id(),
       'field_start_at' => '2022-08-20T14:00:00',
-      'field_end_at'   => '2022-08-20T18:00:00',
+      'field_end_at' => '2022-08-20T18:00:00',
     ]);
     $event_3->save();
 
     // Not so Close Futur Event.
     $event_4 = $this->entityTypeManager->getStorage('node')->create([
-      'type'           => 'event',
-      'title'          => 'event-4',
+      'type' => 'event',
+      'title' => 'event-4',
       'field_activity' => $activity_1->id(),
       'field_start_at' => '2022-08-22T14:00:00',
-      'field_end_at'   => '2022-08-22T18:00:00',
+      'field_end_at' => '2022-08-22T18:00:00',
     ]);
     $event_4->save();
 
     // Only Futur Event.
     $event_5 = $this->entityTypeManager->getStorage('node')->create([
-      'type'           => 'event',
-      'title'          => 'event-5',
+      'type' => 'event',
+      'title' => 'event-5',
       'field_activity' => $activity_2->id(),
       'field_start_at' => '2021-08-20T14:00:00',
-      'field_end_at'   => '2021-08-20T18:00:00',
+      'field_end_at' => '2021-08-20T18:00:00',
     ]);
     $event_5->save();
 
     // Get the closest event from now for each given activity.
     $next_event = $this->eventManager->getNext([$activity_1->id()]);
 
-    $this->assertCount(1, $next_event);
-    $this->assertContainsOnlyInstancesOf(NodeInterface::class, $next_event);
-    $this->assertArrayHasKey($event_3->id(), $next_event);
-    $this->assertEquals($event_3->id(), $next_event[$event_3->id()]->id());
+    self::assertCount(1, $next_event);
+    self::assertContainsOnlyInstancesOf(NodeInterface::class, $next_event);
+    self::assertArrayHasKey($event_3->id(), $next_event);
+    self::assertEquals($event_3->id(), $next_event[$event_3->id()]->id());
 
     // Get the closest event from now for each given activity.
-    $next_event = $this->eventManager->getNext([$activity_1->id(), $activity_2->id()]);
+    $next_event = $this->eventManager->getNext([
+      $activity_1->id(),
+      $activity_2->id(),
+    ]);
 
-    $this->assertCount(2, $next_event);
-    $this->assertContainsOnlyInstancesOf(NodeInterface::class, $next_event);
-    $this->assertArrayHasKey($event_3->id(), $next_event);
-    $this->assertArrayHasKey($event_5->id(), $next_event);
-    $this->assertEquals($event_3->id(), $next_event[$event_3->id()]->id());
-    $this->assertEquals($event_5->id(), $next_event[$event_5->id()]->id());
+    self::assertCount(2, $next_event);
+    self::assertContainsOnlyInstancesOf(NodeInterface::class, $next_event);
+    self::assertArrayHasKey($event_3->id(), $next_event);
+    self::assertArrayHasKey($event_5->id(), $next_event);
+    self::assertEquals($event_3->id(), $next_event[$event_3->id()]->id());
+    self::assertEquals($event_5->id(), $next_event[$event_5->id()]->id());
   }
 
 }

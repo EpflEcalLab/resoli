@@ -17,15 +17,15 @@ function qs_subscription_theme() {
   return [
     'qs_subscription_subscribers_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--subscription--subscribers',
+      'template' => 'qs--subscription--subscribers',
     ],
     'qs_subscription_waiting_approval_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--subscription--waiting-approval',
+      'template' => 'qs--subscription--waiting-approval',
     ],
     'qs_subscription_user_collection_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--subscription--user-collection',
+      'template' => 'qs--subscription--user-collection',
     ],
   ];
 }
@@ -38,16 +38,17 @@ function qs_subscription_theme() {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function qs_subscription_node_delete(EntityInterface $entity) {
-  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
   $entityTypeManager = \Drupal::service('entity_type.manager');
-  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $subscriptionStorage = $entityTypeManager->getStorage('subscription');
-  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  /** @var \Drupal\Core\Entity\Query\QueryInterface */
   $subscriptionQuery = $subscriptionStorage->getQuery();
 
   $query = $subscriptionQuery->condition('entity', $entity->id());
 
   $ids = $query->execute();
+
   if ($ids) {
     $subscriptions = $subscriptionStorage->loadMultiple($ids);
     $subscriptionStorage->delete($subscriptions);
@@ -62,16 +63,17 @@ function qs_subscription_node_delete(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function qs_subscription_user_delete(EntityInterface $entity) {
-  /* @var \Drupal\Core\Entity\EntityTypeManagerInterface */
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
   $entityTypeManager = \Drupal::service('entity_type.manager');
-  /* @var \Drupal\Core\Entity\ContentEntityStorageInterface */
+  /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $subscriptionStorage = $entityTypeManager->getStorage('subscription');
-  /* @var \\Drupal\Core\Entity\Query\QueryInterface */
+  /** @var \Drupal\Core\Entity\Query\QueryInterface */
   $subscriptionQuery = $subscriptionStorage->getQuery();
 
   $query = $subscriptionQuery->condition('user', $entity->id());
 
   $ids = $query->execute();
+
   if ($ids) {
     $subscriptions = $subscriptionStorage->loadMultiple($ids);
     $subscriptionStorage->delete($subscriptions);

@@ -7,7 +7,9 @@
 
 // Includes.
 require_once 'inc/user_login_form.inc';
+
 require_once 'inc/user_pass_form.inc';
+
 require_once 'inc/mails.inc';
 
 /**
@@ -19,20 +21,19 @@ function qs_auth_theme() {
     // ---------------------------------------------------------------------.
     'qs_auth_communities_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--auth--communities',
+      'template' => 'qs--auth--communities',
     ],
     'qs_auth_pass_confirm_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--auth--pass-confirm',
+      'template' => 'qs--auth--pass-confirm',
     ],
     'qs_auth_approval_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--auth--approval',
+      'template' => 'qs--auth--approval',
     ],
     'qs_auth_cancel_confirm_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--auth--cancel-confirm',
+      'template' => 'qs--auth--cancel-confirm',
     ],
-
   ];
 }

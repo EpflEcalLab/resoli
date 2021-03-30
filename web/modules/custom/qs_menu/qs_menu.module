@@ -14,11 +14,11 @@ function qs_menu_theme() {
     // ---------------------------------------------------------------------.
     'qs_menu_navigation_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--menu--navigation',
+      'template' => 'qs--menu--navigation',
     ],
     'qs_menu_previous_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--menu--previous',
+      'template' => 'qs--menu--previous',
     ],
   ];
 }

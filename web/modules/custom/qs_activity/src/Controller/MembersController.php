@@ -2,47 +2,21 @@
 
 namespace Drupal\qs_activity\Controller;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_export\Excel;
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * MembersController.
+ * Dashboard that list the members of one activity.
  */
 class MembersController extends ControllerBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  private $configuration = ['limit' => 50];
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The Privilege Manager.
-   *
-   * @var \Drupal\qs_acl\Service\PrivilegeManager
-   */
-  private $privilegeManager;
-
-  /**
-   * The user Storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected $userStorage;
 
   /**
    * The QS Excel exporter.
@@ -52,6 +26,32 @@ class MembersController extends ControllerBase {
   protected $excelExporter;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * {@inheritdoc}
+   */
+  private $configuration = ['limit' => 50];
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  private $privilegeManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(PrivilegeManager $privilege_manager, AccessControl $acl, Excel $excel_exporter) {
@@ -59,19 +59,6 @@ class MembersController extends ControllerBase {
     $this->acl = $acl;
     $this->userStorage = $this->entityTypeManager()->getStorage('user');
     $this->excelExporter = $excel_exporter;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.privilege_manager'),
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_export.excel')
-    );
   }
 
   /**
@@ -91,63 +78,21 @@ class MembersController extends ControllerBase {
     if ($activity && $this->acl->hasAdminAccessActivity($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
   /**
-   * Members page.
+   * {@inheritdoc}
    */
-  public function members(NodeInterface $activity) {
-    $render = [
-      '#theme'     => 'qs_activity_members_page',
-      '#variables' => ['activity' => $activity],
-      '#cache' => [
-        'tags' => [
-          // Invalidated whenever any community is updated, deleted or created.
-          'user_list:user',
-          // Invalidated whenever any Privilege is updated, deleted or created.
-          'privilege_list:privilege',
-        ],
-      ],
-    ];
-
-    $query = $this->privilegeManager->queryMembersWithPrivileges($activity, $this->configuration['limit']);
-    if (!$query) {
-      return $render;
-    }
-    $render['#variables']['pager'] = [
-      '#type'     => 'pager',
-      '#quantity' => '3',
-    ];
-
-    $rows = $query->execute()->fetchAll();
-    $uids = [];
-    $privileges = [];
-    foreach ($rows as $row) {
-      $uids[] = $row->user;
-      $privileges[$row->user][] = $row->privilege;
-    }
-
-    // Load user entities without privileges.
-    $activity_members = $this->userStorage->loadMultiple($uids);
-
-    // Add privileges to users.
-    foreach ($activity_members as $activity_member) {
-      $activity_member->privileges = $privileges[$activity_member->id()];
-    }
-
-    $render['#variables']['members'] = $activity_members;
-
-    // Get all members to mailto.
-    $mailto = [];
-    $query_members = $this->privilegeManager->queryMembersWithPrivileges($activity, NULL);
-    $rows = $query_members->execute()->fetchAll();
-    foreach ($rows as $row) {
-      $mailto[$row->user] = $row->mail;
-    }
-    $render['#variables']['mailto'] = $mailto;
-
-    return $render;
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.privilege_manager'),
+    $container->get('qs_acl.access_control'),
+    $container->get('qs_export.excel')
+    );
   }
 
   /**
@@ -169,6 +114,7 @@ class MembersController extends ControllerBase {
 
     $uids = [];
     $privileges = [];
+
     foreach ($rows as $row) {
       $uids[] = $row->user;
       $privileges[$row->user][] = $row->privilege;
@@ -190,7 +136,7 @@ class MembersController extends ControllerBase {
       '@date' => $now->format('d-m-Y'),
     ]);
     $summary = $this->t('qs_activity.activities.members.export.summary @total', [
-      '@total' => count($activity_members),
+      '@total' => \count($activity_members),
     ]);
     $disclaimer = $this->t('qs_activity.activities.members.export.disclaimer');
 
@@ -206,18 +152,22 @@ class MembersController extends ControllerBase {
 
     foreach ($activity_members as $member) {
       $privilege = '';
+
       switch ($member->privilege) {
         case 'activity_maintainers':
           $privilege = $this->t('qs.roles.activity_maintainer');
+
           break;
 
         case 'activity_organizers':
           $privilege = $this->t('qs.roles.activity_organizer');
+
           break;
 
         default:
         case 'activity_members':
           $privilege = $this->t('qs.roles.activity_member');
+
           break;
       }
 
@@ -230,12 +180,70 @@ class MembersController extends ControllerBase {
       ], [
         'odd-even-background' => TRUE,
       ]);
-
     }
     $this->excelExporter->setFooter($disclaimer->render());
     $this->excelExporter->finalize();
 
     return $this->excelExporter->download();
+  }
+
+  /**
+   * Members page.
+   */
+  public function members(NodeInterface $activity) {
+    $render = [
+      '#theme' => 'qs_activity_members_page',
+      '#variables' => ['activity' => $activity],
+      '#cache' => [
+        'tags' => [
+          // Invalidated whenever any community is updated, deleted or created.
+          'user_list:user',
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'privilege_list:privilege',
+        ],
+      ],
+    ];
+
+    $query = $this->privilegeManager->queryMembersWithPrivileges($activity, $this->configuration['limit']);
+
+    if (!$query) {
+      return $render;
+    }
+    $render['#variables']['pager'] = [
+      '#type' => 'pager',
+      '#quantity' => '3',
+    ];
+
+    $rows = $query->execute()->fetchAll();
+    $uids = [];
+    $privileges = [];
+
+    foreach ($rows as $row) {
+      $uids[] = $row->user;
+      $privileges[$row->user][] = $row->privilege;
+    }
+
+    // Load user entities without privileges.
+    $activity_members = $this->userStorage->loadMultiple($uids);
+
+    // Add privileges to users.
+    foreach ($activity_members as $activity_member) {
+      $activity_member->privileges = $privileges[$activity_member->id()];
+    }
+
+    $render['#variables']['members'] = $activity_members;
+
+    // Get all members to mailto.
+    $mailto = [];
+    $query_members = $this->privilegeManager->queryMembersWithPrivileges($activity, NULL);
+    $rows = $query_members->execute()->fetchAll();
+
+    foreach ($rows as $row) {
+      $mailto[$row->user] = $row->mail;
+    }
+    $render['#variables']['mailto'] = $mailto;
+
+    return $render;
   }
 
 }

@@ -65,3 +65,5 @@ web/nohup.out
 # Ignore output for debugging tests
 web/localhost
 /.gitattributes
+.phpcs-cache
+.php_cs.cache

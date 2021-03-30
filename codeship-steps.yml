@@ -26,9 +26,6 @@
     - name: Unit
       service: test
       command: docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=qs
-    - name: Code quality
-      service: php
-      command: docker-as-drupal quality-check
 - name: Running deploy
   type: serial
   tag: "^(dev|master)$"

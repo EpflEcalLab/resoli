@@ -2,36 +2,16 @@
 
 namespace Drupal\qs_activity\Form;
 
-use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\taxonomy\TermInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityAddForm class.
+ * Form to create new activity on a community.
  */
 class ActivityAddForm extends FormBasic {
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  private $termStorage;
-
-  /**
-   * The user Storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected $userStorage;
 
   /**
    * The entity QS Activity Manager.
@@ -39,13 +19,6 @@ class ActivityAddForm extends FormBasic {
    * @var \Drupal\qs_activity\Service\ActivityManager
    */
   protected $activityManager;
-
-  /**
-   * The Privilege Manager.
-   *
-   * @var \Drupal\qs_acl\Service\PrivilegeManager
-   */
-  private $privilegeManager;
 
   /**
    * The current user account proxy.
@@ -69,6 +42,33 @@ class ActivityAddForm extends FormBasic {
   protected $languageManager;
 
   /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  private $privilegeManager;
+
+  /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -76,21 +76,14 @@ class ActivityAddForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl                = $this->getAcl();
-    $this->termStorage        = $this->getTermStorage();
-    $this->userStorage        = $this->getUserStorage();
-    $this->activityManager    = $this->getActivityManager();
-    $this->privilegeManager   = $this->getPrivilegeManager();
-    $this->currentUser        = $this->getCurrentUser();
+    $this->acl = $this->getAcl();
+    $this->termStorage = $this->getTermStorage();
+    $this->userStorage = $this->getUserStorage();
+    $this->activityManager = $this->getActivityManager();
+    $this->privilegeManager = $this->getPrivilegeManager();
+    $this->currentUser = $this->getCurrentUser();
     $this->entityFieldManager = $this->getEntityFieldManager();
-    $this->languageManager    = $this->getLanguageManager();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_activity_add_form';
+    $this->languageManager = $this->getLanguageManager();
   }
 
   /**
@@ -106,16 +99,18 @@ class ActivityAddForm extends FormBasic {
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasWriteAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?TermInterface $community = NULL) {
     // Get the current language.
     $currentLang = $this->languageManager->getCurrentLanguage();
 
@@ -125,13 +120,13 @@ class ActivityAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
-      'theme'      => 'primary',
+      'theme' => 'primary',
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
 
     $form['#floating_buttons'][] = [
-      'icon'   => 'happy',
-      'label'  => $this->t('qs_activity.floating.my_activities'),
+      'icon' => 'happy',
+      'label' => $this->t('qs_activity.floating.my_activities'),
       'active' => TRUE,
     ];
 
@@ -156,15 +151,15 @@ class ActivityAddForm extends FormBasic {
     ];
 
     $form['activity']['step-1']['title'] = [
-      '#attributes'  => ['required' => TRUE],
-      '#title'       => $this->t('qs_activity.activities.form.add.title'),
+      '#attributes' => ['required' => TRUE],
+      '#title' => $this->t('qs_activity.activities.form.add.title'),
       '#placeholder' => $this->t('qs_activity.activities.form.add.title.placeholder'),
-      '#type'        => 'textfield',
-      '#required'    => FALSE,
+      '#type' => 'textfield',
+      '#required' => FALSE,
     ];
 
     $form['activity']['step-2'] = [
-      '#type'  => 'fieldset',
+      '#type' => 'fieldset',
       '#description' => $this->t('qs_activity.activities.form.step2.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step2'),
@@ -178,6 +173,7 @@ class ActivityAddForm extends FormBasic {
     // Get all themes for options.
     $themes = $this->termStorage->loadTree('themes', 0, NULL, TRUE);
     $options = [];
+
     foreach ($themes as $theme) {
       // Check if has translation.
       if ($theme->hasTranslation($currentLang->getId())) {
@@ -189,7 +185,7 @@ class ActivityAddForm extends FormBasic {
     $form['activity']['step-2']['theme'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title'    => $this->t('qs_activity.activities.form.add.theme'),
+        'title' => $this->t('qs_activity.activities.form.add.theme'),
         'variant' => 'button_theme',
         'data-toggle' => 'buttons',
         'no_form_group' => TRUE,
@@ -200,13 +196,13 @@ class ActivityAddForm extends FormBasic {
       '#theme_wrappers' => [
         'radios__buttons',
       ],
-      '#type'     => 'radios',
+      '#type' => 'radios',
       '#required' => FALSE,
-      '#options'  => $options,
+      '#options' => $options,
     ];
 
     $form['activity']['step-3'] = [
-      '#type'  => 'fieldset',
+      '#type' => 'fieldset',
       '#description' => $this->t('qs_activity.activities.form.step3.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step3'),
@@ -224,9 +220,9 @@ class ActivityAddForm extends FormBasic {
     $activity_fields = $this->entityFieldManager->getFieldDefinitions('node', 'activity');
     $field_definition = $activity_fields['field_community_can_subscribe'];
     $form['activity']['step-3']['community_can_subscribe'] = [
-      '#title'         => $this->t('qs_activity.activities.form.add.community_can_subscribe'),
-      '#type'          => 'checkbox',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.activities.form.add.community_can_subscribe'),
+      '#type' => 'checkbox',
+      '#required' => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
       '#attributes' => [
         'variant' => 'toggle',
@@ -238,9 +234,9 @@ class ActivityAddForm extends FormBasic {
 
     $field_definition = $activity_fields['field_community_access_contact'];
     $form['activity']['step-3']['community_access_contact'] = [
-      '#title'         => $this->t('qs_activity.activities.form.add.community_access_contact'),
-      '#type'          => 'checkbox',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.activities.form.add.community_access_contact'),
+      '#type' => 'checkbox',
+      '#required' => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
       '#attributes' => [
         'variant' => 'toggle',
@@ -252,9 +248,9 @@ class ActivityAddForm extends FormBasic {
 
     $field_definition = $activity_fields['field_community_access_detail'];
     $form['activity']['step-3']['community_access_detail'] = [
-      '#title'         => $this->t('qs_activity.activities.form.add.community_access_detail'),
-      '#type'          => 'checkbox',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.activities.form.add.community_access_detail'),
+      '#type' => 'checkbox',
+      '#required' => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
       '#attributes' => [
         'variant' => 'toggle',
@@ -266,9 +262,9 @@ class ActivityAddForm extends FormBasic {
 
     $field_definition = $activity_fields['field_community_access_story'];
     $form['activity']['step-3']['community_access_story'] = [
-      '#title'         => $this->t('qs_activity.activities.form.add.community_access_story'),
-      '#type'          => 'checkbox',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.activities.form.add.community_access_story'),
+      '#type' => 'checkbox',
+      '#required' => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
       '#attributes' => [
         'variant' => 'toggle',
@@ -280,9 +276,9 @@ class ActivityAddForm extends FormBasic {
 
     $field_definition = $activity_fields['field_member_create_story'];
     $form['activity']['step-3']['member_create_story'] = [
-      '#title'         => $this->t('qs_activity.activities.form.add.member_create_story'),
-      '#type'          => 'checkbox',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.activities.form.add.member_create_story'),
+      '#type' => 'checkbox',
+      '#required' => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
       '#attributes' => [
         'variant' => 'toggle',
@@ -294,9 +290,9 @@ class ActivityAddForm extends FormBasic {
 
     $field_definition = $activity_fields['field_community_access_gallery'];
     $form['activity']['step-3']['community_access_gallery'] = [
-      '#title'         => $this->t('qs_activity.activities.form.add.community_access_gallery'),
-      '#type'          => 'checkbox',
-      '#required'      => FALSE,
+      '#title' => $this->t('qs_activity.activities.form.add.community_access_gallery'),
+      '#type' => 'checkbox',
+      '#required' => FALSE,
       '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
       '#attributes' => [
         'variant' => 'toggle',
@@ -308,10 +304,10 @@ class ActivityAddForm extends FormBasic {
 
     $field_definition = $activity_fields['field_member_create_gallery'];
     $form['activity']['step-3']['member_create_gallery'] = [
-      '#title'       => $this->t('qs_activity.activities.form.add.member_create_gallery'),
-      '#type'        => 'checkbox',
-      '#required'    => FALSE,
-      '#default_value'     => $field_definition->getDefaultValueLiteral()[0]['value'],
+      '#title' => $this->t('qs_activity.activities.form.add.member_create_gallery'),
+      '#type' => 'checkbox',
+      '#required' => FALSE,
+      '#default_value' => $field_definition->getDefaultValueLiteral()[0]['value'],
       '#attributes' => [
         'variant' => 'toggle',
       ],
@@ -321,7 +317,7 @@ class ActivityAddForm extends FormBasic {
     ];
 
     $form['activity']['step-4'] = [
-      '#type'  => 'fieldset',
+      '#type' => 'fieldset',
       '#description' => $this->t('qs_activity.activities.form.step4.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_activity.activities.form.step4'),
@@ -341,8 +337,8 @@ class ActivityAddForm extends FormBasic {
       '#name' => 'save',
       '#value' => $this->t('qs_activity.activities.form.add.save'),
       '#attributes' => [
-        'outline'   => TRUE,
-        'icon'      => 'activities',
+        'outline' => TRUE,
+        'icon' => 'activities',
         'icon_left' => TRUE,
         'class' => [
           'js-form-normal',
@@ -358,8 +354,8 @@ class ActivityAddForm extends FormBasic {
       '#name' => 'save_and_set_default_values',
       '#value' => $this->t('qs_activity.activities.form.add.save_and_set_default_values'),
       '#attributes' => [
-        'outline'   => TRUE,
-        'icon'      => 'pencil',
+        'outline' => TRUE,
+        'icon' => 'pencil',
         'icon_left' => TRUE,
         'class' => [
           'js-form-normal',
@@ -375,8 +371,8 @@ class ActivityAddForm extends FormBasic {
       '#name' => 'save_and_new_event',
       '#value' => $this->t('qs_activity.activities.form.add.save_and_new_event'),
       '#attributes' => [
-    // 'outline'   => TRUE,.
-        'icon'      => 'plus',
+        // 'outline'   => TRUE,.
+        'icon' => 'plus',
         'icon_left' => TRUE,
         'class' => [
           'btn-secondary',
@@ -394,16 +390,8 @@ class ActivityAddForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    // Assert the title is valid.
-    if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
-      $form_state->setErrorByName('title', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-1']['title']['#title']]));
-    }
-
-    // Assert the theme is valid.
-    if (!$form_state->getValue('theme') || empty($form_state->getValue('theme'))) {
-      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-2']['theme']['#attributes']['title']]));
-    }
+  public function getFormId() {
+    return 'qs_activity_add_form';
   }
 
   /**
@@ -415,13 +403,13 @@ class ActivityAddForm extends FormBasic {
 
     // Format authorizations for creations.
     $authorizations = [
-      'field_community_can_subscribe'  => (bool) $form_state->getValue('community_can_subscribe'),
+      'field_community_can_subscribe' => (bool) $form_state->getValue('community_can_subscribe'),
       'field_community_access_contact' => (bool) $form_state->getValue('community_access_contact'),
-      'field_community_access_detail'  => (bool) $form_state->getValue('community_access_detail'),
-      'field_community_access_story'   => (bool) $form_state->getValue('community_access_story'),
-      'field_member_create_story'      => (bool) $form_state->getValue('member_create_story'),
+      'field_community_access_detail' => (bool) $form_state->getValue('community_access_detail'),
+      'field_community_access_story' => (bool) $form_state->getValue('community_access_story'),
+      'field_member_create_story' => (bool) $form_state->getValue('member_create_story'),
       'field_community_access_gallery' => (bool) $form_state->getValue('community_access_gallery'),
-      'field_member_create_gallery'    => (bool) $form_state->getValue('member_create_gallery'),
+      'field_member_create_gallery' => (bool) $form_state->getValue('member_create_gallery'),
     ];
 
     // Format themes for creations.
@@ -434,25 +422,44 @@ class ActivityAddForm extends FormBasic {
     // Add the current user as the first organizer of this activity.
     $this->privilegeManager->create('activity_organizers', $activity, $this->currentUser);
 
-    drupal_set_message($this->t("qs_activity.activities.form.add.success @activity", [
+    drupal_set_message($this->t('qs_activity.activities.form.add.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 
     // Handle redirection.
     $trigger = $form_state->getTriggeringElement();
+
     switch ($trigger['#name']) {
       case 'save_and_new_event':
         $form_state->setRedirect('qs_activity.events.form.add', ['activity' => $activity->id()], []);
+
         break;
 
       case 'save_and_set_default_values':
         $form_state->setRedirect('qs_activity.activities.form.edit.defaults', ['activity' => $activity->id()], []);
+
         break;
 
       case 'save':
       default:
         $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], []);
+
         break;
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Assert the title is valid.
+    if (!$form_state->getValue('title') || empty($form_state->getValue('title'))) {
+      $form_state->setErrorByName('title', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-1']['title']['#title']]));
+    }
+
+    // Assert the theme is valid.
+    if (!$form_state->getValue('theme') || empty($form_state->getValue('theme'))) {
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['activity']['step-2']['theme']['#attributes']['title']]));
     }
   }
 

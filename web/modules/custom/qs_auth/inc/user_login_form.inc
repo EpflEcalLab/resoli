@@ -40,25 +40,28 @@ function qs_auth_form_user_login_form_alter(&$form, $form_state) {
   ];
 
   $form['login'] = [
-    '#type'  => 'fieldset',
+    '#type' => 'fieldset',
     '#description' => t('qs_auth.form.login.title'),
   ];
 
   $form['login']['name'] = $form['name'];
   unset($form['name']);
   $form['login']['name']['#title'] = t('qs_auth.form.login.name');
-  $form['login']['name']['#attributes']['autocomplete'] = "off";
-  $form['login']['name']['#attributes']['autofocus'] = "autofocus";
+  $form['login']['name']['#attributes']['autocomplete'] = 'off';
+  $form['login']['name']['#attributes']['autofocus'] = 'autofocus';
   $form['login']['name']['#description'] = t('qs_auth.form.login.name.description');
   $form['login']['name']['#placeholder'] = t('qs_auth.form.login.name.placeholder');
 
   $form['login']['pass'] = $form['pass'];
   unset($form['pass']);
   $form['login']['pass']['#title'] = t('qs_auth.form.login.password');
-  $form['login']['pass']['#attributes']['autocomplete'] = "off";
-  $form['login']['name']['#attributes']['autofocus'] = "autofocus";
+  $form['login']['pass']['#attributes']['autocomplete'] = 'off';
+  $form['login']['name']['#attributes']['autofocus'] = 'autofocus';
   $form['login']['pass']['#description'] = Link::CreateFromRoute(
-    t('qs_auth.link.password'), 'qs_auth.pass', [], [
+    t('qs_auth.link.password'),
+    'qs_auth.pass',
+    [],
+    [
       'attributes' => [
         'class' => ['link-underline text-white'],
       ],
@@ -87,6 +90,7 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   // User with Bypass access can go everywhere, so redirect it on communities.
   if ($acl->hasBypass()) {
     $form_state->setRedirect('qs_auth.communities', [], []);
+
     return;
   }
 
@@ -101,13 +105,13 @@ function qs_auth_user_login_form_submit($form, $form_state) {
     // go to the approval page.
     if ($approval) {
       $form_state->setRedirect('qs_auth.approval', ['community' => $approval->id()], []);
+
       return;
     }
     // Otherwise go to the form communities to apply.
-    else {
-      $form_state->setRedirect('qs_auth.communities.apply', [], []);
-      return;
-    }
+    $form_state->setRedirect('qs_auth.communities.apply', [], []);
+
+    return;
   }
 
   // Check user is a beginner, so need unboarding.
@@ -119,6 +123,7 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   // to choose which community it want to connect on.
   if ($acl->hasMultipleCommunities()) {
     $form_state->setRedirect('qs_auth.communities', [], []);
+
     return;
   }
 
@@ -129,6 +134,7 @@ function qs_auth_user_login_form_submit($form, $form_state) {
   // The user has only 1 community access so connect it on.
   if ($community) {
     $form_state->setRedirect('qs_community.welcome', ['community' => $community->id()], []);
+
     return;
   }
 }

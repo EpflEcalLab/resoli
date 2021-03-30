@@ -2,31 +2,28 @@
 
 namespace Drupal\qs_photo\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\AccessControl;
+use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\node\NodeInterface;
-use Drupal\image\ImageStyleInterface;
-use Drupal\Core\Lock\LockBackendInterface;
+use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\File\FileSystem;
+use Drupal\Core\Lock\LockBackendInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\image\ImageStyleInterface;
+use Drupal\node\NodeInterface;
+use Drupal\qs_acl\Service\AccessControl;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
-use Drupal\Component\Utility\Crypt;
 
 /**
- * StreamController.
+ * Stream one image to be displayed in <img> tag.
+ *
+ * The stream is necessary to avoid direct access on image file in order tp
+ * to protect files with access checking.
  */
 class StreamController extends ControllerBase {
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
 
   /**
    * Provides helpers to operate on files and stream wrappers.
@@ -41,6 +38,12 @@ class StreamController extends ControllerBase {
    * @var \Drupal\Core\Lock\LockBackendInterface
    */
   protected $lock;
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
 
   /**
    * {@inheritdoc}
@@ -68,9 +71,10 @@ class StreamController extends ControllerBase {
     $event = $photo->field_event->entity;
     $activity = $event->field_activity->entity;
 
-    if ($photo->bundle() == 'photo' && $this->acl->hasAccessPhoto($activity)) {
+    if ($photo->bundle() === 'photo' && $this->acl->hasAccessPhoto($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
@@ -90,10 +94,10 @@ class StreamController extends ControllerBase {
   /**
    * Download page.
    */
-  public function stream(NodeInterface $photo, ImageStyleInterface $image_style = NULL) {
+  public function stream(NodeInterface $photo, ?ImageStyleInterface $image_style = NULL) {
     $file_download = NULL;
 
-    if ($photo->bundle() != 'photo') {
+    if ($photo->bundle() !== 'photo') {
       throw new NotFoundHttpException();
     }
 
@@ -111,7 +115,7 @@ class StreamController extends ControllerBase {
     }
 
     $file_download = (object) [
-      'path'     => $path,
+      'path' => $path,
       'filename' => $file->getFilename(),
     ];
 
@@ -120,14 +124,15 @@ class StreamController extends ControllerBase {
       // Assert the image style doesn't already exist.
       $image_style_uri = $image_style->buildUri($file_uri);
       $image_style_path = $this->fso->realpath($image_style_uri);
-      if (!is_file($image_style_path)) {
 
+      if (!is_file($image_style_path)) {
         $lock_name = 'image_style_deliver:' . $image_style->id() . ':' . Crypt::hashBase64($file_uri);
         $lock_acquired = $this->lock->acquire($lock_name);
+
         if (!$lock_acquired) {
           // Tell client to retry again in 3 seconds. Currently no browsers are
           // known to support Retry-After.
-          throw new ServiceUnavailableHttpException(3, $this->t('Image generation in progress. Try again shortly.'));
+          throw new ServiceUnavailableHttpException(3, 'Image generation in progress. Try again shortly.');
         }
 
         if (!empty($lock_acquired)) {
@@ -139,23 +144,24 @@ class StreamController extends ControllerBase {
         $image_style_path = $this->fso->realpath($image_style_uri);
       }
       $file_download = (object) [
-        'path'     => $image_style_path,
+        'path' => $image_style_path,
         'filename' => $file->getFilename(),
       ];
     }
 
     $logger = $this->getLogger('qs_photo');
+
     try {
       // Stream the file.
       $user = $this->currentUser()->getAccount();
       $now = new \DateTime();
 
-      $logger->info($this->t("@user (@uid) stream `@file` (@nid) at @now.", [
+      $logger->info($this->t('@user (@uid) stream `@file` (@nid) at @now.', [
         '@user' => $user->name,
-        '@uid'  => $user->id(),
+        '@uid' => $user->id(),
         '@file' => $file_download->filename,
-        '@nid'  => $photo->nid->value,
-        '@now'  => $now->format('d-m-Y H:i:s'),
+        '@nid' => $photo->nid->value,
+        '@now' => $now->format('d-m-Y H:i:s'),
       ]));
 
       $response = new BinaryFileResponse($file_download->path);

@@ -16,7 +16,7 @@ function qs_default_content_events() {
   $field_start = 'field_start_at';
   $field_end = 'field_end_at';
 
-  // @var \Drupal\Core\Entity\EntityTypeManagerInterface
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
   $entityManager = \Drupal::service('entity_type.manager');
   $nodeStorage = $entityManager->getStorage('node');
 
@@ -291,7 +291,8 @@ function qs_default_content_events() {
   $event_54 = $nodeStorage->load(54);
   $dt = new DrupalDateTime();
   $dt->modify('+2 days')->setTime(19, 20);
-  if ($dt->format('m') != $now->format('m')) {
+
+  if ($dt->format('m') !== $now->format('m')) {
     $dt->modify('last day of ' . $now->format('F'));
   }
   $dt->setTimezone(new DateTimeZone('UTC'));

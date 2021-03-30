@@ -2,40 +2,28 @@
 
 namespace Drupal\qs_subscription\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
+use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_export\Excel;
-use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\qs_subscription\Service\SubscriptionManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * SubscribersController.
+ * Collection of subscriptions for an event.
  */
 class SubscribersController extends ControllerBase {
 
   /**
-   * {@inheritdoc}
-   */
-  private $configuration = ['limit' => 50];
-
-  /**
-   * Access Control Service.
+   * The QS Excel exporter.
    *
-   * @var \Drupal\qs_acl\Service\AccessControl
+   * @var \Drupal\qs_export\Excel
    */
-  private $acl;
-
-  /**
-   * The Subscription Manager.
-   *
-   * @var \Drupal\qs_subscription\Service\SubscriptionManager
-   */
-  private $subscriptionManager;
+  protected $excelExporter;
 
   /**
    * The user Storage.
@@ -45,11 +33,23 @@ class SubscribersController extends ControllerBase {
   protected $userStorage;
 
   /**
-   * The QS Excel exporter.
+   * Access Control Service.
    *
-   * @var \Drupal\qs_export\Excel
+   * @var \Drupal\qs_acl\Service\AccessControl
    */
-  protected $excelExporter;
+  private $acl;
+
+  /**
+   * {@inheritdoc}
+   */
+  private $configuration = ['limit' => 50];
+
+  /**
+   * The Subscription Manager.
+   *
+   * @var \Drupal\qs_subscription\Service\SubscriptionManager
+   */
+  private $subscriptionManager;
 
   /**
    * {@inheritdoc}
@@ -60,19 +60,6 @@ class SubscribersController extends ControllerBase {
     $this->userStorage = $this->entityTypeManager()->getStorage('user');
     $this->subscriptionStorage = $this->entityTypeManager()->getStorage('subscription');
     $this->excelExporter = $excel_exporter;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_subscription.subscription_manager'),
-    $container->get('qs_export.excel')
-    );
   }
 
   /**
@@ -95,56 +82,21 @@ class SubscribersController extends ControllerBase {
     if ($activity && $this->acl->hasWriteAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
   /**
-   * Subscribers page.
+   * {@inheritdoc}
    */
-  public function subscribers(NodeInterface $event) {
-    $variables['event'] = $event;
-    $variables['activity'] = $event->field_activity->entity;
-
-    $query = $this->subscriptionManager->querySubscribers($event);
-    $rows = $query->execute()->fetchAll();
-
-    // Get all members to mailto before pagination.
-    $mailto = [];
-    foreach ($rows as $row) {
-      $mailto[$row->user] = $row->mail;
-    }
-    $variables['mailto'] = $mailto;
-
-    pager_default_initialize(count($rows), $this->configuration['limit']);
-    $variables['pager'] = [
-      '#type'     => 'pager',
-      '#quantity' => '3',
-    ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
-    $rows = $query->execute()->fetchAll();
-
-    $ids = [];
-    foreach ($rows as $row) {
-      $ids[] = $row->id;
-    }
-
-    // Load subscriptions entities.
-    $subscriptions = $this->subscriptionStorage->loadMultiple($ids);
-    $variables['subscriptions'] = $subscriptions;
-
-    return [
-      '#theme'     => 'qs_subscription_subscribers_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'tags' => [
-          // Invalidated whenever any community is updated, deleted or created.
-          'user_list:user',
-          // Invalidated whenever any Privilege is updated, deleted or created.
-          'subscription_list:subscription',
-        ],
-      ],
-    ];
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+    $container->get('qs_acl.access_control'),
+    $container->get('qs_subscription.subscription_manager'),
+    $container->get('qs_export.excel')
+    );
   }
 
   /**
@@ -158,6 +110,7 @@ class SubscribersController extends ControllerBase {
     $rows = $query->execute()->fetchAll();
 
     $ids = [];
+
     foreach ($rows as $row) {
       $ids[] = $row->id;
     }
@@ -174,12 +127,12 @@ class SubscribersController extends ControllerBase {
     $this->excelExporter->normalize();
 
     $title = $this->t('qs_subscription.subscribers.export.title @event @activity @date', [
-      '@event'    => $event->getTitle(),
+      '@event' => $event->getTitle(),
       '@activity' => $activity->getTitle(),
-      '@date'     => $now->format('d-m-Y'),
+      '@date' => $now->format('d-m-Y'),
     ]);
     $summary = $this->t('qs_subscription.subscribers.export.summary @total', [
-      '@total' => count($subscriptions),
+      '@total' => \count($subscriptions),
     ]);
     $disclaimer = $this->t('qs_subscription.subscribers.export.disclaimer');
 
@@ -211,6 +164,57 @@ class SubscribersController extends ControllerBase {
     $this->excelExporter->finalize();
 
     return $this->excelExporter->download();
+  }
+
+  /**
+   * Subscribers page.
+   */
+  public function subscribers(NodeInterface $event) {
+    $variables['event'] = $event;
+    $variables['activity'] = $event->field_activity->entity;
+
+    $query = $this->subscriptionManager->querySubscribers($event);
+    $rows = $query->execute()->fetchAll();
+
+    // Get all members to mailto before pagination.
+    $mailto = [];
+
+    foreach ($rows as $row) {
+      $mailto[$row->user] = $row->mail;
+    }
+    $variables['mailto'] = $mailto;
+
+    pager_default_initialize(\count($rows), $this->configuration['limit']);
+    $variables['pager'] = [
+      '#type' => 'pager',
+      '#quantity' => '3',
+    ];
+    $page = pager_find_page();
+    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
+    $rows = $query->execute()->fetchAll();
+
+    $ids = [];
+
+    foreach ($rows as $row) {
+      $ids[] = $row->id;
+    }
+
+    // Load subscriptions entities.
+    $subscriptions = $this->subscriptionStorage->loadMultiple($ids);
+    $variables['subscriptions'] = $subscriptions;
+
+    return [
+      '#theme' => 'qs_subscription_subscribers_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'tags' => [
+          // Invalidated whenever any community is updated, deleted or created.
+          'user_list:user',
+          // Invalidated whenever any Privilege is updated, deleted or created.
+          'subscription_list:subscription',
+        ],
+      ],
+    ];
   }
 
 }

@@ -153,41 +153,73 @@ When importing in the [Drupal admin interface](admin/config/regional/translate/i
 
 ## 🚔 Check Drupal coding standards & Drupal best practices
 
-You need to run composer before using PHPCS. Then register the Drupal and DrupalPractice Standard with PHPCS: `./vendor/bin/phpcs --config-set installed_paths "`pwd`/vendor/drupal/coder/coder_sniffer"`
+You need to run composer before using PHPCS. The Drupal and DrupalPractice Standard will automatically be applied following the rules on phpcs.xml.dist` file
 
 ### Command Line Usage
 
-Check Drupal coding standards:
+Check Drupal coding standards & Drupal best practices:
 
-  ```bash
-  $ ./vendor/bin/phpcs --standard=Drupal --colors --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md ./web/modules/custom
-  ```
-
-Check Drupal best practices:
-
-  ```bash
-  $ ./vendor/bin/phpcs --standard=DrupalPractice --colors --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md ./web/modules/custom
-  ```
+```bash
+./vendor/bin/phpcs
+```
 
 Automatically fix coding standards
 
-  ```bash
-  $ ./vendor/bin/phpcbf --standard=Drupal --colors --extensions=php,module,inc,install,test,profile,theme,css,info,txt,md ./web/modules/custom
-  ```
+```bash
+./vendor/bin/phpcbf
+```
+
+Checks compatibility with PHP interpreter versions
+
+```bash
+./vendor/bin/phpcf --target 7.4 \
+--file-extensions php,module,inc,install,test,profile,theme,info \
+./web/modules/custom
+
+./vendor/bin/phpcf --target 7.4 --file-extensions php ./behat
+```
 
 ### Improve global code quality using PHPCPD (Code duplication) &  PHPMD (PHP Mess Detector).
 
 Detect overcomplicated expressions & Unused parameters, methods, properties
 
-  ```bash
-  $ ./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml --suffixes php,module,inc,install,test,profile,theme,css,info,txt
-  ```
+```bash
+./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml \
+--suffixes php,module,inc,install,test,profile,theme,css,info,txt --exclude *Test.php
+
+./vendor/bin/phpmd ./behat text ./phpmd.xml --suffixes php
+```
 
 Copy/Paste Detector
 
-  ```bash
-  $ ./vendor/bin/phpcpd ./web/modules/custom --names=*.php,*.module,*.inc,*.install,*.test,*.profile,*.theme,*.css,*.info,*.txt --names-exclude=*.md,*.info.yml --ansi
-  ```
+```bash
+./vendor/bin/phpcpd ./web/modules/custom \
+--names=*.php,*.module,*.inc,*.install,*.test,*.profile,*.theme,*.css,*.info,*.txt --names-exclude=*.md,*.info.yml \
+--ansi --exclude=tests
+
+./vendor/bin/phpcpd ./behat --names=*.php --ansi
+```
+
+### Ensure PHP Community Best Practicies using PHP Coding Standards Fixer
+
+It can modernize your code (like converting the pow function to the ** operator on PHP 5.6) and (micro) optimize it.
+
+```bash
+./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle
+```
+
+### Assert Drupal Deprecation
+
+https://github.com/mglaman/drupal-check
+
+Built on PHPStan, this static analysis tool will check for correctness (e.g. using a class that doesn't exist),
+deprecation errors, and more.
+
+Why? While there are many static analysis tools out there, none of them run with the Drupal context in mind.
+
+```bash
+./vendor/bin/drupal-check -d ./web/modules/custom ./behat ./web/themes --no-progress
+```
 
 ### Enforce code standards with git hooks
 

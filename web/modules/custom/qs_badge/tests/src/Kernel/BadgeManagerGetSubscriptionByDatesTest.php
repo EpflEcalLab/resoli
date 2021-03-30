@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\qs_badge\Kernel;
 
-use Drupal\qs_test\Kernel\ResoliKernelTestBase;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\qs_test\Kernel\ResoliKernelTestBase;
 
 /**
  * @coversDefaultClass \Drupal\qs_badge\Service\BadgeManager
@@ -12,8 +12,10 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * @group qs_kernel
  * @group qs_badge
  * @group qs_badge_kernel
+ *
+ * @internal
  */
-class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase {
+final class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase {
 
   /**
    * Modules to enable.
@@ -63,13 +65,13 @@ class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase {
     $start = DrupalDateTime::createFromFormat('Y-m-d', '2016-07-27');
     $end = DrupalDateTime::createFromFormat('Y-m-d', '2020-09-29');
 
-    $this->assertInternalType('array', $events);
-    $this->assertCount(9, $events);
+    self::assertInternalType('array', $events);
+    self::assertCount(9, $events);
 
-    $this->markTestIncomplete('getSubscriptionByDates use MySQL features. Figure out how to make tests that fail on any other database engine.');
+    self::markTestIncomplete('getSubscriptionByDates use MySQL features. Figure out how to make tests that fail on any other database engine.');
 
     $privilegies = $this->badgeManager->getSubscriptionByDates($community[1], $start, $end);
-    $this->assertInternalType('array', $privilegies);
+    self::assertInternalType('array', $privilegies);
   }
 
 }

@@ -29,6 +29,7 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'alias' => '/' . trim($alias, '/') . '/activities/add',
         ],
       ];
+
       break;
 
     case 'activity':
@@ -62,6 +63,7 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'alias' => '/' . trim($alias, '/') . '/dashboard/members',
         ],
       ];
+
       break;
 
     case 'event':
@@ -87,6 +89,7 @@ function qs_activity_alias(EntityInterface $entity, $alias, $operation = 'insert
           'alias' => '/' . trim($alias, '/') . '/dashboard/waiting-approval',
         ],
       ];
+
       break;
   }
 
@@ -107,19 +110,21 @@ function qs_activity_redirects(EntityInterface $entity, $alias, $operation = 'in
     case 'communities':
       $redirects = [
         'activities_by_theme' => [
-          'source'   => '/' . trim($alias, '/') . '/activities',
+          'source' => '/' . trim($alias, '/') . '/activities',
           'redirect' => '/' . trim($alias, '/') . '/activities/theme',
         ],
       ];
+
       break;
 
     case 'activity':
       $redirects = [
         'events' => [
-          'source'   => '/' . trim($alias, '/') . '/events',
+          'source' => '/' . trim($alias, '/') . '/events',
           'redirect' => '/' . trim($alias, '/'),
         ],
       ];
+
       break;
   }
 

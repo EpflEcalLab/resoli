@@ -14,7 +14,7 @@ function qs_supervisor_theme() {
     // ---------------------------------------------------------------------.
     'qs_supervisor_account_dashboard_page' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--supervisor--account-dashboard',
+      'template' => 'qs--supervisor--account-dashboard',
     ],
   ];
 }

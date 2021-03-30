@@ -2,15 +2,15 @@
 
 namespace Drupal\qs_photo\Plugin\Block;
 
-use Drupal\qs_calendar\Plugin\Block\PeriodBlockBase;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\qs_calendar\Plugin\Block\PeriodBlockBase;
 
 /**
  * Calendar Monthly.
  *
  * @Block(
- *   id = "qs_photo_monthly_block",
- *   admin_label = @Translation("Calendar Monthly"),
+ *     id="qs_photo_monthly_block",
+ *     admin_label=@Translation("Calendar Monthly"),
  * )
  */
 class MonthlyBlock extends PeriodBlockBase {
@@ -28,6 +28,7 @@ class MonthlyBlock extends PeriodBlockBase {
     $pagination_month = $master_request->query->get('month');
 
     $month = new DrupalDateTime();
+
     if ($pagination_month) {
       try {
         $month = DrupalDateTime::createFromFormat('Y-m-d', $pagination_month);
@@ -50,12 +51,12 @@ class MonthlyBlock extends PeriodBlockBase {
 
     $variables['current_day'] = $month;
 
-    $date_start         = $this->calendarBuilder->getFirstMondayMonthFullWeek($month);
-    $date_end           = $this->calendarBuilder->getLastSundayMonthFullWeek($month);
+    $date_start = $this->calendarBuilder->getFirstMondayMonthFullWeek($month);
+    $date_end = $this->calendarBuilder->getLastSundayMonthFullWeek($month);
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
     return [
-      '#theme'     => 'qs_photo_monthly_block',
+      '#theme' => 'qs_photo_monthly_block',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

@@ -2,18 +2,18 @@
 
 namespace Drupal\qs_photo\Form;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Url;
+use Drupal\taxonomy\TermInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * PhotoAddForm class.
+ * Form to add photo(s) vua uppy into a given activity > event.
  */
 class AddForm extends FormBasic {
 
@@ -25,20 +25,6 @@ class AddForm extends FormBasic {
    * @var string
    */
   const UPPY_FILES = 'uppy_files';
-
-  /**
-   * Listing of allowed extensions.
-   *
-   * @var string
-   */
-  protected $extensions = 'png gif jpg jpeg';
-
-  /**
-   * Uppy locals strings.
-   *
-   * @var array
-   */
-  protected $uppyLocale = [];
 
   /**
    * Access Control Service.
@@ -62,11 +48,11 @@ class AddForm extends FormBasic {
   protected $currentUser;
 
   /**
-   * The node Storage.
+   * Listing of allowed extensions.
    *
-   * @var \Drupal\node\NodeStorageInterface
+   * @var string
    */
-  protected $nodeStorage;
+  protected $extensions = 'png gif jpg jpeg';
 
   /**
    * The file Storage.
@@ -83,6 +69,20 @@ class AddForm extends FormBasic {
   protected $imageFactory;
 
   /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * Uppy locals strings.
+   *
+   * @var array
+   */
+  protected $uppyLocale = [];
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -90,12 +90,12 @@ class AddForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->currentUser     = $this->getCurrentUser();
-    $this->acl             = $this->getAcl();
-    $this->nodeStorage     = $this->getNodeStorage();
-    $this->fileStorage     = $this->getFileStorage();
+    $this->currentUser = $this->getCurrentUser();
+    $this->acl = $this->getAcl();
+    $this->nodeStorage = $this->getNodeStorage();
+    $this->fileStorage = $this->getFileStorage();
     $this->activityManager = $this->getActivityManager();
-    $this->imageFactory    = $this->getImageFactory();
+    $this->imageFactory = $this->getImageFactory();
 
     // Uppy locals strings.
     $this->uppyLocale = [
@@ -230,17 +230,10 @@ class AddForm extends FormBasic {
           '0' => $this->t('qs.uppy.can_only_upload_x_file %{smart_count}'),
           '1' => $this->t('qs.uppy.can_only_upload_x_files %{smart_count}'),
         ],
-        'exceedsSize'    => $this->t('qs.uppy.exceeds_size'),
+        'exceedsSize' => $this->t('qs.uppy.exceeds_size'),
         'failedToUpload' => $this->t('qs.uppy.failed_to_upload %{file}'),
       ],
     ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_photo_add_form';
   }
 
   /**
@@ -256,16 +249,18 @@ class AddForm extends FormBasic {
    */
   public function access(AccountInterface $account, TermInterface $community) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, TermInterface $community = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?TermInterface $community = NULL) {
     $form = parent::buildForm($form, $form_state);
 
     // Disable caching & HTML5 validation.
@@ -273,8 +268,8 @@ class AddForm extends FormBasic {
     $form['#attributes']['theme'] = 'secondary';
     $form['#disable_inline_form_errors'] = TRUE;
     $form['#floating_buttons'][] = [
-      'icon'   => 'plus',
-      'label'  => $this->t('qs_photo.form.add.title'),
+      'icon' => 'plus',
+      'label' => $this->t('qs_photo.form.add.title'),
       'active' => TRUE,
     ];
 
@@ -311,31 +306,32 @@ class AddForm extends FormBasic {
 
     $fallback = [];
     $select_options = [];
+
     foreach ($activities as $activity) {
       $fallback[$activity->id()] = $activity->getTitle();
       $select_options[] = [
-        'nid'         => $activity->id(),
-        'title'       => $activity->getTitle(),
+        'nid' => $activity->id(),
+        'title' => $activity->getTitle(),
       ];
     }
 
     $form['step-1']['activity'] = [
-      '#title'     => $this->t('qs_photo.add.form.activity'),
-      '#type'      => 'select',
-      '#multiple'  => FALSE,
-      '#required'  => FALSE,
-      '#options'   => $fallback,
+      '#title' => $this->t('qs_photo.add.form.activity'),
+      '#type' => 'select',
+      '#multiple' => FALSE,
+      '#required' => FALSE,
+      '#options' => $fallback,
       '#validated' => TRUE,
-      '#attributes'    => [
-        'selectize'    => TRUE,
-        'class'        => ['selectize-activity'],
+      '#attributes' => [
+        'selectize' => TRUE,
+        'class' => ['selectize-activity'],
         'data-options' => json_encode($select_options),
       ],
       '#theme_wrappers' => [
         'form_element',
         'container__center',
       ],
-      '#ajax'     => [
+      '#ajax' => [
         'callback' => [$this, 'selectEventAjax'],
       ],
     ];
@@ -356,14 +352,14 @@ class AddForm extends FormBasic {
     ];
 
     $form['step-2']['event'] = [
-      '#title'     => $this->t('qs_photo.add.form.event'),
-      '#type'      => 'select',
-      '#required'  => FALSE,
-      '#options'   => ['_none' => $this->t('qs.form.select')],
+      '#title' => $this->t('qs_photo.add.form.event'),
+      '#type' => 'select',
+      '#required' => FALSE,
+      '#options' => ['_none' => $this->t('qs.form.select')],
       '#validated' => TRUE,
-      '#attributes'    => [
-        'selectize'    => TRUE,
-        'class'        => [
+      '#attributes' => [
+        'selectize' => TRUE,
+        'class' => [
           'selectize-activity',
           'selectize-events',
         ],
@@ -373,19 +369,18 @@ class AddForm extends FormBasic {
         'form_element',
         'container__center',
       ],
-      '#ajax'     => [
+      '#ajax' => [
         'callback' => [$this, 'showUppy'],
       ],
     ];
 
     $form['step-3'] = [
       '#type' => 'fieldset',
-      '#description' =>
-      $this->t('qs_photo.add.form.step3.description') .
+      '#description' => $this->t('qs_photo.add.form.step3.description') .
       '<div class="text-center mb-3">' .
       $this->t('qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution', [
-        '@file_validate_extensions'       => $this->extensions,
-        '@file_validate_size'             => $this->humanFilesize(file_upload_max_size()),
+        '@file_validate_extensions' => $this->extensions,
+        '@file_validate_size' => $this->humanFilesize(file_upload_max_size()),
         '@file_validate_image_resolution' => '5000x5000',
       ]) .
       '</div>',
@@ -400,18 +395,18 @@ class AddForm extends FormBasic {
 
     $form['#attached']['library'][] = 'quartiers_solidaires/uppy';
     $form['step-3']['photos'] = [
-      '#type'       => 'file',
-      '#uppy'       => TRUE,
-      '#multiple'   => TRUE,
-      '#required'   => FALSE,
-      '#hide'       => TRUE,
+      '#type' => 'file',
+      '#uppy' => TRUE,
+      '#multiple' => TRUE,
+      '#required' => FALSE,
+      '#hide' => TRUE,
       '#data' => [
-        'data-callback-fields'    => self::UPPY_FILES,
-        'data-locale'             => json_encode($this->uppyLocale),
-        'data-extensions'         => $this->extensions,
+        'data-callback-fields' => self::UPPY_FILES,
+        'data-locale' => json_encode($this->uppyLocale),
+        'data-extensions' => $this->extensions,
         'data-allowed-file-types' => json_encode($this->getMimeTypesFromExt($this->extensions)),
-        'data-filesize'           => file_upload_max_size(),
-        'data-upload-url'         => Url::fromRoute('qs_photo.file.upload')->toString(),
+        'data-filesize' => file_upload_max_size(),
+        'data-upload-url' => Url::fromRoute('qs_photo.file.upload')->toString(),
       ],
     ];
 
@@ -488,6 +483,158 @@ class AddForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
+  public function getFormId() {
+    return 'qs_photo_add_form';
+  }
+
+  /**
+   * Get a human readable file size.
+   *
+   * @param int $bytes
+   *   The original file size in bytes.
+   * @param int $decimals
+   *   The number of final decimals.
+   *
+   * @return string
+   *   The human readable file size.
+   */
+  public function humanFilesize($bytes, $decimals = 2) {
+    $size = ['o', 'ko', 'Mo', 'Go', 'To', 'Po', 'Eo', 'Zo', 'Yo'];
+    $factor = floor((mb_strlen($bytes) - 1) / 3);
+
+    return sprintf("%.{$decimals}f", $bytes / 1024 ** $factor) . ' [' . $size[$factor] . ']';
+  }
+
+  /**
+   * Called via Ajax to populate the Event field according Activity.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The form model field structure.
+   */
+  public function selectEventAjax(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+
+    $select_options[] = [
+      'nid' => '_none',
+      'title' => $this->t('qs.form.select'),
+    ];
+
+    $activity_nid = $form_state->getValue('activity');
+
+    if ($activity_nid) {
+      $activity = $this->getNodeStorage()->load((int) $activity_nid);
+      $events = $this->getEventManager()->getAllPrev($activity);
+
+      if ($events) {
+        $select_options = [];
+
+        foreach ($events as $event) {
+          $select_options[] = [
+            'nid' => $event->id(),
+            'title' => $event->field_end_at->date->format('d.m.Y') . ' - ' . $event->getTitle(),
+          ];
+        }
+      }
+
+      // Update the Step 2 description with activity name.
+      $response->addCommand(new InvokeCommand(
+        '#qs-photo-add-form',
+        'updateStepDescription',
+        [
+          '#edit-step-2',
+          $this->t(
+            'qs_photo.add.form.step2.description @activity',
+            ['@activity' => $activity->getTitle()]
+          ),
+        ]
+      ));
+    }
+
+    $response->addCommand(new InvokeCommand('#edit-event', 'selectizeClearOptions'));
+    $response->addCommand(new InvokeCommand('#edit-event', 'selectizeAddOptions', [$select_options]));
+
+    return $response;
+  }
+
+  /**
+   * Show the Upply uploader.
+   *
+   * @param array $form
+   *   An associative array containing the structure of the form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return \Drupal\Core\Ajax\AjaxResponse
+   *   The form model field structure.
+   */
+  public function showUppy(array &$form, FormStateInterface $form_state) {
+    $response = new AjaxResponse();
+    $response->addCommand(new CssCommand('#uppy-uploader-hidden', ['display' => 'block']));
+
+    return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    // Get files field generated by javascript when upload is done from uppy.
+    $files = $form_state->getUserInput()[self::UPPY_FILES];
+
+    $event_nid = $form_state->getValue('event');
+    $event = $this->getNodeStorage()->load($event_nid);
+    $activity = $event->field_activity->entity;
+
+    // Load FID as File.
+    $photos = [];
+
+    foreach ($files as $file_datas) {
+      $data = json_decode($file_datas, TRUE);
+      $photos[] = $this->fileStorage->load($data[0]['fid']);
+    }
+
+    // Create Node from File.
+    $nodes = [];
+
+    foreach ($photos as $photo) {
+      $node = $this->getPhotoManager()->create($event, $photo);
+      $nodes[] = $node->id();
+    }
+
+    drupal_set_message($this->t('qs_photo.form.add.success @number @event @activity', [
+      '@activity' => $activity->getTitle(),
+      '@event' => $event->getTitle(),
+      '@number' => \count($nodes),
+    ]));
+
+    $trigger = $form_state->getTriggeringElement();
+
+    switch ($trigger['#name']) {
+      case 'comment':
+        $form_state->setRedirect('qs_photo.form.comments', [
+          'activity' => $activity->id(),
+          'photos' => $nodes,
+        ]);
+
+        break;
+
+      case 'story':
+      case 'publish':
+      default:
+        $form_state->setRedirect('qs_photo.activity', ['activity' => $activity->id()]);
+
+        break;
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $event_nid = $form_state->getValue('event');
     $event = $this->getNodeStorage()->load($event_nid);
@@ -516,139 +663,6 @@ class AddForm extends FormBasic {
       && !$this->acl->hasWriteAccessPhoto($activity)) {
       $form_state->setErrorByName('activity', $this->t('qs.form.upload.illegal_choice'));
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Get files field generated by javascript when upload is done from uppy.
-    $files = $form_state->getUserInput()[self::UPPY_FILES];
-
-    $event_nid = $form_state->getValue('event');
-    $event = $this->getNodeStorage()->load($event_nid);
-    $activity = $event->field_activity->entity;
-
-    // Load FID as File.
-    $photos = [];
-    foreach ($files as $file_datas) {
-      $data = json_decode($file_datas, TRUE);
-      $photos[] = $this->fileStorage->load($data[0]['fid']);
-    }
-
-    // Create Node from File.
-    $nodes = [];
-    foreach ($photos as $photo) {
-      $node = $this->getPhotoManager()->create($event, $photo);
-      $nodes[] = $node->id();
-    }
-
-    drupal_set_message($this->t("qs_photo.form.add.success @number @event @activity", [
-      '@activity' => $activity->getTitle(),
-      '@event'    => $event->getTitle(),
-      '@number'   => count($nodes),
-    ]));
-
-    $trigger = $form_state->getTriggeringElement();
-    switch ($trigger['#name']) {
-      case 'comment':
-        $form_state->setRedirect('qs_photo.form.comments', [
-          'activity' => $activity->id(),
-          'photos'   => $nodes,
-        ]);
-        break;
-
-      case 'story':
-      case 'publish':
-      default:
-        $form_state->setRedirect('qs_photo.activity', ['activity' => $activity->id()]);
-        break;
-    }
-  }
-
-  /**
-   * Called via Ajax to populate the Event field according Activity.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   The form model field structure.
-   */
-  public function selectEventAjax(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-
-    $select_options[] = [
-      'nid'   => '_none',
-      'title' => $this->t('qs.form.select'),
-    ];
-
-    $activity_nid = $form_state->getValue('activity');
-
-    if ($activity_nid) {
-
-      $activity = $this->getNodeStorage()->load((int) $activity_nid);
-      $events   = $this->getEventManager()->getAllPrev($activity);
-
-      if ($events) {
-        $select_options = [];
-        foreach ($events as $event) {
-          $select_options[] = [
-            'nid'   => $event->id(),
-            'title' => $event->field_end_at->date->format('d.m.Y') . ' - ' . $event->getTitle(),
-          ];
-        }
-      }
-
-      // Update the Step 2 description with activity name.
-      $response->addCommand(new InvokeCommand('#qs-photo-add-form', 'updateStepDescription',
-        [
-          '#edit-step-2',
-          $this->t('qs_photo.add.form.step2.description @activity',
-            ['@activity' => $activity->getTitle()]),
-        ]
-      ));
-    }
-
-    $response->addCommand(new InvokeCommand('#edit-event', 'selectizeClearOptions'));
-    $response->addCommand(new InvokeCommand('#edit-event', 'selectizeAddOptions', [$select_options]));
-    return $response;
-  }
-
-  /**
-   * Show the Upply uploader.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   *   The form model field structure.
-   */
-  public function showUppy(array &$form, FormStateInterface $form_state) {
-    $response = new AjaxResponse();
-    $response->addCommand(new CssCommand('#uppy-uploader-hidden', ['display' => 'block']));
-    return $response;
-  }
-
-  /**
-   * Get a human readable file size.
-   *
-   * @param int $bytes
-   *   The original file size in bytes.
-   * @param int $decimals
-   *   The number of final decimals.
-   *
-   * @return string
-   *   The human readable file size.
-   */
-  public function humanFilesize($bytes, $decimals = 2) {
-    $size = ['o', 'ko', 'Mo', 'Go', 'To', 'Po', 'Eo', 'Zo', 'Yo'];
-    $factor = floor((strlen($bytes) - 1) / 3);
-    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' [' . @$size[$factor] . ']';
   }
 
 }

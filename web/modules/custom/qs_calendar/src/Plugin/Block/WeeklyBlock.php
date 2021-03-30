@@ -8,8 +8,8 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * Calendar Weekly.
  *
  * @Block(
- *   id = "qs_calendar_weekly_block",
- *   admin_label = @Translation("Calendar Weekly"),
+ *     id="qs_calendar_weekly_block",
+ *     admin_label=@Translation("Calendar Weekly"),
  * )
  */
 class WeeklyBlock extends PeriodBlockBase {
@@ -29,6 +29,7 @@ class WeeklyBlock extends PeriodBlockBase {
     // Get pagination day.
     $pagination_day = $master_request->query->get('day');
     $day = new DrupalDateTime();
+
     if ($pagination_day) {
       try {
         $day = DrupalDateTime::createFromFormat('Y-m-d', $pagination_day);
@@ -52,7 +53,7 @@ class WeeklyBlock extends PeriodBlockBase {
     $variables['current_day'] = $day;
 
     $date_start = $this->calendarBuilder->getMondayWeek($day);
-    $date_end   = $this->calendarBuilder->getSundayWeek($day);
+    $date_end = $this->calendarBuilder->getSundayWeek($day);
     $date_end->setTime(23, 59, 59);
     $variables['dates'] = $this->calendarBuilder->build($date_start, $date_end);
 
@@ -63,7 +64,7 @@ class WeeklyBlock extends PeriodBlockBase {
     $variables['badges'] = $this->getDotesBadges($community, $date_start, $date_end);
 
     return [
-      '#theme'     => 'qs_calendar_weekly_block',
+      '#theme' => 'qs_calendar_weekly_block',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

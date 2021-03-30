@@ -6,8 +6,8 @@
  */
 
 use Drupal\Core\Render\Markup;
-use Drupal\user\UserInterface;
 use Drupal\Core\Url;
+use Drupal\user\UserInterface;
 
 /**
  * Mail hook.
@@ -20,10 +20,10 @@ function qs_auth_mail($key, &$message, $params) {
   $site = $configFactory->get('system.site');
 
   $headers = [
-    'MIME-Version'              => '1.0',
-    'Content-Type'              => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+    'MIME-Version' => '1.0',
+    'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
     'Content-Transfer-Encoding' => '8Bit',
-    'X-Mailer'                  => 'Drupal',
+    'X-Mailer' => 'Drupal',
   ];
 
   // Add headers.
@@ -32,22 +32,21 @@ function qs_auth_mail($key, &$message, $params) {
   }
 
   switch ($key) {
-
     // Sent to new user when registering.
     case 'register':
       $account = $params['user'];
       $message['subject'] = t('qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname', [
-        '@sitename'  => $site->get('name'),
-        '@mail'      => $account->mail->value,
+        '@sitename' => $site->get('name'),
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
       ]);
 
       $message['body'][] = Markup::create(nl2br(t('qs.mail.welcome.no_approval.body @mail @firstname @lastname @url', [
-        '@mail'      => $account->mail->value,
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
-        '@url'       => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+        '@lastname' => $account->field_lastname->value,
+        '@url' => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ])));
 
       break;
@@ -58,20 +57,21 @@ function qs_auth_mail($key, &$message, $params) {
       $community = $message['params']['community'];
 
       $message['subject'] = t('qs.mail.community.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community', [
-        '@sitename'  => $site->get('name'),
-        '@mail'      => $account->mail->value,
+        '@sitename' => $site->get('name'),
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
         '@community' => $community->getName(),
       ]);
 
       $message['body'][0] = Markup::create(nl2br(t('qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url', [
-        '@mail'      => $account->mail->value,
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
         '@community' => $community->getName(),
-        '@url'      => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+        '@url' => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ])));
+
       break;
 
     // Sent to user when communitiy request of approval has been declined.
@@ -80,20 +80,21 @@ function qs_auth_mail($key, &$message, $params) {
       $community = $message['params']['community'];
 
       $message['subject'] = t('qs.mail.community.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community', [
-        '@sitename'  => $site->get('name'),
-        '@mail'      => $account->mail->value,
+        '@sitename' => $site->get('name'),
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
         '@community' => $community->getName(),
       ]);
 
       $message['body'][0] = Markup::create(nl2br(t('qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url', [
-        '@mail'      => $account->mail->value,
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
         '@community' => $community->getName(),
-        '@url'       => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
+        '@url' => Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString(),
       ])));
+
       break;
 
     // Sent to all managers of the applied communitiy when user request access.
@@ -102,20 +103,21 @@ function qs_auth_mail($key, &$message, $params) {
       $community = $message['params']['community'];
 
       $message['subject'] = t('qs.mail.community.apply.subject @sitename @mail @firstname @lastname @community', [
-        '@sitename'  => $site->get('name'),
-        '@mail'      => $account->mail->value,
+        '@sitename' => $site->get('name'),
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
         '@community' => $community->getName(),
       ]);
 
       $message['body'][0] = Markup::create(nl2br(t('qs.mail.community.apply.body @mail @firstname @lastname @community @url', [
-        '@mail'      => $account->mail->value,
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
         '@community' => $community->getName(),
-        '@url'       => Url::fromRoute('qs_community.waiting_approval', ['community' => $community->id()], ['absolute' => TRUE])->toString(),
+        '@url' => Url::fromRoute('qs_community.waiting_approval', ['community' => $community->id()], ['absolute' => TRUE])->toString(),
       ])));
+
       break;
   }
 }
@@ -152,35 +154,37 @@ function qs_auth_mail_alter(&$message) {
     case 'user_cancel_confirm':
       $account = $message['params']['account'];
       $message['subject'] = t('qs.mail.account.cancel_confirm.subject @sitename @mail @firstname @lastname', [
-        '@sitename'  => $site->get('name'),
-        '@mail'      => $account->mail->value,
+        '@sitename' => $site->get('name'),
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
       ]);
 
       $message['body'][0] = Markup::create(nl2br(t('qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url', [
-        '@mail'       => $account->mail->value,
-        '@firstname'  => $account->field_firstname->value,
-        '@lastname'   => $account->field_lastname->value,
+        '@mail' => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname' => $account->field_lastname->value,
         '@cancel-url' => qs_user_cancel_url($account),
       ])));
+
       break;
 
     case 'user_password_reset':
       $account = $message['params']['account'];
       $message['subject'] = t('qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname', [
-        '@sitename'  => $site->get('name'),
-        '@mail'      => $account->mail->value,
+        '@sitename' => $site->get('name'),
+        '@mail' => $account->mail->value,
         '@firstname' => $account->field_firstname->value,
-        '@lastname'  => $account->field_lastname->value,
+        '@lastname' => $account->field_lastname->value,
       ]);
 
       $message['body'][0] = Markup::create(nl2br(t('qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login', [
-        '@mail'           => $account->mail->value,
-        '@firstname'      => $account->field_firstname->value,
-        '@lastname'       => $account->field_lastname->value,
+        '@mail' => $account->mail->value,
+        '@firstname' => $account->field_firstname->value,
+        '@lastname' => $account->field_lastname->value,
         '@one-time-login' => user_pass_reset_url($account),
       ])));
+
       break;
   }
 }
@@ -205,10 +209,14 @@ function qs_auth_mail_alter(&$message) {
 function qs_user_cancel_url(UserInterface $account, array $options = []) {
   $timestamp = REQUEST_TIME;
   $langcode = isset($options['langcode']) ? $options['langcode'] : $account->getPreferredLangcode();
-  $url_options = ['absolute' => TRUE, 'language' => \Drupal::languageManager()->getLanguage($langcode)];
+  $url_options = [
+    'absolute' => TRUE,
+    'language' => \Drupal::languageManager()->getLanguage($langcode),
+  ];
+
   return \Drupal::url('qs_auth.cancel.confirm', [
-    'user'        => $account->id(),
-    'timestamp'   => $timestamp,
+    'user' => $account->id(),
+    'timestamp' => $timestamp,
     'hashed_pass' => user_pass_rehash($account, $timestamp),
   ], $url_options);
 }

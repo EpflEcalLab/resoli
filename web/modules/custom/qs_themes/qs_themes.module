@@ -14,7 +14,7 @@ function qs_themes_theme() {
     // ---------------------------------------------------------------------.
     'qs_themes_filter_block' => [
       'variables' => ['variables' => []],
-      'template'  => 'qs--themes--filter',
+      'template' => 'qs--themes--filter',
     ],
   ];
 }

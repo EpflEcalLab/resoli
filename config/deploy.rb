@@ -17,9 +17,6 @@ set :linked_files, fetch(:linked_files, []).push("#{fetch(:app_path)}/sites/defa
 # Link dirs files and private-files
 set :linked_dirs, fetch(:linked_dirs, []).push("#{fetch(:app_path)}/sites/default/files")
 
-# Default value for :scm is :git
-set :scm, :git
-
 # Default value for :pty is false
 # set :pty, true
 

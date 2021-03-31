@@ -181,7 +181,7 @@ class DeleteForm extends FormBasic {
     $user = $this->getCurrentUser();
     $photos_params = $this->getRequest()->query->get('photos');
 
-    drupal_set_message($this->t('qs_photo.form.delete.success @activity @number', [
+    $this->messenger()->addMessage($this->t('qs_photo.form.delete.success @activity @number', [
       '@activity' => $activity->getTitle(),
       '@number' => \count($photos_params),
     ]));

@@ -159,7 +159,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     // Update the activity.
     $activity = $this->activityManager->update($activity, $fields);
 
-    drupal_set_message($this->t('qs_activity.activities.form.edit.defaults.success @activity', [
+    $this->messenger()->addMessage($this->t('qs_activity.activities.form.edit.defaults.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 

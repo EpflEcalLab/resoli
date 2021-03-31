@@ -606,7 +606,7 @@ class AddForm extends FormBasic {
       $nodes[] = $node->id();
     }
 
-    drupal_set_message($this->t('qs_photo.form.add.success @number @event @activity', [
+    $this->messenger()->addMessage($this->t('qs_photo.form.add.success @number @event @activity', [
       '@activity' => $activity->getTitle(),
       '@event' => $event->getTitle(),
       '@number' => \count($nodes),

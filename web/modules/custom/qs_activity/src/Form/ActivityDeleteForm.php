@@ -109,7 +109,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     $activity = $this->nodeStorage->load($form_state->get('activity'));
     $community = $activity->field_community->entity;
 
-    drupal_set_message($this->t('qs_activity.activities.form.delete.success @activity', [
+    $this->messenger()->addMessage($this->t('qs_activity.activities.form.delete.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 

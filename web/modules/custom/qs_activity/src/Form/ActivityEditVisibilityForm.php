@@ -185,7 +185,7 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
     // Create the new activity.
     $activity = $this->activityManager->update($activity, $fields);
 
-    drupal_set_message($this->t('qs_activity.edit_visibility_form.success @activity', [
+    $this->messenger()->addMessage($this->t('qs_activity.edit_visibility_form.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 

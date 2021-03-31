@@ -5,7 +5,7 @@ namespace Drupal\qs_auth\Controller;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\user\UserDataInterface;
 use Drupal\user\UserInterface;
@@ -121,7 +121,7 @@ class AccountController extends ControllerBase {
         ];
       }
 
-      drupal_set_message($this->t('qs.cancel.confirm.expired'), 'error');
+      $this->messenger()->addMessage($this->t('qs.cancel.confirm.expired'), MessengerInterface::TYPE_ERROR);
 
       return $this->redirect('entity.user.cancel_form', ['user' => $user->id()], ['absolute' => TRUE]);
     }

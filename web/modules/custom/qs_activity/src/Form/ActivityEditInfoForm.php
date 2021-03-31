@@ -150,7 +150,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     // Update the activity.
     $activity = $this->activityManager->update($activity, $fields);
 
-    drupal_set_message($this->t('qs_activity.activities.form.edit.info.success @activity', [
+    $this->messenger()->addMessage($this->t('qs_activity.activities.form.edit.info.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 

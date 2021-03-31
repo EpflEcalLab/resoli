@@ -104,13 +104,12 @@ class WaitingApprovalController extends ControllerBase {
     }
     $variables['mailto'] = $mailto;
 
-    pager_default_initialize(\count($rows), $this->configuration['limit']);
+    $this->pagerManager->createPager(\count($rows), $this->configuration['limit']);
     $variables['pager'] = [
       '#type' => 'pager',
       '#quantity' => '3',
     ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
+    $query->pager($this->configuration['limit']);
 
     $rows = $query->execute()->fetchAll();
 

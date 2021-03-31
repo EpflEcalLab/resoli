@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 /**
  * Global function to alter default events with date according now.
@@ -27,9 +28,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-2 days')->setTime(1, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_15->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_15->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+20 minutes');
-  $event_15->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_15->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_15->save();
 
   // Event - Activity (2) - 1 day ago at 15h00.
@@ -37,9 +38,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-1 day')->setTime(15, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_16->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_16->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+30 minutes');
-  $event_16->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_16->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_16->save();
 
   // Event - Activity (2) - Today in 1 hour.
@@ -47,9 +48,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+1 hour');
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_17->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_17->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+45 minutes');
-  $event_17->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_17->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_17->save();
 
   // Event - Activity (4) - Tomorrow at 18h00.
@@ -57,9 +58,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('tomorrow')->setTime(18, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_18->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_18->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+17 minutes');
-  $event_18->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_18->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_18->save();
 
   // Event - Activity (6) - In 2 days at 19h00.
@@ -67,9 +68,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+2 days')->setTime(19, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_19->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_19->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+22 minutes');
-  $event_19->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_19->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_19->save();
 
   // Event - Activity (5) - 10 days ago at 23h20.
@@ -77,9 +78,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-10 days')->setTime(23, 20);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_20->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_20->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+13 minutes');
-  $event_20->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_20->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_20->save();
 
   // Event - Activity (5) - Today 2 hours ago.
@@ -87,9 +88,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-2 hours');
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_21->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_21->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+15 minutes');
-  $event_21->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_21->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_21->save();
 
   // Event - Activity (4) - Today in 4 hours.
@@ -97,9 +98,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+4 hours');
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_22->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_22->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+21 minutes');
-  $event_22->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_22->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_22->save();
 
   // Event - Activity (7) - Yesterday at 00h05.
@@ -107,9 +108,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('yesterday')->setTime(00, 5);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_23->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_23->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+47 minutes');
-  $event_23->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_23->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_23->save();
 
   // Event - Activity (7) - 1 Month ago, the 2nd at 16h00.
@@ -117,9 +118,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-1 month')->setTime(16, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_24->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_24->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+8 minutes');
-  $event_24->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_24->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_24->save();
 
   // Event - Activity (10) - In 1 Month, the 16th at 11h00.
@@ -128,9 +129,9 @@ function qs_default_content_events() {
   $dt->modify('-1 month')->setTime(11, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
   $dt->setDate($dt->format('Y'), $dt->format('m'), 16);
-  $event_25->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_25->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+29 minutes');
-  $event_25->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_25->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_25->save();
 
   // Event - Activity (9) - In 16 Months, the 01st at 15h00.
@@ -139,9 +140,9 @@ function qs_default_content_events() {
   $dt->modify('+16 months')->setTime(15, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
   $dt->setDate($dt->format('Y'), $dt->format('m'), 1);
-  $event_26->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_26->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+14 minutes');
-  $event_26->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_26->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_26->save();
 
   // Event - Activity (9) - 22 Months ago, the 26nd at 06h00.
@@ -150,9 +151,9 @@ function qs_default_content_events() {
   $dt->modify('-22 months')->setTime(06, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
   $dt->setDate($dt->format('Y'), $dt->format('m'), 26);
-  $event_27->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_27->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+34 minutes');
-  $event_27->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_27->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_27->save();
 
   // Event - Activity (2) - 9 Months ago, the 21nd at 12h00.
@@ -161,9 +162,9 @@ function qs_default_content_events() {
   $dt->modify('-9 months')->setTime(12, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
   $dt->setDate($dt->format('Y'), $dt->format('m'), 21);
-  $event_28->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_28->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+12 minutes');
-  $event_28->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_28->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_28->save();
 
   // Event - Activity (11) - Today in 2 hours.
@@ -171,9 +172,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+2 hours');
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_29->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_29->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+27 minutes');
-  $event_29->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_29->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_29->save();
 
   // Event - Activity (6) - Yesterday at 15h00.
@@ -181,9 +182,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('yesterday')->setTime(15, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_30->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_30->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+14 minutes');
-  $event_30->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_30->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_30->save();
 
   // Event - Activity (8) - Tomorrow at 13h30.
@@ -191,9 +192,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('tomorrow')->setTime(13, 30);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_31->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_31->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+25 minutes');
-  $event_31->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_31->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_31->save();
 
   // Event - Activity (7) - In 14 days at 16h00.
@@ -201,9 +202,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+14 days')->setTime(16, 00);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_32->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_32->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+24 minutes');
-  $event_32->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_32->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_32->save();
 
   // Event - Activity (11) - In 2 days at 22h10.
@@ -211,9 +212,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+2 days')->setTime(22, 10);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_33->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_33->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+50 minutes');
-  $event_33->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_33->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_33->save();
 
   // Event - Activity (10) - Yesterday at 00h00.
@@ -221,9 +222,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('yesterday')->setTime(0, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_34->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_34->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+22 minutes');
-  $event_34->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_34->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_34->save();
 
   // Event - Activity (3) - In 2 days at 16h00.
@@ -231,9 +232,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+2 days')->setTime(16, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_35->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_35->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+56 minutes');
-  $event_35->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_35->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_35->save();
 
   // Event - Event - Activity (3) - In 1 month at 16h00.
@@ -241,9 +242,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+1 month')->setTime(16, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_36->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_36->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+47 minutes');
-  $event_36->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_36->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_36->save();
 
   // Event - Event - Activity (3) - today at 23:00.
@@ -251,9 +252,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('today')->setTime(23, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_37->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_37->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+12 minutes');
-  $event_37->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_37->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_37->save();
 
   // Event - Event - Activity (3) - Yesterday at 12h00.
@@ -261,9 +262,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('yesterday')->setTime(12, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_38->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_38->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+2 hours');
-  $event_38->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_38->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_38->save();
 
   // Event - Event - Activity (5) - 1 weeks ago at 12h00.
@@ -271,9 +272,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-1 week')->setTime(12, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_39->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_39->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('3 hours');
-  $event_39->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_39->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_39->save();
 
   // Event - Event - Activity (5) - In 8 months at 11h00.
@@ -281,9 +282,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+8 months')->setTime(11, 0);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_40->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_40->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+4 hours');
-  $event_40->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_40->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_40->save();
 
   // Event - Activity (3) - In 2 days at 19h00.
@@ -296,9 +297,9 @@ function qs_default_content_events() {
     $dt->modify('last day of ' . $now->format('F'));
   }
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_54->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_54->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+3 hours');
-  $event_54->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_54->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_54->save();
 
   // Event - Activity (56) - 3 months ago at 18h12.
@@ -306,9 +307,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-3 months')->setTime(18, 12);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_58->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_58->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+1 hours');
-  $event_58->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_58->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_58->save();
 
   // Event - Activity (56) - Today in 2 hour.
@@ -316,9 +317,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+2 hour');
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_59->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_59->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+48 minutes');
-  $event_59->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_59->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_59->save();
 
   // Event - Activity (57) - 3 months ago at 16h19.
@@ -326,9 +327,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('-3 months')->setTime(16, 19);
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_60->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_60->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+4 hours');
-  $event_60->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_60->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_60->save();
 
   // Event - Activity (57) - Today in 30 minutes.
@@ -336,9 +337,9 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+30 minutes');
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_61->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_61->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+90 minutes');
-  $event_61->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_61->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_61->save();
 
   // Event - Activity (62) - Today in 44 minutes.
@@ -346,8 +347,8 @@ function qs_default_content_events() {
   $dt = new DrupalDateTime();
   $dt->modify('+44 minutes');
   $dt->setTimezone(new DateTimeZone('UTC'));
-  $event_63->set($field_start, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_63->set($field_start, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $dt->modify('+91 minutes');
-  $event_63->set($field_end, $dt->format(DATETIME_DATETIME_STORAGE_FORMAT));
+  $event_63->set($field_end, $dt->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
   $event_63->save();
 }

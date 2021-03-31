@@ -118,8 +118,8 @@ class EventManager {
       'type' => 'event',
       'status' => TRUE,
       'field_activity' => $activity->id(),
-      'field_start_at' => $date_start->format(DATETIME_DATETIME_STORAGE_FORMAT),
-      'field_end_at' => $date_end->format(DATETIME_DATETIME_STORAGE_FORMAT),
+      'field_start_at' => $date_start->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
+      'field_end_at' => $date_end->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
       'title' => $title,
       'body' => $body,
       'field_contact_name' => $contact_name,
@@ -472,8 +472,8 @@ class EventManager {
     $date_start->setTimezone(new \DateTimeZone('UTC'));
     $date_end->setTimezone(new \DateTimeZone('UTC'));
 
-    $event->set('field_start_at', $date_start->format(DATETIME_DATETIME_STORAGE_FORMAT));
-    $event->set('field_end_at', $date_end->format(DATETIME_DATETIME_STORAGE_FORMAT));
+    $event->set('field_start_at', $date_start->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
+    $event->set('field_end_at', $date_end->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
 
     foreach ($fields as $key => $value) {
       if ($event->hasField($key)) {

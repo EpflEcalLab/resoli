@@ -2,18 +2,19 @@
 
 namespace Drupal\Behat\Context\Drupal;
 
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Drupal\Component\Utility\Random;
 use Behat\Gherkin\Node\TableNode;
+use Drupal\Component\FileSecurity\FileSecurity;
 
 /**
  * Defines application features from the specific context.
  *
  * @codingStandardsIgnoreFile
  */
-class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
+class FormContext extends RawDrupalContext {
 
   /**
    * The base URL.
@@ -111,6 +112,7 @@ class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
    * @throws \Exception
    */
   public function createPrivateFolder($folder) {
+    /** @var \Drupal\Core\File\FileSystemInterface $fso */
     $fso = \Drupal::service('file_system');
     $private_path = $fso->realpath('private://' . $folder);
 
@@ -118,9 +120,9 @@ class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
       throw new \Exception(sprintf('Value "%s" is not a directory.', $private_path));
     }
 
-    file_prepare_directory($private_path, FILE_CREATE_DIRECTORY);
-    file_prepare_directory($private_path, FILE_MODIFY_PERMISSIONS);
-    file_save_htaccess($private_path, TRUE);
+    $fso->prepareDirectory($private_path, FileSystemInterface::CREATE_DIRECTORY);
+    $fso->prepareDirectory($private_path, FileSystemInterface::MODIFY_PERMISSIONS);
+    FileSecurity::writeHtaccess($private_path, TRUE);
   }
 
   /**
@@ -136,12 +138,12 @@ class FormContext extends RawDrupalContext implements SnippetAcceptingContext {
     $fso = \Drupal::service('file_system');
 
     $dirname = 'public://behat-files/';
-    file_prepare_directory($dirname, FILE_CREATE_DIRECTORY);
+    \Drupal\Core\File\FileSystemInterface::prepareDirectory($dirname, FileSystemInterface::CREATE_DIRECTORY);
 
     for ($i = 0; $i < $number; $i++) {
       $destination = $dirname . $random->name(10, TRUE) . '.' . $extension;
       $data        = $random->paragraphs(3);
-      $file        = file_save_data($data, $destination, FILE_EXISTS_ERROR);
+      $file        = file_save_data($data, $destination, FileSystemInterface::EXISTS_ERROR);
 
       $this->attachments[] = [
         $fso->realpath($file->getFileUri()),

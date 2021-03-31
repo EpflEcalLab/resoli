@@ -116,7 +116,7 @@ class ActivityDeleteForm extends ActivityEditFormBase {
     $form_state->setRedirect('qs_activity.collection.themes', ['community' => $community->id()], []);
 
     // Delete the activity.
-    $activity = $activity->delete();
+    $activity->delete();
   }
 
   /**

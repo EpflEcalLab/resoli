@@ -27,6 +27,13 @@ class AccountController extends ControllerBase {
   protected $acl;
 
   /**
+   * The time service.
+   *
+   * @var \Drupal\Component\Datetime\TimeInterface
+   */
+  protected $time;
+
+  /**
    * The user data service.
    *
    * @var \Drupal\user\UserDataInterface
@@ -43,10 +50,11 @@ class AccountController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, UserDataInterface $user_data) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, UserDataInterface $user_data, TimeInterface $time) {
     $this->acl = $acl;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->userData = $user_data;
+    $this->time = $time;
   }
 
   /**
@@ -95,7 +103,7 @@ class AccountController extends ControllerBase {
   public function confirmCancel(UserInterface $user, $timestamp = 0, $hashed_pass = '') {
     // Time out in seconds until cancel URL expires; 24 hours = 86400 seconds.
     $timeout = 86400;
-    $current = \Drupal::time()->getRequestTime();
+    $current = $this->time->getRequestTime();
 
     // Basic validation of arguments.
     $account_data = $this->userData->get('user', $user->id());
@@ -130,7 +138,9 @@ class AccountController extends ControllerBase {
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
     $container->get('entity_type.manager'),
-    $container->get('user.data')
+    $container->get('user.data'),
+    $container->get('datetime.time')
+
     );
   }
 

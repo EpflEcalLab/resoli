@@ -207,8 +207,8 @@ function qs_auth_mail_alter(&$message) {
  * @see \Drupal\user\Controller\UserController::confirmCancel()
  */
 function qs_user_cancel_url(UserInterface $account, array $options = []) {
-  $timestamp = REQUEST_TIME;
-  $langcode = isset($options['langcode']) ? $options['langcode'] : $account->getPreferredLangcode();
+  $timestamp = \Drupal::time()->getRequestTime();
+  $langcode = $options['langcode'] ?? $account->getPreferredLangcode();
   $url_options = [
     'absolute' => TRUE,
     'language' => \Drupal::languageManager()->getLanguage($langcode),

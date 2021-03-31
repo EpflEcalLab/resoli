@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_photo\Form;
 
+use Drupal\Component\Utility\Environment;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\CssCommand;
@@ -380,7 +381,7 @@ class AddForm extends FormBasic {
       '<div class="text-center mb-3">' .
       $this->t('qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution', [
         '@file_validate_extensions' => $this->extensions,
-        '@file_validate_size' => $this->humanFilesize(file_upload_max_size()),
+        '@file_validate_size' => $this->humanFilesize(Environment::getUploadMaxSize()),
         '@file_validate_image_resolution' => '5000x5000',
       ]) .
       '</div>',
@@ -405,7 +406,7 @@ class AddForm extends FormBasic {
         'data-locale' => json_encode($this->uppyLocale),
         'data-extensions' => $this->extensions,
         'data-allowed-file-types' => json_encode($this->getMimeTypesFromExt($this->extensions)),
-        'data-filesize' => file_upload_max_size(),
+        'data-filesize' => Environment::getUploadMaxSize(),
         'data-upload-url' => Url::fromRoute('qs_photo.file.upload')->toString(),
       ],
     ];

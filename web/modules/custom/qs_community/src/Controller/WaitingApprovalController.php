@@ -4,6 +4,7 @@ namespace Drupal\qs_community\Controller;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
@@ -17,6 +18,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * access to the community.
  */
 class WaitingApprovalController extends ControllerBase {
+
+  /**
+   * The pager manager.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
+   */
+  protected $pagerManager;
 
   /**
    * Access Control Service.
@@ -47,10 +55,11 @@ class WaitingApprovalController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager) {
+  public function __construct(AccessControl $acl, PrivilegeManager $privilege_manager, PagerManagerInterface $pager_manager) {
     $this->acl = $acl;
     $this->privilegeManager = $privilege_manager;
     $this->privilegeStorage = $this->entityTypeManager()->getStorage('privilege');
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -80,9 +89,10 @@ class WaitingApprovalController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('pager.manager')
     );
   }
 
@@ -94,13 +104,12 @@ class WaitingApprovalController extends ControllerBase {
     $query = $this->privilegeManager->queryWaitingApproval($community);
 
     $ids = $query->execute()->fetchAll();
-    pager_default_initialize(\count($ids), $this->configuration['limit']);
+    $this->pagerManager->createPager(\count($ids), $this->configuration['limit']);
     $variables['pager'] = [
       '#type' => 'pager',
       '#quantity' => '3',
     ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
+    $query->pager($this->configuration['limit']);
 
     $rows = $query->execute()->fetchAll();
 

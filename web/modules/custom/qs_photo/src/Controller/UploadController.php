@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_photo\Controller;
 
+use Drupal\Component\Utility\Environment;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -121,7 +122,7 @@ class UploadController extends ControllerBase {
   public function upload(Request $request) {
     $upload_validators = [
       'file_validate_extensions' => [$this->extensions],
-      'file_validate_size' => [file_upload_max_size()],
+      'file_validate_size' => [Environment::getUploadMaxSize()],
       'file_validate_image_max_resolution' => ['5000x5000'],
     ];
 

@@ -214,7 +214,7 @@ function qs_user_cancel_url(UserInterface $account, array $options = []) {
     'language' => \Drupal::languageManager()->getLanguage($langcode),
   ];
 
-  return \Drupal::url('qs_auth.cancel.confirm', [
+  return Url::fromRoute('qs_auth.cancel.confirm', [
     'user' => $account->id(),
     'timestamp' => $timestamp,
     'hashed_pass' => user_pass_rehash($account, $timestamp),

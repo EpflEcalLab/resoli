@@ -65,13 +65,13 @@ final class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase 
     $start = DrupalDateTime::createFromFormat('Y-m-d', '2016-07-27');
     $end = DrupalDateTime::createFromFormat('Y-m-d', '2020-09-29');
 
-    self::assertInternalType('array', $events);
+    self::assertIsArray($events);
     self::assertCount(9, $events);
 
     self::markTestIncomplete('getSubscriptionByDates use MySQL features. Figure out how to make tests that fail on any other database engine.');
 
     $privilegies = $this->badgeManager->getSubscriptionByDates($community[1], $start, $end);
-    self::assertInternalType('array', $privilegies);
+    self::assertIsArray($privilegies);
   }
 
 }

@@ -96,7 +96,7 @@ final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
     $end = DrupalDateTime::createFromFormat('Y-m-d', '2020-09-29');
 
     $events = $this->badgeManager->countEventsByDates($communities[1], $start, $end);
-    self::assertInternalType('array', $events);
+    self::assertIsArray($events);
     self::assertSame([
       '2016-09-28' => '1',
       '2019-08-28' => '2',
@@ -143,7 +143,7 @@ final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
     $end = DrupalDateTime::createFromFormat('Y-m-d', '2017-09-29');
 
     $events = $this->badgeManager->countEventsByDates($communities[1], $start, $end);
-    self::assertInternalType('array', $events);
+    self::assertIsArray($events);
     self::assertSame([
       '2016-09-28' => '2',
     ], $events);

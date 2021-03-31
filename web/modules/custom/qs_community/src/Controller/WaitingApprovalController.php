@@ -104,12 +104,12 @@ class WaitingApprovalController extends ControllerBase {
     $query = $this->privilegeManager->queryWaitingApproval($community);
 
     $ids = $query->execute()->fetchAll();
-    $this->pagerManager->createPager(\count($ids), $this->configuration['limit']);
+    $pager = $this->pagerManager->createPager(\count($ids), $this->configuration['limit']);
     $variables['pager'] = [
       '#type' => 'pager',
       '#quantity' => '3',
     ];
-    $query->pager($this->configuration['limit']);
+    $query->range($pager->getCurrentPage() * $this->configuration['limit'], $this->configuration['limit']);
 
     $rows = $query->execute()->fetchAll();
 

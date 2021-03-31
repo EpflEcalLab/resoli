@@ -104,8 +104,8 @@ class SubscribersController extends ControllerBase {
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
     $container->get('qs_subscription.subscription_manager'),
-    $container->get('pager.manager'),
-    $container->get('qs_export.excel')
+    $container->get('qs_export.excel'),
+    $container->get('pager.manager')
     );
   }
 
@@ -194,12 +194,12 @@ class SubscribersController extends ControllerBase {
     }
     $variables['mailto'] = $mailto;
 
-    $this->pagerManager->createPager(\count($rows), $this->configuration['limit']);
+    $pager = $this->pagerManager->createPager(\count($rows), $this->configuration['limit']);
     $variables['pager'] = [
       '#type' => 'pager',
       '#quantity' => '3',
     ];
-    $query->pager($this->configuration['limit']);
+    $query->range($pager->getCurrentPage() * $this->configuration['limit'], $this->configuration['limit']);
     $rows = $query->execute()->fetchAll();
 
     $ids = [];

@@ -2,6 +2,7 @@
 
 namespace Drupal\qs_auth\Controller;
 
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -134,12 +135,11 @@ class AccountController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('user.data'),
-    $container->get('datetime.time')
-
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('entity_type.manager'),
+      $container->get('user.data'),
+      $container->get('datetime.time')
     );
   }
 

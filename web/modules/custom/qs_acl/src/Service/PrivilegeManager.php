@@ -253,7 +253,7 @@ class PrivilegeManager {
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param int $pager
+   * @param int $limit
    *   The limit of members. NULL to get all users.
    * @param array $filters
    *   Conditions to apply on the search.
@@ -263,7 +263,7 @@ class PrivilegeManager {
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50, array $filters = [], $exclude_current_user = TRUE) {
+  public function queryMembersWithPrivileges(EntityInterface $entity, $limit = 50, array $filters = [], $exclude_current_user = TRUE) {
     // We have to get paginated users before getting privileges by users
     // because a user could have 1 or many privileges (so it's not paginable).
     // Query user(s) with privilege(s) in the given entity.
@@ -316,10 +316,10 @@ class PrivilegeManager {
     $query->groupBy('firstname.field_firstname_value');
     $query->groupBy('lastname.field_lastname_value');
 
-    if ($pager) {
+    if ($limit) {
       $ids = $query->execute()->fetchAll();
-      $this->pagerManager->createPager(\count($ids), $pager);
-      $query->pager($pager);
+      $pager = $this->pagerManager->createPager(\count($ids), $limit);
+      $query->range($pager->getCurrentPage() * $limit, $limit);
     }
 
     $rows = $query->execute()->fetchAll();

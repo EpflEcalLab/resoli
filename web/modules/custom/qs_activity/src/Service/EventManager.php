@@ -5,7 +5,6 @@ namespace Drupal\qs_activity\Service;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
@@ -48,13 +47,6 @@ class EventManager {
   protected $privilegeManager;
 
   /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
-
-  /**
    * The Subscription Manager.
    *
    * @var \Drupal\qs_subscription\Service\SubscriptionManager
@@ -71,10 +63,9 @@ class EventManager {
   /**
    * Class constructor.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $connection, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail) {
     $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->userStorage = $entity_type_manager->getStorage('user');
-    $this->queryFactory = $query_factory;
     $this->connection = $connection;
     $this->privilegeManager = $privilege_manager;
     $this->subscriptionManager = $subscription_manager;
@@ -147,7 +138,7 @@ class EventManager {
    */
   public function getAll(NodeInterface $activity) {
     // Get every activity that belongs to the current community.
-    $query = $this->queryFactory->get('node')
+    $query = $this->nodeStorage->getQuery()
       ->condition('type', 'event')
       ->condition('field_activity', $activity->id());
 
@@ -174,7 +165,7 @@ class EventManager {
     $now = new DrupalDateTime();
 
     // Get every activity that belongs to the current community.
-    $query = $this->queryFactory->get('node')
+    $query = $this->nodeStorage->getQuery()
       ->condition('type', 'event')
       ->condition('field_end_at', $now, '>')
       ->condition('status', TRUE)
@@ -210,7 +201,7 @@ class EventManager {
     $today->setTime(23, 59, 59);
 
     // Get every activity that belongs to the current community.
-    $query = $this->queryFactory->get('node')
+    $query = $this->nodeStorage->getQuery()
       ->condition('type', 'event')
       ->condition('field_end_at', $today->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<')
       ->condition('status', TRUE)

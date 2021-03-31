@@ -27,13 +27,6 @@ class AccountController extends ControllerBase {
   protected $acl;
 
   /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
-
-  /**
    * The user data service.
    *
    * @var \Drupal\user\UserDataInterface
@@ -50,10 +43,9 @@ class AccountController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, UserDataInterface $user_data) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, UserDataInterface $user_data) {
     $this->acl = $acl;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
-    $this->queryFactory = $query_factory;
     $this->userData = $user_data;
   }
 
@@ -138,7 +130,6 @@ class AccountController extends ControllerBase {
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
     $container->get('entity_type.manager'),
-    $container->get('entity.query'),
     $container->get('user.data')
     );
   }

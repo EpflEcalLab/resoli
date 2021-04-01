@@ -135,10 +135,11 @@ class FormContext extends RawDrupalContext {
    */
   public function createFileToBeUploaded($number, $extension) {
     $random = new Random();
+    /** @var \Drupal\Core\File\FileSystemInterface $fso */
     $fso = \Drupal::service('file_system');
 
     $dirname = 'public://behat-files/';
-    \Drupal\Core\File\FileSystemInterface::prepareDirectory($dirname, FileSystemInterface::CREATE_DIRECTORY);
+    $fso->prepareDirectory($dirname, FileSystemInterface::CREATE_DIRECTORY);
 
     for ($i = 0; $i < $number; $i++) {
       $destination = $dirname . $random->name(10, TRUE) . '.' . $extension;

@@ -4,7 +4,6 @@ namespace Drupal\qs_acl\Service;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\node\NodeInterface;
@@ -16,12 +15,6 @@ use Drupal\user\UserInterface;
  */
 class AccessControl {
 
-  /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
   /**
    * The current active user.
    *
@@ -46,11 +39,10 @@ class AccessControl {
   /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager) {
     $this->currentUser = $currentUser;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
-    $this->queryFactory = $query_factory;
   }
 
   /**
@@ -77,7 +69,7 @@ class AccessControl {
       return $this->termStorage->loadTree('communities', 0, NULL, TRUE);
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $user->id());
@@ -119,7 +111,7 @@ class AccessControl {
       $user = $account;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $user->id());
 
@@ -220,7 +212,7 @@ class AccessControl {
       return $this->hasAccessCommunity($community, $user);
     }
     // Activity Members+ have access to photo.
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -258,7 +250,7 @@ class AccessControl {
       return TRUE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -296,7 +288,7 @@ class AccessControl {
       return TRUE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('entity', $community->id())
@@ -426,7 +418,7 @@ class AccessControl {
     }
 
     // If the activity is only open to members, check the user has at least one.
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -486,7 +478,7 @@ class AccessControl {
       return TRUE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('entity', $community->id())
@@ -525,7 +517,7 @@ class AccessControl {
       return TRUE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -565,7 +557,7 @@ class AccessControl {
     }
 
     // Activity Members+ have access to upload photo by default.
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -583,7 +575,7 @@ class AccessControl {
     // Check activity is allow member to publish photos.
     if ((bool) $activity->field_member_create_gallery->value === TRUE) {
       // Activity Members+ have access to upload photo by default.
-      $query = $this->queryFactory->get('privilege')
+      $query = $this->privilegeStorage->getQuery()
         ->condition('status', 1)
         ->condition('bundle', 'node')
         ->condition('entity', $activity->id())
@@ -646,7 +638,7 @@ class AccessControl {
       return FALSE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 0)
       ->condition('entity', $community->id())
       ->condition('user', $user->id());
@@ -672,7 +664,7 @@ class AccessControl {
    *   Number of communities the user belongs to.
    */
   private function countCommunitiesByUser(AccountInterface $account) {
-    $query = $this->queryFactory->getAggregate('privilege')
+    $query = $this->privilegeStorage->getAggregateQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $account->id())
@@ -702,7 +694,7 @@ class AccessControl {
    *   Does the user has access on the community.
    */
   private function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $account->id())

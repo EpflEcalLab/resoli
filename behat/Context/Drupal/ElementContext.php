@@ -3,13 +3,12 @@
 namespace Drupal\Behat\Context\Drupal;
 
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * Defines Element features from the specific context.
  */
-class ElementContext extends RawDrupalContext implements SnippetAcceptingContext {
+class ElementContext extends RawDrupalContext {
 
   /**
    * Verify a given link is visible with a given href attr.

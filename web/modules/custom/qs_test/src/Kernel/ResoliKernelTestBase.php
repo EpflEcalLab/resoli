@@ -5,13 +5,13 @@ namespace Drupal\qs_test\Kernel;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
-use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
 use Drupal\node\NodeInterface;
 use Drupal\qs_test\NodeTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\qs_test\UserTestTrait;
 use Drupal\taxonomy\TermInterface;
+use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
 
 /**
  * Provides a base class for Quartiers Solidaires functional tests.

@@ -3,7 +3,6 @@
 namespace Drupal\qs_auth\Service;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\taxonomy\TermInterface;
@@ -21,13 +20,6 @@ class Account {
    * @var \Drupal\Core\Mail\MailManagerInterface
    */
   protected $mail;
-
-  /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
 
   /**
    * The user authentication.
@@ -60,12 +52,11 @@ class Account {
   /**
    * Class constructor.
    */
-  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, QueryFactory $query_factory, PrivilegeManager $privilege_manager) {
+  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, PrivilegeManager $privilege_manager) {
     $this->mail = $mail;
     $this->userStorage = $entity_type_manager->getStorage('user');
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->userAuth = $user_auth;
-    $this->queryFactory = $query_factory;
     $this->privilegeManager = $privilege_manager;
   }
 

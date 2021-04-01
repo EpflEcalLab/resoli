@@ -203,7 +203,7 @@ class CommunitiesApplyForm extends FormBase {
     // Send to community managers a mail with the new request.
     $this->account->sendCommunityManagersApplyReq($account, $community);
 
-    drupal_set_message($this->t('qs_auth.communities.apply.success @community', [
+    $this->messenger()->addMessage($this->t('qs_auth.communities.apply.success @community', [
       '@community' => $community->getName(),
     ]));
 

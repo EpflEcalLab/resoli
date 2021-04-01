@@ -172,7 +172,7 @@ class CommentForm extends FormBasic {
       $photo->save();
     }
 
-    drupal_set_message($this->t('qs_photo.form.comment.success @number @activity', [
+    $this->messenger()->addMessage($this->t('qs_photo.form.comment.success @number @activity', [
       '@number' => \count($photos),
       '@activity' => $activity->getTitle(),
     ]));

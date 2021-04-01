@@ -205,7 +205,7 @@ class AccountEditForm extends FormBase {
 
     $user = $this->account->update($user, $fields);
 
-    drupal_set_message($this->t('qs_supervisor.account.form.edit.success @firstname, @lastname, @mail', [
+    $this->messenger()->addMessage($this->t('qs_supervisor.account.form.edit.success @firstname, @lastname, @mail', [
       '@firstname' => $user->field_firstname->value,
       '@lastname' => $user->field_lastname->value,
       '@mail' => $user->mail->value,

@@ -112,7 +112,7 @@ class EventDeleteForm extends EventEditFormBase {
 
     $this->eventManager->sendDeleted($event, $this->currentUser->getAccount());
 
-    drupal_set_message($this->t('qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end', [
+    $this->messenger()->addMessage($this->t('qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end', [
       '@event' => $event->getTitle(),
       '@date_start' => $event->field_start_at->date->format('j F Y'),
       '@hour_start' => $event->field_start_at->date->format('H\hi'),

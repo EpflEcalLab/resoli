@@ -154,7 +154,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     $account = $this->userStorage->load($form_state->getValue('member'));
 
     $this->privilegeManager->create('activity_members', $activity, $account);
-    drupal_set_message($this->t('qs_activity.activities.form.add.member.success @activity', [
+    $this->messenger()->addMessage($this->t('qs_activity.activities.form.add.member.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 

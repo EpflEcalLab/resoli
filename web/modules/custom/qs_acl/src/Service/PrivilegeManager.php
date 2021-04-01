@@ -7,7 +7,7 @@ use Drupal\Core\Database\Query\ConditionInterface;
 use Drupal\Core\Database\Query\SelectInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Entity\Privilege;
@@ -25,11 +25,12 @@ class PrivilegeManager {
   protected $connection;
 
   /**
-   * The entity query factory.
+   * The pager manager.
    *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
+   * @var \Drupal\Core\Pager\PagerManagerInterface
    */
-  protected $queryFactory;
+  protected $pagerManager;
+
   /**
    * The current active user.
    *
@@ -47,11 +48,11 @@ class PrivilegeManager {
   /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, Connection $connection, PagerManagerInterface $pager_manager) {
     $this->currentUser = $currentUser;
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
-    $this->queryFactory = $query_factory;
     $this->connection = $connection;
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -158,7 +159,7 @@ class PrivilegeManager {
       $user = $account;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', $entity->getEntityTypeId())
       ->condition('user', $user->id())
@@ -211,7 +212,7 @@ class PrivilegeManager {
       $user = $account;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', $status)
       ->condition('user', $user->id())
       ->condition('entity', $entities, 'IN');
@@ -252,7 +253,7 @@ class PrivilegeManager {
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param int $pager
+   * @param int $limit
    *   The limit of members. NULL to get all users.
    * @param array $filters
    *   Conditions to apply on the search.
@@ -262,7 +263,7 @@ class PrivilegeManager {
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50, array $filters = [], $exclude_current_user = TRUE) {
+  public function queryMembersWithPrivileges(EntityInterface $entity, $limit = 50, array $filters = [], $exclude_current_user = TRUE) {
     // We have to get paginated users before getting privileges by users
     // because a user could have 1 or many privileges (so it's not paginable).
     // Query user(s) with privilege(s) in the given entity.
@@ -315,11 +316,10 @@ class PrivilegeManager {
     $query->groupBy('firstname.field_firstname_value');
     $query->groupBy('lastname.field_lastname_value');
 
-    if ($pager) {
+    if ($limit) {
       $ids = $query->execute()->fetchAll();
-      pager_default_initialize(\count($ids), $pager);
-      $page = pager_find_page();
-      $query->range($page * $pager, $pager);
+      $pager = $this->pagerManager->createPager(\count($ids), $limit);
+      $query->range($pager->getCurrentPage() * $limit, $limit);
     }
 
     $rows = $query->execute()->fetchAll();

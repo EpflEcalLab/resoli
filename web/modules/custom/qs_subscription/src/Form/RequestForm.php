@@ -246,11 +246,11 @@ class RequestForm extends FormBase {
     if (mb_strpos($trigger['#name'], 'request_subscription') !== FALSE) {
       $this->subscriptionManager->request($event);
 
-      drupal_set_message($this->t('qs_subscription.request.form.success @event', [
+      $this->messenger()->addMessage($this->t('qs_subscription.request.form.success @event', [
         '@event' => $event->getTitle(),
       ]));
 
-      drupal_set_message($this->t('qs_subscription.request.form.success @event', [
+      $this->messenger()->addMessage($this->t('qs_subscription.request.form.success @event', [
         '@event' => $event->getTitle(),
       ]));
     }
@@ -260,7 +260,7 @@ class RequestForm extends FormBase {
       $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
       $this->subscriptionManager->confirm($subscription);
 
-      drupal_set_message($this->t('qs_subscription.direct_request.form.success @event', [
+      $this->messenger()->addMessage($this->t('qs_subscription.direct_request.form.success @event', [
         '@event' => $event->getTitle(),
       ]));
     }

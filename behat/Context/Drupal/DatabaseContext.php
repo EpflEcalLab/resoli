@@ -2,21 +2,13 @@
 
 namespace Drupal\Behat\Context\Drupal;
 
-use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Drupal\Component\Utility\Random;
+use Drupal\DrupalExtension\Context\RawDrupalContext;
 
 /**
  * Defines Database features from the specific context.
  */
-class DatabaseContext extends RawDrupalContext implements SnippetAcceptingContext {
-
-  /**
-   * The database dump.
-   *
-   * @var string|null
-   */
-  protected static $dump = NULL;
+class DatabaseContext extends RawDrupalContext {
 
   /**
    * The dump path directory from the root.
@@ -24,6 +16,13 @@ class DatabaseContext extends RawDrupalContext implements SnippetAcceptingContex
    * @var string
    */
   public $dumpPath;
+
+  /**
+   * The last dump created.
+   *
+   * @var string
+   */
+  protected static $dump = NULL;
 
   /**
    * Initializes context.
@@ -66,18 +65,20 @@ class DatabaseContext extends RawDrupalContext implements SnippetAcceptingContex
    * @param string $filename
    *   The filename.
    *
+   * @throws \Exception
+   *
    * @return string
    *   The dump file path.
    */
   private function dumpTo($filename) {
     if (!is_dir($this->dumpPath)) {
-      throw new \Exception(sprintf('The dump directory "%s" does not exists.', $this->dumpPath));
+      throw new \RuntimeException(sprintf('The dump directory "%s" does not exists.', $this->dumpPath));
     }
 
-    $file_and_path = $this->dumpPath . DIRECTORY_SEPARATOR . $filename . '.sql';
+    $file_and_path = $this->dumpPath . \DIRECTORY_SEPARATOR . $filename . '.sql';
 
-    echo sprintf("\e[0;34mSQL dump: %s\e[0m\n", $file_and_path);
-    exec("../vendor/bin/drush sql-dump --result-file=$file_and_path -y");
+    print sprintf("\e[0;34mSQL dump: %s\e[0m\n", $file_and_path);
+    exec("../vendor/bin/drush sql-dump --result-file={$file_and_path} -y");
 
     return $file_and_path;
   }
@@ -87,13 +88,15 @@ class DatabaseContext extends RawDrupalContext implements SnippetAcceptingContex
    *
    * @param string $file_and_path
    *   The filename & path.
+   *
+   * @throws \Exception
    */
   private function loadFrom($file_and_path) {
     if (!is_file($file_and_path)) {
-      throw new \Exception(sprintf('The dump file "%s" does not exists.', $file_and_path));
+      throw new \RuntimeException(sprintf('The dump file "%s" does not exists.', $file_and_path));
     }
 
-    exec("../vendor/bin/drush sql-cli < $file_and_path");
+    exec("../vendor/bin/drush sql-cli < {$file_and_path}");
     unlink($file_and_path);
   }
 

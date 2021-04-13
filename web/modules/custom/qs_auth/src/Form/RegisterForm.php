@@ -275,7 +275,7 @@ class RegisterForm extends FormBase {
     // Send to community managers a mail with the new request.
     $this->account->sendCommunityManagersApplyReq($user, $community);
 
-    drupal_set_message($this->t('qs_auth.form.register.success @firstname @lastname @mail', [
+    $this->messenger()->addMessage($this->t('qs_auth.form.register.success @firstname @lastname @mail', [
       '@firstname' => $user->field_firstname->value,
       '@lastname' => $user->field_lastname->value,
       '@mail' => $user->getEmail(),

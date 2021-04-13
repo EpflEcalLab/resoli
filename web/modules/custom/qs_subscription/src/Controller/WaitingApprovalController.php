@@ -4,6 +4,7 @@ namespace Drupal\qs_subscription\Controller;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
@@ -14,6 +15,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Collection of pending subscriptions for an event.
  */
 class WaitingApprovalController extends ControllerBase {
+
+  /**
+   * The pager manager.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
+   */
+  protected $pagerManager;
 
   /**
    * Access Control Service.
@@ -44,10 +52,11 @@ class WaitingApprovalController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager) {
+  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager, PagerManagerInterface $pager_manager) {
     $this->acl = $acl;
     $this->subscriptionManager = $subscription_manager;
     $this->subscriptionStorage = $this->entityTypeManager()->getStorage('subscription');
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -80,9 +89,10 @@ class WaitingApprovalController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_subscription.subscription_manager')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_subscription.subscription_manager'),
+      $container->get('pager.manager')
     );
   }
 
@@ -104,13 +114,12 @@ class WaitingApprovalController extends ControllerBase {
     }
     $variables['mailto'] = $mailto;
 
-    pager_default_initialize(\count($rows), $this->configuration['limit']);
+    $pager = $this->pagerManager->createPager(\count($rows), $this->configuration['limit']);
     $variables['pager'] = [
       '#type' => 'pager',
       '#quantity' => '3',
     ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
+    $query->range($pager->getCurrentPage() * $this->configuration['limit'], $this->configuration['limit']);
 
     $rows = $query->execute()->fetchAll();
 

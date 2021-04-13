@@ -3,12 +3,11 @@
 namespace Drupal\Behat\Context\Resoli;
 
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Defines Login application features from the specific context.
  */
-class LoginContext extends RawDrupalContext implements SnippetAcceptingContext {
+class LoginContext extends RawDrupalContext {
 
   /**
    * Default accounts with password.
@@ -117,16 +116,16 @@ class LoginContext extends RawDrupalContext implements SnippetAcceptingContext {
    *
    * @Given I am logged in as user :username
    *
-   * @throws Exception
+   * @throws \Exception
    */
-  public function iAmLoggedInAsUser($username) {
+  public function iAmLoggedInAsUser($username, $url = 'user/login'): void {
     if (!isset($this->accounts[$username])) {
-      throw new \Exception(sprintf('user "%s" not found.', $username));
+      throw new \RuntimeException(sprintf('user "%s" not found.', $username));
     }
 
     $account = $this->accounts[$username];
 
-    $this->visitPath('user/login');
+    $this->visitPath($url);
     $this->getSession()->getPage()->fillField('name', $account['username']);
     $this->getSession()->getPage()->fillField('pass', $account['pass']);
     $this->getSession()->getPage()->pressButton('edit-submit');

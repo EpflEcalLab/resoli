@@ -3,12 +3,11 @@
 namespace Drupal\Behat\Context\Drupal;
 
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Defines Json features from the specific context.
  */
-class JsonContext extends RawDrupalContext implements SnippetAcceptingContext {
+class JsonContext extends RawDrupalContext {
 
   /**
    * Ensure the JSON response contain the given field.

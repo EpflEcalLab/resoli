@@ -13,7 +13,7 @@ use DateTimeZone;
  *
  * @codingStandardsIgnoreFile
  */
-class EventFormsContext extends RawDrupalContext implements SnippetAcceptingContext {
+class EventFormsContext extends RawDrupalContext {
 
   /**
    * Fill the Event Add Form.

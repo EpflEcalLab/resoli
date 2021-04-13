@@ -5,6 +5,7 @@ namespace Drupal\qs_subscription\Controller;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
@@ -24,6 +25,13 @@ class SubscribersController extends ControllerBase {
    * @var \Drupal\qs_export\Excel
    */
   protected $excelExporter;
+
+  /**
+   * The pager manager.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
+   */
+  protected $pagerManager;
 
   /**
    * The user Storage.
@@ -54,12 +62,13 @@ class SubscribersController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager, Excel $excel_exporter) {
+  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager, Excel $excel_exporter, PagerManagerInterface $pager_manager) {
     $this->acl = $acl;
     $this->subscriptionManager = $subscription_manager;
     $this->userStorage = $this->entityTypeManager()->getStorage('user');
     $this->subscriptionStorage = $this->entityTypeManager()->getStorage('subscription');
     $this->excelExporter = $excel_exporter;
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -95,7 +104,8 @@ class SubscribersController extends ControllerBase {
     // Load customs services used in this class.
     $container->get('qs_acl.access_control'),
     $container->get('qs_subscription.subscription_manager'),
-    $container->get('qs_export.excel')
+    $container->get('qs_export.excel'),
+    $container->get('pager.manager')
     );
   }
 
@@ -184,13 +194,12 @@ class SubscribersController extends ControllerBase {
     }
     $variables['mailto'] = $mailto;
 
-    pager_default_initialize(\count($rows), $this->configuration['limit']);
+    $pager = $this->pagerManager->createPager(\count($rows), $this->configuration['limit']);
     $variables['pager'] = [
       '#type' => 'pager',
       '#quantity' => '3',
     ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
+    $query->range($pager->getCurrentPage() * $this->configuration['limit'], $this->configuration['limit']);
     $rows = $query->execute()->fetchAll();
 
     $ids = [];

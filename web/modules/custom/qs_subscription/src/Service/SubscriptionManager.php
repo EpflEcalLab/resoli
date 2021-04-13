@@ -6,7 +6,6 @@ use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
@@ -57,13 +56,6 @@ class SubscriptionManager {
   protected $privilegeManager;
 
   /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
-
-  /**
    * The user Storage.
    *
    * @var \Drupal\user\UserStorageInterface
@@ -86,12 +78,11 @@ class SubscriptionManager {
   /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection, CacheTagsInvalidatorInterface $cache_tags_invalidator, PrivilegeManager $privilege_manager, MailManagerInterface $mail) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, Connection $connection, CacheTagsInvalidatorInterface $cache_tags_invalidator, PrivilegeManager $privilege_manager, MailManagerInterface $mail) {
     $this->currentUser = $currentUser;
     $this->subscriptionStorage = $entity_type_manager->getStorage('subscription');
     $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->userStorage = $entity_type_manager->getStorage('user');
-    $this->queryFactory = $query_factory;
     $this->connection = $connection;
     $this->cacheTagsInvalidator = $cache_tags_invalidator;
     $this->privilegeManager = $privilege_manager;

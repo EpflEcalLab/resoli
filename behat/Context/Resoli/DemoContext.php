@@ -3,12 +3,11 @@
 namespace Drupal\Behat\Context\Resoli;
 
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Defines application features from the demo context.
  */
-class DemoContext extends RawDrupalContext implements SnippetAcceptingContext {
+class DemoContext extends RawDrupalContext {
 
   /**
    * Enable Demo mode.

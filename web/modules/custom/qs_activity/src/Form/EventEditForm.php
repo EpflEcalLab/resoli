@@ -286,7 +286,7 @@ class EventEditForm extends EventEditFormBase {
       $this->eventManager->sendUpdated($original_event, $updated_event, $this->currentUser->getAccount());
     }
 
-    drupal_set_message($this->t('qs_activity.events.form.edit.success @event', [
+    $this->messenger()->addMessage($this->t('qs_activity.events.form.edit.success @event', [
       '@event' => $event->getTitle(),
     ]));
 

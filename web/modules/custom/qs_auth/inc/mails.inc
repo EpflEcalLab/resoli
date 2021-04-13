@@ -207,14 +207,14 @@ function qs_auth_mail_alter(&$message) {
  * @see \Drupal\user\Controller\UserController::confirmCancel()
  */
 function qs_user_cancel_url(UserInterface $account, array $options = []) {
-  $timestamp = REQUEST_TIME;
-  $langcode = isset($options['langcode']) ? $options['langcode'] : $account->getPreferredLangcode();
+  $timestamp = \Drupal::time()->getRequestTime();
+  $langcode = $options['langcode'] ?? $account->getPreferredLangcode();
   $url_options = [
     'absolute' => TRUE,
     'language' => \Drupal::languageManager()->getLanguage($langcode),
   ];
 
-  return \Drupal::url('qs_auth.cancel.confirm', [
+  return Url::fromRoute('qs_auth.cancel.confirm', [
     'user' => $account->id(),
     'timestamp' => $timestamp,
     'hashed_pass' => user_pass_rehash($account, $timestamp),

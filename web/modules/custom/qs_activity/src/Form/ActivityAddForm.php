@@ -422,7 +422,7 @@ class ActivityAddForm extends FormBasic {
     // Add the current user as the first organizer of this activity.
     $this->privilegeManager->create('activity_organizers', $activity, $this->currentUser);
 
-    drupal_set_message($this->t('qs_activity.activities.form.add.success @activity', [
+    $this->messenger()->addMessage($this->t('qs_activity.activities.form.add.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 

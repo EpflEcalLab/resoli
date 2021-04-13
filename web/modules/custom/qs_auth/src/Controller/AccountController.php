@@ -2,10 +2,10 @@
 
 namespace Drupal\qs_auth\Controller;
 
-use Drupal\Component\Utility\Crypt;
+use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
+use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\user\UserDataInterface;
 use Drupal\user\UserInterface;
@@ -27,11 +27,11 @@ class AccountController extends ControllerBase {
   protected $acl;
 
   /**
-   * The entity query factory.
+   * The time service.
    *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
+   * @var \Drupal\Component\Datetime\TimeInterface
    */
-  protected $queryFactory;
+  protected $time;
 
   /**
    * The user data service.
@@ -50,11 +50,11 @@ class AccountController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, UserDataInterface $user_data) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, UserDataInterface $user_data, TimeInterface $time) {
     $this->acl = $acl;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
-    $this->queryFactory = $query_factory;
     $this->userData = $user_data;
+    $this->time = $time;
   }
 
   /**
@@ -103,14 +103,14 @@ class AccountController extends ControllerBase {
   public function confirmCancel(UserInterface $user, $timestamp = 0, $hashed_pass = '') {
     // Time out in seconds until cancel URL expires; 24 hours = 86400 seconds.
     $timeout = 86400;
-    $current = REQUEST_TIME;
+    $current = $this->time->getRequestTime();
 
     // Basic validation of arguments.
     $account_data = $this->userData->get('user', $user->id());
 
     if (isset($account_data['cancel_method']) && !empty($timestamp) && !empty($hashed_pass)) {
       // Validate expiration and hashed password/login.
-      if ($timestamp <= $current && $current - $timestamp < $timeout && $user->id() && $timestamp >= $user->getLastLoginTime() && Crypt::hashEquals($hashed_pass, user_pass_rehash($user, $timestamp))) {
+      if ($timestamp <= $current && $current - $timestamp < $timeout && $user->id() && $timestamp >= $user->getLastLoginTime() && hash_equals($hashed_pass, user_pass_rehash($user, $timestamp))) {
         $edit = [
           'user_cancel_notify' => isset($account_data['cancel_notify']) ? $account_data['cancel_notify'] : $this->config('user.settings')->get('notify.status_canceled'),
         ];
@@ -121,7 +121,7 @@ class AccountController extends ControllerBase {
         ];
       }
 
-      drupal_set_message($this->t('qs.cancel.confirm.expired'), 'error');
+      $this->messenger()->addMessage($this->t('qs.cancel.confirm.expired'), MessengerInterface::TYPE_ERROR);
 
       return $this->redirect('entity.user.cancel_form', ['user' => $user->id()], ['absolute' => TRUE]);
     }
@@ -135,11 +135,11 @@ class AccountController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('entity.query'),
-    $container->get('user.data')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('entity_type.manager'),
+      $container->get('user.data'),
+      $container->get('datetime.time')
     );
   }
 

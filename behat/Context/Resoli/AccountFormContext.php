@@ -3,7 +3,6 @@
 namespace Drupal\Behat\Context\Resoli;
 
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\TableNode;
 
 /**
@@ -11,7 +10,7 @@ use Behat\Gherkin\Node\TableNode;
  *
  * @codingStandardsIgnoreFile
  */
-class AccountFormContext extends RawDrupalContext implements SnippetAcceptingContext {
+class AccountFormContext extends RawDrupalContext {
 
   /**
    * Fill the Account Form.

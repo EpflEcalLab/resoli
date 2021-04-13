@@ -1,4 +1,4 @@
 services:
   qs_subscription.subscription_manager:
     class: Drupal\qs_subscription\Service\SubscriptionManager
-    arguments: ['@current_user', '@entity_type.manager', '@entity.query', '@database', '@cache_tags.invalidator', '@qs_acl.privilege_manager', '@plugin.manager.mail']
+    arguments: ['@current_user', '@entity_type.manager', '@database', '@cache_tags.invalidator', '@qs_acl.privilege_manager', '@plugin.manager.mail']

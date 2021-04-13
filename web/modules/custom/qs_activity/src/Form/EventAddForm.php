@@ -375,7 +375,7 @@ class EventAddForm extends FormBasic {
 
     // Create the new event.
     $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
-    drupal_set_message($this->t('qs_activity.events.form.add.success'));
+    $this->messenger()->addMessage($this->t('qs_activity.events.form.add.success'));
     $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
 
     // Get the current user activitiy's privilege to this event.

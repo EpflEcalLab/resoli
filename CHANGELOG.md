@@ -8,6 +8,7 @@
  - move Code Styles checking from Codeship to Github Actions
  - update Bundle from 1.16.0 => 2.1.4
  - update Capistrano deployment steps
+ - masive codebase update to remove deprecation notices
  - update Node from 10 => 12
 
 ## 1.5.6 (2020-11-19)

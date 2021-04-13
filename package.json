@@ -4,7 +4,7 @@
   "license": "MIT",
   "main": "index.html",
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "scripts": {
     "start": "toolbox serve",
@@ -42,6 +42,7 @@
     "extends": "stylelint-config-standard",
     "rules": {
       "at-rule-no-vendor-prefix": true,
+      "at-rule-no-unknown": null,
       "media-feature-name-no-vendor-prefix": true,
       "property-no-vendor-prefix": true,
       "selector-no-vendor-prefix": true,

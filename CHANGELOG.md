@@ -9,6 +9,7 @@
  - update Bundle from 1.16.0 => 2.1.4
  - update Capistrano deployment steps
  - masive codebase update to remove deprecation notices
+ - update Node from 10 => 12
 
 ## 1.5.6 (2020-11-19)
  - fix Event Export into Excel file which trigger crash on empty column "Contact"

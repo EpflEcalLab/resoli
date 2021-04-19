@@ -1,6 +1,8 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+
+## 1.6.0 (2021-04-19)
  - update Docker to PHP7.4, Node 10 & MariaDB 10.4
  - update Drupal from 8.9.7 to 8.9.13 with all dependencies
  - modernize the Code Styles integration

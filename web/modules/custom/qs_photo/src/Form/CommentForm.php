@@ -4,21 +4,14 @@ namespace Drupal\qs_photo\Form;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * CommentForm class.
+ * Form to comment photos by batch.
  */
 class CommentForm extends FormBasic {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
 
   /**
    * The node Storage.
@@ -28,6 +21,13 @@ class CommentForm extends FormBasic {
   protected $nodeStorage;
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -35,15 +35,8 @@ class CommentForm extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl         = $this->getAcl();
+    $this->acl = $this->getAcl();
     $this->nodeStorage = $this->getNodeStorage();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_photo_comments_form';
   }
 
   /**
@@ -61,6 +54,7 @@ class CommentForm extends FormBasic {
     $access = AccessResult::allowed();
 
     $photos_params = $this->getRequest()->query->get('photos');
+
     if (!$photos_params) {
       return AccessResult::forbidden();
     }
@@ -72,24 +66,27 @@ class CommentForm extends FormBasic {
       $event_activity = $photo->field_event->entity->field_activity->entity;
 
       // The photo doesn't belongs to the same activity as url.
-      if ($event_activity->id() != $activity->id()) {
+      if ($event_activity->id() !== $activity->id()) {
         $access = AccessResult::forbidden();
+
         break;
       }
 
       // Has not write access for photos.
       if (!$this->acl->hasWriteAccessPhoto($activity)) {
         $access = AccessResult::forbidden();
+
         break;
       }
     }
+
     return $access;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
     $form['#attributes']['title'] = $this->t('qs_photo.form.comment.title_form');
     $form['#tree'] = TRUE;
@@ -105,8 +102,8 @@ class CommentForm extends FormBasic {
     ];
 
     $form['#floating_buttons'][] = [
-      'icon'   => 'pencil',
-      'label'  => $this->t('qs_photo.form.comment.title'),
+      'icon' => 'pencil',
+      'label' => $this->t('qs_photo.form.comment.title'),
       'active' => TRUE,
     ];
 
@@ -124,7 +121,7 @@ class CommentForm extends FormBasic {
       $photo = $this->nodeStorage->load($nid);
 
       $form['photos'][$nid] = [
-        '#type'     => 'textarea',
+        '#type' => 'textarea',
         '#required' => FALSE,
         '#theme' => ['textarea__photo'],
         '#placeholder' => $this->t('qs_photo.form.comment.photo_comment_placeholder'),
@@ -156,7 +153,9 @@ class CommentForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {}
+  public function getFormId() {
+    return 'qs_photo_comments_form';
+  }
 
   /**
    * {@inheritdoc}
@@ -166,21 +165,28 @@ class CommentForm extends FormBasic {
     $user = $this->getCurrentUser();
 
     $photos = $form_state->getValue('photos');
+
     foreach ($photos as $photo_nid => $comment) {
       $photo = $this->nodeStorage->load($photo_nid);
       $photo->set('body', $comment);
       $photo->save();
     }
 
-    drupal_set_message($this->t("qs_photo.form.comment.success @number @activity", [
-      '@number'   => count($photos),
-      '@activity'   => $activity->getTitle(),
+    $this->messenger()->addMessage($this->t('qs_photo.form.comment.success @number @activity', [
+      '@number' => \count($photos),
+      '@activity' => $activity->getTitle(),
     ]));
 
     $form_state->setRedirect('qs_photo.user.form.manage', [
       'activity' => $activity->id(),
       'user' => $user->id(),
     ]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
   }
 
 }

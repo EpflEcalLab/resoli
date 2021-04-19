@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityInlineAddMemberForm class.
+ * Activity form use by privileged user to manually add member to an activity.
  */
 class ActivityInlineAddMemberForm extends ActivityEditFormBase {
 
@@ -25,16 +25,9 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->currentUser      = $this->getCurrentUser();
-    $this->userStorage      = $this->getUserStorage();
+    $this->currentUser = $this->getCurrentUser();
+    $this->userStorage = $this->getUserStorage();
     $this->privilegeManager = $this->getPrivilegeManager();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getFormId() {
-    return 'qs_activity_add_member_form';
   }
 
   /**
@@ -57,8 +50,10 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     // Get every users with at least 1 privilege on the activity.
     $query = $this->privilegeManager->queryMembersWithPrivileges($options['activity'], NULL);
     $activity_members = [];
+
     if ($query) {
       $rows = $query->execute()->fetchAll();
+
       foreach ($rows as $row) {
         $activity_members[$row->user] = $row->user;
       }
@@ -68,8 +63,10 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     // & also remove users already added in the activity.
     $query = $this->privilegeManager->queryMembersWithPrivileges($community, NULL);
     $uids = [];
+
     if ($query) {
       $rows = $query->execute()->fetchAll();
+
       foreach ($rows as $row) {
         // Remove users showed on the page and passed in options to avoid.
         if (!isset($activity_members[$row->user])) {
@@ -81,12 +78,12 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     $community_members = !empty($uids) ? $this->userStorage->loadMultiple($uids) : [];
     $select_options = [];
     $this->fallback = [];
+
     if (!empty($community_members)) {
       foreach ($community_members as $community_member) {
-
         $select_options[] = [
-          'uid'         => $community_member->id(),
-          'email'       => $community_member->mail->value,
+          'uid' => $community_member->id(),
+          'email' => $community_member->mail->value,
           'displayname' => $community_member->field_firstname->value . ' ' . $community_member->field_lastname->value,
         ];
         $this->fallback[$community_member->id()] = !empty($select_options[$community_member->id()]['displayname']) ? $select_options[$community_member->id()]['displayname'] : $community_member->name->value;
@@ -94,15 +91,15 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     }
 
     $form['member'] = [
-      '#title'         => $this->t('qs.activity.add_member'),
-      '#type'          => 'select',
-      '#multiple'      => FALSE,
-      '#required'      => FALSE,
-      '#options'       => $this->fallback,
-      '#attributes'    => [
-        'placeholder'   => $this->t('qs.activity.add_member.placeholder'),
-        'selectize'    => TRUE,
-        'class'        => ['selectize-members'],
+      '#title' => $this->t('qs.activity.add_member'),
+      '#type' => 'select',
+      '#multiple' => FALSE,
+      '#required' => FALSE,
+      '#options' => $this->fallback,
+      '#attributes' => [
+        'placeholder' => $this->t('qs.activity.add_member.placeholder'),
+        'selectize' => TRUE,
+        'class' => ['selectize-members'],
         'data-options' => json_encode($select_options),
       ],
       '#validated' => TRUE,
@@ -113,7 +110,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     ];
 
     $form['actions'] = [
-      '#type'  => 'fieldset',
+      '#type' => 'fieldset',
       '#attributes' => [
         'class' => [
           'mb-5',
@@ -126,7 +123,7 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'icon' => 'plus',
         'icon_left' => TRUE,
@@ -145,15 +142,8 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    // Assert the member is valid.
-    if (!$form_state->getValue('member') || empty($form_state->getValue('member'))) {
-      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['member']['#title']]));
-    }
-
-    if (!isset($this->fallback[$form_state->getValue('member')])) {
-      $form_state->setErrorByName('form', $this->t('qs.form.error.something_went_wrong'));
-    }
+  public function getFormId() {
+    return 'qs_activity_add_member_form';
   }
 
   /**
@@ -164,11 +154,25 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
     $account = $this->userStorage->load($form_state->getValue('member'));
 
     $this->privilegeManager->create('activity_members', $activity, $account);
-    drupal_set_message($this->t("qs_activity.activities.form.add.member.success @activity", [
+    $this->messenger()->addMessage($this->t('qs_activity.activities.form.add.member.success @activity', [
       '@activity' => $activity->getTitle(),
     ]));
 
     $form_state->setRedirect('qs_activity.activities.members', ['activity' => $activity->id()], ['fragment' => 'card' . $account->id()]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Assert the member is valid.
+    if (!$form_state->getValue('member') || empty($form_state->getValue('member'))) {
+      $form_state->setErrorByName('form', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['member']['#title']]));
+    }
+
+    if (!isset($this->fallback[$form_state->getValue('member')])) {
+      $form_state->setErrorByName('form', $this->t('qs.form.error.something_went_wrong'));
+    }
   }
 
 }

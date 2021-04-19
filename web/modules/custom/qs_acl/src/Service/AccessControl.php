@@ -2,32 +2,25 @@
 
 namespace Drupal\qs_acl\Service;
 
-use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
-use Drupal\taxonomy\TermInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
-use Drupal\Core\Entity\EntityInterface;
 
 /**
- * AccessControl.
+ * The Access Control manager.
  */
 class AccessControl {
+
   /**
    * The current active user.
    *
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
   private $currentUser;
-
-  /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  private $termStorage;
 
   /**
    * The Privilege Storage.
@@ -37,20 +30,113 @@ class AccessControl {
   private $privilegeStorage;
 
   /**
-   * The entity query factory.
+   * The term Storage.
    *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
+   * @var \Drupal\taxonomy\TermStorageInterface
    */
-  protected $queryFactory;
+  private $termStorage;
 
   /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory) {
-    $this->currentUser      = $currentUser;
-    $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager) {
+    $this->currentUser = $currentUser;
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
-    $this->queryFactory     = $query_factory;
+  }
+
+  /**
+   * Get communities for a given user.
+   *
+   * This only retrieve relation as Member or Organizer or Managers.
+   * It doesn't get pending request.
+   *
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   Drupal Entity User.
+   *
+   * @return \Drupal\taxonomy\TermInterface[]
+   *   Collection of communities.
+   */
+  public function getCommunities(?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    // If user has bypass Access, return the list of all communities.
+    if ($this->hasBypass($user)) {
+      return $this->termStorage->loadTree('communities', 0, NULL, TRUE);
+    }
+
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_members');
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    $entities = [];
+    $ids = $query->execute();
+
+    if (!empty($ids)) {
+      $privileges = $this->privilegeStorage->loadMultiple($ids);
+
+      foreach ($privileges as $privilege) {
+        $community = $privilege->getEntity();
+        $entities[$community->id()] = $community;
+      }
+    }
+
+    return $entities;
+  }
+
+  /**
+   * Get pending approval communities for a given user.
+   *
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   Drupal Entity User.
+   *
+   * @return \Drupal\taxonomy\TermInterface[]
+   *   Collection of communities.
+   */
+  public function getPendingApprovalCommunities(?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('status', NULL);
+    $or->notExists('status');
+    $query->condition($or);
+
+    $or2 = $query->orConditionGroup();
+    $or2->condition('reviewer', NULL);
+    $or2->notExists('reviewer');
+    $query->condition($or2);
+
+    $entities = [];
+    $ids = $query->execute();
+
+    if (!empty($ids)) {
+      $privileges = $this->privilegeStorage->loadMultiple($ids);
+
+      foreach ($privileges as $privilege) {
+        $entities[] = $privilege->getEntity();
+      }
+    }
+
+    return $entities;
   }
 
   /**
@@ -70,7 +156,283 @@ class AccessControl {
       return TRUE;
     }
 
-    return $user->id() == $account->id();
+    return $user->id() === $account->id();
+  }
+
+  /**
+   * Check if the account has access on the given community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one access for this community.
+   */
+  public function hasAccessCommunity(TermInterface $community, ?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    return $this->hasCommunityByUser($community, $user);
+  }
+
+  /**
+   * Check if the account has read access on the given photo.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity to check access of photos.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one read access for this photo.
+   */
+  public function hasAccessPhoto(NodeInterface $activity, ?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+    $community = $activity->field_community->entity;
+    // Check if the photo's event is open to community or activity members only.
+    if ($activity->field_community_access_gallery->value) {
+      return $this->hasAccessCommunity($community, $user);
+    }
+    // Activity Members+ have access to photo.
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_members');
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account has admin access on the given activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one admin access for this activity.
+   */
+  public function hasAdminAccessActivity(NodeInterface $activity, ?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_organizers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account has admin access on the given community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one admin access for this community.
+   */
+  public function hasAdminAccessCommunity(TermInterface $community, ?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('entity', $community->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the given user can bypass any security restriction.
+   *
+   * This method has security implications.
+   *
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   * @param \Drupal\Core\Entity\EntityInterface|null $entity
+   *   The entity.
+   *
+   * @return bool
+   *   Does the given user has bypass security permission.
+   */
+  public function hasBypass(?AccountInterface $account = NULL, ?EntityInterface $entity = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    if ($user->hasPermission('bypass node access')) {
+      return TRUE;
+    }
+
+    if ($entity) {
+      // Check user is the original author of the given entity.
+      $owner = $entity->getOwner();
+
+      if ($owner->id() === $user->id()) {
+        return TRUE;
+      }
+    }
+
+    return FALSE;
+  }
+
+  /**
+   * Check if the account belongs to at least one community.
+   *
+   * This only check if the accounts belongs to a community
+   * as Member or Organizer or Managers.
+   * It doesn't get pending request.
+   *
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the account belongs to at least one community.
+   */
+  public function hasCommunity(?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    $number = $this->countCommunitiesByUser($user);
+
+    return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account belongs to more than one community.
+   *
+   * This only check if the accounts belongs to a community
+   * as Member or Organizer or Managers.
+   * It doesn't get pending request.
+   *
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the account belongs to more than one community.
+   */
+  public function hasMultipleCommunities(?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    $number = $this->countCommunitiesByUser($user);
+
+    return $number > 1 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account has subscribe access for event on the given activity.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The activity to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has subscribe access.
+   */
+  public function hasSubscribeAccessEvent(NodeInterface $activity, ?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    // Check bypass.
+    if ($this->hasBypass($user, $activity)) {
+      return TRUE;
+    }
+
+    // If this activity is open to the community & user has community access.
+    if ($activity->field_community_can_subscribe->value) {
+      return $this->hasAccessCommunity($activity->field_community->entity, $user);
+    }
+
+    // If the activity is only open to members, check the user has at least one.
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'node')
+      ->condition('entity', $activity->id())
+      ->condition('user', $user->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'activity_members');
+    $or->condition('privilege', 'activity_organizers');
+    $or->condition('privilege', 'activity_maintainers');
+    $query->condition($or);
+
+    $number = (int) $query->count()->execute();
+
+    return $number > 0 ? TRUE : FALSE;
   }
 
   /**
@@ -90,32 +452,7 @@ class AccessControl {
       return TRUE;
     }
 
-    return $user->id() == $account->id();
-  }
-
-  /**
-   * Check if the account has access on the given community.
-   *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return bool
-   *   Does the user has at least one access for this community.
-   */
-  public function hasAccessCommunity(TermInterface $community, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    // Check bypass.
-    if ($this->hasBypass($user)) {
-      return TRUE;
-    }
-
-    return $this->hasCommunityByUser($community, $user);
+    return $user->id() === $account->id();
   }
 
   /**
@@ -123,15 +460,16 @@ class AccessControl {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user has at least one write access for this community.
    */
-  public function hasWriteAccessCommunity(TermInterface $community, AccountInterface $account = NULL) {
+  public function hasWriteAccessCommunity(TermInterface $community, ?AccountInterface $account = NULL) {
     $user = $this->currentUser;
-    if (!is_null($account)) {
+
+    if ($account !== NULL) {
       $user = $account;
     }
 
@@ -140,7 +478,7 @@ class AccessControl {
       return TRUE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('entity', $community->id())
@@ -157,93 +495,20 @@ class AccessControl {
   }
 
   /**
-   * Check if the account has admin access on the given community.
-   *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return bool
-   *   Does the user has at least one admin access for this community.
-   */
-  public function hasAdminAccessCommunity(TermInterface $community, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    // Check bypass.
-    if ($this->hasBypass($user)) {
-      return TRUE;
-    }
-
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', 1)
-      ->condition('bundle', 'taxonomy_term')
-      ->condition('entity', $community->id())
-      ->condition('user', $user->id());
-
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_managers');
-    $query->condition($or);
-
-    $number = (int) $query->count()->execute();
-
-    return $number > 0 ? TRUE : FALSE;
-  }
-
-  /**
-   * Check if the account has admin access on the given activity.
-   *
-   * @param \Drupal\node\NodeInterface $activity
-   *   The activity to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return bool
-   *   Does the user has at least one admin access for this activity.
-   */
-  public function hasAdminAccessActivity(NodeInterface $activity, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    // Check bypass.
-    if ($this->hasBypass($user)) {
-      return TRUE;
-    }
-
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', 1)
-      ->condition('bundle', 'node')
-      ->condition('entity', $activity->id())
-      ->condition('user', $user->id());
-
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'activity_organizers');
-    $query->condition($or);
-
-    $number = (int) $query->count()->execute();
-
-    return $number > 0 ? TRUE : FALSE;
-  }
-
-  /**
    * Check if the account has write access for event on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user has at least one write access for this activity.
    */
-  public function hasWriteAccessEvent(NodeInterface $activity, AccountInterface $account = NULL) {
+  public function hasWriteAccessEvent(NodeInterface $activity, ?AccountInterface $account = NULL) {
     $user = $this->currentUser;
-    if (!is_null($account)) {
+
+    if ($account !== NULL) {
       $user = $account;
     }
 
@@ -252,7 +517,7 @@ class AccessControl {
       return TRUE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -265,46 +530,6 @@ class AccessControl {
 
     $number = (int) $query->count()->execute();
 
-    return $number > 0 ? TRUE : FALSE;
-  }
-
-  /**
-   * Check if the account has read access on the given photo.
-   *
-   * @param \Drupal\node\NodeInterface $activity
-   *   The activity to check access of photos.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return bool
-   *   Does the user has at least one read access for this photo.
-   */
-  public function hasAccessPhoto(NodeInterface $activity, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-    // Check bypass.
-    if ($this->hasBypass($user)) {
-      return TRUE;
-    }
-    $community = $activity->field_community->entity;
-    // Check if the photo's event is open to community or activity members only.
-    if ($activity->field_community_access_gallery->value) {
-      return $this->hasAccessCommunity($community, $user);
-    }
-    // Activity Members+ have access to photo.
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', 1)
-      ->condition('bundle', 'node')
-      ->condition('entity', $activity->id())
-      ->condition('user', $user->id());
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'activity_members');
-    $or->condition('privilege', 'activity_organizers');
-    $or->condition('privilege', 'activity_maintainers');
-    $query->condition($or);
-    $number = (int) $query->count()->execute();
     return $number > 0 ? TRUE : FALSE;
   }
 
@@ -313,15 +538,16 @@ class AccessControl {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check upload access of photos.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user has at least one read access for this photo.
    */
-  public function hasWriteAccessPhoto(NodeInterface $activity, AccountInterface $account = NULL) {
+  public function hasWriteAccessPhoto(NodeInterface $activity, ?AccountInterface $account = NULL) {
     $user = $this->currentUser;
-    if (!is_null($account)) {
+
+    if ($account !== NULL) {
       $user = $account;
     }
 
@@ -331,7 +557,7 @@ class AccessControl {
     }
 
     // Activity Members+ have access to upload photo by default.
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -347,9 +573,9 @@ class AccessControl {
     }
 
     // Check activity is allow member to publish photos.
-    if ($activity->field_member_create_gallery->value == TRUE) {
+    if ((bool) $activity->field_member_create_gallery->value === TRUE) {
       // Activity Members+ have access to upload photo by default.
-      $query = $this->queryFactory->get('privilege')
+      $query = $this->privilegeStorage->getQuery()
         ->condition('status', 1)
         ->condition('bundle', 'node')
         ->condition('entity', $activity->id())
@@ -366,48 +592,24 @@ class AccessControl {
   }
 
   /**
-   * Check if the account has subscribe access for event on the given activity.
+   * Check if the given user or the current logged one has the role beginner.
    *
-   * @param \Drupal\node\NodeInterface $activity
-   *   The activity to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
-   *   Does the user has subscribe access.
+   *   Does the account has the beginner role.
    */
-  public function hasSubscribeAccessEvent(NodeInterface $activity, AccountInterface $account = NULL) {
+  public function isBeginner(?AccountInterface $account = NULL) {
     $user = $this->currentUser;
-    if (!is_null($account)) {
+
+    if ($account !== NULL) {
       $user = $account;
     }
 
-    // Check bypass.
-    if ($this->hasBypass($user, $activity)) {
-      return TRUE;
-    }
+    $roles = $user->getRoles();
 
-    // If this activity is open to the community & user has community access.
-    if ($activity->field_community_can_subscribe->value) {
-      return $this->hasAccessCommunity($activity->field_community->entity, $user);
-    }
-
-    // If the activity is only open to members, check the user has at least one.
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', 1)
-      ->condition('bundle', 'node')
-      ->condition('entity', $activity->id())
-      ->condition('user', $user->id());
-
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'activity_members');
-    $or->condition('privilege', 'activity_organizers');
-    $or->condition('privilege', 'activity_maintainers');
-    $query->condition($or);
-
-    $number = (int) $query->count()->execute();
-
-    return $number > 0 ? TRUE : FALSE;
+    return \in_array('beginner', $roles, TRUE);
   }
 
   /**
@@ -419,15 +621,16 @@ class AccessControl {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise use current user.
    *
    * @return bool
    *   Does the user is waiting for Privilege on this community.
    */
-  public function isPendingApproval(TermInterface $community, AccountInterface $account = NULL) {
+  public function isPendingApproval(TermInterface $community, ?AccountInterface $account = NULL) {
     $user = $this->currentUser;
-    if (!is_null($account)) {
+
+    if ($account !== NULL) {
       $user = $account;
     }
 
@@ -435,7 +638,7 @@ class AccessControl {
       return FALSE;
     }
 
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 0)
       ->condition('entity', $community->id())
       ->condition('user', $user->id());
@@ -446,164 +649,6 @@ class AccessControl {
     $query->condition($or);
 
     return $query->count()->execute() > 0 ? TRUE : FALSE;
-  }
-
-  /**
-   * Check if the given user or the current logged one has the role beginner.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return bool
-   *   Does the account has the beginner role.
-   */
-  public function isBeginner(AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    $roles = $user->getRoles();
-
-    return in_array('beginner', $roles);
-  }
-
-  /**
-   * Check if the account belongs to at least one community.
-   *
-   * This only check if the accounts belongs to a community
-   * as Member or Organizer or Managers.
-   * It doesn't get pending request.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return bool
-   *   Does the account belongs to at least one community.
-   */
-  public function hasCommunity(AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    $number = $this->countCommunitiesByUser($user);
-
-    return $number > 0 ? TRUE : FALSE;
-  }
-
-  /**
-   * Check if the account belongs to more than one community.
-   *
-   * This only check if the accounts belongs to a community
-   * as Member or Organizer or Managers.
-   * It doesn't get pending request.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return bool
-   *   Does the account belongs to more than one community.
-   */
-  public function hasMultipleCommunities(AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    $number = $this->countCommunitiesByUser($user);
-
-    return $number > 1 ? TRUE : FALSE;
-  }
-
-  /**
-   * Get pending approval communities for a given user.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User.
-   *
-   * @return \Drupal\taxonomy\TermInterface[]
-   *   Collection of communities.
-   */
-  public function getPendingApprovalCommunities(AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    $query = $this->queryFactory->get('privilege')
-      ->condition('bundle', 'taxonomy_term')
-      ->condition('user', $user->id());
-
-    $or = $query->orConditionGroup();
-    $or->condition('status', NULL);
-    $or->notExists('status');
-    $query->condition($or);
-
-    $or2 = $query->orConditionGroup();
-    $or2->condition('reviewer', NULL);
-    $or2->notExists('reviewer');
-    $query->condition($or2);
-
-    $entities = [];
-    $ids = $query->execute();
-
-    if (!empty($ids)) {
-      $privileges = $this->privilegeStorage->loadMultiple($ids);
-      foreach ($privileges as $privilege) {
-        $entities[] = $privilege->getEntity();
-      }
-    }
-
-    return $entities;
-  }
-
-  /**
-   * Get communities for a given user.
-   *
-   * This only retrieve relation as Member or Organizer or Managers.
-   * It doesn't get pending request.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User.
-   *
-   * @return \Drupal\taxonomy\TermInterface[]
-   *   Collection of communities.
-   */
-  public function getCommunities(AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    // If user has bypass Access, return the list of all communities.
-    if ($this->hasBypass($user)) {
-      return $this->termStorage->loadTree('communities', 0, NULL, TRUE);
-    }
-
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', 1)
-      ->condition('bundle', 'taxonomy_term')
-      ->condition('user', $user->id());
-
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_members');
-    $or->condition('privilege', 'community_organizers');
-    $or->condition('privilege', 'community_managers');
-    $query->condition($or);
-
-    $entities = [];
-    $ids = $query->execute();
-
-    if (!empty($ids)) {
-      $privileges = $this->privilegeStorage->loadMultiple($ids);
-      foreach ($privileges as $privilege) {
-        $community = $privilege->getEntity();
-        $entities[$community->id()] = $community;
-      }
-    }
-
-    return $entities;
   }
 
   /**
@@ -619,7 +664,7 @@ class AccessControl {
    *   Number of communities the user belongs to.
    */
   private function countCommunitiesByUser(AccountInterface $account) {
-    $query = $this->queryFactory->getAggregate('privilege')
+    $query = $this->privilegeStorage->getAggregateQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $account->id())
@@ -649,7 +694,7 @@ class AccessControl {
    *   Does the user has access on the community.
    */
   private function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
-    $query = $this->queryFactory->get('privilege')
+    $query = $this->privilegeStorage->getQuery()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $account->id())
@@ -662,40 +707,6 @@ class AccessControl {
     $query->condition($or);
 
     return $query->count()->execute() > 0 ? TRUE : FALSE;
-  }
-
-  /**
-   * Check if the given user can bypass any security restriction.
-   *
-   * This method has security implications.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity.
-   *
-   * @return bool
-   *   Does the given user has bypass security permission.
-   */
-  public function hasBypass(AccountInterface $account = NULL, EntityInterface $entity = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    if ($user->hasPermission('bypass node access')) {
-      return TRUE;
-    }
-
-    if ($entity) {
-      // Check user is the original author of the given entity.
-      $owner = $entity->getOwner();
-      if ($owner->id() == $user->id()) {
-        return TRUE;
-      }
-    }
-
-    return FALSE;
   }
 
 }

@@ -4,14 +4,13 @@ namespace Drupal\qs_auth\Service;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\qs_acl\Service\PrivilegeManager;
+use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserAuthInterface;
 use Drupal\user\UserInterface;
-use Drupal\taxonomy\TermInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
-use Drupal\qs_acl\Service\PrivilegeManager;
 
 /**
- * Service Account.
+ * The Service Account.
  */
 class Account {
 
@@ -23,13 +22,6 @@ class Account {
   protected $mail;
 
   /**
-   * The user Storage.
-   *
-   * @var \Drupal\user\UserStorageInterface
-   */
-  protected $userStorage;
-
-  /**
    * The user authentication.
    *
    * @var \Drupal\user\UserAuthInterface
@@ -37,18 +29,11 @@ class Account {
   protected $userAuth;
 
   /**
-   * The entity query factory.
+   * The user Storage.
    *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
+   * @var \Drupal\user\UserStorageInterface
    */
-  protected $queryFactory;
-
-  /**
-   * The term Storage.
-   *
-   * @var \Drupal\taxonomy\TermStorageInterface
-   */
-  private $termStorage;
+  protected $userStorage;
 
   /**
    * The Privilege Manager.
@@ -58,14 +43,20 @@ class Account {
   private $privilegeManager;
 
   /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
    * Class constructor.
    */
-  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, QueryFactory $query_factory, PrivilegeManager $privilege_manager) {
-    $this->mail             = $mail;
-    $this->userStorage      = $entity_type_manager->getStorage('user');
-    $this->termStorage      = $entity_type_manager->getStorage('taxonomy_term');
-    $this->userAuth         = $user_auth;
-    $this->queryFactory     = $query_factory;
+  public function __construct(MailManagerInterface $mail, EntityTypeManagerInterface $entity_type_manager, UserAuthInterface $user_auth, PrivilegeManager $privilege_manager) {
+    $this->mail = $mail;
+    $this->userStorage = $entity_type_manager->getStorage('user');
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+    $this->userAuth = $user_auth;
     $this->privilegeManager = $privilege_manager;
   }
 
@@ -101,6 +92,7 @@ class Account {
 
     // Create a Request Privilege as Member for this community.
     $community = $this->termStorage->load($data['community']);
+
     if ($community) {
       $this->privilegeManager->request('community_members', $community, $user);
     }
@@ -109,6 +101,51 @@ class Account {
     user_login_finalize($user);
 
     return $user;
+  }
+
+  /**
+   * Send mail to all community managers of $community with the new request.
+   *
+   * @param \Drupal\user\UserInterface $account
+   *   The new applier user.
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The impacted community.
+   */
+  public function sendCommunityManagersApplyReq(UserInterface $account, TermInterface $community) {
+    // Get all managers of this community.
+    $query = $this->privilegeManager->queryPrivilege($community, 'community_managers');
+    $rows = $query->execute()->fetchAll();
+
+    $ids = [];
+
+    foreach ($rows as $row) {
+      $ids[] = $row->user;
+    }
+
+    // Load user with community_managers privilege & send them mail.
+    $users = NULL;
+
+    if ($ids) {
+      $users = $this->userStorage->loadMultiple($ids);
+
+      foreach ($users as $user) {
+        $this->mail->mail('qs_auth', 'auth_community_apply', $user->getEmail(), $user->getPreferredLangcode(), [
+          'account' => $account,
+          'community' => $community,
+        ]);
+      }
+    }
+  }
+
+  /**
+   * Send mail to new account mail to confirm itsMembersControll identity.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The user to send register mail.
+   */
+  public function sendRegisterEmail(UserInterface $user) {
+    $params = ['user' => $user];
+    $this->mail->mail('qs_auth', 'register', $user->getEmail(), $user->getPreferredLangcode(), $params);
   }
 
   /**
@@ -126,13 +163,13 @@ class Account {
    */
   public function update(UserInterface $user, array $fields) {
     foreach ($fields as $key => $value) {
-      if ($key == 'password') {
+      if ($key === 'password') {
         $user->setPassword($value);
       }
-      elseif ($key == 'username') {
+      elseif ($key === 'username') {
         $user->setUsername($value);
       }
-      elseif ($key == 'mail') {
+      elseif ($key === 'mail') {
         $user->setEmail($value);
       }
       elseif ($user->hasField($key)) {
@@ -141,50 +178,8 @@ class Account {
     }
 
     $user->save();
+
     return $user;
-  }
-
-  /**
-   * Send mail to new account mail to confirm itsMembersControll identity.
-   *
-   * @param \Drupal\user\UserInterface $user
-   *   The user to send register mail.
-   */
-  public function sendRegisterEmail(UserInterface $user) {
-    $params = ['user' => $user];
-    $this->mail->mail('qs_auth', 'register', $user->getEmail(), $user->getPreferredLangcode(), $params);
-  }
-
-  /**
-   * Send mail to all community managers of $community with the new request.
-   *
-   * @param \Drupal\user\UserInterface $account
-   *   The new applier user.
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The impacted community.
-   */
-  public function sendCommunityManagersApplyReq(UserInterface $account, TermInterface $community) {
-    // Get all managers of this community.
-    $query = $this->privilegeManager->queryPrivilege($community, 'community_managers');
-    $rows = $query->execute()->fetchAll();
-
-    $ids = [];
-    foreach ($rows as $row) {
-      $ids[] = $row->user;
-    }
-
-    // Load user with community_managers privilege & send them mail.
-    $users = NULL;
-    if ($ids) {
-      $users = $this->userStorage->loadMultiple($ids);
-
-      foreach ($users as $user) {
-        $this->mail->mail('qs_auth', 'auth_community_apply', $user->getEmail(), $user->getPreferredLangcode(), [
-          'account'   => $account,
-          'community' => $community,
-        ]);
-      }
-    }
   }
 
 }

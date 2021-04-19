@@ -72,20 +72,20 @@ services:
 
   # Database
   db:
-    image: mariadb:10.1
+    image: mariadb:10.4
     environment:
       MYSQL_USER: drupal
       MYSQL_PASSWORD: drupal
       MYSQL_DATABASE: drupal_%
       MYSQL_ROOT_PASSWORD: root
-    restart: always
+    restart: unless-stopped
     volumes:
       - database:/var/lib/mysql
 
   # Mail
   mail:
     image: schickling/mailcatcher
-    restart: always
+    restart: unless-stopped
 
 volumes:
   database:

@@ -2,12 +2,12 @@
 
 namespace Drupal\qs_photo\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Subscribe to KernelEvents::REQUEST.
@@ -37,6 +37,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     $events[KernelEvents::REQUEST][] = ['photoRedirect'];
+
     return $events;
   }
 
@@ -51,7 +52,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
    */
   public function photoRedirect(GetResponseEvent $event) {
     $node = $this->routeMatch->getParameter('node');
-    if ($this->routeMatch->getRouteName() == 'entity.node.canonical' && $node->bundle() === 'photo') {
+
+    if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'photo') {
       $activity = $node->field_event->entity->field_activity->entity;
       $destination = Url::fromRoute('qs_photo.activity', ['activity' => $activity->id()]);
       $event->setResponse(new RedirectResponse($destination->toString()));

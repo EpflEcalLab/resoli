@@ -15,13 +15,6 @@ class MembersFilterForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function getFormId() {
-    return 'qs_community_members_filter_form';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['#method'] = 'GET';
 
@@ -46,7 +39,7 @@ class MembersFilterForm extends FormBase {
     ];
 
     $form['actions'] = [
-      '#type'  => 'fieldset',
+      '#type' => 'fieldset',
       '#attributes' => [
         'class' => [
           'mb-5',
@@ -59,7 +52,7 @@ class MembersFilterForm extends FormBase {
     ];
 
     $form['actions']['submit'] = [
-      '#type'  => 'submit',
+      '#type' => 'submit',
       '#attributes' => [
         'icon' => 'check',
         'icon_left' => TRUE,
@@ -73,6 +66,13 @@ class MembersFilterForm extends FormBase {
     ];
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'qs_community_members_filter_form';
   }
 
   /**

@@ -2,30 +2,16 @@
 
 namespace Drupal\qs_activity\Form;
 
-use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * ActivityEditFormBase class.
+ * Activity edit form base.
  */
 abstract class ActivityEditFormBase extends FormBasic {
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The node Storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
 
   /**
    * The entity QS Activity Manager.
@@ -35,6 +21,20 @@ abstract class ActivityEditFormBase extends FormBasic {
   protected $activityManager;
 
   /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {
@@ -42,8 +42,8 @@ abstract class ActivityEditFormBase extends FormBasic {
     parent::__construct($container);
 
     // From the container, inject services.
-    $this->acl             = $this->getAcl();
-    $this->nodeStorage     = $this->getNodeStorage();
+    $this->acl = $this->getAcl();
+    $this->nodeStorage = $this->getNodeStorage();
     $this->activityManager = $this->getActivityManager();
   }
 
@@ -60,16 +60,18 @@ abstract class ActivityEditFormBase extends FormBasic {
    */
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::forbidden();
+
     if ($this->acl->hasAdminAccessActivity($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $activity = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $activity = NULL) {
     $form = parent::buildForm($form, $form_state);
 
     // Save the activity for submission.

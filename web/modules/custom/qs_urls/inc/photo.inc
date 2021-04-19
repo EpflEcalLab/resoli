@@ -25,6 +25,7 @@ function qs_photo_alias(EntityInterface $entity, $alias, $operation = 'insert') 
           'alias' => '/' . trim($alias, '/') . '/photos/month',
         ],
       ];
+
       break;
 
     case 'activity':
@@ -34,6 +35,7 @@ function qs_photo_alias(EntityInterface $entity, $alias, $operation = 'insert') 
           'alias' => '/' . trim($alias, '/') . '/photos',
         ],
       ];
+
       break;
   }
 
@@ -54,10 +56,11 @@ function qs_photo_redirects(EntityInterface $entity, $alias, $operation = 'inser
     case 'communities':
       $redirects = [
         'photo' => [
-          'source'   => '/' . trim($alias, '/') . '/photos',
+          'source' => '/' . trim($alias, '/') . '/photos',
           'redirect' => '/' . trim($alias, '/') . '/photos/theme',
         ],
       ];
+
       break;
   }
 

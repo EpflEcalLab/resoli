@@ -154,7 +154,7 @@
   @include media-breakpoint-down(xs) {
     flex-wrap: wrap;
 
-    > *:not('.btn-circle') {
+    > *:not(.btn-circle) {
       flex: 1 1 auto;
       margin-bottom: $spacer * 0.5;
     }

@@ -2,13 +2,13 @@
 
 namespace Drupal\qs_supervisor\EventSubscriber;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Subscribe to KernelEvents::REQUEST.
@@ -16,6 +16,13 @@ use Drupal\Core\Url;
  * Events and redirect for Accounts.
  */
 class AccountRedirect implements EventSubscriberInterface {
+
+  /**
+   * The current user account proxy.
+   *
+   * @var \Drupal\Core\Session\AccountInterface
+   */
+  protected $currentUser;
   /**
    * The current route match.
    *
@@ -24,27 +31,11 @@ class AccountRedirect implements EventSubscriberInterface {
   protected $routeMatch;
 
   /**
-   * The current user account proxy.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
-
-  /**
    * {@inheritdoc}
    */
   public function __construct(RouteMatchInterface $route_match, AccountInterface $current_user) {
     $this->routeMatch = $route_match;
     $this->currentUser = $current_user;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getSubscribedEvents() {
-    $events[KernelEvents::REQUEST][] = ['dashboardRedirect'];
-    $events[KernelEvents::REQUEST][] = ['editFormRedirect'];
-    return $events;
   }
 
   /**
@@ -57,7 +48,7 @@ class AccountRedirect implements EventSubscriberInterface {
    *   Event subscriber.
    */
   public function dashboardRedirect(GetResponseEvent $event) {
-    if ($this->routeMatch->getRouteName() == 'entity.user.canonical') {
+    if ($this->routeMatch->getRouteName() === 'entity.user.canonical') {
       $user = $event->getRequest()->get('user');
       $destination = Url::fromRoute('qs_supervisor.account.dashboard', ['user' => $user->id()]);
       $event->setResponse(new RedirectResponse($destination->toString()));
@@ -75,11 +66,21 @@ class AccountRedirect implements EventSubscriberInterface {
    *   Event subscriber.
    */
   public function editFormRedirect(GetResponseEvent $event) {
-    if (!$this->currentUser->hasPermission('access administration pages') && $this->routeMatch->getRouteName() == 'entity.user.edit_form') {
+    if (!$this->currentUser->hasPermission('access administration pages') && $this->routeMatch->getRouteName() === 'entity.user.edit_form') {
       $user = $event->getRequest()->get('user');
       $destination = Url::fromRoute('qs_supervisor.account.form.edit', ['user' => $user->id()]);
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents() {
+    $events[KernelEvents::REQUEST][] = ['dashboardRedirect'];
+    $events[KernelEvents::REQUEST][] = ['editFormRedirect'];
+
+    return $events;
   }
 
 }

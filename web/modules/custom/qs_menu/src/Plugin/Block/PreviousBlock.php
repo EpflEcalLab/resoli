@@ -13,8 +13,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Previous Block.
  *
  * @Block(
- *   id = "qs_menu_previous_block",
- *   admin_label = @Translation("Previous Navigation"),
+ *     id="qs_menu_previous_block",
+ *     admin_label=@Translation("Previous Navigation"),
  * )
  */
 class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface {
@@ -48,23 +48,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $this->route = $route;
     $this->urlGenerator = $urlGenerator;
     $this->currentUser = $current_user;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    // Instantiates this form class.
-    return new static(
-    // Load the service required to construct this class.
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      // Load customs services used in this class.
-      $container->get('current_route_match'),
-      $container->get('url_generator'),
-      $container->get('current_user')
-    );
   }
 
   /**
@@ -104,56 +87,62 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
     if ($route_name === 'entity.node.canonical') {
       switch ($node->bundle()) {
-        case "activity":
+        case 'activity':
           $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_activities_list');
           $theme = 'primary';
+
           break;
 
-        case "event":
+        case 'event':
           $options = ['fragment' => "card{$event->id()}"];
           $url = $this->urlGenerator->generateFromRoute('entity.node.canonical', [
             'node' => $node->field_activity->target_id,
           ], $options);
           $label = $this->t('qs.previous.to_activity');
           $theme = 'primary';
+
           break;
       }
     }
     else {
       switch ($route_name) {
         // Go to Community Welcome.
-        case "qs_community.dashboard":
+        case 'qs_community.dashboard':
           $url = $this->urlGenerator->generateFromRoute('qs_community.welcome', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_community_welcome');
           $theme = 'danger';
+
           break;
 
         // Go to Community Dashboard.
-        case "qs_community.members":
-        case "qs_community.waiting_approval":
+        case 'qs_community.members':
+        case 'qs_community.waiting_approval':
           $url = $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_community_dashboard');
           $theme = 'danger';
+
           break;
 
-        case "qs_activity.user.collection":
+        case 'qs_activity.user.collection':
           $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_activities_list');
           $theme = 'primary';
+
           break;
 
         // Go to Activity.
-        case "qs_activity.activities.dashboard":
+        case 'qs_activity.activities.dashboard':
           $options = [];
+
           if ($event) {
             $options = ['fragment' => "card{$event->id()}"];
           }
@@ -162,25 +151,28 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           ], $options);
           $label = $this->t('qs.previous.to_activity');
           $theme = 'primary';
+
           break;
 
         // Go to My Activities.
-        case "qs_activity.activities.form.add":
+        case 'qs_activity.activities.form.add':
           $url = $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
           ]);
           $label = $this->t('qs.previous.to_my_activities');
           $theme = 'primary';
+
           break;
 
         // Go to Activity Dashboard.
-        case "qs_activity.activities.form.edit.info":
-        case "qs_activity.activities.form.edit.visibility":
-        case "qs_activity.activities.form.edit.defaults":
-        case "qs_activity.events.form.add":
-        case "qs_activity.activities.members":
+        case 'qs_activity.activities.form.edit.info':
+        case 'qs_activity.activities.form.edit.visibility':
+        case 'qs_activity.activities.form.edit.defaults':
+        case 'qs_activity.events.form.add':
+        case 'qs_activity.activities.members':
           $options = [];
+
           if ($event) {
             $options = ['fragment' => "card{$event->id()}"];
           }
@@ -189,21 +181,24 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           ], $options);
           $label = $this->t('qs.previous.to_activity_dashboard');
           $theme = 'primary';
+
           break;
 
         // Go to Event Dashboard.
-        case "qs_activity.events.form.edit":
-        case "qs_subscription.subscribers":
-        case "qs_subscription.waiting_approval":
+        case 'qs_activity.events.form.edit':
+        case 'qs_subscription.subscribers':
+        case 'qs_subscription.waiting_approval':
           $url = $this->urlGenerator->generateFromRoute('qs_activity.events.dashboard', [
             'event' => $event->id(),
           ], $options);
           $label = $this->t('qs.previous.to_event_dashboard');
           $theme = 'secondary';
+
           break;
 
-        case "qs_activity.events.dashboard":
+        case 'qs_activity.events.dashboard':
           $options = [];
+
           if ($event) {
             $options = ['fragment' => "card{$event->id()}"];
           }
@@ -212,64 +207,71 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           ], $options);
           $label = $this->t('qs.previous.to_event');
           $theme = 'secondary';
+
           break;
 
         // Go to Calendar.
-        case "qs_subscription.user.collection":
+        case 'qs_subscription.user.collection':
           $url = $this->urlGenerator->generateFromRoute('qs_calendar.collection.weekly', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_calendar');
           $theme = 'primary';
+
           break;
 
         // Go to Photos Themes.
-        case "qs_photo.activity":
+        case 'qs_photo.activity':
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.theme', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_photos_list');
           $theme = 'primary';
+
           break;
 
         // Go to Photos Month.
-        case "qs_photo.user.activities.collection":
+        case 'qs_photo.user.activities.collection':
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.month', [
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_photos_month');
           $theme = 'primary';
+
           break;
 
         // Go to My Photos.
-        case "qs_photo.user.form.manage":
-        case "qs_photo.form.add":
+        case 'qs_photo.user.form.manage':
+        case 'qs_photo.form.add':
           $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
           ], $options);
           $label = $this->t('qs.previous.to_my_photos');
           $theme = 'primary';
+
           break;
 
         // Go to Manage Photos.
-        case "qs_photo.form.delete":
-        case "qs_photo.form.comments":
+        case 'qs_photo.form.delete':
+        case 'qs_photo.form.comments':
           $url = $this->urlGenerator->generateFromRoute('qs_photo.user.form.manage', [
             'activity' => $activity->id(),
             'user' => $this->currentUser->id(),
           ], $options);
           $label = $this->t('qs.previous.to_manage_photos');
           $theme = 'secondary';
+
           break;
 
         // Go to Homepage.
-        // TODO add test for this link.
-        case "qs_community.welcome":
+        // @todo add test for this link.
+        case 'qs_community.welcome':
           $url = $this->urlGenerator->generateFromRoute('<front>');
           $label = $this->t('qs_auth.link.home');
           $theme = 'primary';
           $invert = TRUE;
+
           break;
       }
     }
@@ -280,7 +282,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     $variables['invert'] = $invert;
 
     return [
-      '#theme'     => 'qs_menu_previous_block',
+      '#theme' => 'qs_menu_previous_block',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [
@@ -289,6 +291,23 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
         ],
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    // Instantiates this form class.
+    return new static(
+    // Load the service required to construct this class.
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      // Load customs services used in this class.
+      $container->get('current_route_match'),
+      $container->get('url_generator'),
+      $container->get('current_user')
+    );
   }
 
 }

@@ -2,20 +2,35 @@
 
 namespace Drupal\qs_acl\Service;
 
-use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Database\Connection;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\qs_acl\Entity\Privilege;
-use Drupal\Core\Database\Query\SelectInterface;
 use Drupal\Core\Database\Query\ConditionInterface;
+use Drupal\Core\Database\Query\SelectInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Pager\PagerManagerInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\qs_acl\Entity\Privilege;
 
 /**
- * PrivilegeManager.
+ * The Privilege Manager.
  */
 class PrivilegeManager {
+
+  /**
+   * The database connection to use.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $connection;
+
+  /**
+   * The pager manager.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
+   */
+  protected $pagerManager;
+
   /**
    * The current active user.
    *
@@ -31,171 +46,13 @@ class PrivilegeManager {
   private $privilegeStorage;
 
   /**
-   * The entity query factory.
-   *
-   * @var \Drupal\Core\Entity\Query\QueryFactory
-   */
-  protected $queryFactory;
-
-  /**
-   * The database connection to use.
-   *
-   * @var \Drupal\Core\Database\Connection
-   */
-  protected $connection;
-
-  /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, QueryFactory $query_factory, Connection $connection) {
-    $this->currentUser      = $currentUser;
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, Connection $connection, PagerManagerInterface $pager_manager) {
+    $this->currentUser = $currentUser;
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
-    $this->queryFactory     = $query_factory;
-    $this->connection       = $connection;
-  }
-
-  /**
-   * Request the collection of Privilege active for a given entiy & the user.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The Drupal Content Entity for the privilege.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return \Drupal\qs_acl\Entity\Privilege[]
-   *   A collection of active Privilege according the user & the entity given.
-   */
-  public function fetchActive(EntityInterface $entity, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', 1)
-      ->condition('bundle', $entity->getEntityTypeId())
-      ->condition('user', $user->id())
-      ->condition('entity', $entity->id());
-
-    if ($entity->bundle() === 'communities') {
-      $or = $query->orConditionGroup();
-      $or->condition('privilege', 'community_members');
-      $or->condition('privilege', 'community_organizers');
-      $or->condition('privilege', 'community_managers');
-      $query->condition($or);
-    }
-    elseif ($entity->bundle() === 'activity') {
-      $or = $query->orConditionGroup();
-      $or->condition('privilege', 'activity_members');
-      $or->condition('privilege', 'activity_maintainers');
-      $or->condition('privilege', 'activity_organizers');
-      $query->condition($or);
-    }
-
-    $ids = $query->execute();
-    $privileges = [];
-    if ($ids) {
-      $privileges = $this->privilegeStorage->loadMultiple($ids);
-    }
-
-    return $privileges;
-  }
-
-  /**
-   * Request a new privilege for the user on the given entity.
-   *
-   * @param string $privilege
-   *   The requested string privilege.
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The Drupal Content Entity for the privilege.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Account for who we will request de privilege.
-   *
-   * @return \Drupal\Core\Entity\EntityInterface
-   *   The created privilege request.
-   */
-  public function request($privilege, EntityInterface $entity, AccountInterface $account = NULL) {
-    $user = $this->currentUser;
-    if (!is_null($account)) {
-      $user = $account;
-    }
-
-    // Check we don't already have the same privilege.
-    $privileges = $this->privilegeStorage->loadByProperties([
-      'bundle'    => $entity->getEntityTypeId(),
-      'entity'    => $entity->id(),
-      'user'      => $user->id(),
-      'privilege' => $privilege,
-    ]);
-
-    // If the privilege already exists.
-    if ($privileges) {
-      $privilege = reset($privileges);
-
-      // Previously declined ? Change as request again.
-      if ($privilege->getStatus()->value == 0) {
-        $privilege->setStatus(NULL);
-        $privilege->reviewer = NULL;
-        $privilege->reviewed = NULL;
-        $privilege->save();
-      }
-      return $privilege;
-    }
-
-    $requested = $this->privilegeStorage->create([
-      'entity' => $entity->id(),
-      'user'   => $user->id(),
-    ]);
-    $requested->setPrivilege($privilege);
-    $requested->setBundle($entity->getEntityTypeId());
-    $requested->save();
-
-    return $requested;
-  }
-
-  /**
-   * Create a new privilege for the user on the given entity.
-   *
-   * @param string $privilege
-   *   The requested string privilege.
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The Drupal Content Entity for the privilege.
-   * @param \Drupal\Core\Session\AccountInterface $user
-   *   Account for who we will request de privilege.
-   *
-   * @return \Drupal\Core\Entity\EntityInterface
-   *   The created privilege.
-   */
-  public function create($privilege, EntityInterface $entity, AccountInterface $user) {
-    $current_user = $this->currentUser;
-
-    // Check we don't already have the same privilege.
-    $privileges = $this->privilegeStorage->loadByProperties([
-      'bundle'    => $entity->getEntityTypeId(),
-      'entity'    => $entity->id(),
-      'user'      => $user->id(),
-      'privilege' => $privilege,
-    ]);
-
-    // If the privilege already exists, just confirm it.
-    if ($privileges) {
-      $privilege = reset($privileges);
-      return $this->confirm($privilege);
-    }
-
-    // When the privilege don't exists, create one.
-    $created = $this->privilegeStorage->create([
-      'bundle'    => $entity->getEntityTypeId(),
-      'entity'    => $entity->id(),
-      'user'      => $user->id(),
-      'status'    => 1,
-      'privilege' => $privilege,
-      'reviewer'  => $current_user->id(),
-      'reviewed'  => time(),
-    ]);
-    $created->save();
-
-    return $created;
+    $this->connection = $connection;
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -219,6 +76,52 @@ class PrivilegeManager {
   }
 
   /**
+   * Create a new privilege for the user on the given entity.
+   *
+   * @param string $privilege
+   *   The requested string privilege.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
+   * @param \Drupal\Core\Session\AccountInterface $user
+   *   Account for who we will request de privilege.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   The created privilege.
+   */
+  public function create($privilege, EntityInterface $entity, AccountInterface $user) {
+    $current_user = $this->currentUser;
+
+    // Check we don't already have the same privilege.
+    $privileges = $this->privilegeStorage->loadByProperties([
+      'bundle' => $entity->getEntityTypeId(),
+      'entity' => $entity->id(),
+      'user' => $user->id(),
+      'privilege' => $privilege,
+    ]);
+
+    // If the privilege already exists, just confirm it.
+    if ($privileges) {
+      $privilege = reset($privileges);
+
+      return $this->confirm($privilege);
+    }
+
+    // When the privilege don't exists, create one.
+    $created = $this->privilegeStorage->create([
+      'bundle' => $entity->getEntityTypeId(),
+      'entity' => $entity->id(),
+      'user' => $user->id(),
+      'status' => 1,
+      'privilege' => $privilege,
+      'reviewer' => $current_user->id(),
+      'reviewed' => time(),
+    ]);
+    $created->save();
+
+    return $created;
+  }
+
+  /**
    * Decline a previously requested privilege.
    *
    * @param \Drupal\qs_acl\Entity\Privilege $privilege
@@ -239,6 +142,104 @@ class PrivilegeManager {
   }
 
   /**
+   * Request the collection of Privilege active for a given entiy & the user.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return \Drupal\qs_acl\Entity\Privilege[]
+   *   A collection of active Privilege according the user & the entity given.
+   */
+  public function fetchActive(EntityInterface $entity, ?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', $entity->getEntityTypeId())
+      ->condition('user', $user->id())
+      ->condition('entity', $entity->id());
+
+    if ($entity->bundle() === 'communities') {
+      $or = $query->orConditionGroup();
+      $or->condition('privilege', 'community_members');
+      $or->condition('privilege', 'community_organizers');
+      $or->condition('privilege', 'community_managers');
+      $query->condition($or);
+    }
+    elseif ($entity->bundle() === 'activity') {
+      $or = $query->orConditionGroup();
+      $or->condition('privilege', 'activity_members');
+      $or->condition('privilege', 'activity_maintainers');
+      $or->condition('privilege', 'activity_organizers');
+      $query->condition($or);
+    }
+
+    $ids = $query->execute();
+    $privileges = [];
+
+    if ($ids) {
+      $privileges = $this->privilegeStorage->loadMultiple($ids);
+    }
+
+    return $privileges;
+  }
+
+  /**
+   * Check for the given entity IDs, if the user has the requested privileges.
+   *
+   * @param int[] $entities
+   *   A collection of entities IDs.
+   * @param string[] $privileges
+   *   A collection of privileges.
+   * @param bool $status
+   *   The required status for the privileges.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return array[]
+   *   A collection of Entities ID.
+   */
+  public function getPrivileges(array $entities, array $privileges, $status = TRUE, ?AccountInterface $account = NULL) {
+    $user = $this->currentUser;
+
+    if ($account !== NULL) {
+      $user = $account;
+    }
+
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', $status)
+      ->condition('user', $user->id())
+      ->condition('entity', $entities, 'IN');
+
+    $or = $query->orConditionGroup();
+
+    foreach ($privileges as $privilege) {
+      $or->condition('privilege', $privilege);
+    }
+    $query->condition($or);
+
+    $ids = $query->execute();
+    $entity_ids = [];
+    $privileges = NULL;
+
+    if ($ids) {
+      $privileges = $this->privilegeStorage->loadMultiple($ids);
+
+      foreach ($privileges as $privilege) {
+        $entity_ids[$privilege->entity] = $privilege->entity;
+      }
+    }
+
+    return $entity_ids;
+  }
+
+  /**
    * Request the collection of members for a given entity.
    *
    * An account is processed as member of community if it has one privilege:
@@ -252,7 +253,7 @@ class PrivilegeManager {
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param int $pager
+   * @param int $limit
    *   The limit of members. NULL to get all users.
    * @param array $filters
    *   Conditions to apply on the search.
@@ -262,7 +263,7 @@ class PrivilegeManager {
    * @return \Drupal\Core\Database\Query\SelectInterface
    *   The database query.
    */
-  public function queryMembersWithPrivileges(EntityInterface $entity, $pager = 50, array $filters = [], $exclude_current_user = TRUE) {
+  public function queryMembersWithPrivileges(EntityInterface $entity, $limit = 50, array $filters = [], $exclude_current_user = TRUE) {
     // We have to get paginated users before getting privileges by users
     // because a user could have 1 or many privileges (so it's not paginable).
     // Query user(s) with privilege(s) in the given entity.
@@ -280,19 +281,22 @@ class PrivilegeManager {
     }
 
     // Remove empty filters to prevent SQL issue.
-    $filters = array_filter($filters, function ($item) {
+    $filters = array_filter($filters, static function ($item) {
       return !empty($item);
     });
 
     // Add filters criteria to the search query.
     if (!empty($filters)) {
       $filters_conditions = $query->orConditionGroup();
+
       if (isset($filters['firstname']) && !empty($filters['firstname'])) {
         $this->addContainsCondition($filters_conditions, 'firstname.field_firstname_value', $filters['firstname']);
       }
+
       if (isset($filters['lastname']) && !empty($filters['lastname'])) {
         $this->addContainsCondition($filters_conditions, 'lastname.field_lastname_value', $filters['lastname']);
       }
+
       if (isset($filters['mail']) && !empty($filters['mail'])) {
         // Join the users data for filters criteria.
         $query->leftJoin('users_field_data', 'user', 'user.uid = privileges.user');
@@ -312,15 +316,15 @@ class PrivilegeManager {
     $query->groupBy('firstname.field_firstname_value');
     $query->groupBy('lastname.field_lastname_value');
 
-    if ($pager) {
+    if ($limit) {
       $ids = $query->execute()->fetchAll();
-      pager_default_initialize(count($ids), $pager);
-      $page = pager_find_page();
-      $query->range($page * $pager, $pager);
+      $pager = $this->pagerManager->createPager(\count($ids), $limit);
+      $query->range($pager->getCurrentPage() * $limit, $limit);
     }
 
     $rows = $query->execute()->fetchAll();
     $uids = [];
+
     foreach ($rows as $row) {
       $uids[] = $row->user;
     }
@@ -366,31 +370,27 @@ class PrivilegeManager {
   }
 
   /**
-   * Alter the condition to search for every words on the sentence.
+   * Request the collection of Accounts with given privilege on the entity.
    *
-   * Alter the given condition to add multiple OR Condition for every words of
-   * the sentence.
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The Drupal Content Entity for the privilege.
+   * @param string $privilege
+   *   The required privilege.
+   * @param bool $status
+   *   The required status for the privileges.
    *
-   * @param \Drupal\Core\Database\Query\ConditionInterface $condition
-   *   The condition to alter.
-   * @param string $field
-   *   The field name to search on.
-   * @param string $sentence
-   *   The sentence containing words.
+   * @return \Drupal\Core\Database\Query\SelectInterface
+   *   The database query.
    */
-  private function addContainsCondition(ConditionInterface $condition, $field, $sentence) {
-    preg_match_all('/\w+/', $sentence, $matches);
+  public function queryPrivilege(EntityInterface $entity, $privilege, $status = TRUE) {
+    $query = $this->connection->select('privileges', 'privileges');
+    $query->fields('privileges', ['user', 'id'])
+      ->condition('privileges.bundle', $entity->getEntityTypeId())
+      ->condition('privileges.entity', $entity->id())
+      ->condition('privileges.privilege', $privilege)
+      ->condition('privileges.status', $status);
 
-    if (!isset($matches[0]) || empty($matches[0])) {
-      return;
-    }
-
-    $words = $matches[0];
-    $or = $condition->orConditionGroup();
-    foreach ($words as $word) {
-      $or->condition($field, '%' . $word . '%', 'LIKE');
-    }
-    $condition->condition($or);
+    return $query;
   }
 
   /**
@@ -427,7 +427,7 @@ class PrivilegeManager {
     $this->alterQueryHasOneRole($query, $entity);
 
     // Join the users data for filters criteria.
-    // TODO: Add Filter block by name, firstname, lastname.
+    // @todo Add Filter block by name, firstname, lastname.
     $query->leftJoin('users_field_data', 'users', 'users.uid = privileges.user');
     $query->leftJoin('user__field_lastname', 'lastname', 'lastname.entity_id = privileges.user');
 
@@ -438,73 +438,57 @@ class PrivilegeManager {
   }
 
   /**
-   * Request the collection of Accounts with given privilege on the entity.
+   * Request a new privilege for the user on the given entity.
    *
+   * @param string $privilege
+   *   The requested string privilege.
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The Drupal Content Entity for the privilege.
-   * @param string $privilege
-   *   The required privilege.
-   * @param bool $status
-   *   The required status for the privileges.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   Account for who we will request de privilege.
    *
-   * @return \Drupal\Core\Database\Query\SelectInterface
-   *   The database query.
+   * @return \Drupal\Core\Entity\EntityInterface
+   *   The created privilege request.
    */
-  public function queryPrivilege(EntityInterface $entity, $privilege, $status = TRUE) {
-    $query = $this->connection->select('privileges', 'privileges');
-    $query->fields('privileges', ['user', 'id'])
-      ->condition('privileges.bundle', $entity->getEntityTypeId())
-      ->condition('privileges.entity', $entity->id())
-      ->condition('privileges.privilege', $privilege)
-      ->condition('privileges.status', $status);
-
-    return $query;
-  }
-
-  /**
-   * Check for the given entity IDs, if the user has the requested privileges.
-   *
-   * @param integer[] $entities
-   *   A collection of entities IDs.
-   * @param string[] $privileges
-   *   A collection of privileges.
-   * @param bool $status
-   *   The required status for the privileges.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User used to check access. Otherwise use current user.
-   *
-   * @return array[]
-   *   A collection of Entities ID.
-   */
-  public function getPrivileges(array $entities, array $privileges, $status = TRUE, AccountInterface $account = NULL) {
+  public function request($privilege, EntityInterface $entity, ?AccountInterface $account = NULL) {
     $user = $this->currentUser;
-    if (!is_null($account)) {
+
+    if ($account !== NULL) {
       $user = $account;
     }
 
-    $query = $this->queryFactory->get('privilege')
-      ->condition('status', $status)
-      ->condition('user', $user->id())
-      ->condition('entity', $entities, 'IN');
+    // Check we don't already have the same privilege.
+    $privileges = $this->privilegeStorage->loadByProperties([
+      'bundle' => $entity->getEntityTypeId(),
+      'entity' => $entity->id(),
+      'user' => $user->id(),
+      'privilege' => $privilege,
+    ]);
 
-    $or = $query->orConditionGroup();
-    foreach ($privileges as $privilege) {
-      $or->condition('privilege', $privilege);
-    }
-    $query->condition($or);
+    // If the privilege already exists.
+    if ($privileges) {
+      $privilege = reset($privileges);
 
-    $ids = $query->execute();
-    $entity_ids = [];
-    $privileges = NULL;
-    if ($ids) {
-      $privileges = $this->privilegeStorage->loadMultiple($ids);
-
-      foreach ($privileges as $privilege) {
-        $entity_ids[$privilege->entity] = $privilege->entity;
+      // Previously declined ? Change as request again.
+      if ($privilege->getStatus()->value === 0) {
+        $privilege->setStatus(NULL);
+        $privilege->reviewer = NULL;
+        $privilege->reviewed = NULL;
+        $privilege->save();
       }
+
+      return $privilege;
     }
 
-    return $entity_ids;
+    $requested = $this->privilegeStorage->create([
+      'entity' => $entity->id(),
+      'user' => $user->id(),
+    ]);
+    $requested->setPrivilege($privilege);
+    $requested->setBundle($entity->getEntityTypeId());
+    $requested->save();
+
+    return $requested;
   }
 
   /**
@@ -530,6 +514,35 @@ class PrivilegeManager {
       $or->condition('privileges.privilege', 'activity_organizers');
       $query->condition($or);
     }
+  }
+
+  /**
+   * Alter the condition to search for every words on the sentence.
+   *
+   * Alter the given condition to add multiple OR Condition for every words of
+   * the sentence.
+   *
+   * @param \Drupal\Core\Database\Query\ConditionInterface $condition
+   *   The condition to alter.
+   * @param string $field
+   *   The field name to search on.
+   * @param string $sentence
+   *   The sentence containing words.
+   */
+  private function addContainsCondition(ConditionInterface $condition, $field, $sentence) {
+    preg_match_all('/\w+/', $sentence, $matches);
+
+    if (!isset($matches[0]) || empty($matches[0])) {
+      return;
+    }
+
+    $words = $matches[0];
+    $or = $condition->orConditionGroup();
+
+    foreach ($words as $word) {
+      $or->condition($field, '%' . $word . '%', 'LIKE');
+    }
+    $condition->condition($or);
   }
 
 }

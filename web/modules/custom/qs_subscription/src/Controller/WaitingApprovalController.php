@@ -2,23 +2,26 @@
 
 namespace Drupal\qs_subscription\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\qs_acl\Service\AccessControl;
-use Drupal\qs_subscription\Service\SubscriptionManager;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
+use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_subscription\Service\SubscriptionManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * WaitingApprovalController.
+ * Collection of pending subscriptions for an event.
  */
 class WaitingApprovalController extends ControllerBase {
 
   /**
-   * {@inheritdoc}
+   * The pager manager.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
    */
-  private $configuration = ['limit' => 50];
+  protected $pagerManager;
 
   /**
    * Access Control Service.
@@ -26,6 +29,11 @@ class WaitingApprovalController extends ControllerBase {
    * @var \Drupal\qs_acl\Service\AccessControl
    */
   private $acl;
+
+  /**
+   * {@inheritdoc}
+   */
+  private $configuration = ['limit' => 50];
 
   /**
    * The Subscription Manager.
@@ -44,22 +52,11 @@ class WaitingApprovalController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager) {
-    $this->acl                 = $acl;
+  public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager, PagerManagerInterface $pager_manager) {
+    $this->acl = $acl;
     $this->subscriptionManager = $subscription_manager;
     $this->subscriptionStorage = $this->entityTypeManager()->getStorage('subscription');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_subscription.subscription_manager')
-    );
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -82,7 +79,21 @@ class WaitingApprovalController extends ControllerBase {
     if ($activity && $this->acl->hasWriteAccessEvent($activity)) {
       $access = AccessResult::allowed();
     }
+
     return $access;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_subscription.subscription_manager'),
+      $container->get('pager.manager')
+    );
   }
 
   /**
@@ -97,22 +108,23 @@ class WaitingApprovalController extends ControllerBase {
 
     // Get all members to mailto before pagination.
     $mailto = [];
+
     foreach ($rows as $row) {
       $mailto[$row->user] = $row->mail;
     }
     $variables['mailto'] = $mailto;
 
-    pager_default_initialize(count($rows), $this->configuration['limit']);
+    $pager = $this->pagerManager->createPager(\count($rows), $this->configuration['limit']);
     $variables['pager'] = [
-      '#type'     => 'pager',
+      '#type' => 'pager',
       '#quantity' => '3',
     ];
-    $page = pager_find_page();
-    $query->range($page * $this->configuration['limit'], $this->configuration['limit']);
+    $query->range($pager->getCurrentPage() * $this->configuration['limit'], $this->configuration['limit']);
 
     $rows = $query->execute()->fetchAll();
 
     $ids = [];
+
     foreach ($rows as $row) {
       $ids[] = $row->id;
     }
@@ -122,7 +134,7 @@ class WaitingApprovalController extends ControllerBase {
     $variables['subscriptions'] = $subscriptions;
 
     return [
-      '#theme'     => 'qs_subscription_waiting_approval_page',
+      '#theme' => 'qs_subscription_waiting_approval_page',
       '#variables' => $variables,
       '#cache' => [
         'tags' => [

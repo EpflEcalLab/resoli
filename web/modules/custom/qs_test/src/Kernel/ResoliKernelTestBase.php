@@ -2,25 +2,25 @@
 
 namespace Drupal\qs_test\Kernel;
 
-use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
-use Drupal\taxonomy\TermInterface;
-use Drupal\node\NodeInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\field\Tests\EntityReference\EntityReferenceTestTrait;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItem;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
+use Drupal\node\NodeInterface;
+use Drupal\qs_test\NodeTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\qs_test\UserTestTrait;
-use Drupal\qs_test\NodeTestTrait;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\taxonomy\TermInterface;
+use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
 
 /**
  * Provides a base class for Quartiers Solidaires functional tests.
  */
 class ResoliKernelTestBase extends EntityKernelTestBase {
-  use UserTestTrait;
+  use EntityReferenceTestTrait;
   use NodeTestTrait;
   use TaxonomyTestTrait;
-  use EntityReferenceTestTrait;
+  use UserTestTrait;
 
   /**
    * Modules to enable.
@@ -75,10 +75,99 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
   }
 
   /**
-   * Prepare Community Taxonomy fields.
+   * Seed some activities into the given community for testing.
+   *
+   * @param Drupal\taxonomy\TermInterface $community
+   *   The communitiy to seed activities into.
+   * @param int $number
+   *   Number of activities to generate.
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of activitiy keyed by entity ID.
    */
-  protected function setupCommunities() {
-    $this->createVocabulary('communities');
+  protected function seedActivities(TermInterface $community, $number) {
+    $activities = [];
+
+    for ($i = 0; $i < $number; ++$i) {
+      $entity = $this->entityTypeManager->getStorage('node')->create([
+        'type' => 'activity',
+        'field_community' => $community->id(),
+        'title' => $this->randomString(),
+      ]);
+      $entity->save();
+      $activities[$entity->id()] = $entity;
+    }
+
+    return $activities;
+  }
+
+  /**
+   * Seed some communities for testing.
+   *
+   * @param int $number
+   *   Number of communities to generate.
+   *
+   * @return \Drupal\taxonomy\TermInterface[]
+   *   A collection of communities keyed by entity ID.
+   */
+  protected function seedCommunities($number) {
+    $communities = [];
+
+    for ($i = 0; $i < $number; ++$i) {
+      $entity = $this->entityTypeManager->getStorage('taxonomy_term')->create([
+        'vid' => 'communities',
+        'name' => $this->randomString(),
+      ]);
+      $entity->save();
+      $communities[$entity->id()] = $entity;
+    }
+
+    return $communities;
+  }
+
+  /**
+   * Seed some events into the given community for testing.
+   *
+   * @param \Drupal\node\NodeInterface $activity
+   *   The community to seed activities into.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $min_date_start
+   *   The minimum start date for generated events.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $max_date_end
+   *   The maximum end date for generated events.
+   * @param int $number
+   *   Number of activities to generate.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @return \Drupal\node\NodeInterface[]
+   *   A collection of events keyed by entity ID.
+   */
+  protected function seedEvents(NodeInterface $activity, DrupalDateTime $min_date_start, DrupalDateTime $max_date_end, $number) {
+    $events = [];
+
+    for ($i = 0; $i < $number; ++$i) {
+      $random_timestamp = mt_rand($min_date_start->getTimestamp(), $max_date_end->getTimestamp());
+      $start_at = new DrupalDateTime();
+      $start_at->setTimestamp($random_timestamp);
+
+      $random_timestamp = mt_rand($start_at->getTimestamp(), $max_date_end->getTimestamp());
+      $end_at = new DrupalDateTime();
+      $end_at->setTimestamp($random_timestamp);
+
+      $entity = $this->entityTypeManager->getStorage('node')->create([
+        'type' => 'event',
+        'field_activity' => $activity->id(),
+        'title' => $this->randomString(),
+        'field_start_at' => $start_at->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
+        'field_end_at' => $end_at->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
+      ]);
+      $entity->save();
+      $events[$entity->id()] = $entity;
+    }
+
+    return $events;
   }
 
   /**
@@ -95,7 +184,13 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
       NULL,
       'taxonomy_term'
     );
+  }
 
+  /**
+   * Prepare Community Taxonomy fields.
+   */
+  protected function setupCommunities() {
+    $this->createVocabulary('communities');
   }
 
   /**
@@ -123,97 +218,6 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
       [],
       1
     );
-  }
-
-  /**
-   * Seed some communities for testing.
-   *
-   * @param int $number
-   *   Number of communities to generate.
-   *
-   * @return \Drupal\taxonomy\TermInterface[]
-   *   A collection of communities keyed by entity ID.
-   */
-  protected function seedCommunities($number) {
-    $communities = [];
-    for ($i = 0; $i < $number; $i++) {
-      $entity = $this->entityTypeManager->getStorage('taxonomy_term')->create([
-        'vid' => 'communities',
-        'name' => $this->randomString(),
-      ]);
-      $entity->save();
-      $communities[$entity->id()] = $entity;
-    }
-    return $communities;
-  }
-
-  /**
-   * Seed some activities into the given community for testing.
-   *
-   * @param Drupal\taxonomy\TermInterface $community
-   *   The communitiy to seed activities into.
-   * @param int $number
-   *   Number of activities to generate.
-   *
-   * @return \Drupal\node\NodeInterface[]
-   *   A collection of activitiy keyed by entity ID.
-   */
-  protected function seedActivities(TermInterface $community, $number) {
-    $activities = [];
-    for ($i = 0; $i < $number; $i++) {
-      $entity = $this->entityTypeManager->getStorage('node')->create([
-        'type' => 'activity',
-        'field_community' => $community->id(),
-        'title' => $this->randomString(),
-      ]);
-      $entity->save();
-      $activities[$entity->id()] = $entity;
-    }
-    return $activities;
-  }
-
-  /**
-   * Seed some events into the given community for testing.
-   *
-   * @param \Drupal\node\NodeInterface $activity
-   *   The community to seed activities into.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $min_date_start
-   *   The minimum start date for generated events.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $max_date_end
-   *   The maximum end date for generated events.
-   * @param int $number
-   *   Number of activities to generate.
-   *
-   * @return \Drupal\node\NodeInterface[]
-   *   A collection of events keyed by entity ID.
-   *
-   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
-   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
-   * @throws \Drupal\Core\Entity\EntityStorageException
-   */
-  protected function seedEvents(NodeInterface $activity, DrupalDateTime $min_date_start, DrupalDateTime $max_date_end, $number) {
-    $events = [];
-    for ($i = 0; $i < $number; $i++) {
-
-      $random_timestamp = mt_rand($min_date_start->getTimestamp(), $max_date_end->getTimestamp());
-      $start_at = new DrupalDateTime();
-      $start_at->setTimestamp($random_timestamp);
-
-      $random_timestamp = mt_rand($start_at->getTimestamp(), $max_date_end->getTimestamp());
-      $end_at = new DrupalDateTime();
-      $end_at->setTimestamp($random_timestamp);
-
-      $entity = $this->entityTypeManager->getStorage('node')->create([
-        'type' => 'event',
-        'field_activity' => $activity->id(),
-        'title' => $this->randomString(),
-        'field_start_at' => $start_at->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
-        'field_end_at' => $end_at->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
-      ]);
-      $entity->save();
-      $events[$entity->id()] = $entity;
-    }
-    return $events;
   }
 
 }

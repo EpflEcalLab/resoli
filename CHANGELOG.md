@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - update drupal/core (8.9.13 => 8.9.14)
 
 ## 1.6.0 (2021-04-19)
  - update Docker to PHP7.4, Node 10 & MariaDB 10.4

@@ -15,6 +15,7 @@
             <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
               {{ event.field_end_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
             </time> - {{ event.title.value }}
+            <span class="text-secondary-light text-small">(<a href="{{ path('entity.node.canonical', {'node': event.field_activity.entity.nid.value, 'view': 'past'}, {'fragment': 'card' ~ event.nid.value }) }}" class="text-secondary-light link-underline link-to-event">{{ 'qs.photo.view_event'|t }}</a>)</span>
           </h2>
         </div>
 

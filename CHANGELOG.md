@@ -2,6 +2,11 @@
 
 ## NEXT RELEASE
  - Add Quill lib for rich-text edition #791
+ - add link to the event card on Photo's activity list - #799
+ - add feature to show Past & Future events on Activity canonical page - #806 #804
+
+## 1.6.1 (2021-04-23)
+ - update drupal/core (8.9.13 => 8.9.14)
 
 ## 1.6.0 (2021-04-19)
  - update Docker to PHP7.4, Node 10 & MariaDB 10.4

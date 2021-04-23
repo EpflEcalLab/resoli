@@ -14,7 +14,7 @@ Feature: Activity Visibility Form
     Then the "edit-member-create-gallery" checkbox should be checked
 
   @api @preserveDatabase
-  Scenario: When editting the Visibility form of Activity, once saved I should be redirected on the Activity dashboard
+  Scenario: When editing the Visibility form of Activity, once saved I should be redirected on the Activity dashboard
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Visibility form "accueil-cafe" of "lausanne" with:
       | community-can-subscribe | community-access-contact | community-access-detail | community-access-story | member-create-story | community-access-gallery | member-create-gallery |
@@ -22,8 +22,8 @@ Feature: Activity Visibility Form
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe/dashboard"
 
-  @api @preserveDatabase
-  Scenario: When editting the Visibility form of Activity, no mail should be sent
+  @api @preserveDatabase @mail
+  Scenario: When editing the Visibility form of Activity, no mail should be sent
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Visibility form "accueil-cafe" of "lausanne" with:
       | community-can-subscribe | community-access-contact | community-access-detail | community-access-story | member-create-story | community-access-gallery | member-create-gallery |
@@ -32,7 +32,7 @@ Feature: Activity Visibility Form
     And 0 mail should be sent
 
   @api @preserveDatabase
-  Scenario: When editting the Visibility form of Activity, the values should be alterd & stored in the database
+  Scenario: When editing the Visibility form of Activity, the values should be alterd & stored in the database
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Visibility form "accueil-cafe" of "lausanne" with:
       | community-can-subscribe | community-access-contact | community-access-detail | community-access-story | member-create-story | community-access-gallery | member-create-gallery |

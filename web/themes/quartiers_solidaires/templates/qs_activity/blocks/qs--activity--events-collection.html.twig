@@ -1,3 +1,5 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
 {% set subscriptions = variables.badges.subscriptions %}
 {% set privileges = variables.privileges %}
 
@@ -15,11 +17,32 @@
 {% set activity_organizer = 'activity_organizers' in privileges %}
 {% set can_manage_activity = activity_maintainer or activity_organizer %}
 
-
 {% if variables.events %}
-  {# TODO: Replace this by a button in https://github.com/antistatique/quartiers-solidaires/issues/804 #}
-  <a href="{{ path('<current>') }}">{{ 'qs.activity.toggler.view_futur_events'|t }}</a>
-  <a href="{{ path('<current>', {'view': 'past'}) }}">{{ 'qs.activity.toggler.view_past_events'|t }}</a>
+  {# Toggler button to view future or past events. #}
+  <div class="navbar-container mb-4">
+    <div class="btn-group btn-group-toggle" role="group" aria-label="{{ 'qs.a11y.activity.toggler.view_past_future_events'|t }}">
+
+      {% if variables.view == 'past' %}
+          <button href="#" class="btn btn-primary btn-icon">
+            {{ macros.icon('counter-clockwise') }}
+            <span>{{ 'qs.activity.toggler.view_past_events'|t }}</span>
+          </button>
+          <a href="{{ path('<current>') }}" class="btn btn-outline-primary btn-icon btn-icon-right">
+            {{ macros.icon('clockwise') }}
+            <span class="sr-only">{{ 'qs.activity.toggler.view_future_events'|t }}</span>
+          </a>
+      {% else %}
+        <a href="{{ path('<current>', {'view': 'past'}) }}" class="btn btn-outline-primary btn-icon">
+          {{ macros.icon('counter-clockwise') }}
+          <span class="sr-only">{{ 'qs.activity.toggler.view_past_events'|t }}</span>
+        </a>
+        <button class="btn btn-primary btn-icon btn-icon-right">
+          {{ macros.icon('clockwise') }}
+          <span>{{ 'qs.activity.toggler.view_future_events'|t }}</span>
+        </button>
+      {% endif %}
+    </div>
+  </div>
 
   {% embed '@quartiers_solidaires/node/partials/card-list.html.twig' with {card_list_id: 'events-accordion'} %}
     {% block card_list_items %}

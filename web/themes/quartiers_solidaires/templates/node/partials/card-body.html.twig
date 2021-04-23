@@ -8,7 +8,7 @@
 <div class="card-body pb-0 text-center">
 
   <h4 class="h5 card-title mb-1 mt-0">
-    {% if is_past %}<span class="">{{ 'qs.event.past_label'|t }}</span>{% endif %}
+    {% if is_past %}<span class="text-danger">{{ 'qs.event.past_label'|t }}</span>{% endif %}
     {{ event.label }}
   </h4>
 

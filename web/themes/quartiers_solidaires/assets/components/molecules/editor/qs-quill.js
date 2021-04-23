@@ -4,7 +4,7 @@
 (function ($) {
   $(document).ready(function () {
     // Initialized Quill rich-text editor
-    const quill = new Quill($('.editor'), {
+    const quill = new Quill('.editor', {
       modules: {
         toolbar: [
           [{ header: [1, 2, false] }],

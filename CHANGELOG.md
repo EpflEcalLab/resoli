@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - add feature to show Past & Future events on Activity canonical page - #806 #805
 
 ## 1.6.0 (2021-04-19)
  - update Docker to PHP7.4, Node 10 & MariaDB 10.4

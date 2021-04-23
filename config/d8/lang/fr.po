@@ -2131,3 +2131,12 @@ msgstr ""
 
 msgid "qs_subscription.subscribers.reject_confirm"
 msgstr ""
+
+msgid "qs.event.past_label"
+msgstr "Evénement passé:"
+
+msgid "qs.activity.toggler.view_past_events"
+msgstr "Evénements passés"
+
+msgid "qs.activity.toggler.view_futur_events"
+msgstr "Evénements à venir"

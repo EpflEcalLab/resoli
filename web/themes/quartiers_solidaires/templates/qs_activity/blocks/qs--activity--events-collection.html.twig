@@ -17,7 +17,9 @@
 
 
 {% if variables.events %}
-  <h2 class="h4 mb-4">{{ 'qs.activity.next_events'|t }}</h2>
+  {# TODO: Replace this by a button in https://github.com/antistatique/quartiers-solidaires/issues/804 #}
+  <a href="{{ path('<current>') }}">{{ 'qs.activity.toggler.view_futur_events'|t }}</a>
+  <a href="{{ path('<current>', {'view': 'past'}) }}">{{ 'qs.activity.toggler.view_past_events'|t }}</a>
 
   {% embed '@quartiers_solidaires/node/partials/card-list.html.twig' with {card_list_id: 'events-accordion'} %}
     {% block card_list_items %}

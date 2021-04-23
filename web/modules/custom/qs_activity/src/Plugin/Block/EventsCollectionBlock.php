@@ -113,12 +113,18 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
     $view = $request->get('view');
 
     if ($view === 'past') {
+      // Get paginated 25 elements of past events.
       $renderer['#variables']['view'] = 'past';
-      $events = $this->eventManager->getAllPrev($activity);
+      $events = $this->eventManager->getAllPrev($activity, 25);
     }
     else {
       $events = $this->eventManager->getAllNext($activity);
     }
+
+    $renderer['#variables']['pager'] = [
+      '#type' => 'pager',
+      '#quantity' => '3',
+    ];
 
     $renderer['#variables']['events'] = $events;
     $renderer['#cache']['tags'] = $this->getCacheTags($events);

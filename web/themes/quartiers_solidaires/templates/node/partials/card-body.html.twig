@@ -3,10 +3,14 @@
 {% set display_contact = event.field_contact_mail.value is not empty or event.field_contact_phone.value is not empty or event.field_contact_name.value is not empty %}
 
 {% set contribution = event.field_contribution.value %}
+{% set is_past = event.field_end_at.date|date('Y-m-d') < 'now'|date('Y-m-d') %}
 
 <div class="card-body pb-0 text-center">
 
-  <h4 class="h5 card-title mb-1 mt-0">{{ event.label }}</h4>
+  <h4 class="h5 card-title mb-1 mt-0">
+    {% if is_past %}<span class="text-danger">{{ 'qs.event.past_label'|t }}</span>{% endif %}
+    {{ event.label }}
+  </h4>
 
   {# Event hours display on mobile only #}
   <p class="d-md-none mb-0">

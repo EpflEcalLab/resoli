@@ -151,3 +151,15 @@
     .text#{$infix}-size-lg        { font-size: $font-size-lg; }
   }
 }
+
+.text-small {
+  font-size: $font-size-sm;
+}
+
+.text-secondary-light {
+  color: $teal-300;
+
+  &:hover {
+    color: $teal;
+  }
+}

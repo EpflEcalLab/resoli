@@ -1788,6 +1788,9 @@ msgstr "Ajouter des photos"
 msgid "qs.photo.no_photos"
 msgstr ""
 
+msgid "qs.photo.view_event"
+msgstr "voir cet événement"
+
 msgid "qs.form.input.upload"
 msgstr "Sélectionner des photos"
 

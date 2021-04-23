@@ -151,3 +151,7 @@
     .text#{$infix}-size-lg        { font-size: $font-size-lg; }
   }
 }
+
+.text-small {
+  font-size: $small-font-size;
+}

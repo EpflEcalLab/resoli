@@ -1,7 +1,8 @@
 # CHANGELOG
 
 ## NEXT RELEASE
- - add feature to show Past & Future events on Activity canonical page - #806
+ - add link to the event card on Photo's activity list - #799
+ - add feature to show Past & Future events on Activity canonical page - #806 #804
 
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)

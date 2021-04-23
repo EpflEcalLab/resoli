@@ -3,6 +3,7 @@
 /* globals jQuery, Quill */
 (function ($) {
   $(document).ready(function () {
+    // Initialized Quill rich-text editor
     const quill = new Quill($('.editor'), {
       modules: {
         toolbar: [

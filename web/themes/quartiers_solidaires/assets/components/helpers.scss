@@ -153,5 +153,9 @@
 }
 
 .text-small {
-  font-size: $small-font-size;
+  font-size: $font-size-sm;
+}
+
+.text-secondary-light {
+  color: $teal-300;
 }

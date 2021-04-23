@@ -158,4 +158,8 @@
 
 .text-secondary-light {
   color: $teal-300;
+
+  &:hover {
+    color: $teal;
+  }
 }

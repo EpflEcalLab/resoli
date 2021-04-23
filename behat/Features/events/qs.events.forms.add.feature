@@ -9,7 +9,7 @@ Feature: Add Event Form
     And I press "edit-submit"
     Then the url should match "/fr/lausanne/activities/accueil-cafe"
 
-  @api @preserveDatabase
+  @api @preserveDatabase @mail
   Scenario: When creating an Event, as organizer only, no mail should be sent and the user should not be subscribed to the event
     Given I am logged in as user "organizer+lausanne"
     When I fill the Add Event form "sorties-theatre" of "lausanne" with:
@@ -20,7 +20,7 @@ Feature: Add Event Form
     Then I should not see a "#card64[data-status='confirmed']" element
     Then I should see a "#card64[data-status='default']" element
 
-  @api @preserveDatabase
+  @api @preserveDatabase @mail
   Scenario: When creating an Event, as organizer & co-organizer, no mail should be sent and the user should not be subscribed to the event
     Given I am logged in as user "organizer+lausanne"
     When I fill the Add Event form "accueil-cafe" of "lausanne" with:

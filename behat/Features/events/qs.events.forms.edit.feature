@@ -21,7 +21,7 @@ Feature: Event Edit Form
     Then the "edit-has-contribution-1" checkbox should not be checked
 
   @api @preserveDatabase @mail
-  Scenario: When editting the Edit form of Event, once saved I should be redirected on the Event dashboard
+  Scenario: When editing the Edit form of Event, once saved I should be redirected on the Event dashboard
     Given I am logged in as user "organizer+lausanne"
     When I fill the Edit Event "accueil-cafe-1" form on activity "accueil-cafe" of "lausanne" with:
       | title | date | start-at | end-at | body | venue | contact-name | contact-phone | contact-mail | contribution |
@@ -31,7 +31,7 @@ Feature: Event Edit Form
     And I should see "qs_activity.events.form.edit.success Accueil Café" in the ".alert" element
 
   @api @preserveDatabase @mail
-  Scenario: When editting an Event, the values should be alterd & stored in the database
+  Scenario: When editing an Event, the values should be alterd & stored in the database
     Given I am logged in as user "organizer+lausanne"
     When I fill the Edit Event "accueil-cafe-1" form on activity "accueil-cafe" of "lausanne" with:
       | title | date| start-at | end-at | body | venue | contact-name | contact-phone | contact-mail | contribution |
@@ -52,7 +52,7 @@ Feature: Event Edit Form
     And the "edit-contribution" field should contain "25 CHF"
 
   @api @preserveDatabase @mail
-  Scenario: When editting an Event with some other Organizers, a mail should warn them of any changes (even me)
+  Scenario: When editing an Event with some other Organizers, a mail should warn them of any changes (even me)
     Given I am logged in as user "manager+lausanne"
     When I fill the Edit Event "mariage-et-chatiment" form on activity "sorties-theatre" of "lausanne" with:
       | title | date| start-at | end-at | body | venue | contact-name | contact-phone | contact-mail | contribution |
@@ -63,7 +63,7 @@ Feature: Event Edit Form
     Then A mail as been sent to "organizer+lausanne@antistatique.net" with subject "qs.mail.event.updated.subject Resoli Accueil Café (edited)"
 
   @api @preserveDatabase @mail
-  Scenario: When editting an Event with some validated Subscribers, a mail should warn them of any changes
+  Scenario: When editing an Event with some validated Subscribers, a mail should warn them of any changes
     Given I am logged in as user "admin"
     When I fill the Edit Event "prendre-des-photos-avec-son-smartphone" form on activity "cours-smartphone-tablette" of "fribourg" with:
       | title | date| start-at | end-at | body | venue | contact-name | contact-phone | contact-mail | contribution |

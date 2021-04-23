@@ -1,0 +1,36 @@
+@each $color, $value in $theme-colors {
+  .editor.ql-bubble.editor-#{$color} .ql-picker.ql-header,
+  .editor.ql-bubble.editor-#{$color} .ql-editor {
+    .ql-picker-item[data-value="1"]:before,
+    h1 {
+      color: $value;
+    }
+  }
+}
+
+.editor.ql-bubble .ql-picker.ql-header,
+.editor.ql-bubble .ql-editor {
+  * {
+    font-family: $font-family-base-webfonts;
+  }
+
+  .ql-picker-item[data-value="1"]:before,
+  h1 {
+    font-size: $h4-font-size;
+    font-weight: bold;
+
+    @include media-breakpoint-down(xs) {
+      font-size: $h4-font-size * 0.8;
+    }
+  }
+
+  .ql-picker-item[data-value="2"]:before,
+  h2 {
+    font-size: $h5-font-size;
+    font-weight: normal;
+
+    @include media-breakpoint-down(xs) {
+      font-size: $h5-font-size * 0.8;
+    }
+  }
+}

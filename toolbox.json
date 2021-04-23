@@ -59,7 +59,10 @@
     "src": "web/themes/quartiers_solidaires/assets/components/molecules/form-control/qs-uppy.js",
     "dest": "web/themes/quartiers_solidaires/build/uppy"
   },{
-    "src": "node_modules/quill/dist/*",
+    "src": "node_modules/quill/dist/quill.bubble.css",
+    "dest": "web/themes/quartiers_solidaires/build/quill"
+  },{
+    "src": "node_modules/quill/dist/quill.js",
     "dest": "web/themes/quartiers_solidaires/build/quill"
   },{
     "src": "web/themes/quartiers_solidaires/assets/components/molecules/editor/qs-quill.js",

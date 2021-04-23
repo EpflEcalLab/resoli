@@ -88,14 +88,23 @@ $max-items: 5;
 
   .btn.btn-primary {
     box-shadow: -1.5px 2px 2px rgba(120, 30, 190, 0.3);
-  }
-}
+    background-color: $purple;
+    border-color: $purple;
 
-.btn-group-toggle-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
+    .icon svg {
+      fill: transparent;
+    }
+  }
+
+  .btn.btn-outline-primary {
+    color: $purple;
+    border-color: $purple;
+
+    .icon svg {
+      color: $purple;
+      fill: transparent;
+    }
+  }
 }
 
 // Override some Bootstrap 4

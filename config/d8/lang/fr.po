@@ -2146,3 +2146,12 @@ msgstr "Evénements passés"
 
 msgid "qs.activity.toggler.view_future_events"
 msgstr "Evénements à venir"
+
+msgid "qs.quill.editor.placeholder"
+msgstr "Ecrire quelque chose"
+
+msgid "qs.quill.editor.h1"
+msgstr "Titre 1"
+
+msgid "qs.quill.editor.h2"
+msgstr "Titre 2"

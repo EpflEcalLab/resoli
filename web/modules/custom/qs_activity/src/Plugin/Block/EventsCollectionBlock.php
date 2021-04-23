@@ -9,6 +9,7 @@ use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_activity\Service\EventManager;
 use Drupal\qs_badge\Service\BadgeManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Collection of Events by Activity.
@@ -37,6 +38,13 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   protected $eventManager;
 
   /**
+   * The request stack.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
    * The Privilege Manager.
    *
    * @var \Drupal\qs_acl\Service\PrivilegeManager
@@ -53,9 +61,10 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManager $privilege_manager, CurrentRouteMatch $route, EventManager $event_manager, BadgeManager $badge_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, PrivilegeManager $privilege_manager, RequestStack $request_stack, CurrentRouteMatch $route, EventManager $event_manager, BadgeManager $badge_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->privilegeManager = $privilege_manager;
+    $this->requestStack = $request_stack;
     $this->route = $route;
     $this->eventManager = $event_manager;
     $this->badgeManager = $badge_manager;
@@ -65,56 +74,73 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
    * {@inheritdoc}
    */
   public function build($params = []) {
-    $variables = [
-      // List of user privilege for this activity (member|organizer|manager)
-      'privileges' => [],
-      'activity' => NULL,
-      'events' => [],
-    ];
-
-    $activity = $this->route->getParameter('node');
-
-    if ($activity) {
-      $variables['activity'] = $activity;
-      $privileges = $this->privilegeManager->fetchActive($activity);
-      $variables['events'] = $this->eventManager->getAllNext($activity);
-
-      foreach ($privileges as $privilege) {
-        $variables['privileges'][] = $privilege->privilege->value;
-      }
-
-      // Get badges.
-      if (!empty($variables['events'])) {
-        // From list of Events where current user has pending subscriptions.
-        $variables['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($variables['events'], NULL);
-
-        // From list of Events where current user has confirmed subscription.
-        $variables['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($variables['events'], TRUE);
-
-        // From list of Activities get user privileges.
-        $variables['badges']['privileges'] = $this->badgeManager->getPrivileges([$variables['activity']]);
-
-        // From list of Events count pending subscriptions by given events.
-        $variables['badges']['subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptions($variables['events'], NULL);
-
-        // From list of Events count confirmed subscriptions by given events.
-        $variables['badges']['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($variables['events'], TRUE);
-      }
-    }
-
-    return [
+    $renderer = [
       '#theme' => 'qs_activity_events_collection_block',
-      '#variables' => $variables,
+      '#variables' => [
+        // List of user privilege for this activity (member|organizer|manager)
+        'privileges' => [],
+        'activity' => NULL,
+        'events' => [],
+        'view' => 'future',
+      ],
       '#cache' => [
         'contexts' => [
           'user',
         ],
-        'tags' => $this->getCacheTags($variables['events']),
       ],
       '#attached' => [
         'library' => 'quartiers_solidaires/google-map',
       ],
     ];
+
+    $request = $this->requestStack->getCurrentRequest();
+
+    $activity = $this->route->getParameter('node');
+
+    if (!$activity) {
+      return $renderer;
+    }
+    $renderer['#variables']['activity'] = $activity;
+
+    // Build the privileges array for renderer.
+    $privileges = $this->privilegeManager->fetchActive($activity);
+
+    foreach ($privileges as $privilege) {
+      $renderer['#variables']['privileges'][] = $privilege->privilege->value;
+    }
+
+    // Get the view mode (future or past events to list)
+    $view = $request->get('view');
+
+    if ($view === 'past') {
+      $renderer['#variables']['view'] = 'past';
+      $events = $this->eventManager->getAllPrev($activity);
+    }
+    else {
+      $events = $this->eventManager->getAllNext($activity);
+    }
+
+    $renderer['#variables']['events'] = $events;
+    $renderer['#cache']['tags'] = $this->getCacheTags($events);
+
+    // Calculate badge only when events are not empty for performance.
+    if (empty($events)) {
+      return $renderer;
+    }
+
+    // Get badges.
+    // From list of Events where current user has pending subscriptions.
+    $renderer['#variables']['badges']['subscriptions']['pendings'] = $this->badgeManager->getSubscription($renderer['#variables']['events'], NULL);
+    // From list of Events where current user has confirmed subscription.
+    $renderer['#variables']['badges']['subscriptions']['confirmed'] = $this->badgeManager->getSubscription($renderer['#variables']['events'], TRUE);
+    // From list of Activities get user privileges.
+    $renderer['#variables']['badges']['privileges'] = $this->badgeManager->getPrivileges([$renderer['#variables']['activity']]);
+    // From list of Events count pending subscriptions by given events.
+    $renderer['#variables']['badges']['subscriptions']['pendings_guests'] = $this->badgeManager->countSubscriptions($renderer['#variables']['events'], NULL);
+    // From list of Events count confirmed subscriptions by given events.
+    $renderer['#variables']['badges']['subscriptions']['confirmed_guests'] = $this->badgeManager->countSubscriptions($renderer['#variables']['events'], TRUE);
+
+    return $renderer;
   }
 
   /**
@@ -129,6 +155,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
         $plugin_definition,
         // Load customs services used in this class.
         $container->get('qs_acl.privilege_manager'),
+        $container->get('request_stack'),
         $container->get('current_route_match'),
         $container->get('qs_activity.event_manager'),
         $container->get('qs_badge.badge_manager')

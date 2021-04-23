@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - Add Quill lib for rich-text edition #791
  - add link to the event card on Photo's activity list - #799
  - add feature to show Past & Future events on Activity canonical page - #806 #804
 

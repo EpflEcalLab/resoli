@@ -124,6 +124,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
     $renderer['#variables']['pager'] = [
       '#type' => 'pager',
       '#quantity' => '3',
+      '#theme' => 'pager__light_bg',
     ];
 
     $renderer['#variables']['events'] = $events;

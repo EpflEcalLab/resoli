@@ -22,7 +22,7 @@ Feature: Activity Members Form
     Then the url should match "/lausanne/activities/accueil-cafe/dashboard/members#card5"
     And I should see "qs_activity.activities.form.add.member.success Accueil Café" in the ".alert" element
 
-  @api @preserveDatabase
+  @api @preserveDatabase @mail
   Scenario: When adding a Member to the Activity, no mail should be sent
     Given I am logged in as user "organizer+lausanne"
     When I am on "/lausanne/activities/accueil-cafe/dashboard/members"

@@ -10,7 +10,7 @@ Feature: Activity Information Form
     Then the "edit-theme-5" checkbox should be checked
 
   @api @preserveDatabase
-  Scenario: When editting the Information form of Activity, once saved I should be redirected on the Activity dashboard
+  Scenario: When editing the Information form of Activity, once saved I should be redirected on the Activity dashboard
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Information form "accueil-cafe" of "lausanne" with:
       | title | theme |
@@ -18,8 +18,8 @@ Feature: Activity Information Form
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe/dashboard"
 
-  @api @preserveDatabase
-  Scenario: When editting the Information form of Activity, no mail should be sent
+  @api @preserveDatabase @mail
+  Scenario: When editing the Information form of Activity, no mail should be sent
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Information form "accueil-cafe" of "lausanne" with:
       | title | theme |
@@ -28,7 +28,7 @@ Feature: Activity Information Form
     And 0 mail should be sent
 
   @api @preserveDatabase
-  Scenario: When editting the Information form of Activity, the values should be alterd & stored in the database
+  Scenario: When editing the Information form of Activity, the values should be alterd & stored in the database
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Information form "accueil-cafe" of "lausanne" with:
       | title | theme |

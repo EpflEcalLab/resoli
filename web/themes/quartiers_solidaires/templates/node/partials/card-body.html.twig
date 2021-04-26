@@ -48,6 +48,18 @@
       {% include '@quartiers_solidaires/node/partials/card-body-register.html.twig' %}
     {% endif %}
 
+     {# View pictures button #}
+    {# Event should be in the past and user should be member of the activity OR activity should allow community members to view photos #}
+    {% if is_past and (has_activity_privilege or community_can_view_photos) %}
+      {{ macros.card_button(
+        'qs.event.view_photos'|t,
+        path('qs_photo.activity', {activity: variables.activity.nid.value}),
+        'picture',
+        'left',
+        ''
+      ) }}
+    {% endif %}
+
     {# Contact button #}
     {# User should be member of the activity OR activity should allow access to community members #}
     {% if display_contact and (has_activity_privilege or community_can_view_contact) %}

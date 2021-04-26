@@ -17,25 +17,26 @@ class Pdf {
    * Download the pdf.
    *
    * @param string $templateName
+   *   The template name.
    * @param array $variables
+   *   The variables to give to the template
    *
-   * @return void
-   *   The PDF generator for a giver template
+   *   The PDF generator for a giver template.
    */
-  public function download($templateName, $variables) {
-    // Instantiate the dompdf options
+  public function download($templateName, array $variables) {
+    // Instantiate the dompdf options.
     $options = new Options();
-    //$options->set('defaultFont', 'Open Sans');
+    // $options->set('defaultFont', 'Open Sans');
     $options->set('defaultPaperSize', 'a4');
 
-    // Instantiate the dompdf
+    // Instantiate the dompdf.
     $dompdf = new Dompdf($options);
 
     $now = new DrupalDateTime();
 
     $variables['update'] = $now->format('d.m.y');
 
-    // Twig template to be rendered
+    // Twig template to be rendered.
     $template = [
       '#theme' => $templateName,
       '#variables' => $variables,
@@ -43,13 +44,16 @@ class Pdf {
     $rendered = \Drupal::service('renderer')->render($template);
 
     $dompdf->loadHtml($rendered);
-    // Render the HTML as PDF
+    // Render the HTML as PDF.
     $dompdf->render();
 
-    // Set the footer with the pagination
+    // Set the footer with the pagination.
     $font = $dompdf->getFontMetrics()->getFont('Helvetica', 'normal');
-    $dompdf->getCanvas()->page_text(298, 815, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, [0, 0, 0]);
+    $dompdf
+      ->getCanvas()
+      ->page_text(298, 815, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, [0, 0, 0]);
 
     $dompdf->stream('offres_' . $now->format('d_m_Y') . '.pdf');
   }
+
 }

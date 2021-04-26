@@ -17,14 +17,14 @@ class OffersController extends ControllerBase {
   /**
    * The QS PDF exporter.
    *
-   * @var Pdf
+   * @var \Drupal\qs_export\Pdf
    */
   protected $pdfExporter;
 
   /**
    * Access Control Service.
    *
-   * @var AccessControl
+   * @var \Drupal\qs_acl\Service\AccessControl
    */
   private $acl;
 
@@ -72,9 +72,8 @@ class OffersController extends ControllerBase {
   /**
    * Export the complete list of offers by community.
    *
-   * @param TermInterface $community
-   *
-   * @return void
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community object.
    */
   public function exportToPdf(TermInterface $community) {
     /*
@@ -87,4 +86,5 @@ class OffersController extends ControllerBase {
       ['community' => $community->getName()]
     );
   }
+
 }

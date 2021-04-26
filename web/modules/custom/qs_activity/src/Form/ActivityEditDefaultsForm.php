@@ -52,11 +52,13 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     ];
 
     $form['group']['body'] = [
+      '#attributes' => ['class' => ['quill-editor', 'quill-editor-primary']],
       '#title' => $this->t('qs_activity.activities.form.edit.defaults.body'),
       '#placeholder' => $this->t('qs_activity.activities.form.edit.defaults.body.placeholder'),
       '#type' => 'textarea',
       '#default_value' => $activity->body->value,
     ];
+    $form['#attached']['library'][] = 'quartiers_solidaires/quill';
 
     $form['group']['venue'] = [
       '#attributes' => [

@@ -5,6 +5,7 @@ namespace Drupal\qs_export;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Render\Renderer;
 
 /**
  * Pdf exporter for Quartiers-Solidaires.
@@ -12,6 +13,22 @@ use Drupal\Core\Datetime\DrupalDateTime;
  * Ensure a standard format for every Pdf export.
  */
 class Pdf {
+  /**
+   * The renderer service.
+   *
+   * @var \Drupal\Core\Render\Renderer
+   */
+  protected $renderer;
+
+  /**
+   * Constructs a new Pdf instance.
+   *
+   * @param \Drupal\Core\Render\Renderer $renderer
+   *   The renderer service.
+   */
+  public function __construct(Renderer $renderer) {
+    $this->renderer = $renderer;
+  }
 
   /**
    * Download the pdf.
@@ -41,7 +58,8 @@ class Pdf {
       '#theme' => $templateName,
       '#variables' => $variables,
     ];
-    $rendered = \Drupal::service('renderer')->render($template);
+
+    $rendered = $this->renderer->render($template);
 
     $dompdf->loadHtml($rendered);
     // Render the HTML as PDF.

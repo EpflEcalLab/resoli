@@ -574,6 +574,9 @@ msgstr ""
 msgid "qs.event.contact"
 msgstr "Contacter l’organisateur?"
 
+msgid "qs.event.view.photos"
+msgstr "Voir les photos"
+
 msgid "qs.event.back_to_event"
 msgstr "Retour à l’évènement"
 

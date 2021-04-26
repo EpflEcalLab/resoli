@@ -52,7 +52,7 @@
     {# Event should be in the past and user should be member of the activity OR activity should allow community members to view photos #}
     {% if is_past and (has_activity_privilege or community_can_view_photos) %}
       {{ macros.card_button(
-        'qs.event.view_photos'|t,
+        'qs.event.view.photos'|t,
         path('qs_photo.activity', {activity: variables.activity.nid.value}),
         'picture',
         'left',

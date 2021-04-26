@@ -14,7 +14,7 @@ Feature: Activity Defaults Form
     And the "edit-contact-mail" field should contain ""
 
   @api @preserveDatabase
-  Scenario: When editting the Defaults Values form of Activity, once saved I should be redirected on the Activity dashboard
+  Scenario: When editing the Defaults Values form of Activity, once saved I should be redirected on the Activity dashboard
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Defaults Values form "accueil-cafe" of "lausanne" with:
       | title | body | venue | contribution | contact-name | contact-phone | contact-mail |
@@ -23,8 +23,8 @@ Feature: Activity Defaults Form
     Then the url should match "/lausanne/activities/accueil-cafe/dashboard"
     And I should see "qs_activity.activities.form.edit.defaults.success Accueil Café" in the ".alert" element
 
-  @api @preserveDatabase
-  Scenario: When editting the Defaults Values form of Activity, no mail should be sent
+  @api @preserveDatabase @mail
+  Scenario: When editing the Defaults Values form of Activity, no mail should be sent
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Defaults Values form "accueil-cafe" of "lausanne" with:
       | title | body | venue | contribution | contact-name | contact-phone | contact-mail |
@@ -33,7 +33,7 @@ Feature: Activity Defaults Form
     And 0 mail should be sent
 
   @api @preserveDatabase
-  Scenario: When editting the Defaults Values form of Activity, the values should be alterd & stored in the database
+  Scenario: When editing the Defaults Values form of Activity, the values should be alterd & stored in the database
     Given I am logged in as user "organizer+lausanne"
     When I fill the Activity Defaults Values form "accueil-cafe" of "lausanne" with:
       | title | body | venue | contribution | contact-name | contact-phone | contact-mail |

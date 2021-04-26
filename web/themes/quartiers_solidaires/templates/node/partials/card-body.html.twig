@@ -35,16 +35,16 @@
     {% endif %}
 
     {# Contribution #}
-    {# User should be member of the activity OR activity should allow subscription to community members #}
-    {% if (has_activity_privilege or community_can_subscribe) and contribution %}
+    {# Event should not be in the past and user should be member of the activity OR activity should allow subscription to community members #}
+    {% if not is_past and (has_activity_privilege or community_can_subscribe) and contribution %}
       {% include '@quartiers_solidaires/node/partials/card-body-contribution.html.twig' %}
     {% endif %}
   </div>
 
   <div class="card-actions row">
     {# Register button #}
-    {# User should be member of the activity OR activity should allow subscription to community members #}
-    {% if has_activity_privilege or community_can_subscribe %}
+    {# Event should not be in the past and user should be member of the activity OR activity should allow subscription to community members #}
+    {% if not is_past and (has_activity_privilege or community_can_subscribe) %}
       {% include '@quartiers_solidaires/node/partials/card-body-register.html.twig' %}
     {% endif %}
 
@@ -73,8 +73,8 @@
     {% endif %}
 
     {# Location button #}
-    {# User should have some privileges OR activity should allow community to access details #}
-    {% if event.field_venue.value and (has_activity_privilege or community_can_view_detail) %}
+    {# Event should not be in the past and user should have some privileges OR activity should allow community to access details #}
+    {% if not is_past and event.field_venue.value and (has_activity_privilege or community_can_view_detail) %}
       {{ macros.card_button(
         'qs.event.location'|t,
         '#map-' ~ event.nid.value,
@@ -117,28 +117,31 @@
         {% set theme = 'danger' %}
       {% endif %}
 
-      {% if guest_subscription_pending %}
-        {% set guests_btn = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
+      {# Event should not be in the past to show the guest subscriptions  #}
+      {% if not is_past %}
+        {% if guest_subscription_pending %}
+          {% set guests_btn = variables.badges.subscriptions.pendings_guests[event.nid.value] %}
 
-        {{ macros.card_button(
-          'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests_btn}),
-          path('qs_subscription.waiting_approval', params),
-          'wait',
-          'left',
-          'data-status-guest-show="pendings_guests"',
-          theme
-        ) }}
-      {% elseif guest_subscription_confirmed %}
-        {% set guests_btn = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
+          {{ macros.card_button(
+            'qs.event.dashboard.shortcut.waiting_approval @guests'|t({'@guests': guests_btn}),
+            path('qs_subscription.waiting_approval', params),
+            'wait',
+            'left',
+            'data-status-guest-show="pendings_guests"',
+            theme
+          ) }}
+        {% elseif guest_subscription_confirmed %}
+          {% set guests_btn = variables.badges.subscriptions.confirmed_guests[event.nid.value] %}
 
-        {{ macros.card_button(
-          'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests_btn}),
-          path('qs_subscription.subscribers', params),
-          'checklist',
-          'left',
-          'data-status-guest-show="confirmed_guests"',
-          theme
-        ) }}
+          {{ macros.card_button(
+            'qs.event.dashboard.shortcut.confirmed @guests'|t({'@guests': guests_btn}),
+            path('qs_subscription.subscribers', params),
+            'checklist',
+            'left',
+            'data-status-guest-show="confirmed_guests"',
+            theme
+          ) }}
+        {% endif %}
       {% endif %}
 
     {% endif %}

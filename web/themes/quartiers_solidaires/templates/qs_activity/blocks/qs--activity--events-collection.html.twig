@@ -18,8 +18,8 @@
 {% set can_manage_activity = activity_maintainer or activity_organizer %}
 
 {# Toggler button to view future or past events. #}
-<div class="navbar-container mb-4">
-  <div class="btn-group btn-group-toggle" role="group" aria-label="{{ 'qs.a11y.activity.toggler.view_past_future_events'|t }}">
+<div class="btn-group-toggle-display mb-4">
+  <div class="btn-group btn-group-toggle mb-4" role="group" aria-label="{{ 'qs.a11y.activity.toggler.view_past_future_events'|t }}">
 
     {% if variables.view == 'past' %}
       <button href="#" class="btn btn-primary btn-icon">
@@ -83,6 +83,7 @@
     {% endblock %}
   {% endembed %}
 
+  {{ variables.pager }}
 {% else %}
 
   <h2 class="h4 mb-4 text-center">

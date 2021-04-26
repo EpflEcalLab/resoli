@@ -79,11 +79,13 @@ $max-items: 5;
 
 .btn-group.btn-group-toggle {
   .btn.btn-icon-right {
+    padding-right: $input-btn-padding-x * 1.5;
     padding-left: 1.375rem;
   }
 
   .btn.btn-icon:not(.btn-icon-right) {
     padding-right: 1.375rem;
+    padding-left: $input-btn-padding-x * 1.5;
   }
 
   .btn + .btn {
@@ -102,6 +104,7 @@ $max-items: 5;
   }
 
   .btn.btn-outline-primary {
+    min-width: 160px;
     color: $purple;
     border-color: $purple;
     z-index: 6;
@@ -111,6 +114,13 @@ $max-items: 5;
       fill: transparent;
     }
   }
+}
+
+.btn-group-toggle-display {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // Override some Bootstrap 4

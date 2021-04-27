@@ -2,9 +2,37 @@
   .rich-content.rich-content-#{$color},
   .quill-editor.ql-bubble.quill-editor-#{$color} .ql-picker.ql-header,
   .quill-editor.ql-bubble.quill-editor-#{$color} .ql-editor {
-    .ql-picker-item[data-value="1"]:before,
-    h1 {
+    .ql-picker-item[data-value="4"]:before,
+    h4 {
       color: $value;
+    }
+  }
+}
+
+.rich-content {
+  * {
+    font-family: $font-family-base-webfonts;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  h4 {
+    content: attr(data-h4-translation);
+    font-size: $h5-font-size;
+    font-weight: 600;
+
+    @include media-breakpoint-down(xs) {
+      font-size: $h5-font-size * 0.8;
+    }
+  }
+
+  h5 {
+    content: attr(data-h5-translation);
+    font-size: $h5-font-size;
+    font-weight: normal;
+
+    @include media-breakpoint-down(xs) {
+      font-size: $h5-font-size * 0.8;
     }
   }
 }
@@ -24,7 +52,7 @@
   }
 
   .ql-editor.ql-blank::before {
-    font-size: 1rem;
+    font-size: $font-size-base;
     font-style: normal;
   }
 }
@@ -34,22 +62,23 @@
   * {
     font-family: $font-family-base-webfonts;
     font-size: 1rem;
+    margin: 0;
   }
 
-  .ql-picker-item[data-value="1"]:before,
-  h1 {
-    content: attr(data-h1-translation);
-    font-size: $h4-font-size;
-    font-weight: bold;
+  .ql-picker-item[data-value="4"]:before,
+  h4 {
+    content: attr(data-h4-translation);
+    font-size: $h5-font-size;
+    font-weight: 600;
 
     @include media-breakpoint-down(xs) {
-      font-size: $h4-font-size * 0.8;
+      font-size: $h5-font-size * 0.8;
     }
   }
 
-  .ql-picker-item[data-value="2"]:before,
-  h2 {
-    content: attr(data-h2-translation);
+  .ql-picker-item[data-value="5"]:before,
+  h5 {
+    content: attr(data-h5-translation);
     font-size: $h5-font-size;
     font-weight: normal;
 
@@ -58,11 +87,11 @@
     }
   }
 
-  .ql-picker-label[data-value="1"]:before {
-    content: attr(data-h1-translation);
+  .ql-picker-label[data-value="4"]:before {
+    content: attr(data-h4-translation);
   }
 
-  .ql-picker-label[data-value="2"]:before {
-    content: attr(data-h2-translation);
+  .ql-picker-label[data-value="5"]:before {
+    content: attr(data-h5-translation);
   }
 }

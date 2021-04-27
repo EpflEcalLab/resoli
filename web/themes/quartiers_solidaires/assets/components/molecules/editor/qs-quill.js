@@ -11,7 +11,7 @@
       const quill = new Quill(`#${identifier}`, {
         modules: {
           toolbar: [
-            [{ header: [1, 2, false] }],
+            [{ header: [4, 5, false] }],
             ['bold', 'italic', 'underline'],
           ]
         },
@@ -25,17 +25,17 @@
       textareaFormGroup.attr('hidden', true);
 
       // Translate the toolbar heading options
-      const h1 = Drupal.t('qs.quill.editor.h1');
-      const h2 = Drupal.t('qs.quill.editor.h2');
-      $(`#${identifier} .ql-picker-item[data-value="1"]`).attr('data-h1-translation', h1);
-      $(`#${identifier} .ql-picker-item[data-value="2"]`).attr('data-h2-translation', h2);
-      $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="1"]`).attr('data-h1-translation', h1);
-      $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="2"]`).attr('data-h2-translation', h2);
+      const h4 = Drupal.t('qs.quill.editor.h4');
+      const h5 = Drupal.t('qs.quill.editor.h5');
+      $(`#${identifier} .ql-picker-item[data-value="4"]`).attr('data-h4-translation', h4);
+      $(`#${identifier} .ql-picker-item[data-value="5"]`).attr('data-h5-translation', h5);
+      $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="4"]`).attr('data-h4-translation', h4);
+      $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="5"]`).attr('data-h5-translation', h5);
 
       // Translate the current selected option
       quill.on('text-change', function() {
-        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="1"]`).attr('data-h1-translation', h1);
-        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="2"]`).attr('data-h2-translation', h2);
+        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="4"]`).attr('data-h1-translation', h4);
+        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="5"]`).attr('data-h2-translation', h5);
       });
 
       // Add the content of the quill editor to the hidden textarea

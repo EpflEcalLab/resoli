@@ -63,7 +63,7 @@ class Pdf {
 
     $now = new DrupalDateTime();
 
-    $variables['update'] = $this->dateFormatter->format($now->getTimestamp(), 'custom', 'd.m.y');
+    $variables['update'] = $this->dateFormatter->format($now->getTimestamp(), 'default_medium_date_only');
 
     // Twig template to be rendered.
     $template = [
@@ -83,7 +83,7 @@ class Pdf {
       ->getCanvas()
       ->page_text(298, 815, '{PAGE_NUM}/{PAGE_COUNT}', $font, 12, [0, 0, 0]);
 
-    $dompdf->stream($document_title . '_' . $this->dateFormatter->format($now->getTimestamp(), 'custom', 'd_m_Y') . '.pdf');
+    $dompdf->stream($document_title . '_' . $this->dateFormatter->format($now->getTimestamp(), 'html_date') . '.pdf');
   }
 
 }

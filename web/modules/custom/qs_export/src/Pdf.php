@@ -12,7 +12,8 @@ use Drupal\Core\Render\Renderer;
  *
  * Ensure a standard format for every Pdf export.
  */
-class Pdf {
+class Pdf
+{
   /**
    * The renderer service.
    *
@@ -43,7 +44,6 @@ class Pdf {
   public function download($templateName, array $variables) {
     // Instantiate the dompdf options.
     $options = new Options();
-    // $options->set('defaultFont', 'Open Sans');
     $options->set('defaultPaperSize', 'a4');
 
     // Instantiate the dompdf.
@@ -69,7 +69,7 @@ class Pdf {
     $font = $dompdf->getFontMetrics()->getFont('Helvetica', 'normal');
     $dompdf
       ->getCanvas()
-      ->page_text(298, 815, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, [0, 0, 0]);
+      ->page_text(298, 815, '{PAGE_NUM}/{PAGE_COUNT}', $font, 12, [0, 0, 0]);
 
     $dompdf->stream('offres_' . $now->format('d_m_Y') . '.pdf');
   }

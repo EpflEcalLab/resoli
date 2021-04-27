@@ -26,6 +26,13 @@ class InlineAddForm extends FormBasic {
   protected $fallback;
 
   /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
+
+  /**
    * The node Storage.
    *
    * @var \Drupal\node\NodeStorageInterface
@@ -66,6 +73,7 @@ class InlineAddForm extends FormBasic {
     $this->userStorage = $this->getUserStorage();
     $this->privilegeManager = $this->getPrivilegeManager();
     $this->subscriptionManager = $this->getSubscriptionManager();
+    $this->mail = $this->getMail();
   }
 
   /**
@@ -212,6 +220,11 @@ class InlineAddForm extends FormBasic {
     // Register the member but don't send mails to organizer(s).
     $subscription = $this->subscriptionManager->request($event, $account, FALSE);
     $this->subscriptionManager->confirm($subscription);
+
+    $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_confirm', $account->getEmail(), $account->getPreferredLangcode(), [
+      'account' => $account,
+      'event' => $event,
+    ]);
 
     $this->messenger()->addMessage($this->t('qs_subscription.subscription.form.subscribe.member.success @event', [
       '@event' => $event->getTitle(),

@@ -6,6 +6,7 @@
  - add feature to show Past & Future events on Activity canonical page - #806 #804
  - add standard (numeric) pager on Activity canonical page listing of past events - #805
  - add an Inline form autocomplete to subscribe member manually - #800
+ - send mail when organizer manually subscribe a user (#800) to an event - #801 
  - update action btn displayed on past event cards - #839
  - add QuillJS to Event add/edit & Activity Defaults - #807
 

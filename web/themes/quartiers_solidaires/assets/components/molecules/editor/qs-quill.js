@@ -6,6 +6,7 @@
     // Initialized Quill rich-text editor for each instance of ".editor"
     $('.quill-editor').each(function () {
       const identifier = $(this).attr('id');
+      const placeholder = $(`#${identifier}`).attr('data-placeholder-translation');
 
       const quill = new Quill(`#${identifier}`, {
         modules: {
@@ -14,7 +15,7 @@
             ['bold', 'italic', 'underline'],
           ]
         },
-        placeholder: Drupal.t('qs.quill.editor.placeholder'),
+        placeholder: placeholder,
         theme: 'bubble'
       });
 
@@ -31,6 +32,11 @@
         $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="1"]`).attr('data-h1-translation', h1);
         $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="2"]`).attr('data-h2-translation', h2);
       });
-    })
+
+      // Add the content of the quill editor to the hidden textarea
+      quill.on('text-change', function() {
+        $(`#${identifier}`).parent().prev().find('textarea').val(quill.root.innerHTML);
+      });
+    });
   });
 })(jQuery);

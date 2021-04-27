@@ -8,6 +8,20 @@
   }
 }
 
+.quill-label {
+  display: inline-block;
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+.quill-editor.ql-container {
+  height: 120px;
+
+  .ql-editor {
+    padding: 0;
+  }
+}
+
 .quill-editor.ql-bubble .ql-picker.ql-header,
 .quill-editor.ql-bubble .ql-editor {
   * {

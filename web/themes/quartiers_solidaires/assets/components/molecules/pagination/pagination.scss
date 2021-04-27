@@ -24,5 +24,10 @@
     background-color: $white;
     color: $black;
   }
+
+  .active .btn-outline-primary {
+    background-color: $purple-600;
+    color: $white !important;
+  }
 }
 

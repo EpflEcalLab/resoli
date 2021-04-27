@@ -4,7 +4,10 @@
  - Add Quill lib for rich-text edition #791
  - add link to the event card on Photo's activity list - #799
  - add feature to show Past & Future events on Activity canonical page - #806 #804
+ - add standard (numeric) pager on Activity canonical page listing of past events - #805
  - add an Inline form autocomplete to subscribe member manually - #800
+ - update action btn displayed on past event cards - #839
+ - send mail when organizer manually subscribe a user (#800) to an event - #801 
  - Add PDF exporter service and base template #796
 
 ## 1.6.1 (2021-04-23)

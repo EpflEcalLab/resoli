@@ -6,6 +6,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\node\NodeInterface;
@@ -40,6 +41,13 @@ class EventManager {
   protected $nodeStorage;
 
   /**
+   * The pager manager.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
+   */
+  protected $pagerManager;
+
+  /**
    * The Privilege Manager.
    *
    * @var \Drupal\qs_acl\Service\PrivilegeManager
@@ -63,13 +71,14 @@ class EventManager {
   /**
    * Class constructor.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $connection, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, Connection $connection, PrivilegeManager $privilege_manager, SubscriptionManager $subscription_manager, MailManagerInterface $mail, PagerManagerInterface $pager_manager) {
     $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->userStorage = $entity_type_manager->getStorage('user');
     $this->connection = $connection;
     $this->privilegeManager = $privilege_manager;
     $this->subscriptionManager = $subscription_manager;
     $this->mail = $mail;
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -157,11 +166,13 @@ class EventManager {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity which we want the retrieve future events.
+   * @param int $limit
+   *   Maximum of events to retrieve.
    *
    * @return \Drupal\node\NodeInterface[]
    *   A collection of node's Event. Otherwise an empty array.
    */
-  public function getAllNext(NodeInterface $activity) {
+  public function getAllNext(NodeInterface $activity, $limit = NULL) {
     $now = new DrupalDateTime();
 
     // Get every activity that belongs to the current community.
@@ -171,6 +182,12 @@ class EventManager {
       ->condition('status', TRUE)
       ->condition('field_activity', $activity->id())
       ->sort('field_start_at', 'ASC');
+
+    if ($limit) {
+      $rows = $query->execute();
+      $this->pagerManager->createPager(\count($rows), $limit);
+      $query->pager($limit);
+    }
 
     $nids = $query->execute();
     $events = NULL;
@@ -191,11 +208,13 @@ class EventManager {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity which we want the retrieve past events.
+   * @param int $limit
+   *   Maximum of events to retrieve.
    *
    * @return \Drupal\node\NodeInterface[]
    *   A collection of node's Event. Otherwise an empty array.
    */
-  public function getAllPrev(NodeInterface $activity) {
+  public function getAllPrev(NodeInterface $activity, $limit = NULL) {
     $today = new DrupalDateTime();
     $today->setTimezone(new \DateTimeZone('UTC'));
     $today->setTime(23, 59, 59);
@@ -207,6 +226,12 @@ class EventManager {
       ->condition('status', TRUE)
       ->condition('field_activity', $activity->id())
       ->sort('field_end_at', 'DESC');
+
+    if ($limit) {
+      $rows = $query->execute();
+      $this->pagerManager->createPager(\count($rows), $limit);
+      $query->pager($limit);
+    }
 
     $nids = $query->execute();
     $events = NULL;

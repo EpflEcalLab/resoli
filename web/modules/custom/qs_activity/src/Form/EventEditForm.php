@@ -132,7 +132,7 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['body'] = [
-      '#attributes' => ['required' => TRUE, 'hidden' => TRUE],
+      '#attributes' => ['required' => TRUE],
       '#type' => 'textarea',
       '#required' => FALSE,
       '#default_value' => $event->body->value,

@@ -53,7 +53,6 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
 
     $form['group']['body'] = [
       '#attributes' => [
-        'hidden' => TRUE,
         'class' => ['quill-editor', 'quill-editor-primary'],
       ],
       '#type' => 'textarea',

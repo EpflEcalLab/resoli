@@ -232,7 +232,7 @@ class EventAddForm extends FormBasic {
     ];
 
     $form['event']['step-2']['body'] = [
-      '#attributes' => ['required' => TRUE, 'hidden' => TRUE],
+      '#attributes' => ['required' => TRUE],
       '#type' => 'textarea',
       '#required' => FALSE,
       '#default_value' => $activity->body->value,

@@ -19,6 +19,11 @@
         theme: 'bubble'
       });
 
+      // Form group for the textarea of the form which will contains the input from the Quill editor
+      const textareaFormGroup = $(`#${identifier}`).parent().prev();
+      // Textarea form group is hidden with js to prevent accessibility issue
+      textareaFormGroup.attr('hidden', true);
+
       // Translate the toolbar heading options
       const h1 = Drupal.t('qs.quill.editor.h1');
       const h2 = Drupal.t('qs.quill.editor.h2');
@@ -35,7 +40,7 @@
 
       // Add the content of the quill editor to the hidden textarea
       quill.on('text-change', function() {
-        $(`#${identifier}`).parent().prev().find('textarea').val(quill.root.innerHTML);
+        textareaFormGroup.find('textarea').val(quill.root.innerHTML);
       });
     });
   });

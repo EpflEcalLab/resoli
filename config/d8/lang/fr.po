@@ -613,6 +613,12 @@ msgstr "Votre évènement nécessite-t-il une contribution?"
 msgid "qs_activity.events.form.add.contribution"
 msgstr "Inscrivez ci-dessous le montant en francs"
 
+msgid "qs_activity.events.form.add.save"
+msgstr "Publier comme événement unique"
+
+msgid "qs_activity.events.form.add.save_and_repeat_weekly"
+msgstr "Répéter cet événement durant 12 semaines"
+
 msgid "qs_activity.events.form.edit.title"
 msgstr "Quel est le nom de votre évènement?"
 
@@ -874,6 +880,9 @@ msgstr "Créez un nouvel évènement pour votre activité «@activity»."
 msgid "qs_activity.events.form.step2.description @activity"
 msgstr "Créez un nouvel évènement pour votre activité «@activity»."
 
+msgid "qs_activity.events.form.step3.description @activity"
+msgstr "Créez un nouvel évènement pour votre activité «@activity»."
+
 msgid "qs.next"
 msgstr "Etape suivante"
 
@@ -921,6 +930,9 @@ msgstr "L’activité «@activity» a bien été créée!"
 
 msgid "qs_activity.events.form.add.success"
 msgstr "Votre nouvel évènement a bien été créé!"
+
+msgid "qs_activity.events.form.add.weekly.success @repeat"
+msgstr "Vos @repeat nouveaux évènements ont bien été créés!"
 
 msgid "qs_event.events.form.add.success @event"
 msgstr ""
@@ -1213,6 +1225,9 @@ msgid "qs_activity.events.form.step1"
 msgstr "Nouvel évènement"
 
 msgid "qs_activity.events.form.step2"
+msgstr "Nouvel évènement"
+
+msgid "qs_activity.events.form.step3"
 msgstr "Nouvel évènement"
 
 msgid "qs_activity.events.form.add.error.hours.malformed @fieldname"

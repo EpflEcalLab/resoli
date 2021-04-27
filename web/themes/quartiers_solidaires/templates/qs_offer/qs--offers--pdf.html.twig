@@ -2,8 +2,29 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
     <style type="text/css">
+      @font-face {
+        font-family: 'opensans';
+        src: url('web/themes/quartiers_solidaires/build/fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'opensans';
+        src: url('web/themes/quartiers_solidaires/build/fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'opensans';
+        src: url('web/themes/quartiers_solidaires/build/fonts/Open_Sans/OpenSans-BoldItalic.ttf') format('truetype');
+        font-weight: bold;
+        font-style: italic;
+      }
+
       body {
-        font-family: sans-serif;
+        font-family: 'opensans', sans-serif;
       }
       header {
         position: fixed;
@@ -37,7 +58,7 @@
       }
 
       h2 {
-        font-weight: 600;
+        font-weight: normal;
         font-size: 24px;
         line-height: 33px;
         color: #781EBE;
@@ -50,24 +71,26 @@
 
       table {
         width: 100%;
+        border-collapse: collapse;
       }
 
       td, th {
+        padding: 5px;
         vertical-align: top;
         text-align: center;
+        border-left: 1px solid #5AA0FA;
+        border-right: 1px solid #5AA0FA;
       }
 
       th {
         background: #5AA0FA;
         color: white;
-        padding: 2px 0;
         font-weight: normal;
       }
 
       td {
         font-size: 10px;
         line-height: 11px;
-        padding: 5px 2px;
       }
 
       tr:nth-child(odd) {

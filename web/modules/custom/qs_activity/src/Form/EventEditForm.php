@@ -141,7 +141,11 @@ class EventEditForm extends EventEditFormBase {
     $form['quill'] = [
       '#markup' => '<div class="form-group">
         <span class="quill-label">' . $this->t('qs_activity.events.form.edit.body') . '</span>
-        <div id="editor-edit-event" data-placeholder-translation="' . $this->t('qs_activity.events.form.edit.body.placeholder') . '" class="quill-editor quill-editor-primary form-textarea form-control">' . $event->body->value . '</div>
+        <div
+            id="editor-edit-event"
+            data-placeholder-translation="' . $this->t('qs_activity.events.form.edit.body.placeholder') . '"
+            class="quill-editor quill-editor-primary form-textarea form-control">' . $event->body->value . '
+          </div>
       </div>',
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/quill';

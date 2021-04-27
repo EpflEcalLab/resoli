@@ -132,12 +132,17 @@ class EventEditForm extends EventEditFormBase {
     ];
 
     $form['body'] = [
-      '#attributes' => ['required' => TRUE, 'class' => ['quill-editor', 'quill-editor-primary']],
-      '#title' => $this->t('qs_activity.events.form.edit.body'),
-      '#placeholder' => $this->t('qs_activity.events.form.edit.body.placeholder'),
+      '#attributes' => ['required' => TRUE, 'hidden' => TRUE],
       '#type' => 'textarea',
       '#required' => FALSE,
       '#default_value' => $event->body->value,
+    ];
+
+    $form['quill'] = [
+      '#markup' => '<div class="form-group">
+        <span class="quill-label">' . $this->t('qs_activity.events.form.edit.body') . '</span>
+        <div id="editor-edit-event" data-placeholder-translation="' . $this->t('qs_activity.events.form.edit.body.placeholder') . '" class="quill-editor quill-editor-primary form-textarea form-control">' . $event->body->value . '</div>
+      </div>',
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/quill';
 

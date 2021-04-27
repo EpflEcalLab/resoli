@@ -321,23 +321,56 @@ class EventAddForm extends FormBasic {
       ],
     ];
 
-    // Fix padding bottom which is broken sometimes & overflow with submit.
-    $form['event']['step-2']['spacer'] = [
-      '#markup' => '<div class="mb-5"></div>',
-    ];
-
-    $form['event']['step-2']['actions']['submit'] = [
-      '#type' => 'submit',
+    $form['event']['step-3'] = [
+      '#type' => 'fieldset',
+      '#description' => $this->t('qs_activity.events.form.step3.description @activity', [
+        '@activity' => $activity->getTitle(),
+      ]),
       '#attributes' => [
-        'icon' => 'check',
-        'modal' => TRUE,
-        'icon_left' => TRUE,
-        'outline' => TRUE,
+        'data-step' => $this->t('qs_activity.events.form.step3'),
         'class' => [
-          'shadow-to-bottom',
+          'text-center',
+          'pb-4',
         ],
       ],
-      '#value' => $this->t('qs.form.submit'),
+      '#theme_wrappers' => [
+        'container__center',
+        'fieldset__step',
+      ],
+    ];
+
+    $form['event']['step-3']['save'] = [
+      '#type' => 'submit',
+      '#name' => 'save',
+      '#value' => $this->t('qs_activity.events.form.add.save'),
+      '#attributes' => [
+        'outline' => TRUE,
+        'icon' => 'plus',
+        'icon_left' => TRUE,
+        'class' => [
+          'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mb-3',
+        ],
+      ],
+    ];
+
+    $form['event']['step-3']['save_and_repeat_weekly'] = [
+      '#type' => 'submit',
+      '#name' => 'save_and_repeat_weekly',
+      '#value' => $this->t('qs_activity.events.form.add.save_and_repeat_weekly'),
+      '#attributes' => [
+        'outline' => TRUE,
+        'icon' => 'calendar',
+        'icon_left' => TRUE,
+        'class' => [
+          'js-form-normal',
+          'col-md-8',
+          'mx-auto',
+          'mb-3',
+        ],
+      ],
     ];
 
     return $form;
@@ -373,23 +406,56 @@ class EventAddForm extends FormBasic {
     $data['venue_lat'] = $form_state->getValue('latitude');
     $data['venue_long'] = $form_state->getValue('longitude');
 
-    // Create the new event.
-    $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
-    $this->messenger()->addMessage($this->t('qs_activity.events.form.add.success'));
-    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
+    $trigger = $form_state->getTriggeringElement();
 
-    // Get the current user activitiy's privilege to this event.
-    $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
-    $privileges = reset($privileges_by_events);
+    $repeat = 0;
+    $repeat_total = 0;
+    $repeat_period = 'D';
 
-    // According the current user roles to the event,
-    // If it's activity_maintainers and not activity_organizers, then
-    // subscribe it to this new event.
-    if ($privileges && \in_array('activity_maintainers', $privileges, TRUE) && !\in_array('activity_organizers', $privileges, TRUE)) {
-      // By default, subscribe every activity_maintainers (co-organizers) to
-      // there events.
-      $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
-      $this->subscriptionManager->confirm($subscription);
+    if ($trigger['#name'] === 'save_and_repeat_weekly') {
+      $repeat_total = 12;
+      $repeat_period = 'W';
+    }
+
+    // Create one event once, then repeat the event if necessary.
+    do {
+      // Create the new event.
+      $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
+
+      // Get the current user activitiy's privilege to this event.
+      $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
+      $privileges = reset($privileges_by_events);
+
+      // According the current user roles to the event,
+      // If it's activity_maintainers and not activity_organizers, then
+      // subscribe it to this new event.
+      if ($privileges && \in_array('activity_maintainers', $privileges, TRUE) && !\in_array('activity_organizers', $privileges, TRUE)) {
+        // By default, subscribe every activity_maintainers (co-organizers) to
+        // there events.
+        $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
+        $this->subscriptionManager->confirm($subscription);
+      }
+
+      // Alter the start & end at for the next generation.
+      ++$repeat;
+      $start_at->add(new \DateInterval("P1{$repeat_period}"));
+      $end_at->add(new \DateInterval("P1{$repeat_period}"));
+    } while ($repeat < $repeat_total);
+
+    // Handle redirections based on trigger (save one or repeat weekly).
+    switch ($trigger['#name']) {
+      case 'save_and_repeat_weekly':
+        $this->messenger()->addMessage($this->t('qs_activity.events.form.add.weekly.success @repeat', ['@repeat' => $repeat]));
+        $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()]);
+
+        break;
+
+      case 'save':
+      default:
+        $this->messenger()->addMessage($this->t('qs_activity.events.form.add.success'));
+        $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
+
+        break;
     }
   }
 

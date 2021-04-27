@@ -1,4 +1,5 @@
 @each $color, $value in $theme-colors {
+  .rich-content.rich-content-#{$color},
   .quill-editor.ql-bubble.quill-editor-#{$color} .ql-picker.ql-header,
   .quill-editor.ql-bubble.quill-editor-#{$color} .ql-editor {
     .ql-picker-item[data-value="1"]:before,

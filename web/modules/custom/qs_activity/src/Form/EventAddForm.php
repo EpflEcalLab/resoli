@@ -244,7 +244,7 @@ class EventAddForm extends FormBasic {
         <div
             id="editor-add-event"
             data-placeholder-translation="' . $this->t('qs_activity.events.form.add.body.placeholder') . '"
-            class="quill-editor quill-editor-primary form-textarea form-control">' . $activity->body->value . '
+            class="quill-editor quill-editor-secondary form-textarea form-control">' . $activity->body->value . '
           </div>
       </div>',
     ];

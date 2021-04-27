@@ -15,10 +15,16 @@
 }
 
 .quill-editor.ql-container {
-  height: 120px;
+  min-height: 120px;
+  height: auto;
 
   .ql-editor {
     padding: 0;
+  }
+
+  .ql-editor.ql-blank::before {
+    font-size: 1rem;
+    font-style: normal;
   }
 }
 
@@ -26,6 +32,7 @@
 .quill-editor.ql-bubble .ql-editor {
   * {
     font-family: $font-family-base-webfonts;
+    font-size: 1rem;
   }
 
   .ql-picker-item[data-value="1"]:before,

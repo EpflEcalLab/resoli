@@ -144,7 +144,7 @@ class EventEditForm extends EventEditFormBase {
         <div
             id="editor-edit-event"
             data-placeholder-translation="' . $this->t('qs_activity.events.form.edit.body.placeholder') . '"
-            class="quill-editor quill-editor-primary form-textarea form-control">' . $event->body->value . '
+            class="quill-editor quill-editor-secondary form-textarea form-control">' . $event->body->value . '
           </div>
       </div>',
     ];

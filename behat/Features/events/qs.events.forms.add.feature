@@ -57,7 +57,7 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save-and-repeat-weekly"
     When I am on "/lausanne/activities/accueil-cafe"
-    Then I should see 15 ".card-list-item" elements
+    Then I should see 14 ".card-list-item" elements
 
   @api @preserveDatabase
   Scenario: When creating an weekly repeated Event, on save we should be redirected on the Activity's events page
@@ -100,8 +100,6 @@ Feature: Add Event Form
     Then I should see a "#card74[data-status='default']" element
     Then I should not see a "#card75[data-status='confirmed']" element
     Then I should see a "#card75[data-status='default']" element
-    Then I should not see a "#card76[data-status='confirmed']" element
-    Then I should see a "#card76[data-status='default']" element
     Examples:
       | event |
       | sorties-theatre |
@@ -139,5 +137,3 @@ Feature: Add Event Form
     Then I should not see a "#card74[data-status='default']" element
     Then I should see a "#card75[data-status='confirmed']" element
     Then I should not see a "#card75[data-status='default']" element
-    Then I should see a "#card76[data-status='confirmed']" element
-    Then I should not see a "#card76[data-status='default']" element

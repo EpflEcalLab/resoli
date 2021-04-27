@@ -358,7 +358,7 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-3']['save_and_repeat_weekly'] = [
       '#type' => 'submit',
-      '#name' => 'save',
+      '#name' => 'save_and_repeat_weekly',
       '#value' => $this->t('qs_activity.events.form.add.save_and_repeat_weekly'),
       '#attributes' => [
         'outline' => TRUE,

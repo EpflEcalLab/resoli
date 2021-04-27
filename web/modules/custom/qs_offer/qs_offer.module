@@ -11,7 +11,7 @@
 function qs_offer_theme() {
   return [
     // Template PDF.
-    'qs_community_offers_pdf' => [
+    'qs_offers_pdf' => [
       'variables' => ['variables' => []],
       'template' => 'qs--offers--pdf',
     ],

@@ -82,8 +82,9 @@ class OffersController extends ControllerBase {
      * The template will need to be updated as well to fit those data
      * */
     $this->pdfExporter->download(
-      'qs_community_offers_pdf',
-      ['community' => $community->getName()]
+      'qs_offers_pdf',
+      ['community' => $community->getName()],
+      'offres'
     );
   }
 

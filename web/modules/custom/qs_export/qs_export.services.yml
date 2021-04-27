@@ -3,4 +3,4 @@ services:
     class: Drupal\qs_export\Excel
   qs_export.pdf:
     class: Drupal\qs_export\Pdf
-    arguments: ['@renderer']
+    arguments: ['@date.formatter', '@renderer']

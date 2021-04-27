@@ -438,8 +438,8 @@ class EventAddForm extends FormBasic {
 
       // Alter the start & end at for the next generation.
       ++$repeat;
-      $start_at->add(new \DateInterval("P{$repeat}{$repeat_period}"));
-      $end_at->add(new \DateInterval("P{$repeat}{$repeat_period}"));
+      $start_at->add(new \DateInterval("P1{$repeat_period}"));
+      $end_at->add(new \DateInterval("P1{$repeat_period}"));
     } while ($repeat < $repeat_total);
 
     // Handle redirections based on trigger (save one or repeat weekly).

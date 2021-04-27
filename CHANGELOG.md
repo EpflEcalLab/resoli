@@ -9,6 +9,8 @@
  - update action btn displayed on past event cards - #839
  - add a 3rd Step on Event creation to choose between One event or Weekly 12 repeated events - #803
  - send mail when organizer manually subscribe a user (#800) to an event - #801 
+ - update action btn displayed on past event cards - #839
+ - add QuillJS to Event add/edit & Activity Defaults - #807
 
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)

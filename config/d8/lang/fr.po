@@ -2168,8 +2168,8 @@ msgstr "Evénements à venir"
 msgid "qs.quill.editor.placeholder"
 msgstr "Ecrire quelque chose"
 
-msgid "qs.quill.editor.h1"
+msgid "qs.quill.editor.h4"
 msgstr "Titre 1"
 
-msgid "qs.quill.editor.h2"
+msgid "qs.quill.editor.h5"
 msgstr "Titre 2"

@@ -52,11 +52,24 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     ];
 
     $form['group']['body'] = [
-      '#title' => $this->t('qs_activity.activities.form.edit.defaults.body'),
-      '#placeholder' => $this->t('qs_activity.activities.form.edit.defaults.body.placeholder'),
+      '#attributes' => [
+        'class' => ['quill-editor', 'quill-editor-primary'],
+      ],
       '#type' => 'textarea',
       '#default_value' => $activity->body->value,
     ];
+
+    $form['group']['quill'] = [
+      '#markup' => '<div class="form-group">
+        <span class="quill-label">' . $this->t('qs_activity.activities.form.edit.defaults.body') . '</span>
+        <div
+          id="editor-edit-activity"
+          data-placeholder-translation="' . $this->t('qs_activity.activities.form.edit.defaults.body.placeholder') . '"
+          class="quill-editor quill-editor-primary form-textarea form-control">' . $activity->body->value . '
+        </div>
+      </div>',
+    ];
+    $form['#attached']['library'][] = 'quartiers_solidaires/quill';
 
     $form['group']['venue'] = [
       '#attributes' => [

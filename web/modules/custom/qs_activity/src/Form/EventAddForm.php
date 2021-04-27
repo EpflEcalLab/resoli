@@ -233,12 +233,22 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-2']['body'] = [
       '#attributes' => ['required' => TRUE],
-      '#title' => $this->t('qs_activity.events.form.add.body'),
-      '#placeholder' => $this->t('qs_activity.events.form.add.body.placeholder'),
       '#type' => 'textarea',
       '#required' => FALSE,
       '#default_value' => $activity->body->value,
     ];
+
+    $form['event']['step-2']['quill'] = [
+      '#markup' => '<div class="form-group">
+        <span class="quill-label">' . $this->t('qs_activity.events.form.add.body') . '</span>
+        <div
+            id="editor-add-event"
+            data-placeholder-translation="' . $this->t('qs_activity.events.form.add.body.placeholder') . '"
+            class="quill-editor quill-editor-secondary form-textarea form-control">' . $activity->body->value . '
+          </div>
+      </div>',
+    ];
+    $form['#attached']['library'][] = 'quartiers_solidaires/quill';
 
     $form['event']['step-2']['venue'] = [
       '#attributes' => [

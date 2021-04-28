@@ -12,7 +12,7 @@
         modules: {
           toolbar: [
             [{ header: [4, 5, false] }],
-            ['bold', 'italic', 'underline'],
+            ['bold', 'italic', 'underline', 'link'],
           ]
         },
         placeholder: placeholder,

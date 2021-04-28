@@ -12,6 +12,7 @@
  - update action btn displayed on past event cards - #839
  - add QuillJS to Event add/edit & Activity Defaults - #807
  - fix Excel future events export date timezone - #802
+ - fix navigation button next months on Photos by Month, Icon position left instead of right - #759
 
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)

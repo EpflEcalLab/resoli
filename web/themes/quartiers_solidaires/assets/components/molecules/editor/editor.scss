@@ -3,7 +3,8 @@
   .quill-editor.ql-bubble.quill-editor-#{$color} .ql-picker.ql-header,
   .quill-editor.ql-bubble.quill-editor-#{$color} .ql-editor {
     .ql-picker-item[data-value="4"]:before,
-    h4 {
+    .ql-picker-item[data-value="5"]:before,
+    h4, h5 {
       color: $value;
     }
   }
@@ -13,13 +14,24 @@
   * {
     font-family: $font-family-base-webfonts;
     font-size: 1rem;
-    margin: 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  h4, h5 {
+    font-weight: 600;
+  }
+
+  p + h4,
+  p + h5 {
+    margin-top: 2rem;
   }
 
   h4 {
     content: attr(data-h4-translation);
     font-size: $h5-font-size;
-    font-weight: 600;
 
     @include media-breakpoint-down(xs) {
       font-size: $h5-font-size * 0.8;
@@ -28,12 +40,7 @@
 
   h5 {
     content: attr(data-h5-translation);
-    font-size: $h5-font-size;
-    font-weight: normal;
-
-    @include media-breakpoint-down(xs) {
-      font-size: $h5-font-size * 0.8;
-    }
+    font-size: $h6-font-size;
   }
 }
 
@@ -65,11 +72,26 @@
     margin: 0;
   }
 
+  a {
+    text-decoration: underline;
+  }
+
+  p + h4,
+  p + h5 {
+    margin-top: 2rem;
+  }
+
+  .ql-picker-item[data-value="4"]:before,
+  h4,
+  .ql-picker-item[data-value="5"]:before,
+  h5 {
+    font-weight: 600;
+  }
+
   .ql-picker-item[data-value="4"]:before,
   h4 {
     content: attr(data-h4-translation);
     font-size: $h5-font-size;
-    font-weight: 600;
 
     @include media-breakpoint-down(xs) {
       font-size: $h5-font-size * 0.8;
@@ -79,12 +101,7 @@
   .ql-picker-item[data-value="5"]:before,
   h5 {
     content: attr(data-h5-translation);
-    font-size: $h5-font-size;
-    font-weight: normal;
-
-    @include media-breakpoint-down(xs) {
-      font-size: $h5-font-size * 0.8;
-    }
+    font-size: $h6-font-size;
   }
 
   .ql-picker-label[data-value="4"]:before {

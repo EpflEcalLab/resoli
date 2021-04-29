@@ -33,10 +33,12 @@
       $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="5"]`).attr('data-h5-translation', h5);
 
       // Translate the current selected option
-      quill.on('text-change', function() {
-        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="4"]`).attr('data-h1-translation', h4);
-        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="5"]`).attr('data-h2-translation', h5);
-      });
+      const translateHeading = () => {
+        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="4"]`).attr('data-h4-translation', h4);
+        $(`#${identifier} .ql-picker.ql-header .ql-picker-label[data-value="5"]`).attr('data-h5-translation', h5);
+      }
+      quill.on('text-change', translateHeading);
+      quill.on('selection-change', translateHeading);
 
       // Add the content of the quill editor to the hidden textarea
       quill.on('text-change', function() {

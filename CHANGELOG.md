@@ -11,6 +11,7 @@
  - send mail when organizer manually subscribe a user (#800) to an event - #801 
  - update action btn displayed on past event cards - #839
  - add QuillJS to Event add/edit & Activity Defaults - #807
+ - add QuillJS link capability - #849
  - fix Excel future events export date timezone - #802
  - fix navigation button next months on Photos by Month, Icon position left instead of right - #759
 

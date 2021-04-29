@@ -122,6 +122,11 @@ class EventsController extends ControllerBase {
       // Set a Rich text for timetable with partial bold content.
       $timetable = new RichText();
       $bold_timetable = $timetable->createTextRun($event->field_start_at->date->format('d.m.Y'));
+
+      // Ensure we display content using the Swiss timezone.
+      $event->field_start_at->date->setTimezone(new \DateTimeZone('Europe/Zurich'));
+      $event->field_end_at->date->setTimezone(new \DateTimeZone('Europe/Zurich'));
+
       $bold_timetable->getFont()->setBold(TRUE);
       $timetable->createText(sprintf(' %s - %s', $event->field_start_at->date->format('H\hi'), $event->field_end_at->date->format('H\hi')));
 

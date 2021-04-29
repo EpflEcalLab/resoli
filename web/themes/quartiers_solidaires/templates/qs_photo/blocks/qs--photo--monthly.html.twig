@@ -28,7 +28,7 @@
     <div class="col">
       {% if variables.next_month|date('Y-m') <= 'now'|date('Y-m') %}
       <a
-        class="btn btn-outline-secondary btn-icon btn-icon-to-circle"
+        class="btn btn-outline-secondary btn-icon btn-icon-to-circle btn-icon-right"
         href="{{ path('<current>', {'month': variables.next_month|date('Y-m-d')}) }}"
         aria-label="{{ 'qs.calendar.monthly.goto @month'|t({
           '@month': variables.next_month|bamboo_i18n_format_date('custom', 'F')

@@ -14,6 +14,7 @@
  - add QuillJS link capability - #849
  - fix Excel future events export date timezone - #802
  - fix navigation button next months on Photos by Month, Icon position left instead of right - #759
+ - add fragment on past-event button "access event's photo" to scroll-down to the event - #855
 
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)

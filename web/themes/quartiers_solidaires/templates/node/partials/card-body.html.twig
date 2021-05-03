@@ -53,7 +53,7 @@
     {% if is_past and (has_activity_privilege or community_can_view_photos) %}
       {{ macros.card_button(
         'qs.event.view.photos'|t,
-        path('qs_photo.activity', {activity: variables.activity.nid.value}),
+        path('qs_photo.activity', {activity: variables.activity.nid.value}, {'fragment': 'event' ~ event.nid.value }),
         'picture',
         'left',
         ''

@@ -11,7 +11,7 @@
       <div class="row">
       {% for event in variables.events if event.nid.value in variables.photos|keys %}
         <div class="col-12 sticky-top bg-white mb-3">
-          <h2 class="h5 mb-0">
+          <h2 class="h5 mb-0" id="event{{ event.id }}">
             <time datetime="{{ event.field_end_at.date|bamboo_i18n_format_date('custom', 'Y-m-d') }}">
               {{ event.field_end_at.date|bamboo_i18n_format_date('default_medium_date_only') }}
             </time> - {{ event.title.value }}

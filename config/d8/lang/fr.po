@@ -373,6 +373,12 @@ msgstr "Gérer mon évènement"
 msgid "qs_activity.activities.form.add.title.placeholder"
 msgstr "Ex. Randonnées à la Montagne"
 
+msgid "qs_activity.activities.form.add.body"
+msgstr "Quelle est la description de votre activité?"
+
+msgid "qs_activity.activities.form.add.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
 msgid "qs_activity.activities.form.add.title"
 msgstr "Quel est le nom de votre activité?"
 
@@ -459,6 +465,12 @@ msgstr "Ex. Randonnées à la Montagne"
 
 msgid "qs_activity.activities.form.edit.info.title"
 msgstr "Quel est le nom de votre activité?"
+
+msgid "qs_activity.activities.form.edit.info.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_activity.activities.form.edit.info.body"
+msgstr "Quelle est la description de votre activité?"
 
 msgid "qs_activity.activities.form.edit.info.theme"
 msgstr "Quel thème correspond le mieux à votre activité?"

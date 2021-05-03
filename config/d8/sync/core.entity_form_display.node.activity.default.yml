@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.activity.field_contact_phone
     - field.field.node.activity.field_contribution
     - field.field.node.activity.field_default_title
+    - field.field.node.activity.field_description
     - field.field.node.activity.field_member_create_gallery
     - field.field.node.activity.field_member_create_story
     - field.field.node.activity.field_theme
@@ -47,6 +48,7 @@ third_party_settings:
         - field_community
         - field_theme
         - title
+        - field_description
         - path
       parent_name: group_t
       weight: 3
@@ -94,7 +96,6 @@ third_party_settings:
       weight: 4
       format_type: tab
       format_settings:
-        label: 'Default values'
         formatter: closed
         description: ''
         required_fields: true
@@ -202,6 +203,14 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_description:
+    weight: 5
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   field_member_create_gallery:
     weight: 32
     settings:
@@ -246,7 +255,7 @@ content:
     region: content
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }

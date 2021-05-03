@@ -77,6 +77,26 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
       '#default_value' => $activity->getTitle(),
     ];
 
+    $form['step-1']['body'] = [
+      '#type' => 'textarea',
+      '#required' => FALSE,
+      '#default_value' => $activity->field_description->value,
+    ];
+
+    $form['step-1']['quill'] = [
+      '#markup' => '<div class="form-group">
+        <span class="quill-label">' . $this->t('qs_activity.activities.form.edit.info.body') . '</span>
+        <div
+            id="editor-edit-activity"
+            data-placeholder-translation="' . $this->t('qs_activity.activities.form.edit.info.body.placeholder') . '"
+            class="quill-editor quill-editor-secondary form-textarea form-control">' . $activity->field_description->value . '
+          </div>
+      </div>',
+    ];
+
+    $form['#attached']['library'][] = 'quartiers_solidaires/quill';
+
+
     $form['step-2'] = [
       '#type' => 'fieldset',
       '#theme_wrappers' => [
@@ -145,6 +165,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $fields = [
       'title' => $form_state->getValue('title'),
       'field_theme' => [$form_state->getValue('theme')],
+      'field_description' => $form_state->getValue('body'),
     ];
 
     // Update the activity.

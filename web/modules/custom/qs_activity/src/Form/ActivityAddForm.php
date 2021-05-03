@@ -158,6 +158,23 @@ class ActivityAddForm extends FormBasic {
       '#required' => FALSE,
     ];
 
+    $form['activity']['step-1']['body'] = [
+      '#type' => 'textarea',
+      '#required' => FALSE,
+    ];
+
+    $form['activity']['step-1']['quill'] = [
+      '#markup' => '<div class="form-group">
+        <span class="quill-label">' . $this->t('qs_activity.activities.form.add.body') . '</span>
+        <div
+            id="editor-add-activity"
+            data-placeholder-translation="' . $this->t('qs_activity.activities.form.add.body.placeholder') . '"
+            class="quill-editor quill-editor-secondary form-textarea form-control">
+          </div>
+      </div>',
+    ];
+    $form['#attached']['library'][] = 'quartiers_solidaires/quill';
+
     $form['activity']['step-2'] = [
       '#type' => 'fieldset',
       '#description' => $this->t('qs_activity.activities.form.step2.description'),
@@ -418,6 +435,7 @@ class ActivityAddForm extends FormBasic {
 
     // Create the new activity.
     $activity = $this->activityManager->create($form_state->getValue('title'), $themes, $authorizations, $community, $user);
+    $activity = $this->activityManager->update($activity, ['field_description' => $form_state->getValue('body')]);
 
     // Add the current user as the first organizer of this activity.
     $this->privilegeManager->create('activity_organizers', $activity, $this->currentUser);

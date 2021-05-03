@@ -96,7 +96,6 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
 
     $form['#attached']['library'][] = 'quartiers_solidaires/quill';
 
-
     $form['step-2'] = [
       '#type' => 'fieldset',
       '#theme_wrappers' => [

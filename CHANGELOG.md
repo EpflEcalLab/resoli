@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
- - Add Quill lib for rich-text edition #791
+ - add Quill lib for rich-text edition #791
  - add link to the event card on Photo's activity list - #799
  - add feature to show Past & Future events on Activity canonical page - #806 #804
  - add standard (numeric) pager on Activity canonical page listing of past events - #805
@@ -16,6 +16,8 @@
  - fix navigation button next months on Photos by Month, Icon position left instead of right - #759
  - add fragment on past-event button "access event's photo" to scroll-down to the event - #855
  - on multiple events creation (#803) add the URL fragment to the first created event - #854
+ - add Description field to Activity - #859
+ - add Description field to Activity create/edit form - #859
 
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)

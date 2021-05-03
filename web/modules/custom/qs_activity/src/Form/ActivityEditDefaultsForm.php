@@ -52,9 +52,6 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
     ];
 
     $form['group']['body'] = [
-      '#attributes' => [
-        'class' => ['quill-editor', 'quill-editor-primary'],
-      ],
       '#type' => 'textarea',
       '#default_value' => $activity->body->value,
     ];

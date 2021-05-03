@@ -24,6 +24,9 @@
       // Textarea form group is hidden with js to prevent accessibility issue
       textareaFormGroup.attr('hidden', true);
 
+      // Set the content of the textarea in the quill editor
+      quill.root.innerHTML = textareaFormGroup.find('textarea').val();
+
       // Translate the toolbar heading options
       const h4 = Drupal.t('qs.quill.editor.h4');
       const h5 = Drupal.t('qs.quill.editor.h5');

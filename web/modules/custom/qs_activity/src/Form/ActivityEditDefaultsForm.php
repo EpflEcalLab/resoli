@@ -62,8 +62,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
         <div
           id="editor-edit-activity"
           data-placeholder-translation="' . $this->t('qs_activity.activities.form.edit.defaults.body.placeholder') . '"
-          class="quill-editor quill-editor-primary form-textarea form-control">' . $activity->body->value . '
-        </div>
+          class="quill-editor quill-editor-primary form-textarea form-control"></div>
       </div>',
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/quill';

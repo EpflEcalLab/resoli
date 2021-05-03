@@ -18,6 +18,7 @@
  - on multiple events creation (#803) add the URL fragment to the first created event - #854
  - add Description field to Activity - #859
  - add Description field to Activity create/edit form - #859
+ - show Description field to Activity Canonical view - #860
 
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)

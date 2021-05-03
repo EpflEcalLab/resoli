@@ -54,11 +54,30 @@
   min-height: 120px;
   height: auto;
 
+  @include media-breakpoint-down(sm) {
+    min-height: 200px;
+  }
+
   .ql-editor {
+    min-height: 120px;
     padding: 0;
+
+    @include media-breakpoint-down(sm) {
+      min-height: 200px;
+    }
+
+    h4, h5, p {
+      margin-bottom: 1rem;
+    }
+
+    p + h4,
+    p + h5 {
+      margin-top: 2rem;
+    }
   }
 
   .ql-editor.ql-blank::before {
+    color: #858e96;
     font-size: $font-size-base;
     font-style: normal;
   }

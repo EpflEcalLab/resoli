@@ -89,7 +89,7 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
         <div
             id="editor-edit-activity"
             data-placeholder-translation="' . $this->t('qs_activity.activities.form.edit.info.body.placeholder') . '"
-            class="quill-editor quill-editor-secondary form-textarea form-control">' . $activity->field_description->value . '
+            class="quill-editor quill-editor-primary form-textarea form-control">
           </div>
       </div>',
     ];

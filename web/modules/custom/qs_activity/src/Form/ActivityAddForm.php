@@ -167,10 +167,10 @@ class ActivityAddForm extends FormBasic {
       '#markup' => '<div class="form-group">
         <span class="quill-label">' . $this->t('qs_activity.activities.form.add.body') . '</span>
         <div
-            id="editor-add-activity"
-            data-placeholder-translation="' . $this->t('qs_activity.activities.form.add.body.placeholder') . '"
-            class="quill-editor quill-editor-secondary form-textarea form-control">
-          </div>
+          id="editor-add-activity"
+          data-placeholder-translation="' . $this->t('qs_activity.activities.form.add.body.placeholder') . '"
+          class="quill-editor quill-editor-primary form-textarea form-control">
+        </div>
       </div>',
     ];
     $form['#attached']['library'][] = 'quartiers_solidaires/quill';

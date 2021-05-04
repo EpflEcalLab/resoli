@@ -164,7 +164,10 @@ class ActivityEditInfoForm extends ActivityEditFormBase {
     $fields = [
       'title' => $form_state->getValue('title'),
       'field_theme' => [$form_state->getValue('theme')],
-      'field_description' => ['format' => 'light_html', 'value' => $form_state->getValue('body')],
+      'field_description' => [
+        'format' => 'light_html',
+        'value' => $form_state->getValue('body'),
+      ],
     ];
 
     // Update the activity.

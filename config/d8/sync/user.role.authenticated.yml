@@ -20,3 +20,4 @@ permissions:
   - 'select account cancellation method'
   - 'skip comment approval'
   - 'use text format basic_html'
+  - 'use text format light_html'

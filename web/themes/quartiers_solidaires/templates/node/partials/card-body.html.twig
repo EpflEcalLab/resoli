@@ -29,7 +29,7 @@
     {# Body #}
     {# User should have some privileges OR activity should allow community to access details #}
     {% if has_activity_privilege or community_can_view_detail %}
-      {{ event.body.value|raw }}
+      {{ bamboo_render_field('body', 'node', event.nid.value) }}
     {% else %}
       <p>{{ 'qs.event.not_accessible'|t }}</p>
     {% endif %}

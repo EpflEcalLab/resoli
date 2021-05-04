@@ -155,7 +155,7 @@ class ActivityEditDefaultsForm extends ActivityEditFormBase {
 
     $fields = [
       'field_default_title' => $form_state->getValue('title'),
-      'body' => $form_state->getValue('body'),
+      'body' => ['format' => 'light_html', 'value' => $form_state->getValue('body')],
       'field_contact_name' => $form_state->getValue('contact_name'),
       'field_contact_phone' => $form_state->getValue('contact_phone'),
       'field_contact_mail' => $form_state->getValue('contact_mail'),

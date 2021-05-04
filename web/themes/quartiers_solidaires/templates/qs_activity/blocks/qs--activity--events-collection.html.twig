@@ -20,7 +20,7 @@
 
 {% if variables.activity.field_description.value %}
   <div class="mb-5 text-center rich-content rich-content-primary">
-    {{ variables.activity.field_description.value|raw }}
+    {{ bamboo_render_field('field_description', 'node', variables.activity.nid.value) }}
   </div>
 {% endif %}
 

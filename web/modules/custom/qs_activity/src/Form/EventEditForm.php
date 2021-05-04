@@ -275,7 +275,7 @@ class EventEditForm extends EventEditFormBase {
 
     // Prepare fields.
     $fields['title'] = $form_state->getValue('title');
-    $fields['body'] = $form_state->getValue('body');
+    $fields['body'] = ['format' => 'light_html', 'value' => $form_state->getValue('body')];
     $fields['field_contact_name'] = $form_state->getValue('contact_name');
     $fields['field_contact_mail'] = $form_state->getValue('contact_mail');
     $fields['field_contact_phone'] = $form_state->getValue('contact_phone');

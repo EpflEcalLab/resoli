@@ -10,6 +10,23 @@
   }
 }
 
+/*
+ Just for the primary color, we set the heading tool options to a lighter purple
+ in order to increase readability on dark background
+ */
+.quill-editor.ql-bubble.quill-editor-primary .ql-picker.ql-header,
+.quill-editor.ql-bubble.quill-editor-primary .ql-editor {
+  .ql-picker-item[data-value="4"]:before,
+  .ql-picker-item[data-value="5"]:before {
+    color: $purple-400;
+  }
+}
+
+.quill-editor.ql-bubble .ql-picker-options,
+.quill-editor.ql-bubble .ql-tooltip {
+  background-color: #0c0808;
+}
+
 .rich-content {
   * {
     font-family: $font-family-base-webfonts;

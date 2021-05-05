@@ -29,7 +29,12 @@
     {# Body #}
     {# User should have some privileges OR activity should allow community to access details #}
     {% if has_activity_privilege or community_can_view_detail %}
-      {{ event.body.value|raw }}
+      {% set body = {
+        '#type':   'processed_text',
+        '#text':    event.body.value,
+        '#format':  event.body.format,
+      } %}
+      {{ body }}
     {% else %}
       <p>{{ 'qs.event.not_accessible'|t }}</p>
     {% endif %}

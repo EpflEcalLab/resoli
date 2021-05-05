@@ -435,7 +435,12 @@ class ActivityAddForm extends FormBasic {
 
     // Create the new activity.
     $activity = $this->activityManager->create($form_state->getValue('title'), $themes, $authorizations, $community, $user);
-    $activity = $this->activityManager->update($activity, ['field_description' => $form_state->getValue('body')]);
+    $activity = $this->activityManager->update($activity, [
+      'field_description' => [
+        'format' => 'light_html',
+        'value' => $form_state->getValue('body'),
+      ],
+    ]);
 
     // Add the current user as the first organizer of this activity.
     $this->privilegeManager->create('activity_organizers', $activity, $this->currentUser);

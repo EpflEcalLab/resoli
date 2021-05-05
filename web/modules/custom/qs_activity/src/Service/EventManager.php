@@ -121,7 +121,7 @@ class EventManager {
       'field_start_at' => $date_start->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
       'field_end_at' => $date_end->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
       'title' => $title,
-      'body' => $body,
+      'body' => ['value' => $body, 'format' => 'light_html'],
       'field_contact_name' => $contact_name,
       'field_contact_mail' => $contact_mail,
       'field_contact_phone' => $contact_phone,

@@ -20,7 +20,12 @@
 
 {% if variables.activity.field_description.value %}
   <div class="mb-5 text-center rich-content rich-content-primary">
-    {{ variables.activity.field_description.value|raw }}
+    {% set body = {
+      '#type':   'processed_text',
+      '#text':    variables.activity.field_description.body.value,
+      '#format':  variables.activity.field_description.body.format,
+    } %}
+    {{ body }}
   </div>
 {% endif %}
 

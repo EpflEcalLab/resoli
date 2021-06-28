@@ -19,6 +19,7 @@
  - add Description field to Activity - #859
  - add Description field to Activity create/edit form - #859
  - show Description field to Activity Canonical view - #860
+ - show button "View Photos" on Past event & event finishined today - #839
 
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)

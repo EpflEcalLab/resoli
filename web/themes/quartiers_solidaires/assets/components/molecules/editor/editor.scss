@@ -78,6 +78,7 @@
   .ql-editor {
     min-height: 120px;
     padding: 0;
+    overflow-y: visible;
 
     @include media-breakpoint-down(sm) {
       min-height: 200px;

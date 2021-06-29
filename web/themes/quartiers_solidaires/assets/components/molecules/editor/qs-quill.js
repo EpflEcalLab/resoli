@@ -1,8 +1,31 @@
 "use strict";
 
 /* globals jQuery, Quill */
+
 (function ($) {
   $(document).ready(function () {
+    const Link = Quill.import('formats/link');
+
+    /**
+     * Append the link schema (http(s)) from ommitted links' schema.
+     *
+     * Quill by default creates relative links if scheme is missing.
+     */
+    class ResoliLink extends Link {
+      static create(value) {
+        const node = super.create(value);
+        let url = this.sanitize(value);
+
+        // Quill by default creates relative links if scheme is missing.
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+          url = `http://${url}`
+        }
+        node.setAttribute('href', url);
+        return node;
+      }
+    }
+    Quill.register(ResoliLink);
+
     // Initialized Quill rich-text editor for each instance of ".editor"
     $('.quill-editor').each(function () {
       const identifier = $(this).attr('id');

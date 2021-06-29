@@ -47,6 +47,23 @@
       quill.on('text-change', function() {
         textareaFormGroup.find('textarea').val(quill.root.innerHTML);
       });
+
+      // change the link placeholder to https://resoli.ch
+      const tooltip = quill.theme.tooltip;
+      const input = tooltip.root.querySelector("input[data-link]");
+      input.dataset.link = 'https://resoli.ch';
+
+      // Remove custom style on copy-paste
+      quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+        delta.ops = delta.ops.map(op => {
+          return {
+            insert: op.insert
+          }
+        })
+        return delta
+      })
     });
   });
 })(jQuery);
+
+

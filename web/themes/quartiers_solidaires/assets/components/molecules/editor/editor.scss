@@ -148,3 +148,7 @@
     content: attr(data-h5-translation);
   }
 }
+
+.ql-tooltip {
+  z-index: 9999;
+}

@@ -1,3 +1,5 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
 {% set subscriptions = variables.badges.subscriptions %}
 {% set privileges = variables.privileges %}
 
@@ -10,15 +12,50 @@
 {% set community_can_subscribe = variables.activity.field_community_can_subscribe.value %}
 {% set community_can_view_detail = variables.activity.field_community_access_detail.value %}
 {% set community_can_view_contact = variables.activity.field_community_access_contact.value %}
+{% set community_can_view_photos = variables.activity.field_community_access_gallery.value %}
 
 {% set activity_member = 'activity_members' in privileges %}
 {% set activity_organizer = 'activity_organizers' in privileges %}
 {% set can_manage_activity = activity_maintainer or activity_organizer %}
 
+{% if variables.activity.field_description.value %}
+  <div class="mb-5 text-center rich-content rich-content-primary">
+    {% set body = {
+      '#type':   'processed_text',
+      '#text':    variables.activity.field_description.value,
+      '#format':  variables.activity.field_description.format,
+    } %}
+    {{ body }}
+  </div>
+{% endif %}
+
+{# Toggler button to view future or past events. #}
+<div class="btn-group-toggle-display mb-4">
+  <div class="btn-group btn-group-toggle mb-4" role="group" aria-label="{{ 'qs.a11y.activity.toggler.view_past_future_events'|t }}">
+
+    {% if variables.view == 'past' %}
+      <button href="#" class="btn btn-primary btn-icon">
+        {{ macros.icon('counter-clockwise') }}
+        <span>{{ 'qs.activity.toggler.view_past_events'|t }}</span>
+      </button>
+      <a href="{{ path('<current>') }}" class="btn btn-outline-primary btn-icon btn-icon-right">
+        {{ macros.icon('clockwise') }}
+        <span class="sr-only">{{ 'qs.activity.toggler.view_future_events'|t }}</span>
+      </a>
+    {% else %}
+      <a href="{{ path('<current>', {'view': 'past'}) }}" class="btn btn-outline-primary btn-icon">
+        {{ macros.icon('counter-clockwise') }}
+        <span class="sr-only">{{ 'qs.activity.toggler.view_past_events'|t }}</span>
+      </a>
+      <button class="btn btn-primary btn-icon btn-icon-right">
+        {{ macros.icon('clockwise') }}
+        <span>{{ 'qs.activity.toggler.view_future_events'|t }}</span>
+      </button>
+    {% endif %}
+  </div>
+</div>
 
 {% if variables.events %}
-  <h2 class="h4 mb-4">{{ 'qs.activity.next_events'|t }}</h2>
-
   {% embed '@quartiers_solidaires/node/partials/card-list.html.twig' with {card_list_id: 'events-accordion'} %}
     {% block card_list_items %}
       {% for key, event in variables.events %}
@@ -58,6 +95,7 @@
     {% endblock %}
   {% endembed %}
 
+  {{ variables.pager }}
 {% else %}
 
   <h2 class="h4 mb-4 text-center">

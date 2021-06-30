@@ -1,0 +1,28 @@
+<!-- If btn is active : has ".btn-primary" class. Else, had ".btn-outline-primary"
+If it's NOT active, text span should have ".sr-only" class
+-->
+<div class="btn-group-toggle-display mb-4">
+  <div class="btn-group btn-group-toggle mb-4" role="group" aria-label="Sélection des événements selon leur temporalité">
+    <a href="#" class="btn btn-outline-primary btn-icon">
+      {% include "@atoms/icon/icon.twig" with {icon: 'counter-clockwise'} %}
+      <span class="sr-only">Evénements passés</span>
+    </a>
+    <button class="btn btn-primary btn-icon btn-icon-right">
+      {% include "@atoms/icon/icon.twig" with {icon: 'clockwise'} %}
+      <span>Evénements à venir</span>
+    </button>
+  </div>
+</div>
+
+<div class="btn-group-toggle-display mb-4">
+  <div class="btn-group btn-group-toggle" role="group" aria-label="Basic example">
+    <button href="#" class="btn btn-primary btn-icon">
+      {% include "@atoms/icon/icon.twig" with {icon: 'counter-clockwise'} %}
+      <span>Evénements passés</span>
+    </button>
+    <a href="#" class="btn btn-outline-primary btn-icon btn-icon-right">
+      {% include "@atoms/icon/icon.twig" with {icon: 'clockwise'} %}
+      <span class="sr-only">Evénements à venir</span>
+    </a>
+  </div>
+</div>

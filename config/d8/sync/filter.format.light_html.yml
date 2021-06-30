@@ -1,0 +1,17 @@
+uuid: ac7e9bdf-f3c3-4253-81d9-b9b1c761a1d3
+langcode: fr
+status: true
+dependencies: {  }
+name: 'Light HTML'
+format: light_html
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<a href hreflang target> <em> <strong> <h2 id> <h3 id> <h4 id> <h5 id> <h6 id> <p> <u> <br>'
+      filter_html_help: true
+      filter_html_nofollow: false

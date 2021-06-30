@@ -16,6 +16,7 @@ dependencies:
     - field.field.node.activity.field_contact_phone
     - field.field.node.activity.field_contribution
     - field.field.node.activity.field_default_title
+    - field.field.node.activity.field_description
     - field.field.node.activity.field_member_create_gallery
     - field.field.node.activity.field_member_create_story
     - field.field.node.activity.field_theme
@@ -59,6 +60,7 @@ hidden:
   field_contact_phone: true
   field_contribution: true
   field_default_title: true
+  field_description: true
   field_member_create_gallery: true
   field_member_create_story: true
   field_theme: true

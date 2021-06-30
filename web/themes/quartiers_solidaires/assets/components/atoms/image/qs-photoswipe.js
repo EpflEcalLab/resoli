@@ -56,7 +56,10 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
   // triggers when user clicks on thumbnail
   var onThumbnailsClick = function(e) {
     e = e || window.event;
-    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    // Ensure link to event is not prevented
+    if (!e.target.classList.contains('link-to-event')) {
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    }
 
     var eTarget = e.target || e.srcElement;
 

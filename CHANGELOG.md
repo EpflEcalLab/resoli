@@ -2,6 +2,28 @@
 
 ## NEXT RELEASE
 
+## 1.7.0 (2021-06-30)
+ - add Quill lib for rich-text edition #791
+ - add link to the event card on Photo's activity list - #799
+ - add feature to show Past & Future events on Activity canonical page - #806 #804
+ - add standard (numeric) pager on Activity canonical page listing of past events - #805
+ - add an Inline form autocomplete to subscribe member manually - #800
+ - update action btn displayed on past event cards - #839
+ - add a 3rd Step on Event creation to choose between One event or Weekly 12 repeated events - #803
+ - send mail when organizer manually subscribe a user (#800) to an event - #801 
+ - update action btn displayed on past event cards - #839
+ - add QuillJS to Event add/edit & Activity Defaults - #807
+ - add QuillJS link capability - #849
+ - fix Excel future events export date timezone - #802
+ - fix navigation button next months on Photos by Month, Icon position left instead of right - #759
+ - add fragment on past-event button "access event's photo" to scroll-down to the event - #855
+ - on multiple events creation (#803) add the URL fragment to the first created event - #854
+ - add Description field to Activity - #859
+ - add Description field to Activity create/edit form - #859
+ - show Description field to Activity Canonical view - #860
+ - show button "View Photos" on Past event & event finishined today - #839
+ - add custom QuillJS Link component to prepend missing http(s) schemes - #849
+
 ## 1.6.1 (2021-04-23)
  - update drupal/core (8.9.13 => 8.9.14)
 

@@ -16,6 +16,7 @@
 ] %}
 
 {% block modal_content %}
+  {{ bamboo_render_form('qs_subscription', 'InlineAddForm', {'event': variables.event}) }}
 
   {% if variables.subscriptions %}
     <ul class="card-list mb-auto" id="users-accordion" role="tablist" data-children=".card-list-item">

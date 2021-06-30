@@ -128,6 +128,16 @@ abstract class FormBasic extends FormBase {
   }
 
   /**
+   * Lazy loading for Mail service.
+   *
+   * @return \Drupal\Core\Mail\MailManagerInterface
+   *   Return the Mal service.
+   */
+  protected function getMail() {
+    return $this->container->get('plugin.manager.mail');
+  }
+
+  /**
    * Return the node storage.
    *
    * @return \Drupal\node\NodeStorageInterface

@@ -373,6 +373,12 @@ msgstr "Gérer mon évènement"
 msgid "qs_activity.activities.form.add.title.placeholder"
 msgstr "Ex. Randonnées à la Montagne"
 
+msgid "qs_activity.activities.form.add.body"
+msgstr "Quelle est la description de votre activité?"
+
+msgid "qs_activity.activities.form.add.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
 msgid "qs_activity.activities.form.add.title"
 msgstr "Quel est le nom de votre activité?"
 
@@ -459,6 +465,12 @@ msgstr "Ex. Randonnées à la Montagne"
 
 msgid "qs_activity.activities.form.edit.info.title"
 msgstr "Quel est le nom de votre activité?"
+
+msgid "qs_activity.activities.form.edit.info.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_activity.activities.form.edit.info.body"
+msgstr "Quelle est la description de votre activité?"
 
 msgid "qs_activity.activities.form.edit.info.theme"
 msgstr "Quel thème correspond le mieux à votre activité?"
@@ -574,6 +586,9 @@ msgstr ""
 msgid "qs.event.contact"
 msgstr "Contacter l’organisateur?"
 
+msgid "qs.event.view.photos"
+msgstr "Voir les photos"
+
 msgid "qs.event.back_to_event"
 msgstr "Retour à l’évènement"
 
@@ -609,6 +624,12 @@ msgstr "Votre évènement nécessite-t-il une contribution?"
 
 msgid "qs_activity.events.form.add.contribution"
 msgstr "Inscrivez ci-dessous le montant en francs"
+
+msgid "qs_activity.events.form.add.save"
+msgstr "Publier comme événement unique"
+
+msgid "qs_activity.events.form.add.save_and_repeat_weekly"
+msgstr "Répéter cet événement durant 12 semaines"
 
 msgid "qs_activity.events.form.edit.title"
 msgstr "Quel est le nom de votre évènement?"
@@ -871,6 +892,9 @@ msgstr "Créez un nouvel évènement pour votre activité «@activity»."
 msgid "qs_activity.events.form.step2.description @activity"
 msgstr "Créez un nouvel évènement pour votre activité «@activity»."
 
+msgid "qs_activity.events.form.step3.description @activity"
+msgstr "Créez un nouvel évènement pour votre activité «@activity»."
+
 msgid "qs.next"
 msgstr "Etape suivante"
 
@@ -918,6 +942,9 @@ msgstr "L’activité «@activity» a bien été créée!"
 
 msgid "qs_activity.events.form.add.success"
 msgstr "Votre nouvel évènement a bien été créé!"
+
+msgid "qs_activity.events.form.add.weekly.success @repeat"
+msgstr "Vos @repeat nouveaux évènements ont bien été créés!"
 
 msgid "qs_event.events.form.add.success @event"
 msgstr ""
@@ -1210,6 +1237,9 @@ msgid "qs_activity.events.form.step1"
 msgstr "Nouvel évènement"
 
 msgid "qs_activity.events.form.step2"
+msgstr "Nouvel évènement"
+
+msgid "qs_activity.events.form.step3"
 msgstr "Nouvel évènement"
 
 msgid "qs_activity.events.form.add.error.hours.malformed @fieldname"
@@ -1788,6 +1818,9 @@ msgstr "Ajouter des photos"
 msgid "qs.photo.no_photos"
 msgstr ""
 
+msgid "qs.photo.view_event"
+msgstr "voir cet événement"
+
 msgid "qs.form.input.upload"
 msgstr "Sélectionner des photos"
 
@@ -2131,3 +2164,24 @@ msgstr ""
 
 msgid "qs_subscription.subscribers.reject_confirm"
 msgstr ""
+
+msgid "qs.event.past_label"
+msgstr "Evénement passé:"
+
+msgid "qs.a11y.activity.toggler.view_past_future_events"
+msgstr "ection des événements selon leur temporalité"
+
+msgid "qs.activity.toggler.view_past_events"
+msgstr "Evénements passés"
+
+msgid "qs.activity.toggler.view_future_events"
+msgstr "Evénements à venir"
+
+msgid "qs.quill.editor.placeholder"
+msgstr "Ecrire quelque chose"
+
+msgid "qs.quill.editor.h4"
+msgstr "Titre 1"
+
+msgid "qs.quill.editor.h5"
+msgstr "Titre 2"

@@ -1,6 +1,8 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - Fix spacing issue for ENG hours in events #874
+ - Fix quilljs link popover #880
 
 ## 1.7.0 (2021-06-30)
  - add Quill lib for rich-text edition #791

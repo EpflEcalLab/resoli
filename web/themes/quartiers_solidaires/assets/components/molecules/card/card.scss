@@ -214,6 +214,12 @@ a[href].card-pill-simple {
   }
 }
 
+html:lang(en) .size-time {
+  @include media-breakpoint-up(md) {
+    width: 10em;
+  }
+}
+
 // The icon, pushed against the left border
 .card-pill-icon {
   line-height: 0;

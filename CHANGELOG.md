@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - fix themes (customs) D9 compatibility declaration
  - fix modules (customs) D9 compatibility declaration
  - fix behat scalar usage without quotes
 

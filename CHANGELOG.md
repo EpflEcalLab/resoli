@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - fix modules (customs) D9 compatibility declaration
  - fix behat scalar usage without quotes
 
 ## 1.7.0 (2021-06-30)

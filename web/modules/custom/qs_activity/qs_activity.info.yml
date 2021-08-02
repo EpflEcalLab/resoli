@@ -1,7 +1,7 @@
 name: qs_activity
 type: module
 description: Activities
-core: 8.x
+core_version_requirement: ^8.8 || ^9
 package: Quartiers Solidaires
 
 dependencies:

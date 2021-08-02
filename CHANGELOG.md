@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## NEXT RELEASE
+ - fix behat scalar usage without quotes
 
 ## 1.7.0 (2021-06-30)
  - add Quill lib for rich-text edition #791

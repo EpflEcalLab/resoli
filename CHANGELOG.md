@@ -4,6 +4,7 @@
  - fix themes (customs) D9 compatibility declaration
  - fix modules (customs) D9 compatibility declaration
  - fix behat scalar usage without quotes
+ - add new "base theme" key on themes
 
 ## 1.7.0 (2021-06-30)
  - add Quill lib for rich-text edition #791

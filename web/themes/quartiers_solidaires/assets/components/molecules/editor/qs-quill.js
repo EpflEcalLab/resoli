@@ -35,11 +35,13 @@
         modules: {
           toolbar: [
             [{ header: [4, 5, false] }],
-            ['bold', 'italic', 'underline', 'link'],
+            ['bold', 'italic', 'underline'],
+            ['link'],
           ]
         },
         placeholder: placeholder,
-        theme: 'bubble'
+        theme: 'bubble',
+        bounds: `#${identifier}`
       });
 
       // Form group for the textarea of the form which will contains the input from the Quill editor

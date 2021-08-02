@@ -5,6 +5,8 @@
  - fix modules (customs) D9 compatibility declaration
  - fix behat scalar usage without quotes
  - add new "base theme" key on themes
+ - fix spacing issue for ENG hours in events #874
+ - fix quilljs link popover #880
 
 ## 1.7.0 (2021-06-30)
  - add Quill lib for rich-text edition #791

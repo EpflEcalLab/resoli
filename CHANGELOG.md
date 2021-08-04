@@ -7,6 +7,13 @@
  - add new "base theme" key on themes
  - fix spacing issue for ENG hours in events #874
  - fix quilljs link popover #880
+ - update drupal/core (8.9.14 => 8.9.17) with all dependencies (39 updates)
+ - update drupal/honeypot (1.30.0 => 2.0.1)
+ - update drupal/admin_toolbar (2.4.0 => 3.0.1)
+ - update drupal/new_relic_rpm (1.3.0 => 2.1.0)
+ - update drupal/backerymails (1.3.0 => 2.0.0)
+ - update drupal/bamboo_twig (4.1.0 => 5.0.0-alpha1)
+ - add drupal/upgrade_status to prepare Drupal 9 update
 
 ## 1.7.0 (2021-06-30)
  - add Quill lib for rich-text edition #791

@@ -208,19 +208,6 @@ It can modernize your code (like converting the pow function to the ** operator 
 ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle
 ```
 
-### Assert Drupal Deprecation
-
-https://github.com/mglaman/drupal-check
-
-Built on PHPStan, this static analysis tool will check for correctness (e.g. using a class that doesn't exist),
-deprecation errors, and more.
-
-Why? While there are many static analysis tools out there, none of them run with the Drupal context in mind.
-
-```bash
-./vendor/bin/drupal-check -d ./web/modules/custom ./behat ./web/themes --no-progress
-```
-
 ### Enforce code standards with git hooks
 
 Maintaining code quality by adding the custom post-commit hook to yours.

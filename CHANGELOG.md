@@ -14,6 +14,8 @@
  - update drupal/backerymails (1.3.0 => 2.0.0)
  - update drupal/bamboo_twig (4.1.0 => 5.0.0-alpha1)
  - add drupal/upgrade_status to prepare Drupal 9 update
+ - remove drupal/devel (1.2.0)
+ - remove drupal/block_exclude_pages (1.7.0)
 
 ## 1.7.0 (2021-06-30)
  - add Quill lib for rich-text edition #791

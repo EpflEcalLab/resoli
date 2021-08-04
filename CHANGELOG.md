@@ -8,6 +8,7 @@
  - remove drupal/upgrade_status
  - update drupal/core-recommended (8.9.17 => 9.2.3)
  - add Gin Admin theme
+ - fix Gin custom QS Toolbar icon
 
 ## NEXT RELEASE
  - fix themes (customs) D9 compatibility declaration

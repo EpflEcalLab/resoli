@@ -33,7 +33,7 @@
         "drupal/admin_toolbar": "^2.0",
         "drupal/allowed_formats": "^1.1",
         "drupal/backerymails": "^1.2",
-        "drupal/bamboo_twig": "^4.0",
+        "drupal/bamboo_twig": "^5.0",
         "drupal/block_exclude_pages": "^1.2",
         "drupal/console": "^1.0.2",
         "drupal/core-composer-scaffold": "^8.8",

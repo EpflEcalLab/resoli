@@ -110,6 +110,9 @@
         "patches": {
             "drupal/backerymails": {
                 "[3168259] - Excluded sensitive e-mails are not sent": "https://www.drupal.org/files/issues/2020-10-30/3168259-06.patch"
+            },
+            "drupal/captcha": {
+                "[3211466] - Testing modules property Access Level": "https://www.drupal.org/files/issues/2021-04-29/captcha-module-property-access-level.patch"
             }
         }
     }

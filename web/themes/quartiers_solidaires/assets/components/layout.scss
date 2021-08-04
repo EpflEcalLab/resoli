@@ -64,8 +64,9 @@ body {
 }
 
 // Drupal
+.gin--horizontal-toolbar #toolbar-administration,
 #toolbar-administration {
-  z-index: ($zindex-tooltip * 2);
+  z-index: ($zindex-tooltip * 2)!important;
 }
 
 body.toolbar-fixed .toolbar-oriented .toolbar-bar {

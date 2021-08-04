@@ -1026,7 +1026,19 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: "<ul class=\"action-links\">\n  <li>\n    <a href=\"/node/add/activity\" class=\"button button-action button--primary button--small\">Add activity</a>\n  </li>\n  <li>\n    <a href=\"/node/add/event\" class=\"button button-action button--primary button--small\">Add event</a>\n  </li>\n  <li>\n    <a href=\"/node/add/photo\" class=\"button button-action button--primary button--small\">Add photo</a>\n  </li>\n</ul>\n\n"
+          content: |+
+            <ul class="action-links">
+              <li>
+                <a href="/node/add/activity" class="button button-action button--primary button--small">Add activity</a>
+              </li>
+              <li>
+                <a href="/node/add/event" class="button button-action button--primary button--small">Add event</a>
+              </li>
+              <li>
+                <a href="/node/add/photo" class="button button-action button--primary button--small">Add photo</a>
+              </li>
+            </ul>
+
           plugin_id: text_custom
       sorts: {  }
     display_plugin: page
@@ -1600,7 +1612,13 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: "<ul class=\"action-links\">\n  <li>\n    <a href=\"/node/add/activity\" class=\"button button-action button--primary button--small\">Add activity</a>\n  </li>\n</ul>\n\n"
+          content: |+
+            <ul class="action-links">
+              <li>
+                <a href="/node/add/activity" class="button button-action button--primary button--small">Add activity</a>
+              </li>
+            </ul>
+
           plugin_id: text_custom
       style:
         type: table
@@ -2009,7 +2027,11 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<span class=\"marker\">{% if field_start_at_1 == '+' %}futur{% endif %}</span>\n{% if field_start_at_1 == '-' %}past{% endif %}\n\n  "
+            text: |-
+              <span class="marker">{% if field_start_at_1 == '+' %}futur{% endif %}</span>
+              {% if field_start_at_1 == '-' %}past{% endif %}
+
+                
             make_link: false
             path: ''
             absolute: false
@@ -2541,7 +2563,12 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: "<ul class=\"action-links\">\n  <li>\n    <a href=\"/node/add/event\" class=\"button button-action button--primary button--small\">Add event</a>\n  </li>\n</ul>"
+          content: |-
+            <ul class="action-links">
+              <li>
+                <a href="/node/add/event" class="button button-action button--primary button--small">Add event</a>
+              </li>
+            </ul>
           plugin_id: text_custom
       style:
         type: table
@@ -2704,7 +2731,16 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: "<ul class=\"action-links\">\n  <li>\n    <a href=\"/node/add/activity\" class=\"button button-action button--primary button--small\">Add activity</a>\n  </li>\n  <li>\n    <a href=\"/node/add/event\" class=\"button button-action button--primary button--small\">Add event</a>\n  </li>\n</ul>\n\n"
+          content: |+
+            <ul class="action-links">
+              <li>
+                <a href="/node/add/activity" class="button button-action button--primary button--small">Add activity</a>
+              </li>
+              <li>
+                <a href="/node/add/event" class="button button-action button--primary button--small">Add event</a>
+              </li>
+            </ul>
+
           plugin_id: text_custom
       defaults:
         header: false
@@ -2944,7 +2980,9 @@ display:
           exclude: true
           alter:
             alter_text: true
-            text: "<br>\n<h3>{{ field_activity }} (#{{ field_activity__target_id }}) - {{ field_community }}</h3>"
+            text: |-
+              <br>
+              <h3>{{ field_activity }} (#{{ field_activity__target_id }}) - {{ field_community }}</h3>
             make_link: false
             path: ''
             absolute: false
@@ -3377,7 +3415,13 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: "<ul class=\"action-links\">\n  <li>\n    <a href=\"/node/add/photo\" class=\"button button-action button--primary button--small\">Add photo</a>\n  </li>\n</ul>\n\n"
+          content: |+
+            <ul class="action-links">
+              <li>
+                <a href="/node/add/photo" class="button button-action button--primary button--small">Add photo</a>
+              </li>
+            </ul>
+
           plugin_id: text_custom
       defaults:
         header: false

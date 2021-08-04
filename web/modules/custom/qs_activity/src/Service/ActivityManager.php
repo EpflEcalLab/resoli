@@ -326,8 +326,8 @@ class ActivityManager {
     // Make sure the prev is never before today when start date is in the
     // future.
     if (
-      $prev->format('Ymd') < $now_formatted &&
-      $start_date->format('Ymd') > $now_formatted
+      $prev->format('Ymd') < $now_formatted
+      && $start_date->format('Ymd') > $now_formatted
     ) {
       $prev = $this->getNow();
       $prev->setTime(0, 0);

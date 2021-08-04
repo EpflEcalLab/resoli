@@ -21,7 +21,6 @@ Feature: Forget Password
     Given I am on "/authentication/password"
     When I fill in "edit-name" with "manager+lausanne@antistatique.net"
     And I press "edit-submit"
-    And I should see "Further instructions have been sent to your email address." in the ".alert" element
     Then I should see "qs.auth.pass.confirmation.thanks"
     Then I should see "qs.auth.pass.confirmation.description"
     And 1 mail should be sent

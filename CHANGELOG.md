@@ -17,6 +17,7 @@
  - remove drupal/devel (1.2.0)
  - remove drupal/block_exclude_pages (1.7.0)
  - update config system.action using deprecated plugin
+ - add drupal/jquery_ui_datepicker as deprecated from Drupal Core
 
 ## 1.7.0 (2021-06-30)
  - add Quill lib for rich-text edition #791

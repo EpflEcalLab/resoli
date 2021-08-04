@@ -41,6 +41,7 @@
         "drupal/focal_point": "^1.0@beta",
         "drupal/honeypot": "^2.0",
         "drupal/image_effects": "^3.0",
+        "drupal/jquery_ui_datepicker": "^1.1",
         "drupal/mailsystem": "^4.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/metatag": "^1.1",

@@ -8,6 +8,7 @@
  - remove drupal/upgrade_status
  - update drupal/core-recommended (8.9.17 => 9.2.3)
  - fix unit tests by removing install schema system.router in tests
+ - fix behat tests by updating default content date format stored
 
 ## NEXT RELEASE
  - fix themes (customs) D9 compatibility declaration

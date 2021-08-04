@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## TODO BEFORE D9 RELEASE
+ - ensure settings.php new config key is present
+
+## NEXT RELEASE D9
+ - remove mglaman/drupal-check
+ - remove drupal/upgrade_status
+
 ## NEXT RELEASE
  - fix themes (customs) D9 compatibility declaration
  - fix modules (customs) D9 compatibility declaration

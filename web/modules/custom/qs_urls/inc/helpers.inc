@@ -140,13 +140,16 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
 
     // Delete alias on operation delete.
     if ($operation === 'delete') {
-      if (qs_urls_assert_path_alias_exists($item['alias'], $langcode) === TRUE) {
-        $path_alias = $alias_storage->loadByProperties([
+      if (qs_urls_assert_path_alias_exists($item['alias'], $langcode, $item['route']) === TRUE) {
+        $path_aliases = $alias_storage->loadByProperties([
           'path' => $item['route'],
           'alias' => $item['alias'],
           'langcode' => $langcode,
         ]);
-        $path_alias->delete();
+
+        foreach ($path_aliases as $path_alias) {
+          $path_alias->delete();
+        }
       }
     }
   }

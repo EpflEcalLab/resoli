@@ -14,7 +14,7 @@ Feature: Forget Password
     Given I am on "/authentication/password"
     When I fill in "edit-name" with "Batman"
     And I press "edit-submit"
-    And I should see "batman is not recognized as a username or an email address." in the ".alert" element
+    And I should see "If Batman is a valid account, an email will be sent with instructions to reset your password." in the ".alert" element
 
   @mail
   Scenario: When filling the forget password it should redirect me on the confirmation page & send the one-time-login mail.

@@ -40,6 +40,7 @@
         "drupal/core-recommended": "^9.0.0",
         "drupal/field_group": "^3.0",
         "drupal/focal_point": "^1.0@beta",
+        "drupal/gin": "^3.0",
         "drupal/honeypot": "^2.0",
         "drupal/image_effects": "^3.0",
         "drupal/jquery_ui_datepicker": "^1.1",

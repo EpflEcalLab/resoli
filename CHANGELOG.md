@@ -7,6 +7,8 @@
  - remove mglaman/drupal-check
  - remove drupal/upgrade_status
  - update drupal/core-recommended (8.9.17 => 9.2.3)
+ - add Gin Admin theme
+ - fix Gin custom QS Toolbar icon
  - fix unit tests by removing install schema system.router in tests
  - fix behat tests by updating default content date format stored
 

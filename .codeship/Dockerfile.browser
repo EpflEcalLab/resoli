@@ -1,0 +1,22 @@
+FROM selenium/standalone-chrome:3.141.59-oxygen
+
+USER root
+
+RUN set -ex; \
+  \
+  mkdir -p /usr/share/man/man1 /usr/share/man/man7; \
+  \
+  # update list of packages
+  apt-get update; \
+  \
+  # install running dependencies
+  apt-get install -y --no-install-recommends \
+    dnsutils \
+  ; \
+  \
+  # cleanup
+  rm -rf /var/lib/apt/lists/*
+
+ADD ./.codeship/scripts/setup_hosts.sh /opt/bin/
+
+ENTRYPOINT ["/opt/bin/setup_hosts.sh", "--", "/opt/bin/entry_point.sh"]

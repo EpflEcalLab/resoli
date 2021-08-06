@@ -22,7 +22,10 @@
           steps:
             - name: Behat
               service: behat
-              command: docker-as-wait --mysql test:8888 -- docker-as-drupal behat --user=www-data --skip-db-reset
+              command: >-
+                bash -c "docker-as-wait --mysql test:8888 browser:4444 -- ./.codeship/scripts/setup_hosts.sh --
+                  docker-as-drupal behat --user=www-data ||
+                  (docker-as-artifacts --recursive --local-dir=/var/www/log && exit 1)"
     - name: Unit
       service: test
       command: docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=qs

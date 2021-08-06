@@ -9,8 +9,9 @@ services:
       - db
       - mail
     environment:
+      APP_ENV: development
+      BASE_URL: http://localhost:80
       DATABASE_URL: mysql://drupal:drupal@db/drupal_development
-      SMTP_HOST: mail:1025
       PRIVATE_FILES: /var/www/web/sites/default/files/private
       DEFAULT_CONTENT: qs_default_content
     restart: "no"
@@ -30,6 +31,8 @@ services:
       # Behat
       - ./behat:/var/www/behat:cached
       - ./behat.yml:/var/www/behat.yml:cached
+      # Drush
+      - ./config/d8/docker.drush.yml:/var/www/drush/drush.yml:cached
 
   # Drupal test server
   test:
@@ -39,12 +42,14 @@ services:
       - db
       - mail
     environment:
+      APP_ENV: test
+      BASE_URL: http://localhost:8888
       DATABASE_URL: mysql://drupal:drupal@db/drupal_test
-      SMTP_HOST: mail:1025
       PRIVATE_FILES: /var/www/web/sites/default/files/private
       REQUIRED_DIRECTORIES: >-
         /var/www/log/behat
         /var/www/dump/behat
+      BEHAT_PROFILE: default
       TEST_DISABLE_MODULES: >-
         big_pipe
         honeypot
@@ -52,7 +57,6 @@ services:
         recaptcha
       TEST_USER: www-data
       DEFAULT_CONTENT: qs_default_content
-      BEHAT_PROFILE: docker
       PHPUNIT_DEFAULT_GROUP: qs
     restart: "no"
     volumes:
@@ -69,6 +73,19 @@ services:
       # Behat
       - ./behat:/var/www/behat:cached
       - ./behat.yml:/var/www/behat.yml:cached
+      # Drush
+      - ./config/d8/docker.drush.yml:/var/www/drush/drush.yml:cached
+    networks:
+      default:
+        aliases:
+          # Hosts used in default content for testing
+          - resoli.test
+
+  # Test browser
+  browser:
+    image: selenium/standalone-chrome
+    volumes:
+      - /dev/shm:/dev/shm
 
   # Database
   db:

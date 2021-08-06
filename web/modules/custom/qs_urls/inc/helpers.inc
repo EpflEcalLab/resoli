@@ -65,7 +65,6 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
 
   // Load services.
   $redirect_repository = \Drupal::service('redirect.repository');
-  $alias_storage = \Drupal::service('path.alias_storage');
 
   // @todo translation the redirect_suffix before creation/deletion,
   // on every language.
@@ -76,7 +75,7 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
 
       // Only generate redirect for existing alias &
       // non already redirected source.
-      if ($alias_storage->aliasExists($item['source'], $langcode) === FALSE && empty($redirect_repository->findMatchingRedirect(trim($item['source'], '/'), [], $langcode))) {
+      if (qs_urls_assert_path_alias_exists($item['source'], $langcode) === FALSE && empty($redirect_repository->findMatchingRedirect(trim($item['source'], '/'), [], $langcode))) {
         $redirect = $redirectStorage->create();
         $redirect->setSource($item['source']);
         $redirect->setRedirect($item['redirect']);
@@ -119,7 +118,7 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
 
   // Load services.
-  $alias_storage = \Drupal::service('path.alias_storage');
+  $alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
 
   // @todo translation the alias_suffix before creation/deletion,
   // on every language.
@@ -129,20 +128,68 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
     if ($operation === 'insert' || $operation === 'update' || $operation === 'bulkupdate') {
       // Only generate alias for non-existing alias &
       // route which has not already an alias.
-      if ($alias_storage->aliasExists($item['alias'], $langcode) === FALSE && $alias_storage->lookupPathAlias($item['route'], $langcode) === FALSE) {
-        $alias_storage->save($item['route'], $item['alias'], $langcode);
+      if (qs_urls_assert_path_alias_exists($item['alias'], $langcode) === FALSE && qs_urls_assert_path_alias_exists(NULL, $langcode, $item['route']) === FALSE) {
+        $path_alias = $alias_storage->create([
+          'path' => $item['route'],
+          'alias' => $item['alias'],
+          'langcode' => $langcode,
+        ]);
+        $path_alias->save();
       }
     }
 
     // Delete alias on operation delete.
     if ($operation === 'delete') {
-      if ($alias_storage->aliasExists($item['alias'], $langcode) === TRUE) {
-        $alias_storage->delete([
-          'source' => $item['route'],
+      if (qs_urls_assert_path_alias_exists($item['alias'], $langcode, $item['route']) === TRUE) {
+        $path_aliases = $alias_storage->loadByProperties([
+          'path' => $item['route'],
           'alias' => $item['alias'],
           'langcode' => $langcode,
         ]);
+
+        foreach ($path_aliases as $path_alias) {
+          $path_alias->delete();
+        }
       }
     }
   }
+}
+
+/**
+ * Asserts that a path alias exists in the storage.
+ *
+ * @param string $alias
+ *   The path alias.
+ * @param string|null $langcode
+ *   (optional) The language code of the path alias.
+ * @param string|null $path
+ *   (optional) The system path of the path alias.
+ *
+ * @return bool
+ *   Does the path alias exists in the storage.
+ */
+function qs_urls_assert_path_alias_exists($alias, $langcode = NULL, $path = NULL) {
+  $query = \Drupal::entityTypeManager()
+    ->getStorage('path_alias')
+    ->getQuery()
+    ->accessCheck(FALSE);
+
+  if ($alias) {
+    $query
+      ->condition('alias', $alias, '=');
+  }
+
+  if ($langcode) {
+    $query
+      ->condition('langcode', $langcode, '=');
+  }
+
+  if ($path) {
+    $query
+      ->condition('path', $path, '=');
+  }
+
+  $query->count();
+
+  return (bool) $query->execute() > 0;
 }

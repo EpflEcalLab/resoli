@@ -1,3 +1,5 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
 {# Privilege Badges #}
 {% if activity.nid.value and badges.privileges and activity.nid.value in badges.privileges|keys%}
   {# Get user Highest privilege #}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\wd_loan\Kernel;
+namespace Drupal\Tests\qs_activity\Kernel;
 
 use Drupal\node\NodeInterface;
 use Drupal\qs_test\Kernel\ResoliKernelTestBase;

@@ -1,6 +1,8 @@
 # CHANGELOG
 
 ## [Unreleased]
+
+## [1.7.1] - 2021-08-19
 ### Added
 - add new "base theme" key on themes
 - add drupal/upgrade_status to prepare Drupal 9 update

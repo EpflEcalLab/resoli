@@ -1,16 +1,16 @@
 default:
   autoload:
-    '': %paths.base%/behat
+    '': '%paths.base%/behat'
   suites:
     default:
-      paths: [%paths.base%/behat/Features]
+      paths: ['%paths.base%/behat/Features']
       contexts:
         # See composer.json `autoload-dev`
         - Drupal\Behat\Context\Drupal\DatabaseContext:
-            dump_path: %paths.base%/dump/behat
+            dump_path: '%paths.base%/dump/behat'
         - Drupal\Behat\Context\Drupal\ElementContext
         - Drupal\Behat\Context\Drupal\DebugContext:
-            log_path: %paths.base%/log/behat
+            log_path: '%paths.base%/log/behat'
         - Drupal\Behat\Context\Drupal\FormContext:
             base_url: http://127.0.0.1:8888
         - Drupal\Behat\Context\Drupal\MailContext:
@@ -64,10 +64,10 @@ docker:
       contexts:
         # See composer.json `autoload-dev`
         - Drupal\Behat\Context\Drupal\DatabaseContext:
-            dump_path: %paths.base%/dump/behat
+            dump_path: '%paths.base%/dump/behat'
         - Drupal\Behat\Context\Drupal\ElementContext
         - Drupal\Behat\Context\Drupal\DebugContext:
-            log_path: %paths.base%/log/behat
+            log_path: '%paths.base%/log/behat'
         - Drupal\Behat\Context\Drupal\FormContext:
             base_url: http://test:8888
         - Drupal\Behat\Context\Drupal\MailContext:

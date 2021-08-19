@@ -1,25 +1,34 @@
 # CHANGELOG
 
-## NEXT RELEASE
+## [Unreleased]
+### Added
+- add new "base theme" key on themes
+- add drupal/upgrade_status to prepare Drupal 9 update
+- add drupal/jquery_ui_datepicker as deprecated from Drupal Core
+
+### Changed
+- update drupal/core (8.9.14 => 8.9.17) with all dependencies (39 updates)
+- update drupal/honeypot (1.30.0 => 2.0.1)
+- update drupal/admin_toolbar (2.4.0 => 3.0.1)
+- update drupal/new_relic_rpm (1.3.0 => 2.1.0)
+- update drupal/backerymails (1.3.0 => 2.0.0)
+- update drupal/bamboo_twig (4.1.0 => 5.0.0-alpha1)
+- update config system.action using deprecated plugin
+- update changelog form to follow keepachangelog format
+
+### Fixed
  - fix themes (customs) D9 compatibility declaration
  - fix modules (customs) D9 compatibility declaration
  - fix behat scalar usage without quotes
- - add new "base theme" key on themes
  - fix spacing issue for ENG hours in events #874
  - fix quilljs link popover #880
- - update drupal/core (8.9.14 => 8.9.17) with all dependencies (39 updates)
- - update drupal/honeypot (1.30.0 => 2.0.1)
- - update drupal/admin_toolbar (2.4.0 => 3.0.1)
- - update drupal/new_relic_rpm (1.3.0 => 2.1.0)
- - update drupal/backerymails (1.3.0 => 2.0.0)
- - update drupal/bamboo_twig (4.1.0 => 5.0.0-alpha1)
- - add drupal/upgrade_status to prepare Drupal 9 update
+
+### Removed
  - remove drupal/devel (1.2.0)
  - remove drupal/block_exclude_pages (1.7.0)
- - update config system.action using deprecated plugin
- - add drupal/jquery_ui_datepicker as deprecated from Drupal Core
 
-## 1.7.0 (2021-06-30)
+## [1.7.0] - 2021-06-30
+
  - add Quill lib for rich-text edition #791
  - add link to the event card on Photo's activity list - #799
  - add feature to show Past & Future events on Activity canonical page - #806 #804
@@ -41,10 +50,10 @@
  - show button "View Photos" on Past event & event finishined today - #839
  - add custom QuillJS Link component to prepend missing http(s) schemes - #849
 
-## 1.6.1 (2021-04-23)
+## [1.6.1] - 2021-04-23
  - update drupal/core (8.9.13 => 8.9.14)
 
-## 1.6.0 (2021-04-19)
+## [1.6.0] - 2021-04-19
  - update Docker to PHP7.4, Node 10 & MariaDB 10.4
  - update Drupal from 8.9.7 to 8.9.13 with all dependencies
  - modernize the Code Styles integration
@@ -55,10 +64,10 @@
  - masive codebase update to remove deprecation notices
  - update Node from 10 => 12
 
-## 1.5.6 (2020-11-19)
+## [1.5.6] - 2020-11-19
  - fix Event Export into Excel file which trigger crash on empty column "Contact"
 
-## 1.5.5 (2020-11-19)
+## [1.5.5] - 2020-11-19
  - update Drupal from 8.8.4 to 8.9.3 with all dependencies
  - update Drupal from 8.9.3 to 8.9.7
  - update Drupal from 8.9.7 to 8.9.8 with all dependencies
@@ -68,37 +77,37 @@
  - add a captcha on subscription form to avoid spam #768
  - update Drupal from 8.9.8 to 8.9.9 (SA-CORE-2020-012)
 
-## 1.5.4 (2020-10-19)
+## [1.5.4] - 2020-10-19
  - Apply patch to be compatible with Apache 2.4 and avoid double compression with brotli
 
-## 1.5.3 (2020-04-15)
+## [1.5.3] - 2020-04-15
  - update composer lock
  - update composer used in Alwaysdata from 1.5.5 -> 1.10.5
 
-## 1.5.2 (2020-04-15)
+## [1.5.2] - 2020-04-15
  - update Drupal from 8.7.x to 8.8 - #753
  - update modules - #750
  - add NewRelic module
 
-## 1.5.1 (2020-04-01)
+## [1.5.1] - 2020-04-01
  - fix end-of-year previous button - close #747
  - fix date pager bugged on february - close #758
 
-## 1.5.0 (2020-01-08)
+## [1.5.0] - 2020-01-08
  - update to Drupal 8.7.11
  - fix dual step bug when multiple forms - close #748
  - rebuild New Relic for PHP 7.2 on Alwaysdata
 
-## 1.4.4 (2019-10-11)
+## [1.4.4] - 2019-10-11
  - remove InlineErrorFormTrait to use Core Inline Form Error - close #702
 
-## 1.4.3 (2019-09-25)
+## [1.4.3] - 2019-09-25
  - improve responsivness especially smartphones visual design - close #741
 
-## 1.4.2 (2019-09-18)
+## [1.4.2] - 2019-09-18
  - fix fade-out of parent cards on ajax-submitted form - close #739
 
-## 1.4.1 (2019-07-25)
+## [1.4.1] - 2019-07-25
  - fix encoding issues in photos section, close #152
  - fix some modal issues in themes filter and in event/activity add forms #722
  - fix IE and Edge issues, fix some other alignment problems #733 #735
@@ -115,7 +124,7 @@
  - fix z-index dropdown selector on modal - close #711
  - fix button contact-all on subscription waiting approvals - close #717
 
-## 1.4.0 (2019-06-29)
+## [1.4.0] - 2019-06-29
  - refactoring of Floating buttons
  - refactoring of Cards HTML markup & skeletton
  - refactor global pages markup & skeletton
@@ -143,24 +152,24 @@
  - setup Codeship Pro
  - setup Docker
 
-## 1.3.4 (2019-05-13)
+## [1.3.4] - 2019-05-13
  - fix mail layout paragraphs issue - close #691
 
-## 1.3.3 (2019-05-02)
+## [1.3.3] - 2019-05-02
  - fix IE11 - close #687
  - add date of event on 'My subscriptions' page - close #688
 
-## 1.3.2 (2019-03-27)
+## [1.3.2] - 2019-03-27
  - fix tests process on Codeship
 
-## 1.3.1 (2019-03-27)
+## [1.3.1] - 2019-03-27
  - fix masquerade button on navigation - close #684
  - babelify the subscription.js which was uncompatible with IE or some Apple device - close #683
  - update phpunit workflow & scripts
  - add base for future PHPUnit tests
  - fix EventManager::getNext - close #647
 
-## 1.3.0 (2019-02-18)
+## [1.3.0] - 2019-02-18
  - update to Drupal 8.6.9
  - responsivness all the way
  - change icon in "Mes informations" button on welcome dashboard #651
@@ -181,14 +190,14 @@
  - change photos order by date – Newest to Oldest #519
  - add calendar – Today/Tomorrow #384
 
-## 1.2.2 (2018-11-07)
+## [1.2.2] - 2018-11-07
  - add new tests bash files
  - get the true next events - close #647
 
-## 1.2.1 (2018-11-07)
+## [1.2.1] - 2018-11-07
  - remove the baseline of "Pro Senectute" on sponsors.svg
 
-## 1.2.0 (2018-08-21)
+## [1.2.0] - 2018-08-21
  - fix mail body encoded quote #152
  - add module "Image Effects" which allow Image Styles to Automatically use EXIF Image Orientation #606
  - improve members listing by ordering them using Lastname instead of Name (mail) #570
@@ -207,24 +216,24 @@
  - update to Drupal 8.5.6
  - fix hours display in all languages #628 #643
 
-## 1.1.4 (2018-07-05)
+## [1.1.4] - 2018-07-05
  - add german (de) language
  - make Taxonomy "Themes" translatable with fallback in Default Site Lang (FR) - #627
  - update logo - #629
 
-## 1.1.3 (2018-06-28)
+## [1.1.3] - 2018-06-28
  - add mailjet as SMTP mail provider.
  - update to Drupal 8.5.4
 
-## 1.1.2 (2018-05-14)
+## [1.1.2] - 2018-05-14
  - update to Drupal 8.5.3
  - fix IE 11 regression, sticky polyfill crash #620
 
-## 1.1.1 (2018-05-02)
+## [1.1.1] - 2018-05-02
  - add white border to btn-info buttons #598
  - add spacing below visibility buttons in ActivityAddForm #398
 
-## 1.1.0 (2018-04-26)
+## [1.1.0] - 2018-04-26
  - add the sponsors on homepage
  - change confirmed icon for event registering #598
  - increase size of activity in activity user collection and in photos collection #545
@@ -253,20 +262,20 @@
  - add Masquerade module
  - fix pager #610 & #31 - following pagers wasn't working: Members of Activity, Members of Community & Form ActivityInlineAddMember
 
-## 1.0.4 (2018-04-26)
+## [1.0.4] - 2018-04-26
  - Apply Remote Code Exectiion - SA-CORE-2018-004
 
-## 1.0.3 (2018-03-28)
+## [1.0.3] - 2018-03-28
  - apply patch - Remote Code Execution - SA-CORE-2018-002
 
-## 1.0.2 (2018-03-16)
+## [1.0.2] - 2018-03-16
  - setup pagination component #31
 
-## 1.0.1 (2018-03-01)
+## [1.0.1] - 2018-03-01
  - fix images upload on past events - #576
  - update README.md badges
 
-## 1.0.0 (2018-02-26)
+## [1.0.0] - 2018-02-26
  - fix #500 - Remove privilegies & subscriptions when deleting entities
  - improve user supervisor dashboard #202
  - fix click propagation in photoswipe gallery #497
@@ -312,11 +321,11 @@
  - fix IE specific cases #534
  - fix Edge specific cases #566
 
-## 0.1.1 (2018-02-21)
+## [0.1.1] - 2018-02-21
  - add Google Tag Manager
 
-## 0.1.0 (2017-12-13)
+## [0.1.0] - 2017-12-13
  - production deployment
 
-## 0.0.0 (2017-07-14)
+## [0.0.0] - 2017-07-14
  - init empty repo

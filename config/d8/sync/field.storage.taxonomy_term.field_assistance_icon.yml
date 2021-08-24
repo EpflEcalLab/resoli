@@ -15,7 +15,7 @@ settings:
       value: none
       label: None
     -
-      value: mobilité
+      value: mobilite
       label: Mobilité
     -
       value: convivialite

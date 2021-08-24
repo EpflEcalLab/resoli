@@ -69,7 +69,7 @@ final class EventManagerTest extends ResoliKernelTestBase {
       'title' => 'event-1',
       'field_activity' => $activity_1->id(),
       'field_start_at' => ($year - 2) . '-01-20T00:00:00',
-      'field_end_at' => ($year - 2) . '2018-01-20T02:00:00',
+      'field_end_at' => ($year - 2) . '-01-20T02:00:00',
     ]);
     $event_1->save();
 

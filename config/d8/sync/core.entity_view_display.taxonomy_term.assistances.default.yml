@@ -1,0 +1,31 @@
+uuid: b52b5670-d600-4626-b6c7-695071371ec7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.assistances.field_assistance_icon
+    - taxonomy.vocabulary.assistances
+  module:
+    - options
+    - text
+id: taxonomy_term.assistances.default
+targetEntityType: taxonomy_term
+bundle: assistances
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_assistance_icon:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden:
+  langcode: true

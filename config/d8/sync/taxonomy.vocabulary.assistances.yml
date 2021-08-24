@@ -1,0 +1,8 @@
+uuid: 2524a93e-ba59-4b92-9085-603bd704933c
+langcode: fr
+status: true
+dependencies: {  }
+name: Assistances
+vid: assistances
+description: 'Themes for assistance'
+weight: 0

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
  - add Gin Admin theme
  - fix Gin custom QS Toolbar icon
+ - add core architecture for Entraide
 
 ### Changed
  - update drupal/core-recommended (8.9.17 => 9.2.3)

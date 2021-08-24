@@ -61,6 +61,24 @@ class CollectionController extends ControllerBase {
   }
 
   /**
+   * Collection by demands.
+   */
+  public function demands(Request $request, TermInterface $community) {
+    $variables = ['community' => $community];
+
+    return [
+      '#theme' => 'qs_assistance_collection_demands_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+          'url.query_args',
+        ],
+      ],
+    ];
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getCacheTags(?array $nodes = NULL) {
@@ -98,21 +116,4 @@ class CollectionController extends ControllerBase {
     ];
   }
 
-  /**
-   * Collection by demands.
-   */
-  public function demands(Request $request, TermInterface $community) {
-    $variables = ['community' => $community];
-
-    return [
-      '#theme' => 'qs_assistance_collection_demands_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url.query_args',
-        ],
-      ],
-    ];
-  }
 }

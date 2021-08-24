@@ -328,6 +328,9 @@ msgstr "Activités"
 msgid "qs_menu.links.calendar"
 msgstr "Calendrier"
 
+msgid "qs_menu.links.assistance"
+msgstr "Entraide"
+
 msgid "qs_menu.links.stories"
 msgstr "Récits"
 

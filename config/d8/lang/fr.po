@@ -2200,3 +2200,9 @@ msgstr "Offres"
 
 msgid "qs_menu.links.assistance.demands"
 msgstr "Demandes"
+
+msgid "qs.assistance.offers.lead @community"
+msgstr "Voici les offres d’entraide de la communauté de @community."
+
+msgid "qs.assistance.demands.lead @community"
+msgstr "Voici les demandes d’entraide de la communauté de @community."

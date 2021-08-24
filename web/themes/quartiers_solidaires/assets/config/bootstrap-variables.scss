@@ -49,7 +49,9 @@ $red-200: #d84c84;
 $red:     #c80050 !default;
 $red-700: #640028;
 
+$blue-100: #f7faff;
 $blue-300: #83b8fb;
+$blue-400: #74b1ff;
 $blue:     #5aa0fa !default;
 $blue-700: #325ac8;
 
@@ -72,7 +74,9 @@ $colors: (
   secondary-light:  $teal-300,
   secondary:        $teal,
   secondary-darker: $teal-700,
-  info-light:       $blue-300,
+  info-lightest:    $blue-100,
+  info-lighter:     $blue-300,
+  info-light:       $blue-400,
   info:             $blue,
   info-darker:      $blue-700,
   danger-lighter:   $red-200,

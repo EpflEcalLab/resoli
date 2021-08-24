@@ -50,7 +50,7 @@ final class EventManagerTest extends ResoliKernelTestBase {
    * @covers ::getNext
    */
   public function testGetNext() {
-    $year = (int) date("Y");
+    $year = (int) date('Y');
     $activity_1 = $this->entityTypeManager->getStorage('node')->create([
       'type' => 'activity',
       'title' => 'activity-1',

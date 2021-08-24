@@ -50,6 +50,7 @@ final class EventManagerTest extends ResoliKernelTestBase {
    * @covers ::getNext
    */
   public function testGetNext() {
+    $year = (int) date("Y");
     $activity_1 = $this->entityTypeManager->getStorage('node')->create([
       'type' => 'activity',
       'title' => 'activity-1',
@@ -67,8 +68,8 @@ final class EventManagerTest extends ResoliKernelTestBase {
       'type' => 'event',
       'title' => 'event-1',
       'field_activity' => $activity_1->id(),
-      'field_start_at' => '2018-01-20T00:00:00',
-      'field_end_at' => '2018-01-20T02:00:00',
+      'field_start_at' => ($year - 2) . '-01-20T00:00:00',
+      'field_end_at' => ($year - 2) . '2018-01-20T02:00:00',
     ]);
     $event_1->save();
 
@@ -77,8 +78,8 @@ final class EventManagerTest extends ResoliKernelTestBase {
       'type' => 'event',
       'title' => 'event-2',
       'field_activity' => $activity_1->id(),
-      'field_start_at' => '2028-01-20T14:00:00',
-      'field_end_at' => '2028-01-20T18:00:00',
+      'field_start_at' => ($year + 8) . '-01-20T14:00:00',
+      'field_end_at' => ($year + 8) . '-01-20T18:00:00',
     ]);
     $event_2->save();
 
@@ -87,8 +88,8 @@ final class EventManagerTest extends ResoliKernelTestBase {
       'type' => 'event',
       'title' => 'event-3',
       'field_activity' => $activity_1->id(),
-      'field_start_at' => '2022-08-20T14:00:00',
-      'field_end_at' => '2022-08-20T18:00:00',
+      'field_start_at' => ($year + 2) . '-08-20T14:00:00',
+      'field_end_at' => ($year + 2) . '-08-20T18:00:00',
     ]);
     $event_3->save();
 
@@ -97,8 +98,8 @@ final class EventManagerTest extends ResoliKernelTestBase {
       'type' => 'event',
       'title' => 'event-4',
       'field_activity' => $activity_1->id(),
-      'field_start_at' => '2022-08-22T14:00:00',
-      'field_end_at' => '2022-08-22T18:00:00',
+      'field_start_at' => ($year + 2) . '-08-22T14:00:00',
+      'field_end_at' => ($year + 2) . '-08-22T18:00:00',
     ]);
     $event_4->save();
 
@@ -107,8 +108,8 @@ final class EventManagerTest extends ResoliKernelTestBase {
       'type' => 'event',
       'title' => 'event-5',
       'field_activity' => $activity_2->id(),
-      'field_start_at' => '2021-08-20T14:00:00',
-      'field_end_at' => '2021-08-20T18:00:00',
+      'field_start_at' => ($year + 1) . '-08-20T14:00:00',
+      'field_end_at' => ($year + 1) . '-08-20T18:00:00',
     ]);
     $event_5->save();
 

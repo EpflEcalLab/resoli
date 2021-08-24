@@ -2188,3 +2188,15 @@ msgstr "Titre 1"
 
 msgid "qs.quill.editor.h5"
 msgstr "Titre 2"
+
+msgid "qs_assistance.collection.offers.title"
+msgstr "Offres"
+
+msgid "qs_assistance.collection.demands.title"
+msgstr "Demandes"
+
+msgid "qs_menu.links.assistance.offers"
+msgstr "Offres"
+
+msgid "qs_menu.links.assistance.demands"
+msgstr "Demandes"

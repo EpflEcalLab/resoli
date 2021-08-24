@@ -169,22 +169,19 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       ],
       'assistance' => [
         'label' => $this->t('qs_menu.links.assistance'),
-        // @TODO Update with correct links
-        'url' => $this->urlGenerator->generate('qs_calendar.collection.weekly', [
+        'url' => $this->urlGenerator->generate('qs_assistance.collection.offers', [
           'community' => $community->id(),
         ]),
         'icon' => 'assistance',
         'links' => [
           'qs_assistance.collection.offers' => [
-            // @TODO Update with correct links
-            'url' => $this->urlGenerator->generate('qs_calendar.collection.weekly', [
+            'url' => $this->urlGenerator->generate('qs_assistance.collection.offers', [
               'community' => $community->id(),
             ]),
             'label' => $this->t('qs_menu.links.assistance.offers'),
           ],
           'qs_assistance.collection.demands' => [
-            // @TODO Update with correct links
-            'url' => $this->urlGenerator->generate('qs_calendar.collection.weekly', [
+            'url' => $this->urlGenerator->generate('qs_assistance.collection.demands', [
               'community' => $community->id(),
             ]),
             'label' => $this->t('qs_menu.links.assistance.demands'),

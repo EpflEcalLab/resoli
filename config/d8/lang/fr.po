@@ -2204,5 +2204,14 @@ msgstr "Demandes"
 msgid "qs.sharing.offer.lead @community"
 msgstr "Voici les offres d’entraide de la communauté de @community."
 
-msgid "qs.sharing.demand.lead @community"
-msgstr "Voici les demandes d’entraide de la communauté de @community."
+msgid "qs_sharing.requests.form.step1.description"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de Lutry."
+
+msgid "qs_sharing.requests.form.step1"
+msgstr "Indiquez ce que vous rechercher comme partage."
+
+msgid "qs_sharing.requests.form.add.title"
+msgstr ""
+
+msgid "qs_sharing.requests.form.add.title.placeholder"
+msgstr ""

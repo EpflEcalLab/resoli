@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Collection of events by offers or by requests display in sharing.
+ * Collection of offers for Sharing.
  */
 class CollectionController extends ControllerBase {
   /**
@@ -58,24 +58,6 @@ class CollectionController extends ControllerBase {
     // Load customs services used in this class.
       $container->get('qs_acl.access_control')
     );
-  }
-
-  /**
-   * Collection by requests.
-   */
-  public function request(Request $request, TermInterface $community) {
-    $variables = ['community' => $community];
-
-    return [
-      '#theme' => 'qs_sharing_collection_request_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url.query_args',
-        ],
-      ],
-    ];
   }
 
   /**

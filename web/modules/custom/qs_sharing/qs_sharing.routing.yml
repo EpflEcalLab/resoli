@@ -13,15 +13,15 @@ qs_sharing.collection.offer:
       community:
         type: entity:taxonomy_term
 
-# Sharing request
-qs_sharing.collection.request:
-  path: '/sharing/{community}/request'
+# Sharing request form
+qs_sharing.form.add.request:
+  path: '/sharing/{community}/request/add'
   defaults:
-    _controller: '\Drupal\qs_sharing\Controller\CollectionController::request'
-    _title: 'qs_sharing.collection.request.title'
+    _form: '\Drupal\qs_sharing\Form\RequestAddForm'
+    _title: 'qs_sharing.form.request.add.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Controller\CollectionController::access'
+    _custom_access: '\Drupal\qs_sharing\Form\RequestAddForm::access'
     community: \d+
   options:
     parameters:

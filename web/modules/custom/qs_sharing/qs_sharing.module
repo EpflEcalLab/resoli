@@ -11,21 +11,13 @@
 function qs_sharing_theme() {
   return [
     // Pages themes
-    // ---------------------------------------------------------------------.
-    'qs_sharing_collection_request_page' => [
-      'variables' => ['variables' => []],
-      'template' => 'qs--sharing--collection-request',
-    ],
+    // ---------------------------------------------------------------------
     'qs_sharing_collection_offer_page' => [
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--collection-offer',
     ],
     // Blocks themes
     // ---------------------------------------------------------------------.
-    'qs_sharing_request_block' => [
-      'variables' => ['variables' => []],
-      'template' => 'qs--sharing--request',
-    ],
     'qs_sharing_offer_block' => [
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--offer',

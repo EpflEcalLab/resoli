@@ -2,11 +2,11 @@
 qs_sharing.collection.offer:
   path: '/sharing/{community}/offer'
   defaults:
-    _controller: '\Drupal\qs_sharing\Controller\CollectionController::offer'
+    _controller: '\Drupal\qs_sharing\Controller\OffersCollectionController::offer'
     _title: 'qs_sharing.collection.offer.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Controller\CollectionController::access'
+    _custom_access: '\Drupal\qs_sharing\Controller\OffersCollectionController::access'
     community: \d+
   options:
     parameters:

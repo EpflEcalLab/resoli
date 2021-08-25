@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Collection of offers for Sharing.
  */
-class CollectionController extends ControllerBase {
+class OffersCollectionController extends ControllerBase {
   /**
    * Access Control Service.
    *

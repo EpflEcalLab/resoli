@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
  - update drupal/core-recommended (8.9.17 => 9.2.3)
  - update to the new age the way Behat tests are run in Docker
+ - update all Javascript Dependencies
 
 ### Fixed
  - fix unit tests by removing install schema system.router in tests

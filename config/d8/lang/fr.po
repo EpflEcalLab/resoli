@@ -2210,8 +2210,11 @@ msgstr "Voici la boîte à demandes d’entraide de la communauté de Lutry."
 msgid "qs_sharing.requests.form.step1"
 msgstr "Indiquez ce que vous rechercher comme partage."
 
-msgid "qs_sharing.requests.form.add.title"
-msgstr ""
+msgid "qs_sharing.requests.form.add.body"
+msgstr "Précisez en quelques mot ce que vous souhaitez"
 
-msgid "qs_sharing.requests.form.add.title.placeholder"
-msgstr ""
+msgid "qs_sharing.requests.form.add.body.placeholder"
+msgstr "Ex. J’ai besoin d’une personne pour m’aider à monter mes courses à l’étage, si possible une fois par semaine."
+
+msgid "qs_sharing.floating.my_requests"
+msgstr "Mon entraide"

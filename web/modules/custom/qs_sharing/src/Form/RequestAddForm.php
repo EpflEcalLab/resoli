@@ -80,14 +80,26 @@ class RequestAddForm extends FormBasic {
     $form['#cache']['max-age'] = 0;
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
-      'theme' => 'primary',
+      'theme' => 'danger',
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
+
+    $form['#floating_buttons'][] = [
+      'icon' => 'sharing',
+      'label' => $this->t('qs_sharing.floating.my_requests'),
+      'active' => TRUE,
+      'theme' => 'primary',
+    ];
+
+    // Apply custom styles to wrapper.
+    $form['#theme_wrappers'] = [
+      'form__modal__multistep',
+    ];
 
     // Save the community for submission.
     $form_state->set('community', $community->id());
 
-    // @TODO Create form with right fields
+    // @todo Create form with right fields
     $form['request']['step-1'] = [
       '#type' => 'fieldset',
       '#description' => $this->t('qs_sharing.requests.form.step1.description'),
@@ -100,11 +112,10 @@ class RequestAddForm extends FormBasic {
       ],
     ];
 
-    $form['request']['step-1']['title'] = [
-      '#attributes' => ['required' => TRUE],
-      '#title' => $this->t('qs_sharing.requests.form.add.title'),
-      '#placeholder' => $this->t('qs_sharing.requests.form.add.title.placeholder'),
-      '#type' => 'textfield',
+    $form['request']['step-1']['body'] = [
+      '#title' => $this->t('qs_sharing.requests.form.add.body'),
+      '#placeholder' => $this->t('qs_sharing.requests.form.add.body.placeholder'),
+      '#type' => 'textarea',
       '#required' => FALSE,
     ];
 
@@ -134,14 +145,14 @@ class RequestAddForm extends FormBasic {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // @TODO Handle logic
+    // @todo Handle logic
   }
 
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // @TODO Handle logic
+    // @todo Handle logic
   }
 
 }

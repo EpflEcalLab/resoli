@@ -11,7 +11,7 @@
 function qs_sharing_theme() {
   return [
     // Pages themes
-    // ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------.
     'qs_sharing_collection_offer_page' => [
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--collection-offer',

@@ -8,27 +8,27 @@
 /**
  * Implements hook_theme().
  */
-function qs_assistance_theme() {
+function qs_sharing_theme() {
   return [
     // Pages themes
     // ---------------------------------------------------------------------.
-    'qs_assistance_collection_demands_page' => [
+    'qs_sharing_collection_request_page' => [
       'variables' => ['variables' => []],
-      'template' => 'qs--assistance--collection-demands',
+      'template' => 'qs--sharing--collection-request',
     ],
-    'qs_assistance_collection_offers_page' => [
+    'qs_sharing_collection_offer_page' => [
       'variables' => ['variables' => []],
-      'template' => 'qs--assistance--collection-offers',
+      'template' => 'qs--sharing--collection-offer',
     ],
     // Blocks themes
     // ---------------------------------------------------------------------.
-    'qs_assistance_demands_block' => [
+    'qs_sharing_request_block' => [
       'variables' => ['variables' => []],
-      'template' => 'qs--assistance--demands',
+      'template' => 'qs--sharing--request',
     ],
-    'qs_assistance_offers_block' => [
+    'qs_sharing_offer_block' => [
       'variables' => ['variables' => []],
-      'template' => 'qs--assistance--offers',
+      'template' => 'qs--sharing--offer',
     ],
   ];
 }

@@ -1,12 +1,12 @@
-uuid: e4ad5fd4-107e-4e5c-8624-a436eb7d0ae0
+uuid: a87b69c4-1867-4b45-8407-1465ddc00aa2
 langcode: fr
 status: true
 dependencies:
   module:
     - options
     - taxonomy
-id: taxonomy_term.field_assistance_icon
-field_name: field_assistance_icon
+id: taxonomy_term.field_sharing_icon
+field_name: field_sharing_icon
 entity_type: taxonomy_term
 type: list_string
 settings:

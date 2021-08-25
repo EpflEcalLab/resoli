@@ -1,0 +1,7 @@
+{% extends "@quartiers_solidaires/qs_sharing/pages/qs--sharing--collection-offer.html.twig" %}
+
+{% block lead_text %}
+  {{ 'qs.sharing.request.lead @community'|t({
+    '@community': community_name,
+  }) }}
+{% endblock %}

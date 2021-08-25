@@ -1,6 +1,6 @@
-name: qs_assistance
+name: qs_sharing
 type: module
-description: Assistance
+description: Sharing
 core_version_requirement: ^8.8 || ^9
 package: Quartiers Solidaires
 

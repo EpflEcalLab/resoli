@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\qs_assistance\Controller;
+namespace Drupal\qs_sharing\Controller;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Collection of events by offers or by demands display in assistance.
+ * Collection of events by offers or by requests display in sharing.
  */
 class CollectionController extends ControllerBase {
   /**
@@ -61,13 +61,13 @@ class CollectionController extends ControllerBase {
   }
 
   /**
-   * Collection by demands.
+   * Collection by requests.
    */
-  public function demands(Request $request, TermInterface $community) {
+  public function request(Request $request, TermInterface $community) {
     $variables = ['community' => $community];
 
     return [
-      '#theme' => 'qs_assistance_collection_demands_page',
+      '#theme' => 'qs_sharing_collection_request_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [
@@ -101,11 +101,11 @@ class CollectionController extends ControllerBase {
   /**
    * Collection by offers.
    */
-  public function offers(Request $request, TermInterface $community) {
+  public function offer(Request $request, TermInterface $community) {
     $variables = ['community' => $community];
 
     return [
-      '#theme' => 'qs_assistance_collection_offers_page',
+      '#theme' => 'qs_sharing_collection_offer_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

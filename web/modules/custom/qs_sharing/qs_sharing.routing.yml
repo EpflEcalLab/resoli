@@ -1,0 +1,29 @@
+# Sharing offer
+qs_sharing.collection.offer:
+  path: '/sharing/{community}/offer'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\CollectionController::offer'
+    _title: 'qs_sharing.collection.offer.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\CollectionController::access'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+
+# Sharing request
+qs_sharing.collection.request:
+  path: '/sharing/{community}/request'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\CollectionController::request'
+    _title: 'qs_sharing.collection.request.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\CollectionController::access'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term

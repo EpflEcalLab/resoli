@@ -328,7 +328,7 @@ msgstr "Activités"
 msgid "qs_menu.links.calendar"
 msgstr "Calendrier"
 
-msgid "qs_menu.links.assistance"
+msgid "qs_menu.links.sharing"
 msgstr "Entraide"
 
 msgid "qs_menu.links.stories"
@@ -2189,20 +2189,20 @@ msgstr "Titre 1"
 msgid "qs.quill.editor.h5"
 msgstr "Titre 2"
 
-msgid "qs_assistance.collection.offers.title"
+msgid "qs_sharing.collection.offer.title"
 msgstr "Offres"
 
-msgid "qs_assistance.collection.demands.title"
+msgid "qs_sharing.collection.request.title"
 msgstr "Demandes"
 
-msgid "qs_menu.links.assistance.offers"
+msgid "qs_menu.links.sharing.offer"
 msgstr "Offres"
 
-msgid "qs_menu.links.assistance.demands"
+msgid "qs_menu.links.sharing.request"
 msgstr "Demandes"
 
-msgid "qs.assistance.offers.lead @community"
+msgid "qs.sharing.offer.lead @community"
 msgstr "Voici les offres d’entraide de la communauté de @community."
 
-msgid "qs.assistance.demands.lead @community"
+msgid "qs.sharing.demand.lead @community"
 msgstr "Voici les demandes d’entraide de la communauté de @community."

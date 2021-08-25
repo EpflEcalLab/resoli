@@ -167,29 +167,29 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
           'qs_calendar.collection.monthly',
         ],
       ],
-      'assistance' => [
-        'label' => $this->t('qs_menu.links.assistance'),
-        'url' => $this->urlGenerator->generate('qs_assistance.collection.offers', [
+      'sharing' => [
+        'label' => $this->t('qs_menu.links.sharing'),
+        'url' => $this->urlGenerator->generate('qs_sharing.collection.offer', [
           'community' => $community->id(),
         ]),
-        'icon' => 'assistance',
+        'icon' => 'sharing',
         'links' => [
-          'qs_assistance.collection.offers' => [
-            'url' => $this->urlGenerator->generate('qs_assistance.collection.offers', [
+          'qs_sharing.collection.offer' => [
+            'url' => $this->urlGenerator->generate('qs_sharing.collection.offer', [
               'community' => $community->id(),
             ]),
-            'label' => $this->t('qs_menu.links.assistance.offers'),
+            'label' => $this->t('qs_menu.links.sharing.offer'),
           ],
-          'qs_assistance.collection.demands' => [
-            'url' => $this->urlGenerator->generate('qs_assistance.collection.demands', [
+          'qs_sharing.collection.request' => [
+            'url' => $this->urlGenerator->generate('qs_sharing.collection.request', [
               'community' => $community->id(),
             ]),
-            'label' => $this->t('qs_menu.links.assistance.demands'),
+            'label' => $this->t('qs_menu.links.sharing.request'),
           ],
         ],
         'activated_by' => [
-          'qs_assistance.collection.offers',
-          'qs_assistance.collection.demands',
+          'qs_sharing.collection.offer',
+          'qs_sharing.collection.request',
         ],
       ],
       'photos' => [

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.offer.body
     - field.field.node.offer.field_description
     - field.field.node.offer.field_offer_type
+    - field.field.node.offer.field_theme
     - node.type.offer
   module:
     - text
@@ -24,6 +25,11 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 100
     settings: {  }
@@ -32,4 +38,5 @@ content:
 hidden:
   field_description: true
   field_offer_type: true
+  field_theme: true
   langcode: true

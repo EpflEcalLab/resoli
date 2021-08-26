@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.offer.body
     - field.field.node.offer.field_description
     - field.field.node.offer.field_offer_type
+    - field.field.node.offer.field_theme
     - node.type.offer
     - workflows.workflow.offers
   module:
@@ -30,6 +31,7 @@ third_party_settings:
     group_general:
       children:
         - field_offer_type
+        - field_theme
         - title
         - body
         - field_description
@@ -51,7 +53,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 13
+    weight: 16
     settings:
       rows: 9
       summary_rows: 3
@@ -60,7 +62,7 @@ content:
     third_party_settings: {  }
     region: content
   field_description:
-    weight: 14
+    weight: 17
     settings:
       rows: 5
       placeholder: ''
@@ -68,7 +70,17 @@ content:
     type: text_textarea
     region: content
   field_offer_type:
-    weight: 11
+    weight: 13
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_theme:
+    weight: 14
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -91,7 +103,7 @@ content:
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 12
+    weight: 15
     region: content
     settings:
       size: 60

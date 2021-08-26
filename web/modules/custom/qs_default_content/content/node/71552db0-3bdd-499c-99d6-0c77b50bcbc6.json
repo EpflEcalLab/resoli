@@ -1,0 +1,205 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/65?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/offer_type"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_community": [
+            {
+                "href": "http:\/\/localhost\/fribourg?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 65
+        }
+    ],
+    "uuid": [
+        {
+            "value": "71552db0-3bdd-499c-99d6-0c77b50bcbc6"
+        }
+    ],
+    "vid": [
+        {
+            "value": 151
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "offer_type"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-08-26T14:53:48+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_community": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fribourg?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3b9e3824-c73b-4b19-82cf-ac35022f2d47"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "0930812e-d866-47df-a224-70bba49cdc6b"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Faire les courses",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-08-26T14:53:48+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-08-26T14:53:48+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Velit elit duis erat mollis nec lacinia in urna, quam turpis metus molestie nisl euismod diam facilisi, viverra ultricies nullam congue amet sit blandit. Tortor mi posuere dictum ultricies id mus sociosqu turpis, fames lorem euismod venenatis congue consectetur rhoncus. Cum consectetur primis magna nibh adipiscing vestibulum tincidunt penatibus dui, mattis urna himenaeos laoreet elit tristique pharetra praesent, montes vulputate pellentesque parturient taciti eleifend egestas id.",
+            "format": "light_html",
+            "processed": "Velit elit duis erat mollis nec lacinia in urna, quam turpis metus molestie nisl euismod diam facilisi, viverra ultricies nullam congue amet sit blandit. Tortor mi posuere dictum ultricies id mus sociosqu turpis, fames lorem euismod venenatis congue consectetur rhoncus. Cum consectetur primis magna nibh adipiscing vestibulum tincidunt penatibus dui, mattis urna himenaeos laoreet elit tristique pharetra praesent, montes vulputate pellentesque parturient taciti eleifend egestas id.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ]
+}

@@ -28,8 +28,8 @@ require_once 'inc/subscription.inc';
 function qs_urls_pathauto_alias_alter(&$alias, array &$context) {
   $moduleHandler = \Drupal::service('module_handler');
 
-  if (isset($context['module']) &&
-  $context['module'] === 'taxonomy' && isset($context['data']['term'])) {
+  if (isset($context['module'])
+  && $context['module'] === 'taxonomy' && isset($context['data']['term'])) {
 
     // Uniquifier the alias, pathauto do it on the creation process, not here.
     // If we don't do it now, we will duplicate aliases/redirect
@@ -67,8 +67,8 @@ function qs_urls_pathauto_alias_alter(&$alias, array &$context) {
     }
   }
 
-  if (isset($context['module']) &&
-  $context['module'] === 'node' && isset($context['data']['node'])) {
+  if (isset($context['module'])
+  && $context['module'] === 'node' && isset($context['data']['node'])) {
 
     // Uniquifier the alias, pathauto do it on the creation process, not here.
     // If we don't do it now, we will duplicate aliases/redirect

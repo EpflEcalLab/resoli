@@ -208,19 +208,6 @@ It can modernize your code (like converting the pow function to the ** operator 
 ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle
 ```
 
-### Assert Drupal Deprecation
-
-https://github.com/mglaman/drupal-check
-
-Built on PHPStan, this static analysis tool will check for correctness (e.g. using a class that doesn't exist),
-deprecation errors, and more.
-
-Why? While there are many static analysis tools out there, none of them run with the Drupal context in mind.
-
-```bash
-./vendor/bin/drupal-check -d ./web/modules/custom ./behat ./web/themes --no-progress
-```
-
 ### Enforce code standards with git hooks
 
 Maintaining code quality by adding the custom post-commit hook to yours.
@@ -233,37 +220,6 @@ Maintaining code quality by adding the custom post-commit hook to yours.
 
   ```bash
   docker-conpose exec dev docker-as-drupal quality-check
-  ```
-
-## 🔥 Behavior Driven Development using Behat
-
-For isolation test databases, you should run Behat using our custom script `scripts/tests/behat.sh`.
-
-### Quick & dirty
-
-1. Launch a stand-alone server with `drush runserver`.
-
-1. Keep this command line open and run `./vendor/bin/behat`
-in the root of your project.
-
-### Using docker
-
-1. Laucnh Docker environment with `docker-compose up -d --build`
-
-1. Run `docker-compose exec test docker-as-wait --mysql -- docker-as-drupal behat`
-
-### Re-install default values
-
-You can use the Driven Development script to install re-install default values by running:
-
-  ```bash
-  ./scripts/tests/behat.sh --skip-dependencies=1 --skip-tests=1 --skip-interaction=1
-  ```
-
-Or in docker:
-
-  ```bash
-  docker-compose exec dev docker-as-drupal db-reset
   ```
 
 ## 🚛 Install localy
@@ -425,64 +381,59 @@ We use Capistrano to deploy:
 
 ## 🏆 Tests
 
-  ```bash
-  ./scripts/tests/phpunit.sh [-g group] [-x exclude-group]
-  ./scripts/tests/behat.sh
-  ```
+Every tests should be run into the Docker environment.
+
+1. Run a shell on your Docker test env.
+
+```bash
+docker-compose exec test bash
+```
+
+1. Once connected via ssh on you Docker test, you may run any `docker-as-drupal` commands
+
+```bash
+docker-as-drupal [behat|phpunit|nightwatch]
+```
+
+You also may use the direct access - whitout opening a bash on the Docket test env. using:
+
+```bash
+docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
+```
 
 ### Kernel tests
 
-  ```bash
-  ./vendor/bin/phpunit -x wd_functional
-  ```
+```bash
+./vendor/bin/phpunit -x vevey_functional
+```
 
 ### Browser tests
 
 1. *(optional)* Bootstrap your Drupal if you don't already have a working env.
 
-  ```bash
-  ./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
-  ```
+```bash
+./scripts/bootstrap/drupal.sh --private-files="PATH/TO/PRIVATES" [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
+```
 
 1. Then you can run functional tests
 
-  ```bash
-  ./vendor/bin/phpunit -g wd_functional
-  ```
+```bash
+./vendor/bin/phpunit -g vevey_functional
+```
 
 ### Behat
 
 1. *(optional)* Bootstrap your Drupal if you don't already have a working env.
 
-  ```bash
-  ./scripts/bootstrap/drupal.sh [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
-  ```
+```bash
+./scripts/bootstrap/drupal.sh [--skip-dependencies=1] [--skip-default=1] [--database=DATABASE_URL] [--skip-interaction=1]
+```
 
 1. Then you can run functional tests
 
-  ```bash
-  ./vendor/bin/behat
-  ```
-
-### Docker
-
-1. Run a shell on your Docker test env.
-
-  ```bash
-  docker-compose exec test bash
-  ```
-
-1. Once connected via ssh on you Docker test, you may run any `docker-as-drupal` commands
-
-  ```bash
-  docker-as-drupal [behat|phpunit|nightwatch]
-  ```
-
-You also may use the direct access - whitout opening a bash on the Docket test env. using:
-
-  ```bash
-  docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
-  ```
+```bash
+./vendor/bin/behat
+```
 
 ## 📋 Documentations
 

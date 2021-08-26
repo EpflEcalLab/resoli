@@ -15,6 +15,3 @@ echo "\n🍫  \033[0;32mRunning PhpCodeFixer ...\033[0m"
 
 echo "\n🕵🏻  \033[0;32mRunning PHP-CS-Fixer ...\033[0m"
 ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle
-
-echo "\n💦  \033[0;32mRunning Drupal-Check ...\033[0m"
-./vendor/bin/drupal-check -d ./web/modules/custom ./behat ./web/themes --no-progress

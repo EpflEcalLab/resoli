@@ -1,0 +1,223 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/72?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/offer"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/uid": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/8?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_offer_type": [
+            {
+                "href": "http:\/\/localhost\/node\/64?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/21?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 72
+        }
+    ],
+    "uuid": [
+        {
+            "value": "6d815957-a6b0-49ae-a1f1-9e73336a0af3"
+        }
+    ],
+    "vid": [
+        {
+            "value": 161
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "offer"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-08-26T15:38:01+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/8?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "1bbb8566-39e6-4d09-ab2b-e1569e19b0bc"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_offer_type": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/node\/64?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/offer_type"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "aaf0da2e-99d7-49fd-8895-1ccb4d6d132c"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/21?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "b5089548-9523-4fa6-9e8b-21f0332f7b17"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Aide pour porter les courses",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-08-26T15:38:01+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-08-26T15:38:01+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "published",
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Je me propose volontiers pour aider quiconque \u00e0 porter ces courses.",
+            "format": "light_html",
+            "processed": "Je me propose volontiers pour aider quiconque \u00e0 porter ces courses.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Jerry Kan",
+            "lang": "zxx"
+        }
+    ],
+    "field_description": [
+        {
+            "value": "Tout les soirs de semaine de 17h00 \u00e0 18h00",
+            "format": "light_html",
+            "processed": "Tout les soirs de semaine de 17h00 \u00e0 18h00",
+            "lang": "zxx"
+        }
+    ]
+}

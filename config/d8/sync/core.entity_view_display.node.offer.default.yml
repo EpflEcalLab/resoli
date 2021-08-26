@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.offer.body
+    - field.field.node.offer.field_description
     - field.field.node.offer.field_offer_type
     - node.type.offer
   module:
@@ -20,6 +21,13 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_description:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
     region: content
   field_offer_type:
     weight: 102

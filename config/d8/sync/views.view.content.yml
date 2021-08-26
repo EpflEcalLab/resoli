@@ -4160,7 +4160,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      path: admin/content/sharing/offer_types
+      path: admin/content/sharing_offer_types
       menu:
         type: tab
         title: 'Offer''s Types'
@@ -4690,7 +4690,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      path: admin/content/sharing/offers
+      path: admin/content/sharing_offers
       menu:
         type: tab
         title: Offers
@@ -5339,15 +5339,15 @@ display:
   page_8:
     display_plugin: page
     id: page_8
-    display_title: Request
+    display_title: Requests
     position: 8
     display_options:
       display_extenders: {  }
       display_description: ''
-      path: admin/content/sharing/requests
+      path: admin/content/sharing_requests
       menu:
         type: tab
-        title: Request
+        title: Requests
         description: ''
         expanded: false
         parent: ''

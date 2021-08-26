@@ -422,7 +422,9 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{{ field_firstname }} • <strong>{{ field_lastname }}</strong><br>\n{{ name }}"
+            text: |-
+              {{ field_firstname }} • <strong>{{ field_lastname }}</strong><br>
+              {{ name }}
             make_link: false
             path: ''
             absolute: false

@@ -64,7 +64,6 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
     $this->entityTypeManager = $this->container->get('entity_type.manager');
 
     $this->installEntitySchema('user');
-    $this->installSchema('system', 'router');
 
     $this->installEntitySchema('node');
 

@@ -4,6 +4,7 @@
 # Ignore Codeship stuff
 .codeship*
 !.codeship/entrypoint.deploy.sh
+!.codeship/scripts/setup_hosts.sh
 codeship*
 build
 backups

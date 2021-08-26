@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - add core architecture for Entraide
 
+### Changed
+- update all Javascript Dependencies
+
 ## [2.0.0] - 2021-08-26
 ### Added
 - add Gin Admin theme

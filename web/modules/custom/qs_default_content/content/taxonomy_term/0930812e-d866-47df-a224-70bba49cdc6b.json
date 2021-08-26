@@ -1,0 +1,270 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/sharing_themes\/parent": [
+            null
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/sharing_themes\/content_translation_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json",
+                "lang": "fr"
+            },
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json",
+                "lang": "en"
+            },
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json",
+                "lang": "de"
+            }
+        ]
+    },
+    "tid": [
+        {
+            "value": 19
+        }
+    ],
+    "uuid": [
+        {
+            "value": "0930812e-d866-47df-a224-70bba49cdc6b"
+        }
+    ],
+    "revision_id": [
+        {
+            "value": 19
+        }
+    ],
+    "langcode": [
+        {
+            "value": "fr",
+            "lang": "fr"
+        },
+        {
+            "value": "en",
+            "lang": "en"
+        },
+        {
+            "value": "de",
+            "lang": "de"
+        }
+    ],
+    "vid": [
+        {
+            "target_id": "sharing_themes"
+        }
+    ],
+    "revision_created": [
+        {
+            "value": "2021-08-26T14:46:09+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "fr"
+        },
+        {
+            "value": true,
+            "lang": "en"
+        },
+        {
+            "value": true,
+            "lang": "de"
+        }
+    ],
+    "name": [
+        {
+            "value": "Mobilit\u00e9",
+            "lang": "fr"
+        },
+        {
+            "value": "Mobility",
+            "lang": "en"
+        },
+        {
+            "value": "Mobilit\u00e4t",
+            "lang": "de"
+        }
+    ],
+    "weight": [
+        {
+            "value": 0
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/sharing_themes\/parent": [
+            null
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/taxonomy_term\/sharing_themes\/content_translation_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ],
+                "lang": "fr"
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ],
+                "lang": "en"
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ],
+                "lang": "de"
+            }
+        ]
+    },
+    "changed": [
+        {
+            "value": "2021-08-26T14:46:09+00:00",
+            "lang": "fr",
+            "format": "Y-m-d\\TH:i:sP"
+        },
+        {
+            "value": "2021-08-26T14:47:35+00:00",
+            "lang": "en",
+            "format": "Y-m-d\\TH:i:sP"
+        },
+        {
+            "value": "2021-08-26T14:47:52+00:00",
+            "lang": "de",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "fr"
+        },
+        {
+            "value": false,
+            "lang": "en"
+        },
+        {
+            "value": false,
+            "lang": "de"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "fr"
+        },
+        {
+            "value": true,
+            "lang": "en"
+        },
+        {
+            "value": true,
+            "lang": "de"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "fr",
+            "lang": "fr"
+        },
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "en",
+            "lang": "en"
+        },
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "de",
+            "lang": "de"
+        }
+    ],
+    "content_translation_source": [
+        {
+            "value": "und",
+            "lang": "fr"
+        },
+        {
+            "value": "fr",
+            "lang": "en"
+        },
+        {
+            "value": "fr",
+            "lang": "de"
+        }
+    ],
+    "content_translation_outdated": [
+        {
+            "value": false,
+            "lang": "fr"
+        },
+        {
+            "value": false,
+            "lang": "en"
+        },
+        {
+            "value": false,
+            "lang": "de"
+        }
+    ],
+    "content_translation_created": [
+        {
+            "value": "2021-08-26T14:46:09+00:00",
+            "lang": "fr",
+            "format": "Y-m-d\\TH:i:sP"
+        },
+        {
+            "value": "2021-08-26T14:47:35+00:00",
+            "lang": "en",
+            "format": "Y-m-d\\TH:i:sP"
+        },
+        {
+            "value": "2021-08-26T14:47:52+00:00",
+            "lang": "de",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "field_sharing_icon": [
+        {
+            "value": "mobilite"
+        }
+    ]
+}

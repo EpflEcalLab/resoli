@@ -1,0 +1,29 @@
+uuid: 3b86c8fb-e950-4647-8688-d417630bb515
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_theme
+    - node.type.request
+    - taxonomy.vocabulary.sharing_themes
+id: node.request.field_theme
+field_name: field_theme
+entity_type: node
+bundle: request
+label: Theme
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      sharing_themes: sharing_themes
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

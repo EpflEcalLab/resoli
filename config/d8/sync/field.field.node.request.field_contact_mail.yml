@@ -1,0 +1,19 @@
+uuid: fcd7edf8-53d2-4adf-aa8a-8cde982e1c7b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_mail
+    - node.type.request
+id: node.request.field_contact_mail
+field_name: field_contact_mail
+entity_type: node
+bundle: request
+label: 'Contact mail'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

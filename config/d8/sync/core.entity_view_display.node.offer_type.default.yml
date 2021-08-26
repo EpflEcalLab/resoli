@@ -1,0 +1,38 @@
+uuid: 5df66c04-f7c0-4e8f-8663-a4eb4296bd66
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.offer_type.body
+    - field.field.node.offer_type.field_community
+    - node.type.offer_type
+  module:
+    - text
+    - user
+id: node.offer_type.default
+targetEntityType: node
+bundle: offer_type
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_community:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true

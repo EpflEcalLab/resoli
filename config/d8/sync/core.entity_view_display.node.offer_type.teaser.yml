@@ -1,0 +1,33 @@
+uuid: f38babf3-a364-4ecb-a927-8721e186557d
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.offer_type.body
+    - field.field.node.offer_type.field_community
+    - node.type.offer_type
+  module:
+    - text
+    - user
+id: node.offer_type.teaser
+targetEntityType: node
+bundle: offer_type
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_community: true
+  langcode: true

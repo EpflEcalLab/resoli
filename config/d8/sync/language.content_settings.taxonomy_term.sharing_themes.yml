@@ -1,0 +1,16 @@
+uuid: a8cb57da-0ea6-47d4-b7b8-62fc16611426
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.sharing_themes
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.sharing_themes
+target_entity_type_id: taxonomy_term
+target_bundle: sharing_themes
+default_langcode: site_default
+language_alterable: true

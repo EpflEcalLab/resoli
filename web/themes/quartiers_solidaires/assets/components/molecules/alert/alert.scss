@@ -76,7 +76,7 @@
 //
 // Generate contextual modifier classes for colorizing the alert.
 .alert-info {
-  @include qs-alert-variant(color('info-light'), color-level(color('info-light'), 0.5), $white);
+  @include qs-alert-variant(color('info-lighter'), color-level(color('info-lighter'), 0.5), $white);
 }
 
 .alert-success {

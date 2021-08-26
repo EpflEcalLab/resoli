@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.offer.body
+    - field.field.node.offer.field_contact_mail
+    - field.field.node.offer.field_contact_name
+    - field.field.node.offer.field_contact_phone
     - field.field.node.offer.field_description
     - field.field.node.offer.field_offer_type
     - field.field.node.offer.field_theme
@@ -27,6 +30,30 @@ content:
     weight: -20
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_contact_mail:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contact_name:
+    weight: 107
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_contact_phone:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
     region: content
   field_description:
     weight: 103

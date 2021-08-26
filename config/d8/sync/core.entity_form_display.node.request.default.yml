@@ -8,9 +8,12 @@ dependencies:
     - field.field.node.request.field_contact_mail
     - field.field.node.request.field_contact_name
     - field.field.node.request.field_contact_phone
+    - field.field.node.request.field_solved_at
+    - field.field.node.request.field_solved_by
     - field.field.node.request.field_theme
     - node.type.request
   module:
+    - datetime
     - field_group
     - path
     - text
@@ -20,6 +23,7 @@ third_party_settings:
       children:
         - group_general
         - group_contact
+        - group_handling
       parent_name: ''
       weight: 0
       format_type: tabs
@@ -62,6 +66,21 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Contact
+    group_handling:
+      children:
+        - field_solved_at
+        - field_solved_by
+      parent_name: group_tabs
+      weight: 13
+      format_type: tab
+      region: hidden
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Handling
 id: node.request.default
 targetEntityType: node
 bundle: request
@@ -110,6 +129,22 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_solved_at:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_solved_by:
+    weight: 6
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_theme:
     weight: 14

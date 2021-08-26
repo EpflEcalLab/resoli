@@ -9,6 +9,8 @@ dependencies:
     - field.field.node.request.field_contact_mail
     - field.field.node.request.field_contact_name
     - field.field.node.request.field_contact_phone
+    - field.field.node.request.field_solved_at
+    - field.field.node.request.field_solved_by
     - field.field.node.request.field_theme
     - node.type.request
   module:
@@ -37,5 +39,7 @@ hidden:
   field_contact_mail: true
   field_contact_name: true
   field_contact_phone: true
+  field_solved_at: true
+  field_solved_by: true
   field_theme: true
   langcode: true

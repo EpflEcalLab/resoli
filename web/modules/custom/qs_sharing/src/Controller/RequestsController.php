@@ -4,6 +4,7 @@ namespace Drupal\qs_sharing\Controller;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Form\FormBuilder;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\taxonomy\TermInterface;
@@ -11,9 +12,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Collection of offers for Sharing.
+ * Hanlde requests for Sharing.
  */
-class OffersCollectionController extends ControllerBase {
+class RequestsController extends ControllerBase {
+
+  /**
+   * Form builder.
+   *
+   * @var \Drupal\Core\Form\FormBuilder
+   */
+  protected $formBuilder;
   /**
    * Access Control Service.
    *
@@ -24,8 +32,9 @@ class OffersCollectionController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl) {
+  public function __construct(AccessControl $acl, FormBuilder $formBuilder) {
     $this->acl = $acl;
+    $this->formBuilder = $formBuilder;
   }
 
   /**
@@ -50,46 +59,15 @@ class OffersCollectionController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Render template for the Request add form.
    */
-  public static function create(ContainerInterface $container) {
-    // Instantiates this form class.
-    return new static(
-    // Load customs services used in this class.
-      $container->get('qs_acl.access_control')
-    );
-  }
+  public function add(Request $request, TermInterface $community) {
+    $form = $this->formBuilder->getForm('\Drupal\qs_sharing\Form\RequestAddForm', $community);
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheTags(?array $nodes = NULL) {
-    $tags = [
-      // Invalidated whenever any Community is updated, deleted or created.
-      'taxonomy_term_list:communities',
-      // Invalidated whenever any Sharing Theme is updated, deleted or created.
-      'taxonomy_term_list:sharing_themes',
-      // Invalidated whenever any Privilege is updated, deleted or created.
-      'privilege_list:privilege',
-    ];
-
-    if ($nodes) {
-      foreach ($nodes as $node) {
-        $tags[] = 'node:' . $node->id();
-      }
-    }
-
-    return $tags;
-  }
-
-  /**
-   * Collection by offers.
-   */
-  public function offer(Request $request, TermInterface $community) {
-    $variables = ['community' => $community];
+    $variables = ['community' => $community, 'form' => $form];
 
     return [
-      '#theme' => 'qs_sharing_collection_offer_page',
+      '#theme' => 'qs_sharing_add_request_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [
@@ -98,6 +76,18 @@ class OffersCollectionController extends ControllerBase {
         ],
       ],
     ];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('form_builder')
+    );
   }
 
 }

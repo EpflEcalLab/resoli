@@ -2,29 +2,23 @@
 
 namespace Drupal\qs_sharing\Form;
 
-use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Language\LanguageManager;
 use Drupal\taxonomy\TermInterface;
+use Drupal\taxonomy\TermStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Form to create a new sharing request in a community.
  */
-class RequestAddForm extends FormBasic {
+class RequestAddForm extends FormBase {
   /**
    * The language manager.
    *
    * @var \Drupal\Core\Language\LanguageManagerInterface
    */
   protected $languageManager;
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
 
   /**
    * The term Storage.
@@ -36,35 +30,9 @@ class RequestAddForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ContainerInterface $container) {
-    // Initialize the container.
-    parent::__construct($container);
-
-    // From the container, inject services.
-    $this->acl = $this->getAcl();
-    $this->termStorage = $this->getTermStorage();
-    $this->languageManager = $this->getLanguageManager();
-  }
-
-  /**
-   * Checks access for creating file in the given community.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Run access checks for this account.
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   Run access checks for this taxonomy.
-   *
-   * @return \Drupal\Core\Access\AccessResultInterface
-   *   The access result.
-   */
-  public function access(AccountInterface $account, TermInterface $community) {
-    $access = AccessResult::forbidden();
-
-    if ($this->acl->hasWriteAccessCommunity($community)) {
-      $access = AccessResult::allowed();
-    }
-
-    return $access;
+  public function __construct(LanguageManager $language_manager, TermStorageInterface $termStorage) {
+    $this->languageManager = $language_manager;
+    $this->termStorage = $termStorage;
   }
 
   /**
@@ -74,10 +42,9 @@ class RequestAddForm extends FormBasic {
     // Get the current language.
     $currentLang = $this->languageManager->getCurrentLanguage();
 
-    $form = parent::buildForm($form, $form_state);
-
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
+
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
       'theme' => 'danger',
@@ -132,6 +99,16 @@ class RequestAddForm extends FormBasic {
     }
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('language_manager'),
+      $container->get('entity_type.manager')->getStorage('taxonomy_term')
+    );
   }
 
   /**

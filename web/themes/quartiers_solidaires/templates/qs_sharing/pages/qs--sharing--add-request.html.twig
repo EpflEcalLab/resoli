@@ -1,0 +1,16 @@
+
+{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
+
+{% set community_name = variables.community.name.value|trim %}
+
+<div class="container">
+  <p class="lead text-center my-5">
+    {% block lead_text %}
+      {{ 'qs.sharing.add.request @community'|t({
+        '@community': community_name,
+      }) }}
+    {% endblock %}
+
+    {{ variables.form }}
+  </p>
+</div>

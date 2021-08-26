@@ -43,7 +43,7 @@ class Volunteerism extends ContentEntityBase {
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = [];
 
-    // Standard field, used as unique if primary index.
+    // Standard field, used as unique id primary index.
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(new TranslatableMarkup('ID'))
       ->setDescription(new TranslatableMarkup('The ID of the involvement as a volunteer.'))

@@ -328,6 +328,9 @@ msgstr "Activités"
 msgid "qs_menu.links.calendar"
 msgstr "Calendrier"
 
+msgid "qs_menu.links.sharing"
+msgstr "Entraide"
+
 msgid "qs_menu.links.stories"
 msgstr "Récits"
 
@@ -2185,3 +2188,36 @@ msgstr "Titre 1"
 
 msgid "qs.quill.editor.h5"
 msgstr "Titre 2"
+
+msgid "qs_sharing.collection.offer.title"
+msgstr "Offres"
+
+msgid "qs_sharing.collection.request.title"
+msgstr "Demandes"
+
+msgid "qs_menu.links.sharing.offer"
+msgstr "Offres"
+
+msgid "qs_menu.links.sharing.request"
+msgstr "Demandes"
+
+msgid "qs.sharing.offer.lead @community"
+msgstr "Voici les offres d’entraide de la communauté de @community."
+
+msgid "qs.sharing.add.request @community"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de @community."
+
+msgid "qs_sharing.requests.form.step1.description"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de Lutry."
+
+msgid "qs_sharing.requests.form.step1"
+msgstr "Indiquez ce que vous rechercher comme partage."
+
+msgid "qs_sharing.requests.form.add.body"
+msgstr "Précisez en quelques mot ce que vous souhaitez"
+
+msgid "qs_sharing.requests.form.add.body.placeholder"
+msgstr "Ex. J’ai besoin d’une personne pour m’aider à monter mes courses à l’étage, si possible une fois par semaine."
+
+msgid "qs_sharing.floating.my_requests"
+msgstr "Mon entraide"

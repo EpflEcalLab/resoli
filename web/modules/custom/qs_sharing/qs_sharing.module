@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function qs_sharing_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_sharing_collection_offer_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--collection-offer',
+    ],
+    'qs_sharing_add_request_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--add-request',
+    ],
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_sharing_offer_block' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--offer',
+    ],
+  ];
+}

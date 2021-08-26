@@ -1,0 +1,68 @@
+uuid: 96002aee-da77-46f6-ba5f-15ad4fc6cec5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.request
+  module:
+    - content_moderation
+id: requests
+label: Requests
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      published: false
+      default_revision: false
+      label: Archived
+      weight: 1
+    draft:
+      published: false
+      default_revision: false
+      label: Unpublished
+      weight: -2
+    published:
+      label: Published
+      published: true
+      default_revision: true
+      weight: -1
+    solved:
+      published: true
+      default_revision: false
+      label: Solved
+      weight: 0
+  transitions:
+    archive:
+      label: Archive
+      from:
+        - archived
+        - draft
+        - published
+        - solved
+      to: archived
+      weight: 1
+    create_new_draft:
+      label: 'Create New'
+      to: draft
+      weight: -2
+      from:
+        - draft
+    publish:
+      label: Publish
+      to: published
+      weight: -1
+      from:
+        - archived
+        - draft
+        - published
+    solve:
+      label: Solve
+      from:
+        - published
+        - solved
+      to: solved
+      weight: 0
+  entity_types:
+    node:
+      - request
+  default_moderation_state: draft

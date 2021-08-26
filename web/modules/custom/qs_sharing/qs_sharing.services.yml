@@ -1,0 +1,5 @@
+services:
+  qs_sharing.repository.volunteerism:
+    class: Drupal\qs_sharing\Repository\VolunteerismRepository
+    arguments:
+      - '@entity_type.manager'

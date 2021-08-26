@@ -15,12 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
  * Hanlde requests for Sharing.
  */
 class RequestsController extends ControllerBase {
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
 
   /**
    * Form builder.
@@ -28,6 +22,12 @@ class RequestsController extends ControllerBase {
    * @var \Drupal\Core\Form\FormBuilder
    */
   protected $formBuilder;
+  /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
 
   /**
    * {@inheritdoc}

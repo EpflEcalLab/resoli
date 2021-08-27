@@ -1,13 +1,51 @@
-{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
-
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set currentTheme = null %}
 {% set community_name = variables.community.name.value|trim %}
 
-<div class="container">
-  <p class="lead text-center my-5">
-    {% block lead_text %}
+{# Block with all offer types #}
+{% if variables.offer_types %}
+  <div class="container my-5">
+    <p class="lead text-center mb-0">
       {{ 'qs.sharing.offer.lead @community'|t({
         '@community': community_name,
       }) }}
-    {% endblock %}
-  </p>
-</div>
+    </p>
+    <div class="text-center">
+      <a href="#">
+        {{ 'qs.sharing.offer.list.download'|t }}
+      </a>
+    </div>
+
+    <div class="row mt-5">
+      {% for offer_type in variables.offer_types %}
+      {% set offers = variables.offers[offer_type.nid.value] %}
+
+      {# Print the theme header if we are on the next one #}
+      {% if (offer_type.field_theme.target_id != currentTheme) %}
+      {% set currentTheme = offer_type.field_theme.target_id %}
+      {% if loop.index > 1 %}
+    </div>
+    <div class="row">
+      {% endif %}
+      <div class="col-12 sticky-top bg-white mb-2">
+        {% set theme = offer_type.field_theme.entity.hasTranslation(bamboo_i18n_current_lang()) ? offer_type.field_theme.entity.translation(bamboo_i18n_current_lang()) : offer_type.field_theme.entity %}
+        {{ bamboo_render_entity('taxonomy_term', theme.id, 'teaser') }}
+      </div>
+      {% endif %}
+
+      <div class="col-sm-6 col-lg-4 d-flex">
+        {% include "@quartiers_solidaires/node/node--offer-type--teaser.html.twig" with {node: offer_type, offers_count: offers|length} %}
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+  <div class="container">
+    <p class="lead text-center mt-5">{{ 'qs.sharing.offer.title_empty @community_name'|t({'@community_name': community_name}) }}</p>
+  </div>
+{% endif %}
+
+{% block modal_floating %}
+  {{ bamboo_render_block('qs_sharing_offer_floating_actions_buttons_block') }}
+{% endblock %}

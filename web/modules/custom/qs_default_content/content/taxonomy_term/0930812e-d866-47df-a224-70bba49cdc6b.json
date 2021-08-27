@@ -34,11 +34,6 @@
             "value": "0930812e-d866-47df-a224-70bba49cdc6b"
         }
     ],
-    "revision_id": [
-        {
-            "value": 19
-        }
-    ],
     "langcode": [
         {
             "value": "fr",
@@ -56,12 +51,6 @@
     "vid": [
         {
             "target_id": "sharing_themes"
-        }
-    ],
-    "revision_created": [
-        {
-            "value": "2021-08-26T14:46:09+00:00",
-            "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "status": [
@@ -180,20 +169,6 @@
         },
         {
             "value": false,
-            "lang": "de"
-        }
-    ],
-    "revision_translation_affected": [
-        {
-            "value": true,
-            "lang": "fr"
-        },
-        {
-            "value": true,
-            "lang": "en"
-        },
-        {
-            "value": true,
             "lang": "de"
         }
     ],

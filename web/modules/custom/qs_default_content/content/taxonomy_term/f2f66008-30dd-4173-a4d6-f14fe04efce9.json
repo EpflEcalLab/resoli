@@ -26,11 +26,6 @@
             "value": "f2f66008-30dd-4173-a4d6-f14fe04efce9"
         }
     ],
-    "revision_id": [
-        {
-            "value": 24
-        }
-    ],
     "langcode": [
         {
             "value": "fr",
@@ -40,12 +35,6 @@
     "vid": [
         {
             "target_id": "sharing_themes"
-        }
-    ],
-    "revision_created": [
-        {
-            "value": "2021-08-26T14:48:43+00:00",
-            "format": "Y-m-d\\TH:i:sP"
         }
     ],
     "status": [
@@ -96,12 +85,6 @@
         }
     ],
     "default_langcode": [
-        {
-            "value": true,
-            "lang": "fr"
-        }
-    ],
-    "revision_translation_affected": [
         {
             "value": true,
             "lang": "fr"

@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update drupal/admin_toolbar (3.0.1 => 3.0.2)
 - Update drupal/field_group (3.1.0 => 3.2.0)
 
+### Fixed
+- fix pager of Events
+
+### Added
+- add Docker credentials for Codeship to prevent Pull Rate Limit
+
 ## [2.0.0] - 2021-08-26
 ### Added
 - add Gin Admin theme

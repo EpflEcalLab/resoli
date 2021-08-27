@@ -5,6 +5,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.offer.body
+    - field.field.node.offer.field_contact_mail
+    - field.field.node.offer.field_contact_name
+    - field.field.node.offer.field_contact_phone
     - field.field.node.offer.field_description
     - field.field.node.offer.field_offer_type
     - field.field.node.offer.field_theme
@@ -36,6 +39,9 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_contact_mail: true
+  field_contact_name: true
+  field_contact_phone: true
   field_description: true
   field_offer_type: true
   field_theme: true

@@ -1,0 +1,205 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/67?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/offer_type"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_community": [
+            {
+                "href": "http:\/\/localhost\/lausanne?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/20?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 67
+        }
+    ],
+    "uuid": [
+        {
+            "value": "ea52fb9f-c0a0-4b34-9297-3646ca2546c7"
+        }
+    ],
+    "vid": [
+        {
+            "value": 153
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "offer_type"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-08-26T14:54:56+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_community": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/lausanne?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "e8cfc427-c90d-4015-b583-1418974120ed"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer_type\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/20?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "831d95bf-96e8-4645-b826-6d23ba0f959d"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Papoter ensemble",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-08-26T14:54:56+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-08-26T14:54:56+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "N\u2019h\u00e9sitez pas \u00e0 contacter les personnes ci-dessous pour demander\u2028 un coup de main ou simplement \u00e9changer un moment convivial.",
+            "format": "light_html",
+            "processed": "N\u2019h\u00e9sitez pas \u00e0 contacter les personnes ci-dessous pour demander\u2028 un coup de main ou simplement \u00e9changer un moment convivial.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ]
+}

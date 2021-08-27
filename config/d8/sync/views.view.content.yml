@@ -3,6 +3,7 @@ langcode: fr
 status: true
 dependencies:
   config:
+    - field.storage.node.body
     - field.storage.node.field_activity
     - field.storage.node.field_community
     - field.storage.node.field_contact_name
@@ -20,11 +21,14 @@ dependencies:
     - taxonomy.vocabulary.communities
     - taxonomy.vocabulary.sharing_themes
     - taxonomy.vocabulary.themes
+    - workflows.workflow.offers
   module:
+    - content_moderation
     - datetime
     - image
     - node
     - taxonomy
+    - text
     - user
 _core:
   default_config_hash: tS8PbpJX90aRFC3-UTgXzdqkq7_2frk2pz4TMijEebM
@@ -4219,6 +4223,54 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
+        field_theme_target_id:
+          id: field_theme_target_id
+          table: node__field_theme
+          field: field_theme_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_theme_target_id_op
+            label: 'Default theme'
+            description: ''
+            use_operator: false
+            operator: field_theme_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_theme_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              beginner: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: sharing_themes
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
         title:
           id: title
           table: node_field_data
@@ -4407,6 +4459,69 @@ display:
           group_type: group
           admin_label: ''
           label: Community
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_theme:
+          id: field_theme
+          table: node__field_theme
+          field: field_theme
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Default theme'
           exclude: false
           alter:
             alter_text: false
@@ -4682,6 +4797,7 @@ display:
         - user.permissions
       tags:
         - 'config:field.storage.node.field_community'
+        - 'config:field.storage.node.field_theme'
   page_7:
     display_plugin: page
     id: page_7
@@ -4929,14 +5045,77 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        title:
-          id: title
-          table: node_field_data
-          field: title
+        field_theme:
+          id: field_theme
+          table: node__field_theme
+          field: field_theme
           relationship: none
           group_type: group
           admin_label: ''
-          label: Offer
+          label: Theme
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_contact_name:
+          id: field_contact_name
+          table: node__field_contact_name
+          field: field_contact_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Objet
           exclude: false
           alter:
             alter_text: false
@@ -4980,7 +5159,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -4991,8 +5170,69 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: node
-          entity_field: title
+          plugin_id: field
+        body:
+          id: body
+          table: node__body
+          field: body
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Description
+          exclude: false
+          alter:
+            alter_text: true
+            text: '<br><small>{{ body }}</small>'
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_trimmed
+          settings:
+            trim_length: 80
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
           plugin_id: field
         operations:
           id: operations
@@ -5045,6 +5285,52 @@ display:
           destination: true
           plugin_id: entity_operations
       filters:
+        moderation_state:
+          id: moderation_state
+          table: node_field_data
+          field: moderation_state
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            offers-draft: offers-draft
+            offers-published: offers-published
+            offers-archived: offers-archived
+          group: 1
+          exposed: true
+          expose:
+            operator_id: moderation_state_op
+            label: State
+            description: ''
+            use_operator: false
+            operator: moderation_state_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: moderation_state
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              beginner: '0'
+            reduce: true
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          plugin_id: moderation_state_filter
         field_community_target_id:
           id: field_community_target_id
           table: node__field_community
@@ -5093,10 +5379,58 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        title:
-          id: title
-          table: node_field_data
-          field: title
+        field_theme_target_id:
+          id: field_theme_target_id
+          table: node__field_theme
+          field: field_theme_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_theme_target_id_op
+            label: Theme
+            description: ''
+            use_operator: false
+            operator: field_theme_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_theme_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              beginner: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: sharing_themes
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
+        field_contact_name_value:
+          id: field_contact_name_value
+          table: node__field_contact_name
+          field: field_contact_name_value
           relationship: none
           group_type: group
           admin_label: ''
@@ -5105,12 +5439,14 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: title_op
-            label: Title
+            operator_id: field_contact_name_value_op
+            label: 'Prénom et nom'
             description: ''
             use_operator: false
-            operator: title_op
-            identifier: title
+            operator: field_contact_name_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: field_contact_name_value
             required: false
             remember: false
             multiple: false
@@ -5118,8 +5454,8 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
-            operator_limit_selection: false
-            operator_list: {  }
+              beginner: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -5133,8 +5469,6 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           plugin_id: string
-          entity_type: node
-          entity_field: title
         status_extra:
           id: status_extra
           table: node_field_data
@@ -5189,6 +5523,50 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: field_offer_type
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: 'Offer''s Type'
+            description: ''
+            use_operator: false
+            operator: title_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: offers_type_title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              beginner: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
@@ -5229,13 +5607,10 @@ display:
           columns:
             node_bulk_form: node_bulk_form
             status: status
-            field_start_at_1: field_start_at_1
             field_community: field_community
-            field_activity: field_activity
-            title: title
-            field_start_at_2: field_start_at_2
-            field_start_at: field_start_at
-            field_end_at: field_end_at
+            field_offer_type: field_offer_type
+            field_contact_name: field_contact_name
+            body: field_contact_name
             operations: operations
           info:
             node_bulk_form:
@@ -5250,13 +5625,6 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_start_at_1:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             field_community:
               sortable: true
               default_sort_order: asc
@@ -5264,38 +5632,24 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_activity:
-              sortable: true
+            field_offer_type:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            title:
-              sortable: true
+            field_contact_name:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_start_at_2:
-              sortable: true
+            body:
+              sortable: false
               default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_start_at:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_end_at:
-              sortable: true
-              default_sort_order: asc
-              align: ''
+              align: views-align-left
               separator: ''
               empty_column: false
               responsive: ''
@@ -5334,8 +5688,12 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_community'
+        - 'config:field.storage.node.field_contact_name'
         - 'config:field.storage.node.field_offer_type'
+        - 'config:field.storage.node.field_theme'
+        - 'config:workflow_list'
   page_8:
     display_plugin: page
     id: page_8

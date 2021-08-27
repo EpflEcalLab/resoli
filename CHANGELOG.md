@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix pager of Events
 
+### Added
+- add Docker credentials for Codeship to prevent Pull Rate Limit
+
 ## [2.0.0] - 2021-08-26
 ### Added
 - add Gin Admin theme

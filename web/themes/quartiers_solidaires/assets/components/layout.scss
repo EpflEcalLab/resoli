@@ -51,6 +51,12 @@ body {
   flex: 1 0 100%;
 }
 
+.container-narrow {
+  @include media-breakpoint-up(md) {
+    max-width: 724px;
+  }
+}
+
 .header {
   > .row > * {
     // basic column properties

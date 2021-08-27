@@ -123,6 +123,14 @@
   border-radius: 0 !important;
 }
 
+.rounded-lg {
+  border-radius: $border-radius-lg;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
 // Text helpers
 @include text-emphasis-variant('.text-dark', color("dark"));
 @include text-emphasis-variant('.text-gray', $gray-700);

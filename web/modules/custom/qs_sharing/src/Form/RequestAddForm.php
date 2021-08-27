@@ -47,7 +47,8 @@ class RequestAddForm extends FormBase {
 
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
-      'theme' => 'danger',
+      'theme' => 'pink',
+      'class' => ['bg-pink'],
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
 
@@ -60,7 +61,7 @@ class RequestAddForm extends FormBase {
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
-      'form__modal__multistep',
+      'form__multistep',
     ];
 
     // Save the community for submission.
@@ -72,9 +73,10 @@ class RequestAddForm extends FormBase {
       '#description' => $this->t('qs_sharing.requests.form.step1.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_sharing.requests.form.step1'),
+
       ],
       '#theme_wrappers' => [
-        'container__center',
+        'container__center__wide',
         'fieldset__step',
       ],
     ];
@@ -84,6 +86,19 @@ class RequestAddForm extends FormBase {
       '#placeholder' => $this->t('qs_sharing.requests.form.add.body.placeholder'),
       '#type' => 'textarea',
       '#required' => FALSE,
+    ];
+
+
+    $form['request']['step-2'] = [
+      '#type' => 'fieldset',
+      '#description' => $this->t('qs_sharing.requests.form.step2.description'),
+      '#attributes' => [
+        'data-step' => $this->t('qs_sharing.requests.form.step2'),
+      ],
+      '#theme_wrappers' => [
+        'container__center__wide',
+        'fieldset__step',
+      ],
     ];
 
     // Get all themes for options.

@@ -1,0 +1,223 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/71?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/offer"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/uid": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/8?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_offer_type": [
+            {
+                "href": "http:\/\/localhost\/node\/66?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 71
+        }
+    ],
+    "uuid": [
+        {
+            "value": "1d832ef0-b83e-4df9-a161-6269aabf4db4"
+        }
+    ],
+    "vid": [
+        {
+            "value": 159
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "offer"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-08-26T15:35:10+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/8?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "1bbb8566-39e6-4d09-ab2b-e1569e19b0bc"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_offer_type": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/node\/66?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/offer_type"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "44e47840-b942-4521-8e35-b03c946ad17d"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "0930812e-d866-47df-a224-70bba49cdc6b"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Co-Voiturage Lausanne-Fribourg",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-08-26T15:35:10+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-08-26T15:35:10+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "published",
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Travaillant \u00e0 Lausanne et habitant \u00e0 Fribourg, je me d\u00e9place en voiture tous les matins en direction de Lausanne et reviens sur Fribourg tous les soirs.\r\n\r\nJe propose \u00e0 qui le veut bien de m'accompagner durant ces quelques trajets.",
+            "format": "light_html",
+            "processed": "Travaillant \u00e0 Lausanne et habitant \u00e0 Fribourg, je me d\u00e9place en voiture tous les matins en direction de Lausanne et reviens sur Fribourg tous les soirs.\n\nJe propose \u00e0 qui le veut bien de m'accompagner durant ces quelques trajets.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Jerry Kan",
+            "lang": "zxx"
+        }
+    ],
+    "field_description": [
+        {
+            "value": "Tout les matins \u00e0 8h00 et les soirs \u00e0 17h00",
+            "format": "light_html",
+            "processed": "Tout les matins \u00e0 8h00 et les soirs \u00e0 17h00",
+            "lang": "zxx"
+        }
+    ]
+}

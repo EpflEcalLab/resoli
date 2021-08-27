@@ -1,21 +1,20 @@
-uuid: 84c83ef0-f774-454f-84af-7ad94af984d2
-langcode: en
+uuid: 69e45500-ba06-467d-a9e1-4a0f9d1b1db4
+langcode: fr
 status: true
 dependencies:
   config:
-    - field.field.node.event.body
-    - field.field.node.event.field_activity
-    - field.field.node.event.field_contact_mail
-    - field.field.node.event.field_contact_name
-    - field.field.node.event.field_contact_phone
-    - field.field.node.event.field_contribution
-    - field.field.node.event.field_end_at
-    - field.field.node.event.field_start_at
-    - field.field.node.event.field_venue
-    - field.field.node.event.field_venue_lat
-    - field.field.node.event.field_venue_long
-    - node.type.event
+    - field.field.node.request.body
+    - field.field.node.request.field_community
+    - field.field.node.request.field_contact_mail
+    - field.field.node.request.field_contact_name
+    - field.field.node.request.field_contact_phone
+    - field.field.node.request.field_solved_at
+    - field.field.node.request.field_solved_by
+    - field.field.node.request.field_theme
+    - node.type.request
+    - workflows.workflow.requests
   module:
+    - content_moderation
     - datetime
     - field_group
     - path
@@ -25,76 +24,73 @@ third_party_settings:
     group_tabs:
       children:
         - group_general
-        - group_venue
         - group_contact
+        - group_handling
       parent_name: ''
-      weight: 1
+      weight: 0
       format_type: tabs
+      region: content
       format_settings:
         id: ''
         classes: ''
-        direction: vertical
+        direction: horizontal
       label: Tabs
-      region: content
     group_general:
       children:
-        - field_activity
+        - field_community
+        - field_theme
         - title
         - body
-        - field_start_at
-        - field_end_at
-        - field_contribution
       parent_name: group_tabs
-      weight: 20
+      weight: 11
       format_type: tab
+      region: content
       format_settings:
         id: ''
         classes: ''
-        formatter: closed
         description: ''
+        formatter: closed
         required_fields: true
       label: General
-      region: content
-    group_venue:
-      children:
-        - field_venue
-        - field_venue_lat
-        - field_venue_long
-      parent_name: group_tabs
-      weight: 21
-      format_type: tab
-      format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
-        description: ''
-        required_fields: true
-      label: Venue
-      region: content
     group_contact:
       children:
         - field_contact_name
         - field_contact_phone
         - field_contact_mail
       parent_name: group_tabs
-      weight: 22
+      weight: 12
       format_type: tab
+      region: content
       format_settings:
         id: ''
         classes: ''
-        formatter: closed
         description: ''
+        formatter: closed
         required_fields: true
       label: Contact
+    group_handling:
+      children:
+        - field_solved_at
+        - field_solved_by
+      parent_name: group_tabs
+      weight: 13
+      format_type: tab
       region: content
-id: node.event.default
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Handling
+id: node.request.default
 targetEntityType: node
-bundle: event
+bundle: request
 mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 28
+    weight: 16
     settings:
       rows: 9
       summary_rows: 3
@@ -102,18 +98,18 @@ content:
       show_summary: false
     third_party_settings: {  }
     region: content
-  field_activity:
-    weight: 26
+  field_community:
+    weight: 13
     settings:
       match_operator: CONTAINS
+      match_limit: 10
       size: 60
       placeholder: ''
-      match_limit: 10
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
   field_contact_mail:
-    weight: 34
+    weight: 3
     settings:
       size: 60
       placeholder: ''
@@ -121,7 +117,7 @@ content:
     type: string_textfield
     region: content
   field_contact_name:
-    weight: 32
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -129,71 +125,54 @@ content:
     type: string_textfield
     region: content
   field_contact_phone:
-    weight: 33
+    weight: 2
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_contribution:
-    weight: 31
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_end_at:
-    weight: 30
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_start_at:
-    weight: 29
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_venue:
-    weight: 3
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_venue_lat:
-    weight: 4
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-    type: number
-    region: content
-  field_venue_long:
+  field_solved_at:
     weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_solved_by:
+    weight: 6
     settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: number
+    type: entity_reference_autocomplete
     region: content
+  field_theme:
+    weight: 14
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 3
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   path:
     type: path
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
-    third_party_settings: {  }
-  status:
-    type: boolean_checkbox
-    settings:
-      display_label: true
-    weight: 3
-    region: content
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 27
+    weight: 15
     region: content
     settings:
       size: 60
@@ -207,7 +186,7 @@ content:
 hidden:
   created: true
   langcode: true
-  moderation_state: true
   promote: true
+  status: true
   sticky: true
   uid: true

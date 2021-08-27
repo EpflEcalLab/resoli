@@ -29,8 +29,8 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save"
     And 0 mail should be sent
-    Then I should not see a "#card64[data-status='confirmed']" element
-    Then I should see a "#card64[data-status='default']" element
+    Then I should not see a "#card76[data-status='confirmed']" element
+    Then I should see a "#card76[data-status='default']" element
     Examples:
       | event |
       | sorties-theatre |
@@ -44,8 +44,8 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save"
     And 0 mail should be sent
-    Then I should see a "#card64[data-status='confirmed']" element
-    Then I should not see a "#card64[data-status='default']" element
+    Then I should see a "#card76[data-status='confirmed']" element
+    Then I should not see a "#card76[data-status='default']" element
 
   @api @preserveDatabase
   Scenario: When creating an weekly repeated Event, 12 events must be saved & stored in the database
@@ -76,30 +76,30 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save-and-repeat-weekly"
     And 0 mail should be sent
-    Then I should not see a "#card64[data-status='confirmed']" element
-    Then I should see a "#card64[data-status='default']" element
-    Then I should not see a "#card65[data-status='confirmed']" element
-    Then I should see a "#card65[data-status='default']" element
-    Then I should not see a "#card66[data-status='confirmed']" element
-    Then I should see a "#card66[data-status='default']" element
-    Then I should not see a "#card67[data-status='confirmed']" element
-    Then I should see a "#card67[data-status='default']" element
-    Then I should not see a "#card68[data-status='confirmed']" element
-    Then I should see a "#card68[data-status='default']" element
-    Then I should not see a "#card69[data-status='confirmed']" element
-    Then I should see a "#card69[data-status='default']" element
-    Then I should not see a "#card70[data-status='confirmed']" element
-    Then I should see a "#card70[data-status='default']" element
-    Then I should not see a "#card71[data-status='confirmed']" element
-    Then I should see a "#card71[data-status='default']" element
-    Then I should not see a "#card72[data-status='confirmed']" element
-    Then I should see a "#card72[data-status='default']" element
-    Then I should not see a "#card73[data-status='confirmed']" element
-    Then I should see a "#card73[data-status='default']" element
-    Then I should not see a "#card74[data-status='confirmed']" element
-    Then I should see a "#card74[data-status='default']" element
-    Then I should not see a "#card75[data-status='confirmed']" element
-    Then I should see a "#card75[data-status='default']" element
+    Then I should not see a "#card76[data-status='confirmed']" element
+    Then I should see a "#card76[data-status='default']" element
+    Then I should not see a "#card77[data-status='confirmed']" element
+    Then I should see a "#card77[data-status='default']" element
+    Then I should not see a "#card78[data-status='confirmed']" element
+    Then I should see a "#card78[data-status='default']" element
+    Then I should not see a "#card79[data-status='confirmed']" element
+    Then I should see a "#card79[data-status='default']" element
+    Then I should not see a "#card80[data-status='confirmed']" element
+    Then I should see a "#card80[data-status='default']" element
+    Then I should not see a "#card81[data-status='confirmed']" element
+    Then I should see a "#card81[data-status='default']" element
+    Then I should not see a "#card82[data-status='confirmed']" element
+    Then I should see a "#card82[data-status='default']" element
+    Then I should not see a "#card83[data-status='confirmed']" element
+    Then I should see a "#card83[data-status='default']" element
+    Then I should not see a "#card84[data-status='confirmed']" element
+    Then I should see a "#card84[data-status='default']" element
+    Then I should not see a "#card85[data-status='confirmed']" element
+    Then I should see a "#card85[data-status='default']" element
+    Then I should not see a "#card86[data-status='confirmed']" element
+    Then I should see a "#card86[data-status='default']" element
+    Then I should not see a "#card87[data-status='confirmed']" element
+    Then I should see a "#card87[data-status='default']" element
     Examples:
       | event |
       | sorties-theatre |
@@ -113,27 +113,27 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save-and-repeat-weekly"
     And 0 mail should be sent
-    Then I should see a "#card64[data-status='confirmed']" element
-    Then I should not see a "#card64[data-status='default']" element
-    Then I should see a "#card65[data-status='confirmed']" element
-    Then I should not see a "#card65[data-status='default']" element
-    Then I should see a "#card66[data-status='confirmed']" element
-    Then I should not see a "#card66[data-status='default']" element
-    Then I should see a "#card67[data-status='confirmed']" element
-    Then I should not see a "#card67[data-status='default']" element
-    Then I should see a "#card68[data-status='confirmed']" element
-    Then I should not see a "#card68[data-status='default']" element
-    Then I should see a "#card69[data-status='confirmed']" element
-    Then I should not see a "#card69[data-status='default']" element
-    Then I should see a "#card70[data-status='confirmed']" element
-    Then I should not see a "#card70[data-status='default']" element
-    Then I should see a "#card71[data-status='confirmed']" element
-    Then I should not see a "#card71[data-status='default']" element
-    Then I should see a "#card72[data-status='confirmed']" element
-    Then I should not see a "#card72[data-status='default']" element
-    Then I should see a "#card73[data-status='confirmed']" element
-    Then I should not see a "#card73[data-status='default']" element
-    Then I should see a "#card74[data-status='confirmed']" element
-    Then I should not see a "#card74[data-status='default']" element
-    Then I should see a "#card75[data-status='confirmed']" element
-    Then I should not see a "#card75[data-status='default']" element
+    Then I should see a "#card76[data-status='confirmed']" element
+    Then I should not see a "#card76[data-status='default']" element
+    Then I should see a "#card77[data-status='confirmed']" element
+    Then I should not see a "#card77[data-status='default']" element
+    Then I should see a "#card78[data-status='confirmed']" element
+    Then I should not see a "#card78[data-status='default']" element
+    Then I should see a "#card79[data-status='confirmed']" element
+    Then I should not see a "#card79[data-status='default']" element
+    Then I should see a "#card80[data-status='confirmed']" element
+    Then I should not see a "#card80[data-status='default']" element
+    Then I should see a "#card81[data-status='confirmed']" element
+    Then I should not see a "#card81[data-status='default']" element
+    Then I should see a "#card82[data-status='confirmed']" element
+    Then I should not see a "#card82[data-status='default']" element
+    Then I should see a "#card83[data-status='confirmed']" element
+    Then I should not see a "#card83[data-status='default']" element
+    Then I should see a "#card84[data-status='confirmed']" element
+    Then I should not see a "#card84[data-status='default']" element
+    Then I should see a "#card85[data-status='confirmed']" element
+    Then I should not see a "#card85[data-status='default']" element
+    Then I should see a "#card86[data-status='confirmed']" element
+    Then I should not see a "#card86[data-status='default']" element
+    Then I should see a "#card87[data-status='confirmed']" element
+    Then I should not see a "#card87[data-status='default']" element

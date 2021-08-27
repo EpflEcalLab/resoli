@@ -1,0 +1,11 @@
+uuid: 262c506a-28fa-49eb-aff8-44ed884ec22e
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.request
+id: node.request
+target_entity_type_id: node
+target_bundle: request
+default_langcode: zxx
+language_alterable: false

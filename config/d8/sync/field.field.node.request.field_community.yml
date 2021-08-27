@@ -1,0 +1,29 @@
+uuid: dc0d5777-5699-44a9-9f59-432204377096
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_community
+    - node.type.request
+    - taxonomy.vocabulary.communities
+id: node.request.field_community
+field_name: field_community
+entity_type: node
+bundle: request
+label: Community
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      communities: communities
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

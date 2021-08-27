@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - add core architecture for Entraide
+- Add new Sharing entity 'Offer's Type'
+- Add new Sharging entity 'Offer'
+- Add new Sharging entity 'Request'
+- Add new Sharging entity 'Volunteerism'
 
 ### Changed
 - update all Javascript Dependencies

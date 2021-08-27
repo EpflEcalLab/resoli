@@ -88,7 +88,6 @@ class RequestAddForm extends FormBase {
       '#required' => FALSE,
     ];
 
-
     $form['request']['step-2'] = [
       '#type' => 'fieldset',
       '#description' => $this->t('qs_sharing.requests.form.step2.description'),

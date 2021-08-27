@@ -186,7 +186,7 @@ class EventManager {
     if ($limit) {
       $rows = $query->execute();
       $this->pagerManager->createPager(\count($rows), $limit);
-      $query->pager($limit);
+      $query->range($this->pagerManager->findPage() * $limit, $limit);
     }
 
     $nids = $query->execute();
@@ -230,7 +230,7 @@ class EventManager {
     if ($limit) {
       $rows = $query->execute();
       $this->pagerManager->createPager(\count($rows), $limit);
-      $query->pager($limit);
+      $query->range($this->pagerManager->findPage() * $limit, $limit);
     }
 
     $nids = $query->execute();

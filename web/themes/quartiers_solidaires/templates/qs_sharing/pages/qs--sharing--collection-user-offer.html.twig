@@ -7,7 +7,7 @@
 
 {% set floating_buttons = [
   {
-    label: 'qs_sharing.floating.handle.user.offers'|t,
+    label: 'qs_sharing.floating.manage.user.offers'|t,
     icon: 'pencil',
     active: true,
   }
@@ -17,6 +17,7 @@
 
 {% block modal_content %}
 
+  {# @todo Get deactivate state and display information accordingly #}
   {% if variables.offers %}
     <ul class="card-list mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
       {% for offer in variables.offers %}
@@ -32,24 +33,42 @@
             id="volunteerism{{ offer.nid.value }}"
           >
             <span class="card-pill-icon">
-              {{ macros.icon('theme_' ~ offer.field_theme.entity.field_icon.value) }}
+              {{ macros.icon('theme_' ~ offer.field_theme.entity.field_sharing_icon.value) }}
             </span>
 
             <span class="card-pill-title mr-auto">
-              <span class="lead">{{ offer.title.value }}</span>
+              <span class="lead">{{ offer.field_offer_type.entity.title.value }}</span>
             </span>
 
-            <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white" aria-label="{{ 'qs.offer.more'|t }}">
+            <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white">
               {{ macros.icon('look') }}
-              <span class="sr-only d-none d-md-inline">{{ 'qs.offer.more'|t }}</span>
+              <span>{{ 'qs.offer.more'|t }}</span>
             </span>
           </a>
 
           <div class="collapse" id="collapse-{{ offer.nid.value }}" role="tabpanel">
             <div class="card-body">
+              <div class="card-text text-center">
+                <h4 class="h5 card-title mb-1 mt-0">{{ offer.field_description.value }}</h4>
+                <p class="mb-0">{{ offer.body.value }}</p>
+              </div>
 
+              {# @todo Handle deactivate and edit actions in routing and controller #}
+              <div class="card-actions card-actions-offset row">
+                <div class="col-sm-6 mb-3">
+                  <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                    {{ macros.icon('cross') }}
+                    {{ 'qs.sharing.offer.deactivate'|t }}
+                  </a>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                    {{ macros.icon('pencil') }}
+                    {{ 'qs.sharing.manage_offer'|t }}
+                  </a>
+                </div>
+              </div>
 
-              <p>Panel</p>
             </div>
           </div>
         </li>

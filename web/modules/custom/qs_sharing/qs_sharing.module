@@ -5,6 +5,11 @@
  * Legacy Drupal 7 code to implements hooks.
  */
 
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+include 'inc/offer_type_node_access.inc';
+
 /**
  * Implements hook_theme().
  */
@@ -26,6 +31,10 @@ function qs_sharing_theme() {
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--offer',
     ],
+    'qs_sharing_offers_collection_block' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--offers-collection',
+    ],
     // PDFs themes
     // ---------------------------------------------------------------------.
     'qs_sharing_export_offers_pdf' => [
@@ -33,4 +42,14 @@ function qs_sharing_theme() {
       'template' => 'qs--sharing--export-offers--pdf',
     ],
   ];
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * The administrative account (user ID #1) always passes any access check,
+ * so this hook is not called in that case.
+ */
+function qs_sharing_node_access(NodeInterface $node, $operation, AccountInterface $account) {
+  return qs_sharing_offer_type_node_access($node, $operation, $account);
 }

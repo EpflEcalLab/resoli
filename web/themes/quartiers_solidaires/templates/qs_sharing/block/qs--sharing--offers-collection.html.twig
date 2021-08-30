@@ -1,0 +1,41 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
+
+<div class="text-center my-5">
+  {{ macros.icon('theme_' ~ variables.theme.field_sharing_icon.value, ['icon-xl', 'text-primary']) }}
+  <h1 class="h2 text-primary mt-3">{{ variables.offer_type.title.value }}</h1>
+</div>
+
+{% if variables.offer_type.body.value %}
+  <div class="mb-5 text-center rich-content rich-content-primary">
+    {% set body = {
+      '#type':   'processed_text',
+      '#text':    variables.offer_type.body.value,
+      '#format':  variables.offer_type.body.format,
+    } %}
+    {{ body }}
+  </div>
+{% endif %}
+
+{% if variables.offers %}
+  <ul class="card-list" id="offers-accordion" role="tablist" data-children=".card-list-item">
+  {% for key, offer in variables.offers %}
+    {% set contact_name = offer.field_contact_name.value %}
+    {% set contact_phone = offer.field_contact_phone.value %}
+    {% set contact_mail = offer.field_contact_mail.value %}
+
+    {{ offer.title.value }}
+
+    {% set body = {
+      '#type':   'processed_text',
+      '#text':    offer.body.value,
+      '#format':  offer.body.format,
+    } %}
+    {{ body }}
+  {% endfor %}
+  </ul>
+{% else %}
+  <h2 class="h4 mb-4 text-center">
+    {{ 'qs.sharing.no_offers'|t }}
+  </h2>
+{% endif %}
+

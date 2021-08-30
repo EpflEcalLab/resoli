@@ -29,7 +29,7 @@ class OfferRepository {
   }
 
   /**
-   * Get all offers bellowing to an offer type in a specific theme.
+   * Get all offers belonging to an offer type in a specific theme.
    *
    * This method will return only published offers.
    *

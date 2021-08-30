@@ -46,7 +46,7 @@ final class OfferRepositoryTest extends KernelTestBase {
   /**
    * The offer repository.
    *
-   * @var \Drupal\qs_sharing\Repository\OfferTypeRepository
+   * @var \Drupal\qs_sharing\Repository\OfferRepository
    */
   protected $offerRepository;
 

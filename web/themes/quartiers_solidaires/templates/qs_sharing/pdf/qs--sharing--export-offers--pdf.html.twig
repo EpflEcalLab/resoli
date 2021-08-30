@@ -105,201 +105,42 @@
   </head>
   <body>
     <header>
-      Communauté de {{ variables.community }}
+      {{ 'qs.sharing.export.offers.pdf.header @community'|t({'@community': variables.community}) }}
     </header>
     <main>
-      <h1>Offres de bénévolat</h1>
-      <p>Mis à jour le {{ variables.update }}</p>
+      <h1>{{ 'qs.sharing.export.offers.pdf.title'|t }}</h1>
+      <p>{{ 'qs.sharing.export.offers.pdf.updatedOn @date'|t({'@date': variables.update}) }}</p>
 
-      <p class="description">N’hésitez pas à contacter les personnes ci-dessous pour demander un coup d’main ou simplement échanger un moment convivial.</p>
+      <p class="description">{{ 'qs.sharing.export.offers.pdf.lead'|t }}</p>
 
-      <h2>Papoter ensemble</h2>
+      {% set currentOfferType = null %}
+      {% for offer in variables.offers %}
+        {# Print the offer type header if we are on the new/next one. #}
+        {% if (offer.field_offer_type.target_id != currentOfferType) %}
+          {# On non first offer type, we must close the previous table. #}
+          {% if loop.index > 1 %}
+          </table>
+          {% endif %}
 
-      <table>
-        <tr>
-          <th>Bénévole</th>
-          <th>Offre</th>
-          <th>Disponibilité</th>
-          <th>Contact</th>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-      </table>
+          {% set currentOfferType = offer.field_offer_type.target_id %}
 
-      <h2>Faire les courses</h2>
+      <h2>{{ offer.field_offer_type.entity.title.value }}</h2>
+          <table>
+            <tr>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.volunteer'|t }}</th>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.offer'|t }}</th>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.availability'|t }}</th>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.contact'|t }}</th>
+            </tr>
+        {% endif %}
 
-      <table>
         <tr>
-          <th>Bénévole</th>
-          <th>Offre</th>
-          <th>Disponibilité</th>
-          <th>Contact</th>
+          <td>{{ offer.field_contact_name.value }}</td>
+          <td>{{ offer.body.value }}</td>
+          <td>{{ offer.field_availability.value }}</td>
+          <td>{{ offer.field_contact_phone.value }}<br>{{ offer.field_contact_mail.value }}</td>
         </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-      </table>
-
-      <h2>Faire les courses</h2>
-
-      <table>
-        <tr>
-          <th>Bénévole</th>
-          <th>Offre</th>
-          <th>Disponibilité</th>
-          <th>Contact</th>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-      </table>
-
-      <h2>Faire les courses</h2>
-
-      <table>
-        <tr>
-          <th>Bénévole</th>
-          <th>Offre</th>
-          <th>Disponibilité</th>
-          <th>Contact</th>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-        <tr>
-          <td>Romain Collaud</td>
-          <td>Je parle volontiers de tous les sujets. J’aime particulièrement l’art et le design, et me passionne pour la cuisine et le hockey sur glace.</td>
-          <td>Disponible tous les jours de la semaine, l’après-midi</td>
-          <td>079 793 78 90<br>romain.collaud@epfl.ch</td>
-        </tr>
-      </table>
+      {% endfor %}
     </main>
   </body>
 </html>

@@ -8,7 +8,6 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DateFormatter;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Render\Renderer;
-use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -32,6 +31,20 @@ class Pdf {
   protected $renderer;
 
   /**
+   * The PDF.
+   *
+   * @var \Dompdf\Dompdf
+   */
+  private $dompdf;
+
+  /**
+   * The PDF title.
+   *
+   * @var string|null
+   */
+  private $title;
+
+  /**
    * Constructs a new Pdf instance.
    *
    * @param \Drupal\Core\Datetime\DateFormatter $date_formatter
@@ -45,30 +58,57 @@ class Pdf {
   }
 
   /**
+   * Add a footer pagination.
+   */
+  public function addPagination(): void {
+    // Set the footer with the pagination.
+    $font = $this->dompdf->getFontMetrics()->getFont('Helvetica', 'normal');
+    $this->dompdf
+      ->getCanvas()
+      ->page_text(298, 815, '{PAGE_NUM}/{PAGE_COUNT}', $font, 12, [0, 0, 0]);
+  }
+
+  /**
    * Download the pdf.
    *
    * Generate a standard PDF output with the given data.
    *
-   * @param string $template_name
-   *   The template name.
-   * @param array $variables
-   *   The variables to be given to the template.
-   * @param string $document_title
-   *   The name of the outputted PDF.
-   *
    * @return \Symfony\Component\HttpFoundation\StreamedResponse
    *   The spreadsheet usable on Excel.
    */
-  public function download(string $template_name, array $variables, string $document_title): StreamedResponse {
+  public function download(): StreamedResponse {
+    $filename = Html::cleanCssIdentifier($this->title) . '.pdf';
+
+    $pdf = $this->dompdf;
+    $response = new StreamedResponse(
+      static function () use ($pdf, $filename) {
+        $pdf->stream($filename);
+      }
+    );
+
+    $response->headers->set('Content-Type', 'application/pdf');
+    $response->headers->set('Cache-Control', 'max-age=0');
+
+    return $response;
+  }
+
+  /**
+   * Initialize the PDF.
+   */
+  public function init(): void {
     // Instantiate the dompdf options.
     $options = new Options();
     $options->set('defaultPaperSize', 'a4');
 
     // Instantiate the dompdf.
-    $dompdf = new Dompdf($options);
+    $this->dompdf = new Dompdf($options);
+  }
 
+  /**
+   * Load and render given Twig template as HTML.
+   */
+  public function setContent(string $template_name, array $variables): void {
     $now = new DrupalDateTime();
-
     $variables['update'] = $this->dateFormatter->format($now->getTimestamp(), 'default_medium_date_only');
 
     // Twig template to be rendered.
@@ -79,34 +119,18 @@ class Pdf {
 
     $rendered = $this->renderer->render($template);
 
-    $dompdf->loadHtml($rendered);
+    $this->dompdf->loadHtml($rendered);
     // Render the HTML as PDF.
-    $dompdf->render();
+    $this->dompdf->render();
+  }
 
-    // Set the footer with the pagination.
-    $font = $dompdf->getFontMetrics()->getFont('Helvetica', 'normal');
-    $dompdf
-      ->getCanvas()
-      ->page_text(298, 815, '{PAGE_NUM}/{PAGE_COUNT}', $font, 12, [0, 0, 0]);
+  /**
+   * Initialize the PDF.
+   */
+  public function setTitle(string $title): self {
+    $this->title = $title;
 
-    $filename = Html::cleanCssIdentifier($document_title . '_' . $this->dateFormatter->format($now->getTimestamp(), 'html_date')) . '.pdf';
-
-    $response = new StreamedResponse(
-      static function () use ($dompdf, $filename) {
-        $dompdf->stream($filename);
-      }
-    );
-
-    $disposition = HeaderUtils::makeDisposition(
-      HeaderUtils::DISPOSITION_ATTACHMENT,
-      $filename
-    );
-
-    $response->headers->set('Content-Type', 'application/force-download');
-    $response->headers->set('Cache-Control', 'max-age=0');
-    $response->headers->set('Content-Disposition', $disposition);
-
-    return $response;
+    return $this;
   }
 
 }

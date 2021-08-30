@@ -44,14 +44,17 @@ qs_sharing.export.community.offers.pdf:
 
 ## PDF Export of Offers by offer type.
 qs_sharing.export.offer_type.offers.pdf:
-  path: '/sharing/export/offer_type/{offer_type}/pdf'
+  path: '/sharing/export/offer_type/{offer_type}/theme/{theme}/pdf'
   defaults:
     _controller: '\Drupal\qs_sharing\Controller\ExportController::offerType'
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Controller\ExportController::accessOfferType'
     offer_type: \d+
+    theme: \d+
   options:
     parameters:
       offer_type:
         type: entity:node
+      theme:
+        type: entity:taxonomy_term

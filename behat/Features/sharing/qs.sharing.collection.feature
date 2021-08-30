@@ -7,7 +7,7 @@ Feature: Sharing by Offer's Type Access
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/1/offers"
     Then I should see 5 ".card-info" elements
-    And I should see "qs.sharing.offer_type.volunteers 1" in the "#card-offer-type71" element
+    And I should see "qs.sharing.offer_type.volunteers.plural 2" in the "#card-offer-type71" element
     And I should see "qs.sharing.offer_type.volunteers 1" in the "#card-offer-type74" element
     And I should see "qs.sharing.offer_type.volunteers 1" in the "#card-offer-type69" element
     And I should see "qs.sharing.offer_type.volunteers 1" in the "#card-offer-type72" element

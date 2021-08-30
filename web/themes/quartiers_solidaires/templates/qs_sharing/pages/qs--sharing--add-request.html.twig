@@ -3,7 +3,7 @@
 
 {% set community_name = variables.community.name.value|trim %}
 
-<div class="container">
+<div class="container container-narrow">
   <p class="lead text-center my-5">
     {% block lead_text %}
       {{ 'qs.sharing.add.request @community'|t({
@@ -11,6 +11,12 @@
       }) }}
     {% endblock %}
 
-    {{ variables.form }}
+    <div class="rounded-lg overflow-hidden">
+      {{ variables.form }}
+    </div>
+  </p>
+
+  <p class="text-center text-small mt-4 mx-5">
+    {{ 'qs.sharing.add.request.info'|t }}
   </p>
 </div>

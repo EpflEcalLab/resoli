@@ -487,17 +487,25 @@ html:lang(en) .size-time {
 // Invert colors with theme colors
 @each $color, $value in $theme-colors {
   .card-#{$color} {
-    background: color(#{$color}-lighter);
+    background: color(#{$color}-lightest);
     border-color: $value;
 
-    // Automaticly calculate color value based on contrast with background
+    // Automatically calculate color value based on contrast with background
     @include color-contrast($value);
 
     // Base is secondary color, just apply to other colors
     @if ($color != 'secondary') {
+      h3 {
+        color: color("primary");
+      }
+
       .card-pill {
         background-color: $value;
         border-color: $value;
+
+        &.card-pill-white {
+          background-color: color("light");
+        }
       }
 
       .card-pill-simple {

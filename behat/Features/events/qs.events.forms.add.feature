@@ -29,8 +29,8 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save"
     And 0 mail should be sent
-    Then I should not see a "#card76[data-status='confirmed']" element
-    Then I should see a "#card76[data-status='default']" element
+    Then I should not see a "#card77[data-status='confirmed']" element
+    Then I should see a "#card77[data-status='default']" element
     Examples:
       | event |
       | sorties-theatre |
@@ -44,8 +44,8 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save"
     And 0 mail should be sent
-    Then I should see a "#card76[data-status='confirmed']" element
-    Then I should not see a "#card76[data-status='default']" element
+    Then I should see a "#card77[data-status='confirmed']" element
+    Then I should not see a "#card77[data-status='default']" element
 
   @api @preserveDatabase
   Scenario: When creating an weekly repeated Event, 12 events must be saved & stored in the database
@@ -76,8 +76,6 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save-and-repeat-weekly"
     And 0 mail should be sent
-    Then I should not see a "#card76[data-status='confirmed']" element
-    Then I should see a "#card76[data-status='default']" element
     Then I should not see a "#card77[data-status='confirmed']" element
     Then I should see a "#card77[data-status='default']" element
     Then I should not see a "#card78[data-status='confirmed']" element
@@ -100,6 +98,8 @@ Feature: Add Event Form
     Then I should see a "#card86[data-status='default']" element
     Then I should not see a "#card87[data-status='confirmed']" element
     Then I should see a "#card87[data-status='default']" element
+    Then I should not see a "#card88[data-status='confirmed']" element
+    Then I should see a "#card88[data-status='default']" element
     Examples:
       | event |
       | sorties-theatre |
@@ -113,8 +113,6 @@ Feature: Add Event Form
       | Accueil Café | +2 days | 12:00 | 15:00 | Partagez un simple café entre habitants! | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-save-and-repeat-weekly"
     And 0 mail should be sent
-    Then I should see a "#card76[data-status='confirmed']" element
-    Then I should not see a "#card76[data-status='default']" element
     Then I should see a "#card77[data-status='confirmed']" element
     Then I should not see a "#card77[data-status='default']" element
     Then I should see a "#card78[data-status='confirmed']" element
@@ -137,3 +135,5 @@ Feature: Add Event Form
     Then I should not see a "#card86[data-status='default']" element
     Then I should see a "#card87[data-status='confirmed']" element
     Then I should not see a "#card87[data-status='default']" element
+    Then I should see a "#card88[data-status='confirmed']" element
+    Then I should not see a "#card88[data-status='default']" element

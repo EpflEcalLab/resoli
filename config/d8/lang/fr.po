@@ -2213,6 +2213,9 @@ msgstr "Voici la boîte à demandes d’entraide de la communauté de Lutry."
 msgid "qs_sharing.requests.form.step1"
 msgstr "Indiquez ce que vous rechercher comme partage."
 
+msgid "qs_sharing.requests.form.step2"
+msgstr "A qui cette demande est-elle destinée?"
+
 msgid "qs_sharing.requests.form.add.body"
 msgstr "Précisez en quelques mot ce que vous souhaitez"
 
@@ -2254,3 +2257,18 @@ msgstr "Réactiver mon offre"
 
 msgid "qs.offer.deactivated @date"
 msgstr "Désactivée le @date"
+
+msgid "qs.sharing.offer_type.volunteers @offers_count"
+msgstr "@offers_count bénévole offre ses services"
+
+msgid "qs.sharing.offer_type.volunteers.plural @offers_count"
+msgstr "@offers_count bénévoles offrent leurs services"
+
+msgid "qs.sharing.offer_type.volunteers.empty"
+msgstr "Aucun bénévole n'offre ses services"
+
+msgid "qs.sharing.offer.list.download"
+msgstr "Télécharger la liste des offres"
+
+msgid "qs.sharing.add.request.info"
+msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les bénévoles de la communauté y ont accès"

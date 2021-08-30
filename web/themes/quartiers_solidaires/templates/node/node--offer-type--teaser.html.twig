@@ -1,0 +1,32 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set classes = [
+  'card card-info mb-4 shadow-to-bottom-info',
+  not offers_count ? 'opacity-50',
+] %}
+<a href="{{ path('entity.node.canonical', {node: node.nid.value}) }}" class="{{ classes|join(' ') }}" id="card-offer-type{{ node.nid.value }}">
+
+  <div class="card-body">
+    <h3 class="mt-3 mb-4 h5 font-weight-bold text-center">{{ node.title.value }}</h3>
+    <div class="text-center">
+
+      <p class="text-dark font-weight-bold">
+        {# If there is at least one offer #}
+        {% if offers_count > 1 %}
+          {{ 'qs.sharing.offer_type.volunteers.plural @offers_count'|t({'@offers_count': offers_count}) }}
+        {% elseif offers_count == 1 %}
+          {{ 'qs.sharing.offer_type.volunteers @offers_count'|t({'@offers_count': offers_count}) }}
+        {% else %}
+          {{ 'qs.sharing.offer_type.volunteers.empty'|t }}
+        {%- endif -%}
+      </p>
+    </div>
+  </div>
+  <div class="card-pill card-pill-white">
+    <span class="card-pill-icon">
+      {{ macros.icon('look') }}
+    </span>
+    <span class="card-pill-title mx-auto">
+      <span class="text-dark">{{ 'qs.sharing.readmore'|t }}</span>
+    </span>
+  </div>
+</a>

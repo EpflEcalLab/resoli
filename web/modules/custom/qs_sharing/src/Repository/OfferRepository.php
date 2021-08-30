@@ -38,7 +38,7 @@ class OfferRepository {
    * @param \Drupal\taxonomy\TermInterface $theme
    *   The sharing theme.
    *
-   * @return array|\Drupal\node\NodeInterface[]
+   * @return array|\Drupal\node\NodeInterface[]|null
    *   A collection of published offers.
    *   Otherwise, an empty array or NULL.
    */

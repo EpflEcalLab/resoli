@@ -25,6 +25,10 @@
   @include drop-shadow(bottom, theme-color('secondary'));
 }
 
+.shadow-to-bottom-info {
+  @include drop-shadow(bottom, theme-color('info'));
+}
+
 .shadow-floating {
   @include floating-shadow();
 }
@@ -117,6 +121,14 @@
 
 .rounded-0 {
   border-radius: 0 !important;
+}
+
+.rounded-lg {
+  border-radius: $border-radius-lg;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 // Text helpers

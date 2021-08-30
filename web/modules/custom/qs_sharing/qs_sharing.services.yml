@@ -1,5 +1,20 @@
 services:
+
+  # Repositories
   qs_sharing.repository.volunteerism:
     class: Drupal\qs_sharing\Repository\VolunteerismRepository
     arguments:
       - '@entity_type.manager'
+
+  qs_sharing.repository.offer_type:
+    class: Drupal\qs_sharing\Repository\OfferTypeRepository
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+
+  # EventSubscribers
+  qs_sharing.redirect:
+    class: Drupal\qs_sharing\EventSubscriber\RedirectSubscriber
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }

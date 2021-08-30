@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Tests\vevey_council_meeting\Kernel;
+namespace Drupal\Tests\qs_sharing\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\qs_test\TaxonomyTestTrait;
@@ -32,11 +32,9 @@ final class VolunteerismRepositoryTest extends KernelTestBase {
   protected static $modules = [
     'user',
     'taxonomy',
-    'field',
-    'qs_sharing',
     'text',
-    'filter',
     'system',
+    'qs_sharing',
   ];
 
   /**
@@ -58,10 +56,6 @@ final class VolunteerismRepositoryTest extends KernelTestBase {
     $this->installSchema('system', ['sequences']);
     $this->installEntitySchema('user');
     $this->installEntitySchema('taxonomy_term');
-    $this->setupTaxonomy();
-
-    $this->createVocabulary('sharing_themes');
-    $this->createVocabulary('community');
 
     $this->installEntitySchema('volunteerism');
 

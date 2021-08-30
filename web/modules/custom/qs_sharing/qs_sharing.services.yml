@@ -3,3 +3,9 @@ services:
     class: Drupal\qs_sharing\Repository\VolunteerismRepository
     arguments:
       - '@entity_type.manager'
+
+  qs_sharing.repository.offer_type:
+    class: Drupal\qs_sharing\Repository\OfferTypeRepository
+    arguments:
+      - '@entity_type.manager'
+      - '@database'

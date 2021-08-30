@@ -12,9 +12,9 @@ function qs_sharing_theme() {
   return [
     // Pages themes
     // ---------------------------------------------------------------------.
-    'qs_sharing_collection_offer_page' => [
+    'qs_sharing_collection_offer_types_page' => [
       'variables' => ['variables' => []],
-      'template' => 'qs--sharing--collection-offer',
+      'template' => 'qs--sharing--collection-offer-types',
     ],
     'qs_sharing_add_request_page' => [
       'variables' => ['variables' => []],

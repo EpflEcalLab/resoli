@@ -4,16 +4,18 @@ namespace Drupal\qs_sharing\Controller;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_sharing\Repository\OfferTypeRepository;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Collection of offers for Sharing.
+ * Collection of Offer's Type for Sharing.
  */
-class OffersCollectionController extends ControllerBase {
+class OfferTypesCollectionController extends ControllerBase {
   /**
    * Access Control Service.
    *
@@ -22,10 +24,26 @@ class OffersCollectionController extends ControllerBase {
   private $acl;
 
   /**
+   * The offer's type repository.
+   *
+   * @var \Drupal\qs_sharing\Repository\OfferTypeRepository
+   */
+  private $offerTypeRepository;
+
+  /**
+   * The term Storage.
+   *
+   * @var \Drupal\taxonomy\TermStorageInterface
+   */
+  private $termStorage;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, OfferTypeRepository $offer_type_repository) {
     $this->acl = $acl;
+    $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+    $this->offerTypeRepository = $offer_type_repository;
   }
 
   /**
@@ -56,7 +74,9 @@ class OffersCollectionController extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
-      $container->get('qs_acl.access_control')
+      $container->get('qs_acl.access_control'),
+      $container->get('entity_type.manager'),
+      $container->get('qs_sharing.repository.offer_type')
     );
   }
 
@@ -83,15 +103,30 @@ class OffersCollectionController extends ControllerBase {
   }
 
   /**
-   * Collection by offers.
+   * Collection of Offer's Type by sharing theme.
    */
-  public function offer(Request $request, TermInterface $community) {
+  public function offersTypeByTheme(Request $request, TermInterface $community) {
     $variables = ['community' => $community];
 
+    // Get all sharing themes.
+    $themes = $this->termStorage->loadTree('sharing_themes', 0, NULL, TRUE);
+
+    $offerTypesByTheme = [];
+
+    foreach ($themes as $theme) {
+      $offerTypesByTheme[] = [
+        'theme' => $theme,
+        'offersTypes' => $this->offerTypeRepository->getAllByCommunityByThemeWithOffersCount($community, $theme),
+      ];
+    }
+
+    $variables['offerTypesByThemes'] = $offerTypesByTheme;
+
     return [
-      '#theme' => 'qs_sharing_collection_offer_page',
+      '#theme' => 'qs_sharing_collection_offer_types_page',
       '#variables' => $variables,
       '#cache' => [
+        'tags' => $this->getCacheTags(),
         'contexts' => [
           'user',
           'url.query_args',

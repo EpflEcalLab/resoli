@@ -6,6 +6,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_sharing\Service\OfferManager;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,6 +16,13 @@ use Symfony\Component\HttpFoundation\Request;
  * Collection of offers for Sharing.
  */
 class OffersController extends ControllerBase {
+
+  /**
+   * The entity QS Offer Manager.
+   *
+   * @var \Drupal\qs_sharing\Service\OfferManager
+   */
+  protected $offerManager;
   /**
    * Access Control Service.
    *
@@ -25,8 +33,9 @@ class OffersController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl) {
+  public function __construct(AccessControl $acl, OfferManager $offer_manager) {
     $this->acl = $acl;
+    $this->offerManager = $offer_manager;
   }
 
   /**
@@ -75,7 +84,8 @@ class OffersController extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
-      $container->get('qs_acl.access_control')
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_sharing.offer_manager')
     );
   }
 
@@ -123,9 +133,10 @@ class OffersController extends ControllerBase {
    * Collection of offers for user.
    */
   public function offersByUser(Request $request, TermInterface $community, UserInterface $user) {
+    $offers = $this->offerManager->getAllByUser($user);
     $variables = [
       'community' => $community,
-      'offers' => NULL,
+      'offers' => $offers,
     ];
 
     return [

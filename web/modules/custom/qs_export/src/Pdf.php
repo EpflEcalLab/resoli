@@ -4,9 +4,12 @@ namespace Drupal\qs_export;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Datetime\DateFormatter;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Render\Renderer;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Pdf exporter for Quartiers-Solidaires.
@@ -52,8 +55,11 @@ class Pdf {
    *   The variables to be given to the template.
    * @param string $document_title
    *   The name of the outputted PDF.
+   *
+   * @return \Symfony\Component\HttpFoundation\StreamedResponse
+   *   The spreadsheet usable on Excel.
    */
-  public function download(string $template_name, array $variables, string $document_title): void {
+  public function download(string $template_name, array $variables, string $document_title): StreamedResponse {
     // Instantiate the dompdf options.
     $options = new Options();
     $options->set('defaultPaperSize', 'a4');
@@ -83,7 +89,24 @@ class Pdf {
       ->getCanvas()
       ->page_text(298, 815, '{PAGE_NUM}/{PAGE_COUNT}', $font, 12, [0, 0, 0]);
 
-    $dompdf->stream($document_title . '_' . $this->dateFormatter->format($now->getTimestamp(), 'html_date') . '.pdf');
+    $filename = Html::cleanCssIdentifier($document_title . '_' . $this->dateFormatter->format($now->getTimestamp(), 'html_date')) . '.pdf';
+
+    $response = new StreamedResponse(
+      static function () use ($dompdf, $filename) {
+        $dompdf->stream($filename);
+      }
+    );
+
+    $disposition = HeaderUtils::makeDisposition(
+      HeaderUtils::DISPOSITION_ATTACHMENT,
+      $filename
+    );
+
+    $response->headers->set('Content-Type', 'application/force-download');
+    $response->headers->set('Cache-Control', 'max-age=0');
+    $response->headers->set('Content-Disposition', $disposition);
+
+    return $response;
   }
 
 }

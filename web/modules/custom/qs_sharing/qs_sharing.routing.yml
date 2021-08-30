@@ -27,3 +27,31 @@ qs_sharing.add.request:
     parameters:
       community:
         type: entity:taxonomy_term
+
+## PDF Export of Offers by communities.
+qs_sharing.export.community.offers.pdf:
+  path: '/sharing/export/community/{community}/pdf'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\ExportController::community'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\ExportController::accessCommunity'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+
+## PDF Export of Offers by offer type.
+qs_sharing.export.offer_type.offers.pdf:
+  path: '/sharing/export/offer_type/{offer_type}/pdf'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\ExportController::offerType'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\ExportController::accessOfferType'
+    offer_type: \d+
+  options:
+    parameters:
+      offer_type:
+        type: entity:node

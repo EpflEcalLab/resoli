@@ -11,7 +11,7 @@
       }) }}
     </p>
     <div class="text-center">
-      <a href="#">
+      <a href="{{ url('qs_sharing.export.community.offers.pdf', {'community': variables.community.tid.value}) }}">
         {{ 'qs.sharing.offer.list.download'|t }}
       </a>
     </div>

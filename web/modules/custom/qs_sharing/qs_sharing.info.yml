@@ -8,3 +8,4 @@ dependencies:
   - drupal:qs_site
   - drupal:qs_acl
   - drupal:qs_auth
+  - drupal:qs_export

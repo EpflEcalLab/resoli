@@ -232,7 +232,9 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if bundle__value =='node' %}Activity{% endif %}\n{% if bundle__value =='taxonomy_term' %}Community{% endif %}"
+            text: |-
+              {% if bundle__value =='node' %}Activity{% endif %}
+              {% if bundle__value =='taxonomy_term' %}Community{% endif %}
             make_link: false
             path: ''
             absolute: false
@@ -297,7 +299,12 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% set node = bamboo_load_entity('node', entity__value) %}\n{% set taxonomy_term = bamboo_load_entity('taxonomy_term', entity__value) %}\n\n{% if node and bundle_1 == 'node' %}{{ bamboo_render_field('title', 'node', entity__value) }}{% endif %}\n{% if taxonomy_term and bundle_1 == 'taxonomy_term' %}{{ bamboo_render_field('name', 'taxonomy_term', entity__value) }}{% endif %}"
+            text: |-
+              {% set node = bamboo_load_entity('node', entity__value) %}
+              {% set taxonomy_term = bamboo_load_entity('taxonomy_term', entity__value) %}
+
+              {% if node and bundle_1 == 'node' %}{{ bamboo_render_field('title', 'node', entity__value) }}{% endif %}
+              {% if taxonomy_term and bundle_1 == 'taxonomy_term' %}{{ bamboo_render_field('name', 'taxonomy_term', entity__value) }}{% endif %}
             make_link: false
             path: ''
             absolute: false
@@ -1136,7 +1143,12 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% set node = bamboo_load_entity('node', entity__value) %}\n{% set taxonomy_term = bamboo_load_entity('taxonomy_term', entity__value) %}\n\n{% if node and bundle_1 == 'node' %}{{ bamboo_render_field('title', 'node', entity__value) }}{% endif %}\n{% if taxonomy_term and bundle_1 == 'taxonomy_term' %}{{ bamboo_render_field('name', 'taxonomy_term', entity__value) }}{% endif %}"
+            text: |-
+              {% set node = bamboo_load_entity('node', entity__value) %}
+              {% set taxonomy_term = bamboo_load_entity('taxonomy_term', entity__value) %}
+
+              {% if node and bundle_1 == 'node' %}{{ bamboo_render_field('title', 'node', entity__value) }}{% endif %}
+              {% if taxonomy_term and bundle_1 == 'taxonomy_term' %}{{ bamboo_render_field('name', 'taxonomy_term', entity__value) }}{% endif %}
             make_link: false
             path: ''
             absolute: false
@@ -2108,7 +2120,12 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% set node = bamboo_load_entity('node', entity__value) %}\n{% set taxonomy_term = bamboo_load_entity('taxonomy_term', entity__value) %}\n\n{% if node and bundle_1 == 'node' %}{{ bamboo_render_field('title', 'node', entity__value) }}{% endif %}\n{% if taxonomy_term and bundle_1 == 'taxonomy_term' %}{{ bamboo_render_field('name', 'taxonomy_term', entity__value) }}{% endif %}"
+            text: |-
+              {% set node = bamboo_load_entity('node', entity__value) %}
+              {% set taxonomy_term = bamboo_load_entity('taxonomy_term', entity__value) %}
+
+              {% if node and bundle_1 == 'node' %}{{ bamboo_render_field('title', 'node', entity__value) }}{% endif %}
+              {% if taxonomy_term and bundle_1 == 'taxonomy_term' %}{{ bamboo_render_field('name', 'taxonomy_term', entity__value) }}{% endif %}
             make_link: false
             path: ''
             absolute: false

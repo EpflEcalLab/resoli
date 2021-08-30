@@ -49,7 +49,9 @@ $red-200: #d84c84;
 $red:     #c80050 !default;
 $red-700: #640028;
 
+$blue-100: #f7faff;
 $blue-300: #83b8fb;
+$blue-400: #74b1ff;
 $blue:     #5aa0fa !default;
 $blue-700: #325ac8;
 
@@ -57,7 +59,11 @@ $orange-300: #ff765E;
 $orange:  #ff7814 !default;
 
 $indigo:  #6610f2 !default;
-$pink:    #e83e8c !default;
+
+$pink-400:  #e255bb;
+$pink:      #c72f9c !default;
+$pink-700:  #a21f7d;
+
 $yellow:  #ffc107 !default;
 $green:   #28a745 !default;
 $cyan:    #17a2b8 !default;
@@ -72,7 +78,9 @@ $colors: (
   secondary-light:  $teal-300,
   secondary:        $teal,
   secondary-darker: $teal-700,
-  info-light:       $blue-300,
+  info-lightest:    $blue-100,
+  info-lighter:     $blue-300,
+  info-light:       $blue-400,
   info:             $blue,
   info-darker:      $blue-700,
   danger-lighter:   $red-200,
@@ -83,6 +91,9 @@ $colors: (
   dark:             $black,
   warning-light:    $orange-300,
   warning:          $orange,
+  pink-light:       $pink-400,
+  pink:             $pink,
+  pink-darker:      $pink-700,
 ) !default;
 
 $theme-colors: () !default;
@@ -92,6 +103,7 @@ $theme-colors: map-merge((
   danger:    $red,
   info:      $blue,
   warning:   $orange,
+  pink:      $pink,
 ), $theme-colors);
 
 $flag-colors: (

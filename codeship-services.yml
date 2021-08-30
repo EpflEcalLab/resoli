@@ -21,6 +21,8 @@ test: &test
   depends_on:
     - db
   environment:
+    APP_ENV: development
+    BASE_URL: http://localhost:80
     DATABASE_URL: mysql://drupal:drupal@db/drupal_test
     SMTP_HOST: mail:1025
     PRIVATE_FILES: /var/www/web/sites/default/files/private
@@ -33,7 +35,8 @@ test: &test
       captcha
       recaptcha
     DEFAULT_CONTENT: qs_default_content
-    BEHAT_PROFILE: docker
+    BEHAT_PROFILE: default
+    PHP_MEMORY_LIMIT: -1
   volumes:
     - ./.codeship/build/styleguide:/var/www/web/themes/quartiers_solidaires/build
     - ./.codeship/backups:/var/backups
@@ -44,9 +47,20 @@ behat:
   <<: *test
   depends_on:
     - test
+    - browser
     - db
     - mail
   volumes_from:
+    - test
+
+# Test Browser
+browser:
+  build:
+    context: .
+    dockerfile: .codeship/Dockerfile.browser
+  cached: true
+  default_cache_branch: dev
+  depends_on:
     - test
 
 # Database

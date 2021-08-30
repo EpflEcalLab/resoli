@@ -121,7 +121,7 @@ class EventManager {
       'field_start_at' => $date_start->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
       'field_end_at' => $date_end->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
       'title' => $title,
-      'body' => $body,
+      'body' => ['value' => $body, 'format' => 'light_html'],
       'field_contact_name' => $contact_name,
       'field_contact_mail' => $contact_mail,
       'field_contact_phone' => $contact_phone,
@@ -186,7 +186,7 @@ class EventManager {
     if ($limit) {
       $rows = $query->execute();
       $this->pagerManager->createPager(\count($rows), $limit);
-      $query->pager($limit);
+      $query->range($this->pagerManager->findPage() * $limit, $limit);
     }
 
     $nids = $query->execute();
@@ -230,7 +230,7 @@ class EventManager {
     if ($limit) {
       $rows = $query->execute();
       $this->pagerManager->createPager(\count($rows), $limit);
-      $query->pager($limit);
+      $query->range($this->pagerManager->findPage() * $limit, $limit);
     }
 
     $nids = $query->execute();

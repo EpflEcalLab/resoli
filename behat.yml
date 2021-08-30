@@ -1,20 +1,19 @@
 default:
   autoload:
-    '': %paths.base%/behat
+    '': '%paths.base%/behat'
   suites:
     default:
-      paths: [%paths.base%/behat/Features]
+      paths: ['%paths.base%/behat/Features']
       contexts:
-        # See composer.json `autoload-dev`
         - Drupal\Behat\Context\Drupal\DatabaseContext:
-            dump_path: %paths.base%/dump/behat
+            dump_path: '%paths.base%/dump/behat'
         - Drupal\Behat\Context\Drupal\ElementContext
         - Drupal\Behat\Context\Drupal\DebugContext:
-            log_path: %paths.base%/log/behat
+            log_path: '%paths.base%/log/behat'
         - Drupal\Behat\Context\Drupal\FormContext:
-            base_url: http://127.0.0.1:8888
+            base_url: http://resoli.test:8888
         - Drupal\Behat\Context\Drupal\MailContext:
-            base_url: http://127.0.0.1:8888
+            base_url: http://resoli.test:8888
         - Drupal\Behat\Context\Drupal\JsonContext:
         - Drupal\Behat\Context\Drupal\WatchdogContext:
 
@@ -35,8 +34,9 @@ default:
   extensions:
     Behat\MinkExtension:
       goutte: ~
-      selenium2: ~
-      base_url: http://127.0.0.1:8888
+      selenium2:
+        wd_host: http://browser:4444/wd/hub
+      base_url: http://resoli.test:8888
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'
@@ -54,43 +54,7 @@ default:
         log_in: "Se connecter"
         log_out: "Se déconnecter"
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://127.0.0.1:1080
+      url: http://mail:1080
       purge_before_scenario: true
   gherkin:
     cache: ~
-docker:
-  suites:
-    default:
-      contexts:
-        # See composer.json `autoload-dev`
-        - Drupal\Behat\Context\Drupal\DatabaseContext:
-            dump_path: %paths.base%/dump/behat
-        - Drupal\Behat\Context\Drupal\ElementContext
-        - Drupal\Behat\Context\Drupal\DebugContext:
-            log_path: %paths.base%/log/behat
-        - Drupal\Behat\Context\Drupal\FormContext:
-            base_url: http://test:8888
-        - Drupal\Behat\Context\Drupal\MailContext:
-            base_url: http://test:8888
-        - Drupal\Behat\Context\Drupal\JsonContext:
-        - Drupal\Behat\Context\Drupal\WatchdogContext:
-
-        # Resoli Contexts
-        - Drupal\Behat\Context\Resoli\RegisterContext
-        - Drupal\Behat\Context\Resoli\LoginContext
-        - Drupal\Behat\Context\Resoli\DemoContext
-        - Drupal\Behat\Context\Resoli\PhotosContext
-        - Drupal\Behat\Context\Resoli\AccountFormContext
-        - Drupal\Behat\Context\Resoli\ActivityFormsContext
-        - Drupal\Behat\Context\Resoli\EventFormsContext
-
-        # Drupal Extension Contexts
-        - Drupal\DrupalExtension\Context\DrupalContext
-        - Drupal\DrupalExtension\Context\MinkContext
-        - Drupal\DrupalExtension\Context\MessageContext
-        - Drupal\DrupalExtension\Context\DrushContext
-  extensions:
-    Behat\MinkExtension:
-      base_url: http://test:8888
-    Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-      url: http://mail:1080

@@ -4,6 +4,7 @@
 
 {% set contribution = event.field_contribution.value %}
 {% set is_past = event.field_end_at.date|date('Y-m-d') < 'now'|date('Y-m-d') %}
+{% set end_today = event.field_end_at.date|date('Y-m-d') == 'now'|date('Y-m-d') %}
 
 <div class="card-body pb-0 text-center">
 
@@ -25,11 +26,16 @@
     </time>
   </p>
 
-  <div class="card-text mt-3">
+  <div class="card-text rich-content rich-content-primary mt-3">
     {# Body #}
     {# User should have some privileges OR activity should allow community to access details #}
     {% if has_activity_privilege or community_can_view_detail %}
-      {{ event.body.value|raw }}
+      {% set body = {
+        '#type':   'processed_text',
+        '#text':    event.body.value,
+        '#format':  event.body.format,
+      } %}
+      {{ body }}
     {% else %}
       <p>{{ 'qs.event.not_accessible'|t }}</p>
     {% endif %}
@@ -50,10 +56,10 @@
 
      {# View pictures button #}
     {# Event should be in the past and user should be member of the activity OR activity should allow community members to view photos #}
-    {% if is_past and (has_activity_privilege or community_can_view_photos) %}
+    {% if (is_past or end_today) and (has_activity_privilege or community_can_view_photos) %}
       {{ macros.card_button(
         'qs.event.view.photos'|t,
-        path('qs_photo.activity', {activity: variables.activity.nid.value}),
+        path('qs_photo.activity', {activity: variables.activity.nid.value}, {'fragment': 'event' ~ event.nid.value }),
         'picture',
         'left',
         ''

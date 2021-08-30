@@ -11,15 +11,14 @@ Feature: Past Event Actions Buttons
     And the response status code should be 200
     Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-<id>" element
-    Then I should see 3 "#collapse-17 .card-actions .col-sm-6" elements
+    Then I should see 4 "#collapse-17 .card-actions .col-sm-6" elements
     And I should see "qs.event.register" in the "#collapse-17 .card-actions" element
-    And I should not see "qs.event.view.photos" in the "#collapse-17 .card-actions" element
     And I should see "qs.event.register" in the "#collapse-17 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-17 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-17 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-17 .card-actions" element
     And I should see 0 "#collapse-17 .card-actions .btn.btn-outline-danger" elements
     And I should see 0 "#collapse-17 .card-actions .btn.btn-outline-warning" elements
-    And I should not see "qs.event.view.photos" in the "#collapse-17 .card-actions" element
     And I should not see "qs.event.register" in the "#collapse-<id> .card-actions" element
     And I should see "qs.event.view.photos" in the "#collapse-<id> .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-<id> .card-actions" element
@@ -40,9 +39,10 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-37" element
     Then I should see a "#collapse-38" element
-    Then I should see 6 "#collapse-37 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-37 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-37 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.register.pending" in the "#collapse-37 .card-actions" element
     And the "#collapse-37 .card-actions .btn.btn-outline-info.btn-white[data-status-show='pending']" element should contain "qs.event.register.pending"
@@ -94,9 +94,10 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-37" element
     Then I should see a "#collapse-38" element
-    Then I should see 6 "#collapse-37 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-37 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-37 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.register.confirmed" in the "#collapse-37 .card-actions" element
     And the "#collapse-37 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
@@ -116,7 +117,7 @@ Feature: Past Event Actions Buttons
     And I should see 0 "#collapse-38 .card-actions .btn.btn-outline-warning" elements
 
   @api
-  Scenario Outline: Logged as member of Lausanne, I can see the same button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1), because this is a public activity
+  Scenario Outline: Logged as none member of Lausanne, I can onl see the public button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1)
     Given I am logged in as user "<username>"
     When I am on "/lausanne/activities/atelier-bougies?view=past"
     And the response status code should be 200
@@ -125,6 +126,7 @@ Feature: Past Event Actions Buttons
     Then I should see 4 "#collapse-22 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-22 .card-actions" element
+    And I should not see "qs.event.view.photos" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.register" in the "#collapse-22 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-22 .card-actions" element
@@ -134,8 +136,28 @@ Feature: Past Event Actions Buttons
     Examples:
       | username |
       | organizer+lausanne |
-      | member+lausanne |
       | member+lausanne+organizer+fribourg |
+
+  @api
+  Scenario Outline: Logged as member of Lausanne, I can see the private button in the Events of the Activity N°4 (Activity - Lausanne - Theme N°1)
+    Given I am logged in as user "<username>"
+    When I am on "/lausanne/activities/atelier-bougies?view=past"
+    And the response status code should be 200
+    Then I should see 1 ".card-list-item" elements
+    Then I should see a "#collapse-22" element
+    Then I should see 5 "#collapse-22 .card-actions .col-sm-6" elements
+    And I should see "qs.event.contact" in the "#collapse-22 .card-actions" element
+    And I should see "qs.event.calendar" in the "#collapse-22 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-22 .card-actions" element
+    And I should see "qs.event.location" in the "#collapse-22 .card-actions" element
+    And I should see "qs.event.register" in the "#collapse-22 .card-actions" element
+    And I should not see "qs.event.dashboard" in the "#collapse-22 .card-actions" element
+    And the "#collapse-22 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
+    And I should see 0 "#collapse-22 .card-actions .btn.btn-outline-danger" elements
+    And I should see 0 "#collapse-22 .card-actions .btn.btn-outline-warning" elements
+    Examples:
+      | username |
+      | member+lausanne |
 
   @api
   Scenario: Logged as Member of Lausanne & Organizer of Fribourg, I can't see "register" button in the Events of the Activity N°3 (Activity - Lausanne - Theme N°1), because this is not a public activity
@@ -145,11 +167,11 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-37" element
     Then I should see a "#collapse-38" element
-    Then I should see 3 "#collapse-37 .card-actions .col-sm-6" elements
+    Then I should see 4 "#collapse-37 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-37 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
-    And I should not see "qs.event.view.photos" in the "#collapse-37 .card-actions" element
     And I should not see "qs.event.register" in the "#collapse-37 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-37 .card-actions" element
     And I should see 0 "#collapse-37 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -174,11 +196,11 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-59" element
     Then I should see a "#collapse-58" element
-    Then I should see 6 "#collapse-59 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-59 .card-actions .col-sm-6" elements
     And the "#collapse-59 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
-    And I should not see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.contact" in the "#collapse-59 .card-actions" element
@@ -201,12 +223,12 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-59" element
     Then I should see a "#collapse-58" element
-    Then I should see 4 "#collapse-59 .card-actions .col-sm-6" elements
+    Then I should see 5 "#collapse-59 .card-actions .col-sm-6" elements
     And I should see "qs.event.register" in the "#collapse-59 .card-actions" element
     And the "#collapse-59 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
-    And I should not see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.contact" in the "#collapse-59 .card-actions" element
     And I should see 0 "#collapse-59 .card-actions .btn.btn-outline-danger" elements
@@ -229,10 +251,10 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-59" element
     Then I should see a "#collapse-58" element
-    Then I should see 2 "#collapse-59 .card-actions .col-sm-6" elements
+    Then I should see 3 "#collapse-59 .card-actions .col-sm-6" elements
     And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
-    And I should not see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.contact" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.register" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
@@ -257,12 +279,12 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-61" element
     Then I should see a "#collapse-60" element
-    Then I should see 6 "#collapse-61 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-61 .card-actions .col-sm-6" elements
     And I should see "qs.event.register.confirmed" in the "#collapse-61 .card-actions" element
     And the "#collapse-61 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
-    And I should not see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.contact" in the "#collapse-61 .card-actions" element
     And the "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" element should contain "qs.event.dashboard.shortcut.confirmed 1"
@@ -284,12 +306,12 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-61" element
     Then I should see a "#collapse-60" element
-    Then I should see 5 "#collapse-61 .card-actions .col-sm-6" elements
+    Then I should see 6 "#collapse-61 .card-actions .col-sm-6" elements
     And I should see "qs.event.register.confirmed" in the "#collapse-61 .card-actions" element
     And the "#collapse-61 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
-    And I should not see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.contact" in the "#collapse-61 .card-actions" element
     And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger" elements
@@ -312,12 +334,12 @@ Feature: Past Event Actions Buttons
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-61" element
     Then I should see a "#collapse-60" element
-    Then I should see 1 "#collapse-61 .card-actions .col-sm-6" elements
+    Then I should see 2 "#collapse-61 .card-actions .col-sm-6" elements
     And I should not see "qs.event.register" in the "#collapse-61 .card-actions" element
     And I should not see "qs.event.register.confirmed" in the "#collapse-61 .card-actions" element
-    And I should not see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should not see "qs.event.location" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
     And I should not see "qs.event.contact" in the "#collapse-61 .card-actions" element
     And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger" elements

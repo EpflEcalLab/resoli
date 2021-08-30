@@ -133,12 +133,21 @@ class EventEditForm extends EventEditFormBase {
 
     $form['body'] = [
       '#attributes' => ['required' => TRUE],
-      '#title' => $this->t('qs_activity.events.form.edit.body'),
-      '#placeholder' => $this->t('qs_activity.events.form.edit.body.placeholder'),
       '#type' => 'textarea',
       '#required' => FALSE,
       '#default_value' => $event->body->value,
     ];
+
+    $form['quill'] = [
+      '#markup' => '<div class="form-group">
+        <span class="quill-label">' . $this->t('qs_activity.events.form.edit.body') . '</span>
+        <div
+            id="editor-edit-event"
+            data-placeholder-translation="' . $this->t('qs_activity.events.form.edit.body.placeholder') . '"
+            class="quill-editor quill-editor-primary form-textarea form-control"></div>
+      </div>',
+    ];
+    $form['#attached']['library'][] = 'quartiers_solidaires/quill';
 
     $form['venue'] = [
       '#attributes' => [
@@ -266,7 +275,10 @@ class EventEditForm extends EventEditFormBase {
 
     // Prepare fields.
     $fields['title'] = $form_state->getValue('title');
-    $fields['body'] = $form_state->getValue('body');
+    $fields['body'] = [
+      'format' => 'light_html',
+      'value' => $form_state->getValue('body'),
+    ];
     $fields['field_contact_name'] = $form_state->getValue('contact_name');
     $fields['field_contact_mail'] = $form_state->getValue('contact_mail');
     $fields['field_contact_phone'] = $form_state->getValue('contact_phone');

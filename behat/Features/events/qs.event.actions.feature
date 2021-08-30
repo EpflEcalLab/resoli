@@ -11,10 +11,11 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-17" element
-    Then I should see 3 "#collapse-17 .card-actions .col-sm-6" elements
+    Then I should see 4 "#collapse-17 .card-actions .col-sm-6" elements
     And I should see "qs.event.register" in the "#collapse-17 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-17 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-17 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-17 .card-actions" element
     And I should see 0 "#collapse-17 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-17 .card-actions .btn.btn-outline-warning.btn-white[data-status-guest-show='pendings_guests']" elements
 
@@ -25,10 +26,11 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    Then I should see 6 "#collapse-37 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-37 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.register.pending" in the "#collapse-37 .card-actions" element
     And the "#collapse-37 .card-actions .btn.btn-outline-info.btn-white[data-status-show='pending']" element should contain "qs.event.register.pending"
     And I should see "qs.event.dashboard" in the "#collapse-37 .card-actions" element
@@ -88,10 +90,11 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    Then I should see 6 "#collapse-37 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-37 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.register.confirmed" in the "#collapse-37 .card-actions" element
     And the "#collapse-37 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
     And I should see "qs.event.dashboard" in the "#collapse-37 .card-actions" element
@@ -140,6 +143,7 @@ Feature: Event Actions Buttons
     And I should see "qs.event.calendar" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.register" in the "#collapse-22 .card-actions" element
+    And I should not see "qs.event.view.photos" in the "#collapse-22 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-22 .card-actions" element
     And the "#collapse-22 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
     And I should see 0 "#collapse-22 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -162,11 +166,12 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 2 ".card-list-item" elements
     Then I should see a "#collapse-22" element
-    Then I should see 4 "#collapse-22 .card-actions .col-sm-6" elements
+    Then I should see 5 "#collapse-22 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.register" in the "#collapse-22 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-22 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-22 .card-actions" element
     And the "#collapse-22 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
     And I should see 0 "#collapse-22 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -194,6 +199,7 @@ Feature: Event Actions Buttons
     And I should see "qs.event.calendar" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-22 .card-actions" element
     And I should see "qs.event.register" in the "#collapse-22 .card-actions" element
+    And I should not see "qs.event.view.photos" in the "#collapse-22 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-22 .card-actions" element
     And the "#collapse-22 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
     And I should see 0 "#collapse-22 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -216,10 +222,11 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 4 ".card-list-item" elements
     Then I should see a "#collapse-37" element
-    Then I should see 3 "#collapse-37 .card-actions .col-sm-6" elements
+    Then I should see 4 "#collapse-37 .card-actions .col-sm-6" elements
     And I should see "qs.event.contact" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-37 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-37 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-37 .card-actions" element
     And I should not see "qs.event.register" in the "#collapse-37 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-37 .card-actions" element
     And I should see 0 "#collapse-37 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -260,10 +267,11 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-59" element
-    Then I should see 6 "#collapse-59 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-59 .card-actions .col-sm-6" elements
     And the "#collapse-59 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.contact" in the "#collapse-59 .card-actions" element
@@ -276,10 +284,11 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-59" element
-    Then I should see 4 "#collapse-59 .card-actions .col-sm-6" elements
+    Then I should see 5 "#collapse-59 .card-actions .col-sm-6" elements
     And the "#collapse-59 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
     And I should see "qs.event.contact" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
     And I should see 0 "#collapse-59 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
@@ -292,9 +301,10 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-59" element
-    Then I should see 2 "#collapse-59 .card-actions .col-sm-6" elements
+    Then I should see 3 "#collapse-59 .card-actions .col-sm-6" elements
     And I should see "qs.event.calendar" in the "#collapse-59 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-59 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.contact" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.register" in the "#collapse-59 .card-actions" element
     And I should not see "qs.event.dashboard" in the "#collapse-59 .card-actions" element
@@ -309,10 +319,11 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-61" element
-    Then I should see 6 "#collapse-61 .card-actions .col-sm-6" elements
+    Then I should see 7 "#collapse-61 .card-actions .col-sm-6" elements
     And the "#collapse-61 .card-actions .btn.btn-outline-secondary[data-status-show='default']" element should contain "qs.event.register"
     And I should see "qs.event.location" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.contact" in the "#collapse-61 .card-actions" element
     And the "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" element should contain "qs.event.dashboard.shortcut.confirmed 1"
@@ -324,12 +335,13 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-61" element
-    Then I should see 5 "#collapse-61 .card-actions .col-sm-6" elements
+    Then I should see 6 "#collapse-61 .card-actions .col-sm-6" elements
     And the "#collapse-61 .card-actions .btn.btn-info[data-status-show='confirmed']" element should contain "qs.event.register.confirmed"
     And I should see "qs.event.dashboard" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.contact" in the "#collapse-61 .card-actions" element
     And I should see "qs.event.location" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='confirmed_guests']" elements
     And I should see 0 "#collapse-61 .card-actions .btn.btn-outline-danger.btn-white[data-status-guest-show='pendings_guests']" elements
 
@@ -340,8 +352,9 @@ Feature: Event Actions Buttons
     And the response status code should be 200
     Then I should see 1 ".card-list-item" elements
     Then I should see a "#collapse-61" element
-    Then I should see 1 "#collapse-61 .card-actions .col-sm-6" elements
+    Then I should see 2 "#collapse-61 .card-actions .col-sm-6" elements
     And I should see "qs.event.calendar" in the "#collapse-61 .card-actions" element
+    And I should see "qs.event.view.photos" in the "#collapse-61 .card-actions" element
     And I should not see "qs.event.location" in the "#collapse-61 .card-actions" element
     And I should not see "qs.event.contact" in the "#collapse-61 .card-actions" element
     And I should not see "qs.event.register" in the "#collapse-61 .card-actions" element

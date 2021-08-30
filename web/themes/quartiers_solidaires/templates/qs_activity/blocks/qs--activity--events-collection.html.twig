@@ -18,6 +18,17 @@
 {% set activity_organizer = 'activity_organizers' in privileges %}
 {% set can_manage_activity = activity_maintainer or activity_organizer %}
 
+{% if variables.activity.field_description.value %}
+  <div class="mb-5 text-center rich-content rich-content-primary">
+    {% set body = {
+      '#type':   'processed_text',
+      '#text':    variables.activity.field_description.value,
+      '#format':  variables.activity.field_description.format,
+    } %}
+    {{ body }}
+  </div>
+{% endif %}
+
 {# Toggler button to view future or past events. #}
 <div class="btn-group-toggle-display mb-4">
   <div class="btn-group btn-group-toggle mb-4" role="group" aria-label="{{ 'qs.a11y.activity.toggler.view_past_future_events'|t }}">

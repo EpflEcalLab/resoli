@@ -28,7 +28,7 @@ third_party_settings:
         - group_venue
         - group_contact
       parent_name: ''
-      weight: 20
+      weight: 1
       format_type: tabs
       format_settings:
         id: ''
@@ -180,7 +180,7 @@ content:
     region: content
   path:
     type: path
-    weight: 1
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -188,7 +188,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 120
+    weight: 3
     region: content
     third_party_settings: {  }
   title:
@@ -200,13 +200,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
   langcode: true
+  moderation_state: true
   promote: true
   sticky: true
   uid: true

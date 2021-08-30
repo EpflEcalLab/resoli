@@ -1,0 +1,23 @@
+uuid: d074006b-bff7-4976-b384-cd60b64fdce5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.offer
+  module:
+    - text
+id: node.offer.body
+field_name: body
+entity_type: node
+bundle: offer
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

@@ -1,0 +1,25 @@
+uuid: 3ce7bdaf-9a6f-4c87-9db3-073161aed7bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_offer_type
+    - node.type.offer
+id: node.offer.field_offer_type
+field_name: field_offer_type
+entity_type: node
+bundle: offer
+label: 'Offer''s type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: content_entity_reference
+      display_name: entity_reference_1
+      arguments: {  }
+field_type: entity_reference

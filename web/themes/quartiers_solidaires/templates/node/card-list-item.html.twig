@@ -1,5 +1,3 @@
-{% import "@quartiers_solidaires/macros.html.twig" as macros %}
-
 <li class="card card-flippable card-list-item" data-status="{{ status }}" data-status-badge="{{ guests_status|default(status) }}" data-guests="{{ guests }}" id="card{{ key }}">
 
   <div class="card-front">
@@ -19,6 +17,8 @@
     {% block card_back_id %}contact-{{ key }}{% endblock %}
 
     {% block card_back_body %}
+      {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
       {% if contact_name %}
         <p class="card-text">
           {{ 'qs.event.contact_description @contact_name'|t({'@contact_name': contact_name}) }}
@@ -52,6 +52,8 @@
       {%- endblock %}
 
       {% block card_back_body %}
+        {% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
         {# Enable the map only when lat & lng are given #}
         {% if event.field_venue_lat.value and event.field_venue_long.value %}
           <div class="card-map" id="map-container-{{ key }}" data-lat="{{ event.field_venue_lat.value }}" data-lng="{{ event.field_venue_long.value }}" data-label="{{ event.field_venue.value }}" data-info="<strong>{{ event.title.value }}</strong> <br/>{{ event.field_venue.value }}">

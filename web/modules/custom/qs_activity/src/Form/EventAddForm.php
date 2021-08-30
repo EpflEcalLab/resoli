@@ -233,12 +233,21 @@ class EventAddForm extends FormBasic {
 
     $form['event']['step-2']['body'] = [
       '#attributes' => ['required' => TRUE],
-      '#title' => $this->t('qs_activity.events.form.add.body'),
-      '#placeholder' => $this->t('qs_activity.events.form.add.body.placeholder'),
       '#type' => 'textarea',
       '#required' => FALSE,
       '#default_value' => $activity->body->value,
     ];
+
+    $form['event']['step-2']['quill'] = [
+      '#markup' => '<div class="form-group">
+        <span class="quill-label">' . $this->t('qs_activity.events.form.add.body') . '</span>
+        <div
+            id="editor-add-event"
+            data-placeholder-translation="' . $this->t('qs_activity.events.form.add.body.placeholder') . '"
+            class="quill-editor quill-editor-primary form-textarea form-control"></div>
+      </div>',
+    ];
+    $form['#attached']['library'][] = 'quartiers_solidaires/quill';
 
     $form['event']['step-2']['venue'] = [
       '#attributes' => [
@@ -417,10 +426,14 @@ class EventAddForm extends FormBasic {
       $repeat_period = 'W';
     }
 
+    // An array collection of created events.
+    $events = [];
+
     // Create one event once, then repeat the event if necessary.
     do {
       // Create the new event.
       $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
+      $events[] = $event;
 
       // Get the current user activitiy's privilege to this event.
       $privileges_by_events = $this->badgeManager->getPrivilegesByEvents([$event]);
@@ -446,17 +459,20 @@ class EventAddForm extends FormBasic {
     switch ($trigger['#name']) {
       case 'save_and_repeat_weekly':
         $this->messenger()->addMessage($this->t('qs_activity.events.form.add.weekly.success @repeat', ['@repeat' => $repeat]));
-        $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()]);
 
         break;
 
       case 'save':
       default:
         $this->messenger()->addMessage($this->t('qs_activity.events.form.add.success'));
-        $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $event->id()]);
 
         break;
     }
+
+    // Get the first event to point on redirect.
+    $first_event = reset($events);
+
+    $form_state->setRedirect('entity.node.canonical', ['node' => $activity->id()], ['fragment' => 'card' . $first_event->id()]);
   }
 
   /**

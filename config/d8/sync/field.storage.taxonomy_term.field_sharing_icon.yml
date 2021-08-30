@@ -1,0 +1,45 @@
+uuid: a87b69c4-1867-4b45-8407-1465ddc00aa2
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_sharing_icon
+field_name: field_sharing_icon
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: none
+      label: None
+    -
+      value: mobilite
+      label: Mobilité
+    -
+      value: convivialite
+      label: Convivialité
+    -
+      value: petitsservices
+      label: 'Petits services'
+    -
+      value: competences
+      label: Compétences
+    -
+      value: numerique
+      label: Numérique
+    -
+      value: objets
+      label: Objets
+    -
+      value: divers
+      label: Divers
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

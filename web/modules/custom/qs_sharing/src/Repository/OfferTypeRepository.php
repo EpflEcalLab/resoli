@@ -62,6 +62,8 @@ class OfferTypeRepository {
     $query->condition('field_theme.field_theme_target_id', [$theme->id()], 'IN');
 
     $query->leftJoin('node__field_offer_type', 'field_offer_type', 'field_offer_type.entity_id = offer.nid');
+    $query->fields('field_offer_type', ['field_offer_type_target_id']);
+
     $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = field_offer_type.field_offer_type_target_id');
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
 
@@ -76,7 +78,7 @@ class OfferTypeRepository {
 
     foreach ($tuples as $tuple) {
       /** @var \Drupal\node\NodeInterface $offerType */
-      $offerType = $this->nodeStorage->load($tuple->nid);
+      $offerType = $this->nodeStorage->load($tuple->field_offer_type_target_id);
       $offerType->offersCount = $tuple->offersByType;
       $offerTypes[] = $offerType;
     }

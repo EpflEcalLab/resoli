@@ -3,7 +3,7 @@
   'card card-info mb-4 shadow-to-bottom-info',
   not offers_count ? 'opacity-50',
 ] %}
-<a href="{{ path('entity.node.canonical', {node: node.nid.value}) }}" class="{{ classes|join(' ') }}" id="card-offer-type{{ node.nid.value }}">
+<a href="{{ path('entity.node.canonical', {node: node.nid.value, 'theme': theme.tid.value}) }}" class="{{ classes|join(' ') }}" id="card-offer-type{{ node.nid.value }}-theme{{ theme.tid.value }}">
 
   <div class="card-body">
     <h3 class="mt-3 mb-4 h5 font-weight-bold text-center">{{ node.title.value }}</h3>

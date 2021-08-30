@@ -40,7 +40,7 @@ class OfferRepository {
    *
    * @return array|\Drupal\node\NodeInterface[]
    *   A collection of published offers.
-   *   Otherwise, an empty array.
+   *   Otherwise, an empty array or NULL.
    */
   public function getAllByOffersByTypeByTheme(NodeInterface $offer_type, TermInterface $theme): ?array {
     $query = $this->nodeStorage->getQuery()

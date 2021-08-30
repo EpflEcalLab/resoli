@@ -1,4 +1,6 @@
 services:
+
+  # Repositories
   qs_sharing.repository.volunteerism:
     class: Drupal\qs_sharing\Repository\VolunteerismRepository
     arguments:
@@ -9,3 +11,10 @@ services:
     arguments:
       - '@entity_type.manager'
       - '@database'
+
+  # EventSubscribers
+  qs_sharing.redirect:
+    class: Drupal\qs_sharing\EventSubscriber\RedirectSubscriber
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }

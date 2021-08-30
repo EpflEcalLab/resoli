@@ -2221,3 +2221,27 @@ msgstr "Ex. J’ai besoin d’une personne pour m’aider à monter mes courses 
 
 msgid "qs_sharing.floating.my_requests"
 msgstr "Mon entraide"
+
+msgid "qs_sharing.collection.user.offer.title"
+msgstr "Voici vos offres d'entraide"
+
+msgid "qs_sharing.form.offer.add.title"
+msgstr "Ajouter une nouvelle offre d'entraide"
+
+msgid "qs_sharing.floating.manage.user.offers"
+msgstr "Gérer mes offres d'entraide"
+
+msgid "qs.offer.more"
+msgstr "Voir les détails"
+
+msgid "qs.sharing.offer.deactivate"
+msgstr "Désactiver mon offre"
+
+msgid "qs.sharing.manage_offer"
+msgstr "Modifier mon offre"
+
+msgid "qs.sharing.user.collection.empty"
+msgstr "Vous n'avez pas d'offres"
+
+msgid "qs.sharing.add_offer"
+msgstr "Proposer une nouvelle offre"

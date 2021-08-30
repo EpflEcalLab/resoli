@@ -63,6 +63,7 @@ class OffersController extends ControllerBase {
    * Render template for the Offer add form.
    */
   public function add(Request $request, TermInterface $community) {
+    // @todo Handle the add form
     $variables = ['community' => $community];
 
     return [

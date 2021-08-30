@@ -1,0 +1,80 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{% set modal_title = 'qs_sharing.collection.user.offer.title'|t %}
+{% set modal_bg = 'primary' %}
+
+{% set floating_buttons = [
+  {
+    label: 'qs_sharing.floating.handle.user.offers'|t,
+    icon: 'pencil',
+    active: true,
+  }
+] %}
+
+{% set community_name = variables.community.name.value|trim %}
+
+{% block modal_content %}
+
+  {% if variables.offers %}
+    <ul class="card-list mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
+      {% for offer in variables.offers %}
+        <li class="card card-list-item" id="card{{ offer.nid.value }}">
+          <a
+            data-toggle="collapse"
+            data-parent="#offers-accordion"
+            href="#collapse-{{ offer.nid.value }}"
+            class="card-pill collapsed"
+            role="tab"
+            aria-expanded="false"
+            aria-controls="collapse-{{ offer.nid.value }}"
+            id="volunteerism{{ offer.nid.value }}"
+          >
+            <span class="card-pill-icon">
+              {{ macros.icon('theme_' ~ offer.field_theme.entity.field_icon.value) }}
+            </span>
+
+            <span class="card-pill-title mr-auto">
+              <span class="lead">{{ offer.title.value }}</span>
+            </span>
+
+            <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white" aria-label="{{ 'qs.offer.more'|t }}">
+              {{ macros.icon('look') }}
+              <span class="sr-only d-none d-md-inline">{{ 'qs.offer.more'|t }}</span>
+            </span>
+          </a>
+
+          <div class="collapse" id="collapse-{{ offer.nid.value }}" role="tabpanel">
+            <div class="card-body">
+
+
+              <p>Panel</p>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="text-center mb-auto">
+      <p>
+        {{ 'qs.sharing.user.collection.empty'|t }}
+      </p>
+    </div>
+  {% endif %}
+{% endblock %}
+
+
+{% block modal_footer %}
+  {% set modal_footer_button_classes = 'bg-info btn-outline-invert btn-outline-info' %}
+  {% set modal_footer_buttons = [
+    {
+      label: 'qs.sharing.add_offer'|t,
+      icon: 'plus',
+      url: path('qs_sharing.add.offer', {community: variables.community.tid.value}),
+      classes: modal_footer_button_classes,
+    },
+  ] %}
+  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
+{% endblock %}
+

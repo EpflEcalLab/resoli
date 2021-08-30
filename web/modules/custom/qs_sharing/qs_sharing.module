@@ -20,6 +20,10 @@ function qs_sharing_theme() {
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--add-request',
     ],
+    'qs_sharing_collection_user_offer_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--collection-user-offer',
+    ],
     // Blocks themes
     // ---------------------------------------------------------------------.
     'qs_sharing_offer_block' => [

@@ -7,13 +7,14 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\taxonomy\TermInterface;
+use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Collection of offers for Sharing.
  */
-class OffersCollectionController extends ControllerBase {
+class OffersController extends ControllerBase {
   /**
    * Access Control Service.
    *
@@ -47,6 +48,24 @@ class OffersCollectionController extends ControllerBase {
     }
 
     return $access;
+  }
+
+  /**
+   * Render template for the Offer add form.
+   */
+  public function add(Request $request, TermInterface $community) {
+    $variables = ['community' => $community];
+
+    return [
+      '#theme' => 'qs_sharing_add_request_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+          'url.query_args',
+        ],
+      ],
+    ];
   }
 
   /**
@@ -90,6 +109,27 @@ class OffersCollectionController extends ControllerBase {
 
     return [
       '#theme' => 'qs_sharing_collection_offer_page',
+      '#variables' => $variables,
+      '#cache' => [
+        'contexts' => [
+          'user',
+          'url.query_args',
+        ],
+      ],
+    ];
+  }
+
+  /**
+   * Collection of offers for user.
+   */
+  public function offersByUser(Request $request, TermInterface $community, UserInterface $user) {
+    $variables = [
+      'community' => $community,
+      'offers' => NULL,
+    ];
+
+    return [
+      '#theme' => 'qs_sharing_collection_user_offer_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [

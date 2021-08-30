@@ -558,6 +558,48 @@ html:lang(en) .size-time {
   }
 }
 
+// Offer card style
+.card-list-offer.card-list  {
+  .card-pill .btn {
+    @include media-breakpoint-up(md) {
+      min-width: 160px;
+    }
+  }
+
+  .card-open {
+    .card-pill-title .lead {
+      color: color('dark');
+      font-weight: bold;
+    }
+  }
+
+  .card-body {
+    @include media-breakpoint-up(lg) {
+      width: 66%;
+    }
+  }
+
+  .card-body .card-text {
+    font-size: 18px;
+  }
+
+  .deactivated {
+    .card-pill.collapsed {
+      background-image: linear-gradient(89.99deg, color('primary-darker') 27.08%, color('primary') 94.27%);
+
+      .btn {
+        background-color: color('primary-darker');
+      }
+    }
+
+    .card-pill:not(.collapsed) {
+      .card-pill-title.card-pill-deactivated {
+        color: color('danger');
+      }
+    }
+  }
+}
+
 // Animations
 .card-flippable {
   position: relative;

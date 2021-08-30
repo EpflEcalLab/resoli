@@ -99,8 +99,6 @@ class OffersController extends ControllerBase {
       'taxonomy_term_list:communities',
       // Invalidated whenever any Sharing Theme is updated, deleted or created.
       'taxonomy_term_list:sharing_themes',
-      // Invalidated whenever any Privilege is updated, deleted or created.
-      'privilege_list:privilege',
     ];
 
     if ($nodes) {

@@ -30,7 +30,7 @@ qs_sharing.add.request:
 
 # Sharing user offers
 qs_sharing.collection.user.offers:
-  path: '/sharing/{community}/offer/{user}'
+  path: '/sharing/{community}/offers/{user}'
   defaults:
     _controller: '\Drupal\qs_sharing\Controller\OffersController::offersByUser'
     _title: 'qs_sharing.collection.user.offer.title'
@@ -47,7 +47,7 @@ qs_sharing.collection.user.offers:
 
 # Sharing offer form
 qs_sharing.add.offer:
-  path: '/sharing/{community}/offer/add'
+  path: '/sharing/{community}/offers/add'
   defaults:
     _controller: '\Drupal\qs_sharing\Controller\OffersController::add'
     _title: 'qs_sharing.form.offer.add.title'

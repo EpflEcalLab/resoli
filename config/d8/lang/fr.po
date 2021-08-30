@@ -2245,3 +2245,12 @@ msgstr "Vous n'avez pas d'offres"
 
 msgid "qs.sharing.add_offer"
 msgstr "Proposer une nouvelle offre"
+
+msgid "qs.sharing.offer.delete"
+msgstr "Supprimer mon offre"
+
+msgid "qs.sharing.offer.reactivate"
+msgstr "Réactiver mon offre"
+
+msgid "qs.offer.deactivated @date"
+msgstr "Désactivée le @date"

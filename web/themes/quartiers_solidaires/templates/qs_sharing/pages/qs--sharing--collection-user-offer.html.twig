@@ -19,9 +19,10 @@
 
   {# @todo Get deactivate state and display information accordingly #}
   {% if variables.offers %}
-    <ul class="card-list mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
+    <ul class="card-list card-list-offer mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
       {% for offer in variables.offers %}
-        <li class="card card-list-item" id="card{{ offer.nid.value }}">
+        {% set is_deactivated = offer.status.value != 1 %}
+        <li class="card card-list-item {% if is_deactivated %}deactivated{% endif %}" id="card{{ offer.nid.value }}">
           <a
             data-toggle="collapse"
             data-parent="#offers-accordion"
@@ -30,43 +31,70 @@
             role="tab"
             aria-expanded="false"
             aria-controls="collapse-{{ offer.nid.value }}"
-            id="volunteerism{{ offer.nid.value }}"
+            id="offer{{ offer.nid.value }}"
           >
             <span class="card-pill-icon">
               {{ macros.icon('theme_' ~ offer.field_theme.entity.field_sharing_icon.value) }}
             </span>
 
-            <span class="card-pill-title mr-auto">
+            <span class="card-pill-title {% if is_deactivated %}mr-auto{% endif %}">
               <span class="lead">{{ offer.field_offer_type.entity.title.value }}</span>
             </span>
 
-            <span class="btn btn-outline-invert btn-circle shadow-to-left btn-white">
+            {% if is_deactivated %}
+              <span class="card-pill-title card-pill-deactivated mx-auto">
+                <span>
+                {{ 'qs.offer.deactivated @date'|t({
+                  '@date': offer.changed.value|bamboo_i18n_format_date('default_medium_date_only')
+                }) }}
+                </span>
+              </span>
+            {% endif %}
+
+            <span class="btn btn-outline-invert btn-circle btn-icon shadow-to-left btn-white">
               {{ macros.icon('look') }}
               <span>{{ 'qs.offer.more'|t }}</span>
             </span>
           </a>
 
           <div class="collapse" id="collapse-{{ offer.nid.value }}" role="tabpanel">
-            <div class="card-body">
-              <div class="card-text text-center">
-                <h4 class="h5 card-title mb-1 mt-0">{{ offer.field_description.value }}</h4>
+            <div class="card-body mx-auto">
+              <div class="card-text text-center mb-4">
+                {% if offer.field_description.value %}
+                  <h4 class="h5 card-title mb-3 mt-0">{{ offer.field_description.value }}</h4>
+                {% endif %}
                 <p class="mb-0">{{ offer.body.value }}</p>
               </div>
 
-              {# @todo Handle deactivate and edit actions in routing and controller #}
+              {# @todo Handle actions in routing and controller #}
               <div class="card-actions card-actions-offset row">
-                <div class="col-sm-6 mb-3">
-                  <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
-                    {{ macros.icon('cross') }}
-                    {{ 'qs.sharing.offer.deactivate'|t }}
-                  </a>
-                </div>
-                <div class="col-sm-6 mb-3">
-                  <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
-                    {{ macros.icon('pencil') }}
-                    {{ 'qs.sharing.manage_offer'|t }}
-                  </a>
-                </div>
+                {% if not is_deactivated %}
+                  <div class="col-sm-6 mb-3">
+                    <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                      {{ macros.icon('cross') }}
+                      {{ 'qs.sharing.offer.deactivate'|t }}
+                    </a>
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                      {{ macros.icon('pencil') }}
+                      {{ 'qs.sharing.manage_offer'|t }}
+                    </a>
+                  </div>
+                {% else %}
+                  <div class="col-sm-6 mb-3">
+                    <a href="#" class="btn bg-danger btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                      {{ macros.icon('trash') }}
+                      {{ 'qs.sharing.offer.delete'|t }}
+                    </a>
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                      {{ macros.icon('clockwise') }}
+                      {{ 'qs.sharing.offer.reactivate'|t }}
+                    </a>
+                  </div>
+                {% endif %}
               </div>
 
             </div>

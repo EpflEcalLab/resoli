@@ -25,7 +25,7 @@
 
         {% for offerType in offerTypesByTheme.offersTypes %}
         <div class="col-sm-6 col-lg-4 d-flex">
-          {% include "@quartiers_solidaires/node/node--offer-type--teaser.html.twig" with {node: offerType, offers_count: offerType.offersCount} %}
+          {% include "@quartiers_solidaires/node/node--offer-type--teaser.html.twig" with {node: offerType, offers_count: offerType.offersCount, theme: offerTypesByTheme.theme} %}
         </div>
         {% endfor %}
       </div>

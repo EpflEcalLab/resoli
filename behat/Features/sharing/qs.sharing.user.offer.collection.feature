@@ -1,8 +1,6 @@
 
 Feature: Sharing by Offer Access
-  In order to make sure ACL is working for Sharing by Offer and User collection page
-  As a bunch of users
-  I want to make sure the access & access bypass are working like a charm
+  Asserts the listing of Offer by User display the correct number of items.
 
   @api
   Scenario: Logged as Member of Lausanne & Organizer of Fribourg, When I access "My offers" in Lausanne

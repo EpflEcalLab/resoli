@@ -132,7 +132,7 @@ class OffersController extends ControllerBase {
    * Collection of offers for user.
    */
   public function offersByUser(Request $request, TermInterface $community, UserInterface $user) {
-    $offers = $this->offerRepository->getAllOffersByUser($user);
+    $offers = $this->offerRepository->getAllOffersByUser($user, $community);
     $variables = [
       'community' => $community,
       'offers' => $offers,

@@ -221,21 +221,6 @@ final class OfferRepositoryTest extends KernelTestBase {
   }
 
   /**
-   * @covers ::getAllOffersByUser
-   */
-  public function testGetAllOffersByUserReturnsExpected(): void {
-    $results = $this->offerRepository->getAllOffersByUser($this->user1, $this->community1);
-    self::containsOnlyInstancesOf(NodeInterface::class, $results);
-    self::assertCount(3, $results);
-
-    $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community2);
-    self::assertCount(1, $results);
-
-    $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community1);
-    self::assertCount(1, $results);
-  }
-  
-  /**
    * @covers ::getAllByCommunity
    */
   public function testGetAllByCommunityReturnsExpected(): void {
@@ -272,6 +257,21 @@ final class OfferRepositoryTest extends KernelTestBase {
     $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type3, $this->theme2);
     self::containsOnlyInstancesOf(NodeInterface::class, $offers);
     self::assertCount(1, $offers);
+  }
+
+  /**
+   * @covers ::getAllOffersByUser
+   */
+  public function testGetAllOffersByUserReturnsExpected(): void {
+    $results = $this->offerRepository->getAllOffersByUser($this->user1, $this->community1);
+    self::containsOnlyInstancesOf(NodeInterface::class, $results);
+    self::assertCount(3, $results);
+
+    $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community2);
+    self::assertCount(1, $results);
+
+    $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community1);
+    self::assertCount(1, $results);
   }
 
 }

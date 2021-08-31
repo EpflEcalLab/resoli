@@ -96,14 +96,6 @@ class UserController extends ControllerBase {
 
   /**
    * Account offers page.
-   *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community.
-   * @param \Drupal\user\UserInterface $user
-   *   The user.
-   *
-   * @return array
-   *   Render array of account offers.
    */
   public function offers(Request $request, TermInterface $community, UserInterface $user) {
     $offers = $this->offerRepository->getAllOffersByUser($user, $community);

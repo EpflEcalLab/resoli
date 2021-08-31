@@ -8,20 +8,22 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_sharing\Repository\OfferRepository;
 use Drupal\taxonomy\TermInterface;
+use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Collection of offers for Sharing.
+ * Dashboard that list offers of one user.
  */
-class OffersController extends ControllerBase {
+class UserController extends ControllerBase {
 
   /**
-   * The entity QS Offer Manager.
+   * The Offer repository.
    *
    * @var \Drupal\qs_sharing\Repository\OfferRepository
    */
   protected $offerRepository;
+
   /**
    * Access Control Service.
    *
@@ -59,25 +61,6 @@ class OffersController extends ControllerBase {
   }
 
   /**
-   * Render template for the Offer add form.
-   */
-  public function add(Request $request, TermInterface $community) {
-    // @todo Handle the add form
-    $variables = ['community' => $community];
-
-    return [
-      '#theme' => 'qs_sharing_add_request_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url.query_args',
-        ],
-      ],
-    ];
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
@@ -112,13 +95,25 @@ class OffersController extends ControllerBase {
   }
 
   /**
-   * Collection by offers.
+   * Account offers page.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community.
+   * @param \Drupal\user\UserInterface $user
+   *   The user.
+   *
+   * @return array
+   *   Render array of account offers.
    */
-  public function offer(Request $request, TermInterface $community) {
-    $variables = ['community' => $community];
+  public function offers(Request $request, TermInterface $community, UserInterface $user) {
+    $offers = $this->offerRepository->getAllOffersByUser($user, $community);
+    $variables = [
+      'community' => $community,
+      'offers' => $offers,
+    ];
 
     return [
-      '#theme' => 'qs_sharing_collection_offer_page',
+      '#theme' => 'qs_sharing_user_offers_collection_page',
       '#variables' => $variables,
       '#cache' => [
         'contexts' => [
@@ -128,4 +123,5 @@ class OffersController extends ControllerBase {
       ],
     ];
   }
+
 }

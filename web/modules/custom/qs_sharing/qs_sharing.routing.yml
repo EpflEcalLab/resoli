@@ -14,11 +14,11 @@ qs_sharing.collection.offer:
         type: entity:taxonomy_term
 
 # Sharing request form
-qs_sharing.add.request:
+qs_sharing.requests.form.add:
   path: '/sharing/{community}/request/add'
   defaults:
     _controller: '\Drupal\qs_sharing\Controller\RequestsController::add'
-    _title: 'qs_sharing.form.request.add.title'
+    _title: 'qs_sharing.requests.form.add.title'
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Controller\RequestsController::access'
@@ -30,13 +30,13 @@ qs_sharing.add.request:
 
 # Sharing user offers
 qs_sharing.collection.user.offers:
-  path: '/sharing/{community}/offers/{user}'
+  path: '/sharing/{community}/user/{user}/offers'
   defaults:
-    _controller: '\Drupal\qs_sharing\Controller\OffersController::offersByUser'
-    _title: 'qs_sharing.collection.user.offer.title'
+    _controller: '\Drupal\qs_sharing\Controller\UserController::offers'
+    _title: 'qs_sharing.user.offers.collection.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Controller\OffersController::access'
+    _custom_access: '\Drupal\qs_sharing\Controller\UserController::access'
     community: \d+
   options:
     parameters:
@@ -46,11 +46,11 @@ qs_sharing.collection.user.offers:
         type: entity:user
 
 # Sharing offer form
-qs_sharing.add.offer:
+qs_sharing.offers.form.add:
   path: '/sharing/{community}/offers/add'
   defaults:
     _controller: '\Drupal\qs_sharing\Controller\OffersController::add'
-    _title: 'qs_sharing.form.offer.add.title'
+    _title: 'qs_sharing.offers.form.add.title'
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Controller\OffersController::access'

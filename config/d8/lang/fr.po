@@ -2225,46 +2225,46 @@ msgstr "Ex. J’ai besoin d’une personne pour m’aider à monter mes courses 
 msgid "qs_sharing.floating.my_requests"
 msgstr "Mon entraide"
 
-msgid "qs_sharing.collection.user.offer.title"
+msgid "qs_sharing.user.offers.collection.title"
 msgstr "Voici vos offres d'entraide"
 
-msgid "qs_sharing.form.offer.add.title"
+msgid "qs_sharing.offers.form.add.title"
 msgstr "Ajouter une nouvelle offre d'entraide"
 
-msgid "qs_sharing.floating.manage.user.offers"
+msgid "qs_sharing.floating.my_offers"
 msgstr "Gérer mes offres d'entraide"
 
-msgid "qs.offer.more"
+msgid "qs_sharing.offer.more"
 msgstr "Voir les détails"
 
-msgid "qs.sharing.offer.deactivate"
+msgid "qs_sharing.user.offers.collection.deactivate"
 msgstr "Désactiver mon offre"
 
-msgid "qs.sharing.manage_offer"
+msgid "qs_sharing.user.offers.collection.edit"
 msgstr "Modifier mon offre"
 
-msgid "qs.sharing.user.collection.empty"
+msgid "qs_sharing.user.offers.collection.empty"
 msgstr "Vous n'avez pas d'offres"
 
-msgid "qs.sharing.add_offer"
+msgid "qs_sharing.add_offer"
 msgstr "Proposer une nouvelle offre"
 
-msgid "qs.sharing.offer.delete"
+msgid "qs_sharing.user.offers.collection.delete"
 msgstr "Supprimer mon offre"
 
-msgid "qs.sharing.offer.reactivate"
+msgid "qs_sharing.user.offers.collection.reactivate"
 msgstr "Réactiver mon offre"
 
-msgid "qs.offer.deactivated @date"
+msgid "qs_sharing.user.offers.collection.deactivated @date"
 msgstr "Désactivée le @date"
 
-msgid "qs.sharing.offer_type.volunteers @offers_count"
+msgid "qs_sharing.offer_type.volunteers @offers_count"
 msgstr "@offers_count bénévole offre ses services"
 
-msgid "qs.sharing.offer_type.volunteers.plural @offers_count"
+msgid "qs_sharing.offer_type.volunteers.plural @offers_count"
 msgstr "@offers_count bénévoles offrent leurs services"
 
-msgid "qs.sharing.offer_type.volunteers.empty"
+msgid "qs_sharing.offer_type.volunteers.empty"
 msgstr "Aucun bénévole n'offre ses services"
 
 msgid "qs.sharing.offer.list.download"

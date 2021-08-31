@@ -234,5 +234,44 @@ final class OfferRepositoryTest extends KernelTestBase {
     $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community1);
     self::assertCount(1, $results);
   }
+  
+  /**
+   * @covers ::getAllByCommunity
+   */
+  public function testGetAllByCommunityReturnsExpected(): void {
+    $offers = $this->offerRepository->getAllByCommunity($this->community1);
+    self::containsOnlyInstancesOf(NodeInterface::class, $offers);
+    self::assertCount(3, $offers);
+
+    $offers = $this->offerRepository->getAllByCommunity($this->community2);
+    self::containsOnlyInstancesOf(NodeInterface::class, $offers);
+    self::assertCount(1, $offers);
+  }
+
+  /**
+   * @covers ::getAllByOffersByTypeByTheme
+   */
+  public function testGetAllByOffersByTypeByThemeReturnsExpected(): void {
+    $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type1, $this->theme1);
+    self::containsOnlyInstancesOf(NodeInterface::class, $offers);
+    self::assertCount(2, $offers);
+
+    $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type1, $this->theme2);
+    self::assertNull($offers);
+
+    $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type2, $this->theme1);
+    self::containsOnlyInstancesOf(NodeInterface::class, $offers);
+    self::assertCount(1, $offers);
+
+    $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type2, $this->theme2);
+    self::assertNull($offers);
+
+    $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type3, $this->theme1);
+    self::assertNull($offers);
+
+    $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type3, $this->theme2);
+    self::containsOnlyInstancesOf(NodeInterface::class, $offers);
+    self::assertCount(1, $offers);
+  }
 
 }

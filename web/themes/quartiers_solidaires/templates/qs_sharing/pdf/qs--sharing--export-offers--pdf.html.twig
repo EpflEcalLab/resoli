@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+    <style type="text/css">
+      @font-face {
+        font-family: 'opensans';
+        src: url('web/themes/quartiers_solidaires/build/fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'opensans';
+        src: url('web/themes/quartiers_solidaires/build/fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'opensans';
+        src: url('web/themes/quartiers_solidaires/build/fonts/Open_Sans/OpenSans-BoldItalic.ttf') format('truetype');
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      body {
+        font-family: 'opensans', sans-serif;
+      }
+      header {
+        position: fixed;
+        top: -30px;
+        left: 0;
+        right: 0;
+        color: black;
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.03em;
+      }
+
+      main {
+        margin: 0 15px;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        letter-spacing: 0.03em;
+        color: black;
+      }
+
+      h1 {
+        font-style: italic;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 44px;
+        color: #781EBE;
+        margin: 37px 0 0 0;
+      }
+
+      h2 {
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 33px;
+        color: #781EBE;
+        margin: 50px 0 18px 0;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      td, th {
+        padding: 5px;
+        vertical-align: top;
+        text-align: center;
+        border-left: 1px solid #5AA0FA;
+        border-right: 1px solid #5AA0FA;
+      }
+
+      th {
+        background: #5AA0FA;
+        color: white;
+        font-weight: normal;
+      }
+
+      td {
+        font-size: 10px;
+        line-height: 11px;
+      }
+
+      tr:nth-child(odd) {
+        background-color: rgba(90, 160, 250, 0.2);
+      }
+
+      .description {
+        max-width: 550px;
+        margin: 37px auto 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      {{ 'qs.sharing.export.offers.pdf.header @community'|t({'@community': variables.community}) }}
+    </header>
+    <main>
+      <h1>{{ 'qs.sharing.export.offers.pdf.title'|t }}</h1>
+      <p>{{ 'qs.sharing.export.offers.pdf.updatedOn @date'|t({'@date': variables.update}) }}</p>
+
+      <p class="description">{{ 'qs.sharing.export.offers.pdf.lead'|t }}</p>
+
+      {% set currentOfferType = null %}
+      {% for offer in variables.offers %}
+        {# Print the offer type header if we are on the new/next one. #}
+        {% if (offer.field_offer_type.target_id != currentOfferType) %}
+          {# On non first offer type, we must close the previous table. #}
+          {% if loop.index > 1 %}
+          </table>
+          {% endif %}
+
+          {% set currentOfferType = offer.field_offer_type.target_id %}
+
+      <h2>{{ offer.field_offer_type.entity.title.value }}</h2>
+          <table>
+            <tr>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.volunteer'|t }}</th>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.offer'|t }}</th>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.availability'|t }}</th>
+              <th>{{ 'qs.sharing.export.offers.pdf.table.headers.contact'|t }}</th>
+            </tr>
+        {% endif %}
+
+        <tr>
+          <td>{{ offer.field_contact_name.value }}</td>
+          <td>{{ offer.body.value }}</td>
+          <td>{{ offer.field_availability.value }}</td>
+          <td>{{ offer.field_contact_phone.value }}<br>{{ offer.field_contact_mail.value }}</td>
+        </tr>
+      {% endfor %}
+    </main>
+  </body>
+</html>

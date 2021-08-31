@@ -3,6 +3,14 @@
 <div class="text-center my-5">
   {{ macros.icon('theme_' ~ variables.theme.field_sharing_icon.value, ['icon-xl', 'text-primary']) }}
   <h1 class="h2 text-primary my-3">{{ variables.offer_type.title.value }}</h1>
+  {# Export PDF button availables to everyone. #}
+  {% if variables.theme.tid.value  %}
+    <div class="text-center mb-3">
+      <a href="{{ url('qs_sharing.export.offer_type.offers.pdf', {'offer_type': variables.offer_type.nid.value, 'theme': variables.theme.tid.value }) }}">
+        {{ 'qs.sharing.offer.list.download'|t }}
+      </a>
+    </div>
+  {% endif %}
   {% if variables.offer_type.body.value %}
     <div class="mb-5 text-center rich-content rich-content-primary">
       {% set body = {
@@ -16,17 +24,8 @@
 </div>
 
 
-{# Export PDF button availables to everyone. #}
-{% if variables.theme.tid.value  %}
-<div class="text-center">
-  <a href="{{ url('qs_sharing.export.offer_type.offers.pdf', {'offer_type': variables.offer_type.nid.value, 'theme': variables.theme.tid.value }) }}">
-    {{ 'qs.sharing.offer.list.download'|t }}
-  </a>
-</div>
-{% endif %}
-
 {% if variables.offers %}
-  <ul class="card-list" id="offers-accordion" role="tablist" data-children=".card-list-item">
+  <ul class="card-list card-list-offer" id="offers-accordion" role="tablist" data-children=".card-list-item">
 
   {% embed '@quartiers_solidaires/node/partials/card-list.html.twig' with {card_list_id: 'offers-accordion'} %}
     {% block card_list_items %}

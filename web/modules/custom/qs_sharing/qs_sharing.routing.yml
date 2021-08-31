@@ -37,8 +37,11 @@ qs_sharing.collection.user.offers:
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Controller\OffersController::access'
+    community: \d+
   options:
     parameters:
+      community:
+        type: entity:taxonomy_term
       user:
         type: entity:user
 
@@ -56,7 +59,7 @@ qs_sharing.add.offer:
     parameters:
       community:
         type: entity:taxonomy_term
-      
+
 ## PDF Export of Offers by communities.
 qs_sharing.export.community.offers.pdf:
   path: '/sharing/export/community/{community}/pdf'
@@ -70,7 +73,7 @@ qs_sharing.export.community.offers.pdf:
     parameters:
       community:
         type: entity:taxonomy_term
-        
+
 ## PDF Export of Offers by offer type.
 qs_sharing.export.offer_type.offers.pdf:
   path: '/sharing/export/offer_type/{offer_type}/theme/{theme}/pdf'

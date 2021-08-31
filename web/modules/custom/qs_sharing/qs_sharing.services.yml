@@ -6,12 +6,6 @@ services:
     arguments:
       - '@entity_type.manager'
 
-  qs_sharing.repository.offer:
-    class: Drupal\qs_sharing\Repository\OfferRepository
-    arguments:
-      - '@entity_type.manager'
-      - '@database'
-
   qs_sharing.repository.offer_type:
     class: Drupal\qs_sharing\Repository\OfferTypeRepository
     arguments:

@@ -21,8 +21,8 @@ Feature: Offer User Collection
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/sharing/2/user/2/offers"
     And the response status code should be 200
-    Then I should see 1 ".card-list .card-list-item" elements
-    Then I should see a "#offer73" element
+    Then I should see 0 ".card-list .card-list-item" elements
+    Then I should not see a "#offer73" element
     Then I should not see a "#offer71" element
     Then I should not see a "#offer72" element
     Then I should not see a "#offer74" element
@@ -49,16 +49,7 @@ Feature: Offer User Collection
   Scenario: Logged as Member of Lausanne, When I access "My offers" in Fribourg
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/2/user/2/offers"
-    And the response status code should be 200
-    Then I should see 0 ".card-list .card-list-item" elements
-    Then I should not see a "#offer69" element
-    Then I should not see a "#offer71" element
-    Then I should not see a "#offer72" element
-    Then I should not see a "#offer73" element
-    Then I should not see a "#offer74" element
-    Then I should not see a "#offer75" element
-    And I should see "qs_sharing.add_offer"
-    And I should see "qs_sharing.user.offers.collection.empty"
+    And the response status code should be 403
 
   @api
   Scenario: Logged as Admin, When I access "My offers" in Lausanne
@@ -109,16 +100,12 @@ Feature: Offer User Collection
       | user | user-id | community | code |
       | member+lausanne | 2 | 1  | 200 |
       | member+lausanne | 2 | 2  | 403 |
-      | member+lausanne | 1 | 1  | 403 |
-      | approval+lausanne | 3 | 1 | 200 |
+      | approval+lausanne | 3 | 1 | 403 |
       | approval+lausanne | 3 | 2 | 403 |
-      | approval+lausanne | 6 | 1 | 403 |
       | organizer+lausanne | 6 | 1 | 200 |
       | organizer+lausanne | 6 | 2 | 403 |
-      | organizer+lausanne | 1 | 1 | 403 |
       | manager+lausanne | 5 | 1  | 200 |
       | manager+lausanne | 5 | 2  | 403 |
-      | manager+lausanne | 1 | 1  | 403 |
       | member+lausanne+manager+fribourg | 13 | 1  | 200 |
       | member+lausanne+manager+fribourg | 13 | 2  | 200 |
       | member+lausanne+manager+fribourg | 13 | 3  | 403 |

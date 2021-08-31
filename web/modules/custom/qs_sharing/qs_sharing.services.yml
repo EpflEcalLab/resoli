@@ -16,6 +16,7 @@ services:
     class: Drupal\qs_sharing\Repository\OfferRepository
     arguments:
       - '@entity_type.manager'
+      - '@database'
 
   # EventSubscribers
   qs_sharing.redirect:

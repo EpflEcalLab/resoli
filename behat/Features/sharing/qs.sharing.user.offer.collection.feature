@@ -63,7 +63,7 @@ Feature: Sharing by Offer Access
   @api
   Scenario: Logged as Admin, When I access "My offers" in Lausanne
     Given I am logged in as user "admin"
-    When I am on "/sharing/1/user/1"
+    When I am on "/sharing/1/offers/1"
     And the response status code should be 200
     Then I should see 0 ".card-list .card-list-item" elements
     And I should see "qs.sharing.add_offer"
@@ -72,7 +72,7 @@ Feature: Sharing by Offer Access
   @api
   Scenario: Logged as Admin, When I access "My offers" in Fribourg
     Given I am logged in as user "admin"
-    When I am on "/sharing/2/user/1"
+    When I am on "/sharing/2/offers/1"
     And the response status code should be 200
     Then I should see 0 ".card-list .card-list-item" elements
     And I should see "qs.sharing.add_offer"
@@ -81,7 +81,7 @@ Feature: Sharing by Offer Access
   @api
   Scenario: Logged as Admin, When I access "My offers" in Genève
     Given I am logged in as user "admin"
-    When I am on "/sharing/3/user/1"
+    When I am on "/sharing/3/offers/1"
     And the response status code should be 200
     Then I should see 0 ".card-list .card-list-item" elements
     And I should see "qs.sharing.add_offer"

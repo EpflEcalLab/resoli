@@ -111,22 +111,4 @@ class OffersController extends ControllerBase {
     return $tags;
   }
 
-  /**
-   * Collection by offers.
-   */
-  public function offer(Request $request, TermInterface $community) {
-    $variables = ['community' => $community];
-
-    return [
-      '#theme' => 'qs_sharing_collection_offer_page',
-      '#variables' => $variables,
-      '#cache' => [
-        'contexts' => [
-          'user',
-          'url.query_args',
-        ],
-      ],
-    ];
-  }
-
 }

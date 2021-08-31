@@ -2242,3 +2242,33 @@ msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les b
 
 msgid "qs_sharing.floating.my_offers"
 msgstr "Mon entraide"
+
+msgid "qs.sharing.export.offers.pdf.filename @community @date"
+msgstr "Offres de bénévolat à @community (mis à jour le @date)"
+
+msgid "qs.sharing.export.offers.pdf.filename @community @offer_type @theme @date"
+msgstr "Offres de bénévolat à @community (mis à jour le @date)"
+
+msgid "qs.sharing.export.offers.pdf.header @community"
+msgstr "Communauté de @community"
+
+msgid "qs.sharing.export.offers.pdf.title"
+msgstr "Offres de bénévolat"
+
+msgid "qs.sharing.export.offers.pdf.updatedOn @date"
+msgstr "Mis à jour le @date"
+
+msgid "qs.sharing.export.offers.pdf.lead"
+msgstr "N’hésitez pas à contacter les personnes ci-dessous pour demander un coup d’main ou simplement échanger un moment convivial."
+
+msgid "qs.sharing.export.offers.pdf.table.headers.volunteer"
+msgstr "Bénévole"
+
+msgid "qs.sharing.export.offers.pdf.table.headers.offer"
+msgstr "Offre"
+
+msgid "qs.sharing.export.offers.pdf.table.headers.availability"
+msgstr "Disponibilité"
+
+msgid "qs.sharing.export.offers.pdf.table.headers.contact"
+msgstr "Contact"

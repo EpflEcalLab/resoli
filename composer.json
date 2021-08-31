@@ -30,6 +30,7 @@
     "require": {
         "composer/installers": "^1.7",
         "cweagans/composer-patches": "^1.6",
+        "dompdf/dompdf": "^1.0",
         "drupal/admin_toolbar": "^3.0",
         "drupal/allowed_formats": "^1.1",
         "drupal/backerymails": "^2.0",

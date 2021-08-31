@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new Sharging entity 'Offer'
 - Add new Sharging entity 'Request'
 - Add new Sharging entity 'Volunteerism'
+- Add PDF exporter service and base template #796
 
 ### Changed
 - update all Javascript Dependencies

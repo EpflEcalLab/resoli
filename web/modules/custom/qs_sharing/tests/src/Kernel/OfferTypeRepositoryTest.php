@@ -44,7 +44,7 @@ final class OfferTypeRepositoryTest extends KernelTestBase {
   ];
 
   /**
-   * The volunteerism repository.
+   * The offer's type repository.
    *
    * @var \Drupal\qs_sharing\Repository\OfferTypeRepository
    */

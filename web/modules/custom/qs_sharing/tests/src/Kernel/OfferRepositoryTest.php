@@ -44,9 +44,9 @@ final class OfferRepositoryTest extends KernelTestBase {
   ];
 
   /**
-   * The volunteerism repository.
+   * The offer repository.
    *
-   * @var \Drupal\qs_sharing\Repository\OfferTypeRepository
+   * @var \Drupal\qs_sharing\Repository\OfferRepository
    */
   protected $offerRepository;
 
@@ -66,9 +66,19 @@ final class OfferRepositoryTest extends KernelTestBase {
     $this->setupTaxonomy();
 
     $this->createVocabulary('sharing_themes');
+    $this->createVocabulary('communities');
 
     $this->createNodeType('offer_type');
     $this->createNodeType('offer');
+
+    // Add the field "Belongs to community" on Offer's Type.
+    $this->createEntityReferenceField(
+      'node',
+      'offer_type',
+      'field_community',
+      NULL,
+      'taxonomy_term'
+    );
 
     // Add the field "Belongs to an Offer's type" on Offer.
     $this->createEntityReferenceField(
@@ -88,6 +98,18 @@ final class OfferRepositoryTest extends KernelTestBase {
       'taxonomy_term'
     );
 
+    $this->community1 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
+      'vid' => 'communities',
+      'name' => $this->randomString(),
+    ]);
+    $this->community1->save();
+
+    $this->community2 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
+      'vid' => 'communities',
+      'name' => $this->randomString(),
+    ]);
+    $this->community2->save();
+
     $this->theme1 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
       'vid' => 'sharing_themes',
       'name' => 'Conviviality',
@@ -103,20 +125,30 @@ final class OfferRepositoryTest extends KernelTestBase {
     $this->offer_type1 = $this->entityTypeManager->getStorage('node')->create([
       'title' => $this->randomString(),
       'type' => 'offer_type',
+      'field_community' => $this->community1,
     ]);
     $this->offer_type1->save();
 
     $this->offer_type2 = $this->entityTypeManager->getStorage('node')->create([
       'title' => $this->randomString(),
       'type' => 'offer_type',
+      'field_community' => $this->community1,
     ]);
     $this->offer_type2->save();
 
     $this->offer_type3 = $this->entityTypeManager->getStorage('node')->create([
       'title' => $this->randomString(),
       'type' => 'offer_type',
+      'field_community' => $this->community2,
     ]);
     $this->offer_type3->save();
+
+    $this->offer_type4 = $this->entityTypeManager->getStorage('node')->create([
+      'title' => $this->randomString(),
+      'type' => 'offer_type',
+      'field_community' => $this->community1,
+    ]);
+    $this->offer_type4->save();
 
     $this->offer1 = $this->entityTypeManager->getStorage('node')->create([
       'title' => $this->randomString(),
@@ -160,6 +192,19 @@ final class OfferRepositoryTest extends KernelTestBase {
     $this->offer5->save();
 
     $this->offerRepository = $this->container->get('qs_sharing.repository.offer');
+  }
+
+  /**
+   * @covers ::getAllByCommunity
+   */
+  public function testGetAllByCommunityReturnsExpected(): void {
+    $offers = $this->offerRepository->getAllByCommunity($this->community1);
+    self::containsOnlyInstancesOf(NodeInterface::class, $offers);
+    self::assertCount(3, $offers);
+
+    $offers = $this->offerRepository->getAllByCommunity($this->community2);
+    self::containsOnlyInstancesOf(NodeInterface::class, $offers);
+    self::assertCount(1, $offers);
   }
 
   /**

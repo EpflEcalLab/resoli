@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Hanlde requests for Sharing.
+ * Handle requests for Sharing.
  */
 class RequestsController extends ControllerBase {
 

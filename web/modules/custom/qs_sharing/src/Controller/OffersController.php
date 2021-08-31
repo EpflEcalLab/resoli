@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Collection of offers for Sharing.
+ * Handle offers for Sharing.
  */
 class OffersController extends ControllerBase {
 

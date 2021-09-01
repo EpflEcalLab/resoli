@@ -132,6 +132,7 @@ class OfferRepository {
     $query->leftJoin('node__field_offer_type', 'field_offer_type', 'field_offer_type.entity_id = offer.nid');
     $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = field_offer_type.field_offer_type_target_id');
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+    $query->orderBy('offer.status', 'DESC');
 
     $tuples = $query->execute()->fetchAll();
 

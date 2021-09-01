@@ -37,7 +37,7 @@ const formAjax = () => {
       return false;
     });
 
-    $(document).on('submit', 'form[data-ajax="true"]', function(e) {
+    $(document).on('submit', 'form[data-ajax="true"]:not(.offer)', function(e) {
       e.preventDefault();
       const $this = $(this);
 

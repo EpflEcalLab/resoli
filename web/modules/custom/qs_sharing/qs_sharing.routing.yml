@@ -64,11 +64,11 @@ qs_sharing.offers.form.add:
 qs_sharing.offers.form.delete:
   path: '/sharing/{offer}/delete'
   defaults:
-    _form: '\Drupal\qs_sharing\Form\OfferDeleteForm'
+    _controller: '\Drupal\qs_sharing\Controller\OffersController::delete'
     _title: 'qs_sharing.offers.form.delete.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Form\OfferDeleteForm::access'
+    _custom_access: '\Drupal\qs_sharing\Controller\OffersController::access'
     offer: \d+
   options:
     parameters:
@@ -79,11 +79,11 @@ qs_sharing.offers.form.delete:
 qs_sharing.offers.form.deactivate:
   path: '/sharing/{offer}/deactivate'
   defaults:
-    _form: '\Drupal\qs_sharing\Form\OfferDeactivateForm'
+    _controller: '\Drupal\qs_sharing\Controller\OffersController::deactivate'
     _title: 'qs_sharing.offers.form.deactivate.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Form\OfferDeactivateForm::access'
+    _custom_access: '\Drupal\qs_sharing\Controller\OffersController::access'
     offer: \d+
   options:
     parameters:
@@ -94,11 +94,11 @@ qs_sharing.offers.form.deactivate:
 qs_sharing.offers.form.reactivate:
   path: '/sharing/{offer}/reactivate'
   defaults:
-    _form: '\Drupal\qs_sharing\Form\OfferReactivateForm'
+    _controller: '\Drupal\qs_sharing\Controller\OffersController::reactivate'
     _title: 'qs_sharing.offers.form.reactivate.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Form\OfferReactivateForm::access'
+    _custom_access: '\Drupal\qs_sharing\Controller\OffersController::access'
     offer: \d+
   options:
     parameters:

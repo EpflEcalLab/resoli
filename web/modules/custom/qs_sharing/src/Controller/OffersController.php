@@ -122,7 +122,7 @@ class OffersController extends ControllerBase {
     ]));
 
     // Deactivate the offer.
-    $offer->setPublished(FALSE);
+    $offer->set('moderation_state', 'archived');
     $offer->save();
 
     $destination = Url::fromRoute('qs_sharing.collection.user.offers', [
@@ -187,7 +187,7 @@ class OffersController extends ControllerBase {
     ]));
 
     // Reactivate the offer.
-    $offer->setPublished(TRUE);
+    $offer->set('moderation_state', 'published');
     $offer->save();
 
     $destination = Url::fromRoute('qs_sharing.collection.user.offers', [

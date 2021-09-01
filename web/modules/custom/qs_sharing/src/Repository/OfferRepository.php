@@ -133,8 +133,13 @@ class OfferRepository {
     $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = field_offer_type.field_offer_type_target_id');
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
 
-    // Order first the published, then the archived entites
+    // Order first the published, then the archived entites.
     $query->leftJoin('content_moderation_state_field_data', 'content_moderation_state', 'content_moderation_state.content_entity_id = offer.nid');
+    $query->condition(
+      'content_moderation_state.moderation_state',
+      ['published', 'archived'],
+      'IN'
+    );
     $query->orderBy('content_moderation_state.moderation_state', 'DESC');
 
     $tuples = $query->execute()->fetchAll();

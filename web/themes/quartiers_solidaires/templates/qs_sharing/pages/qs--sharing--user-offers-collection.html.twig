@@ -20,7 +20,7 @@
   {% if variables.offers %}
     <ul class="card-list card-list-offer mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
       {% for offer in variables.offers %}
-        {% set is_deactivated = offer.status.value != 1 %}
+        {% set is_deactivated = offer.moderation_state.value == 'archived' %}
         <li class="card card-list-item {% if is_deactivated %}deactivated{% endif %}" id="card{{ offer.nid.value }}">
           <a
             data-toggle="collapse"

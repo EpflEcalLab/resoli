@@ -15,9 +15,9 @@ use Drupal\qs_sharing\Repository\OfferRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Form to delete an offer.
+ * Form to deactivate an offer.
  */
-class OfferDeleteForm extends FormBase {
+class OfferDeactivateForm extends FormBase {
 
   /**
    * The current user.
@@ -103,13 +103,13 @@ class OfferDeleteForm extends FormBase {
 
     $form['#attributes'] = [
       'title' => $offer->title->value,
-      'description' => $this->t('qs_sharing.offers.form.delete.warning'),
-      'icon' => 'trash',
+      'description' => $this->t('qs_sharing.offers.form.deactivate.warning'),
+      'icon' => 'cross',
       'theme' => 'danger',
     ];
 
     $form['#floating_buttons'][] = [
-      'label' => $this->t('qs.sharing.delete'),
+      'label' => $this->t('qs.sharing.deactivate'),
       'icon' => 'trash',
       'active' => TRUE,
     ];
@@ -146,11 +146,11 @@ class OfferDeleteForm extends FormBase {
         'class' => [
           'text-danger',
         ],
-        'icon' => 'trash',
+        'icon' => 'cross',
         'icon_left' => TRUE,
         'white' => TRUE,
       ],
-      '#value' => $this->t('qs.form.delete_submit'),
+      '#value' => $this->t('qs.form.deactivate_submit'),
     ];
 
     // Remove unload script.
@@ -176,7 +176,7 @@ class OfferDeleteForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'qs_sharing_delete_form';
+    return 'qs_sharing_deactivate_form';
   }
 
   /**
@@ -186,7 +186,7 @@ class OfferDeleteForm extends FormBase {
     $offer = $this->nodeStorage->load($form_state->get('offer'));
     $community = $offer->field_offer_type->entity->field_community->entity;
 
-    $this->messenger()->addMessage($this->t('qs_sharing.offers.form.delete.success @offer', [
+    $this->messenger()->addMessage($this->t('qs_sharing.offers.form.deactivate.success @offer', [
       '@offer' => $offer->getTitle(),
     ]));
 
@@ -195,8 +195,9 @@ class OfferDeleteForm extends FormBase {
       'user' => $this->currentUser->id(),
     ], []);
 
-    // Delete the offer.
-    $offer->delete();
+    // Deactivate the offer.
+    $offer->setPublished(FALSE);
+    $offer->save();
   }
 
 }

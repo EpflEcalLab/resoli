@@ -3,7 +3,7 @@ Feature: Offer Delete Form
   @api
   Scenario: When reaching the Delete form of Offer, I should see the confirmation form
     Given I am logged in as user "organizer+lausanne"
-    When I am on "/sharing/71/delete"
+    When I am on "/sharing/76/delete"
     Then I should see "qs_sharing.offers.form.delete.warning"
     And I should see "qs.form.cancel" link with href "/sharing/1/user/6/offers"
     Then I should see 1 "button[type=submit]" element

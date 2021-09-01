@@ -18,7 +18,7 @@ Feature: Sharing by Offer's Type listing
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/sharing/2/offers"
     Then I should see 1 ".card-info" element
-    And I should see "qs.sharing.offer_type.volunteers 1" in the "#card-offer-type65-theme21" element
+    And I should see "qs_sharing.offer_type.volunteers 1" in the "#card-offer-type65-theme21" element
 
 ## Floating Button
   @api
@@ -26,7 +26,7 @@ Feature: Sharing by Offer's Type listing
     Given I am logged in as user "<user>"
     When I am on "/sharing/1/offers"
     Then I should see 1 ".floating a" elements
-    And I should see "qs_sharing.floating.my_offers" link with href "/activities/1/user/<user-id>"
+    And I should see "qs_sharing.floating.my_offers" link with href "/sharing/1/user/<user-id>/offers"
     Examples:
       | user | user-id |
       | member+lausanne | 2 |

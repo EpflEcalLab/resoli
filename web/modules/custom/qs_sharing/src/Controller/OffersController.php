@@ -89,6 +89,7 @@ class OffersController extends ControllerBase {
       '#theme' => 'qs_sharing_add_request_page',
       '#variables' => $variables,
       '#cache' => [
+        'tags' => $this->getCacheTags(),
         'contexts' => [
           'user',
           'url.query_args',
@@ -122,6 +123,7 @@ class OffersController extends ControllerBase {
     ]));
 
     // Deactivate the offer.
+    // @todo Ensure the latest revision with the updated moderation_state is returned
     $offer->set('moderation_state', 'archived');
     $offer->save();
 
@@ -187,6 +189,7 @@ class OffersController extends ControllerBase {
     ]));
 
     // Reactivate the offer.
+    // @todo Ensure the latest revision with the updated moderation_state is returned
     $offer->set('moderation_state', 'published');
     $offer->save();
 

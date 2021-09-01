@@ -88,7 +88,7 @@
                     </a>
                   </div>
                   <div class="col-sm-6 mb-3">
-                    <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                    <a href="{{ path('qs_sharing.offers.form.reactivate', {offer: offer.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
                       {{ macros.icon('clockwise') }}
                       {{ 'qs_sharing.user.offers.collection.reactivate'|t }}
                     </a>

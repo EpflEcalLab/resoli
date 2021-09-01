@@ -60,7 +60,7 @@ qs_sharing.offers.form.add:
       community:
         type: entity:taxonomy_term
 
-# Activities delete form
+# Offer delete form
 qs_sharing.offers.form.delete:
   path: '/sharing/{offer}/delete'
   defaults:
@@ -75,7 +75,7 @@ qs_sharing.offers.form.delete:
       offer:
         type: entity:node
 
-# Activities deactivate form
+# Offer deactivate form
 qs_sharing.offers.form.deactivate:
   path: '/sharing/{offer}/deactivate'
   defaults:
@@ -84,6 +84,21 @@ qs_sharing.offers.form.deactivate:
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Form\OfferDeactivateForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
+
+# Offer reactivate form
+qs_sharing.offers.form.reactivate:
+  path: '/sharing/{offer}/reactivate'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferReactivateForm'
+    _title: 'qs_sharing.offers.form.reactivate.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferReactivateForm::access'
     offer: \d+
   options:
     parameters:

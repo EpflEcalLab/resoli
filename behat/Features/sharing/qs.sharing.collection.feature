@@ -1,4 +1,4 @@
-Feature: Sharing by Offer's Type Access
+Feature: Sharing by Offer's Type listing
   Asserts the listing of Offer's Type by Theme display the correct number of items and the
   corresponding volunteers per type.
 

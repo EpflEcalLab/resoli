@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+
+<div class="container container-narrow">
+  {% set classes = [
+    'form-multistep',
+    element['#validated'] ? 'was-validated',
+    'my-auto',
+    'w-100',
+  ] %}
+
+  {% if element['#top_lead'] %}
+  <div class="lead text-center my-5">
+    {% block lead_text %}
+      {{ element['#top_lead'] }}
+    {% endblock %}
+  </div>
+  {% endif %}
+
+  {% if element['#top_links'] %}
+  <div class="row justify-content-between">
+    {% for path, link in element['#top_links'] %}
+      <a class="btn btn-outline-secondary btn-outline-invert{{ link.options.icon ? ' btn-icon' }} shadow-to-bottom" href="{{ link.params ? path(path, link.params) : path(path) }}">
+        {% if link.options.icon %}
+          {{ macros.icon(link.options.icon) }}
+        {% endif %}
+        {{ link.label }}
+      </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="rounded-lg overflow-hidden">
+    <form{{ attributes.addClass(classes) }}>
+      <div class="row">
+        <div class="col tab-content">{{ children }}</div>
+      </div>
+    </form>
+  </div>
+
+  {% if element['#bottom_text'] %}
+    <p class="text-center text-small mt-4 mx-5">
+      {{ element['#bottom_text'] }}
+    </p>
+  {% endif %}
+
+</div>

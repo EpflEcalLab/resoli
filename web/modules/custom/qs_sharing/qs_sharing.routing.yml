@@ -17,11 +17,11 @@ qs_sharing.collection.offer:
 qs_sharing.requests.form.add:
   path: '/sharing/{community}/request/add'
   defaults:
-    _controller: '\Drupal\qs_sharing\Controller\RequestsController::add'
+    _form: '\Drupal\qs_sharing\Form\RequestAddForm'
     _title: 'qs_sharing.requests.form.add.title'
   requirements:
     _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Controller\RequestsController::access'
+    _custom_access: '\Drupal\qs_sharing\Form\RequestAddForm::access'
     community: \d+
   options:
     parameters:

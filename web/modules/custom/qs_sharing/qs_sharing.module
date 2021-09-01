@@ -21,10 +21,6 @@ function qs_sharing_theme() {
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--collection-offer-types',
     ],
-    'qs_sharing_add_request_page' => [
-      'variables' => ['variables' => []],
-      'template' => 'qs--sharing--add-request',
-    ],
     'qs_sharing_user_offers_collection_page' => [
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--user-offers-collection',

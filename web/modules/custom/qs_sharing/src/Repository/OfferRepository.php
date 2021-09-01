@@ -124,7 +124,7 @@ class OfferRepository {
    *   A collection of node's Offer. Otherwise an empty array.
    */
   public function getAllOffersByUser(UserInterface $user, TermInterface $community) {
-    // Get every offers that belongs to the current user in the current community.
+    // Get offers that belongs to the current user in the current community.
     $query = $this->database->select('node_field_data', 'offer');
     $query->fields('offer', ['nid'])
       ->condition('offer.uid', $user->id());

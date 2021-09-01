@@ -35,6 +35,10 @@ function qs_sharing_theme() {
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--offers-collection',
     ],
+    'qs_sharing_collection_floating_action_button_block' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--collection-floating-btn',
+    ],
     // PDFs themes
     // ---------------------------------------------------------------------.
     'qs_sharing_export_offers_pdf' => [

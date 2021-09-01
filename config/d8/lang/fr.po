@@ -2273,6 +2273,9 @@ msgstr "Télécharger la liste des offres"
 msgid "qs.sharing.add.request.info"
 msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les bénévoles de la communauté y ont accès"
 
+msgid "qs_sharing.floating.my_offers"
+msgstr "Mon entraide"
+
 msgid "qs.sharing.export.offers.pdf.filename @community @date"
 msgstr "Offres de bénévolat à @community (mis à jour le @date)"
 
@@ -2302,3 +2305,6 @@ msgstr "Disponibilité"
 
 msgid "qs.sharing.export.offers.pdf.table.headers.contact"
 msgstr "Contact"
+
+msgid "qs.previous.to_offers_type_list"
+msgstr "Retour aux offres"

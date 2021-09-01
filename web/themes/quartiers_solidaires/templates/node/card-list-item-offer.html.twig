@@ -1,0 +1,12 @@
+<li class="card card-info card-flippable card-list-item" id="card{{ key }}">
+
+  <div class="card-front">
+    {% include "@quartiers_solidaires/node/partials/card-pill-offers.html.twig" %}
+  </div>
+
+  <div class="collapse" id="collapse-{{ key }}" role="tabpanel" data-parent="#offers-accordion">
+    {% include "@quartiers_solidaires/node/partials/card-body-offers.html.twig" %}
+  </div>
+
+</li>
+

@@ -28,7 +28,7 @@ Feature: Offer User Collection
     Then I should not see a "#offer74" element
     Then I should not see a "#offer75" element
     And I should see "qs_sharing.add_offer"
-    And I should not see "qs_sharing.user.offers.collection.empty"
+    And I should see "qs_sharing.user.offers.collection.empty"
 
   @api
   Scenario: Logged as Member of Lausanne, When I access "My offers" in Lausanne

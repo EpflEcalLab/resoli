@@ -60,6 +60,21 @@ qs_sharing.offers.form.add:
       community:
         type: entity:taxonomy_term
 
+# Activities delete form
+qs_sharing.offers.form.delete:
+  path: '/sharing/{offer}/delete'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferDeleteForm'
+    _title: 'qs_sharing.offers.form.delete.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferDeleteForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
+
 ## PDF Export of Offers by communities.
 qs_sharing.export.community.offers.pdf:
   path: '/sharing/export/community/{community}/pdf'

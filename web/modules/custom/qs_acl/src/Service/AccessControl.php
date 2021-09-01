@@ -186,7 +186,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the account has read access on the given photo.
+   * Check if the account is the author of the given offer.
    *
    * @param \Drupal\node\NodeInterface $offer
    *   The offer to check access.
@@ -248,7 +248,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the account is the author of the given offer.
+   * Check if the account is the author admin access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.

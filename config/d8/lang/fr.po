@@ -2272,3 +2272,6 @@ msgstr "Disponibilité"
 
 msgid "qs.sharing.export.offers.pdf.table.headers.contact"
 msgstr "Contact"
+
+msgid "qs.previous.to_offers_type_list"
+msgstr "Retour aux offres"

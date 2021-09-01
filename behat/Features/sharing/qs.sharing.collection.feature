@@ -19,3 +19,11 @@ Feature: Sharing by Offer's Type listing
     When I am on "/sharing/2/offers"
     Then I should see 1 ".card-info" element
     And I should see "qs.sharing.offer_type.volunteers 1" in the "#card-offer-type65-theme21" element
+
+
+# Back button.
+  @api
+  Scenario: In the Sharing offers collection page, I don't see any back button
+    Given I am logged in as user "admin"
+    When I am on "/sharing/1/offers"
+    Then I should not see a "#block-previousnavigation a" element

@@ -248,7 +248,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the account is the author admin access on the given activity.
+   * Check if the account had admin access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.

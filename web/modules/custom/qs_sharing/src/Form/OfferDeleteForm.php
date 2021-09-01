@@ -79,7 +79,7 @@ class OfferDeleteForm extends FormBase {
   public function access(AccountInterface $account, NodeInterface $offer) {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasAccessCommunity($offer->field_offer_type->entity->field_community->entity)) {
+    if ($this->acl->hasAccessOffer($offer)) {
       $access = AccessResult::allowed();
     }
 
@@ -185,6 +185,10 @@ class OfferDeleteForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $offer = $this->nodeStorage->load($form_state->get('offer'));
     $community = $offer->field_offer_type->entity->field_community;
+
+    $this->messenger()->addMessage($this->t('qs_sharing.offers.form.delete.success @offer', [
+      '@offer' => $offer->getTitle(),
+    ]));
 
     $form_state->setRedirect('qs_sharing.collection.user.offers', [
       'community' => $community->id(),

@@ -188,6 +188,26 @@ class AccessControl {
   /**
    * Check if the account has read access on the given photo.
    *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to check access.
+   *
+   * @return bool
+   *   Is the user the creator of the offer.
+   */
+  public function hasAccessOffer(NodeInterface $offer) {
+    $user = $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    return $user->id() === $offer->uid->entity->id();
+  }
+
+  /**
+   * Check if the account has read access on the given photo.
+   *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access of photos.
    * @param \Drupal\Core\Session\AccountInterface|null $account
@@ -228,7 +248,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the account has admin access on the given activity.
+   * Check if the account is the author of the given offer.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.

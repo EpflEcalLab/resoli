@@ -28,22 +28,6 @@ qs_sharing.add.request:
       community:
         type: entity:taxonomy_term
 
-# Sharing user offers
-qs_sharing.collection.user.offers:
-  path: '/sharing/{community}/offers/{user}'
-  defaults:
-    _controller: '\Drupal\qs_sharing\Controller\OffersController::offersByUser'
-    _title: 'qs_sharing.collection.user.offer.title'
-  requirements:
-    _user_is_logged_in: 'TRUE'
-    _custom_access: '\Drupal\qs_sharing\Controller\OffersController::access'
-  options:
-    parameters:
-      community:
-        type: entity:taxonomy_term
-      user:
-        type: entity:user
-
 ## PDF Export of Offers by communities.
 qs_sharing.export.community.offers.pdf:
   path: '/sharing/export/community/{community}/pdf'

@@ -8,10 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - add core architecture for Entraide
 - Add new Sharing entity 'Offer's Type'
-- Add new Sharging entity 'Offer'
-- Add new Sharging entity 'Request'
-- Add new Sharging entity 'Volunteerism'
+- Add new Sharing entity 'Offer'
+- Add new Sharing entity 'Request'
+- Add new Sharing entity 'Volunteerism'
 - Add PDF exporter service and base template #796
+- Add templates for listing offers
 
 ### Changed
 - update all Javascript Dependencies

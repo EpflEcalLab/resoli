@@ -58,3 +58,4 @@ qs_sharing.export.offer_type.offers.pdf:
         type: entity:node
       theme:
         type: entity:taxonomy_term
+

@@ -20,6 +20,19 @@ Feature: Sharing by Offer's Type listing
     Then I should see 1 ".card-info" element
     And I should see "qs.sharing.offer_type.volunteers 1" in the "#card-offer-type65-theme21" element
 
+## Floating Button
+  @api
+  Scenario Outline: Logged-in on the Lausanne listing, I should see the floating button point to my offers
+    Given I am logged in as user "<user>"
+    When I am on "/sharing/1/offers"
+    Then I should see 1 ".floating a" elements
+    And I should see "qs_sharing.floating.my_offers" link with href "/activities/1/user/<user-id>"
+    Examples:
+      | user | user-id |
+      | member+lausanne | 2 |
+      | manager+lausanne | 5 |
+      | organizer+lausanne | 6 |
+      | member+lausanne+manager+fribourg | 13 |
 
 # Back button.
   @api

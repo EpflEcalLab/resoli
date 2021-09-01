@@ -70,17 +70,19 @@ class OfferTypeFloatingBtnBlock extends BlockBase implements ContainerFactoryPlu
    */
   public function build($params = []) {
     $community = $this->route->getParameter('community');
+    $offerType = $this->route->getParameter('node');
 
-    $communityId = 2;
-
-    if ($community) {
-      $communityId = $community->id();
+    if (!$community && $offerType && !$offerType->get('field_community')->isEmpty()) {
+      $community = $offerType->field_community->entity;
     }
 
     // "My Offers" floating buttons.
-    // @todo replace with right url once dashbaord offers is merged
     $variables['floating_buttons']['action'] = [
-      'url' => '#',
+      // @todo replace with right url once dashbaord offers is merged
+      'url' => Url::fromRoute('qs_activity.user.collection', [
+        'community' => $community->id(),
+        'user' => $this->currentUser->id(),
+      ]),
       'label' => $this->t('qs_sharing.floating.my_offers'),
       'theme' => 'primary',
       'icon' => 'activities',

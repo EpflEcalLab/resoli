@@ -636,6 +636,11 @@ class AccessControl {
     /** @var \Drupal\user\UserInterface $user */
     $user = $account ?? $this->currentUser;
 
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
     return !empty($this->volunteerismRepository->getAllByCommunityUser($community, $user));
   }
 

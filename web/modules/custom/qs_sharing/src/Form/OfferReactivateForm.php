@@ -31,7 +31,7 @@ class OfferReactivateForm extends OfferActionFormBase {
     $form['action']['submit'] = [
       '#type' => 'submit',
       '#name' => 'submit',
-      '#value' => $this->t('qs_sharing.user.offers.collection.reactivate.confirmed'),
+      '#value' => $this->t('qs_sharing.user.offers.collection.reactivate'),
       '#attributes' => [
         'icon' => 'clockwise',
         'icon_left' => TRUE,
@@ -42,7 +42,7 @@ class OfferReactivateForm extends OfferActionFormBase {
           'shadow-to-bottom',
           'btn-block',
         ],
-        'data-confirm' => $this->t('qs_sharing.user.offers.reactivate.delete'),
+        'data-confirm' => $this->t('qs_sharing.user.offers.collection.reactivate.confirmed'),
       ],
     ];
 

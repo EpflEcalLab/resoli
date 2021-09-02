@@ -31,7 +31,7 @@ class OfferDeactivateForm extends OfferActionFormBase {
     $form['action']['submit'] = [
       '#type' => 'submit',
       '#name' => 'submit',
-      '#value' => $this->t('qs_sharing.user.offers.collection.deactivate.confirmed'),
+      '#value' => $this->t('qs_sharing.user.offers.collection.deactivate'),
       '#attributes' => [
         'icon' => 'cross',
         'icon_left' => TRUE,
@@ -42,7 +42,7 @@ class OfferDeactivateForm extends OfferActionFormBase {
           'shadow-to-bottom',
           'btn-block',
         ],
-        'data-confirm' => $this->t('qs_sharing.user.offers.deactivate.delete'),
+        'data-confirm' => $this->t('qs_sharing.user.offers.collection.deactivate.confirmed'),
       ],
     ];
 

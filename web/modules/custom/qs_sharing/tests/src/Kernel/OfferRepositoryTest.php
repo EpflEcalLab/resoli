@@ -282,7 +282,8 @@ final class OfferRepositoryTest extends KernelTestBase {
     $results = $this->offerRepository->getAllOffersByUser($this->user1, $this->community1);
     self::containsOnlyInstancesOf(NodeInterface::class, $results);
     self::assertCount(3, $results);
-    // Ensure the elements are ordered by moderation_state (first published, then archived).
+    // Ensure the elements are ordered
+    // by moderation_state (first published, then archived).
     self::assertSame('Offer 2', $results[0]->title->value);
     self::assertSame('Offer 3', $results[1]->title->value);
     self::assertSame('Offer 1', $results[2]->title->value);

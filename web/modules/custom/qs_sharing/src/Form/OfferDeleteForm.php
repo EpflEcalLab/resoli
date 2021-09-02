@@ -31,7 +31,7 @@ class OfferDeleteForm extends OfferActionFormBase {
     $form['action']['submit'] = [
       '#type' => 'submit',
       '#name' => 'submit',
-      '#value' => $this->t('qs_sharing.user.offers.collection.delete.confirmed'),
+      '#value' => $this->t('qs_sharing.user.offers.collection.delete'),
       '#attributes' => [
         'icon' => 'trash',
         'icon_left' => TRUE,
@@ -43,7 +43,7 @@ class OfferDeleteForm extends OfferActionFormBase {
           'btn-block',
           'bg-danger',
         ],
-        'data-confirm' => $this->t('qs_sharing.user.offers.collection.delete'),
+        'data-confirm' => $this->t('qs_sharing.user.offers.collection.delete.confirmed'),
       ],
     ];
 

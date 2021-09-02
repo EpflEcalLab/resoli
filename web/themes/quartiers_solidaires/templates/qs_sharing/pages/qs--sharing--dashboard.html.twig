@@ -1,0 +1,72 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{% set modal_bg = 'primary' %}
+
+{% set floating_buttons = [
+  {
+    label: 'qs_sharing.floating.dashboard'|t,
+    icon: 'sharing',
+    active: true,
+  }
+] %}
+
+{% block modal_content %}
+  <div class="text-center mb-5 mx-auto pt-4">
+    <h1 class="mb-5">{{ 'qs_sharing.dashboard.title'|t }}</h1>
+    {{ macros.icon('sharing-big', 'icon-xl') }}
+  </div>
+
+
+  <p class="font-weight-bold text-size-lg mx-auto text-center">Pour contribuer à l’entraide, choisissez une des options ci-dessous.</p>
+  {% set btn_default_classes = 'btn-outline-invert' %}
+  {% set params = {'community': variables.community.tid.value, 'user': variables.user} %}
+
+  {# @todo Update urls #}
+  {% set buttons = {} %}
+  {% if variables.hasOffers %}
+    {% set buttons = buttons|merge({'Manager offers button': {
+      label: 'qs_sharing.manage_offers'|t,
+      path: 'qs_sharing.collection.user.offers',
+      icon: 'pencil',
+    }}) %}
+  {% endif %}
+  {% if variables.hasRequests %}
+    {% set buttons = buttons|merge({'See requests button': {
+      label: 'qs_sharing.see_requests'|t,
+      path: 'qs_sharing.collection.user.offers',
+      icon: 'wait',
+    }}) %}
+  {% endif %}
+  {% if variables.isVolunteer %}
+    {% set buttons = buttons|merge({'Manager volunteerism button': {
+      label: 'qs_sharing.manage_volunteerism'|t,
+      path: 'qs_sharing.collection.user.offers',
+      icon: 'user',
+    }}) %}
+  {% endif %}
+  {% set buttons = buttons|merge({
+    'Become volunteer button': { label: 'qs_sharing.become_volunteer'|t,
+      path: 'qs_sharing.offers.form.add',
+      classes: 'bg-info btn-outline-invert',
+      icon: 'plus',}
+  }) %}
+  {{ macros.list_buttons(buttons, btn_default_classes, params) }}
+
+  <p class="font-weight-bold text-size-lg mx-auto text-center">Pour partager une demande, cliquez ci-dessous.</p>
+  {% set btn_default_classes = 'btn-outline-invert' %}
+  {% set params = {'community': variables.community.tid.value} %}
+  {% set buttons = {
+    'Share request Button': {
+      label: 'qs_sharing.share_request'|t,
+      path: 'qs_sharing.requests.form.add',
+      classes: 'bg-pink btn-outline-invert',
+      icon: 'plus',
+    },
+  } %}
+  {{ macros.list_buttons(buttons, btn_default_classes, params) }}
+
+{% endblock %}
+
+

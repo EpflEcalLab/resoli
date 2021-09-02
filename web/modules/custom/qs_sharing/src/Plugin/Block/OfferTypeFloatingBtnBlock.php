@@ -78,8 +78,7 @@ class OfferTypeFloatingBtnBlock extends BlockBase implements ContainerFactoryPlu
 
     // "My Offers" floating buttons.
     $variables['floating_buttons']['action'] = [
-      // @todo replace with right url once dashboard offers is merged
-      'url' => Url::fromRoute('qs_activity.user.collection', [
+      'url' => Url::fromRoute('qs_sharing.collection.user.offers', [
         'community' => $community->id(),
         'user' => $this->currentUser->id(),
       ]),

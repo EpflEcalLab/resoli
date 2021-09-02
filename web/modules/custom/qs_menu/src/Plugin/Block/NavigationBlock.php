@@ -183,8 +183,8 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
             ]),
             'label' => $this->t('qs_menu.links.sharing.offer'),
           ],
-          'qs_sharing.add.request' => [
-            'url' => $this->urlGenerator->generate('qs_sharing.add.request', [
+          'qs_sharing.requests.form.add' => [
+            'url' => $this->urlGenerator->generate('qs_sharing.requests.form.add', [
               'community' => $community->id(),
             ]),
             'label' => $this->t('qs_menu.links.sharing.request'),
@@ -192,7 +192,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
         ],
         'activated_by' => [
           'qs_sharing.collection.offer',
-          'qs_sharing.add.request',
+          'qs_sharing.requests.form.add',
         ],
       ],
       'photos' => [

@@ -6,6 +6,7 @@ use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
+use Drupal\user\UserInterface;
 
 /**
  * The Offer Repository.
@@ -24,7 +25,7 @@ class OfferRepository {
    *
    * @var \Drupal\node\NodeStorageInterface
    */
-  private $nodeStorage;
+  protected $nodeStorage;
 
   /**
    * Class constructor.
@@ -102,6 +103,33 @@ class OfferRepository {
       ->condition('status', TRUE)
       ->condition('field_offer_type', $offer_type->id())
       ->condition('field_theme', $theme->id());
+    $ids = $query->execute();
+
+    if (empty($ids) || !\is_array($ids)) {
+      return NULL;
+    }
+
+    return $this->nodeStorage->loadMultiple($ids);
+  }
+
+  /**
+   * Get all offers for a given user.
+   *
+   * @param \Drupal\user\UserInterface $user
+   *   The user for which we want to retrieve the related offers.
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   *
+   * @return array|\Drupal\node\NodeInterface[]|null
+   *   A collection of node's Offer. Otherwise an empty array or null.
+   */
+  public function getAllOffersByUser(UserInterface $user, TermInterface $community) {
+    $query = $this->nodeStorage->getQuery()
+      ->accessCheck(TRUE)
+      ->condition('type', 'offer')
+      ->condition('field_offer_type.entity.field_community', $community->id())
+      ->condition('uid', $user->id());
+
     $ids = $query->execute();
 
     if (empty($ids) || !\is_array($ids)) {

@@ -12,11 +12,11 @@
       <p class="text-dark font-weight-bold">
         {# If there is at least one offer #}
         {% if offers_count > 1 %}
-          {{ 'qs.sharing.offer_type.volunteers.plural @offers_count'|t({'@offers_count': offers_count}) }}
+          {{ 'qs_sharing.offer_type.volunteers.plural @offers_count'|t({'@offers_count': offers_count}) }}
         {% elseif offers_count == 1 %}
-          {{ 'qs.sharing.offer_type.volunteers @offers_count'|t({'@offers_count': offers_count}) }}
+          {{ 'qs_sharing.offer_type.volunteers @offers_count'|t({'@offers_count': offers_count}) }}
         {% else %}
-          {{ 'qs.sharing.offer_type.volunteers.empty'|t }}
+          {{ 'qs_sharing.offer_type.volunteers.empty'|t }}
         {%- endif -%}
       </p>
     </div>

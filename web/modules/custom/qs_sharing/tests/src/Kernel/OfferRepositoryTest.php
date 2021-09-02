@@ -6,6 +6,7 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\NodeInterface;
 use Drupal\qs_test\NodeTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
+use Drupal\qs_test\UserTestTrait;
 use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
 
 /**
@@ -21,6 +22,7 @@ final class OfferRepositoryTest extends KernelTestBase {
   use EntityReferenceTestTrait;
   use NodeTestTrait;
   use TaxonomyTestTrait;
+  use UserTestTrait;
 
   /**
    * The Entity Type Manager.
@@ -98,6 +100,25 @@ final class OfferRepositoryTest extends KernelTestBase {
       'taxonomy_term'
     );
 
+    // Add the field "Belongs to user" on Offer.
+    $this->createEntityReferenceField(
+      'node',
+      'offer',
+      'field_theme',
+      NULL,
+      'user'
+    );
+
+    $this->user1 = $this->entityTypeManager->getStorage('user')->create([
+      'vid' => 'users',
+      'name' => $this->randomString(),
+    ]);
+
+    $this->user2 = $this->entityTypeManager->getStorage('user')->create([
+      'vid' => 'users',
+      'name' => $this->randomString(),
+    ]);
+
     $this->community1 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
       'vid' => 'communities',
       'name' => $this->randomString(),
@@ -155,6 +176,7 @@ final class OfferRepositoryTest extends KernelTestBase {
       'type' => 'offer',
       'field_offer_type' => $this->offer_type1,
       'field_theme' => $this->theme1,
+      'uid' => $this->user1,
     ]);
     $this->offer1->save();
 
@@ -163,6 +185,7 @@ final class OfferRepositoryTest extends KernelTestBase {
       'type' => 'offer',
       'field_offer_type' => $this->offer_type1,
       'field_theme' => $this->theme1,
+      'uid' => $this->user1,
     ]);
     $this->offer2->save();
 
@@ -171,6 +194,7 @@ final class OfferRepositoryTest extends KernelTestBase {
       'type' => 'offer',
       'field_offer_type' => $this->offer_type2,
       'field_theme' => $this->theme1,
+      'uid' => $this->user1,
     ]);
     $this->offer3->save();
 
@@ -179,6 +203,7 @@ final class OfferRepositoryTest extends KernelTestBase {
       'type' => 'offer',
       'field_offer_type' => $this->offer_type3,
       'field_theme' => $this->theme2,
+      'uid' => $this->user2,
     ]);
     $this->offer4->save();
 
@@ -188,6 +213,7 @@ final class OfferRepositoryTest extends KernelTestBase {
       'field_offer_type' => $this->offer_type1,
       'field_theme' => $this->theme1,
       'status' => FALSE,
+      'uid' => $this->user2,
     ]);
     $this->offer5->save();
 
@@ -231,6 +257,24 @@ final class OfferRepositoryTest extends KernelTestBase {
     $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type3, $this->theme2);
     self::containsOnlyInstancesOf(NodeInterface::class, $offers);
     self::assertCount(1, $offers);
+  }
+
+  /**
+   * @covers ::getAllOffersByUser
+   */
+  public function testGetAllOffersByUserReturnsExpected(): void {
+    $results = $this->offerRepository->getAllOffersByUser($this->user1, $this->community1);
+    self::containsOnlyInstancesOf(NodeInterface::class, $results);
+    self::assertCount(3, $results);
+
+    $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community2);
+    self::assertCount(1, $results);
+
+    $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community1);
+    self::assertCount(1, $results);
+
+    $results = $this->offerRepository->getAllOffersByUser($this->user1, $this->community2);
+    self::assertNull($results);
   }
 
 }

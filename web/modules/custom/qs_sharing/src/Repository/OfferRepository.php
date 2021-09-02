@@ -129,16 +129,9 @@ class OfferRepository {
       ->accessCheck(TRUE)
       ->condition('type', 'offer')
       ->condition('field_offer_type.entity.field_community', $community->id())
-      ->condition('uid', $user->id());
-
-    // // Order first the published, then the archived entites.
-    //    $query->leftJoin('content_moderation_state_field_data', 'content_moderation_state', 'content_moderation_state.content_entity_id = offer.nid');
-    //    $query->condition(
-    //      'content_moderation_state.moderation_state',
-    //      ['published', 'archived'],
-    //      'IN'
-    //    );
-    //    $query->orderBy('content_moderation_state.moderation_state', 'DESC');
+      ->condition('uid', $user->id())
+      ->condition('moderation_state', ['published', 'archived'], 'IN')
+      ->sort('moderation_state', 'DESC');
 
     $ids = $query->execute();
 

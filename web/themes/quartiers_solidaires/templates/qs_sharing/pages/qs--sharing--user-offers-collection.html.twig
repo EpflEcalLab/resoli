@@ -69,12 +69,7 @@
               <div class="card-actions card-actions-offset row">
                 {% if not is_deactivated %}
                   <div class="col-sm-6 mb-3">
-                    <form action="{{ path('qs_sharing.offers.form.deactivate', {offer: offer.nid.value}) }}" data-ajax="true" data-parent="card{{ offer.nid.value }}" class="offer" method="post" id="qs-offer-deactivate-confirm-{{ offer.nid.value }}">
-                      <button class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block" data-confirm="{{ 'qs_sharing.user.offers.collection.deactivate'|t }}" type="submit" value="{{ 'qs_sharing.user.offers.collection.deactivate.confirmed'|t }}">
-                        {{ macros.icon('cross') }}
-                        {{ 'qs_sharing.user.offers.collection.deactivate'|t }}
-                      </button>
-                    </form>
+                    {{ bamboo_render_form('qs_sharing', 'OfferDeactivateForm', {'offer': offer}) }}
                   </div>
                   <div class="col-sm-6 mb-3">
                     <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
@@ -84,20 +79,10 @@
                   </div>
                 {% else %}
                   <div class="col-sm-6 mb-3">
-                    <form action="{{ path('qs_sharing.offers.form.delete', {offer: offer.nid.value}) }}" data-ajax="true" data-parent="card{{ offer.nid.value }}" class="offer" method="post" id="qs-offer-deactivate-confirm-{{ offer.nid.value }}">
-                      <button class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block" data-confirm="{{ 'qs_sharing.user.offers.collection.delete'|t }}" type="submit" value="{{ 'qs_sharing.user.offers.collection.delete.confirmed'|t }}">
-                        {{ macros.icon('trash') }}
-                        {{ 'qs_sharing.user.offers.collection.delete'|t }}
-                      </button>
-                    </form>
+                    {{ bamboo_render_form('qs_sharing', 'OfferDeleteForm', {'offer': offer}) }}
                   </div>
                   <div class="col-sm-6 mb-3">
-                    <form action="{{ path('qs_sharing.offers.form.reactivate', {offer: offer.nid.value}) }}" data-ajax="true" data-parent="card{{ offer.nid.value }}" class="offer" method="post" id="qs-offer-deactivate-confirm-{{ offer.nid.value }}">
-                      <button class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block" data-confirm="{{ 'qs_sharing.user.offers.collection.reactivate'|t }}" type="submit" value="{{ 'qs_sharing.user.offers.collection.reactivate.confirmed'|t }}">
-                        {{ macros.icon('clockwise') }}
-                        {{ 'qs_sharing.user.offers.collection.reactivate'|t }}
-                      </button>
-                    </form>
+                    {{ bamboo_render_form('qs_sharing', 'OfferReactivateForm', {'offer': offer}) }}
                   </div>
                 {% endif %}
               </div>

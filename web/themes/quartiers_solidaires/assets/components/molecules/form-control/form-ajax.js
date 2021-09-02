@@ -6,6 +6,8 @@ const formAjax = () => {
 
     $('form[data-ajax="true"]').on('click', '[type="submit"][data-confirm]', function(e) {
       const $this = $(this);
+      const hasClassBgDanger = $this.hasClass('bg-danger');
+
       const text = $this.text();
       const $icon = $this.find('.icon').clone();
       const confirmText = $this.data('confirm');
@@ -23,6 +25,7 @@ const formAjax = () => {
         .prepend($icon)
         .data('confirm', text)
         .data('pending', 'true')
+        .removeClass('bg-danger')
         .addClass('btn-confirm');
 
       timer = window.setTimeout(function() {
@@ -32,6 +35,10 @@ const formAjax = () => {
           .data('confirm', confirmText)
           .removeData('pending')
           .removeClass('btn-confirm');
+
+        if (hasClassBgDanger) {
+          $this.addClass('bg-danger');
+        }
       }, delay);
 
       return false;

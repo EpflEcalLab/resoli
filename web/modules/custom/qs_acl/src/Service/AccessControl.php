@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\node\NodeInterface;
+use Drupal\qs_sharing\Repository\VolunteerismRepository;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
 
@@ -14,6 +15,13 @@ use Drupal\user\UserInterface;
  * The Access Control manager.
  */
 class AccessControl {
+
+  /**
+   * The volunteerism repository.
+   *
+   * @var \Drupal\qs_sharing\Repository\VolunteerismRepository
+   */
+  protected $volunteerismRepository;
 
   /**
    * The current active user.
@@ -39,10 +47,11 @@ class AccessControl {
   /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, VolunteerismRepository $volunteerismRepository) {
     $this->currentUser = $currentUser;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
+    $this->volunteerismRepository = $volunteerismRepository;
   }
 
   /**
@@ -610,6 +619,24 @@ class AccessControl {
     $roles = $user->getRoles();
 
     return \in_array('beginner', $roles, TRUE);
+  }
+
+  /**
+   * Check if the account has at least one volunteerism in the community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User.
+   *
+   * @return bool
+   *   Does the user has at least one volunteerism for this community.
+   */
+  public function isCommunityVolunteer(TermInterface $community, ?AccountInterface $account = NULL) {
+    /** @var \Drupal\user\UserInterface $user */
+    $user = $account ?? $this->currentUser;
+
+    return !empty($this->volunteerismRepository->getAllByCommunityUser($community, $user));
   }
 
   /**

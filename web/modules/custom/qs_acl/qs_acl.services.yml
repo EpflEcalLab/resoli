@@ -1,7 +1,11 @@
 services:
   qs_acl.access_control:
     class: Drupal\qs_acl\Service\AccessControl
-    arguments: ['@current_user', '@entity_type.manager']
+    arguments:
+      - '@current_user'
+      - '@entity_type.manager'
+      - '@qs_sharing.repository.volunteerism'
+
   qs_acl.privilege_manager:
     class: Drupal\qs_acl\Service\PrivilegeManager
     arguments: ['@current_user', '@entity_type.manager', '@database', '@pager.manager']

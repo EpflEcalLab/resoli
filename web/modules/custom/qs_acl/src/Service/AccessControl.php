@@ -626,7 +626,7 @@ class AccessControl {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
+   * @param \Drupal\Core\Session\AccountInterface|null $account
    *   Drupal Entity User.
    *
    * @return bool

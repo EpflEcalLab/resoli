@@ -48,8 +48,6 @@ final class AccessControlTest extends UnitTestCase {
 
   /**
    * {@inheritdoc}
-   *
-   * @covers ::__construct
    */
   protected function setUp(): void {
     parent::setUp();
@@ -62,6 +60,8 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
+   * Provider of ::testIsCommunityVolunteerContextualUser.
+   *
    * Set of return value from isCommunityReturnsExcepted with excepted boolean
    * result on isCommunityVolunteer.
    *

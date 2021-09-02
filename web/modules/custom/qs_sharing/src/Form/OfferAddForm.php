@@ -71,6 +71,8 @@ class OfferAddForm extends FormBase {
    *   The current user.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
+   * @param \Drupal\qs_sharing\Repository\OfferTypeRepository $offer_type_repository
+   *   The offer's type repository.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException

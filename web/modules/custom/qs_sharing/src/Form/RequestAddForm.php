@@ -2,9 +2,12 @@
 
 namespace Drupal\qs_sharing\Form;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManager;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\qs_acl\Service\AccessControl;
 use Drupal\taxonomy\TermInterface;
 use Drupal\taxonomy\TermStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -21,6 +24,13 @@ class RequestAddForm extends FormBase {
   protected $languageManager;
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
    * The term Storage.
    *
    * @var \Drupal\taxonomy\TermStorageInterface
@@ -30,9 +40,31 @@ class RequestAddForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(LanguageManager $language_manager, TermStorageInterface $termStorage) {
+  public function __construct(AccessControl $acl, LanguageManager $language_manager, TermStorageInterface $termStorage) {
+    $this->acl = $acl;
     $this->languageManager = $language_manager;
     $this->termStorage = $termStorage;
+  }
+
+  /**
+   * Checks access.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Run access checks for this account.
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   Run access checks for this taxonomy.
+   *
+   * @return \Drupal\Core\Access\AccessResultInterface
+   *   The access result.
+   */
+  public function access(AccountInterface $account, TermInterface $community) {
+    $access = AccessResult::forbidden();
+
+    if ($this->acl->hasAccessCommunity($community)) {
+      $access = AccessResult::allowed();
+    }
+
+    return $access;
   }
 
   /**
@@ -59,9 +91,12 @@ class RequestAddForm extends FormBase {
       'theme' => 'primary',
     ];
 
+    $form['#top_lead'] = $this->t('qs.sharing.add.request @community', ['@community' => $community->getName()]);
+    $form['#bottom_text'] = $this->t('qs.sharing.add.request.info');
+
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [
-      'form__multistep',
+      'form__modal__multistep__narrow',
     ];
 
     // Save the community for submission.
@@ -120,6 +155,7 @@ class RequestAddForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('qs_acl.access_control'),
       $container->get('language_manager'),
       $container->get('entity_type.manager')->getStorage('taxonomy_term')
     );

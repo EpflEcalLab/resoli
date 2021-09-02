@@ -95,6 +95,17 @@ const card = () => {
           $collapse.collapse('hide');
         });
       }
+      if (parent && parent.match("^#offers-accordion")) {
+        $.each($('[id*=offers-accordion]'), function() {
+          const $collapse = $(this).find('.collapse');
+
+          if ('#' + $collapse.attr('id') === parent) {
+            return;
+          }
+
+          $collapse.collapse('hide');
+        });
+      }
     });
 
     // Get the hash in the URL

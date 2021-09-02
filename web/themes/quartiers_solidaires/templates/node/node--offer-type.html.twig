@@ -5,5 +5,10 @@
   <div class="container">
     {{ bamboo_render_block('qs_sharing_offers_collection_block') }}
   </div>
+
+  {# Floating buttons #}
+  {% block modal_floating %}
+    {{ bamboo_render_block('qs_sharing_collection_floating_action_button_block') }}
+  {% endblock %}
 {% endblock %}
 

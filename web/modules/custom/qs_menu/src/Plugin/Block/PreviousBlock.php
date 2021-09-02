@@ -87,6 +87,15 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
     if ($route_name === 'entity.node.canonical') {
       switch ($node->bundle()) {
+        case 'offer_type':
+          $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.offer', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_offers_type_list');
+          $theme = 'primary';
+
+          break;
+
         case 'activity':
           $url = $this->urlGenerator->generateFromRoute('qs_activity.collection.dates', [
             'community' => $community->id(),
@@ -261,6 +270,16 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           ], $options);
           $label = $this->t('qs.previous.to_manage_photos');
           $theme = 'secondary';
+
+          break;
+
+        // Go to Offer's Type collection.
+        case 'qs_sharing.collection.user.offers':
+          $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.offer', [
+            'community' => $community->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_offers_type_list');
+          $theme = 'primary';
 
           break;
 

@@ -125,21 +125,28 @@ class OfferRepository {
    */
   public function getAllOffersByUser(UserInterface $user, TermInterface $community) {
     // Get offers that belongs to the current user in the current community.
-    $query = $this->nodeStorage->getQuery()
-      ->accessCheck(TRUE)
-      ->condition('type', 'offer')
-      ->condition('field_offer_type.entity.field_community', $community->id())
-      ->condition('uid', $user->id())
-      ->condition('moderation_state', ['published', 'archived'], 'IN')
-      ->sort('moderation_state', 'DESC');
+    $query = $this->database->select('node_field_data', 'offer');
+    $query->fields('offer', ['nid'])
+      ->condition('offer.uid', $user->id());
 
-    $ids = $query->execute();
+    $query->leftJoin('node__field_offer_type', 'field_offer_type', 'field_offer_type.entity_id = offer.nid');
+    $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = field_offer_type.field_offer_type_target_id');
+    $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+    $query->orderBy('offer.status', 'DESC');
 
-    if (empty($ids) || !\is_array($ids)) {
-      return NULL;
+    $query->leftJoin('content_moderation_state_field_data', 'content_moderation_state', 'content_moderation_state.content_entity_id = offer.nid');
+    $query->orderBy('content_moderation_state.moderation_state', 'DESC');
+
+    $tuples = $query->execute()->fetchAll();
+
+    $offers = NULL;
+
+    foreach ($tuples as $tuple) {
+      /** @var \Drupal\node\NodeInterface $offer */
+      $offers[] = $this->nodeStorage->load($tuple->nid);
     }
 
-    return $this->nodeStorage->loadMultiple($ids);
+    return $offers;
   }
 
 }

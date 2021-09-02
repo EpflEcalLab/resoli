@@ -280,6 +280,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           ], $options);
           $label = $this->t('qs.previous.to_offers_type_list');
           $theme = 'primary';
+
           break;
 
         // Go to Homepage.

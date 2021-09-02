@@ -216,4 +216,17 @@ final class OfferTypeRepositoryTest extends KernelTestBase {
     self::assertEquals(1, $results[0]->offersCount);
   }
 
+  /**
+   * @covers ::getAllByCommunity
+   */
+  public function testGetAllByCommunityReturnsExpected(): void {
+    $results = $this->offerTypeRepository->getAllByCommunity($this->community1);
+    self::containsOnlyInstancesOf(NodeInterface::class, $results);
+    self::assertCount(3, $results);
+
+    $results = $this->offerTypeRepository->getAllByCommunity($this->community2);
+    self::containsOnlyInstancesOf(NodeInterface::class, $results);
+    self::assertCount(1, $results);
+  }
+
 }

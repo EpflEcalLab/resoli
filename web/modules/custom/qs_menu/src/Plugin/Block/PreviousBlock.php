@@ -279,7 +279,18 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_offers_type_list');
-          $theme = 'primary';
+          $theme = 'info';
+
+          break;
+
+        // Go to My Offers.
+        case 'qs_sharing.offers.form.add':
+          $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.user.offers', [
+            'community' => $community->id(),
+            'user' => $this->currentUser->id(),
+          ], $options);
+          $label = $this->t('qs.previous.to_my_offers');
+          $theme = 'info';
 
           break;
 

@@ -10,11 +10,19 @@ use Drupal\node\NodeInterface;
 use Drupal\qs_sharing\Repository\VolunteerismRepository;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * The Access Control manager.
  */
 class AccessControl {
+
+  /**
+   * The container.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+   */
+  protected $container;
 
   /**
    * The volunteerism repository.
@@ -47,11 +55,10 @@ class AccessControl {
   /**
    * Class constructor.
    */
-  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager, VolunteerismRepository $volunteerismRepository) {
+  public function __construct(AccountProxyInterface $currentUser, EntityTypeManagerInterface $entity_type_manager) {
     $this->currentUser = $currentUser;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->privilegeStorage = $entity_type_manager->getStorage('privilege');
-    $this->volunteerismRepository = $volunteerismRepository;
   }
 
   /**
@@ -641,6 +648,10 @@ class AccessControl {
       return TRUE;
     }
 
+    if (!$this->volunteerismRepository instanceof VolunteerismRepository) {
+      $this->volunteerismRepository = $this->container->get('qs_sharing.repository.volunteerism');
+    }
+
     return !empty($this->volunteerismRepository->getAllByCommunityUser($community, $user));
   }
 
@@ -681,6 +692,25 @@ class AccessControl {
     $query->condition($or);
 
     return $query->count()->execute() > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Sets the container.
+   *
+   * Setter injection to avoid cyclic reference.
+   */
+  public function setContainer(ContainerInterface $container): void {
+    $this->container = $container;
+  }
+
+  /**
+   * Setter injection of the Volunteerism repository to avoid cyclic reference.
+   *
+   * @param \Drupal\qs_sharing\Repository\VolunteerismRepository $volunteerismRepository
+   *   The volunteerism repository.
+   */
+  public function setVolunteerismRepository(VolunteerismRepository $volunteerismRepository): void {
+    $this->volunteerismRepository = $volunteerismRepository;
   }
 
   /**

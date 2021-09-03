@@ -4,7 +4,8 @@ services:
     arguments:
       - '@current_user'
       - '@entity_type.manager'
-      - '@qs_sharing.repository.volunteerism'
+    calls:
+      - [setContainer, ['@service_container']]
 
   qs_acl.privilege_manager:
     class: Drupal\qs_acl\Service\PrivilegeManager

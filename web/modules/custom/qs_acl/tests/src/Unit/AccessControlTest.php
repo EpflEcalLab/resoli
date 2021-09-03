@@ -56,7 +56,8 @@ final class AccessControlTest extends UnitTestCase {
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->volunteerismRepository = $this->createMock(VolunteerismRepository::class);
 
-    $this->acl = new AccessControl($this->currentUser, $this->entityTypeManager, $this->volunteerismRepository);
+    $this->acl = new AccessControl($this->currentUser, $this->entityTypeManager);
+    $this->acl->setVolunteerismRepository($this->volunteerismRepository);
   }
 
   /**

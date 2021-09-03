@@ -481,25 +481,32 @@ class OfferAddForm extends FormBase {
       '@offer' => $offer->getTitle(),
       '@offer_type' => $offer_type->getTitle(),
     ]));
-    $form_state->setRedirect('entity.node.canonical', ['node' => $offer_type->id(), 'theme' => $theme->id()], ['fragment' => "card{$offer->id()}"]);
+    $form_state->setRedirect('entity.node.canonical', [
+      'node' => $offer_type->id(),
+      'theme' => $theme->id(),
+    ], ['fragment' => "card{$offer->id()}"]);
   }
 
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // When the custom offer type is checked, then the new offer type title is mandatory.
+    // When custom offer type is checked, then offer type title is mandatory.
     if ($form_state->getValue('offer_type_new') === '1'
       && (!$form_state->getValue('offer_type_title') || empty($form_state->getValue('offer_type_title')))
     ) {
-      $form_state->setErrorByName('offer_type_title', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['offer']['step-1']['offer_type_title']['#title']]));
+      $form_state->setErrorByName('offer_type_title', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $form['offer']['step-1']['offer_type_title']['#title'],
+      ]));
     }
 
-    // When the custom offer type is unchecked, then the  offer type selection is mandatory.
+    // When custom offer type is unchecked, then offer type select is mandatory.
     if ($form_state->getValue('offer_type_new') === '0'
       && (!$form_state->getValue('offer_type') || empty($form_state->getValue('offer_type')))
     ) {
-      $form_state->setErrorByName('offer_type', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['offer']['step-1']['offer_type']['#title']]));
+      $form_state->setErrorByName('offer_type', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $form['offer']['step-1']['offer_type']['#title'],
+      ]));
     }
 
     // Assert the theme is valid.
@@ -509,12 +516,16 @@ class OfferAddForm extends FormBase {
 
     // Assert the body is valid.
     if (!$form_state->getValue('body') || empty($form_state->getValue('body'))) {
-      $form_state->setErrorByName('body', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $this->t('qs_sharing.offers.form.add.body')]));
+      $form_state->setErrorByName('body', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $this->t('qs_sharing.offers.form.add.body'),
+      ]));
     }
 
     // Assert the availability is valid.
     if (!$form_state->getValue('availability') || empty($form_state->getValue('availability'))) {
-      $form_state->setErrorByName('availability', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $this->t('qs_sharing.offers.form.add.availability')]));
+      $form_state->setErrorByName('availability', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $this->t('qs_sharing.offers.form.add.availability'),
+      ]));
     }
   }
 

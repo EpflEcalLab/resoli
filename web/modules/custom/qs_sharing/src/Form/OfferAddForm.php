@@ -8,7 +8,10 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_sharing\Manager\OfferManager;
+use Drupal\qs_sharing\Manager\OfferTypeManager;
 use Drupal\qs_sharing\Repository\OfferTypeRepository;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,18 +29,18 @@ class OfferAddForm extends FormBase {
   protected $acl;
 
   /**
-   * The current user account proxy.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
-
-  /**
    * The language manager.
    *
    * @var \Drupal\Core\Language\LanguageManagerInterface
    */
   protected $languageManager;
+
+  /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
 
   /**
    * The term Storage.
@@ -54,6 +57,20 @@ class OfferAddForm extends FormBase {
   protected $userStorage;
 
   /**
+   * The offer manager.
+   *
+   * @var \Drupal\qs_sharing\Manager\OfferManager
+   */
+  private $offerManager;
+
+  /**
+   * The offer's type manager.
+   *
+   * @var \Drupal\qs_sharing\Manager\OfferTypeManager
+   */
+  private $offerTypeManager;
+
+  /**
    * The offer's type repository.
    *
    * @var \Drupal\qs_sharing\Repository\OfferTypeRepository
@@ -64,27 +81,31 @@ class OfferAddForm extends FormBase {
    * Construct a new form allowing submission of Offers from Volunteers.
    *
    * @param \Drupal\qs_acl\Service\AccessControl $acl
-   *   The access control.
+   *   The access controls.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
    *   The language manager.
    * @param \Drupal\qs_sharing\Repository\OfferTypeRepository $offer_type_repository
    *   The offer's type repository.
+   * @param \Drupal\qs_sharing\Manager\OfferTypeManager $offer_type_manager
+   *   The offer's type manager.
+   * @param \Drupal\qs_sharing\Manager\OfferManager $offer_manager
+   *   The offer manager.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, AccountInterface $current_user, LanguageManagerInterface $language_manager, OfferTypeRepository $offer_type_repository) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, OfferTypeRepository $offer_type_repository, OfferTypeManager $offer_type_manager, OfferManager $offer_manager) {
     // From the container, inject services.
     $this->acl = $acl;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->userStorage = $entity_type_manager->getStorage('user');
-    $this->currentUser = $current_user;
+    $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->languageManager = $language_manager;
     $this->offerTypeRepository = $offer_type_repository;
+    $this->offerTypeManager = $offer_type_manager;
+    $this->offerManager = $offer_manager;
   }
 
   /**
@@ -114,7 +135,7 @@ class OfferAddForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, ?TermInterface $community = NULL) {
     // Get the current language.
     $currentLang = $this->languageManager->getCurrentLanguage();
-    $account = $this->userStorage->load($this->currentUser->id());
+    $account = $this->userStorage->load($this->currentUser()->id());
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
@@ -135,7 +156,7 @@ class OfferAddForm extends FormBase {
       'form__modal__multistep',
     ];
 
-    // Save the community for submission.
+    // Save the community for later usage on submission.
     $form_state->set('community', $community->id());
 
     $form['offer']['step-1'] = [
@@ -173,7 +194,7 @@ class OfferAddForm extends FormBase {
       '#options' => $this->fallback,
       '#attributes' => [
         'icon' => 'sharing',
-        'placeholder' => $this->t('qs.activity.add_member.placeholder'),
+        'placeholder' => $this->t('qs_sharing.offers.form.add.offer_type.placeholder'),
         'selectize' => TRUE,
         'class' => ['selectize-members'],
         'data-options' => json_encode($select_options),
@@ -250,7 +271,6 @@ class OfferAddForm extends FormBase {
     $form['offer']['step-2']['theme'] = [
       '#attributes' => [
         'required' => TRUE,
-        'title' => $this->t('qs_sharing.offers.form.add.theme'),
         'variant' => 'button_theme',
         'data-toggle' => 'buttons',
         'no_form_group' => TRUE,
@@ -406,9 +426,10 @@ class OfferAddForm extends FormBase {
     return new static(
       $container->get('qs_acl.access_control'),
       $container->get('entity_type.manager'),
-      $container->get('current_user'),
       $container->get('language_manager'),
-      $container->get('qs_sharing.repository.offer_type')
+      $container->get('qs_sharing.repository.offer_type'),
+      $container->get('qs_sharing.manager.offer_type'),
+      $container->get('qs_sharing.manager.offer')
     );
   }
 
@@ -423,14 +444,78 @@ class OfferAddForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // @todo handle submit.
+    $comunity = $this->termStorage->load($form_state->get('community'));
+    $account = $this->userStorage->load($this->currentUser()->id());
+    $theme = $this->termStorage->load($form_state->getValue('theme'));
+
+    // Create the new type offer if necessary.
+    if ($form_state->getValue('offer_type_new') === '1') {
+      $offer_type = $this->offerTypeManager->create(
+        $form_state->getValue('offer_type_title'),
+        $theme,
+        $comunity,
+        $account
+      );
+    }
+    else {
+      $offer_type = $this->nodeStorage->load($form_state->getValue('offer_type'));
+    }
+
+    if (!$offer_type instanceof NodeInterface || $offer_type->bundle() !== 'offer_type') {
+      throw new \Exception('Oops something went wrong.');
+    }
+
+    $offer = $this->offerManager->create(
+      $offer_type,
+      $theme,
+      $account,
+      $form_state->getValue('body'),
+      $form_state->getValue('availability'),
+      $form_state->getValue('contact_firstname'),
+      $form_state->getValue('contact_lastname'),
+      $form_state->getValue('contact_phone'),
+      $form_state->getValue('contact_mail'),
+    );
+
+    $this->messenger()->addMessage($this->t('qs_sharing.offers.form.add.success @offer @offer_type', [
+      '@offer' => $offer->getTitle(),
+      '@offer_type' => $offer_type->getTitle(),
+    ]));
+    $form_state->setRedirect('entity.node.canonical', ['node' => $offer_type->id(), 'theme' => $theme->id()], ['fragment' => "card{$offer->id()}"]);
   }
 
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // @todo handle validation.
+    // When the custom offer type is checked, then the new offer type title is mandatory.
+    if ($form_state->getValue('offer_type_new') === '1'
+      && (!$form_state->getValue('offer_type_title') || empty($form_state->getValue('offer_type_title')))
+    ) {
+      $form_state->setErrorByName('offer_type_title', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['offer']['step-1']['offer_type_title']['#title']]));
+    }
+
+    // When the custom offer type is unchecked, then the  offer type selection is mandatory.
+    if ($form_state->getValue('offer_type_new') === '0'
+      && (!$form_state->getValue('offer_type') || empty($form_state->getValue('offer_type')))
+    ) {
+      $form_state->setErrorByName('offer_type', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $form['offer']['step-1']['offer_type']['#title']]));
+    }
+
+    // Assert the theme is valid.
+    if (!$form_state->getValue('theme') || empty($form_state->getValue('theme'))) {
+      $form_state->setErrorByName('form', $this->t('qs_sharing.offers.form.add.error.empty.theme'));
+    }
+
+    // Assert the body is valid.
+    if (!$form_state->getValue('body') || empty($form_state->getValue('body'))) {
+      $form_state->setErrorByName('body', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $this->t('qs_sharing.offers.form.add.body')]));
+    }
+
+    // Assert the availability is valid.
+    if (!$form_state->getValue('availability') || empty($form_state->getValue('availability'))) {
+      $form_state->setErrorByName('availability', $this->t('qs.form.error.empty @fieldname', ['@fieldname' => $this->t('qs_sharing.offers.form.add.availability')]));
+    }
   }
 
 }

@@ -1,21 +1,124 @@
 Feature: Sharing Offers add Form
 
+## Access
+  Scenario Outline: The add Offer form is only available to account being at least volunteering on one sharing theme.
+    Given I am logged in as user "<user>"
+    When I am on "<url>"
+    Then the response status code should be <code>
+    Examples:
+    | user | url | code |
+    | admin | /sharing/1/offers/add | 200 |
+    | admin | /sharing/2/offers/add | 200 |
+    | admin | /sharing/3/offers/add | 200 |
+    | member+lausanne | /sharing/1/offers/add | 403 |
+    | member+lausanne | /sharing/2/offers/add | 403 |
+    | member+lausanne | /sharing/3/offers/add | 403 |
+    | approval+lausanne | /sharing/1/offers/add | 403 |
+    | approval+lausanne | /sharing/2/offers/add | 403 |
+    | approval+lausanne | /sharing/3/offers/add | 403 |
+    | manager+lausanne | /sharing/1/offers/add | 403 |
+    | manager+lausanne | /sharing/2/offers/add | 403 |
+    | manager+lausanne | /sharing/3/offers/add | 403 |
+    | organizer+lausanne | /sharing/1/offers/add | 403 |
+    | organizer+lausanne | /sharing/2/offers/add | 403 |
+    | organizer+lausanne | /sharing/3/offers/add | 403 |
+    | member+lausanne+organizer+fribourg | /sharing/1/offers/add | 403 |
+    | member+lausanne+organizer+fribourg | /sharing/2/offers/add | 403 |
+    | member+lausanne+organizer+fribourg | /sharing/3/offers/add | 403 |
+    | member+fribourg+approval+organizer+fribourg | /sharing/1/offers/add | 403 |
+    | member+fribourg+approval+organizer+fribourg | /sharing/2/offers/add | 403 |
+    | member+fribourg+approval+organizer+fribourg | /sharing/3/offers/add | 403 |
+    | member+fribourg+organizer+fribourg | /sharing/1/offers/add | 403 |
+    | member+fribourg+organizer+fribourg | /sharing/2/offers/add | 403 |
+    | member+fribourg+organizer+fribourg | /sharing/3/offers/add | 403 |
+    | approval+member+fribourg+approval+organizer+fribourg | /sharing/1/offers/add | 403 |
+    | approval+member+fribourg+approval+organizer+fribourg | /sharing/2/offers/add | 403 |
+    | approval+member+fribourg+approval+organizer+fribourg | /sharing/3/offers/add | 403 |
+    | declined+organizer+lausanne | /sharing/1/offers/add | 403 |
+    | declined+organizer+lausanne | /sharing/2/offers/add | 403 |
+    | declined+organizer+lausanne | /sharing/3/offers/add | 403 |
+    | member+lausanne+declined+organizer+lausanne | /sharing/1/offers/add | 403 |
+    | member+lausanne+declined+organizer+lausanne | /sharing/2/offers/add | 403 |
+    | member+lausanne+declined+organizer+lausanne | /sharing/3/offers/add | 403 |
+    | member+fribourg+declined+member+lausanne | /sharing/1/offers/add | 403 |
+    | member+fribourg+declined+member+lausanne | /sharing/2/offers/add | 403 |
+    | member+fribourg+declined+member+lausanne | /sharing/3/offers/add | 403 |
+
 ## Floating Button
-  @api
-  Scenario: In the Sharing request form page, I don't see any floating button
+  Scenario: In the add Offer form, I don't see any floating button
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
     Then I should see 1 ".floating a" element
     And I should see "qs_sharing.add_offer" link with href "/sharing/1/offers/add"
 
-# Back button.
-  @api
-  Scenario: In the Sharing request form page, I don't see any back button
+## Back button.
+  Scenario: In the add Offer form, I don't see any back button
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
-    Then I should not see a "#block-previousnavigation a" element
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_my_offers" link with href "/sharing/1/user/1/offers"
 
-# Form pre-filled values.
+## Form pre-filled values.
+  Scenario Outline: In the add Offer form, a select should let me choose on community's offer's types.
+    Given I am logged in as user "admin"
+    When I am on "<url>"
+    Then I should see <choices> "#edit-offer-type option" elements
+    Examples:
+      | url | choices |
+      | /sharing/1/offers/add | 3 |
+      | /sharing/2/offers/add | 1 |
+      | /sharing/3/offers/add | 1 |
 
-# Form submits.
+  Scenario Outline: In the add Offer form, the contact information must be prefilled using logged-in account data.
+    Given I am volunteer on community <community> for theme 22 as user <user_id>
+    Given I am logged in as user "<user>"
+    When I am on "/sharing/<community>/offers/add"
+    And the "edit-contact-firstname" field should contain "<firstname>"
+    And the "edit-contact-lastname" field should contain "<lastname>"
+    And the "edit-contact-phone" field should contain "<phone>"
+    And the "edit-contact-mail" field should contain "<mail>"
+    Examples:
+      | user | user_id | community | firstname | lastname | phone | mail |
+      | admin | 1 | 1 | | | | dev@antistatique.net |
+      | member+lausanne | 2 | 1 | Sarah | Courci | 0211234567 | member+lausanne@antistatique.net |
+      | manager+lausanne | 5 | 1 | Juda | Bricot | | manager+lausanne@antistatique.net |
+      | organizer+lausanne | 6 | 1 | Gerard | Mensoif | | organizer+lausanne@antistatique.net |
+      | member+lausanne+organizer+fribourg | 8 | 1 | Jerry | Kan | | member+lausanne+organizer+fribourg@antistatique.net |
+      | member+lausanne+organizer+fribourg | 8 | 2 | Jerry | Kan | | member+lausanne+organizer+fribourg@antistatique.net |
+      | member+fribourg+approval+organizer+fribourg | 14 | 2 | Paul | Honet | 0211234567 | member+fribourg+approval+organizer+fribourg@antistatique.net |
 
+## Form submits.
+  @api @preserveDatabase
+  Scenario: In the add Offer form, I should be able to submit a valid offer in an existing offer type.
+    Given I am logged in as user "admin"
+    When I am on "/sharing/1/offers/add"
+    And I select "64" from "edit-offer-type"
+    And I select "22" from "theme"
+    And I fill in "J'échange diverses pièces de porcelaine, contre du matériel de cuisine." for "edit-body"
+    And I fill in "A convenir" for "edit-availability"
+    And I fill in "Sarah" for "edit-contact-firstname"
+    And I fill in "Courci" for "edit-contact-lastname"
+    And I fill in "Courci" for "edit-contact-lastname"
+    And I fill in "0211234567" for "edit-contact-phone"
+    And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
+    And I press "edit-submit"
+    Then the url should match "/fr/node/64#card77"
+    And I should see "qs_sharing.offers.form.add.success Faire les courses | Sarah Courci Faire les courses" in the ".alert" element
+
+  @api @preserveDatabase
+  Scenario: In the add Offer form, I should be able to submit a valid offer in an new offer type.
+    Given I am logged in as user "admin"
+    When I am on "/sharing/1/offers/add"
+    And I select "1" from "offer_type_new"
+    And I select "22" from "theme"
+    And I fill in "Echange ou don de matériel" for "edit-offer-type-title"
+    And I fill in "J'échange diverses pièces de porcelaine, contre du matériel de cuisine." for "edit-body"
+    And I fill in "A convenir" for "edit-availability"
+    And I fill in "Sarah" for "edit-contact-firstname"
+    And I fill in "Courci" for "edit-contact-lastname"
+    And I fill in "Courci" for "edit-contact-lastname"
+    And I fill in "0211234567" for "edit-contact-phone"
+    And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
+    And I press "edit-submit"
+    Then the url should match "/fr/node/77#card78"
+    And I should see "qs_sharing.offers.form.add.success Echange ou don de matériel | Sarah Courci Echange ou don de matériel" in the ".alert" element

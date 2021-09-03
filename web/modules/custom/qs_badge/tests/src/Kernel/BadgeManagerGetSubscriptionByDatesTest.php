@@ -25,6 +25,7 @@ final class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase 
   public static $modules = [
     'qs_badge',
     'qs_subscription',
+    'qs_sharing',
   ];
 
   /**
@@ -37,7 +38,7 @@ final class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase 
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Install every system configurations needs by FormBuilder.
@@ -54,7 +55,7 @@ final class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase 
   /**
    * @covers ::getSubscriptionByDates
    */
-  public function testGetSubscriptionByDates() {
+  public function testGetSubscriptionByDates(): void {
     $community = $this->seedCommunities(1);
     $activity = $this->seedActivities($community[1], 1);
 

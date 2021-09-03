@@ -25,7 +25,7 @@ final class EventManagerTest extends ResoliKernelTestBase {
   public static $modules = [
     'qs_subscription',
     'qs_activity',
-    'qs_sharing'
+    'qs_sharing',
   ];
 
   /**

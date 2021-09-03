@@ -18,12 +18,11 @@ use Drupal\qs_test\Kernel\ResoliKernelTestBase;
 final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   public static $modules = [
     'qs_badge',
+    'qs_sharing',
   ];
 
   /**
@@ -36,7 +35,7 @@ final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     // Install every system configurations needs by FormBuilder.
@@ -52,7 +51,7 @@ final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
   /**
    * @covers ::countEventsByDates
    */
-  public function testCountEventsByDates() {
+  public function testCountEventsByDates(): void {
     $communities = $this->seedCommunities(1);
     $activities = $this->seedActivities($communities[1], 1);
 
@@ -106,7 +105,7 @@ final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
   /**
    * @covers ::countEventsByDates
    */
-  public function testCountEventsByDatesDontMixCommunities() {
+  public function testCountEventsByDatesDontMixCommunities(): void {
     $communities = $this->seedCommunities(2);
 
     $activities = $this->seedActivities($communities[1], 1);

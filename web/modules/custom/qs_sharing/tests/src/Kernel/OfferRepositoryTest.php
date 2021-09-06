@@ -5,7 +5,7 @@ namespace Drupal\Tests\qs_sharing\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\NodeInterface;
 use Drupal\qs_test\NodeTestTrait;
-use Drupal\qs_test\OfferWorkflowTestTrait;
+use Drupal\qs_test\SharingWorkflowTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\qs_test\UserTestTrait;
 use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
@@ -22,7 +22,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
 final class OfferRepositoryTest extends KernelTestBase {
   use EntityReferenceTestTrait;
   use NodeTestTrait;
-  use OfferWorkflowTestTrait;
+  use SharingWorkflowTestTrait;
   use TaxonomyTestTrait;
   use UserTestTrait;
 

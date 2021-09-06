@@ -2344,3 +2344,6 @@ msgstr "Réactiver mon offre"
 
 msgid "qs_sharing.offers.form.reactivate.success @offer"
 msgstr "L’offre «@offer» a bien été réactivée !"
+
+msgid "qs.sharing.readmore"
+msgstr "Voir les offres"

@@ -8,7 +8,7 @@ Feature: Offer Deactivate Form
     And I should see "qs.form.cancel" link with href "/sharing/1/user/6/offers"
     Then I should see 1 "button[type=submit]" element
 
-  @api @preserveDatabase @mail
+  @api @preserveDatabase
   Scenario: When deactivating an Offer, it should works and redirect me on my offer dashboard page
     Given I am logged in as user "admin"
     When I am on "/sharing/72/deactivate"

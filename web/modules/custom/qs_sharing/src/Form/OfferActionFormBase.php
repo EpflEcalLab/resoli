@@ -16,12 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Base form for all offer actions.
  */
 abstract class OfferActionFormBase extends FormBase {
-  /**
-   * The current user.
-   *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $currentUser;
 
   /**
    * The node Storage.
@@ -46,11 +40,10 @@ abstract class OfferActionFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, OfferRepository $offer_repository, EntityTypeManagerInterface $entity_type_manager, AccountInterface $current_user) {
+  public function __construct(AccessControl $acl, OfferRepository $offer_repository, EntityTypeManagerInterface $entity_type_manager) {
     $this->acl = $acl;
     $this->offerRepository = $offer_repository;
     $this->nodeStorage = $entity_type_manager->getStorage('node');
-    $this->currentUser = $current_user;
   }
 
   /**
@@ -78,15 +71,12 @@ abstract class OfferActionFormBase extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $offer = NULL) {
-    // Save the offer for submission.
-    if ($offer) {
-      $form_state->set('offer', $offer->id());
+    if (!$offer) {
+      return $form;
     }
 
-    $form_state->setRequestMethod('POST');
-    $form_state->setCached(TRUE);
-
-    $form['#attached']['library'][] = 'qs_site/unload';
+    // Save the offer for later usage on submission.
+    $form_state->set('offer', $offer->id());
 
     return $form;
   }
@@ -100,8 +90,7 @@ abstract class OfferActionFormBase extends FormBase {
     // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('qs_sharing.repository.offer'),
-      $container->get('entity_type.manager'),
-      $container->get('current_user')
+      $container->get('entity_type.manager')
     );
   }
 

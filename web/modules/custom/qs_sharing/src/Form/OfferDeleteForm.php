@@ -16,11 +16,12 @@ class OfferDeleteForm extends OfferActionFormBase {
     if (!isset($options['offer'])) {
       return $form;
     }
+    /** @var \Drupal\node\NodeInterface $offer */
     $offer = $options['offer'];
 
     $form = parent::buildForm($form, $form_state, $offer);
 
-    // Disable caching & HTML5 validation.
+    // Disable caching.
     $form['#cache']['max-age'] = 0;
 
     $form['#attributes'] = [
@@ -46,9 +47,6 @@ class OfferDeleteForm extends OfferActionFormBase {
         'data-confirm' => $this->t('qs_sharing.user.offers.collection.delete.confirmed'),
       ],
     ];
-
-    // Remove unload script.
-    $form['#attached']['library'] = [];
 
     return $form;
   }
@@ -76,7 +74,7 @@ class OfferDeleteForm extends OfferActionFormBase {
 
     $form_state->setRedirect('qs_sharing.collection.user.offers', [
       'community' => $community->id(),
-      'user' => $this->currentUser->id(),
+      'user' => $this->currentUser()->id(),
     ], []);
   }
 

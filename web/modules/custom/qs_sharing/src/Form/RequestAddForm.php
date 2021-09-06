@@ -74,7 +74,7 @@ class RequestAddForm extends FormBase {
     // Get the current language.
     $currentLang = $this->languageManager->getCurrentLanguage();
 
-    // Disable caching & HTML5 validation.
+    // Disable caching.
     $form['#cache']['max-age'] = 0;
 
     $form['#attributes'] = [

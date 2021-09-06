@@ -1,17 +1,16 @@
 Feature: Offer Delete Form
 
   @api
-  Scenario: When reaching the Delete form of Offer, I should see the confirmation form
-    Given I am logged in as user "organizer+lausanne"
-    When I am on "/sharing/76/delete"
-    Then I should see "qs_sharing.offers.form.delete.warning"
-    And I should see "qs.form.cancel" link with href "/sharing/1/user/6/offers"
-    Then I should see 1 "button[type=submit]" element
+  Scenario: When reaching the offer dashboard, I should see the delete form
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/sharing/1/users/8/offers"
+    Then I should see 1 "#qs-sharing-offer-delete-form" elements
 
   @api @preserveDatabase
   Scenario: When deleting an Offer, it should works and redirect me on my offer dashboard page
-    Given I am logged in as user "admin"
-    When I am on "/sharing/72/delete"
-    And I press "edit-submit"
-    Then the url should match "/sharing/1/user/1/offers"
-    And I should see "qs_sharing.offers.form.delete.success @offer Aide pour porter les courses" in the ".alert" element
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/sharing/1/users/8/offers"
+    And I press "#collapse-75 #qs-sharing-offer-delete-form #edit-submit"
+    Then the url should match "/sharing/1/user/8/offers"
+    And I should see "qs_sharing.offers.form.delete.success Discussion à l'achat d'un nouvelle ordinateur" in the ".alert" element
+    And I should not see "#collapse-75" in the ".card-list-offer" element

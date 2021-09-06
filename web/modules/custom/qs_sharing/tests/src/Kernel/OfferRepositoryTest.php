@@ -246,7 +246,7 @@ final class OfferRepositoryTest extends KernelTestBase {
 
     $offers = $this->offerRepository->getAllByCommunity($this->community2);
     self::containsOnlyInstancesOf(NodeInterface::class, $offers);
-    self::assertCount(1, $offers);
+    self::assertNull($offers);
   }
 
   /**
@@ -272,7 +272,7 @@ final class OfferRepositoryTest extends KernelTestBase {
 
     $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type3, $this->theme2);
     self::containsOnlyInstancesOf(NodeInterface::class, $offers);
-    self::assertCount(1, $offers);
+    self::assertNull($offers);
   }
 
   /**

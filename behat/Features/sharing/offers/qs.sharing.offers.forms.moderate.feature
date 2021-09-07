@@ -9,17 +9,17 @@ Feature: Offer Moderate Form
 
     Examples:
       | user | community-id | offer-id | code |
-      | organizer+lausanne | 1 | 76 | 200 |
-      | organizer+lausanne | 1 | 74 | 200 |
+      | organizer+lausanne | 1 | 76 | 403 |
+      | organizer+lausanne | 1 | 74 | 403 |
       | member+lausanne+manager+fribourg | 2 | 71  | 200 |
-      | member+lausanne+manager+fribourg | 1 | 72  | 200 |
-      | member+lausanne+manager+fribourg | 1 | 73  | 200 |
-      | organizer+lausanne | 1 | 71 | 200 |
-      | organizer+lausanne | 1 | 72 | 200 |
+      | member+lausanne+manager+fribourg | 1 | 72  | 403 |
+      | member+lausanne+manager+fribourg | 1 | 73  | 403 |
+      | organizer+lausanne | 1 | 71 | 403 |
+      | organizer+lausanne | 1 | 72 | 403 |
       | organizer+lausanne | 2 | 73 | 403 |
       | member+lausanne+manager+fribourg | 1 | 71  | 403 |
-      | member+lausanne+manager+fribourg | 2 | 72  | 403 |
-      | member+lausanne+manager+fribourg | 2 | 73  | 403 |
+      | member+lausanne+manager+fribourg | 2 | 72  | 200 |
+      | member+lausanne+manager+fribourg | 2 | 73  | 200 |
       | member+lausanne+manager+fribourg | 1 | 69  | 403 |
       | member+lausanne+manager+fribourg | 1 | 74  | 403 |
       | member+lausanne+manager+fribourg | 1 | 76  | 403 |
@@ -27,10 +27,10 @@ Feature: Offer Moderate Form
       | member+lausanne | 1 | 74  | 403 |
       | member+lausanne | 2 | 73  | 403 |
       | member+lausanne | 1 | 69  | 403 |
-      | manager+lausanne | 1 | 70  | 403 |
+      | manager+lausanne | 1 | 70  | 200 |
       | manager+lausanne | 2 | 71  | 403 |
-      | manager+lausanne | 1 | 72  | 403 |
-      | manager+lausanne | 1 | 73  | 403 |
+      | manager+lausanne | 1 | 72  | 200 |
+      | manager+lausanne | 1 | 73  | 200 |
 
 ## Form visibility.
   @api
@@ -47,6 +47,6 @@ Feature: Offer Moderate Form
     Then I should see 1 "form.offer73.moderate" element
     Then I follow the link ".offer73.moderate button[type='submit']" element
     And 1 mail should be sent
-    Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.offer.deactivated.subject @sitename Resoli Aide pour porter les courses"
+    Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.offer.deactivated.subject Resoli Aide pour porter les courses"
     Then the url should match "/sharing/2/offers"
     And I should see 0 ".card.card-info " element

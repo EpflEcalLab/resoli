@@ -27,7 +27,7 @@ class OfferDeleteForm extends OfferActionFormBase {
     $form['#attributes'] = [
       'data-ajax' => 'true',
       'data-parent' => 'card' . $offer->id(),
-      'class' => ['offer'],
+      'class' => ['offer', 'offer' . $offer->id(), 'delete'],
     ];
     $form['action']['submit'] = [
       '#type' => 'submit',

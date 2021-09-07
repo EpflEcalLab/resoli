@@ -27,7 +27,7 @@ class OfferReactivateForm extends OfferActionFormBase {
     $form['#attributes'] = [
       'data-ajax' => 'true',
       'data-parent' => 'card' . $offer->id(),
-      'class' => ['offer'],
+      'class' => ['offer', 'offer' . $offer->id(), 'reactivate'],
     ];
     $form['action']['submit'] = [
       '#type' => 'submit',

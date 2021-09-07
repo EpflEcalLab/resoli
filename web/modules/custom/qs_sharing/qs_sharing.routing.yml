@@ -60,6 +60,51 @@ qs_sharing.offers.form.add:
       community:
         type: entity:taxonomy_term
 
+# Offer delete form
+qs_sharing.offers.form.delete:
+  path: '/sharing/{offer}/delete'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferDeleteForm'
+    _title: 'qs_sharing.offers.form.delete.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferDeleteForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
+
+# Offer deactivate form
+qs_sharing.offers.form.deactivate:
+  path: '/sharing/{offer}/deactivate'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferDeactivateForm'
+    _title: 'qs_sharing.offers.form.deactivate.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferDeactivateForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
+
+# Offer reactivate form
+qs_sharing.offers.form.reactivate:
+  path: '/sharing/{offer}/reactivate'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferReactivateForm'
+    _title: 'qs_sharing.offers.form.reactivate.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferReactivateForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
+
 ## PDF Export of Offers by communities.
 qs_sharing.export.community.offers.pdf:
   path: '/sharing/export/community/{community}/pdf'

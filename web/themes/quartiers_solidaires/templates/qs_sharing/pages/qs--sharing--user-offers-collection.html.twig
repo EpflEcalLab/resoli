@@ -20,7 +20,7 @@
   {% if variables.offers %}
     <ul class="card-list card-list-offer mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
       {% for offer in variables.offers %}
-        {% set is_deactivated = offer.status.value != 1 %}
+        {% set is_deactivated = offer.moderation_state.value == 'archived' %}
         <li class="card card-list-item {% if is_deactivated %}deactivated{% endif %}" id="card{{ offer.nid.value }}">
           <a
             data-toggle="collapse"
@@ -65,14 +65,11 @@
                 <p class="mb-0">{{ offer.body.value }}</p>
               </div>
 
-              {# @todo Handle actions in routing and controller #}
+              {# @todo Handle edit + add actions in routing and controller #}
               <div class="card-actions card-actions-offset row">
                 {% if not is_deactivated %}
                   <div class="col-sm-6 mb-3">
-                    <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
-                      {{ macros.icon('cross') }}
-                      {{ 'qs_sharing.user.offers.collection.deactivate'|t }}
-                    </a>
+                    {{ bamboo_render_form('qs_sharing', 'OfferDeactivateForm', {'offer': offer}) }}
                   </div>
                   <div class="col-sm-6 mb-3">
                     <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
@@ -82,16 +79,10 @@
                   </div>
                 {% else %}
                   <div class="col-sm-6 mb-3">
-                    <a href="#" class="btn bg-danger btn-outline-invert btn-icon shadow-to-bottom btn-block">
-                      {{ macros.icon('trash') }}
-                      {{ 'qs_sharing.user.offers.collection.delete'|t }}
-                    </a>
+                    {{ bamboo_render_form('qs_sharing', 'OfferDeleteForm', {'offer': offer}) }}
                   </div>
                   <div class="col-sm-6 mb-3">
-                    <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
-                      {{ macros.icon('clockwise') }}
-                      {{ 'qs_sharing.user.offers.collection.reactivate'|t }}
-                    </a>
+                    {{ bamboo_render_form('qs_sharing', 'OfferReactivateForm', {'offer': offer}) }}
                   </div>
                 {% endif %}
               </div>

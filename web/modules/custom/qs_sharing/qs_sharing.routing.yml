@@ -60,6 +60,20 @@ qs_sharing.offers.form.add:
       community:
         type: entity:taxonomy_term
 
+qs_sharing.offers.form.edit:
+  path: '/sharing/offers/{offer}/edit'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferEditForm'
+    _title_callback: '\Drupal\qs_sharing\Form\OfferEditForm::getTitle'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferEditForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
+
 ## PDF Export of Offers by communities.
 qs_sharing.export.community.offers.pdf:
   path: '/sharing/export/community/{community}/pdf'

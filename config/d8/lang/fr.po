@@ -2363,9 +2363,6 @@ msgstr "Ex. Dubuis"
 msgid "qs_sharing.offers.form.add.contact_mail"
 msgstr "Comment contacter cette personne?"
 
-msgid "qs_activity.events.form.edit.contact_mail"
-msgstr "Quelle est son adresse e-mail?"
-
 msgid "qs_sharing.offers.form.add.contact_mail.placeholder"
 msgstr "Ex. marcel.despraz@re-so.ch"
 
@@ -2377,3 +2374,51 @@ msgstr "Retour à mes offres"
 
 msgid "qs_sharing.offers.form.add.success @offer @offer_type"
 msgstr "Votre nouvelle offre a bien été créée!"
+
+msgid "qs_sharing.offers.form.edit.title @offer_date"
+msgstr "Modifiez votre offre du @offer_date!"
+
+msgid "qs_sharing.edit_offer"
+msgstr "Modifier mon offre"
+
+msgid "qs_sharing.offers.form.edit.description"
+msgstr "La date sera automatiquement ajustée en cas de validation des données."
+
+msgid "qs_sharing.offers.form.edit.theme"
+msgstr "Quel thème correspond à votre offre?"
+
+msgid "qs_sharing.offers.form.edit.theme.placeholder"
+msgstr ""
+
+msgid "qs_sharing.offers.form.edit.body"
+msgstr "Comment décririez-vous votre offre ?"
+
+msgid "qs_sharing.offers.form.edit.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_sharing.offers.form.edit.availability"
+msgstr "Quelles sont vos disponibilités?"
+
+msgid "qs_sharing.offers.form.add.availability.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_sharing.offers.form.edit.contact_firstname"
+msgstr "Par qui cette offre est-elle proposée?"
+
+msgid "qs_sharing.offers.form.edit.contact_firstname.placeholder"
+msgstr "Ex. Catherine"
+
+msgid "qs_sharing.offers.form.edit.contact_lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+msgid "qs_sharing.offers.form.edit.contact_mail"
+msgstr "Comment contacter cette personne?"
+
+msgid "qs_sharing.offers.form.edit.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@re-so.ch"
+
+msgid "qs_sharing.offers.form.edit.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+msgid "qs_sharing.offers.form.edit.success @offer_date"
+msgstr "Les informations de l’offre du «@offer_date» ont bien été validées!"

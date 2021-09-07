@@ -87,7 +87,13 @@ class OfferModerateForm extends FormBase {
     $form['#attributes'] = [
       'data-ajax' => 'true',
       'data-parent' => 'card' . $offer->id(),
-      'class' => ['offer', 'offer' . $offer->id(), 'moderate'],
+      'class' => [
+        'offer',
+        'offer' . $offer->id(),
+        'moderate',
+        'mx-auto',
+        'mb-3',
+      ],
     ];
     $form['action']['submit'] = [
       '#type' => 'submit',

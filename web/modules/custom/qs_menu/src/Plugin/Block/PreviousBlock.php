@@ -279,7 +279,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'community' => $community->id(),
           ], $options);
           $label = $this->t('qs.previous.to_offers_type_list');
-          $theme = 'info';
+          $theme = 'primary';
 
           break;
 
@@ -290,7 +290,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'user' => $this->currentUser->id(),
           ], $options);
           $label = $this->t('qs.previous.to_my_offers');
-          $theme = 'info';
+          $theme = 'primary';
 
           break;
 

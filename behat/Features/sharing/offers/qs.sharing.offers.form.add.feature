@@ -45,14 +45,14 @@ Feature: Sharing Offers add Form
     | member+fribourg+declined+member+lausanne | /sharing/3/offers/add | 403 |
 
 ## Floating Button
-  Scenario: In the add Offer form, I don't see any floating button
+  Scenario: In the add Offer form, I should see the floating button pointing to the current form.
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
     Then I should see 1 ".floating a" element
     And I should see "qs_sharing.add_offer" link with href "/sharing/1/offers/add"
 
 ## Back button.
-  Scenario: In the add Offer form, I don't see any back button
+  Scenario: In the add Offer form, I should see the back button pointing to my offers.
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
     Then I should see a "#block-previousnavigation a" element

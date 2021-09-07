@@ -10,6 +10,8 @@ use Drupal\node\NodeInterface;
 
 include 'inc/offer_type_node_access.inc';
 
+require_once 'inc/mails.inc';
+
 /**
  * Implements hook_theme().
  */

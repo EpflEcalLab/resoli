@@ -9,7 +9,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_sharing\Manager\OfferManager;
-use Drupal\qs_sharing\Repository\OfferRepository;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -24,13 +23,6 @@ class ModerateOfferForm extends FormBase {
    * @var \Drupal\node\NodeStorageInterface
    */
   protected $nodeStorage;
-
-  /**
-   * The entity QS Offer Manager.
-   *
-   * @var \Drupal\qs_sharing\Repository\OfferRepository
-   */
-  protected $offerRepository;
 
   /**
    * Access Control Service.
@@ -49,9 +41,8 @@ class ModerateOfferForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, OfferRepository $offer_repository, EntityTypeManagerInterface $entity_type_manager, OfferManager $offer_manager) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, OfferManager $offer_manager) {
     $this->acl = $acl;
-    $this->offerRepository = $offer_repository;
     $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->offerManager = $offer_manager;
   }
@@ -87,6 +78,8 @@ class ModerateOfferForm extends FormBase {
 
     /** @var \Drupal\node\NodeInterface $offer */
     $offer = $options['offer'];
+    // Save the offer for later usage on submission.
+    $form_state->set('offer', $offer->id());
 
     // Disable caching.
     $form['#cache']['max-age'] = 0;
@@ -124,7 +117,6 @@ class ModerateOfferForm extends FormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('qs_acl.access_control'),
-      $container->get('qs_sharing.repository.offer'),
       $container->get('entity_type.manager'),
       $container->get('qs_sharing.manager.offer')
     );
@@ -147,6 +139,10 @@ class ModerateOfferForm extends FormBase {
     // Deactivate the offer and send an email to its author.
     $this->offerManager->archive($offer);
     $this->offerManager->sendModerated($offer);
+
+    $form_state->setRedirect('qs_sharing.collection.offer', [
+      'community' => $offer->field_offer_type->entity->field_community->entity->id(),
+    ], []);
   }
 
 }

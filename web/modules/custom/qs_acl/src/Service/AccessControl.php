@@ -202,26 +202,6 @@ class AccessControl {
   }
 
   /**
-   * Check if the account is authorized ot edit the given offer.
-   *
-   * @param \Drupal\node\NodeInterface $offer
-   *   The offer to check access.
-   *
-   * @return bool
-   *   Is the user may edit the offer.
-   */
-  public function hasAccessEditOffer(NodeInterface $offer) {
-    $user = $this->currentUser;
-
-    // Check bypass.
-    if ($this->hasBypass($user)) {
-      return TRUE;
-    }
-
-    return $user->id() === $offer->uid->entity->id();
-  }
-
-  /**
    * Check if the account has read access on the given photo.
    *
    * @param \Drupal\node\NodeInterface $activity
@@ -398,6 +378,30 @@ class AccessControl {
     $number = $this->countCommunitiesByUser($user);
 
     return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account is authorized ot edit the given offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise, use current user.
+   *
+   * @return bool
+   *   Is the user may edit the offer.
+   */
+  public function hasEditAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL): bool {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $offer->get('uid')->target_id;
+
+    return $user->id() === $author_id && $author_id;
   }
 
   /**

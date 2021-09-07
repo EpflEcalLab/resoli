@@ -65,8 +65,7 @@ class OfferDeactivateForm extends OfferActionFormBase {
     $community = $offer->field_offer_type->entity->field_community->entity;
 
     // Deactivate the offer.
-    $offer->set('moderation_state', 'archived');
-    $offer->save();
+    $this->offerManager->deactivate($offer);
 
     $this->messenger()->addMessage($this->t('qs_sharing.offers.form.deactivate.success @offer', [
       '@offer' => $offer->getTitle(),

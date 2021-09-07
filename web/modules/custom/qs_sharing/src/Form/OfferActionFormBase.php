@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_sharing\Manager\OfferManager;
 use Drupal\qs_sharing\Repository\OfferRepository;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -25,11 +26,19 @@ abstract class OfferActionFormBase extends FormBase {
   protected $nodeStorage;
 
   /**
+   * The offer manager.
+   *
+   * @var \Drupal\qs_sharing\Manager\OfferManager
+   */
+  protected $offerManager;
+
+  /**
    * The entity QS Offer Manager.
    *
    * @var \Drupal\qs_sharing\Repository\OfferRepository
    */
   protected $offerRepository;
+
   /**
    * Access Control Service.
    *
@@ -40,10 +49,11 @@ abstract class OfferActionFormBase extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, OfferRepository $offer_repository, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(AccessControl $acl, OfferRepository $offer_repository, EntityTypeManagerInterface $entity_type_manager, OfferManager $offer_manager) {
     $this->acl = $acl;
     $this->offerRepository = $offer_repository;
     $this->nodeStorage = $entity_type_manager->getStorage('node');
+    $this->offerManager = $offer_manager;
   }
 
   /**
@@ -60,7 +70,7 @@ abstract class OfferActionFormBase extends FormBase {
   public function access(AccountInterface $account, NodeInterface $offer) {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasAccessEditOffer($offer)) {
+    if ($this->acl->hasEditAccessOffer($offer)) {
       $access = AccessResult::allowed();
     }
 
@@ -90,7 +100,8 @@ abstract class OfferActionFormBase extends FormBase {
     // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('qs_sharing.repository.offer'),
-      $container->get('entity_type.manager')
+      $container->get('entity_type.manager'),
+      $container->get('qs_sharing.manager.offer')
     );
   }
 

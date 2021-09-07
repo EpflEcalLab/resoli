@@ -64,9 +64,8 @@ class OfferReactivateForm extends OfferActionFormBase {
     $offer = $this->nodeStorage->load($form_state->get('offer'));
     $community = $offer->field_offer_type->entity->field_community->entity;
 
-    // Reactivate the offer.
-    $offer->set('moderation_state', 'published');
-    $offer->save();
+    // Deactivate the offer.
+    $this->offerManager->reactivate($offer);
 
     $this->messenger()->addMessage($this->t('qs_sharing.offers.form.reactivate.success @offer', [
       '@offer' => $offer->getTitle(),

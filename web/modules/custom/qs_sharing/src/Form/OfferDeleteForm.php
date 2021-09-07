@@ -65,8 +65,8 @@ class OfferDeleteForm extends OfferActionFormBase {
     $offer = $this->nodeStorage->load($form_state->get('offer'));
     $community = $offer->field_offer_type->entity->field_community->entity;
 
-    // Delete the offer.
-    $offer->delete();
+    // Deactivate the offer.
+    $this->offerManager->delete($offer);
 
     $this->messenger()->addMessage($this->t('qs_sharing.offers.form.delete.success @offer', [
       '@offer' => $offer->getTitle(),

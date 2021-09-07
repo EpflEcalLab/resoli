@@ -82,4 +82,53 @@ class OfferManager {
     return $offer;
   }
 
+  /**
+   * Deactivate the offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The deactivated offer.
+   */
+  public function deactivate(NodeInterface $offer): NodeInterface {
+    $offer->set('moderation_state', 'archived');
+    $offer->save();
+
+    return $offer;
+  }
+
+  /**
+   * Delete the offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  public function delete(NodeInterface $offer): void {
+    $offer->delete();
+  }
+
+  /**
+   * Reactivate the offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The reactivated offer.
+   */
+  public function reactivate(NodeInterface $offer): NodeInterface {
+    // Reactivate the offer.
+    $offer->set('moderation_state', 'published');
+    $offer->save();
+
+    return $offer;
+  }
+
 }

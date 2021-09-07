@@ -95,8 +95,7 @@ class OfferManager {
    * @return \Drupal\node\NodeInterface
    *   The updated offer.
    */
-  public function     And I should see "qs_sharing.offers.form.edit.success" in the ".alert" element
-update(NodeInterface $offer, array $fields) {
+  public function update(NodeInterface $offer, array $fields) {
     foreach ($fields as $key => $value) {
       if ($offer->hasField($key)) {
         $offer->set($key, $value);

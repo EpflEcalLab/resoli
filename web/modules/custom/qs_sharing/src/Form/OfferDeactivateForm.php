@@ -65,7 +65,6 @@ class OfferDeactivateForm extends OfferActionFormBase {
     $community = $offer->field_offer_type->entity->field_community->entity;
 
     // Deactivate the offer.
-    // @todo Ensure the latest revision with the updated moderation_state is returned
     $offer->set('moderation_state', 'archived');
     $offer->save();
 

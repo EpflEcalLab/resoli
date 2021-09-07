@@ -65,7 +65,6 @@ class OfferReactivateForm extends OfferActionFormBase {
     $community = $offer->field_offer_type->entity->field_community->entity;
 
     // Reactivate the offer.
-    // @todo Ensure the latest revision with the updated moderation_state is returned
     $offer->set('moderation_state', 'published');
     $offer->save();
 

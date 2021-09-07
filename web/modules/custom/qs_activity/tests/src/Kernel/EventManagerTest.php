@@ -37,7 +37,7 @@ final class EventManagerTest extends ResoliKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->setupActivities();

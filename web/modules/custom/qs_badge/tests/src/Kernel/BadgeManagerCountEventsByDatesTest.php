@@ -22,7 +22,6 @@ final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
    */
   public static $modules = [
     'qs_badge',
-    'qs_sharing',
   ];
 
   /**

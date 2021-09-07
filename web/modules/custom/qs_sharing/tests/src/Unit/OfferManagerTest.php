@@ -159,7 +159,8 @@ final class OfferManagerTest extends UnitTestCase {
         ],
         ['field_contact_name', 'Aptent Tempus'],
         ['field_contact_mail', 'aptent.tempus@example.org'],
-        ['field_contact_phone', '079 790 79 79']);
+        ['field_contact_phone', '079 790 79 79']
+      );
     $node
       ->expects(self::once())
       ->method('save');

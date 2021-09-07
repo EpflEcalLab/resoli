@@ -30,6 +30,13 @@ class OfferEditForm extends FormBase {
   protected $acl;
 
   /**
+   * The date formatter service.
+   *
+   * @var \Drupal\Core\Datetime\DateFormatter
+   */
+  protected $dateFormatter;
+
+  /**
    * The language manager.
    *
    * @var \Drupal\Core\Language\LanguageManagerInterface
@@ -56,13 +63,6 @@ class OfferEditForm extends FormBase {
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
-
-  /**
-   * The date formatter service.
-   *
-   * @var \Drupal\Core\Datetime\DateFormatter
-   */
-  protected $dateFormatter;
 
   /**
    * The offer manager.
@@ -141,21 +141,6 @@ class OfferEditForm extends FormBase {
   }
 
   /**
-   * Generate a dynamic form title using the offer created date.
-   *
-   * @param \Drupal\node\NodeInterface $offer
-   *   The offer to be edited.
-   *
-   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
-   *   The translatable dynamic form title.
-   */
-  public function getTitle(NodeInterface $offer): TranslatableMarkup {
-    return $this->t('qs_sharing.offers.form.edit.title @offer_date', [
-      '@offer_date' => $this->dateFormatter->format($offer->getChangedTime(), 'default_medium_date_only'),
-    ]);
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, ?NodeInterface $offer = NULL) {
@@ -187,6 +172,7 @@ class OfferEditForm extends FormBase {
 
     $community_offer_types = $this->offerTypeRepository->getAllByCommunity($offer->get('field_offer_type')->entity->get('field_community')->entity);
     $options = [];
+
     if (!empty($community_offer_types)) {
       foreach ($community_offer_types as $community_offer_type) {
         $options[$community_offer_type->id()] = $community_offer_type->getTitle();
@@ -358,6 +344,21 @@ class OfferEditForm extends FormBase {
    */
   public function getFormId() {
     return 'qs_sharing_edit_form';
+  }
+
+  /**
+   * Generate a dynamic form title using the offer created date.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to be edited.
+   *
+   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
+   *   The translatable dynamic form title.
+   */
+  public function getTitle(NodeInterface $offer): TranslatableMarkup {
+    return $this->t('qs_sharing.offers.form.edit.title @offer_date', [
+      '@offer_date' => $this->dateFormatter->format($offer->getChangedTime(), 'default_medium_date_only'),
+    ]);
   }
 
   /**

@@ -25,6 +25,7 @@ default:
         - Drupal\Behat\Context\Resoli\AccountFormContext
         - Drupal\Behat\Context\Resoli\ActivityFormsContext
         - Drupal\Behat\Context\Resoli\EventFormsContext
+        - Drupal\Behat\Context\Resoli\SharingContext
 
         # Drupal Extension Contexts
         - Drupal\DrupalExtension\Context\DrupalContext

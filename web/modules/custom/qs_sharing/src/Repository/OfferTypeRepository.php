@@ -39,6 +39,34 @@ class OfferTypeRepository {
   }
 
   /**
+   * Get all offer type in a community.
+   *
+   * This method will return all published offer type on the community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   *
+   * @return array|\Drupal\node\NodeInterface[]|null
+   *   A collection of sharing offers.
+   *   Otherwise NULL.
+   */
+  public function getAllByCommunity(TermInterface $community): ?array {
+    $query = $this->nodeStorage->getQuery()
+      ->accessCheck(TRUE)
+      ->condition('type', 'offer_type')
+      ->condition('status', TRUE)
+      ->condition('field_community', $community->id());
+
+    $ids = $query->execute();
+
+    if (empty($ids) || !\is_array($ids)) {
+      return NULL;
+    }
+
+    return $this->nodeStorage->loadMultiple($ids);
+  }
+
+  /**
    * Get all offer type in a community for a specific sharing theme.
    *
    * This method will return only offer type with at least one published offer.

@@ -186,15 +186,15 @@ class AccessControl {
   }
 
   /**
-   * Check if the account is the author of the given offer.
+   * Check if the account is authorized ot edit the given offer.
    *
    * @param \Drupal\node\NodeInterface $offer
    *   The offer to check access.
    *
    * @return bool
-   *   Is the user the creator of the offer.
+   *   Is the user may edit the offer.
    */
-  public function hasAccessOffer(NodeInterface $offer) {
+  public function hasAccessEditOffer(NodeInterface $offer) {
     $user = $this->currentUser;
 
     // Check bypass.

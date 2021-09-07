@@ -46,9 +46,9 @@ class OfferTypeRepository {
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
    *
-   * @return array|\Drupal\node\NodeInterface[]
+   * @return array|\Drupal\node\NodeInterface[]|null
    *   A collection of sharing offers.
-   *   Otherwise, an empty array.
+   *   Otherwise NULL.
    */
   public function getAllByCommunity(TermInterface $community): ?array {
     $query = $this->nodeStorage->getQuery()

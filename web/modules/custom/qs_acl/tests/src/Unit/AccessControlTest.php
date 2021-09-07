@@ -61,6 +61,29 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
+   * Provider of ::testHasEditAccessOfferContextualUser.
+   *
+   * Set of return value from isCommunityReturnsExcepted with excepted boolean
+   * result on isCommunityVolunteer.
+   *
+   * @return iterable
+   *   Return an array of arrays contains expectation.
+   */
+  public function hasEditAccessOfferReturnsExcepted(): iterable {
+    yield [NULL, NULL, FALSE];
+
+    yield ['1', '1', TRUE];
+
+    yield ['2', '1', FALSE];
+
+    yield ['1', '2', FALSE];
+
+    yield ['1', NULL, FALSE];
+
+    yield [NULL, '2', FALSE];
+  }
+
+  /**
    * Provider of ::testIsCommunityVolunteerContextualUser.
    *
    * Set of return value from isCommunityReturnsExcepted with excepted boolean
@@ -78,6 +101,57 @@ final class AccessControlTest extends UnitTestCase {
       $this->createMock(NodeInterface::class),
     ], TRUE,
     ];
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasEditAccessOffer
+   */
+  public function testHasEditAccessOfferContextualUser() {
+    $offer = $this->createMock(NodeInterface::class);
+
+    $offer->expects(self::exactly(2))
+      ->method('get')
+      ->with('uid')
+      ->willReturn((object) ['target_id' => '2']);
+
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn('2');
+
+    // Fallback on the current user.
+    $this->acl->hasEditAccessOffer($offer);
+
+    $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
+    $anotherCurrentUser->expects(self::once())
+      ->method('id')
+      ->willReturn('2');
+
+    // User the given user.
+    $this->acl->hasEditAccessOffer($offer, $anotherCurrentUser);
+  }
+
+  /**
+   * @covers ::hasEditAccessOffer
+   *
+   * @dataProvider hasEditAccessOfferReturnsExcepted
+   */
+  public function testHasEditAccessOfferReturnsExcepted($userId, $offerAuthorId, bool $excepted) {
+    $offer = $this->createMock(NodeInterface::class);
+    $offer->expects(self::once())
+      ->method('get')
+      ->with('uid')
+      ->willReturn((object) ['target_id' => $offerAuthorId]);
+
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn($userId);
+
+    // Fallback on the current user.
+    $result = $this->acl->hasEditAccessOffer($offer);
+
+    self::assertEquals($excepted, $result);
   }
 
   /**

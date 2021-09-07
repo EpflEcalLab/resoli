@@ -1,4 +1,3 @@
-@kevin
 Feature: Sharing Offers edit Form
 
 ## Access

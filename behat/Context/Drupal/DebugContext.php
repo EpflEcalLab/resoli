@@ -49,6 +49,17 @@ class DebugContext extends RawDrupalContext {
   }
 
   /**
+   * Print the HTML of the current page.
+   *
+   * @Then Print me the HTML and show it
+   */
+  public function printHtml() {
+
+    echo $this->getSession()->getDriver()->getContent();
+
+  }
+
+  /**
    * Save the HTML - All Driver - when a Step fail.
    *
    * @AfterStep

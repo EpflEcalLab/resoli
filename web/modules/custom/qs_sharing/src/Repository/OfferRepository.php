@@ -120,22 +120,26 @@ class OfferRepository {
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
    *
-   * @return array|\Drupal\node\NodeInterface[]
-   *   A collection of node's Offer. Otherwise an empty array.
+   * @return array|\Drupal\node\NodeInterface[]|null
+   *   A collection of node's Offer. Otherwise an empty array or null.
    */
   public function getAllOffersByUser(UserInterface $user, TermInterface $community) {
-    // Get every activity that belongs to the current community.
+    // Get offers that belongs to the current user in the current community.
     $query = $this->database->select('node_field_data', 'offer');
     $query->fields('offer', ['nid'])
-      ->condition('uid', $user->id());
+      ->condition('offer.uid', $user->id());
 
     $query->leftJoin('node__field_offer_type', 'field_offer_type', 'field_offer_type.entity_id = offer.nid');
     $query->leftJoin('node__field_community', 'field_community', 'field_community.entity_id = field_offer_type.field_offer_type_target_id');
     $query->condition('field_community.field_community_target_id', [$community->id()], 'IN');
+    $query->orderBy('offer.status', 'DESC');
+
+    $query->leftJoin('content_moderation_state_field_data', 'content_moderation_state', 'content_moderation_state.content_entity_id = offer.nid');
+    $query->orderBy('content_moderation_state.moderation_state', 'DESC');
 
     $tuples = $query->execute()->fetchAll();
 
-    $offers = [];
+    $offers = NULL;
 
     foreach ($tuples as $tuple) {
       /** @var \Drupal\node\NodeInterface $offer */

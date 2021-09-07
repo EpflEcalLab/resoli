@@ -3,8 +3,8 @@
 namespace Drupal\qs_sharing\Repository;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\taxonomy\TermInterface;
-use Drupal\user\UserInterface;
 
 /**
  * The Volunteerism Repository.
@@ -30,13 +30,13 @@ class VolunteerismRepository {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
-   * @param \Drupal\user\UserInterface $user
+   * @param \Drupal\Core\Session\AccountInterface $user
    *   The user entity.
    *
    * @return \Drupal\qs_sharing\Entity\volunteerism[]|null
    *   A collection of volunteerism. Otherwise, an empty array.
    */
-  public function getAllByCommunityUser(TermInterface $community, UserInterface $user): ?array {
+  public function getAllByCommunityUser(TermInterface $community, AccountInterface $user): ?array {
     $query = $this->volunteerismStorage->getQuery()
       ->accessCheck()
       ->condition('user', $user->id())

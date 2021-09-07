@@ -5,6 +5,7 @@ namespace Drupal\Tests\qs_sharing\Kernel;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\NodeInterface;
 use Drupal\qs_test\NodeTestTrait;
+use Drupal\qs_test\SharingWorkflowTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\qs_test\UserTestTrait;
 use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
@@ -21,6 +22,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
 final class OfferRepositoryTest extends KernelTestBase {
   use EntityReferenceTestTrait;
   use NodeTestTrait;
+  use SharingWorkflowTestTrait;
   use TaxonomyTestTrait;
   use UserTestTrait;
 
@@ -43,6 +45,8 @@ final class OfferRepositoryTest extends KernelTestBase {
     'text',
     'filter',
     'system',
+    'content_moderation',
+    'workflows',
   ];
 
   /**
@@ -62,9 +66,12 @@ final class OfferRepositoryTest extends KernelTestBase {
     $this->entityTypeManager = $this->container->get('entity_type.manager');
 
     $this->installSchema('system', ['sequences']);
+    $this->installEntitySchema('content_moderation_state');
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
     $this->installEntitySchema('taxonomy_term');
+    $this->installConfig(['content_moderation']);
+
     $this->setupTaxonomy();
 
     $this->createVocabulary('sharing_themes');
@@ -72,6 +79,10 @@ final class OfferRepositoryTest extends KernelTestBase {
 
     $this->createNodeType('offer_type');
     $this->createNodeType('offer');
+
+    $workflow = $this->createOfferWorkflow();
+    $workflow->getTypePlugin()->addEntityTypeAndBundle('node', 'offer');
+    $workflow->save();
 
     // Add the field "Belongs to community" on Offer's Type.
     $this->createEntityReferenceField(
@@ -172,48 +183,53 @@ final class OfferRepositoryTest extends KernelTestBase {
     $this->offer_type4->save();
 
     $this->offer1 = $this->entityTypeManager->getStorage('node')->create([
-      'title' => $this->randomString(),
+      'title' => 'Offer 1',
       'type' => 'offer',
       'field_offer_type' => $this->offer_type1,
       'field_theme' => $this->theme1,
       'uid' => $this->user1,
+      'moderation_state' => 'archived',
     ]);
     $this->offer1->save();
 
     $this->offer2 = $this->entityTypeManager->getStorage('node')->create([
-      'title' => $this->randomString(),
+      'title' => 'Offer 2',
       'type' => 'offer',
       'field_offer_type' => $this->offer_type1,
       'field_theme' => $this->theme1,
       'uid' => $this->user1,
+      'moderation_state' => 'published',
     ]);
     $this->offer2->save();
 
     $this->offer3 = $this->entityTypeManager->getStorage('node')->create([
-      'title' => $this->randomString(),
+      'title' => 'Offer 3',
       'type' => 'offer',
       'field_offer_type' => $this->offer_type2,
       'field_theme' => $this->theme1,
       'uid' => $this->user1,
+      'moderation_state' => 'published',
     ]);
     $this->offer3->save();
 
     $this->offer4 = $this->entityTypeManager->getStorage('node')->create([
-      'title' => $this->randomString(),
+      'title' => 'Offer 4',
       'type' => 'offer',
       'field_offer_type' => $this->offer_type3,
       'field_theme' => $this->theme2,
       'uid' => $this->user2,
+      'moderation_state' => 'archived',
     ]);
     $this->offer4->save();
 
     $this->offer5 = $this->entityTypeManager->getStorage('node')->create([
-      'title' => $this->randomString(),
+      'title' => 'Offer 5',
       'type' => 'offer',
       'field_offer_type' => $this->offer_type1,
       'field_theme' => $this->theme1,
       'status' => FALSE,
       'uid' => $this->user2,
+      'moderation_state' => 'published',
     ]);
     $this->offer5->save();
 
@@ -230,7 +246,7 @@ final class OfferRepositoryTest extends KernelTestBase {
 
     $offers = $this->offerRepository->getAllByCommunity($this->community2);
     self::containsOnlyInstancesOf(NodeInterface::class, $offers);
-    self::assertCount(1, $offers);
+    self::assertNull($offers);
   }
 
   /**
@@ -256,7 +272,7 @@ final class OfferRepositoryTest extends KernelTestBase {
 
     $offers = $this->offerRepository->getAllByOffersByTypeByTheme($this->offer_type3, $this->theme2);
     self::containsOnlyInstancesOf(NodeInterface::class, $offers);
-    self::assertCount(1, $offers);
+    self::assertNull($offers);
   }
 
   /**
@@ -266,12 +282,20 @@ final class OfferRepositoryTest extends KernelTestBase {
     $results = $this->offerRepository->getAllOffersByUser($this->user1, $this->community1);
     self::containsOnlyInstancesOf(NodeInterface::class, $results);
     self::assertCount(3, $results);
+    // Ensure the elements are ordered
+    // by moderation_state (first published, then archived).
+    self::assertSame('Offer 2', $results[0]->title->value);
+    self::assertSame('Offer 3', $results[1]->title->value);
+    self::assertSame('Offer 1', $results[2]->title->value);
 
     $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community2);
     self::assertCount(1, $results);
 
     $results = $this->offerRepository->getAllOffersByUser($this->user2, $this->community1);
     self::assertCount(1, $results);
+
+    $results = $this->offerRepository->getAllOffersByUser($this->user1, $this->community2);
+    self::assertNull($results);
   }
 
 }

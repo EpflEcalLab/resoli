@@ -7,13 +7,29 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\node\NodeInterface;
+use Drupal\qs_sharing\Repository\VolunteerismRepository;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * The Access Control manager.
  */
 class AccessControl {
+
+  /**
+   * The container.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerBuilder
+   */
+  protected $container;
+
+  /**
+   * The volunteerism repository.
+   *
+   * @var \Drupal\qs_sharing\Repository\VolunteerismRepository
+   */
+  protected $volunteerismRepository;
 
   /**
    * The current active user.
@@ -228,7 +244,7 @@ class AccessControl {
   }
 
   /**
-   * Check if the account has admin access on the given activity.
+   * Check if the account had admin access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity to check access.
@@ -362,6 +378,30 @@ class AccessControl {
     $number = $this->countCommunitiesByUser($user);
 
     return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account is authorized ot edit the given offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise, use current user.
+   *
+   * @return bool
+   *   Is the user may edit the offer.
+   */
+  public function hasEditAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL): bool {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $offer->get('uid')->target_id;
+
+    return $user->id() === $author_id && $author_id;
   }
 
   /**
@@ -613,6 +653,33 @@ class AccessControl {
   }
 
   /**
+   * Check if the account has at least one volunteerism in the community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   Drupal Entity User.
+   *
+   * @return bool
+   *   Does the user has at least one volunteerism for this community.
+   */
+  public function isCommunityVolunteer(TermInterface $community, ?AccountInterface $account = NULL) {
+    /** @var \Drupal\user\UserInterface $user */
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    if (!$this->volunteerismRepository instanceof VolunteerismRepository) {
+      $this->volunteerismRepository = $this->container->get('qs_sharing.repository.volunteerism');
+    }
+
+    return !empty($this->volunteerismRepository->getAllByCommunityUser($community, $user));
+  }
+
+  /**
    * Check the account is waiting for at least one Privilege on the community.
    *
    * If the user has already one privilege it will always return FALSE.
@@ -649,6 +716,25 @@ class AccessControl {
     $query->condition($or);
 
     return $query->count()->execute() > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Sets the container.
+   *
+   * Setter injection to avoid cyclic reference.
+   */
+  public function setContainer(ContainerInterface $container): void {
+    $this->container = $container;
+  }
+
+  /**
+   * Setter injection of the Volunteerism repository to avoid cyclic reference.
+   *
+   * @param \Drupal\qs_sharing\Repository\VolunteerismRepository $volunteerismRepository
+   *   The volunteerism repository.
+   */
+  public function setVolunteerismRepository(VolunteerismRepository $volunteerismRepository): void {
+    $this->volunteerismRepository = $volunteerismRepository;
   }
 
   /**

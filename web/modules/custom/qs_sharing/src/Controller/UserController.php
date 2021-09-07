@@ -77,10 +77,6 @@ class UserController extends ControllerBase {
    */
   public function getCacheTags(?array $nodes = NULL) {
     $tags = [
-      // Invalidated whenever any Community is updated, deleted or created.
-      'taxonomy_term_list:communities',
-      // Invalidated whenever any Sharing Theme is updated, deleted or created.
-      'taxonomy_term_list:sharing_themes',
       // Invalidated whenever any Offer is updated, deleted or created.
       'node_list:offer',
     ];
@@ -108,6 +104,7 @@ class UserController extends ControllerBase {
       '#theme' => 'qs_sharing_user_offers_collection_page',
       '#variables' => $variables,
       '#cache' => [
+        'tags' => $this->getCacheTags($offers),
         'contexts' => [
           'user',
           'url.query_args',

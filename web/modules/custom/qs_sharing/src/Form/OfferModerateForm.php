@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Form to moderate an offer.
  */
-class ModerateOfferForm extends FormBase {
+class OfferModerateForm extends FormBase {
 
   /**
    * The node Storage.
@@ -72,7 +72,7 @@ class ModerateOfferForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $options = NULL) {
-    if (!$options['offer']) {
+    if (!isset($options) || !$options['offer']) {
       return $form;
     }
 
@@ -137,8 +137,8 @@ class ModerateOfferForm extends FormBase {
     $offer = $this->nodeStorage->load($form_state->get('offer'));
 
     // Deactivate the offer and send an email to its author.
-    $this->offerManager->archive($offer);
-    $this->offerManager->sendModerated($offer);
+    $this->offerManager->deactivate($offer);
+    $this->offerManager->sendModerated($offer, $offer->uid->entity);
 
     $form_state->setRedirect('qs_sharing.collection.offer', [
       'community' => $offer->field_offer_type->entity->field_community->entity->id(),

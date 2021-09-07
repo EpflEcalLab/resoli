@@ -69,7 +69,7 @@ qs_sharing.offers.form.moderate:
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Form\OfferModerateForm::access'
-    offer: \d+
+    community: \d+
   options:
     parameters:
       community:

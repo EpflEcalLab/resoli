@@ -39,12 +39,12 @@ function qs_sharing_mail($key, &$message, $params) {
       /** @var \Drupal\user\UserInterface $user */
       $user = $offer->uid->entity;
 
-      $message['subject'] = t('qs.mail.offer.archived.subject @sitename @offer', [
+      $message['subject'] = t('qs.mail.offer.deactivated.subject @sitename @offer', [
         '@sitename' => $site->get('name'),
         '@offer' => $offer->getTitle(),
       ]);
 
-      $message['body'][] = Markup::create(nl2br(t('qs.mail.offer.archived.body @mail @firstname @lastname @community @offer_type @offer @created_at', [
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at', [
         '@mail' => $user->getEmail(),
         '@firstname' => $user->field_firstname->value,
         '@lastname' => $user->field_lastname->value,

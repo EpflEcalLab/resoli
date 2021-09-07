@@ -38,7 +38,7 @@
     {# Moderation button #}
     {# User should be responsible of the community OR admin #}
     {% if can_moderate_community or user.hasPermission('administer nodes') %}
-      {{ bamboo_render_form('qs_sharing', 'ModerateOfferForm', {'offer': offer}) }}
+      {{ bamboo_render_form('qs_sharing', 'OfferModerateForm', {'offer': offer}) }}
     {% endif %}
 
   </div>

@@ -40,19 +40,6 @@ class OfferManager {
   }
 
   /**
-   * Archive an offer.
-   *
-   * @return \Drupal\node\NodeInterface
-   *   The created offer.
-   */
-  public function archive(NodeInterface $offer) {
-    $offer->set('moderation_state', 'archived');
-    $offer->save();
-
-    return $offer;
-  }
-
-  /**
    * Create an Offer Type.
    *
    * @param \Drupal\node\NodeInterface $offer_type
@@ -107,21 +94,6 @@ class OfferManager {
   }
 
   /**
-   * Send a mail to alert the user of the moderation of its offer.
-   *
-   * @param \Drupal\node\NodeInterface $offer
-   *   The moderated offer.
-   */
-  public function sendModerated(NodeInterface $offer) {
-    /** @var \Drupal\user\UserInterface $user */
-    $user = $offer->uid->entity;
-
-    $this->mail->mail('qs_sharing', 'offer_moderated', $user->getEmail(), $user->getPreferredLangcode(), [
-      'offer' => $offer,
-    ]);
-  }
- 
-  /**
    * Deactivate the offer.
    *
    * @param \Drupal\node\NodeInterface $offer
@@ -168,6 +140,20 @@ class OfferManager {
     $offer->save();
 
     return $offer;
+  }
+
+  /**
+   * Send a mail to alert the user of the moderation of its offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The moderated offer.
+   * @param \Drupal\user\UserInterface $user
+   *   The author of the offer.
+   */
+  public function sendModerated(NodeInterface $offer, UserInterface $user): void {
+    $this->mail->mail('qs_sharing', 'offer_moderated', $user->getEmail(), $user->getPreferredLangcode(), [
+      'offer' => $offer,
+    ]);
   }
 
 }

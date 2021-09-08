@@ -6,6 +6,11 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\default_content\Event\DefaultContentEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * Subscribe to DefaultContentEvents::IMPORT.
+ *
+ * Generate Volunteerism.
+ */
 class GenerateVolunteerismSubscriber implements EventSubscriberInterface {
 
   /**

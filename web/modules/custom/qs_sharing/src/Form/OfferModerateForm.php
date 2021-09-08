@@ -84,6 +84,11 @@ class OfferModerateForm extends FormBase {
     // Disable caching.
     $form['#cache']['max-age'] = 0;
 
+    // Needed to ensure the right offer is linked to the right form
+    // https://drupal.stackexchange.com/a/276999
+    $form_state->setRequestMethod('POST');
+    $form_state->setCached(TRUE);
+
     $form['#attributes'] = [
       'data-ajax' => 'true',
       'data-parent' => 'card' . $offer->id(),

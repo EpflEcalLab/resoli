@@ -46,7 +46,6 @@ Feature: Offer Moderate Form
     When I am on "/node/65?theme=21"
     Then I should see 1 "form.offer73.moderate" element
     Then I follow the link ".offer73.moderate button[type='submit']" element
-    And 1 mail should be sent
     Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.offer.deactivated.subject Resoli Aide pour porter les courses"
     Then the url should match "/sharing/2/offers"
     And I should see 0 ".card.card-info " element

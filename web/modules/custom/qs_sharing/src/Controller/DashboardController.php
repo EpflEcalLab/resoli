@@ -6,6 +6,8 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_sharing\Repository\OfferRepository;
+use Drupal\qs_sharing\Repository\VolunteerismRepository;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,10 +28,26 @@ class DashboardController extends ControllerBase {
   private $acl;
 
   /**
+   * The Volunteerism repository.
+   *
+   * @var \Drupal\qs_sharing\Repository\OfferRepository
+   */
+  private $offerRepository;
+
+  /**
+   * The Volunteerism repository.
+   *
+   * @var \Drupal\qs_sharing\Repository\VolunteerismRepository
+   */
+  private $volunteerismRepository;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl) {
+  public function __construct(AccessControl $acl, VolunteerismRepository $volunteerism_repository, OfferRepository $offer_repository) {
     $this->acl = $acl;
+    $this->volunteerismRepository = $volunteerism_repository;
+    $this->offerRepository = $offer_repository;
   }
 
   /**
@@ -60,7 +78,9 @@ class DashboardController extends ControllerBase {
     // Instantiates this form class.
     return new static(
     // Load customs services used in this class.
-      $container->get('qs_acl.access_control')
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_sharing.repository.volunteerism'),
+      $container->get('qs_sharing.repository.offer')
     );
   }
 
@@ -68,13 +88,14 @@ class DashboardController extends ControllerBase {
    * Dashboard page.
    */
   public function dashboard(Request $request, TermInterface $community, UserInterface $user) {
+    $isVolunteer = $this->volunteerismRepository->getAllByCommunityUser($community, $user);
+
     $variables = [
       'community' => $community,
       'user' => $user->id(),
-      // @todo get right value
-      'isVolunteer' => TRUE,
-      'hasOffers' => TRUE,
-      'hasRequests' => TRUE,
+      'isVolunteer' => $isVolunteer,
+      'hasOffers' => $this->offerRepository->getAllOffersByUser($user, $community),
+      'hasRequests' => $isVolunteer,
     ];
 
     return [

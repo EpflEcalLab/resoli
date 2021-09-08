@@ -85,6 +85,11 @@ abstract class OfferActionFormBase extends FormBase {
       return $form;
     }
 
+    // Needed to ensure the right offer is linked to the right form
+    // https://drupal.stackexchange.com/a/276999
+    $form_state->setRequestMethod('POST');
+    $form_state->setCached(TRUE);
+
     // Save the offer for later usage on submission.
     $form_state->set('offer', $offer->id());
 

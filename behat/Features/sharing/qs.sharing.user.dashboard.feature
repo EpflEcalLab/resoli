@@ -31,7 +31,7 @@ Feature: Dashboard sharing
       | member+lausanne | /sharing/1/user/2/dashboard | 200 |
       | member+lausanne | /sharing/1/user/3/dashboard | 403 |
       | approval+lausanne | /sharing/1/user/2/dashboard | 403 |
-      | approval+lausanne | /sharing/1/user/3/dashboard | 200 |
+      | approval+lausanne | /sharing/1/user/3/dashboard | 403 |
       | manager+lausanne | /sharing/1/user/2/dashboard | 403 |
       | manager+lausanne | /sharing/1/user/5/dashboard | 200 |
       | member+lausanne+organizer+fribourg | /sharing/1/user/8/dashboard | 200 |
@@ -54,28 +54,27 @@ Feature: Dashboard sharing
   Scenario: On any sharing dashboard page, it should have a "Share request" button.
     Given I am logged in as user "admin"
     When I am on "/sharing/1/user/1/dashboard"
-    And I should see "qs_sharing.share_request" link with href "/sharing/2/request/add"
+    And I should see "qs_sharing.share_request" link with href "/sharing/1/request/add"
 
   @api
-  Scenario: On the sharing dashboard page, as a member with no volunteerism, it should have a "Become volunteer" button and no "Add offer" and "See requests" buttons.
-    Given I am logged in as user "admin"
-    When I am on "/sharing/1/user/1/dashboard"
+  Scenario: On the sharing dashboard page, as a member with no volunteerism, it should have a "Become volunteer" button and no "Add offer"", "Manage volunteerism" and "See requests" buttons.
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/sharing/1/user/8/dashboard"
     ## Update test with correct url once created
-    Then Print me the HTML and show it
-    And I should see "qs_sharing.become_volunteer" link with href "/sharing/1/offers/add?user=1"
+    And I should see "qs_sharing.become_volunteer" link with href "/sharing/1/offers/add?user=8"
     And I should not see "qs_sharing.add_offer"
     And I should not see "qs_sharing.see_requests"
+    And I should not see "qs_sharing.manager_volunteerism"
 
-  ## No Member yet with volunteerism
-  ## @api
-  ## Scenario: On the sharing dashboard page, as a member with volunteerism, it should have an "Add Offer" and a "See requests" button and no "Become volunteer" button.
-    ## Update test with right user
-    ## Given I am logged in as user "admin"
-    ## When I am on "/sharing/1/user/1/dashboard"
-     ## Update test with correct url once created
-    ## And I should see "qs_sharing.add_offer" link with href "/sharing/1/offers/add?user=1"
-    ## And I should see "qs_sharing.see_requests" link with href "/sharing/1/offers/add?user=1"
-    ## And I should not see "qs_sharing.become_volunteer"
+  @api
+  Scenario: On the sharing dashboard page, as a member with volunteerism, it should have an "Add Offer", an "Manage volunteerism" and a "See requests" button and no "Become volunteer" button.
+    Given I am logged in as user "member+lausanne+organizer+fribourg"
+    When I am on "/sharing/1/user/8/dashboard"
+    ## Update test with correct url once created
+    And I should see "qs_sharing.add_offer" link with href "/sharing/1/offers/add?user=8"
+    And I should see "qs_sharing.see_requests" link with href "/sharing/1/user/8/offers"
+    And I should see "qs_sharing.manager_volunteerism" link with href "/sharing/1/user/8/offers"
+    And I should not see "qs_sharing.become_volunteer"
 
   @api
   Scenario: On the sharing dashboard page, as a member with no offers, it should not have a "Manager Offer" button.

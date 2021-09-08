@@ -51,4 +51,33 @@ class VolunteerismRepository {
     return $this->volunteerismStorage->loadMultiple($ids);
   }
 
+  /**
+   * Retrieve the Volunteerism entity for the given theme if it exists.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
+   * @param \Drupal\Core\Session\AccountInterface $user
+   *   The user entity.
+   * @param \Drupal\taxonomy\TermInterface $theme
+   *   The user entity.
+   *
+   * @return \Drupal\qs_sharing\entity\Volunteerism|null
+   *   A Volunteerism empty, otherwise null.
+   */
+  public function isUserVolunteerForTheme(TermInterface $community, AccountInterface $user, TermInterface $theme) {
+    $query = $this->volunteerismStorage->getQuery()
+      ->accessCheck()
+      ->condition('user', $user->id())
+      ->condition('community', $community->id())
+      ->condition('theme', $theme->id());
+
+    $ids = $query->execute();
+
+    if (empty($ids) || !\is_array($ids)) {
+      return NULL;
+    }
+
+    return array_values($this->volunteerismStorage->loadMultiple($ids))[0];
+  }
+
 }

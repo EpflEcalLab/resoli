@@ -88,14 +88,11 @@ class DashboardController extends ControllerBase {
    * Dashboard page.
    */
   public function dashboard(Request $request, TermInterface $community, UserInterface $user) {
-    $isVolunteer = $this->volunteerismRepository->getAllByCommunityUser($community, $user);
-
     $variables = [
       'community' => $community,
       'user' => $user->id(),
-      'isVolunteer' => $isVolunteer,
+      'isVolunteer' => $this->volunteerismRepository->getAllByCommunityUser($community, $user),
       'hasOffers' => $this->offerRepository->getAllOffersByUser($user, $community),
-      'hasRequests' => $isVolunteer,
     ];
 
     return [

@@ -6,8 +6,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\default_content\Event\DefaultContentEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class GenerateVolunteerismSubscriber implements EventSubscriberInterface
-{
+class GenerateVolunteerismSubscriber implements EventSubscriberInterface {
 
   /**
    * The Volunteerism storage.
@@ -24,18 +23,7 @@ class GenerateVolunteerismSubscriber implements EventSubscriberInterface
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public static function getSubscribedEvents() {
-    return [
-      DefaultContentEvents::IMPORT => [
-        ['generateVolunteerisms', 1000],
-      ],
-    ];
-  }
-
-  /**
-   * generate Volunteerism entities
+   * Generate Volunteerism entities.
    */
   public function generateVolunteerisms() {
     $volunteerism1 = $this->volunteerismStorage->create(
@@ -98,4 +86,16 @@ class GenerateVolunteerismSubscriber implements EventSubscriberInterface
     );
     $volunteerism6->save();
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents() {
+    return [
+      DefaultContentEvents::IMPORT => [
+        ['generateVolunteerisms', 1000],
+      ],
+    ];
+  }
+
 }

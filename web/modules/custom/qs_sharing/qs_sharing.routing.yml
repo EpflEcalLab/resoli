@@ -38,6 +38,7 @@ qs_sharing.sharing.dashboard:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Controller\DashboardController::access'
     community: \d+
+    user: \d+
   options:
     parameters:
       community:

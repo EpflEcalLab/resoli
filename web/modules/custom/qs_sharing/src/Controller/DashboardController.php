@@ -57,14 +57,16 @@ class DashboardController extends ControllerBase {
    *   Run access checks for this account.
    * @param \Drupal\taxonomy\TermInterface $community
    *   Run access checks for this taxonomy.
+   * @param \Drupal\user\UserInterface $user
+   *   Run access checks for this user.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function access(AccountInterface $account, TermInterface $community) {
+  public function access(AccountInterface $account, TermInterface $community, UserInterface $user) {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasAccessCommunity($community)) {
+    if ($this->acl->hasDashboardSharingAccess($community, $user)) {
       $access = AccessResult::allowed();
     }
 

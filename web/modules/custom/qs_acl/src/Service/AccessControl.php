@@ -381,7 +381,27 @@ class AccessControl {
   }
 
   /**
-   * Check if the account is authorized ot edit the given offer.
+   * Check the user access to the community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\user\UserInterface $user
+   *   User used to check access.
+   *
+   * @return bool
+   *   Is the user may access the sharing dashboard.
+   */
+  public function hasDashboardSharingAccess(TermInterface $community, UserInterface $user): bool {
+    // Check bypass.
+    if ($this->hasBypass()) {
+      return TRUE;
+    }
+
+    return $this->currentUser->id() === $user->id() && $this->hasCommunityByUser($community, $user);
+  }
+
+  /**
+   * Check if the account is authorized to edit the given offer.
    *
    * @param \Drupal\node\NodeInterface $offer
    *   The offer to check access.

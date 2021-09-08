@@ -61,6 +61,7 @@ Feature: Dashboard sharing
     Given I am logged in as user "admin"
     When I am on "/sharing/1/user/1/dashboard"
     ## Update test with correct url once created
+    Then Print me the HTML and show it
     And I should see "qs_sharing.become_volunteer" link with href "/sharing/1/offers/add?user=1"
     And I should not see "qs_sharing.add_offer"
     And I should not see "qs_sharing.see_requests"

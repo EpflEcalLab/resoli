@@ -1,0 +1,111 @@
+name: Continuous Integration & Continuous Deployment
+on: [push]
+
+jobs:
+  phpcs:
+    name: phpcs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
+          tools: cs2pr, composer:v1
+      - uses: actions/checkout@master
+      - run: composer install --prefer-dist
+      - run: ./vendor/bin/phpcs --report=checkstyle | cs2pr
+
+  phpmd:
+    name: phpmd
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
+          tools: composer:v1
+      - uses: actions/checkout@master
+      - run: composer install --prefer-dist
+      - run: ./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml --suffixes php,module,inc,install,test,profile,theme,css,info,txt --exclude *Test.php
+        continue-on-error: true
+      - run: ./vendor/bin/phpmd ./behat text ./phpmd.xml --suffixes php
+
+  php-cs-fixer:
+    name: php-cs-fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
+          tools: php-cs-fixer, cs2pr, composer:v1
+      - uses: actions/checkout@master
+      - run: composer install --prefer-dist
+      - run: ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml pull --include-deps test
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name: Build the docker-compose stack
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --build -d test
+      - name: Run unit tests
+        run: docker exec test docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=qs
+
+  functional-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml pull --include-deps test
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name: Build the docker-compose stack
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --build -d test
+      - name: Bootstrap
+        run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only
+      - name: Build Styleguide
+        run: docker exec test bash -c "yarn build --production && mkdir -p /var/www/.codeship/build/styleguide && mv /var/www/web/themes/quartiers_solidaires/build/* /var/www/.codeship/build/styleguide/"
+      - name: Run Behat tests
+        run: docker exec test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data || (docker-as-artifacts --recursive --local-dir=/var/www/log && exit 1)
+
+  deploy:
+    name: Deploy
+    needs: [ phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
+    if:
+      contains('
+      refs/heads/master
+      refs/heads/dev
+      ', github.ref)
+    runs-on: ubuntu-latest
+    env:
+      PRIVATE_SSH_KEY: ${{ secrets.PRIVATE_SSH_KEY }}
+      COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+    steps:
+      - name: Set deployment environment variables based on Git branches
+        working-directory: ./
+        id: deploy_target
+        run: |
+          if [[ $GITHUB_REF == 'refs/heads/dev' ]]; then
+              echo "::set-output name=DEPLOY_ENV::staging"
+          fi
+          if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
+              echo "::set-output name=DEPLOY_ENV::production"
+          fi
+      - uses: actions/checkout@v2.3.4
+      - name: Set Docker Image Tag
+        id: image_tag
+        run: echo "::set-output name=DOCKER_DEPLOY_IMAGE_TAG::resoli-deploy:$(date +%s)"
+      - name: Pull Antistatique Deploy Docker Image
+        run: docker pull antistatique/deploy
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name: Build the docker image
+        run: docker build --file docker/Dockerfile.deploy --tag ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} .
+      - name: Execute the deployment
+        run: docker run --env CI --env PRIVATE_SSH_KEY --rm ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} bundle exec cap ${{ steps.deploy_target.outputs.DEPLOY_ENV }} deploy

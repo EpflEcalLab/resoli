@@ -10,7 +10,7 @@ Feature: Sharing Offers add Form
     | admin | /sharing/1/offers/add | 200 |
     | admin | /sharing/2/offers/add | 200 |
     | admin | /sharing/3/offers/add | 200 |
-    | member+lausanne | /sharing/1/offers/add | 403 |
+    | member+lausanne | /sharing/1/offers/add | 200 |
     | member+lausanne | /sharing/2/offers/add | 403 |
     | member+lausanne | /sharing/3/offers/add | 403 |
     | approval+lausanne | /sharing/1/offers/add | 403 |
@@ -22,8 +22,8 @@ Feature: Sharing Offers add Form
     | organizer+lausanne | /sharing/1/offers/add | 403 |
     | organizer+lausanne | /sharing/2/offers/add | 403 |
     | organizer+lausanne | /sharing/3/offers/add | 403 |
-    | member+lausanne+organizer+fribourg | /sharing/1/offers/add | 403 |
-    | member+lausanne+organizer+fribourg | /sharing/2/offers/add | 403 |
+    | member+lausanne+organizer+fribourg | /sharing/1/offers/add | 200 |
+    | member+lausanne+organizer+fribourg | /sharing/2/offers/add | 200 |
     | member+lausanne+organizer+fribourg | /sharing/3/offers/add | 403 |
     | member+fribourg+approval+organizer+fribourg | /sharing/1/offers/add | 403 |
     | member+fribourg+approval+organizer+fribourg | /sharing/2/offers/add | 403 |
@@ -69,6 +69,7 @@ Feature: Sharing Offers add Form
       | /sharing/2/offers/add | 1 |
       | /sharing/3/offers/add | 1 |
 
+  @api @preserveDatabase
   Scenario Outline: In the add Offer form, the contact information must be prefilled using logged-in account data.
     Given I am volunteer on community <community> for theme 22 as user <user_id>
     Given I am logged in as user "<user>"

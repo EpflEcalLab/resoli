@@ -28,6 +28,24 @@ qs_sharing.requests.form.add:
       community:
         type: entity:taxonomy_term
 
+# Sharing dashboard page
+qs_sharing.sharing.dashboard:
+  path: '/sharing/{community}/user/{user}/dashboard'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\DashboardController::dashboard'
+    _title: 'qs_sharing.dashboard.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\DashboardController::access'
+    community: \d+
+    user: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+      user:
+        type: entity:user
+
 # Sharing user offers
 qs_sharing.collection.user.offers:
   path: '/sharing/{community}/user/{user}/offers'

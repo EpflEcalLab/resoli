@@ -78,11 +78,11 @@ class OfferTypeFloatingBtnBlock extends BlockBase implements ContainerFactoryPlu
 
     // "My Offers" floating buttons.
     $variables['floating_buttons']['action'] = [
-      'url' => Url::fromRoute('qs_sharing.collection.user.offers', [
+      'url' => Url::fromRoute('qs_sharing.sharing.dashboard', [
         'community' => $community->id(),
         'user' => $this->currentUser->id(),
       ]),
-      'label' => $this->t('qs_sharing.floating.my_offers'),
+      'label' => $this->t('qs_sharing.floating.dashboard'),
       'theme' => 'primary',
       'icon' => 'sharing',
     ];

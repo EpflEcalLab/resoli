@@ -122,11 +122,11 @@ Feature: Collection of Offers
 
 ## Floating Button
   @api
-  Scenario Outline: Logged-in on the "Transports et déplacements" listing, I should see the floating button point to my offers
+  Scenario Outline: Logged-in on the "Transports et déplacements" listing, I should see the floating button point to my dashboard
     Given I am logged in as user "<user>"
     When I am on "/node/66?theme=19"
     Then I should see 1 ".floating a" elements
-    And I should see "qs_sharing.floating.my_offers" link with href "/sharing/1/user/<user-id>/offers"
+    And I should see "qs_sharing.floating.dashboard" link with href "/sharing/1/user/<user-id>/dashboard"
     Examples:
       | user | user-id |
       | member+lausanne | 2 |

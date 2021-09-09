@@ -2309,7 +2309,6 @@ msgstr "Contact"
 msgid "qs.previous.to_offers_type_list"
 msgstr "Retour aux offres"
 
-<<<<<<< HEAD
 msgid "qs_sharing.offers.form.delete.title"
 msgstr "Supprimer l'offre"
 
@@ -2417,4 +2416,15 @@ msgstr "Retour à mes offres"
 
 msgid "qs_sharing.offers.form.add.success @offer @offer_type"
 msgstr "Votre nouvelle offre a bien été créée!"
->
+
+msgid "qs_sharing.user.offers.collection.moderate"
+msgstr "Désactiver cette offre"
+
+msgid "qs_sharing.user.offers.collection.moderate.confirmed"
+msgstr "Confirmer"
+
+msgid "qs.mail.offer.deactivated.subject @sitename @offer"
+msgstr ""
+
+msgid "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+msgstr ""

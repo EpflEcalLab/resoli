@@ -3,6 +3,7 @@
 namespace Drupal\qs_sharing\Manager;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
@@ -11,6 +12,13 @@ use Drupal\user\UserInterface;
  * Manage CRUD operations and actions on Offer.
  */
 class OfferManager {
+
+  /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
   /**
    * The node Storage.
    *
@@ -23,9 +31,12 @@ class OfferManager {
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   * @param \Drupal\Core\Mail\MailManagerInterface $mail
+   *   The mail manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, MailManagerInterface $mail) {
     $this->nodeStorage = $entity_type_manager->getStorage('node');
+    $this->mail = $mail;
   }
 
   /**
@@ -129,6 +140,20 @@ class OfferManager {
     $offer->save();
 
     return $offer;
+  }
+
+  /**
+   * Send a mail to alert the user of the moderation of its offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The moderated offer.
+   * @param \Drupal\user\UserInterface $user
+   *   The author of the offer.
+   */
+  public function sendModeratedMail(NodeInterface $offer, UserInterface $user): void {
+    $this->mail->mail('qs_sharing', 'offer_moderated', $user->getEmail(), $user->getPreferredLangcode(), [
+      'offer' => $offer,
+    ]);
   }
 
 }

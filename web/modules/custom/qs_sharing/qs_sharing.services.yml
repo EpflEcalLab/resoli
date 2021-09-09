@@ -28,6 +28,7 @@ services:
     class: Drupal\qs_sharing\Manager\OfferManager
     arguments:
       - '@entity_type.manager'
+      - '@plugin.manager.mail'
 
   # EventSubscribers
   qs_sharing.redirect:

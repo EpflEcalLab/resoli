@@ -62,18 +62,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml pull --include-deps test
+      - run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml pull --include-deps test browser
       - uses: satackey/action-docker-layer-caching@v0.0.11
         continue-on-error: true
       - name: Build the docker-compose stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --build -d test
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --build -d test browser
       - name: Bootstrap
         run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only
       - name: Build Styleguide
         run: docker exec test yarn build --production
 #        run: docker exec test bash -c "yarn build --production && mkdir -p /var/www/build/styleguide && mv /var/www/web/themes/quartiers_solidaires/build/* /var/www/build/styleguide/"
       - name: Run Behat tests
-        run: docker exec test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --skip-db-reset --skip-default-content --user=www-data
+        run: docker-compose exec -T test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         if: failure()

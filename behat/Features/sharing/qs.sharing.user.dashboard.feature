@@ -62,18 +62,16 @@ Feature: Dashboard sharing
     When I am on "/sharing/1/user/1/dashboard"
     ## Update test with correct url once created
     And I should see "qs_sharing.become_volunteer" link with href "/sharing/1/offers/add?user=1"
-    And I should not see "qs_sharing.add_offer"
-    And I should not see "qs_sharing.see_requests"
-    And I should not see "qs_sharing.manager_volunteerism"
 
-  @api
+  @api @preserveDatabase
   Scenario: On the sharing dashboard page, as a member with volunteerism, it should have an "Add Offer", an "Manage volunteerism" and a "See requests" button and no "Become volunteer" button.
-    Given I am logged in as user "member+lausanne"
-    When I am on "/sharing/1/user/2/dashboard"
+    Given I am volunteer on community 1 for theme 22 as user 1
+    And I am logged in as user "admin"
+    When I am on "/sharing/1/user/1/dashboard"
     ## Update test with correct url once created
-    And I should see "qs_sharing.add_offer" link with href "/sharing/1/offers/add?user=2"
-    And I should see "qs_sharing.see_requests" link with href "/sharing/1/user/2/offers"
-    And I should see "qs_sharing.manage_volunteerism" link with href "/sharing/1/user/2/offers"
+    And I should see "qs_sharing.add_offer" link with href "/sharing/1/offers/add?user=1"
+    And I should see "qs_sharing.see_requests" link with href "/sharing/1/user/1/offers"
+    And I should see "qs_sharing.manage_volunteerism" link with href "/sharing/1/user/1/offers"
     And I should not see "qs_sharing.become_volunteer"
 
   @api

@@ -69,6 +69,7 @@ Feature: Sharing Offers add Form
       | /sharing/2/offers/add | 1 |
       | /sharing/3/offers/add | 1 |
 
+  @api @preserveDatabase
   Scenario Outline: In the add Offer form, the contact information must be prefilled using logged-in account data.
     Given I am volunteer on community <community> for theme 22 as user <user_id>
     Given I am logged in as user "<user>"

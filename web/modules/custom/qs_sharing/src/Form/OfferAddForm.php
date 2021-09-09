@@ -277,6 +277,11 @@ class OfferAddForm extends FormBase {
         'class' => [
           'btn-grid',
         ],
+        'is_offer' => TRUE,
+        // Create a translation string for each of the sharing themes in the foreach loop
+        // phpcs:disable
+        'description' => $this->t(sprintf('qs_sharing.volunteerism.form.description.theme.%s', $theme->field_sharing_icon->value)),
+        // phpcs:enable
       ],
       '#theme_wrappers' => [
         'radios__buttons',

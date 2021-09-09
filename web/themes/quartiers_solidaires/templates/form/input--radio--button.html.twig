@@ -17,7 +17,14 @@
   <label class="btn checkbox {{ attributes.checked ? 'active' }}">
     {{ macros.icon("theme_#{labelIcon[1]}_o") }}
     <input{{ attributes }} />
-    {{ labelIcon|first }}
+    {% if attributes.is_offer %}
+      <h4>
+        {{ labelIcon|first }}
+      </h4>
+      <span class="my-0">{{ attributes.description }}</span>
+    {% else %}
+      {{ labelIcon|first }}
+    {% endif %}
   </label>
 {% else %}
   {% set classes = [

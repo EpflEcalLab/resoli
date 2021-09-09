@@ -70,6 +70,7 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
       break;
 
     case in_array('page__events__user', $suggestions):
+    case in_array('page__sharing__offers__add', $suggestions):
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'info';
       break;

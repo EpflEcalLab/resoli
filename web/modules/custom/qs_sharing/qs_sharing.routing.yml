@@ -60,6 +60,23 @@ qs_sharing.offers.form.add:
       community:
         type: entity:taxonomy_term
 
+# Offer moderation form
+qs_sharing.offers.form.moderate:
+  path: '/sharing/community/{community}/{offer}/moderate'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferModerateForm'
+    _title: 'qs_sharing.offers.form.moderate.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferModerateForm::access'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+      offer:
+        type: entity:node
+
 # Offer delete form
 qs_sharing.offers.form.delete:
   path: '/sharing/{offer}/delete'

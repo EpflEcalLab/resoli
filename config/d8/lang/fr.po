@@ -2461,3 +2461,15 @@ msgstr "Valider mes données et créer une offre"
 
 msgid "qs_sharing.volunteerisms.form.manage.success @community"
 msgstr "Vos préférences de bénévolat pour @community ont bien été mis à jour !"
+
+msgid "qs_sharing.user.offers.collection.moderate"
+msgstr "Désactiver cette offre"
+
+msgid "qs_sharing.user.offers.collection.moderate.confirmed"
+msgstr "Confirmer"
+
+msgid "qs.mail.offer.deactivated.subject @sitename @offer"
+msgstr ""
+
+msgid "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+msgstr ""

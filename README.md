@@ -1,10 +1,7 @@
 # Quartiers Solidaires
 Drupal 8 powered.
 
-| Staging CodeShip-CI | Prod CodeShip-CI |
-|:-------------------:|:----------------:|
-| [ ![Staging CodeShip-CI](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=dev)](https://app.codeship.com/projects/232628) | [ ![Prod CodeShip-CI](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=master)](https://app.codeship.com/projects/232628) |
-
+[![Continuous Integration & Continuous Deployment](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci-cd.yml)
 
 ## 🔧 Prerequisites
 

@@ -104,7 +104,7 @@ Feature: Dashboard sharing
 
 # Back button.
   @api
-  Scenario: In the Sharing dashboard page, I should a back button point to the offer type listing
+  Scenario: In the Sharing dashboard page, I should see a back button point to the offer type listing
     Given I am logged in as user "admin"
     When I am on "/sharing/1/user/1/dashboard"
     Then I should see 1 "#block-previousnavigation a" elements

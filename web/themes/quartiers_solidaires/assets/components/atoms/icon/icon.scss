@@ -46,3 +46,17 @@
 .icon-offset {
   top: 0.4em;
 }
+
+.icon-circle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 2px solid color('light');
+  border-radius: 50%;
+
+  .icon {
+    top: 5px;
+    left: 5px;
+  }
+}

@@ -56,7 +56,7 @@ Feature: Sharing Offers add Form
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_my_offers" link with href "/sharing/1/user/1/offers"
+    And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/1/dashboard"
 
 ## Form pre-filled values.
   Scenario Outline: In the add Offer form, a select should let me choose on community's offer's types.

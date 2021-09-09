@@ -3,6 +3,7 @@
 namespace Drupal\Tests\qs_sharing\Unit;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\qs_sharing\Manager\OfferManager;
@@ -30,6 +31,13 @@ final class OfferManagerTest extends UnitTestCase {
   protected $entityTypeManager;
 
   /**
+   * Composes and optionally sends an email message.
+   *
+   * @var \Drupal\Core\Mail\MailManagerInterface
+   */
+  protected $mail;
+
+  /**
    * The node Storage.
    *
    * @var \Drupal\node\NodeStorageInterface
@@ -51,13 +59,14 @@ final class OfferManagerTest extends UnitTestCase {
 
     $this->entityTypeManager = $this->createMock(EntityTypeManagerInterface::class);
     $this->nodeStorage = $this->createMock(NodeStorageInterface::class);
+    $this->mail = $this->createMock(MailManagerInterface::class);
 
     $this->entityTypeManager->expects(self::once())
       ->method('getStorage')
       ->with('node')
       ->willReturn($this->nodeStorage);
 
-    $this->offerManager = new OfferManager($this->entityTypeManager);
+    $this->offerManager = new OfferManager($this->entityTypeManager, $this->mail);
   }
 
   /**
@@ -151,7 +160,7 @@ final class OfferManagerTest extends UnitTestCase {
   }
 
   /**
-   * @covers ::reactivate§
+   * @covers ::reactivate
    */
   public function testReactivateReturnsExcepted() {
     $node = $this->createMock(NodeInterface::class);
@@ -225,6 +234,20 @@ final class OfferManagerTest extends UnitTestCase {
         'field_contact_phone' => '079 790 79 79',
       ],
     );
+  }
+  
+  /**
+   * @covers ::sendModeratedMail
+   */
+  public function testSendModeratedMailReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $user = $this->createMock(UserInterface::class);
+
+    $user->expects(self::once())->method('getEmail');
+    $user->expects(self::once())->method('getPreferredLangcode');
+    $this->mail->expects(self::once())->method('mail');
+
+    $this->offerManager->sendModeratedMail($node, $user);
   }
 
 }

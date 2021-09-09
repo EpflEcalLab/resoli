@@ -2427,7 +2427,7 @@ msgid "qs_sharing.offers.form.edit.theme"
 msgstr "Quel thème correspond à votre offre?"
 
 msgid "qs_sharing.offers.form.edit.theme.placeholder"
-msgstr ""
+msgstr "qs_sharing.offers.form.edit.theme.placeholder"
 
 msgid "qs_sharing.offers.form.edit.body"
 msgstr "Comment décririez-vous votre offre ?"
@@ -2461,3 +2461,15 @@ msgstr "Ex. 079 790 79 79"
 
 msgid "qs_sharing.offers.form.edit.success @offer_date"
 msgstr "Les informations de l’offre du «@offer_date» ont bien été validées!"
+
+msgid "qs_sharing.user.offers.collection.moderate"
+msgstr "Désactiver cette offre"
+
+msgid "qs_sharing.user.offers.collection.moderate.confirmed"
+msgstr "Confirmer"
+
+msgid "qs.mail.offer.deactivated.subject @sitename @offer"
+msgstr "qs.mail.offer.deactivated.subject @sitename @offer"
+
+msgid "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+msgstr "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"

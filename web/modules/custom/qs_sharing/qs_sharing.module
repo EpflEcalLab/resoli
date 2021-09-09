@@ -10,6 +10,8 @@ use Drupal\node\NodeInterface;
 
 include 'inc/offer_type_node_access.inc';
 
+require_once 'inc/mails.inc';
+
 /**
  * Implements hook_theme().
  */
@@ -24,6 +26,10 @@ function qs_sharing_theme() {
     'qs_sharing_user_offers_collection_page' => [
       'variables' => ['variables' => []],
       'template' => 'qs--sharing--user-offers-collection',
+    ],
+    'qs_sharing_dashboard_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--dashboard',
     ],
     // Blocks themes
     // ---------------------------------------------------------------------.

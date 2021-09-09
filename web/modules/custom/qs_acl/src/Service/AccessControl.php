@@ -405,6 +405,58 @@ class AccessControl {
   }
 
   /**
+   * Does the given user has access on the given community.
+   *
+   * This only count relation as Member or Organizer or Managers.
+   * It doesn't count pending request.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User.
+   *
+   * @return bool
+   *   Does the user has access on the community.
+   */
+  public function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('user', $account->id())
+      ->condition('entity', $community->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_members');
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    return $query->count()->execute() > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check the user access to the community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise, use current user.
+   *
+   * @return bool
+   *   Is the user may access the sharing dashboard.
+   */
+  public function hasDashboardSharingAccess(TermInterface $community, ?AccountInterface $account = NULL): bool {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass()) {
+      return TRUE;
+    }
+
+    return $this->currentUser->id() === $user->id() && $this->hasCommunityByUser($community, $user);
+  }
+
+  /**
    * Check if the account belongs to more than one community.
    *
    * This only check if the accounts belongs to a community
@@ -787,36 +839,6 @@ class AccessControl {
     $query->condition($or);
 
     return (int) $query->count()->execute();
-  }
-
-  /**
-   * Does the given user has access on the given community.
-   *
-   * This only count relation as Member or Organizer or Managers.
-   * It doesn't count pending request.
-   *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User.
-   *
-   * @return bool
-   *   Does the user has access on the community.
-   */
-  private function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
-    $query = $this->privilegeStorage->getQuery()
-      ->condition('status', 1)
-      ->condition('bundle', 'taxonomy_term')
-      ->condition('user', $account->id())
-      ->condition('entity', $community->id());
-
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_members');
-    $or->condition('privilege', 'community_organizers');
-    $or->condition('privilege', 'community_managers');
-    $query->condition($or);
-
-    return $query->count()->execute() > 0 ? TRUE : FALSE;
   }
 
 }

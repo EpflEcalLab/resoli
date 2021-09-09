@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add PDF exporter service and base template #796
 - Add dashboard 'Offers'
 - Add templates for listing offers
+- Add moderation for the offers
 
 ### Changed
 - update all Javascript Dependencies

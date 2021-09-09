@@ -279,6 +279,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           break;
 
         // Go to Offer's Type collection.
+        case 'qs_sharing.sharing.dashboard':
         case 'qs_sharing.collection.user.offers':
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.offer', [
             'community' => $community->id(),

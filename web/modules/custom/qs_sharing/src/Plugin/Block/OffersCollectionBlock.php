@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\NodeInterface;
+use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_sharing\Repository\OfferRepository;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -46,6 +47,13 @@ class OffersCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   protected $routeMatch;
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  private $acl;
+
+  /**
    * The offer repository.
    *
    * @var \Drupal\qs_sharing\Repository\OfferRepository
@@ -62,12 +70,13 @@ class OffersCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, RouteMatchInterface $route_match, RequestStack $request_stack, OfferRepository $offer_repository) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, RouteMatchInterface $route_match, RequestStack $request_stack, OfferRepository $offer_repository, AccessControl $acl) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->routeMatch = $route_match;
     $this->offerRepository = $offer_repository;
     $this->requestStack = $request_stack;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
+    $this->acl = $acl;
   }
 
   /**
@@ -124,6 +133,8 @@ class OffersCollectionBlock extends BlockBase implements ContainerFactoryPluginI
     $renderer['#variables']['offers'] = $offers;
     $renderer['#cache']['tags'] = $this->getCacheTags($offers);
 
+    $renderer['#variables']['can_moderate_community'] = $this->acl->hasAdminAccessCommunity($offer_type->field_community->entity);
+
     return $renderer;
   }
 
@@ -141,7 +152,8 @@ class OffersCollectionBlock extends BlockBase implements ContainerFactoryPluginI
         $container->get('entity_type.manager'),
         $container->get('current_route_match'),
         $container->get('request_stack'),
-        $container->get('qs_sharing.repository.offer')
+        $container->get('qs_sharing.repository.offer'),
+        $container->get('qs_acl.access_control'),
       );
   }
 

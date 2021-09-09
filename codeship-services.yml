@@ -37,6 +37,7 @@ test: &test
     DEFAULT_CONTENT: qs_default_content
     BEHAT_PROFILE: default
     PHP_MEMORY_LIMIT: -1
+  encrypted_env_file: .codeship/env.encrypted
   volumes:
     - ./.codeship/build/styleguide:/var/www/web/themes/quartiers_solidaires/build
     - ./.codeship/backups:/var/backups

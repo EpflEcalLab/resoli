@@ -58,6 +58,9 @@ services:
       TEST_USER: www-data
       DEFAULT_CONTENT: qs_default_content
       PHPUNIT_DEFAULT_GROUP: qs
+      ARTIFACTS_BUCKET: codeship-artifact
+      ARTIFACTS_LOG_DIR: /var/www/log
+      CI_REPO_NAME: quartiers-solidaires
     restart: "no"
     volumes:
       - backups:/var/backups

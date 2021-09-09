@@ -122,4 +122,4 @@ jobs:
       - name: Build the docker image
         run: docker build --file docker/Dockerfile.deploy --tag ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} .
       - name: Execute the deployment
-        run: docker run --env CI --env PRIVATE_SSH_KEY --rm ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} bundle exec cap ${{ steps.deploy_target.outputs.DEPLOY_ENV }} deploy
+        run: docker run  -v `pwd`/web/themes/quartiers_solidaires/:/app/web/themes/quartiers_solidaires/ --env CI --env PRIVATE_SSH_KEY --rm ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} bundle exec cap ${{ steps.deploy_target.outputs.DEPLOY_ENV }} deploy

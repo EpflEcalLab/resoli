@@ -217,7 +217,7 @@ class OfferEditForm extends FormBase {
       if ($theme->hasTranslation($currentLang->getId())) {
         $theme = $theme->getTranslation($currentLang->getId());
       }
-      $options[$theme->id()] = $theme->getName() . '|' . $theme->field_sharing_icon->value;
+      $options[$theme->id()] = $theme->getName();
     }
 
     $form['group']['theme'] = [

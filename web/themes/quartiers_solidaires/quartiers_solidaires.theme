@@ -81,6 +81,7 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
     case in_array('page__activities__user', $suggestions):
     case in_array('page__sharing__user__offers', $suggestions):
     case in_array('page__sharing__community__volunteerism__manage', $suggestions):
+    case in_array('page__sharing__user__dashboard', $suggestions):
     case in_array('page__photos__user', $suggestions):
     case in_array('page__photos__activity__user', $suggestions):
       $suggestions[] = 'page__fullmodal';

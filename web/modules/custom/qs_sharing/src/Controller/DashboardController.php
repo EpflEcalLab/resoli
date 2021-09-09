@@ -104,7 +104,6 @@ class DashboardController extends ControllerBase {
         'tags' => $this->getCacheTags(),
         'contexts' => [
           'user',
-          'url.query_args',
         ],
       ],
     ];
@@ -117,6 +116,8 @@ class DashboardController extends ControllerBase {
     $tags = [
       // Invalidated whenever any Offer is updated, deleted or created.
       'node_list:offer',
+      // Invalidated whenever any Volunteerism is updated, deleted or created.
+      'volunteerism_list:volunteerism',
     ];
 
     if ($nodes) {

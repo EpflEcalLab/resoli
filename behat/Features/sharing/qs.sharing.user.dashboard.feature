@@ -88,7 +88,6 @@ Feature: Dashboard sharing
     When I am on "/sharing/1/user/8/dashboard"
     And I should see "qs_sharing.manage_offers" link with href "/sharing/1/user/8/offers"
 
-
 ## Floating Button
   @api
   Scenario Outline: Logged-in on the sharing dashboard, I should see the floating button point to my dashboard
@@ -105,7 +104,8 @@ Feature: Dashboard sharing
 
 # Back button.
   @api
-  Scenario: In the Sharing dashboard page, I don't see any back button
+  Scenario: In the Sharing dashboard page, I should a back button point to the offer type listing
     Given I am logged in as user "admin"
     When I am on "/sharing/1/user/1/dashboard"
-    Then I should not see a "#block-previousnavigation a" element
+    Then I should see 1 "#block-previousnavigation a" elements
+    And I should see "qs.previous.to_offers_type_list" link with href "/sharing/1/offers"

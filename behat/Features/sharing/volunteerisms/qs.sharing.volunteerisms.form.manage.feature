@@ -65,4 +65,4 @@ Feature: Sharing manage Volunteerism Form
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/community/1/volunteerism/manage"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/2/offers"
+    And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/2/dashboard"

@@ -33,7 +33,7 @@ Feature: Sharing Offers edit Form
     Given I am logged in as user "admin"
     When I am on "/sharing/offers/69/edit"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_my_offers" link with href "/sharing/1/user/1/offers"
+    And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/1/dashboard"
 
 ## Form pre-filled values.
   Scenario: In the edit Offer form, the fields should be prefilled with entity values.

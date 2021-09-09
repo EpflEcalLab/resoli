@@ -293,8 +293,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
         case 'qs_sharing.volunteerisms.form.manage':
         case 'qs_sharing.offers.form.add':
         case 'qs_sharing.offers.form.edit':
-          // @todo update with right url to dashboard.
-          $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.user.offers', [
+          $url = $this->urlGenerator->generateFromRoute('qs_sharing.sharing.dashboard', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
           ], $options);

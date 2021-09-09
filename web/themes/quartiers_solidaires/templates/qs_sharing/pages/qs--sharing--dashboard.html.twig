@@ -33,6 +33,7 @@
     }}) %}
   {% endif %}
   {% if variables.isVolunteer %}
+    {% set params = {'community': variables.community.tid.value, 'user': variables.user} %}
     {% set buttons = buttons|merge({'See requests button': {
       label: 'qs_sharing.see_requests'|t,
       path: 'qs_sharing.collection.user.offers',
@@ -40,7 +41,7 @@
     }}) %}
     {% set buttons = buttons|merge({'Manager volunteerism button': {
       label: 'qs_sharing.manage_volunteerism'|t,
-      path: 'qs_sharing.collection.user.offers',
+      path: 'qs_sharing.volunteerisms.form.manage',
       icon: 'user',
     }}) %}
     {% set buttons = buttons|merge({
@@ -51,9 +52,10 @@
     }) %}
   {% endif %}
   {% if not variables.isVolunteer %}
+    {% set params = {'community': variables.community.tid.value, 'user': variables.user} %}
     {% set buttons = buttons|merge({
       'Become volunteer button': { label: 'qs_sharing.become_volunteer'|t,
-        path: 'qs_sharing.offers.form.add',
+        path: 'qs_sharing.volunteerisms.form.manage',
         classes: 'bg-info btn-outline-invert',
         icon: 'plus',}
     }) %}

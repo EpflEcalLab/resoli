@@ -1,0 +1,12 @@
+FROM antistatique/deploy
+
+WORKDIR /app
+
+ADD Gemfile Gemfile.lock ./
+RUN set -eux; \
+  \
+  bundle install --jobs=5 --retry=5; \
+  \
+  rm -rf /tmp/* $GEM_HOME/cache/* $HOME/.bundle/cache/*
+
+COPY . ./

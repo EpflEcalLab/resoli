@@ -104,6 +104,11 @@ jobs:
               echo "::set-output name=DEPLOY_ENV::production"
           fi
       - uses: actions/checkout@v2.3.4
+      - uses: actions/setup-node@v2
+        with:
+            node-version: '12'
+      - name: Build Styleguide
+        run: yarn && yarn build --production
       - name: Set Docker Image Tag
         id: image_tag
         run: echo "::set-output name=DOCKER_DEPLOY_IMAGE_TAG::resoli-deploy:$(date +%s)"

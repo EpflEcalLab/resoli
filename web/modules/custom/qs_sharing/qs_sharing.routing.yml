@@ -63,7 +63,7 @@ qs_sharing.collection.user.offers:
       user:
         type: entity:user
 
-# Sharing offer form
+# Sharing offer forms
 qs_sharing.offers.form.add:
   path: '/sharing/{community}/offers/add'
   defaults:
@@ -77,6 +77,20 @@ qs_sharing.offers.form.add:
     parameters:
       community:
         type: entity:taxonomy_term
+
+qs_sharing.offers.form.edit:
+  path: '/sharing/offers/{offer}/edit'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferEditForm'
+    _title_callback: '\Drupal\qs_sharing\Form\OfferEditForm::getTitle'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferEditForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
 
 # Offer moderation form
 qs_sharing.offers.form.moderate:

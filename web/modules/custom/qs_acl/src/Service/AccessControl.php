@@ -320,6 +320,30 @@ class AccessControl {
   }
 
   /**
+   * Check if the account has admin access on the given offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one admin access for this offer.
+   */
+  public function hasAdminAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL) {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $offer->get('uid')->target_id;
+
+    return $user->id() === $author_id && $author_id;
+  }
+
+  /**
    * Check if the given user can bypass any security restriction.
    *
    * This method has security implications.
@@ -430,30 +454,6 @@ class AccessControl {
     }
 
     return $this->currentUser->id() === $user->id() && $this->hasCommunityByUser($community, $user);
-  }
-
-  /**
-   * Check if the account is authorized to edit the given offer.
-   *
-   * @param \Drupal\node\NodeInterface $offer
-   *   The offer to check access.
-   * @param \Drupal\Core\Session\AccountInterface|null $account
-   *   User used to check access. Otherwise, use current user.
-   *
-   * @return bool
-   *   Is the user may edit the offer.
-   */
-  public function hasEditAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL): bool {
-    $user = $account ?? $this->currentUser;
-
-    // Check bypass.
-    if ($this->hasBypass($user)) {
-      return TRUE;
-    }
-
-    $author_id = $offer->get('uid')->target_id;
-
-    return $user->id() === $author_id && $author_id;
   }
 
   /**
@@ -623,6 +623,30 @@ class AccessControl {
     $number = (int) $query->count()->execute();
 
     return $number > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check if the account is authorized ot edit the given offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise, use current user.
+   *
+   * @return bool
+   *   Is the user may edit the offer.
+   */
+  public function hasWriteAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL): bool {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $offer->get('uid')->target_id;
+
+    return $user->id() === $author_id && $author_id;
   }
 
   /**

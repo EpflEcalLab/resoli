@@ -2309,7 +2309,6 @@ msgstr "Contact"
 msgid "qs.previous.to_offers_type_list"
 msgstr "Retour aux offres"
 
-<<<<<<< HEAD
 msgid "qs_sharing.offers.form.delete.title"
 msgstr "Supprimer l'offre"
 
@@ -2415,6 +2414,50 @@ msgstr "Ex. 079 790 79 79"
 msgid "qs.previous.to_my_offers"
 msgstr "Retour à mes offres"
 
+msgid "qs.previous.to_dashboard"
+msgstr "Mon entraide"
+
 msgid "qs_sharing.offers.form.add.success @offer @offer_type"
 msgstr "Votre nouvelle offre a bien été créée!"
->
+
+msgid "qs_sharing.offers.form.add.success @offer @offer_type"
+msgstr "Votre nouvelle offre a bien été créée!"
+
+msgid "qs_sharing.floating.dashboard"
+msgstr "Mon entraide"
+
+msgid "qs_sharing.volunteerism.form.title"
+msgstr "Remplissez ce formulaire afin de devenir bénévole auprès de votre communauté."
+
+msgid "qs_sharing.volunteerism.form.description"
+msgstr "Sélectionnez la ou les catégories pour lesquelles vous souhaitez recevoir les demandes d’entraide."
+
+msgid "qs_sharing.volunteerism.form.description.theme.mobilite"
+msgstr "Déplacements, co-voiturage, faires les courses, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.convivialite"
+msgstr "Partager un bon moment, se téléphoner, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.petitsservices"
+msgstr "La main verte, bricolage, autres coups de mains, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.objets"
+msgstr "Prêt, échange ou don de matériel divers, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.numerique"
+msgstr "Dépanages, bonnes pratiques informatiques, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.competences"
+msgstr "Transmission de savoir-faire, partage d’impressions, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.divers"
+msgstr "Autres propositions utiles à la communauté."
+
+msgid "qs_sharing.volunteerisms.form.manage.save_and_set_default_values"
+msgstr "Valider mes données uniquement"
+
+msgid "qs_sharing.volunteerisms.form.manage.save_and_new_offer"
+msgstr "Valider mes données et créer une offre"
+
+msgid "qs_sharing.volunteerisms.form.manage.success @community"
+msgstr "Vos préférences de bénévolat pour @community ont bien été mis à jour !"

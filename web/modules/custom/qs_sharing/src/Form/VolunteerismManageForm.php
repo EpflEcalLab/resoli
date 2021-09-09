@@ -100,7 +100,7 @@ class VolunteerismManageForm extends FormBase {
 
     $form['#floating_buttons'][] = [
       'icon' => 'sharing',
-      'label' => $this->t('qs_sharing.floating.my_offers'),
+      'label' => $this->t('qs_sharing.floating.dashboard'),
       'active' => TRUE,
     ];
 
@@ -111,11 +111,17 @@ class VolunteerismManageForm extends FormBase {
 
     $form['volunteerism'] = [
       '#type' => 'fieldset',
-      '#description' => $this->t('qs_sharing.volunteerism.form.description'),
+      '#description' => $this->t('qs_sharing.volunteerism.form.title'),
       '#theme_wrappers' => [
-        'container__center',
         'fieldset__step',
+        'container__center__wide',
       ],
+    ];
+
+    $form['volunteerism']['description'] = [
+      '#markup' => '<p class="font-weight-bold text-center mb-4">
+       ' . $this->t('qs_sharing.volunteerism.form.description') . '
+      </p>',
     ];
 
     $themes = $this->termStorage->loadTree('sharing_themes', 0, NULL, TRUE);
@@ -124,6 +130,8 @@ class VolunteerismManageForm extends FormBase {
       $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community, $this->currentUser(), $theme);
       $form['volunteerism']['volunteerism_' . $theme->tid->value] = [
         '#title' => $theme->getName(),
+        '#body' => $this->t(sprintf('qs_sharing.volunteerism.form.description.theme.%s', $theme->field_sharing_icon->value)),
+        '#icon' => $theme->field_sharing_icon->value,
         '#type' => 'checkbox',
         '#required' => FALSE,
         '#default_value' => isset($volunteerism),
@@ -131,14 +139,22 @@ class VolunteerismManageForm extends FormBase {
           'variant' => 'toggle',
         ],
         '#theme_wrappers' => [
-          'input__checkbox__toggle',
+          'input__checkbox__toggle__volunteerism',
         ],
       ];
     }
 
     $form['volunteerism']['actions'] = [
       '#type' => 'fieldset',
-
+      '#theme_wrappers' => [
+        'container__center__extra_wide',
+      ],
+      '#attributes' => [
+        'sticky_footer' => TRUE,
+        'class' => [
+          'text-center',
+        ],
+      ],
     ];
 
     $form['volunteerism']['actions']['save_and_set_default_values'] = [
@@ -150,8 +166,6 @@ class VolunteerismManageForm extends FormBase {
         'icon_left' => TRUE,
         'class' => [
           'btn-outline-invert',
-          'mx-auto',
-          'mt-5',
           'col-md-6',
         ],
       ],
@@ -166,8 +180,6 @@ class VolunteerismManageForm extends FormBase {
         'icon_left' => TRUE,
         'class' => [
           'btn-info',
-          'mx-auto',
-          'mt-5',
           'col-md-6',
         ],
       ],

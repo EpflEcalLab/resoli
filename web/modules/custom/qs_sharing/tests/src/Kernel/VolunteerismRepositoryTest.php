@@ -149,4 +149,65 @@ final class VolunteerismRepositoryTest extends KernelTestBase {
     self::assertNull($volunteerisms);
   }
 
+  /**
+   * @covers ::isUserVolunteerForTheme
+   */
+  public function testIsUserVolunteerForThemeReturnsExpected(): void {
+    $fooUser = $this->entityTypeManager->getStorage('user')->create([
+      'mail' => 'foo@example.org',
+      'name' => 'foo@example.org',
+    ]);
+    $fooUser->save();
+
+    $barUser = $this->entityTypeManager->getStorage('user')->create([
+      'mail' => 'bar@example.org',
+      'name' => 'bar@example.org',
+    ]);
+    $barUser->save();
+
+    $community1 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
+      'vid' => 'communities',
+      'name' => $this->randomString(),
+    ]);
+    $community1->save();
+
+    $community2 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
+      'vid' => 'communities',
+      'name' => $this->randomString(),
+    ]);
+    $community2->save();
+
+    $theme1 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
+      'vid' => 'sharing_themes',
+      'name' => 'Conviviality',
+    ]);
+    $theme1->save();
+
+    $theme2 = $this->entityTypeManager->getStorage('taxonomy_term')->create([
+      'vid' => 'sharing_themes',
+      'name' => 'Mobility',
+    ]);
+    $theme2->save();
+
+    $volunteerism1 = $this->entityTypeManager->getStorage('volunteerism')->create([
+      'theme' => $theme1,
+      'community' => $community1,
+      'user' => $fooUser,
+    ]);
+    $volunteerism1->save();
+
+    $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community1, $fooUser, $theme1);
+    self::assertNotNull($volunteerism);
+    self::assertEqual($volunteerism1->id(), $volunteerism->id());
+
+    $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community1, $fooUser, $theme2);
+    self::assertNull($volunteerism);
+
+    $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community2, $fooUser, $theme1);
+    self::assertNull($volunteerism);
+
+    $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community1, $barUser, $theme1);
+    self::assertNull($volunteerism);
+  }
+
 }

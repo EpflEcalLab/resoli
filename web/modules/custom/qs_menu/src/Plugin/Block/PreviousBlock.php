@@ -283,13 +283,15 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to My Offers.
+        // Go to Sharing Dashboard.
+        case 'qs_sharing.volunteerisms.form.manage':
         case 'qs_sharing.offers.form.add':
+          // @todo update with right url to dashboard
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.user.offers', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
           ], $options);
-          $label = $this->t('qs.previous.to_my_offers');
+          $label = $this->t('qs.previous.to_dashboard');
           $theme = 'primary';
 
           break;

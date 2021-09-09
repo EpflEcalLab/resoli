@@ -72,12 +72,13 @@ class OfferModerateForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $options = NULL) {
-    if (!isset($options) || !$options['offer']) {
+    if (!isset($options['offer'])) {
       return $form;
     }
 
     /** @var \Drupal\node\NodeInterface $offer */
     $offer = $options['offer'];
+
     // Save the offer for later usage on submission.
     $form_state->set('offer', $offer->id());
 
@@ -86,8 +87,8 @@ class OfferModerateForm extends FormBase {
 
     // Needed to ensure the right offer is linked to the right form
     // https://drupal.stackexchange.com/a/276999
-    $form_state->setRequestMethod('POST');
-    $form_state->setCached(TRUE);
+    //$form_state->setRequestMethod('POST');
+    //$form_state->setCached(TRUE);
 
     $form['#attributes'] = [
       'data-ajax' => 'true',

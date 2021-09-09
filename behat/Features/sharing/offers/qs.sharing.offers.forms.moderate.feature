@@ -40,19 +40,20 @@ Feature: Offer Moderate Form
     Then I should see <element> "form.moderate" element
 
     Examples:
-      | user | element
-      | admin | 1
-      | member+lausanne+manager+fribourg | 1
-      | member+lausanne | 0
-      | organizer+lausanne | 0
+      | user | element |
+      | admin | 1 |
+      | member+lausanne+manager+fribourg | 1 |
+      | member+lausanne | 0 |
+      | organizer+lausanne | 0 |
 
 ## Form submits.
-  @api @preserveDatabase @mail
+  @api @preserveDatabase @mail @iris
   Scenario: When moderating an Offer, it should works, send an email and redirect me to the listing of offer type of the current community
-    Given I am logged in as user "member+lausanne+manager+fribourg"
-    When I am on "/node/65?theme=21"
-    Then I should see 1 "form.offer73.moderate" element
-    Then I follow the link ".offer73.moderate button[type='submit']" element
-    Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.offer.deactivated.subject Resoli Aide pour porter les courses"
-    Then the url should match "/node/65?theme=21"
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/node/66?theme=19"
+    Then I should see 1 "form.offer71.moderate" element
+    Then I follow the link ".offer71.moderate button[type='submit']" element
+    And 1 mail should be sent
+    Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.offer.deactivated.subject Resoli Co-Voiturage Lausanne-Fribourg"
+    Then the url should match "/node/66?theme=19"
     And I should see 0 ".card.card-info " element

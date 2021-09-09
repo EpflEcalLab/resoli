@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update drupal/core (9.2.1 => 9.2.4)
 - Update drupal/admin_toolbar (3.0.1 => 3.0.2)
 - Update drupal/field_group (3.1.0 => 3.2.0)
+- move from Codeship to Github Actions
 
 ### Fixed
 - fix pager of Events

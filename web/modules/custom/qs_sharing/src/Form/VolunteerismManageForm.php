@@ -133,7 +133,7 @@ class VolunteerismManageForm extends FormBase {
         // phpcs:disable
         // Create a translation string for each of the sharing themes in the foreach loop
         '#body' => $this->t(sprintf('qs_sharing.volunteerism.form.description.theme.%s', $theme->field_sharing_icon->value)),
-        // phpcs:disable
+        // phpcs:enable
         '#icon' => $theme->field_sharing_icon->value,
         '#type' => 'checkbox',
         '#required' => FALSE,

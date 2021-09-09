@@ -2,6 +2,13 @@
   type: parallel
   exclude: '^\d+\.\d+\.\d+$'
   steps:
+    - name: Artifacts
+      type: serial
+      steps:
+        - name: Artifacts
+          service: behat
+          command: >-
+            bash -c "touch /var/www/log/test-09092021.log && docker-as-artifacts --recursive --local-dir=/var/www/log"
     - name: Behaviour
       type: serial
       steps:

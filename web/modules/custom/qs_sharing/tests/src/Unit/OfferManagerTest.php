@@ -173,6 +173,20 @@ final class OfferManagerTest extends UnitTestCase {
   }
 
   /**
+   * @covers ::sendModeratedMail
+   */
+  public function testSendModeratedMailReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $user = $this->createMock(UserInterface::class);
+
+    $user->expects(self::once())->method('getEmail');
+    $user->expects(self::once())->method('getPreferredLangcode');
+    $this->mail->expects(self::once())->method('mail');
+
+    $this->offerManager->sendModeratedMail($node, $user);
+  }
+
+  /**
    * @covers ::update
    */
   public function testUpdateReturnsExcepted() {
@@ -234,20 +248,6 @@ final class OfferManagerTest extends UnitTestCase {
         'field_contact_phone' => '079 790 79 79',
       ],
     );
-  }
-  
-  /**
-   * @covers ::sendModeratedMail
-   */
-  public function testSendModeratedMailReturnsExcepted() {
-    $node = $this->createMock(NodeInterface::class);
-    $user = $this->createMock(UserInterface::class);
-
-    $user->expects(self::once())->method('getEmail');
-    $user->expects(self::once())->method('getPreferredLangcode');
-    $this->mail->expects(self::once())->method('mail');
-
-    $this->offerManager->sendModeratedMail($node, $user);
   }
 
 }

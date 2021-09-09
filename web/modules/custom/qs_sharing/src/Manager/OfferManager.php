@@ -143,6 +143,20 @@ class OfferManager {
   }
 
   /**
+   * Send a mail to alert the user of the moderation of its offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The moderated offer.
+   * @param \Drupal\user\UserInterface $user
+   *   The author of the offer.
+   */
+  public function sendModeratedMail(NodeInterface $offer, UserInterface $user): void {
+    $this->mail->mail('qs_sharing', 'offer_moderated', $user->getEmail(), $user->getPreferredLangcode(), [
+      'offer' => $offer,
+    ]);
+  }
+
+  /**
    * Update an Offer.
    *
    * Only update given fields.
@@ -167,20 +181,6 @@ class OfferManager {
     $offer->save();
 
     return $offer;
-  }
-  
-  /**
-   * Send a mail to alert the user of the moderation of its offer.
-   *
-   * @param \Drupal\node\NodeInterface $offer
-   *   The moderated offer.
-   * @param \Drupal\user\UserInterface $user
-   *   The author of the offer.
-   */
-  public function sendModeratedMail(NodeInterface $offer, UserInterface $user): void {
-    $this->mail->mail('qs_sharing', 'offer_moderated', $user->getEmail(), $user->getPreferredLangcode(), [
-      'offer' => $offer,
-    ]);
   }
 
 }

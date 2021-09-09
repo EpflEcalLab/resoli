@@ -66,7 +66,7 @@ class DashboardController extends ControllerBase {
   public function access(AccountInterface $account, TermInterface $community, UserInterface $user) {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasDashboardSharingAccess($community, $user)) {
+    if ($this->acl->hasDashboardSharingAccess($user) && $this->acl->hasAccessCommunity($community)) {
       $access = AccessResult::allowed();
     }
 

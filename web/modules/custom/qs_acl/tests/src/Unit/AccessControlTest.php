@@ -10,6 +10,7 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_sharing\Repository\VolunteerismRepository;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Tests\UnitTestCase;
+use Drupal\user\UserInterface;
 
 /**
  * Tests the block plugin collection.
@@ -61,6 +62,23 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
+   * Provider of ::testHasDashboardSharingAccessReturnsExcepted.
+   *
+   * Set of return value from hasDashboardSharingAccessReturnsExcepted
+   * with expected boolean result on hasDashboardSharingAccess.
+   *
+   * @return iterable
+   *   Return an array of arrays contains expectation.
+   */
+  public function hasDashboardSharingAccessReturnsExcepted(): iterable {
+    yield ['2', TRUE];
+
+    yield ['3', FALSE];
+
+    yield ['4', FALSE];
+  }
+
+  /**
    * Provider of ::testHasEditAccessOfferContextualUser.
    *
    * Set of return value from isCommunityReturnsExcepted with excepted boolean
@@ -101,6 +119,26 @@ final class AccessControlTest extends UnitTestCase {
       $this->createMock(NodeInterface::class),
     ], TRUE,
     ];
+  }
+
+  /**
+   * @covers ::hasDashboardSharingAccess
+   *
+   * @dataProvider hasDashboardSharingAccessReturnsExcepted
+   */
+  public function testHasDashboardSharingAccessReturnsExcepted($userId, bool $excepted) {
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn('2');
+
+    $user = $this->createMock(UserInterface::class);
+    $user->expects(self::once())
+      ->method('id')
+      ->willReturn($userId);
+
+    $result = $this->acl->hasDashboardSharingAccess($user);
+
+    self::assertEquals($excepted, $result);
   }
 
   /**

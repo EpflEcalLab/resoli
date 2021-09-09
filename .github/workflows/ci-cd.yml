@@ -81,7 +81,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [ phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
+#    needs: [ phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
     if:
       contains('
       refs/heads/master
@@ -103,7 +103,7 @@ jobs:
           if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
               echo "::set-output name=DEPLOY_ENV::production"
           fi
-          if [[ $GITHUB_REF == 'refs/heads/move-to-github-actions' ]]; then
+          if [[ $GITHUB_REF == 'refs/heads/feature/move-to-github-actions' ]]; then
               echo "::set-output name=DEPLOY_ENV::staging"
           fi
       - uses: actions/checkout@v2.3.4

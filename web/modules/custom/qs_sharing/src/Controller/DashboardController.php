@@ -3,6 +3,7 @@
 namespace Drupal\qs_sharing\Controller;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
@@ -63,10 +64,10 @@ class DashboardController extends ControllerBase {
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function access(AccountInterface $account, TermInterface $community, UserInterface $user) {
+  public function access(AccountInterface $account, TermInterface $community, UserInterface $user): AccessResultInterface {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasDashboardSharingAccess($user) && $this->acl->hasAccessCommunity($community)) {
+    if ($this->acl->hasDashboardSharingAccess($community, $user)) {
       $access = AccessResult::allowed();
     }
 

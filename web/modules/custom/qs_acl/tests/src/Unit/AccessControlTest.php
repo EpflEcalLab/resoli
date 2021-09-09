@@ -71,11 +71,11 @@ final class AccessControlTest extends UnitTestCase {
    *   Return an array of arrays contains expectation.
    */
   public function hasDashboardSharingAccessReturnsExcepted(): iterable {
-    yield ['2', TRUE];
+    yield ['4', FALSE];
 
     yield ['3', FALSE];
 
-    yield ['4', FALSE];
+    yield ['2', TRUE];
   }
 
   /**
@@ -122,11 +122,59 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasDashboardSharingAccess
+   */
+  public function testHasDashboardSharingAccessContextualUser() {
+    $community = $this->createMock(TermInterface::class);
+
+    $this->currentUser->expects(self::exactly(2))
+      ->method('id');
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasCommunityByUser', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasCommunityByUser')->willReturn(TRUE);
+
+    // Fallback on the current user.
+    $acl->hasDashboardSharingAccess($community);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasDashboardSharingAccess
+   */
+  public function testHasDashboardSharingAccessGivenUser() {
+    $community = $this->createMock(TermInterface::class);
+
+    $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
+    $anotherCurrentUser->expects(self::once())
+      ->method('id');
+    $this->currentUser->expects(self::once())
+      ->method('id');
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasCommunityByUser', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasCommunityByUser')->willReturn(TRUE);
+
+    // Fallback on the current user.
+    $acl->hasDashboardSharingAccess($community, $anotherCurrentUser);
+  }
+
+  /**
    * @covers ::hasDashboardSharingAccess
    *
    * @dataProvider hasDashboardSharingAccessReturnsExcepted
    */
   public function testHasDashboardSharingAccessReturnsExcepted($userId, bool $excepted) {
+    $community = $this->createMock(TermInterface::class);
     $this->currentUser->expects(self::once())
       ->method('id')
       ->willReturn('2');
@@ -136,7 +184,14 @@ final class AccessControlTest extends UnitTestCase {
       ->method('id')
       ->willReturn($userId);
 
-    $result = $this->acl->hasDashboardSharingAccess($user);
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasCommunityByUser', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->method('hasCommunityByUser')->willReturn(TRUE);
+
+    $result = $acl->hasDashboardSharingAccess($community, $user);
 
     self::assertEquals($excepted, $result);
   }

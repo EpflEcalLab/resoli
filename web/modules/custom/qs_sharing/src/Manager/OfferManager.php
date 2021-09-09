@@ -150,7 +150,7 @@ class OfferManager {
    * @param \Drupal\user\UserInterface $user
    *   The author of the offer.
    */
-  public function sendModerated(NodeInterface $offer, UserInterface $user): void {
+  public function sendModeratedMail(NodeInterface $offer, UserInterface $user): void {
     $this->mail->mail('qs_sharing', 'offer_moderated', $user->getEmail(), $user->getPreferredLangcode(), [
       'offer' => $offer,
     ]);

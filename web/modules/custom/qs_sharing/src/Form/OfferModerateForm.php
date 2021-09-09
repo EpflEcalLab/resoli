@@ -149,7 +149,7 @@ class OfferModerateForm extends FormBase {
 
     // Deactivate the offer and send an email to its author.
     $this->offerManager->deactivate($offer);
-    $this->offerManager->sendModerated($offer, $offer->uid->entity);
+    $this->offerManager->sendModeratedMail($offer, $offer->uid->entity);
 
     $form_state->setRedirect('qs_sharing.collection.offer', [
       'community' => $offer->field_offer_type->entity->field_community->entity->id(),

@@ -173,9 +173,9 @@ final class OfferManagerTest extends UnitTestCase {
   }
 
   /**
-   * @covers ::sendModerated
+   * @covers ::sendModeratedMail
    */
-  public function testSendModeratedReturnsExcepted() {
+  public function testSendModeratedMailReturnsExcepted() {
     $node = $this->createMock(NodeInterface::class);
     $user = $this->createMock(UserInterface::class);
 
@@ -183,7 +183,7 @@ final class OfferManagerTest extends UnitTestCase {
     $user->expects(self::once())->method('getPreferredLangcode');
     $this->mail->expects(self::once())->method('mail');
 
-    $this->offerManager->sendModerated($node, $user);
+    $this->offerManager->sendModeratedMail($node, $user);
   }
 
 }

@@ -86,6 +86,7 @@ jobs:
       contains('
       refs/heads/master
       refs/heads/dev
+      refs/heads/feature/move-to-github-actions
       ', github.ref)
     runs-on: ubuntu-latest
     env:
@@ -99,8 +100,11 @@ jobs:
           if [[ $GITHUB_REF == 'refs/heads/dev' ]]; then
               echo "::set-output name=DEPLOY_ENV::staging"
           fi
-          if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
+          if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
               echo "::set-output name=DEPLOY_ENV::production"
+          fi
+          if [[ $GITHUB_REF == 'refs/heads/move-to-github-actions' ]]; then
+              echo "::set-output name=DEPLOY_ENV::staging"
           fi
       - uses: actions/checkout@v2.3.4
       - uses: actions/setup-node@v2

@@ -55,5 +55,7 @@ Feature: Offer Moderate Form
     Then I follow the link ".offer71.moderate button[type='submit']" element
     And 1 mail should be sent
     Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.offer.deactivated.subject Resoli Co-Voiturage Lausanne-Fribourg"
-    Then the url should match "/node/66?theme=19"
-    And I should see 0 ".card.card-info " element
+    And the url should match "/node" with parameter:
+      | theme |
+      | 19 |
+    And I should see 0 "#card71" element

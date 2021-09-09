@@ -71,7 +71,6 @@ jobs:
         run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only
       - name: Build Styleguide
         run: docker exec test yarn build --production
-#        run: docker exec test bash -c "yarn build --production && mkdir -p /var/www/build/styleguide && mv /var/www/web/themes/quartiers_solidaires/build/* /var/www/build/styleguide/"
       - name: Run Behat tests
         run: docker-compose exec -T test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data
       - name: Upload Artifact

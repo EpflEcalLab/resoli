@@ -151,8 +151,8 @@ class OfferModerateForm extends FormBase {
     $this->offerManager->deactivate($offer);
     $this->offerManager->sendModeratedMail($offer, $offer->uid->entity);
 
-    $form_state->setRedirect('qs_sharing.collection.offer', [
-      'community' => $offer->field_offer_type->entity->field_community->entity->id(),
+    $form_state->setRedirect('entity.node.canonical', [
+      'node' => $offer->field_offer_type->entity->id(),
     ], []);
   }
 

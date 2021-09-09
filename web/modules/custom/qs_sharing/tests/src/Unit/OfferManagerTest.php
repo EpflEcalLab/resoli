@@ -125,7 +125,8 @@ final class OfferManagerTest extends UnitTestCase {
   /**
    * @covers ::update
    */
-  public function testUpdateReturnsExcepted() {
+  public function testUpdateReturnsExcepted()
+  {
     $node = $this->createMock(NodeInterface::class);
     $node
       ->expects(self::exactly(8))
@@ -184,6 +185,47 @@ final class OfferManagerTest extends UnitTestCase {
         'field_contact_phone' => '079 790 79 79',
       ],
     );
+  }
+
+  /**
+   * @covers ::deactivate
+   */
+  public function testDeactivateReturnsExcepted(): void {
+    $node = $this->createMock(NodeInterface::class);
+
+    $node->expects(self::once())
+      ->method('set')
+      ->with('moderation_state', 'archived');
+
+    $node->expects(self::once())
+      ->method('save');
+
+    $this->offerManager->deactivate($node);
+  }
+
+  /**
+   * @covers ::delete
+   */
+  public function testDeleteReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+
+    $node->expects(self::once())
+      ->method('delete');
+
+    $this->offerManager->delete($node);
+  }
+
+  /**
+   * @covers ::reactivate§
+   */
+  public function testReactivateReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+
+    $node->expects(self::once())
+      ->method('set')
+      ->with('moderation_state', 'published');
+
+    $this->offerManager->reactivate($node);
   }
 
 }

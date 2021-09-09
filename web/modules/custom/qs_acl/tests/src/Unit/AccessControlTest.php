@@ -61,7 +61,7 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
-   * Provider of ::testHasAdminAccessOfferContextualUser.
+   * Provider of ::testHasWriteAccessOfferContextualUser.
    *
    * Set of return value from isCommunityReturnsExcepted with excepted boolean
    * result on isCommunityVolunteer.
@@ -69,7 +69,7 @@ final class AccessControlTest extends UnitTestCase {
    * @return iterable
    *   Return an array of arrays contains expectation.
    */
-  public function hasAdminAccessOfferReturnsExcepted(): iterable {
+  public function hasWriteAccessOfferReturnsExcepted(): iterable {
     yield [NULL, NULL, FALSE];
 
     yield ['1', '1', TRUE];
@@ -106,9 +106,9 @@ final class AccessControlTest extends UnitTestCase {
   /**
    * Ensure the current user will be used when non given.
    *
-   * @covers ::hasAdminAccessOffer
+   * @covers ::hasWriteAccessOffer
    */
-  public function testHasAdminAccessOfferContextualUser() {
+  public function testHasWriteAccessOfferContextualUser() {
     $offer = $this->createMock(NodeInterface::class);
 
     $offer->expects(self::exactly(2))
@@ -121,7 +121,7 @@ final class AccessControlTest extends UnitTestCase {
       ->willReturn('2');
 
     // Fallback on the current user.
-    $this->acl->hasAdminAccessOffer($offer);
+    $this->acl->hasWriteAccessOffer($offer);
 
     $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
     $anotherCurrentUser->expects(self::once())
@@ -129,15 +129,15 @@ final class AccessControlTest extends UnitTestCase {
       ->willReturn('2');
 
     // User the given user.
-    $this->acl->hasAdminAccessOffer($offer, $anotherCurrentUser);
+    $this->acl->hasWriteAccessOffer($offer, $anotherCurrentUser);
   }
 
   /**
-   * @covers ::hasAdminAccessOffer
+   * @covers ::hasWriteAccessOffer
    *
-   * @dataProvider hasAdminAccessOfferReturnsExcepted
+   * @dataProvider hasWriteAccessOfferReturnsExcepted
    */
-  public function testHasAdminAccessOfferReturnsExcepted($userId, $offerAuthorId, bool $excepted) {
+  public function testHasWriteAccessOfferReturnsExcepted($userId, $offerAuthorId, bool $excepted) {
     $offer = $this->createMock(NodeInterface::class);
     $offer->expects(self::once())
       ->method('get')
@@ -149,7 +149,7 @@ final class AccessControlTest extends UnitTestCase {
       ->willReturn($userId);
 
     // Fallback on the current user.
-    $result = $this->acl->hasAdminAccessOffer($offer);
+    $result = $this->acl->hasWriteAccessOffer($offer);
 
     self::assertEquals($excepted, $result);
   }

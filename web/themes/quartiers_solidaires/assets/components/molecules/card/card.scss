@@ -570,7 +570,7 @@ html:lang(en) .size-time {
 .card-list-offer.card-list  {
   .card-pill .btn {
     @include media-breakpoint-up(md) {
-      min-width: 160px;
+      min-width: 240px;
     }
   }
 

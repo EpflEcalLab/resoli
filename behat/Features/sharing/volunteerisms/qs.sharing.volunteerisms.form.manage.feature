@@ -49,7 +49,8 @@ Feature: Sharing manage Volunteerism Form
 
 # Back button.
   @api
-  Scenario: In the Sharing volunteerism manage form page, I should see a back button
+  Scenario: In the Sharing volunteerism manage form page, I should see a back button pointing to my sharing dashboard
     Given I am logged in as user "admin"
     When I am on "/sharing/community/1/volunteerism/manage"
     Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.previous.to_sharing_dashboard" link with href "/sharing/1/user/1/offers"

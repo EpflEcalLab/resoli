@@ -291,7 +291,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
           ], $options);
-          $label = $this->t('qs.previous.to_dashboard');
+          $label = $this->t('qs.previous.to_sharing_dashboard');
           $theme = 'primary';
 
           break;

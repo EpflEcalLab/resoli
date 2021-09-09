@@ -47,7 +47,7 @@ Feature: Offer Moderate Form
       | organizer+lausanne | 0 |
 
 ## Form submits.
-  @api @preserveDatabase @mail @iris
+  @api @preserveDatabase @mail
   Scenario: When moderating an Offer, it should works, send an email and redirect me to the listing of offer type of the current community
     Given I am logged in as user "manager+lausanne"
     When I am on "/node/66?theme=19"

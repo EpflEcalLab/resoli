@@ -20,11 +20,9 @@ Feature: Sharing manage Volunteerism Form
       | manager+lausanne | 2  | 403 |
 
 ## Form submits.
-  ## @todo this test will fail until #913 is merged (Volunteerism default content)
-  @api @preserveDatabase
   Scenario: In the manage Volunteerism form, I should have my values prefilled for a user with volunteerisms.
     Given I am logged in as user "member+lausanne"
-    When I am on "/sharing/community/2/volunteerism/manage"
+    When I am on "/sharing/community/1/volunteerism/manage"
     And the "edit-volunteerism-20" checkbox should be checked
     And the "edit-volunteerism-21" checkbox should be checked
     And the "edit-volunteerism-23" checkbox should be checked
@@ -35,17 +33,17 @@ Feature: Sharing manage Volunteerism Form
 
   @api @preserveDatabase
   Scenario: In the manage Volunteerism form, I should be able to submit valid volunteerisms and be redirected to my dashboard.
-    Given I am logged in as user "admin"
+    Given I am logged in as user "member+lausanne"
     When I am on "/sharing/community/1/volunteerism/manage"
     And I check "edit-volunteerism-19"
     And I check "edit-volunteerism-20"
     And I press "edit-save-and-set-default-values"
-    Then the url should match "/sharing/1/user/1/offers"
+    Then the url should match "/sharing/1/user/2/offers"
     And I should see "qs_sharing.volunteerisms.form.manage.success Lausanne" in the ".alert" element
 
   @api @preserveDatabase
-  Scenario: In the manage Volunteerism form, I should be able to submit valid volunteerisms and be redirected to create an offer.
-    Given I am logged in as user "admin"
+  Scenario: In the manage Volunteerism form, I should be able to submit valid volunteerism and be redirected to create an offer.
+    Given I am logged in as user "member+lausanne"
     When I am on "/sharing/community/1/volunteerism/manage"
     And I check "edit-volunteerism-22"
     And I check "edit-volunteerism-25"
@@ -56,14 +54,15 @@ Feature: Sharing manage Volunteerism Form
 ## Floating Button
   @api
   Scenario: In the Sharing volunteerism manage form page, I should see a floating button
-    Given I am logged in as user "admin"
+    Given I am logged in as user "member+lausanne"
     When I am on "/sharing/community/1/volunteerism/manage"
     Then I should see 1 ".floating a" elements
+    And I should see "qs_sharing.floating.dashboard" link with href "/sharing/community/1/volunteerism/manage"
 
 # Back button.
   @api
   Scenario: In the Sharing volunteerism manage form page, I should see a back button pointing to my sharing dashboard
-    Given I am logged in as user "admin"
+    Given I am logged in as user "member+lausanne"
     When I am on "/sharing/community/1/volunteerism/manage"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.previous.to_sharing_dashboard" link with href "/sharing/1/user/1/offers"
+    And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/2/offers"

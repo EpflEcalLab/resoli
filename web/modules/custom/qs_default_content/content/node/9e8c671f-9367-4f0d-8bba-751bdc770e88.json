@@ -1,0 +1,250 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/79?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/request"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/5?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "href": "http:\/\/localhost\/lausanne?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_solved_by": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/6?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/24?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 79
+        }
+    ],
+    "uuid": [
+        {
+            "value": "9e8c671f-9367-4f0d-8bba-751bdc770e88"
+        }
+    ],
+    "vid": [
+        {
+            "value": 175
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "request"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-09-09T15:35:49+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "54c2e13a-f5d8-483b-9067-d98c3e50a2fb"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/5?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "79ebbfd1-4918-479c-b05c-b5c3ec52f7e2"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/lausanne?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "e8cfc427-c90d-4015-b583-1418974120ed"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_solved_by": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/6?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "6a14afb5-35ea-4180-bba1-666b7f6860c9"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/24?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "f2f66008-30dd-4173-a4d6-f14fe04efce9"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Demande d'entraide N\u00b079 de Juda Bricot",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-09-09T15:35:27+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-09-09T15:35:49+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "published",
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Bonjour, \r\n\r\nJe poss\u00e8de un cerisier 1\/2 tige Bigareau de 6 ann\u00e9es.\r\n\r\nDepuis une ann\u00e9e toute l\u2019\u00e9corce du tronc part en lambeau du haut en bas du tronc.\r\n\r\nJe souhaiterai savoir comment le soigner ou le traiter  pour qu\u2019il refasse son \u00e9corce si c\u2019est encore possible. \r\n\r\nMerci pour vos r\u00e9ponses\r\nCordialement.",
+            "format": "light_html",
+            "processed": "Bonjour, \n\nJe poss\u00e8de un cerisier 1\/2 tige Bigareau de 6 ann\u00e9es.\n\nDepuis une ann\u00e9e toute l\u2019\u00e9corce du tronc part en lambeau du haut en bas du tronc.\n\nJe souhaiterai savoir comment le soigner ou le traiter  pour qu\u2019il refasse son \u00e9corce si c\u2019est encore possible. \n\nMerci pour vos r\u00e9ponses\nCordialement.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_mail": [
+        {
+            "value": "manager+lausanne@antistatique.net",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Juda Bricot",
+            "lang": "zxx"
+        }
+    ],
+    "field_solved_at": [
+        {
+            "value": "2020-01-01T12:00:00+01:00"
+        }
+    ]
+}

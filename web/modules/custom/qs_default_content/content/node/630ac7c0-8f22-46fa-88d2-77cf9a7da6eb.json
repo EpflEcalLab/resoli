@@ -1,0 +1,217 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/80?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/request"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/5?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "href": "http:\/\/localhost\/lausanne?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 80
+        }
+    ],
+    "uuid": [
+        {
+            "value": "630ac7c0-8f22-46fa-88d2-77cf9a7da6eb"
+        }
+    ],
+    "vid": [
+        {
+            "value": 176
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "request"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-09-09T15:37:34+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "54c2e13a-f5d8-483b-9067-d98c3e50a2fb"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/5?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "79ebbfd1-4918-479c-b05c-b5c3ec52f7e2"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/lausanne?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "e8cfc427-c90d-4015-b583-1418974120ed"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "0930812e-d866-47df-a224-70bba49cdc6b"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Demande d'entraide N\u00b080 de Juda Bricot",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-09-09T15:37:34+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-09-09T15:37:34+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "published",
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Bonjour,\r\n\r\nUne odeur de br\u00fbl\u00e9 m\u2019a alert\u00e9e. En ouvrant le capot du moteur, le garagiste a imm\u00e9diatement identifi\u00e9 l\u2019origine du probl\u00e8me, a rajout\u00e9 de l\u2019huile et pr\u00e9cis\u00e9 qu\u2019il fallait changer le couvre-culasse. \r\n\r\nLe v\u00e9hicule est une Fiat 500 en bo\u00eete auto, achet\u00e9 en 2016, donc plus sous garantie, et avec 15000 kms au compteur. Sur le tableau de bord, aucun voyant n\u2019\u00e9tait allum\u00e9. \r\n\r\nJe suis d\u00e9sagr\u00e9ablement surprise de devoir remplacer une pi\u00e8ce sur une voiture aussi r\u00e9cente et ayant aussi peu roul\u00e9. Est-ce consid\u00e9r\u00e9 comme normal ?\r\n\r\nMerci pour vos r\u00e9ponses.",
+            "format": "light_html",
+            "processed": "Bonjour,\n\nUne odeur de br\u00fbl\u00e9 m\u2019a alert\u00e9e. En ouvrant le capot du moteur, le garagiste a imm\u00e9diatement identifi\u00e9 l\u2019origine du probl\u00e8me, a rajout\u00e9 de l\u2019huile et pr\u00e9cis\u00e9 qu\u2019il fallait changer le couvre-culasse. \n\nLe v\u00e9hicule est une Fiat 500 en bo\u00eete auto, achet\u00e9 en 2016, donc plus sous garantie, et avec 15000 kms au compteur. Sur le tableau de bord, aucun voyant n\u2019\u00e9tait allum\u00e9. \n\nJe suis d\u00e9sagr\u00e9ablement surprise de devoir remplacer une pi\u00e8ce sur une voiture aussi r\u00e9cente et ayant aussi peu roul\u00e9. Est-ce consid\u00e9r\u00e9 comme normal ?\n\nMerci pour vos r\u00e9ponses.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Juda Bricot",
+            "lang": "zxx"
+        }
+    ]
+}

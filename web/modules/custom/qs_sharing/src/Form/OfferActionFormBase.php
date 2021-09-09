@@ -70,7 +70,7 @@ abstract class OfferActionFormBase extends FormBase {
   public function access(AccountInterface $account, NodeInterface $offer) {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasEditAccessOffer($offer)) {
+    if ($this->acl->hasWriteAccessOffer($offer)) {
       $access = AccessResult::allowed();
     }
 

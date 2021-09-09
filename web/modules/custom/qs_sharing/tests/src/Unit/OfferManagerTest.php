@@ -186,4 +186,68 @@ final class OfferManagerTest extends UnitTestCase {
     $this->offerManager->sendModeratedMail($node, $user);
   }
 
+  /**
+   * @covers ::update
+   */
+  public function testUpdateReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $node
+      ->expects(self::exactly(8))
+      ->method('hasField')
+      ->withConsecutive(
+        ['title'],
+        ['field_offer_type'],
+        ['field_theme'],
+        ['body'],
+        ['field_availability'],
+        ['field_contact_name'],
+        ['field_contact_mail'],
+        ['field_contact_phone']
+      )->willReturn(TRUE);
+    $node
+      ->expects(self::exactly(8))
+      ->method('set')
+      ->withConsecutive(
+        ['title', 'Mollis facilisi | Aptent Tempus'],
+        ['field_offer_type', 1],
+        ['field_theme', 1],
+        ['body', [
+          'format' => 'light_html',
+          'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
+        ],
+        ],
+        ['field_availability', [
+          'format' => 'light_html',
+          'value' => 'In porttitor justo urna nullam lectus lacus',
+        ],
+        ],
+        ['field_contact_name', 'Aptent Tempus'],
+        ['field_contact_mail', 'aptent.tempus@example.org'],
+        ['field_contact_phone', '079 790 79 79']
+      );
+    $node
+      ->expects(self::once())
+      ->method('save');
+
+    $this->offerManager->update(
+      $node,
+      [
+        'title' => 'Mollis facilisi | Aptent Tempus',
+        'field_offer_type' => 1,
+        'field_theme' => 1,
+        'body' => [
+          'format' => 'light_html',
+          'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
+        ],
+        'field_availability' => [
+          'format' => 'light_html',
+          'value' => 'In porttitor justo urna nullam lectus lacus',
+        ],
+        'field_contact_name' => 'Aptent Tempus',
+        'field_contact_mail' => 'aptent.tempus@example.org',
+        'field_contact_phone' => '079 790 79 79',
+      ],
+    );
+  }
+
 }

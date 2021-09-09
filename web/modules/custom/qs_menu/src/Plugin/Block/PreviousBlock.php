@@ -66,11 +66,16 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
     $community = $this->route->getParameter('community');
     $activity = $this->route->getParameter('activity');
+    $offer = $this->route->getParameter('offer');
     $event = $this->route->getParameter('event');
     $node = $this->route->getParameter('node');
 
     if (!$community && $event && !$event->get('field_activity')->isEmpty()) {
       $community = $event->field_activity->entity;
+    }
+
+    if (!$community && $offer && !$offer->get('field_offer_type')->isEmpty()) {
+      $community = $offer->field_offer_type->entity->field_community->entity;
     }
 
     if (!$activity && $event && $event->hasField('field_activity')) {
@@ -286,6 +291,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
         // Go to My Offers.
         case 'qs_sharing.offers.form.add':
+        case 'qs_sharing.offers.form.edit':
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.user.offers', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),

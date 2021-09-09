@@ -156,4 +156,31 @@ class OfferManager {
     ]);
   }
 
+  /**
+   * Update an Offer.
+   *
+   * Only update given fields.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to update.
+   * @param array $fields
+   *   The fields to update with the new value.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The updated offer.
+   */
+  public function update(NodeInterface $offer, array $fields): NodeInterface {
+    foreach ($fields as $key => $value) {
+      if ($offer->hasField($key)) {
+        $offer->set($key, $value);
+      }
+    }
+
+    $offer->save();
+
+    return $offer;
+  }
+
 }

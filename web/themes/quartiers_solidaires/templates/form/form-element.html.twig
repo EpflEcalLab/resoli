@@ -76,7 +76,7 @@
 
 {% if element['#attributes'].icon %}
 <div class="d-flex">
-  {{ macros.icon(element['#attributes'].icon, ['mr-2', 'icon-lg', 'mt-4']) }}
+  {{ macros.icon(element['#attributes'].icon, ['mr-2', label_display in ['before', 'invisible'] ? 'mt-4' : 'icon-lg']) }}
   <div class="flex-grow">
 {% endif %}
 

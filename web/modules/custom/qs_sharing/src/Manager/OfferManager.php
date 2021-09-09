@@ -83,31 +83,6 @@ class OfferManager {
   }
 
   /**
-   * Update an Offer.
-   *
-   * Only update given fields.
-   *
-   * @param \Drupal\node\NodeInterface $offer
-   *   The offer to update.
-   * @param array $fields
-   *   The fields to update with the new value.
-   *
-   * @return \Drupal\node\NodeInterface
-   *   The updated offer.
-   *
-   * @throws \Drupal\Core\Entity\EntityStorageException
-   */
-  public function update(NodeInterface $offer, array $fields) {
-    foreach ($fields as $key => $value) {
-      if ($offer->hasField($key)) {
-        $offer->set($key, $value);
-      }
-    }
-
-    $offer->save();
-  }
-
-  /*
    * Deactivate the offer.
    *
    * @param \Drupal\node\NodeInterface $offer
@@ -151,6 +126,33 @@ class OfferManager {
   public function reactivate(NodeInterface $offer): NodeInterface {
     // Reactivate the offer.
     $offer->set('moderation_state', 'published');
+    $offer->save();
+
+    return $offer;
+  }
+
+  /**
+   * Update an Offer.
+   *
+   * Only update given fields.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to update.
+   * @param array $fields
+   *   The fields to update with the new value.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The updated offer.
+   */
+  public function update(NodeInterface $offer, array $fields): NodeInterface {
+    foreach ($fields as $key => $value) {
+      if ($offer->hasField($key)) {
+        $offer->set($key, $value);
+      }
+    }
+
     $offer->save();
 
     return $offer;

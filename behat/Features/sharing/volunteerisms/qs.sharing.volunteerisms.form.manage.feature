@@ -20,6 +20,19 @@ Feature: Sharing manage Volunteerism Form
       | manager+lausanne | 2  | 403 |
 
 ## Form submits.
+  ## @todo this test will fail until #913 is merged (Volunteerism default content)
+  @api @preserveDatabase
+  Scenario: In the manage Volunteerism form, I should have my values prefilled for a user with volunteerisms.
+    Given I am logged in as user "member+lausanne"
+    When I am on "/sharing/community/2/volunteerism/manage"
+    And the "edit-volunteerism-20" checkbox should be checked
+    And the "edit-volunteerism-21" checkbox should be checked
+    And the "edit-volunteerism-23" checkbox should be checked
+    And the "edit-volunteerism-19" checkbox should not be checked
+    And the "edit-volunteerism-22" checkbox should not be checked
+    And the "edit-volunteerism-24" checkbox should not be checked
+    And the "edit-volunteerism-25" checkbox should not be checked
+
   @api @preserveDatabase
   Scenario: In the manage Volunteerism form, I should be able to submit valid volunteerisms and be redirected to my dashboard.
     Given I am logged in as user "admin"
@@ -37,7 +50,7 @@ Feature: Sharing manage Volunteerism Form
     And I check "edit-volunteerism-22"
     And I check "edit-volunteerism-25"
     And I press "edit-save-and-new-offer"
-    Then the url should match "/sharing/1/offers/add?user=1"
+    Then the url should match "/sharing/1/offers/add"
     And I should see "qs_sharing.volunteerisms.form.manage.success Lausanne" in the ".alert" element
 
 ## Floating Button

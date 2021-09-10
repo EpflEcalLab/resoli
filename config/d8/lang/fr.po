@@ -2518,3 +2518,9 @@ msgstr "qs.mail.offer.deactivated.subject @sitename @offer"
 
 msgid "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
 msgstr "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+
+msgid "qs_sharing.collection.request.title @community"
+msgstr "Voici les demandes d’entraide de la communauté de @community"
+
+msgid "qs_sharing.floating.requests"
+msgstr "Demandes d’entraide"

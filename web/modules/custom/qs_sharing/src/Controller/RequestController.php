@@ -96,6 +96,7 @@ class RequestController extends ControllerBase {
   public function requests(Request $request, TermInterface $community) {
     $variables = [
       'community' => $community,
+      'requests' => $this->requestRepository->getAllByCommunity($community),
     ];
 
     return [

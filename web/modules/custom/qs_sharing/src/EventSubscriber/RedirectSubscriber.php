@@ -35,8 +35,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      KernelEvents::REQUEST => ['offerRedirect'],
-      KernelEvents::REQUEST => ['requestRedirect'],
+      KernelEvents::REQUEST => [
+        ['offerRedirect'],
+        ['requestRedirect'],
+      ],
     ];
   }
 

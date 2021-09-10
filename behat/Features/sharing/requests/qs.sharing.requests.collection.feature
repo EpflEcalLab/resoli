@@ -1,4 +1,3 @@
-@debug
 Feature: Collection of Requests
   Asserts the listing of Requests of one community display the correct number of items.
 

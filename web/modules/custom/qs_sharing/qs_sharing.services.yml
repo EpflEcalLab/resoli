@@ -18,6 +18,12 @@ services:
       - '@entity_type.manager'
       - '@database'
 
+  qs_sharing.repository.request:
+    class: Drupal\qs_sharing\Repository\RequestRepository
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+
   # Managers
   qs_sharing.manager.offer_type:
     class: Drupal\qs_sharing\Manager\OfferTypeManager

@@ -209,7 +209,7 @@
     ],
     "moderation_state": [
         {
-            "value": "published",
+            "value": "solved",
             "lang": "zxx"
         }
     ],

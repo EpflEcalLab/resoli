@@ -68,7 +68,7 @@ Feature: Dashboard sharing
     And I am logged in as user "admin"
     When I am on "/sharing/1/user/1/dashboard"
     And I should see "qs_sharing.add_offer" link with href "/sharing/1/offers/add?user=1"
-    And I should see "qs_sharing.see_requests" link with href "/sharing/1/user/1/offers"
+    And I should see "qs_sharing.see_requests" link with href "/sharing/1/requests"
     And I should see "qs_sharing.manage_volunteerism" link with href "/sharing/community/1/volunteerism/manage?user=1"
     And I should not see "qs_sharing.become_volunteer"
 

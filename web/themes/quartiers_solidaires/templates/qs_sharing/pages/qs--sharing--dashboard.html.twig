@@ -36,7 +36,7 @@
     {% set params = {'community': variables.community.tid.value, 'user': variables.user} %}
     {% set buttons = buttons|merge({'See requests button': {
       label: 'qs_sharing.see_requests'|t,
-      path: 'qs_sharing.collection.user.offers',
+      path: 'qs_sharing.collection.request',
       icon: 'wait',
     }}) %}
     {% set buttons = buttons|merge({'Manager volunteerism button': {

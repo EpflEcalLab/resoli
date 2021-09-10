@@ -1,1 +1,31 @@
-{{ qs_sharing.collection.request.title'|t }}
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{% set community_name = variables.community.name.value|trim %}
+{% set modal_title = 'qs_sharing.collection.request.title @community'|t({'@community': community_name}) %}
+{% set modal_bg = 'primary' %}
+
+{% set floating_buttons = [
+  {
+    label: 'qs_sharing.floating.requests'|t,
+    icon: 'wait',
+    active: true,
+  }
+] %}
+
+{% block modal_content %}
+  {% if variables.requests %}
+    <ul class="card-list card-list-offer mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
+      {% for requests in variables.requests %}
+        {{ requests.title.value }}
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="text-center mb-auto">
+      <p>
+        {{ 'qs_sharing.collection.request.empty'|t }}
+      </p>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -46,3 +46,21 @@ Feature: Collection of Requests
       | member+lausanne+declined+organizer+lausanne | /sharing/2/requests | 403 |
       | member+fribourg+declined+member+lausanne | /sharing/1/requests | 403 |
       | member+fribourg+declined+member+lausanne | /sharing/2/requests | 403 |
+
+## @todo once Element listed on the page
+
+## Floating Button
+  @api
+  Scenario: In the Sharing requests collection page, I should see the floating button point to this page.
+    Given I am logged in as user "member+lausanne"
+    When I am on "/sharing/1/requests"
+    Then I should see 1 ".floating a" elements
+    And I should see "qs_sharing.floating.requests" link with href "/sharing/1/requests"
+
+## Back button.
+  @api
+  Scenario: In the Sharing requests collection page, I should see a back button pointing to my sharing dashboard.
+    Given I am logged in as user "member+lausanne"
+    When I am on "/sharing/1/requests"
+    Then I should see a "#block-previousnavigation a" element
+    And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/2/dashboard"

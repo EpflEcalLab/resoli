@@ -50,9 +50,11 @@ qs_sharing.sharing.dashboard:
 qs_sharing.collection.request:
   path: '/sharing/{community}/requests'
   defaults:
-    _controller: '\Drupal\qs_sharing\Controller\OfferTypesCollectionController::offersTypeByTheme'
+    _controller: '\Drupal\qs_sharing\Controller\RequestController::requests'
+    _title: 'qs_sharing.collection.request.title'
   requirements:
     _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\RequestController::access'
     community: \d+
   options:
     parameters:

@@ -46,6 +46,19 @@ qs_sharing.sharing.dashboard:
       user:
         type: entity:user
 
+# Sharing request collection
+qs_sharing.collection.request:
+  path: '/sharing/{community}/requests'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\OfferTypesCollectionController::offersTypeByTheme'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+
 # Sharing user offers
 qs_sharing.collection.user.offers:
   path: '/sharing/{community}/user/{user}/offers'

@@ -44,6 +44,7 @@ const formAjax = () => {
       return false;
     });
 
+    // @todo remove.offer here and use data-confirm on offer confirmation-forms.
     $(document).on('submit', 'form[data-ajax="true"]:not(.offer)', function(e) {
       e.preventDefault();
       const $this = $(this);

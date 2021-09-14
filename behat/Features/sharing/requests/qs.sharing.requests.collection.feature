@@ -67,12 +67,44 @@ Feature: Collection of Requests
     When I am on "/sharing/1/requests"
     Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions .btn" element
     Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions form#qs-sharing-request-solve-form" element
+    Then I should see 4 "#requests-accordion .card-list-item#card77 .card-actions .btn" elements
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='tel:+41 021 987 47 22']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='mailto:sara.courci@example.org']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions form#qs-sharing-request-solve-form--2" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions form#qs-sharing-request-archive-form" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions .btn" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions a[href='mailto:manager+lausanne@antistatique.net']" element
+
+  @api @preserveDatabase
+  Scenario: On the "Lausanne" listing of requests, as a regular volunteer and author of some requests, I should see specific actions to my account.
+    Given I am volunteer on community 1 for theme 22 as user 5
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/sharing/1/requests"
+    Then I should see 2 "#requests-accordion .card-list-item#card80 .card-actions .btn" element
+    Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions form#qs-sharing-request-solve-form" element
+    Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions form#qs-sharing-request-archive-form" element
     Then I should see 3 "#requests-accordion .card-list-item#card77 .card-actions .btn" elements
     Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='tel:+41 021 987 47 22']" element
     Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='mailto:sara.courci@example.org']" element
     Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions form#qs-sharing-request-solve-form--2" element
-    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions .btn" element
+    Then I should see 2 "#requests-accordion .card-list-item#card79 .card-actions .btn" element
     Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions a[href='mailto:manager+lausanne@antistatique.net']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions form#qs-sharing-request-archive-form--2" element
+
+  Scenario: On the "Lausanne" listing of requests, as Admin, I should see specific actions to my account.
+    Given I am logged in as user "admin"
+    When I am on "/sharing/1/requests"
+    Then I should see 2 "#requests-accordion .card-list-item#card80 .card-actions .btn" element
+    Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions form#qs-sharing-request-solve-form" element
+    Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions form#qs-sharing-request-archive-form" element
+    Then I should see 4 "#requests-accordion .card-list-item#card77 .card-actions .btn" elements
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='tel:+41 021 987 47 22']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='mailto:sara.courci@example.org']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions form#qs-sharing-request-solve-form--2" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions form#qs-sharing-request-archive-form--2" element
+    Then I should see 2 "#requests-accordion .card-list-item#card79 .card-actions .btn" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions a[href='mailto:manager+lausanne@antistatique.net']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions form#qs-sharing-request-archive-form--3" element
 
 ## Floating Button
   Scenario: In the Sharing requests collection page, I should see the floating button point to this page.

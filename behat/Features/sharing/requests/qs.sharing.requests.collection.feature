@@ -2,7 +2,6 @@ Feature: Collection of Requests
   Asserts the listing of Requests of one community display the correct number of items.
 
 ## Redirect
-  @api
   Scenario: Accessing to a request canonical view should redirect to the requests collection page.
     Given I am logged in as user "member+lausanne"
     When I am on "/node/77"
@@ -10,7 +9,6 @@ Feature: Collection of Requests
     And the response status code should be 200
 
 ## Access
-  @api
   Scenario Outline: As anonymous I should not be able to access any community offers collection.
     Given I am on "<url>"
     And the response status code should be 403
@@ -20,7 +18,6 @@ Feature: Collection of Requests
       | /sharing/2/requests |
       | /sharing/3/requests |
 
-  @api
   Scenario Outline: Logged-in, I can access my own community(ies) request collection if I'm also Volunteer on that community. Accessing community in which I don't belongs should not be unauthorized.
     Given I am logged in as user "<user>"
     When I am on "<url>"
@@ -46,10 +43,34 @@ Feature: Collection of Requests
       | member+fribourg+declined+member+lausanne | /sharing/1/requests | 403 |
       | member+fribourg+declined+member+lausanne | /sharing/2/requests | 403 |
 
-## @todo once Element listed on the page
+## Element listed
+  Scenario: On the "Lausanne" listing of requests, it should display 2 requests.
+    Given I am logged in as user "member+lausanne"
+    When I am on "/sharing/1/requests"
+    And I should see "qs_sharing.collection.request.title Lausanne"
+    And I should not see "qs_sharing.collection.request.empty"
+    Then I should see 3 "#requests-accordion .card-list-item" elements
+
+  Scenario: On the "Genève" listing of requests, it should display no requests.
+    Given I am volunteer on community 3 for theme 22 as user 1
+    And I am logged in as user "admin"
+    When I am on "/sharing/3/requests"
+    And I should see "qs_sharing.collection.request.title Genève"
+    And I should see "qs_sharing.collection.request.empty"
+    Then I should see 0 "#requests-accordion .card-list-item" element
+
+## Visible actions per element listed
+  Scenario: On the "Lausanne" listing of requests, it should display 2 requests.
+    Given I am logged in as user "member+lausanne"
+    When I am on "/sharing/1/requests"
+    Then I should see 0 "#requests-accordion .card-list-item#card80 .card-actions a" element
+    Then I should see 2 "#requests-accordion .card-list-item#card77 .card-actions a" elements
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='tel:+41 021 987 47 22']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='mailto:sara.courci@example.org']" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions a" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions a[href='mailto:manager+lausanne@antistatique.net']" element
 
 ## Floating Button
-  @api
   Scenario: In the Sharing requests collection page, I should see the floating button point to this page.
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/1/requests"
@@ -57,7 +78,6 @@ Feature: Collection of Requests
     And I should see "qs_sharing.floating.requests" link with href "/sharing/1/requests"
 
 ## Back button.
-  @api
   Scenario: In the Sharing requests collection page, I should see a back button pointing to my sharing dashboard.
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/1/requests"

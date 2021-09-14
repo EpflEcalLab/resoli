@@ -44,12 +44,13 @@ Feature: Collection of Requests
       | member+fribourg+declined+member+lausanne | /sharing/2/requests | 403 |
 
 ## Element listed
-  Scenario: On the "Lausanne" listing of requests, it should display 2 requests.
+  Scenario: On the "Lausanne" listing of requests, it should display 3 requests.
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/1/requests"
     And I should see "qs_sharing.collection.request.title Lausanne"
     And I should not see "qs_sharing.collection.request.empty"
     Then I should see 3 "#requests-accordion .card-list-item" elements
+    Then I should see 1 "#requests-accordion .card-list-item#card79.solved" element
 
   Scenario: On the "Genève" listing of requests, it should display no requests.
     Given I am volunteer on community 3 for theme 22 as user 1

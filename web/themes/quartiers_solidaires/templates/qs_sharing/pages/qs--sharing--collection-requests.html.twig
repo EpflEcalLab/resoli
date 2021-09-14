@@ -21,6 +21,7 @@
       {% embed '@quartiers_solidaires/node/partials/card-list.html.twig' with {card_list_id: 'requests-accordion'} %}
         {% block card_list_items %}
           {% for key, request in variables.requests %}
+            {% set is_solved = request.moderation_state.value == 'solved' %}
             {% set contact_phone = request.field_contact_phone.value %}
             {% set contact_mail = request.field_contact_mail.value %}
 

@@ -2524,3 +2524,6 @@ msgstr "Voici les demandes d’entraide de la communauté de @community"
 
 msgid "qs_sharing.floating.requests"
 msgstr "Demandes d’entraide"
+
+msgid "qs_sharing.collection.request.solved @date"
+msgstr "Pris en charge le @date"

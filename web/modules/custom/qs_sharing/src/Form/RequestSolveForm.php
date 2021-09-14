@@ -154,7 +154,7 @@ class RequestSolveForm extends FormBase {
 
     // Solve the request and send an email to its author.
     $this->requestManager->solved($request, $currentUser);
-    $this->requestManager->sendSolvedMail($request, $request->get('uid')->entity);
+    $this->requestManager->sendSolvedMail($request, $currentUser);
 
     $this->messenger()->addMessage($this->t('qs_sharing.collection.request.solve.success'));
 

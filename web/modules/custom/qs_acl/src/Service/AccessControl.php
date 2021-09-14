@@ -708,6 +708,30 @@ class AccessControl {
   }
 
   /**
+   * Check if the account is authorized to edit the given request.
+   *
+   * @param \Drupal\node\NodeInterface $request
+   *   The request to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise, use current user.
+   *
+   * @return bool
+   *   Is the user may edit the request.
+   */
+  public function hasWriteAccessRequest(NodeInterface $request, ?AccountInterface $account = NULL): bool {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $request->get('uid')->target_id;
+
+    return $user->id() === $author_id && $author_id;
+  }
+
+  /**
    * Check if the given user or the current logged one has the role beginner.
    *
    * @param \Drupal\Core\Session\AccountInterface|null $account

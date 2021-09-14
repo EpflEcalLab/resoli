@@ -102,6 +102,26 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
+   * Provider of ::testHasWriteAccessRequestContextualUser.
+   *
+   * @return iterable
+   *   Return an array of arrays contains expectation.
+   */
+  public function hasWriteAccessRequestReturnsExcepted(): iterable {
+    yield [NULL, NULL, FALSE];
+
+    yield ['1', '1', TRUE];
+
+    yield ['2', '1', FALSE];
+
+    yield ['1', '2', FALSE];
+
+    yield ['1', NULL, FALSE];
+
+    yield [NULL, '2', FALSE];
+  }
+
+  /**
    * Provider of ::testIsCommunityVolunteerContextualUser.
    *
    * Set of return value from isCommunityReturnsExcepted with excepted boolean
@@ -243,6 +263,57 @@ final class AccessControlTest extends UnitTestCase {
 
     // Fallback on the current user.
     $result = $this->acl->hasWriteAccessOffer($offer);
+
+    self::assertEquals($excepted, $result);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasWriteAccessRequest
+   */
+  public function testHasWriteAccessRequestContextualUser() {
+    $request = $this->createMock(NodeInterface::class);
+
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->with('uid')
+      ->willReturn((object) ['target_id' => '2']);
+
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn('2');
+
+    // Fallback on the current user.
+    $this->acl->hasWriteAccessRequest($request);
+
+    $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
+    $anotherCurrentUser->expects(self::once())
+      ->method('id')
+      ->willReturn('2');
+
+    // User the given user.
+    $this->acl->hasWriteAccessRequest($request, $anotherCurrentUser);
+  }
+
+  /**
+   * @covers ::hasWriteAccessRequest
+   *
+   * @dataProvider hasWriteAccessRequestReturnsExcepted
+   */
+  public function testHasWriteAccessRequestReturnsExcepted($userId, $requestAuthorId, bool $excepted) {
+    $request = $this->createMock(NodeInterface::class);
+    $request->expects(self::once())
+      ->method('get')
+      ->with('uid')
+      ->willReturn((object) ['target_id' => $requestAuthorId]);
+
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn($userId);
+
+    // Fallback on the current user.
+    $result = $this->acl->hasWriteAccessRequest($request);
 
     self::assertEquals($excepted, $result);
   }

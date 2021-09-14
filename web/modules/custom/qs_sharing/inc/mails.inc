@@ -55,5 +55,36 @@ function qs_sharing_mail($key, &$message, $params) {
       ])));
 
       break;
+
+    // Sent to the author of the request.
+    case 'request_solved':
+      $request = $message['params']['request'];
+
+      /** @var \Drupal\user\UserInterface $user */
+      $author = $request->uid->entity;
+      /** @var \Drupal\user\UserInterface $solved_by */
+      $solved_by = $request->get('field_solved_by')->entity;
+
+      $message['subject'] = t('qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at', [
+        '@sitename' => $site->get('name'),
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+        '@resolver_firstname' => $solved_by->field_firstname->value,
+        '@resolver_lastname' => $solved_by->field_lastname->value,
+      ]);
+
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at', [
+        '@author_firstname' => $author->field_firstname->value,
+        '@author_lastname' => $author->field_lastname->value,
+        '@resolver_firstname' => $solved_by->field_firstname->value,
+        '@resolver_lastname' => $solved_by->field_lastname->value,
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+        '@solved_at' => $dateFormatter->format($request->changed->value, 'default_medium_date_only'),
+      ])));
+
+      break;
   }
 }

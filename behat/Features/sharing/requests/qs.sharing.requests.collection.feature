@@ -44,7 +44,7 @@ Feature: Collection of Requests
       | member+fribourg+declined+member+lausanne | /sharing/2/requests | 403 |
 
 ## Element listed
-  Scenario: On the "Lausanne" listing of requests, it should display 3 requests.
+  Scenario: On the "Lausanne" listing of requests, as a regular volunteer, I should see 3 requests.
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/1/requests"
     And I should see "qs_sharing.collection.request.title Lausanne"
@@ -52,6 +52,7 @@ Feature: Collection of Requests
     Then I should see 3 "#requests-accordion .card-list-item" elements
     Then I should see 1 "#requests-accordion .card-list-item#card79.solved" element
 
+  @api @preserveDatabase
   Scenario: On the "Genève" listing of requests, it should display no requests.
     Given I am volunteer on community 3 for theme 22 as user 1
     And I am logged in as user "admin"
@@ -61,7 +62,7 @@ Feature: Collection of Requests
     Then I should see 0 "#requests-accordion .card-list-item" element
 
 ## Visible actions per element listed
-  Scenario: On the "Lausanne" listing of requests, it should display 2 requests.
+  Scenario: On the "Lausanne" listing of requests, as a regular volunteer, I should see specific actions to my account.
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/1/requests"
     Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions .btn" element

@@ -61,6 +61,21 @@ qs_sharing.collection.request:
       community:
         type: entity:taxonomy_term
 
+# Request solve form
+qs_sharing.requests.form.solve:
+  path: '/sharing/requests/{request}/solve'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\RequestSolveForm'
+    _title: 'qs_sharing.requests.form.solve.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\RequestSolveForm::access'
+    request: \d+
+  options:
+    parameters:
+      request:
+        type: entity:node
+
 # Sharing user offers
 qs_sharing.collection.user.offers:
   path: '/sharing/{community}/user/{user}/offers'

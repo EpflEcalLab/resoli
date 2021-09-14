@@ -54,7 +54,7 @@ Feature: Request Solve Form
       | member+lausanne+organizer+fribourg | /sharing/2/requests | 1 |
 
 ## Form submits.
-  @api @preserveDatabase @mail @debug
+  @api @preserveDatabase @mail
   Scenario: When solving a request, an email should be sent to the request author and redirect the solver user to the listing of request
     Given I am logged in as user "member+lausanne"
     When I am on "/sharing/1/requests"

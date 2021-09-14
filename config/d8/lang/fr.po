@@ -2527,3 +2527,18 @@ msgstr "Demandes d’entraide"
 
 msgid "qs_sharing.collection.request.solved @date"
 msgstr "Pris en charge le @date"
+
+msgid "qs_sharing.collection.request.solve"
+msgstr "Marquer comme pris en charge"
+
+msgid "qs_sharing.collection.request.solve.confirmed"
+msgstr "Confirmer"
+
+msgid "qs_sharing.collection.request.solve.success"
+msgstr "qs_sharing.collection.request.solve.success"
+
+msgid "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+msgstr "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
+msgstr "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"

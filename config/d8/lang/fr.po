@@ -2458,7 +2458,7 @@ msgstr "Valider mes données et créer une offre"
 
 msgid "qs_sharing.volunteerisms.form.manage.success @community"
 msgstr "Vos préférences de bénévolat pour @community ont bien été mis à jour !"
-=======
+
 msgid "qs_sharing.offers.form.edit.title @offer_date"
 msgstr "Modifiez votre offre du @offer_date!"
 

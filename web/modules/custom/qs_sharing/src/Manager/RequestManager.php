@@ -39,6 +39,40 @@ class RequestManager {
   }
 
   /**
+   * Archive the request.
+   *
+   * @param \Drupal\node\NodeInterface $request
+   *   The archive.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   *
+   * @return \Drupal\node\NodeInterface
+   *   The archived request.
+   */
+  public function archive(NodeInterface $request): NodeInterface {
+    $request->set('moderation_state', 'archived');
+    $request->save();
+
+    return $request;
+  }
+
+  /**
+   * Send a mail to alert the user its request has been archived.
+   *
+   * @param \Drupal\node\NodeInterface $request
+   *   The archived request.
+   * @param \Drupal\user\UserInterface $archived_by
+   *   The author of the archive operation.
+   */
+  public function sendArchivedMail(NodeInterface $request, UserInterface $archived_by): void {
+    $author = $request->get('uid')->entity;
+    $this->mail->mail('qs_sharing', 'request_archived', $author->getEmail(), $author->getPreferredLangcode(), [
+      'request' => $request,
+      'archived_by' => $archived_by,
+    ]);
+  }
+
+  /**
    * Send a mail to alert the user on request resolution.
    *
    * @param \Drupal\node\NodeInterface $request

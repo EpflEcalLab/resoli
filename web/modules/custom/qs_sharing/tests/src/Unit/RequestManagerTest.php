@@ -69,6 +69,40 @@ final class RequestManagerTest extends UnitTestCase {
   }
 
   /**
+   * @covers ::archive
+   */
+  public function testArchiveReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+
+    $node
+      ->expects(self::once())
+      ->method('save');
+
+    $node->expects(self::once())
+      ->method('set')
+      ->with('moderation_state', 'archived');
+    $this->requestManager->archive($node);
+  }
+
+  /**
+   * @covers ::sendArchivedMail
+   */
+  public function testSendArchivedMailReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $author = $this->createMock(UserInterface::class);
+    $uidField = new \stdClass();
+    $uidField->entity = $author;
+    $resolver = $this->createMock(UserInterface::class);
+
+    $node->expects(self::once())->method('get')->with('uid')->willReturn($uidField);
+    $author->expects(self::once())->method('getEmail');
+    $author->expects(self::once())->method('getPreferredLangcode');
+    $this->mail->expects(self::once())->method('mail');
+
+    $this->requestManager->sendArchivedMail($node, $resolver);
+  }
+
+  /**
    * @covers ::sendSolvedMail
    */
   public function testSendSolvedMailReturnsExcepted() {

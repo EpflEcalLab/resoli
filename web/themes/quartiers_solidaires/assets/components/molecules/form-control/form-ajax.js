@@ -4,7 +4,7 @@ const formAjax = () => {
     let timer = null;
     const delay = 2500;
 
-    $('form[data-ajax="true"]').on('click', '[type="submit"][data-confirm]', function(e) {
+    $('form[data-ajax="true"], form[data-confirm="true"]').on('click', '[type="submit"][data-confirm]', function(e) {
       const $this = $(this);
       const hasClassBgDanger = $this.hasClass('bg-danger');
 

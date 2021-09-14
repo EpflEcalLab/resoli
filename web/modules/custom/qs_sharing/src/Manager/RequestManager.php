@@ -42,7 +42,7 @@ class RequestManager {
    * Send a mail to alert the user on request resolution.
    *
    * @param \Drupal\node\NodeInterface $request
-   *   The solved offer.
+   *   The solved request.
    * @param \Drupal\user\UserInterface $solved_by
    *   The author of the resolution.
    */

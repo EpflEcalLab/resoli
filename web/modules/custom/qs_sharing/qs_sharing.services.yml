@@ -36,6 +36,12 @@ services:
       - '@entity_type.manager'
       - '@plugin.manager.mail'
 
+  qs_sharing.manager.request:
+    class: Drupal\qs_sharing\Manager\RequestManager
+    arguments:
+      - '@entity_type.manager'
+      - '@plugin.manager.mail'
+
   # EventSubscribers
   qs_sharing.redirect:
     class: Drupal\qs_sharing\EventSubscriber\RedirectSubscriber

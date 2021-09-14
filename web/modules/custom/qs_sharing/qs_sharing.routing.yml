@@ -76,6 +76,21 @@ qs_sharing.requests.form.solve:
       request:
         type: entity:node
 
+# Request archive form
+qs_sharing.requests.form.archive:
+  path: '/sharing/requests/{request}/archive'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\RequestArchiveForm'
+    _title: 'qs_sharing.requests.form.archive.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\RequestArchiveForm::access'
+    request: \d+
+  options:
+    parameters:
+      request:
+        type: entity:node
+
 # Sharing user offers
 qs_sharing.collection.user.offers:
   path: '/sharing/{community}/user/{user}/offers'

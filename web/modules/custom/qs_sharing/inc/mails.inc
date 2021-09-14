@@ -86,5 +86,37 @@ function qs_sharing_mail($key, &$message, $params) {
       ])));
 
       break;
+
+    // Sent to the author of the request.
+    case 'request_archived':
+      $request = $message['params']['request'];
+
+      /** @var \Drupal\user\UserInterface $archived_by */
+      $archived_by = $message['params']['archived_by'];
+
+      /** @var \Drupal\user\UserInterface $user */
+      $author = $request->uid->entity;
+
+      $message['subject'] = t('qs.mail.request.archived.subject @sitename @archiver_firstname @archiver_lastname @community @theme @created_at', [
+        '@sitename' => $site->get('name'),
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+        '@archiver_firstname' => $archived_by->field_firstname->value,
+        '@archiver_lastname' => $archived_by->field_lastname->value,
+      ]);
+
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at', [
+        '@author_firstname' => $author->field_firstname->value,
+        '@author_lastname' => $author->field_lastname->value,
+        '@archiver_firstname' => $archived_by->field_firstname->value,
+        '@archiver_lastname' => $archived_by->field_lastname->value,
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+        '@archived_at' => $dateFormatter->format($request->changed->value, 'default_medium_date_only'),
+      ])));
+
+      break;
   }
 }

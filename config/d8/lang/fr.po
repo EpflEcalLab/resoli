@@ -2534,6 +2534,9 @@ msgstr "Marquer comme pris en charge"
 msgid "qs_sharing.collection.request.solve.confirmed"
 msgstr "Confirmer"
 
+msgid "qs_sharing.requests.form.solve.title"
+msgstr "qs_sharing.requests.form.solve.title"
+
 msgid "qs_sharing.collection.request.solve.success"
 msgstr "qs_sharing.collection.request.solve.success"
 
@@ -2542,3 +2545,12 @@ msgstr "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_l
 
 msgid "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
 msgstr "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
+
+msgid "qs_sharing.requests.form.archive.title"
+msgstr "qs_sharing.requests.form.archive.title"
+
+msgid "qs.mail.request.archived.subject @sitename @archiver_firstname @archiver_lastname @community @theme @created_at"
+msgstr "qs.mail.request.archived.subject @sitename @archiver_firstname @archiver_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"
+msgstr "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"

@@ -38,6 +38,11 @@
       ) }}
     {% endif %}
 
+    {# Solve button #}
+    {% if not is_solved %}
+      {{ bamboo_render_form('qs_sharing', 'RequestSolveForm', {'request': request}) }}
+    {% endif %}
+
   </div>
 
 </div>

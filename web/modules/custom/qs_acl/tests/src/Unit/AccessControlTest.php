@@ -79,35 +79,12 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
-   * Provider of ::testHasWriteAccessOfferContextualUser.
-   *
-   * Set of return value from isCommunityReturnsExcepted with excepted boolean
-   * result on isCommunityVolunteer.
+   * Provider of HasWrite access methods where Author/Admin may only write.
    *
    * @return iterable
    *   Return an array of arrays contains expectation.
    */
-  public function hasWriteAccessOfferReturnsExcepted(): iterable {
-    yield [NULL, NULL, FALSE];
-
-    yield ['1', '1', TRUE];
-
-    yield ['2', '1', FALSE];
-
-    yield ['1', '2', FALSE];
-
-    yield ['1', NULL, FALSE];
-
-    yield [NULL, '2', FALSE];
-  }
-
-  /**
-   * Provider of ::testHasWriteAccessRequestContextualUser.
-   *
-   * @return iterable
-   *   Return an array of arrays contains expectation.
-   */
-  public function hasWriteAccessRequestReturnsExcepted(): iterable {
+  public function hasWriteAccessAuthorship(): iterable {
     yield [NULL, NULL, FALSE];
 
     yield ['1', '1', TRUE];
@@ -248,7 +225,7 @@ final class AccessControlTest extends UnitTestCase {
   /**
    * @covers ::hasWriteAccessOffer
    *
-   * @dataProvider hasWriteAccessOfferReturnsExcepted
+   * @dataProvider hasWriteAccessAuthorship
    */
   public function testHasWriteAccessOfferReturnsExcepted($userId, $offerAuthorId, bool $excepted) {
     $offer = $this->createMock(NodeInterface::class);
@@ -299,7 +276,7 @@ final class AccessControlTest extends UnitTestCase {
   /**
    * @covers ::hasWriteAccessRequest
    *
-   * @dataProvider hasWriteAccessRequestReturnsExcepted
+   * @dataProvider hasWriteAccessAuthorship
    */
   public function testHasWriteAccessRequestReturnsExcepted($userId, $requestAuthorId, bool $excepted) {
     $request = $this->createMock(NodeInterface::class);

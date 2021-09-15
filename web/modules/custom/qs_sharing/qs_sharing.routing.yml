@@ -15,7 +15,7 @@ qs_sharing.collection.offer:
 
 # Sharing request form
 qs_sharing.requests.form.add:
-  path: '/sharing/{community}/request/add'
+  path: '/sharing/{community}/requests/add'
   defaults:
     _form: '\Drupal\qs_sharing\Form\RequestAddForm'
     _title: 'qs_sharing.requests.form.add.title'

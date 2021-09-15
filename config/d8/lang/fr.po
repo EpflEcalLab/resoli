@@ -2216,6 +2216,30 @@ msgstr "Indiquez ce que vous rechercher comme partage."
 msgid "qs_sharing.requests.form.step2"
 msgstr "A qui cette demande est-elle destinée?"
 
+msgid "qs_sharing.requests.form.add.theme"
+msgstr "Quelle thématique d’entraide recherchez-vous?"
+
+msgid "qs_sharing.requests.form.add.contact_firstname"
+msgstr "A qui est destinée cette demande?"
+
+msgid "qs_sharing.requests.form.add.contact_firstname.placeholder"
+msgstr "Ex. Catherine"
+
+msgid "qs_sharing.requests.form.add.contact_lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+msgid "qs_sharing.requests.form.add.contact_mail"
+msgstr "Comment contacter cette personne?"
+
+msgid "qs_sharing.requests.form.add.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@re-so.ch"
+
+msgid "qs_sharing.requests.form.add.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+msgid "qs_sharing.requests.form.add.save"
+msgstr "Partager la demande"
+
 msgid "qs_sharing.requests.form.add.body"
 msgstr "Précisez en quelques mot ce que vous souhaitez"
 

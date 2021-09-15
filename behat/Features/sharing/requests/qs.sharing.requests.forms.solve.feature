@@ -17,6 +17,9 @@ Feature: Request Solve Form
 
     Examples:
       | user | request-id | code |
+      | admin | 79 | 403 |
+      | admin | 80 | 200 |
+      | admin | 81 | 200 |
       | organizer+lausanne | 79 | 403 |
       | organizer+lausanne | 80 | 403 |
       | organizer+lausanne | 81 | 403 |

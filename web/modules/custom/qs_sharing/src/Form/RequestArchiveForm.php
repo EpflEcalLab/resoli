@@ -13,9 +13,9 @@ use Drupal\qs_sharing\Manager\RequestManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Form to resolve a request by the current logged-in user.
+ * Form to archive a request by the current logged-in user.
  */
-class RequestSolveForm extends FormBase {
+class RequestArchiveForm extends FormBase {
 
   /**
    * Access Control Service.
@@ -68,9 +68,8 @@ class RequestSolveForm extends FormBase {
    */
   public function access(AccountInterface $account, NodeInterface $request) {
     $access = AccessResult::forbidden();
-    $community = $request->field_community->entity;
 
-    if ($this->acl->isCommunityVolunteer($community) && $request->get('moderation_state')->value !== 'solved') {
+    if ($this->acl->hasWriteAccessRequest($request) && $request->get('moderation_state')->value !== 'archived') {
       $access = AccessResult::allowed();
     }
 
@@ -105,7 +104,7 @@ class RequestSolveForm extends FormBase {
       'class' => [
         'request',
         'request' . $request->id(),
-        'solve',
+        'archive',
         'mx-auto',
         'mb-3',
       ],
@@ -113,9 +112,9 @@ class RequestSolveForm extends FormBase {
     $form['action']['submit'] = [
       '#type' => 'submit',
       '#name' => 'submit',
-      '#value' => $this->t('qs_sharing.collection.request.solve'),
+      '#value' => $this->t('qs_sharing.collection.request.archive'),
       '#attributes' => [
-        'icon' => 'check',
+        'icon' => 'trash',
         'icon_left' => TRUE,
         'class' => [
           'btn',
@@ -123,8 +122,9 @@ class RequestSolveForm extends FormBase {
           'btn-icon',
           'shadow-to-bottom',
           'btn-block',
+          'bg-danger',
         ],
-        'data-confirm' => $this->t('qs_sharing.collection.request.solve.confirmed'),
+        'data-confirm' => $this->t('qs_sharing.collection.request.archive.confirmed'),
       ],
     ];
 
@@ -146,7 +146,7 @@ class RequestSolveForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'qs_sharing_request_solve_form';
+    return 'qs_sharing_request_archive_form';
   }
 
   /**
@@ -155,17 +155,21 @@ class RequestSolveForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     /** @var \Drupal\node\NodeInterface $request */
     $request = $this->nodeStorage->load($form_state->get('request'));
-    $currentUser = $this->userStorage->load($this->currentUser()->id());
 
-    // Solve the request and send an email to its author.
-    $this->requestManager->solved($request, $currentUser);
-    $this->requestManager->sendSolvedMail($request, $currentUser);
+    // Archive the request.
+    $this->requestManager->archive($request);
 
-    $this->messenger()->addMessage($this->t('qs_sharing.collection.request.solve.success'));
+    // When archived by someone else than the request author, send an email.
+    if ($this->currentUser()->id() !== $request->get('uid')->target_id) {
+      $currentUser = $this->userStorage->load($this->currentUser()->id());
+      $this->requestManager->sendArchivedMail($request, $currentUser);
+    }
+
+    $this->messenger()->addMessage($this->t('qs_sharing.collection.request.archive.success'));
 
     $form_state->setRedirect('qs_sharing.collection.request', [
       'community' => $request->field_community->target_id,
-    ], ['fragment' => 'card' . $request->id()]);
+    ]);
   }
 
 }

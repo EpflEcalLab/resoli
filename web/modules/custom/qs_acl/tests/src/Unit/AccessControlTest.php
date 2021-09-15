@@ -79,15 +79,12 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
-   * Provider of ::testHasWriteAccessOfferContextualUser.
-   *
-   * Set of return value from isCommunityReturnsExcepted with excepted boolean
-   * result on isCommunityVolunteer.
+   * Provider of HasWrite access methods where Author/Admin may only write.
    *
    * @return iterable
    *   Return an array of arrays contains expectation.
    */
-  public function hasWriteAccessOfferReturnsExcepted(): iterable {
+  public function hasWriteAccessAuthorship(): iterable {
     yield [NULL, NULL, FALSE];
 
     yield ['1', '1', TRUE];
@@ -228,7 +225,7 @@ final class AccessControlTest extends UnitTestCase {
   /**
    * @covers ::hasWriteAccessOffer
    *
-   * @dataProvider hasWriteAccessOfferReturnsExcepted
+   * @dataProvider hasWriteAccessAuthorship
    */
   public function testHasWriteAccessOfferReturnsExcepted($userId, $offerAuthorId, bool $excepted) {
     $offer = $this->createMock(NodeInterface::class);
@@ -243,6 +240,90 @@ final class AccessControlTest extends UnitTestCase {
 
     // Fallback on the current user.
     $result = $this->acl->hasWriteAccessOffer($offer);
+
+    self::assertEquals($excepted, $result);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasWriteAccessRequest
+   */
+  public function testHasWriteAccessRequestContextualUser() {
+    $request = $this->createMock(NodeInterface::class);
+    $community = $this->createMock(TermInterface::class);
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasAdminAccessCommunity', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasAdminAccessCommunity')->willReturn(FALSE);
+
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => '2']],
+        ['field_community', (object) ['entity' => $community]],
+      ]);
+
+    // Fallback on the current user.
+    $acl->hasWriteAccessRequest($request);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasWriteAccessRequest
+   */
+  public function testHasWriteAccessRequestGivenUser() {
+    $request = $this->createMock(NodeInterface::class);
+    $community = $this->createMock(TermInterface::class);
+
+    $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
+    $anotherCurrentUser->expects(self::once())
+      ->method('id');
+    $this->currentUser->expects(self::never())
+      ->method('id');
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasAdminAccessCommunity', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasAdminAccessCommunity')->willReturn(FALSE);
+
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => '2']],
+        ['field_community', (object) ['entity' => $community]],
+      ]);
+
+    // Use the given user.
+    $acl->hasWriteAccessRequest($request, $anotherCurrentUser);
+  }
+
+  /**
+   * @covers ::hasWriteAccessRequest
+   *
+   * @dataProvider hasWriteAccessAuthorship
+   */
+  public function testHasWriteAccessRequestReturnsExcepted($userId, $requestAuthorId, bool $excepted) {
+    $request = $this->createMock(NodeInterface::class);
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => $requestAuthorId]],
+        ['field_community', (object) ['entity' => NULL]],
+      ]);
+
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn($userId);
+
+    // Fallback on the current user.
+    $result = $this->acl->hasWriteAccessRequest($request);
 
     self::assertEquals($excepted, $result);
   }

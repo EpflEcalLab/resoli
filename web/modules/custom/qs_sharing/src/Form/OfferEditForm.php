@@ -378,7 +378,7 @@ class OfferEditForm extends FormBase {
           'format' => 'light_html',
           'value' => $form_state->getValue('body'),
         ],
-        'field_availability' => [
+        'field_description' => [
           'format' => 'light_html',
           'value' => $form_state->getValue('availability'),
         ],

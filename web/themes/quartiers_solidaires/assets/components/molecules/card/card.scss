@@ -566,7 +566,8 @@ html:lang(en) .size-time {
   }
 }
 
-// Offer card style
+// Sharing (offer & requests) card style.
+.card-list-request.card-list,
 .card-list-offer.card-list  {
   .card-pill .btn {
     @include media-breakpoint-up(md) {
@@ -591,6 +592,7 @@ html:lang(en) .size-time {
     font-size: 18px;
   }
 
+  .solved,
   .deactivated {
     .card-pill.collapsed {
       background-image: linear-gradient(89.99deg, color('primary-darker') 27.08%, color('primary') 94.27%);
@@ -601,7 +603,8 @@ html:lang(en) .size-time {
     }
 
     .card-pill:not(.collapsed) {
-      .card-pill-title.card-pill-deactivated {
+        .card-pill-title.card-pill-solved,
+        .card-pill-title.card-pill-deactivated {
         color: color('danger');
       }
     }

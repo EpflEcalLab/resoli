@@ -82,7 +82,8 @@ const card = () => {
       // Once we run this, we won't be on the first card anymore
       isFirstCard = false;
 
-      // Collapse all the other collapses on the page
+      // Collapse all the other collapses on the page.
+      // @todo refactor to use more generic collapse-others class.
       const parent = $(e.currentTarget).data('parent');
       if (parent && parent.match("^#events-accordion")) {
         $.each($('[id*=events-accordion]'), function() {
@@ -97,6 +98,17 @@ const card = () => {
       }
       if (parent && parent.match("^#offers-accordion")) {
         $.each($('[id*=offers-accordion]'), function() {
+          const $collapse = $(this).find('.collapse');
+
+          if ('#' + $collapse.attr('id') === parent) {
+            return;
+          }
+
+          $collapse.collapse('hide');
+        });
+      }
+      if (parent && parent.match("^#requests-accordion")) {
+        $.each($('[id*=requests-accordion]'), function() {
           const $collapse = $(this).find('.collapse');
 
           if ('#' + $collapse.attr('id') === parent) {

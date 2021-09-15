@@ -35,7 +35,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      KernelEvents::REQUEST => ['offerRedirect'],
+      KernelEvents::REQUEST => [
+        ['offerRedirect'],
+        ['requestRedirect'],
+      ],
     ];
   }
 
@@ -54,6 +57,25 @@ class RedirectSubscriber implements EventSubscriberInterface {
     if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'offer') {
       $offerType = $node->field_offer_type->entity;
       $destination = Url::fromRoute('entity.node.canonical', ['node' => $offerType->id()]);
+      $event->setResponse(new RedirectResponse($destination->toString()));
+    }
+  }
+
+  /**
+   * Redirect Request canonical access.
+   *
+   * It verifies the current route is Request canonical access then
+   * redirect on the Request collection  page.
+   *
+   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   *   Event subscriber.
+   */
+  public function requestRedirect(GetResponseEvent $event) {
+    $node = $this->routeMatch->getParameter('node');
+
+    if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'request') {
+      $community = $node->field_community->entity;
+      $destination = Url::fromRoute('qs_sharing.collection.request', ['community' => $community->id()]);
       $event->setResponse(new RedirectResponse($destination->toString()));
     }
   }

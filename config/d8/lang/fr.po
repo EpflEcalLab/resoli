@@ -2458,7 +2458,7 @@ msgstr "Valider mes données et créer une offre"
 
 msgid "qs_sharing.volunteerisms.form.manage.success @community"
 msgstr "Vos préférences de bénévolat pour @community ont bien été mis à jour !"
-=======
+
 msgid "qs_sharing.offers.form.edit.title @offer_date"
 msgstr "Modifiez votre offre du @offer_date!"
 
@@ -2518,3 +2518,27 @@ msgstr "qs.mail.offer.deactivated.subject @sitename @offer"
 
 msgid "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
 msgstr "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+
+msgid "qs_sharing.collection.request.title @community"
+msgstr "Voici les demandes d’entraide de la communauté de @community"
+
+msgid "qs_sharing.floating.requests"
+msgstr "Demandes d’entraide"
+
+msgid "qs_sharing.collection.request.solved @date"
+msgstr "Pris en charge le @date"
+
+msgid "qs_sharing.collection.request.solve"
+msgstr "Marquer comme pris en charge"
+
+msgid "qs_sharing.collection.request.solve.confirmed"
+msgstr "Confirmer"
+
+msgid "qs_sharing.collection.request.solve.success"
+msgstr "qs_sharing.collection.request.solve.success"
+
+msgid "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+msgstr "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
+msgstr "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"

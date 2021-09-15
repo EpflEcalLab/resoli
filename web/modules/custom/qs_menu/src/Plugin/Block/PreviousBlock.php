@@ -290,6 +290,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           break;
 
         // Go to Sharing Dashboard.
+        case 'qs_sharing.collection.request':
         case 'qs_sharing.volunteerisms.form.manage':
         case 'qs_sharing.offers.form.add':
         case 'qs_sharing.offers.form.edit':

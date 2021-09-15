@@ -346,7 +346,7 @@ class RequestAddForm extends FormBase {
     $this->requestManager->sendCreatedConfirmationMail($request);
 
     // Send mail to volunteers of the theme.
-    $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community, $theme);
+    $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community, $theme, [$this->currentUser()]);
 
     if (empty($volunteerisms)) {
       // When the theme has not volunteers, then send the mail to the community

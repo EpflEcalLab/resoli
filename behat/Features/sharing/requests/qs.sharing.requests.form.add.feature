@@ -96,9 +96,8 @@ Feature: Sharing Request add Form
     And I press "edit-submit"
     Then the url should match "/sharing/1/requests/add"
     And I should see "qs_sharing.requests.form.add.success Lausanne Convivialité" in the ".alert" element
-    And 3 mail should be sent
+    And 2 mail should be sent
     Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Convivialité 15 September 2021"
-    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Convivialité 15 September 2021"
     Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Convivialité 15 September 2021"
 
   @api @preserveDatabase @mail

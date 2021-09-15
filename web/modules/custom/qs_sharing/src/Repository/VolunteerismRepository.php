@@ -32,15 +32,25 @@ class VolunteerismRepository {
    *   The community entity.
    * @param \Drupal\taxonomy\TermInterface $theme
    *   The sharing theme entity.
+   * @param \Drupal\user\UserInterface[]|null $exclude_users
+   *   An optional collection of user to be excluded.
    *
    * @return \Drupal\qs_sharing\Entity\volunteerism[]|null
    *   A collection of volunteerism. Otherwise, an empty array.
    */
-  public function getAllByCommunityTheme(TermInterface $community, TermInterface $theme): ?array {
+  public function getAllByCommunityTheme(TermInterface $community, TermInterface $theme, ?array $exclude_users = NULL): ?array {
     $query = $this->volunteerismStorage->getQuery()
       ->accessCheck()
       ->condition('theme', $theme->id())
       ->condition('community', $community->id());
+
+    if (!empty($exclude_users)) {
+      $exclude_uids = array_map(static function ($user) {
+        return $user->id();
+      }, $exclude_users);
+      $query->condition('user', $exclude_uids, 'NOT IN');
+    }
+
     $query->groupBy('user');
 
     $ids = $query->execute();

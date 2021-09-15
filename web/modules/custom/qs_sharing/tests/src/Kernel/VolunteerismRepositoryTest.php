@@ -139,6 +139,9 @@ final class VolunteerismRepositoryTest extends KernelTestBase {
     $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community1, $theme1);
     self::assertCount(2, $volunteerisms);
 
+    $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community1, $theme1, [$fooUser]);
+    self::assertCount(1, $volunteerisms);
+
     $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community1, $theme2);
     self::assertCount(1, $volunteerisms);
 
@@ -147,6 +150,9 @@ final class VolunteerismRepositoryTest extends KernelTestBase {
 
     $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community1, $theme2);
     self::assertCount(1, $volunteerisms);
+
+    $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community1, $theme2, [$fooUser]);
+    self::assertNull($volunteerisms);
   }
 
   /**

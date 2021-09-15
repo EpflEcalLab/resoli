@@ -64,6 +64,7 @@ Feature: Sharing Request add Form
     Then I should not see a "#block-previousnavigation a" element
 
 ## Form pre-filled values.
+  @api @preserveDatabase
   Scenario Outline: In the add Request form, the contact information must be prefilled using logged-in account data.
     Given I am volunteer on community <community> for theme 22 as user <user_id>
     Given I am logged in as user "<user>"
@@ -94,7 +95,7 @@ Feature: Sharing Request add Form
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
-    Then the url should match "/sharing/requests/89/confirmation"
+    Then the url should match "/sharing/requests/82/confirmation"
     And I should see "qs_sharing.requests.form.add.success Lausanne Convivialité" in the ".alert" element
     And 2 mail should be sent
     Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Convivialité 15 September 2021"
@@ -111,7 +112,7 @@ Feature: Sharing Request add Form
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
-    Then the url should match "/sharing/requests/89/confirmation"
+    Then the url should match "/sharing/requests/82/confirmation"
     And I should see "qs_sharing.requests.form.add.success Lausanne Mobilité" in the ".alert" element
     And 2 mail should be sent
     Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Mobilité 15 September 2021"
@@ -128,7 +129,7 @@ Feature: Sharing Request add Form
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "jane.doe@example.org" for "edit-contact-mail"
     And I press "edit-submit"
-    Then the url should match "/sharing/requests/89/confirmation"
+    Then the url should match "/sharing/requests/82/confirmation"
     And I should see "qs_sharing.requests.form.add.success Lausanne Objets" in the ".alert" element
     And 3 mail should be sent
     Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Objets 15 September 2021"

@@ -2,6 +2,7 @@
 
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
+{% set can_moderate_community = variables.can_moderate_community %}
 {% set community_name = variables.community.name.value|trim %}
 {% set modal_title = 'qs_sharing.collection.request.title @community'|t({'@community': community_name}) %}
 {% set modal_bg = 'primary' %}

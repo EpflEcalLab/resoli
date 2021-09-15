@@ -728,6 +728,13 @@ class AccessControl {
 
     $author_id = $request->get('uid')->target_id;
 
+    // Community manager can delete other people requests.
+    $community = $request->get('field_community')->entity;
+
+    if ($community && $this->hasAdminAccessCommunity($community)) {
+      return TRUE;
+    }
+
     return $user->id() === $author_id && $author_id;
   }
 

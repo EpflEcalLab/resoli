@@ -97,6 +97,7 @@ class RequestController extends ControllerBase {
     $variables = [
       'community' => $community,
       'requests' => $this->requestRepository->getAllByCommunity($community),
+      'can_moderate_community' => $this->acl->hasAdminAccessCommunity($community),
     ];
 
     return [

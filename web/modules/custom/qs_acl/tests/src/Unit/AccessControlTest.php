@@ -251,26 +251,57 @@ final class AccessControlTest extends UnitTestCase {
    */
   public function testHasWriteAccessRequestContextualUser() {
     $request = $this->createMock(NodeInterface::class);
+    $community = $this->createMock(TermInterface::class);
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasAdminAccessCommunity', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasAdminAccessCommunity')->willReturn(FALSE);
 
     $request->expects(self::exactly(2))
       ->method('get')
-      ->with('uid')
-      ->willReturn((object) ['target_id' => '2']);
-
-    $this->currentUser->expects(self::once())
-      ->method('id')
-      ->willReturn('2');
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => '2']],
+        ['field_community', (object) ['entity' => $community]],
+      ]);
 
     // Fallback on the current user.
-    $this->acl->hasWriteAccessRequest($request);
+    $acl->hasWriteAccessRequest($request);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasWriteAccessRequest
+   */
+  public function testHasWriteAccessRequestGivenUser() {
+    $request = $this->createMock(NodeInterface::class);
+    $community = $this->createMock(TermInterface::class);
 
     $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
     $anotherCurrentUser->expects(self::once())
-      ->method('id')
-      ->willReturn('2');
+      ->method('id');
+    $this->currentUser->expects(self::never())
+      ->method('id');
 
-    // User the given user.
-    $this->acl->hasWriteAccessRequest($request, $anotherCurrentUser);
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasAdminAccessCommunity', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasAdminAccessCommunity')->willReturn(FALSE);
+
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => '2']],
+        ['field_community', (object) ['entity' => $community]],
+      ]);
+
+    // Use the given user.
+    $acl->hasWriteAccessRequest($request, $anotherCurrentUser);
   }
 
   /**
@@ -280,10 +311,12 @@ final class AccessControlTest extends UnitTestCase {
    */
   public function testHasWriteAccessRequestReturnsExcepted($userId, $requestAuthorId, bool $excepted) {
     $request = $this->createMock(NodeInterface::class);
-    $request->expects(self::once())
+    $request->expects(self::exactly(2))
       ->method('get')
-      ->with('uid')
-      ->willReturn((object) ['target_id' => $requestAuthorId]);
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => $requestAuthorId]],
+        ['field_community', (object) ['entity' => NULL]],
+      ]);
 
     $this->currentUser->expects(self::once())
       ->method('id')

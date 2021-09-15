@@ -46,7 +46,7 @@
     {# Archive button #}
     {# Available for Author of request or Admin. #}
     {% set currentUser = bamboo_load_currentuser() %}
-    {% if currentUser.id == request.uid.target_id or user.hasPermission('administer nodes') %}
+    {% if currentUser.id == request.uid.target_id or user.hasPermission('administer nodes') or can_moderate_community %}
       {{ bamboo_render_form('qs_sharing', 'RequestArchiveForm', {'request': request}) }}
     {% endif %}
 

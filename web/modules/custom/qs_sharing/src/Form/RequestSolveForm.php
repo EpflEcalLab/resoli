@@ -18,6 +18,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class RequestSolveForm extends FormBase {
 
   /**
+   * Access Control Service.
+   *
+   * @var \Drupal\qs_acl\Service\AccessControl
+   */
+  protected $acl;
+
+  /**
    * The node Storage.
    *
    * @var \Drupal\node\NodeStorageInterface
@@ -25,25 +32,18 @@ class RequestSolveForm extends FormBase {
   protected $nodeStorage;
 
   /**
+   * The Offer Manager.
+   *
+   * @var \Drupal\qs_sharing\Manager\RequestManager
+   */
+  protected $requestManager;
+
+  /**
    * The user Storage.
    *
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
-
-  /**
-   * Access Control Service.
-   *
-   * @var \Drupal\qs_acl\Service\AccessControl
-   */
-  private $acl;
-
-  /**
-   * The Offer Manager.
-   *
-   * @var \Drupal\qs_sharing\Manager\RequestManager
-   */
-  private $requestManager;
 
   /**
    * {@inheritdoc}
@@ -84,6 +84,11 @@ class RequestSolveForm extends FormBase {
     if (!isset($options['request'])) {
       return $form;
     }
+
+    // Needed to ensure the right offer is linked to the right form
+    // https://drupal.stackexchange.com/a/276999
+    $form_state->setRequestMethod('POST');
+    $form_state->setCached(TRUE);
 
     /** @var \Drupal\node\NodeInterface $request */
     $request = $options['request'];

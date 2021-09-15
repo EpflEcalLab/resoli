@@ -1,3 +1,5 @@
+{% import '@quartiers_solidaires/macros.html.twig' as macros %}
+
 {#
 /**
  * @file
@@ -10,6 +12,8 @@
  * @see template_preprocess_form()
  */
 #}
+
+{% set modal_bg = attributes.theme ?? 'warning' %}
 
 <div class="container container-narrow">
   {% set classes = [
@@ -54,4 +58,8 @@
     </p>
   {% endif %}
 
+  {% block modal_floating %}
+    {% set floating_buttons = element['#floating_buttons'] %}
+    {{ macros.floating_buttons(floating_buttons, modal_bg|default('warning'), path('<current>')) }}
+  {% endblock %}
 </div>

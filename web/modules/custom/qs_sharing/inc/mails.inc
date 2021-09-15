@@ -118,5 +118,77 @@ function qs_sharing_mail($key, &$message, $params) {
       ])));
 
       break;
+
+    // Sent to the author of the request.
+    case 'request_add_confirm':
+      $request = $message['params']['request'];
+
+      /** @var \Drupal\user\UserInterface $user */
+      $author = $request->uid->entity;
+
+      $message['subject'] = t('qs.mail.request.add_confirm.subject @sitename @community @theme @created_at', [
+        '@sitename' => $site->get('name'),
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+      ]);
+
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.request.add_confirm.body @author_firstname @author_lastname @community @theme @created_at', [
+        '@author_firstname' => $author->field_firstname->value,
+        '@author_lastname' => $author->field_lastname->value,
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+      ])));
+
+      break;
+
+    // Sent to an email when a request has been created on its behalf.
+    case 'add_request_on_behalf':
+      $request = $message['params']['request'];
+
+      /** @var \Drupal\user\UserInterface $user */
+      $author = $request->uid->entity;
+
+      $message['subject'] = t('qs.mail.request.add_request_on_behalf.subject @sitename @community @theme @created_at', [
+        '@sitename' => $site->get('name'),
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+      ]);
+
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.request.add_request_on_behalf.body @author_firstname @author_lastname @community @theme @created_at', [
+        '@author_firstname' => $author->field_firstname->value,
+        '@author_lastname' => $author->field_lastname->value,
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+      ])));
+
+      break;
+
+    // Sent to volunteer of the request theme.
+    case 'add_request':
+      $request = $message['params']['request'];
+
+      /** @var \Drupal\user\UserInterface $user */
+      $author = $request->uid->entity;
+
+      $message['subject'] = t('qs.mail.request.add_request.subject @sitename @community @theme @created_at', [
+        '@sitename' => $site->get('name'),
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+      ]);
+
+      $message['body'][] = Markup::create(nl2br(t('qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at', [
+        '@author_firstname' => $author->field_firstname->value,
+        '@author_lastname' => $author->field_lastname->value,
+        '@community' => $request->field_community->entity->getName(),
+        '@theme' => $request->field_theme->entity->getName(),
+        '@created_at' => $dateFormatter->format($request->created->value, 'default_medium_date_only'),
+      ])));
+
+      break;
   }
 }

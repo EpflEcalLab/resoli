@@ -54,7 +54,7 @@ Feature: Dashboard sharing
   Scenario: On any sharing dashboard page, it should have a "Share request" button.
     Given I am logged in as user "admin"
     When I am on "/sharing/1/user/1/dashboard"
-    And I should see "qs_sharing.share_request" link with href "/sharing/1/request/add"
+    And I should see "qs_sharing.share_request" link with href "/sharing/1/requests/add"
 
   @api
   Scenario: On the sharing dashboard page, as a member with no volunteerism, it should have a "Become volunteer" button and no "Add offer"", "Manage volunteerism" and "See requests" buttons.

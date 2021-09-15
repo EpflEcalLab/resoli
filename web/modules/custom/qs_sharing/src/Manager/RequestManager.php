@@ -122,6 +122,49 @@ class RequestManager {
   }
 
   /**
+   * Send a mail to the author of a request to confirm the creation.
+   *
+   * @param \Drupal\node\NodeInterface $request
+   *   The created request.
+   */
+  public function sendCreatedConfirmationMail(NodeInterface $request): void {
+    $author = $request->get('uid')->entity;
+    $this->mail->mail('qs_sharing', 'request_add_confirm', $author->getEmail(), $author->getPreferredLangcode(), [
+      'request' => $request,
+    ]);
+  }
+
+  /**
+   * Send a mail to a user when someone else creates a request on behalf.
+   *
+   * @param \Drupal\node\NodeInterface $request
+   *   The created request.
+   * @param string $mail
+   *   The person for whom the author create the request.
+   */
+  public function sendCreateOnBehalfMail(NodeInterface $request, string $mail): void {
+    $author = $request->get('uid')->entity;
+    $this->mail->mail('qs_sharing', 'add_request_on_behalf', $mail, $author->getPreferredLangcode(), [
+      'request' => $request,
+    ]);
+  }
+
+  /**
+   * Send a mail to all volunteers of a specific theme.
+   *
+   * @param \Drupal\node\NodeInterface $request
+   *   The created request.
+   * @param string[] $mails
+   *   Mails of volunteers.
+   */
+  public function sendNewRequestMail(NodeInterface $request, array $mails): void {
+    $author = $request->get('uid')->entity;
+    $this->mail->mail('qs_sharing', 'add_request', implode(', ', $mails), $author->getPreferredLangcode(), [
+      'request' => $request,
+    ]);
+  }
+
+  /**
    * Send a mail to alert the user on request resolution.
    *
    * @param \Drupal\node\NodeInterface $request

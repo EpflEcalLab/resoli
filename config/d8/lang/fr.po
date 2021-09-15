@@ -2578,3 +2578,12 @@ msgstr "qs.mail.request.archived.subject @sitename @archiver_firstname @archiver
 
 msgid "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"
 msgstr "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"
+
+msgid "qs.mail.request.add_confirm.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_confirm.body @author_firstname @author_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.add_request_on_behalf.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_request_on_behalf.body @author_firstname @author_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.add_request.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"

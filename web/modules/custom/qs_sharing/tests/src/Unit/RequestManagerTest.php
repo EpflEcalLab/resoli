@@ -161,6 +161,58 @@ final class RequestManagerTest extends UnitTestCase {
   }
 
   /**
+   * @covers ::sendCreatedConfirmationMail
+   */
+  public function testSendCreatedConfirmationMailReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $author = $this->createMock(UserInterface::class);
+    $uidField = new \stdClass();
+    $uidField->entity = $author;
+    $resolver = $this->createMock(UserInterface::class);
+
+    $node->expects(self::once())->method('get')->with('uid')->willReturn($uidField);
+    $author->expects(self::once())->method('getEmail');
+    $author->expects(self::once())->method('getPreferredLangcode');
+    $this->mail->expects(self::once())->method('mail');
+
+    $this->requestManager->sendCreatedConfirmationMail($node, $resolver);
+  }
+
+  /**
+   * @covers ::sendCreateOnBehalfMail
+   */
+  public function testSendCreateOnBehalfMailReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $author = $this->createMock(UserInterface::class);
+    $uidField = new \stdClass();
+    $uidField->entity = $author;
+
+    $node->expects(self::once())->method('get')->with('uid')->willReturn($uidField);
+    $author->expects(self::never())->method('getEmail');
+    $author->expects(self::once())->method('getPreferredLangcode');
+    $this->mail->expects(self::once())->method('mail');
+
+    $this->requestManager->sendCreateOnBehalfMail($node, 'jane.doe@example.org');
+  }
+
+  /**
+   * @covers ::sendNewRequestMail
+   */
+  public function testSendNewRequestMailReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $author = $this->createMock(UserInterface::class);
+    $uidField = new \stdClass();
+    $uidField->entity = $author;
+
+    $node->expects(self::once())->method('get')->with('uid')->willReturn($uidField);
+    $author->expects(self::never())->method('getEmail');
+    $author->expects(self::once())->method('getPreferredLangcode');
+    $this->mail->expects(self::once())->method('mail');
+
+    $this->requestManager->sendNewRequestMail($node, ['jane.doe@example.org', 'john.doe@example.org']);
+  }
+
+  /**
    * @covers ::sendSolvedMail
    */
   public function testSendSolvedMailReturnsExcepted() {

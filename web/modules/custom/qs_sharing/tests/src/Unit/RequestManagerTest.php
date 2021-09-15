@@ -7,6 +7,7 @@ use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\qs_sharing\Manager\RequestManager;
+use Drupal\taxonomy\TermInterface;
 use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
 
@@ -82,6 +83,63 @@ final class RequestManagerTest extends UnitTestCase {
       ->method('set')
       ->with('moderation_state', 'archived');
     $this->requestManager->archive($node);
+  }
+
+  /**
+   * @covers ::create
+   */
+  public function testCreateReturnsExcepted() {
+    $node = $this->createMock(NodeInterface::class);
+    $community = $this->createMock(TermInterface::class);
+    $theme = $this->createMock(TermInterface::class);
+    $theme->expects(self::once())
+      ->method('id')
+      ->willReturn(11);
+    $community->expects(self::once())
+      ->method('id')
+      ->willReturn(22);
+    $theme->expects(self::once())
+      ->method('getName')
+      ->willReturn('Mollis facilisi');
+    $author = $this->createMock(UserInterface::class);
+    $author->expects(self::once())
+      ->method('id')
+      ->willReturn(13);
+
+    $this->nodeStorage->expects(self::once())
+      ->method('create')
+      ->with([
+        'type' => 'request',
+        'status' => TRUE,
+        'moderation_state' => 'published',
+        'title' => 'Mollis facilisi | Aptent Tempus',
+        'field_community' => 22,
+        'field_theme' => 11,
+        'body' => [
+          'format' => 'light_html',
+          'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
+        ],
+        'field_contact_firstname' => 'Aptent',
+        'field_contact_lastname' => 'Tempus',
+        'field_contact_mail' => 'aptent.tempus@example.org',
+        'field_contact_phone' => '079 790 79 79',
+        'uid' => 13,
+      ])
+      ->willReturn($node);
+
+    $node->expects(self::once())
+      ->method('save');
+
+    $this->requestManager->create(
+      $theme,
+      $community,
+      $author,
+      'Feugiat mollis lacus leo nascetur neque consequat',
+      'Aptent',
+      'Tempus',
+      'aptent.tempus@example.org',
+      '079 790 79 79',
+    );
   }
 
   /**

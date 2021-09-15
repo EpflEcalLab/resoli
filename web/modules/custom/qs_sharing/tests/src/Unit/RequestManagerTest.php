@@ -209,7 +209,10 @@ final class RequestManagerTest extends UnitTestCase {
     $author->expects(self::once())->method('getPreferredLangcode');
     $this->mail->expects(self::once())->method('mail');
 
-    $this->requestManager->sendNewRequestMail($node, ['jane.doe@example.org', 'john.doe@example.org']);
+    $this->requestManager->sendNewRequestMail($node, [
+      'jane.doe@example.org',
+      'john.doe@example.org',
+    ]);
   }
 
   /**

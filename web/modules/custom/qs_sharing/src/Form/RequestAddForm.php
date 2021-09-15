@@ -6,7 +6,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Language\LanguageManager;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\qs_acl\Service\AccessControl;
@@ -75,7 +75,7 @@ class RequestAddForm extends FormBase {
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, LanguageManager $language_manager, RequestManager $request_manager) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, RequestManager $request_manager) {
     $this->acl = $acl;
     $this->languageManager = $language_manager;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');

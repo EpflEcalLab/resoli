@@ -83,13 +83,14 @@ Feature: Collection of Requests
     Then I should see 2 "#requests-accordion .card-list-item#card80 .card-actions .btn" element
     Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions form#qs-sharing-request-solve-form" element
     Then I should see 1 "#requests-accordion .card-list-item#card80 .card-actions form#qs-sharing-request-archive-form" element
-    Then I should see 3 "#requests-accordion .card-list-item#card77 .card-actions .btn" elements
+    Then I should see 4 "#requests-accordion .card-list-item#card77 .card-actions .btn" elements
     Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='tel:+41 021 987 47 22']" element
     Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions a[href='mailto:sara.courci@example.org']" element
     Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions form#qs-sharing-request-solve-form--2" element
+    Then I should see 1 "#requests-accordion .card-list-item#card77 .card-actions form#qs-sharing-request-archive-form--2" element
     Then I should see 2 "#requests-accordion .card-list-item#card79 .card-actions .btn" element
     Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions a[href='mailto:manager+lausanne@antistatique.net']" element
-    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions form#qs-sharing-request-archive-form--2" element
+    Then I should see 1 "#requests-accordion .card-list-item#card79 .card-actions form#qs-sharing-request-archive-form--3" element
 
   Scenario: On the "Lausanne" listing of requests, as Admin, I should see specific actions to my account.
     Given I am logged in as user "admin"

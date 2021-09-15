@@ -22,8 +22,8 @@ Feature: Request Archive Form
       | admin | 80 | 200 |
       | admin | 81 | 200 |
       | organizer+lausanne | 78 | 403 |
-      | organizer+lausanne | 79 | 200 |
-      | organizer+lausanne | 80 | 200 |
+      | organizer+lausanne | 79 | 403 |
+      | organizer+lausanne | 80 | 403 |
       | organizer+lausanne | 81 | 403 |
       | member+lausanne+manager+fribourg | 78  | 403 |
       | member+lausanne+manager+fribourg | 79  | 403 |
@@ -40,7 +40,7 @@ Feature: Request Archive Form
       | member+lausanne+organizer+fribourg | 78  | 403 |
       | member+lausanne+organizer+fribourg | 79  | 403 |
       | member+lausanne+organizer+fribourg | 80  | 403 |
-      | member+lausanne+organizer+fribourg | 81  | 200 |
+      | member+lausanne+organizer+fribourg | 81  | 403 |
 
 ## Form visibility.
   Scenario Outline: When reaching the request listing, only the request author, a community manager or an admin should see the request archive form

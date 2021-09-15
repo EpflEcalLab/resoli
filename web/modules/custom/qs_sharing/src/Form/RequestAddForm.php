@@ -376,8 +376,8 @@ class RequestAddForm extends FormBase {
       '@theme' => $theme->getName(),
     ]));
 
-    $form_state->setRedirect('qs_sharing.requests.form.add', [
-      'community' => $community->id(),
+    $form_state->setRedirect('qs_sharing.requests.confirmation', [
+      'request' => $request->id(),
     ]);
   }
 

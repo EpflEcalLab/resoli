@@ -2590,3 +2590,21 @@ msgstr "qs.mail.request.add_request_on_behalf.body @author_firstname @author_las
 
 msgid "qs.mail.request.add_request.subject @sitename @community @theme @created_at"
 msgstr "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"
+
+msgid "qs_sharing.requests.confirmation.lead @community"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de @community."
+
+msgid "qs_sharing.requests.confirmation.title"
+msgstr "Merci."
+
+msgid "qs_sharing.requests.confirmation.intro"
+msgstr "Votre demande a bien été transmise aux personnes bénévoles de la communauté concernées par la thématique choisie."
+
+msgid "qs_sharing.requests.confirmation.add_request"
+msgstr "Partager une nouvelle demande"
+
+msgid "qs_sharing.requests.confirmation.help"
+msgstr "Vous pouvez accéder aux demandes en cours en cliquant sur le bouton «Mon entraide» ci-dessous."
+
+msgid "qs_sharing.requests.confirmation.info"
+msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les bénévoles de la communauté y ont accès"

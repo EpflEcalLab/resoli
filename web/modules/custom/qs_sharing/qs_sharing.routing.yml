@@ -28,6 +28,21 @@ qs_sharing.requests.form.add:
       community:
         type: entity:taxonomy_term
 
+# Sharing request confirmation page
+qs_sharing.requests.confirmation:
+  path: '/sharing/requests/{request}/confirmation'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\RequestConfirmationController::confirm'
+    _title: 'qs_sharing.requests.confirmation.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\RequestConfirmationController::access'
+    request: \d+
+  options:
+    parameters:
+      request:
+        type: entity:node
+
 # Sharing dashboard page
 qs_sharing.sharing.dashboard:
   path: '/sharing/{community}/user/{user}/dashboard'

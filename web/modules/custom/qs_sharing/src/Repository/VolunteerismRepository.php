@@ -30,6 +30,33 @@ class VolunteerismRepository {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
+   * @param \Drupal\taxonomy\TermInterface $theme
+   *   The sharing theme entity.
+   *
+   * @return \Drupal\qs_sharing\Entity\volunteerism[]|null
+   *   A collection of volunteerism. Otherwise, an empty array.
+   */
+  public function getAllByCommunityTheme(TermInterface $community, TermInterface $theme): ?array {
+    $query = $this->volunteerismStorage->getQuery()
+      ->accessCheck()
+      ->condition('theme', $theme->id())
+      ->condition('community', $community->id());
+    $query->groupBy('user');
+
+    $ids = $query->execute();
+
+    if (empty($ids) || !\is_array($ids)) {
+      return NULL;
+    }
+
+    return $this->volunteerismStorage->loadMultiple($ids);
+  }
+
+  /**
+   * Get all volunteering for the $user in the given $community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community entity.
    * @param \Drupal\Core\Session\AccountInterface $user
    *   The user entity.
    *

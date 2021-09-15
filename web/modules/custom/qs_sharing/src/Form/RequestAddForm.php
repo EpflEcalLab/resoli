@@ -10,7 +10,9 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\qs_acl\Service\AccessControl;
+use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_sharing\Manager\RequestManager;
+use Drupal\qs_sharing\Repository\VolunteerismRepository;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -25,6 +27,7 @@ class RequestAddForm extends FormBase {
    * @var \Drupal\qs_acl\Service\AccessControl
    */
   protected $acl;
+
   /**
    * The language manager.
    *
@@ -38,6 +41,13 @@ class RequestAddForm extends FormBase {
    * @var \Drupal\node\NodeStorageInterface
    */
   protected $nodeStorage;
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  protected $privilegeManager;
 
   /**
    * The Request Manager.
@@ -61,6 +71,13 @@ class RequestAddForm extends FormBase {
   protected $userStorage;
 
   /**
+   * The volunteerism repository.
+   *
+   * @var \Drupal\qs_sharing\Repository\VolunteerismRepository
+   */
+  protected $volunteerismRepository;
+
+  /**
    * Construct a new form allowing submission of Offers from Volunteers.
    *
    * @param \Drupal\qs_acl\Service\AccessControl $acl
@@ -71,17 +88,23 @@ class RequestAddForm extends FormBase {
    *   The language manager.
    * @param \Drupal\qs_sharing\Manager\RequestManager $request_manager
    *   The request manager.
+   * @param \Drupal\qs_sharing\Repository\VolunteerismRepository $volunteerism_repository
+   *   The volunteerism repository.
+   * @param \Drupal\qs_acl\Service\PrivilegeManager $privilege_manager
+   *   The Privilege Manager.
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, RequestManager $request_manager) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, RequestManager $request_manager, VolunteerismRepository $volunteerism_repository, PrivilegeManager $privilege_manager) {
     $this->acl = $acl;
     $this->languageManager = $language_manager;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->userStorage = $entity_type_manager->getStorage('user');
     $this->nodeStorage = $entity_type_manager->getStorage('node');
     $this->requestManager = $request_manager;
+    $this->volunteerismRepository = $volunteerism_repository;
+    $this->privilegeManager = $privilege_manager;
   }
 
   /**
@@ -287,7 +310,9 @@ class RequestAddForm extends FormBase {
       $container->get('qs_acl.access_control'),
       $container->get('entity_type.manager'),
       $container->get('language_manager'),
-      $container->get('qs_sharing.manager.request')
+      $container->get('qs_sharing.manager.request'),
+      $container->get('qs_sharing.repository.volunteerism'),
+      $container->get('qs_acl.privilege_manager'),
     );
   }
 
@@ -302,14 +327,109 @@ class RequestAddForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // @todo Handle logic
+    $community = $this->termStorage->load($form_state->get('community'));
+    $account = $this->userStorage->load($this->currentUser()->id());
+    $theme = $this->termStorage->load($form_state->getValue('theme'));
+
+    $request = $this->requestManager->create(
+      $theme,
+      $community,
+      $account,
+      $form_state->getValue('body'),
+      $form_state->getValue('contact_firstname'),
+      $form_state->getValue('contact_lastname'),
+      $form_state->getValue('contact_phone'),
+      $form_state->getValue('contact_mail'),
+    );
+
+    // Send confirmation mail to the request author.
+    $this->requestManager->sendCreatedConfirmationMail($request);
+
+    // Send mail to volunteers of the theme.
+    $volunteerisms = $this->volunteerismRepository->getAllByCommunityTheme($community, $theme);
+
+    if (empty($volunteerisms)) {
+      // When the theme has not volunteers, then send the mail to the community
+      // managers.
+      // Get all managers of this community.
+      $user_notified = $this->getCommunityManagers($community);
+    }
+    else {
+      foreach ($volunteerisms as $volunteerism) {
+        $user = $volunteerism->getVolunteer()->entity;
+        $user_notified[$user->id()] = $volunteerism->getVolunteer()->entity;
+      }
+    }
+
+    // Notify volunteers or managers of the new request creation.
+    $this->requestManager->sendNewRequestMail($request, $user_notified);
+
+    // If no volunteers, then send mail to organizer of the community.
+    // The request has been created for another e-mail, then send an e-mail
+    // to this person.
+    if ($account->getEmail() !== $form_state->getValue('contact_mail')) {
+      $this->requestManager->sendCreateOnBehalfMail($request, $form_state->getValue('contact_mail'));
+    }
+
+    $this->messenger()->addMessage($this->t('qs_sharing.requests.form.add.success @community @theme', [
+      '@community' => $community->getName(),
+      '@theme' => $theme->getName(),
+    ]));
+
+    $form_state->setRedirect('qs_sharing.requests.form.add', [
+      'community' => $community->id(),
+    ]);
   }
 
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // @todo Handle logic
+    // Assert the theme is valid.
+    if (!$form_state->getValue('theme') || empty($form_state->getValue('theme'))) {
+      $form_state->setErrorByName('form', $this->t('qs_sharing.requests.form.add.error.empty.theme'));
+    }
+
+    // Assert the body is valid.
+    if (!$form_state->getValue('body') || empty($form_state->getValue('body'))) {
+      $form_state->setErrorByName('body', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $this->t('qs_sharing.requests.form.add.body'),
+      ]));
+    }
+
+    // Assert the mail is valid.
+    if (!$form_state->getValue('contact_mail') || empty($form_state->getValue('contact_mail'))) {
+      $form_state->setErrorByName('contact_mail', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $this->t('qs_sharing.requests.form.add.contact_mail'),
+      ]));
+    }
+  }
+
+  /**
+   * Get all community managers.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community.
+   *
+   * @return \Drupal\user\UserInterface[]|null
+   *   The collection of user with the community manager privilege or null.
+   */
+  private function getCommunityManagers(TermInterface $community): ?array {
+    // Get all managers of this community.
+    $query = $this->privilegeManager->queryPrivilege($community, 'community_managers');
+    $rows = $query->execute()->fetchAll();
+
+    $ids = [];
+
+    foreach ($rows as $row) {
+      $ids[] = $row->user;
+    }
+
+    if (empty($ids)) {
+      return NULL;
+    }
+
+    return $this->userStorage->loadMultiple($ids);
   }
 
 }

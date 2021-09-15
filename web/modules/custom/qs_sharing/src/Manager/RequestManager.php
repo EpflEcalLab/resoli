@@ -154,14 +154,15 @@ class RequestManager {
    *
    * @param \Drupal\node\NodeInterface $request
    *   The created request.
-   * @param string[] $mails
-   *   Mails of volunteers.
+   * @param \Drupal\user\Entity\User[] $users
+   *   Volunteers or Manager whom will receive the mail.
    */
-  public function sendNewRequestMail(NodeInterface $request, array $mails): void {
-    $author = $request->get('uid')->entity;
-    $this->mail->mail('qs_sharing', 'add_request', implode(', ', $mails), $author->getPreferredLangcode(), [
-      'request' => $request,
-    ]);
+  public function sendNewRequestMail(NodeInterface $request, array $users): void {
+    foreach ($users as $user) {
+      $this->mail->mail('qs_sharing', 'add_request', $user->getEmail(), $user->getPreferredLangcode(), [
+        'request' => $request,
+      ]);
+    }
   }
 
   /**

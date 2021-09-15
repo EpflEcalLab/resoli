@@ -200,19 +200,17 @@ final class RequestManagerTest extends UnitTestCase {
    */
   public function testSendNewRequestMailReturnsExcepted() {
     $node = $this->createMock(NodeInterface::class);
-    $author = $this->createMock(UserInterface::class);
-    $uidField = new \stdClass();
-    $uidField->entity = $author;
 
-    $node->expects(self::once())->method('get')->with('uid')->willReturn($uidField);
-    $author->expects(self::never())->method('getEmail');
-    $author->expects(self::once())->method('getPreferredLangcode');
-    $this->mail->expects(self::once())->method('mail');
+    $user1 = $this->createMock(UserInterface::class);
+    $user1->expects(self::once())->method('getEmail');
+    $user1->expects(self::once())->method('getPreferredLangcode');
+    $user2 = $this->createMock(UserInterface::class);
+    $user2->expects(self::once())->method('getEmail');
+    $user2->expects(self::once())->method('getPreferredLangcode');
 
-    $this->requestManager->sendNewRequestMail($node, [
-      'jane.doe@example.org',
-      'john.doe@example.org',
-    ]);
+    $this->mail->expects(self::exactly(2))->method('mail');
+
+    $this->requestManager->sendNewRequestMail($node, [$user1, $user2]);
   }
 
   /**

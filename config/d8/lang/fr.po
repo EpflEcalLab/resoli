@@ -2246,6 +2246,9 @@ msgstr "Précisez en quelques mot ce que vous souhaitez"
 msgid "qs_sharing.requests.form.add.body.placeholder"
 msgstr "Ex. J’ai besoin d’une personne pour m’aider à monter mes courses à l’étage, si possible une fois par semaine."
 
+msgid "qs_sharing.requests.form.add.error.empty.theme"
+msgstr "qs_sharing.requests.form.add.error.empty.theme"
+
 msgid "qs_sharing.floating.my_requests"
 msgstr "Mon entraide"
 

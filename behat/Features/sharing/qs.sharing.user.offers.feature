@@ -112,12 +112,12 @@ Feature: Offer User Collection
   Scenario: Logged as Member of Lausanne & Organizer of Fribourg, When I access "My offers" in Lausanne
     Given I am logged in as user "member+lausanne+organizer+fribourg"
     When I am on "/sharing/1/user/8/offers"
-    Then I should see 2 "#offers-accordion .card-list-item#card71 .card-actions .btn" elements
-    Then I should see 1 "#offers-accordion .card-list-item#card71 .card-actions form#qs-sharing-offer-deactivate-form" element
-    Then I should see 1 "#offers-accordion .card-list-item#card71 .card-actions a[href='/fr/sharing/offers/71/edit']" element
     Then I should see 2 "#offers-accordion .card-list-item#card72 .card-actions .btn" elements
-    Then I should see 1 "#offers-accordion .card-list-item#card72 .card-actions form#qs-sharing-offer-deactivate-form--2" element
+    Then I should see 1 "#offers-accordion .card-list-item#card72 .card-actions form#qs-sharing-offer-deactivate-form" element
     Then I should see 1 "#offers-accordion .card-list-item#card72 .card-actions a[href='/fr/sharing/offers/72/edit']" element
+    Then I should see 2 "#offers-accordion .card-list-item#card71 .card-actions .btn" elements
+    Then I should see 1 "#offers-accordion .card-list-item#card71 .card-actions form#qs-sharing-offer-deactivate-form--2" element
+    Then I should see 1 "#offers-accordion .card-list-item#card71 .card-actions a[href='/fr/sharing/offers/71/edit']" element
     Then I should see 2 "#offers-accordion .card-list-item#card75 .card-actions .btn" elements
     Then I should see 1 "#offers-accordion .card-list-item#card75 .card-actions form#qs-sharing-offer-delete-form" element
     Then I should see 1 "#offers-accordion .card-list-item#card75 .card-actions form#qs-sharing-offer-reactivate-form" element

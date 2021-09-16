@@ -62,7 +62,12 @@
                 {% if offer.field_description.value %}
                   <h4 class="h5 card-title mb-3 mt-0">{{ offer.field_description.value|striptags }}</h4>
                 {% endif %}
-                <p class="mb-0">{{ offer.body.value }}</p>
+                {% set body = {
+                  '#type':   'processed_text',
+                  '#text':    offer.body.value,
+                  '#format':  offer.body.format,
+                } %}
+                {{ body }}
               </div>
 
               {# @todo Handle edit + add actions in routing and controller #}

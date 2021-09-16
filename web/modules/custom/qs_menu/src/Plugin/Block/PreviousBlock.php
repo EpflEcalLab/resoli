@@ -280,7 +280,6 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
         // Go to Offer's Type collection.
         case 'qs_sharing.sharing.dashboard':
-        case 'qs_sharing.collection.user.offers':
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.offer', [
             'community' => $community->id(),
           ], $options);
@@ -294,6 +293,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
         case 'qs_sharing.volunteerisms.form.manage':
         case 'qs_sharing.offers.form.add':
         case 'qs_sharing.offers.form.edit':
+        case 'qs_sharing.collection.user.offers':
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.sharing.dashboard', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),

@@ -37,7 +37,7 @@
             </span>
 
             <span class="card-pill-title {% if is_deactivated %}mr-auto{% endif %}">
-              <span class="lead">{{ offer.field_offer_type.entity.title.value }}</span>
+              {{ offer.field_offer_type.entity.title.value }}
             </span>
 
             {% if is_deactivated %}

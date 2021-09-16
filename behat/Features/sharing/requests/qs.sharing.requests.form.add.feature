@@ -98,8 +98,8 @@ Feature: Sharing Request add Form
     Then the url should match "/sharing/requests/82/confirmation"
     And I should see "qs_sharing.requests.form.add.success Lausanne Convivialité" in the ".alert" element
     And 2 mail should be sent
-    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Convivialité 15 September 2021"
-    Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Convivialité 15 September 2021"
+    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Convivialité"
+    Then A mail as been sent to "member+lausanne+organizer+fribourg@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Convivialité"
 
   @api @preserveDatabase @mail
   Scenario: In the add Request form, when submitting on a theme without volunteers, then an e-mail is sent to the organizer(s) of the community.
@@ -115,8 +115,8 @@ Feature: Sharing Request add Form
     Then the url should match "/sharing/requests/82/confirmation"
     And I should see "qs_sharing.requests.form.add.success Lausanne Mobilité" in the ".alert" element
     And 2 mail should be sent
-    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Mobilité 15 September 2021"
-    Then A mail as been sent to "manager+lausanne@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Mobilité 15 September 2021"
+    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Mobilité"
+    Then A mail as been sent to "manager+lausanne@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Mobilité"
 
   @api @preserveDatabase @mail
   Scenario: In the add Request form, when submitting with someone else contact e-mail, a mail is sent to this person.
@@ -132,6 +132,6 @@ Feature: Sharing Request add Form
     Then the url should match "/sharing/requests/82/confirmation"
     And I should see "qs_sharing.requests.form.add.success Lausanne Objets" in the ".alert" element
     And 3 mail should be sent
-    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Objets 15 September 2021"
-    Then A mail as been sent to "jane.doe@example.org" with subject "qs.mail.request.add_request_on_behalf.subject Resoli Lausanne Objets 15 September 2021"
-    Then A mail as been sent to "manager+lausanne@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Objets 15 September 2021"
+    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.add_confirm.subject Resoli Lausanne Objets"
+    Then A mail as been sent to "jane.doe@example.org" with subject "qs.mail.request.add_request_on_behalf.subject Resoli Lausanne Objets"
+    Then A mail as been sent to "manager+lausanne@antistatique.net" with subject "qs.mail.request.add_request.subject Resoli Lausanne Objets"

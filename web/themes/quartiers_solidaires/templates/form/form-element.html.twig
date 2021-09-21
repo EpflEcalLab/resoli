@@ -74,18 +74,21 @@
 <div{{ attributes.addClass(classes).removeClass('form-text') }}{{ element['#attributes']['required'] ? ' data-required' }}>
 {% endif %}
 
-{% if element['#attributes'].icon %}
-<div class="d-flex">
-  {{ macros.icon(element['#attributes'].icon, ['mr-2', label_display in ['before', 'invisible'] ? 'mt-4' : 'icon-lg']) }}
-  <div class="flex-grow">
-{% endif %}
+
 
   {% if label_display in ['before', 'invisible'] %}
     {% if type != 'file' %}
     {{ label }}
     {% endif %}
   {% endif %}
-  {% if prefix is not empty %}
+
+  {% if element['#attributes'].icon %}
+  <div class="d-flex">
+    {{ macros.icon(element['#attributes'].icon, ['mr-2', 'icon-lg']) }}
+    <div class="flex-grow">
+      {% endif %}
+
+      {% if prefix is not empty %}
     <span class="field-prefix">{{ prefix }}</span>
   {% endif %}
   {% if description_display == 'before' and description.content %}
@@ -97,6 +100,11 @@
   {% if suffix is not empty %}
     <span class="field-suffix">{{ suffix }}</span>
   {% endif %}
+      {% if element['#attributes'].icon %}
+    </div>
+  </div>
+  {% endif %}
+
   {% if label_display == 'after' and type != 'radio' and type != 'checkbox' %}
     {{ label }}
   {% endif %}
@@ -111,10 +119,7 @@
     </small>
   {% endif %}
 
-{% if element['#attributes'].icon %}
-  </div>
-</div>
-{% endif %}
+
 
 {% if not element['#attributes'].no_form_group %}
 </div>

@@ -113,6 +113,12 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
       $community = $event->field_activity->entity->field_community->entity;
     }
 
+    $request = $this->route->getParameter('request');
+
+    if (!$community && $request && $request->bundle() === 'request') {
+      $community = $request->field_community->entity;
+    }
+
     // When the community doesn't exists, it's impossible build the menu.
     if (!$community) {
       return $render;
@@ -193,6 +199,7 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
         'activated_by' => [
           'qs_sharing.collection.offer',
           'qs_sharing.requests.form.add',
+          'qs_sharing.requests.confirmation',
         ],
       ],
       'photos' => [

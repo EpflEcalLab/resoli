@@ -10,6 +10,7 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_sharing\Repository\VolunteerismRepository;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Tests\UnitTestCase;
+use Drupal\user\UserInterface;
 
 /**
  * Tests the block plugin collection.
@@ -61,15 +62,29 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
-   * Provider of ::testHasEditAccessOfferContextualUser.
+   * Provider of ::testHasDashboardSharingAccessReturnsExcepted.
    *
-   * Set of return value from isCommunityReturnsExcepted with excepted boolean
-   * result on isCommunityVolunteer.
+   * Set of return value from hasDashboardSharingAccessReturnsExcepted
+   * with expected boolean result on hasDashboardSharingAccess.
    *
    * @return iterable
    *   Return an array of arrays contains expectation.
    */
-  public function hasEditAccessOfferReturnsExcepted(): iterable {
+  public function hasDashboardSharingAccessReturnsExcepted(): iterable {
+    yield ['4', FALSE];
+
+    yield ['3', FALSE];
+
+    yield ['2', TRUE];
+  }
+
+  /**
+   * Provider of HasWrite access methods where Author/Admin may only write.
+   *
+   * @return iterable
+   *   Return an array of arrays contains expectation.
+   */
+  public function hasWriteAccessAuthorship(): iterable {
     yield [NULL, NULL, FALSE];
 
     yield ['1', '1', TRUE];
@@ -106,9 +121,84 @@ final class AccessControlTest extends UnitTestCase {
   /**
    * Ensure the current user will be used when non given.
    *
-   * @covers ::hasEditAccessOffer
+   * @covers ::hasDashboardSharingAccess
    */
-  public function testHasEditAccessOfferContextualUser() {
+  public function testHasDashboardSharingAccessContextualUser() {
+    $community = $this->createMock(TermInterface::class);
+
+    $this->currentUser->expects(self::exactly(2))
+      ->method('id');
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasCommunityByUser', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasCommunityByUser')->willReturn(TRUE);
+
+    // Fallback on the current user.
+    $acl->hasDashboardSharingAccess($community);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasDashboardSharingAccess
+   */
+  public function testHasDashboardSharingAccessGivenUser() {
+    $community = $this->createMock(TermInterface::class);
+
+    $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
+    $anotherCurrentUser->expects(self::once())
+      ->method('id');
+    $this->currentUser->expects(self::once())
+      ->method('id');
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasCommunityByUser', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasCommunityByUser')->willReturn(TRUE);
+
+    // Fallback on the current user.
+    $acl->hasDashboardSharingAccess($community, $anotherCurrentUser);
+  }
+
+  /**
+   * @covers ::hasDashboardSharingAccess
+   *
+   * @dataProvider hasDashboardSharingAccessReturnsExcepted
+   */
+  public function testHasDashboardSharingAccessReturnsExcepted($userId, bool $excepted) {
+    $community = $this->createMock(TermInterface::class);
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn('2');
+
+    $user = $this->createMock(UserInterface::class);
+    $user->expects(self::once())
+      ->method('id')
+      ->willReturn($userId);
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasCommunityByUser', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->method('hasCommunityByUser')->willReturn(TRUE);
+
+    $result = $acl->hasDashboardSharingAccess($community, $user);
+
+    self::assertEquals($excepted, $result);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasWriteAccessOffer
+   */
+  public function testHasWriteAccessOfferContextualUser() {
     $offer = $this->createMock(NodeInterface::class);
 
     $offer->expects(self::exactly(2))
@@ -121,7 +211,7 @@ final class AccessControlTest extends UnitTestCase {
       ->willReturn('2');
 
     // Fallback on the current user.
-    $this->acl->hasEditAccessOffer($offer);
+    $this->acl->hasWriteAccessOffer($offer);
 
     $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
     $anotherCurrentUser->expects(self::once())
@@ -129,15 +219,15 @@ final class AccessControlTest extends UnitTestCase {
       ->willReturn('2');
 
     // User the given user.
-    $this->acl->hasEditAccessOffer($offer, $anotherCurrentUser);
+    $this->acl->hasWriteAccessOffer($offer, $anotherCurrentUser);
   }
 
   /**
-   * @covers ::hasEditAccessOffer
+   * @covers ::hasWriteAccessOffer
    *
-   * @dataProvider hasEditAccessOfferReturnsExcepted
+   * @dataProvider hasWriteAccessAuthorship
    */
-  public function testHasEditAccessOfferReturnsExcepted($userId, $offerAuthorId, bool $excepted) {
+  public function testHasWriteAccessOfferReturnsExcepted($userId, $offerAuthorId, bool $excepted) {
     $offer = $this->createMock(NodeInterface::class);
     $offer->expects(self::once())
       ->method('get')
@@ -149,7 +239,91 @@ final class AccessControlTest extends UnitTestCase {
       ->willReturn($userId);
 
     // Fallback on the current user.
-    $result = $this->acl->hasEditAccessOffer($offer);
+    $result = $this->acl->hasWriteAccessOffer($offer);
+
+    self::assertEquals($excepted, $result);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasWriteAccessRequest
+   */
+  public function testHasWriteAccessRequestContextualUser() {
+    $request = $this->createMock(NodeInterface::class);
+    $community = $this->createMock(TermInterface::class);
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasAdminAccessCommunity', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasAdminAccessCommunity')->willReturn(FALSE);
+
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => '2']],
+        ['field_community', (object) ['entity' => $community]],
+      ]);
+
+    // Fallback on the current user.
+    $acl->hasWriteAccessRequest($request);
+  }
+
+  /**
+   * Ensure the current user will be used when non given.
+   *
+   * @covers ::hasWriteAccessRequest
+   */
+  public function testHasWriteAccessRequestGivenUser() {
+    $request = $this->createMock(NodeInterface::class);
+    $community = $this->createMock(TermInterface::class);
+
+    $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
+    $anotherCurrentUser->expects(self::once())
+      ->method('id');
+    $this->currentUser->expects(self::never())
+      ->method('id');
+
+    $acl = $this->getMockBuilder(AccessControl::class)
+      ->onlyMethods(['hasAdminAccessCommunity', 'hasBypass'])
+      ->setConstructorArgs([$this->currentUser, $this->entityTypeManager])
+      ->getMock();
+    $acl->expects(self::once())->method('hasBypass')->willReturn(FALSE);
+    $acl->expects(self::once())->method('hasAdminAccessCommunity')->willReturn(FALSE);
+
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => '2']],
+        ['field_community', (object) ['entity' => $community]],
+      ]);
+
+    // Use the given user.
+    $acl->hasWriteAccessRequest($request, $anotherCurrentUser);
+  }
+
+  /**
+   * @covers ::hasWriteAccessRequest
+   *
+   * @dataProvider hasWriteAccessAuthorship
+   */
+  public function testHasWriteAccessRequestReturnsExcepted($userId, $requestAuthorId, bool $excepted) {
+    $request = $this->createMock(NodeInterface::class);
+    $request->expects(self::exactly(2))
+      ->method('get')
+      ->willReturnMap([
+        ['uid', (object) ['target_id' => $requestAuthorId]],
+        ['field_community', (object) ['entity' => NULL]],
+      ]);
+
+    $this->currentUser->expects(self::once())
+      ->method('id')
+      ->willReturn($userId);
+
+    // Fallback on the current user.
+    $result = $this->acl->hasWriteAccessRequest($request);
 
     self::assertEquals($excepted, $result);
   }

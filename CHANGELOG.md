@@ -14,12 +14,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add PDF exporter service and base template #796
 - Add dashboard 'Offers'
 - Add templates for listing offers
+- Add moderation for the offers
+- add offer edit form
+- add Request collection for volunteers - #831 #832
+- add Request Archive form - #832
+- add Request Solve form - #830
+- add Request Add form - #833
 
 ### Changed
 - update all Javascript Dependencies
 - Update drupal/core (9.2.1 => 9.2.4)
 - Update drupal/admin_toolbar (3.0.1 => 3.0.2)
 - Update drupal/field_group (3.1.0 => 3.2.0)
+- move from Codeship to Github Actions
+- security update drupal/core-dev (9.2.4 => 9.2.6)
 
 ### Fixed
 - fix pager of Events

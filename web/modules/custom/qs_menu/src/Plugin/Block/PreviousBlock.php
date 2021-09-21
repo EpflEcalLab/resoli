@@ -66,11 +66,16 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
     $community = $this->route->getParameter('community');
     $activity = $this->route->getParameter('activity');
+    $offer = $this->route->getParameter('offer');
     $event = $this->route->getParameter('event');
     $node = $this->route->getParameter('node');
 
     if (!$community && $event && !$event->get('field_activity')->isEmpty()) {
       $community = $event->field_activity->entity;
+    }
+
+    if (!$community && $offer && !$offer->get('field_offer_type')->isEmpty()) {
+      $community = $offer->field_offer_type->entity->field_community->entity;
     }
 
     if (!$activity && $event && $event->hasField('field_activity')) {
@@ -274,7 +279,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
           break;
 
         // Go to Offer's Type collection.
-        case 'qs_sharing.collection.user.offers':
+        case 'qs_sharing.sharing.dashboard':
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.offer', [
             'community' => $community->id(),
           ], $options);
@@ -283,13 +288,17 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to My Offers.
+        // Go to Sharing Dashboard.
+        case 'qs_sharing.collection.request':
+        case 'qs_sharing.volunteerisms.form.manage':
         case 'qs_sharing.offers.form.add':
-          $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.user.offers', [
+        case 'qs_sharing.offers.form.edit':
+        case 'qs_sharing.collection.user.offers':
+          $url = $this->urlGenerator->generateFromRoute('qs_sharing.sharing.dashboard', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
           ], $options);
-          $label = $this->t('qs.previous.to_my_offers');
+          $label = $this->t('qs.previous.to_sharing_dashboard');
           $theme = 'primary';
 
           break;

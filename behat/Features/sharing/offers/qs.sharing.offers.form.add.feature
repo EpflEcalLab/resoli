@@ -10,7 +10,7 @@ Feature: Sharing Offers add Form
     | admin | /sharing/1/offers/add | 200 |
     | admin | /sharing/2/offers/add | 200 |
     | admin | /sharing/3/offers/add | 200 |
-    | member+lausanne | /sharing/1/offers/add | 403 |
+    | member+lausanne | /sharing/1/offers/add | 200 |
     | member+lausanne | /sharing/2/offers/add | 403 |
     | member+lausanne | /sharing/3/offers/add | 403 |
     | approval+lausanne | /sharing/1/offers/add | 403 |
@@ -22,8 +22,8 @@ Feature: Sharing Offers add Form
     | organizer+lausanne | /sharing/1/offers/add | 403 |
     | organizer+lausanne | /sharing/2/offers/add | 403 |
     | organizer+lausanne | /sharing/3/offers/add | 403 |
-    | member+lausanne+organizer+fribourg | /sharing/1/offers/add | 403 |
-    | member+lausanne+organizer+fribourg | /sharing/2/offers/add | 403 |
+    | member+lausanne+organizer+fribourg | /sharing/1/offers/add | 200 |
+    | member+lausanne+organizer+fribourg | /sharing/2/offers/add | 200 |
     | member+lausanne+organizer+fribourg | /sharing/3/offers/add | 403 |
     | member+fribourg+approval+organizer+fribourg | /sharing/1/offers/add | 403 |
     | member+fribourg+approval+organizer+fribourg | /sharing/2/offers/add | 403 |
@@ -56,7 +56,7 @@ Feature: Sharing Offers add Form
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
     Then I should see a "#block-previousnavigation a" element
-    And I should see "qs.previous.to_my_offers" link with href "/sharing/1/user/1/offers"
+    And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/1/dashboard"
 
 ## Form pre-filled values.
   Scenario Outline: In the add Offer form, a select should let me choose on community's offer's types.
@@ -69,6 +69,7 @@ Feature: Sharing Offers add Form
       | /sharing/2/offers/add | 1 |
       | /sharing/3/offers/add | 1 |
 
+  @api @preserveDatabase
   Scenario Outline: In the add Offer form, the contact information must be prefilled using logged-in account data.
     Given I am volunteer on community <community> for theme 22 as user <user_id>
     Given I am logged in as user "<user>"
@@ -102,7 +103,7 @@ Feature: Sharing Offers add Form
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
-    Then the url should match "/fr/node/64#card77"
+    Then the url should match "/node/64#card82"
     And I should see "qs_sharing.offers.form.add.success Faire les courses | Sarah Courci Faire les courses" in the ".alert" element
 
   @api @preserveDatabase
@@ -120,5 +121,5 @@ Feature: Sharing Offers add Form
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
-    Then the url should match "/fr/node/77#card78"
+    Then the url should match "/node/82#card83"
     And I should see "qs_sharing.offers.form.add.success Echange ou don de matériel | Sarah Courci Echange ou don de matériel" in the ".alert" element

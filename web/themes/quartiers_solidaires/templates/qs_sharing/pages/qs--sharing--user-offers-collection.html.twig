@@ -37,7 +37,7 @@
             </span>
 
             <span class="card-pill-title {% if is_deactivated %}mr-auto{% endif %}">
-              <span class="lead">{{ offer.field_offer_type.entity.title.value }}</span>
+              {{ offer.field_offer_type.entity.title.value }}
             </span>
 
             {% if is_deactivated %}
@@ -60,9 +60,14 @@
             <div class="card-body mx-auto">
               <div class="card-text text-center mb-4">
                 {% if offer.field_description.value %}
-                  <h4 class="h5 card-title mb-3 mt-0">{{ offer.field_description.value }}</h4>
+                  <h4 class="h5 card-title mb-3 mt-0">{{ offer.field_description.value|striptags }}</h4>
                 {% endif %}
-                <p class="mb-0">{{ offer.body.value }}</p>
+                {% set body = {
+                  '#type':   'processed_text',
+                  '#text':    offer.body.value,
+                  '#format':  offer.body.format,
+                } %}
+                {{ body }}
               </div>
 
               {# @todo Handle edit + add actions in routing and controller #}
@@ -72,7 +77,7 @@
                     {{ bamboo_render_form('qs_sharing', 'OfferDeactivateForm', {'offer': offer}) }}
                   </div>
                   <div class="col-sm-6 mb-3">
-                    <a href="#" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                    <a href="{{ path('qs_sharing.offers.form.edit', {'offer': offer.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
                       {{ macros.icon('pencil') }}
                       {{ 'qs_sharing.user.offers.collection.edit'|t }}
                     </a>

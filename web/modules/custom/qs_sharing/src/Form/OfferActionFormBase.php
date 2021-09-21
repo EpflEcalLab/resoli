@@ -70,7 +70,7 @@ abstract class OfferActionFormBase extends FormBase {
   public function access(AccountInterface $account, NodeInterface $offer) {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasEditAccessOffer($offer)) {
+    if ($this->acl->hasWriteAccessOffer($offer)) {
       $access = AccessResult::allowed();
     }
 
@@ -84,6 +84,11 @@ abstract class OfferActionFormBase extends FormBase {
     if (!$offer) {
       return $form;
     }
+
+    // Needed to ensure the right offer is linked to the right form
+    // https://drupal.stackexchange.com/a/276999
+    $form_state->setRequestMethod('POST');
+    $form_state->setCached(TRUE);
 
     // Save the offer for later usage on submission.
     $form_state->set('offer', $offer->id());

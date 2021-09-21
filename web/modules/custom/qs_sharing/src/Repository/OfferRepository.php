@@ -136,6 +136,7 @@ class OfferRepository {
 
     $query->leftJoin('content_moderation_state_field_data', 'content_moderation_state', 'content_moderation_state.content_entity_id = offer.nid');
     $query->orderBy('content_moderation_state.moderation_state', 'DESC');
+    $query->orderBy('created', 'DESC');
 
     $tuples = $query->execute()->fetchAll();
 

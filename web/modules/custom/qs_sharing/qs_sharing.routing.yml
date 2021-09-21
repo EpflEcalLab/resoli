@@ -15,7 +15,7 @@ qs_sharing.collection.offer:
 
 # Sharing request form
 qs_sharing.requests.form.add:
-  path: '/sharing/{community}/request/add'
+  path: '/sharing/{community}/requests/add'
   defaults:
     _form: '\Drupal\qs_sharing\Form\RequestAddForm'
     _title: 'qs_sharing.requests.form.add.title'
@@ -27,6 +27,84 @@ qs_sharing.requests.form.add:
     parameters:
       community:
         type: entity:taxonomy_term
+
+# Sharing request confirmation page
+qs_sharing.requests.confirmation:
+  path: '/sharing/requests/{request}/confirmation'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\RequestConfirmationController::confirm'
+    _title: 'qs_sharing.requests.confirmation.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\RequestConfirmationController::access'
+    request: \d+
+  options:
+    parameters:
+      request:
+        type: entity:node
+
+# Sharing dashboard page
+qs_sharing.sharing.dashboard:
+  path: '/sharing/{community}/user/{user}/dashboard'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\DashboardController::dashboard'
+    _title: 'qs_sharing.dashboard.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\DashboardController::access'
+    community: \d+
+    user: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+      user:
+        type: entity:user
+
+# Sharing request collection
+qs_sharing.collection.request:
+  path: '/sharing/{community}/requests'
+  defaults:
+    _controller: '\Drupal\qs_sharing\Controller\RequestController::requests'
+    _title: 'qs_sharing.collection.request.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Controller\RequestController::access'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+
+# Request solve form
+qs_sharing.requests.form.solve:
+  path: '/sharing/requests/{request}/solve'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\RequestSolveForm'
+    _title: 'qs_sharing.requests.form.solve.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\RequestSolveForm::access'
+    request: \d+
+  options:
+    parameters:
+      request:
+        type: entity:node
+
+# Request archive form
+qs_sharing.requests.form.archive:
+  path: '/sharing/requests/{request}/archive'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\RequestArchiveForm'
+    _title: 'qs_sharing.requests.form.archive.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\RequestArchiveForm::access'
+    request: \d+
+  options:
+    parameters:
+      request:
+        type: entity:node
 
 # Sharing user offers
 qs_sharing.collection.user.offers:
@@ -45,7 +123,7 @@ qs_sharing.collection.user.offers:
       user:
         type: entity:user
 
-# Sharing offer form
+# Sharing offer forms
 qs_sharing.offers.form.add:
   path: '/sharing/{community}/offers/add'
   defaults:
@@ -59,6 +137,37 @@ qs_sharing.offers.form.add:
     parameters:
       community:
         type: entity:taxonomy_term
+
+qs_sharing.offers.form.edit:
+  path: '/sharing/offers/{offer}/edit'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferEditForm'
+    _title_callback: '\Drupal\qs_sharing\Form\OfferEditForm::getTitle'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferEditForm::access'
+    offer: \d+
+  options:
+    parameters:
+      offer:
+        type: entity:node
+
+# Offer moderation form
+qs_sharing.offers.form.moderate:
+  path: '/sharing/community/{community}/{offer}/moderate'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\OfferModerateForm'
+    _title: 'qs_sharing.offers.form.moderate.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\OfferModerateForm::access'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
+      offer:
+        type: entity:node
 
 # Offer delete form
 qs_sharing.offers.form.delete:
@@ -104,6 +213,21 @@ qs_sharing.offers.form.reactivate:
     parameters:
       offer:
         type: entity:node
+
+# Volunteerism management form
+qs_sharing.volunteerisms.form.manage:
+  path: '/sharing/community/{community}/volunteerism/manage'
+  defaults:
+    _form: '\Drupal\qs_sharing\Form\VolunteerismManageForm'
+    _title: 'qs_sharing.volunteerisms.form.manage.title'
+  requirements:
+    _user_is_logged_in: 'TRUE'
+    _custom_access: '\Drupal\qs_sharing\Form\VolunteerismManageForm::access'
+    community: \d+
+  options:
+    parameters:
+      community:
+        type: entity:taxonomy_term
 
 ## PDF Export of Offers by communities.
 qs_sharing.export.community.offers.pdf:

@@ -449,7 +449,7 @@ class OfferAddForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $comunity = $this->termStorage->load($form_state->get('community'));
+    $community = $this->termStorage->load($form_state->get('community'));
     $account = $this->userStorage->load($this->currentUser()->id());
     $theme = $this->termStorage->load($form_state->getValue('theme'));
 
@@ -458,7 +458,7 @@ class OfferAddForm extends FormBase {
       $offer_type = $this->offerTypeManager->create(
         $form_state->getValue('offer_type_title'),
         $theme,
-        $comunity,
+        $community,
         $account
       );
     }

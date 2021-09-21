@@ -4,7 +4,7 @@
 
   {% if offer.field_description.value %}
     <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0 text-dark">
-      {{ offer.field_description.value }}
+      {{ offer.field_description.value|striptags }}
     </h4>
   {% endif %}
 
@@ -33,6 +33,12 @@
         '',
         'info'
       ) }}
+    {% endif %}
+
+    {# Moderation button #}
+    {# User should be responsible of the community OR admin #}
+    {% if can_moderate_community or user.hasPermission('administer nodes') %}
+      {{ bamboo_render_form('qs_sharing', 'OfferModerateForm', {'offer': offer}) }}
     {% endif %}
 
   </div>

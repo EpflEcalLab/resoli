@@ -320,6 +320,30 @@ class AccessControl {
   }
 
   /**
+   * Check if the account has admin access on the given offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise use current user.
+   *
+   * @return bool
+   *   Does the user has at least one admin access for this offer.
+   */
+  public function hasAdminAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL) {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $offer->get('uid')->target_id;
+
+    return $user->id() === $author_id && $author_id;
+  }
+
+  /**
    * Check if the given user can bypass any security restriction.
    *
    * This method has security implications.
@@ -381,27 +405,55 @@ class AccessControl {
   }
 
   /**
-   * Check if the account is authorized ot edit the given offer.
+   * Does the given user has access on the given community.
    *
-   * @param \Drupal\node\NodeInterface $offer
-   *   The offer to check access.
+   * This only count relation as Member or Organizer or Managers.
+   * It doesn't count pending request.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   Drupal Entity User.
+   *
+   * @return bool
+   *   Does the user has access on the community.
+   */
+  public function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
+    $query = $this->privilegeStorage->getQuery()
+      ->condition('status', 1)
+      ->condition('bundle', 'taxonomy_term')
+      ->condition('user', $account->id())
+      ->condition('entity', $community->id());
+
+    $or = $query->orConditionGroup();
+    $or->condition('privilege', 'community_members');
+    $or->condition('privilege', 'community_organizers');
+    $or->condition('privilege', 'community_managers');
+    $query->condition($or);
+
+    return $query->count()->execute() > 0 ? TRUE : FALSE;
+  }
+
+  /**
+   * Check the user access to the community.
+   *
+   * @param \Drupal\taxonomy\TermInterface $community
+   *   The community to check access.
    * @param \Drupal\Core\Session\AccountInterface|null $account
    *   User used to check access. Otherwise, use current user.
    *
    * @return bool
-   *   Is the user may edit the offer.
+   *   Is the user may access the sharing dashboard.
    */
-  public function hasEditAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL): bool {
+  public function hasDashboardSharingAccess(TermInterface $community, ?AccountInterface $account = NULL): bool {
     $user = $account ?? $this->currentUser;
 
     // Check bypass.
-    if ($this->hasBypass($user)) {
+    if ($this->hasBypass()) {
       return TRUE;
     }
 
-    $author_id = $offer->get('uid')->target_id;
-
-    return $user->id() === $author_id && $author_id;
+    return $this->currentUser->id() === $user->id() && $this->hasCommunityByUser($community, $user);
   }
 
   /**
@@ -574,6 +626,30 @@ class AccessControl {
   }
 
   /**
+   * Check if the account is authorized ot edit the given offer.
+   *
+   * @param \Drupal\node\NodeInterface $offer
+   *   The offer to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise, use current user.
+   *
+   * @return bool
+   *   Is the user may edit the offer.
+   */
+  public function hasWriteAccessOffer(NodeInterface $offer, ?AccountInterface $account = NULL): bool {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $offer->get('uid')->target_id;
+
+    return $user->id() === $author_id && $author_id;
+  }
+
+  /**
    * Check if the account has upload photo access on the given activity.
    *
    * @param \Drupal\node\NodeInterface $activity
@@ -629,6 +705,37 @@ class AccessControl {
     }
 
     return FALSE;
+  }
+
+  /**
+   * Check if the account is authorized to edit the given request.
+   *
+   * @param \Drupal\node\NodeInterface $request
+   *   The request to check access.
+   * @param \Drupal\Core\Session\AccountInterface|null $account
+   *   User used to check access. Otherwise, use current user.
+   *
+   * @return bool
+   *   Is the user may edit the request.
+   */
+  public function hasWriteAccessRequest(NodeInterface $request, ?AccountInterface $account = NULL): bool {
+    $user = $account ?? $this->currentUser;
+
+    // Check bypass.
+    if ($this->hasBypass($user)) {
+      return TRUE;
+    }
+
+    $author_id = $request->get('uid')->target_id;
+
+    // Community manager can delete other people requests.
+    $community = $request->get('field_community')->entity;
+
+    if ($community && $this->hasAdminAccessCommunity($community)) {
+      return TRUE;
+    }
+
+    return $user->id() === $author_id && $author_id;
   }
 
   /**
@@ -763,36 +870,6 @@ class AccessControl {
     $query->condition($or);
 
     return (int) $query->count()->execute();
-  }
-
-  /**
-   * Does the given user has access on the given community.
-   *
-   * This only count relation as Member or Organizer or Managers.
-   * It doesn't count pending request.
-   *
-   * @param \Drupal\taxonomy\TermInterface $community
-   *   The community to check access.
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   Drupal Entity User.
-   *
-   * @return bool
-   *   Does the user has access on the community.
-   */
-  private function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
-    $query = $this->privilegeStorage->getQuery()
-      ->condition('status', 1)
-      ->condition('bundle', 'taxonomy_term')
-      ->condition('user', $account->id())
-      ->condition('entity', $community->id());
-
-    $or = $query->orConditionGroup();
-    $or->condition('privilege', 'community_members');
-    $or->condition('privilege', 'community_organizers');
-    $or->condition('privilege', 'community_managers');
-    $query->condition($or);
-
-    return $query->count()->execute() > 0 ? TRUE : FALSE;
   }
 
 }

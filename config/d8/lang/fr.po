@@ -2213,14 +2213,50 @@ msgstr "Voici la boîte à demandes d’entraide de la communauté de Lutry."
 msgid "qs_sharing.requests.form.step1"
 msgstr "Indiquez ce que vous rechercher comme partage."
 
+msgid "qs_sharing.requests.form.add.title"
+msgstr "Boîte à demandes d’entraide"
+
+msgid "qs_sharing.requests.form.step2.description"
+msgstr "A qui cette demande est-elle destinée?"
+
 msgid "qs_sharing.requests.form.step2"
 msgstr "A qui cette demande est-elle destinée?"
+
+msgid "qs_sharing.requests.form.add.theme"
+msgstr "Quelle thématique d’entraide recherchez-vous?"
+
+msgid "qs_sharing.requests.form.add.contact_firstname"
+msgstr "A qui est destinée cette demande?"
+
+msgid "qs_sharing.requests.form.add.contact_firstname.placeholder"
+msgstr "Ex. Catherine"
+
+msgid "qs_sharing.requests.form.add.contact_lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+msgid "qs_sharing.requests.form.add.contact_mail"
+msgstr "Comment contacter cette personne?"
+
+msgid "qs_sharing.requests.form.add.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@re-so.ch"
+
+msgid "qs_sharing.requests.form.add.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+msgid "qs_sharing.requests.form.add.save"
+msgstr "Partager la demande"
 
 msgid "qs_sharing.requests.form.add.body"
 msgstr "Précisez en quelques mot ce que vous souhaitez"
 
 msgid "qs_sharing.requests.form.add.body.placeholder"
 msgstr "Ex. J’ai besoin d’une personne pour m’aider à monter mes courses à l’étage, si possible une fois par semaine."
+
+msgid "qs_sharing.requests.form.add.error.empty.theme"
+msgstr "qs_sharing.requests.form.add.error.empty.theme"
+
+msgid "qs_sharing.requests.form.add.success @community @theme"
+msgstr "Votre demande a bien été transmise aux personnes bénévoles de la communauté concernées par la thématique choisie."
 
 msgid "qs_sharing.floating.my_requests"
 msgstr "Mon entraide"
@@ -2309,7 +2345,6 @@ msgstr "Contact"
 msgid "qs.previous.to_offers_type_list"
 msgstr "Retour aux offres"
 
-<<<<<<< HEAD
 msgid "qs_sharing.offers.form.delete.title"
 msgstr "Supprimer l'offre"
 
@@ -2320,7 +2355,7 @@ msgid "qs_sharing.user.offers.collection.delete"
 msgstr "Supprimer mon offre"
 
 msgid "qs_sharing.offers.form.delete.success @offer"
-msgstr "L’offre «@offer» a bien été supprimée !"
+msgstr "L’offre a bien été supprimée !"
 
 msgid "qs_sharing.offers.form.deactivate.title"
 msgstr "Désactiver l'offre"
@@ -2332,7 +2367,7 @@ msgid "qs_sharing.user.offers.collection.deactivate"
 msgstr "Désactiver mon offre"
 
 msgid "qs_sharing.offers.form.deactivate.success @offer"
-msgstr "L’offre «@offer» a bien été désactivée !"
+msgstr "L’offre a bien été désactivée !"
 
 msgid "qs_sharing.offers.form.reactivate.title"
 msgstr "Réactiver l'offre"
@@ -2344,7 +2379,7 @@ msgid "qs_sharing.user.offers.collection.reactivate"
 msgstr "Réactiver mon offre"
 
 msgid "qs_sharing.offers.form.reactivate.success @offer"
-msgstr "L’offre «@offer» a bien été réactivée !"
+msgstr "L’offre a bien été réactivée !"
 
 msgid "qs.sharing.readmore"
 msgstr "Voir les offres"
@@ -2403,9 +2438,6 @@ msgstr "Ex. Dubuis"
 msgid "qs_sharing.offers.form.add.contact_mail"
 msgstr "Comment contacter cette personne?"
 
-msgid "qs_activity.events.form.edit.contact_mail"
-msgstr "Quelle est son adresse e-mail?"
-
 msgid "qs_sharing.offers.form.add.contact_mail.placeholder"
 msgstr "Ex. marcel.despraz@re-so.ch"
 
@@ -2415,6 +2447,215 @@ msgstr "Ex. 079 790 79 79"
 msgid "qs.previous.to_my_offers"
 msgstr "Retour à mes offres"
 
+msgid "qs.previous.to_sharing_dashboard"
+msgstr "Mon entraide"
+
+msgid "qs_sharing.offers.form.add.save"
+msgstr "Valider les données"
+
 msgid "qs_sharing.offers.form.add.success @offer @offer_type"
 msgstr "Votre nouvelle offre a bien été créée!"
->
+
+msgid "qs_sharing.floating.dashboard"
+msgstr "Mon entraide"
+
+msgid "qs_sharing.volunteerism.form.title"
+msgstr "Remplissez ce formulaire afin de devenir bénévole auprès de votre communauté."
+
+msgid "qs_sharing.volunteerism.form.description"
+msgstr "Sélectionnez la ou les catégories pour lesquelles vous souhaitez recevoir les demandes d’entraide."
+
+msgid "qs_sharing.volunteerism.form.description.theme.mobilite"
+msgstr "Déplacements, co-voiturage, faires les courses, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.convivialite"
+msgstr "Partager un bon moment, se téléphoner, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.petitsservices"
+msgstr "La main verte, bricolage, autres coups de mains, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.objets"
+msgstr "Prêt, échange ou don de matériel divers, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.numerique"
+msgstr "Dépanages, bonnes pratiques informatiques, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.competences"
+msgstr "Transmission de savoir-faire, partage d’impressions, etc."
+
+msgid "qs_sharing.volunteerism.form.description.theme.divers"
+msgstr "Autres propositions utiles à la communauté."
+
+msgid "qs_sharing.volunteerisms.form.manage.save_and_set_default_values"
+msgstr "Valider mes données uniquement"
+
+msgid "qs_sharing.volunteerisms.form.manage.save_and_new_offer"
+msgstr "Valider mes données et créer une offre"
+
+msgid "qs_sharing.volunteerisms.form.manage.success @community"
+msgstr "Vos préférences de bénévolat pour @community ont bien été mis à jour !"
+
+msgid "qs_sharing.offers.form.edit.title @offer_date"
+msgstr "Modifiez votre offre du @offer_date!"
+
+msgid "qs_sharing.edit_offer"
+msgstr "Modifier mon offre"
+
+msgid "qs_sharing.offers.form.edit.description"
+msgstr "La date sera automatiquement ajustée en cas de validation des données."
+
+msgid "qs_sharing.offers.form.edit.theme"
+msgstr "Quel thème correspond à votre offre?"
+
+msgid "qs_sharing.offers.form.edit.theme.placeholder"
+msgstr "qs_sharing.offers.form.edit.theme.placeholder"
+
+msgid "qs_sharing.offers.form.edit.body"
+msgstr "Comment décririez-vous votre offre ?"
+
+msgid "qs_sharing.offers.form.edit.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_sharing.offers.form.edit.availability"
+msgstr "Quelles sont vos disponibilités?"
+
+msgid "qs_sharing.offers.form.add.availability.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_sharing.offers.form.edit.contact_firstname"
+msgstr "Par qui cette offre est-elle proposée?"
+
+msgid "qs_sharing.offers.form.edit.contact_firstname.placeholder"
+msgstr "Ex. Catherine"
+
+msgid "qs_sharing.offers.form.edit.contact_lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+msgid "qs_sharing.offers.form.edit.contact_mail"
+msgstr "Comment contacter cette personne?"
+
+msgid "qs_sharing.offers.form.edit.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@re-so.ch"
+
+msgid "qs_sharing.offers.form.edit.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+msgid "qs_sharing.offers.form.edit.success @offer_date"
+msgstr "Les informations de l’offre du «@offer_date» ont bien été validées!"
+
+msgid "qs_sharing.user.offers.collection.moderate"
+msgstr "Désactiver cette offre"
+
+msgid "qs_sharing.user.offers.collection.moderate.confirmed"
+msgstr "Confirmer"
+
+msgid "qs.mail.offer.deactivated.subject @sitename @offer"
+msgstr "qs.mail.offer.deactivated.subject @sitename @offer"
+
+msgid "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+msgstr "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+
+msgid "qs_sharing.collection.request.title @community"
+msgstr "Voici les demandes d’entraide de la communauté de @community"
+
+msgid "qs_sharing.floating.requests"
+msgstr "Demandes d’entraide"
+
+msgid "qs_sharing.collection.request.solved @date"
+msgstr "Pris en charge le @date"
+
+msgid "qs_sharing.collection.request.solve"
+msgstr "Marquer comme pris en charge"
+
+msgid "qs_sharing.collection.request.solve.confirmed"
+msgstr "Confirmer"
+
+msgid "qs_sharing.requests.form.solve.title"
+msgstr "qs_sharing.requests.form.solve.title"
+
+msgid "qs_sharing.collection.request.solve.success"
+msgstr "La demande a bien été pris en charge !"
+
+msgid "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+msgstr "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
+msgstr "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
+
+msgid "qs_sharing.requests.form.archive.title"
+msgstr "qs_sharing.requests.form.archive.title"
+
+msgid "qs.mail.request.archived.subject @sitename @archiver_firstname @archiver_lastname @community @theme @created_at"
+msgstr "qs.mail.request.archived.subject @sitename @archiver_firstname @archiver_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"
+msgstr "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"
+
+msgid "qs.mail.request.add_confirm.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_confirm.body @author_firstname @author_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.add_request_on_behalf.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_request_on_behalf.body @author_firstname @author_lastname @community @theme @created_at"
+
+msgid "qs.mail.request.add_request.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"
+
+msgid "qs_sharing.requests.confirmation.lead @community"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de @community."
+
+msgid "qs_sharing.requests.confirmation.title"
+msgstr "Merci."
+
+msgid "qs_sharing.requests.confirmation.intro"
+msgstr "Votre demande a bien été transmise aux personnes bénévoles de la communauté concernées par la thématique choisie."
+
+msgid "qs_sharing.requests.confirmation.add_request"
+msgstr "Partager une nouvelle demande"
+
+msgid "qs_sharing.requests.confirmation.help"
+msgstr "Vous pouvez accéder aux demandes en cours en cliquant sur le bouton «Mon entraide» ci-dessous."
+
+msgid "qs_sharing.requests.confirmation.info"
+msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les bénévoles de la communauté y ont accès"
+
+msgid "qs_sharing.dashboard.title"
+msgstr "De quelle manière souhaitez-vous contribuer à l’entraide de votre communauté?"
+
+msgid "qs_sharing.become_volunteer"
+msgstr "Devenir bénévole"
+
+msgid "qs_sharing.share_request"
+msgstr "Partager une nouvelle demande"
+
+msgid "qs_sharing.see_requests"
+msgstr "Voir les demandes en cours"
+
+msgid "qs_sharing.manage_volunteerism"
+msgstr "Gérer mes préférences de bénévole"
+
+msgid "qs_sharing.manage_offers"
+msgstr "Gérer mes offres d’entraide"
+
+msgid "qs_sharing.collection.request.readmore"
+msgstr "Voir les détails"
+
+msgid "qs_sharing.collection.request.archive"
+msgstr "Supprimer cette demande"
+
+msgid "qs_sharing.collection.request.archive.confirmed"
+msgstr "Confirmer"
+
+msgid "qs_sharing.collection.request.archive.success"
+msgstr "La demande a bien été supprimée !"
+
+msgid "qs_sharing.offers.form.edit.save"
+msgstr "Valider les données"
+
+msgid "qs.sharing.no_offers"
+msgstr "Il n’y a pour le moment pas d'offres disponibles pour ce thème."
+
+msgid "qs_sharing.volunteerisms.form.manage.title"
+msgstr "Préférences de bénévole"
+
+msgid "qs_sharing.collection.request.empty"
+msgstr "Il n’y a pour le moment pas de demandes d'entraide."

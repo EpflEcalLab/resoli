@@ -478,8 +478,8 @@ class OfferAddForm extends FormBase {
       $form_state->getValue('availability'),
       $form_state->getValue('contact_firstname'),
       $form_state->getValue('contact_lastname'),
-      $form_state->getValue('contact_phone'),
       $form_state->getValue('contact_mail'),
+      $form_state->getValue('contact_phone'),
     );
 
     $this->messenger()->addMessage($this->t('qs_sharing.offers.form.add.success @offer @offer_type', [

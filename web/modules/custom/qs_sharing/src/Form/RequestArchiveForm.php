@@ -107,6 +107,7 @@ class RequestArchiveForm extends FormBase {
         'archive',
         'mx-auto',
         'mb-3',
+        'col-sm-6',
       ],
     ];
     $form['action']['submit'] = [

@@ -65,6 +65,7 @@ function quartiers_solidaires_preprocess_html(&$variables) {
 function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
 
   switch (true) {
+    case in_array('page__sharing__requests__add', $suggestions):
     case in_array('page__communities__welcome', $suggestions):
       $suggestions[] = 'page__fullpage';
       break;

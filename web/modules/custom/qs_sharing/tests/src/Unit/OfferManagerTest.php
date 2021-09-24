@@ -103,7 +103,7 @@ final class OfferManagerTest extends UnitTestCase {
           'format' => 'light_html',
           'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
         ],
-        'field_availability' => [
+        'field_description' => [
           'format' => 'light_html',
           'value' => 'In porttitor justo urna nullam lectus lacus',
         ],
@@ -199,7 +199,7 @@ final class OfferManagerTest extends UnitTestCase {
         ['field_offer_type'],
         ['field_theme'],
         ['body'],
-        ['field_availability'],
+        ['field_description'],
         ['field_contact_name'],
         ['field_contact_mail'],
         ['field_contact_phone']
@@ -216,7 +216,7 @@ final class OfferManagerTest extends UnitTestCase {
           'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
         ],
         ],
-        ['field_availability', [
+        ['field_description', [
           'format' => 'light_html',
           'value' => 'In porttitor justo urna nullam lectus lacus',
         ],
@@ -239,7 +239,7 @@ final class OfferManagerTest extends UnitTestCase {
           'format' => 'light_html',
           'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
         ],
-        'field_availability' => [
+        'field_description' => [
           'format' => 'light_html',
           'value' => 'In porttitor justo urna nullam lectus lacus',
         ],

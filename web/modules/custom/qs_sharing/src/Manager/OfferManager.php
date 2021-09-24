@@ -78,7 +78,7 @@ class OfferManager {
         'format' => 'light_html',
         'value' => $body,
       ],
-      'field_availability' => [
+      'field_description' => [
         'format' => 'light_html',
         'value' => $availability,
       ],

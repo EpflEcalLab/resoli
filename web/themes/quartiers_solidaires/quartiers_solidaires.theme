@@ -65,11 +65,14 @@ function quartiers_solidaires_preprocess_html(&$variables) {
 function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, array &$variables) {
 
   switch (true) {
+    case in_array('page__sharing__requests__add', $suggestions):
+    case in_array('page__sharing__requests__confirmation', $suggestions):
     case in_array('page__communities__welcome', $suggestions):
       $suggestions[] = 'page__fullpage';
       break;
 
     case in_array('page__events__user', $suggestions):
+    case in_array('page__sharing__offers__add', $suggestions):
       $suggestions[] = 'page__fullmodal';
       $variables['attributes']['bg'] = 'info';
       break;
@@ -82,6 +85,7 @@ function quartiers_solidaires_theme_suggestions_page_alter(array &$suggestions, 
     case in_array('page__sharing__user__offers', $suggestions):
     case in_array('page__sharing__community__volunteerism__manage', $suggestions):
     case in_array('page__sharing__user__dashboard', $suggestions):
+    case in_array('page__sharing__requests', $suggestions):
     case in_array('page__photos__user', $suggestions):
     case in_array('page__photos__activity__user', $suggestions):
       $suggestions[] = 'page__fullmodal';

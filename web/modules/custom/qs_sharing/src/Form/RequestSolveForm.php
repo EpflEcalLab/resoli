@@ -108,6 +108,7 @@ class RequestSolveForm extends FormBase {
         'solve',
         'mx-auto',
         'mb-3',
+        'col-sm-6',
       ],
     ];
     $form['action']['submit'] = [

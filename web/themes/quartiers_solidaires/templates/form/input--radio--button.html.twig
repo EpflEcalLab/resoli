@@ -14,10 +14,17 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 {% if labelIcon|length > 1 and attributes.variant == 'button_theme' %}
-  <label class="btn checkbox {{ attributes.checked ? 'active' }}">
+  <label class="btn checkbox {{ attributes.checked ? 'active' }}{{ attributes.is_offer ? ' offer-info' }}">
     {{ macros.icon("theme_#{labelIcon[1]}_o") }}
     <input{{ attributes }} />
-    {{ labelIcon|first }}
+    {% if attributes.is_offer %}
+      <h4 class="mt-3">
+        {{ labelIcon|first }}
+      </h4>
+      <span class="my-0">{{ attributes.description }}</span>
+    {% else %}
+      {{ labelIcon|first }}
+    {% endif %}
   </label>
 {% else %}
   {% set classes = [

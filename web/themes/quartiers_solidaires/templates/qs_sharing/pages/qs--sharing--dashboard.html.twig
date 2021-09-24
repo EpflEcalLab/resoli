@@ -23,7 +23,6 @@
   {% set btn_default_classes = 'btn-outline-invert' %}
   {% set params = {'community': variables.community.tid.value, 'user': variables.user} %}
 
-  {# @todo Update urls #}
   {% set buttons = {} %}
   {% if variables.hasOffers %}
     {% set buttons = buttons|merge({'Manager offers button': {

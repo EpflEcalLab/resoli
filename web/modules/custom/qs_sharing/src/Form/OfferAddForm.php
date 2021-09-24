@@ -277,6 +277,11 @@ class OfferAddForm extends FormBase {
         'class' => [
           'btn-grid',
         ],
+        'is_offer' => TRUE,
+        // phpcs:disable
+        // Create a translation string for each of the sharing themes in the foreach loop.
+        'description' => $this->t(sprintf('qs_sharing.volunteerism.form.description.theme.%s', $theme->field_sharing_icon->value)),
+        // phpcs:enable
       ],
       '#theme_wrappers' => [
         'radios__buttons',
@@ -473,8 +478,8 @@ class OfferAddForm extends FormBase {
       $form_state->getValue('availability'),
       $form_state->getValue('contact_firstname'),
       $form_state->getValue('contact_lastname'),
-      $form_state->getValue('contact_phone'),
       $form_state->getValue('contact_mail'),
+      $form_state->getValue('contact_phone'),
     );
 
     $this->messenger()->addMessage($this->t('qs_sharing.offers.form.add.success @offer @offer_type', [

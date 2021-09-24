@@ -94,6 +94,7 @@ class OfferModerateForm extends FormBase {
         'moderate',
         'mx-auto',
         'mb-3',
+        'col-md-6',
       ],
     ];
     $form['action']['submit'] = [

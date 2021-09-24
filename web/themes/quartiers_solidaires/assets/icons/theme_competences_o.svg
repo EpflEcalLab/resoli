@@ -1,24 +1,10 @@
-<svg viewBox="0 0 107 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g filter="url(#filter0_d)">
-    <circle cx="52" cy="51" r="50" fill="currentColor"/>
-    <circle cx="52" cy="51" r="50" stroke="#16509A" stroke-width="1.5"/>
-  </g>
-  <path d="M68.8045 26.1447C64.0104 22.897 58.2267 21 52 21C35.4315 21 22 34.4315 22 51C22 67.5685 35.4315 81 52 81C68.5685 81 82 67.5685 82 51C82 44.778 80.1059 38.9985 76.8628 34.2065" stroke="#16509A" stroke-width="1.5"/>
-  <circle cx="52" cy="51" r="20" stroke="#16509A" stroke-width="1.5"/>
-  <circle cx="52" cy="51" r="10" stroke="#16509A" stroke-width="1.5"/>
-  <path d="M52 51V46" stroke="#16509A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M52 51H57" stroke="#16509A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M66 29V37H74L82 29H74V21L66 29Z" stroke="#16509A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M74 29L52 51" stroke="#16509A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="filter0_d" x="0.75" y="0.25" width="105.5" height="105.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dx="1.5" dy="2"/>
-      <feGaussianBlur stdDeviation="1"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.129412 0 0 0 0 0.129412 0 0 0 0 0.129412 0 0 0 0.3 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-    </filter>
+    <style>
+      .cls-1{fill:currentColor}
+    </style>
   </defs>
+  <circle class="cls-2" cx="60" cy="60" r="51.5"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 60C8.5 31.5573 31.5573 8.5 60 8.5C88.4427 8.5 111.5 31.5573 111.5 60C111.5 88.4427 88.4427 111.5 60 111.5C31.5573 111.5 8.5 88.4427 8.5 60ZM60 11.5C33.2142 11.5 11.5 33.2142 11.5 60C11.5 86.7858 33.2142 108.5 60 108.5C86.7858 108.5 108.5 86.7858 108.5 60C108.5 33.2142 86.7858 11.5 60 11.5Z" fill="#fff"/>
+<path class="cls-1" fill-rule="evenodd" clip-rule="evenodd" d="M72.9846 36.8941C69.1464 34.7328 64.7153 33.5 60 33.5C45.3645 33.5 33.5 45.3645 33.5 60C33.5 74.6355 45.3645 86.5 60 86.5C74.6355 86.5 86.5 74.6355 86.5 60C86.5 55.2846 85.2672 50.8536 83.106 47.0154L86.0607 44.0607C86.4897 43.6317 86.618 42.9865 86.3858 42.426C86.1536 41.8655 85.6067 41.5 85 41.5H78.5V35C78.5 34.3934 78.1345 33.8464 77.574 33.6142C77.0135 33.3821 76.3683 33.5104 75.9393 33.9394L72.9846 36.8941ZM60 36.5C47.0213 36.5 36.5 47.0213 36.5 60C36.5 72.9787 47.0213 83.5 60 83.5C72.9787 83.5 83.5 72.9787 83.5 60C83.5 56.1159 82.5588 52.4548 80.8922 49.2291L78.0607 52.0607C77.7794 52.342 77.3978 52.5 77 52.5H71.2267C72.6626 54.6452 73.5 57.2248 73.5 60C73.5 67.4558 67.4558 73.5 60 73.5C52.5442 73.5 46.5 67.4558 46.5 60C46.5 52.5442 52.5442 46.5 60 46.5C62.7752 46.5 65.3549 47.3374 67.5 48.7733V43C67.5 42.6022 67.658 42.2207 67.9393 41.9394L70.7709 39.1078C67.5453 37.4413 63.8842 36.5 60 36.5ZM49.5 60C49.5 54.201 54.201 49.5 60 49.5C62.3585 49.5 64.5354 50.2776 66.2883 51.5904L59.5 58.3787V54C59.5 53.1716 58.8284 52.5 58 52.5C57.1716 52.5 56.5 53.1716 56.5 54V62C56.5 62.2034 56.5405 62.3973 56.6138 62.5742C56.687 62.7511 56.7955 62.9168 56.9393 63.0607C57.0832 63.2045 57.2489 63.313 57.4258 63.3862C57.5802 63.4502 57.7475 63.4892 57.9228 63.498C57.9484 63.4993 57.9741 63.5 58 63.5H66C66.8284 63.5 67.5 62.8284 67.5 62C67.5 61.1716 66.8284 60.5 66 60.5H61.6213L68.4096 53.7117C69.7224 55.4646 70.5 57.6415 70.5 60C70.5 65.799 65.799 70.5 60 70.5C54.201 70.5 49.5 65.799 49.5 60ZM70.5 49.5V43.6214L75.5 38.6214V43C75.5 43.8285 76.1716 44.5 77 44.5H81.3787L76.3787 49.5H70.5Z" />
 </svg>

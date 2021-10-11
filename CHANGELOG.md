@@ -33,6 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - fix pager of Events
+- fix un-peristed contact firstname & lasname upon offer creation - #944
+- fix un-peristed contact firstname & lasname upon request creation
+- fix wrong persistence of e-mail & phone number upon request creation
 - fix missing translations strings - #960
 - fix counter of offers by types - #981
 

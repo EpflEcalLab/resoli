@@ -2621,6 +2621,12 @@ msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les b
 msgid "qs_sharing.dashboard.title"
 msgstr "De quelle manière souhaitez-vous contribuer à l’entraide de votre communauté?"
 
+msgid "qs_sharing.dashboard.leads.primary"
+msgstr "Pour contribuer à l’entraide, choisissez une des options ci-dessous."
+
+msgid "qs_sharing.dashboard.leads.secondary"
+msgstr "Pour partager une demande, cliquez ci-dessous."
+
 msgid "qs_sharing.become_volunteer"
 msgstr "Devenir bénévole"
 

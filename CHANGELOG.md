@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add Request Archive form - #832
 - add Request Solve form - #830
 - add Request Add form - #833
+- add filter by moderation state on requests admin Views UI - #943
+- add fragment #card upon offer desactivation & re-activation - #978
 
 ### Changed
 - update all Javascript Dependencies
@@ -31,8 +33,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - fix pager of Events
+- fix un-peristed contact firstname & lasname upon offer creation - #944
+- fix un-peristed contact firstname & lasname upon request creation
+- fix wrong persistence of e-mail & phone number upon request creation
+- fix missing translations strings - #960
 - fix counter of offers by types - #981
 - strip HTML markup on PDF export - #974
+- volunteering preferences form should redirect to my dashboard - #961
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

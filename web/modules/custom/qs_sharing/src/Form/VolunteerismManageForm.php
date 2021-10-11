@@ -257,7 +257,7 @@ class VolunteerismManageForm extends FormBase {
 
         case 'save_and_set_default_values':
         default:
-          $form_state->setRedirect('qs_sharing.collection.user.offers', [
+          $form_state->setRedirect('qs_sharing.sharing.dashboard', [
             'community' => $community->id(),
             'user' => $user->id(),
           ], []);

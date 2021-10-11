@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix pager of Events
 - fix missing translations strings - #960
 - fix counter of offers by types - #981
+- volunteering preferences form should redirect to my dashboard - #961
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

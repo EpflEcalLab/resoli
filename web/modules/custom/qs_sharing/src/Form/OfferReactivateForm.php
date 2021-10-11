@@ -74,7 +74,7 @@ class OfferReactivateForm extends OfferActionFormBase {
     $form_state->setRedirect('qs_sharing.collection.user.offers', [
       'community' => $community->id(),
       'user' => $this->currentUser()->id(),
-    ], []);
+    ], ['fragment' => 'card' . $offer->id()]);
   }
 
 }

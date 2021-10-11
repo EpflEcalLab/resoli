@@ -2665,3 +2665,7 @@ msgstr "Préférences de bénévole"
 
 msgid "qs_sharing.collection.request.empty"
 msgstr "Il n’y a pour le moment pas de demandes d'entraide."
+
+msgid "qs_sharing.collection.request.solved_by @solved_by @authored_by"
+msgstr "La demande de @authored_by a été prise en charge par @solved_by."
+

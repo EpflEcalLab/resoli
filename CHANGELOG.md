@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix pager of Events
 - fix un-peristed contact firstname & lasname upon offer creation - #944
 - fix un-peristed contact firstname & lasname upon request creation
+- fix wrong persistence of e-mail & phone number upon request creation
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

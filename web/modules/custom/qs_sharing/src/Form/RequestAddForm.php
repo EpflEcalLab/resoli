@@ -338,8 +338,8 @@ class RequestAddForm extends FormBase {
       $form_state->getValue('body'),
       $form_state->getValue('contact_firstname'),
       $form_state->getValue('contact_lastname'),
-      $form_state->getValue('contact_phone'),
       $form_state->getValue('contact_mail'),
+      $form_state->getValue('contact_phone'),
     );
 
     // Send confirmation mail to the request author.

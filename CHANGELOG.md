@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix wrong persistence of e-mail & phone number upon request creation
 - fix missing translations strings - #960
 - fix counter of offers by types - #981
+- strip HTML markup on PDF export - #974
 - increase body width of request confirmation form to make the btn readable - #969
 - volunteering preferences form should redirect to my dashboard - #961
 - fix persistance of solved_at date when solving a request - #964

@@ -23,6 +23,10 @@
 
         {% for key, link in current_item.links %}
           {% set active = key == variables.route_name %}
+          {% if not active and variables.route_name in link.extra_activated_by %}
+            {% set active = TRUE %}
+          {% endif %}
+
           {% set classes = [
             'btn btn-outline-primary navbar-filter',
             active ? 'active',

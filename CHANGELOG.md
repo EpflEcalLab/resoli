@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add filter by moderation state on requests admin Views UI - #943
 - add fragment #card upon offer desactivation & re-activation - #978
 - add bg-pink-darker variante and use it on request confirmation form - #969
+- add active sharing link on request confirmation page - #969
 
 ### Changed
 - update all Javascript Dependencies

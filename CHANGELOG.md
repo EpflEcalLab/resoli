@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add Request Add form - #833
 - add filter by moderation state on requests admin Views UI - #943
 - add fragment #card upon offer desactivation & re-activation - #978
+- add bg-pink-darker variante and use it on request confirmation form - #969
+- add active sharing link on request confirmation page - #969
 
 ### Changed
 - update all Javascript Dependencies
@@ -38,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix wrong persistence of e-mail & phone number upon request creation
 - fix missing translations strings - #960
 - fix counter of offers by types - #981
+- increase body width of request confirmation form to make the btn readable - #969
 - volunteering preferences form should redirect to my dashboard - #961
 
 ### Added

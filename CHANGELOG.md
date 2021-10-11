@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add filter by moderation state on requests admin Views UI - #943
 - add fragment #card upon offer desactivation & re-activation - #978
 - add solved_by lead text on listing of offers - #964
+- add bg-pink-darker variante and use it on request confirmation form - #969
+- add active sharing link on request confirmation page - #969
 
 ### Changed
 - update all Javascript Dependencies
@@ -31,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update drupal/field_group (3.1.0 => 3.2.0)
 - move from Codeship to Github Actions
 - security update drupal/core-dev (9.2.4 => 9.2.6)
+- show the offer_type title instead of offer title upon deactivate, delete and reactive actions on offers - #947
 
 ### Fixed
 - fix pager of Events
@@ -39,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix wrong persistence of e-mail & phone number upon request creation
 - fix missing translations strings - #960
 - fix counter of offers by types - #981
+- increase body width of request confirmation form to make the btn readable - #969
 - volunteering preferences form should redirect to my dashboard - #961
 - fix persistance of solved_at date when solving a request - #964
 

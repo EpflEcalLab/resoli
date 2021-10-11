@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix pager of Events
 - fix counter of offers by types - #981
+- strip HTML markup on PDF export - #974
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

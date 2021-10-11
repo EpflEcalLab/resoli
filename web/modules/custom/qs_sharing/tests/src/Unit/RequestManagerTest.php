@@ -2,8 +2,10 @@
 
 namespace Drupal\Tests\qs_sharing\Unit;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\qs_sharing\Manager\RequestManager;
@@ -236,22 +238,29 @@ final class RequestManagerTest extends UnitTestCase {
   public function testSolvedReturnsExcepted() {
     $node = $this->createMock(NodeInterface::class);
     $author = $this->createMock(UserInterface::class);
+    $solved_at = $this->createMock(DrupalDateTime::class);
 
     $author->expects(self::once())
       ->method('id')
       ->willReturn(2);
 
+    $solved_at->expects(self::once())
+      ->method('format')
+      ->with(DateTimeItemInterface::DATETIME_STORAGE_FORMAT)
+      ->willReturn('2000-26-04T15:00:00');
+
     $node
       ->expects(self::once())
       ->method('save');
 
-    $node->expects(self::exactly(2))
+    $node->expects(self::exactly(3))
       ->method('set')
       ->withConsecutive(
         ['moderation_state', 'solved'],
-        ['field_solved_by', 2]
+        ['field_solved_by', 2],
+        ['field_solved_at', '2000-26-04T15:00:00']
       );
-    $this->requestManager->solved($node, $author);
+    $this->requestManager->solved($node, $author, $solved_at);
   }
 
 }

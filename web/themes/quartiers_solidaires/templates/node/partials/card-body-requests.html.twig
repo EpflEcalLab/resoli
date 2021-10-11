@@ -2,9 +2,19 @@
 
 <div class="card-body pb-0 text-center mx-auto">
 
-  <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0">
-    {{ request.uid.entity.field_firstname.value }} {{ request.uid.entity.field_lastname.value }}
-  </h4>
+  {# Solve lead #}
+  {% if  is_solved %}
+    <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0">
+      {{ 'qs_sharing.collection.request.solved_by @solved_by @authored_by'|t({
+        '@solved_by': request.field_solved_by.entity.field_firstname.value ~ ' ' ~ request.field_solved_by.entity.field_lastname.value,
+        '@authored_by': request.uid.entity.field_firstname.value ~ ' ' ~ request.uid.entity.field_lastname.value,
+      }) }}
+    </h4>
+  {% else %}
+    <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0">
+      {{ request.uid.entity.field_firstname.value }} {{ request.uid.entity.field_lastname.value }}
+    </h4>
+  {% endif %}
 
   <div class="card-text rich-content rich-content-primary mb-3">
     {% set body = {

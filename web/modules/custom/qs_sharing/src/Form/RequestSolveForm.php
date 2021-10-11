@@ -3,6 +3,7 @@
 namespace Drupal\qs_sharing\Form;
 
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -159,9 +160,10 @@ class RequestSolveForm extends FormBase {
     /** @var \Drupal\node\NodeInterface $request */
     $request = $this->nodeStorage->load($form_state->get('request'));
     $currentUser = $this->userStorage->load($this->currentUser()->id());
+    $now = new DrupalDateTime();
 
     // Solve the request and send an email to its author.
-    $this->requestManager->solved($request, $currentUser);
+    $this->requestManager->solved($request, $currentUser, $now);
     $this->requestManager->sendSolvedMail($request, $currentUser);
 
     $this->messenger()->addMessage($this->t('qs_sharing.collection.request.solve.success'));

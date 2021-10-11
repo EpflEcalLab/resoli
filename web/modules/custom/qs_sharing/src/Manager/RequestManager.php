@@ -2,8 +2,10 @@
 
 namespace Drupal\qs_sharing\Manager;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
@@ -187,15 +189,18 @@ class RequestManager {
    *   The request.
    * @param \Drupal\user\UserInterface $solved_by
    *   The author of the resolution.
+   * @param \Drupal\Core\Datetime\DrupalDateTime $solved_at
+   *   The date of the resolution.
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    *
    * @return \Drupal\node\NodeInterface
    *   The deactivated request.
    */
-  public function solved(NodeInterface $request, UserInterface $solved_by): NodeInterface {
+  public function solved(NodeInterface $request, UserInterface $solved_by, DrupalDateTime $solved_at): NodeInterface {
     $request->set('moderation_state', 'solved');
     $request->set('field_solved_by', $solved_by->id());
+    $request->set('field_solved_at', $solved_at->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT));
     $request->save();
 
     return $request;

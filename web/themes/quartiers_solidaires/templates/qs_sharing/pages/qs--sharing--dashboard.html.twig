@@ -19,7 +19,7 @@
   </div>
 
 
-  <p class="font-weight-bold text-size-lg mx-auto text-center">Pour contribuer à l’entraide, choisissez une des options ci-dessous.</p>
+  <p class="font-weight-bold text-size-lg mx-auto text-center">{{ 'qs_sharing.dashboard.leads.primary'|t }}</p>
   {% set btn_default_classes = 'btn-outline-invert' %}
   {% set params = {'community': variables.community.tid.value, 'user': variables.user} %}
 
@@ -62,7 +62,7 @@
 
   {{ macros.list_buttons(buttons, btn_default_classes, params) }}
 
-  <p class="font-weight-bold text-size-lg mx-auto text-center">Pour partager une demande, cliquez ci-dessous.</p>
+  <p class="font-weight-bold text-size-lg mx-auto text-center">{{ 'qs_sharing.dashboard.leads.secondary'|t }}</p>
   {% set btn_default_classes = 'btn-outline-invert' %}
   {% set params = {'community': variables.community.tid.value} %}
   {% set buttons = {

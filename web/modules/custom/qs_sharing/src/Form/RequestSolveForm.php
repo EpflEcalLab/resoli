@@ -105,6 +105,8 @@ class RequestSolveForm extends FormBase {
       'class' => [
         'request',
         'request' . $request->id(),
+        'request-solve-form',
+        'request-solve-form' . $request->id(),
         'solve',
         'mx-auto',
         'mb-3',

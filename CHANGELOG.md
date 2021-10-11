@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update drupal/field_group (3.1.0 => 3.2.0)
 - move from Codeship to Github Actions
 - security update drupal/core-dev (9.2.4 => 9.2.6)
+- show the offer_type title instead of offer title upon deactivate, delete and reactive actions on offers - #947
 
 ### Fixed
 - fix pager of Events

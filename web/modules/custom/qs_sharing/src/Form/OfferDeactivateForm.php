@@ -68,7 +68,7 @@ class OfferDeactivateForm extends OfferActionFormBase {
     $this->offerManager->deactivate($offer);
 
     $this->messenger()->addMessage($this->t('qs_sharing.offers.form.deactivate.success @offer', [
-      '@offer' => $offer->getTitle(),
+      '@offer' => $offer->field_offer_type->entity->getTitle(),
     ]));
 
     $form_state->setRedirect('qs_sharing.collection.user.offers', [

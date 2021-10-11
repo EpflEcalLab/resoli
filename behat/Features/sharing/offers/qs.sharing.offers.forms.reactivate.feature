@@ -44,6 +44,6 @@ Feature: Offer Reactivate Form
     Then I should see 1 "form.offer75.reactivate" element
     Then I follow the link ".offer75.reactivate button[type='submit']" element
     Then the url should match "/sharing/1/user/8/offers"
-    And I should see "qs_sharing.offers.form.reactivate.success Discussion à l'achat d'un nouvelle ordinateur" in the ".alert" element
+    And I should see "qs_sharing.offers.form.reactivate.success Papoter ensemble" in the ".alert" element
     And I should see 0 "form.offer71.reactivate" element
     And I should see 1 "form.offer71.deactivate" element

@@ -68,7 +68,7 @@ class OfferReactivateForm extends OfferActionFormBase {
     $this->offerManager->reactivate($offer);
 
     $this->messenger()->addMessage($this->t('qs_sharing.offers.form.reactivate.success @offer', [
-      '@offer' => $offer->getTitle(),
+      '@offer' => $offer->field_offer_type->entity->getTitle(),
     ]));
 
     $form_state->setRedirect('qs_sharing.collection.user.offers', [

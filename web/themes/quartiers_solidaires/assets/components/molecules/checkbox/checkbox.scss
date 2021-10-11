@@ -28,6 +28,10 @@
       }
     }
 
+    &.no-shadow {
+      box-shadow: none !important;
+    }
+
     &:not(.offer-info) {
       @include icon-size(50px);
 

@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - volunteering preferences form should redirect to my dashboard - #961
 - fix persistance of solved_at date when solving a request - #964
 - apply fullpage modal template to edit offer form - #977 #957
+- remove box-shadow on checkboxes on Create offer Form - #951
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

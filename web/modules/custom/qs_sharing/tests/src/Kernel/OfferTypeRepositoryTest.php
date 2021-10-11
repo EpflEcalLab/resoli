@@ -191,6 +191,14 @@ final class OfferTypeRepositoryTest extends KernelTestBase {
     ]);
     $this->offer5->save();
 
+    $this->offer6 = $this->entityTypeManager->getStorage('node')->create([
+      'title' => $this->randomString(),
+      'type' => 'offer',
+      'field_offer_type' => $this->offer_type1,
+      'field_theme' => $this->theme2,
+    ]);
+    $this->offer6->save();
+
     $this->offerTypeRepository = $this->container->get('qs_sharing.repository.offer_type');
   }
 
@@ -198,14 +206,20 @@ final class OfferTypeRepositoryTest extends KernelTestBase {
    * @covers ::getAllByCommunityByThemeWithOffersCount
    */
   public function testGetAllByCommunityByThemeWithOffersCountReturnsExpected(): void {
-    $results = $this->offerTypeRepository->getAllByCommunityByThemeWithOffersCount($this->community1, $this->theme1);
-    self::containsOnlyInstancesOf(NodeInterface::class, $results);
-    self::assertCount(2, $results);
-    self::assertEquals(2, $results[0]->offersCount);
-    self::assertEquals(1, $results[1]->offersCount);
+    $resultsTheme1 = $this->offerTypeRepository->getAllByCommunityByThemeWithOffersCount($this->community1, $this->theme1);
+    $resultsTheme2 = $this->offerTypeRepository->getAllByCommunityByThemeWithOffersCount($this->community1, $this->theme2);
+
+    self::containsOnlyInstancesOf(NodeInterface::class, $resultsTheme1);
+    self::assertCount(2, $resultsTheme1);
+    self::assertEquals(2, $resultsTheme1[0]->offersCount);
+    self::assertEquals(1, $resultsTheme1[1]->offersCount);
+
+    self::containsOnlyInstancesOf(NodeInterface::class, $resultsTheme2);
+    self::assertCount(1, $resultsTheme2);
+    self::assertEquals(1, $resultsTheme2[0]->offersCount);
 
     $results = $this->offerTypeRepository->getAllByCommunityByThemeWithOffersCount($this->community1, $this->theme2);
-    self::assertCount(0, $results);
+    self::assertCount(1, $results);
 
     $results = $this->offerTypeRepository->getAllByCommunityByThemeWithOffersCount($this->community2, $this->theme1);
     self::assertCount(0, $results);

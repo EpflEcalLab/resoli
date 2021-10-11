@@ -108,7 +108,7 @@ class OfferTypeRepository {
       /** @var \Drupal\node\NodeInterface $offerType */
       $offerType = $this->nodeStorage->load($tuple->field_offer_type_target_id);
       $offerType->offersCount = $tuple->offersByType;
-      $offerTypes[] = $offerType;
+      $offerTypes[] = clone $offerType;
     }
 
     return $offerTypes;

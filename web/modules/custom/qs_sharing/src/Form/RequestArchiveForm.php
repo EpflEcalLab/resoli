@@ -104,6 +104,8 @@ class RequestArchiveForm extends FormBase {
       'class' => [
         'request',
         'request' . $request->id(),
+        'request-archive-form',
+        'request-archive-form' . $request->id(),
         'archive',
         'mx-auto',
         'mb-3',

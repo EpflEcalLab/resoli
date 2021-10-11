@@ -38,7 +38,7 @@ Feature: Sharing manage Volunteerism Form
     And I check "edit-volunteerism-19"
     And I check "edit-volunteerism-20"
     And I press "edit-save-and-set-default-values"
-    Then the url should match "/sharing/1/user/2/offers"
+    Then the url should match "/sharing/1/user/2/dashboard"
     And I should see "qs_sharing.volunteerisms.form.manage.success Lausanne" in the ".alert" element
 
   @api @preserveDatabase

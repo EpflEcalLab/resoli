@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - increase body width of request confirmation form to make the btn readable - #969
 - volunteering preferences form should redirect to my dashboard - #961
 - fix persistance of solved_at date when solving a request - #964
+- apply fullpage modal template to edit offer form - #977 #957
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

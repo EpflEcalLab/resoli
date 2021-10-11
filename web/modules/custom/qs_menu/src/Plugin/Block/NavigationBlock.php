@@ -194,6 +194,9 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
               'community' => $community->id(),
             ]),
             'label' => $this->t('qs_menu.links.sharing.request'),
+            'extra_activated_by' => [
+              'qs_sharing.requests.confirmation',
+            ],
           ],
         ],
         'activated_by' => [

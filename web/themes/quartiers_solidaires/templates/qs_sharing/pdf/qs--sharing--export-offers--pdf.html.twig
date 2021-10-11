@@ -136,8 +136,8 @@
 
         <tr>
           <td>{{ offer.field_contact_name.value }}</td>
-          <td>{{ offer.body.value|striptags('<br><p>')|raw }}</td>
-          <td>{{ offer.field_description.value|striptags('<br><p>')|raw }}</td>
+          <td>{{ offer.body.value|qs_striptags('<br><p>')|raw }}</td>
+          <td>{{ offer.field_description.value|qs_striptags('<br><p>')|raw }}</td>
           <td>{{ offer.field_contact_phone.value }}<br>{{ offer.field_contact_mail.value }}</td>
         </tr>
       {% endfor %}

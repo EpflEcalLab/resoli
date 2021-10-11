@@ -12,3 +12,8 @@ services:
       - [setContainer, ['@service_container']]
     tags:
       - { name: twig.extension }
+
+  qs_site.twig.text:
+    class: Drupal\qs_site\TwigExtension\Text
+    tags:
+      - { name: twig.extension }

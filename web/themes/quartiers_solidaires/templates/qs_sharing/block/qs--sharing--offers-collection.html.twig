@@ -3,7 +3,7 @@
 {% set can_moderate_community = variables.can_moderate_community %}
 
 <div class="text-center my-5">
-  {{ macros.icon('theme_' ~ variables.theme.field_sharing_icon.value, ['icon-xl', 'text-primary']) }}
+  {{ macros.icon('theme_' ~ variables.theme.field_sharing_icon.value ~ '_lg', ['icon-xl', 'text-primary']) }}
   <h1 class="h2 text-primary my-3">{{ variables.offer_type.title.value }}</h1>
   {# Export PDF button availables to everyone. #}
   {% if variables.theme.tid.value  %}

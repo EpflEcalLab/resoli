@@ -2669,3 +2669,7 @@ msgstr "Il n’y a pour le moment pas de demandes d'entraide."
 msgid "qs_sharing.collection.request.solved_by @solved_by @authored_by"
 msgstr "La demande de @authored_by a été prise en charge par @solved_by."
 
+msgid "Unable to send email. Contact the site administrator if the problem persists."
+msgstr "Impossible d'envoyer le courriel. Contacter l'administrateur du site si le problème persiste."
+
+

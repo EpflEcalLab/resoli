@@ -142,7 +142,7 @@ class RequestAddForm extends FormBase {
     $form['#attributes'] = [
       'novalidate' => 'novalidate',
       'theme' => 'pink',
-      'class' => ['bg-pink'],
+      'class' => ['bg-pink', 'container', 'd-flex', 'flex-column', 'flex-grow'],
     ];
     $form['#attached']['library'][] = 'qs_site/unload';
 

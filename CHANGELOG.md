@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - move from Codeship to Github Actions
 - security update drupal/core-dev (9.2.4 => 9.2.6)
 - show the offer_type title instead of offer title upon deactivate, delete and reactive actions on offers - #947
+- remove quill from Offer Availability field - #1001
 
 ### Fixed
 - fix pager of Events
@@ -51,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - use Large sharing icon size on collection pages - #947
 - update 'divers' sharing theme icon - #967
 - update request add form to have margin on mobile - #1006
+- update offer add form themes responsivness - #1005
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

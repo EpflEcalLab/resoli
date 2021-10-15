@@ -249,19 +249,13 @@ class OfferEditForm extends FormBase {
     ];
 
     $form['group']['availability'] = [
+      '#title' => $this->t('qs_sharing.offers.form.edit.availability'),
       '#type' => 'textarea',
       '#required' => FALSE,
       '#default_value' => $offer->field_description->value,
-    ];
-    $form['group']['quill_availability'] = [
-      '#markup' => '<div class="form-group">
-        <span class="quill-label">' . $this->t('qs_sharing.offers.form.edit.availability') . '</span>
-        <div
-          id="editor-add-offer-availability"
-          data-placeholder-translation="' . $this->t('qs_sharing.offers.form.edit.availability.placeholder') . '"
-          class="quill-editor quill-editor-primary form-textarea form-control">
-        </div>
-      </div>',
+      '#attributes' => [
+        'placeholder' => $this->t('qs_sharing.offers.form.edit.availability.placeholder'),
+      ],
     ];
 
     $form['group']['#attached']['library'][] = 'quartiers_solidaires/quill';

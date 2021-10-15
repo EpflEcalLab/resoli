@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - remove box-shadow on checkboxes on Create offer Form - #951
 - use Large sharing icon size on collection pages - #947
 - update 'divers' sharing theme icon - #967
+- update request add form to have margin on mobile - #1006
 - update offer add form themes responsivness - #1005
 
 ### Added

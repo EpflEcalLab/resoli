@@ -322,18 +322,12 @@ class OfferAddForm extends FormBase {
     ];
 
     $form['offer']['step-3']['availability'] = [
+      '#title' => $this->t('qs_sharing.offers.form.add.availability'),
       '#type' => 'textarea',
       '#required' => FALSE,
-    ];
-    $form['offer']['step-3']['quill_availability'] = [
-      '#markup' => '<div class="form-group">
-        <span class="quill-label">' . $this->t('qs_sharing.offers.form.add.availability') . '</span>
-        <div
-          id="editor-add-offer-availability"
-          data-placeholder-translation="' . $this->t('qs_sharing.offers.form.add.availability.placeholder') . '"
-          class="quill-editor quill-editor-primary form-textarea form-control">
-        </div>
-      </div>',
+      '#attributes' => [
+        'placeholder' => $this->t('qs_sharing.offers.form.add.availability.placeholder'),
+      ],
     ];
 
     $form['#attached']['library'][] = 'quartiers_solidaires/quill';

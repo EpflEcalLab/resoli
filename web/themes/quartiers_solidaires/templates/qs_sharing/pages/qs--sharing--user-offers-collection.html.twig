@@ -42,7 +42,7 @@
 
             {% if is_deactivated %}
               {# Disable date display on medium device only #}
-              <span class="card-pill-title card-pill-deactivated mx-auto d-none d-md-inline">
+              <span class="card-pill-title card-pill-deactivated mx-auto d-none d-md-flex">
                 <span>
                 {{ 'qs_sharing.user.offers.collection.deactivated @date'|t({
                   '@date': offer.changed.value|bamboo_i18n_format_date('default_medium_date_only')
@@ -78,7 +78,7 @@
 
                 {% if is_deactivated %}
                   {# Disable date display on mobile device only #}
-                  <span class="d-sm-none mb-0">
+                  <span class="d-md-none mb-0">
                     <span>
                     {{ 'qs_sharing.user.offers.collection.deactivated @date'|t({
                       '@date': offer.changed.value|bamboo_i18n_format_date('default_medium_date_only')

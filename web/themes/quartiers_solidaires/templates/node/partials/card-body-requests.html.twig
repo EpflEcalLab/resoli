@@ -2,8 +2,23 @@
 
 <div class="card-body pb-0 text-center mx-auto">
 
+  {# Solved/Changed Dates display on mobile device only #}
+  <div class="d-lg-none mb-3 mt-0">
+    {% if is_solved %}
+      <span>
+    {{ 'qs_sharing.collection.request.solved @date'|t({
+      '@date': request.field_solved_at.date|bamboo_i18n_format_date('default_medium_date_only')
+    }) }}
+    </span>
+    {% else %}
+      <time datetime="{{ request.changed.value|date('Y-m-d') }}">
+        {{ request.changed.value|bamboo_i18n_format_date('default_medium_date_only') }}
+      </time>
+    {% endif %}
+  </div>
+
   {# Solve lead #}
-  {% if  is_solved %}
+  {% if is_solved %}
     <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0">
       {{ 'qs_sharing.collection.request.solved_by @solved_by @authored_by'|t({
         '@solved_by': request.field_solved_by.entity.field_firstname.value ~ ' ' ~ request.field_solved_by.entity.field_lastname.value,

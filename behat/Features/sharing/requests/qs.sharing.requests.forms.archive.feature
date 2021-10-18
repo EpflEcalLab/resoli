@@ -75,14 +75,13 @@ Feature: Request Archive Form
     Then I should see 2 "#requests-accordion .card-list-item" elements
 
   @api @preserveDatabase @mail
-  Scenario: When archiving someone else requests, a email should be sent to the request's author and I should be redirect to the listing of requests.
+  Scenario: When archiving someone else requests, no email should be sent and I should be redirect to the listing of requests.
     Given I am volunteer on community 1 for theme 22 as user 5
     Given I am logged in as user "manager+lausanne"
     When I am on "/sharing/1/requests"
     Then I should see 3 "#requests-accordion .card-list-item" elements
     Then I follow the link ".request77.archive button[type='submit']" element
-    And 1 mail should be sent
-    Then A mail as been sent to "member+lausanne@antistatique.net" with subject "qs.mail.request.archived.subject Resoli Juda Bricot Lausanne Convivialité 9 September 2021"
+    And 0 mail should be sent
     Then the url should match "/sharing/1/requests"
     And I should see "qs_sharing.collection.request.archive.success" in the ".alert" element
     Then I should see 2 "#requests-accordion .card-list-item" elements

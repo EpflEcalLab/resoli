@@ -102,7 +102,9 @@ class OfferRepository {
       ->condition('type', 'offer')
       ->condition('status', TRUE)
       ->condition('field_offer_type', $offer_type->id())
-      ->condition('field_theme', $theme->id());
+      ->condition('field_theme', $theme->id())
+      ->sort('changed', 'DESC');
+
     $ids = $query->execute();
 
     if (empty($ids) || !\is_array($ids)) {
@@ -136,7 +138,7 @@ class OfferRepository {
 
     $query->leftJoin('content_moderation_state_field_data', 'content_moderation_state', 'content_moderation_state.content_entity_id = offer.nid');
     $query->orderBy('content_moderation_state.moderation_state', 'DESC');
-    $query->orderBy('created', 'DESC');
+    $query->orderBy('changed', 'DESC');
 
     $tuples = $query->execute()->fetchAll();
 

@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - security update drupal/core-dev (9.2.4 => 9.2.6)
 - show the offer_type title instead of offer title upon deactivate, delete and reactive actions on offers - #947
 - remove quill from Offer Availability field - #1001
+- change order of offers collection listing to always list last changed on top - #1010
 
 ### Fixed
 - fix pager of Events

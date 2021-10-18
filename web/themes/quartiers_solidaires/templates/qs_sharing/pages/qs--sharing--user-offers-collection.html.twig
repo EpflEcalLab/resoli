@@ -41,7 +41,8 @@
             </span>
 
             {% if is_deactivated %}
-              <span class="card-pill-title card-pill-deactivated mx-auto">
+              {# Disable date display on medium device only #}
+              <span class="card-pill-title card-pill-deactivated mx-auto d-none d-md-inline">
                 <span>
                 {{ 'qs_sharing.user.offers.collection.deactivated @date'|t({
                   '@date': offer.changed.value|bamboo_i18n_format_date('default_medium_date_only')
@@ -50,9 +51,15 @@
               </span>
             {% endif %}
 
-            <span class="btn btn-outline-invert btn-circle btn-icon shadow-to-left btn-white">
+            <span
+              class="btn btn-icon btn-icon-to-circle shadow-to-bottom ml-auto"
+              aria-label="{{ 'qs.readmore.about'|t }} {{ request.label }}"
+            >
               {{ macros.icon('look') }}
-              <span>{{ 'qs_sharing.offer.more'|t }}</span>
+              <span class="d-none d-sm-inline">
+                {{ 'qs_sharing.offer.more'|t }}
+                <span class="sr-only">{{ 'qs_sharing.offer.more'|t }}</span>
+              </span>
             </span>
           </a>
 
@@ -68,6 +75,18 @@
                   '#format':  offer.body.format,
                 } %}
                 {{ body }}
+
+                {% if is_deactivated %}
+                  {# Disable date display on mobile device only #}
+                  <span class="d-sm-none mb-0">
+                    <span>
+                    {{ 'qs_sharing.user.offers.collection.deactivated @date'|t({
+                      '@date': offer.changed.value|bamboo_i18n_format_date('default_medium_date_only')
+                    }) }}
+                    </span>
+                  </span>
+                {% endif %}
+
               </div>
 
               <div class="card-actions card-actions-offset row">

@@ -17,14 +17,15 @@
     <span>{{ request.field_theme.entity.name.value }}</span>
   </span>
 
-  <span class="card-pill-title {% if is_solved %}card-pill-deactivated{% endif %} mx-auto">
+  {# Solved date display on medium device only #}
+  <span class="card-pill-title {% if is_solved %}card-pill-deactivated{% endif %} mx-auto d-none d-lg-flex">
     {% if is_solved %}
       {{ 'qs_sharing.collection.request.solved @date'|t({
         '@date': request.field_solved_at.date|bamboo_i18n_format_date('default_medium_date_only')
       }) }}
     {% else %}
-      <time datetime="{{ request.changed.date|date('Y-m-d') }}">
-        {{ request.changed.date|bamboo_i18n_format_date('default_medium_date_only') }}
+      <time datetime="{{ request.changed.value|date('Y-m-d') }}">
+        {{ request.changed.value|bamboo_i18n_format_date('default_medium_date_only') }}
       </time>
     {% endif %}
   </span>

@@ -64,6 +64,7 @@ class RequestRepository {
 
     $query->leftJoin('content_moderation_state_field_data', 'content_moderation_state', 'content_moderation_state.content_entity_id = request.nid');
     $query->orderBy('content_moderation_state.moderation_state');
+    $query->orderBy('changed', 'DESC');
 
     $ids = array_map(static function ($tuple) {
       return $tuple->nid;

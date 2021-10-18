@@ -162,12 +162,6 @@ class RequestArchiveForm extends FormBase {
     // Archive the request.
     $this->requestManager->archive($request);
 
-    // When archived by someone else than the request author, send an email.
-    if ($this->currentUser()->id() !== $request->get('uid')->target_id) {
-      $currentUser = $this->userStorage->load($this->currentUser()->id());
-      $this->requestManager->sendArchivedMail($request, $currentUser);
-    }
-
     $this->messenger()->addMessage($this->t('qs_sharing.collection.request.archive.success'));
 
     $form_state->setRedirect('qs_sharing.collection.request', [

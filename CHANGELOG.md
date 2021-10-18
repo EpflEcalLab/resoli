@@ -55,6 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update 'divers' sharing theme icon - #967
 - update request add form to have margin on mobile - #1006
 - update offer add form themes responsivness - #1005
+- fix none-working Moderate offer action when multiple form on the same page
+- fix Daylight Saving offsetting events's hours over repetitions - #920
 - user's offers collection responsivness - #1003
 - community's requests collection responsivness - #1004
 

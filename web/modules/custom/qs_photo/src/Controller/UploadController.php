@@ -123,7 +123,7 @@ class UploadController extends ControllerBase {
     $upload_validators = [
       'file_validate_extensions' => [$this->extensions],
       'file_validate_size' => [Environment::getUploadMaxSize()],
-      'file_validate_image_max_resolution' => ['5000x5000'],
+      'file_validate_image_max_resolution' => ['10000x10000'],
     ];
 
     $files = file_save_upload(0, $upload_validators, 'private://photos');

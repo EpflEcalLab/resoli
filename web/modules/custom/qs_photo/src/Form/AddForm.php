@@ -382,7 +382,7 @@ class AddForm extends FormBasic {
       $this->t('qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution', [
         '@file_validate_extensions' => $this->extensions,
         '@file_validate_size' => $this->humanFilesize(Environment::getUploadMaxSize()),
-        '@file_validate_image_resolution' => '5000x5000',
+        '@file_validate_image_resolution' => '10000x10000',
       ]) .
       '</div>',
       '#attributes' => [

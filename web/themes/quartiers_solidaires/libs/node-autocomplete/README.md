@@ -15,7 +15,12 @@ Finally, use the following markup in your page:
 
 ```html
 <!-- Interactive autocomplete -->
-<div id="node-autocomplete" data-list='[{"id": "ac232e32","name": "Type X"},...]'></div>
+<div
+  id="node-autocomplete"
+  data-list='[{"id": "ac232e32","name": "Type X"},...]'
+  data-target-name="#node-autocomplete-target-name"
+  data-target-id="#node-autocomplete-target-id"
+></div>
 
 <!-- Input filled with existing selected ID -->
 <input type="text" id="node-autocomplete-target-id" class="sr-only" />

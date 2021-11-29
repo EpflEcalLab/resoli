@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import CreatableSelect from 'react-select/creatable';
 
 export type Props = {
+  targetId?: string;
+  targetName?: string;
   list: {
     id: string;
     name: string;
@@ -13,7 +15,7 @@ type SelectItem = {
   label: string;
 };
 
-const App = ({ list }: Props): JSX.Element => {
+const App = ({ list, targetId, targetName }: Props): JSX.Element => {
   const options: SelectItem[] = list.map(({id, name}) => ({
     label: name,
     value: id
@@ -25,13 +27,13 @@ const App = ({ list }: Props): JSX.Element => {
       const { label, value } = selected;
       const isFresh = label === value;
 
-      const inputId = document.getElementById('node-autocomplete-target-id') as HTMLInputElement;
+      const inputId = document.getElementById(targetId?.replace('#', '') ?? 'node-autocomplete-target-id') as HTMLInputElement;
       if (inputId !== null) inputId.value = isFresh ? '' : value;
 
-      const inputName = document.getElementById('node-autocomplete-target-name') as HTMLInputElement;
+      const inputName = document.getElementById(targetName?.replace('#', '') ??'node-autocomplete-target-name') as HTMLInputElement;
       if (inputName !== null) inputName.value = isFresh ? value : '';
     }
-  }, [selected])
+  }, [selected, targetName, targetId])
 
   return (
     <CreatableSelect

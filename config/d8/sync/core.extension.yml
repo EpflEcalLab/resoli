@@ -51,6 +51,7 @@ module:
   language: 0
   link: 0
   locale: 0
+  loco_translate: 0
   mailsystem: 0
   masquerade: 0
   menu_ui: 0

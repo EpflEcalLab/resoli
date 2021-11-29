@@ -1,0 +1,15 @@
+api:
+  fullaccess_key: ''
+  readonly_key: ''
+automation:
+  push:
+    interval: 0
+    langcodes: {  }
+    template: ''
+  pull:
+    interval: 0
+    langcodes: {  }
+    status: translated
+_core:
+  default_config_hash: O8pujjuOkaNSb3rHGtRqdEsv18MLT6mTBW-XcaP32w0
+langcode: fr

@@ -9,6 +9,12 @@ set :http_auth_users, [
    [ "quartiers-solidaires", "$apr1$vHMguZuD$ZD0IeqhM0Ioypda9rIdf./" ]
 ]
 
+# Override the pull configuration to get all translations from Loco.
+set :loco_pull, {
+  languages: ['fr', 'de', 'en'],
+  status: 'all',
+}
+
 # Disable Notification on slack
 set :slackistrano, false
 

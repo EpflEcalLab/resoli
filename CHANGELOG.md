@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add solved_by lead text on listing of offers - #964
 - add bg-pink-darker variante and use it on request confirmation form - #969
 - add active sharing link on request confirmation page - #969
+- add Loco Translate integration to ease translations
 
 ### Changed
 - update all Javascript Dependencies

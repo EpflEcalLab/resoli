@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit
+- node-autocomplete library
 
 ## [2.0.0] - 2021-08-26
 ### Added

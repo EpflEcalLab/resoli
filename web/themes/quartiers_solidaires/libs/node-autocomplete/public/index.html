@@ -2,14 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Node Autocomplete</title>
+    <link rel="stylesheet" href="/vendors.min.css" />
+    <link rel="stylesheet" href="/base.css" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="na"></div>
-    <input type="text" id="na-target-id" />
-    <input type="text" id="na-target-name" />
+    <div class="container py-4">
+      <div id="na" data-list='[{"id": "superunique000","name": "Lorem"},{"id": "superunique001","name": "Ipsum"},{"id": "superunique002","name": "Dolor"},{"id": "superunique003","name": "Sit"},{"id": "superunique004","name": "Amet"}]'></div>
+      <div class="py-4">
+        <input type="text" id="na-target-id" />
+        <input type="text" id="na-target-name" />
+      </div>
+    </div>
   </body>
 </html>

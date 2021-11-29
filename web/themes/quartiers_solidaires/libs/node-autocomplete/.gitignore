@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+public/base.css
+public/vendors.min.css
+public/base.css.map
+public/styleguide.css
+public/styleguide.css.map

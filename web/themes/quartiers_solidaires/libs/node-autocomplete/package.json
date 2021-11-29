@@ -13,13 +13,15 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "react-select": "^5.2.1",
     "typescript": "^4.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "setup": "cp ../../build/css/* ./public/",
+    "start": "yarn setup && react-scripts start",
+    "build": "yarn setup && react-scripts build",
+    "test": "yarn setup && react-scripts test",
+    "eject": "yarn setup && react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

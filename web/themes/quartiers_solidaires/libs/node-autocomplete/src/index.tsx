@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App, { Props } from './App';
+
+const root = document.getElementById('na');
+const data = root?.dataset as unknown as Props;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App list={JSON.parse(data.list as unknown as string)} />
   </React.StrictMode>,
-  document.getElementById('na')
+  root,
 );

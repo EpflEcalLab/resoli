@@ -1,14 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import CreatableSelect from 'react-select/creatable';
 
-function App() {
+export type Props = {
+  list: {
+    id: string;
+    name: string;
+  }[]
+};
+
+type SelectItem = {
+  value: string;
+  label: string;
+};
+
+const App = ({ list }: Props): JSX.Element => {
+  const options: SelectItem[] = list.map(({id, name}) => ({
+    label: name,
+    value: id
+  }));
+  const [selected, setSelected] = useState<SelectItem | null>(null);
+
+  useEffect(() => {
+    console.log(selected?.label === selected?.value ? 'new' : 'existing');
+  }, [selected])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <CreatableSelect
+      defaultValue={selected}
+      onChange={setSelected}
+      options={options}
+      theme={(theme) => ({
+        ...theme,
+        borderRadius: 4,
+        colors: {
+          ...theme.colors,
+          primary25: '#83b8fb',
+          primary50: '#83b8fb',
+          primary75: '#83b8fb',
+          primary: '#325ac8',
+          danger: '#c80050',
+          dangerLight: '#d84c84',
+          neutral10: '#f2f2f2',
+          neutral20: '#e9ecef',
+          neutral30: '#dee2e6',
+          neutral40: '#ced4da',
+          neutral50: '#adb5bd',
+          neutral60: '#868e96',
+          neutral70: '#495057',
+          neutral80: '#343a40',
+          neutral90: '#292b2c',
+        },
+      })}
+    />
   );
 }
 

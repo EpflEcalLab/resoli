@@ -21,7 +21,16 @@ const App = ({ list }: Props): JSX.Element => {
   const [selected, setSelected] = useState<SelectItem | null>(null);
 
   useEffect(() => {
-    console.log(selected?.label === selected?.value ? 'new' : 'existing');
+    if (selected !== null) {
+      const { label, value } = selected;
+      const isFresh = label === value;
+
+      const inputId = document.getElementById('node-autocomplete-target-id') as HTMLInputElement;
+      if (inputId !== null) inputId.value = isFresh ? '' : value;
+
+      const inputName = document.getElementById('node-autocomplete-target-name') as HTMLInputElement;
+      if (inputName !== null) inputName.value = isFresh ? value : '';
+    }
   }, [selected])
 
   return (

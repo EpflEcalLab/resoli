@@ -3415,17 +3415,17 @@
         },
         {
             "name": "drupal/loco_translate",
-            "version": "2.0.0-alpha1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/loco_translate.git",
-                "reference": "8.x-2.0-alpha1"
+                "reference": "8.x-2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/loco_translate-8.x-2.0-alpha1.zip",
-                "reference": "8.x-2.0-alpha1",
-                "shasum": "9d764ef829337ee6a60b21996a11e8cf8fe05eb0"
+                "url": "https://ftp.drupal.org/files/projects/loco_translate-8.x-2.0.zip",
+                "reference": "8.x-2.0",
+                "shasum": "5b5cc1964d7f930a953ae0e499ae017f19b7bbb2"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9",
@@ -3437,11 +3437,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.0-alpha1",
-                    "datestamp": "1593673984",
+                    "version": "8.x-2.0",
+                    "datestamp": "1638186999",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },

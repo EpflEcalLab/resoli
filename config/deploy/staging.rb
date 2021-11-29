@@ -2,12 +2,18 @@
 set :deploy_to, '/home/quartiers-solidaires/www/staging.quartiers-solidaires.ch'
 
 # set a branch for this release
-set :branch, 'dev'
+set :branch, 'feature/integrate-with-loco'
 
 # Protect the staging with a password
 set :http_auth_users, [
    [ "quartiers-solidaires", "$apr1$vHMguZuD$ZD0IeqhM0Ioypda9rIdf./" ]
 ]
+
+# Override the pull configuration to get all translations from Loco.
+set :loco_pull, {
+  languages: ['fr', 'de', 'en'],
+  status: 'all',
+}
 
 # Disable Notification on slack
 set :slackistrano, false

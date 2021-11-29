@@ -86,7 +86,6 @@ jobs:
       contains('
       refs/heads/master
       refs/heads/dev
-      refs/heads/feature/integrate-with-loco
       ', github.ref)
     runs-on: ubuntu-latest
     env:
@@ -102,9 +101,6 @@ jobs:
           fi
           if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
               echo "::set-output name=DEPLOY_ENV::production"
-          fi
-          if [[ $GITHUB_REF == 'refs/heads/feature/integrate-with-loco' ]]; then
-              echo "::set-output name=DEPLOY_ENV::staging"
           fi
       - uses: actions/checkout@v2.3.4
       - uses: actions/setup-node@v2

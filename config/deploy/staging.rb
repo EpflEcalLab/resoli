@@ -2,7 +2,7 @@
 set :deploy_to, '/home/quartiers-solidaires/www/staging.quartiers-solidaires.ch'
 
 # set a branch for this release
-set :branch, 'feature/integrate-with-loco'
+set :branch, 'dev'
 
 # Protect the staging with a password
 set :http_auth_users, [

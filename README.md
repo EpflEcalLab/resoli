@@ -401,7 +401,7 @@ docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
 ### Kernel tests
 
 ```bash
-./vendor/bin/phpunit -x vevey_functional
+./vendor/bin/phpunit -x qs_functional
 ```
 
 ### Browser tests
@@ -415,7 +415,7 @@ docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
 1. Then you can run functional tests
 
 ```bash
-./vendor/bin/phpunit -g vevey_functional
+./vendor/bin/phpunit -g qs_functional
 ```
 
 ### Behat

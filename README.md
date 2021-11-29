@@ -358,6 +358,10 @@ For more help about Toolbox, the [official documentation](http://frontend.github
    docker-compose exec dev yarn build
   ```
 
+## 🧩 Frontend Libraries
+
+- [node-autocomplete](web/themes/quartiers_solidaires/libs/node-autocomplete/README.md)
+
 ## 🚀 Deploy
 
 ### First time

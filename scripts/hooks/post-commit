@@ -1,17 +1,16 @@
 echo "\n🚔  \033[0;32mRunning Code Sniffer Drupal & DrupalPractice for /web/modules/custom ...\033[0m"
-./vendor/bin/phpcs
+docker-compose exec dev ./vendor/bin/phpcs
 
 echo "\n💩  \033[0;32mRunning PHP Mess Detector ...\033[0m"
-./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml --suffixes php,module,inc,install,test,profile,theme,css,info,txt --exclude *Test.php
-./vendor/bin/phpmd ./behat text ./phpmd.xml --suffixes php
+docker-compose exec dev ./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml --suffixes php,module,inc,install,test,profile,theme,css,info,txt --exclude *Test.php,cardis_site.install
+docker-compose exec dev ./vendor/bin/phpmd ./behat text ./phpmd.xml --suffixes php
 
 echo "\n🛂  \033[0;32mRunning PHP Copy/Paste Detector ...\033[0m"
-./vendor/bin/phpcpd ./web/modules/custom --names=*.php,*.module,*.inc,*.install,*.test,*.profile,*.theme,*.css,*.info,*.txt --names-exclude=*.md,*.info.yml --ansi --exclude=tests
-./vendor/bin/phpcpd ./behat --names=*.php --ansi
+docker-compose exec dev ./vendor/bin/phpcpd ./behat --names=*.php --ansi
 
 echo "\n🍫  \033[0;32mRunning PhpCodeFixer ...\033[0m"
-./vendor/bin/phpcf --target 7.4 --file-extensions php,module,inc,install,test,profile,theme,info ./web/modules/custom
-./vendor/bin/phpcf --target 7.4 --file-extensions php ./behat
+#docker-compose exec dev ./vendor/bin/phpcf --target 7.4 --file-extensions php,module,inc,install,test,profile,theme,info ./web/modules/custom
+#docker-compose exec dev ./vendor/bin/phpcf --target 7.4 --file-extensions php ./behat
 
 echo "\n🕵🏻  \033[0;32mRunning PHP-CS-Fixer ...\033[0m"
-./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle
+docker-compose exec dev bash -c "./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle"

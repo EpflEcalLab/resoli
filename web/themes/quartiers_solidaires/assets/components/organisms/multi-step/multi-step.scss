@@ -9,4 +9,12 @@
   > .tab-content {
     flex: 1 1 auto;
   }
+
+  &.bg-pink {
+    color: color("light");
+
+    .btn-outline-invert, .btn-outline-invert:hover {
+      background-color: color("pink-light");
+    }
+  }
 }

@@ -1,0 +1,17 @@
+uuid: ecca25f3-66c7-4bd9-98c4-c80cdd1737eb
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Request
+type: request
+description: 'Sharing request sent by mail and visible by Volunteers.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

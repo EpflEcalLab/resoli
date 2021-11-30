@@ -204,8 +204,6 @@ class CollectionController extends ControllerBase {
       'node_list:event',
       // Invalidated whenever any Community is updated, deleted or created.
       'taxonomy_term_list:communities',
-      // Invalidated whenever any Privilege is updated, deleted or created.
-      'privilege_list:privilege',
     ];
 
     if ($nodes) {

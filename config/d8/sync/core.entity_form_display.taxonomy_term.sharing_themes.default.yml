@@ -1,0 +1,55 @@
+uuid: 9512ad92-25e5-44a2-bfdb-371c0fcf2105
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sharing_themes.field_sharing_icon
+    - taxonomy.vocabulary.sharing_themes
+  module:
+    - path
+id: taxonomy_term.sharing_themes.default
+targetEntityType: taxonomy_term
+bundle: sharing_themes
+mode: default
+content:
+  field_sharing_icon:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  langcode:
+    type: language_select
+    weight: 0
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  translation:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true

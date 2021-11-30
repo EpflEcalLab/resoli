@@ -30,6 +30,7 @@
     "require": {
         "composer/installers": "^1.7",
         "cweagans/composer-patches": "^1.6",
+        "dompdf/dompdf": "^1.0",
         "drupal/admin_toolbar": "^3.0",
         "drupal/allowed_formats": "^1.1",
         "drupal/backerymails": "^2.0",
@@ -44,6 +45,7 @@
         "drupal/honeypot": "^2.0",
         "drupal/image_effects": "^3.0",
         "drupal/jquery_ui_datepicker": "^1.1",
+        "drupal/loco_translate": "^2.0",
         "drupal/mailsystem": "^4.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/metatag": "^1.1",

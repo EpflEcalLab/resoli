@@ -1,0 +1,46 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="card-body pb-0 text-center mx-auto">
+
+  {% if offer.field_description.value %}
+    <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0 text-dark">
+      {{ offer.field_description.value|striptags }}
+    </h4>
+  {% endif %}
+
+  <div class="card-text rich-content rich-content-primary mb-3 text-dark">
+    {{ body }}
+  </div>
+
+  <div class="card-actions row">
+    {% if contact_phone %}
+      {{ macros.card_button(
+        contact_phone,
+        "tel:#{contact_phone}",
+        'phone',
+        'left',
+        '',
+        'info'
+      ) }}
+    {% endif %}
+
+    {% if contact_mail %}
+      {{ macros.card_button(
+        contact_mail,
+        "mailto:#{contact_mail}",
+        'mail',
+        'left',
+        '',
+        'info'
+      ) }}
+    {% endif %}
+
+    {# Moderation button #}
+    {# User should be responsible of the community OR admin #}
+    {% if can_moderate_community or user.hasPermission('administer nodes') %}
+      {{ bamboo_render_form('qs_sharing', 'OfferModerateForm', {'offer': offer}) }}
+    {% endif %}
+
+  </div>
+
+</div>

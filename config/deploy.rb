@@ -35,11 +35,28 @@ set :keep_releases, 3
 # Default value for keep_backups is 5
 set :keep_backups, 3
 
+# Loco Translate settings
+set :loco_po_sync_lang, 'fr'
+# Loco Translate path to template file from the root.
+set :loco_po_file, './config/languages/loco-fr.po'
+
 set :ssh_options, {
   forward_agent: true
 }
 
 set :slackistrano, false
+
+# Loco Push Translate settings.
+set :loco_push, {
+  po_sync_lang: 'fr',
+  po_file: './config/languages/loco-fr.po',
+}
+
+# Loco Pull Translate settings.
+set :loco_pull, {
+  languages: ['fr', 'de', 'en'],
+  status: 'translated',
+}
 
 # Used only if composer.json isn't on root
 # set :composer_working_dir, -> { fetch(:release_path).join(fetch(:app_path)) }
@@ -75,6 +92,11 @@ namespace :deploy do
   after :updated, "drupal:updatedb"
 
   # Clear your Drupal cache.
+  after :updated, "drupal:cache:clear"
+
+  # Sync translations with Loco.
+  after :updated, "drupal:loco:push"
+  after :updated, "drupal:loco:pull"
   after :updated, "drupal:cache:clear"
 
   # Disable the maintenance on the Drupal project.

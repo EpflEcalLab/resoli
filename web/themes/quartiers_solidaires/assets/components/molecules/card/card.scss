@@ -487,17 +487,25 @@ html:lang(en) .size-time {
 // Invert colors with theme colors
 @each $color, $value in $theme-colors {
   .card-#{$color} {
-    background: color(#{$color}-lighter);
+    background: color(#{$color}-lightest);
     border-color: $value;
 
-    // Automaticly calculate color value based on contrast with background
+    // Automatically calculate color value based on contrast with background
     @include color-contrast($value);
 
     // Base is secondary color, just apply to other colors
     @if ($color != 'secondary') {
+      h3 {
+        color: color("primary");
+      }
+
       .card-pill {
         background-color: $value;
         border-color: $value;
+
+        &.card-pill-white {
+          background-color: color("light");
+        }
       }
 
       .card-pill-simple {
@@ -553,6 +561,51 @@ html:lang(en) .size-time {
             background-image: linear-gradient(to right, rgba($value, 0.02) 5%, rgba($value, 0.3) 70%);
           }
         }
+      }
+    }
+  }
+}
+
+// Sharing (offer & requests) card style.
+.card-list-request.card-list,
+.card-list-offer.card-list  {
+  .card-pill .btn {
+    @include media-breakpoint-up(md) {
+      min-width: 240px;
+    }
+  }
+
+  .card-open {
+    .card-pill-title .lead {
+      color: color('dark');
+      font-weight: bold;
+    }
+  }
+
+  .card-body {
+    @include media-breakpoint-up(lg) {
+      width: 75%;
+    }
+  }
+
+  .card-body .card-text {
+    font-size: 18px;
+  }
+
+  .solved,
+  .deactivated {
+    .card-pill.collapsed {
+      background-image: linear-gradient(89.99deg, color('primary-darker') 27.08%, color('primary') 94.27%);
+
+      .btn {
+        background-color: color('primary-darker');
+      }
+    }
+
+    .card-pill:not(.collapsed) {
+        .card-pill-title.card-pill-solved,
+        .card-pill-title.card-pill-deactivated {
+        color: color('danger');
       }
     }
   }

@@ -1,0 +1,11 @@
+name: qs_sharing
+type: module
+description: Sharing
+core_version_requirement: ^8.8 || ^9
+package: Quartiers Solidaires
+
+dependencies:
+  - drupal:qs_site
+  - drupal:qs_acl
+  - drupal:qs_auth
+  - drupal:qs_export

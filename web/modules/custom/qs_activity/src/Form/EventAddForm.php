@@ -401,38 +401,53 @@ class EventAddForm extends FormBasic {
     // Format dates.
     $date = new DrupalDateTime($form_state->getValue('date'));
     $formatted_date = $date->format('d.m.Y');
-    $start_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00');
-    $end_at = DrupalDateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00');
+    $start_at = \DateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('start_at') . ':00', new \DateTimeZone('Europe/Zurich'));
+    $end_at = \DateTime::createFromFormat('d.m.Y H:i:s', $formatted_date . ' ' . $form_state->getValue('end_at') . ':00', new \DateTimeZone('Europe/Zurich'));
+    $interval = $start_at->diff($end_at);
 
     // Prepare data.
-    $data['title'] = $form_state->getValue('title');
-    $data['body'] = $form_state->getValue('body');
-    $data['contact_name'] = $form_state->getValue('contact_name');
-    $data['contact_mail'] = $form_state->getValue('contact_mail');
-    $data['contact_phone'] = $form_state->getValue('contact_phone');
-    $data['contribution'] = $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL;
-    $data['venue'] = $form_state->getValue('venue');
-    $data['venue_lat'] = $form_state->getValue('latitude');
-    $data['venue_long'] = $form_state->getValue('longitude');
+    $data = [
+      'title' => $form_state->getValue('title'),
+      'body' => $form_state->getValue('body'),
+      'contact_name' => $form_state->getValue('contact_name'),
+      'contact_mail' => $form_state->getValue('contact_mail'),
+      'contact_phone' => $form_state->getValue('contact_phone'),
+      'contribution' => $form_state->getValue('has_contribution') ? $form_state->getValue('contribution') : NULL,
+      'venue' => $form_state->getValue('venue'),
+      'venue_lat' => $form_state->getValue('latitude'),
+      'venue_long' => $form_state->getValue('longitude'),
+    ];
 
     $trigger = $form_state->getTriggeringElement();
 
-    $repeat = 0;
-    $repeat_total = 0;
+    // Calculate the number of repetition (1 element or multiple elements).
+    $repeat = 1;
     $repeat_period = 'D';
 
     if ($trigger['#name'] === 'save_and_repeat_weekly') {
-      $repeat_total = 12;
+      $repeat = 12;
       $repeat_period = 'W';
     }
+
+    $start_period_start_at = clone $start_at;
+    $start_period_end_at = clone $start_at;
+    $start_period_end_at->add(new \DateInterval("P{$repeat}{$repeat_period}"));
+    $period_interval = new \DateInterval("P1{$repeat_period}");
+
+    // Because of Daylight Saving, we must use DatePeriod to prevent
+    // 25 DTS to changes hours.
+    // @see https://github.com/antistatique/quartiers-solidaires/issues/920
+    $period = new \DatePeriod($start_period_start_at, $period_interval, $start_period_end_at);
 
     // An array collection of created events.
     $events = [];
 
-    // Create one event once, then repeat the event if necessary.
-    do {
-      // Create the new event.
-      $event = $this->eventManager->create($activity, $start_at, $end_at, $data);
+    foreach ($period as $period_start_date) {
+      // Calculate the period interval based on the first event interval.
+      $period_end_date = clone $period_start_date;
+      $period_end_date->add($interval);
+
+      $event = $this->eventManager->create($activity, $period_start_date, $period_end_date, $data);
       $events[] = $event;
 
       // Get the current user activitiy's privilege to this event.
@@ -448,12 +463,7 @@ class EventAddForm extends FormBasic {
         $subscription = $this->subscriptionManager->request($event, NULL, FALSE);
         $this->subscriptionManager->confirm($subscription);
       }
-
-      // Alter the start & end at for the next generation.
-      ++$repeat;
-      $start_at->add(new \DateInterval("P1{$repeat_period}"));
-      $end_at->add(new \DateInterval("P1{$repeat_period}"));
-    } while ($repeat < $repeat_total);
+    }
 
     // Handle redirections based on trigger (save one or repeat weekly).
     switch ($trigger['#name']) {

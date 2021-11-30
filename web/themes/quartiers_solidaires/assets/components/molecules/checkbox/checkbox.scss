@@ -28,11 +28,27 @@
       }
     }
 
-    @include icon-size(50px);
+    &.no-shadow {
+      box-shadow: none !important;
+    }
 
-    svg {
-      fill: color('primary-light');
-      filter: drop-shadow(0 2px 1px rgba($black, 0.4));
+    &:not(.offer-info) {
+      @include icon-size(50px);
+
+      svg {
+        fill: color('primary-light');
+        filter: drop-shadow(0 2px 1px rgba($black, 0.4));
+      }
+    }
+
+
+    &.offer-info {
+      @include icon-size(100px);
+
+      svg {
+        fill: color('info-light');
+        filter: drop-shadow(1.5px 2px 2px rgba(33, 33, 33, 0.3));
+      }
     }
   }
 

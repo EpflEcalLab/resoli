@@ -9,11 +9,17 @@ set :http_auth_users, [
    [ "quartiers-solidaires", "$apr1$vHMguZuD$ZD0IeqhM0Ioypda9rIdf./" ]
 ]
 
+# Override the pull configuration to get all translations from Loco.
+set :loco_pull, {
+  languages: ['fr', 'de', 'en'],
+  status: 'all',
+}
+
 # Disable Notification on slack
 set :slackistrano, false
 
 before "styleguide:build_local", "httpauth:protect"
-before "styleguide:deploy_build", "styleguide:build_local" unless ENV['CI_NAME']
+before "styleguide:deploy_build", "styleguide:build_local" unless ENV['CI']
 
 # Map composer and drush commands
 # NOTE: If stage have different deploy_to

@@ -5,6 +5,7 @@ export type Props = {
   targetId?: string;
   targetName?: string;
   placeholder?: string;
+  create?: string;
   value?: string;
   list: {
     id: string;
@@ -19,7 +20,7 @@ type SelectItem = {
   theme?: string;
 };
 
-const App = ({ list, targetId, targetName, placeholder, value }: Props): JSX.Element => {
+const App = ({ list, targetId, targetName, placeholder, value, create }: Props): JSX.Element => {
   const options: SelectItem[] = list.map(({id, name, theme}) => ({
     label: name,
     value: id,
@@ -40,8 +41,8 @@ const App = ({ list, targetId, targetName, placeholder, value }: Props): JSX.Ele
       if (inputName !== null) inputName.value = isFresh ? value : '';
 
       if (theme !== undefined) {
-        const themeRadio = document.getElementById(theme?.replace('#', '')) as HTMLInputElement;
-        if (themeRadio !== null) themeRadio.checked = true;
+        const themeLabel = document.getElementById(`label-${theme?.replace('#', '')}`) as HTMLLabelElement;
+        if (themeLabel !== null) themeLabel.click();
       }
     }
   }, [selected, targetName, targetId])
@@ -53,6 +54,7 @@ const App = ({ list, targetId, targetName, placeholder, value }: Props): JSX.Ele
         onChange={setSelected}
         options={options}
         placeholder={placeholder ?? 'Search...'}
+        formatCreateLabel={input => `${create} “${input}”`}
         theme={(theme) => ({
           ...theme,
           borderRadius: 4,

@@ -22,6 +22,7 @@ Finally, use the following markup in your page:
   data-target-id="#node-autocomplete-target-id"
   data-value="ac232e32"
   data-placeholder="Type something"
+  data-create="Create"
 ></div>
 
 <!-- Input filled with existing selected ID -->

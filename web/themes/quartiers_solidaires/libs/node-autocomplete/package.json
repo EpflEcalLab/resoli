@@ -19,7 +19,7 @@
   "scripts": {
     "setup": "cp ../../build/css/* ./public/",
     "start": "yarn setup && react-scripts start",
-    "build": "node ./scripts/build.js",
+    "build": "react-app-rewired build",
     "test": "yarn setup && react-scripts test",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "yarn setup && react-scripts eject"
@@ -43,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "rewire": "^5.0.0",
+    "react-app-rewired": "^2.1.8",
     "source-map-explorer": "^2.5.2"
   }
 }

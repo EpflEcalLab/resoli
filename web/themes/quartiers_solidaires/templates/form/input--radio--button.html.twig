@@ -14,7 +14,7 @@
 {% import "@quartiers_solidaires/macros.html.twig" as macros %}
 
 {% if labelIcon|length > 1 and attributes.variant == 'button_theme' %}
-  <label class="btn no-shadow checkbox {{ attributes.checked ? 'active' }}{{ attributes.is_offer ? ' offer-info flex-column' }}">
+  <label id="label-{{ attributes.id }}" class="btn no-shadow checkbox {{ attributes.checked ? 'active' }}{{ attributes.is_offer ? ' offer-info flex-column' }}">
     {{ macros.icon("theme_#{labelIcon[1]}_o") }}
     <input{{ attributes }} />
     {% if attributes.is_offer %}

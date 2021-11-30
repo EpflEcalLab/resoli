@@ -62,6 +62,12 @@
 ]
 %}
 {%
+  set icon_classes = [
+    not element['#attributes'].node_autocomplete ? 'mr-2 icon-lg',
+    element['#attributes'].node_autocomplete ? 'align-self-auto icon icon-lg mr-2 mt-2',
+]
+%}
+{%
   set description_classes = [
     'description',
     'text-muted',
@@ -84,7 +90,7 @@
 
   {% if element['#attributes'].icon %}
   <div class="d-flex">
-    {{ macros.icon(element['#attributes'].icon, ['mr-2', 'icon-lg']) }}
+    {{ macros.icon(element['#attributes'].icon, icon_classes) }}
     <div class="flex-grow">
       {% endif %}
 

@@ -10,6 +10,7 @@ set :app_path, "web"
 set :config_path, "config/d8/sync"
 set :theme_path, "themes/quartiers_solidaires"
 set :build_path, "build"
+set :deploy_libraries, fetch(:deploy_libraries, []).push("web/themes/quartiers_solidaires/libs/node-autocomplete/build")
 
 # Link file settings.php & drushcr.php
 set :linked_files, fetch(:linked_files, []).push("#{fetch(:app_path)}/sites/default/settings.php", "#{fetch(:app_path)}/sites/default/drushrc.php")
@@ -74,7 +75,9 @@ namespace :deploy do
   before :failed, "drupal:db:rollback"
   before :cleanup, "drupal:db:backup:cleanup"
 
+  after :updated, "deploy:styleguide:libs:build"
   after :updated, "styleguide:deploy_build"
+  after :updated, "deploy:styleguide:libs:deploy"
 
   # Set the maintenance Mode on your Drupal online project when deploying.
   after :updated, "drupal:maintenance:on"
@@ -106,8 +109,36 @@ namespace :deploy do
   after :updated, "drupal:permissions:recommended"
   after :updated, "drupal:permissions:writable_shared"
 
-
   # Fix the release permissions (due to Drupal restrictive permissions)
   # before deleting old release.
   before :cleanup, "drupal:permissions:cleanup"
+
+  namespace :styleguide do
+    namespace :libs do
+      task :build do
+        desc 'Build standalone libraries'
+        run_locally do
+          fetch(:deploy_libraries).each do |standalone_library|
+            within standalone_library do
+              info "Build locally: \e[35m#{standalone_library}\e[0m"
+              execute 'yarn', '--check-files', '--no-progress', '--silent'
+              execute 'yarn', 'build', '--production'
+            end
+          end
+        end
+      end
+
+      task :deploy do
+        desc 'Deploy standalone libraries'
+        on roles(:web) do
+          fetch(:deploy_libraries).each do |standalone_library|
+            from = standalone_library;
+            to = release_path.join(standalone_library)
+            info "Upload from local: \e[35m#{from}\e[0m to remote \e[35m#{to}\e[0m"
+            upload! from, to, recursive: true
+          end
+        end
+      end
+    end
+  end
 end

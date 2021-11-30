@@ -4,27 +4,33 @@ import CreatableSelect from 'react-select/creatable';
 export type Props = {
   targetId?: string;
   targetName?: string;
+  placeholder?: string;
+  value?: string;
   list: {
     id: string;
     name: string;
+    theme?: string;
   }[]
 };
 
 type SelectItem = {
   value: string;
   label: string;
+  theme?: string;
 };
 
-const App = ({ list, targetId, targetName }: Props): JSX.Element => {
-  const options: SelectItem[] = list.map(({id, name}) => ({
+const App = ({ list, targetId, targetName, placeholder, value }: Props): JSX.Element => {
+  const options: SelectItem[] = list.map(({id, name, theme}) => ({
     label: name,
-    value: id
+    value: id,
+    theme
   }));
-  const [selected, setSelected] = useState<SelectItem | null>(null);
+  const defaultValue: SelectItem | null = options.filter(i => i.value === value)[0] ?? null;
+  const [selected, setSelected] = useState<SelectItem | null>(defaultValue);
 
   useEffect(() => {
     if (selected !== null) {
-      const { label, value } = selected;
+      const { label, value, theme } = selected;
       const isFresh = label === value;
 
       const inputId = document.getElementById(targetId?.replace('#', '') ?? 'node-autocomplete-target-id') as HTMLInputElement;
@@ -32,37 +38,45 @@ const App = ({ list, targetId, targetName }: Props): JSX.Element => {
 
       const inputName = document.getElementById(targetName?.replace('#', '') ??'node-autocomplete-target-name') as HTMLInputElement;
       if (inputName !== null) inputName.value = isFresh ? value : '';
+
+      if (theme !== undefined) {
+        const themeRadio = document.getElementById(theme?.replace('#', '')) as HTMLInputElement;
+        if (themeRadio !== null) themeRadio.checked = true;
+      }
     }
   }, [selected, targetName, targetId])
 
   return (
-    <CreatableSelect
-      defaultValue={selected}
-      onChange={setSelected}
-      options={options}
-      theme={(theme) => ({
-        ...theme,
-        borderRadius: 4,
-        colors: {
-          ...theme.colors,
-          primary25: '#83b8fb',
-          primary50: '#83b8fb',
-          primary75: '#83b8fb',
-          primary: '#325ac8',
-          danger: '#c80050',
-          dangerLight: '#d84c84',
-          neutral10: '#f2f2f2',
-          neutral20: '#e9ecef',
-          neutral30: '#dee2e6',
-          neutral40: '#ced4da',
-          neutral50: '#adb5bd',
-          neutral60: '#868e96',
-          neutral70: '#495057',
-          neutral80: '#343a40',
-          neutral90: '#292b2c',
-        },
-      })}
-    />
+    <div className="text-dark" style={{paddingBottom: 300}}>
+      <CreatableSelect
+        defaultValue={selected}
+        onChange={setSelected}
+        options={options}
+        placeholder={placeholder ?? 'Search...'}
+        theme={(theme) => ({
+          ...theme,
+          borderRadius: 4,
+          colors: {
+            ...theme.colors,
+            primary25: '#83b8fb',
+            primary50: '#83b8fb',
+            primary75: '#83b8fb',
+            primary: '#325ac8',
+            danger: '#c80050',
+            dangerLight: '#d84c84',
+            neutral10: '#f2f2f2',
+            neutral20: '#e9ecef',
+            neutral30: '#dee2e6',
+            neutral40: '#ced4da',
+            neutral50: '#adb5bd',
+            neutral60: '#868e96',
+            neutral70: '#495057',
+            neutral80: '#343a40',
+            neutral90: '#292b2c',
+          },
+        })}
+      />
+    </div>
   );
 }
 

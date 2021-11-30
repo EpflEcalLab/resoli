@@ -17,9 +17,11 @@ Finally, use the following markup in your page:
 <!-- Interactive autocomplete -->
 <div
   id="node-autocomplete"
-  data-list='[{"id": "ac232e32","name": "Type X"},...]'
+  data-list='[{"id": "ac232e32","name": "Type X", "theme": "my-theme-id"},...]'
   data-target-name="#node-autocomplete-target-name"
   data-target-id="#node-autocomplete-target-id"
+  data-value="ac232e32"
+  data-placeholder="Type something"
 ></div>
 
 <!-- Input filled with existing selected ID -->
@@ -35,6 +37,7 @@ The `data-list` attribute should be a JSON structured like:
 type List = {
   id: string;
   name: string;
+  theme?: string;
 }[];
 ```
 

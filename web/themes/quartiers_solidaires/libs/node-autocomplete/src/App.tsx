@@ -7,6 +7,7 @@ export type Props = {
   placeholder?: string;
   create?: string;
   value?: string;
+  noPadding?: string;
   list: {
     id: string;
     name: string;
@@ -20,7 +21,7 @@ type SelectItem = {
   theme?: string;
 };
 
-const App = ({ list, targetId, targetName, placeholder, value, create }: Props): JSX.Element => {
+const App = ({ list, targetId, targetName, placeholder, value, create, noPadding }: Props): JSX.Element => {
   const options: SelectItem[] = list.map(({id, name, theme}) => ({
     label: name,
     value: id,
@@ -48,7 +49,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create }: Props):
   }, [selected, targetName, targetId])
 
   return (
-    <div className="text-dark" style={{paddingBottom: 300}}>
+    <div className="text-dark" style={{paddingBottom: noPadding !== 'true' ? 300 : 0}}>
       <CreatableSelect
         defaultValue={selected}
         onChange={setSelected}

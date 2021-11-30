@@ -23,6 +23,7 @@ Finally, use the following markup in your page:
   data-value="ac232e32"
   data-placeholder="Type something"
   data-create="Create"
+  data-no-padding="true"
 ></div>
 
 <!-- Input filled with existing selected ID -->

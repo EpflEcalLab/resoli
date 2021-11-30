@@ -10,7 +10,12 @@ set :app_path, "web"
 set :config_path, "config/d8/sync"
 set :theme_path, "themes/quartiers_solidaires"
 set :build_path, "build"
-set :deploy_libraries, fetch(:deploy_libraries, []).push("web/themes/quartiers_solidaires/libs/node-autocomplete/build")
+set :deploy_libraries, [
+  {
+    src: "web/themes/quartiers_solidaires/libs/node-autocomplete",
+    build: "web/themes/quartiers_solidaires/libs/node-autocomplete/build"
+  }
+]
 
 # Link file settings.php & drushcr.php
 set :linked_files, fetch(:linked_files, []).push("#{fetch(:app_path)}/sites/default/settings.php", "#{fetch(:app_path)}/sites/default/drushrc.php")
@@ -75,7 +80,7 @@ namespace :deploy do
   before :failed, "drupal:db:rollback"
   before :cleanup, "drupal:db:backup:cleanup"
 
-  after :updated, "deploy:styleguide:libs:build"
+  after :updated, "deploy:styleguide:libs:build" unless ENV['CI']
   after :updated, "styleguide:deploy_build"
   after :updated, "deploy:styleguide:libs:deploy"
 
@@ -119,8 +124,8 @@ namespace :deploy do
         desc 'Build standalone libraries'
         run_locally do
           fetch(:deploy_libraries).each do |standalone_library|
-            within standalone_library do
-              info "Build locally: \e[35m#{standalone_library}\e[0m"
+            within standalone_library[:src] do
+              info "Build locally: \e[35m#{standalone_library[:src]}\e[0m"
               execute 'yarn', '--check-files', '--no-progress', '--silent'
               execute 'yarn', 'build', '--production'
             end
@@ -132,8 +137,8 @@ namespace :deploy do
         desc 'Deploy standalone libraries'
         on roles(:web) do
           fetch(:deploy_libraries).each do |standalone_library|
-            from = standalone_library;
-            to = release_path.join(standalone_library)
+            from = standalone_library[:build];
+            to = release_path.join(from)
             info "Upload from local: \e[35m#{from}\e[0m to remote \e[35m#{to}\e[0m"
             upload! from, to, recursive: true
           end

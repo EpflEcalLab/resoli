@@ -81,11 +81,12 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: [ phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
+#    needs: [ phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
     if:
       contains('
       refs/heads/master
       refs/heads/dev
+      refs/heads/feature/810--sharing
       ', github.ref)
     runs-on: ubuntu-latest
     env:
@@ -102,12 +103,18 @@ jobs:
           if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
               echo "::set-output name=DEPLOY_ENV::production"
           fi
+          if [[ $GITHUB_REF == 'refs/heads/feature/810--sharing' ]]; then
+              echo "::set-output name=DEPLOY_ENV::staging"
+          fi
       - uses: actions/checkout@v2.3.4
       - uses: actions/setup-node@v2
         with:
             node-version: '12'
       - name: Build Styleguide
         run: yarn && yarn build --production
+      - name: Build Styleguide Library Node Autocomplete
+        run: yarn && yarn build --production
+        working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete
       - name: Set Docker Image Tag
         id: image_tag
         run: echo "::set-output name=DOCKER_DEPLOY_IMAGE_TAG::resoli-deploy:$(date +%s)"

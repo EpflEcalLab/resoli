@@ -63,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix Daylight Saving offsetting events's hours over repetitions - #920
 - user's offers collection responsivness - #1003
 - community's requests collection responsivness - #1004
+- fix button past event active state - QS-10
 
 ### Added
 - add Docker credentials for Codeship to prevent Pull Rate Limit

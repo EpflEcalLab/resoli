@@ -171,11 +171,17 @@ class OfferEditForm extends FormBase {
     ];
 
     $community_offer_types = $this->offerTypeRepository->getAllByCommunity($offer->get('field_offer_type')->entity->get('field_community')->entity);
-    $options = [];
+    $autocomplete_options = [];
+    $autocomplete_fallback = [];
 
     if (!empty($community_offer_types)) {
       foreach ($community_offer_types as $community_offer_type) {
-        $options[$community_offer_type->id()] = $community_offer_type->getTitle();
+        $autocomplete_options[] = [
+          'id' => $community_offer_type->id(),
+          'name' => $community_offer_type->getTitle(),
+          'theme' => 'edit-theme-' . $community_offer_type->get('field_theme')->entity->id(),
+        ];
+        $autocomplete_fallback[$community_offer_type->id()] = !empty($autocomplete_options[$community_offer_type->id()]['name']) ? $autocomplete_options[$community_offer_type->id()]['name'] : $community_offer_type->getTitle();
       }
     }
 
@@ -191,21 +197,39 @@ class OfferEditForm extends FormBase {
       ],
     ];
 
-    $form['group']['offer_type'] = [
+    $form['#attached']['library'][] = 'quartiers_solidaires/node-autocomplete';
+    $form['group']['offer_type_autocomplete'] = [
       '#title' => $this->t('qs_sharing.offers.form.edit.offer_type'),
-      '#type' => 'select',
-      '#multiple' => FALSE,
-      '#required' => FALSE,
-      '#default_value' => $offer->field_offer_type->target_id,
-      '#options' => $options,
+      '#type' => 'textfield',
+      '#options' => $autocomplete_fallback,
       '#attributes' => [
+        'node_autocomplete' => TRUE,
+        'id' => 'node-autocomplete',
         'icon' => 'sharing',
-        'placeholder' => $this->t('qs_sharing.offers.form.edit.offer_type.placeholder'),
+        'data-placeholder' => $this->t('qs_sharing.offers.form.edit.offer_type.placeholder'),
+        'data-list' => json_encode($autocomplete_options),
+        'data-target-name' => '#node-autocomplete-target-name',
+        'data-target-id' => '#node-autocomplete-target-id',
+        'data-create' => $this->t('qs_sharing.offers.form.edit.offer_type.autocomplete.create'),
+        'data-value' => $offer->field_offer_type->target_id,
+        'data-no-padding' => 'true',
       ],
       '#validated' => TRUE,
       '#theme_wrappers' => [
         'form_element',
       ],
+    ];
+    $form['group']['offer_type_target_id'] = [
+      '#attributes' => [
+        'id' => 'node-autocomplete-target-id',
+      ],
+      '#type' => 'hidden',
+    ];
+    $form['group']['offer_type_target_name'] = [
+      '#attributes' => [
+        'id' => 'node-autocomplete-target-name',
+      ],
+      '#type' => 'hidden',
     ];
 
     // Get all sharing themes for options.
@@ -361,7 +385,20 @@ class OfferEditForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $theme = $this->termStorage->load($form_state->getValue('theme'));
     $offer = $this->nodeStorage->load($form_state->get('offer'));
-    $offer_type = $this->nodeStorage->load($form_state->getValue('offer_type'));
+    $account = $this->userStorage->load($this->currentUser()->id());
+
+    // When offer type target name is filled, then create a new offer type.
+    if (!empty($form_state->getValue('offer_type_target_name'))) {
+      $offer_type = $this->offerTypeManager->create(
+        $form_state->getValue('offer_type_target_name'),
+        $theme,
+        $offer->get('field_offer_type')->entity->get('field_community')->entity,
+        $account
+      );
+    }
+    else {
+      $offer_type = $this->nodeStorage->load($form_state->getValue('offer_type_target_id'));
+    }
 
     $offer = $this->offerManager->update(
       $offer,
@@ -396,10 +433,10 @@ class OfferEditForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // When custom offer type is unchecked, then offer type select is mandatory.
-    if (!$form_state->getValue('offer_type') || empty($form_state->getValue('offer_type'))) {
-      $form_state->setErrorByName('offer_type', $this->t('qs.form.error.empty @fieldname', [
-        '@fieldname' => $form['offer_type']['#title'],
+    // Selecting from autocomplete or creating a new offer type is mandatory.
+    if (empty($form_state->getValue('offer_type_target_id')) && empty($form_state->getValue('offer_type_target_name'))) {
+      $form_state->setErrorByName('offer_type_autocomplete', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $form['group']['offer_type_autocomplete']['#title'],
       ]));
     }
 

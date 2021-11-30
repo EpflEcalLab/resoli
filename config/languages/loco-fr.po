@@ -2821,6 +2821,14 @@ msgid "qs_sharing.offers.form.add.offer_type_title.placeholder"
 msgstr "Ex. Faire vos courses"
 
 #, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type.autocomplete.create"
+msgstr "Nouveau: "
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.offer_type.autocomplete.create"
+msgstr "Nouveau: "
+
+#, fuzzy
 msgid "qs_sharing.offers.form.step2.description"
 msgstr "Quel thème correspond le mieux à votre offre d’entraide ?"
 

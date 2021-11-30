@@ -172,76 +172,51 @@ class OfferAddForm extends FormBase {
     ];
 
     $community_offer_types = $this->offerTypeRepository->getAllByCommunity($community);
-    $select_options = [];
-    $this->fallback = [];
+    $autocomplete_options = [];
+    $autocomplete_fallback = [];
 
     if (!empty($community_offer_types)) {
       foreach ($community_offer_types as $community_offer_type) {
-        $select_options[] = [
-          'nid' => $community_offer_type->id(),
+        $autocomplete_options[] = [
+          'id' => $community_offer_type->id(),
           'name' => $community_offer_type->getTitle(),
-          'theme' => $community_offer_type->get('field_theme')->entity->getName(),
+          'theme' => 'edit-theme-' . $community_offer_type->get('field_theme')->entity->id(),
         ];
-        $this->fallback[$community_offer_type->id()] = !empty($select_options[$community_offer_type->id()]['name']) ? $select_options[$community_offer_type->id()]['name'] : $community_offer_type->getTitle();
+        $autocomplete_fallback[$community_offer_type->id()] = !empty($autocomplete_options[$community_offer_type->id()]['name']) ? $autocomplete_options[$community_offer_type->id()]['name'] : $community_offer_type->getTitle();
       }
     }
 
-    $form['offer']['step-1']['offer_type'] = [
+    $form['#attached']['library'][] = 'quartiers_solidaires/node-autocomplete';
+    $form['offer']['step-1']['offer_type_autocomplete'] = [
       '#title' => $this->t('qs_sharing.offers.form.add.offer_type'),
-      '#type' => 'select',
-      '#multiple' => FALSE,
-      '#required' => FALSE,
-      '#options' => $this->fallback,
+      '#type' => 'textfield',
+      '#options' => $autocomplete_fallback,
       '#attributes' => [
+        'node_autocomplete' => TRUE,
+        'id' => 'node-autocomplete',
         'icon' => 'sharing',
-        'placeholder' => $this->t('qs_sharing.offers.form.add.offer_type.placeholder'),
-        'selectize' => TRUE,
-        'class' => ['selectize-members'],
-        'data-options' => json_encode($select_options),
+        'data-placeholder' => $this->t('qs_sharing.offers.form.add.offer_type.placeholder'),
+        'data-list' => json_encode($autocomplete_options),
+        'data-target-name' => '#node-autocomplete-target-name',
+        'data-target-id' => '#node-autocomplete-target-id',
+        'data-create' => $this->t('qs_sharing.offers.form.add.offer_type.autocomplete.create'),
       ],
       '#validated' => TRUE,
       '#theme_wrappers' => [
         'form_element',
       ],
     ];
-
-    $form['offer']['step-1']['offer_type_new'] = [
-      '#type' => 'radios',
-      '#options' => [0 => $this->t('qs.form.no'), 1 => $this->t('qs.form.yes')],
-      '#required' => FALSE,
-      '#default_value' => 0,
+    $form['offer']['step-1']['offer_type_target_id'] = [
       '#attributes' => [
-        'title' => $this->t('qs_sharing.offers.form.add.offer_type_new'),
-        'no_form_group' => TRUE,
-        'data-toggle' => 'buttons',
-        'color' => 'danger',
-        'variant' => 'button',
-        'no_block' => TRUE,
-        'class' => [
-          'mb-2',
-        ],
+        'id' => 'node-autocomplete-target-id',
       ],
-      '#theme_wrappers' => [
-        'input__button_group',
-      ],
+      '#type' => 'hidden',
     ];
-
-    $form['offer']['step-1']['offer_type_title'] = [
+    $form['offer']['step-1']['offer_type_target_name'] = [
       '#attributes' => [
-        'icon' => 'plus',
+        'id' => 'node-autocomplete-target-name',
       ],
-      '#title' => $this->t('qs_sharing.offers.form.add.offer_type_title'),
-      '#placeholder' => $this->t('qs_sharing.offers.form.add.offer_type_title.placeholder'),
-      '#type' => 'textfield',
-      '#required' => FALSE,
-      '#theme_wrappers' => [
-        'form_element',
-      ],
-      '#states' => [
-        'visible' => [
-          ':input[name="offer_type_new"]' => ['value' => '1'],
-        ],
-      ],
+      '#type' => 'hidden',
     ];
 
     $form['offer']['step-2'] = [
@@ -447,17 +422,17 @@ class OfferAddForm extends FormBase {
     $account = $this->userStorage->load($this->currentUser()->id());
     $theme = $this->termStorage->load($form_state->getValue('theme'));
 
-    // Create the new type offer if necessary.
-    if ($form_state->getValue('offer_type_new') === '1') {
+    // When offer type target name is filled, then create a new offer type.
+    if (!empty($form_state->getValue('offer_type_target_name'))) {
       $offer_type = $this->offerTypeManager->create(
-        $form_state->getValue('offer_type_title'),
+        $form_state->getValue('offer_type_target_name'),
         $theme,
         $community,
         $account
       );
     }
     else {
-      $offer_type = $this->nodeStorage->load($form_state->getValue('offer_type'));
+      $offer_type = $this->nodeStorage->load($form_state->getValue('offer_type_target_id'));
     }
 
     if (!$offer_type instanceof NodeInterface || $offer_type->bundle() !== 'offer_type') {
@@ -490,21 +465,10 @@ class OfferAddForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // When custom offer type is checked, then offer type title is mandatory.
-    if ($form_state->getValue('offer_type_new') === '1'
-      && (!$form_state->getValue('offer_type_title') || empty($form_state->getValue('offer_type_title')))
-    ) {
-      $form_state->setErrorByName('offer_type_title', $this->t('qs.form.error.empty @fieldname', [
-        '@fieldname' => $form['offer']['step-1']['offer_type_title']['#title'],
-      ]));
-    }
-
-    // When custom offer type is unchecked, then offer type select is mandatory.
-    if ($form_state->getValue('offer_type_new') === '0'
-      && (!$form_state->getValue('offer_type') || empty($form_state->getValue('offer_type')))
-    ) {
-      $form_state->setErrorByName('offer_type', $this->t('qs.form.error.empty @fieldname', [
-        '@fieldname' => $form['offer']['step-1']['offer_type']['#title'],
+    // Selecting from autocomplete or creating a new offer type is mandatory.
+    if (empty($form_state->getValue('offer_type_target_id')) && empty($form_state->getValue('offer_type_target_name'))) {
+      $form_state->setErrorByName('offer_type_autocomplete', $this->t('qs.form.error.empty @fieldname', [
+        '@fieldname' => $form['offer']['step-1']['offer_type_autocomplete']['#title'],
       ]));
     }
 

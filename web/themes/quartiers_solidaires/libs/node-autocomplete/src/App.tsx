@@ -56,6 +56,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
         options={options}
         placeholder={placeholder ?? 'Search...'}
         formatCreateLabel={input => `${create} “${input}”`}
+        isClearable
         theme={(theme) => ({
           ...theme,
           borderRadius: 4,
@@ -71,7 +72,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
             neutral20: '#e9ecef',
             neutral30: '#dee2e6',
             neutral40: '#ced4da',
-            neutral50: '#adb5bd',
+            neutral50: '#495057',
             neutral60: '#868e96',
             neutral70: '#495057',
             neutral80: '#343a40',

@@ -2625,6 +2625,10 @@ msgid "qs_sharing.requests.form.add.error.empty.theme"
 msgstr "qs_sharing.requests.form.add.error.empty.theme"
 
 #, fuzzy
+msgid "qs_sharing.offers.form.add.error.empty.theme"
+msgstr "qs_sharing.offers.form.add.error.empty.theme"
+
+#, fuzzy
 msgid "qs_sharing.requests.form.add.success @community @theme"
 msgstr "Votre demande a bien été transmise aux personnes bénévoles de la communauté concernées par la thématique choisie."
 
@@ -3082,10 +3086,22 @@ msgstr "qs.mail.request.archived.body @author_firstname @author_lastname @archiv
 
 #, fuzzy
 msgid "qs.mail.request.add_confirm.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_confirm.subject @sitename @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_confirm.body @author_firstname @author_lastname @community @theme @created_at"
 msgstr "qs.mail.request.add_confirm.body @author_firstname @author_lastname @community @theme @created_at"
 
 #, fuzzy
+msgid "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"
+msgstr "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"
+
+#, fuzzy
 msgid "qs.mail.request.add_request_on_behalf.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_request_on_behalf.subject @sitename @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_request_on_behalf.body @author_firstname @author_lastname @community @theme @created_at"
 msgstr "qs.mail.request.add_request_on_behalf.body @author_firstname @author_lastname @community @theme @created_at"
 
 #, fuzzy
@@ -3188,3 +3204,22 @@ msgstr "La demande de @authored_by a été prise en charge par @solved_by."
 msgid "Unable to send email. Contact the site administrator if the problem persists."
 msgstr "Impossible d'envoyer le courriel. Contacter l'administrateur du site si le problème persiste."
 
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.offer_type"
+msgstr "Choisissez un type d’offres existant ci-dessous:"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.offer_type.placeholder"
+msgstr "Cliquez pour choisir un type d’offres"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.availability.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_name"
+msgstr "qs_sharing.offers.form.edit.contact_name"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_name.placeholder"
+msgstr "qs_sharing.offers.form.edit.contact_name.placeholder"

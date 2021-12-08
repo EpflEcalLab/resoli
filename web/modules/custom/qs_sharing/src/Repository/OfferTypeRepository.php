@@ -52,7 +52,7 @@ class OfferTypeRepository {
    *   A collection of sharing offers.
    *   Otherwise NULL.
    */
-  public function getAllByCommunity(TermInterface $community, bool $sort_alpha = false): ?array {
+  public function getAllByCommunity(TermInterface $community, bool $sort_alpha = FALSE): ?array {
     $query = $this->nodeStorage->getQuery()
       ->accessCheck(TRUE)
       ->condition('type', 'offer_type')

@@ -1,5 +1,5 @@
 name: Continuous Integration & Continuous Deployment
-on: [push]
+on: [ push ]
 
 jobs:
   phpcs:
@@ -81,7 +81,7 @@ jobs:
 
   deploy:
     name: Deploy
-   needs: [ phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
+    needs: [phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
     if:
       contains('
       refs/heads/master

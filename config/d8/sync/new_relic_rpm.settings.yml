@@ -9,12 +9,12 @@ exclusive_urls: ''
 api_key: ''
 override_exception_handler: true
 watchdog_severities:
-  - '0'
-  - '1'
-  - '2'
-  - '3'
+  - 0
+  - 1
+  - 2
+  - 3
 views_log_slow: false
-views_log_threshold: '100'
+views_log_threshold: 100
 disable_autorum: false
 _core:
   default_config_hash: B3WP6GKGW7WbSBBI6zs7GZlD8cK0jpFQpFIR5p8FUe0

@@ -45,17 +45,23 @@ class OfferTypeRepository {
    *
    * @param \Drupal\taxonomy\TermInterface $community
    *   The community entity.
+   * @param bool $sort_alpha
+   *   Does the list of offer(s) is sorted alphabetically.
    *
    * @return array|\Drupal\node\NodeInterface[]|null
    *   A collection of sharing offers.
    *   Otherwise NULL.
    */
-  public function getAllByCommunity(TermInterface $community): ?array {
+  public function getAllByCommunity(TermInterface $community, bool $sort_alpha = false): ?array {
     $query = $this->nodeStorage->getQuery()
       ->accessCheck(TRUE)
       ->condition('type', 'offer_type')
       ->condition('status', TRUE)
       ->condition('field_community', $community->id());
+
+    if ($sort_alpha) {
+      $query->sort('title', 'ASC');
+    }
 
     $ids = $query->execute();
 

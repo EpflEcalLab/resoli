@@ -171,7 +171,7 @@ class OfferAddForm extends FormBase {
       ],
     ];
 
-    $community_offer_types = $this->offerTypeRepository->getAllByCommunity($community);
+    $community_offer_types = $this->offerTypeRepository->getAllByCommunity($community, TRUE);
     $autocomplete_options = [];
     $autocomplete_fallback = [];
 

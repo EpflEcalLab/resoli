@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - increase image WxH limitation from 5000x5000 => 10000x10000 - #940
 - update all PHP dependencies with config export
 - update all Javascript dependencies
+- update autocomplete order of elements to be sorted alpha - QS-12
 
 ### Fixed
 - fix pager of Events

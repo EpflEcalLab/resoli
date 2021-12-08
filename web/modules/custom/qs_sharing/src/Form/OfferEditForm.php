@@ -170,7 +170,7 @@ class OfferEditForm extends FormBase {
       'active' => TRUE,
     ];
 
-    $community_offer_types = $this->offerTypeRepository->getAllByCommunity($offer->get('field_offer_type')->entity->get('field_community')->entity);
+    $community_offer_types = $this->offerTypeRepository->getAllByCommunity($offer->get('field_offer_type')->entity->get('field_community')->entity, TRUE);
     $autocomplete_options = [];
     $autocomplete_fallback = [];
 

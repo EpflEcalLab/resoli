@@ -14,12 +14,11 @@ $finder = PhpCsFixer\Finder::create()
   ->notPath('*.info.yml')
 ;
 
-$config = Drupal8::create()
-  ->setFinder($finder)
-;
+$config = new Drupal8();
+$config->setFinder($finder);
 
 $rules = $config->getRules();
 $rules['global_namespace_import'] = FALSE;
-$rules['no_extra_blank_lines'] = ['extra'];
+$rules['no_extra_blank_lines'] = ['tokens' => ['extra']];
 $config->setRules($rules);
 return $config;

@@ -1,5 +1,5 @@
 name: Continuous Integration & Continuous Deployment
-on: [push]
+on: [ push ]
 
 jobs:
   phpcs:
@@ -71,6 +71,9 @@ jobs:
         run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only
       - name: Build Styleguide
         run: docker exec test yarn build --production
+      - name: Build Styleguide Library Node Autocomplete
+        run: yarn && yarn build --production
+        working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete
       - name: Run Behat tests
         run: docker-compose exec -T test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data
       - name: Upload Artifact
@@ -81,7 +84,7 @@ jobs:
 
   deploy:
     name: Deploy
-   needs: [ phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
+    needs: [phpmd, phpcs, php-cs-fixer, unit-tests, functional-tests]
     if:
       contains('
       refs/heads/master

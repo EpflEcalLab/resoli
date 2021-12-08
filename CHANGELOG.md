@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update all PHP dependencies with config export
 - update all Javascript dependencies
 - update autocomplete order of elements to be sorted alpha - QS-12
+- update friendsofphp/php-cs-fixer (v2.19.3 => v3.3.1)
 
 ### Fixed
 - fix pager of Events

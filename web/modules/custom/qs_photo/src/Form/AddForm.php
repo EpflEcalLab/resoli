@@ -25,7 +25,7 @@ class AddForm extends FormBasic {
    *
    * @var string
    */
-  const UPPY_FILES = 'uppy_files';
+  public const UPPY_FILES = 'uppy_files';
 
   /**
    * Access Control Service.

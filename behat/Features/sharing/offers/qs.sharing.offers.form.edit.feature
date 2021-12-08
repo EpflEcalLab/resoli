@@ -39,7 +39,7 @@ Feature: Sharing Offers edit Form
   Scenario: In the edit Offer form, the fields should be prefilled with entity values.
     Given I am logged in as user "admin"
     When I am on "/sharing/offers/69/edit"
-    And the "edit-offer-type" field should contain "67"
+    And I fill hidden field "offer_type_target_id" with "67"
     And the "edit-theme" field should contain "20"
     And the "edit-body" field should contain "Je parle volontiers de tous les sujets, j'aime particulièrement l'art et le design, et me passionne pour la cuisine et le hockey sur glace."
     And the "edit-availability" field should contain "Disponible tout les jours de la semaine, l'après-midi."
@@ -49,10 +49,25 @@ Feature: Sharing Offers edit Form
 
 ## Form submits.
   @api @preserveDatabase
+  Scenario: In the edit Offer form, I should be able to submit a valid offer in an existing offer type.
+    Given I am logged in as user "admin"
+    When I am on "/sharing/offers/69/edit"
+    And I fill hidden field "offer_type_target_id" with "64"
+    And I select "22" from "theme"
+    And I fill in "J'échange diverses pièces de porcelaine, contre du matériel de cuisine." for "edit-body"
+    And I fill in "A convenir" for "edit-availability"
+    And I fill in "Sarah Courci" for "edit-contact-name"
+    And I fill in "0211234567" for "edit-contact-phone"
+    And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
+    And I press "edit-submit"
+    Then the url should match "/node/64#card69"
+    And I should see "qs_sharing.offers.form.edit.success" in the ".alert" element
+
+  @api @preserveDatabase
   Scenario: In the edit Offer form, I should be able to submit new values for an offer and those one should be persisted.
     Given I am logged in as user "admin"
     When I am on "/sharing/offers/69/edit"
-    And I select "64" from "edit-offer-type"
+    And I fill hidden field "offer_type_target_name" with "Echange ou don de matériel"
     And I select "22" from "theme"
     And I fill in "Jéchange diverses pièces de porcelaine, contre du matériel de cuisine." for "edit-body"
     And I fill in "A convenir" for "edit-availability"
@@ -60,8 +75,8 @@ Feature: Sharing Offers edit Form
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
-    Then the url should match "/fr/node/64#card69"
-    And the url should match "/fr/node/64#card69" with parameters:
+    Then the url should match "/fr/node/82#card69"
+    And the url should match "/fr/node/82#card69" with parameters:
       | theme |
       | 22 |
     And I should see "qs_sharing.offers.form.edit.success" in the ".alert" element

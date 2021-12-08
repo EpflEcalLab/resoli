@@ -58,17 +58,6 @@ Feature: Sharing Offers add Form
     Then I should see a "#block-previousnavigation a" element
     And I should see "qs.previous.to_sharing_dashboard" link with href "/sharing/1/user/1/dashboard"
 
-## Form pre-filled values.
-  Scenario Outline: In the add Offer form, a select should let me choose on community's offer's types.
-    Given I am logged in as user "admin"
-    When I am on "<url>"
-    Then I should see <choices> "#edit-offer-type option" elements
-    Examples:
-      | url | choices |
-      | /sharing/1/offers/add | 3 |
-      | /sharing/2/offers/add | 1 |
-      | /sharing/3/offers/add | 1 |
-
   @api @preserveDatabase
   Scenario Outline: In the add Offer form, the contact information must be prefilled using logged-in account data.
     Given I am volunteer on community <community> for theme 22 as user <user_id>
@@ -93,12 +82,11 @@ Feature: Sharing Offers add Form
   Scenario: In the add Offer form, I should be able to submit a valid offer in an existing offer type.
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
-    And I select "64" from "edit-offer-type"
+    And I fill hidden field "offer_type_target_id" with "64"
     And I select "22" from "theme"
     And I fill in "J'échange diverses pièces de porcelaine, contre du matériel de cuisine." for "edit-body"
     And I fill in "A convenir" for "edit-availability"
     And I fill in "Sarah" for "edit-contact-firstname"
-    And I fill in "Courci" for "edit-contact-lastname"
     And I fill in "Courci" for "edit-contact-lastname"
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
@@ -110,13 +98,11 @@ Feature: Sharing Offers add Form
   Scenario: In the add Offer form, I should be able to submit a valid offer in an new offer type.
     Given I am logged in as user "admin"
     When I am on "/sharing/1/offers/add"
-    And I select "1" from "offer_type_new"
+    And I fill hidden field "offer_type_target_name" with "Echange ou don de matériel"
     And I select "22" from "theme"
-    And I fill in "Echange ou don de matériel" for "edit-offer-type-title"
     And I fill in "J'échange diverses pièces de porcelaine, contre du matériel de cuisine." for "edit-body"
     And I fill in "A convenir" for "edit-availability"
     And I fill in "Sarah" for "edit-contact-firstname"
-    And I fill in "Courci" for "edit-contact-lastname"
     And I fill in "Courci" for "edit-contact-lastname"
     And I fill in "0211234567" for "edit-contact-phone"
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"

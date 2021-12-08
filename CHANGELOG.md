@@ -72,6 +72,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add Docker credentials for Codeship to prevent Pull Rate Limit
 - node-autocomplete library
 
+### Security
+- update drupal/core (9.2.7 => 9.2.10) - QS-14
+
 ## [2.0.0] - 2021-08-26
 ### Added
 - add Gin Admin theme

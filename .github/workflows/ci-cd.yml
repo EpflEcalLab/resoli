@@ -71,6 +71,9 @@ jobs:
         run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only
       - name: Build Styleguide
         run: docker exec test yarn build --production
+      - name: Build Styleguide Library Node Autocomplete
+        run: yarn && yarn build --production
+        working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete
       - name: Run Behat tests
         run: docker-compose exec -T test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data
       - name: Upload Artifact

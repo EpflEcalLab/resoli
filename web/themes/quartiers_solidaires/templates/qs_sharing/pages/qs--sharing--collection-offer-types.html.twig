@@ -1,0 +1,42 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+{% set currentTheme = null %}
+{% set community_name = variables.community.name.value|trim %}
+
+{# Block with all offer types #}
+{% if variables.offerTypesByThemes %}
+  <div class="container my-5">
+    <p class="lead text-center mb-0">
+      {{ 'qs.sharing.offer.lead @community'|t({
+        '@community': community_name,
+      }) }}
+    </p>
+
+    {# Export PDF button availables to everyone. #}
+    <div class="text-center">
+      <a href="{{ url('qs_sharing.export.community.offers.pdf', {'community': variables.community.tid.value}) }}">
+        {{ 'qs.sharing.offer.list.download'|t }}
+      </a>
+    </div>
+
+    {% for offerTypesByTheme in variables.offerTypesByThemes if offerTypesByTheme.offersTypes is not empty %}
+      <div class="row mt-5">
+
+        <div class="col-12 sticky-top bg-white mb-2">
+          {{ bamboo_render_entity('taxonomy_term', offerTypesByTheme.theme.id, 'teaser') }}
+        </div>
+
+        {% for offerType in offerTypesByTheme.offersTypes %}
+        <div class="col-sm-6 col-lg-4 d-flex">
+          {% include "@quartiers_solidaires/node/node--offer-type--teaser.html.twig" with {node: offerType, offers_count: offerType.offersCount, theme: offerTypesByTheme.theme} %}
+        </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="container">
+    <p class="lead text-center mt-5">{{ 'qs.sharing.offer.title_empty @community_name'|t({'@community_name': community_name}) }}</p>
+  </div>
+{% endif %}
+
+{{ bamboo_render_block('qs_sharing_collection_floating_action_button_block') }}

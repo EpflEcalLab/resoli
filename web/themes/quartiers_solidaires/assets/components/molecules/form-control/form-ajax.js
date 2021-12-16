@@ -4,8 +4,10 @@ const formAjax = () => {
     let timer = null;
     const delay = 2500;
 
-    $('form[data-ajax="true"]').on('click', '[type="submit"][data-confirm]', function(e) {
+    $('form[data-ajax="true"], form[data-confirm="true"]').on('click', '[type="submit"][data-confirm]', function(e) {
       const $this = $(this);
+      const hasClassBgDanger = $this.hasClass('bg-danger');
+
       const text = $this.text();
       const $icon = $this.find('.icon').clone();
       const confirmText = $this.data('confirm');
@@ -23,6 +25,7 @@ const formAjax = () => {
         .prepend($icon)
         .data('confirm', text)
         .data('pending', 'true')
+        .removeClass('bg-danger')
         .addClass('btn-confirm');
 
       timer = window.setTimeout(function() {
@@ -32,12 +35,17 @@ const formAjax = () => {
           .data('confirm', confirmText)
           .removeData('pending')
           .removeClass('btn-confirm');
+
+        if (hasClassBgDanger) {
+          $this.addClass('bg-danger');
+        }
       }, delay);
 
       return false;
     });
 
-    $(document).on('submit', 'form[data-ajax="true"]', function(e) {
+    // @todo remove.offer here and use data-confirm on offer confirmation-forms.
+    $(document).on('submit', 'form[data-ajax="true"]:not(.offer)', function(e) {
       e.preventDefault();
       const $this = $(this);
 

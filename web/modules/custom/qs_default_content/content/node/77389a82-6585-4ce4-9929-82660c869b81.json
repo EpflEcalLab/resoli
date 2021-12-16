@@ -1,0 +1,217 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/78?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/request"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/2?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "href": "http:\/\/localhost\/lausanne?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/23?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 78
+        }
+    ],
+    "uuid": [
+        {
+            "value": "77389a82-6585-4ce4-9929-82660c869b81"
+        }
+    ],
+    "vid": [
+        {
+            "value": 173
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "request"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-09-09T15:33:05+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "54c2e13a-f5d8-483b-9067-d98c3e50a2fb"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/2?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "962f5253-7237-45f3-b567-26fd227a0089"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/lausanne?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "e8cfc427-c90d-4015-b583-1418974120ed"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/23?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "77ebcdf6-cc4b-411e-ac2d-9db22bd73c23"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Demande d'entraide N\u00b078 de Sara Courci",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-09-09T15:32:29+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-09-09T15:33:05+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "archived",
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Bonjour,\r\n\r\nY a-t-il une nouvelle solution afin de pouvoir envoyer des mails avec Thunderbird \u00e0 pr\u00e8s de 100 utilisateurs ?\r\nJ'ai donc la version 91.1.0 \r\n\r\nCela m'arrive depuis le 1er septembre 2021. Jamais eu de probl\u00e8me auparavant.\r\n\r\nMerci d'avance pour vos id\u00e9es.",
+            "format": "light_html",
+            "processed": "Bonjour,\n\nY a-t-il une nouvelle solution afin de pouvoir envoyer des mails avec Thunderbird \u00e0 pr\u00e8s de 100 utilisateurs ?\nJ'ai donc la version 91.1.0 \n\nCela m'arrive depuis le 1er septembre 2021. Jamais eu de probl\u00e8me auparavant.\n\nMerci d'avance pour vos id\u00e9es.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Sarah Courci",
+            "lang": "zxx"
+        }
+    ]
+}

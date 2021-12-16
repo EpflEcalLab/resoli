@@ -1,0 +1,56 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %} {# You are not logged in #}
+
+{% set community_name = variables.community.name.value|trim %}
+
+<div class="container container-narrow">
+  <p class="lead text-center my-5">
+    {% block lead_text %}
+      {{ 'qs_sharing.requests.confirmation.lead @community'|t({
+        '@community': community_name,
+      }) }}
+    {% endblock %}
+  </p>
+
+  <div class="rounded-lg overflow-hidden">
+    <div theme="pink" class="bg-pink bg-pink-darker my-auto w-100">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+
+          <div class="text-center mt-5">
+            <p class="lead">{{ 'qs_sharing.requests.confirmation.title'|t }}</p>
+          </div>
+
+          <p class="font-weight-bold text-size-md mx-auto text-center">{{ 'qs_sharing.requests.confirmation.intro'|t }}</p>
+
+          <div class="row my-5">
+            <div class="col-sm-8 mx-auto text-center">
+              <ul class="list-unstyled mx-auto">
+                <li>
+                  <a class="btn btn-block btn-icon btn-icon-right btn-outline-primary btn-outline-invert" href="{{ path('qs_sharing.requests.form.add', {'community': variables.community.id}) }}">
+                    {{ 'qs_sharing.requests.confirmation.add_request'|t }}
+                    {{ macros.icon('plus') }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {# Help arrow. #}
+          <div class="mx-auto text-align-center mb-2" aria-hidden="true">
+            <svg width="42" height="62" viewBox="0 0 42 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 0V60" stroke="white" stroke-width="1.5"/>
+              <path d="M41 40L21 60L1 40" stroke="white" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <p class="font-weight-bold text-size-md mx-auto text-center">{{ 'qs_sharing.requests.confirmation.help'|t }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="text-center text-small mt-4 mx-5">
+    {{ 'qs_sharing.requests.confirmation.info'|t }}
+  </p>
+</div>
+
+{{ macros.floating_buttons(variables.floating_buttons, modal_bg|default('warning'), path('<current>')) }}

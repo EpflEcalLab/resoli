@@ -16,6 +16,7 @@ default:
             base_url: http://resoli.test:8888
         - Drupal\Behat\Context\Drupal\JsonContext:
         - Drupal\Behat\Context\Drupal\WatchdogContext:
+        - Drupal\Behat\Context\Drupal\UrlContext:
 
         # Resoli Contexts
         - Drupal\Behat\Context\Resoli\RegisterContext
@@ -25,6 +26,7 @@ default:
         - Drupal\Behat\Context\Resoli\AccountFormContext
         - Drupal\Behat\Context\Resoli\ActivityFormsContext
         - Drupal\Behat\Context\Resoli\EventFormsContext
+        - Drupal\Behat\Context\Resoli\SharingContext
 
         # Drupal Extension Contexts
         - Drupal\DrupalExtension\Context\DrupalContext

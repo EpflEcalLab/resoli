@@ -1,0 +1,140 @@
+{% extends "@quartiers_solidaires/wrapper/modal.html.twig" %}
+
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+{% set modal_title = 'qs_sharing.user.offers.collection.title'|t %}
+{% set modal_bg = 'primary' %}
+
+{% set floating_buttons = [
+  {
+    label: 'qs_sharing.floating.my_offers'|t,
+    icon: 'pencil',
+    active: true,
+  }
+] %}
+
+{% set community_name = variables.community.name.value|trim %}
+
+{% block modal_content %}
+
+  {% if variables.offers %}
+    <ul class="card-list card-list-offer mb-auto" id="offers-accordion" role="tablist" data-children=".card-list-item">
+      {% for offer in variables.offers %}
+        {% set is_deactivated = offer.moderation_state.value == 'archived' %}
+        <li class="card card-list-item {% if is_deactivated %}deactivated{% endif %}" id="card{{ offer.nid.value }}">
+          <a
+            data-toggle="collapse"
+            data-parent="#offers-accordion"
+            href="#collapse-{{ offer.nid.value }}"
+            class="card-pill collapsed"
+            role="tab"
+            aria-expanded="false"
+            aria-controls="collapse-{{ offer.nid.value }}"
+            id="offer{{ offer.nid.value }}"
+          >
+            <span class="card-pill-icon">
+              {{ macros.icon('theme_' ~ offer.field_theme.entity.field_sharing_icon.value) }}
+            </span>
+
+            <span class="card-pill-title {% if is_deactivated %}mr-auto{% endif %}">
+              {{ offer.field_offer_type.entity.title.value }}
+            </span>
+
+            {% if is_deactivated %}
+              {# Disable date display on medium device only #}
+              <span class="card-pill-title card-pill-deactivated mx-auto d-none d-md-flex">
+                <span>
+                {{ 'qs_sharing.user.offers.collection.deactivated @date'|t({
+                  '@date': offer.changed.value|bamboo_i18n_format_date('default_medium_date_only')
+                }) }}
+                </span>
+              </span>
+            {% endif %}
+
+            <span
+              class="btn btn-icon btn-icon-to-circle shadow-to-bottom ml-auto"
+              aria-label="{{ 'qs.readmore.about'|t }} {{ request.label }}"
+            >
+              {{ macros.icon('look') }}
+              <span class="d-none d-sm-inline">
+                {{ 'qs_sharing.offer.more'|t }}
+                <span class="sr-only">{{ 'qs_sharing.offer.more'|t }}</span>
+              </span>
+            </span>
+          </a>
+
+          <div class="collapse" id="collapse-{{ offer.nid.value }}" role="tabpanel">
+            <div class="card-body mx-auto">
+              <div class="card-text text-center mb-4">
+                {% if offer.field_description.value %}
+                  <h4 class="h5 card-title mb-3 mt-0">{{ offer.field_description.value|striptags }}</h4>
+                {% endif %}
+                {% set body = {
+                  '#type':   'processed_text',
+                  '#text':    offer.body.value,
+                  '#format':  offer.body.format,
+                } %}
+                {{ body }}
+
+                {% if is_deactivated %}
+                  {# Disable date display on mobile device only #}
+                  <span class="d-md-none mb-0">
+                    <span>
+                    {{ 'qs_sharing.user.offers.collection.deactivated @date'|t({
+                      '@date': offer.changed.value|bamboo_i18n_format_date('default_medium_date_only')
+                    }) }}
+                    </span>
+                  </span>
+                {% endif %}
+
+              </div>
+
+              <div class="card-actions card-actions-offset row">
+                {% if not is_deactivated %}
+                  <div class="col-sm-6 mb-3">
+                    {{ bamboo_render_form('qs_sharing', 'OfferDeactivateForm', {'offer': offer}) }}
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    <a href="{{ path('qs_sharing.offers.form.edit', {'offer': offer.nid.value}) }}" class="btn btn-outline-invert btn-icon shadow-to-bottom btn-block">
+                      {{ macros.icon('pencil') }}
+                      {{ 'qs_sharing.user.offers.collection.edit'|t }}
+                    </a>
+                  </div>
+                {% else %}
+                  <div class="col-sm-6 mb-3">
+                    {{ bamboo_render_form('qs_sharing', 'OfferDeleteForm', {'offer': offer}) }}
+                  </div>
+                  <div class="col-sm-6 mb-3">
+                    {{ bamboo_render_form('qs_sharing', 'OfferReactivateForm', {'offer': offer}) }}
+                  </div>
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="text-center mb-auto">
+      <p>
+        {{ 'qs_sharing.user.offers.collection.empty'|t }}
+      </p>
+    </div>
+  {% endif %}
+{% endblock %}
+
+
+{% block modal_footer %}
+  {% set modal_footer_button_classes = 'bg-info btn-outline-invert btn-outline-info' %}
+  {% set modal_footer_buttons = [
+    {
+      label: 'qs_sharing.add_offer'|t,
+      icon: 'plus',
+      url: path('qs_sharing.offers.form.add', {community: variables.community.tid.value}),
+      classes: modal_footer_button_classes,
+    },
+  ] %}
+  {{ macros.modal_footer_buttons(modal_footer_buttons) }}
+{% endblock %}
+

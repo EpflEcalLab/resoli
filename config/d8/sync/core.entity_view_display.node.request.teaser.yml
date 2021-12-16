@@ -1,0 +1,50 @@
+uuid: 968a1e7d-1117-40e1-8c85-20a5897661d7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.request.body
+    - field.field.node.request.field_community
+    - field.field.node.request.field_contact_mail
+    - field.field.node.request.field_contact_name
+    - field.field.node.request.field_contact_phone
+    - field.field.node.request.field_solved_at
+    - field.field.node.request.field_solved_by
+    - field.field.node.request.field_theme
+    - node.type.request
+  module:
+    - text
+    - user
+id: node.request.teaser
+targetEntityType: node
+bundle: request
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_community: true
+  field_contact_mail: true
+  field_contact_name: true
+  field_contact_phone: true
+  field_solved_at: true
+  field_solved_by: true
+  field_theme: true
+  langcode: true

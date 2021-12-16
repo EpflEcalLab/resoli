@@ -12,6 +12,7 @@ install_plugin Capistrano::SCM::Git
 require 'capistrano/composer'
 
 require 'capistrano/antistatique'
+require 'capistrano/antistatique/drupal/loco'
 require 'capdrupal'
 require 'slackistrano/capistrano'
 

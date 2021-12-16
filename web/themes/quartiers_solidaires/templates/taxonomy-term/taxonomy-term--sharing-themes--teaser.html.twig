@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Theme override to display a taxonomy term.
+ *
+ * Available variables:
+ * - url: URL of the current term.
+ * - name: Name of the current term.
+ * - content: Items for the content of the term (fields and description).
+ *   Use 'content' to print them all, or print a subset such as
+ *   'content.description'. Use the following code to exclude the
+ *   printing of a given child element:
+ *   @code
+ *   {{ content|without('description') }}
+ *   @endcode
+ * - attributes: HTML attributes for the wrapper.
+ * - page: Flag for the full page state.
+ * - term: The taxonomy term entity, including:
+ *   - id: The ID of the taxonomy term.
+ *   - bundle: Machine name of the current vocabulary.
+ * - view_mode: View mode, e.g. 'full', 'teaser', etc.
+ *
+ * @see template_preprocess_taxonomy_term()
+ *
+#}
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="d-flex align-items-center py-2">
+  {% if term.field_sharing_icon.value != 'none' %}
+  <div class="mr-2 text-gray d-inline-flex justify-content-center align-items-center">
+    {{ macros.icon('theme_' ~ term.field_sharing_icon.value, 'icon-lg') }}
+  </div>
+  {% endif %}
+  <h2 class="mb-0 h5">{{ name }}</h2>
+</div>

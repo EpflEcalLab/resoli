@@ -94,7 +94,10 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
     $community = $this->route->getParameter('community');
     $node = $this->route->getParameter('node');
 
-    if (!$community && $node && $node->bundle() === 'activity') {
+    if (!$community && $node && \in_array($node->bundle(), [
+      'activity',
+      'offer_type',
+    ], TRUE)) {
       $community = $node->field_community->entity;
     }
 
@@ -108,6 +111,12 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
 
     if (!$community && $event && $event->bundle() === 'event') {
       $community = $event->field_activity->entity->field_community->entity;
+    }
+
+    $request = $this->route->getParameter('request');
+
+    if (!$community && $request && $request->bundle() === 'request') {
+      $community = $request->field_community->entity;
     }
 
     // When the community doesn't exists, it's impossible build the menu.
@@ -165,6 +174,35 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
         'activated_by' => [
           'qs_calendar.collection.weekly',
           'qs_calendar.collection.monthly',
+        ],
+      ],
+      'sharing' => [
+        'label' => $this->t('qs_menu.links.sharing'),
+        'url' => $this->urlGenerator->generate('qs_sharing.collection.offer', [
+          'community' => $community->id(),
+        ]),
+        'icon' => 'sharing',
+        'links' => [
+          'qs_sharing.collection.offer' => [
+            'url' => $this->urlGenerator->generate('qs_sharing.collection.offer', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.sharing.offer'),
+          ],
+          'qs_sharing.requests.form.add' => [
+            'url' => $this->urlGenerator->generate('qs_sharing.requests.form.add', [
+              'community' => $community->id(),
+            ]),
+            'label' => $this->t('qs_menu.links.sharing.request'),
+            'extra_activated_by' => [
+              'qs_sharing.requests.confirmation',
+            ],
+          ],
+        ],
+        'activated_by' => [
+          'qs_sharing.collection.offer',
+          'qs_sharing.requests.form.add',
+          'qs_sharing.requests.confirmation',
         ],
       ],
       'photos' => [

@@ -1,0 +1,11 @@
+uuid: cb9d04a3-5a98-451d-a9b8-44a89588b410
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.offer
+id: node.offer
+target_entity_type_id: node
+target_bundle: offer
+default_langcode: zxx
+language_alterable: false

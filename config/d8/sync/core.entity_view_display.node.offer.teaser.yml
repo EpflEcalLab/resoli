@@ -1,0 +1,48 @@
+uuid: 3e9eaad9-bbb5-42c1-abfb-19b7b5d0ee44
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.offer.body
+    - field.field.node.offer.field_contact_mail
+    - field.field.node.offer.field_contact_name
+    - field.field.node.offer.field_contact_phone
+    - field.field.node.offer.field_description
+    - field.field.node.offer.field_offer_type
+    - field.field.node.offer.field_theme
+    - node.type.offer
+  module:
+    - text
+    - user
+id: node.offer.teaser
+targetEntityType: node
+bundle: offer
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_contact_mail: true
+  field_contact_name: true
+  field_contact_phone: true
+  field_description: true
+  field_offer_type: true
+  field_theme: true
+  langcode: true

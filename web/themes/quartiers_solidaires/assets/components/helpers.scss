@@ -25,6 +25,10 @@
   @include drop-shadow(bottom, theme-color('secondary'));
 }
 
+.shadow-to-bottom-info {
+  @include drop-shadow(bottom, theme-color('info'));
+}
+
 .shadow-floating {
   @include floating-shadow();
 }
@@ -41,6 +45,7 @@
 // Background helpers
 @include bg-variant('.bg-primary', color("primary"));
 @include bg-variant('.bg-primary-light', color("primary-lighter"));
+@include bg-variant('.bg-pink-darker', color("pink-darker"));
 
 // Opacity helpers
 .opacity-50 {
@@ -50,6 +55,7 @@
 // Light colors on colored backgrounds
 .bg-secondary,
 .bg-info,
+.bg-pink,
 .bg-primary,
 .bg-danger {
   color: color("light");
@@ -117,6 +123,14 @@
 
 .rounded-0 {
   border-radius: 0 !important;
+}
+
+.rounded-lg {
+  border-radius: $border-radius-lg;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 // Text helpers

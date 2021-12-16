@@ -1,0 +1,19 @@
+uuid: 93721215-e752-445d-b014-6920497043ad
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_mail
+    - node.type.offer
+id: node.offer.field_contact_mail
+field_name: field_contact_mail
+entity_type: node
+bundle: offer
+label: 'Contact mail'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

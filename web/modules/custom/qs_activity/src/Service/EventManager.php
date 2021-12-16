@@ -86,9 +86,9 @@ class EventManager {
    *
    * @param \Drupal\node\NodeInterface $activity
    *   The activity this event will belongs to.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $date_start
+   * @param \DateTimeInterface $date_start
    *   The start date.
-   * @param \Drupal\Core\Datetime\DrupalDateTime $date_end
+   * @param \DateTimeInterface $date_end
    *   The end date.
    * @param array|null $data
    *   Optional data to override default activity value.
@@ -98,11 +98,9 @@ class EventManager {
    * @return \Drupal\node\NodeInterface
    *   The created event.
    */
-  public function create(NodeInterface $activity, DrupalDateTime $date_start, DrupalDateTime $date_end, ?array $data = NULL) {
-
-    // Change timezone for storage.
-    $date_end->setTimezone(new \DateTimeZone('UTC'));
-    $date_start->setTimezone(new \DateTimeZone('UTC'));
+  public function create(NodeInterface $activity, \DateTimeInterface $date_start, \DateTimeInterface $date_end, ?array $data = NULL) {
+    $date_end->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
+    $date_start->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
 
     $title = isset($data['title']) ? $data['title'] : $activity->title->value;
     $body = isset($data['body']) ? $data['body'] : $activity->body->value;
@@ -186,7 +184,7 @@ class EventManager {
     if ($limit) {
       $rows = $query->execute();
       $this->pagerManager->createPager(\count($rows), $limit);
-      $query->pager($limit);
+      $query->range($this->pagerManager->findPage() * $limit, $limit);
     }
 
     $nids = $query->execute();
@@ -230,7 +228,7 @@ class EventManager {
     if ($limit) {
       $rows = $query->execute();
       $this->pagerManager->createPager(\count($rows), $limit);
-      $query->pager($limit);
+      $query->range($this->pagerManager->findPage() * $limit, $limit);
     }
 
     $nids = $query->execute();

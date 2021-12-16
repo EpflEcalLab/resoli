@@ -6,6 +6,79 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2021-12-16
+### Added
+- add core architecture for Entraide
+- Add new Sharing entity 'Offer's Type'
+- Add new Sharing entity 'Offer'
+- Add new Sharing entity 'Request'
+- Add new Sharing entity 'Volunteerism'
+- Add PDF exporter service and base template #796
+- Add dashboard 'Offers'
+- Add templates for listing offers
+- Add moderation for the offers
+- add offer edit form
+- add Request collection for volunteers - #831 #832
+- add Request Archive form - #832
+- add Request Solve form - #830
+- add Request Add form - #833
+- add filter by moderation state on requests admin Views UI - #943
+- add fragment #card upon offer desactivation & re-activation - #978
+- add solved_by lead text on listing of offers - #964
+- add bg-pink-darker variante and use it on request confirmation form - #969
+- add active sharing link on request confirmation page - #969
+- add Loco Translate integration to ease translations
+- add new Javascript library node-autocomplete - QS-3
+- integrate node-autocomplete - QS-7 QS-4 QS-5 QS-6
+
+### Changed
+- update all Javascript Dependencies
+- Update drupal/core (9.2.1 => 9.2.4)
+- Update drupal/admin_toolbar (3.0.1 => 3.0.2)
+- Update drupal/field_group (3.1.0 => 3.2.0)
+- move from Codeship to Github Actions
+- security update drupal/core-dev (9.2.4 => 9.2.6)
+- show the offer_type title instead of offer title upon deactivate, delete and reactive actions on offers - #947
+- remove quill from Offer Availability field - #1001
+- change order of offers collection listing to always list last changed on top - #1010
+- remove notification mail when someone archive Requests of others - #968
+- increase image WxH limitation from 5000x5000 => 10000x10000 - #940
+- update all PHP dependencies with config export
+- update all Javascript dependencies
+- update autocomplete order of elements to be sorted alpha - QS-12
+- update friendsofphp/php-cs-fixer (v2.19.3 => v3.3.1)
+
+### Fixed
+- fix pager of Events
+- fix un-peristed contact firstname & lasname upon offer creation - #944
+- fix un-peristed contact firstname & lasname upon request creation
+- fix wrong persistence of e-mail & phone number upon request creation
+- fix missing translations strings - #960
+- fix counter of offers by types - #981
+- strip HTML markup on PDF export - #974
+- increase body width of request confirmation form to make the btn readable - #969
+- volunteering preferences form should redirect to my dashboard - #961
+- fix persistance of solved_at date when solving a request - #964
+- apply fullpage modal template to edit offer form - #977 #957
+- remove box-shadow on checkboxes on Create offer Form - #951
+- use Large sharing icon size on collection pages - #947
+- update 'divers' sharing theme icon - #967
+- update request add form to have margin on mobile - #1006
+- update offer add form themes responsivness - #1005
+- fix none-working Moderate offer action when multiple form on the same page
+- fix Daylight Saving offsetting events's hours over repetitions - #920
+- user's offers collection responsivness - #1003
+- community's requests collection responsivness - #1004
+- fix button past event active state - QS-10
+
+### Added
+- add Docker credentials for Codeship to prevent Pull Rate Limit
+- node-autocomplete library
+
+### Security
+- update drupal/core (9.2.7 => 9.2.10) - QS-14
+- update dependencies (others than drupal/core) - QS-14
+
 ## [2.0.0] - 2021-08-26
 ### Added
 - add Gin Admin theme
@@ -389,5 +462,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/antistatique/quartiers-solidaires/compare/v1.7.1...v2.0.0

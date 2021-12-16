@@ -1,0 +1,12 @@
+<li class="card {% if is_solved %}solved{% endif %} card-list-item" id="card{{ key }}">
+
+  <div class="card-front">
+    {% include "@quartiers_solidaires/node/partials/card-pill-requests.html.twig" %}
+  </div>
+
+  <div class="collapse" id="collapse-{{ key }}" role="tabpanel" data-parent="#requests-accordion">
+    {% include "@quartiers_solidaires/node/partials/card-body-requests.html.twig" %}
+  </div>
+
+</li>
+

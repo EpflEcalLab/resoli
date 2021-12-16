@@ -80,3 +80,8 @@ quill:
     - core/jquery
     - core/drupal
     - core/drupalSettings
+
+# Node Autocomplete
+node-autocomplete:
+  js:
+    libs/node-autocomplete/build/static/js/main.js: {}

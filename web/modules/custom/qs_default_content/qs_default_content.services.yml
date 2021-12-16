@@ -1,0 +1,8 @@
+services:
+  # Redirect
+  qs_default_content.generate_volunteerism:
+    class: Drupal\qs_default_content\EventSubscriber\GenerateVolunteerismSubscriber
+    arguments:
+      - '@entity_type.manager'
+    tags:
+      - { name: event_subscriber }

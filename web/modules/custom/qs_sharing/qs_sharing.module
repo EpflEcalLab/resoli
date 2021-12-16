@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * @file
+ * Legacy Drupal 7 code to implements hooks.
+ */
+
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+include 'inc/offer_type_node_access.inc';
+
+require_once 'inc/mails.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function qs_sharing_theme() {
+  return [
+    // Pages themes
+    // ---------------------------------------------------------------------.
+    'qs_sharing_collection_offer_types_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--collection-offer-types',
+    ],
+    'qs_sharing_collection_requests_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--collection-requests',
+    ],
+    'qs_sharing_confirmation_requests_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--confirmation-requests',
+    ],
+    'qs_sharing_user_offers_collection_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--user-offers-collection',
+    ],
+    'qs_sharing_dashboard_page' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--dashboard',
+    ],
+    // Blocks themes
+    // ---------------------------------------------------------------------.
+    'qs_sharing_offer_block' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--offer',
+    ],
+    'qs_sharing_offers_collection_block' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--offers-collection',
+    ],
+    'qs_sharing_collection_floating_action_button_block' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--collection-floating-btn',
+    ],
+    // PDFs themes
+    // ---------------------------------------------------------------------.
+    'qs_sharing_export_offers_pdf' => [
+      'variables' => ['variables' => []],
+      'template' => 'qs--sharing--export-offers--pdf',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * The administrative account (user ID #1) always passes any access check,
+ * so this hook is not called in that case.
+ */
+function qs_sharing_node_access(NodeInterface $node, $operation, AccountInterface $account) {
+  return qs_sharing_offer_type_node_access($node, $operation, $account);
+}

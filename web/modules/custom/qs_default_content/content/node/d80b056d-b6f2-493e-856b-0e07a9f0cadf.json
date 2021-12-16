@@ -1,0 +1,223 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/81?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/request"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/4?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "href": "http:\/\/localhost\/fribourg?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 81
+        }
+    ],
+    "uuid": [
+        {
+            "value": "d80b056d-b6f2-493e-856b-0e07a9f0cadf"
+        }
+    ],
+    "vid": [
+        {
+            "value": 177
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "request"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-09-09T15:39:35+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "54c2e13a-f5d8-483b-9067-d98c3e50a2fb"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/4?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "c3cdeea4-9012-4351-ba04-7dcfa4312abf"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_community": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fribourg?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/communities"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "3b9e3824-c73b-4b19-82cf-ac35022f2d47"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/request\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/19?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "0930812e-d866-47df-a224-70bba49cdc6b"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "Demande d'entraide N\u00b081 de Rabbi Boch\u00e9",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-09-09T15:39:35+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-09-09T15:39:35+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "published",
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Bonjour,\r\n\r\nEssence E85 pour quelle voiture ?\r\n\r\nMerci.\r\n\r\n",
+            "format": "light_html",
+            "processed": "Bonjour,\n\nEssence E85 pour quelle voiture ?\n\nMerci.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Rabbi Boch\u00e9",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_phone": [
+        {
+            "value": "021 821 01 01",
+            "lang": "zxx"
+        }
+    ]
+}

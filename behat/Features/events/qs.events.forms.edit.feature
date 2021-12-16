@@ -9,9 +9,7 @@ Feature: Event Edit Form
     And the "#edit-date" field should match regex "/[0-9]{2}.[0-9]{2}.[0-9]{4}/"
     And the "#edit-start-at" field should match regex "/(([0-1][0-9])|([2][0-3])):([0-5][0-9])/"
     And the "#edit-end-at" field should match regex "/(([0-1][0-9])|([2][0-3])):([0-5][0-9])/"
-    And the "edit-body" field should contain """
-<p>Partagez un simple café entre habitants!</p>
-      """
+    And the "edit-body" field should contain "<p>Partagez un simple café entre habitants!</p>"
     And the "edit-venue" field should contain ""
     And the "edit-contact-name" field should contain ""
     And the "edit-contact-phone" field should contain ""

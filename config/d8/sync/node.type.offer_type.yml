@@ -1,0 +1,17 @@
+uuid: b90ea344-e5e1-4f25-bf40-b31186afae46
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Offer''s Type'
+type: offer_type
+description: 'Offer''s type where offers will be attached.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

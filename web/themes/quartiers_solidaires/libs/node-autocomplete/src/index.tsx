@@ -1,0 +1,13 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App, { Props } from './App';
+
+const root = document.getElementById('node-autocomplete');
+const data = root?.dataset as unknown as Props;
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App {...data} list={JSON.parse(data.list as unknown as string)} />
+  </React.StrictMode>,
+  root,
+);

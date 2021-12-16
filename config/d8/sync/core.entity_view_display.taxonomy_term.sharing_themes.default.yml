@@ -1,0 +1,31 @@
+uuid: e077c49b-87ba-4324-ae88-f99eb69d39a2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.sharing_themes.field_sharing_icon
+    - taxonomy.vocabulary.sharing_themes
+  module:
+    - options
+    - text
+id: taxonomy_term.sharing_themes.default
+targetEntityType: taxonomy_term
+bundle: sharing_themes
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_sharing_icon:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden:
+  langcode: true

@@ -1,0 +1,21 @@
+uuid: 9fa4502d-b706-43ac-90dc-ee0006a86213
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_solved_at
+    - node.type.request
+  module:
+    - datetime
+id: node.request.field_solved_at
+field_name: field_solved_at
+entity_type: node
+bundle: request
+label: 'Solved at'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

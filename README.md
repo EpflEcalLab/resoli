@@ -1,10 +1,7 @@
 # Quartiers Solidaires
 Drupal 8 powered.
 
-| Staging CodeShip-CI | Prod CodeShip-CI |
-|:-------------------:|:----------------:|
-| [ ![Staging CodeShip-CI](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=dev)](https://app.codeship.com/projects/232628) | [ ![Prod CodeShip-CI](https://app.codeship.com/projects/fa0ca830-4aa8-0135-46f5-7acfff03633b/status?branch=master)](https://app.codeship.com/projects/232628) |
-
+[![Continuous Integration & Continuous Deployment](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci-cd.yml)
 
 ## 🔧 Prerequisites
 
@@ -358,6 +355,10 @@ For more help about Toolbox, the [official documentation](http://frontend.github
    docker-compose exec dev yarn build
   ```
 
+## 🧩 Frontend Libraries
+
+- [node-autocomplete](web/themes/quartiers_solidaires/libs/node-autocomplete/README.md)
+
 ## 🚀 Deploy
 
 ### First time
@@ -404,7 +405,7 @@ docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
 ### Kernel tests
 
 ```bash
-./vendor/bin/phpunit -x vevey_functional
+./vendor/bin/phpunit -x qs_functional
 ```
 
 ### Browser tests
@@ -418,7 +419,7 @@ docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
 1. Then you can run functional tests
 
 ```bash
-./vendor/bin/phpunit -g vevey_functional
+./vendor/bin/phpunit -g qs_functional
 ```
 
 ### Behat
@@ -439,8 +440,37 @@ docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
 
 Customs modules:
 
- - [Antistatique - Easy Breadcrumb](./web/modules/custom/antistatique/antistatique_easy_breadcrumb/README.md)
  - [Quartiers-Solidaires - Badges](./web/modules/custom/qs_badge/README.md)
+ 
+### 🌍 i18n
+
+We use [Localise.biz](https://localise.biz) (Loco) to translate the interface. The translation PO file is automatically pushed to Loco when deploying to staging. This means that **the PO file must contain ALL custom translation string of the projet**.
+
+- **Developers** should never forget to add a translation string to the PO file as soon as they create the new key.
+- Translations should be marked as **fuzzy** in the PO file.
+- **Project managers** should be aware of all the new translation strings and that these will be the ones in the staging *AND* production environments.
+- **Clients** should take it upon themselves to translate the keys in the required languages.
+
+## How to translate keys?
+
+Log into [localise.biz/antistatique](https://localise.biz/antistatique) and make sure you have the correct role to work on the Vevey project.
+
+In the project page [localise.biz/antistatique/resoli](https://localise.biz/antistatique/resoli), you have access to a "Manage" and a "Translate" tabs.
+
+Use the Translate tab and show the "Asset ID" and "Context" columns to work with the translation keys. Select the language you want to translate to and you're done!
+
+- Don't forget to set the translation status to a correct state (Fuzzy, translated, untranslated, etc)
+- Don't forget to save once you're done
+
+## What to do if a translation string is missing?
+
+1. **Notify the nearest developer about this.**
+1. Add the asset in the "Manage" section of the Loco project: use the "Asset ID" field to write the translation key (e.g. `resoli.title`) and save.
+1. You can now translate the asset in any language.
+1. The next cron job will update the string in the website.
+1. Once the developers have updated the file, it will get pushed to Loco.
+
+*You can also use the User Interface Translation page from the Drupal admin (`/admin/config/regional/translate`) to set a value temporarily, but be aware that it will get overwritten on the next deployment.*
 
 ## 🚑 Troubleshootings
 

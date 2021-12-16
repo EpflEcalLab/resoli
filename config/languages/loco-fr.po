@@ -1,0 +1,3225 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Quartiers-Solidaires\n"
+"Language: fr-ch\n"
+
+msgid "last year"
+msgstr "l’année dernière"
+
+msgid "this year"
+msgstr "cette année"
+
+msgid "next year"
+msgstr "l'année prochaine"
+
+msgid "last month"
+msgstr "le mois dernier"
+
+msgid "this month"
+msgstr "ce mois-ci"
+
+msgid "next month"
+msgstr "le mois prochain"
+
+msgid "last week"
+msgstr "la semaine dernière"
+
+msgid "this week"
+msgstr "cette semaine"
+
+msgid "next week"
+msgstr "la semaine prochaine"
+
+msgid "Yesterday"
+msgstr "Hier"
+
+msgid "Today"
+msgstr "Aujourd'hui"
+
+msgid "Tomorrow"
+msgstr "Demain"
+
+msgctxt "ampm"
+msgid "am"
+msgstr "am"
+
+msgctxt "ampm"
+msgid "pm"
+msgstr "pm"
+
+msgid "Midnight"
+msgstr "Minuit"
+
+msgid "Night"
+msgstr "Nuit"
+
+msgid "Morning"
+msgstr "Matin"
+
+msgid "Noon"
+msgstr "Midi"
+
+msgid "Afternoon"
+msgstr "Après-midi"
+
+msgid "Evening"
+msgstr "Soir"
+
+msgid "Sunday"
+msgstr "Dimanche"
+
+msgid "Monday"
+msgstr "Lundi"
+
+msgid "Tuesday"
+msgstr "Mardi"
+
+msgid "Wednesday"
+msgstr "Mercredi"
+
+msgid "Thursday"
+msgstr "Jeudi"
+
+msgid "Friday"
+msgstr "Vendredi"
+
+msgid "Saturday"
+msgstr "Samedi"
+
+msgctxt "Abbreviated weekday"
+msgid "Sun"
+msgstr "Dim."
+
+msgctxt "Abbreviated weekday"
+msgid "Mon"
+msgstr "Lun."
+
+msgctxt "Abbreviated weekday"
+msgid "Tue"
+msgstr "Mar."
+
+msgctxt "Abbreviated weekday"
+msgid "Wed"
+msgstr "Mer."
+
+msgctxt "Abbreviated weekday"
+msgid "Thu"
+msgstr "Jeu."
+
+msgctxt "Abbreviated weekday"
+msgid "Fri"
+msgstr "Ven."
+
+msgctxt "Abbreviated weekday"
+msgid "Sat"
+msgstr "Sam."
+
+msgid "Sun"
+msgstr "Dim"
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Wed"
+msgstr "Mer"
+
+msgid "Thu"
+msgstr "Jeu"
+
+msgid "Fri"
+msgstr "Ven"
+
+msgid "Sat"
+msgstr "Sam"
+
+msgctxt "Abbreviated 1 letter weekday Sunday"
+msgid "S"
+msgstr "D"
+
+msgctxt "Abbreviated 1 letter weekday Monday"
+msgid "M"
+msgstr "L"
+
+msgctxt "Abbreviated 1 letter weekday Tuesday"
+msgid "T"
+msgstr "M"
+
+msgctxt "Abbreviated 1 letter weekday Wednesday"
+msgid "W"
+msgstr "M"
+
+msgctxt "Abbreviated 1 letter weekday Thursday"
+msgid "T"
+msgstr "J"
+
+msgctxt "Abbreviated 1 letter weekday Friday"
+msgid "F"
+msgstr "V"
+
+msgctxt "Abbreviated 1 letter weekday Saturday"
+msgid "S"
+msgstr "S"
+
+msgctxt "Long month name"
+msgid "January"
+msgstr "Janvier"
+
+msgctxt "Long month name"
+msgid "February"
+msgstr "Février"
+
+msgctxt "Long month name"
+msgid "March"
+msgstr "Mars"
+
+msgctxt "Long month name"
+msgid "April"
+msgstr "Avril"
+
+msgctxt "Long month name"
+msgid "May"
+msgstr "Mai"
+
+msgctxt "Long month name"
+msgid "June"
+msgstr "Juin"
+
+msgctxt "Long month name"
+msgid "July"
+msgstr "Juillet"
+
+msgctxt "Long month name"
+msgid "August"
+msgstr "Août"
+
+msgctxt "Long month name"
+msgid "September"
+msgstr "Septembre"
+
+msgctxt "Long month name"
+msgid "October"
+msgstr "Octobre"
+
+msgctxt "Long month name"
+msgid "November"
+msgstr "Novembre"
+
+msgctxt "Long month name"
+msgid "December"
+msgstr "Décembre"
+
+msgctxt "Abbreviated month name"
+msgid "Jan"
+msgstr "Janv."
+
+msgctxt "Abbreviated month name"
+msgid "Feb"
+msgstr "Févr."
+
+msgctxt "Abbreviated month name"
+msgid "Mar"
+msgstr "Mars"
+
+msgctxt "Abbreviated month name"
+msgid "Apr"
+msgstr "Avr."
+
+msgctxt "Abbreviated month name"
+msgid "Jun"
+msgstr "Juin"
+
+msgctxt "Abbreviated month name"
+msgid "Jul"
+msgstr "Juil."
+
+msgctxt "Abbreviated month name"
+msgid "Aug"
+msgstr "Août"
+
+msgctxt "Abbreviated month name"
+msgid "Sep"
+msgstr "Sept."
+
+msgctxt "Abbreviated month name"
+msgid "Oct"
+msgstr "Oct."
+
+msgctxt "Abbreviated month name"
+msgid "Nov"
+msgstr "Nov."
+
+msgctxt "Abbreviated month name"
+msgid "Dec"
+msgstr "Déc."
+
+msgid "qs_auth.form.login.name.placeholder"
+msgstr "Ex. catherine.dubuis@resoli.ch"
+
+msgid "qs_auth.form.login.name"
+msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
+
+msgid "qs_auth.form.login.name.description"
+msgstr "En cas d’oubli, demandez-la à la personne responsable de votre communauté"
+
+msgid "qs_auth.form.login.placeholder"
+msgstr "Vous seul(e) le connaissez"
+
+msgid "qs_auth.form.login.password"
+msgstr "Inscrivez votre mot de passe ici"
+
+msgid "qs_auth.form.login.title"
+msgstr "Entrez les informations suivantes pour vous connecter de manière sécurisée à Resoli."
+
+msgid "qs.form.submit"
+msgstr "Valider les données"
+
+msgid "qs_auth.link.home"
+msgstr "Page d’accueil"
+
+msgid "qs_auth.link.password"
+msgstr "Mot de passe oublié?"
+
+msgid "qs_auth.link.register"
+msgstr "Créer un compte"
+
+msgid "qs_auth.login"
+msgstr "Utiliser mon compte"
+
+msgid "qs.auth.communities.welcome"
+msgstr "Bienvenue! A quelle communauté souhaitez-vous vous connecter?"
+
+msgid "qs.auth.communities.description"
+msgstr "Ce choix peut être modifié dans vos informations personnelles, accessibles par le menu principal."
+
+msgid "qs_auth.communities.selector"
+msgstr "Choisissez une communauté"
+
+msgid "qs.themes.filter_btn"
+msgstr "Thèmes"
+
+msgid "qs.themes.filter_title"
+msgstr "Choisissez un ou plusieurs thèmes qui correspondent à vos intérêts!"
+
+msgid "qs.themes.filter_all"
+msgstr "Tous les thèmes"
+
+msgid "qs_themes.filter_form.submit"
+msgstr "Valider la sélection"
+
+msgid "qs.activity.readmore"
+msgstr "Voir les détails"
+
+msgid "qs_activity.collection.themes.title"
+msgstr "Activités par thème"
+
+msgid "qs.previous"
+msgstr "Etape précédente"
+
+msgid "qs_menu.links.activities"
+msgstr "Activités"
+
+msgid "qs_menu.links.calendar"
+msgstr "Calendrier"
+
+msgid "qs_menu.links.stories"
+msgstr "Récits"
+
+msgid "qs_menu.links.photos"
+msgstr "Photos"
+
+msgid "qs_menu.links.account.dashboard"
+msgstr "Mes informations"
+
+msgid "qs_activity.floating.add.activity"
+msgstr "Créer une activité"
+
+msgid "qs_community.dashboard.members"
+msgstr "Membres de la communauté"
+
+msgid "qs_community.dashboard.waiting_approval"
+msgstr "Demandes en attente"
+
+msgid "qs_community.dashboard.title"
+msgstr "Gérer ma communauté"
+
+msgid "qs_community.waiting_approval.title"
+msgstr "Voici les demandes en attente de confirmation"
+
+msgid "qs_community.members.title"
+msgstr "Voici les membres de la communauté"
+
+msgid "qs_auth.logout"
+msgstr "Se déconnecter"
+
+msgid "qs_auth.communities"
+msgstr "Mes communautés"
+
+msgid "qs_auth.register"
+msgstr "Créer un compte"
+
+msgid "qs_activity.activity.dashboard"
+msgstr ""
+
+msgid "qs_activity.events.dashboard.title"
+msgstr "Gérer mon événement"
+
+msgid "qs_activity.activities.form.add.title.placeholder"
+msgstr "Ex. Randonnées à la Montagne"
+
+msgid "qs_activity.activities.form.add.title"
+msgstr "Quel est le nom de votre activité?"
+
+msgid "qs_activity.activities.form.add.theme"
+msgstr "Choisissez un des thèmes ci-dessous"
+
+msgid "qs_activity.activities.form.add.community_can_subscribe.description"
+msgstr "Inscriptions ouvertes aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.community_access_contact.description"
+msgstr "Informations de contact montrées aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.community_access_detail.description"
+msgstr "Détails des événements montrés aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.community_access_story.description"
+msgstr "Récits de l’activité montrés aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.member_create_story.description"
+msgstr "Publication de récits autorisée pour les membres de l’activité?"
+
+msgid "qs_activity.activities.form.add.community_access_gallery.description"
+msgstr "Photos de l’activité montrées aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.member_create_gallery.description"
+msgstr "Publication de photos autorisée pour les membres de l’activité?"
+
+msgid "qs_activity.activities.form.add.event"
+msgstr ""
+
+msgid "qs.form.no"
+msgstr "Non"
+
+msgid "qs.form.yes"
+msgstr "Oui"
+
+msgid "qs_supervisor.account.dashboard.apply"
+msgstr "Rejoindre une communauté"
+
+msgid "qs_supervisor.account.dashboard.edit"
+msgstr "Modifier mes données"
+
+msgid "qs_supervisor.account.dashboard.logout"
+msgstr "Se déconnecter"
+
+msgid "qs_supervisor.account.dashboard.title"
+msgstr "Mes informations"
+
+msgid "qs_auth.form.communities_apply.community"
+msgstr "Sélectionnez une communauté ci-dessous"
+
+msgid "qs_auth.communities.apply"
+msgstr "Rejoindre une communauté"
+
+msgid "qs_supervisor.account.form.edit.mail"
+msgstr "Mon adresse e-mail"
+
+msgid "qs_supervisor.account.form.edit.password"
+msgstr "Mon mot de passe"
+
+msgid "qs_supervisor.account.form.edit.firstname"
+msgstr "Mon prénom"
+
+msgid "qs_supervisor.account.form.edit.lastname"
+msgstr "Mon nom de famille"
+
+msgid "qs_supervisor.account.form.edit.phone"
+msgstr "Mon numéro de téléphone"
+
+msgid "qs_supervisor.account.form.edit.title"
+msgstr "Ici, vous pouvez modifier vos informations personnelles en toute sécurité."
+
+msgid "The requested page could not be found."
+msgstr "La page demandée ne peut pas être trouvée."
+
+msgid "Page not found"
+msgstr "Page non trouvée"
+
+msgid "qs_activity.activities.dashboard.title"
+msgstr "Gérer mon activité"
+
+msgid "qs_activity.activities.form.edit.info.title.placeholder"
+msgstr "Ex. Randonnées à la Montagne"
+
+msgid "qs_activity.activities.form.edit.info.title"
+msgstr "Quel est le nom de votre activité?"
+
+msgid "qs_activity.activities.form.edit.info.theme"
+msgstr "Quel thème correspond le mieux à votre activité?"
+
+msgid "qs_activity.add_form.community_can_subscribe.description"
+msgstr "Inscriptions ouvertes aux membres de la communauté?"
+
+msgid "qs_activity.add_form.community_access_contact.description"
+msgstr "Informations de contact montrées aux membres de la communauté?"
+
+msgid "qs_activity.add_form.community_access_detail.description"
+msgstr "Détails des événements montrés aux membres de la communauté?"
+
+msgid "qs_activity.add_form.community_access_story.description"
+msgstr "Récits de l’activité montrés aux membres de la communauté?"
+
+msgid "qs_activity.add_form.member_create_story.description"
+msgstr "Publication de récits autorisée pour les membres de l’activité?"
+
+msgid "qs_activity.add_form.community_access_gallery.description"
+msgstr "Photos de l’activité montrées aux membres de la communauté?"
+
+msgid "qs_activity.add_form.member_create_gallery.description"
+msgstr "Publication de photos autorisée pour les membres de l’activité?"
+
+msgid "qs_activity.activities.form.edit.visibility.title"
+msgstr "Visibilité de l’activité"
+
+msgid "qs_activity.activities.form.edit.defaults.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_activity.activities.form.edit.defaults.body"
+msgstr "Description par défaut"
+
+msgid "qs_activity.activities.form.edit.defaults.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+msgid "qs_activity.activities.form.edit.defaults.contact_phone"
+msgstr "Numéro de téléphone de contact par défaut"
+
+msgid "qs_activity.activities.form.edit.defaults.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@resoli.ch"
+
+msgid "qs_activity.activities.form.edit.defaults.contact_mail"
+msgstr "Adresse e-mail de contact par défaut"
+
+msgid "qs_activity.activities.form.edit.defaults.venue"
+msgstr "Point de rendez-vous par défaut"
+
+msgid "qs_activity.activities.form.edit.defaults.contribution"
+msgstr "Contribution par défaut"
+
+msgid "qs_activity.activities.form.edit.defaults.contribution.placeholder"
+msgstr "Ex. 15.00 CHF"
+
+msgid "qs_activity.activities.form.edit.defaults.title"
+msgstr "Valeurs par défaut"
+
+msgid "qs_activity.form.cancel"
+msgstr "Ne pas supprimer"
+
+msgid "qs_activity.activities.form.delete.title"
+msgstr "Supprimer l’activité"
+
+msgid "qs.activity.theme.filters @community_name."
+msgstr "Voici toutes les activités à venir, par thème, de @community_name."
+
+msgid "qs.menu.current_page"
+msgstr ""
+
+msgid "qs.menu.sorted_by"
+msgstr ""
+
+msgid "qs_menu.links.activities.themes"
+msgstr "Par thème"
+
+msgid "qs.menu.sort_by"
+msgstr ""
+
+msgid "qs_menu.links.activities.date"
+msgstr "Par date"
+
+msgid "qs_activity.floating.dashboard.community"
+msgstr "Gérer ma communauté"
+
+msgid "qs.auth.approval.thanks"
+msgstr "Votre demande nous est bien parvenue, merci!"
+
+msgid "qs.auth.approval.description @variables.community.name.value"
+msgstr "Une personne responsable de la communauté @variables.community.name.value va vérifier votre adhésion. Vous serez informé par e-mail lorsque vous pourrez commencer à utiliser Resoli! Cette validation peut durer quelques minutes, comme quelques jours. Vous pouvez écrire à contact@resoli.ch pour toute information complémentaire."
+
+msgid "qs.auth.approval.short"
+msgstr "Adhésion en cours de validation"
+
+msgid "qs_auth.approval"
+msgstr "Adhésion en attente"
+
+msgid "qs.activity.edit"
+msgstr ""
+
+msgid "qs.activity.next_events"
+msgstr "Voici les prochains événements de cette activité:"
+
+msgid "qs.readmore.about"
+msgstr ""
+
+msgid "qs.event.readmore"
+msgstr "Voir les détails"
+
+msgid "qs.event.readmore.about"
+msgstr ""
+
+msgid "qs.event.contact"
+msgstr "Contacter l’organisateur?"
+
+msgid "qs.event.back_to_event"
+msgstr "Retour à l’événement"
+
+msgid "qs.event.edit"
+msgstr "Modifier l’événement"
+
+msgid "qs_activity.events.form.add.title.placeholder"
+msgstr "Ex. Introduction à la recherche sur internet"
+
+msgid "qs_activity.events.form.add.title"
+msgstr "Quel est le nom de votre événement?"
+
+msgid "qs_activity.events.form.add.date"
+msgstr "Quand aura lieu votre événement?"
+
+msgid "qs_activity.events.form.add.start_at"
+msgstr "Heure du début"
+
+msgid "qs_activity.events.form.add.end_at"
+msgstr "Heure de fin"
+
+msgid "qs_activity.events.form.add.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_activity.events.form.add.body"
+msgstr "Comment décririez-vous votre événement?"
+
+msgid "qs_activity.events.form.add.venue"
+msgstr "Quel est le point de rendez-vous?"
+
+msgid "qs_activity.events.form.add.has_contribution"
+msgstr "Votre événement nécessite-t-il une contribution?"
+
+msgid "qs_activity.events.form.add.contribution"
+msgstr "Inscrivez ci-dessous la contribution désirée"
+
+msgid "qs_activity.events.form.edit.title"
+msgstr "Quel est le nom de votre événement?"
+
+msgid "qs_activity.events.form.edit.date"
+msgstr "Quand aura lieu votre événement?"
+
+msgid "qs_activity.events.form.edit.start_at"
+msgstr "Heure du début"
+
+msgid "qs_activity.events.form.edit.end_at"
+msgstr "Heure de fin"
+
+msgid "qs_activity.events.form.edit.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+msgid "qs_activity.events.form.edit.body"
+msgstr "Comment décririez-vous votre événement?"
+
+msgid "qs_activity.events.form.edit.venue"
+msgstr "Quel est le point de rendez-vous?"
+
+msgid "qs_activity.events.form.edit.has_contribution"
+msgstr "Votre événement nécessite-t-il une contribution?"
+
+msgid "qs_activity.events.form.edit.contribution"
+msgstr "Inscrivez ci-dessous la contribution désirée"
+
+msgid "qs.user.more"
+msgstr "Voir les détails"
+
+msgid "qs_community.members.roles"
+msgstr ""
+
+msgid "qs.roles.community_member"
+msgstr "Membre"
+
+msgid "qs.roles.community_organizer"
+msgstr "Organisateur"
+
+msgid "qs.roles.community_manager"
+msgstr "Responsable"
+
+msgid "qs.roles.community_none"
+msgstr "Désinscrire"
+
+msgid "qs.contact @member.field_firstname.value"
+msgstr "Contacter @member.field_firstname.value"
+
+msgid "qs.community.waiting_approval.request.member"
+msgstr "Cette personne souhaite devenir membre de la communauté."
+
+msgid "qs.confirmed"
+msgstr "Confirmer"
+
+msgid "qs.reject"
+msgstr "Refuser"
+
+msgid "qs.community.waiting_approval.request.organizer"
+msgstr ""
+
+msgid "qs.community.waiting_approval.request.manager"
+msgstr ""
+
+msgid "qs_auth.form.pass.name.label"
+msgstr "Inscrivez l’adresse e-mail avec laquelle vous êtes enregistré(e) ici"
+
+msgid "qs_auth.form.pass.name.description"
+msgstr "En cas d’oubli, demandez-la à la personne responsable de votre communauté"
+
+msgid "qs_auth.form.pass.title"
+msgstr "Demander un nouveau mot de passe"
+
+msgid "qs_auth.link.login"
+msgstr "Utiliser mon compte"
+
+msgid "qs_auth.forget_password"
+msgstr "Mot de passe oublié?"
+
+msgid "qs_auth.form.register.community"
+msgstr "Sélectionnez une communauté ci-dessous"
+
+msgid "qs_auth.register_form.step1"
+msgstr "Choisissez une communauté"
+
+msgid "qs_auth.form.register.firstname.placeholder"
+msgstr "Ex. Catherine"
+
+msgid "qs_auth.form.register.firstname"
+msgstr "Inscrivez votre prénom ici"
+
+msgid "qs_auth.form.register.lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+msgid "qs_auth.form.register.lastname"
+msgstr "Inscrivez votre nom de famille ici"
+
+msgid "qs_auth.register_form.step2"
+msgstr "Vos identifiants"
+
+msgid "qs_auth.register_form.mail.placeholder"
+msgstr "Ex. catherine.dubuis@resoli.ch"
+
+msgid "qs_auth.register_form.mail"
+msgstr "Inscrivez votre adresse e-mail ici"
+
+msgid "qs_auth.register_form.phone.placeholder"
+msgstr "Ex. 079 797 79 79"
+
+msgid "qs_auth.register_form.phone"
+msgstr "Inscrivez, si désiré, votre numéro de téléphone ici"
+
+msgid "qs_auth.register_form.step3"
+msgstr "Comment vous contacter?"
+
+msgid "qs_auth.form.register.username.placeholder"
+msgstr "Ex. Catherine33"
+
+msgid "qs_auth.form.register.username"
+msgstr "Inscrivez votre nom d’utilisateur ici"
+
+msgid "qs_auth.register_form.password.placeholder"
+msgstr "Vous seul(e) le saurez"
+
+msgid "qs_auth.form.register.password"
+msgstr "Inscrivez votre mot de passe ici"
+
+msgid "qs_auth.register_form.password_verification.placeholder"
+msgstr "Afin d’éviter les erreurs"
+
+msgid "qs_auth.form.register.password_verification"
+msgstr "Confirmez votre mot de passe ici"
+
+msgid "qs_auth.register_form.step4"
+msgstr "Protégez votre compte"
+
+msgid "qs_community.waiting_approval.empty"
+msgstr "Il n’y a actuellement aucune demande en attente pour rejoindre votre communauté."
+
+msgid "qs.activity.theme.filters @community_name @themes_names."
+msgstr "Voici les activités à venir, pour @themes_names, de @community_name."
+
+msgid "qs.activity.nextevent"
+msgstr "Prochain événement"
+
+msgid "qs.event.dashboard"
+msgstr "Gérer mon événement"
+
+msgid "qs.event.location"
+msgstr "Point de rendez-vous"
+
+msgid "qs.event.delete"
+msgstr "Supprimer l’événement"
+
+msgid "qs.event.dashboard_title @event"
+msgstr "@event"
+
+msgid "qs.event.dashboard_description"
+msgstr "Modifier l’événement et gérer les inscriptions."
+
+msgid "qs.event.subscriptions"
+msgstr "Gérer les inscriptions"
+
+msgid "qs_activity.events.form.delete.warning"
+msgstr "Voulez-vous vraiment supprimer cet événement?"
+
+msgid "qs.form.cancel"
+msgstr "Annuler"
+
+msgid "qs.form.error.empty @fieldname"
+msgstr "Cette information est absente: « @fieldname »"
+
+msgid "qs_activity.events.form.edit.title_form @activity"
+msgstr "Modifiez l’événement de votre activité «@activity»."
+
+msgid "qs.form.error.mail.malformed"
+msgstr "Votre adresse e-mail semble être incorrecte ou absente."
+
+msgid "qs.form.error.mail.used"
+msgstr "Cette adresse est déjà utilisée par un compte."
+
+msgid "qs_auth.form.register.error.password_verification.invalid"
+msgstr "Il semblerait que vous n’ayez pas inscrit des mots de passe identiques."
+
+msgid "qs.error.404.title"
+msgstr "Vous êtes perdu?"
+
+msgid "qs.error.404.decription"
+msgstr "Choisissez une des deux options ci-dessous."
+
+msgid "qs.error.403.title"
+msgstr "Accès refusé!"
+
+msgid "qs.error.403.decription"
+msgstr "Choisissez une des deux options ci-dessous."
+
+msgid "qs_auth.register_form.step1.description"
+msgstr "Bienvenue! Pour commencer, indiquez la communauté que vous souhaitez rejoindre!"
+
+msgid "qs_auth.register_form.step1.sub_description"
+msgstr "Vous souhaitez créer une nouvelle communauté? Ecrivez à contact@resoli.ch"
+
+msgid "qs_auth.register_form.step2.description"
+msgstr "Afin de vous donner accès à la communauté, indiquez les renseignements suivants:"
+
+msgid "qs_auth.register_form.step2.sub_description"
+msgstr "Ces données seront visibles uniquement par vous et vos responsables de communauté."
+
+msgid "qs_auth.register_form.step3.description"
+msgstr "Excellent! Indiquez à présent vos informations de contact, afin que les autres personnes membres puissent communiquer avec vous!"
+
+msgid "qs_auth.register_form.step3.sub_description"
+msgstr "Seules les personnes validées par la communauté pourront voir cette information."
+
+msgid "qs_auth.register_form.step4.description"
+msgstr "Finalement, choisissez un mot de passe pour que vous, uniquement, puissiez accéder à votre compte."
+
+msgid "qs_auth.register_form.step4.sub_description"
+msgstr "En cas d’oubli, vous pourrez à tout instant le réinitialiser."
+
+msgid "qs_supervisor.account.personal_info"
+msgstr "Voici les informations liées à mon compte."
+
+msgid "qs_supervisor.account.personal_data"
+msgstr "Mes données personnelles"
+
+msgid "qs_supervisor.account.form.edit_title"
+msgstr "Réviser ou modifier mes données personnelles"
+
+msgid "qs_supervisor.account.firstname"
+msgstr "Mon prénom"
+
+msgid "qs_supervisor.account.lastname"
+msgstr "Mon nom"
+
+msgid "qs_supervisor.account.phone"
+msgstr "Mon téléphone"
+
+msgid "qs_supervisor.account.mail"
+msgstr "Mon e-mail"
+
+msgid "qs_supervisor.account.communities"
+msgstr "Vers quelle communauté souhaitez-vous retourner?"
+
+msgid "qs_auth.form.communities_apply.no_community"
+msgstr "Il n’y a pas d’autres communautés disponibles."
+
+msgid "qs_supervisor.account.form.back"
+msgstr "Retour à mes infos"
+
+msgid "qs_activity.floating.dashboard.activity"
+msgstr "Gérer mon activité"
+
+msgid "qs_activity.floating.add.event"
+msgstr "Création d’un événement"
+
+msgid "qs_activity.events.form.step1.description @activity"
+msgstr "Créez un nouvel événement pour votre activité «@activity»."
+
+msgid "qs_activity.events.form.step2.description @activity"
+msgstr "Créez un nouvel événement pour votre activité «@activity»."
+
+msgid "qs.next"
+msgstr "Etape suivante"
+
+#, fuzzy
+msgid "qs.activity.edit_info"
+msgstr "Modifier l’aperçu de l’activité"
+
+msgid "qs.activity.edit_visibility"
+msgstr "Modifier la visibilité de l’activité"
+
+msgid "qs_activity.add_form.community_can_subscribe"
+msgstr "Inscriptions ouvertes aux membres de la communauté?"
+
+msgid "qs_activity.add_form.community_access_contact"
+msgstr "Informations de contact montrées aux membres de la communauté?"
+
+msgid "qs_activity.add_form.community_access_detail"
+msgstr "Détails des événements montrés aux membres de la communauté?"
+
+msgid "qs_activity.add_form.community_access_story"
+msgstr "Récits de l’activité montrés aux membres de la communauté?"
+
+msgid "qs_activity.add_form.member_create_story"
+msgstr "Publication de récits autorisée pour les membres de l’activité?"
+
+msgid "qs_activity.add_form.community_access_gallery"
+msgstr "Photos de l’activité montrées aux membres de la communauté?"
+
+msgid "qs_activity.add_form.member_create_gallery"
+msgstr "Publication de photos autorisée pour les membres de l’activité?"
+
+msgid "qs.activity.edit_default_values"
+msgstr "Modifier les valeurs par défaut des événements"
+
+msgid "qs.activity.add_event"
+msgstr "Créer un événement"
+
+msgid "qs.activity.delete"
+msgstr "Supprimer l’activité"
+
+msgid "qs_activity.activities.form.delete.warning"
+msgstr "Voulez-vous vraiment supprimer cette activité?"
+
+msgid "qs_activity.activities.form.add.success @activity"
+msgstr "L’activité «@activity» a bien été créée!"
+
+msgid "qs_activity.events.form.add.success"
+msgstr "Votre nouvel événement a bien été créé!"
+
+msgid "qs_event.events.form.add.success @event"
+msgstr ""
+
+msgid "qs_event.events.form.delete.success @event @date_start @date_end @hour_start @hour_end"
+msgstr "L’événement «@event» a bien été supprimé!"
+
+msgid "Unrecognized username or password. <a href=\":password\">Forgot your password?</a>"
+msgstr "E-mail ou mot de passe inconnu. <a href=\":password\">Mot de passe oublié?</a>"
+
+msgid "qs_auth.form.pass.name.placeholder"
+msgstr "Ex. catherine.dubuis@resoli.ch"
+
+msgid "qs.auth.pass.confirmation.thanks"
+msgstr "Merci pour votre demande."
+
+msgid "qs.auth.pass.confirmation.description"
+msgstr "Vérifiez votre boîte de réception, un e-mail vient de vous être envoyé!"
+
+msgid "%name is not recognized as a username or an email address."
+msgstr "L’adresse e-mail %name est inconnue de Resoli."
+
+msgid "Further instructions have been sent to your email address."
+msgstr "De plus amples informations vous ont été envoyées par e-mail."
+
+msgid "qs.auth.communities.dashboard_title"
+msgstr "Voici l’espace dédié à la gestion de votre communauté"
+
+msgid "qs.auth.communities.dashboard_description"
+msgstr "Choisissez une des options ci-dessous."
+
+msgid "qs.contact @privilege.user.entity.field_firstname.value"
+msgstr "Contacter @privilege.user.entity.field_firstname.value"
+
+msgid "qs_activity.activities.form.add.save"
+msgstr "Voir l’activité"
+
+msgid "qs_activity.activities.form.add.save_and_new_event"
+msgstr "Créer un premier événement"
+
+msgid "qs.activity.nextevent.empty"
+msgstr "Pas de prochaine date prévue pour le moment"
+
+msgid "qs_auth.form.reset.help"
+msgstr "Vous pourrez en choisir un nouveau en validant cette requête."
+
+msgid "qs_auth.form.reset.message @mail @expiration_date"
+msgstr "Elle ne concerne que l’adresse @mail, et sera disponible jusqu’au @expiration_date."
+
+msgid "qs.mail.pass.recovery.subject @sitename @mail @firstname @lastname"
+msgstr "Remplacement de vos informations de connexion sur @sitename"
+
+msgid "qs.mail.pass.recovery.body @mail @firstname @lastname @one-time-login"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"Vous avez effectué une demande de nouveau mot de passe pour accéder à la plateforme.\n"
+"\n"
+"Vous pouvez désormais vous y connecter en appuyant sur le lien suivant, ou en le copiant-collant dans votre navigateur internet:\n"
+"\n"
+"<a href=\"@one-time-login\">@one-time-login</a>\n"
+"\n"
+"Ce lien ne peut être utilisé qu’une seule fois et vous conduira vers une page regroupant vos informations personnelles. Là, vous pourrez choisir un nouveau mot de passe à votre convenance. Si vous n’utilisez pas ce lien, il sera automatiquement échu après un jour.\n"
+"\n"
+"Cordialement, \n"
+"l’équipe Resoli"
+
+msgid "You have just used your one-time login link. It is no longer necessary to use this link to log in. Please change your password."
+msgstr "Vous venez d’utiliser un lien à usage unique. Vous n’aurez plus besoin d’utiliser ce lien lors de vos prochaines connexions. Merci de modifier votre mot de passe."
+
+msgid "qs.mail.account.cancel.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.account.cancel.body @mail @firstname @lastname"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"Vous avez effectué une demande d’annulation de votre compte d’accès à la plateforme.\n"
+"\n"
+"\n"
+"Vous pouvez désormais confirmer cette demande sur [site:url-brief], en appuyant sur le lien suivant, ou en le copiant-collant dans votre navigateur internet:\n"
+"\n"
+"[user:cancel-url]\n"
+"\n"
+"ATTENTION: Cette action est irréversible.\n"
+"\n"
+"Si vous n’utilisez pas ce lien, il sera automatiquement échu après un jour."
+
+msgid "qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname"
+msgstr "Bienvenue sur @sitename!"
+
+msgid "qs.mail.welcome.no_approval.body @mail @firstname @lastname"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"Merci de vous être enregistré(e) sur la plateforme. \n"
+"\n"
+"Vous pourrez vous y connecter en appuyant sur le lien ci-dessous, ou en le copiant-collant dans votre navigateur internet, aussitôt qu’un-e responsable aura validé votre adhésion:\n"
+"\n"
+"www.resoli.ch\n"
+"\n"
+"Ce lien vous mènera vers une page sur laquelle vous pourrez vous connecter en toute sécurité. Après y avoir inséré votre mot de passe, vous accéderez au contenu de votre communauté. Finalement, retrouvez <a href=\"http://collaudromain.cr/documents/resoli/RS_Demarrage.pdf\">sur ce lien</a> un résumé des conditions générales, ainsi qu’un aide-mémoire pour bien démarrer!\n"
+"\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.mail.awaiting.approval.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.awaiting.approval.body @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.awaiting.approval.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.awaiting.approval.body @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.welcome.no_approval.subject @sitename @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.mail.admin.welcome.no_approval.body @mail @firstname @lastname"
+msgstr ""
+
+msgid "qs.auth.communities.dashboard_title @variables.community.name.value"
+msgstr "Voici le gestionnaire de la communauté @variables.community.name.value."
+
+msgid "qs.community.waiting_approval.request.manger"
+msgstr "Il n’y a actuellement aucune demande en attente pour rejoindre votre communauté."
+
+msgid "qs_community.members.empty"
+msgstr "Le terme de recherche n'a pas retourné de résultat"
+
+msgid "qs_supervisor.account.community_go"
+msgstr ""
+
+msgid "qs_supervisor.account.community_pending"
+msgstr "Demande d’accès en attente de validation"
+
+msgid "qs_supervisor.account.approval_go"
+msgstr ""
+
+msgid "Contact Us"
+msgstr "Contactez-nous!"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "qs.status_message"
+msgstr ""
+
+msgid "qs.error_message"
+msgstr ""
+
+msgid "qs.warning_message"
+msgstr ""
+
+msgid "qs_informative_message"
+msgstr ""
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "qs.event.contact_description @event.field_contact_name.value"
+msgstr "La personne qui organise cet événement est @event.field_contact_name.value."
+
+msgid "qs.event.contact.you_can_contact"
+msgstr "Vous pouvez la contacter"
+
+msgid "qs.event.contact.by_phone"
+msgstr "par téléphone"
+
+msgid "qs.event.contact.or"
+msgstr "ou"
+
+msgid "qs.event.contact.by_email"
+msgstr "par e-mail."
+
+msgid "qs.activity.no_events_please_contact @mail_link"
+msgstr "Il n’y a pas d’événement pour le moment.\n"
+"Pour toute question, contactez @mail_link"
+
+#, fuzzy
+msgid "qs.activity.no_events"
+msgstr "Il n’y a pas d’événement pour le moment."
+
+msgid "qs.event.not_accessible"
+msgstr "Cet événement est privé: les membres de l’activité uniquement peuvent en voir les détails."
+
+msgid "qs.event.register"
+msgstr "S’inscrire à l’événement"
+
+msgid "qs.event.contribution"
+msgstr "Contribution:"
+
+msgid "qs.error.403.description"
+msgstr "Choisissez une des deux options ci-dessous."
+
+msgid "qs.auth.approval.description @variables.community.name.value "
+msgstr "Une personne responsable de la communauté @variables.community.name.value va vérifier votre adhésion. Vous serez informé par e-mail lorsque vous pourrez commencer à utiliser Resoli! Cette validation peut durer quelques minutes, comme quelques jours. Vous pouvez écrire à contact@resoli.ch pour toute information complémentaire."
+
+msgid "qs.activity.theme.title_empty @community_name"
+msgstr "Aucune activité de @community_name ne correspond à votre choix de thème(s)."
+
+msgid "qs_activity.activities.form.add.community_can_subscribe"
+msgstr "Inscriptions ouvertes aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.community_access_contact"
+msgstr "Informations de contact montrées aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.community_access_detail"
+msgstr "Détails des événements montrés aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.community_access_story"
+msgstr "Récits de l’activité montrés aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.member_create_story"
+msgstr "Publication de récits autorisée pour les membres de l’activité?"
+
+msgid "qs_activity.activities.form.add.community_access_gallery"
+msgstr "Photos de l’activité montrées aux membres de la communauté?"
+
+msgid "qs_activity.activities.form.add.member_create_gallery"
+msgstr "Publication de photos autorisée pour les membres de l’activité?"
+
+msgid "qs_supervisor.account.phone_default"
+msgstr "Vous n’avez pas indiqué de numéro"
+
+msgid "qs_menu.links.stories.themes"
+msgstr "Par thème"
+
+msgid "qs_menu.links.stories.date"
+msgstr "Par date"
+
+msgid "qs_menu.links.photos.themes"
+msgstr "Par thème"
+
+msgid "qs_menu.links.photos.date"
+msgstr "Par date"
+
+msgid "qs_supervisor.account.form.edit.success @firstname, @lastname, @mail"
+msgstr "Vos données personnelles ont bien été mises à jour, @firstname!"
+
+msgid "qs_auth.pass_reset_form.title"
+msgstr "Souhaitez-vous réinitialiser votre mot de passe?"
+
+msgid "qs.form.error.username.used"
+msgstr ""
+
+msgid "qs_auth.form.register.success @firstname, @lastname, @mail"
+msgstr "Votre compte a bien été créé @firstname!\n"
+"La personne responsable de votre communauté vous informera lorsque vous pourrez commencer à l’utiliser."
+
+msgid "qs_auth.communities.apply.success @community"
+msgstr "Une demande d’accès à la communauté @community a bien été envoyée à son responsable!"
+
+msgid "qs_activity.activities.form.edit.info.success @activity"
+msgstr "Le titre et le thème de l’activité «@activity» ont bien été validés!"
+
+msgid "qs.form.delete_submit"
+msgstr "Oui, supprimer"
+
+msgid "qs_activity.activities.form.delete.error.has_events @activity"
+msgstr "Vous ne pouvez actuellement pas supprimer l’activité «@activity» avant d’avoir annulé tous ses événements. Si certains d’entre eux se sont déjà déroulés, merci d’écrire un e-mail à contact@resoli.ch"
+
+msgid "qs_activity.activities.form.delete.success @activity"
+msgstr "L’activité «@activity» a bien été supprimée!"
+
+msgid "qs.activity.edit_defaults"
+msgstr "Valeurs par défaut des prochains événements"
+
+msgid "qs_activity.activities.form.edit.defaults.contact_name"
+msgstr "Personne de contact par défaut"
+
+msgid "qs_activity.activities.form.edit.defaults.contact_name.placeholder"
+msgstr "Ex. Chantal Durand"
+
+msgid "qs.form.error.empty @mail"
+msgstr "Cette information est absente: « @mail »"
+
+msgid "qs_activity.activities.form.edit.defaults.success @activity"
+msgstr "Les valeurs par défaut de l’activité «@activity» ont bien été validées!"
+
+msgid "qs_activity.edit_visibility_form.success @activity"
+msgstr "Les réglages de visibilité de l’activité «@activity» ont bien été validés!"
+
+msgid "qs_activity.events.form.step1"
+msgstr "Nouvel événement"
+
+msgid "qs_activity.events.form.step2"
+msgstr "Nouvel événement"
+
+msgid "qs_activity.events.form.add.error.hours.malformed @fieldname"
+msgstr "Il semblerait que le champ «@fieldname» ne soit pas écrit correctement. Vérifiez qu’il corresponde au format suivant: « ex. 18:00 »."
+
+msgid "qs.form.error.something_went_wrong"
+msgstr "Quelque chose ne s’est pas déroulé comme prévu!"
+
+msgid "qs_activity.form.error.date_format_invalid @fieldname"
+msgstr ""
+
+msgid "qs_activity.form.error.date_past @fieldname"
+msgstr "La date choisie est déjà passée."
+
+msgid "qs_activity.events.form.add.error.hours.inconsistency @fieldname"
+msgstr "Vérifiez l’heure de votre événement."
+
+msgid "qs_activity.activities.form.step1.description"
+msgstr "Quel nom voulez-vous donner à votre activité?"
+
+msgid "qs_activity.activities.form.step1"
+msgstr "Nom de l’activité\n"
+""
+
+msgid "qs_activity.activities.form.step2.description"
+msgstr "Quel thème correspond le mieux à votre activité?"
+
+msgid "qs_activity.activities.form.step2"
+msgstr "Thème de l’activité"
+
+msgid "qs_activity.activities.form.step3.description"
+msgstr "Quel degré de confidentialité souhaitez-vous attribuer à votre activité?"
+
+msgid "qs_activity.activities.form.step3"
+msgstr "Degré de confidentialité de l’activité"
+
+msgid "qs_activity.activities.form.step4.description"
+msgstr "Pour terminer la création de votre activité, choisissez une des options ci-dessous!"
+
+msgid "qs_activity.activities.form.step4"
+msgstr "Terminer la création de l’activité"
+
+msgid "qs_activity.events.form.delete.error.is_past @event"
+msgstr "L’événement «@event» ne peut pas être supprimé, car il est déjà passé."
+
+msgid "qs_activity.events.form.edit.title.placeholder"
+msgstr "Ex. Randonnées à la Montagne"
+
+msgid "qs_activity.events.form.edit.success @event"
+msgstr "Les informations de l’événement «@event» ont bien été validées!"
+
+msgid "qs.mail.account.cancel_confirm.subject @sitename @mail @firstname @lastname"
+msgstr "Demande d’annulation de votre compte sur @sitename"
+
+msgid "qs.activity.nextevent.date @event_date @event_hour"
+msgstr "Jour @event_date \n"
+"@event_hour – heure de fin"
+
+msgid "Password reset instructions will be sent to your registered email address."
+msgstr "Indiquez comment nous pouvons vous contacter et nous vous enverrons les informations pour réinitialiser votre mot de passe."
+
+msgid "A confirmation request to cancel your account has been sent to your email address."
+msgstr "Une demande de confirmation d’annulation de votre compte vient de vous être envoyée par e-mail."
+
+msgid "There was a problem with your form submission. Please refresh the page and try again."
+msgstr "Il y a eu un problème avec la validation de vos données. Merci de recharger la page et d’essayer à nouveau."
+
+msgid "There was a problem with your form submission. Please wait @limit seconds and try again."
+msgstr "Il y a eu un problème avec la validation de vos données. Merci de patienter @limit secondes et d’essayer à nouveau."
+
+msgid "qs.activity.add_member"
+msgstr "Ajouter une personne"
+
+msgid "Member"
+msgstr "Membre"
+
+msgid "qs_activity.activities.form.add.member.success @activity"
+msgstr "Vous avez bien ajouté un nouveau membre à l’activité «@activity»!"
+
+msgid "qs.mail.account.cancel_confirm.body @mail @firstname @lastname @cancel-url"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"Vous avez effectué une demande d’annulation de votre compte d’accès à la plateforme Resoli.\n"
+"\n"
+"\n"
+"Vous pouvez désormais confirmer cette demande en appuyant sur le lien suivant, ou en le copiant-collant dans votre navigateur internet:\n"
+"\n"
+"@cancel-url\n"
+"\n"
+"ATTENTION: Cette action est irréversible.\n"
+"\n"
+"Si vous n’utilisez pas ce lien, il sera automatiquement échu après un jour.\n"
+"\n"
+"\n"
+"Cordialement, \n"
+"l’équipe Resoli"
+
+msgid "qs.cancel.confirm.expired"
+msgstr "Ce lien a expiré, redemandez-en un."
+
+msgid "qs_menu.links.calendar.weekly"
+msgstr "Hebdo"
+
+msgid "qs_menu.links.calendar.monthly"
+msgstr "Mensuel"
+
+msgid "qs.activity.date.sticky.from_to @start_date @end_date"
+msgstr "Semaines du @start_date au @end_date"
+
+msgid "qs.activity.date.sticky.today"
+msgstr "Aujourd’hui"
+
+msgid "qs.activity.date.sticky.tomorrow"
+msgstr "Demain"
+
+msgid "qs.activity.date.sticky.this_week"
+msgstr "Cette semaine"
+
+msgid "qs.activity.date.sticky.next_week"
+msgstr "La semaine prochaine"
+
+msgid "qs.activity.date.sticky.in_two_weeks"
+msgstr "Dans deux semaines"
+
+msgid "qs.activity.date.title_empty @community @start_date @end_date"
+msgstr "Aucune activité de @community n’est prévue pour la période du @start_date au @end_date."
+
+msgid "qs.activity.date.link_prev"
+msgstr "Activités précédentes"
+
+msgid "qs.activity.date.link_next"
+msgstr "Prochaines activités"
+
+msgid "qs.activity.members"
+msgstr "Gérer les membres"
+
+msgid "qs.event.subscriptions.subscribers"
+msgstr "Inscriptions confirmées"
+
+msgid "qs.event.subscriptions.waiting_approval"
+msgstr "Inscriptions en attente"
+
+msgid "qs_activity.members.title"
+msgstr "Voici les membres de votre activité"
+
+msgid "qs_activity.members.roles"
+msgstr ""
+
+msgid "qs.roles.activity_member"
+msgstr "membre"
+
+msgid "qs.roles.activity_maintainer"
+msgstr "coorganisateur"
+
+msgid "qs.roles.activity_organizer"
+msgstr "organisateur"
+
+msgid "qs_activity.members.empty"
+msgstr "Il n’y a aucun membre pour le moment."
+
+msgid "qs.auth.cancel.confirmation.thanks"
+msgstr ""
+
+msgid "qs.auth.cancel.confirmation.description"
+msgstr ""
+
+msgid "qs.calendar.monthly.goto @month"
+msgstr ""
+
+msgid "qs.calendar.today"
+msgstr "Aujourd’hui"
+
+msgid "qs.calendar.weekly.week"
+msgstr ""
+
+msgid "qs.calendar.weekly.previous"
+msgstr "Précédente"
+
+msgid "qs.calendar.weekly.next"
+msgstr "Suivante"
+
+msgid "qs.calendar.events.collection_empty"
+msgstr "Aucun événement n’est prévu pour cette date."
+
+msgid "qs_subscription.subscribers.title @variables.event.title.value @variables.activity.title.value"
+msgstr "Voici les inscriptions confirmées pour l’événement «@variables.event.title.value»"
+
+msgid "qs.contact @subscriber.field_firstname.value"
+msgstr "Contacter @subscriber.field_firstname.value"
+
+msgid "qs_subscription.subscribers.empty"
+msgstr "Il n’y a aucune inscription confirmée pour l’instant."
+
+msgid "qs_subscription.waiting_approval.title @variables.event.title.value @variables.activity.title.value"
+msgstr "Voici les inscriptions en attente pour l’événement «@variables.event.title.value»"
+
+msgid "qs.contact @subscription.user.entity.field_firstname.value"
+msgstr "Contacter @subscription.user.entity.field_firstname.value"
+
+msgid "qs_subscription.waiting_approval.empty"
+msgstr "Il n’y a pas d’inscription en attente de confirmation."
+
+msgid "qs.activity.add_member.submit"
+msgstr "Ajouter comme membre de l’activité"
+
+msgid "qs.previous.to_activities_list"
+msgstr "Activités"
+
+msgid "qs.previous.to_activity"
+msgstr "Mon activité"
+
+msgid "qs.previous.to_community_dashboard"
+msgstr "Gestionnaire"
+
+msgid "qs.previous.to_my_activities"
+msgstr "Mes activités"
+
+msgid "qs.previous.to_activity_dashboard"
+msgstr "Gestionnaire"
+
+msgid "qs.previous.to_event_dashboard"
+msgstr "Gestionnaire"
+
+msgid "qs.map.loading"
+msgstr "Chargement de la carte"
+
+msgid "qs.map.none"
+msgstr "Aucune carte disponible..."
+
+msgid "qs.event.register.pending"
+msgstr "Inscription en attente de confirmation"
+
+msgid "qs.event.register.confirmed"
+msgstr "Vous êtes inscrit(e) à l’événement"
+
+msgid "qs.roles.activity_none"
+msgstr "Désinscrire"
+
+msgid "qs.activity.user.collection.title @variables.user.field_firstname.value @variables.user.field_lastname.value @variables.user.mail.value"
+msgstr "Voici les activités qui vous concernent, @variables.user.field_firstname.value."
+
+msgid "qs.activity.user.collection.title"
+msgstr "Voici les activités qui vous concernent."
+
+msgid "qs.activity.more"
+msgstr ""
+
+msgid "qs.activity.goto"
+msgstr "Voir l’activité"
+
+msgid "qs.activity.user.collection.empty <span class=\"text-info\">@member</span> <span class=\"text-warning\">@maintainer</span>"
+msgstr "Vous n’êtes actuellement <span class=\"text-info\">@member</span> ou <span class=\"text-warning\">@maintainer</span> d’aucune activité. Pour le devenir, contacter son organisateur en vous rendant sur un événement de l’activité désirée."
+
+msgid "qs.activity.become.activity.organizer <span class=\"text-danger\">@organizer</span>"
+msgstr "Si vous désirez devenir <span class=\"text-danger\">@organizer</span> d’activité, contactez votre responsable de communauté."
+
+msgid "qs.subscription.user.collection.title @variables.user.field_firstname.value @variables.user.field_lastname.value @variables.user.mail.value"
+msgstr "Voici la liste de vos inscriptions, @variables.user.field_firstname.value."
+
+msgid "qs.subscription.user.collection.title"
+msgstr "Voici les événements auxquels vous vous êtes inscrit(e)."
+
+msgid "qs.subscription.user.collection.empty"
+msgstr "Vous n’avez prévu de participer à aucun événement pour l’instant."
+
+msgid "qs_activity.floating.my_activities"
+msgstr "Mes activités"
+
+msgid "qs_activity.floating.my_subscriptions"
+msgstr "Mes inscriptions"
+
+msgid "qs_supervisor.floating.my_account"
+msgstr "Mes informations"
+
+msgid "qs.event.calendar"
+msgstr "Voir dans le calendrier"
+
+msgid "qs.community.welcome.body"
+msgstr "Vous êtes connecté(e) à la communauté"
+
+msgid "qs.previous.to_calendar"
+msgstr "Calendrier"
+
+msgid "qs_activity.activities.form.add.save_and_set_default_values"
+msgstr "Définir des valeurs par défaut"
+
+msgid "qs_menu.links.account.communities"
+msgstr "Gérer ma communauté"
+
+msgid "qs_activity.events.form.edit.contact_name"
+msgstr "Quelle personne l’organise?"
+
+msgid "qs_activity.events.form.edit.contact_name.placeholder"
+msgstr "Ex. Michel Perriard"
+
+msgid "qs_activity.events.form.edit.contact_phone"
+msgstr "Quel est son numéro de téléphone?"
+
+msgid "qs_activity.events.form.edit.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+msgid "qs_activity.events.form.edit.contact_mail"
+msgstr "Quelle est son adresse e-mail?"
+
+msgid "qs_activity.events.form.edit.contact_mail.placeholder"
+msgstr "Ex. michel.perriard@resoli.ch"
+
+msgid "qs_activity.activities.form.edit.defaults.venue.placeholder"
+msgstr "Ex. Avenue Bergières 10, 1004 Lausanne"
+
+msgid "qs_activity.events.form.add.venue.placeholder"
+msgstr "Ex. Avenue Bergières 10, 1004 Lausanne"
+
+msgid "qs_activity.events.form.edit.venue.placeholder"
+msgstr "Ex. Avenue Bergières 10, 1004 Lausanne"
+
+msgid "qs.etc"
+msgstr "etc..."
+
+msgid "qs.and"
+msgstr "et"
+
+msgid "qs.previous.to_event"
+msgstr "Mon événement"
+
+msgid "qs.previous.to_photos_list"
+msgstr "Galerie"
+
+msgid "qs_menu.links.photos.months"
+msgstr "Par date"
+
+msgid "qs.community.welcome.body @community"
+msgstr "Vous êtes connecté(e) à la communauté @community."
+
+msgid "qs.community.welcome.title @firstname @lastname"
+msgstr "Bonjour @firstname @lastname!"
+
+msgid "qs.onboarding.my_account"
+msgstr "Accédez ici à vos informations personnelles! Vous pourrez y modifier votre mot de passe ou vous connecter à une autre communauté."
+
+msgid "qs.onboarding.menu"
+msgstr "Ceci est une barre de navigation! Elle vous permet de voyager dans les sections de votre communauté."
+
+msgid "qs.photos.date"
+msgstr ""
+
+msgid "qs.photo.month.empty @community @start_date @end_date"
+msgstr "Aucune photo de @community n’a été publiée pour la période du @start_date au @end_date."
+
+msgid "qs.photos.date.sticky.two_weeks_ago"
+msgstr "Il y a deux semaines"
+
+msgid "qs.photos.date.sticky.last_week"
+msgstr "La semaine passée"
+
+msgid "qs.photos.date.sticky.this_week"
+msgstr "Cette semaine"
+
+msgid "qs.photos.date.sticky.tomorrow"
+msgstr "Hier"
+
+msgid "qs.photos.date.sticky.today"
+msgstr "Aujourd’hui"
+
+msgid "qs.photos.date.sticky.from_to @start_date @end_date"
+msgstr "Semaine du @start_date au @end_date"
+
+msgid "qs.photo.theme.filters @community_name @themes_names."
+msgstr "Voici les photos des activités passées de @community_name, pour @themes_names."
+
+msgid "qs.photo.theme.filters @community_name."
+msgstr "Voici toutes les photos des activités de @community_name, par thème."
+
+msgid "qs.photos.view_all"
+msgstr "Voir les photos de l’activité"
+
+msgid "qs.photoswipe.prev"
+msgstr "Précédente"
+
+msgid "qs.photoswipe.next"
+msgstr "Suivante"
+
+msgid "qs.photoswipe.btn.close"
+msgstr "Fermer"
+
+msgid "qs.photoswipe.btn.share"
+msgstr "Partager"
+
+msgid "qs.photoswipe.btn.fullscreen"
+msgstr "Plein écran"
+
+msgid "qs.photoswipe.btn.zoom"
+msgstr "Agrandir"
+
+msgid "qs.photo.month.lead @community @month @year"
+msgstr "Voici toutes les photos des activités passées de @community, par date."
+
+msgid "qs.photo.month.empty @community @month @year"
+msgstr "Il n’y a pas de photos de @community à consulter en @month @year."
+
+msgid "qs.activity.date.lead @community @start_date @end_date"
+msgstr "Voici toutes les activités à venir, par date, de @community."
+
+msgid "qs.calendar.weekly.lead @community @current_day"
+msgstr "Voici le calendrier hebdomadaire de toutes les activités à venir de @community."
+
+msgid "qs.calendar.monthly.lead @community @current_day"
+msgstr "Voici le calendrier mensuel des activités à venir, pour tous les thèmes, de @community."
+
+msgid "qs.activity.user.you_are @role"
+msgstr "Vous êtes @role de cette activité."
+
+msgid "qs_photo.user.form.manage.title_form @activity"
+msgstr "Voici vos photos pour «@activity»."
+
+msgid "qs_photo.user.form.manage.description_form"
+msgstr "Commentez ou supprimez des photos."
+
+msgid "qs_photos.photos_select_all"
+msgstr "Tout sélectionner"
+
+msgid "qs_photos.photos_select"
+msgstr "Cliquez sur les photos pour les sélectionner"
+
+msgid "qs_photos.photos_comment"
+msgstr "Commenter les photos"
+
+msgid "qs_photos.photos_delete"
+msgstr "Supprimer les photos"
+
+msgid "qs_photo.form.add.title_form"
+msgstr "Ajouter des photos"
+
+msgid "qs_photo.add.form.step1.description"
+msgstr "Pour commencer, à quelle activité souhaitez-vous ajouter de nouvelles photos?"
+
+msgid "qs_photo.add.form.step1"
+msgstr "Cliquez ci-dessous pour voir les activités disponibles:"
+
+msgid "qs.form.select"
+msgstr "Cliquez pour voir les options"
+
+msgid "qs_photo.add.form.activity"
+msgstr "Choisissez une activité disponible:"
+
+msgid "qs_photo.add.form.step2.description"
+msgstr "A quel événement passé de cette activité souhaitez-vous ajouter de nouvelles photos?"
+
+msgid "qs_photo.add.form.step2"
+msgstr "Cliquez ci-dessous pour voir les événements disponibles:"
+
+msgid "qs_photo.add.form.event"
+msgstr "Choisissez un événement passé:"
+
+msgid "qs_photo.add.form.step3.description"
+msgstr "Sélectionnez et ajoutez sans plus tarder vos photos à cet événement!"
+
+msgid "qs_photo.add.form.step3"
+msgstr ""
+
+msgid "qs_photo.add.form.photos"
+msgstr ""
+
+msgid "qs_photo.add.form.step4.description"
+msgstr "Pour terminer la publication de vos photos, choisissez une des options ci-dessous!"
+
+msgid "qs_photo.add.form.step4"
+msgstr ""
+
+msgid "qs_photo.add.form.publish"
+msgstr "Publier les images"
+
+msgid "qs_photo.add.form.comment"
+msgstr "Commenter les images"
+
+msgid "qs_photo.add.form.story"
+msgstr "Créer un récit"
+
+msgid "qs.form.upload.at_least_one"
+msgstr "Choisissez au moins une image."
+
+msgid "qs_photo.form.add.success @number @event @activity"
+msgstr "@number photos ont bien été ajoutées à l’événement «@event», de l’activité «@activity»!"
+
+msgid "Image generation in progress. Try again shortly."
+msgstr "Génération de l'image en cours. Réessayez dans un court instant."
+
+msgid "@user (@uid) stream `@file` (@nid) at @now."
+msgstr ""
+
+msgid "qs.previous.to_my_photos"
+msgstr "Mes photos"
+
+msgid "qs_photo.floating.my_photos"
+msgstr "Mes photos"
+
+msgid "qs_photo.floating.manage_photos"
+msgstr "Gérer mes photos"
+
+msgid "qs_photo.user.form.manage.choose_one"
+msgstr "Sélectionnez d’abord au moins une photo!"
+
+msgid "qs_photo.form.comment.title_form"
+msgstr "Ecrivez vos commentaires à côté de vos photos!"
+
+msgid "qs_photo.form.comment.photo_comment_placeholder"
+msgstr "Ex. Lors de cet atelier, Françoise a dû revoir son jugement face au numérique!"
+
+msgid "qs_photo.form.comment.photo_comment_title"
+msgstr "Inscrivez un commentaire ici:"
+
+msgid "qs_photo.form.add.title"
+msgstr "Ajouter des photos"
+
+msgid "qs_photo.form.comment.success @number @activity"
+msgstr "Les commentaires de @number photo(s) de l’activité «@activity» ont bien été mis à jour!"
+
+msgid "qs_photo.form.delete.warning"
+msgstr "Voulez-vous vraiment supprimer ces photos?"
+
+msgid "qs_photo.form.delete.success @activity @number"
+msgstr "Vous avez bien supprimé @number photo(s) de l’activité «@activity»!"
+
+msgid "qs.previous.to_manage_photos"
+msgstr "Mes photos"
+
+msgid "qs.community.welcome"
+msgstr "Accueil de la communauté"
+
+msgid "qs_activity.collection.dates.title"
+msgstr "Activités par date"
+
+msgid "qs_calendar.collection.weekly.title"
+msgstr "Calendrier hebdo"
+
+msgid "qs_calendar.collection.monthly.title"
+msgstr "Calendrier mensuel"
+
+msgid "qs_photo.collection.monthly.title"
+msgstr "Photos par date"
+
+msgid "qs_photo.collection.themes.title"
+msgstr "Photos par thème"
+
+msgid "qs_activity.activities.members.title"
+msgstr "Gérer les membres"
+
+msgid "qs_subscription.subscribers.title"
+msgstr "Inscriptions confirmées"
+
+msgid "qs_subscription.waiting_approval.title"
+msgstr "Inscriptions en attente"
+
+msgid "qs_activity.events.form.delete.title"
+msgstr "Supprimer l’événement?"
+
+msgid "qs_subscription.user.collection.title"
+msgstr "Mes inscriptions"
+
+msgid "qs.form.upload.illegal_choice"
+msgstr "Choisissez une activité et un événement pour ajouter vos photos."
+
+msgid "qs.photos.user.collection.title"
+msgstr "Voici les photos d’activités vous concernant."
+
+msgid "qs.photos.view_activity_photos"
+msgstr "Voir les photos"
+
+msgid "qs.photos.manage_photos"
+msgstr "Gérer mes photos"
+
+msgid "qs.photos.add_photos"
+msgstr "Ajouter des photos"
+
+msgid "qs.photo.no_photos"
+msgstr ""
+
+msgid "qs.form.input.upload"
+msgstr "Sélectionner des photos"
+
+msgid "qs_photo.activity.title"
+msgstr "Photos de l’activité"
+
+msgid "qs_photo.user.form.manage.title"
+msgstr "Gérer mes photos"
+
+msgid "qs_photo.user.activities.collection.title"
+msgstr "Mes photos"
+
+msgid "qs_photo.form.comments.title"
+msgstr "Commenter les photos"
+
+msgid "qs_photo.form.delete.title"
+msgstr "Supprimer les photos?"
+
+msgid "qs.activity.add_member.placeholder"
+msgstr "Cliquez pour voir les membres de la communauté"
+
+msgid "You have tried to use a one-time login link that has either been used or is no longer valid. Please request a new one using the form below."
+msgstr "Vous avez tenté de réinitialiser votre mot de passe avec un lien à usage unique échu. Merci de redemandez un nouveau lien ci-dessous."
+
+msgid "qs.previous.to_photos_month"
+msgstr "Galerie"
+
+msgid "qs_auth.form.communities.no_community"
+msgstr "Vous n’êtes actuellement membre d’aucune communauté."
+
+msgid "qs.photo.theme.title_empty @community_name"
+msgstr "Aucune photo d’activité de @community_name ne correspond à votre choix de thème(s)."
+
+msgid "qs.comment.copy_to_other"
+msgstr "Appliquer à toutes les images"
+
+msgid "qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution"
+msgstr "Formats d’images valides: @file_validate_extensions"
+
+msgid "The image was resized to fit within the maximum allowed dimensions of %dimensions pixels."
+msgstr "Les images ont été ajustées à la taille maximale autorisée."
+
+msgid "The selected file %filename cannot be uploaded. Only files with the following extensions are allowed: %extensions."
+msgstr "Le fichier %filename ne peut être téléchargé. Seules les images aux formats suivants sont autorisées: %extensions."
+
+msgid "Only files with the following extensions are allowed: %files-allowed."
+msgstr "Seules les images aux formats suivants sont autorisées: %files-allowed."
+
+msgid "The specified file %name could not be uploaded."
+msgstr "Le fichier %name ne peux être téléchargé."
+
+msgid "qs.mail.welcome.no_approval.body @mail @firstname @lastname @url"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"Merci de vous être enregistré(e) sur la plateforme. \n"
+"\n"
+"Vous pourrez vous y connecter en appuyant sur le lien ci-dessous, ou en le copiant-collant dans votre navigateur internet, aussitôt qu’un-e responsable aura validé votre adhésion:\n"
+"\n"
+"@url\n"
+"\n"
+"Ce lien vous mènera vers une page sur laquelle vous pourrez vous connecter en toute sécurité. Après y avoir inséré votre mot de passe, vous accéderez au contenu de votre communauté. Finalement, retrouvez <a href=\"http://collaudromain.cr/documents/resoli/RS_Demarrage.pdf\">sur ce lien</a> un résumé des conditions générales, ainsi qu’un aide-mémoire pour bien démarrer!\n"
+"\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs_photo.form.comment.title_form @activity"
+msgstr "Ecrivez vos commentaires à côté de vos photos de l’activité «@activity»!"
+
+msgid "qs.photos.user.collection.title @name @email"
+msgstr ""
+
+msgid "qs.photos.user.collection.empty"
+msgstr "Pour ajouter des photos, vous devez au minimum être membre d’une activité.\n"
+"\n"
+"Celle-ci doit avoir des événements qui se sont déjà déroulés. Si ce n’est pas le cas, vous pouvez créer des événements passés dans la section «activités». "
+
+msgid "qs.photo.no_photos_please_contact @mail_link"
+msgstr "Il n’y a actuellement aucune photo pour cette activité.\n"
+"Pour toute question, contactez @mail_link"
+
+msgid "qs_community.waiting_approval.confirmed_confirm"
+msgstr "Ajouter aux membres?"
+
+msgid "qs_community.waiting_approval.reject_confirm"
+msgstr "Supprimer la demande?"
+
+msgid "qs_community.members.community_none_confirm"
+msgstr "Confirmer la désinscription?"
+
+msgid "qs_subscription.waiting_approval.confirmed_confirm"
+msgstr "Inscrire la personne?"
+
+msgid "qs_subscription.waiting_approval.reject_confirm"
+msgstr "Supprimer la demande?"
+
+msgid "qs.event.more"
+msgstr ""
+
+msgid "qs.activity.user.collection.title @name @email"
+msgstr ""
+
+msgid "qs_activity.members.ban_confirm"
+msgstr "Confirmer la désinscription?"
+
+msgid "qs_activity.activities.form.edit.defaults.titlefield"
+msgstr "Titre par défaut"
+
+msgid "qs_activity.activities.form.edit.defaults.titlefield.placeholder"
+msgstr "Ex. Introduction à la recherche sur internet"
+
+msgid "qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
+msgstr "Bonjour @firstname, \n"
+"\n"
+"votre inscription à l’événement «@event»  du @date à @time_start de l’activité «@activity» a été validée!\n"
+"\n"
+"Pour de plus amples détails, n’hésitez pas à contacter son organisateur ou organisatrice au travers de la plateforme:\n"
+"@url\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.mail.subscription.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community @event @activity"
+msgstr "Demande d’inscription à l’événement «@event» confirmée!"
+
+msgid "Su"
+msgstr "Di"
+
+msgid "Mo"
+msgstr "Lu"
+
+msgid "Tu"
+msgstr "Ma"
+
+msgid "We"
+msgstr "Me"
+
+msgid "Th"
+msgstr "Je"
+
+msgid "Fr"
+msgstr "Ve"
+
+msgid "Sa"
+msgstr "Sa"
+
+msgid "qs_supervisor.account.form.title"
+msgstr "Indiquez la communauté que vous souhaitez rejoindre!"
+
+msgid "qs.mail.community.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community"
+msgstr "Accès refusé à la communauté @community sur @sitename!"
+
+msgid "qs.mail.community.waiting_approval.decline.body @mail @firstname @lastname @community @url"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"nous avons le regret de vous informer qu’une des personnes responsables de la communauté @community a refusé votre demande d’inscription.\n"
+"\n"
+"Si désiré, vous pouvez à nouveau vous connecter à l’adresse @url en utilisant votre adresse e-mail @mail et faire une nouvelle demande d’inscription à une autre communauté.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.mail.community.waiting_approval.confirm.subject @sitename @mail @firstname @lastname @community"
+msgstr "Accès validé à la communauté @community sur @sitename!"
+
+msgid "qs.mail.community.waiting_approval.confirm.body @mail @firstname @lastname @community @url"
+msgstr "Bonjour @firstname @lastname,\n"
+"\n"
+"nous avons le plaisir de vous informer qu’une des personnes responsables de la communauté @community a validé votre demande d’inscription.\n"
+"\n"
+"Vous pouvez dès à présent vous y connecter à l’adresse @url en utilisant votre adresse e-mail @mail.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.previous.to_community_welcome"
+msgstr "Accueil"
+
+msgid "qs_subscription.request.form.success @event"
+msgstr "Votre demande d’inscription à l’événement «@event» a bien été envoyée à ses organisateurs/-trices."
+
+msgid "qs_photos.photos_select.empty"
+msgstr "Il n’y a plus de photos dans cette activité."
+
+msgid "qs.mail.community.apply.subject @sitename @mail @firstname @lastname @community"
+msgstr "@firstname @lastname souhaite rejoindre votre communauté @community"
+
+msgid "qs.mail.community.apply.body @mail @firstname @lastname @community @url"
+msgstr "Bonjour, \n"
+"\n"
+"Vous recevez ce message, car vous faites partie des personnes responsables de la communauté @community. Vous pourrez valider ou refuser la demande de @firstname dans la gestion des membres en attente ou en cliquant simplement sur ce lien: \n"
+"\n"
+"@url \n"
+"\n"
+"Il se peut que cette demande n’y figure plus, dans le cas où une autre personne responsable l’aurait déjà traitée. Pour plus de renseignements, n’hésitez pas à contacter cette personne par e-mail: @mail\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs_photo.form.comment.title"
+msgstr "Commenter des photos"
+
+msgid "qs.photo.theme.filters.empty"
+msgstr ""
+
+msgid "qs.contact @subscription_user"
+msgstr "Contacter @subscription_user"
+
+msgid "qs_supervisor.account.role @role"
+msgstr "Vous y êtes @role"
+
+msgid "qs.mail.subscription.waiting_approval.confirm_organizers.subject @sitename @mail @firstname @lastname @community @event @activity"
+msgstr "Confirmation d’inscription pour votre événement «@event»."
+
+msgid "qs.mail.subscription.waiting_approval.confirm_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
+msgstr "Bonjour, \n"
+"\n"
+"la demande d’inscription de @firstname @lastname à votre événement «@event» du @date a bien été validée par une de ses personnes organisatrices. Vous pouvez contacter cette personne par e-mail: @mail\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.mail.subscription.waiting_approval.decline.subject @sitename @mail @firstname @lastname @community @event @activity"
+msgstr "Annulation de votre inscription à l’événement «@event»."
+
+msgid "qs.mail.subscription.waiting_approval.decline.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
+msgstr "Bonjour @firstname, \n"
+"\n"
+"votre inscription à l’événement «@event» du @date de l’activité «@activity» a été annulée. N’hésitez pas à contacter son organisateur ou organisatrice.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.mail.event.deleted.subject @sitename @event"
+msgstr "L’événement «@event» a été annulé"
+
+msgid "qs.mail.event.deleted.body @mail @firstname @lastname @activity @event @date @time_start @time_end"
+msgstr "Bonjour, \n"
+"\n"
+"l’événement «@event» de l’activité «@activity» qui était prévu le @date à @time_start a été annulé par @firstname @lastname. Vous pouvez contacter cette personne par e-mail à l’adresse: @mail\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.mail.event.updated.subject @sitename @event"
+msgstr "L’événement «@event» a été modifié"
+
+msgid "qs.mail.event.updated.body @mail @firstname @lastname @activity @event @original_date @original_time_start @original_time_end @updated_date @updated_time_start @updated_time_end"
+msgstr "Bonjour, \n"
+"\n"
+"l’événement «@event» de l’activité «@activity» qui était prévu le @original_date, de @original_time_start à @original_time_end a été modifié par @firstname @lastname. Vous pouvez contacter cette personne par e-mail: @mail\n"
+"\n"
+"Merci de noter que désormais, il aura lieu le @updated_date, de @updated_time_start à @updated_time_end\n"
+"\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.mail.subscription.waiting_approval.confirm.body @mail @firstname @lastname @community @event @activity @url"
+msgstr "Bonjour @firstname, \n"
+"\n"
+"votre inscription à l’événement «@event» de l’activité «@activity» a été validée!\n"
+"\n"
+"Pour de plus amples détails, n’hésitez pas à contacter son organisateur ou organisatrice.\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs.photo.delete"
+msgstr "Supprimer les photos"
+
+msgid "Last »"
+msgstr "Dernier »"
+
+msgid "Next ›"
+msgstr "Suivant ›"
+
+msgid "‹ Previous"
+msgstr "‹ Précédent"
+
+msgid "« First"
+msgstr "« Premier"
+
+msgid "qs.pager.last"
+msgstr "Dernière"
+
+msgid "qs.pager.goto_last"
+msgstr "Aller à la dernière page"
+
+msgid "qs.pager.next"
+msgstr "Suivante"
+
+msgid "qs.pager.goto_next"
+msgstr "Aller à la page suivante"
+
+msgid "qs.pager.go_to_page @key"
+msgstr "Page @key"
+
+msgid "qs.pager.current_page"
+msgstr "Page actuelle"
+
+msgid "qs.pager.previous"
+msgstr "Précédente"
+
+msgid "qs.pager.goto_previous"
+msgstr "Aller à la page précédente"
+
+msgid "qs.pager.first"
+msgstr "Première"
+
+msgid "qs.pager.goto_first"
+msgstr "Aller à la première page"
+
+msgid "qs.event.goto"
+msgstr "Voir cet événement dans l’activité"
+
+msgid "qs_activity.user.collection.title"
+msgstr "Mes activités"
+
+msgid "qs.event.user.subscription.confirmed"
+msgstr "Vous êtes inscrit(e) à l’événement"
+
+msgid "qs.event.dashboard.shortcut.waiting_approval @guests"
+msgstr "@guests inscription(s) en attente"
+
+msgid "qs.event.user.subscription.pendings_guests @count"
+msgstr "@count inscription(s) en attente"
+
+msgid "qs.a11y.pager.title"
+msgstr "Pagination"
+
+msgid "qs.pager.a11y.first"
+msgstr "Première page"
+
+msgid "qs.pager.a11y.previous"
+msgstr "Page précédente"
+
+msgid "qs.pager.page"
+msgstr "Page"
+
+msgid "qs.pager.a11y.next"
+msgstr "Page suivante"
+
+msgid "qs.pager.a11y.last"
+msgstr "Dernière page"
+
+msgid "qs.event.user.subscription.confirmed_guests @count"
+msgstr "@count autre(s) personne(s) déjà inscrite(s)"
+
+msgid "qs_subscription.direct_request.form.success @event"
+msgstr "Vous avez bien confirmé votre présence à l’événement «@event»!"
+
+msgid "qs.event.dashboard.shortcut.confirmed @guests"
+msgstr "@guests autre(s) personne(s) déjà inscrite(s)"
+
+msgid "qs.event.user.subscription.confirmed_guests"
+msgstr "Inscription(s) confirmée(s)"
+
+msgid "qs.event.user.subscription.pendings_guests"
+msgstr "Inscription(s) en attente"
+
+msgid "qs.event.user.subscription.pending"
+msgstr "Inscription en attente de confirmation"
+
+msgid "qs.mail.subscription.waiting_approval.request_organizers.subject @sitename @mail @firstname @lastname @community @event @activity"
+msgstr "@firstname @lastname souhaite participer à votre événement «@event»"
+
+msgid "qs.mail.subscription.waiting_approval.request_organizers.body @mail @firstname @lastname @community @event @date @time_start @time_end @activity @url"
+msgstr "Bonjour, \n"
+"\n"
+"@firstname @lastname souhaite participer à votre événement «@event» de l’activité «@activity», prévu le @date à @time_start. Vous pourrez valider ou refuser cette demande la gestion de cet événement ou en cliquant simplement sur ce lien: \n"
+"\n"
+"@url \n"
+"\n"
+"Il se peut que cette demande n’y figure plus, dans le cas où une autre personne organisatrice l’aurait déjà traitée. Pour plus de renseignements, n’hésitez pas à contacter cette personne par e-mail: @mail\n"
+"\n"
+"Cordialement,\n"
+"l’équipe Resoli"
+
+msgid "qs_subscription.subscribers.reject"
+msgstr "Désinscrire la personne"
+
+msgid "qs_subscription.subscribers.reject_confirm"
+msgstr "Annuler l’inscription?"
+
+msgid "qs.activity.become.activity.organizer @organizer"
+msgstr "Si vous désirez devenir @organizer d’activité, contactez votre responsable de communauté."
+
+msgid "qs.partners.sponsored_by_sponsor"
+msgstr "Soutenu&nbsp;par&nbsp;la&nbsp;<strong><a href=\"https://www.leenaards.ch\" target=\"_blank\">Fondation&nbsp;Leenaards</a></strong> &nbsp;|&nbsp; Visitez&nbsp;notre&nbsp;<strong><a href=\"https://www.info-resoli.ch/\" target=\"_blank\">site&nbsp;de&nbsp;présentation</a></strong>"
+
+msgid "qs.partners.technology_by_antistatique"
+msgstr "Partenaire&nbsp;technologique: <strong><a href=\"https://www.antistatique.net\" target=\"_blank\">Antistatique</a></strong> &nbsp;|&nbsp; <strong><a href=\"https://www.info-resoli.ch/mentions-legales-resoli\" target=\"_blank\">Mentions&nbsp;légales</a></strong>"
+
+msgid "There have been more than @count failed login attempts for this account. It is temporarily blocked. Try again later or <a href=\":url\">request a new password</a>."
+msgstr "Vous avez indiqué plus de 5 fois un mauvais mot de passe pour ce compte. Il est temporairement bloqué pour des raisons de sécurité. Réessayez d’ici quelques minutes ou <a href=\":url\">demandez un nouveau mot de passe</a>."
+
+msgid "qs.contact_all"
+msgstr "Ecrire à toutes les personnes"
+
+msgid "qs.available_on_mobile_only"
+msgstr "Actuellement disponible sur ordinateurs et tablettes."
+
+msgid "qs.calendar.tomorrow"
+msgstr "Demain"
+
+msgid "qs_photo.add.form.step1.description @activity"
+msgstr "A quel événement passé de «@activity» souhaitez-vous ajouter de nouvelles photos?"
+
+msgid "qs_photo.add.form.step2.description @activity"
+msgstr "A quel événement passé de «@activity» souhaitez-vous ajouter de nouvelles photos?"
+
+msgid "qs_activity.events.form.add.contribution.placeholder"
+msgstr "Ex. 15.00 CHF"
+
+msgid "qs_activity.events.form.edit.contribution.placeholder"
+msgstr "Ex. 15.00 CHF"
+
+msgid "qs.event.register.confirm"
+msgstr "Confirmer la demande?"
+
+msgid "qs_activity.floating.contact.author"
+msgstr "Contacter un organisateur"
+
+#, fuzzy
+msgid "qs.uppy.drop_paste %{browse}"
+msgstr "Glissez ici vos images %{browse}"
+
+msgid "qs.uppy.browse"
+msgstr "ou cliquez ici pour les sélectionner"
+
+msgid "qs.uppy.complete"
+msgstr "Vos photos ont été téléchargées!"
+
+msgid "qs.uppy.upload_complete"
+msgstr "Téléchargement terminé!"
+
+msgid "qs.uppy.back"
+msgstr "Retour"
+
+msgid "qs.uppy.adding_more_files"
+msgstr "Ajoutez d’autres photos"
+
+msgid "qs_activity.floating.contact.organizers_and_maintainers"
+msgstr "Contacter un organisateur"
+
+msgid "qs.uppy.can_only_upload_x_file %{smart_count}"
+msgstr "Chargement de %{smart_count} photo"
+
+msgid "qs.uppy.can_only_upload_x_files %{smart_count}"
+msgstr "Chargement de %{smart_count} photos"
+
+msgid "qs.uppy.can_only_upload_file_types"
+msgstr "Formats de photo acceptés:"
+
+msgid "qs.uppy.add_more_files"
+msgstr "Ajoutez d’autres photos"
+
+msgid "qs.uppy.uploading"
+msgstr "Chargement"
+
+msgid "qs.uppy.uploading_new_file %{smart_count}"
+msgstr "Photo en chargement: %{smart_count}"
+
+msgid "qs.uppy.uploading_new_files %{smart_count}"
+msgstr "Photos en chargement: %{smart_count}"
+
+msgid "qs.uppy.cancel"
+msgstr "Annuler"
+
+msgid "qs.uppy.retry_upload"
+msgstr "Réessayer"
+
+msgid "qs.uppy_cancel_upload"
+msgstr "Annuler"
+
+msgid "qs.uppy.retry"
+msgstr "Réessayer"
+
+msgid "qs.uppy.exceeds_size"
+msgstr "Cette photo excède la taille limite autorisée de"
+
+msgid "qs.uppy.failed_to_upload %{file}"
+msgstr "%{file} n'a pas pu être téléchargé"
+
+msgid "qs.maintenance.title"
+msgstr "On revient!"
+
+msgid "qs_community.events.export.title @community @date"
+msgstr "Prochains événements prévus à @community (mis à jour le @date)"
+
+msgid "qs_community.events.export.download"
+msgstr "Télécharger la liste des prochains événements"
+
+msgid "qs_community.events.export.summary @total"
+msgstr "Total: @total événement(s)"
+
+msgid "qs_community.events.export.disclaimer"
+msgstr "Les informations de ce document sont strictement confidentielles et réservées à l’organisation d’activités liées à la plateforme Resoli. En aucun cas elles ne doivent être transférées ou échangées à des tiers. La personne les ayant téléchargées en est la seule responsable."
+
+msgid "qs_community.events.export.header.organizer.label"
+msgstr "Organisateur"
+
+msgid "qs_community.members.export.download"
+msgstr "Télécharger la liste des membres"
+
+msgid "qs_community.members.export.title @community @date"
+msgstr "Membre(s) de @community (mis à jour le @date)"
+
+msgid "qs_community.members.export.summary @total"
+msgstr "Total: @total membre(s)"
+
+msgid "qs_community.members.export.header.privilege.label"
+msgstr "Rôle"
+
+msgid "qs_community.members.export.header.firstname.label"
+msgstr "Prénom"
+
+msgid "qs_community.members.export.header.lastname.label"
+msgstr "Nom"
+
+msgid "qs_community.members.export.header.mail.label"
+msgstr "E-mail"
+
+msgid "qs_community.members.export.header.phone.label"
+msgstr "Téléphone"
+
+msgid "qs_community.members.export.disclaimer"
+msgstr "Les informations de ce document sont strictement confidentielles et réservées à l’organisation d’activités liées à la plateforme Resoli. En aucun cas elles ne doivent être transférées ou échangées à des tiers. La personne les ayant téléchargées en est la seule responsable."
+
+msgid "qs_community.events.export.header.activity.label"
+msgstr "Activité"
+
+msgid "qs_community.events.export.header.event.label"
+msgstr "Evénement"
+
+msgid "qs_community.events.export.header.date_start.label"
+msgstr "Début"
+
+msgid "qs_community.events.export.header.date_end.label"
+msgstr "Fin"
+
+msgid "qs_community.events.export.header.venue.label"
+msgstr "Point de rendez-vous"
+
+msgid "qs_community.events.export.header.contribution.label"
+msgstr "Contribution"
+
+msgid "qs_community.events.export.header.organizer_mail.label"
+msgstr "E-mail"
+
+msgid "qs_community.events.export.header.organizer_phone.label"
+msgstr "Téléphone"
+
+msgid "qs_subscription.subscribers.export.title @event @activity @date"
+msgstr "Inscription(s) à «@event» de l’activité «@activity» (mis à jour: @date)"
+
+msgid "qs_subscription.subscribers.export.summary @total"
+msgstr "Total: @total personne(s) inscrite(s)"
+
+msgid "qs_subscription.subscribers.export.header.firstname.label"
+msgstr "Prénom"
+
+msgid "qs_subscription.subscribers.export.header.lastname.label"
+msgstr "Nom"
+
+msgid "qs_subscription.subscribers.export.header.mail.label"
+msgstr "E-mail"
+
+msgid "qs_subscription.subscribers.export.header.phone.label"
+msgstr "Téléphone"
+
+msgid "qs_subscription.subscribers.export.header.date.label"
+msgstr "Date d’inscription"
+
+msgid "qs_subscription.subscribers.export.disclaimer"
+msgstr "Les informations de ce document sont strictement confidentielles et réservées à l’organisation d’activités liées à la plateforme Resoli. En aucun cas elles ne doivent être transférées ou échangées à des tiers. La personne les ayant téléchargées en est la seule responsable."
+
+msgid "qs_activity.activities.members.export.download"
+msgstr "Télécharger la liste des membres"
+
+msgid "qs_activity.activities.members.export.title @activity @date"
+msgstr "Membre(s) de l’activité «@activity» (mis à jour le @date)"
+
+msgid "qs_activity.activities.members.export.summary @total"
+msgstr "Total: @total membre(s)"
+
+msgid "qs_activity.activities.members.export.header.privilege.label"
+msgstr "Rôle"
+
+msgid "qs_activity.activities.members.export.header.firstname.label"
+msgstr "Prénom"
+
+msgid "qs_activity.activities.members.export.header.lastname.label"
+msgstr "Nom"
+
+msgid "qs_activity.activities.members.export.header.mail.label"
+msgstr "E-mail"
+
+msgid "qs_activity.activities.members.export.header.phone.label"
+msgstr "Téléphone"
+
+msgid "qs_activity.activities.members.export.disclaimer"
+msgstr "Les informations de ce document sont strictement confidentielles et réservées à l’organisation d’activités liées à la plateforme Resoli. En aucun cas elles ne doivent être transférées ou échangées à des tiers. La personne les ayant téléchargées en est la seule responsable."
+
+msgid "qs_community.members.filter.search.title"
+msgstr "Rechercher une personne"
+
+msgid "qs_community.members.filter.submit"
+msgstr "Exécuter la recherche"
+
+msgid "qs_community.members.filter.search.placeholder"
+msgstr "Ex. Dupont"
+
+#, fuzzy
+msgid "qs_community.events.export.header.organizer_name.label"
+msgstr "Organisateur"
+
+msgid "qs.error.404.description"
+msgstr "Choisissez une des deux options ci-dessous."
+
+msgid "qs_subscription.subscribers.export.download"
+msgstr "Télécharger la liste des inscriptions"
+
+msgid "qs.event.contact_description @contact_name"
+msgstr "La personne qui organise cet événement est @contact_name"
+
+msgid "qs_activity.floating.dashboard"
+msgstr "Gérer mon événement"
+
+msgid "qs_subscription.floating.waiting_approval"
+msgstr "Inscriptions en attente"
+
+msgid "qs_subscription.floating.subscribers"
+msgstr "Inscriptions confirmées"
+
+msgid "qs.activity.edit_event"
+msgstr "Modifier l’événement"
+
+#, fuzzy
+msgid "qs.uppy.press_retry"
+msgstr "Réessayer"
+
+msgid "qs_auth.form.register.success"
+msgstr "Votre compte a bien été créé!\n"
+"La personne responsable de votre communauté vous informera lorsque vous pourrez commencer à l’utiliser."
+
+msgid "qs_auth.form.register.success @firstname @lastname @mail"
+msgstr "Votre compte a bien été créé!\n"
+"La personne responsable de votre communauté vous informera lorsque vous pourrez commencer à l’utiliser."
+
+msgid "qs_activity.floating.dashboard.event"
+msgstr "Gérer mon événement"
+
+#, fuzzy
+msgid "An error has occurred."
+msgstr "Une erreur est survenue."
+
+#, fuzzy
+msgid "Math question"
+msgstr "Répondez à ce calcul"
+
+msgid "Solve this simple math problem and enter the result. E.g. for 1+3, enter 4."
+msgstr "Résolvez ce simple problème et entrez le résultat ci-dessus. Ex. pour 1+3, entrez 4."
+
+msgid "The answer you entered for the CAPTCHA was not correct."
+msgstr "La réponse insérée n’est pas correcte."
+
+#, fuzzy
+msgid "@name field is required."
+msgstr "Le champ «@name» est requis."
+
+msgid "qs_community.events.export.header.timetable.label"
+msgstr ""
+
+msgid "qs_community.events.export.header.contact"
+msgstr ""
+
+msgid "qs_activity.activities.form.add.body"
+msgstr "Comment décririez-vous votre activité?"
+
+msgid "qs_activity.activities.form.add.body.placeholder"
+msgstr "Ex. Randonnées à la Montagne est une activité ouverte aux 55+, tous les jeudis durant la belle saison."
+
+msgid "qs_activity.activities.form.edit.info.body.placeholder"
+msgstr "Ex. Randonnées à la Montagne est une activité ouverte aux 55+, tous les jeudis durant la belle saison."
+
+msgid "qs_activity.activities.form.edit.info.body"
+msgstr "Comment décririez-vous votre activité?"
+
+msgid "qs.event.view.photos"
+msgstr "Voir les photos de l’activité"
+
+msgid "qs_activity.events.form.add.save"
+msgstr "Publier comme événement unique"
+
+msgid "qs_activity.events.form.step3.description @activity"
+msgstr "Pour terminer la publication de votre événement, choisissez une des options ci-dessous!"
+
+msgid "qs_activity.events.form.add.save_and_repeat_weekly"
+msgstr "Répéter cet événement durant 12 semaines"
+
+msgid "qs_activity.events.form.add.weekly.success @repeat"
+msgstr "Vos @repeat nouveaux événements ont bien été créés!"
+
+msgid "qs_activity.events.form.step3"
+msgstr "Nouvel événement"
+
+msgid "qs.photo.view_event"
+msgstr "voir cet événement"
+
+msgid "qs.a11y.activity.toggler.view_past_future_events"
+msgstr "Sélection des événements selon leur temporalité"
+
+msgid "qs.activity.toggler.view_future_events"
+msgstr "Evénements à venir"
+
+msgid "qs.quill.editor.placeholder"
+msgstr "Ecrire quelque chose"
+
+msgid "qs.quill.editor.h4"
+msgstr "Titre"
+
+msgid "qs.quill.editor.h5"
+msgstr "Sous-titre"
+
+msgid "qs.activity.toggler.view_past_events"
+msgstr "Evénements passés"
+
+msgid "qs.event.past_label"
+msgstr "Evénement passé:"
+
+msgid "qs.subscription.subscribe_member"
+msgstr "Inscrire une personne"
+
+msgid "qs.subscription.subscribe_member.placeholder"
+msgstr "Cliquez pour voir les membres de l’activité"
+
+msgid "qs.subscription.subscribe_member.submit"
+msgstr "Inscrire cette personne"
+
+msgid "qs_subscription.subscription.form.subscribe.member.success @event"
+msgstr "Vous avez bien inscrit cette personne à votre événement"
+
+msgid "1 error has been found: "
+msgstr "1 erreur a été détectée: "
+
+msgid "qs_auth.pass.confirmation\n"
+""
+msgstr "Mot de passe oublié"
+
+msgid "If %identifier is a valid account, an email will be sent with instructions to reset your password."
+msgstr "De plus amples informations vous ont été envoyées à l’e-mail %identifier"
+
+msgid "qs_menu.links.sharing"
+msgstr "Entraide"
+
+msgid "qs_sharing.collection.offer.title"
+msgstr "Offres"
+
+msgid "qs_sharing.collection.request.title"
+msgstr "Demandes"
+
+msgid "qs_menu.links.sharing.offer"
+msgstr "Offres"
+
+msgid "qs_menu.links.sharing.request"
+msgstr "Demandes"
+
+msgid "qs.sharing.offer.lead @community"
+msgstr "Voici les offres d’entraide de la communauté de @community."
+
+#, fuzzy
+msgid "qs.sharing.add.request @community"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de @community."
+
+#, fuzzy
+msgid "qs_sharing.requests.form.step1.description"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de Lutry."
+
+#, fuzzy
+msgid "qs_sharing.requests.form.step1"
+msgstr "Indiquez ce que vous rechercher comme partage."
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.title"
+msgstr "Boîte à demandes d’entraide"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.step2.description"
+msgstr "A qui cette demande est-elle destinée?"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.step2"
+msgstr "A qui cette demande est-elle destinée?"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.theme"
+msgstr "Quelle thématique d’entraide recherchez-vous?"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.contact_firstname"
+msgstr "A qui est destinée cette demande?"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.contact_firstname.placeholder"
+msgstr "Ex. Catherine"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.contact_lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.contact_mail"
+msgstr "Comment contacter cette personne?"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@re-so.ch"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.save"
+msgstr "Partager la demande"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.body"
+msgstr "Précisez en quelques mot ce que vous souhaitez"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.body.placeholder"
+msgstr "Ex. J’ai besoin d’une personne pour m’aider à monter mes courses à l’étage, si possible une fois par semaine."
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.error.empty.theme"
+msgstr "qs_sharing.requests.form.add.error.empty.theme"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.error.empty.theme"
+msgstr "qs_sharing.offers.form.add.error.empty.theme"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.add.success @community @theme"
+msgstr "Votre demande a bien été transmise aux personnes bénévoles de la communauté concernées par la thématique choisie."
+
+#, fuzzy
+msgid "qs_sharing.floating.my_requests"
+msgstr "Mon entraide"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.title"
+msgstr "Voici vos offres d'entraide"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.title"
+msgstr "Ajouter une nouvelle offre d'entraide"
+
+#, fuzzy
+msgid "qs_sharing.floating.my_offers"
+msgstr "Gérer mes offres d'entraide"
+
+#, fuzzy
+msgid "qs_sharing.offer.more"
+msgstr "Voir les détails"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.deactivate"
+msgstr "Désactiver mon offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.edit"
+msgstr "Modifier mon offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.empty"
+msgstr "Vous n'avez pas d'offres"
+
+#, fuzzy
+msgid "qs_sharing.add_offer"
+msgstr "Proposer une nouvelle offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.delete"
+msgstr "Supprimer mon offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.reactivate"
+msgstr "Réactiver mon offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.deactivated @date"
+msgstr "Désactivée le @date"
+
+#, fuzzy
+msgid "qs_sharing.offer_type.volunteers @offers_count"
+msgstr "@offers_count bénévole offre ses services"
+
+#, fuzzy
+msgid "qs_sharing.offer_type.volunteers.plural @offers_count"
+msgstr "@offers_count bénévoles offrent leurs services"
+
+#, fuzzy
+msgid "qs_sharing.offer_type.volunteers.empty"
+msgstr "Aucun bénévole n'offre ses services"
+
+#, fuzzy
+msgid "qs.sharing.offer.list.download"
+msgstr "Télécharger la liste des offres"
+
+#, fuzzy
+msgid "qs.sharing.add.request.info"
+msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les bénévoles de la communauté y ont accès"
+
+#, fuzzy
+msgid "qs_sharing.floating.my_offers"
+msgstr "Mon entraide"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.filename @community @date"
+msgstr "Offres de bénévolat à @community (mis à jour le @date)"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.filename @community @offer_type @theme @date"
+msgstr "Offres de bénévolat à @community (mis à jour le @date)"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.header @community"
+msgstr "Communauté de @community"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.title"
+msgstr "Offres de bénévolat"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.updatedOn @date"
+msgstr "Mis à jour le @date"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.lead"
+msgstr "N’hésitez pas à contacter les personnes ci-dessous pour demander un coup d’main ou simplement échanger un moment convivial."
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.table.headers.volunteer"
+msgstr "Bénévole"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.table.headers.offer"
+msgstr "Offre"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.table.headers.availability"
+msgstr "Disponibilité"
+
+#, fuzzy
+msgid "qs.sharing.export.offers.pdf.table.headers.contact"
+msgstr "Contact"
+
+#, fuzzy
+msgid "qs.previous.to_offers_type_list"
+msgstr "Retour aux offres"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.delete.title"
+msgstr "Supprimer l'offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.delete.confirmed"
+msgstr "Confirmer"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.delete"
+msgstr "Supprimer mon offre"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.delete.success @offer"
+msgstr "L’offre a bien été supprimée !"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.deactivate.title"
+msgstr "Désactiver l'offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.deactivate.confirmed"
+msgstr "Confirmer"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.deactivate"
+msgstr "Désactiver mon offre"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.deactivate.success @offer"
+msgstr "L’offre a bien été désactivée !"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.reactivate.title"
+msgstr "Réactiver l'offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.reactivate.confirmed"
+msgstr "Confirmer"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.reactivate"
+msgstr "Réactiver mon offre"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.reactivate.success @offer"
+msgstr "L’offre a bien été réactivée !"
+
+#, fuzzy
+msgid "qs.sharing.readmore"
+msgstr "Voir les offres"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.step1.description"
+msgstr "Pour commencer, choisissez ci-dessous un type d’offres dans lequel vous souhaitez apporter votre contribution."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type"
+msgstr "Choisissez un type d’offres existant ci-dessous:"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type.placeholder"
+msgstr "Cliquez pour choisir un type d’offres"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type_new"
+msgstr "Créez un nouveau type d’offres"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type_title"
+msgstr "Titre du nouveau type d'offres"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type_title.placeholder"
+msgstr "Ex. Faire vos courses"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type.autocomplete.create"
+msgstr "Nouveau: "
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.offer_type.autocomplete.create"
+msgstr "Nouveau: "
+
+#, fuzzy
+msgid "qs_sharing.offers.form.step2.description"
+msgstr "Quel thème correspond le mieux à votre offre d’entraide ?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.step3.description"
+msgstr "Décrivez votre offre"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.step3.description"
+msgstr "Comment décririez-vous votre offre ?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.body"
+msgstr "Comment décririez-vous votre offre ?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.availability"
+msgstr "Quelles sont vos disponibilités?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.availability.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.step4.description"
+msgstr "Pour terminer, valider vos informations personnelles."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.contact_firstname"
+msgstr "Par qui cette offre est-elle proposée?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.contact_firstname.placeholder"
+msgstr "Ex. Catherine"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.contact_lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.contact_mail"
+msgstr "Comment contacter cette personne?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@re-so.ch"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+#, fuzzy
+msgid "qs.previous.to_my_offers"
+msgstr "Retour à mes offres"
+
+#, fuzzy
+msgid "qs.previous.to_sharing_dashboard"
+msgstr "Mon entraide"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.save"
+msgstr "Valider les données"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.success @offer @offer_type"
+msgstr "Votre nouvelle offre a bien été créée!"
+
+#, fuzzy
+msgid "qs_sharing.floating.dashboard"
+msgstr "Mon entraide"
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.title"
+msgstr "Remplissez ce formulaire afin de devenir bénévole auprès de votre communauté."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description"
+msgstr "Sélectionnez la ou les catégories pour lesquelles vous souhaitez recevoir les demandes d’entraide."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description.theme.mobilite"
+msgstr "Déplacements, co-voiturage, faires les courses, etc."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description.theme.convivialite"
+msgstr "Partager un bon moment, se téléphoner, etc."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description.theme.petitsservices"
+msgstr "La main verte, bricolage, autres coups de mains, etc."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description.theme.objets"
+msgstr "Prêt, échange ou don de matériel divers, etc."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description.theme.numerique"
+msgstr "Dépanages, bonnes pratiques informatiques, etc."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description.theme.competences"
+msgstr "Transmission de savoir-faire, partage d’impressions, etc."
+
+#, fuzzy
+msgid "qs_sharing.volunteerism.form.description.theme.divers"
+msgstr "Autres propositions utiles à la communauté."
+
+#, fuzzy
+msgid "qs_sharing.volunteerisms.form.manage.save_and_set_default_values"
+msgstr "Valider mes données uniquement"
+
+#, fuzzy
+msgid "qs_sharing.volunteerisms.form.manage.save_and_new_offer"
+msgstr "Valider mes données et créer une offre"
+
+#, fuzzy
+msgid "qs_sharing.volunteerisms.form.manage.success @community"
+msgstr "Vos préférences de bénévolat pour @community ont bien été mis à jour !"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.title @offer_date"
+msgstr "Modifiez votre offre du @offer_date!"
+
+#, fuzzy
+msgid "qs_sharing.edit_offer"
+msgstr "Modifier mon offre"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.description"
+msgstr "La date sera automatiquement ajustée en cas de validation des données."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.theme"
+msgstr "Quel thème correspond à votre offre?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.theme.placeholder"
+msgstr "qs_sharing.offers.form.edit.theme.placeholder"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.body"
+msgstr "Comment décririez-vous votre offre ?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.body.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.availability"
+msgstr "Quelles sont vos disponibilités?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.add.availability.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_firstname"
+msgstr "Par qui cette offre est-elle proposée?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_firstname.placeholder"
+msgstr "Ex. Catherine"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_lastname.placeholder"
+msgstr "Ex. Dubuis"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_mail"
+msgstr "Comment contacter cette personne?"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_mail.placeholder"
+msgstr "Ex. marcel.despraz@re-so.ch"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_phone.placeholder"
+msgstr "Ex. 079 790 79 79"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.success @offer_date"
+msgstr "Les informations de l’offre du «@offer_date» ont bien été validées!"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.moderate"
+msgstr "Désactiver cette offre"
+
+#, fuzzy
+msgid "qs_sharing.user.offers.collection.moderate.confirmed"
+msgstr "Confirmer"
+
+#, fuzzy
+msgid "qs.mail.offer.deactivated.subject @sitename @offer"
+msgstr "qs.mail.offer.deactivated.subject @sitename @offer"
+
+#, fuzzy
+msgid "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+msgstr "qs.mail.offer.deactivated.body @mail @firstname @lastname @community @offer_type @offer @created_at"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.title @community"
+msgstr "Voici les demandes d’entraide de la communauté de @community"
+
+#, fuzzy
+msgid "qs_sharing.floating.requests"
+msgstr "Demandes d’entraide"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.solved @date"
+msgstr "Pris en charge le @date"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.solve"
+msgstr "Marquer comme pris en charge"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.solve.confirmed"
+msgstr "Confirmer"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.solve.title"
+msgstr "qs_sharing.requests.form.solve.title"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.solve.success"
+msgstr "La demande a bien été pris en charge !"
+
+#, fuzzy
+msgid "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+msgstr "qs.mail.request.solved.subject @sitename @resolver_firstname @resolver_lastname @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
+msgstr "qs.mail.request.solved.body @author_firstname @author_lastname @resolver_firstname @resolver_lastname @community @theme @created_at @solved_at"
+
+#, fuzzy
+msgid "qs_sharing.requests.form.archive.title"
+msgstr "qs_sharing.requests.form.archive.title"
+
+#, fuzzy
+msgid "qs.mail.request.archived.subject @sitename @archiver_firstname @archiver_lastname @community @theme @created_at"
+msgstr "qs.mail.request.archived.subject @sitename @archiver_firstname @archiver_lastname @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"
+msgstr "qs.mail.request.archived.body @author_firstname @author_lastname @archiver_firstname @archiver_lastname @community @theme @created_at @archived_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_confirm.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_confirm.subject @sitename @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_confirm.body @author_firstname @author_lastname @community @theme @created_at"
+msgstr "qs.mail.request.add_confirm.body @author_firstname @author_lastname @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"
+msgstr "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_request_on_behalf.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_request_on_behalf.subject @sitename @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_request_on_behalf.body @author_firstname @author_lastname @community @theme @created_at"
+msgstr "qs.mail.request.add_request_on_behalf.body @author_firstname @author_lastname @community @theme @created_at"
+
+#, fuzzy
+msgid "qs.mail.request.add_request.subject @sitename @community @theme @created_at"
+msgstr "qs.mail.request.add_request.body @author_firstname @author_lastname @community @theme @created_at"
+
+#, fuzzy
+msgid "qs_sharing.requests.confirmation.lead @community"
+msgstr "Voici la boîte à demandes d’entraide de la communauté de @community."
+
+#, fuzzy
+msgid "qs_sharing.requests.confirmation.title"
+msgstr "Merci."
+
+#, fuzzy
+msgid "qs_sharing.requests.confirmation.intro"
+msgstr "Votre demande a bien été transmise aux personnes bénévoles de la communauté concernées par la thématique choisie."
+
+#, fuzzy
+msgid "qs_sharing.requests.confirmation.add_request"
+msgstr "Partager une nouvelle demande"
+
+#, fuzzy
+msgid "qs_sharing.requests.confirmation.help"
+msgstr "Vous pouvez accéder aux demandes en cours en cliquant sur le bouton «Mon entraide» ci-dessous."
+
+#, fuzzy
+msgid "qs_sharing.requests.confirmation.info"
+msgstr "Les demandes ne sont pas affichées publiquement sur Resoli, seuls les bénévoles de la communauté y ont accès"
+
+#, fuzzy
+msgid "qs_sharing.dashboard.title"
+msgstr "De quelle manière souhaitez-vous contribuer à l’entraide de votre communauté?"
+
+#, fuzzy
+msgid "qs_sharing.dashboard.leads.primary"
+msgstr "Pour contribuer à l’entraide, choisissez une des options ci-dessous."
+
+#, fuzzy
+msgid "qs_sharing.dashboard.leads.secondary"
+msgstr "Pour partager une demande, cliquez ci-dessous."
+
+#, fuzzy
+msgid "qs_sharing.become_volunteer"
+msgstr "Devenir bénévole"
+
+#, fuzzy
+msgid "qs_sharing.share_request"
+msgstr "Partager une nouvelle demande"
+
+#, fuzzy
+msgid "qs_sharing.see_requests"
+msgstr "Voir les demandes en cours"
+
+#, fuzzy
+msgid "qs_sharing.manage_volunteerism"
+msgstr "Gérer mes préférences de bénévole"
+
+#, fuzzy
+msgid "qs_sharing.manage_offers"
+msgstr "Gérer mes offres d’entraide"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.readmore"
+msgstr "Voir les détails"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.archive"
+msgstr "Supprimer cette demande"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.archive.confirmed"
+msgstr "Confirmer"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.archive.success"
+msgstr "La demande a bien été supprimée !"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.save"
+msgstr "Valider les données"
+
+#, fuzzy
+msgid "qs.sharing.no_offers"
+msgstr "Il n’y a pour le moment pas d'offres disponibles pour ce thème."
+
+#, fuzzy
+msgid "qs_sharing.volunteerisms.form.manage.title"
+msgstr "Préférences de bénévole"
+
+#, fuzzy
+msgid "qs_sharing.collection.request.empty"
+msgstr "Il n’y a pour le moment pas de demandes d'entraide."
+
+#, fuzzy
+msgid "qs_sharing.collection.request.solved_by @solved_by @authored_by"
+msgstr "La demande de @authored_by a été prise en charge par @solved_by."
+
+#, fuzzy
+msgid "Unable to send email. Contact the site administrator if the problem persists."
+msgstr "Impossible d'envoyer le courriel. Contacter l'administrateur du site si le problème persiste."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.offer_type"
+msgstr "Choisissez un type d’offres existant ci-dessous:"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.offer_type.placeholder"
+msgstr "Cliquez pour choisir un type d’offres"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.availability.placeholder"
+msgstr "Ex. Atelier intergénérationnel de pratique informatique (ordinateur, tablette, smartphone, etc.) du SeMo Mobilet’. Un jeune, un senior; des solutions! Session de deux heures au maximum. Tarif horaire."
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_name"
+msgstr "qs_sharing.offers.form.edit.contact_name"
+
+#, fuzzy
+msgid "qs_sharing.offers.form.edit.contact_name.placeholder"
+msgstr "qs_sharing.offers.form.edit.contact_name.placeholder"

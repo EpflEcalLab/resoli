@@ -197,4 +197,13 @@ class FormContext extends RawDrupalContext {
     }
   }
 
+  /**
+   * @Given /^I fill hidden field "([^"]*)" with "([^"]*)"$/
+   */
+  public function iFillHiddenFieldWith($field, $value)
+  {
+    $this->getSession()->getPage()->find('css',
+      'input[name="'.$field.'"]')->setValue($value);
+  }
+
 }

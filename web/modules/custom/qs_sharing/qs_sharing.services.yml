@@ -1,0 +1,50 @@
+services:
+
+  # Repositories
+  qs_sharing.repository.volunteerism:
+    class: Drupal\qs_sharing\Repository\VolunteerismRepository
+    arguments:
+      - '@entity_type.manager'
+
+  qs_sharing.repository.offer_type:
+    class: Drupal\qs_sharing\Repository\OfferTypeRepository
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+
+  qs_sharing.repository.offer:
+    class: Drupal\qs_sharing\Repository\OfferRepository
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+
+  qs_sharing.repository.request:
+    class: Drupal\qs_sharing\Repository\RequestRepository
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+
+  # Managers
+  qs_sharing.manager.offer_type:
+    class: Drupal\qs_sharing\Manager\OfferTypeManager
+    arguments:
+      - '@entity_type.manager'
+
+  qs_sharing.manager.offer:
+    class: Drupal\qs_sharing\Manager\OfferManager
+    arguments:
+      - '@entity_type.manager'
+      - '@plugin.manager.mail'
+
+  qs_sharing.manager.request:
+    class: Drupal\qs_sharing\Manager\RequestManager
+    arguments:
+      - '@entity_type.manager'
+      - '@plugin.manager.mail'
+
+  # EventSubscribers
+  qs_sharing.redirect:
+    class: Drupal\qs_sharing\EventSubscriber\RedirectSubscriber
+    arguments: ['@current_route_match']
+    tags:
+      - { name: event_subscriber }

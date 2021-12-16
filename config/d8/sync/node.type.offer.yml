@@ -1,0 +1,17 @@
+uuid: 0d3483d8-e723-434a-938e-49c97bc85f5f
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Offer
+type: offer
+description: 'Offer which belongs to only one Offer''s type.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

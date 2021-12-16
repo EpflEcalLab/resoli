@@ -1,0 +1,80 @@
+{% import "@quartiers_solidaires/macros.html.twig" as macros %}
+
+<div class="card-body pb-0 text-center mx-auto">
+
+  {# Solved/Changed Dates display on mobile device only #}
+  <div class="d-lg-none mb-3 mt-0">
+    {% if is_solved %}
+      <span>
+    {{ 'qs_sharing.collection.request.solved @date'|t({
+      '@date': request.field_solved_at.date|bamboo_i18n_format_date('default_medium_date_only')
+    }) }}
+    </span>
+    {% else %}
+      <time datetime="{{ request.changed.value|date('Y-m-d') }}">
+        {{ request.changed.value|bamboo_i18n_format_date('default_medium_date_only') }}
+      </time>
+    {% endif %}
+  </div>
+
+  {# Solve lead #}
+  {% if is_solved %}
+    <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0">
+      {{ 'qs_sharing.collection.request.solved_by @solved_by @authored_by'|t({
+        '@solved_by': request.field_solved_by.entity.field_firstname.value ~ ' ' ~ request.field_solved_by.entity.field_lastname.value,
+        '@authored_by': request.uid.entity.field_firstname.value ~ ' ' ~ request.uid.entity.field_lastname.value,
+      }) }}
+    </h4>
+  {% else %}
+    <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0">
+      {{ request.uid.entity.field_firstname.value }} {{ request.uid.entity.field_lastname.value }}
+    </h4>
+  {% endif %}
+
+  <div class="card-text rich-content rich-content-primary mb-3">
+    {% set body = {
+      '#type':   'processed_text',
+      '#text':    request.body.value,
+      '#format':  request.body.format,
+    } %}
+    {{ body }}
+  </div>
+
+  <div class="card-actions row">
+    {% if contact_phone %}
+      {{ macros.card_button(
+        contact_phone,
+        "tel:#{contact_phone}",
+        'phone',
+        'left',
+        '',
+        'invert'
+      ) }}
+    {% endif %}
+
+    {% if contact_mail %}
+      {{ macros.card_button(
+        contact_mail,
+        "mailto:#{contact_mail}",
+        'mail',
+        'left',
+        '',
+        'invert'
+      ) }}
+    {% endif %}
+
+    {# Solve button #}
+    {% if not is_solved %}
+      {{ bamboo_render_form('qs_sharing', 'RequestSolveForm', {'request': request}) }}
+    {% endif %}
+
+    {# Archive button #}
+    {# Available for Author of request or Admin. #}
+    {% set currentUser = bamboo_load_currentuser() %}
+    {% if currentUser.id == request.uid.target_id or user.hasPermission('administer nodes') or can_moderate_community %}
+      {{ bamboo_render_form('qs_sharing', 'RequestArchiveForm', {'request': request}) }}
+    {% endif %}
+
+  </div>
+
+</div>

@@ -1,0 +1,235 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/localhost\/node\/69?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/node\/offer"
+        },
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/revision_uid": [
+            {
+                "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/uid": [
+            {
+                "href": "http:\/\/localhost\/fr\/user\/2?_format=hal_json",
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_offer_type": [
+            {
+                "href": "http:\/\/localhost\/node\/67?_format=hal_json"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_theme": [
+            {
+                "href": "http:\/\/localhost\/fr\/taxonomy\/term\/20?_format=hal_json",
+                "lang": "zxx"
+            }
+        ]
+    },
+    "nid": [
+        {
+            "value": 69
+        }
+    ],
+    "uuid": [
+        {
+            "value": "b80d60e6-a14d-4bfe-a1f1-51af1ff8072d"
+        }
+    ],
+    "vid": [
+        {
+            "value": 167
+        }
+    ],
+    "langcode": [
+        {
+            "value": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "offer"
+        }
+    ],
+    "revision_timestamp": [
+        {
+            "value": "2021-08-26T15:44:30+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "_embedded": {
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/revision_uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/en\/user\/1?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "7aa4c410-9a2e-4afb-9bf5-012f5fe0aba3"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/uid": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/user\/2?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/user\/user"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "962f5253-7237-45f3-b567-26fd227a0089"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_offer_type": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/node\/67?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/node\/offer_type"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "ea52fb9f-c0a0-4b34-9297-3646ca2546c7"
+                    }
+                ]
+            }
+        ],
+        "http:\/\/drupal.org\/rest\/relation\/node\/offer\/field_theme": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/localhost\/fr\/taxonomy\/term\/20?_format=hal_json"
+                    },
+                    "type": {
+                        "href": "http:\/\/drupal.org\/rest\/type\/taxonomy_term\/sharing_themes"
+                    }
+                },
+                "uuid": [
+                    {
+                        "value": "831d95bf-96e8-4645-b826-6d23ba0f959d"
+                    }
+                ],
+                "lang": "zxx"
+            }
+        ]
+    },
+    "status": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "title": [
+        {
+            "value": "R\u00e9union et discussion sur l'Art",
+            "lang": "zxx"
+        }
+    ],
+    "created": [
+        {
+            "value": "2021-08-26T15:18:27+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2021-08-26T15:44:30+00:00",
+            "lang": "zxx",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "promote": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "sticky": [
+        {
+            "value": false,
+            "lang": "zxx"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "zxx"
+        }
+    ],
+    "moderation_state": [
+        {
+            "value": "published",
+            "lang": "zxx"
+        }
+    ],
+    "path": [
+        {
+            "alias": null,
+            "pid": null,
+            "langcode": "zxx",
+            "lang": "zxx"
+        }
+    ],
+    "body": [
+        {
+            "value": "Je parle volontiers de tous les sujets, j'aime particuli\u00e8rement l'art et le design, et me passionne pour la cuisine et le hockey sur glace.",
+            "format": "light_html",
+            "processed": "Je parle volontiers de tous les sujets, j'aime particuli\u00e8rement l'art et le design, et me passionne pour la cuisine et le hockey sur glace.",
+            "summary": "",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_mail": [
+        {
+            "value": "sara.courci@example.org",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_name": [
+        {
+            "value": "Sarah Courci",
+            "lang": "zxx"
+        }
+    ],
+    "field_contact_phone": [
+        {
+            "value": "+41 21 123 45 67",
+            "lang": "zxx"
+        }
+    ],
+    "field_description": [
+        {
+            "value": "Disponible tout les jours de la semaine, l'apr\u00e8s-midi.",
+            "format": "light_html",
+            "processed": "Disponible tout les jours de la semaine, l'apr\u00e8s-midi.",
+            "lang": "zxx"
+        }
+    ]
+}

@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix display Sharing Themes translated names on volunteerism form
 
+### Removed
+- remove satackey/action-docker-layer-caching on Github Actions
+
 ## [2.1.0] - 2021-12-16
 ### Added
 - add core architecture for Entraide

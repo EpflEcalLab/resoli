@@ -6,6 +6,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_sharing\Repository\VolunteerismRepository;
@@ -16,6 +17,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Form to manage Volunteerism preferences.
  */
 class VolunteerismManageForm extends FormBase {
+
+  /**
+   * The language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
   /**
    * Access Control Service.
    *
@@ -54,12 +62,13 @@ class VolunteerismManageForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, VolunteerismRepository $volunteerism_repository) {
+  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, VolunteerismRepository $volunteerism_repository, LanguageManagerInterface $language_manager) {
     $this->acl = $acl;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->volunteerismRepository = $volunteerism_repository;
     $this->userStorage = $entity_type_manager->getStorage('user');
     $this->volunteerismStorage = $entity_type_manager->getStorage('volunteerism');
+    $this->languageManager = $language_manager;
   }
 
   /**
@@ -87,6 +96,9 @@ class VolunteerismManageForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, ?TermInterface $community = NULL) {
+    // Get the current language.
+    $currentLang = $this->languageManager->getCurrentLanguage();
+
     // Disable caching.
     $form['#cache']['max-age'] = 0;
 
@@ -128,6 +140,12 @@ class VolunteerismManageForm extends FormBase {
 
     foreach ($themes as $theme) {
       $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community, $this->currentUser(), $theme);
+
+      // Get the translated theme.
+      if ($theme->hasTranslation($currentLang->getId())) {
+        $theme = $theme->getTranslation($currentLang->getId());
+      }
+
       $form['volunteerism']['volunteerism_' . $theme->tid->value] = [
         '#title' => $theme->getName(),
         // phpcs:disable
@@ -200,7 +218,8 @@ class VolunteerismManageForm extends FormBase {
     // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('entity_type.manager'),
-      $container->get('qs_sharing.repository.volunteerism')
+      $container->get('qs_sharing.repository.volunteerism'),
+      $container->get('language_manager')
     );
   }
 

@@ -11,12 +11,12 @@ pattern: '/[node:field_activity:entity:field_community:entity:name]/activities/[
 selection_criteria:
   afa278e5-f493-4ff6-b6ca-eff21b9853eb:
     id: node_type
-    bundles:
-      event: event
     negate: false
+    uuid: afa278e5-f493-4ff6-b6ca-eff21b9853eb
     context_mapping:
       node: node
-    uuid: afa278e5-f493-4ff6-b6ca-eff21b9853eb
+    bundles:
+      event: event
 selection_logic: and
 weight: -5
 relationships: {  }

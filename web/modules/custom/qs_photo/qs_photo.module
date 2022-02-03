@@ -88,7 +88,7 @@ function file_validate_image_max_resolution(FileInterface $file, $maximum_dimens
 
   if ($maximum_dimensions) {
     // Check that it is smaller than the given dimensions.
-    list($width, $height) = explode('x', $maximum_dimensions);
+    [$width, $height] = explode('x', $maximum_dimensions);
 
     if ($image->getWidth() > $width || $image->getHeight() > $height) {
       $errors[] = t('The image is too large. The maximum dimensions are %dimensions pixels and the image size is %widthx%height pixels.', [
@@ -101,7 +101,7 @@ function file_validate_image_max_resolution(FileInterface $file, $maximum_dimens
 
   if ($minimum_dimensions) {
     // Check that it is larger than the given dimensions.
-    list($width, $height) = explode('x', $minimum_dimensions);
+    [$width, $height] = explode('x', $minimum_dimensions);
 
     if ($image->getWidth() < $width || $image->getHeight() < $height) {
       $errors[] = t('The image is too small. The minimum dimensions are %dimensions pixels and the image size is %widthx%height pixels.', [

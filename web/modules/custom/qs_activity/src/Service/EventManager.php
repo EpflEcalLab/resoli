@@ -102,15 +102,15 @@ class EventManager {
     $date_end->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
     $date_start->setTimezone(new \DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
 
-    $title = isset($data['title']) ? $data['title'] : $activity->title->value;
-    $body = isset($data['body']) ? $data['body'] : $activity->body->value;
-    $contact_name = isset($data['contact_name']) ? $data['contact_name'] : $activity->field_contact_name->value;
-    $contact_mail = isset($data['contact_mail']) ? $data['contact_mail'] : $activity->field_contact_mail->value;
-    $contact_phone = isset($data['contact_phone']) ? $data['contact_phone'] : $activity->field_contact_phone->value;
-    $contribution = isset($data['contribution']) ? $data['contribution'] : NULL;
-    $venue = isset($data['venue']) ? $data['venue'] : $activity->field_venue->value;
-    $venue_lat = isset($data['venue_lat']) ? $data['venue_lat'] : $activity->field_venue_lat->value;
-    $venue_long = isset($data['venue_long']) ? $data['venue_long'] : $activity->field_venue_long->value;
+    $title = $data['title'] ?? $activity->title->value;
+    $body = $data['body'] ?? $activity->body->value;
+    $contact_name = $data['contact_name'] ?? $activity->field_contact_name->value;
+    $contact_mail = $data['contact_mail'] ?? $activity->field_contact_mail->value;
+    $contact_phone = $data['contact_phone'] ?? $activity->field_contact_phone->value;
+    $contribution = $data['contribution'] ?? NULL;
+    $venue = $data['venue'] ?? $activity->field_venue->value;
+    $venue_lat = $data['venue_lat'] ?? $activity->field_venue_lat->value;
+    $venue_long = $data['venue_long'] ?? $activity->field_venue_long->value;
 
     $event = $this->nodeStorage->create([
       'type' => 'event',

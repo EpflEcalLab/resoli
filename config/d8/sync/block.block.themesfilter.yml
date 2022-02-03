@@ -16,11 +16,11 @@ plugin: qs_themes_filter_block
 settings:
   id: qs_themes_filter_block
   label: 'Themes Filter'
-  provider: qs_themes
   label_display: '0'
+  provider: qs_themes
 visibility:
   request_path:
     id: request_path
-    pages: "*/activities/theme\r\n*/photos/theme\r\n/photos/*/theme"
     negate: false
     context_mapping: {  }
+    pages: "*/activities/theme\r\n*/photos/theme\r\n/photos/*/theme"

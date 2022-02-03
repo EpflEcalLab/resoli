@@ -14,11 +14,11 @@ bundle: themes
 mode: teaser
 content:
   field_icon:
-    weight: 0
+    type: list_key
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    type: list_key
+    weight: 0
     region: content
 hidden:
   description: true

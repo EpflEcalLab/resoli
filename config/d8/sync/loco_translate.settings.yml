@@ -1,3 +1,6 @@
+_core:
+  default_config_hash: O8pujjuOkaNSb3rHGtRqdEsv18MLT6mTBW-XcaP32w0
+langcode: fr
 api:
   fullaccess_key: ''
   readonly_key: ''
@@ -10,6 +13,3 @@ automation:
     interval: 0
     langcodes: {  }
     status: translated
-_core:
-  default_config_hash: O8pujjuOkaNSb3rHGtRqdEsv18MLT6mTBW-XcaP32w0
-langcode: fr

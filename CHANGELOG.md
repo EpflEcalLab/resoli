@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.2.0] - 2022-02-14
 ### Security
 - update Drupal 9.2.10 => 9.3.3 with all dependencies
 
@@ -471,7 +473,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.1...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.0...HEAD
+[2.2.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/antistatique/quartiers-solidaires/compare/v1.7.1...v2.0.0

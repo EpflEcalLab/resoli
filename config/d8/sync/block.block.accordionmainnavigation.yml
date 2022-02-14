@@ -16,11 +16,11 @@ plugin: qs_menu_navigation_block
 settings:
   id: qs_menu_navigation_block
   label: 'Accordion Main Navigation'
-  provider: qs_menu
   label_display: '0'
+  provider: qs_menu
 visibility:
   request_path:
     id: request_path
-    pages: "<front>\r\n/authentication\r\n/authentication/*\r\n/user/*\r\n/account/*"
     negate: true
     context_mapping: {  }
+    pages: "<front>\r\n/authentication\r\n/authentication/*\r\n/user/*\r\n/account/*"

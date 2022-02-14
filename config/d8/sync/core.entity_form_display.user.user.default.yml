@@ -16,47 +16,47 @@ third_party_settings:
       children:
         - group_credentials
         - group_informations
+      label: Tabs
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: vertical
-      label: Tabs
-      region: content
     group_credentials:
       children:
         - account
         - timezone
         - language
+      label: Credentials
+      region: content
       parent_name: group_tabs
       weight: 20
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Credentials
-      region: content
     group_informations:
       children:
         - field_firstname
         - field_lastname
         - field_phone
+      label: Informations
+      region: content
       parent_name: group_tabs
       weight: 21
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Informations
-      region: content
 _core:
   default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
 id: user.user.default
@@ -73,29 +73,29 @@ content:
     weight: 5
     region: content
   field_firstname:
+    type: string_textfield
     weight: 22
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_lastname:
+    type: string_textfield
     weight: 23
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   field_phone:
+    type: string_textfield
     weight: 24
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   language:
     weight: 3
     region: content

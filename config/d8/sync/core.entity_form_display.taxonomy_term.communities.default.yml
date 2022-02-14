@@ -17,61 +17,61 @@ third_party_settings:
         - name
         - field_community_logo
         - path
+      label: General
+      region: content
       parent_name: group_general
       weight: 8
       format_type: tab
       format_settings:
         label: General
+        classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-        id: ''
-        classes: ''
-      label: General
-      region: content
     group_general:
       children:
         - group_tab
         - group_privileges
+      label: Tab
+      region: content
       parent_name: ''
       weight: 5
       format_type: tabs
       format_settings:
         label: Tab
-        direction: vertical
-        id: ''
         classes: ''
-      label: Tab
-      region: content
+        id: ''
+        direction: vertical
     group_privileges:
       children:
         - field_community_organizers
         - field_community_managers
         - field_community_members
+      label: Privileges
+      region: content
       parent_name: group_general
       weight: 9
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Privileges
-      region: content
 id: taxonomy_term.communities.default
 targetEntityType: taxonomy_term
 bundle: communities
 mode: default
 content:
   field_community_logo:
+    type: image_image
     weight: 2
+    region: content
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
-    region: content
   name:
     type: string_textfield
     weight: 1
@@ -88,10 +88,10 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 100
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
 hidden:
   description: true

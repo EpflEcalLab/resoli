@@ -1,7 +1,9 @@
 uuid: 47f98ed5-9adc-4f26-9cc6-99ee1ece7875
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - system
 _core:
   default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
 id: anonymous
@@ -9,8 +11,4 @@ label: 'Utilisateur anonyme'
 weight: 0
 is_admin: false
 permissions:
-  - 'access comments'
   - 'access content'
-  - 'access site-wide contact form'
-  - 'search content'
-  - 'use text format restricted_html'

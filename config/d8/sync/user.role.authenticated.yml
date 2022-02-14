@@ -1,7 +1,12 @@
 uuid: 47be031d-16ea-4fc5-bc58-9c0c4ae11631
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.light_html
+  module:
+    - filter
+    - system
 _core:
   default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
 id: authenticated
@@ -9,15 +14,8 @@ label: 'Utilisateur authentifié'
 weight: 1
 is_admin: false
 permissions:
-  - 'access comments'
   - 'access content'
-  - 'access shortcuts'
-  - 'access site-wide contact form'
   - 'cancel account'
   - 'change own username'
-  - 'post comments'
-  - 'search content'
   - 'select account cancellation method'
-  - 'skip comment approval'
-  - 'use text format basic_html'
   - 'use text format light_html'

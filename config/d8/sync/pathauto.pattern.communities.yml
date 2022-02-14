@@ -12,12 +12,12 @@ pattern: '[term:name]'
 selection_criteria:
   682ecf34-707e-45eb-9009-30d449520fbc:
     id: 'entity_bundle:taxonomy_term'
-    bundles:
-      communities: communities
     negate: false
+    uuid: 682ecf34-707e-45eb-9009-30d449520fbc
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: 682ecf34-707e-45eb-9009-30d449520fbc
+    bundles:
+      communities: communities
 selection_logic: and
 weight: -5
 relationships: {  }

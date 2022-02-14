@@ -11,12 +11,12 @@ pattern: '/[node:field_community:entity:name]/activities/[node:title]'
 selection_criteria:
   df4099fc-a24b-4b52-b42a-6748bfd416ed:
     id: node_type
-    bundles:
-      activity: activity
     negate: false
+    uuid: df4099fc-a24b-4b52-b42a-6748bfd416ed
     context_mapping:
       node: node
-    uuid: df4099fc-a24b-4b52-b42a-6748bfd416ed
+    bundles:
+      activity: activity
 selection_logic: and
 weight: -5
 relationships: {  }

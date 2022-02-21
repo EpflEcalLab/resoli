@@ -52,7 +52,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
       const inputId = document.getElementById(targetId?.replace('#', '') ?? 'node-autocomplete-target-id') as HTMLInputElement;
       setNoOption(inputId.dataset.noOption);
     }
-  }, [selected, targetName, targetId])
+  }, [selected, targetName, targetId, noOption])
 
   return (
     <div className="text-dark" style={{paddingBottom: noPadding !== 'true' ? 300 : 0}}>

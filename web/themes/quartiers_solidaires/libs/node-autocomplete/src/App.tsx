@@ -8,6 +8,7 @@ export type Props = {
   create?: string;
   value?: string;
   noPadding?: string;
+  noOption?: string;
   list: {
     id: string;
     name: string;
@@ -29,6 +30,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
   }));
   const defaultValue: SelectItem | null = options.filter(i => i.value === value)[0] ?? null;
   const [selected, setSelected] = useState<SelectItem | null>(defaultValue);
+  const [noOption, setNoOption] = useState<string | null>();
 
   useEffect(() => {
     if (selected !== null) {
@@ -45,6 +47,10 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
         const themeLabel = document.getElementById(`label-${theme?.replace('#', '')}`) as HTMLLabelElement;
         if (themeLabel !== null) themeLabel.click();
       }
+    } else {
+      /* Use the value of data-no-option */
+      const inputId = document.getElementById(targetId?.replace('#', '') ?? 'node-autocomplete-target-id') as HTMLInputElement;
+      setNoOption(inputId.dataset.noOption);
     }
   }, [selected, targetName, targetId])
 
@@ -55,6 +61,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
         onChange={setSelected}
         options={options}
         placeholder={placeholder ?? 'Search...'}
+        noOptionsMessage={() => (noOption)}
         formatCreateLabel={input => `${create} “${input}”`}
         isClearable
         theme={(theme) => ({

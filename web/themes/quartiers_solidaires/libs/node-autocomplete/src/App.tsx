@@ -22,7 +22,7 @@ type SelectItem = {
   theme?: string;
 };
 
-const App = ({ list, targetId, targetName, placeholder, value, create, noPadding }: Props): JSX.Element => {
+const App = ({ list, targetId, targetName, placeholder, value, create, noPadding, noOption }: Props): JSX.Element => {
   const options: SelectItem[] = list.map(({id, name, theme}) => ({
     label: name,
     value: id,
@@ -30,7 +30,6 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
   }));
   const defaultValue: SelectItem | null = options.filter(i => i.value === value)[0] ?? null;
   const [selected, setSelected] = useState<SelectItem | null>(defaultValue);
-  const [noOption, setNoOption] = useState<string | null>();
 
   useEffect(() => {
     if (selected !== null) {
@@ -47,10 +46,6 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
         const themeLabel = document.getElementById(`label-${theme?.replace('#', '')}`) as HTMLLabelElement;
         if (themeLabel !== null) themeLabel.click();
       }
-    } else {
-      /* Use the value of data-no-option */
-      const inputId = document.getElementById(targetId?.replace('#', '') ?? 'node-autocomplete-target-id') as HTMLInputElement;
-      setNoOption(inputId.dataset.noOption);
     }
   }, [selected, targetName, targetId, noOption])
 

@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -6,19 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- add a translation if no option into the autocomplet - QS-17
+
 ## [2.2.0] - 2022-02-14
+
 ### Security
+
 - update Drupal 9.2.10 => 9.3.3 with all dependencies
 
 ## [2.1.1] - 2021-12-17
+
 ### Fixed
+
 - fix display Sharing Themes translated names on volunteerism form
 
 ### Removed
+
 - remove satackey/action-docker-layer-caching on Github Actions
 
 ## [2.1.0] - 2021-12-16
+
 ### Added
+
 - add core architecture for Entraide
 - Add new Sharing entity 'Offer's Type'
 - Add new Sharing entity 'Offer'
@@ -43,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - integrate node-autocomplete - QS-7 QS-4 QS-5 QS-6
 
 ### Changed
+
 - update all Javascript Dependencies
 - Update drupal/core (9.2.1 => 9.2.4)
 - Update drupal/admin_toolbar (3.0.1 => 3.0.2)
@@ -60,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update friendsofphp/php-cs-fixer (v2.19.3 => v3.3.1)
 
 ### Fixed
+
 - fix pager of Events
 - fix un-peristed contact firstname & lasname upon offer creation - #944
 - fix un-peristed contact firstname & lasname upon request creation
@@ -83,38 +97,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix button past event active state - QS-10
 
 ### Added
+
 - add Docker credentials for Codeship to prevent Pull Rate Limit
 - node-autocomplete library
 
 ### Security
+
 - update drupal/core (9.2.7 => 9.2.10) - QS-14
 - update dependencies (others than drupal/core) - QS-14
 
 ## [2.0.0] - 2021-08-26
+
 ### Added
+
 - add Gin Admin theme
 - fix Gin custom QS Toolbar icon
 
 ### Changed
+
 - update drupal/core-recommended (8.9.17 => 9.2.3)
 - update to the new age the way Behat tests are run in Docker
 
 ### Fixed
+
 - fix unit tests by removing install schema system.router in tests
 - fix behat tests by updating default content date format stored
 - fix twig missing include of macros
 
 ### Removed
+
 - remove mglaman/drupal-check
 - remove drupal/upgrade_status
 
 ## 1.7.1 - 2021-08-19
+
 ### Added
+
 - add new "base theme" key on themes
 - add drupal/upgrade_status to prepare Drupal 9 update
 - add drupal/jquery_ui_datepicker as deprecated from Drupal Core
 
 ### Changed
+
 - update drupal/core (8.9.14 => 8.9.17) with all dependencies (39 updates)
 - update drupal/honeypot (1.30.0 => 2.0.1)
 - update drupal/admin_toolbar (2.4.0 => 3.0.1)
@@ -125,6 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update changelog form to follow keepachangelog format
 
 ### Fixed
+
 - fix themes (customs) D9 compatibility declaration
 - fix modules (customs) D9 compatibility declaration
 - fix behat scalar usage without quotes
@@ -132,11 +157,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix quilljs link popover #880
 
 ### Removed
+
 - remove drupal/devel (1.2.0)
 - remove drupal/block_exclude_pages (1.7.0)
 
 ## 1.7.0 - 2021-06-30
+
 ### Changed
+
 - add Quill lib for rich-text edition #791
 - add link to the event card on Photo's activity list - #799
 - add feature to show Past & Future events on Activity canonical page - #806 #804
@@ -159,11 +187,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add custom QuillJS Link component to prepend missing http(s) schemes - #849
 
 ## 1.6.1 - 2021-04-23
+
 ### Changed
+
 - update drupal/core (8.9.13 => 8.9.14)
 
 ## 1.6.0 - 2021-04-19
+
 ### Changed
+
 - update Docker to PHP7.4, Node 10 & MariaDB 10.4
 - update Drupal from 8.9.7 to 8.9.13 with all dependencies
 - modernize the Code Styles integration
@@ -175,11 +207,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update Node from 10 => 12
 
 ## 1.5.6 - 2020-11-19
+
 ### Changed
+
 - fix Event Export into Excel file which trigger crash on empty column "Contact"
 
 ## 1.5.5 - 2020-11-19
+
 ### Changed
+
 - update Drupal from 8.8.4 to 8.9.3 with all dependencies
 - update Drupal from 8.9.3 to 8.9.7
 - update Drupal from 8.9.7 to 8.9.8 with all dependencies
@@ -190,45 +226,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update Drupal from 8.9.8 to 8.9.9 (SA-CORE-2020-012)
 
 ## 1.5.4 - 2020-10-19
+
 ### Changed
+
 - Apply patch to be compatible with Apache 2.4 and avoid double compression with brotli
 
 ## 1.5.3 - 2020-04-15
+
 ### Changed
+
 - update composer lock
 - update composer used in Alwaysdata from 1.5.5 -> 1.10.5
 
 ## 1.5.2 - 2020-04-15
+
 ### Changed
+
 - update Drupal from 8.7.x to 8.8 - #753
 - update modules - #750
 - add NewRelic module
 
 ## 1.5.1 - 2020-04-01
+
 ### Changed
+
 - fix end-of-year previous button - close #747
 - fix date pager bugged on february - close #758
 
 ## 1.5.0 - 2020-01-08
+
 ### Changed
+
 - update to Drupal 8.7.11
 - fix dual step bug when multiple forms - close #748
 - rebuild New Relic for PHP 7.2 on Alwaysdata
 
 ## 1.4.4 - 2019-10-11
+
 ### Changed
+
 - remove InlineErrorFormTrait to use Core Inline Form Error - close #702
 
 ## 1.4.3 - 2019-09-25
+
 ### Changed
+
 - improve responsivness especially smartphones visual design - close #741
 
 ## 1.4.2 - 2019-09-18
+
 ### Changed
+
 - fix fade-out of parent cards on ajax-submitted form - close #739
 
 ## 1.4.1 - 2019-07-25
+
 ### Changed
+
 - fix encoding issues in photos section, close #152
 - fix some modal issues in themes filter and in event/activity add forms #722
 - fix IE and Edge issues, fix some other alignment problems #733 #735
@@ -246,7 +300,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix button contact-all on subscription waiting approvals - close #717
 
 ## 1.4.0 - 2019-06-29
+
 ### Changed
+
 - refactoring of Floating buttons
 - refactoring of Cards HTML markup & skeletton
 - refactor global pages markup & skeletton
@@ -275,20 +331,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - setup Docker
 
 ## 1.3.4 - 2019-05-13
+
 ### Changed
+
 - fix mail layout paragraphs issue - close #691
 
 ## 1.3.3 - 2019-05-02
+
 ### Changed
+
 - fix IE11 - close #687
 - add date of event on 'My subscriptions' page - close #688
 
 ## 1.3.2 - 2019-03-27
+
 ### Changed
+
 - fix tests process on Codeship
 
 ## 1.3.1 - 2019-03-27
+
 ### Changed
+
 - fix masquerade button on navigation - close #684
 - babelify the subscription.js which was uncompatible with IE or some Apple device - close #683
 - update phpunit workflow & scripts
@@ -296,7 +360,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix EventManager::getNext - close #647
 
 ## 1.3.0 - 2019-02-18
+
 ### Changed
+
 - update to Drupal 8.6.9
 - responsivness all the way
 - change icon in "Mes informations" button on welcome dashboard #651
@@ -318,16 +384,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add calendar – Today/Tomorrow #384
 
 ## 1.2.2 - 2018-11-07
+
 ### Changed
+
 - add new tests bash files
 - get the true next events - close #647
 
 ## 1.2.1 - 2018-11-07
+
 ### Changed
+
 - remove the baseline of "Pro Senectute" on sponsors.svg
 
 ## 1.2.0 - 2018-08-21
+
 ### Changed
+
 - fix mail body encoded quote #152
 - add module "Image Effects" which allow Image Styles to Automatically use EXIF Image Orientation #606
 - improve members listing by ordering them using Lastname instead of Name (mail) #570
@@ -347,34 +419,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix hours display in all languages #628 #643
 
 ## 1.1.4 - 2018-07-05
+
 ### Changed
+
 - add german (de) language
 - make Taxonomy "Themes" translatable with fallback in Default Site Lang (FR) - #627
 - update logo - #629
 
 ## 1.1.3 - 2018-06-28
+
 ### Changed
+
 - add mailjet as SMTP mail provider.
 - update to Drupal 8.5.4
 
 ## 1.1.2 - 2018-05-14
+
 ### Changed
+
 - update to Drupal 8.5.3
 - fix IE 11 regression, sticky polyfill crash #620
 
 ## 1.1.1 - 2018-05-02
+
 ### Changed
+
 - add white border to btn-info buttons #598
 - add spacing below visibility buttons in ActivityAddForm #398
 
 ## 1.1.0 - 2018-04-26
+
 ### Changed
+
 - add the sponsors on homepage
 - change confirmed icon for event registering #598
 - increase size of activity in activity user collection and in photos collection #545
 - fix card pill flag position on medium and small screens #588
 - make all cards close when opening one in calendar view #596
-- add Privilege's Badge on Activity by theme #318,  #315 & #316
+- add Privilege's Badge on Activity by theme #318, #315 & #316
 - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
 - add Subscription's Badge, using highest Privilege color, on My Activities #304
 - update Subscription's Badge, using highest Privilege color, on Activity page #543
@@ -389,7 +471,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add Subscription's Badge, using Count of Guests Pending & Confirmed on events pill #310, #311, #312 & #313
 - add Subscription's Badge, using Count of Guests Pending on Activitiy Teaser Card #317 & #319
 - switch the Event Dashboard button in Activity detail page when Guests Pending
-- add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
+- add Subscription's Badge, using highest Privilege color, on Calendar Weekly/Monthly Dots #386
 - update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309
 - fix #590 - wrong badges on activities by Theme when activity has event in past with pending subscriptions
 - fix #207 - photos by months - sticky months are not translated
@@ -398,24 +480,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix pager #610 & #31 - following pagers wasn't working: Members of Activity, Members of Community & Form ActivityInlineAddMember
 
 ## 1.0.4 - 2018-04-26
+
 ### Changed
+
 - Apply Remote Code Exectiion - SA-CORE-2018-004
 
 ## 1.0.3 - 2018-03-28
+
 ### Changed
+
 - apply patch - Remote Code Execution - SA-CORE-2018-002
 
 ## 1.0.2 - 2018-03-16
+
 ### Changed
+
 - setup pagination component #31
 
 ## 1.0.1 - 2018-03-01
+
 ### Changed
+
 - fix images upload on past events - #576
 - update README.md badges
 
 ## 1.0.0 - 2018-02-26
+
 ### Changed
+
 - fix #500 - Remove privilegies & subscriptions when deleting entities
 - improve user supervisor dashboard #202
 - fix click propagation in photoswipe gallery #497
@@ -462,18 +554,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix Edge specific cases #566
 
 ## 0.1.1 - 2018-02-21
+
 ### Changed
+
 - add Google Tag Manager
 
 ## 0.1.0 - 2017-12-13
+
 ### Changed
+
 - production deployment
 
 ## 0.0.0 - 2017-07-14
+
 ### Changed
+
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.0...HEAD
+[unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.0...HEAD
 [2.2.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.0.0...2.1.0

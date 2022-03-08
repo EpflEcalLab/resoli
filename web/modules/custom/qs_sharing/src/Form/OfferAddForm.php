@@ -200,6 +200,7 @@ class OfferAddForm extends FormBase {
         'data-target-name' => '#node-autocomplete-target-name',
         'data-target-id' => '#node-autocomplete-target-id',
         'data-create' => $this->t('qs_sharing.offers.form.add.offer_type.autocomplete.create'),
+        'data-no-option' => $this->t('qs_sharing.offers.form.add.offer_type.no_option.label'),
       ],
       '#validated' => TRUE,
       '#theme_wrappers' => [

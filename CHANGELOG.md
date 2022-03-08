@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] - 2022-03-08
+### Added
+- add a translation if no option into the autocomplet - QS-17
+
 ## [2.2.0] - 2022-02-14
 ### Security
 - update Drupal 9.2.10 => 9.3.3 with all dependencies
@@ -374,7 +378,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - increase size of activity in activity user collection and in photos collection #545
 - fix card pill flag position on medium and small screens #588
 - make all cards close when opening one in calendar view #596
-- add Privilege's Badge on Activity by theme #318,  #315 & #316
+- add Privilege's Badge on Activity by theme #318, #315 & #316
 - add Subscription's Badge, using highest Privilege color, on Activity by date #308 & #309
 - add Subscription's Badge, using highest Privilege color, on My Activities #304
 - update Subscription's Badge, using highest Privilege color, on Activity page #543
@@ -389,7 +393,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add Subscription's Badge, using Count of Guests Pending & Confirmed on events pill #310, #311, #312 & #313
 - add Subscription's Badge, using Count of Guests Pending on Activitiy Teaser Card #317 & #319
 - switch the Event Dashboard button in Activity detail page when Guests Pending
-- add Subscription's Badge, using highest Privilege color,  on Calendar Weekly/Monthly Dots #386
+- add Subscription's Badge, using highest Privilege color, on Calendar Weekly/Monthly Dots #386
 - update Subscripton's Badge, using hiest Privilege color, on Activity page #309 & #309
 - fix #590 - wrong badges on activities by Theme when activity has event in past with pending subscriptions
 - fix #207 - photos by months - sticky months are not translated
@@ -473,7 +477,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.0...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.1...HEAD
+[2.2.1]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.0...2.2.1
 [2.2.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/antistatique/quartiers-solidaires/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.0.0...2.1.0

@@ -8,6 +8,7 @@ export type Props = {
   create?: string;
   value?: string;
   noPadding?: string;
+  noOption?: string;
   list: {
     id: string;
     name: string;
@@ -21,7 +22,7 @@ type SelectItem = {
   theme?: string;
 };
 
-const App = ({ list, targetId, targetName, placeholder, value, create, noPadding }: Props): JSX.Element => {
+const App = ({ list, targetId, targetName, placeholder, value, create, noPadding, noOption }: Props): JSX.Element => {
   const options: SelectItem[] = list.map(({id, name, theme}) => ({
     label: name,
     value: id,
@@ -46,7 +47,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
         if (themeLabel !== null) themeLabel.click();
       }
     }
-  }, [selected, targetName, targetId])
+  }, [selected, targetName, targetId, noOption])
 
   return (
     <div className="text-dark" style={{paddingBottom: noPadding !== 'true' ? 300 : 0}}>
@@ -55,6 +56,7 @@ const App = ({ list, targetId, targetName, placeholder, value, create, noPadding
         onChange={setSelected}
         options={options}
         placeholder={placeholder ?? 'Search...'}
+        noOptionsMessage={() => (noOption)}
         formatCreateLabel={input => `${create} “${input}”`}
         isClearable
         theme={(theme) => ({

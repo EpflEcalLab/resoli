@@ -2393,6 +2393,10 @@ msgstr "Choisissez un type d’offres existant ci-dessous:"
 msgid "qs_sharing.offers.form.add.offer_type.placeholder"
 msgstr "Cliquez pour choisir un type d’offres"
 
+#, fuzzy
+msgid "qs_sharing.offers.form.add.offer_type.no_option.label"
+msgstr "Aucun type d'offre disponible"
+
 msgid "qs_sharing.offers.form.add.offer_type_new"
 msgstr "Créez un nouveau type d’offres"
 

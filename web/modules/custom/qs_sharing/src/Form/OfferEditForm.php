@@ -213,6 +213,7 @@ class OfferEditForm extends FormBase {
         'data-create' => $this->t('qs_sharing.offers.form.edit.offer_type.autocomplete.create'),
         'data-value' => $offer->field_offer_type->target_id,
         'data-no-padding' => 'true',
+        'data-no-option' => $this->t('qs_sharing.offers.form.edit.offer_type.no_option.label'),
       ],
       '#validated' => TRUE,
       '#theme_wrappers' => [

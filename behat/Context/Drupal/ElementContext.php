@@ -2,6 +2,7 @@
 
 namespace Drupal\Behat\Context\Drupal;
 
+use Behat\Mink\Exception\ElementHtmlException;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Mink\Exception\ElementNotFoundException;
 
@@ -39,7 +40,7 @@ class ElementContext extends RawDrupalContext {
   public function iShouldNotSeeLinkWithHref($label) {
     $link = $this->getSession()->getPage()->findLink($label);
     if (NULL !== $link) {
-      throw new Exception('Link "' . $label . '" was found.');
+      throw new ElementHtmlException('Link "' . $label . '" was found.');
     }
   }
 

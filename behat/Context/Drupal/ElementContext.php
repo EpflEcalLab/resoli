@@ -40,7 +40,7 @@ class ElementContext extends RawDrupalContext {
   public function iShouldNotSeeLinkWithHref($label) {
     $link = $this->getSession()->getPage()->findLink($label);
     if (NULL !== $link) {
-      throw new ElementHtmlException('Link "' . $label . '" was found.');
+      throw new ElementHtmlException('Link "' . $label . '" was found.', $this->getSession(), $link);
     }
   }
 

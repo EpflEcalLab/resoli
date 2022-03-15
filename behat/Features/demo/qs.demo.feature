@@ -16,10 +16,10 @@ Feature: Demo mode
     And I should see "qs_auth.communities" link with href "/authentication/communities"
 
   @qs_demo
-  Scenario: As the admin, on the front page I should not see the logout button
+  Scenario: As the admin, on the front page I should see the logout button
     Given I am logged in as user "admin"
     When I am on "/"
-    Then I should not see "qs_auth.logout" link
+    Then I should see "qs_auth.logout" link with href "/user/logout"
     And I should see "qs_auth.communities" link with href "/authentication/communities"
 
   @qs_demo

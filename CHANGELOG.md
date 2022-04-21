@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Security
+- update Drupal 9.3.7 => 9.3.12 with all dependencies
+- update module drupal/gin (3.0.0-beta1 => 3.0.0-beta2)
+- update module drupal/gin_toolbar (1.0.0-beta21 => 1.0.0-beta22)
+- update module drupal/allowed_formats (1.4.0 => 1.5.0)
 
 ## [2.2.2] - 2022-03-15
 ### Security

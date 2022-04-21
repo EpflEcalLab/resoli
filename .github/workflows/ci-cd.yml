@@ -115,8 +115,6 @@ jobs:
         run: echo "::set-output name=DOCKER_DEPLOY_IMAGE_TAG::resoli-deploy:$(date +%s)"
       - name: Pull Antistatique Deploy Docker Image
         run: docker pull antistatique/deploy
-      - uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
       - name: Build the docker image
         run: docker build --file docker/Dockerfile.deploy --tag ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} .
       - name: Execute the deployment

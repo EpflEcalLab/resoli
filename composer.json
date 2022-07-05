@@ -118,9 +118,6 @@
         },
         "enable-patching": true,
         "patches": {
-            "drupal/captcha": {
-                "[3211466] - Testing modules property Access Level": "https://www.drupal.org/files/issues/2021-04-29/captcha-module-property-access-level.patch"
-            }
         }
     }
 }

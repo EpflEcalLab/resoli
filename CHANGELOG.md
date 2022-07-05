@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - upgrade Drupal Core drupal/core (9.3.12 => 9.4.1) with all dependencies
 - upgrade module drupal/loco_translate (2.0.0 => 2.1.0)
 - upgrade module drupal/bamboo_twig (5.0.0-alpha1 => 5.0.0)
+- upgrade theme drupal/gin (3.0.0-beta2 => 3.0.0-beta5)
 
 ## [2.2.3] - 2022-04-21
 ### Security

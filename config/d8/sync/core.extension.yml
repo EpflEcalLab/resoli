@@ -58,6 +58,7 @@ module:
   mailsystem: 0
   masquerade: 0
   menu_ui: 0
+  mysql: 0
   node: 0
   options: 0
   path: 0

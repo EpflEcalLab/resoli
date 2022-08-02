@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - replace behat/mink-extension by friends-of-behat/mink-extension
 - upgrade library phpoffice/phpspreadsheet (1.22.0 => 1.23.0)
 
+### Fixed
+- fix icon 'object' of sharing theme - QS-25
+
 ## [2.2.3] - 2022-04-21
 ### Security
 - update Drupal 9.3.7 => 9.3.12 with all dependencies

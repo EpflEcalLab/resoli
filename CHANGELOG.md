@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2022-08-11
+### Security
+- upgrade Drupal Core drupal/core (9.3.12 => 9.4.1) with all dependencies
+- upgrade module drupal/loco_translate (2.0.0 => 2.1.0)
+- upgrade module drupal/bamboo_twig (5.0.0-alpha1 => 5.0.0)
+- upgrade theme drupal/gin (3.0.0-beta2 => 3.0.0-beta5)
+- upgrade module drupal/pathauto (1.9.0 => 1.10.0)
+- upgrade module drupal/honeypot (2.0.2 => 2.1.1)
+- upgrade module drupal/image_effects (3.2.0 => 3.3.0)
+- upgrade module drupal/ctools (3.7.0 => 4.0.0)
+- upgrade module drupal/captcha (1.2.0 => 1.3.0)
+- upgrade linter wapmorgan/php-code-fixer (2.0.26 => 2.0.29)
+- upgrade library dompdf/dompdf (v1.2.1 => v1.2.2)
+- upgrade behat extension drupal/drupal-extension (v4.1.0 => v4.2.1)
+- upgrade behat driver drupal/drupal-driver (v2.1.1 => v2.2.0)
+- replace behat/mink-extension by friends-of-behat/mink-extension
+- upgrade library phpoffice/phpspreadsheet (1.22.0 => 1.23.0)
+
+### Fixed
+- fix icon 'object' of sharing theme - QS-25
+
 ## [2.2.3] - 2022-04-21
 ### Security
 - update Drupal 9.3.7 => 9.3.12 with all dependencies
@@ -488,7 +509,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.3...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.0...HEAD
+[2.3.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.3...2.3.0
 [2.2.3]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.2...2.2.3
 [2.2.2]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.1...2.2.2
 [2.2.1]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.0...2.2.1

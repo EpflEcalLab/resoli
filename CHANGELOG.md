@@ -5,6 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Security
+- upgrade Drupal Core drupal/core (9.4.1 => 9.4.5) with all deps
+- upgrade module behat/behat (v3.10.0 => v3.11.0)
+- upgrade module drupal/admin_toolbar (3.1.0 => 3.1.1)
+- upgrade module drupal/captcha (1.3.0 => 1.4.0)
+- upgrade module drupal/jquery_ui_datepicker (1.2.0 => 1.3.0)
+- upgrade module drupal/mailsystem (4.3.0 => 4.4.0)
+- upgrade module drupal/metatag (1.19.0 => 1.21.0)
+- upgrade module drupal/pathauto (1.10.0 => 1.11.0)
+- upgrade module drupal/token (1.10.0 => 1.11.0)
+- upgrade module myclabs/php-enum (1.8.3 => 1.8.4)
+- upgrade module phpoffice/phpspreadsheet (1.23.0 => 1.24.1)
+- upgrade module drupal/core-composer-scaffold (9.4.1 => 9.4.5)
+- upgrade twig/twig (v2.15.1 => v2.15.2)
 
 ## [2.3.0] - 2022-08-11
 ### Security

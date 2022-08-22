@@ -15,13 +15,3 @@ insert_final_newline = true
 
 [composer.{json,lock}]
 indent_size = 4
-
-[*.php]
-indent_size = 2
-
-[{package,bower}.json]
-indent_style = space
-indent_size = 2
-
-[*.md]
-trim_trailing_whitespace = false

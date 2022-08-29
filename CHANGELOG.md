@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - upgrade module drupal/core-composer-scaffold (9.4.1 => 9.4.5)
 - upgrade twig/twig (v2.15.1 => v2.15.2)
 
+### Fixed
+- fix demo enable & logout button visibility for admin
+
 ## [2.3.0] - 2022-08-11
 ### Security
 - upgrade Drupal Core drupal/core (9.3.12 => 9.4.1) with all dependencies

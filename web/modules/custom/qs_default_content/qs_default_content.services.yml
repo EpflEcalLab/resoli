@@ -6,3 +6,10 @@ services:
       - '@entity_type.manager'
     tags:
       - { name: event_subscriber }
+
+  qs_default_content.user:
+    class: Drupal\qs_default_content\EventSubscriber\UserSubscriber
+    arguments:
+      - '@entity_type.manager'
+    tags:
+      - {name: event_subscriber}

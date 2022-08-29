@@ -75,7 +75,7 @@ function qs_photo_theme() {
  *
  * @see file_validate_image_resolution()
  */
-function file_validate_image_max_resolution(FileInterface $file, $maximum_dimensions = 0, $minimum_dimensions = 0) {
+function qs_photo_file_validate_image_max_resolution(FileInterface $file, $maximum_dimensions = 0, $minimum_dimensions = 0) {
   $errors = [];
 
   // Check first that the file is an image.

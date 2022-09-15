@@ -17,7 +17,7 @@
   {# Authenticated floating buttons. #}
   {% if bamboo_has_role('authenticated') %}
     {% set floating_buttons = [] %}
-    {% if not bamboo_config_get('qs_auth.settings', 'demo_mode') %}
+    {% if not bamboo_config_get('qs_auth.settings', 'demo_mode') or bamboo_has_role('administrator') %}
       {% set floating_buttons = floating_buttons|merge([{
         label: 'qs_auth.logout'|t,
         url: path('user.logout'),

@@ -73,11 +73,14 @@
         "drupol/phpcsfixer-configs-drupal": "^2.0.1",
         "friendsofphp/php-cs-fixer": "^3.4",
         "phpmd/phpmd": "^2.12",
-        "sebastian/phpcpd": "^4.1.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "sebastian/phpcpd": "^6.0.3",
         "wapmorgan/php-code-fixer": "^2.0.29"
     },
     "conflict": {
-        "drupal/drupal": "*"
+        "drupal/drupal": "*",
+        "drupal/ctools": "4.0.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

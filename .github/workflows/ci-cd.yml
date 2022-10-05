@@ -53,7 +53,7 @@ jobs:
       matrix:
         include:
           - dockerFile: Dockerfile
-            image: quartier-solidaires-test
+            image: quartiers-solidaires_test
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
@@ -95,10 +95,10 @@ jobs:
       - name: Cache artifacts
         uses: actions/cache@v3
         with:
-          path: /tmp/quartier-solidaires-test.tar
-          key: ${{ runner.os }}-quartier-solidaires-test-${{ github.sha }}
+          path: /tmp/quartiers-solidaires_test.tar
+          key: ${{ runner.os }}-quartiers-solidaires_test-${{ github.sha }}
       - name: Load Docker image
-        run: docker load --input /tmp/quartier-solidaires-test.tar
+        run: docker load --input /tmp/quartiers-solidaires_test.tar
       - name: Up the docker-compose stack
         run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --no-build -d test
       - name: Run unit tests
@@ -114,10 +114,10 @@ jobs:
       - name: Cache artifacts
         uses: actions/cache@v3
         with:
-          path: /tmp/quartier-solidaires-test.tar
-          key: ${{ runner.os }}-quartier-solidaires-test-${{ github.sha }}
+          path: /tmp/quartiers-solidaires_test.tar
+          key: ${{ runner.os }}-quartiers-solidaires_test-${{ github.sha }}
       - name: Load Docker image
-        run: docker load --input /tmp/quartier-solidaires-test.tar
+        run: docker load --input /tmp/quartiers-solidaires_test.tar
       - name: Up the docker-compose stack
         run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --no-build -d test browser
       - name: Bootstrap

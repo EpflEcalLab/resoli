@@ -77,7 +77,8 @@
         "wapmorgan/php-code-fixer": "^2.0.29"
     },
     "conflict": {
-        "drupal/drupal": "*"
+        "drupal/drupal": "*",
+        "drupal/ctools": "4.0.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

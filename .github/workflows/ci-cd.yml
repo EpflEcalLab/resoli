@@ -11,8 +11,8 @@ jobs:
         with:
           php-version: '7.4'
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
-          tools: cs2pr, composer:v1
-      - uses: actions/checkout@master
+          tools: cs2pr, composer:v2
+      - uses: actions/checkout@v3
       - run: composer install --prefer-dist
       - run: ./vendor/bin/phpcs --report=checkstyle | cs2pr
 
@@ -25,8 +25,8 @@ jobs:
         with:
           php-version: '7.4'
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
-          tools: composer:v1
-      - uses: actions/checkout@master
+          tools: composer:v2
+      - uses: actions/checkout@v3
       - run: composer install --prefer-dist
       - run: ./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml --suffixes php,module,inc,install,test,profile,theme,css,info,txt --exclude *Test.php
         continue-on-error: true
@@ -41,37 +41,94 @@ jobs:
         with:
           php-version: '7.4'
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
-          tools: php-cs-fixer, cs2pr, composer:v1
-      - uses: actions/checkout@master
+          tools: php-cs-fixer, cs2pr, composer:v2
+      - uses: actions/checkout@v3
       - run: composer install --prefer-dist
       - run: ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
+  build_docker:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - dockerFile: Dockerfile
+            image: quartiers-solidaires_test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Get the user id
+        id: user_id
+        run: |
+          echo "::set-output name=id::$(id -u)"
+      - name: Get the user group
+        id: user_group
+        run: |
+          echo "::set-output name=id::$(id -g)"
+      - name: Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          pull: true
+          build-args: |
+            user=${{ steps.user_id.outputs.id }}
+            group=${{ steps.user_group.outputs.id }}
+          file: ${{ matrix.dockerFile }}
+          tags: ${{ matrix.image }}:latest
+          outputs: type=docker, dest=/tmp/${{ matrix.image }}.tar
+          cache-from: type=gha,scope=${{ github.workflow }}_${{ matrix.image }}
+          cache-to: type=gha,mode=max,scope=${{ github.workflow }}_${{ matrix.image }}
+      - name: Cache artifacts
+        uses: actions/cache@v3
+        with:
+          path: /tmp/${{ matrix.image }}.tar
+          key: ${{ runner.os }}-${{ matrix.image }}-${{ github.sha }}
+
   unit-tests:
+    needs: build_docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml pull --include-deps test
-      - name: Build the docker-compose stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --build -d test
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Cache artifacts
+        uses: actions/cache@v3
+        with:
+          path: /tmp/quartiers-solidaires_test.tar
+          key: ${{ runner.os }}-quartiers-solidaires_test-${{ github.sha }}
+      - name: Load Docker image
+        run: docker load --input /tmp/quartiers-solidaires_test.tar
+      - name: Up the docker-compose stack
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --no-build -d test
       - name: Run unit tests
-        run: docker exec test docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=qs
+        run: docker exec test docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=quartier-solidaires
 
   functional-tests:
+    needs: build_docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml pull --include-deps test browser
-      - name: Build the docker-compose stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --build -d test browser
+      - uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Cache artifacts
+        uses: actions/cache@v3
+        with:
+          path: /tmp/quartiers-solidaires_test.tar
+          key: ${{ runner.os }}-quartiers-solidaires_test-${{ github.sha }}
+      - name: Load Docker image
+        run: docker load --input /tmp/quartiers-solidaires_test.tar
+      - name: Up the docker-compose stack
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --no-build -d test browser
       - name: Bootstrap
-        run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only
+        run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only --force
       - name: Build Styleguide
         run: docker exec test yarn build --production
       - name: Build Styleguide Library Node Autocomplete
         run: yarn && yarn build --production
         working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete
       - name: Run Behat tests
-        run: docker-compose exec -T test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data
+        run: docker-compose exec -T test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data --skip-db-reset
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         if: failure()
@@ -101,7 +158,7 @@ jobs:
           if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
               echo "::set-output name=DEPLOY_ENV::production"
           fi
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
             node-version: '12'

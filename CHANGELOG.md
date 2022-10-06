@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.2] - 2022-10-06
+### Security
+- Upgrade `drupal/core (9.4.5 => 9.4.7)` with all deps
+- Upgrade `twig/twig (v2.15.2 => v2.15.3)`
+- Upgrade module `drupal/captcha (1.4.0 => 1.5.0)`
+- Upgrade module `drupal/console (1.9.8 => 1.9.10)`
+- Upgrade module `drupal/field_group (3.2.0 => 3.3.0)`
+- Upgrade module `drupal/file_mdm (2.4.0 => 2.5.0)`
+- Upgrade module `drupal/file_mdm_exif (2.4.0 => 2.5.0)`
+- Upgrade module `drupal/file_mdm_font (2.4.0 => 2.5.0)`
+- Upgrade module `drupal/honeypot (2.1.1 => 2.1.2)`
+- Upgrade module `drupal/image_effects (3.3.0 => 3.4.0)`
+- Upgrade module `drupal/masquerade (2.0.0-beta4 => 2.0.0-rc1)`
+- Upgrade module `drupal/metatag (1.21.0 => 1.22.0)`
+- Upgrade module `drupal/recaptcha (3.0.0 => 3.1.0)`
+- Upgrade module `drupal/redirect (1.7.0 => 1.8.0)`
+- Upgrade module `phpoffice/phpspreadsheet (1.24.1 => 1.25.2)`
+
 ## [2.3.1] - 2022-09-13
 ### Security
 - upgrade Drupal Core drupal/core (9.4.1 => 9.4.5) with all deps
@@ -528,7 +546,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.1...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.2...HEAD
+[2.3.2]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.1...2.3.2
 [2.3.1]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.0...2.3.1
 [2.3.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.3...2.3.0
 [2.2.3]: https://github.com/antistatique/quartiers-solidaires/compare/2.2.2...2.2.3

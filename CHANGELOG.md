@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - update drupal/core (9.4.7 => 9.4.8)
 
+### Fixed
+- fix crash PHP 8 when Event does not have a content body - QS-36
+
 ## [2.3.2] - 2022-10-06
 ### Security
 - Upgrade `drupal/core (9.4.5 => 9.4.7)` with all deps

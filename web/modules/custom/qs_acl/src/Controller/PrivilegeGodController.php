@@ -35,7 +35,7 @@ class PrivilegeGodController extends AjaxControllerBase {
     }
 
     $community_id = $request->request->get('community');
-    $community = $this->termStorage->load($community_id);
+    $community = $community_id ? $this->termStorage->load($community_id) : NULL;
 
     if ($community && $community->bundle() === 'communities' && $this->acl->hasAdminAccessCommunity($community)) {
       $access = AccessResult::allowed();
@@ -43,7 +43,7 @@ class PrivilegeGodController extends AjaxControllerBase {
 
     // Check access for activity.
     $activity_id = $request->request->get('activity');
-    $activity = $this->nodeStorage->load($activity_id);
+    $activity = $activity_id ? $this->nodeStorage->load($activity_id) : NULL;
 
     if ($activity && $activity->bundle() === 'activity' && $this->acl->hasAdminAccessActivity($activity)) {
       $access = AccessResult::allowed();
@@ -130,10 +130,10 @@ class PrivilegeGodController extends AjaxControllerBase {
     $user = $this->userStorage->load($user_id);
 
     $community_id = $request->request->get('community');
-    $community = $this->termStorage->load($community_id);
+    $community = $community_id ? $this->termStorage->load($community_id) : NULL;
 
     $activity_id = $request->request->get('activity');
-    $activity = $this->nodeStorage->load($activity_id);
+    $activity = $activity_id ? $this->nodeStorage->load($activity_id) : NULL;
 
     if (!$community && !$activity) {
       return new JsonResponse(['status' => FALSE]);

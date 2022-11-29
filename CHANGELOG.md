@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - fix crash PHP 8 when Event does not have a content body - QS-36
+- fix PHP8 new assertion triggering Warning - QS-36
 
 ## [2.3.2] - 2022-10-06
 ### Security

@@ -22,6 +22,7 @@ services:
       - ./composer.lock:/var/www/composer.lock
       - ./config:/var/www/config
       - ./web/modules/custom:/var/www/web/modules/custom
+      - ./web/sites/default/settings.development.php:/var/www/web/sites/default/settings.development.php
       # Styleguide
       - ./package.json:/var/www/package.json
       - ./yarn.lock:/var/www/yarn.lock

@@ -28,6 +28,7 @@
         }
     ],
     "require": {
+        "php": ">=8.0",
         "composer/installers": "^1.12",
         "cweagans/composer-patches": "^1.7.2",
         "dompdf/dompdf": "^1.2.2",
@@ -57,10 +58,10 @@
         "drush/drush": "^10.6.2",
         "mglaman/phpstan-drupal": "^0.12.15",
         "phpoffice/phpspreadsheet": "^1.24.1",
-        "ralouphie/mimey": "^2.1",
         "symfony/property-access": "^3.4.47",
         "webflo/drupal-finder": "^1.2.2",
-        "webmozart/path-util": "^2.3"
+        "webmozart/path-util": "^2.3",
+        "xantios/mimey": "^2.2"
     },
     "require-dev": {
         "alexandresalome/mailcatcher": "^1.4",
@@ -75,7 +76,6 @@
         "phpmd/phpmd": "^2.12",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "sebastian/phpcpd": "^6.0.3",
         "wapmorgan/php-code-fixer": "^2.0.29"
     },
     "conflict": {

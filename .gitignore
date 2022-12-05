@@ -35,11 +35,10 @@ docker-compose.override.yml
 /web/profiles/contrib/
 /web/libraries/
 
-# Ignore sensitive information
-/web/sites/*/settings.php
+# Ignore Drupal's local config files
 /web/sites/*/settings.local.php
-/web/sites/*/services*.yml
-/web/sites/*/drushrc.php
+/web/sites/*/services.local.yml
+/web/sites/*/drushrc.local.php
 
 # Ignore Drupal's file directory
 /web/sites/*/files/

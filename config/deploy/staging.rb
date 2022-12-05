@@ -23,8 +23,8 @@ before "styleguide:deploy_build", "styleguide:build_local" unless ENV['CI']
 
 # Map php command in order to change PHP version from "default" setup-one
 # See https://help.alwaysdata.com/fr/langages/php/probl%C3%A8mes-fr%C3%A9quents/#utiliser-diff%C3%A9rentes-versions-en-ssh
-# set :php, '/usr/bin/php'
-set :php, '/usr/bin/php8.0 -c /home/quartiers-solidaires/admin/config/php/php-497349.ini'
+set :php, '/usr/bin/php'
+# set :php, '/usr/bin/php8.0 -c /home/quartiers-solidaires/admin/config/php/php-497349.ini'
 SSHKit.config.command_map[:php] = -> { fetch(:php, 'php') }
 
 # Map composer and drush commands

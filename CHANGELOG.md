@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/ctools (4.0.0 => 4.0.3)
 - update module drupal/jquery_ui (1.4.0 => 1.6.0)
 - update module drupal/jquery_ui_datepicker (1.3.0 => 1.4.0)
+- update module drupal/crop (2.2.0 => 2.3.0)
 
 ## [2.3.3] - 2022-12-05
 ### Security

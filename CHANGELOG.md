@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update dompdf/dompdf v1.2.2 => v2.0.1
+- update module drupal/admin_toolbar (3.1.1 => 3.3.0)
+- update module drupal/bamboo_twig (5.0.0 => 6.0.0)
+- update module drupal/loco_translate (2.1.0 => 3.0.0)
+- update module drupal/swiftmailer (2.2.0 => 2.3.0)
+- update module drupal/ctools (4.0.0 => 4.0.3)
+- update module drupal/jquery_ui (1.4.0 => 1.6.0)
+- update module drupal/jquery_ui_datepicker (1.3.0 => 1.4.0)
+- update module drupal/crop (2.2.0 => 2.3.0)
+- update module drupal/gin_toolbar (1.0.0-beta22 => 1.0.0-rc1)
+- update module drupal/gin (3.0.0-beta5 => 3.0.0-rc1)
+- update module drupal/field_group (3.3.0 => 3.4.0)
+- update module drupal/captcha (1.5.0 => 1.9.0)
+- update module drupal/backerymails (2.1.0 => 2.2.0)
+- update drupal/core-dev (9.4.8 => 9.5.1)
+- update drupal/core (9.4.8 => 9.5.1)
+- replace library wapmorgan/php-code-fixer by wapmorgan/php-deprecation-detector
 
 ## [2.3.3] - 2022-12-05
 ### Security

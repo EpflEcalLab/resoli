@@ -1784,20 +1784,20 @@
         },
         {
             "name": "drupal/backerymails",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/backerymails.git",
-                "reference": "8.x-2.1"
+                "reference": "8.x-2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/backerymails-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "6ac20dbf782f6174572f3934dfcb6413fac65f5d"
+                "url": "https://ftp.drupal.org/files/projects/backerymails-8.x-2.2.zip",
+                "reference": "8.x-2.2",
+                "shasum": "6051907d5eebcfd00d719d41d77c6c1a3e5baea7"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9",
+                "drupal/core": "^9",
                 "drupal/mailsystem": "~4.3"
             },
             "require-dev": {
@@ -1806,8 +1806,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1628837905",
+                    "version": "8.x-2.2",
+                    "datestamp": "1666353998",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

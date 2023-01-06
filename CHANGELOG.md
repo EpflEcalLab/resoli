@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update dompdf/dompdf v1.2.2 => v2.0.1
+- update module drupal/admin_toolbar (3.1.1 => 3.3.0)
 
 ## [2.3.3] - 2022-12-05
 ### Security

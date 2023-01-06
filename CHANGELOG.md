@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/backerymails (2.1.0 => 2.2.0)
 - update drupal/core-dev (9.4.8 => 9.5.1)
 - update drupal/core (9.4.8 => 9.5.1)
+- replace library wapmorgan/php-code-fixer by wapmorgan/php-deprecation-detector
 
 ## [2.3.3] - 2022-12-05
 ### Security

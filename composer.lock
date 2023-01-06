@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aaa5810174d583e6da316ba549a04617",
+    "content-hash": "e3126ad4e80817129c2e79527f634175",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -16315,7 +16315,7 @@
             "time": "2021-07-28T10:34:58+00:00"
         },
         {
-            "name": "wapmorgan/php-code-fixer",
+            "name": "wapmorgan/php-deprecation-detector",
             "version": "2.0.29",
             "source": {
                 "type": "git",
@@ -16333,6 +16333,9 @@
                 "ext-tokenizer": "*",
                 "php": ">=5.4",
                 "symfony/console": "^3.4|^4.0|^5.0"
+            },
+            "replace": {
+                "wapmorgan/php-code-fixer": "self.version"
             },
             "suggest": {
                 "ext-json": "Adds ability to store report in JSON format"
@@ -16374,7 +16377,6 @@
                 "issues": "https://github.com/wapmorgan/PhpDeprecationDetector/issues",
                 "source": "https://github.com/wapmorgan/PhpDeprecationDetector/tree/2.0.29"
             },
-            "abandoned": "wapmorgan/php-deprecation-detector",
             "time": "2022-06-16T00:36:37+00:00"
         }
     ],

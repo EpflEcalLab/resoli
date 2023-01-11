@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/core (9.4.8 => 9.5.1)
 - replace library wapmorgan/php-code-fixer by wapmorgan/php-deprecation-detector
 
+### Fixed
+- fix Ajax Maximum call stack size exceeded since Drupal 9.5 update
+
 ## [2.3.3] - 2022-12-05
 ### Security
 - update drupal/core (9.4.7 => 9.4.8)

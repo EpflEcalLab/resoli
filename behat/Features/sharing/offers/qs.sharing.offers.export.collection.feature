@@ -22,9 +22,8 @@ Feature: Offers export by offer's type
       | organizer+lausanne | 65 | 21 | 403 |
       | manager+lausanne | 65 | 21 | 403 |
 
-#  @todo add tests on header to ensure a pdf is downloaded.
-#  @api
-#  Scenario: Accessing the export feature will download an pdf file
-#    Given I am logged in as user "manager+lausanne"
-#    When I am on "/sharing/export/offer_type/66/theme/19/pdf"
-#    And I should see in the header "Content-Type":"application/pdf"
+  @api
+  Scenario: Accessing the export feature will download a PDF file.
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/sharing/export/offer_type/66/theme/19/pdf"
+    And I should see in the header "Content-Type":"application/pdf"

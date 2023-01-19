@@ -22,9 +22,8 @@ Feature: Offers export by community
       | organizer+lausanne | 2 | 403 |
       | manager+lausanne | 2 | 403 |
 
-#  @todo add tests on header to ensure a pdf is downloaded.
-#  @api
-#  Scenario: Accessing the export feature will download an pdf file
-#    Given I am logged in as user "manager+lausanne"
-#    When I am on "/sharing/export/community/1/pdf"
-#    And I should see in the header "Content-Type":"application/pdf"
+  @api
+  Scenario: Accessing the export feature will download a PDF file.
+    Given I am logged in as user "manager+lausanne"
+    When I am on "/sharing/export/community/1/pdf"
+    And I should see in the header "Content-Type":"application/pdf"

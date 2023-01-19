@@ -10,7 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * When using this form, be are of the following:.
+ * When using this form, be aware of the following:.
  *
  * This form is rendered more than once in the same page & it use Ajax.
  * Drupal has an issue & can't handle multiple same form with Ajax

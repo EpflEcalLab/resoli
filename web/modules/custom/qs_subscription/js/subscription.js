@@ -105,7 +105,7 @@
                   confirmDeferred($this, settings.subscriptionConfirm).then(function (answer) {
                     if (answer === 'yes') {
                       ajax.alreadyConfirmed = true;
-                      $(ajax.element).trigger(ajax.element_settings.event);
+                      $(ajax.element).trigger(ajax.elementSettings.event);
                     }
                   }); // Interrupt the ajax submission.
 
@@ -113,9 +113,8 @@
                   return false;
                 }
 
-                var beforeSend = ajax.options.originalBeforeSend(xmlhttprequest, options);
                 ajax.alreadyConfirmed = false;
-                return beforeSend;
+                return null;
               };
             }
           });

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - fix Github Actions build using uncompatible node version
+- order the photos by date and by event ID - QS-39
 
 ## [2.3.4] - 2023-01-19
 ### Security

@@ -316,6 +316,7 @@ class PhotoManager {
 
     $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_event.field_event_target_id');
     $query->orderBy('field_end_at.field_end_at_value', 'DESC');
+    $query->orderBy('field_event.field_event_target_id', 'DESC');
 
     $rows = $query->execute()->fetchAll();
 

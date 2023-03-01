@@ -124,6 +124,11 @@ jobs:
         run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only --force
       - name: Build Styleguide
         run: docker exec test yarn build --production
+      # Build assets
+      # Uncomment and set right node version if you have to build assets
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
       - name: Build Styleguide Library Node Autocomplete
         run: yarn && yarn build --production
         working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete

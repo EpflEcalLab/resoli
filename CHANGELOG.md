@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update bundle capdrupal 3.0.2 (was 3.0.0)
+- update drupal/core (9.5.1 => 9.5.4)
 
 ### Fixed
 - fix Github Actions build using uncompatible node version

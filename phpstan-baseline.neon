@@ -1,0 +1,255 @@
+parameters:
+	ignoreErrors:
+		-
+			message: """
+				#^Call to deprecated function file_save_data\\(\\)\\:
+				in drupal\\:9\\.3\\.0 and is removed from drupal\\:10\\.0\\.0\\. Use
+				  \\\\Drupal\\\\file\\\\FileRepositoryInterface\\:\\:writeData\\(\\) instead\\.$#
+			"""
+			count: 1
+			path: behat/Context/Drupal/FormContext.php
+
+		-
+			message: "#^Variable \\$entity might not be defined\\.$#"
+			count: 3
+			path: web/modules/custom/qs_acl/src/Controller/PrivilegeGodController.php
+
+		-
+			message: "#^Variable \\$roles might not be defined\\.$#"
+			count: 1
+			path: web/modules/custom/qs_acl/src/Controller/PrivilegeGodController.php
+
+		-
+			message: "#^Variable \\$storage in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 1
+			path: web/modules/custom/qs_acl/src/Entity/Privilege.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_activity\\\\EventSubscriber\\\\RedirectSubscriber\\:\\:communityRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_activity/src/EventSubscriber/RedirectSubscriber.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_activity\\\\EventSubscriber\\\\RedirectSubscriber\\:\\:eventRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_activity/src/EventSubscriber/RedirectSubscriber.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\qs_activity\\\\Form\\\\ActivityInlineAddMemberForm\\:\\:\\$currentUser\\.$#"
+			count: 1
+			path: web/modules/custom/qs_activity/src/Form/ActivityInlineAddMemberForm.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\qs_activity\\\\Form\\\\ActivityInlineAddMemberForm\\:\\:\\$privilegeManager\\.$#"
+			count: 4
+			path: web/modules/custom/qs_activity/src/Form/ActivityInlineAddMemberForm.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\qs_activity\\\\Form\\\\ActivityInlineAddMemberForm\\:\\:\\$userStorage\\.$#"
+			count: 3
+			path: web/modules/custom/qs_activity/src/Form/ActivityInlineAddMemberForm.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_auth\\\\EventSubscriber\\\\AuthRedirect\\:\\:cancelRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_auth/src/EventSubscriber/AuthRedirect.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_auth\\\\EventSubscriber\\\\AuthRedirect\\:\\:loginRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_auth/src/EventSubscriber/AuthRedirect.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_auth\\\\EventSubscriber\\\\AuthRedirect\\:\\:passRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_auth/src/EventSubscriber/AuthRedirect.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_auth\\\\EventSubscriber\\\\AuthRedirect\\:\\:registerRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_auth/src/EventSubscriber/AuthRedirect.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_auth\\\\EventSubscriber\\\\AuthRedirect\\:\\:resetRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_auth/src/EventSubscriber/AuthRedirect.php
+
+		-
+			message: """
+				#^Call to deprecated function honeypot_add_form_protection\\(\\)\\:
+				in honeypot\\:2\\.1\\.0 and is removed from honeypot\\:3\\.0\\.0\\. Use the
+				  'honeypot' service instead\\. For example, \\\\Drupal\\:\\:service\\('honeypot'\\)
+				  \\-\\>addFormProtection\\(\\$form, \\$form_state, \\$options\\)\\.$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_auth/src/Form/RegisterForm.php
+
+		-
+			message: """
+				#^Call to deprecated method getCellByColumnAndRow\\(\\) of class PhpOffice\\\\PhpSpreadsheet\\\\Worksheet\\\\Worksheet\\:
+				1\\.23\\.0
+				     Use the getCell\\(\\) method with a cell address such as 'C5' instead;,
+				         or passing in an array of \\[\\$columnIndex, \\$row\\] \\(e\\.g\\. \\[3, 5\\]\\), or a CellAddress object\\.$#
+			"""
+			count: 3
+			path: web/modules/custom/qs_export/src/Excel.php
+
+		-
+			message: "#^Variable \\$lock_acquired in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 1
+			path: web/modules/custom/qs_photo/src/Controller/StreamController.php
+
+		-
+			message: "#^Variable \\$messages in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 1
+			path: web/modules/custom/qs_photo/src/Controller/UploadController.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\qs_photo\\\\Controller\\\\UserController\\:\\:\\$nodeStorage\\.$#"
+			count: 2
+			path: web/modules/custom/qs_photo/src/Controller/UserController.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_photo\\\\EventSubscriber\\\\RedirectSubscriber\\:\\:photoRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_photo/src/EventSubscriber/RedirectSubscriber.php
+
+		-
+			message: "#^Array has 2 duplicate keys with value 'pauseUpload' \\('pauseUpload', 'pauseUpload'\\)\\.$#"
+			count: 1
+			path: web/modules/custom/qs_photo/src/Form/AddForm.php
+
+		-
+			message: "#^Array has 2 duplicate keys with value 'resumeUpload' \\('resumeUpload', 'resumeUpload'\\)\\.$#"
+			count: 1
+			path: web/modules/custom/qs_photo/src/Form/AddForm.php
+
+		-
+			message: "#^Array has 2 duplicate keys with value 'retryUpload' \\('retryUpload', 'retryUpload'\\)\\.$#"
+			count: 1
+			path: web/modules/custom/qs_photo/src/Form/AddForm.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\qs_photo\\\\Form\\\\FormBasic\\:\\:\\$extensions\\.$#"
+			count: 1
+			path: web/modules/custom/qs_photo/src/Form/FormBasic.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_sharing\\\\EventSubscriber\\\\RedirectSubscriber\\:\\:offerRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_sharing/src/EventSubscriber/RedirectSubscriber.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_sharing\\\\EventSubscriber\\\\RedirectSubscriber\\:\\:requestRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_sharing/src/EventSubscriber/RedirectSubscriber.php
+
+		-
+			message: "#^Variable \\$theme might not be defined\\.$#"
+			count: 1
+			path: web/modules/custom/qs_sharing/src/Form/OfferAddForm.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_site\\\\EventSubscriber\\\\EntityAccess\\:\\:isDisabledTaxonomy\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_site/src/EventSubscriber/EntityAccess.php
+
+		-
+			message: """
+				#^Class Drupal\\\\qs_site\\\\TwigExtension\\\\Render extends deprecated class Twig_Extension\\:
+				since Twig 2\\.7, use "Twig\\\\Extension\\\\AbstractExtension" instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_site/src/TwigExtension/Render.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class Twig_SimpleFunction\\:
+				since Twig 2\\.7, use "Twig\\\\TwigFunction" instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_site/src/TwigExtension/Render.php
+
+		-
+			message: "#^Variable \\$ids might not be defined\\.$#"
+			count: 1
+			path: web/modules/custom/qs_subscription/src/Controller/JudgeController.php
+
+		-
+			message: "#^Access to an undefined property Drupal\\\\qs_subscription\\\\Controller\\\\SubscribersController\\:\\:\\$subscriptionStorage\\.$#"
+			count: 3
+			path: web/modules/custom/qs_subscription/src/Controller/SubscribersController.php
+
+		-
+			message: "#^Variable \\$storage in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 1
+			path: web/modules/custom/qs_subscription/src/Entity/Subscription.php
+
+		-
+			message: "#^Variable \\$messages in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 2
+			path: web/modules/custom/qs_subscription/src/Form/RequestForm.php
+
+		-
+			message: "#^Variable \\$ids might not be defined\\.$#"
+			count: 1
+			path: web/modules/custom/qs_subscription/src/Service/SubscriptionManager.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_supervisor\\\\EventSubscriber\\\\AccountRedirect\\:\\:dashboardRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_supervisor/src/EventSubscriber/AccountRedirect.php
+
+		-
+			message: """
+				#^Parameter \\$event of method Drupal\\\\qs_supervisor\\\\EventSubscriber\\\\AccountRedirect\\:\\:editFormRedirect\\(\\) has typehint with deprecated class Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\GetResponseEvent\\:
+				since Symfony 4\\.3, use RequestEvent instead$#
+			"""
+			count: 1
+			path: web/modules/custom/qs_supervisor/src/EventSubscriber/AccountRedirect.php
+
+		-
+			message: "#^Variable \\$redirect in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 1
+			path: web/modules/custom/qs_urls/inc/helpers.inc
+
+		-
+			message: "#^Access to an undefined property FlattedString\\:\\:\\$value\\.$#"
+			count: 1
+			path: web/themes/quartiers_solidaires/libs/node-autocomplete/node_modules/flatted/php/flatted.php

@@ -7,10 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update bundle capdrupal 3.0.2 (was 3.0.0)
+- update drupal/core (9.5.1 => 9.5.4)
+- update composer/installers (v1.12.0 => v2.2.0)
+- update linter phpstan/phpstan (0.12.100 => 1.10.5)
+- update linter mglaman/phpstan-drupal (0.12.15 => 1.1.29)
 
 ### Fixed
 - fix Github Actions build using uncompatible node version
 - order the photos by date and by event ID - QS-39
+
+### Removed
+- remove drupal/console in favor of Drush
 
 ## [2.3.4] - 2023-01-19
 ### Security

@@ -55,7 +55,6 @@
         "drupal/redirect": "^1.8@beta",
         "drupal/swiftmailer": "^2.3",
         "drush/drush": "^10.6.2",
-        "mglaman/phpstan-drupal": "^0.12.15",
         "phpoffice/phpspreadsheet": "^1.26",
         "symfony/property-access": "^3.4.47",
         "webflo/drupal-finder": "^1.2.2",
@@ -72,8 +71,10 @@
         "drupal/schema_metatag": "^1.9",
         "drupol/phpcsfixer-configs-drupal": "^2.0.1",
         "friendsofphp/php-cs-fixer": "^3.4",
+        "mglaman/phpstan-drupal": "^1.1",
         "phpmd/phpmd": "^2.13",
         "phpspec/prophecy-phpunit": "^2.0.1",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpunit/phpunit": "^9.5.27",
         "wapmorgan/php-deprecation-detector": "^2.0.29"
     },

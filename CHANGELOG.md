@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.5] - 2023-03-23
+### Security
+- update bundle capdrupal 3.0.2 (was 3.0.0)
+- update drupal/core (9.5.1 => 9.5.4)
+- update composer/installers (v1.12.0 => v2.2.0)
+- update linter phpstan/phpstan (0.12.100 => 1.10.5)
+- update linter mglaman/phpstan-drupal (0.12.15 => 1.1.29)
+- update library dompdf/dompdf (v2.0.1 => v2.0.3)
+
+### Fixed
+- fix Github Actions build using uncompatible node version
+- order the photos by date and by event ID - QS-39
+
+### Removed
+- remove drupal/console in favor of Drush
+
 ## [2.3.4] - 2023-01-19
 ### Security
 - update dompdf/dompdf v1.2.2 => v2.0.1
@@ -581,7 +597,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.4...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.5...HEAD
+[2.3.5]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.4...2.3.5
 [2.3.4]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.3...2.3.4
 [2.3.3]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.2...2.3.3
 [2.3.2]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.1...2.3.2

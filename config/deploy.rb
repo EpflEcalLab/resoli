@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.14.1'
+lock '3.17.1'
 
 set :application, 'quartiers-solidaires'
 set :repo_url, 'git@github.com:antistatique/quartiers-solidaires.git'
@@ -49,8 +49,6 @@ set :loco_po_file, './config/languages/loco-fr.po'
 set :ssh_options, {
   forward_agent: true
 }
-
-set :slackistrano, false
 
 # Loco Push Translate settings.
 set :loco_push, {

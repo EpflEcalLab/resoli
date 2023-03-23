@@ -15,9 +15,6 @@ set :loco_pull, {
   status: 'all',
 }
 
-# Disable Notification on slack
-set :slackistrano, false
-
 before "styleguide:build_local", "httpauth:protect"
 before "styleguide:deploy_build", "styleguide:build_local" unless ENV['CI']
 

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update composer/installers (v1.12.0 => v2.2.0)
 - update linter phpstan/phpstan (0.12.100 => 1.10.5)
 - update linter mglaman/phpstan-drupal (0.12.15 => 1.1.29)
+- update library dompdf/dompdf (v2.0.1 => v2.0.3)
 
 ### Fixed
 - fix Github Actions build using uncompatible node version

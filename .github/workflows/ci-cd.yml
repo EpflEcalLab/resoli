@@ -81,7 +81,7 @@ jobs:
         run: |
           echo "::set-output name=id::$(id -g)"
       - name: Build and Push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           pull: true

@@ -44,7 +44,7 @@
         "drupal/gin": "^3.0",
         "drupal/honeypot": "^2.1.2",
         "drupal/image_effects": "^3.4",
-        "drupal/jquery_ui_datepicker": "^1.4",
+        "drupal/jquery_ui_datepicker": "^2.0",
         "drupal/loco_translate": "^3.0",
         "drupal/mailsystem": "^4.4",
         "drupal/masquerade": "^2.0@beta",

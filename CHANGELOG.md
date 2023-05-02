@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/recaptcha (3.1.0 => 3.2.0)
 - update module drupal/captcha (1.9.0 => 1.10.0)
 - update module google/recaptcha (1.2.4 => 1.3.0)
+- update module drupal/allowed_formats (1.5.0 => 2.0.0)
 
 ## [2.3.5] - 2023-03-23
 ### Security

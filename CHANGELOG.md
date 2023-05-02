@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update phpunit/phpunit (9.6.4 => 9.6.7)
 - update phpstan/phpstan (1.10.5 => 1.10.14)
 - update module drupal/jquery_ui_datepicker (1.4.0 => 2.0.0)
+- update drupal/focal_point (1.5.0 => 2.0.0)
 
 ## [2.3.5] - 2023-03-23
 ### Security

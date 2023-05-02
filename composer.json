@@ -40,7 +40,7 @@
         "drupal/core-project-message": "^9.5.1",
         "drupal/core-recommended": "^9.5.1",
         "drupal/field_group": "^3.4",
-        "drupal/focal_point": "^1.5@beta",
+        "drupal/focal_point": "^2.0",
         "drupal/gin": "^3.0",
         "drupal/honeypot": "^2.1.2",
         "drupal/image_effects": "^3.4",

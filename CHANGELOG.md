@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/jquery_ui_datepicker (1.4.0 => 2.0.0)
 - update drupal/focal_point (1.5.0 => 2.0.0)
 - update module drupal/backerymails (2.2.0 => 3.0.0)
+- update theme drupal/gin (3.0.0-rc1 => 3.0.0-rc3)
+- update module drupal/admin_toolbar (3.3.0 => 3.3.1)
 
 ## [2.3.5] - 2023-03-23
 ### Security

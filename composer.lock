@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e39ecc82c12cd0a0b6708afcec56350d",
+    "content-hash": "da5d36cd84a5657ffe71761d159d5341",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1478,20 +1478,20 @@
         },
         {
             "name": "drupal/backerymails",
-            "version": "2.2.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/backerymails.git",
-                "reference": "8.x-2.2"
+                "reference": "3.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/backerymails-8.x-2.2.zip",
-                "reference": "8.x-2.2",
-                "shasum": "6051907d5eebcfd00d719d41d77c6c1a3e5baea7"
+                "url": "https://ftp.drupal.org/files/projects/backerymails-3.0.0.zip",
+                "reference": "3.0.0",
+                "shasum": "5eef044988ce1ad2ccfd9531186686d87f57dd2e"
             },
             "require": {
-                "drupal/core": "^9",
+                "drupal/core": "^9.4 || ^10",
                 "drupal/mailsystem": "~4.3"
             },
             "require-dev": {
@@ -1500,8 +1500,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.2",
-                    "datestamp": "1666353998",
+                    "version": "3.0.0",
+                    "datestamp": "1679065694",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

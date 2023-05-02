@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update linter wapmorgan/php-deprecation-detector (2.0.29 => 2.0.33)
+- update behat/behat (v3.12.0 => v3.13.0)
 
 ## [2.3.5] - 2023-03-23
 ### Security

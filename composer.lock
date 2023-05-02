@@ -15272,23 +15272,23 @@
         },
         {
             "name": "wapmorgan/php-deprecation-detector",
-            "version": "2.0.29",
+            "version": "2.0.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wapmorgan/PhpDeprecationDetector.git",
-                "reference": "ffdc1e9f577f809e54d06f8cfa1b49aad58f489d"
+                "reference": "860e40c545acbd5c2aefdef416d09fb4639198bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wapmorgan/PhpDeprecationDetector/zipball/ffdc1e9f577f809e54d06f8cfa1b49aad58f489d",
-                "reference": "ffdc1e9f577f809e54d06f8cfa1b49aad58f489d",
+                "url": "https://api.github.com/repos/wapmorgan/PhpDeprecationDetector/zipball/860e40c545acbd5c2aefdef416d09fb4639198bd",
+                "reference": "860e40c545acbd5c2aefdef416d09fb4639198bd",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "php": ">=5.4",
-                "symfony/console": "^3.4|^4.0|^5.0"
+                "symfony/console": "^3.4|^4.0|^5.0|^6.0"
             },
             "replace": {
                 "wapmorgan/php-code-fixer": "self.version"
@@ -15331,9 +15331,9 @@
             "description": "Analyzer of PHP code to search issues with deprecated functionality in newer interpreter versions.",
             "support": {
                 "issues": "https://github.com/wapmorgan/PhpDeprecationDetector/issues",
-                "source": "https://github.com/wapmorgan/PhpDeprecationDetector/tree/2.0.29"
+                "source": "https://github.com/wapmorgan/PhpDeprecationDetector/tree/2.0.33"
             },
-            "time": "2022-06-16T00:36:37+00:00"
+            "time": "2023-04-23T09:23:34+00:00"
         }
     ],
     "aliases": [],

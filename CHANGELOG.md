@@ -5,6 +5,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Security
+- update linter wapmorgan/php-deprecation-detector (2.0.29 => 2.0.33)
+- update behat/behat (v3.12.0 => v3.13.0)
+- update phpunit/phpunit (9.6.4 => 9.6.7)
+- update phpstan/phpstan (1.10.5 => 1.10.14)
+- update module drupal/jquery_ui_datepicker (1.4.0 => 2.0.0)
+- update drupal/focal_point (1.5.0 => 2.0.0)
+- update module drupal/backerymails (2.2.0 => 3.0.0)
+- update theme drupal/gin (3.0.0-rc1 => 3.0.0-rc3)
+- update module drupal/admin_toolbar (3.3.0 => 3.3.1)
+- update module drupal/recaptcha (3.1.0 => 3.2.0)
+- update module drupal/captcha (1.9.0 => 1.10.0)
+- update module google/recaptcha (1.2.4 => 1.3.0)
+- update module drupal/allowed_formats (1.5.0 => 2.0.0)
+- update module drupal/schema_metatag (1.9.0 => 2.4.0)
+- update module drupal/swiftmailer (2.3.0 => 2.4.0)
+- update Core drupal/core (9.5.4 => 9.5.8)
+- update all remaining minors library
 
 ## [2.3.5] - 2023-03-23
 ### Security

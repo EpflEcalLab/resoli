@@ -49,7 +49,7 @@
         "drupal/mailsystem": "^4.4",
         "drupal/masquerade": "^2.0@beta",
         "drupal/metatag": "^1.22",
-        "drupal/new_relic_rpm": "^2.1",
+        "drupal/new_relic_rpm": "^2.1.0",
         "drupal/pathauto": "^1.11",
         "drupal/recaptcha": "^3.1",
         "drupal/redirect": "^1.8@beta",

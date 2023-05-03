@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/schema_metatag (1.9.0 => 2.4.0)
 - update module drupal/swiftmailer (2.3.0 => 2.4.0)
 - update Core drupal/core (9.5.4 => 9.5.8)
+- update all remaining minors library
 
 ## [2.3.5] - 2023-03-23
 ### Security

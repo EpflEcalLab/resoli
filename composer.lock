@@ -4902,29 +4902,30 @@
         },
         {
             "name": "loco/loco",
-            "version": "2.0.10",
+            "version": "2.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loco/loco-php-sdk.git",
-                "reference": "d6192a787c964a72ad206da6e81bf17185ebcb23"
+                "reference": "7ede6c2308f662fdaed2faac5e5052aaae36343f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loco/loco-php-sdk/zipball/d6192a787c964a72ad206da6e81bf17185ebcb23",
-                "reference": "d6192a787c964a72ad206da6e81bf17185ebcb23",
+                "url": "https://api.github.com/repos/loco/loco-php-sdk/zipball/7ede6c2308f662fdaed2faac5e5052aaae36343f",
+                "reference": "7ede6c2308f662fdaed2faac5e5052aaae36343f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-zip": "*",
                 "guzzlehttp/guzzle-services": "^1.1",
+                "guzzlehttp/psr7": "^1.8|^2.1",
                 "php": "^7.1.3|^8.0",
-                "symfony/console": "~4.0|~5.0"
+                "symfony/console": "~4.0|~5.0|^6.0"
             },
             "require-dev": {
                 "loco/swizzle": "@dev",
                 "phpunit/phpunit": "~7.0|~8.0|~9.0",
-                "symfony/translation": "~4.0|~5.0"
+                "symfony/translation": "~4.0|~5.0|^6.0"
             },
             "type": "library",
             "extra": {
@@ -4966,9 +4967,9 @@
             ],
             "support": {
                 "issues": "https://github.com/loco/loco-php-sdk/issues",
-                "source": "https://github.com/loco/loco-php-sdk/tree/2.0.10"
+                "source": "https://github.com/loco/loco-php-sdk/tree/2.0.12"
             },
-            "time": "2021-10-08T11:27:41+00:00"
+            "time": "2023-05-05T09:51:13+00:00"
         },
         {
             "name": "lsolesen/pel",

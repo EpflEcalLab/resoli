@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.3.6] - 2023-05-23
 ### Security
 - update linter wapmorgan/php-deprecation-detector (2.0.29 => 2.0.33)
 - update behat/behat (v3.12.0 => v3.13.0)
@@ -616,7 +618,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.5...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.6...HEAD
+[2.3.6]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.5...2.3.6
 [2.3.5]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.4...2.3.5
 [2.3.4]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.3...2.3.4
 [2.3.3]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.2...2.3.3

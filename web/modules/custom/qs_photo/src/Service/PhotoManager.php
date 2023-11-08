@@ -206,6 +206,7 @@ class PhotoManager {
     $query->leftJoin('node__field_event', 'field_event', 'field_event.entity_id = photo.nid');
     $query->leftJoin('node__field_activity', 'field_activity', 'field_activity.entity_id = field_event.field_event_target_id');
     $query->condition('field_activity.field_activity_target_id', $activity->id());
+    $query->orderBy('photo.created', 'ASC');
 
     if ($limit) {
       $query->addTag('random');
@@ -316,6 +317,7 @@ class PhotoManager {
 
     $query->leftJoin('node__field_end_at', 'field_end_at', 'field_end_at.entity_id = field_event.field_event_target_id');
     $query->orderBy('field_end_at.field_end_at_value', 'DESC');
+    $query->orderBy('photo.created', 'ASC');
     $query->orderBy('field_event.field_event_target_id', 'DESC');
 
     $rows = $query->execute()->fetchAll();

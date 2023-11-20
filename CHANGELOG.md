@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/admin_toolbar (3.3.2 => 3.4.2)
 - update module drupal/gin (3.0.0-rc3 => 3.0.0-rc7)
 - update module drupal/gin_toolbar (1.0.0-rc1 => 1.0.0-rc4)
+- update module drupal/token (1.11.0 => 1.13.0)
 
 ## [2.3.6] - 2023-05-23
 ### Security

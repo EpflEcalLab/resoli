@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/ctools (4.0.3 => 4.0.4)
 - update module drupal/file_mdm (2.5.0 => 2.6.0)
 - update module drupal/focal_point (2.0.0 => 2.0.2)
+- update module drupal/redirect (1.8.0 => 1.9.0)
 
 ## [2.3.6] - 2023-05-23
 ### Security

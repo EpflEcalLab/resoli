@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/captcha (1.10.0 => 2.0.5)
 - update module drupal/honeypot (2.1.2 => 2.1.3)
 - update module drupal/masquerade (2.0.0-rc1 => 2.0.0-rc4)
+- update module drupal/new_relic_rpm (2.1.0 => 2.1.1)
 
 ## [2.3.6] - 2023-05-23
 ### Security

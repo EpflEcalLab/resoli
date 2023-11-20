@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
-- fix order of photos by event then by creation date, then by event date (follow-up QS-39) - QS-55
+- fix order of photos by event then by creation date, then by ID, then by event date (follow-up QS-39) - QS-55 QS-57
+- harmonize photos listing (teaser, calendar and activity) to follow the same order - QS-55 QS-57
 
 ## [2.3.6] - 2023-05-23
 ### Security

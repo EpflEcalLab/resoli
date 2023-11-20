@@ -30,17 +30,17 @@ qs_sharing.requests.form.add:
 
 # Sharing request confirmation page
 qs_sharing.requests.confirmation:
-  path: '/sharing/requests/{request}/confirmation'
+  path: '/sharing/requests/{node}/confirmation'
   defaults:
     _controller: '\Drupal\qs_sharing\Controller\RequestConfirmationController::confirm'
     _title: 'qs_sharing.requests.confirmation.title'
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Controller\RequestConfirmationController::access'
-    request: \d+
+    node: \d+
   options:
     parameters:
-      request:
+      node:
         type: entity:node
 
 # Sharing dashboard page
@@ -78,32 +78,32 @@ qs_sharing.collection.request:
 
 # Request solve form
 qs_sharing.requests.form.solve:
-  path: '/sharing/requests/{request}/solve'
+  path: '/sharing/requests/{node}/solve'
   defaults:
     _form: '\Drupal\qs_sharing\Form\RequestSolveForm'
     _title: 'qs_sharing.requests.form.solve.title'
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Form\RequestSolveForm::access'
-    request: \d+
+    node: \d+
   options:
     parameters:
-      request:
+      node:
         type: entity:node
 
 # Request archive form
 qs_sharing.requests.form.archive:
-  path: '/sharing/requests/{request}/archive'
+  path: '/sharing/requests/{node}/archive'
   defaults:
     _form: '\Drupal\qs_sharing\Form\RequestArchiveForm'
     _title: 'qs_sharing.requests.form.archive.title'
   requirements:
     _user_is_logged_in: 'TRUE'
     _custom_access: '\Drupal\qs_sharing\Form\RequestArchiveForm::access'
-    request: \d+
+    node: \d+
   options:
     parameters:
-      request:
+      node:
         type: entity:node
 
 # Sharing user offers

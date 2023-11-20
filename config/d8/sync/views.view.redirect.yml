@@ -247,7 +247,7 @@ display:
         type: basic
         options:
           submit_button: Appliquer
-          reset_button: false
+          reset_button: true
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
           expose_sort_order: true

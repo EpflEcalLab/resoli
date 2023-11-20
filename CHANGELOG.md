@@ -8,6 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix order of photos by event then by creation date, then by ID, then by event date (follow-up QS-39) - QS-55 QS-57
 - harmonize photos listing (teaser, calendar and activity) to follow the same order - QS-55 QS-57
+- fix usage of restricted variable  and replace by
+
+### Security
+- update module drupal/admin_toolbar (3.3.2 => 3.4.2)
+- update module drupal/gin (3.0.0-rc3 => 3.0.0-rc7)
+- update module drupal/gin_toolbar (1.0.0-rc1 => 1.0.0-rc4)
+- update module drupal/token (1.11.0 => 1.13.0)
+- update module drupal/ctools (4.0.3 => 4.0.4)
+- update module drupal/file_mdm (2.5.0 => 2.6.0)
+- update module drupal/focal_point (2.0.0 => 2.0.2)
+- update module drupal/redirect (1.8.0 => 1.9.0)
+- update module drupal/pathauto (1.11.0 => 1.12.0)
+- update module drupal/captcha (1.10.0 => 2.0.5)
+- update module drupal/honeypot (2.1.2 => 2.1.3)
+- update module drupal/masquerade (2.0.0-rc1 => 2.0.0-rc4)
+- update module drupal/new_relic_rpm (2.1.0 => 2.1.1)
+- update drupal/core (9.5.8 => 9.5.11)
+
+### Removed
+- uninstall module drupal/new_relic_rpm
 
 ## [2.3.6] - 2023-05-23
 ### Security

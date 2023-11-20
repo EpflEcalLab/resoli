@@ -65,14 +65,14 @@
 
     {# Solve button #}
     {% if not is_solved %}
-      {{ bamboo_render_form('qs_sharing', 'RequestSolveForm', {'request': request}) }}
+      {{ bamboo_render_form('qs_sharing', 'RequestSolveForm', {'node': request}) }}
     {% endif %}
 
     {# Archive button #}
     {# Available for Author of request or Admin. #}
     {% set currentUser = bamboo_load_currentuser() %}
     {% if currentUser.id == request.uid.target_id or user.hasPermission('administer nodes') or can_moderate_community %}
-      {{ bamboo_render_form('qs_sharing', 'RequestArchiveForm', {'request': request}) }}
+      {{ bamboo_render_form('qs_sharing', 'RequestArchiveForm', {'node': request}) }}
     {% endif %}
 
   </div>

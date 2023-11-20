@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/focal_point (2.0.0 => 2.0.2)
 - update module drupal/redirect (1.8.0 => 1.9.0)
 - update module drupal/pathauto (1.11.0 => 1.12.0)
+- update module drupal/captcha (1.10.0 => 2.0.5)
 
 ## [2.3.6] - 2023-05-23
 ### Security

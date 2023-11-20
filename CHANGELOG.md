@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix order of photos by event then by creation date, then by ID, then by event date (follow-up QS-39) - QS-55 QS-57
 - harmonize photos listing (teaser, calendar and activity) to follow the same order - QS-55 QS-57
 
+### Security
+- update module drupal/admin_toolbar (3.3.2 => 3.4.2)
+- update module drupal/gin (3.0.0-rc3 => 3.0.0-rc7)
+- update module drupal/gin_toolbar (1.0.0-rc1 => 1.0.0-rc4)
+
 ## [2.3.6] - 2023-05-23
 ### Security
 - update linter wapmorgan/php-deprecation-detector (2.0.29 => 2.0.33)

@@ -3,8 +3,8 @@
 namespace Drupal\Behat\Context\Drupal;
 
 use Behat\Mink\Exception\ElementHtmlException;
-use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Drupal\DrupalExtension\Context\RawDrupalContext;
 
 /**
  * Defines Element features from the specific context.

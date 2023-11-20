@@ -32,16 +32,16 @@ class RequestConfirmationController extends ControllerBase {
   /**
    * Checks access.
    *
-   * @param \Drupal\node\NodeInterface $request
+   * @param \Drupal\node\NodeInterface $node
    *   Run access checks for this node.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access results.
    */
-  public function access(NodeInterface $request): AccessResultInterface {
+  public function access(NodeInterface $node): AccessResultInterface {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasBypass() || $request->get('uid')->target_id === $this->currentUser()->id()) {
+    if ($this->acl->hasBypass() || $node->get('uid')->target_id === $this->currentUser()->id()) {
       $access = AccessResult::allowed();
     }
 
@@ -51,8 +51,8 @@ class RequestConfirmationController extends ControllerBase {
   /**
    * Request thanks page.
    */
-  public function confirm(NodeInterface $request) {
-    $community = $request->field_community->entity;
+  public function confirm(NodeInterface $node) {
+    $community = $node->field_community->entity;
 
     $floating_buttons = [
       [
@@ -70,7 +70,7 @@ class RequestConfirmationController extends ControllerBase {
       '#theme' => 'qs_sharing_confirmation_requests_page',
       '#variables' => [
         'community' => $community,
-        'request' => $request,
+        'request' => $node,
         'floating_buttons' => $floating_buttons,
       ],
       '#cache' => [

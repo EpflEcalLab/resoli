@@ -60,16 +60,16 @@ class RequestArchiveForm extends FormBase {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
-   * @param \Drupal\node\NodeInterface $request
+   * @param \Drupal\node\NodeInterface $node
    *   Run access checks for this node.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function access(AccountInterface $account, NodeInterface $request) {
+  public function access(AccountInterface $account, NodeInterface $node) {
     $access = AccessResult::forbidden();
 
-    if ($this->acl->hasWriteAccessRequest($request) && $request->get('moderation_state')->value !== 'archived') {
+    if ($this->acl->hasWriteAccessRequest($node) && $node->get('moderation_state')->value !== 'archived') {
       $access = AccessResult::allowed();
     }
 
@@ -80,7 +80,7 @@ class RequestArchiveForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $options = NULL) {
-    if (!isset($options['request'])) {
+    if (!isset($options['node'])) {
       return $form;
     }
 
@@ -89,23 +89,23 @@ class RequestArchiveForm extends FormBase {
     $form_state->setRequestMethod('POST');
     $form_state->setCached(TRUE);
 
-    /** @var \Drupal\node\NodeInterface $request */
-    $request = $options['request'];
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $options['node'];
 
     // Save the request for later usage on submission.
-    $form_state->set('request', $request->id());
+    $form_state->set('node', $node->id());
 
     // Disable caching.
     $form['#cache']['max-age'] = 0;
 
     $form['#attributes'] = [
       'data-confirm' => 'true',
-      'data-parent' => 'card' . $request->id(),
+      'data-parent' => 'card' . $node->id(),
       'class' => [
         'request',
-        'request' . $request->id(),
+        'request' . $node->id(),
         'request-archive-form',
-        'request-archive-form' . $request->id(),
+        'request-archive-form' . $node->id(),
         'archive',
         'mx-auto',
         'mb-3',
@@ -156,16 +156,16 @@ class RequestArchiveForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    /** @var \Drupal\node\NodeInterface $request */
-    $request = $this->nodeStorage->load($form_state->get('request'));
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $this->nodeStorage->load($form_state->get('node'));
 
     // Archive the request.
-    $this->requestManager->archive($request);
+    $this->requestManager->archive($node);
 
     $this->messenger()->addMessage($this->t('qs_sharing.collection.request.archive.success'));
 
     $form_state->setRedirect('qs_sharing.collection.request', [
-      'community' => $request->field_community->target_id,
+      'community' => $node->field_community->target_id,
     ]);
   }
 

@@ -82,7 +82,7 @@ class RequestSolveForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $options = NULL) {
-    if (!isset($options['request'])) {
+    if (!isset($options['node'])) {
       return $form;
     }
 
@@ -91,23 +91,23 @@ class RequestSolveForm extends FormBase {
     $form_state->setRequestMethod('POST');
     $form_state->setCached(TRUE);
 
-    /** @var \Drupal\node\NodeInterface $request */
-    $request = $options['request'];
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $options['node'];
 
     // Save the request for later usage on submission.
-    $form_state->set('request', $request->id());
+    $form_state->set('node', $node->id());
 
     // Disable caching.
     $form['#cache']['max-age'] = 0;
 
     $form['#attributes'] = [
       'data-confirm' => 'true',
-      'data-parent' => 'card' . $request->id(),
+      'data-parent' => 'card' . $node->id(),
       'class' => [
         'request',
-        'request' . $request->id(),
+        'request' . $node->id(),
         'request-solve-form',
-        'request-solve-form' . $request->id(),
+        'request-solve-form' . $node->id(),
         'solve',
         'mx-auto',
         'mb-3',
@@ -157,20 +157,20 @@ class RequestSolveForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    /** @var \Drupal\node\NodeInterface $request */
-    $request = $this->nodeStorage->load($form_state->get('request'));
+    /** @var \Drupal\node\NodeInterface $node */
+    $node = $this->nodeStorage->load($form_state->get('node'));
     $currentUser = $this->userStorage->load($this->currentUser()->id());
     $now = new DrupalDateTime();
 
     // Solve the request and send an email to its author.
-    $this->requestManager->solved($request, $currentUser, $now);
-    $this->requestManager->sendSolvedMail($request, $currentUser);
+    $this->requestManager->solved($node, $currentUser, $now);
+    $this->requestManager->sendSolvedMail($node, $currentUser);
 
     $this->messenger()->addMessage($this->t('qs_sharing.collection.request.solve.success'));
 
     $form_state->setRedirect('qs_sharing.collection.request', [
-      'community' => $request->field_community->target_id,
-    ], ['fragment' => 'card' . $request->id()]);
+      'community' => $node->field_community->target_id,
+    ], ['fragment' => 'card' . $node->id()]);
   }
 
 }

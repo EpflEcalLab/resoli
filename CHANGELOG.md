@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/gin_toolbar (1.0.0-rc1 => 1.0.0-rc4)
 - update module drupal/token (1.11.0 => 1.13.0)
 - update module drupal/ctools (4.0.3 => 4.0.4)
+- update module drupal/file_mdm (2.5.0 => 2.6.0)
 
 ## [2.3.6] - 2023-05-23
 ### Security

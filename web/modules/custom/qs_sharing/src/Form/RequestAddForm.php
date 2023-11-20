@@ -377,7 +377,7 @@ class RequestAddForm extends FormBase {
     ]));
 
     $form_state->setRedirect('qs_sharing.requests.confirmation', [
-      'request' => $request->id(),
+      'node' => $request->id(),
     ]);
   }
 

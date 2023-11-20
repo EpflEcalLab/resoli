@@ -61,17 +61,17 @@ class RequestSolveForm extends FormBase {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Run access checks for this account.
-   * @param \Drupal\node\NodeInterface $request
+   * @param \Drupal\node\NodeInterface $node
    *   Run access checks for this node.
    *
    * @return \Drupal\Core\Access\AccessResultInterface
    *   The access result.
    */
-  public function access(AccountInterface $account, NodeInterface $request) {
+  public function access(AccountInterface $account, NodeInterface $node) {
     $access = AccessResult::forbidden();
-    $community = $request->field_community->entity;
+    $community = $node->field_community->entity;
 
-    if ($this->acl->isCommunityVolunteer($community) && $request->get('moderation_state')->value !== 'solved') {
+    if ($this->acl->isCommunityVolunteer($community) && $node->get('moderation_state')->value !== 'solved') {
       $access = AccessResult::allowed();
     }
 

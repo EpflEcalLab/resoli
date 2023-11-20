@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/new_relic_rpm (2.1.0 => 2.1.1)
 - update drupal/core (9.5.8 => 9.5.11)
 
+### Removed
+- uninstall module drupal/new_relic_rpm
+
 ## [2.3.6] - 2023-05-23
 ### Security
 - update linter wapmorgan/php-deprecation-detector (2.0.29 => 2.0.33)

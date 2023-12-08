@@ -415,8 +415,8 @@ class OfferEditForm extends FormBase {
           'value' => $form_state->getValue('availability'),
         ],
         'field_contact_name' => $form_state->getValue('contact_name'),
-        'field_contact_mail' => $form_state->getValue('contact_phone'),
-        'field_contact_phone' => $form_state->getValue('contact_mail'),
+        'field_contact_mail' => $form_state->getValue('contact_mail'),
+        'field_contact_phone' => $form_state->getValue('contact_phone'),
       ]
     );
 

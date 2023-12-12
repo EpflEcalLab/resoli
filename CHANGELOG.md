@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix order of photos by event then by creation date, then by ID, then by event date (follow-up QS-39) - QS-55 QS-57
 - harmonize photos listing (teaser, calendar and activity) to follow the same order - QS-55 QS-57
-- fix usage of restricted variable  and replace by
+- fix usage of restricted variable request and replace by node - QS-55 QS-57 QS-59
 - fix bug populating mail on phone and vice-versa during offer edition - QS-59
 
 ### Security

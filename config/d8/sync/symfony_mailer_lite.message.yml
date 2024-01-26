@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: pxXXt2Y_C4hI99GWfwgveH4pNT6ev8mQMkJEkVOashQ
+langcode: fr
+content_type: text/html
+override: true
+text_format: ''
+generate_plain: false
+character_set: UTF-8

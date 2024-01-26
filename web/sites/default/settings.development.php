@@ -19,12 +19,13 @@ $databases['default']['default'] = array (
 $settings['hash_salt'] = 'JL8kjr9Sqp2g4twbSBPhUAFUWFJq5wgfWv4QD0trCsG9TlxV18pzHyVFrtqKgBANYTgkh7pIfQ';
 
 /**
- * Swiftmailer configurations.
+ * The Symfony Mailer transporter.
+ *
+ * @var string
  */
-$config['swiftmailer.transport']['transport'] = 'smtp';
-$config['swiftmailer.transport']['smtp_host'] = 'mail';
-$config['swiftmailer.transport']['smtp_port'] = '1025';
-$config['swiftmailer.transport']['smtp_encryption'] = '0';
+$config['symfony_mailer_lite.settings']['default_transport'] = 'smtp';
+$config['symfony_mailer_lite.symfony_mailer_lite_transport.smtp']['configuration']['host'] = 'mail';
+$config['symfony_mailer_lite.symfony_mailer_lite_transport.smtp']['configuration']['port'] = '1025';
 
 /**
  * Private file path.

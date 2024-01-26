@@ -89,6 +89,22 @@ $config['recaptcha.settings.yml']['site_key'] = 'RECAPTCHA-SITE-KEY';
 $config['recaptcha.settings.yml']['secret_key'] = 'RECAPTCHA-SECRET-KEY';
 ```
 
+#### Symfony Mailer Liter
+
+We use Symfony Mailer Liter to manager the Mail Transport.
+For this project, we use Mailjet *SMTP* on both production & staging servers and we use a local *SMTP* server for development.
+
+```php
+/**
+ * The Symfony Mailer transporter.
+ *
+ * @var string
+ */
+$config['symfony_mailer_lite.settings']['default_transport'] = 'smtp';
+$config['symfony_mailer_lite.symfony_mailer_lite_transport.smtp']['configuration']['host'] = 'localhost';
+$config['symfony_mailer_lite.symfony_mailer_lite_transport.smtp']['configuration']['port'] = '25';
+```
+
 ### (optional) Get the productions files and database
 
 Local Drupal site files directory is mounted in Docker dev container, you can sync them with

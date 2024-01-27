@@ -53,6 +53,7 @@
         "drupal/recaptcha": "^3.1",
         "drupal/redirect": "^1.8@beta",
         "drupal/swiftmailer": "^2.3",
+        "drupal/symfony_mailer_lite": "^1.0",
         "drush/drush": "^10.6.2",
         "phpoffice/phpspreadsheet": "^1.26",
         "symfony/property-access": "^3.4.47",

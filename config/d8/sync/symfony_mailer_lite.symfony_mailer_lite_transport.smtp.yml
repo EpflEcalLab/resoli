@@ -1,0 +1,18 @@
+uuid: 35c7f6e6-dd58-4156-aa9e-5871f6d3ec54
+langcode: fr
+status: true
+dependencies: {  }
+id: smtp
+label: SMTP
+plugin: smtp
+configuration:
+  user: ''
+  pass: null
+  host: in-v3.mailjet.com
+  port: 25
+  query:
+    verify_peer: true
+    local_domain: ''
+    restart_threshold: null
+    restart_threshold_sleep: null
+    ping_threshold: null

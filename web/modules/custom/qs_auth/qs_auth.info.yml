@@ -8,4 +8,3 @@ dependencies:
   - drupal:qs_site
   - drupal:qs_acl
   - drupal:mailsystem
-  - drupal:swiftmailer

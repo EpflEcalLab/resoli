@@ -3,10 +3,14 @@ _core:
 langcode: fr
 theme: quartiers_solidaires
 defaults:
-  sender: swiftmailer
-  formatter: swiftmailer
+  sender: symfony_mailer_lite
+  formatter: symfony_mailer_lite
 modules:
   swiftmailer:
     none:
       sender: swiftmailer
       formatter: swiftmailer
+  symfony_mailer_lite:
+    none:
+      sender: symfony_mailer_lite
+      formatter: symfony_mailer_lite

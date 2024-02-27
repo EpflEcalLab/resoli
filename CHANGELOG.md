@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61
 
+### Added
+- add Upgrade Status on CI - QS-49
+
 ## [2.3.7] - 2023-12-12
 ### Fixed
 - fix order of photos by event then by creation date, then by ID, then by event date (follow-up QS-39) - QS-55 QS-57

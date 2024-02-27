@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - add Upgrade Status on CI - QS-49
 
+### Changed
+- change confirmation buttons waiting time from 2.5s to 4s - QS-62
+
 ## [2.3.7] - 2023-12-12
 ### Fixed
 - fix order of photos by event then by creation date, then by ID, then by event date (follow-up QS-39) - QS-55 QS-57

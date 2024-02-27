@@ -7,7 +7,7 @@
  */
 (function ($, Drupal) {
   var timer = null;
-  var delay = 2500;
+  var delay = 4000;
 
   /**
    * Attaches the confirm dialog to all enabled elements for ajax confirmation.

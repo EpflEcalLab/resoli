@@ -2,7 +2,7 @@ const formAjax = () => {
   (function ($) {
     // Handle buttons with confirmation step
     let timer = null;
-    const delay = 2500;
+    const delay = 4000;
 
     $('form[data-ajax="true"], form[data-confirm="true"]').on('click', '[type="submit"][data-confirm]', function(e) {
       const $this = $(this);

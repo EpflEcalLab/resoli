@@ -12,7 +12,7 @@ jobs:
           php-version: '8.0'
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
           tools: cs2pr, composer:v2
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: composer install --prefer-dist
       - run: ./vendor/bin/phpcs --report=checkstyle | cs2pr
 
@@ -37,7 +37,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.0
+          php-version: 8.1
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
           tools: psalm, composer:v2
       - uses: actions/checkout@v4
@@ -91,7 +91,7 @@ jobs:
           - dockerFile: Dockerfile
             image: quartiers-solidaires_test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Get the user id
@@ -125,7 +125,7 @@ jobs:
     needs: build_docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Cache artifacts
@@ -144,7 +144,7 @@ jobs:
     needs: build_docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Cache artifacts

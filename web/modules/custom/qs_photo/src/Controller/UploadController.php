@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * Controller receiving uppy call to upload/save an image.
  */
 class UploadController extends ControllerBase {
+
   use MessengerTrait;
 
   /**

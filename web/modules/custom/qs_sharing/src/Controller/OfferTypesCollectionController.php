@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Collection of Offer's Type for Sharing.
  */
 class OfferTypesCollectionController extends ControllerBase {
+
   /**
    * Access Control Service.
    *
@@ -73,7 +74,7 @@ class OfferTypesCollectionController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
+      // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('entity_type.manager'),
       $container->get('qs_sharing.repository.offer_type')

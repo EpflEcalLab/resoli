@@ -77,10 +77,10 @@ class EventsController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_activity.event_manager'),
-    $container->get('qs_export.excel')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_activity.event_manager'),
+      $container->get('qs_export.excel')
     );
   }
 
@@ -118,7 +118,6 @@ class EventsController extends ControllerBase {
     ], 2, ['background' => '7030A0', 'foreground' => 'ffffff', 'repeat' => TRUE]);
 
     foreach ($events as $event) {
-
       // Set a Rich text for timetable with partial bold content.
       $timetable = new RichText();
       $bold_timetable = $timetable->createTextRun($event->field_start_at->date->format('d.m.Y'));

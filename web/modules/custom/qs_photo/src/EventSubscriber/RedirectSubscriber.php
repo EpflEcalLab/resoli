@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Redirect photo to the photo by activity page.
  */
 class RedirectSubscriber implements EventSubscriberInterface {
+
   /**
    * The current route match.
    *

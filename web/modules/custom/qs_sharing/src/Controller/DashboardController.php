@@ -80,7 +80,7 @@ class DashboardController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
+      // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('qs_sharing.repository.volunteerism'),
       $container->get('qs_sharing.repository.offer')

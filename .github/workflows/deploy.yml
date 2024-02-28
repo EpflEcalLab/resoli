@@ -1,0 +1,55 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - main
+      - master
+      - dev
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      PRIVATE_SSH_KEY: ${{ secrets.PRIVATE_SSH_KEY }}
+      COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+    steps:
+      - name: Set deployment environment variables based on Git branches
+        id: deploy_target
+        run: |
+          if [[ $GITHUB_REF == 'refs/heads/dev' ]]; then
+              echo "DEPLOY_ENV=staging" >> $GITHUB_ENV
+          fi
+          if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
+              echo "DEPLOY_ENV=production" >> $GITHUB_ENV
+          fi
+          if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
+              echo "DEPLOY_ENV=production" >> $GITHUB_ENV
+          fi
+      - uses: actions/checkout@v4
+
+      # Setup deploy envionment (SSH + ruby)
+      - name: Install SSH key to deploy
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_SSH_KEY }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+          bundler-cache: true
+
+      # Build assets
+      - uses: actions/setup-node@v3
+        with:
+            node-version: '12'
+      - name: Build Styleguide
+        run: yarn && yarn build --production
+      - name: Build Styleguide Library Node Autocomplete
+        run: yarn && yarn build --production
+        working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete
+
+      # Deploy using capistrano
+      - run: bundle exec cap ${{ env.DEPLOY_ENV }} deploy

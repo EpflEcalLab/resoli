@@ -23,6 +23,7 @@ class Pdf {
    * @var \Drupal\Core\Datetime\DateFormatter
    */
   protected $dateFormatter;
+
   /**
    * The renderer service.
    *

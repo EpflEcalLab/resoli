@@ -14,7 +14,7 @@ use Drupal\user\UserInterface;
  */
 function qs_auth_mail($key, &$message, $params) {
   // Load services.
-  $configFactory = \Drupal::service('config.factory');
+  $configFactory = Drupal::service('config.factory');
 
   // Get Drupal Config for site.
   $site = $configFactory->get('system.site');
@@ -32,8 +32,8 @@ function qs_auth_mail($key, &$message, $params) {
   }
 
   switch ($key) {
-    // Sent to new user when registering.
     case 'register':
+      // Sent to new user when registering.
       $account = $params['user'];
       $message['subject'] = t('qs.mail.welcome.no_approval.subject @sitename @mail @firstname @lastname', [
         '@sitename' => $site->get('name'),
@@ -51,8 +51,8 @@ function qs_auth_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to user when communitiy request of approval has been confirmed.
     case 'user_community_waiting_approval_confirm':
+      // Sent to user when communitiy request of approval has been confirmed.
       $account = $message['params']['account'];
       $community = $message['params']['community'];
 
@@ -74,8 +74,8 @@ function qs_auth_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to user when communitiy request of approval has been declined.
     case 'user_community_waiting_approval_decline':
+      // Sent to user when communitiy request of approval has been declined.
       $account = $message['params']['account'];
       $community = $message['params']['community'];
 
@@ -97,8 +97,8 @@ function qs_auth_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to all managers of the applied communitiy when user request access.
     case 'auth_community_apply':
+      // Sent to all managers of the applied community when user request access.
       $account = $message['params']['account'];
       $community = $message['params']['community'];
 
@@ -127,7 +127,7 @@ function qs_auth_mail($key, &$message, $params) {
  */
 function qs_auth_mail_alter(&$message) {
   // Load services.
-  $configFactory = \Drupal::service('config.factory');
+  $configFactory = Drupal::service('config.factory');
 
   // Get Drupal Config for site.
   $site = $configFactory->get('system.site');
@@ -207,11 +207,11 @@ function qs_auth_mail_alter(&$message) {
  * @see \Drupal\user\Controller\UserController::confirmCancel()
  */
 function qs_user_cancel_url(UserInterface $account, array $options = []) {
-  $timestamp = \Drupal::time()->getRequestTime();
+  $timestamp = Drupal::time()->getRequestTime();
   $langcode = $options['langcode'] ?? $account->getPreferredLangcode();
   $url_options = [
     'absolute' => TRUE,
-    'language' => \Drupal::languageManager()->getLanguage($langcode),
+    'language' => Drupal::languageManager()->getLanguage($langcode),
   ];
 
   return Url::fromRoute('qs_auth.cancel.confirm', [

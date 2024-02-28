@@ -21,7 +21,7 @@ require_once 'inc/default_photos.inc';
  */
 function qs_default_content_install() {
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityManager = \Drupal::service('entity_type.manager');
+  $entityManager = Drupal::service('entity_type.manager');
   $userStorage = $entityManager->getStorage('user');
 
   // Update the timezone of the admin user.

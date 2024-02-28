@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * A controller exposing endpoint to confirm or cancel decline subscription.
  */
 class JudgeController extends ControllerBase {
+
   /**
    * Access Control Service.
    *
@@ -164,12 +165,12 @@ class JudgeController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('entity_type.manager'),
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager'),
-    $container->get('qs_subscription.subscription_manager'),
-    $container->get('plugin.manager.mail')
+      // Load customs services used in this class.
+      $container->get('entity_type.manager'),
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('qs_subscription.subscription_manager'),
+      $container->get('plugin.manager.mail')
     );
   }
 

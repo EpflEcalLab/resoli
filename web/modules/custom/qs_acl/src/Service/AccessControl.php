@@ -218,11 +218,13 @@ class AccessControl {
     if ($account !== NULL) {
       $user = $account;
     }
+
     // Check bypass.
     if ($this->hasBypass($user)) {
       return TRUE;
     }
     $community = $activity->field_community->entity;
+
     // Check if the photo's event is open to community or activity members only.
     if ($activity->field_community_access_gallery->value) {
       return $this->hasAccessCommunity($community, $user);

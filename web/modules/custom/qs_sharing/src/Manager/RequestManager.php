@@ -21,6 +21,7 @@ class RequestManager {
    * @var \Drupal\Core\Mail\MailManagerInterface
    */
   protected $mail;
+
   /**
    * The node Storage.
    *

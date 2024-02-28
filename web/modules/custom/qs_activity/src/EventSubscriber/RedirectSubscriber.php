@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Redirect event to the activity page.
  */
 class RedirectSubscriber implements EventSubscriberInterface {
+
   /**
    * The current route match.
    *

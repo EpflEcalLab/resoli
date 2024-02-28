@@ -23,6 +23,7 @@ class AccountRedirect implements EventSubscriberInterface {
    * @var \Drupal\Core\Session\AccountInterface
    */
   protected $currentUser;
+
   /**
    * The current route match.
    *

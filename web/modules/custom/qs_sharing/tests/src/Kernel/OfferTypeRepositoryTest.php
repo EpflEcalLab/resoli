@@ -18,6 +18,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  * @internal
  */
 final class OfferTypeRepositoryTest extends KernelTestBase {
+
   use EntityReferenceTestTrait;
   use NodeTestTrait;
   use TaxonomyTestTrait;

@@ -123,8 +123,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
     }
     else {
       switch ($route_name) {
-        // Go to Community Welcome.
         case 'qs_community.dashboard':
+          // Go to Community Welcome.
           $url = $this->urlGenerator->generateFromRoute('qs_community.welcome', [
             'community' => $community->id(),
           ], $options);
@@ -133,9 +133,9 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Community Dashboard.
         case 'qs_community.members':
         case 'qs_community.waiting_approval':
+          // Go to Community Dashboard.
           $url = $this->urlGenerator->generateFromRoute('qs_community.dashboard', [
             'community' => $community->id(),
           ], $options);
@@ -153,8 +153,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Activity.
         case 'qs_activity.activities.dashboard':
+          // Go to Activity.
           $options = [];
 
           if ($event) {
@@ -168,8 +168,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to My Activities.
         case 'qs_activity.activities.form.add':
+          // Go to My Activities.
           $url = $this->urlGenerator->generateFromRoute('qs_activity.user.collection', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
@@ -179,12 +179,12 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Activity Dashboard.
         case 'qs_activity.activities.form.edit.info':
         case 'qs_activity.activities.form.edit.visibility':
         case 'qs_activity.activities.form.edit.defaults':
         case 'qs_activity.events.form.add':
         case 'qs_activity.activities.members':
+          // Go to Activity Dashboard.
           $options = [];
 
           if ($event) {
@@ -198,10 +198,10 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Event Dashboard.
         case 'qs_activity.events.form.edit':
         case 'qs_subscription.subscribers':
         case 'qs_subscription.waiting_approval':
+          // Go to Event Dashboard.
           $url = $this->urlGenerator->generateFromRoute('qs_activity.events.dashboard', [
             'event' => $event->id(),
           ], $options);
@@ -224,8 +224,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Calendar.
         case 'qs_subscription.user.collection':
+          // Go to Calendar.
           $url = $this->urlGenerator->generateFromRoute('qs_calendar.collection.weekly', [
             'community' => $community->id(),
           ], $options);
@@ -234,8 +234,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Photos Themes.
         case 'qs_photo.activity':
+          // Go to Photos Themes.
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.theme', [
             'community' => $community->id(),
           ], $options);
@@ -244,8 +244,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Photos Month.
         case 'qs_photo.user.activities.collection':
+          // Go to Photos Month.
           $url = $this->urlGenerator->generateFromRoute('qs_photo.collection.month', [
             'community' => $community->id(),
           ], $options);
@@ -254,9 +254,9 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to My Photos.
         case 'qs_photo.user.form.manage':
         case 'qs_photo.form.add':
+          // Go to My Photos.
           $url = $this->urlGenerator->generateFromRoute('qs_photo.user.activities.collection', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
@@ -266,9 +266,9 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Manage Photos.
         case 'qs_photo.form.delete':
         case 'qs_photo.form.comments':
+          // Go to Manage Photos.
           $url = $this->urlGenerator->generateFromRoute('qs_photo.user.form.manage', [
             'activity' => $activity->id(),
             'user' => $this->currentUser->id(),
@@ -278,8 +278,8 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Offer's Type collection.
         case 'qs_sharing.sharing.dashboard':
+          // Go to Offer's Type collection.
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.collection.offer', [
             'community' => $community->id(),
           ], $options);
@@ -288,12 +288,12 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Sharing Dashboard.
         case 'qs_sharing.collection.request':
         case 'qs_sharing.volunteerisms.form.manage':
         case 'qs_sharing.offers.form.add':
         case 'qs_sharing.offers.form.edit':
         case 'qs_sharing.collection.user.offers':
+          // Go to Sharing Dashboard.
           $url = $this->urlGenerator->generateFromRoute('qs_sharing.sharing.dashboard', [
             'community' => $community->id(),
             'user' => $this->currentUser->id(),
@@ -303,9 +303,9 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
 
           break;
 
-        // Go to Homepage.
-        // @todo add test for this link.
         case 'qs_community.welcome':
+          // Go to Homepage.
+          // @todo add test for this link.
           $url = $this->urlGenerator->generateFromRoute('<front>');
           $label = $this->t('qs_auth.link.home');
           $theme = 'primary';
@@ -338,7 +338,7 @@ class PreviousBlock extends BlockBase implements ContainerFactoryPluginInterface
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-    // Load the service required to construct this class.
+      // Load the service required to construct this class.
       $configuration,
       $plugin_id,
       $plugin_definition,

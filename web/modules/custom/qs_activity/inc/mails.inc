@@ -13,8 +13,8 @@ use Drupal\Core\Render\Markup;
  */
 function qs_activity_mail($key, &$message, $params) {
   // Load services.
-  $configFactory = \Drupal::service('config.factory');
-  $dateFormatter = \Drupal::service('date.formatter');
+  $configFactory = Drupal::service('config.factory');
+  $dateFormatter = Drupal::service('date.formatter');
 
   // Get Drupal Config for site.
   $site = $configFactory->get('system.site');
@@ -32,9 +32,9 @@ function qs_activity_mail($key, &$message, $params) {
   }
 
   switch ($key) {
-    // Sent to Subscribed user(s) of event &
-    // to all Activity Maintainer(s) et Activity Organizer(s).
     case 'activity_event_deleted':
+      // Sent to Subscribed user(s) of event &
+      // to all Activity Maintainer(s) et Activity Organizer(s).
       $author = $message['params']['author'];
       $event = $message['params']['event'];
       $activity = $event->field_activity->entity;
@@ -57,9 +57,9 @@ function qs_activity_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to Subscribed user(s) of event &
-    // to all Activity Maintainer(s) et Activity Organizer(s).
     case 'activity_event_updated':
+      // Sent to Subscribed user(s) of event &
+      // to all Activity Maintainer(s) et Activity Organizer(s).
       $author = $message['params']['author'];
       $original_event = $message['params']['original_event'];
       $updated_event = $message['params']['updated_event'];

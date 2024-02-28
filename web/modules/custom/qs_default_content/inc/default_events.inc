@@ -10,15 +10,13 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 /**
  * Global function to alter default events with date according now.
- *
- * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_events() {
   $field_start = 'field_start_at';
   $field_end = 'field_end_at';
 
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityManager = \Drupal::service('entity_type.manager');
+  $entityManager = Drupal::service('entity_type.manager');
   $nodeStorage = $entityManager->getStorage('node');
 
   $now = new DrupalDateTime();

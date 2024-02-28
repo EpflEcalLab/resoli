@@ -1,4 +1,4 @@
-name: Continuous Integration & Continuous Deployment
+name: CI
 on: [ push ]
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
           php-version: '8.0'
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
           tools: cs2pr, composer:v2
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: composer install --prefer-dist
       - run: ./vendor/bin/phpcs --report=checkstyle | cs2pr
 
@@ -26,25 +26,28 @@ jobs:
           php-version: 8.0
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
           tools: phpstan, cs2pr, composer:v2
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: composer install
       - run: ./vendor/bin/phpstan analyse ./web/modules/custom ./behat ./web/themes/quartiers_solidaires --error-format=checkstyle | cs2pr
 
-  phpmd:
-    name: phpmd
+  php-deprecation-detector:
+    name: php-deprecation-detector
     runs-on: ubuntu-latest
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: 8.1
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
-          tools: composer:v2
-      - uses: actions/checkout@v3
-      - run: composer install --prefer-dist
-      - run: ./vendor/bin/phpmd ./web/modules/custom text ./phpmd.xml --suffixes php,module,inc,install,test,profile,theme,css,info,txt --exclude *Test.php
-        continue-on-error: true
-      - run: ./vendor/bin/phpmd ./behat text ./phpmd.xml --suffixes php
+          tools: psalm, composer:v2
+      - uses: actions/checkout@v4
+      - run: cd tools/php-deprecation-detector && composer install --prefer-dist
+      # PHP 8.2 is not already supported by this tools:
+      # @see https://github.com/wapmorgan/PhpDeprecationDetector/issues/73
+      - run: ./tools/php-deprecation-detector/vendor/bin/phpdd --target 8.0 \
+              --file-extensions php,module,inc,install,test,profile,theme,info \
+              ./web/modules/custom
+      - run: ./tools/php-deprecation-detector/vendor/bin/phpdd --target 8.0 --file-extensions php ./behat
 
   php-cs-fixer:
     name: php-cs-fixer
@@ -53,12 +56,12 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
           tools: php-cs-fixer, cs2pr, composer:v2
-      - uses: actions/checkout@v3
-      - run: composer install --prefer-dist
-      - run: ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+      - uses: actions/checkout@v4
+      - run: cd tools/php-cs-fixer && composer install --prefer-dist
+      - run: ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --using-cache=no --dry-run --format=checkstyle | cs2pr
 
   upgrade-status:
     runs-on: ubuntu-latest
@@ -88,7 +91,7 @@ jobs:
           - dockerFile: Dockerfile
             image: quartiers-solidaires_test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Get the user id
@@ -122,7 +125,7 @@ jobs:
     needs: build_docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Cache artifacts
@@ -141,7 +144,7 @@ jobs:
     needs: build_docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Cache artifacts
@@ -172,45 +175,3 @@ jobs:
         if: failure()
         with:
           path: ./app/logs
-
-  deploy:
-    name: Deploy
-    needs: [phpmd, phpcs, phpstan, php-cs-fixer, unit-tests, functional-tests]
-    if:
-      contains('
-      refs/heads/master
-      refs/heads/dev
-      ', github.ref)
-    runs-on: ubuntu-latest
-    env:
-      PRIVATE_SSH_KEY: ${{ secrets.PRIVATE_SSH_KEY }}
-      COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
-    steps:
-      - name: Set deployment environment variables based on Git branches
-        working-directory: ./
-        id: deploy_target
-        run: |
-          if [[ $GITHUB_REF == 'refs/heads/dev' ]]; then
-              echo "::set-output name=DEPLOY_ENV::staging"
-          fi
-          if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
-              echo "::set-output name=DEPLOY_ENV::production"
-          fi
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-            node-version: '12'
-      - name: Build Styleguide
-        run: yarn && yarn build --production
-      - name: Build Styleguide Library Node Autocomplete
-        run: yarn && yarn build --production
-        working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete
-      - name: Set Docker Image Tag
-        id: image_tag
-        run: echo "::set-output name=DOCKER_DEPLOY_IMAGE_TAG::resoli-deploy:$(date +%s)"
-      - name: Pull Antistatique Deploy Docker Image
-        run: docker pull antistatique/deploy
-      - name: Build the docker image
-        run: docker build --file docker/Dockerfile.deploy --tag ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} .
-      - name: Execute the deployment
-        run: docker run  -v `pwd`/web/themes/quartiers_solidaires/:/app/web/themes/quartiers_solidaires/ --env CI --env PRIVATE_SSH_KEY --rm ${{ steps.image_tag.outputs.DOCKER_DEPLOY_IMAGE_TAG }} bundle exec cap ${{ steps.deploy_target.outputs.DEPLOY_ENV }} deploy

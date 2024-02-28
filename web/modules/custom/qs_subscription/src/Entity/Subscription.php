@@ -44,7 +44,6 @@ class Subscription extends ContentEntityBase implements ContentEntityInterface, 
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
-
     // Standard field, used as unique if primary index.
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(new TranslatableMarkup('ID'))

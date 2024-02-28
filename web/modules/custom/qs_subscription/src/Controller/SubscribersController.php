@@ -101,11 +101,11 @@ class SubscribersController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_subscription.subscription_manager'),
-    $container->get('qs_export.excel'),
-    $container->get('pager.manager')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_subscription.subscription_manager'),
+      $container->get('qs_export.excel'),
+      $container->get('pager.manager')
     );
   }
 

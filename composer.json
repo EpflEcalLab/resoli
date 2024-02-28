@@ -70,14 +70,10 @@
         "drupal/rules": "^3.0@alpha",
         "drupal/schema_metatag": "^2.4",
         "drupal/upgrade_status": "^4.1",
-        "drupol/phpcsfixer-configs-drupal": "^2.0.1",
-        "friendsofphp/php-cs-fixer": "^3.4",
         "mglaman/phpstan-drupal": "^1.1",
-        "phpmd/phpmd": "^2.13",
         "phpspec/prophecy-phpunit": "^2.0.1",
         "phpstan/phpstan-deprecation-rules": "^1.1",
-        "phpunit/phpunit": "^9.5.27",
-        "wapmorgan/php-deprecation-detector": "^2.0.29"
+        "phpunit/phpunit": "^9.5.27"
     },
     "conflict": {
         "drupal/drupal": "*",

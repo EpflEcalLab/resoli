@@ -61,6 +61,7 @@ class SubscriptionManager {
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
+
   /**
    * The current active user.
    *

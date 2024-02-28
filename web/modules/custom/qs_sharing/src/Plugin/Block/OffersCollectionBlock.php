@@ -144,17 +144,17 @@ class OffersCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        // Load the service required to construct this class.
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        // Load customs services used in this class.
-        $container->get('entity_type.manager'),
-        $container->get('current_route_match'),
-        $container->get('request_stack'),
-        $container->get('qs_sharing.repository.offer'),
-        $container->get('qs_acl.access_control'),
-      );
+      // Load the service required to construct this class.
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      // Load customs services used in this class.
+      $container->get('entity_type.manager'),
+      $container->get('current_route_match'),
+      $container->get('request_stack'),
+      $container->get('qs_sharing.repository.offer'),
+      $container->get('qs_acl.access_control'),
+    );
   }
 
   /**

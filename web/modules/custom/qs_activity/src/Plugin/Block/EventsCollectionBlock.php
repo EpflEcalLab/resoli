@@ -156,17 +156,17 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        // Load the service required to construct this class.
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        // Load customs services used in this class.
-        $container->get('qs_acl.privilege_manager'),
-        $container->get('request_stack'),
-        $container->get('current_route_match'),
-        $container->get('qs_activity.event_manager'),
-        $container->get('qs_badge.badge_manager')
-      );
+      // Load the service required to construct this class.
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      // Load customs services used in this class.
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('request_stack'),
+      $container->get('current_route_match'),
+      $container->get('qs_activity.event_manager'),
+      $container->get('qs_badge.badge_manager')
+    );
   }
 
   /**

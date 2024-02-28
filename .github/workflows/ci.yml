@@ -37,12 +37,12 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
           tools: php-cs-fixer, cs2pr, composer:v2
-      - uses: actions/checkout@v3
-      - run: composer install --prefer-dist
-      - run: ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+      - uses: actions/checkout@v4
+      - run: cd tools/php-cs-fixer && composer install --prefer-dist
+      - run: ./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --using-cache=no --dry-run --format=checkstyle | cs2pr
 
   upgrade-status:
     runs-on: ubuntu-latest

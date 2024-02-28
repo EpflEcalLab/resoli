@@ -227,11 +227,9 @@ class UserManageForm extends FormBasic {
    */
   private function getCheckedPhotos(FormStateInterface $form_state) {
     // Get every checked photos.
-    $photos = array_filter($form_state->getValue('photos'), static function ($value) {
+    return array_filter($form_state->getValue('photos'), static function ($value) {
       return !empty($value);
     });
-
-    return $photos;
   }
 
 }

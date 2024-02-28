@@ -48,6 +48,7 @@ class AjaxControllerBase extends ControllerBase {
    * @var \Drupal\Core\Entity\ContentEntityStorageInterface
    */
   protected $privilegeStorage;
+
   /**
    * The request stack (get the URL argument(s) and combined it with the path).
    *
@@ -89,11 +90,11 @@ class AjaxControllerBase extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('request_stack'),
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager'),
-    $container->get('plugin.manager.mail')
+      // Load customs services used in this class.
+      $container->get('request_stack'),
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('plugin.manager.mail')
     );
   }
 

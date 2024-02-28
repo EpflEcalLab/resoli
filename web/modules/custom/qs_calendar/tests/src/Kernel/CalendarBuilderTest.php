@@ -145,6 +145,7 @@ final class CalendarBuilderTest extends KernelTestBase {
 
   /**
    * @covers \Drupal\qs_calendar\Service\CalendarBuilder::build
+   *
    * @dataProvider buildProvider
    */
   public function testBuild($date_start, $date_end, $expected) {
@@ -159,6 +160,7 @@ final class CalendarBuilderTest extends KernelTestBase {
 
   /**
    * @covers \Drupal\qs_calendar\Service\CalendarBuilder::getFirstMondayMonthFullWeek
+   *
    * @dataProvider getFirstMondayMonthProvider
    */
   public function testGetFirstMondayMonth($date, $expected) {
@@ -170,6 +172,7 @@ final class CalendarBuilderTest extends KernelTestBase {
 
   /**
    * @covers \Drupal\qs_calendar\Service\CalendarBuilder::getLastSundayMonthFullWeek
+   *
    * @dataProvider getLastSundayMonthProvider
    */
   public function testGetLastSundayMonth($date, $expected) {
@@ -181,6 +184,7 @@ final class CalendarBuilderTest extends KernelTestBase {
 
   /**
    * @covers \Drupal\qs_calendar\Service\CalendarBuilder::getMondayWeek
+   *
    * @dataProvider getMondayWeekProvider
    */
   public function testGetMondayWeek($date, $expected) {
@@ -192,6 +196,7 @@ final class CalendarBuilderTest extends KernelTestBase {
 
   /**
    * @covers \Drupal\qs_calendar\Service\CalendarBuilder::getSundayWeek
+   *
    * @dataProvider getSundayWeekProvider
    */
   public function testGetSundayWeek($date, $expected) {

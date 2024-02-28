@@ -14,8 +14,8 @@ use Drupal\Core\Url;
  */
 function qs_subscription_mail($key, &$message, $params) {
   // Load services.
-  $configFactory = \Drupal::service('config.factory');
-  $dateFormatter = \Drupal::service('date.formatter');
+  $configFactory = Drupal::service('config.factory');
+  $dateFormatter = Drupal::service('date.formatter');
 
   // Get Drupal Config for site.
   $site = $configFactory->get('system.site');
@@ -33,8 +33,8 @@ function qs_subscription_mail($key, &$message, $params) {
   }
 
   switch ($key) {
-    // Sent to user when event subscription request has been approved.
     case 'subscription_event_waiting_approval_confirm':
+      // Sent to user when event subscription request has been approved.
       $account = $message['params']['account'];
       $event = $message['params']['event'];
       $activity = $event->field_activity->entity;
@@ -65,8 +65,8 @@ function qs_subscription_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to organizers & maintainers when some ask for event subscription.
     case 'subscription_event_waiting_approval_request_organizers':
+      // Sent to organizers & maintainers when some ask for event subscription.
       $user = $message['params']['user'];
       $event = $message['params']['event'];
       $activity = $event->field_activity->entity;
@@ -97,9 +97,9 @@ function qs_subscription_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to organizers & maintainers when event subscription
-    // request has been approved.
     case 'subscription_event_waiting_approval_confirm_organizers':
+      // Sent to organizers & maintainers when event subscription
+      // request has been approved.
       $user = $message['params']['user'];
       $event = $message['params']['event'];
       $activity = $event->field_activity->entity;
@@ -130,8 +130,8 @@ function qs_subscription_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to user when event subscription request has been declined.
     case 'subscription_event_waiting_approval_decline':
+      // Sent to user when event subscription request has been declined.
       $account = $message['params']['account'];
       $event = $message['params']['event'];
       $activity = $event->field_activity->entity;

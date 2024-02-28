@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
  * Provides some renderer as Twig Extensions.
  */
 class Render extends \Twig_Extension {
+
   use ContainerAwareTrait;
 
   /**

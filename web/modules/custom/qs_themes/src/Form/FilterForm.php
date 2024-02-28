@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * A theme filter form that add the chosen theme as GET param to the route.
  */
 class FilterForm extends FormBase {
+
   /**
    * The current active user.
    *
@@ -117,10 +118,10 @@ class FilterForm extends FormBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-        $container->get('current_user'),
-        $container->get('request_stack'),
-        $container->get('entity_type.manager'),
-        $container->get('language_manager')
+      $container->get('current_user'),
+      $container->get('request_stack'),
+      $container->get('entity_type.manager'),
+      $container->get('language_manager')
     );
   }
 
@@ -134,13 +135,11 @@ class FilterForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-  }
+  public function submitForm(array &$form, FormStateInterface $form_state) {}
 
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
 
 }

@@ -47,7 +47,6 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
-
     // Standard field, used as unique if primary index.
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(new TranslatableMarkup('ID'))
@@ -159,7 +158,6 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
    * {@inheritdoc}
    */
   public function getEntity() {
-
     // Load services. No way to inject them on EntityInterface.
     $type_manager = \Drupal::service('entity_type.manager');
 

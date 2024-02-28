@@ -118,14 +118,14 @@ class CollectionController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('qs_activity.activity_manager'),
-    $container->get('qs_activity.event_manager'),
-    $container->get('qs_badge.badge_manager'),
-    $container->get('request_stack'),
-    $container->get('language_manager')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('entity_type.manager'),
+      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_activity.event_manager'),
+      $container->get('qs_badge.badge_manager'),
+      $container->get('request_stack'),
+      $container->get('language_manager')
     );
   }
 

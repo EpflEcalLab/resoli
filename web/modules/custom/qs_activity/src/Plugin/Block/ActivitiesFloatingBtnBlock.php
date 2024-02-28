@@ -19,6 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Expose the Floating actions buttons of Activities collection pages.
  *
  * @codingStandardsIgnoreFile
+ *
  * @Block(
  *     id="qs_activity_collection_floating_actions_buttons_block",
  *     admin_label=@Translation("Activities Collection Floating actions buttons"),
@@ -123,7 +124,7 @@ class ActivitiesFloatingBtnBlock extends BlockBase implements ContainerFactoryPl
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-    // Load the service required to construct this class.
+      // Load the service required to construct this class.
       $configuration,
       $plugin_id,
       $plugin_definition,

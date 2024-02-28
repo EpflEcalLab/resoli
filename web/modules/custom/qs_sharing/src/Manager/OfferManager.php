@@ -19,6 +19,7 @@ class OfferManager {
    * @var \Drupal\Core\Mail\MailManagerInterface
    */
   protected $mail;
+
   /**
    * The node Storage.
    *

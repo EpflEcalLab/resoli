@@ -22,6 +22,7 @@ class ActivityManager {
    * @var \Drupal\Core\Database\Connection
    */
   protected $connection;
+
   /**
    * The node Storage.
    *

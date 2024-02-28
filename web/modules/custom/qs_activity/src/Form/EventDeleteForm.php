@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Form to delete event.
  */
 class EventDeleteForm extends EventEditFormBase {
+
   /**
    * The entity QS Event Manager.
    *

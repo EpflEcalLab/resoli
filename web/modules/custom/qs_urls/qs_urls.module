@@ -26,11 +26,10 @@ require_once 'inc/subscription.inc';
  * Generate aliases & redirects based on node alias.
  */
 function qs_urls_pathauto_alias_alter(&$alias, array &$context) {
-  $moduleHandler = \Drupal::service('module_handler');
+  $moduleHandler = Drupal::service('module_handler');
 
   if (isset($context['module'])
   && $context['module'] === 'taxonomy' && isset($context['data']['term'])) {
-
     // Uniquifier the alias, pathauto do it on the creation process, not here.
     // If we don't do it now, we will duplicate aliases/redirect
     // it may break the whole plateform.
@@ -69,7 +68,6 @@ function qs_urls_pathauto_alias_alter(&$alias, array &$context) {
 
   if (isset($context['module'])
   && $context['module'] === 'node' && isset($context['data']['node'])) {
-
     // Uniquifier the alias, pathauto do it on the creation process, not here.
     // If we don't do it now, we will duplicate aliases/redirect
     // it may break the whole plateform.
@@ -96,7 +94,7 @@ function qs_urls_pathauto_alias_alter(&$alias, array &$context) {
  * Ensure deletion of aliases & redirects based on node.
  */
 function qs_urls_node_delete(EntityInterface $entity) {
-  $moduleHandler = \Drupal::service('module_handler');
+  $moduleHandler = Drupal::service('module_handler');
 
   // Get the base alias of this node.
   $alias = $entity->toUrl()->toString();
@@ -119,7 +117,7 @@ function qs_urls_node_delete(EntityInterface $entity) {
  * Ensure deletion of aliases & redirects based on taxonomy term.
  */
 function qs_urls_taxonomy_term_delete(EntityInterface $entity) {
-  $moduleHandler = \Drupal::service('module_handler');
+  $moduleHandler = Drupal::service('module_handler');
 
   // Get the base alias of this term.
   $alias = $entity->toUrl()->toString();

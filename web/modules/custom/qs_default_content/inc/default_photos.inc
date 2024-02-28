@@ -10,7 +10,7 @@
  */
 function qs_default_content_photos() {
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityManager = \Drupal::service('entity_type.manager');
+  $entityManager = Drupal::service('entity_type.manager');
   $nodeStorage = $entityManager->getStorage('node');
 
   $photo_41 = $nodeStorage->load(41);

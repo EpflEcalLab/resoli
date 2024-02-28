@@ -39,7 +39,7 @@ function qs_subscription_theme() {
  */
 function qs_subscription_node_delete(EntityInterface $entity) {
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityTypeManager = \Drupal::service('entity_type.manager');
+  $entityTypeManager = Drupal::service('entity_type.manager');
   /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $subscriptionStorage = $entityTypeManager->getStorage('subscription');
   /** @var \Drupal\Core\Entity\Query\QueryInterface */
@@ -64,7 +64,7 @@ function qs_subscription_node_delete(EntityInterface $entity) {
  */
 function qs_subscription_user_delete(EntityInterface $entity) {
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityTypeManager = \Drupal::service('entity_type.manager');
+  $entityTypeManager = Drupal::service('entity_type.manager');
   /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $subscriptionStorage = $entityTypeManager->getStorage('subscription');
   /** @var \Drupal\Core\Entity\Query\QueryInterface */

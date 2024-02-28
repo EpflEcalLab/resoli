@@ -38,6 +38,7 @@ class StreamController extends ControllerBase {
    * @var \Drupal\Core\Lock\LockBackendInterface
    */
   protected $lock;
+
   /**
    * Access Control Service.
    *
@@ -84,7 +85,7 @@ class StreamController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
+      // Load customs services used in this class.
       $container->get('qs_acl.access_control'),
       $container->get('file_system'),
       $container->get('lock')
@@ -178,6 +179,7 @@ class StreamController extends ControllerBase {
     }
     catch (\Exception $e) {
       $logger->error($e->getMessage());
+
       // Note: Don't display the default drupal message for security reason,
       // may contain the file name.
       throw new NotFoundHttpException();

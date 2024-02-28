@@ -156,8 +156,8 @@ class Excel {
 
           break;
 
-        // Skip unprocessable content.
         case $content instanceof PhpSpreadsheetHtml:
+          // Skip unprocessable content.
           break;
 
         default:

@@ -173,7 +173,6 @@ class RequestAddForm extends FormBase {
       '#description' => $this->t('qs_sharing.requests.form.step1.description'),
       '#attributes' => [
         'data-step' => $this->t('qs_sharing.requests.form.step1'),
-
       ],
       '#theme_wrappers' => [
         'container__center__wide',

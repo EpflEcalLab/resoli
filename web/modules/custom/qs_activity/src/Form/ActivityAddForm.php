@@ -47,6 +47,7 @@ class ActivityAddForm extends FormBasic {
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
+
   /**
    * Access Control Service.
    *

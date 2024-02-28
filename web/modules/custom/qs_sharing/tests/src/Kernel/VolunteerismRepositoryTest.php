@@ -16,6 +16,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  * @internal
  */
 final class VolunteerismRepositoryTest extends KernelTestBase {
+
   use EntityReferenceTestTrait;
   use TaxonomyTestTrait;
 

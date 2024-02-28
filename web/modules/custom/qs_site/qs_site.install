@@ -12,7 +12,7 @@ use Drupal\Core\Entity\EntityStorageException;
  */
 function qs_site_update_8001() {
   try {
-    $entityUpdateManager = \Drupal::service('entity.definition_update_manager');
+    $entityUpdateManager = Drupal::service('entity.definition_update_manager');
     $entityUpdateManager->applyUpdates();
   }
   catch (EntityStorageException $e) {

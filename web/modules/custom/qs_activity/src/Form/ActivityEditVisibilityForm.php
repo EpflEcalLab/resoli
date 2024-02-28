@@ -195,7 +195,6 @@ class ActivityEditVisibilityForm extends ActivityEditFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
 
 }

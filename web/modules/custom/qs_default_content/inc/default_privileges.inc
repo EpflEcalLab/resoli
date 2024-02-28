@@ -17,9 +17,8 @@ function qs_default_content_privileges() {
  * Global function to create default privileges for communities.
  */
 function qs_default_content_privileges_community() {
-
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityManager = \Drupal::service('entity_type.manager');
+  $entityManager = Drupal::service('entity_type.manager');
   $privilegeStorage = $entityManager->getStorage('privilege');
 
   // User 2: member+lausanne.
@@ -578,7 +577,7 @@ function qs_default_content_privileges_community() {
  */
 function qs_default_content_privileges_activities() {
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityManager = \Drupal::service('entity_type.manager');
+  $entityManager = Drupal::service('entity_type.manager');
   $privilegeStorage = $entityManager->getStorage('privilege');
 
   // User 2: member+lausanne.

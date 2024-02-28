@@ -30,7 +30,7 @@ function qs_alias_uniquifier(EntityInterface $entity, $alias, $langcode = Langua
   $source = $entity->toUrl()->toString();
 
   /** @var \Drupal\pathauto\AliasUniquifierInterface */
-  $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+  $alias_uniquifier = Drupal::service('pathauto.alias_uniquifier');
 
   // If the alias already exists, generate a new, hopefully unique, variant.
   $alias_uniquifier->uniquify($alias, $source, $langcode);
@@ -60,11 +60,11 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
 
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityManager = \Drupal::service('entity_type.manager');
+  $entityManager = Drupal::service('entity_type.manager');
   $redirectStorage = $entityManager->getStorage('redirect');
 
   // Load services.
-  $redirect_repository = \Drupal::service('redirect.repository');
+  $redirect_repository = Drupal::service('redirect.repository');
 
   // @todo translation the redirect_suffix before creation/deletion,
   // on every language.
@@ -72,7 +72,6 @@ function qs_urls_redirects_manager(array $redirects, $operation = 'insert') {
   foreach ($redirects as $item) {
     // Generate redirect.
     if ($operation === 'insert' || $operation === 'update' || $operation === 'bulkupdate') {
-
       // Only generate redirect for existing alias &
       // non already redirected source.
       if (qs_urls_assert_path_alias_exists($item['source'], $langcode) === FALSE && empty($redirect_repository->findMatchingRedirect(trim($item['source'], '/'), [], $langcode))) {
@@ -118,7 +117,7 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
 
   // Load services.
-  $alias_storage = \Drupal::entityTypeManager()->getStorage('path_alias');
+  $alias_storage = Drupal::entityTypeManager()->getStorage('path_alias');
 
   // @todo translation the alias_suffix before creation/deletion,
   // on every language.
@@ -169,7 +168,7 @@ function qs_urls_aliases_manager(array $aliases, $operation = 'insert') {
  *   Does the path alias exists in the storage.
  */
 function qs_urls_assert_path_alias_exists($alias, $langcode = NULL, $path = NULL) {
-  $query = \Drupal::entityTypeManager()
+  $query = Drupal::entityTypeManager()
     ->getStorage('path_alias')
     ->getQuery()
     ->accessCheck(FALSE);

@@ -17,6 +17,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  * Provides a base class for Quartiers Solidaires functional tests.
  */
 class ResoliKernelTestBase extends EntityKernelTestBase {
+
   use EntityReferenceTestTrait;
   use NodeTestTrait;
   use TaxonomyTestTrait;

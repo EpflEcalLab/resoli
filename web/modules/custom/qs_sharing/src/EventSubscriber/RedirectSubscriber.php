@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Redirect offers to the offer's type canonical page.
  */
 class RedirectSubscriber implements EventSubscriberInterface {
+
   /**
    * The current route match.
    *

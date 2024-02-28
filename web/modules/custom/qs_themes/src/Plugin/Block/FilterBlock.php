@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * )
  */
 class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
   /**
    * Request stack that controls the lifecycle of requests.
    *
@@ -82,11 +83,11 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        $container->get('request_stack'),
-        $container->get('entity_type.manager')
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('request_stack'),
+      $container->get('entity_type.manager')
     );
   }
 

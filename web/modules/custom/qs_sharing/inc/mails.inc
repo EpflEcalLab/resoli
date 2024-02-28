@@ -13,8 +13,8 @@ use Drupal\Core\Render\Markup;
  */
 function qs_sharing_mail($key, &$message, $params) {
   // Load services.
-  $configFactory = \Drupal::service('config.factory');
-  $dateFormatter = \Drupal::service('date.formatter');
+  $configFactory = Drupal::service('config.factory');
+  $dateFormatter = Drupal::service('date.formatter');
 
   // Get Drupal Config for site.
   $site = $configFactory->get('system.site');
@@ -32,8 +32,8 @@ function qs_sharing_mail($key, &$message, $params) {
   }
 
   switch ($key) {
-    // Sent to the author of the offer.
     case 'offer_moderated':
+      // Sent to the author of the offer.
       $offer = $message['params']['offer'];
 
       /** @var \Drupal\user\UserInterface $user */
@@ -56,8 +56,8 @@ function qs_sharing_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to the author of the request.
     case 'request_solved':
+      // Sent to the author of the request.
       $request = $message['params']['request'];
 
       /** @var \Drupal\user\UserInterface $user */
@@ -87,8 +87,8 @@ function qs_sharing_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to the author of the request.
     case 'request_archived':
+      // Sent to the author of the request.
       $request = $message['params']['request'];
 
       /** @var \Drupal\user\UserInterface $archived_by */
@@ -119,8 +119,8 @@ function qs_sharing_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to the author of the request.
     case 'request_add_confirm':
+      // Sent to the author of the request.
       $request = $message['params']['request'];
 
       /** @var \Drupal\user\UserInterface $user */
@@ -143,8 +143,8 @@ function qs_sharing_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to an email when a request has been created on its behalf.
     case 'add_request_on_behalf':
+      // Sent to an email when a request has been created on its behalf.
       $request = $message['params']['request'];
 
       /** @var \Drupal\user\UserInterface $user */
@@ -167,8 +167,8 @@ function qs_sharing_mail($key, &$message, $params) {
 
       break;
 
-    // Sent to volunteer of the request theme.
     case 'add_request':
+      // Sent to volunteer of the request theme.
       $request = $message['params']['request'];
 
       /** @var \Drupal\user\UserInterface $user */

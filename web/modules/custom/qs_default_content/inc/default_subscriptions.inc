@@ -9,9 +9,8 @@
  * Global function to create default subscriptions for events.
  */
 function qs_default_content_subscriptions() {
-
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */
-  $entityManager = \Drupal::service('entity_type.manager');
+  $entityManager = Drupal::service('entity_type.manager');
   $subscriptionStorage = $entityManager->getStorage('subscription');
 
   // Event 36: Activity (3) - In 1 month at 16h00.

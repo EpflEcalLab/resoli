@@ -13,6 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * The registration form.
  */
 class RegisterForm extends FormBase {
+
   /**
    * The QS account service.
    *

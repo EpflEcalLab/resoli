@@ -23,6 +23,7 @@ class AuthRedirect implements EventSubscriberInterface {
    * @var \Drupal\qs_auth\EventSubscriber\ConfigFactoryInterface
    */
   protected $config;
+
   /**
    * The current route match.
    *

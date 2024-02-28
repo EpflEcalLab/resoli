@@ -7,8 +7,6 @@
 
 /**
  * Global function to alter default events with date according now.
- *
- * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_photos() {
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */

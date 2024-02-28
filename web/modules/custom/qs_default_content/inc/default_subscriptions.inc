@@ -7,8 +7,6 @@
 
 /**
  * Global function to create default subscriptions for events.
- *
- * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_subscriptions() {
 

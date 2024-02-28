@@ -10,8 +10,6 @@ use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 
 /**
  * Global function to alter default events with date according now.
- *
- * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_events() {
   $field_start = 'field_start_at';

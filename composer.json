@@ -73,7 +73,6 @@
         "drupol/phpcsfixer-configs-drupal": "^2.0.1",
         "friendsofphp/php-cs-fixer": "^3.4",
         "mglaman/phpstan-drupal": "^1.1",
-        "phpmd/phpmd": "^2.13",
         "phpspec/prophecy-phpunit": "^2.0.1",
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpunit/phpunit": "^9.5.27",

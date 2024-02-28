@@ -15,8 +15,6 @@ function qs_default_content_privileges() {
 
 /**
  * Global function to create default privileges for communities.
- *
- * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_privileges_community() {
 
@@ -577,8 +575,6 @@ function qs_default_content_privileges_community() {
 
 /**
  * Global function to create default privileges for activities.
- *
- * @SuppressWarnings(PHPMD)
  */
 function qs_default_content_privileges_activities() {
   /** @var \Drupal\Core\Entity\EntityTypeManagerInterface */

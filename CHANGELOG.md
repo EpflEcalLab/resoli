@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61
 
+### Added
+- add Upgrade Status on CI - QS-49
+
 ### Changed
 - change confirmation buttons waiting time from 2.5s to 4s - QS-62
 

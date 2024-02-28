@@ -60,6 +60,25 @@ jobs:
       - run: composer install --prefer-dist
       - run: ./vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
+  upgrade-status:
+    runs-on: ubuntu-latest
+    env:
+      COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the docker-compose stack
+        run: |
+          docker-compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
+          mkdir -p ./log ./backups
+      - name: Run the docker stack
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d test browser
+      - name: Bootstrap
+        run: docker exec test docker-as-wait db:3306 -- docker-as-drupal bootstrap --force
+      - name: Enable upgrade status
+        run: docker-compose exec -T test docker-as-wait db:3306 -- ./vendor/bin/drush en upgrade_status -y
+      - name: Run upgrade status
+        run: docker-compose exec -T test docker-as-wait db:3306 -- /var/www/vendor/bin/drush upgrade_status:analyze --ignore-contrib --ignore-uninstalled --all
+
   build_docker:
     runs-on: ubuntu-latest
     strategy:

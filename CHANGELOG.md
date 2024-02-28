@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - change confirmation buttons waiting time from 2.5s to 4s - QS-62
+- change deployment workflow - QS-47
+- move Linters php-cs-fixer into own Tools/ComposerJson - QS-64
+- move Linters php-deprecation-detector into own Tools/ComposerJson - QS-64
+
+### Removed
+- remove linter phpmd - QS-64
 
 ## [2.3.7] - 2023-12-12
 ### Fixed

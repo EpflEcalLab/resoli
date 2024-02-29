@@ -4,19 +4,27 @@ services:
   # Drupal development server
   dev:
     hostname: dev
+    #volumes:
+    # Styleguide (To mount if you need to sync to your host the theme build)
+    #   - ./web/themes/vevey/build:/var/www/web/themes/vevey/build
+    # build:
+    #   args:
+    # Set your user id (like 1000) to run the container with the same user as your system and ensure
+    # files have the right permissions (default is to "www-data", doesn't work on OSX)
+    # user: <YOUR USER ID>
     ports:
-      - "8080:8888"
+      - "8080:80"
 
   # Drupal test server
   test:
     hostname: test
     ports:
-      - "8888:8888"
+      - "8888:80"
 
   # Database
   db:
     ports:
-      - "3306:3306"
+      - "13306:3306"
 
   # Email
   mail:

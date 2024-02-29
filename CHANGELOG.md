@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - change deployment workflow - QS-47
 - move Linters php-cs-fixer into own Tools/ComposerJson - QS-64
 - move Linters php-deprecation-detector into own Tools/ComposerJson - QS-64
+- rework Docker integration using new Docker images - QS-48
 
 ### Removed
 - remove linter phpmd - QS-64

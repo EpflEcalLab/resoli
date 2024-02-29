@@ -3,16 +3,17 @@ version: '3.9'
 services:
   # Drupal development server
   dev:
-    build: .
-    command: docker-as-wait --mysql -- docker-as-drupal apache-server
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+    command: docker-as-wait db:3306 -- docker-as-drupal apache-server
     depends_on:
       - db
       - mail
     environment:
       APP_ENV: development
-      BASE_URL: http://localhost:80
+      BASE_URL: http://localhost
       DATABASE_URL: mysql://drupal:drupal@db/drupal_development
-      PRIVATE_FILES: /var/www/web/sites/default/files/private
       DEFAULT_CONTENT: qs_default_content
     restart: "no"
     volumes:
@@ -33,31 +34,28 @@ services:
       - ./behat:/var/www/behat
       - ./behat.yml:/var/www/behat.yml
       # Drush
-      - ./config/d8/docker.drush.yml:/var/www/drush/drush.yml
+      - ./web/sites/default/drush.development.yml:/var/www/drush/drush.yml
 
   # Drupal test server
   test:
-    build: .
-    command: docker-as-wait --mysql -- docker-as-drupal apache-server
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+    command: docker-as-wait db:3306 -- docker-as-drupal apache-server
     depends_on:
       - db
       - mail
       - browser
     environment:
       APP_ENV: test
-      BASE_URL: http://localhost:8888
+      BASE_URL: http://localhost
       DATABASE_URL: mysql://drupal:drupal@db/drupal_test
-      PRIVATE_FILES: /var/www/web/sites/default/files/private
-      REQUIRED_DIRECTORIES: >-
-        /var/www/log/behat
-        /var/www/dump/behat
       BEHAT_PROFILE: default
       TEST_DISABLE_MODULES: >-
         big_pipe
         honeypot
         captcha
         recaptcha
-      TEST_USER: www-data
       DEFAULT_CONTENT: qs_default_content
       PHPUNIT_DEFAULT_GROUP: qs
     restart: "no"
@@ -76,7 +74,7 @@ services:
       - ./behat:/var/www/behat
       - ./behat.yml:/var/www/behat.yml
       # Drush
-      - ./config/d8/docker.drush.yml:/var/www/drush/drush.yml
+      - ./web/sites/default/drush.development.yml:/var/www/drush/drush.yml
     networks:
       default:
         aliases:

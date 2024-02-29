@@ -17,7 +17,6 @@ RUN set -eux; \
 COPY ./web/themes/quartiers_solidaires/ /app/web/themes/quartiers_solidaires
 
 RUN set -eux; \
-    \
     yarn build --production
 
 # Temp image used to build the library Node Autocomplete only. Its not used after the first --build execution.

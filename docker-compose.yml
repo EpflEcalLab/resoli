@@ -27,7 +27,6 @@ services:
       # Styleguide
       - ./package.json:/var/www/package.json
       - ./yarn.lock:/var/www/yarn.lock
-      - ./web/themes/quartiers_solidaires:/var/www/web/themes/quartiers_solidaires
       # Files
       - ./web/sites/default/files:/var/www/web/sites/default/files:delegated
       # Behat
@@ -68,7 +67,6 @@ services:
       # Styleguide
       - ./package.json:/var/www/package.json
       - ./yarn.lock:/var/www/yarn.lock
-      - ./web/themes/quartiers_solidaires:/var/www/web/themes/quartiers_solidaires
       # Behat
       - ./behat:/var/www/behat
       - ./behat.yml:/var/www/behat.yml

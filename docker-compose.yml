@@ -57,7 +57,6 @@ services:
         captcha
         recaptcha
       DEFAULT_CONTENT: qs_default_content
-      PHPUNIT_DEFAULT_GROUP: qs
     restart: "no"
     volumes:
       - backups:/var/backups

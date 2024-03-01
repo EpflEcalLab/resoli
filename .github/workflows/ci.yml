@@ -82,96 +82,39 @@ jobs:
       - name: Run upgrade status
         run: docker-compose exec -T test docker-as-wait db:3306 -- /var/www/vendor/bin/drush upgrade_status:analyze --ignore-contrib --ignore-uninstalled --all
 
-  build_docker:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        include:
-          - dockerFile: Dockerfile
-            image: quartiers-solidaires_test
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Get the user id
-        id: user_id
-        run: |
-          echo "::set-output name=id::$(id -u)"
-      - name: Get the user group
-        id: user_group
-        run: |
-          echo "::set-output name=id::$(id -g)"
-      - name: Build and Push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          pull: true
-          build-args: |
-            user=${{ steps.user_id.outputs.id }}
-            group=${{ steps.user_group.outputs.id }}
-          file: ${{ matrix.dockerFile }}
-          tags: ${{ matrix.image }}:latest
-          outputs: type=docker, dest=/tmp/${{ matrix.image }}.tar
-          cache-from: type=gha,scope=${{ github.workflow }}_${{ matrix.image }}
-          cache-to: type=gha,mode=max,scope=${{ github.workflow }}_${{ matrix.image }}
-      - name: Cache artifacts
-        uses: actions/cache@v3
-        with:
-          path: /tmp/${{ matrix.image }}.tar
-          key: ${{ runner.os }}-${{ matrix.image }}-${{ github.sha }}
-
   unit-tests:
-    needs: build_docker
     runs-on: ubuntu-latest
+    env:
+      COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Cache artifacts
-        uses: actions/cache@v3
-        with:
-          path: /tmp/quartiers-solidaires_test.tar
-          key: ${{ runner.os }}-quartiers-solidaires_test-${{ github.sha }}
-      - name: Load Docker image
-        run: docker load --input /tmp/quartiers-solidaires_test.tar
-      - name: Up the docker-compose stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --no-build -d test
+      - name: Build the docker-compose stack
+        run: |
+          docker-compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
+          mkdir -p ./log ./backups
+      - name: Run the docker stack
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d test
       - name: Run unit tests
-        run: docker exec test docker-as-wait --mysql -- docker-as-drupal phpunit --skip-default-stops --group=quartier-solidaires
+        run: docker exec test docker-as-wait db:3306 -- docker-as-drupal phpunit --skip-default-stops
 
-  functional-tests:
-    needs: build_docker
+  behat-tests:
     runs-on: ubuntu-latest
+    env:
+      COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Cache artifacts
-        uses: actions/cache@v3
-        with:
-          path: /tmp/quartiers-solidaires_test.tar
-          key: ${{ runner.os }}-quartiers-solidaires_test-${{ github.sha }}
-      - name: Load Docker image
-        run: docker load --input /tmp/quartiers-solidaires_test.tar
-      - name: Up the docker-compose stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up --no-build -d test browser
+      - name: Build the docker-compose stack
+        run: |
+          docker-compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
+          mkdir -p ./log ./backups
+      - name: Run the docker stack
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d test browser
       - name: Bootstrap
-        run: docker exec test docker-as-wait --mysql -- docker-as-drupal bootstrap --install-only --force
-      - name: Build Styleguide
-        run: docker exec test yarn build --production
-      # Build assets
-      # Uncomment and set right node version if you have to build assets
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: Build Styleguide Library Node Autocomplete
-        run: yarn && yarn build --production
-        working-directory: ./web/themes/quartiers_solidaires/libs/node-autocomplete
+        run: docker exec test docker-as-wait db:3306 -- docker-as-drupal bootstrap --force --with-default-content
       - name: Run Behat tests
-        run: docker-compose exec -T test docker-as-wait --mysql test:8888 browser:4444 -- docker-as-drupal behat --user=www-data --skip-db-reset
+        run: docker-compose exec -T test docker-as-wait db:3306 test:80 browser:4444 -- docker-as-drupal behat --skip-db-reset --skip-default-content
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
-          path: ./app/logs
+          path: ./log

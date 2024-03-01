@@ -14,12 +14,18 @@ services:
     # user: <YOUR USER ID>
     ports:
       - "8080:80"
+    #volumes:
+      # Styleguide
+      #- ./web/themes/quartiers_solidaires:/var/www/web/themes/quartiers_solidaires
 
   # Drupal test server
   test:
     hostname: test
     ports:
       - "8888:80"
+    #volumes:
+      # Styleguide
+      #- ./web/themes/quartiers_solidaires:/var/www/web/themes/quartiers_solidaires
 
   # Database
   db:

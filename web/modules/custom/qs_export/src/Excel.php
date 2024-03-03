@@ -161,7 +161,7 @@ class Excel {
           break;
 
         default:
-          $safe_string = htmlspecialchars_decode($content, \ENT_QUOTES);
+          $safe_string = htmlspecialchars_decode((string) $content, \ENT_QUOTES);
           $cell->setValue($safe_string);
 
           break;

@@ -24,6 +24,10 @@ services:
       - ./config:/var/www/config
       - ./web/modules/custom:/var/www/web/modules/custom
       - ./web/sites/default/settings.development.php:/var/www/web/sites/default/settings.development.php
+      # Theme
+      - ./web/themes/quartiers_solidaires/templates:/var/www/web/themes/quartiers_solidaires/templates
+      - ./web/themes/quartiers_solidaires/quartiers_solidaires.libraries.yml:/var/www/web/themes/quartiers_solidaires/quartiers_solidaires.libraries.yml
+      - ./web/themes/quartiers_solidaires/quartiers_solidaires.info.yml:/var/www/web/themes/quartiers_solidaires/quartiers_solidaires.info.yml
       # Styleguide
       - ./package.json:/var/www/package.json
       - ./yarn.lock:/var/www/yarn.lock

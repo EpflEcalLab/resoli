@@ -185,7 +185,7 @@ class MembersController extends ControllerBase {
    * Members page.
    */
   public function members(Request $request, TermInterface $community) {
-    $keywords = $request->get('keywords');
+    $keywords = $request->get('keywords', '');
     $variables['community'] = $community;
 
     $render = [

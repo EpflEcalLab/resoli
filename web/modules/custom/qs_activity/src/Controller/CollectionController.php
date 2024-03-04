@@ -139,7 +139,7 @@ class CollectionController extends ControllerBase {
     $master_request = $this->requestStack->getMasterRequest();
 
     // Get pagination date.
-    $pagination_date = $master_request->query->get('date');
+    $pagination_date = $master_request->query->get('date', 'now');
 
     try {
       $start_date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);

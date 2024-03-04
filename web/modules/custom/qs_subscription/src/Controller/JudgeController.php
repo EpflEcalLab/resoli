@@ -112,6 +112,8 @@ class JudgeController extends ControllerBase {
 
     // Send email to user when event subscription is approved.
     if ($entity && $entity->bundle() === 'event' && $user && $user->entity) {
+      $ids = [];
+
       $this->mail->mail('qs_subscription', 'subscription_event_waiting_approval_confirm', $user->entity->getEmail(), $user->entity->getPreferredLangcode(), [
         'account' => $user->entity,
         'event' => $entity,

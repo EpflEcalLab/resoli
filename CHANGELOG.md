@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/loco_translate (3.0.0 => 3.0.1)
 - update library dompdf/dompdf (v2.0.3 => v2.0.4)
 - remove root dependency on webmozart/path-util but still present by another package
+- update linters mglaman/phpstan-drupal (1.1.31 => 1.2.5) & phpstan/phpstan-deprecation-rules (1.1.3 => 1.1.4)
 
 ### Added
 - add Upgrade Status on CI - QS-49

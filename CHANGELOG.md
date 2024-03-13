@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61
 - upgrade to PHP 8.1 - QS-52
 - add module drupal/ckeditor (1.0.2)
+- update module drupal/bamboo_twig (6.0.0 => 6.0.1)
 
 ### Added
 - add Upgrade Status on CI - QS-49

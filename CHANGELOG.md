@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - replace usage of assertEqual() by assertEquals() - QS-63
 - replace phpunit usage of deprecated withConsecutive - QS-63
 - replace phpunit usage of deprecated setMethods - QS-63
+- remove necessary @internal on FormBasic - QS-63
 
 ### Removed
 - remove linter phpmd - QS-64

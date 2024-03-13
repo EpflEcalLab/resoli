@@ -43,7 +43,8 @@ function qs_subscription_node_delete(EntityInterface $entity) {
   /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $subscriptionStorage = $entityTypeManager->getStorage('subscription');
   /** @var \Drupal\Core\Entity\Query\QueryInterface */
-  $subscriptionQuery = $subscriptionStorage->getQuery();
+  $subscriptionQuery = $subscriptionStorage->getQuery()
+    ->accessCheck();
 
   $query = $subscriptionQuery->condition('entity', $entity->id());
 
@@ -68,7 +69,8 @@ function qs_subscription_user_delete(EntityInterface $entity) {
   /** @var \Drupal\Core\Entity\ContentEntityStorageInterface */
   $subscriptionStorage = $entityTypeManager->getStorage('subscription');
   /** @var \Drupal\Core\Entity\Query\QueryInterface */
-  $subscriptionQuery = $subscriptionStorage->getQuery();
+  $subscriptionQuery = $subscriptionStorage->getQuery()
+    ->accessCheck();
 
   $query = $subscriptionQuery->condition('user', $entity->id());
 

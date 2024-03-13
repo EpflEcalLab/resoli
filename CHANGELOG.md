@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - rework the Github Actions PHPUnit & Behat integration - QS-48
 - uninstall legacy base theme Stable for compliancy upgrade D9 -> D10 - QS-63
 - update all Default Content to use Yaml format - QS-63
+- add missing ->accessCheck() on Query - QS-63
 
 ### Removed
 - remove linter phpmd - QS-64

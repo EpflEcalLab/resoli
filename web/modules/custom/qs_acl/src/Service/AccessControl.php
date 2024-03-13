@@ -86,6 +86,7 @@ class AccessControl {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $user->id());
@@ -128,6 +129,7 @@ class AccessControl {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $user->id());
 
@@ -231,6 +233,7 @@ class AccessControl {
     }
     // Activity Members+ have access to photo.
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -269,6 +272,7 @@ class AccessControl {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -307,6 +311,7 @@ class AccessControl {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('entity', $community->id())
@@ -422,6 +427,7 @@ class AccessControl {
    */
   public function hasCommunityByUser(TermInterface $community, AccountInterface $account) {
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $account->id())
@@ -513,6 +519,7 @@ class AccessControl {
 
     // If the activity is only open to members, check the user has at least one.
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -573,6 +580,7 @@ class AccessControl {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('entity', $community->id())
@@ -612,6 +620,7 @@ class AccessControl {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -676,6 +685,7 @@ class AccessControl {
 
     // Activity Members+ have access to upload photo by default.
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -694,6 +704,7 @@ class AccessControl {
     if ((bool) $activity->field_member_create_gallery->value === TRUE) {
       // Activity Members+ have access to upload photo by default.
       $query = $this->privilegeStorage->getQuery()
+        ->accessCheck()
         ->condition('status', 1)
         ->condition('bundle', 'node')
         ->condition('entity', $activity->id())
@@ -815,6 +826,7 @@ class AccessControl {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 0)
       ->condition('entity', $community->id())
       ->condition('user', $user->id());
@@ -860,6 +872,7 @@ class AccessControl {
    */
   private function countCommunitiesByUser(AccountInterface $account) {
     $query = $this->privilegeStorage->getAggregateQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'taxonomy_term')
       ->condition('user', $account->id())

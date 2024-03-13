@@ -98,7 +98,6 @@ module:
   views: 10
   standard: 1000
 theme:
-  seven: 0
   quartiers_solidaires: 0
   claro: 0
   gin: 0

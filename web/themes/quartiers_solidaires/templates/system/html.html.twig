@@ -67,7 +67,7 @@ set body_classes = [
 <html {{ html_attributes }}>
 <head>
   <!-- Drupal assets and headers -->
-  <head-placeholder token="{{ placeholder_token|raw }}">
+  <head-placeholder token="{{ placeholder_token }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- Favicons -->
@@ -88,7 +88,7 @@ set body_classes = [
   })(window,document,'script','dataLayer','GTM-N8L2WM6');</script>
   <!-- End Google Tag Manager -->
 
-  <css-placeholder token="{{ placeholder_token|raw }}">
+  <css-placeholder token="{{ placeholder_token }}">
   <script>
     WebFontConfig = {google: {families: ['Open Sans:300,400,600']}};
     (function(d) {
@@ -98,7 +98,7 @@ set body_classes = [
       s.parentNode.insertBefore(wf, s);
     })(document);
   </script>
-  <js-placeholder token="{{ placeholder_token|raw }}">
+  <js-placeholder token="{{ placeholder_token }}">
 
   <!-- https://blogs.msdn.microsoft.com/ieinternals/2011/05/14/stylesheet-limits-in-internet-explorer -->
   <!-- Bypass Limitation of IE 9 -->
@@ -118,6 +118,6 @@ set body_classes = [
   <script type="text/javascript">
     window.svgPath = "/{{ directory }}/build/icons/icons.svg";
   </script>
-  <js-bottom-placeholder token="{{ placeholder_token|raw }}">
+  <js-bottom-placeholder token="{{ placeholder_token }}">
 </body>
 </html>

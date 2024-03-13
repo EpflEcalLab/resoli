@@ -255,11 +255,15 @@ final class RequestManagerTest extends UnitTestCase {
 
     $node->expects(self::exactly(3))
       ->method('set')
-      ->withConsecutive(
-        ['moderation_state', 'solved'],
-        ['field_solved_by', 2],
-        ['field_solved_at', '2000-26-04T15:00:00']
-      );
+      ->willReturnCallback(function (string $field, mixed $value): void {
+        static $i = 0;
+        match (++$i) {
+          1 => $this->assertEquals($field, 'moderation_state') && $this->assertEquals($value, 'solved'),
+          2 => $this->assertEquals($field, 'field_solved_by') && $this->assertEquals($value, '2'),
+          3 => $this->assertEquals($field, 'field_solved_at') && $this->assertEquals($value, '2000-26-04T15:00:00'),
+        };
+      });
+
     $this->requestManager->solved($node, $author, $solved_at);
   }
 

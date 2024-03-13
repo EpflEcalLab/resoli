@@ -335,14 +335,20 @@ final class AccessControlTest extends UnitTestCase {
    */
   public function testIsCommunityVolunteerContextualUser() {
     $community = $this->createMock(TermInterface::class);
+    $currentUser = $this->currentUser;
     $anotherCurrentUser = $this->createMock(AccountProxyInterface::class);
 
     $this->volunteerismRepository->expects(self::exactly(2))
       ->method('getAllByCommunityUser')
-      ->withConsecutive(
-        [$community, $this->currentUser],
-        [$community, $anotherCurrentUser]
-      );
+      ->willReturnCallback(function (TermInterface $paramCommunity, AccountProxyInterface $paramCurrentUser) use ($community, $currentUser, $anotherCurrentUser): array {
+        static $i = 0;
+        match (++$i) {
+          1 => $this->assertEquals($paramCommunity, $community) && $this->assertEquals($paramCurrentUser, $currentUser),
+          2 => $this->assertEquals($paramCommunity, $community) && $this->assertEquals($paramCurrentUser, $anotherCurrentUser),
+        };
+
+        return [];
+      });
 
     // Fallback on the current user.
     $this->acl->isCommunityVolunteer($community);

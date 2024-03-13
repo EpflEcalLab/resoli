@@ -193,37 +193,39 @@ final class OfferManagerTest extends UnitTestCase {
     $node
       ->expects(self::exactly(8))
       ->method('hasField')
-      ->withConsecutive(
-        ['title'],
-        ['field_offer_type'],
-        ['field_theme'],
-        ['body'],
-        ['field_description'],
-        ['field_contact_name'],
-        ['field_contact_mail'],
-        ['field_contact_phone']
-      )->willReturn(TRUE);
+      ->willReturnMap([
+        ['title', TRUE],
+        ['field_offer_type', TRUE],
+        ['field_theme', TRUE],
+        ['body', TRUE],
+        ['field_description', TRUE],
+        ['field_contact_name', TRUE],
+        ['field_contact_mail', TRUE],
+        ['field_contact_phone', TRUE],
+      ]);
     $node
       ->expects(self::exactly(8))
       ->method('set')
-      ->withConsecutive(
-        ['title', 'Mollis facilisi | Aptent Tempus'],
-        ['field_offer_type', 1],
-        ['field_theme', 1],
-        ['body', [
-          'format' => 'light_html',
-          'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
-        ],
-        ],
-        ['field_description', [
-          'format' => 'light_html',
-          'value' => 'In porttitor justo urna nullam lectus lacus',
-        ],
-        ],
-        ['field_contact_name', 'Aptent Tempus'],
-        ['field_contact_mail', 'aptent.tempus@example.org'],
-        ['field_contact_phone', '079 790 79 79']
-      );
+      ->willReturnCallback(function (string $field, mixed $value): void {
+        static $i = 0;
+        match (++$i) {
+          1 => $this->assertEquals($field, 'title') && $this->assertEquals($value, 'Mollis facilisi | Aptent Tempus'),
+          2 => $this->assertEquals($field, 'field_offer_type') && $this->assertEquals($value, 1),
+          3 => $this->assertEquals($field, 'field_theme') && $this->assertEquals($value, 1),
+          4 => $this->assertEquals($field, 'body') && $this->assertEquals($value, [
+            'format' => 'light_html',
+            'value' => 'Feugiat mollis lacus leo nascetur neque consequat',
+          ]),
+          5 => $this->assertEquals($field, 'field_description') && $this->assertEquals($value, [
+            'format' => 'light_html',
+            'value' => 'In porttitor justo urna nullam lectus lacus',
+          ]),
+          6 => $this->assertEquals($field, 'field_contact_name') && $this->assertEquals($value, 'Aptent Tempus'),
+          7 => $this->assertEquals($field, 'field_contact_mail') && $this->assertEquals($value, 'aptent.tempus@example.org'),
+          8 => $this->assertEquals($field, 'field_contact_phone') && $this->assertEquals($value, '079 790 79 79'),
+        };
+      });
+
     $node
       ->expects(self::once())
       ->method('save');

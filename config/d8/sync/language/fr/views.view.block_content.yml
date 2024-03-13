@@ -41,7 +41,7 @@ display:
       title: 'Bibliothèque de blocs personnalisés'
       empty:
         area_text_custom:
-          content: 'Aucun bloc personnalisé n''est disponible. '
+          content: "Aucun bloc personnalisé n'est disponible. "
   page_1:
     display_title: Page
     display_options:

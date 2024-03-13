@@ -9,8 +9,8 @@ id: node.activity.field_community_can_subscribe
 field_name: field_community_can_subscribe
 entity_type: node
 bundle: activity
-label: 'Permettre à la communauté l''inscription aux événements'
-description: 'Si décoché, seuls les membres de l''activité peuvent s''inscrire.'
+label: "Permettre à la communauté l'inscription aux événements"
+description: "Si décoché, seuls les membres de l'activité peuvent s'inscrire."
 required: false
 translatable: false
 default_value:

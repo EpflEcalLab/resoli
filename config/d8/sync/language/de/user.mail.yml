@@ -1,4 +1,5 @@
 cancel_confirm:
+  subject: 'Antrag auf Löschung von Benutzerkonto [user:name] auf [site:name]'
   body: |-
     [user:display-name],
 
@@ -14,8 +15,8 @@ cancel_confirm:
 
     Viele Grüße
     Das Team von [site:name]
-  subject: 'Antrag auf Löschung von Benutzerkonto [user:name] auf [site:name]'
 password_reset:
+  subject: 'Neue Login-Daten für Benutzerkonto [user:name] auf [site:name]'
   body: |-
     [user:display-name],
 
@@ -29,8 +30,8 @@ password_reset:
 
     Viele Grüße
     Das Team von [site:name]
-  subject: 'Neue Login-Daten für Benutzerkonto [user:name] auf [site:name]'
 register_admin_created:
+  subject: 'Ein Administrator hat für Sie auf [site:name] ein Benutzerkonto angelegt'
   body: |-
     [user:display-name],
 
@@ -47,8 +48,8 @@ register_admin_created:
 
     Viele Grüße
     Das Team von [site:name]
-  subject: 'Ein Administrator hat für Sie auf [site:name] ein Benutzerkonto angelegt'
 register_no_approval_required:
+  subject: 'Kontodetails für [user:display-name] auf [site:name]'
   body: |-
     [user:display-name],
 
@@ -65,8 +66,8 @@ register_no_approval_required:
 
     Viele Grüße
     Das Team von [site:name]
-  subject: 'Kontodetails für [user:display-name] auf [site:name]'
 register_pending_approval:
+  subject: 'Kontendetails für [user:display-name] auf [site:name] (Genehmigung ausstehend)'
   body: |-
     [user:display-name],
 
@@ -74,11 +75,11 @@ register_pending_approval:
 
     Viele Grüße
     Das Team von [site:name]
-  subject: 'Kontendetails für [user:display-name] auf [site:name] (Genehmigung ausstehend)'
 register_pending_approval_admin:
-  body: "[user:display-name] hat einen Antrag auf ein Benutzerkonto gestellt.\r\n\r\n[user:edit-url]"
   subject: 'Kontendetails für [user:display-name] auf [site:name] (Genehmigung ausstehend)'
+  body: "[user:display-name] hat einen Antrag auf ein Benutzerkonto gestellt.\r\n\r\n[user:edit-url]"
 status_activated:
+  subject: 'Kontodetails für [user:display-name] auf [site:name] (freigegeben)'
   body: |-
     [user:display-name],
 
@@ -97,16 +98,16 @@ status_activated:
 
     Viele Grüße
     Das Team von [site:name]
-  subject: 'Kontodetails für [user:display-name] auf [site:name] (freigegeben)'
 status_blocked:
+  subject: 'Details für Benutzerkonto [user:name] auf [site:name] (gesperrt)'
   body: |-
     [user:display-name],
 
     Ihr Benutzerkonto auf [site:name] wurde gesperrt.
 
     --  [site:name]-Team
-  subject: 'Details für Benutzerkonto [user:name] auf [site:name] (gesperrt)'
 status_canceled:
+  subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (abgebrochen)'
   body: |-
     [user:display-name],
 
@@ -114,4 +115,3 @@ status_canceled:
 
     Viele Grüße
     Das Team von [site:name]
-  subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (abgebrochen)'

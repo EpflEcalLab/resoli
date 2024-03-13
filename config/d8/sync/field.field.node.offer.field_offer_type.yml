@@ -9,7 +9,7 @@ id: node.offer.field_offer_type
 field_name: field_offer_type
 entity_type: node
 bundle: offer
-label: 'Offer''s type'
+label: "Offer's type"
 description: ''
 required: true
 translatable: false

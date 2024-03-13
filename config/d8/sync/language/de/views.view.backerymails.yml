@@ -1,6 +1,5 @@
 display:
   default:
-    display_title: Master
     display_options:
       exposed_form:
         options:
@@ -19,29 +18,9 @@ display:
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
-            offset_label: Offset
       fields:
-        id:
-          label: Objektkennung
-          separator: ', '
-        created:
-          separator: ', '
-        module:
-          label: Modul
-          separator: ', '
-        module_key:
-          label: Schlüssel
-          separator: ', '
         mail_from:
           label: Von
-          separator: ', '
-        mail_reply_to:
-          separator: ', '
-        langcode:
-          separator: ', '
-        subject:
-          label: Betreff
-          separator: ', '
       empty:
         area_text_custom:
           content: 'Kein Inhalt verfügbar.'

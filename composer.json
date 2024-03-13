@@ -36,6 +36,7 @@
         "drupal/allowed_formats": "^2.0",
         "drupal/backerymails": "^3.0",
         "drupal/bamboo_twig": "^6.0",
+        "drupal/ckeditor": "^1.0",
         "drupal/core-composer-scaffold": "^9.5.1",
         "drupal/core-project-message": "^9.5.1",
         "drupal/core-recommended": "^9.5.1",

@@ -61,7 +61,7 @@ class EntityAccess implements EventSubscriberInterface {
 
     if ($route_name === 'entity.taxonomy_term.canonical' && \in_array($term->vid->target_id, $this->disabledVocabularies, TRUE)) {
       $dest = Url::fromRoute('<front>')->toString();
-      $event->setResponse(RedirectResponse::create($dest));
+      $event->setResponse(new RedirectResponse($dest));
     }
   }
 

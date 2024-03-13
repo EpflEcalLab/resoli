@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add module drupal/ckeditor (1.0.2)
 - update module drupal/bamboo_twig (6.0.0 => 6.0.1)
 - update module drupal/symfony_mailer_lite (1.0.2 => 1.0.6)
+- update theme drupal/gin (3.0.0-rc7 => 3.0.0-rc9)
+- update drupal/gin_toolbar (1.0.0-rc4 => 1.0.0-rc5)
 
 ### Added
 - add Upgrade Status on CI - QS-49

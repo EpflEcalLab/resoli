@@ -24,7 +24,7 @@ final class CalendarBuilderTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['qs_calendar'];
+  protected static $modules = ['qs_calendar'];
 
   /**
    * {@inheritdoc}

@@ -22,7 +22,7 @@ final class EventManagerTest extends ResoliKernelTestBase {
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'qs_subscription',
     'qs_activity',
   ];

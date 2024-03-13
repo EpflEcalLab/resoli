@@ -20,7 +20,7 @@ final class BadgeManagerCountEventsByDatesTest extends ResoliKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'qs_badge',
   ];
 

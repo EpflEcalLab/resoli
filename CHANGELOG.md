@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - twig replace deprecated usage of if condition on for tag
 - replace usage of deprecated function honeypot_add_form_protection() by honeypot service addFormProtection - QS-63
 - replace deprecated GetResponseEvent event args by RequestEvent on subscribers - QS-63
+- change visibility on $modules tests Class from public -> protected - QS-63
 
 ### Removed
 - remove linter phpmd - QS-64

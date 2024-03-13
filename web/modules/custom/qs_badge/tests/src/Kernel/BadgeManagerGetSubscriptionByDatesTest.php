@@ -22,7 +22,7 @@ final class BadgeManagerGetSubscriptionByDatesTest extends ResoliKernelTestBase 
    *
    * @var array
    */
-  public static $modules = [
+  protected static $modules = [
     'qs_badge',
     'qs_subscription',
   ];

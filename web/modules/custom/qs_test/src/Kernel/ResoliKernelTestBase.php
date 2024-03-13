@@ -33,7 +33,7 @@ class ResoliKernelTestBase extends EntityKernelTestBase {
    *
    * @see \Drupal\simpletest\WebTestBase::installModulesFromClassProperty()
    */
-  public static $modules = [
+  protected static $modules = [
     'user',
     'qs_test',
     'system',

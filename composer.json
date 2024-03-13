@@ -59,7 +59,6 @@
         "phpoffice/phpspreadsheet": "^1.26",
         "symfony/property-access": "^3.4.47",
         "webflo/drupal-finder": "^1.2.2",
-        "webmozart/path-util": "^2.3",
         "xantios/mimey": "^2.2"
     },
     "require-dev": {

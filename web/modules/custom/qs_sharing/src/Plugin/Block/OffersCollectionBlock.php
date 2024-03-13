@@ -4,6 +4,7 @@ namespace Drupal\qs_sharing\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\node\NodeInterface;
@@ -11,7 +12,6 @@ use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_sharing\Repository\OfferRepository;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Collection of Offers by Offer's type.
@@ -35,7 +35,7 @@ class OffersCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * The request stack.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\Http\RequestStack
    */
   protected $requestStack;
 

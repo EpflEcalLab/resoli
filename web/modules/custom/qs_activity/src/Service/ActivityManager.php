@@ -5,11 +5,11 @@ namespace Drupal\qs_activity\Service;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * The Activity Manager.
@@ -33,7 +33,7 @@ class ActivityManager {
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\Http\RequestStack
    */
   protected $requestStack;
 
@@ -359,7 +359,7 @@ class ActivityManager {
    */
   public function getThemed(TermInterface $community) {
     // The request should be took at the latest moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
+    $master_request = $this->requestStack->getMainRequest();
 
     $query = $this->connection->select('node_field_data', 'activity');
     $query->fields('activity', ['nid', 'title'])

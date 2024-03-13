@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - remove necessary @internal on FormBasic - QS-63
 - replace deprecated usage of class Twig_Extension by Twig\Extension\AbstractExtension - QS-63
 - replace usage of jQuery once in favor of Drupal core/once - QS-63
+- replace usage of Symfony\Component\HttpFoundation\RequestStack by shim Drupal\Core\Http\RequestStack - QS-63
 
 ### Removed
 - remove linter phpmd - QS-64

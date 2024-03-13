@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update library phpoffice/phpspreadsheet (1.28.0 => 1.29.0)
 - update dev-dependency module drupal/rules (3.0.0-alpha7 => 3.0.0-alpha8)
 - update library behat/behat (v3.13.0 => v3.14.0)
+- update module drupal/default_content (1.0.0-alpha9 => 2.0.0-alpha2)
 
 ### Added
 - add Upgrade Status on CI - QS-49

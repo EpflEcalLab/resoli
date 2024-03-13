@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 153f0f76-0309-4ec0-b226-49e7e0fd0b06
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 11
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+fribourg+approval+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$EE1FcafhS7QU3o9sikmeLXxfe4ObfufjXxx/VdQ49gqcMGx9m4eh
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+fribourg+approval+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1503057727
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Kelly
+  field_lastname:
+    -
+      value: Diote

@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: bfbf9ac6-2917-4647-9b09-1acca6b29949
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 13
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+lausanne+manager+fribourg@antistatique.net
+  pass:
+    -
+      value: $S$EzR8zEwJP6u9L0qKFzdKJonT68uaTdvNraqEdDb7UAVxAAgvaImJ
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+lausanne+manager+fribourg@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1504274808
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Alain
+  field_lastname:
+    -
+      value: Connu
+  field_phone:
+    -
+      value: '0211234567'

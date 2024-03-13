@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 27a5e517-0af2-4e63-b74f-496b11b32876
+  bundle: event
+  default_langcode: zxx
+  depends:
+    54d76066-ae8b-475e-b8d9-68d9577166c2: node
+default:
+  nid:
+    -
+      value: 60
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Monopol Pokémon'
+  created:
+    -
+      value: 1522920784
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/monopoly/events/monopol-pokemon
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "I wanna be the very best\r\nLike no one ever was\r\nTo catch them is my real test\r\nTo train them is my cause13\r\n\r\nI will travel across the land\r\nSearching far and wide\r\nTeach pokémon to understand\r\nThe power that's inside2\r\n\r\nPokémon! Gotta catch 'em all\r\nIt's you and me\r\nI know it's my destiny\r\nPokémon! Oh, you're my best friend\r\nIn a world we must defend"
+      format: ''
+      summary: ''
+  field_activity:
+    -
+      entity: 54d76066-ae8b-475e-b8d9-68d9577166c2
+  field_contact_mail:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  field_end_at:
+    -
+      value: '2023-12-13T19:19:00'
+  field_start_at:
+    -
+      value: '2023-12-13T15:19:00'
+  field_venue:
+    -
+      value: 'Bern, Switzerland'
+  field_venue_lat:
+    -
+      value: '46.9480'
+  field_venue_long:
+    -
+      value: '7.4474'

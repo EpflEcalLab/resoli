@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: c4ec4153-d403-4cb2-a5e4-af4ae9c70dcf
+  bundle: event
+  default_langcode: zxx
+  depends:
+    b4750e3e-9da7-487f-8355-4f6a5b6dca87: node
+default:
+  nid:
+    -
+      value: 33
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Wifi, 3G, 4G… Quelle est la différence?'
+  created:
+    -
+      value: 1503415233
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/cours-smartphone-tablette/events/wifi-3g-4g-quelle-est-la-difference
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Le jargon numérique n’est de loin le vocabulaire le plus accessible. Grâce à cette initiation, vous en saurez plus à ce sujet qui n’aura plus de secrets pour vous!</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: b4750e3e-9da7-487f-8355-4f6a5b6dca87
+  field_end_at:
+    -
+      value: '2024-03-15T22:00:00'
+  field_start_at:
+    -
+      value: '2024-03-15T21:10:00'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11 1, Renens, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

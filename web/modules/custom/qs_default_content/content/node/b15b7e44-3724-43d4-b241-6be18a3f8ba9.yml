@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b15b7e44-3724-43d4-b241-6be18a3f8ba9
+  bundle: event
+  default_langcode: zxx
+  depends:
+    5c5f2e54-c3ac-4a69-9659-17afc8d1734d: node
+default:
+  nid:
+    -
+      value: 28
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Confection de bijoux'
+  created:
+    -
+      value: 1503415038
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/atelier-creatif/events/confection-de-bijoux
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Nam gravida, sapien sed lobortis lacinia, metus velit feugiat eros, in ornare ipsum enim malesuada enim. Phasellus dapibus metus leo, vel vulputate dui aliquet vitae. Proin feugiat purus nec lacus fringilla tempor. In id erat id felis egestas pharetra non ornare mi. Suspendisse vehicula, justo ac vulputate pulvinar, velit orci ultrices elit, sed pharetra tortor dui et nisl. Donec scelerisque quis neque in gravida. In hac habitasse platea dictumst. Aenean ac elementum urna, ac congue sem. Aliquam arcu ligula, lacinia ut dictum ut, dignissim at orci. Aliquam erat volutpat. Sed lorem orci, rutrum ac quam at, bibendum dignissim lorem.</p>\r\n\r\n<p><br />\r\nAenean congue ante eu dui porta hendrerit. Vivamus finibus ipsum et dictum venenatis. Nulla rutrum nibh vitae nisi sollicitudin pharetra. Aliquam id bibendum lorem. Etiam vel odio vel felis varius pellentesque ut sed purus. Etiam sit amet turpis lorem. Quisque dapibus lectus urna, vel imperdiet elit fringilla a. Etiam eget sapien consectetur, pulvinar nulla sit amet, egestas magna. Curabitur id neque euismod, fermentum metus in, venenatis massa. Etiam ligula nibh, tristique nec justo nec, tempor molestie lectus. Quisque orci velit, aliquet eu libero quis, consectetur sodales leo. Vestibulum fermentum tincidunt sapien pharetra cursus. Maecenas cursus feugiat mi, at ornare est porttitor eu. Nunc vitae interdum magna. Sed pulvinar, est quis convallis feugiat, lacus lorem gravida eros, non lacinia orci nulla a nunc. Nullam laoreet vulputate arcu, in porttitor augue iaculis sed.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 5c5f2e54-c3ac-4a69-9659-17afc8d1734d
+  field_contribution:
+    -
+      value: Gratuit
+  field_end_at:
+    -
+      value: '2023-06-21T10:12:00'
+  field_start_at:
+    -
+      value: '2023-06-21T10:00:00'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

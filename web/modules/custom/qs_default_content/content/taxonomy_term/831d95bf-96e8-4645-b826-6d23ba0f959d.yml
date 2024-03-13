@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 831d95bf-96e8-4645-b826-6d23ba0f959d
+  bundle: sharing_themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 20
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Convivialité
+  weight:
+    -
+      value: 1
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_created:
+    -
+      value: 1629989298
+  field_sharing_icon:
+    -
+      value: convivialite

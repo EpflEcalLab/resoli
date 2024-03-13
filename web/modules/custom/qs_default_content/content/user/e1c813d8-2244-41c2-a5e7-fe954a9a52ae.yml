@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: e1c813d8-2244-41c2-a5e7-fe954a9a52ae
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 21
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: approval+all@antistatique.net
+  pass:
+    -
+      value: $S$E0cTSvrg9pvCpsAPIk/ftSkK4Pwkr.onXMFbfz5Sbm4VV88H134C
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: approval+all@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1512489281
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Nordine
+  field_lastname:
+    -
+      value: Ateur

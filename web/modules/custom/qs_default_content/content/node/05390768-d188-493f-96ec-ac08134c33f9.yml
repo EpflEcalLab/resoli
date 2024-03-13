@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 05390768-d188-493f-96ec-ac08134c33f9
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8d4fcba8-649d-4912-bb62-87bc42e78e24: node
+default:
+  nid:
+    -
+      value: 24
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Aperitif
+  created:
+    -
+      value: 1503414814
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/aperitif/events/aperitif-1
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Cave Communale, Avenue du Prieuré, Pully, Switzerland</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8d4fcba8-649d-4912-bb62-87bc42e78e24
+  field_contact_phone:
+    -
+      value: '+41 21 804 15 65'
+  field_end_at:
+    -
+      value: '2024-02-13T15:08:00'
+  field_start_at:
+    -
+      value: '2024-02-13T15:00:00'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

@@ -1,0 +1,70 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 973cdb88-abeb-485d-9a2e-7720209af710
+  bundle: event
+  default_langcode: zxx
+  depends:
+    7e03e7d6-1d74-4b40-8016-15a30f33b3fe: node
+default:
+  nid:
+    -
+      value: 59
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Escalade du Mont Richemond'
+  created:
+    -
+      value: 1522920557
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/escalade/events/escalade-du-mont-richemond
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: 'Lorem ipsum dolor sit amet consectetur adipiscing elit eget libero nulla, odio torquent urna iaculis natoque sapien aliquet magna platea ante integer, nascetur porttitor laoreet porta montes molestie phasellus himenaeos feugiat. Curae libero et vitae dignissim sollicitudin habitasse lacus, mi ridiculus in odio rhoncus.'
+      format: ''
+      summary: ''
+  field_activity:
+    -
+      entity: 7e03e7d6-1d74-4b40-8016-15a30f33b3fe
+  field_contact_mail:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  field_contact_name:
+    -
+      value: 'Pierre Affeu'
+  field_end_at:
+    -
+      value: '2024-03-13T10:39:23'
+  field_start_at:
+    -
+      value: '2024-03-13T09:51:23'
+  field_venue:
+    -
+      value: 'Paradiso, Switzerland'
+  field_venue_lat:
+    -
+      value: '45.9907'
+  field_venue_long:
+    -
+      value: '8.9453'

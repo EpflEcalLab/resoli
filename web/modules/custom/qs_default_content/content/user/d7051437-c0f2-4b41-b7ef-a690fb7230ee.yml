@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: d7051437-c0f2-4b41-b7ef-a690fb7230ee
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 19
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+fribourg+declined+member+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$EjK7Y7Suyl9saGkDd0LHlYEdUISdOvrpRaUV05Rfu3ABaZXSwC3l
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+fribourg+declined+member+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1504603757
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Maude
+  field_lastname:
+    -
+      value: Erateur
+  field_phone:
+    -
+      value: '0211234567'

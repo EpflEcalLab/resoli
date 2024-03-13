@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 0302c153-1a10-4d38-879a-49677814290e
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 20
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: declined+all@antistatique.net
+  pass:
+    -
+      value: $S$EORh1iZ7YlETfZCbOEZC0Peblgv26PjZCdZFy5kqEFbJyoUxgBKU
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: declined+all@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1512489258
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Samira
+  field_lastname:
+    -
+      value: Bien

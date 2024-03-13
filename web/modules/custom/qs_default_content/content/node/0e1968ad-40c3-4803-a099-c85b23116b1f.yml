@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0e1968ad-40c3-4803-a099-c85b23116b1f
+  bundle: event
+  default_langcode: zxx
+  depends:
+    5c5f2e54-c3ac-4a69-9659-17afc8d1734d: node
+default:
+  nid:
+    -
+      value: 15
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Cours d’Origami'
+  created:
+    -
+      value: 1503414519
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/atelier-creatif/events/cours-dorigami
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Venez apprendre à plier de simples feuilles de papier afin de les transformer en somptueuses sculptures! Les leçons se déroulent en toute convivialité avec un expert de cet art japonais.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 5c5f2e54-c3ac-4a69-9659-17afc8d1734d
+  field_end_at:
+    -
+      value: '2024-03-11T00:20:00'
+  field_start_at:
+    -
+      value: '2024-03-11T00:00:00'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11, Renens, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

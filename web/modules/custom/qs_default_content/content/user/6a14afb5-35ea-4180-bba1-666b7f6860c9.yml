@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 6a14afb5-35ea-4180-bba1-666b7f6860c9
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 6
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: organizer+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$E2qRQwcNWpQje.XRdYTGXbVUAl8Yp6NrXBtLBknch3ry4Xbrkp4T
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: organizer+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1502813391
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Gerard
+  field_lastname:
+    -
+      value: Mensoif

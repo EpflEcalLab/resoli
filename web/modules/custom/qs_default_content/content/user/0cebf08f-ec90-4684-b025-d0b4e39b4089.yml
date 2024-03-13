@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 0cebf08f-ec90-4684-b025-d0b4e39b4089
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 9
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+fribourg+member+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$EJzz7WEi/gSjrX5BkBgR5IGY3XKhfitJYeRK7AU0LTWmjBDjrwUr
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+fribourg+member+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1503057354
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Larry
+  field_lastname:
+    -
+      value: Bambelle

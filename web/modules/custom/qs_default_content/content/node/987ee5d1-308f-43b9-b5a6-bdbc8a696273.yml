@@ -1,0 +1,70 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 987ee5d1-308f-43b9-b5a6-bdbc8a696273
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441: node
+default:
+  nid:
+    -
+      value: 37
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Macbeth
+  created:
+    -
+      value: 1507540961
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/sorties-theatre/events/macbeth
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p id=\"_description2\" itemprop=\"description\">Après quelques infidélités à son auteur fétiche, Valentin Rossier revient à ses premières amours et présente \"la pièce écossaise\", celle dont on ne doit pas prononcer le nom dans un théâtre.&nbsp;Macbeth… Vision sombre de l’humanité, où l’oppression est vouée à succéder à l’oppression, où la frontière entre le visible et l’invisible se dissout. Transposé dans l’environnement aseptisé et glaçant d’un palace cinq étoiles,&nbsp;Macbeth&nbsp;ne dérogera cependant à aucune tradition shakespearienne: meurtre, trahison et folie!</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441
+  field_contact_phone:
+    -
+      value: '+41 21 692 21 24'
+  field_contribution:
+    -
+      value: 'CHF 20.-'
+  field_end_at:
+    -
+      value: '2024-03-13T22:12:00'
+  field_start_at:
+    -
+      value: '2024-03-13T22:00:00'
+  field_venue:
+    -
+      value: 'Théâtre La Grange de Dorigny. Université de Lausanne, Quartier Centre 1015 Lausanne'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

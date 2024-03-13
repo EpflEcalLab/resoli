@@ -1,0 +1,75 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 868dd285-8e79-4c28-a7f6-b0bacf417362
+  bundle: activity
+  default_langcode: zxx
+  depends:
+    d7885321-10ad-4a50-ad52-e843829e148e: taxonomy_term
+    d61ea8b9-e9ac-4b4d-9cc4-c0d364b33b4a: taxonomy_term
+default:
+  nid:
+    -
+      value: 9
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Cinéma
+  created:
+    -
+      value: 1503413799
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /geneve/activities/cinema
+      langcode: und
+      pathauto: 1
+  field_community:
+    -
+      entity: d7885321-10ad-4a50-ad52-e843829e148e
+  field_community_access_contact:
+    -
+      value: true
+  field_community_access_detail:
+    -
+      value: true
+  field_community_access_gallery:
+    -
+      value: false
+  field_community_access_story:
+    -
+      value: false
+  field_community_can_subscribe:
+    -
+      value: false
+  field_member_create_gallery:
+    -
+      value: true
+  field_member_create_story:
+    -
+      value: true
+  field_theme:
+    -
+      entity: d61ea8b9-e9ac-4b4d-9cc4-c0d364b33b4a
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

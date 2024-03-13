@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d646956d-b40c-41f6-99a4-5631e0048d02
+  bundle: event
+  default_langcode: zxx
+  depends:
+    d00884b2-446e-4e09-8844-8dcec7f7ba63: node
+default:
+  nid:
+    -
+      value: 19
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Balade au Moléson'
+  created:
+    -
+      value: 1503414673
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/randonnees/events/balade-au-moleson
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Balade en montagne au-travers d’un sentier pédagogique et gastronomique.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: d00884b2-446e-4e09-8844-8dcec7f7ba63
+  field_contact_name:
+    -
+      value: 'Kevin Wenger'
+  field_end_at:
+    -
+      value: '2024-03-15T18:22:00'
+  field_start_at:
+    -
+      value: '2024-03-15T18:00:00'
+  field_venue:
+    -
+      value: 'Le Moléson, Gruyères, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

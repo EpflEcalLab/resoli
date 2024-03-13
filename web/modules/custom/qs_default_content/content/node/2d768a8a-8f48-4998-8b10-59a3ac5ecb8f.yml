@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2d768a8a-8f48-4998-8b10-59a3ac5ecb8f
+  bundle: activity
+  default_langcode: zxx
+  depends:
+    3b9e3824-c73b-4b19-82cf-ac35022f2d47: taxonomy_term
+    4a0618f8-f41c-4355-9379-fb984edd11a8: taxonomy_term
+default:
+  nid:
+    -
+      value: 62
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Ginguettes
+  created:
+    -
+      value: 1522921671
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/ginguettes
+      langcode: und
+      pathauto: 1
+  field_community:
+    -
+      entity: 3b9e3824-c73b-4b19-82cf-ac35022f2d47
+  field_community_access_contact:
+    -
+      value: true
+  field_community_access_detail:
+    -
+      value: true
+  field_community_access_gallery:
+    -
+      value: true
+  field_community_access_story:
+    -
+      value: true
+  field_community_can_subscribe:
+    -
+      value: true
+  field_contact_mail:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  field_member_create_gallery:
+    -
+      value: true
+  field_member_create_story:
+    -
+      value: true
+  field_theme:
+    -
+      entity: 4a0618f8-f41c-4355-9379-fb984edd11a8

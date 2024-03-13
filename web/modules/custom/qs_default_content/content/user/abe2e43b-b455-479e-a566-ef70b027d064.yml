@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: abe2e43b-b455-479e-a566-ef70b027d064
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 15
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: approval+member+fribourg+approval+organizer+fribourg@as.net
+  pass:
+    -
+      value: $S$EkNLHQHKyyPa3A1XZ0RDhWOiG1.Aaqie2czLij2g94vRaZZiF/y8
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: approval+member+fribourg+approval+organizer+fribourg@as.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1504512741
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Jean
+  field_lastname:
+    -
+      value: Némard
+  field_phone:
+    -
+      value: '0211234567'

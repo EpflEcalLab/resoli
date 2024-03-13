@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 50b1759e-82ee-49be-9d4e-5a16946c3dc0
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    f4e4353a-2b4c-4535-ae6f-9be34825cb23: node
+default:
+  nid:
+    -
+      value: 47
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Photo N° 7 - Aperitif (23) - Aperitif (7)'
+  created:
+    -
+      value: 1509628577
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  field_event:
+    -
+      entity: f4e4353a-2b4c-4535-ae6f-9be34825cb23

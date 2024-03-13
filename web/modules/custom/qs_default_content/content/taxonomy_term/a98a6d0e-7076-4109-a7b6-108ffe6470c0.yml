@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: a98a6d0e-7076-4109-a7b6-108ffe6470c0
+  bundle: themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 12
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Intergénérationnel
+  weight:
+    -
+      value: 8
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1710316280
+  field_icon:
+    -
+      value: intergenerationnel

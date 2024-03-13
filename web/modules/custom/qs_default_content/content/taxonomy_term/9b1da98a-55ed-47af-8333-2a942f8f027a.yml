@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 9b1da98a-55ed-47af-8333-2a942f8f027a
+  bundle: sharing_themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 25
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Divers
+  weight:
+    -
+      value: 6
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_created:
+    -
+      value: 1629989330
+  field_sharing_icon:
+    -
+      value: divers

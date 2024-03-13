@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: c3cdeea4-9012-4351-ba04-7dcfa4312abf
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 4
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+fribourg@antistatique.net
+  pass:
+    -
+      value: $S$EP3q5JC5lBdRbHPEaxTw0m8xUJjqatepuEDJKqCD2wt/wRgscB2r
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+fribourg@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1502813267
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Rabbi
+  field_lastname:
+    -
+      value: Boché
+  field_phone:
+    -
+      value: '0211234567'

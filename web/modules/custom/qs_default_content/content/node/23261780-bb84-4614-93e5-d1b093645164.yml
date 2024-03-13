@@ -1,0 +1,73 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 23261780-bb84-4614-93e5-d1b093645164
+  bundle: event
+  default_langcode: zxx
+  depends:
+    69ba6e03-31e1-4ee5-add1-467f3efab36a: node
+default:
+  nid:
+    -
+      value: 22
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Les Bougies Colorées'
+  created:
+    -
+      value: 1503414740
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/atelier-bougies/events/les-bougies-colorees
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Réalisation de bougies artisanales, idéales comme cadeau de fin d'année. Plusieurs parfums et couleurs à choix, plusieurs formes de moules, etc. Venez nombreux partager un moment de création originales!</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 69ba6e03-31e1-4ee5-add1-467f3efab36a
+  field_contact_mail:
+    -
+      value: romain.collaud@gmail.com
+  field_contact_name:
+    -
+      value: 'Romain Collaud'
+  field_contact_phone:
+    -
+      value: '+41 21 804 15 65'
+  field_contribution:
+    -
+      value: '15.00 CHF'
+  field_end_at:
+    -
+      value: '2024-03-13T12:12:22'
+  field_start_at:
+    -
+      value: '2024-03-13T11:51:22'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11, Renens, Suisse'
+  field_venue_long:
+    -
+      value: '8.2275'

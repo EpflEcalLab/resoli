@@ -1,0 +1,70 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: a65592c3-0343-4352-81af-b1ab32fa1336
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441: node
+default:
+  nid:
+    -
+      value: 54
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Mariage et châtiment'
+  created:
+    -
+      value: 1519208641
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/sorties-theatre/events/mariage-et-chatiment
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>De David Pharao, mise en scène Jean-Luc Moreau<br />\r\nAvec Daniel Russo, Laurent Gamelon, Zoé Nonn…</p>\r\n\r\n<p id=\"_description2\" itemprop=\"description\"><em>Mariage et châtiment</em>, une pièce de David Pharao mise en scène par Jean-Luc Moreau à découvrir au Théâtre de Beausobre à Morges le 6 mars 2018.<br />\r\n<br />\r\nAlors qu’il s’apprête à être témoin au mariage de son meilleur ami avec une Miss Météo, Édouard apprend qu’il doit s’absenter pour répondre à une obligation professionnelle de dernière minute. Incapable d’avouer la vérité à ses proches, Édouard décide d’inventer un énorme mensonge, sans se douter que cette petite lâcheté va se retourner contre lui et prendre une tournure dramatique.<br />\r\n<br />\r\nToutes les vérités sont-elles bonnes à dire? C’est l’enjeu de cette comédie qui mêle quiproquos et faux-semblants dans une joyeuse pagaille. Il y a du Bourvil et du Louis de Funès dans le duo que forment Daniel Russo et Laurent Gamelon. Entre les deux comédiens aux personnalités complémentaires et attachantes, la complicité est palpable. De malentendus tragiques en rebondissements délirants, on rit autant qu’on est touché par cet hymne mordant à l’amitié.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441
+  field_contact_mail:
+    -
+      value: manager+lausanne@antistatique.net
+  field_contact_name:
+    -
+      value: 'Juda Bricot'
+  field_end_at:
+    -
+      value: '2024-03-15T21:20:00'
+  field_start_at:
+    -
+      value: '2024-03-15T18:20:00'
+  field_venue:
+    -
+      value: 'Théâtre de Beausobre  2, avenue de Vertou  1110 Morges'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 962f5253-7237-45f3-b567-26fd227a0089
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 2
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$E5WspT6f..ABZBjPRgari9q7vyPhpnBW5VNJzp5zjUTlgX7xmLHo
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1502813200
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Sarah
+  field_lastname:
+    -
+      value: Courci
+  field_phone:
+    -
+      value: '0211234567'

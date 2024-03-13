@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: a55d4ca7-95d9-4a6b-b6d0-545f34adde70
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 12
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+fribourg+approval+lausanne+member+geneve@as.net
+  pass:
+    -
+      value: $S$E9ij0jSGJ7H8.8FeqlL3x6qUSeB5ZCelmFyIYPDNmc9Cp90sI.q/
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+fribourg+approval+lausanne+member+geneve@as.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1503057994
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Harry
+  field_lastname:
+    -
+      value: Covert
+  field_phone:
+    -
+      value: '0211234567'

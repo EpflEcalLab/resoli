@@ -1,0 +1,70 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b80d60e6-a14d-4bfe-a1f1-51af1ff8072d
+  bundle: offer
+  default_langcode: zxx
+  depends:
+    962f5253-7237-45f3-b567-26fd227a0089: user
+    ea52fb9f-c0a0-4b34-9297-3646ca2546c7: node
+    831d95bf-96e8-4645-b826-6d23ba0f959d: taxonomy_term
+default:
+  nid:
+    -
+      value: 69
+  revision_uid:
+    -
+      entity: 962f5253-7237-45f3-b567-26fd227a0089
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 962f5253-7237-45f3-b567-26fd227a0089
+  title:
+    -
+      value: 'Réunion et discussion sur l''Art'
+  created:
+    -
+      value: 1629991107
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: 'Je parle volontiers de tous les sujets, j''aime particulièrement l''art et le design, et me passionne pour la cuisine et le hockey sur glace.'
+      format: light_html
+      summary: ''
+  field_contact_mail:
+    -
+      value: sara.courci@example.org
+  field_contact_name:
+    -
+      value: 'Sarah Courci'
+  field_contact_phone:
+    -
+      value: '+41 21 123 45 67'
+  field_description:
+    -
+      value: 'Disponible tout les jours de la semaine, l''après-midi.'
+      format: light_html
+  field_offer_type:
+    -
+      entity: ea52fb9f-c0a0-4b34-9297-3646ca2546c7
+  field_theme:
+    -
+      entity: 831d95bf-96e8-4645-b826-6d23ba0f959d

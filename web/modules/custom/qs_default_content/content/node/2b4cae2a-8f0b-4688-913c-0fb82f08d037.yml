@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2b4cae2a-8f0b-4688-913c-0fb82f08d037
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441: node
+default:
+  nid:
+    -
+      value: 35
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Un Obus dans le coeur'
+  created:
+    -
+      value: 1503935593
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/sorties-theatre/events/un-obus-dans-le-coeur
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p id=\"_description2\" itemprop=\"description\">Un Obus dans le coeur, une pièce de Wajdi Mouawad mise en scène par Laurent Gachoud à découvrir au Théâtre de l'Échandole à Yverdon-les-Bains les 26 et 27 octobre 2017.<br />\r\n<br />\r\nLa rencontre entre l’auteur canado-libanais Wajdi Mouawad et l’interprète Sofyen Khalfaoui promet manifestement une création puissante. Comédien très impliqué dans les programmes de soutien humanitaires tels qu’au Darfour et en Syrie, son œil se pose de façon toute personnelle sur les thèmes de prédilection de l’auteur, tels que le conflit ou les liens du sang.<br />\r\n<br />\r\nEn échos aux problématiques terroristes, migratoires et identitaires actuelles, ce spectacle ouvre notre regard de spectateur sur le cheminement intérieur à activer pour se reconstruire, reprendre foi en la vie et passer au-delà d’un traumatisme quel qu’il soit. Dans cette histoire, le personnage de Wahab se rend au chevet de sa mère mourante, emprunt à ses questionnements intérieurs. Cela nous touche au plus profond du cœur: de façon viscérale, libératrice et généreuse. C’est un récit initiatique avec en ligne de mire, la lumière salvatrice.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441
+  field_contribution:
+    -
+      value: 'de chf 22 à 29.-'
+  field_end_at:
+    -
+      value: '2024-03-15T15:56:00'
+  field_start_at:
+    -
+      value: '2024-03-15T15:00:00'
+  field_venue:
+    -
+      value: 'Théâtre de l''Échandole, Rue du Casino 9 1401, Yverdon-les-Bains'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

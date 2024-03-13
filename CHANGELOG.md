@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - add missing ->accessCheck() on Query - QS-63
 - replace RedirectResponse::create by new RedirectResponse - QS-63
 - twig replace deprecated spaceless by apply-spaceless - QS-63
+- twig replace deprecated usage of if condition on for tag
 
 ### Removed
 - remove linter phpmd - QS-64

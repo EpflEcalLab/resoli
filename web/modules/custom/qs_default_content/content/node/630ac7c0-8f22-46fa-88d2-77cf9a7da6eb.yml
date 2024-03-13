@@ -1,0 +1,60 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 630ac7c0-8f22-46fa-88d2-77cf9a7da6eb
+  bundle: request
+  default_langcode: zxx
+  depends:
+    79ebbfd1-4918-479c-b05c-b5c3ec52f7e2: user
+    e8cfc427-c90d-4015-b583-1418974120ed: taxonomy_term
+    0930812e-d866-47df-a224-70bba49cdc6b: taxonomy_term
+default:
+  nid:
+    -
+      value: 80
+  revision_uid:
+    -
+      entity: 79ebbfd1-4918-479c-b05c-b5c3ec52f7e2
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 79ebbfd1-4918-479c-b05c-b5c3ec52f7e2
+  title:
+    -
+      value: 'Demande d''entraide N°80 de Juda Bricot'
+  created:
+    -
+      value: 1631201854
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: "Bonjour,\r\n\r\nUne odeur de brûlé m’a alertée. En ouvrant le capot du moteur, le garagiste a immédiatement identifié l’origine du problème, a rajouté de l’huile et précisé qu’il fallait changer le couvre-culasse. \r\n\r\nLe véhicule est une Fiat 500 en boîte auto, acheté en 2016, donc plus sous garantie, et avec 15000 kms au compteur. Sur le tableau de bord, aucun voyant n’était allumé. \r\n\r\nJe suis désagréablement surprise de devoir remplacer une pièce sur une voiture aussi récente et ayant aussi peu roulé. Est-ce considéré comme normal ?\r\n\r\nMerci pour vos réponses."
+      format: light_html
+      summary: ''
+  field_community:
+    -
+      entity: e8cfc427-c90d-4015-b583-1418974120ed
+  field_contact_name:
+    -
+      value: 'Juda Bricot'
+  field_theme:
+    -
+      entity: 0930812e-d866-47df-a224-70bba49cdc6b

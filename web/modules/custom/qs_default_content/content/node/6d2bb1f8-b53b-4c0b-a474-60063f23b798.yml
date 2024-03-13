@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 6d2bb1f8-b53b-4c0b-a474-60063f23b798
+  bundle: event
+  default_langcode: zxx
+  depends:
+    f6ec3e65-3a8e-4b88-9523-1b27511cd020: node
+default:
+  nid:
+    -
+      value: 31
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: L‘Himalaya
+  created:
+    -
+      value: 1503415158
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/causeries-conferences/events/lhimalaya
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Récit des aventures d’un groupe d’habitant au Mont Everest.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: f6ec3e65-3a8e-4b88-9523-1b27511cd020
+  field_end_at:
+    -
+      value: '2024-03-14T12:55:00'
+  field_start_at:
+    -
+      value: '2024-03-14T12:30:00'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11, Renens, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

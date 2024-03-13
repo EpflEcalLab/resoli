@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d2942415-23bf-4d0d-8aa9-700a75984221
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    0cebf08f-ec90-4684-b025-d0b4e39b4089: user
+    619eba65-2a76-42e3-a6f1-ad81408ea026: node
+    2cd9b332-383e-4a79-82c9-7acc7eef27e8: file
+default:
+  nid:
+    -
+      value: 52
+  revision_uid:
+    -
+      entity: 0cebf08f-ec90-4684-b025-d0b4e39b4089
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 0cebf08f-ec90-4684-b025-d0b4e39b4089
+  title:
+    -
+      value: '1200x800 - 180H.jpg - Labio de liebre "Bec de lièvre"'
+  created:
+    -
+      value: 1512592170
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  field_event:
+    -
+      entity: 619eba65-2a76-42e3-a6f1-ad81408ea026
+  field_image:
+    -
+      entity: 2cd9b332-383e-4a79-82c9-7acc7eef27e8
+      alt: 'Caecus elit nimis nutus plaga quis vero.'
+      title: 'Abico amet commodo gilvus.'
+      width: 271
+      height: 530

@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: cf86aa82-0eef-41c0-bcdd-9a8827fd8c1a
+  bundle: themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 11
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Informatique
+  weight:
+    -
+      value: 7
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1710316280
+  field_icon:
+    -
+      value: informatique

@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: af80ed18-7d63-470d-9b17-b1073dc4fc31
+  bundle: event
+  default_langcode: zxx
+  depends:
+    aa75a7cf-a6f7-48df-bf24-631c8fbf4c5c: node
+default:
+  nid:
+    -
+      value: 55
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'L''Iliade le choix d''Achille'
+  created:
+    -
+      value: 1521103010
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/massages/events/liliade-le-choix-dachille
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>De Domenico Carli et Michel Voïta, mise en scène Michel Voïta<br />\r\nAvec Carine Barbey, Séverine Bujard, Erwan Creignou, Yves Jenny, Yasmina Rémil, Laurent Sandoz et Frank Semelet.</p>\r\n\r\n<p>Antoine Vitez nous invitait à \"faire théâtre de tout\", un adage dont a su se saisir Michel Voïta… en choisissant comme matière théâtrale pour sa nouvelle création un épisode de cette épopée au fondement de notre culture,&nbsp;<em>L’Iliade</em>&nbsp;d’Homère. Ce faisant, il s’agit de réfléchir ensemble à la violence de ces héros de légende et à la nôtre, penseurs et poètes comme guides possibles, de Simone Weil à Hannah Arendt en passant par René Char, en une traversée salutaire.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: aa75a7cf-a6f7-48df-bf24-631c8fbf4c5c
+  field_contact_mail:
+    -
+      value: billetterie@t-km.ch
+  field_contact_name:
+    -
+      value: 'Théâtre Kléber-Méleau (TKM)'
+  field_contact_phone:
+    -
+      value: '+41 21 625 84 29'
+  field_contribution:
+    -
+      value: 'de chf 8 à 45.-'
+  field_end_at:
+    -
+      value: '2017-12-15T17:15:00'
+  field_start_at:
+    -
+      value: '2017-12-15T14:15:00'
+  field_venue:
+    -
+      value: 'Théâtre Kléber-Méleau (TKM), Renens-Malley, '
+  field_venue_lat:
+    -
+      value: '46.5263'
+  field_venue_long:
+    -
+      value: '6.5993'

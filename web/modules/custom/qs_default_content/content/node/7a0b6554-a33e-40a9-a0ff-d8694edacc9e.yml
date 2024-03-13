@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7a0b6554-a33e-40a9-a0ff-d8694edacc9e
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    a8d7f98f-cf90-4b50-bd2d-e30faf11b055: node
+default:
+  nid:
+    -
+      value: 46
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Photo N° 6 - Réalisation de Mandala (16) - Atelier Créatif (2)'
+  created:
+    -
+      value: 1509628261
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  field_event:
+    -
+      entity: a8d7f98f-cf90-4b50-bd2d-e30faf11b055

@@ -1,0 +1,75 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b4750e3e-9da7-487f-8355-4f6a5b6dca87
+  bundle: activity
+  default_langcode: zxx
+  depends:
+    3b9e3824-c73b-4b19-82cf-ac35022f2d47: taxonomy_term
+    cf86aa82-0eef-41c0-bcdd-9a8827fd8c1a: taxonomy_term
+default:
+  nid:
+    -
+      value: 11
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Cours Smartphone & Tablette'
+  created:
+    -
+      value: 1503413867
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/cours-smartphone-tablette
+      langcode: und
+      pathauto: 1
+  field_community:
+    -
+      entity: 3b9e3824-c73b-4b19-82cf-ac35022f2d47
+  field_community_access_contact:
+    -
+      value: true
+  field_community_access_detail:
+    -
+      value: true
+  field_community_access_gallery:
+    -
+      value: false
+  field_community_access_story:
+    -
+      value: false
+  field_community_can_subscribe:
+    -
+      value: false
+  field_member_create_gallery:
+    -
+      value: true
+  field_member_create_story:
+    -
+      value: true
+  field_theme:
+    -
+      entity: cf86aa82-0eef-41c0-bcdd-9a8827fd8c1a
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: de41e248-e715-4ca5-93d4-78f1fb72c026
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441: node
+default:
+  nid:
+    -
+      value: 36
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Victor Vatard - Dire l’inverse, penser le contraire et vice-versa'
+  created:
+    -
+      value: 1507540895
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/sorties-theatre/events/victor-vatard-dire-linverse-penser-le-contraire-et-vice
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p id=\"_description2\" itemprop=\"description\">Victor Vatard - Dire l’inverse, penser le contraire et vice-versa!, un seul en scène de par Fabian Ferrari et mis en scène par Brigitte Boucher à découvrir au Casino Théâtre de Rolle du 26 au 29 octobre 2017.<br />\r\n<br />\r\nVictor Vatard, impitoyable critique de la gastronomie parisienne et défenseur le plus engagé et tonitruant de la moule belge, vous entraîne dans son univers aussi caustique que savoureux!<br />\r\n<br />\r\nVictor Vatard est critique gastronomique et belge, fondateur de moulestoujours.com et du guide \"Les Contournables\": les 100 restaurants à éviter à tout prix. Il porte un regard percutant sur l’industrie agroalimentaire, la consommation et ses dérives mais aussi sur la politique sans les idées, la fortune sans le travail, la jouissance sans la conscience ou encore le sexe sans l’amour. Un humour bien assaisonné et traduit en direct avec un bon coup de mixer.<br />\r\n<br />\r\nSpectacle d’humour et d’esprit, Victor Vatard a pour but de dessiner et de raconter un personnage de caractère, aussi caustique que savoureux, quelque peu perdu dans l’évolution de la société et la puissance de l’industrie agroalimentaire.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441
+  field_contact_mail:
+    -
+      value: info@theatre-rolle.ch
+  field_contact_name:
+    -
+      value: 'Casino Théâtre de Rolle'
+  field_contact_phone:
+    -
+      value: '+41 21 825 12 40'
+  field_contribution:
+    -
+      value: 'de chf 17 à 28.-'
+  field_end_at:
+    -
+      value: '2024-04-13T14:47:00'
+  field_start_at:
+    -
+      value: '2024-04-13T14:00:00'
+  field_venue:
+    -
+      value: 'Casino Théâtre de Rolle Rue du Port 15 1191 Rolle'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

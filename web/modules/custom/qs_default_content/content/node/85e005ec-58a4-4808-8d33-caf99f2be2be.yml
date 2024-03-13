@@ -1,0 +1,73 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 85e005ec-58a4-4808-8d33-caf99f2be2be
+  bundle: event
+  default_langcode: zxx
+  depends:
+    7e03e7d6-1d74-4b40-8016-15a30f33b3fe: node
+default:
+  nid:
+    -
+      value: 58
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Escalade du Clos à Golet'
+  created:
+    -
+      value: 1522920517
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/escalade/events/escalade-du-clos-golet
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Lorem ipsum dolor sit amet consectetur adipiscing elit dapibus, malesuada facilisi facilisis justo urna augue placerat, platea metus tortor auctor phasellus quis ad. Vivamus magna aenean sit lacinia hendrerit aliquam, potenti cum amet felis consequat ut, ipsum duis curabitur nisi dictum. Mauris dolor elementum maecenas interdum aliquet integer ac convallis, laoreet rutrum leo dapibus dui euismod habitant sem, est viverra risus quam tellus tortor adipiscing.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 7e03e7d6-1d74-4b40-8016-15a30f33b3fe
+  field_contact_mail:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  field_contact_name:
+    -
+      value: 'Pierre Affeu'
+  field_contribution:
+    -
+      value: 10.-
+  field_end_at:
+    -
+      value: '2023-12-13T18:12:00'
+  field_start_at:
+    -
+      value: '2023-12-13T17:12:00'
+  field_venue:
+    -
+      value: 'Clos à Golet'
+  field_venue_lat:
+    -
+      value: '46.5280'
+  field_venue_long:
+    -
+      value: '6.8970'

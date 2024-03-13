@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 44e47840-b942-4521-8e35-b03c946ad17d
+  bundle: offer_type
+  default_langcode: zxx
+  depends:
+    e8cfc427-c90d-4015-b583-1418974120ed: taxonomy_term
+    0930812e-d866-47df-a224-70bba49cdc6b: taxonomy_term
+default:
+  nid:
+    -
+      value: 66
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Transports et déplacements'
+  created:
+    -
+      value: 1629989663
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  field_community:
+    -
+      entity: e8cfc427-c90d-4015-b583-1418974120ed
+  field_theme:
+    -
+      entity: 0930812e-d866-47df-a224-70bba49cdc6b

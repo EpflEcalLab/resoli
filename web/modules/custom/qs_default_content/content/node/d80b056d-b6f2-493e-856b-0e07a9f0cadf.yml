@@ -1,0 +1,63 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d80b056d-b6f2-493e-856b-0e07a9f0cadf
+  bundle: request
+  default_langcode: zxx
+  depends:
+    c3cdeea4-9012-4351-ba04-7dcfa4312abf: user
+    3b9e3824-c73b-4b19-82cf-ac35022f2d47: taxonomy_term
+    0930812e-d866-47df-a224-70bba49cdc6b: taxonomy_term
+default:
+  nid:
+    -
+      value: 81
+  revision_uid:
+    -
+      entity: c3cdeea4-9012-4351-ba04-7dcfa4312abf
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: c3cdeea4-9012-4351-ba04-7dcfa4312abf
+  title:
+    -
+      value: 'Demande d''entraide N°81 de Rabbi Boché'
+  created:
+    -
+      value: 1631201975
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: "Bonjour,\r\n\r\nEssence E85 pour quelle voiture ?\r\n\r\nMerci.\r\n\r\n"
+      format: light_html
+      summary: ''
+  field_community:
+    -
+      entity: 3b9e3824-c73b-4b19-82cf-ac35022f2d47
+  field_contact_name:
+    -
+      value: 'Rabbi Boché'
+  field_contact_phone:
+    -
+      value: '021 821 01 01'
+  field_theme:
+    -
+      entity: 0930812e-d866-47df-a224-70bba49cdc6b

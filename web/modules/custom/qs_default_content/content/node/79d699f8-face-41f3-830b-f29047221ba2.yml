@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 79d699f8-face-41f3-830b-f29047221ba2
+  bundle: event
+  default_langcode: zxx
+  depends:
+    e3f00a5e-493f-435a-bb70-93397d654d81: node
+default:
+  nid:
+    -
+      value: 25
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'De Pully à Puidoux'
+  created:
+    -
+      value: 1503414835
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /geneve/activities/balade-gourmande-interculturelle/events/de-pully-puidoux
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Balade champêtre à vélo. Rythme détendu, bonne humeur et mollets dégourdis préconisés!</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: e3f00a5e-493f-435a-bb70-93397d654d81
+  field_end_at:
+    -
+      value: '2024-02-16T10:29:00'
+  field_start_at:
+    -
+      value: '2024-02-16T10:00:00'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11, Renens, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

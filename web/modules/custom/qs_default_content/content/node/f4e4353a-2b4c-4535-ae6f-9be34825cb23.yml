@@ -1,0 +1,70 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f4e4353a-2b4c-4535-ae6f-9be34825cb23
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8d4fcba8-649d-4912-bb62-87bc42e78e24: node
+default:
+  nid:
+    -
+      value: 23
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Aperitif
+  created:
+    -
+      value: 1503414771
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/aperitif/events/aperitif
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Boire un verre de blanc de Pully</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8d4fcba8-649d-4912-bb62-87bc42e78e24
+  field_contact_mail:
+    -
+      value: annezel@bluewin.ch
+  field_contribution:
+    -
+      value: '20 centimes'
+  field_end_at:
+    -
+      value: '2024-03-11T23:52:00'
+  field_start_at:
+    -
+      value: '2024-03-11T23:05:00'
+  field_venue:
+    -
+      value: 'Cave Communale, Avenue du Prieuré, Pully, Switzerland'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

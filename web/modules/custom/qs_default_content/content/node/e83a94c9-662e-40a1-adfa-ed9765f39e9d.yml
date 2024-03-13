@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e83a94c9-662e-40a1-adfa-ed9765f39e9d
+  bundle: event
+  default_langcode: zxx
+  depends:
+    54d76066-ae8b-475e-b8d9-68d9577166c2: node
+default:
+  nid:
+    -
+      value: 61
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Conan le Barbare'
+  created:
+    -
+      value: 1522920838
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/monopoly/events/conan-le-barbare
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: 'The Wizard: Between the time when the oceans drank Atlantis and the rise of the sons of Aryas, there was an age undreamed of. And unto this, Conan, destined to wear the jeweled crown of Aquilonia upon a troubled brow. It is I, his chronicler, who alone can tell thee of his saga. '
+      format: ''
+      summary: ''
+  field_activity:
+    -
+      entity: 54d76066-ae8b-475e-b8d9-68d9577166c2
+  field_contact_mail:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  field_end_at:
+    -
+      value: '2024-03-13T09:51:23'
+  field_start_at:
+    -
+      value: '2024-03-13T08:21:23'
+  field_venue:
+    -
+      value: 'Antistatique, Rue de Sébeillon, Lausanne, Switzerland'
+  field_venue_lat:
+    -
+      value: '46.5233'
+  field_venue_long:
+    -
+      value: '6.6153'

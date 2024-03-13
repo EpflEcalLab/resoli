@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: e3a76021-c477-4762-88be-c6d5660c7eab
+  bundle: themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 4
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Activités Créatrices'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_icon:
+    -
+      value: activitescreatrices
+translations:
+  de:
+    status:
+      -
+        value: true
+    name:
+      -
+        value: 'Kreative Aktivitäten'
+    revision_translation_affected:
+      -
+        value: true
+    path:
+      -
+        alias: ''
+        langcode: de
+        pathauto: 1
+    content_translation_source:
+      -
+        value: und
+    content_translation_outdated:
+      -
+        value: false
+    content_translation_uid:
+      -
+        target_id: 1
+    content_translation_created:
+      -
+        value: 1710316280

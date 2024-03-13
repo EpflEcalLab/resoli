@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 88f41c83-0615-4737-b70e-9b59f7c14c2b
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    619eba65-2a76-42e3-a6f1-ad81408ea026: node
+default:
+  nid:
+    -
+      value: 50
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Photo N° 10 - "Labio de liebre ""Bec de lièvre"" (38)" - Sorties Théâtre (3)'
+  created:
+    -
+      value: 1509628788
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  field_event:
+    -
+      entity: 619eba65-2a76-42e3-a6f1-ad81408ea026

@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 05a0e505-a9ea-4680-8723-5874111442ca
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8d4fcba8-649d-4912-bb62-87bc42e78e24: node
+default:
+  nid:
+    -
+      value: 32
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Aperitif
+  created:
+    -
+      value: 1503415176
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/aperitif/events/aperitif-0
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Maecenas dapibus libero pulvinar, blandit tellus at, dignissim risus. Donec facilisis ultrices sem, a sollicitudin massa mollis quis. Praesent in porta nulla, molestie dignissim arcu. In in ultrices velit. Praesent vitae egestas arcu. Vestibulum sollicitudin eros massa, et blandit nibh aliquam vel. Ut non odio consectetur, hendrerit purus a, sollicitudin nunc. Integer in purus laoreet, suscipit felis vitae, iaculis risus. Pellentesque sodales congue porta. Donec semper velit at lacinia mattis.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8d4fcba8-649d-4912-bb62-87bc42e78e24
+  field_contact_name:
+    -
+      value: 'Kevin Wenger'
+  field_end_at:
+    -
+      value: '2024-03-27T15:24:00'
+  field_start_at:
+    -
+      value: '2024-03-27T15:00:00'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

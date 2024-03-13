@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: aece4424-4434-4f6b-8cb2-5de146649b9f
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 14
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+fribourg+approval+organizer+fribourg@antistatique.net
+  pass:
+    -
+      value: $S$Eed8i9VVsIxO0OR3zJHRqiCGJ3ZHPKWGGxu6pV.5ZiQAzjvbqfZP
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+fribourg+approval+organizer+fribourg@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1504512314
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Paul
+  field_lastname:
+    -
+      value: Honet
+  field_phone:
+    -
+      value: '0211234567'

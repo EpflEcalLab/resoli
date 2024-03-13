@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 102f2441-92aa-45d3-8b70-7e863a740e37
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 7
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: nobody@antistatique.net
+  pass:
+    -
+      value: $S$EO9kRFq.t0UbLY3vCxgRNx6Wn8KDycV9HcW4YirHgrIieDd0NYxw
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: nobody@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1503056940
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Axel
+  field_lastname:
+    -
+      value: Aire

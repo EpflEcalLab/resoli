@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 16720bed-6054-421f-ad20-ea7c07f35400
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    0e1968ad-40c3-4803-a099-c85b23116b1f: node
+default:
+  nid:
+    -
+      value: 41
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Photo N° 1 - Cours d’Origami (15) - Atelier Créatif (2)'
+  created:
+    -
+      value: 1509551678
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  body:
+    -
+      value: "Balade champêtre à vélo. Rythme détendu, bonne humeur et mollets dégourdis préconisés! Point de rendez-vous\r\n"
+      format: plain_text
+      summary: ''
+  field_event:
+    -
+      entity: 0e1968ad-40c3-4803-a099-c85b23116b1f

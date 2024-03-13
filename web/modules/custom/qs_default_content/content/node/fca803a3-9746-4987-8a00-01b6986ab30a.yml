@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fca803a3-9746-4987-8a00-01b6986ab30a
+  bundle: page
+  default_langcode: fr
+default:
+  nid:
+    -
+      value: 1
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: home
+  created:
+    -
+      value: 1502813029
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1

@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - remove root dependency on webmozart/path-util but still present by another package
 - update linters mglaman/phpstan-drupal (1.1.31 => 1.2.5) & phpstan/phpstan-deprecation-rules (1.1.3 => 1.1.4)
 - update library phpoffice/phpspreadsheet (1.28.0 => 1.29.0)
+- update dev-dependency module drupal/rules (3.0.0-alpha7 => 3.0.0-alpha8)
 
 ### Added
 - add Upgrade Status on CI - QS-49

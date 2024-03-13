@@ -7,7 +7,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -50,10 +50,10 @@ class AuthRedirect implements EventSubscriberInterface {
    * It verify the current route is default drupal '/user/cancel' then
    * redirect on our custom one.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function cancelRedirect(GetResponseEvent $event) {
+  public function cancelRedirect(RequestEvent $event): void {
     $destination = NULL;
 
     switch ($this->routeMatch->getRouteName()) {
@@ -77,7 +77,7 @@ class AuthRedirect implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     $events[KernelEvents::REQUEST][] = ['loginRedirect'];
     $events[KernelEvents::REQUEST][] = ['registerRedirect'];
     $events[KernelEvents::REQUEST][] = ['cancelRedirect'];
@@ -93,10 +93,10 @@ class AuthRedirect implements EventSubscriberInterface {
    * It verify the current route is default drupal '/user/login' then
    * redirect on our custom one.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function loginRedirect(GetResponseEvent $event) {
+  public function loginRedirect(RequestEvent $event): void {
     if ($this->routeMatch->getRouteName() === 'user.login') {
       $destination = Url::fromRoute('qs_auth.login');
       $event->setResponse(new RedirectResponse($destination->toString()));
@@ -109,10 +109,10 @@ class AuthRedirect implements EventSubscriberInterface {
    * It verify the current route is default drupal '/user/password' then
    * redirect on our custom one.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function passRedirect(GetResponseEvent $event) {
+  public function passRedirect(RequestEvent $event): void {
     if ($this->routeMatch->getRouteName() === 'user.pass') {
       $destination = Url::fromRoute('qs_auth.pass');
       $event->setResponse(new RedirectResponse($destination->toString()));
@@ -125,10 +125,10 @@ class AuthRedirect implements EventSubscriberInterface {
    * It verify the current route is default drupal '/user/register' then
    * redirect on our custom one.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function registerRedirect(GetResponseEvent $event) {
+  public function registerRedirect(RequestEvent $event): void {
     if ($this->routeMatch->getRouteName() === 'user.register') {
       $destination = Url::fromRoute('qs_auth.register');
       $event->setResponse(new RedirectResponse($destination->toString()));
@@ -141,10 +141,10 @@ class AuthRedirect implements EventSubscriberInterface {
    * It verify the current route is default drupal '/user/password' then
    * redirect on our custom one.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function resetRedirect(GetResponseEvent $event) {
+  public function resetRedirect(RequestEvent $event): void {
     $destination = NULL;
 
     switch ($this->routeMatch->getRouteName()) {

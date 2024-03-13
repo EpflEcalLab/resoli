@@ -6,7 +6,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -34,7 +34,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       KernelEvents::REQUEST => [
         ['offerRedirect'],
@@ -49,10 +49,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * It verifies the current route is Offer canonical access then
    * redirect on the Offer's type page.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function offerRedirect(GetResponseEvent $event) {
+  public function offerRedirect(RequestEvent $event): void {
     $node = $this->routeMatch->getParameter('node');
 
     if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'offer') {
@@ -68,10 +68,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * It verifies the current route is Request canonical access then
    * redirect on the Request collection  page.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function requestRedirect(GetResponseEvent $event) {
+  public function requestRedirect(RequestEvent $event): void {
     $node = $this->routeMatch->getParameter('node');
 
     if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'request') {

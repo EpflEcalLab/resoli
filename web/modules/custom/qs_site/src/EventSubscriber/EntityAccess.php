@@ -6,7 +6,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -43,7 +43,7 @@ class EntityAccess implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     $events[KernelEvents::REQUEST][] = ['isDisabledTaxonomy'];
 
     return $events;
@@ -52,10 +52,10 @@ class EntityAccess implements EventSubscriberInterface {
   /**
    * It verify the requested page is a disabled term view and shut-it-down.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   A response for a request.
    */
-  public function isDisabledTaxonomy(GetResponseEvent $event) {
+  public function isDisabledTaxonomy(RequestEvent $event): void {
     $term = $this->routeMatch->getParameter('taxonomy_term');
     $route_name = $this->routeMatch->getRouteName();
 

@@ -6,4 +6,3 @@ subscription:
   - core/drupalSettings
   - core/drupal.ajax
   - core/jquery
-  - core/jquery.once

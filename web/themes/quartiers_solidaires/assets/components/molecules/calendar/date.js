@@ -5,10 +5,8 @@
 (function ($, Drupal) {
   Drupal.behaviors.date = {
     attach: function attach(context, settings) {
-      var $context = $(context);
-
-      $context.find('input[data-drupal-date-format]').once('datePicker').each(function () {
-        var $input = $(this);
+      once('datePicker', 'input[data-drupal-date-format]', context).forEach((input) => {
+        const $input = $(input);
         var datepickerSettings = {};
         var dateFormat = $input.data('drupalDateFormat');
 

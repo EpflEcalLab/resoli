@@ -17,7 +17,7 @@ date:
     build/js/date.js: {}
   dependencies:
     - core/drupal
-    - core/jquery.once
+    - core/once
     - jquery_ui_datepicker/datepicker
 
 # Google Map

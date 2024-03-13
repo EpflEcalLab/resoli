@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - remove linter phpmd - QS-64
 - uninstall legacy module RDF - QS-63
+- remove jQuery Datepicker in favor of Browser native date picker - QS-63
 
 ## [2.3.7] - 2023-12-12
 ### Fixed

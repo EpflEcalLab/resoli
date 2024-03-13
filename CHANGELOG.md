@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - move Linters php-deprecation-detector into own Tools/ComposerJson - QS-64
 - rework Docker integration using new Docker images - QS-48
 - rework the Github Actions PHPUnit & Behat integration - QS-48
+- uninstall legacy base theme Stable for compliancy upgrade D9 -> D10 - QS-63
 
 ### Removed
 - remove linter phpmd - QS-64

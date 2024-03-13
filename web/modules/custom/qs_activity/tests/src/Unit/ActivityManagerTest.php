@@ -32,7 +32,7 @@ final class ActivityManagerTest extends UnitTestCase {
 
     $this->activityManager = $this->getMockBuilder(ActivityManager::class)
       ->disableOriginalConstructor()
-      ->setMethods(['getNow'])
+      ->onlyMethods(['getNow'])
       ->getMock();
   }
 

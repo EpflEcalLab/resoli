@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update library dompdf/dompdf (v2.0.3 => v2.0.4)
 - remove root dependency on webmozart/path-util but still present by another package
 - update linters mglaman/phpstan-drupal (1.1.31 => 1.2.5) & phpstan/phpstan-deprecation-rules (1.1.3 => 1.1.4)
+- update library phpoffice/phpspreadsheet (1.28.0 => 1.29.0)
 
 ### Added
 - add Upgrade Status on CI - QS-49

@@ -144,7 +144,7 @@ class FormContext extends RawDrupalContext {
     for ($i = 0; $i < $number; $i++) {
       $destination = $dirname . $random->name(10, TRUE) . '.' . $extension;
       $data        = $random->paragraphs(3);
-      $file        = file_save_data($data, $destination, FileSystemInterface::EXISTS_ERROR);
+      $file        = \Drupal::service('file.repository')->writeData($data, $destination, FileSystemInterface::EXISTS_ERROR);
 
       $this->attachments[] = [
         $fso->realpath($file->getFileUri()),

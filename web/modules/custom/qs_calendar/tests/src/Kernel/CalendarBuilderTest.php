@@ -29,7 +29,7 @@ final class CalendarBuilderTest extends KernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
     $this->calendarBuilder = \Drupal::service('qs_calendar.calendar_builder');
   }

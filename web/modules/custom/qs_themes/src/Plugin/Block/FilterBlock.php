@@ -4,9 +4,9 @@ namespace Drupal\qs_themes\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Filter Theme Block.
@@ -25,7 +25,7 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Drupal\Core\Http\RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 

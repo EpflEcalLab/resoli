@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - update phpstan.neon for Drupal 10 - QS-50
+- remove shim class Drupal\Core\Http\RequestStack and use Symfony\Component\HttpFoundation\RequestStack - QS-50
 
 ### Added
 - add drush alias on Docker container - QS-50

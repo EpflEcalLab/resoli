@@ -53,7 +53,7 @@ class CommentForm extends FormBasic {
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::allowed();
 
-    $photos_params = $this->getRequest()->query->get('photos');
+    $photos_params = $this->getRequest()->query->all('photos');
 
     if (!$photos_params) {
       return AccessResult::forbidden();
@@ -107,7 +107,7 @@ class CommentForm extends FormBasic {
       'active' => TRUE,
     ];
 
-    $photos_params = $this->getRequest()->query->get('photos');
+    $photos_params = $this->getRequest()->query->all('photos');
 
     // Apply custom styles to wrapper.
     $form['#theme_wrappers'] = [

@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - upgrade drupal/core 9.5.11 => 10.0.11 - QS-50
 - replace Mink Goutte in favor of Browserkit for Behat testing - QS-50
 
+### Added
+- add drush alias on Docker container - QS-50
+
 ## [Unreleased]
 ### Security
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61

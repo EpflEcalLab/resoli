@@ -53,7 +53,6 @@
         "drupal/pathauto": "^1.11",
         "drupal/recaptcha": "^3.1",
         "drupal/redirect": "^1.8@beta",
-        "drupal/swiftmailer": "^2.3",
         "drupal/symfony_mailer_lite": "^1.0",
         "drush/drush": "^12",
         "phpoffice/phpspreadsheet": "^1.26",

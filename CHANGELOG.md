@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - add drush alias on Docker container - QS-50
 
+### Removed
+- remove drupal/swiftmailer - QS-50
+
 ## [Unreleased]
 ### Security
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61

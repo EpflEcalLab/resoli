@@ -35,7 +35,7 @@ default:
         - Drupal\DrupalExtension\Context\DrushContext
   extensions:
     Behat\MinkExtension:
-      goutte: ~
+      browserkit_http: ~
       selenium2:
         wd_host: http://browser:4444/wd/hub
       base_url: http://resoli.test

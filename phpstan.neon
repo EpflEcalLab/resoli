@@ -5,7 +5,8 @@ parameters:
   excludePaths:
     - *Test.php
     - *TestBase.php
-    - web/themes/custom/vernier/node_modules/*
+    - web/themes/quartiers_solidaires/node_modules/*
+    - web/themes/quartiers_solidaires/*/node_modules/*
   # PHPStan Level 1
   level: 1
   ignoreErrors:

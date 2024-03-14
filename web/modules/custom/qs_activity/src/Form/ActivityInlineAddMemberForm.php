@@ -18,6 +18,27 @@ class ActivityInlineAddMemberForm extends ActivityEditFormBase {
   protected $fallback;
 
   /**
+   * The current active user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected $currentUser;
+
+  /**
+   * The user Storage.
+   *
+   * @var \Drupal\user\UserStorageInterface
+   */
+  protected $userStorage;
+
+  /**
+   * The Privilege Manager.
+   *
+   * @var \Drupal\qs_acl\Service\PrivilegeManager
+   */
+  protected $privilegeManager;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {

@@ -130,13 +130,14 @@ class UploadController extends ControllerBase {
     $files = file_save_upload(0, $upload_validators, 'private://photos');
 
     // Get errors throw by file_save_upload.
+    /** @var array|null $messages */
     $messages = $this->messenger()->messagesByType(MessengerInterface::TYPE_ERROR);
 
     // Clear the error bag for potential next call.
     $this->messenger()->deleteByType(MessengerInterface::TYPE_ERROR);
 
     // Return error(s) to Uppy.
-    if ($messages && !empty($messages)) {
+    if (\is_array($messages) && !empty($messages)) {
       $errors = [];
 
       foreach ($messages as $error) {

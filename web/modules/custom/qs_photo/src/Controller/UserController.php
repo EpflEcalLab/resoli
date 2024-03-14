@@ -41,6 +41,13 @@ class UserController extends ControllerBase {
   protected $photoManager;
 
   /**
+   * The node Storage.
+   *
+   * @var \Drupal\node\NodeStorageInterface
+   */
+  protected $nodeStorage;
+
+  /**
    * Access Control Service.
    *
    * @var \Drupal\qs_acl\Service\AccessControl

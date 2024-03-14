@@ -162,6 +162,7 @@ class Privilege extends ContentEntityBase implements ContentEntityInterface, Ent
     $type_manager = \Drupal::service('entity_type.manager');
 
     // Get the storage according the bundle.
+    /** @var \Drupal\Core\Entity\ContentEntityStorageInterface|null $storage */
     $storage = $type_manager->getStorage($this->bundle->value);
 
     if (empty($storage)) {

@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - upgrade drupal/core 9.5.11 => 10.0.11 - QS-50
 - replace Mink Goutte in favor of Browserkit for Behat testing - QS-50
+- upgrade module drupal/metatag (1.26.0 => 2.0.0)
+- upgrade module drupal/schema_metatag (2.5.0 => 3.0.1)
 
 ### Changed
 - update phpstan.neon for Drupal 10 - QS-50

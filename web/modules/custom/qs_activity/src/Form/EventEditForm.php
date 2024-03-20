@@ -79,7 +79,7 @@ class EventEditForm extends EventEditFormBase {
       '#title' => $this->t('qs_activity.events.form.edit.date'),
       '#type' => 'date',
       '#required' => FALSE,
-      '#default_value' => $start_at->format('d.m.Y'),
+      '#default_value' => $start_at->format('Y-m-d'),
       '#size' => 8,
       '#date_date_format' => 'd.m.Y',
     ];

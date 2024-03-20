@@ -1,0 +1,72 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 54d76066-ae8b-475e-b8d9-68d9577166c2
+  bundle: activity
+  default_langcode: zxx
+  depends:
+    3b9e3824-c73b-4b19-82cf-ac35022f2d47: taxonomy_term
+    d0c54d26-c766-4725-97b1-618e9e3c6917: taxonomy_term
+default:
+  nid:
+    -
+      value: 57
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Monopoly
+  created:
+    -
+      value: 1522919940
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/monopoly
+      langcode: und
+      pathauto: 1
+  field_community:
+    -
+      entity: 3b9e3824-c73b-4b19-82cf-ac35022f2d47
+  field_community_access_contact:
+    -
+      value: false
+  field_community_access_detail:
+    -
+      value: false
+  field_community_access_gallery:
+    -
+      value: true
+  field_community_access_story:
+    -
+      value: true
+  field_community_can_subscribe:
+    -
+      value: false
+  field_contact_mail:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  field_member_create_gallery:
+    -
+      value: true
+  field_member_create_story:
+    -
+      value: true
+  field_theme:
+    -
+      entity: d0c54d26-c766-4725-97b1-618e9e3c6917

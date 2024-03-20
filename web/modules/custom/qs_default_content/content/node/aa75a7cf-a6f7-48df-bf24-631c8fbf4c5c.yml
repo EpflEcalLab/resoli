@@ -1,0 +1,75 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: aa75a7cf-a6f7-48df-bf24-631c8fbf4c5c
+  bundle: activity
+  default_langcode: zxx
+  depends:
+    e8cfc427-c90d-4015-b583-1418974120ed: taxonomy_term
+    cb4fe583-6c9a-496e-9592-1d08373dcf69: taxonomy_term
+default:
+  nid:
+    -
+      value: 13
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Massages
+  created:
+    -
+      value: 1503413951
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/massages
+      langcode: und
+      pathauto: 1
+  field_community:
+    -
+      entity: e8cfc427-c90d-4015-b583-1418974120ed
+  field_community_access_contact:
+    -
+      value: true
+  field_community_access_detail:
+    -
+      value: true
+  field_community_access_gallery:
+    -
+      value: false
+  field_community_access_story:
+    -
+      value: false
+  field_community_can_subscribe:
+    -
+      value: false
+  field_member_create_gallery:
+    -
+      value: true
+  field_member_create_story:
+    -
+      value: true
+  field_theme:
+    -
+      entity: cb4fe583-6c9a-496e-9592-1d08373dcf69
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

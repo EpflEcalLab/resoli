@@ -21,7 +21,7 @@ class MonthlyBlock extends PeriodBlockBase {
     $variables = [];
 
     // The request should be took at the last moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
+    $master_request = $this->requestStack->getMainRequest();
 
     // Get the community route parameter.
     $community = $master_request->attributes->get('community');

@@ -9,8 +9,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base form handler for activity/event CRUD forms.
- *
- * @internal
  */
 abstract class FormBasic extends FormBase {
 

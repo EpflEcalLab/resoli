@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 19e12c7f-1c2f-42bd-886d-29281fb30dd6
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 23
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member2+fribourg@antistatique.net
+  pass:
+    -
+      value: $S$EIszrRaM9kkzV/rpE3dNhcVojlkapvKo2hOFHxtIDDEQvvw6vfk3
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member2+fribourg@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1522922703
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Abel
+  field_lastname:
+    -
+      value: Auboisdormant

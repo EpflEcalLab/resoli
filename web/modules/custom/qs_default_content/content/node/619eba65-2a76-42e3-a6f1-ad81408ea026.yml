@@ -1,0 +1,73 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 619eba65-2a76-42e3-a6f1-ad81408ea026
+  bundle: event
+  default_langcode: zxx
+  depends:
+    8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441: node
+default:
+  nid:
+    -
+      value: 38
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Labio de liebre "Bec de lièvre"'
+  created:
+    -
+      value: 1507540987
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/sorties-theatre/events/labio-de-liebre-bec-de-lievre
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p id=\"_description2\" itemprop=\"description\">Labio de liebre \"Bec de lièvre\", une pièce écrite et mise en scène par Fabio Rubiano Orjuela à voir au Théâtre Kléber-Méleau (TKM) à Renens-Malley du 19 au 21 octobre 2017.<br />\r\n<br />\r\nLe Teatro Petra nous propose un théâtre lieu de mémoire, qui revient sur l’histoire de la Colombie, sur ses bourreaux et ses victimes, sur le désir de vengeance et le pardon.<br />\r\n<br />\r\nLe protagoniste de ce spectacle, Salvo Castello, est un homme dur et implacable, qui fut un tortionnaire et qui purge sa peine en résidence surveillée. Parmi les fantômes qui habitent avec lui sa demeure, il y a un garçon au bec de lièvre, Granado Sosa, mais aussi toute sa famille (sœur, frère et mère), des paysans dont il a ordonné le massacre.<br />\r\n<br />\r\nLa fable porte ainsi autant sur le pardon des victimes que sur la vengeance, le bourreau ne trouvant pas de repos dans sa retraite, tel Macbeth après son crime, ses victimes ne le quittant pas, ayant une présence fantomatique prégnante. Il les appelle, leur parle, se souvient: rien ne peut lui faire oublier ses exactions et leurs souffrances, sa cruauté et leur martyre, ses viols et leurs cris.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441
+  field_contact_mail:
+    -
+      value: billetterie@t-km.ch
+  field_contact_phone:
+    -
+      value: '+41 21 625 84 29'
+  field_contribution:
+    -
+      value: 'de chf 8 à 45.-'
+  field_end_at:
+    -
+      value: '2024-03-12T13:00:00'
+  field_start_at:
+    -
+      value: '2024-03-12T11:00:00'
+  field_venue:
+    -
+      value: 'Théâtre Kléber-Méleau (TKM) Chemin de l''Usine à Gaz 9 1020 Renens-Malley'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

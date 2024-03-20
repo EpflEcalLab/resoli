@@ -1,0 +1,66 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fae32fb8-3ef2-44f4-aeb5-2c08e8818d1b
+  bundle: request
+  default_langcode: zxx
+  depends:
+    962f5253-7237-45f3-b567-26fd227a0089: user
+    e8cfc427-c90d-4015-b583-1418974120ed: taxonomy_term
+    831d95bf-96e8-4645-b826-6d23ba0f959d: taxonomy_term
+default:
+  nid:
+    -
+      value: 77
+  revision_uid:
+    -
+      entity: 962f5253-7237-45f3-b567-26fd227a0089
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 962f5253-7237-45f3-b567-26fd227a0089
+  title:
+    -
+      value: 'Demande d''entraide N°77 de Sara Courci'
+  created:
+    -
+      value: 1631201368
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: 'Je souhaiterais partager quelques instants par téléphone, si possible une fois par semaine. Merci!'
+      format: light_html
+      summary: ''
+  field_community:
+    -
+      entity: e8cfc427-c90d-4015-b583-1418974120ed
+  field_contact_mail:
+    -
+      value: sara.courci@example.org
+  field_contact_name:
+    -
+      value: 'Sarah Courci'
+  field_contact_phone:
+    -
+      value: '+41 021 987 47 22'
+  field_theme:
+    -
+      entity: 831d95bf-96e8-4645-b826-6d23ba0f959d

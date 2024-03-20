@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 199203bb-0339-40a1-bf7b-606c46e9a215
+  bundle: offer_type
+  default_langcode: zxx
+  depends:
+    d7885321-10ad-4a50-ad52-e843829e148e: taxonomy_term
+    831d95bf-96e8-4645-b826-6d23ba0f959d: taxonomy_term
+default:
+  nid:
+    -
+      value: 68
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Papoter ensemble'
+  created:
+    -
+      value: 1629989711
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: "N’hésitez pas à contacter les personnes ci-dessous pour demander\Lun coup de main ou simplement échanger un moment convivial."
+      format: light_html
+      summary: ''
+  field_community:
+    -
+      entity: d7885321-10ad-4a50-ad52-e843829e148e
+  field_theme:
+    -
+      entity: 831d95bf-96e8-4645-b826-6d23ba0f959d

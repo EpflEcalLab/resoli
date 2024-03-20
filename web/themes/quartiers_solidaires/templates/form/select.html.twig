@@ -10,7 +10,7 @@
  * @see template_preprocess_select()
  */
 #}
-{% spaceless %}
+{% apply spaceless %}
   {%
     set classes = [
       attributes.selectize is empty ? 'custom-select form-control' : 'selectize',
@@ -29,4 +29,4 @@
       {% endif %}
     {% endfor %}
   </select>
-{% endspaceless %}
+{% endapply %}

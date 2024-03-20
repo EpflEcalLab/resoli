@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 69b945a8-c2f3-4da3-b442-860846ce59ed
+  bundle: event
+  default_langcode: zxx
+  depends:
+    0d1a1d73-d969-4cbf-b2fc-c8e93dd18e16: node
+default:
+  nid:
+    -
+      value: 20
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Accueil Café'
+  created:
+    -
+      value: 1503414699
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/accueil-cafe/events/accueil-cafe
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Partagez un simple café entre habitants!</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 0d1a1d73-d969-4cbf-b2fc-c8e93dd18e16
+  field_end_at:
+    -
+      value: '2024-03-03T22:33:00'
+  field_start_at:
+    -
+      value: '2024-03-03T22:20:00'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11, Renens, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

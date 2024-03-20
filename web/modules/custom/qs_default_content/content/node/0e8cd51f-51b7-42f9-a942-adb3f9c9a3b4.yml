@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0e8cd51f-51b7-42f9-a942-adb3f9c9a3b4
+  bundle: event
+  default_langcode: zxx
+  depends:
+    868dd285-8e79-4c28-a7f6-b0bacf417362: node
+default:
+  nid:
+    -
+      value: 26
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Les films à succès'
+  created:
+    -
+      value: 1503414862
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /geneve/activities/cinema/events/les-films-succes
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Ce soir: Vol au-dessus d’un nid de coucou, Miloš Forman</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 868dd285-8e79-4c28-a7f6-b0bacf417362
+  field_contribution:
+    -
+      value: '25.00 CHF'
+  field_end_at:
+    -
+      value: '2025-07-01T13:14:00'
+  field_start_at:
+    -
+      value: '2025-07-01T13:00:00'
+  field_venue:
+    -
+      value: 'Zinéma Lausanne, Rue du Maupas, Lausanne, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

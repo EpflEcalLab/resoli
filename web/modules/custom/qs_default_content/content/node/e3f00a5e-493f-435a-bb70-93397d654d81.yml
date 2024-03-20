@@ -1,0 +1,75 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e3f00a5e-493f-435a-bb70-93397d654d81
+  bundle: activity
+  default_langcode: zxx
+  depends:
+    d7885321-10ad-4a50-ad52-e843829e148e: taxonomy_term
+    4a0618f8-f41c-4355-9379-fb984edd11a8: taxonomy_term
+default:
+  nid:
+    -
+      value: 10
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Balade Gourmande Interculturelle'
+  created:
+    -
+      value: 1503413833
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /geneve/activities/balade-gourmande-interculturelle
+      langcode: und
+      pathauto: 1
+  field_community:
+    -
+      entity: d7885321-10ad-4a50-ad52-e843829e148e
+  field_community_access_contact:
+    -
+      value: true
+  field_community_access_detail:
+    -
+      value: true
+  field_community_access_gallery:
+    -
+      value: false
+  field_community_access_story:
+    -
+      value: false
+  field_community_can_subscribe:
+    -
+      value: false
+  field_member_create_gallery:
+    -
+      value: true
+  field_member_create_story:
+    -
+      value: true
+  field_theme:
+    -
+      entity: 4a0618f8-f41c-4355-9379-fb984edd11a8
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

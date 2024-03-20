@@ -1,0 +1,60 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: efeffe90-b2c2-4021-8e06-ebc8484a3d78
+  bundle: offer
+  default_langcode: zxx
+  depends:
+    1bbb8566-39e6-4d09-ab2b-e1569e19b0bc: user
+    ea52fb9f-c0a0-4b34-9297-3646ca2546c7: node
+    77ebcdf6-cc4b-411e-ac2d-9db22bd73c23: taxonomy_term
+default:
+  nid:
+    -
+      value: 75
+  revision_uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  status:
+    -
+      value: false
+  uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  title:
+    -
+      value: 'Discussion à l''achat d''un nouvelle ordinateur'
+  created:
+    -
+      value: 1629992632
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: archived
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: 'Je propose ma petite expertise en informatique à quiconque désirant acquérir un nouvel ordinateur, mais n''ayant pas les connaissances suffisantes pour choisir un modèle convenable.'
+      format: light_html
+      summary: ''
+  field_contact_name:
+    -
+      value: 'Jerry Kan'
+  field_offer_type:
+    -
+      entity: ea52fb9f-c0a0-4b34-9297-3646ca2546c7
+  field_theme:
+    -
+      entity: 77ebcdf6-cc4b-411e-ac2d-9db22bd73c23

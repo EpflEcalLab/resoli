@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61
 - upgrade to PHP 8.1 - QS-52
+- add module drupal/ckeditor (1.0.2)
+- update module drupal/bamboo_twig (6.0.0 => 6.0.1)
+- update module drupal/symfony_mailer_lite (1.0.2 => 1.0.6)
+- update theme drupal/gin (3.0.0-rc7 => 3.0.0-rc9)
+- update drupal/gin_toolbar (1.0.0-rc4 => 1.0.0-rc5)
+- update drupal/loco_translate (3.0.0 => 3.0.1)
+- update library dompdf/dompdf (v2.0.3 => v2.0.4)
+- remove root dependency on webmozart/path-util but still present by another package
+- update linters mglaman/phpstan-drupal (1.1.31 => 1.2.5) & phpstan/phpstan-deprecation-rules (1.1.3 => 1.1.4)
+- update library phpoffice/phpspreadsheet (1.28.0 => 1.29.0)
+- update dev-dependency module drupal/rules (3.0.0-alpha7 => 3.0.0-alpha8)
+- update library behat/behat (v3.13.0 => v3.14.0)
+- update module drupal/default_content (1.0.0-alpha9 => 2.0.0-alpha2)
 
 ### Added
 - add Upgrade Status on CI - QS-49
@@ -19,9 +32,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - move Linters php-deprecation-detector into own Tools/ComposerJson - QS-64
 - rework Docker integration using new Docker images - QS-48
 - rework the Github Actions PHPUnit & Behat integration - QS-48
+- uninstall legacy base theme Stable for compliancy upgrade D9 -> D10 - QS-63
+- update all Default Content to use Yaml format - QS-63
+- add missing ->accessCheck() on Query - QS-63
+- replace RedirectResponse::create by new RedirectResponse - QS-63
+- twig replace deprecated spaceless by apply-spaceless - QS-63
+- twig replace deprecated usage of if condition on for tag
+- replace usage of deprecated function honeypot_add_form_protection() by honeypot service addFormProtection - QS-63
+- replace deprecated GetResponseEvent event args by RequestEvent on subscribers - QS-63
+- change visibility on $modules tests Class from public -> protected - QS-63
+- replace usage of assertEqual() by assertEquals() - QS-63
+- replace phpunit usage of deprecated withConsecutive - QS-63
+- replace phpunit usage of deprecated setMethods - QS-63
+- remove necessary @internal on FormBasic - QS-63
+- replace deprecated usage of class Twig_Extension by Twig\Extension\AbstractExtension - QS-63
+- replace usage of jQuery once in favor of Drupal core/once - QS-63
+- replace usage of Symfony\Component\HttpFoundation\RequestStack by shim Drupal\Core\Http\RequestStack - QS-63
+- replace deprecated method getCellByColumnAndRow() of class PhpOffice\PhpSpreadsheet\Worksheet\Worksheet by getCell() method with an array of \[, ] - QS-63
 
 ### Removed
 - remove linter phpmd - QS-64
+- uninstall legacy module RDF - QS-63
+- remove jQuery Datepicker in favor of Browser native date picker - QS-63
 
 ## [2.3.7] - 2023-12-12
 ### Fixed

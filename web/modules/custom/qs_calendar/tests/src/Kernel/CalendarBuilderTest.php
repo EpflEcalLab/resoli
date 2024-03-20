@@ -24,7 +24,7 @@ final class CalendarBuilderTest extends KernelTestBase {
    *
    * @var array
    */
-  public static $modules = ['qs_calendar'];
+  protected static $modules = ['qs_calendar'];
 
   /**
    * {@inheritdoc}
@@ -155,7 +155,7 @@ final class CalendarBuilderTest extends KernelTestBase {
     $period = $this->calendarBuilder->build($start, $end);
 
     self::assertInstanceOf('\DatePeriod', $period);
-    $this->assertEqual(iterator_count($period), $expected);
+    self::assertEquals(iterator_count($period), $expected);
   }
 
   /**
@@ -167,7 +167,7 @@ final class CalendarBuilderTest extends KernelTestBase {
     $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
     $monday = $this->calendarBuilder->getFirstMondayMonthFullWeek($date);
     self::assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $monday);
-    $this->assertEqual($monday->format('Y-m-d'), $expected);
+    self::assertEquals($monday->format('Y-m-d'), $expected);
   }
 
   /**
@@ -179,7 +179,7 @@ final class CalendarBuilderTest extends KernelTestBase {
     $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
     $sunday = $this->calendarBuilder->getLastSundayMonthFullWeek($date);
     self::assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $sunday);
-    $this->assertEqual($sunday->format('Y-m-d'), $expected);
+    self::assertEquals($sunday->format('Y-m-d'), $expected);
   }
 
   /**
@@ -191,7 +191,7 @@ final class CalendarBuilderTest extends KernelTestBase {
     $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
     $monday = $this->calendarBuilder->getMondayWeek($date);
     self::assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $monday);
-    $this->assertEqual($monday->format('Y-m-d'), $expected);
+    self::assertEquals($monday->format('Y-m-d'), $expected);
   }
 
   /**
@@ -203,7 +203,7 @@ final class CalendarBuilderTest extends KernelTestBase {
     $date = DrupalDateTime::createFromFormat('Y-m-d', $date);
     $sunday = $this->calendarBuilder->getSundayWeek($date);
     self::assertInstanceOf('Drupal\Core\Datetime\DrupalDateTime', $sunday);
-    $this->assertEqual($sunday->format('Y-m-d'), $expected);
+    self::assertEquals($sunday->format('Y-m-d'), $expected);
   }
 
 }

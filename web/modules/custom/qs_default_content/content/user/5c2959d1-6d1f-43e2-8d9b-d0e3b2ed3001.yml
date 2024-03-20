@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 5c2959d1-6d1f-43e2-8d9b-d0e3b2ed3001
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 22
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: approved+all@antistatique.net
+  pass:
+    -
+      value: $S$ETRzmrzNJZU8O5HPVBNpmXnI3.4zvU.MqD9Vcc/470jyV3zg17wz
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: approved+all@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1512493143
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Mick
+  field_lastname:
+    -
+      value: Emmaus

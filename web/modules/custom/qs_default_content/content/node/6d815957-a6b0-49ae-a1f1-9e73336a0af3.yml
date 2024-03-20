@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 6d815957-a6b0-49ae-a1f1-9e73336a0af3
+  bundle: offer
+  default_langcode: zxx
+  depends:
+    1bbb8566-39e6-4d09-ab2b-e1569e19b0bc: user
+    aaf0da2e-99d7-49fd-8895-1ccb4d6d132c: node
+    b5089548-9523-4fa6-9e8b-21f0332f7b17: taxonomy_term
+default:
+  nid:
+    -
+      value: 72
+  revision_uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  title:
+    -
+      value: 'Aide pour porter les courses'
+  created:
+    -
+      value: 1629992281
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: 'Je me propose volontiers pour aider quiconque à porter ces courses.'
+      format: light_html
+      summary: ''
+  field_contact_name:
+    -
+      value: 'Jerry Kan'
+  field_description:
+    -
+      value: 'Tout les soirs de semaine de 17h00 à 18h00'
+      format: light_html
+  field_offer_type:
+    -
+      entity: aaf0da2e-99d7-49fd-8895-1ccb4d6d132c
+  field_theme:
+    -
+      entity: b5089548-9523-4fa6-9e8b-21f0332f7b17

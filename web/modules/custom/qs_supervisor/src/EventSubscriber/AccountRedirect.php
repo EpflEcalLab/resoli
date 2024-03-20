@@ -7,7 +7,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -45,10 +45,10 @@ class AccountRedirect implements EventSubscriberInterface {
    * It verify the current route is default drupal '/user/{user}'
    * then redirect on our custom one.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function dashboardRedirect(GetResponseEvent $event) {
+  public function dashboardRedirect(RequestEvent $event): void {
     if ($this->routeMatch->getRouteName() === 'entity.user.canonical') {
       $user = $event->getRequest()->get('user');
       $destination = Url::fromRoute('qs_supervisor.account.dashboard', ['user' => $user->id()]);
@@ -63,10 +63,10 @@ class AccountRedirect implements EventSubscriberInterface {
    * non-admin then redirect on our custom one.
    * We also keep the administration page accessible for admin user.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function editFormRedirect(GetResponseEvent $event) {
+  public function editFormRedirect(RequestEvent $event): void {
     if (!$this->currentUser->hasPermission('access administration pages') && $this->routeMatch->getRouteName() === 'entity.user.edit_form') {
       $user = $event->getRequest()->get('user');
       $destination = Url::fromRoute('qs_supervisor.account.form.edit', ['user' => $user->id()]);
@@ -77,7 +77,7 @@ class AccountRedirect implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     $events[KernelEvents::REQUEST][] = ['dashboardRedirect'];
     $events[KernelEvents::REQUEST][] = ['editFormRedirect'];
 

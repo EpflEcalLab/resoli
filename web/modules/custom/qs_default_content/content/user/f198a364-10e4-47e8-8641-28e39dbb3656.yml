@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: f198a364-10e4-47e8-8641-28e39dbb3656
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 10
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: approval+fribourg+approval+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$EgKad7pQVsede6x4XDCTasfrtUYJPcL2JVzvr9kgqyfSEnV8QRo5
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: approval+fribourg+approval+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1503057691
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Yamamoto
+  field_lastname:
+    -
+      value: Kaderate
+  field_phone:
+    -
+      value: '0211234567'

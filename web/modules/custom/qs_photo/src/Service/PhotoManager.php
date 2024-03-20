@@ -403,6 +403,7 @@ class PhotoManager {
 
     // When user has members+ access, list all photos of this activity.
     $query = $this->privilegeStorage->getAggregateQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -418,6 +419,7 @@ class PhotoManager {
 
     // If the user has only member access, list only its photos.
     $query = $this->privilegeStorage->getAggregateQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())

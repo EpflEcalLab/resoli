@@ -18,7 +18,7 @@
       </a>
     </div>
 
-    {% for offerTypesByTheme in variables.offerTypesByThemes if offerTypesByTheme.offersTypes is not empty %}
+    {% for offerTypesByTheme in variables.offerTypesByThemes|filter(offerTypesByTheme => offerTypesByTheme.offersTypes is not empty) %}
       <div class="row mt-5">
 
         <div class="col-12 sticky-top bg-white mb-2">

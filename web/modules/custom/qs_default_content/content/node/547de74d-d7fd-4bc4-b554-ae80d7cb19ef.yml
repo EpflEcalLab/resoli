@@ -1,0 +1,73 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 547de74d-d7fd-4bc4-b554-ae80d7cb19ef
+  bundle: event
+  default_langcode: zxx
+  depends:
+    d00884b2-446e-4e09-8844-8dcec7f7ba63: node
+default:
+  nid:
+    -
+      value: 30
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Promenade au lac Taney'
+  created:
+    -
+      value: 1503415130
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/randonnees/events/promenade-au-lac-taney
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Proin et magna vulputate, pharetra eros semper, placerat ex. Aliquam ut efficitur massa. Vestibulum gravida purus sem, at ullamcorper est.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: d00884b2-446e-4e09-8844-8dcec7f7ba63
+  field_contact_mail:
+    -
+      value: toni@antistatique.net
+  field_contact_name:
+    -
+      value: 'Toni Fisler'
+  field_contact_phone:
+    -
+      value: '+41 21 825 12 40'
+  field_end_at:
+    -
+      value: '2024-03-12T14:14:00'
+  field_start_at:
+    -
+      value: '2024-03-12T14:00:00'
+  field_venue:
+    -
+      value: 'Lac Taney'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

@@ -1,0 +1,60 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8d9272a6-f3ca-4b4d-a4b7-487b145627b0
+  bundle: offer
+  default_langcode: zxx
+  depends:
+    1bbb8566-39e6-4d09-ab2b-e1569e19b0bc: user
+    71552db0-3bdd-499c-99d6-0c77b50bcbc6: node
+    b5089548-9523-4fa6-9e8b-21f0332f7b17: taxonomy_term
+default:
+  nid:
+    -
+      value: 73
+  revision_uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  title:
+    -
+      value: 'Aide pour porter les courses'
+  created:
+    -
+      value: 1629992339
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: 'Je me propose volontiers pour aider quiconque à porter ces courses.'
+      format: light_html
+      summary: ''
+  field_contact_name:
+    -
+      value: 'Jerry Kan'
+  field_offer_type:
+    -
+      entity: 71552db0-3bdd-499c-99d6-0c77b50bcbc6
+  field_theme:
+    -
+      entity: b5089548-9523-4fa6-9e8b-21f0332f7b17

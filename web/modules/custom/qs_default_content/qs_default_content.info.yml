@@ -2,7 +2,7 @@ name: Default Content
 description: 'Default content of Quartiers Solidaires'
 package: Quartiers Solidaires
 type: module
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^8.8 || ^9 || ^10
 
 dependencies:
   - drupal:default_content

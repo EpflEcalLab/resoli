@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 5a8fa060-c52b-4567-b1d7-79d408d6791a
+  bundle: themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 10
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Entraide
+  weight:
+    -
+      value: 6
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1710316280
+  field_icon:
+    -
+      value: entraide

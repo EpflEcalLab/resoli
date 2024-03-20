@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 1d832ef0-b83e-4df9-a161-6269aabf4db4
+  bundle: offer
+  default_langcode: zxx
+  depends:
+    1bbb8566-39e6-4d09-ab2b-e1569e19b0bc: user
+    44e47840-b942-4521-8e35-b03c946ad17d: node
+    0930812e-d866-47df-a224-70bba49cdc6b: taxonomy_term
+default:
+  nid:
+    -
+      value: 71
+  revision_uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  title:
+    -
+      value: 'Co-Voiturage Lausanne-Fribourg'
+  created:
+    -
+      value: 1629992110
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: "Travaillant à Lausanne et habitant à Fribourg, je me déplace en voiture tous les matins en direction de Lausanne et reviens sur Fribourg tous les soirs.\r\n\r\nJe propose à qui le veut bien de m'accompagner durant ces quelques trajets."
+      format: light_html
+      summary: ''
+  field_contact_name:
+    -
+      value: 'Jerry Kan'
+  field_description:
+    -
+      value: 'Tout les matins à 8h00 et les soirs à 17h00'
+      format: light_html
+  field_offer_type:
+    -
+      entity: 44e47840-b942-4521-8e35-b03c946ad17d
+  field_theme:
+    -
+      entity: 0930812e-d866-47df-a224-70bba49cdc6b

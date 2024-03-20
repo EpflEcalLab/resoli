@@ -30,7 +30,7 @@
 
   {% if variables.activities %}
     <ul class="card-list mb-auto" id="activities-accordion" role="tablist" data-children=".card-list-item">
-      {% for activity in variables.activities if activity.nid.value in variables.photos_by_activities|keys %}
+      {% for activity in variables.activities|filter(activity => activity.nid.value in variables.photos_by_activities|keys) %}
         <li class="card card-list-item" id="card{{ activity.nid.value }}">
           <a
             data-toggle="collapse"

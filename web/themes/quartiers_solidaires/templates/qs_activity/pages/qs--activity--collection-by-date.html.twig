@@ -27,7 +27,7 @@
         {% set current_header = null %}
         {% set previous_event_week = null %}
 
-        {% for key, event in variables.events if (event.field_start_at.value|date('Y-m-d') >= 'now'|date('Y-m-d')) %}
+        {% for key, event in variables.events|filter(event => event.field_start_at.value|date('Y-m-d') >= 'now'|date('Y-m-d')) %}
 
           {# List header #}
           {% set event_date = event.field_start_at.value|date('Y-m-d') %}

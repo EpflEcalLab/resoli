@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 668377e9-b635-48a8-b027-d604723458a7
+  bundle: themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 6
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Conférences
+  weight:
+    -
+      value: 2
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1710316280
+  field_icon:
+    -
+      value: conferences

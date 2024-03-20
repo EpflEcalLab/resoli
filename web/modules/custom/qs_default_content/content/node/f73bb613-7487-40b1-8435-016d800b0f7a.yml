@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: f73bb613-7487-40b1-8435-016d800b0f7a
+  bundle: event
+  default_langcode: zxx
+  depends:
+    5c5f2e54-c3ac-4a69-9659-17afc8d1734d: node
+default:
+  nid:
+    -
+      value: 17
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Atelier Scooby-Doo'
+  created:
+    -
+      value: 1503414591
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/atelier-creatif/events/atelier-scooby-doo
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Etiam id ultrices ipsum, a euismod leo. Suspendisse tempor rutrum diam vel vestibulum. Vivamus urna odio, accumsan ut iaculis vel, porta sed magna. Vivamus nec quam non sem euismod pharetra. Donec sed malesuada dui. Phasellus sit amet risus dui. Suspendisse ut eros mi. Quisque eget condimentum lacus. Pellentesque iaculis consectetur nunc, gravida lobortis metus.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 5c5f2e54-c3ac-4a69-9659-17afc8d1734d
+  field_contribution:
+    -
+      value: '~50 CHF'
+  field_end_at:
+    -
+      value: '2024-03-13T09:36:22'
+  field_start_at:
+    -
+      value: '2024-03-13T08:51:22'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

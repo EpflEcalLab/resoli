@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b87a50be-3b5b-43e9-ae18-a9e9e7fb1cde
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    0e8cd51f-51b7-42f9-a942-adb3f9c9a3b4: node
+default:
+  nid:
+    -
+      value: 49
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Photo N° 9 - Les films à succès (26) - Cinéma (9)'
+  created:
+    -
+      value: 1509628741
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  field_event:
+    -
+      entity: 0e8cd51f-51b7-42f9-a942-adb3f9c9a3b4

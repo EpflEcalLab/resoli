@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 052ef3ec-456b-4725-867e-a762c552bb98
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 18
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+lausanne+declined+organizer+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$EdIVcV0e.qpQ07t/zVkECgro4XlLXOIhS7SnYbMd/byqn3gIdqjM
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+lausanne+declined+organizer+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1504603679
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Paul
+  field_lastname:
+    -
+      value: Tergeist

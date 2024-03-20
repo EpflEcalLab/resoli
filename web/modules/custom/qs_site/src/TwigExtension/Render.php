@@ -3,11 +3,13 @@
 namespace Drupal\qs_site\TwigExtension;
 
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Provides some renderer as Twig Extensions.
  */
-class Render extends \Twig_Extension {
+class Render extends AbstractExtension {
 
   use ContainerAwareTrait;
 
@@ -16,7 +18,7 @@ class Render extends \Twig_Extension {
    */
   public function getFunctions() {
     return [
-      new \Twig_SimpleFunction('qs_site_render_form', [$this, 'renderForm'], ['is_safe' => ['html']]),
+      new TwigFunction('qs_site_render_form', [$this, 'renderForm'], ['is_safe' => ['html']]),
     ];
   }
 

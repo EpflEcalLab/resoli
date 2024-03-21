@@ -6,7 +6,7 @@ Feature: Event Edit Form
     When I am on "/events/21/edit"
     Then I should see 16 "#qs-activity-event-edit-form input" elements
     And the "edit-title" field should contain "Accueil Café"
-    And the "#edit-date" field should match regex "/[0-9]{2}.[0-9]{2}.[0-9]{4}/"
+    And the "#edit-date" field should match regex "/[0-9]{4}-[0-9]{2}-[0-9]{2}/"
     And the "#edit-start-at" field should match regex "/(([0-1][0-9])|([2][0-3])):([0-5][0-9])/"
     And the "#edit-end-at" field should match regex "/(([0-1][0-9])|([2][0-3])):([0-5][0-9])/"
     And the "edit-body" field should contain "<p>Partagez un simple café entre habitants!</p>"
@@ -37,7 +37,7 @@ Feature: Event Edit Form
     And I press "edit-submit"
     When I am on "/lausanne/activities/accueil-cafe/events/accueil-cafe-1/edit"
     And the "edit-title" field should contain "Accueil Café (edited)"
-    And the "#edit-date" field should match regex "/[0-9]{2}.[0-9]{2}.[0-9]{4}/"
+    And the "#edit-date" field should match regex "/[0-9]{4}-[0-9]{2}-[0-9]{2}/"
     And the "edit-start-at" field should contain "19:12"
     And the "edit-end-at" field should contain "22:15"
     And the "edit-body" field should contain "Lorem Ipsum"

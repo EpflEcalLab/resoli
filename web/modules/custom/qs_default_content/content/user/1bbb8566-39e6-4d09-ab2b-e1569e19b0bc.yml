@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 1bbb8566-39e6-4d09-ab2b-e1569e19b0bc
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 8
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+lausanne+organizer+fribourg@antistatique.net
+  pass:
+    -
+      value: $S$Eht7mp/mtM6iP7Lz8b1yenN/jNXvJt0ssHxhFEwKTlXYOI7h.MHc
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+lausanne+organizer+fribourg@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1503057152
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Jerry
+  field_lastname:
+    -
+      value: Kan

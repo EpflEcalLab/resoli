@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 85ec6253-dcb0-4914-88d8-fa4469e3ef4b
+  bundle: event
+  default_langcode: zxx
+  depends:
+    b4750e3e-9da7-487f-8355-4f6a5b6dca87: node
+default:
+  nid:
+    -
+      value: 29
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Prendre des Photos avec son Smartphone'
+  created:
+    -
+      value: 1503415079
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/cours-smartphone-tablette/events/prendre-des-photos-avec-son-smartphone
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Initiation à la prise de photos à l’aide de son smartphone. Grâce à ce cours, vous découvrirez de nombreuses astuces qui vous faciliteront la vie au quotidien.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: b4750e3e-9da7-487f-8355-4f6a5b6dca87
+  field_end_at:
+    -
+      value: '2024-03-13T10:18:23'
+  field_start_at:
+    -
+      value: '2024-03-13T09:51:23'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11, Renens, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

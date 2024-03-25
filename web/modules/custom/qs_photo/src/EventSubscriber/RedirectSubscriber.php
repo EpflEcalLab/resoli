@@ -6,7 +6,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Redirect photo to the photo by activity page.
  */
 class RedirectSubscriber implements EventSubscriberInterface {
+
   /**
    * The current route match.
    *
@@ -35,7 +36,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     $events[KernelEvents::REQUEST][] = ['photoRedirect'];
 
     return $events;
@@ -47,10 +48,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * It verify the current route is Photo canonical access then
    * redirect on the photos by activity page.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function photoRedirect(GetResponseEvent $event) {
+  public function photoRedirect(RequestEvent $event): void {
     $node = $this->routeMatch->getParameter('node');
 
     if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'photo') {

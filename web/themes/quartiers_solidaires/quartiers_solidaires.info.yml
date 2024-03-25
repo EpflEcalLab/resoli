@@ -1,16 +1,13 @@
 name: Quartiers Solidaires
 type: theme
 description: The Official Theme for Quartiers Solidaires
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^8.8 || ^9 || ^10
 screenshot: screenshot.png
-base theme: stable
+base theme: false
 
 libraries:
   - quartiers_solidaires/polyfill-io
   - quartiers_solidaires/global-styling
-
-libraries-override:
-  core/drupal.date: quartiers_solidaires/date
 
 stylesheets-remove:
   - core/assets/vendor/normalize-css/normalize.css

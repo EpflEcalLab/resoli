@@ -16,6 +16,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  * @internal
  */
 final class VolunteerismRepositoryTest extends KernelTestBase {
+
   use EntityReferenceTestTrait;
   use TaxonomyTestTrait;
 
@@ -291,7 +292,7 @@ final class VolunteerismRepositoryTest extends KernelTestBase {
 
     $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community1, $fooUser, $theme1);
     self::assertNotNull($volunteerism);
-    self::assertEqual($volunteerism1->id(), $volunteerism->id());
+    self::assertEquals($volunteerism1->id(), $volunteerism->id());
 
     $volunteerism = $this->volunteerismRepository->isUserVolunteerForTheme($community1, $fooUser, $theme2);
     self::assertNull($volunteerism);

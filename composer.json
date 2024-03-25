@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.0 || >= 8.1",
         "composer/installers": "^2.2",
         "cweagans/composer-patches": "^1.7.3",
         "dompdf/dompdf": "^2.0.1",
@@ -36,6 +36,7 @@
         "drupal/allowed_formats": "^2.0",
         "drupal/backerymails": "^3.0",
         "drupal/bamboo_twig": "^6.0",
+        "drupal/ckeditor": "^1.0",
         "drupal/core-composer-scaffold": "^9.5.1",
         "drupal/core-project-message": "^9.5.1",
         "drupal/core-recommended": "^9.5.1",
@@ -53,29 +54,26 @@
         "drupal/recaptcha": "^3.1",
         "drupal/redirect": "^1.8@beta",
         "drupal/swiftmailer": "^2.3",
+        "drupal/symfony_mailer_lite": "^1.0",
         "drush/drush": "^10.6.2",
         "phpoffice/phpspreadsheet": "^1.26",
         "symfony/property-access": "^3.4.47",
         "webflo/drupal-finder": "^1.2.2",
-        "webmozart/path-util": "^2.3",
         "xantios/mimey": "^2.2"
     },
     "require-dev": {
         "alexandresalome/mailcatcher": "^1.4",
         "behat/behat": "^3.12",
         "drupal/core-dev": "^9.5.1",
-        "drupal/default_content": "^1.0@alpha",
+        "drupal/default_content": "^2.0@alpha",
         "drupal/drupal-extension": "^4.2.1",
         "drupal/rules": "^3.0@alpha",
         "drupal/schema_metatag": "^2.4",
-        "drupol/phpcsfixer-configs-drupal": "^2.0.1",
-        "friendsofphp/php-cs-fixer": "^3.4",
+        "drupal/upgrade_status": "^4.1",
         "mglaman/phpstan-drupal": "^1.1",
-        "phpmd/phpmd": "^2.13",
         "phpspec/prophecy-phpunit": "^2.0.1",
         "phpstan/phpstan-deprecation-rules": "^1.1",
-        "phpunit/phpunit": "^9.5.27",
-        "wapmorgan/php-deprecation-detector": "^2.0.29"
+        "phpunit/phpunit": "^9.5.27"
     },
     "conflict": {
         "drupal/drupal": "*",
@@ -91,7 +89,8 @@
             "cweagans/composer-patches": true,
             "drupal/console-extend-plugin": true,
             "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true
+            "drupal/core-project-message": true,
+            "phpstan/extension-installer": true
         }
     },
     "autoload-dev": {

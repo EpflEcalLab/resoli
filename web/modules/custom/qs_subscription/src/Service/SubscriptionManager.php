@@ -61,6 +61,7 @@ class SubscriptionManager {
    * @var \Drupal\user\UserStorageInterface
    */
   protected $userStorage;
+
   /**
    * The current active user.
    *
@@ -256,6 +257,7 @@ class SubscriptionManager {
    */
   public function request(NodeInterface $event, ?AccountInterface $account = NULL, $mail_to_organizers = TRUE) {
     $user = $this->currentUser;
+    $ids = [];
 
     if ($account !== NULL) {
       $user = $account;

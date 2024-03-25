@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4ec098fb-370d-4c1d-ad31-faa7562d47f7
+  bundle: event
+  default_langcode: zxx
+  depends:
+    69ba6e03-31e1-4ee5-add1-467f3efab36a: node
+default:
+  nid:
+    -
+      value: 18
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Les Bougies Parfumées'
+  created:
+    -
+      value: 1503414645
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/atelier-bougies/events/les-bougies-parfumees
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Réalisation de bougies artisanales, idéales comme cadeau de fin d'année. Plusieurs parfums et couleurs à choix, plusieurs formes de moules, etc. Venez nombreux partager un moment de création originales!</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 69ba6e03-31e1-4ee5-add1-467f3efab36a
+  field_contribution:
+    -
+      value: '2.00 CHF'
+  field_end_at:
+    -
+      value: '2024-03-14T17:17:00'
+  field_start_at:
+    -
+      value: '2024-03-14T17:00:00'
+  field_venue:
+    -
+      value: 'Avenue du 24-Janvier 11, Renens, Suisse'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

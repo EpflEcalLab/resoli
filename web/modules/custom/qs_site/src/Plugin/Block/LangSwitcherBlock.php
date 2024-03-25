@@ -24,6 +24,7 @@ class LangSwitcherBlock extends BlockBase implements ContainerFactoryPluginInter
    * @var \Drupal\language\ConfigurableLanguageManagerInterface
    */
   protected $languageManager;
+
   /**
    * The Current Route.
    *
@@ -69,7 +70,7 @@ class LangSwitcherBlock extends BlockBase implements ContainerFactoryPluginInter
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-    // Load the service required to construct this class.
+      // Load the service required to construct this class.
       $configuration,
       $plugin_id,
       $plugin_definition,

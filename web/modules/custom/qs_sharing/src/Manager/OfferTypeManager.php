@@ -11,6 +11,7 @@ use Drupal\user\UserInterface;
  * Manage CRUD operations and actions on Offer's Types.
  */
 class OfferTypeManager {
+
   /**
    * The node Storage.
    *

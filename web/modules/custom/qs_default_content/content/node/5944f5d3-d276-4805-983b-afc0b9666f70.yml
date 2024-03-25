@@ -1,0 +1,61 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 5944f5d3-d276-4805-983b-afc0b9666f70
+  bundle: event
+  default_langcode: zxx
+  depends:
+    e3f00a5e-493f-435a-bb70-93397d654d81: node
+default:
+  nid:
+    -
+      value: 34
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'De Pully à Romanel'
+  created:
+    -
+      value: 1503415262
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /geneve/activities/balade-gourmande-interculturelle/events/de-pully-romanel
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Balade champêtre à vélo. Rythme détendu, bonne humeur et mollets dégourdis préconisés! Point de rendez-vous</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: e3f00a5e-493f-435a-bb70-93397d654d81
+  field_end_at:
+    -
+      value: '2024-03-11T23:22:00'
+  field_start_at:
+    -
+      value: '2024-03-11T23:00:00'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

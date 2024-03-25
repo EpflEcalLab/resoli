@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Expose the Floating actions buttons of the community welcome page.
  *
  * @codingStandardsIgnoreFile
+ *
  * @Block(
  *     id="qs_community_welcome_floating_actions_buttons_block",
  *     admin_label=@Translation("Community Welcome Floating actions buttons"),
@@ -86,7 +87,7 @@ class WelcomeFloatingBtnBlock extends BlockBase implements ContainerFactoryPlugi
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-    // Load the service required to construct this class.
+      // Load the service required to construct this class.
       $configuration,
       $plugin_id,
       $plugin_definition,

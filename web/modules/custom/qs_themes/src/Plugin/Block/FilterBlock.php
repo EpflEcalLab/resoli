@@ -4,9 +4,9 @@ namespace Drupal\qs_themes\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Filter Theme Block.
@@ -21,10 +21,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
  * )
  */
 class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\Http\RequestStack
    */
   protected $requestStack;
 
@@ -51,7 +52,7 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
     $variables = ['filtered' => NULL];
 
     // The request should be took at the latest moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
+    $master_request = $this->requestStack->getMainRequest();
 
     $filtered_themes = $master_request->query->get('themes');
 
@@ -82,11 +83,11 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        $container->get('request_stack'),
-        $container->get('entity_type.manager')
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('request_stack'),
+      $container->get('entity_type.manager')
     );
   }
 

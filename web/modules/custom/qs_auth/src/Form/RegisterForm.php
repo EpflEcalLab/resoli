@@ -13,6 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * The registration form.
  */
 class RegisterForm extends FormBase {
+
   /**
    * The QS account service.
    *
@@ -57,10 +58,9 @@ class RegisterForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state, $extra = NULL) {
     // Honeypot.
     if ($this->moduleHandler->moduleExists('honeypot')) {
-      honeypot_add_form_protection($form, $form_state, [
-        'honeypot',
-        'time_restriction',
-      ]);
+      // phpcs:ignore
+      \Drupal::service('honeypot')
+        ->addFormProtection($form, $form_state, ['honeypot', 'time_restriction']);
     }
 
     // Disable caching & HTML5 validation.

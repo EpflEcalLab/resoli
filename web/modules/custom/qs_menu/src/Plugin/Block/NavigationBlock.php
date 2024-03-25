@@ -286,16 +286,16 @@ class NavigationBlock extends BlockBase implements ContainerFactoryPluginInterfa
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        // Load the service required to construct this class.
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        // Load customs services used in this class.
-        $container->get('qs_acl.access_control'),
-        $container->get('current_route_match'),
-        $container->get('current_user'),
-        $container->get('url_generator'),
-        $container->get('masquerade')
+      // Load the service required to construct this class.
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('current_route_match'),
+      $container->get('current_user'),
+      $container->get('url_generator'),
+      $container->get('masquerade')
     );
   }
 

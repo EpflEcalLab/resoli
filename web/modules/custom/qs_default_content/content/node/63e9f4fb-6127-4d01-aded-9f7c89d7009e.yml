@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 63e9f4fb-6127-4d01-aded-9f7c89d7009e
+  bundle: offer
+  default_langcode: zxx
+  depends:
+    79ebbfd1-4918-479c-b05c-b5c3ec52f7e2: user
+    ea52fb9f-c0a0-4b34-9297-3646ca2546c7: node
+    77ebcdf6-cc4b-411e-ac2d-9db22bd73c23: taxonomy_term
+default:
+  nid:
+    -
+      value: 70
+  revision_uid:
+    -
+      entity: 79ebbfd1-4918-479c-b05c-b5c3ec52f7e2
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 79ebbfd1-4918-479c-b05c-b5c3ec52f7e2
+  title:
+    -
+      value: 'Table cercle jeux vidéos'
+  created:
+    -
+      value: 1629991924
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: "Vidéo-jeux et politique: une osmose coincidentielle inexorable?\r\n\r\nDébat intergénérationnel sur différents sujets profonds à participation libre et ouverte en compagnie d'experts du milieu. Modéré par qui le veut bien."
+      format: light_html
+      summary: ''
+  field_contact_name:
+    -
+      value: 'Juda Bricot'
+  field_description:
+    -
+      value: 'Tous les 4 matins'
+      format: light_html
+  field_offer_type:
+    -
+      entity: ea52fb9f-c0a0-4b34-9297-3646ca2546c7
+  field_theme:
+    -
+      entity: 77ebcdf6-cc4b-411e-ac2d-9db22bd73c23

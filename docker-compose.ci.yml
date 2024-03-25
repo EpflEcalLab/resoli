@@ -4,6 +4,7 @@ services:
   test:
     container_name: test
     volumes:
-      - ./app/logs:/var/www/log:delegated
+      - ./log:/var/www/log
+      - ./backups:/var/backups
     environment:
       PHP_MEMORY_LIMIT: 1024M

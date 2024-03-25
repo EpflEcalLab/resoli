@@ -129,7 +129,6 @@ class InlineAddForm extends FormBasic {
       $rows = $query->execute()->fetchAll();
 
       foreach ($rows as $row) {
-
         // Remove already subscribed member.
         if (!isset($activity_members[$row->user])) {
           unset($activity_members[$row->user]);

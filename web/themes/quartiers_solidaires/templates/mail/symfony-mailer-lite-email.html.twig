@@ -1,0 +1,352 @@
+{#
+/**
+ * @file
+ * The default template file for e-mails.
+ *
+ * Available variables:
+ * - subject: The subject.
+ * - body: The message content.
+ * - is_html: True if generating HTML output, false for plain text.
+ * - message: The $message array created and used in the mail building
+ *   procedure. Its content varies between cases, but typically contains at
+ *   least the following elements:
+ *   - id: The message identifier.
+ *   - module: The module that handles the building of the message.
+ *   - key: The key of the message.
+ *   - to: The recipient email address.
+ *   - from: The email address of the sender.
+ *   - langcode: The langcode to use to compose the e-mail.
+ *   - params: The message parameters.
+ * - base_url: The site base url including scheme, without trailing slash.
+ *
+ * This template may be overriden by module and/or mail key, using any of the
+ * following template names:
+ * - symfony-mailer-lite-email.html.twig: global, used by default.
+ * - symfony-mailer-lite-email--mymodule.html.twig: only emails sent by the module "mymodule".
+ * - symfony-mailer-lite-email--mymodule--test.html.twig: only emails by the module
+ *   "mymodule" with key "test".
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_symfony_mailer_lite_email()
+ *
+ * @ingroup themeable
+ */
+#}
+<html bgcolor="#00a082" style="background-color: #00a082;">
+  <head>
+      <style type="text/css">
+
+        /* Resets: see reset.css for details */
+        .ReadMsgBody { width: 100%; background-color: #FFFFFF;}
+        .ExternalClass {width: 100%; background-color: #FFFFFF;}
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height:100%;}
+        body {-webkit-text-size-adjust:none; -ms-text-size-adjust:none; margin:0; padding:0; font-family: arial;}
+        table {border-spacing:0;}
+        table td {border-collapse:collapse;}
+        .yshortcuts a {border-bottom: none !important;}
+        img{
+          display: block;
+        }
+        p{
+          margin: 10px 0;
+          padding: 0;
+          font-family: arial;
+          font-size: 18px;
+          line-height: 24px;
+        }
+        ul{
+          margin: 5px 0;
+          padding: 5px 15px;
+        }
+
+        .ii a[href],
+        a {
+          color: #f79838 !important;
+        }
+
+        .ii a[href]:visited,
+        a:visited {
+          color: #f79838 !important;
+        }
+        li{
+          margin: 0;
+          padding: 0;
+          font-family: helvetica, arial, Sans-serif;
+        }
+        .table_of_content li{
+          list-style: none;
+        }
+        .table_of_content a{
+          color:#ffffff;
+          font-family: helvetica, arial, Sans-serif;
+        }
+        .container_img{
+          padding: 10px 0;
+        }
+        .bloc-title{
+          color: #000000;
+          font-family: helvetica, arial, Sans-serif;
+          font-size: 26px;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+        .client{
+          color: #666666;
+          font-family: helvetica, arial, Sans-serif;
+          font-size: 10px;
+        }
+        .title {
+          color: #ffffff;
+          font-family: arial, Sans-serif;
+          font-weight: bold;
+          font-size: 32px;
+          line-height: 40px;
+          margin-bottom: 16px;
+        }
+        .bloc_text{
+          color: #000000;
+          font-family: helvetica, arial, Sans-serif;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        .text_footer{
+          color: #ffffff;
+          font-family: helvetica, arial, Sans-serif;
+          font-size: 10px;
+        }
+        .bloc_footer{
+          font-size: 11px;
+          line-height: 16px;
+        }
+
+        .call-links a{
+          font-size: 16px;
+          font-family: 'Helvetica Neue', Helvetica, Arial, Serif;
+          line-height: 20px;
+          background-color: #f79838;
+          display: inline-block;
+          color: #ffffff;
+          font-weight: bold;
+          padding: 0.8em;
+          text-transform: uppercase;
+        }
+
+        .call-links-empty a{
+          font-size: 16px;
+          font-family: 'Helvetica Neue', Helvetica, Arial, Serif;
+          line-height: 20px;
+          background-color:#000000;
+          display: inline-block;
+          color: #f79838;
+          font-weight: bold;
+          padding: 0.8em;
+          text-transform: uppercase;
+          border: 1px solid #f79838;
+        }
+
+        .im {
+            color: #8A8D8F;
+        }
+
+        /* Constrain email width for small screens */
+        @media screen and (max-width: 700px) {
+          table[class="container"] {
+            width:96% !important;
+            margin-left: 2%!important;
+            margin-right: 2%!important;
+          }
+          img[class="item_img"]{
+            width: 100%!important;
+            height: auto!important;
+          }
+        }
+      </style>
+
+  </head>
+
+  <body style="color: #ffffff; margin:0px; padding:0px; -webkit-text-size-adjust: none; background-color:#00a082;" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#00a082">
+  <div>
+
+    <!-- spacer -->
+    <table border="0" bgcolor="#00a082" width="736" cellpadding="0" cellspacing="0" align="center">
+      <tr>
+        <td colspan="6">
+          <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+        </td>
+      </tr>
+    </table>
+    <!-- /spacer -->
+
+    <!-- Container for bordering-->
+    <table border="0" bgcolor="#00a082" width="736" cellpadding="0" cellspacing="0" align="center">
+      <tr>
+        <!-- spacer-side -->
+        <td height="68">
+          <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+        </td>
+        <!-- /spacer-side -->
+
+        <td height="68" colspan="2">
+          <!-- Container -->
+          <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" height="auto" style="background-color:#FFFFFF; color: #000000;">
+
+            <!-- spacer -->
+            <tr>
+              <td height="68" colspan="4">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+              </td>
+            </tr>
+            <!-- /spacer -->
+
+            <!-- logo -->
+            <tr>
+
+              <!-- spacer-side -->
+              <td height="68">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+              </td>
+              <!-- /spacer-side -->
+
+              <td align="left">
+                  <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/qs-'~message.langcode~'-logo-black.png') }}" width="200" height="100" alt="{{ bamboo_config_get('system.site', 'name') }}">
+              </td>
+              <td align="right" style="vertical-align: top;">
+                {{ "now"|date("Y-m-d")|bamboo_i18n_format_date("default_medium_date_only", '', 'Europe/Zurich', message.langcode) }}
+              </td>
+
+              <!-- spacer-side -->
+              <td height="68">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+              </td>
+              <!-- /spacer-side -->
+
+            </tr>
+            <!-- /logo -->
+
+            <!-- spacer -->
+            <tr>
+              <td height="32" colspan="4">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="32" alt="">
+              </td>
+            </tr>
+            <!-- /spacer -->
+
+            <tr>
+
+              <!-- spacer-side -->
+              <td height="32">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="32" alt="">
+              </td>
+              <!-- /spacer-side -->
+
+              <td align="left" colspan="2">
+                <p style="font-weight: bold; font-size: 20px; color: #000000; line-height: 1.4em;">
+                  {{ subject }}
+                </p>
+              </td>
+
+              <!-- spacer-side -->
+              <td height="32">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="32" alt="">
+              </td>
+              <!-- /spacer-side -->
+
+            </tr>
+
+            <!-- spacer -->
+            <tr>
+              <td height="32" colspan="4">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="32" alt="">
+              </td>
+            </tr>
+            <!-- /spacer -->
+
+            <tr>
+
+              <!-- spacer-side -->
+              <td height="68">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+              </td>
+              <!-- /spacer-side -->
+
+              <td style="color: #000000;" colspan="2">
+                  <div style="vertical-align: top; margin: 0; padding: 0; font-weight: normal; font-size: 16px; color: #000000;">
+                    {{ body }}
+                  </div>
+              </td>
+
+              <!-- spacer-side -->
+              <td height="68">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+              </td>
+              <!-- /spacer-side -->
+
+            </tr>
+
+            <!-- spacer -->
+            <tr>
+              <!-- 74 instead of 68 for visual trick -->
+              <td height="74" colspan="4">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="74" alt="">
+              </td>
+            </tr>
+            <!-- /spacer -->
+
+          </table>
+          <!-- /Container -->
+
+          <!-- contact -->
+          <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" height="auto" style="color: #ffffff; text-align: center;">
+
+            <!-- spacer -->
+            <tr>
+              <td height="32" colspan="4">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="32" alt="">
+              </td>
+            </tr>
+            <!-- /spacer -->
+
+            <tr>
+
+              <!-- spacer-side -->
+              <td height="68">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="16" height="68" alt="">
+              </td>
+              <!-- /spacer-side -->
+
+              <td colspan="2" align="center" style="vertical-align: top; margin: 0; padding: 0; font-size: 12px; color: #ffffff; line-height: 8px; text-align: center;">
+                <b>{{ 'Contact Us'|t }}</b><br/><br/>
+                <a style="color: #ffffff!important; text-decoration: underline!important;" href="mailto:{{ bamboo_config_get('system.site', 'mail') }}">{{ bamboo_config_get('system.site', 'mail') }}</a>
+              </td>
+
+              <!-- spacer-side -->
+              <td height="68">
+                <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="16" height="68" alt="">
+              </td>
+              <!-- /spacer-side -->
+            </tr>
+          </table>
+          <!-- /contact -->
+        </td>
+
+        <!-- spacer-side -->
+        <td height="68">
+          <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+        </td>
+        <!-- /spacer-side -->
+      </tr>
+    </table>
+
+    <!-- spacer -->
+    <table border="0" bgcolor="#00a082" width="736" cellpadding="0" cellspacing="0" align="center">
+      <tr>
+        <td colspan="6">
+          <img src="{{ bamboo_file_url_absolute(bamboo_path_system('theme', 'quartiers_solidaires') ~'/build/images/mail/px.gif') }}" width="68" height="68" alt="">
+        </td>
+      </tr>
+    </table>
+    <!-- /spacer -->
+
+  </div>
+  </body>
+  </html>

@@ -6,6 +6,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
@@ -14,7 +15,6 @@ use Drupal\qs_activity\Service\EventManager;
 use Drupal\qs_badge\Service\BadgeManager;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Expose the route to list activities > events by Theme or Date.
@@ -59,7 +59,7 @@ class CollectionController extends ControllerBase {
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\Http\RequestStack
    */
   protected $requestStack;
 
@@ -118,14 +118,14 @@ class CollectionController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('qs_activity.activity_manager'),
-    $container->get('qs_activity.event_manager'),
-    $container->get('qs_badge.badge_manager'),
-    $container->get('request_stack'),
-    $container->get('language_manager')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('entity_type.manager'),
+      $container->get('qs_activity.activity_manager'),
+      $container->get('qs_activity.event_manager'),
+      $container->get('qs_badge.badge_manager'),
+      $container->get('request_stack'),
+      $container->get('language_manager')
     );
   }
 
@@ -136,10 +136,10 @@ class CollectionController extends ControllerBase {
     $variables = ['community' => $community];
 
     // The request should be took at the last moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
+    $master_request = $this->requestStack->getMainRequest();
 
     // Get pagination date.
-    $pagination_date = $master_request->query->get('date');
+    $pagination_date = $master_request->query->get('date', 'now');
 
     try {
       $start_date = DrupalDateTime::createFromFormat('Y-m-d', $pagination_date);
@@ -227,7 +227,7 @@ class CollectionController extends ControllerBase {
     $variables = ['community' => $community];
 
     // The request should be took at the last moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
+    $master_request = $this->requestStack->getMainRequest();
 
     // Get filters themes.
     $filtered_themes = $master_request->query->get('themes');

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 77ebcdf6-cc4b-411e-ac2d-9db22bd73c23
+  bundle: sharing_themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 23
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Numérique
+  weight:
+    -
+      value: 4
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_created:
+    -
+      value: 1629989315
+  field_sharing_icon:
+    -
+      value: numerique

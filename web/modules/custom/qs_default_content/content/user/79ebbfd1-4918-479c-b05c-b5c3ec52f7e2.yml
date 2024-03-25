@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 79ebbfd1-4918-479c-b05c-b5c3ec52f7e2
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 5
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: manager+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$EKfG8JBQVEvZF0BOIbvJa7CiFeoqWfSQxr4NHKUmjL1C5.ERHOny
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: manager+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1502813361
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Juda
+  field_lastname:
+    -
+      value: Bricot

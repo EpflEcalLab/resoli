@@ -1,0 +1,53 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 71552db0-3bdd-499c-99d6-0c77b50bcbc6
+  bundle: offer_type
+  default_langcode: zxx
+  depends:
+    3b9e3824-c73b-4b19-82cf-ac35022f2d47: taxonomy_term
+    0930812e-d866-47df-a224-70bba49cdc6b: taxonomy_term
+default:
+  nid:
+    -
+      value: 65
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Faire les courses'
+  created:
+    -
+      value: 1629989628
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: 'Velit elit duis erat mollis nec lacinia in urna, quam turpis metus molestie nisl euismod diam facilisi, viverra ultricies nullam congue amet sit blandit. Tortor mi posuere dictum ultricies id mus sociosqu turpis, fames lorem euismod venenatis congue consectetur rhoncus. Cum consectetur primis magna nibh adipiscing vestibulum tincidunt penatibus dui, mattis urna himenaeos laoreet elit tristique pharetra praesent, montes vulputate pellentesque parturient taciti eleifend egestas id.'
+      format: light_html
+      summary: ''
+  field_community:
+    -
+      entity: 3b9e3824-c73b-4b19-82cf-ac35022f2d47
+  field_theme:
+    -
+      entity: 0930812e-d866-47df-a224-70bba49cdc6b

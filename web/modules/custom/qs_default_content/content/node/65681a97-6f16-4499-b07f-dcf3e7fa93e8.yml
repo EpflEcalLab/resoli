@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 65681a97-6f16-4499-b07f-dcf3e7fa93e8
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    0cebf08f-ec90-4684-b025-d0b4e39b4089: user
+    619eba65-2a76-42e3-a6f1-ad81408ea026: node
+default:
+  nid:
+    -
+      value: 53
+  revision_uid:
+    -
+      entity: 0cebf08f-ec90-4684-b025-d0b4e39b4089
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 0cebf08f-ec90-4684-b025-d0b4e39b4089
+  title:
+    -
+      value: '1200x800 - 217H.jpg - Labio de liebre "Bec de lièvre"'
+  created:
+    -
+      value: 1512592170
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  field_event:
+    -
+      entity: 619eba65-2a76-42e3-a6f1-ad81408ea026

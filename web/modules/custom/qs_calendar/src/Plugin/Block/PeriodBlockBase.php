@@ -4,12 +4,12 @@ namespace Drupal\qs_calendar\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\qs_badge\Service\BadgeManager;
 use Drupal\qs_calendar\Service\CalendarBuilder;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Period Block Base.
@@ -33,7 +33,7 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
   /**
    * The request stack (get the URL argument(s) and combined it with the path).
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\Http\RequestStack
    */
   protected $requestStack;
 
@@ -53,14 +53,14 @@ abstract class PeriodBlockBase extends BlockBase implements ContainerFactoryPlug
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     // Instantiates this form class.
     return new static(
-        // Load the service required to construct this class.
-        $configuration,
-        $plugin_id,
-        $plugin_definition,
-        // Load customs services used in this class.
-        $container->get('qs_calendar.calendar_builder'),
-        $container->get('request_stack'),
-        $container->get('qs_badge.badge_manager')
+      // Load the service required to construct this class.
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      // Load customs services used in this class.
+      $container->get('qs_calendar.calendar_builder'),
+      $container->get('request_stack'),
+      $container->get('qs_badge.badge_manager')
     );
   }
 

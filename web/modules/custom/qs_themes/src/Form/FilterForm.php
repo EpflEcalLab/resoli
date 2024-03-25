@@ -5,15 +5,16 @@ namespace Drupal\qs_themes\Form;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * A theme filter form that add the chosen theme as GET param to the route.
  */
 class FilterForm extends FormBase {
+
   /**
    * The current active user.
    *
@@ -31,7 +32,7 @@ class FilterForm extends FormBase {
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\Http\RequestStack
    */
   protected $requestStack;
 
@@ -62,7 +63,7 @@ class FilterForm extends FormBase {
     $form['#method'] = 'GET';
 
     // The request should be took at the last moment, avoid it on constructor.
-    $master_request = $this->requestStack->getMasterRequest();
+    $master_request = $this->requestStack->getMainRequest();
 
     // Disable caching & HTML5 validation.
     $form['#cache']['max-age'] = 0;
@@ -117,10 +118,10 @@ class FilterForm extends FormBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-        $container->get('current_user'),
-        $container->get('request_stack'),
-        $container->get('entity_type.manager'),
-        $container->get('language_manager')
+      $container->get('current_user'),
+      $container->get('request_stack'),
+      $container->get('entity_type.manager'),
+      $container->get('language_manager')
     );
   }
 
@@ -134,13 +135,11 @@ class FilterForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-  }
+  public function submitForm(array &$form, FormStateInterface $form_state) {}
 
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
 
 }

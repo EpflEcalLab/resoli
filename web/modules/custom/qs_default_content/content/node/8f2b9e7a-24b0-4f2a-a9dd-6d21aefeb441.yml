@@ -1,0 +1,84 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8f2b9e7a-24b0-4f2a-a9dd-6d21aefeb441
+  bundle: activity
+  default_langcode: zxx
+  depends:
+    e8cfc427-c90d-4015-b583-1418974120ed: taxonomy_term
+    d61ea8b9-e9ac-4b4d-9cc4-c0d364b33b4a: taxonomy_term
+default:
+  nid:
+    -
+      value: 3
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Sorties Théâtre'
+  created:
+    -
+      value: 1503413590
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/sorties-theatre
+      langcode: und
+      pathauto: 1
+  field_community:
+    -
+      entity: e8cfc427-c90d-4015-b583-1418974120ed
+  field_community_access_contact:
+    -
+      value: true
+  field_community_access_detail:
+    -
+      value: true
+  field_community_access_gallery:
+    -
+      value: true
+  field_community_access_story:
+    -
+      value: false
+  field_community_can_subscribe:
+    -
+      value: false
+  field_contact_mail:
+    -
+      value: jean.neige@example.com
+  field_contact_name:
+    -
+      value: 'Jean Neige'
+  field_contact_phone:
+    -
+      value: '012 345 67 89'
+  field_member_create_gallery:
+    -
+      value: true
+  field_member_create_story:
+    -
+      value: true
+  field_theme:
+    -
+      entity: d61ea8b9-e9ac-4b4d-9cc4-c0d364b33b4a
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

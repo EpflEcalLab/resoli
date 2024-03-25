@@ -105,7 +105,6 @@ class PhotoManager {
 
     // If the user has access bypass, display all photos, don't check access.
     if (!$this->acl->hasBypass()) {
-
       // From given $activities
       // Get only the ones which are Photos open to community.
       $query_open = $this->connection->select('node_field_data', 'activity');
@@ -255,7 +254,6 @@ class PhotoManager {
 
     // If the user has access bypass, display all photos, don't check access.
     if (!$this->acl->hasBypass()) {
-
       // From given $events
       // Get only the ones which are Photos open to community.
       $query_open = $this->connection->select('node_field_data', 'event');
@@ -405,6 +403,7 @@ class PhotoManager {
 
     // When user has members+ access, list all photos of this activity.
     $query = $this->privilegeStorage->getAggregateQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())
@@ -420,6 +419,7 @@ class PhotoManager {
 
     // If the user has only member access, list only its photos.
     $query = $this->privilegeStorage->getAggregateQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', 'node')
       ->condition('entity', $activity->id())

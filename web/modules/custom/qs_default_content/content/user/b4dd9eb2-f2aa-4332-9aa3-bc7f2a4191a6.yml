@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: b4dd9eb2-f2aa-4332-9aa3-bc7f2a4191a6
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 16
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  pass:
+    -
+      value: $S$Ewhme/r/lbuT6cJXW3sc2eGHf29yWHnTrau79aPMD0UKvV5cRzw.
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: member+fribourg+organizer+fribourg@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1504513492
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Pierre
+  field_lastname:
+    -
+      value: Affeu
+  field_phone:
+    -
+      value: '0211234567'

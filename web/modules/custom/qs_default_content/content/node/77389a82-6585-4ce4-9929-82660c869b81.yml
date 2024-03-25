@@ -1,0 +1,60 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 77389a82-6585-4ce4-9929-82660c869b81
+  bundle: request
+  default_langcode: zxx
+  depends:
+    962f5253-7237-45f3-b567-26fd227a0089: user
+    e8cfc427-c90d-4015-b583-1418974120ed: taxonomy_term
+    77ebcdf6-cc4b-411e-ac2d-9db22bd73c23: taxonomy_term
+default:
+  nid:
+    -
+      value: 78
+  revision_uid:
+    -
+      entity: 962f5253-7237-45f3-b567-26fd227a0089
+  status:
+    -
+      value: false
+  uid:
+    -
+      entity: 962f5253-7237-45f3-b567-26fd227a0089
+  title:
+    -
+      value: 'Demande d''entraide N°78 de Sara Courci'
+  created:
+    -
+      value: 1631201549
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: archived
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: "Bonjour,\r\n\r\nY a-t-il une nouvelle solution afin de pouvoir envoyer des mails avec Thunderbird à près de 100 utilisateurs ?\r\nJ'ai donc la version 91.1.0 \r\n\r\nCela m'arrive depuis le 1er septembre 2021. Jamais eu de problème auparavant.\r\n\r\nMerci d'avance pour vos idées."
+      format: light_html
+      summary: ''
+  field_community:
+    -
+      entity: e8cfc427-c90d-4015-b583-1418974120ed
+  field_contact_name:
+    -
+      value: 'Sarah Courci'
+  field_theme:
+    -
+      entity: 77ebcdf6-cc4b-411e-ac2d-9db22bd73c23

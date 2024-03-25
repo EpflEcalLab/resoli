@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e6ede821-1132-49c4-ad51-93849f4312ec
+  bundle: photo
+  default_langcode: zxx
+  depends:
+    69b945a8-c2f3-4da3-b442-860846ce59ed: node
+default:
+  nid:
+    -
+      value: 48
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Photo N° 8 - Accueil Café (20) - Accueil Café (5)'
+  created:
+    -
+      value: 1509628635
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 1
+  field_event:
+    -
+      entity: 69b945a8-c2f3-4da3-b442-860846ce59ed

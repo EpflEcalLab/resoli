@@ -35,7 +35,8 @@
 {% if variables.photos is not empty %}
   <div class="container my-5">
     <div class="row">
-      {% for activity in variables.activities if variables.photos[activity.nid.value] is not empty %}
+      {% for activity in variables.activities|filter(activity => variables.photos[activity.nid.value] is not empty) %}
+
       {% set event = variables.events[activity.nid.value] %}
       {# Print the theme header if we are on the next one #}
       {% if (activity.field_theme.target_id != currentTheme) %}

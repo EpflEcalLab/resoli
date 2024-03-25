@@ -20,6 +20,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  * @internal
  */
 final class OfferRepositoryTest extends KernelTestBase {
+
   use EntityReferenceTestTrait;
   use NodeTestTrait;
   use SharingWorkflowTestTrait;

@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 8028e2f1-7193-497e-8d82-f9511c0a020c
+  bundle: themes
+  default_langcode: fr
+default:
+  tid:
+    -
+      value: 14
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Langues
+  weight:
+    -
+      value: 10
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  content_translation_uid:
+    -
+      target_id: 1
+  content_translation_created:
+    -
+      value: 1710316280
+  field_icon:
+    -
+      value: langues

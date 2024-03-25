@@ -146,6 +146,7 @@ class EventManager {
   public function getAll(NodeInterface $activity) {
     // Get every activity that belongs to the current community.
     $query = $this->nodeStorage->getQuery()
+      ->accessCheck()
       ->condition('type', 'event')
       ->condition('field_activity', $activity->id());
 
@@ -175,6 +176,7 @@ class EventManager {
 
     // Get every activity that belongs to the current community.
     $query = $this->nodeStorage->getQuery()
+      ->accessCheck()
       ->condition('type', 'event')
       ->condition('field_end_at', $now, '>')
       ->condition('status', TRUE)
@@ -219,6 +221,7 @@ class EventManager {
 
     // Get every activity that belongs to the current community.
     $query = $this->nodeStorage->getQuery()
+      ->accessCheck()
       ->condition('type', 'event')
       ->condition('field_end_at', $today->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<')
       ->condition('status', TRUE)

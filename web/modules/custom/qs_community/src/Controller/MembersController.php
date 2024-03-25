@@ -88,10 +88,10 @@ class MembersController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager'),
-    $container->get('qs_export.excel')
+      // Load customs services used in this class.
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('qs_export.excel')
     );
   }
 
@@ -185,7 +185,7 @@ class MembersController extends ControllerBase {
    * Members page.
    */
   public function members(Request $request, TermInterface $community) {
-    $keywords = $request->get('keywords');
+    $keywords = $request->get('keywords', '');
     $variables['community'] = $community;
 
     $render = [

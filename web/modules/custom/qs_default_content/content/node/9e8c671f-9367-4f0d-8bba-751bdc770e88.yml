@@ -1,0 +1,70 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9e8c671f-9367-4f0d-8bba-751bdc770e88
+  bundle: request
+  default_langcode: zxx
+  depends:
+    79ebbfd1-4918-479c-b05c-b5c3ec52f7e2: user
+    e8cfc427-c90d-4015-b583-1418974120ed: taxonomy_term
+    6a14afb5-35ea-4180-bba1-666b7f6860c9: user
+    f2f66008-30dd-4173-a4d6-f14fe04efce9: taxonomy_term
+default:
+  nid:
+    -
+      value: 79
+  revision_uid:
+    -
+      entity: 79ebbfd1-4918-479c-b05c-b5c3ec52f7e2
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 79ebbfd1-4918-479c-b05c-b5c3ec52f7e2
+  title:
+    -
+      value: 'Demande d''entraide N°79 de Juda Bricot'
+  created:
+    -
+      value: 1631201727
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: solved
+  path:
+    -
+      alias: ''
+      langcode: zxx
+      pathauto: 0
+  body:
+    -
+      value: "Bonjour, \r\n\r\nJe possède un cerisier 1/2 tige Bigareau de 6 années.\r\n\r\nDepuis une année toute l’écorce du tronc part en lambeau du haut en bas du tronc.\r\n\r\nJe souhaiterai savoir comment le soigner ou le traiter  pour qu’il refasse son écorce si c’est encore possible. \r\n\r\nMerci pour vos réponses\r\nCordialement."
+      format: light_html
+      summary: ''
+  field_community:
+    -
+      entity: e8cfc427-c90d-4015-b583-1418974120ed
+  field_contact_mail:
+    -
+      value: manager+lausanne@antistatique.net
+  field_contact_name:
+    -
+      value: 'Juda Bricot'
+  field_solved_at:
+    -
+      value: '2020-01-01T11:00:00'
+  field_solved_by:
+    -
+      entity: 6a14afb5-35ea-4180-bba1-666b7f6860c9
+  field_theme:
+    -
+      entity: f2f66008-30dd-4173-a4d6-f14fe04efce9

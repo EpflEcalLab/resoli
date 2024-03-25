@@ -6,7 +6,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Redirect event to the activity page.
  */
 class RedirectSubscriber implements EventSubscriberInterface {
+
   /**
    * The current route match.
    *
@@ -38,10 +39,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * It verify the current route is Community canonical access then
    * redirect on the activities page.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function communityRedirect(GetResponseEvent $event) {
+  public function communityRedirect(RequestEvent $event): void {
     $term = $this->routeMatch->getParameter('taxonomy_term');
 
     if ($this->routeMatch->getRouteName() === 'entity.taxonomy_term.canonical' && $term->bundle() === 'communities') {
@@ -56,10 +57,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * It verify the current route is Event canonical access then
    * redirect on the activity page.
    *
-   * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
    *   Event subscriber.
    */
-  public function eventRedirect(GetResponseEvent $event) {
+  public function eventRedirect(RequestEvent $event): void {
     $node = $this->routeMatch->getParameter('node');
 
     if ($this->routeMatch->getRouteName() === 'entity.node.canonical' && $node->bundle() === 'event') {
@@ -71,7 +72,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     $events[KernelEvents::REQUEST][] = ['communityRedirect'];
     $events[KernelEvents::REQUEST][] = ['eventRedirect'];
 

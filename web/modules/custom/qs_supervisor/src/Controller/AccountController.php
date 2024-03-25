@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * A user dashboard listing its communities and the user data.
  */
 class AccountController extends ControllerBase {
+
   /**
    * Access Control Service.
    *

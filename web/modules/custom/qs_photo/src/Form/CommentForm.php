@@ -186,7 +186,6 @@ class CommentForm extends FormBasic {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-  }
+  public function validateForm(array &$form, FormStateInterface $form_state) {}
 
 }

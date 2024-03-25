@@ -160,6 +160,7 @@ class PrivilegeManager {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', 1)
       ->condition('bundle', $entity->getEntityTypeId())
       ->condition('user', $user->id())
@@ -213,6 +214,7 @@ class PrivilegeManager {
     }
 
     $query = $this->privilegeStorage->getQuery()
+      ->accessCheck()
       ->condition('status', $status)
       ->condition('user', $user->id())
       ->condition('entity', $entities, 'IN');

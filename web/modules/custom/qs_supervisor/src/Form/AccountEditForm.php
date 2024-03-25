@@ -30,6 +30,7 @@ class AccountEditForm extends FormBase {
    * @var \Drupal\qs_auth\Service\Account
    */
   private $account;
+
   /**
    * Access Control Service.
    *

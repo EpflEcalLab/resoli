@@ -1,0 +1,64 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: ce7ef8f2-ed46-4b86-92fc-184c4c1847d5
+  bundle: event
+  default_langcode: zxx
+  depends:
+    0d1a1d73-d969-4cbf-b2fc-c8e93dd18e16: node
+default:
+  nid:
+    -
+      value: 40
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Accueil Café'
+  created:
+    -
+      value: 1507541171
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /lausanne/activities/accueil-cafe/events/accueil-cafe-2
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Partagez un simple café entre habitants!</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 0d1a1d73-d969-4cbf-b2fc-c8e93dd18e16
+  field_contribution:
+    -
+      value: '90 centimes'
+  field_end_at:
+    -
+      value: '2024-11-13T14:00:00'
+  field_start_at:
+    -
+      value: '2024-11-13T10:00:00'
+  field_venue_lat:
+    -
+      value: '46.8182'
+  field_venue_long:
+    -
+      value: '8.2275'

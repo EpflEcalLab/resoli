@@ -3,11 +3,11 @@
 namespace Drupal\qs_acl\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Base class for Ajax Controllers.
@@ -48,10 +48,11 @@ class AjaxControllerBase extends ControllerBase {
    * @var \Drupal\Core\Entity\ContentEntityStorageInterface
    */
   protected $privilegeStorage;
+
   /**
    * The request stack (get the URL argument(s) and combined it with the path).
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\Http\RequestStack
    */
   protected $requestStack;
 
@@ -89,11 +90,11 @@ class AjaxControllerBase extends ControllerBase {
   public static function create(ContainerInterface $container) {
     // Instantiates this form class.
     return new static(
-    // Load customs services used in this class.
-    $container->get('request_stack'),
-    $container->get('qs_acl.access_control'),
-    $container->get('qs_acl.privilege_manager'),
-    $container->get('plugin.manager.mail')
+      // Load customs services used in this class.
+      $container->get('request_stack'),
+      $container->get('qs_acl.access_control'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('plugin.manager.mail')
     );
   }
 

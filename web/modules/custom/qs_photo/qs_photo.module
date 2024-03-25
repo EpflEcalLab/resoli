@@ -79,7 +79,7 @@ function qs_photo_file_validate_image_max_resolution(FileInterface $file, $maxim
   $errors = [];
 
   // Check first that the file is an image.
-  $image_factory = \Drupal::service('image.factory');
+  $image_factory = Drupal::service('image.factory');
   $image = $image_factory->get($file->getFileUri());
 
   if (!$image->isValid()) {

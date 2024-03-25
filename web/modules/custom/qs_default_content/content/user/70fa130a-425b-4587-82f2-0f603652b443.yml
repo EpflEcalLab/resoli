@@ -1,0 +1,49 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: 70fa130a-425b-4587-82f2-0f603652b443
+  default_langcode: fr
+default:
+  uid:
+    -
+      value: 17
+  preferred_langcode:
+    -
+      value: fr
+  name:
+    -
+      value: declined+organizer+lausanne@antistatique.net
+  pass:
+    -
+      value: $S$E4n6ORdsU97w2fcGt7y0M.PcYTvkR9ByNDebCsOq9OH17tdgl9b6
+      existing: ''
+      pre_hashed: true
+  mail:
+    -
+      value: declined+organizer+lausanne@antistatique.net
+  timezone:
+    -
+      value: Europe/Zurich
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1504603632
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  path:
+    -
+      alias: ''
+      langcode: fr
+      pathauto: 1
+  field_firstname:
+    -
+      value: Cara
+  field_lastname:
+    -
+      value: Melmou

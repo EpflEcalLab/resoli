@@ -83,7 +83,7 @@ class Excel {
     $i = 1;
 
     foreach ($items as $item) {
-      $cell = $worksheet->getCellByColumnAndRow($i++, $row);
+      $cell = $worksheet->getCell([$i++, $row]);
       $cell->getStyle()->getFont()->setBold(TRUE);
       $cell->getStyle()->getFont()->setSize(18);
 
@@ -130,7 +130,7 @@ class Excel {
     $row = $worksheet->getHighestRow() + 1;
 
     foreach ($items as $item) {
-      $cell = $worksheet->getCellByColumnAndRow($col++, $row);
+      $cell = $worksheet->getCell([$col++, $row]);
       $cell->getStyle()->getFont()->setSize(12);
 
       // Get the raw values to write.
@@ -156,12 +156,12 @@ class Excel {
 
           break;
 
-        // Skip unprocessable content.
         case $content instanceof PhpSpreadsheetHtml:
+          // Skip unprocessable content.
           break;
 
         default:
-          $safe_string = htmlspecialchars_decode($content, \ENT_QUOTES);
+          $safe_string = htmlspecialchars_decode((string) $content, \ENT_QUOTES);
           $cell->setValue($safe_string);
 
           break;
@@ -267,7 +267,7 @@ class Excel {
     $highest_col_index = Coordinate::columnIndexFromString($highest_col);
 
     for ($col = 1; $col <= $highest_col_index; ++$col) {
-      $cell = $worksheet->getCellByColumnAndRow($col, $last_row);
+      $cell = $worksheet->getCell([$col, $last_row]);
       $cell->getStyle()->getBorders()->getBottom()->setBorderStyle(Border::BORDER_MEDIUM);
     }
   }

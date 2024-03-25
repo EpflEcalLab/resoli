@@ -1,0 +1,58 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 42792f39-091b-48ea-8892-c75a583b29ec
+  bundle: event
+  default_langcode: zxx
+  depends:
+    2d768a8a-8f48-4998-8b10-59a3ac5ecb8f: node
+default:
+  nid:
+    -
+      value: 63
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Ginguettes Party de Vevey'
+  created:
+    -
+      value: 1522921721
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /fribourg/activities/ginguettes/events/ginguettes-party-de-vevey
+      langcode: und
+      pathauto: 1
+  body:
+    -
+      value: "<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, hac curae fames eros litora venenatis.</p>\r\n"
+      format: full_html
+      summary: ''
+  field_activity:
+    -
+      entity: 2d768a8a-8f48-4998-8b10-59a3ac5ecb8f
+  field_contribution:
+    -
+      value: '30'
+  field_end_at:
+    -
+      value: '2024-03-13T10:06:23'
+  field_start_at:
+    -
+      value: '2024-03-13T08:35:23'

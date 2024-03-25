@@ -175,11 +175,11 @@ class CommunitiesApplyForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-    $container->get('qs_acl.access_control'),
-    $container->get('entity_type.manager'),
-    $container->get('qs_acl.privilege_manager'),
-    $container->get('current_user'),
-    $container->get('qs_auth.account')
+      $container->get('qs_acl.access_control'),
+      $container->get('entity_type.manager'),
+      $container->get('qs_acl.privilege_manager'),
+      $container->get('current_user'),
+      $container->get('qs_auth.account')
     );
   }
 

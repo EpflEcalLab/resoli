@@ -11,9 +11,9 @@ default:
         - Drupal\Behat\Context\Drupal\DebugContext:
             log_path: '%paths.base%/log/behat'
         - Drupal\Behat\Context\Drupal\FormContext:
-            base_url: http://resoli.test:8888
+            base_url: http://resoli.test
         - Drupal\Behat\Context\Drupal\MailContext:
-            base_url: http://resoli.test:8888
+            base_url: http://resoli.test
         - Drupal\Behat\Context\Drupal\JsonContext:
         - Drupal\Behat\Context\Drupal\WatchdogContext:
         - Drupal\Behat\Context\Drupal\UrlContext:
@@ -38,7 +38,7 @@ default:
       goutte: ~
       selenium2:
         wd_host: http://browser:4444/wd/hub
-      base_url: http://resoli.test:8888
+      base_url: http://resoli.test
     Drupal\DrupalExtension:
       blackbox: ~
       api_driver: 'drupal'

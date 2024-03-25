@@ -8,6 +8,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Drupal\Component\Utility\Random;
 use Behat\Gherkin\Node\TableNode;
 use Drupal\Component\FileSecurity\FileSecurity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Defines application features from the specific context.
@@ -142,12 +143,18 @@ class FormContext extends RawDrupalContext {
     $fso->prepareDirectory($dirname, FileSystemInterface::CREATE_DIRECTORY);
 
     for ($i = 0; $i < $number; $i++) {
-      $destination = $dirname . $random->name(10, TRUE) . '.' . $extension;
-      $data        = $random->paragraphs(3);
-      $file        = file_save_data($data, $destination, FileSystemInterface::EXISTS_ERROR);
+      $filename = $random->name(10, TRUE) . '.' . $extension;
+      $destination = $dirname . $filename;
+      $data = $random->paragraphs(3);
+      $file = \Drupal::service('file.repository')->writeData($data, $destination, FileSystemInterface::EXISTS_ERROR);
+
+      $uploaded_file = [
+        'name' => $filename,
+        'tmp_name' => $fso->realpath($file->getFileUri()),
+      ];
 
       $this->attachments[] = [
-        $fso->realpath($file->getFileUri()),
+        $uploaded_file,
       ];
     }
   }
@@ -158,9 +165,11 @@ class FormContext extends RawDrupalContext {
    * @Then /^I send "([^"]*)" request to "([^"]*)" with parameters:$/
    */
   public function iSendRequestWithBody($method, $url, TableNode $parameters) {
-    /** @var \Symfony\Component\BrowserKit\Client $client */
+    /** @var \Symfony\Component\BrowserKit\HttpBrowser $client */
     $client = $this->getSession()->getDriver()->getClient();
-    $client->request($method, $this->baseUrl . $url, $parameters->getRowsHash(), ['files' => $this->attachments]);
+    $client->request($method, $this->baseUrl . $url, $parameters->getRowsHash(), [
+      'files' => $this->attachments,
+    ]);
   }
 
   /**
@@ -169,7 +178,7 @@ class FormContext extends RawDrupalContext {
    * @Then /^I send "([^"]*)" request to "([^"]*)"$/
    */
   public function iSendUpload($method, $url) {
-    /** @var \Symfony\Component\BrowserKit\Client $client */
+    /** @var \Symfony\Component\BrowserKit\HttpBrowser $client */
     $client = $this->getSession()->getDriver()->getClient();
     $client->request($method, $this->baseUrl . $url, [], [
       'files' => $this->attachments,

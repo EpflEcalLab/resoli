@@ -11,9 +11,9 @@ dependencies:
 _core:
   default_config_hash: GNfx9kN8-0_KgQ-xf3fjdXCCzZwXCI8T0IPFW8SIe7g
 id: frontpage
-label: 'Page d''accueil'
+label: "Page d'accueil"
 module: node
-description: 'Tout le contenu promu en page d''accueil.'
+description: "Tout le contenu promu en page d'accueil."
 tag: default
 base_table: node_field_data
 base_field: nid
@@ -75,7 +75,7 @@ display:
           plugin_id: text_custom
           label: ''
           empty: true
-          content: 'Aucun contenu de page d''accueil n''a été créé pour l''instant.'
+          content: "Aucun contenu de page d'accueil n'a été créé pour l'instant."
           tokenize: false
         node_listing_empty:
           id: node_listing_empty

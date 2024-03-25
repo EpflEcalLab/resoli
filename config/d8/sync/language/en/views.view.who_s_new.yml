@@ -1,9 +1,10 @@
-label: 'Who''s new'
-description: 'Shows a list of the newest user accounts on the site.'
+label: 'Nouveaux membres'
+description: 'Affiche la liste des utilisateurs les plus récents sur le site.'
 display:
   default:
-    display_title: Master
+    display_title: Maître
     display_options:
+      title: 'Nouveaux membres'
       exposed_form:
         options:
           submit_button: Apply
@@ -11,10 +12,9 @@ display:
           exposed_sorts_label: 'Sort by'
           sort_asc_label: Asc
           sort_desc_label: Desc
-      title: 'Who''s new'
   block_1:
-    display_title: 'Who''s new'
+    display_title: 'Nouveaux membres'
     display_options:
-      display_description: 'A list of new users'
-      block_description: 'Who''s new'
-      block_category: User
+      display_description: 'Une liste des nouveaux utilisateurs'
+      block_description: 'Nouveaux membres'
+      block_category: Utilisateur

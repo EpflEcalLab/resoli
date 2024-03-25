@@ -10,7 +10,7 @@ field_name: field_community_access_detail
 entity_type: node
 bundle: activity
 label: 'Montrer les détails des événements à la communauté'
-description: 'Si décoché, seuls les membres de l''activité peuvent les voir.'
+description: "Si décoché, seuls les membres de l'activité peuvent les voir."
 required: false
 translatable: false
 default_value:

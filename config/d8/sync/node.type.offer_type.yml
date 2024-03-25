@@ -8,9 +8,9 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
-name: 'Offer''s Type'
+name: "Offer's Type"
 type: offer_type
-description: 'Offer''s type where offers will be attached.'
+description: "Offer's type where offers will be attached."
 help: ''
 new_revision: true
 preview_mode: 0

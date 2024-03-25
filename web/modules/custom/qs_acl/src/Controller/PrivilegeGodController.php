@@ -139,6 +139,9 @@ class PrivilegeGodController extends AjaxControllerBase {
       return new JsonResponse(['status' => FALSE]);
     }
 
+    $roles = [];
+    $entity = NULL;
+
     if ($community) {
       $entity = $community;
       $roles = [

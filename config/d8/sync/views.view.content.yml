@@ -4163,7 +4163,7 @@ display:
         - 'config:field.storage.node.field_image'
   page_6:
     id: page_6
-    display_title: 'Offer''s Types'
+    display_title: "Offer's Types"
     display_plugin: page
     position: 6
     display_options:
@@ -4387,7 +4387,7 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-          label: ' Offer''s Type'
+          label: " Offer's Type"
           exclude: false
           alter:
             alter_text: false
@@ -4783,7 +4783,7 @@ display:
       path: admin/content/sharing_offer_types
       menu:
         type: tab
-        title: 'Offer''s Types'
+        title: "Offer's Types"
         description: ''
         weight: 0
         expanded: false
@@ -4964,7 +4964,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: 'Offer''s type'
+          label: "Offer's type"
           exclude: false
           alter:
             alter_text: false
@@ -5528,7 +5528,7 @@ display:
           exposed: true
           expose:
             operator_id: title_op
-            label: 'Offer''s Type'
+            label: "Offer's Type"
             description: ''
             use_operator: false
             operator: title_op

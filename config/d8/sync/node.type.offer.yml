@@ -10,7 +10,7 @@ third_party_settings:
     parent: ''
 name: Offer
 type: offer
-description: 'Offer which belongs to only one Offer''s type.'
+description: "Offer which belongs to only one Offer's type."
 help: ''
 new_revision: true
 preview_mode: 0

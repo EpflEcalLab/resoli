@@ -22,6 +22,13 @@ abstract class FormBasic extends FormBase {
   protected $container;
 
   /**
+   * Listing of allowed extensions.
+   *
+   * @var string
+   */
+  protected $extensions = 'png gif jpg jpeg';
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ContainerInterface $container) {

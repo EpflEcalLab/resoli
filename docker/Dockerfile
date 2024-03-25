@@ -43,6 +43,9 @@ ARG group=${user}
 
 ENV COMPOSER_DISCARD_CHANGES=true
 
+# Create an alias of Drush to run it from root directory.
+RUN ln -snf "/var/www/vendor/bin/drush" /usr/local/bin/drush
+
 # Feel free to disable those lines to use Xdebug on your side.
 #RUN mkdir -p /usr/src/php/ext/xdebug && \
 #    pecl install xdebug && \

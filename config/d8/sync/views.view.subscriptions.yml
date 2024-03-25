@@ -101,7 +101,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="{{ path(''entity.node.canonical'', {''node'': entity__value}) }}">{{ bamboo_render_field(''title'', ''node'', entity__value) }}</a>'
+            text: "<a href=\"{{ path('entity.node.canonical', {'node': entity__value}) }}\">{{ bamboo_render_field('title', 'node', entity__value) }}</a>"
             make_link: false
             path: ''
             absolute: false

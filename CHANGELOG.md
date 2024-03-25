@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.3.8] - 2024-03-25
 ### Security
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61
 - upgrade to PHP 8.1 - QS-52
@@ -693,7 +695,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.7...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.8...HEAD
+[2.3.8]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.7...2.3.8
 [2.3.7]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.6...2.3.7
 [2.3.6]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.5...2.3.6
 [2.3.5]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.4...2.3.5

@@ -27,7 +27,11 @@
     </h4>
   {% else %}
     <h4 class="text-size-base font-weight-bold card-title mb-3 mt-0">
-      {{ request.uid.entity.field_firstname.value }} {{ request.uid.entity.field_lastname.value }}
+      {% if contact_name is not empty %}
+        {{ contact_name }}
+      {% else %}
+        {{ request.uid.entity.field_firstname.value }} {{ request.uid.entity.field_lastname.value }}
+      {% endif %}
     </h4>
   {% endif %}
 

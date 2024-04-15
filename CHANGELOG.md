@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased2]
+## [Unreleased]
 ### Security
 - upgrade drupal/core 9.5.11 => 10.0.11 - QS-50
 - replace Mink Goutte in favor of Browserkit for Behat testing - QS-50
@@ -22,7 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - remove drupal/swiftmailer - QS-50
 
-## [Unreleased]
+### Fixed
+- fix Requests Contact name field never display - QS-69
 
 ## [2.3.8] - 2024-03-25
 ### Security

@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - fix Requests Contact name field never display - QS-69
+- fix filtering Activities & Photos by Themes - QS-68
 
 ## [2.3.8] - 2024-03-25
 ### Security

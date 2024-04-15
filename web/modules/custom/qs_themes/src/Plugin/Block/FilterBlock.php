@@ -54,7 +54,7 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
     // The request should be took at the latest moment, avoid it on constructor.
     $master_request = $this->requestStack->getMainRequest();
 
-    $filtered_themes = $master_request->query->get('themes');
+    $filtered_themes = $master_request->query->all('themes');
 
     if ($filtered_themes) {
       $variables['filtered'] = $this->termStorage->loadMultiple($filtered_themes);

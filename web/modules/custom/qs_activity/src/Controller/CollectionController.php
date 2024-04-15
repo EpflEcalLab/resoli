@@ -230,7 +230,7 @@ class CollectionController extends ControllerBase {
     $master_request = $this->requestStack->getMainRequest();
 
     // Get filters themes.
-    $filtered_themes = $master_request->query->get('themes');
+    $filtered_themes = $master_request->query->all('themes');
 
     if ($filtered_themes) {
       $themes = $this->termStorage->loadMultiple($filtered_themes);

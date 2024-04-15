@@ -377,7 +377,7 @@ class ActivityManager {
     $query->groupBy('field_theme.field_theme_target_id');
 
     // Apply filter by theme if requested.
-    $themes = $master_request->query->get('themes');
+    $themes = $master_request->query->all('themes');
 
     if ($themes) {
       $or_themes = $query->orConditionGroup();

@@ -23,6 +23,8 @@
         {% block card_list_items %}
           {% for key, request in variables.requests %}
             {% set is_solved = request.moderation_state.value == 'solved' %}
+
+            {% set contact_name = not request.field_contact_name.isEmpty ? request.field_contact_name.value|trim : null %}
             {% set contact_phone = request.field_contact_phone.value %}
             {% set contact_mail = request.field_contact_mail.value %}
 

@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.0.0] - 2024-04-22
 ### Security
 - upgrade drupal/core 9.5.11 => 10.0.11 - QS-50
 - replace Mink Goutte in favor of Browserkit for Behat testing - QS-50
@@ -715,7 +717,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.8...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.8...3.0.0
 [2.3.8]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.7...2.3.8
 [2.3.7]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.6...2.3.7
 [2.3.6]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.5...2.3.6

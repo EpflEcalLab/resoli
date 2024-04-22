@@ -27,7 +27,7 @@ final class ActivityManagerTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->activityManager = $this->getMockBuilder(ActivityManager::class)

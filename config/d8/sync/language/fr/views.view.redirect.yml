@@ -48,7 +48,7 @@ display:
                 title: '307 Redirection Temporaire'
         language:
           expose:
-            label: 'Langue d''origine'
+            label: "Langue d'origine"
       title: Rediriger
   page_1:
     display_title: Page

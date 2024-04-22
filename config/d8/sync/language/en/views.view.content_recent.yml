@@ -1,9 +1,10 @@
-label: 'Recent content'
-description: 'Recent content.'
+label: 'Contenu récent'
+description: 'Contenu récent.'
 display:
   default:
-    display_title: Master
+    display_title: Maître
     display_options:
+      title: 'Contenu récent'
       exposed_form:
         options:
           submit_button: Apply
@@ -11,13 +12,9 @@ display:
           exposed_sorts_label: 'Sort by'
           sort_asc_label: Asc
           sort_desc_label: Desc
-      fields:
-        changed:
-          separator: ', '
-      title: 'Recent content'
       empty:
         area_text_custom:
           content: 'No content available.'
-      use_more_text: More
+      use_more_text: Plus
   block_1:
-    display_title: Block
+    display_title: Bloc

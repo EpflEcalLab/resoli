@@ -5,16 +5,10 @@ parameters:
   excludePaths:
     - *Test.php
     - *TestBase.php
-    - web/themes/custom/vernier/node_modules/*
+    - web/themes/quartiers_solidaires/node_modules/*
+    - web/themes/quartiers_solidaires/*/node_modules/*
   # PHPStan Level 1
   level: 1
   ignoreErrors:
     - '#Unsafe usage of new static#'
-    # - '#\Drupal calls should be avoided in classes, use dependency injection instead#'
-includes:
-  # Add the phpstan-drupal extension & rules.
-  - vendor/mglaman/phpstan-drupal/extension.neon
-  # Add the phpstan deprecation rules.
-  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
-  # The Baseline file of this project created on 08.03.2023.
-  - ./phpstan-baseline.neon
+    - '#\Drupal calls should be avoided in classes, use dependency injection instead#'

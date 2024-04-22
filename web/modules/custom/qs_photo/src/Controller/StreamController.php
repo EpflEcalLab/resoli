@@ -136,13 +136,10 @@ class StreamController extends ControllerBase {
           throw new ServiceUnavailableHttpException(3, 'Image generation in progress. Try again shortly.');
         }
 
-        if (!empty($lock_acquired)) {
-          $this->lock->release($lock_name);
-        }
-
         // Create the new image derivative.
         $image_style->createDerivative($file_uri, $image_style_uri);
         $image_style_path = $this->fso->realpath($image_style_uri);
+        $this->lock->release($lock_name);
       }
       $file_download = (object) [
         'path' => $image_style_path,

@@ -54,7 +54,7 @@ class DeleteForm extends FormBasic {
   public function access(AccountInterface $account, NodeInterface $activity) {
     $access = AccessResult::allowed();
 
-    $photos_params = $this->getRequest()->query->get('photos');
+    $photos_params = $this->getRequest()->query->all('photos');
 
     if (!$photos_params) {
       return AccessResult::forbidden();
@@ -91,7 +91,7 @@ class DeleteForm extends FormBasic {
     $form = parent::buildForm($form, $form_state);
     $user = $this->getCurrentUser();
 
-    $photos_params = $this->getRequest()->query->get('photos');
+    $photos_params = $this->getRequest()->query->all('photos');
     $photos = $this->nodeStorage->loadMultiple($photos_params);
 
     // Save the activity for submission.
@@ -180,7 +180,7 @@ class DeleteForm extends FormBasic {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $activity = $this->nodeStorage->load($form_state->get('activity'));
     $user = $this->getCurrentUser();
-    $photos_params = $this->getRequest()->query->get('photos');
+    $photos_params = $this->getRequest()->query->all('photos');
 
     $this->messenger()->addMessage($this->t('qs_photo.form.delete.success @activity @number', [
       '@activity' => $activity->getTitle(),

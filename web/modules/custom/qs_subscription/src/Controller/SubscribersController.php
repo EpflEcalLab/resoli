@@ -60,6 +60,13 @@ class SubscribersController extends ControllerBase {
   private $subscriptionManager;
 
   /**
+   * The Subscription Storage.
+   *
+   * @var \Drupal\Core\Entity\ContentEntityStorageInterface
+   */
+  private $subscriptionStorage;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(AccessControl $acl, SubscriptionManager $subscription_manager, Excel $excel_exporter, PagerManagerInterface $pager_manager) {

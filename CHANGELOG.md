@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2024-04-22
+### Security
+- upgrade drupal/core 9.5.11 => 10.0.11 - QS-50
+- replace Mink Goutte in favor of Browserkit for Behat testing - QS-50
+- upgrade module drupal/metatag (1.26.0 => 2.0.0)
+- upgrade module drupal/schema_metatag (2.5.0 => 3.0.1)
+
+### Changed
+- update phpstan.neon for Drupal 10 - QS-50
+- remove shim class Drupal\Core\Http\RequestStack and use Symfony\Component\HttpFoundation\RequestStack - QS-50
+- fix Request get parameter of array GET params since Symfony 6 - QS-50
+
+### Added
+- add drush alias on Docker container - QS-50
+
+### Removed
+- remove drupal/swiftmailer - QS-50
+
+### Fixed
+- fix Requests Contact name field never display - QS-69
+- fix filtering Activities & Photos by Themes - QS-68
+
 ## [2.3.8] - 2024-03-25
 ### Security
 - replace drupal/swiftmailer by drupal/symfony_mailer_lite - QS-61
@@ -695,7 +717,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.8...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.8...3.0.0
 [2.3.8]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.7...2.3.8
 [2.3.7]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.6...2.3.7
 [2.3.6]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.5...2.3.6

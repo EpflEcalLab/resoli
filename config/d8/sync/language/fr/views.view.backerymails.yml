@@ -22,7 +22,7 @@ display:
             offset_label: Décalage
       fields:
         id:
-          label: 'Identifiant (ID) de l''entité'
+          label: "Identifiant (ID) de l'entité"
           separator: ', '
         created:
           separator: ', '

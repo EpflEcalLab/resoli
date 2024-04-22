@@ -185,6 +185,7 @@ class RequestForm extends FormBase {
       $form_state->setRebuild();
       // Create the bag message render array.
       $status_messages = ['#type' => 'status_messages'];
+      /** @var \Drupal\Component\Render\MarkupInterface|null $messages */
       $messages = $this->renderer->renderRoot($status_messages);
 
       if (!empty($messages)) {
@@ -217,6 +218,7 @@ class RequestForm extends FormBase {
 
     // Create the bag message render array.
     $status_messages = ['#type' => 'status_messages'];
+    /** @var \Drupal\Component\Render\MarkupInterface|null $messages */
     $messages = $this->renderer->renderRoot($status_messages);
 
     if (!empty($messages)) {

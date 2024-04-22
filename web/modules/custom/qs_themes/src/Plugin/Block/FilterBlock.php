@@ -4,9 +4,9 @@ namespace Drupal\qs_themes\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Filter Theme Block.
@@ -25,7 +25,7 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Drupal\Core\Http\RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
@@ -54,7 +54,7 @@ class FilterBlock extends BlockBase implements ContainerFactoryPluginInterface {
     // The request should be took at the latest moment, avoid it on constructor.
     $master_request = $this->requestStack->getMainRequest();
 
-    $filtered_themes = $master_request->query->get('themes');
+    $filtered_themes = $master_request->query->all('themes');
 
     if ($filtered_themes) {
       $variables['filtered'] = $this->termStorage->loadMultiple($filtered_themes);

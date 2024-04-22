@@ -1,43 +1,43 @@
 display:
   default:
-    display_title: Default
+    display_title: Maître
     display_options:
-      exposed_form:
-        options:
-          submit_button: Filter
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
+      fields:
+        title:
+          label: Titre
+        type:
+          label: 'Type de contenu'
+        name:
+          label: Auteur
+        changed:
+          label: 'Mis à jour'
+        operations:
+          label: Actions
       pager:
         options:
           tags:
-            previous: '‹ Previous'
             next: 'Next ›'
+            previous: '‹ Previous'
             first: '« First'
             last: 'Last »'
           expose:
             items_per_page_label: 'Items per page'
             items_per_page_options_all_label: '- All -'
             offset_label: Offset
-      fields:
-        title:
-          label: Title
-        type:
-          label: 'Content type'
-        name:
-          label: Author
-        changed:
-          label: Updated
-        operations:
-          label: Operations
+      exposed_form:
+        options:
+          submit_button: Apply
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       filters:
         title:
           expose:
-            label: Title
+            label: Titre
         type:
           expose:
-            label: 'Content type'
+            label: 'Type de contenu'
         langcode:
           expose:
             label: Language

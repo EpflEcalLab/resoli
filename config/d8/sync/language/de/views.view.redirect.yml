@@ -1,7 +1,6 @@
 label: Umleiten
 display:
   default:
-    display_title: Master
     display_options:
       exposed_form:
         options:
@@ -20,11 +19,9 @@ display:
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
-            offset_label: Offset
       fields:
         redirect_source__path:
           label: Von
-          separator: ', '
         created:
           label: 'Erstellt am'
       filters:
@@ -34,23 +31,6 @@ display:
         redirect_redirect__uri:
           expose:
             label: An
-        status_code:
-          group_info:
-            group_items:
-              1:
-                title: '300 Multiple Choices'
-              2:
-                title: '301 Moved Permanently'
-              3:
-                title: '302 Found'
-              4:
-                title: '303 See Other'
-              5:
-                title: '304 Not Modified'
-              6:
-                title: '305 Use Proxy'
-              7:
-                title: '307 Temporary Redirect'
         language:
           expose:
             label: Originalsprache

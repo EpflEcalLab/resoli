@@ -6,7 +6,6 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\qs_acl\Service\AccessControl;
@@ -15,6 +14,7 @@ use Drupal\qs_activity\Service\EventManager;
 use Drupal\qs_badge\Service\BadgeManager;
 use Drupal\taxonomy\TermInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Expose the route to list activities > events by Theme or Date.
@@ -59,7 +59,7 @@ class CollectionController extends ControllerBase {
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Drupal\Core\Http\RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
@@ -230,7 +230,7 @@ class CollectionController extends ControllerBase {
     $master_request = $this->requestStack->getMainRequest();
 
     // Get filters themes.
-    $filtered_themes = $master_request->query->get('themes');
+    $filtered_themes = $master_request->query->all('themes');
 
     if ($filtered_themes) {
       $themes = $this->termStorage->loadMultiple($filtered_themes);

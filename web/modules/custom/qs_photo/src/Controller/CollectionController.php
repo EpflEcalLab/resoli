@@ -231,7 +231,7 @@ class CollectionController extends ControllerBase {
     $activities_nids = $this->activityManager->getThemed($community);
 
     // Get filters themes.
-    $filtered_themes = $request->query->get('themes');
+    $filtered_themes = $request->query->all('themes');
 
     if ($filtered_themes) {
       $themes = $this->termStorage->loadMultiple($filtered_themes);

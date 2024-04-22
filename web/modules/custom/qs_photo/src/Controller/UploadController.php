@@ -5,7 +5,6 @@ namespace Drupal\qs_photo\Controller;
 use Drupal\Component\Utility\Environment;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\Core\Session\AccountInterface;
@@ -13,6 +12,7 @@ use Drupal\qs_acl\Service\AccessControl;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Controller receiving uppy call to upload/save an image.
@@ -45,14 +45,14 @@ class UploadController extends ControllerBase {
   /**
    * The request stack.
    *
-   * @var \Drupal\Core\Http\RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
   /**
    * Construct a new UploadController object.
    *
-   * @param \Drupal\Core\Http\RequestStack $request_stack
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack.
    * @param \Drupal\qs_acl\Service\AccessControl $acl
    *   The access control.
@@ -130,13 +130,14 @@ class UploadController extends ControllerBase {
     $files = file_save_upload(0, $upload_validators, 'private://photos');
 
     // Get errors throw by file_save_upload.
+    /** @var array|null $messages */
     $messages = $this->messenger()->messagesByType(MessengerInterface::TYPE_ERROR);
 
     // Clear the error bag for potential next call.
     $this->messenger()->deleteByType(MessengerInterface::TYPE_ERROR);
 
     // Return error(s) to Uppy.
-    if ($messages && !empty($messages)) {
+    if (\is_array($messages) && !empty($messages)) {
       $errors = [];
 
       foreach ($messages as $error) {

@@ -3,11 +3,11 @@
 namespace Drupal\qs_acl\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Mail\MailManagerInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Base class for Ajax Controllers.
@@ -52,7 +52,7 @@ class AjaxControllerBase extends ControllerBase {
   /**
    * The request stack (get the URL argument(s) and combined it with the path).
    *
-   * @var \Drupal\Core\Http\RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 

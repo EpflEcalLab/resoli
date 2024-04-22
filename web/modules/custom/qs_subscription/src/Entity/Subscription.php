@@ -123,6 +123,7 @@ class Subscription extends ContentEntityBase implements ContentEntityInterface, 
     $type_manager = \Drupal::service('entity_type.manager');
 
     // Get the storage according the event.
+    /** @var \Drupal\Core\Entity\ContentEntityStorageInterface|null $storage */
     $storage = $type_manager->getStorage('node');
 
     if (empty($storage)) {

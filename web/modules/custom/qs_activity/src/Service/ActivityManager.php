@@ -5,11 +5,11 @@ namespace Drupal\qs_activity\Service;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\UserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * The Activity Manager.
@@ -33,7 +33,7 @@ class ActivityManager {
   /**
    * Request stack that controls the lifecycle of requests.
    *
-   * @var \Drupal\Core\Http\RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 
@@ -377,7 +377,7 @@ class ActivityManager {
     $query->groupBy('field_theme.field_theme_target_id');
 
     // Apply filter by theme if requested.
-    $themes = $master_request->query->get('themes');
+    $themes = $master_request->query->all('themes');
 
     if ($themes) {
       $or_themes = $query->orConditionGroup();

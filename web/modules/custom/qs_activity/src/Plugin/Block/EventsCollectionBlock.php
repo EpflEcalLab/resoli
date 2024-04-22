@@ -3,13 +3,13 @@
 namespace Drupal\qs_activity\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Http\RequestStack;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\qs_acl\Service\PrivilegeManager;
 use Drupal\qs_activity\Service\EventManager;
 use Drupal\qs_badge\Service\BadgeManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Collection of Events by Activity.
@@ -40,7 +40,7 @@ class EventsCollectionBlock extends BlockBase implements ContainerFactoryPluginI
   /**
    * The request stack.
    *
-   * @var \Drupal\Core\Http\RequestStack
+   * @var \Symfony\Component\HttpFoundation\RequestStack
    */
   protected $requestStack;
 

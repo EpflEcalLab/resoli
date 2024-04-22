@@ -188,14 +188,6 @@ class AddForm extends FormBasic {
         'retry' => $this->t('qs.uppy.retry'),
         // Used as the label for the button that cancels an upload.
         'cancel' => $this->t('qs.uppy.cancel'),
-        // Used as the screen reader label for the button that retries
-        // an upload.
-        'retryUpload' => $this->t('qs.uppy.retry_upload'),
-        // Used as the screen reader label for the button that pauses an upload.
-        'pauseUpload' => $this->t('qs.uppy.pause_upload'),
-        // Used as the screen reader label for the button that resumes a
-        // paused upload.
-        'resumeUpload' => $this->t('qs.uppy.resume_upload'),
         // Used as the screen reader label for the button that cancels
         // an upload.
         'cancelUpload' => $this->t('qs.uppy_cancel_upload'),

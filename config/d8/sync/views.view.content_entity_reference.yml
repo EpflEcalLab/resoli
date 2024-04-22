@@ -265,7 +265,7 @@ display:
         - 'config:field.storage.node.field_community'
   entity_reference_1:
     id: entity_reference_1
-    display_title: 'Offer''s Types with Community'
+    display_title: "Offer's Types with Community"
     display_plugin: entity_reference
     position: 1
     display_options:

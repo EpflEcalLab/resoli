@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - add module jquery_ui_draggable - QS-67
+- mark all custom modules & themes as Drupal 11 compliant - QS-67
 
 ### Fixed
 - remove usage of deprecated ContainerAware class - QS-67

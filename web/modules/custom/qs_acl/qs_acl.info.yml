@@ -1,5 +1,5 @@
 name: ACL Manager
 type: module
 description: 'ACL Manager'
-core_version_requirement: ^8.8 || ^9 || ^10
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
 package: Quartiers Solidaires

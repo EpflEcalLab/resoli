@@ -8,8 +8,7 @@ services:
 
   qs_site.twig.render:
     class: Drupal\qs_site\TwigExtension\Render
-    calls:
-      - [setContainer, ['@service_container']]
+    arguments: ['@service_container', '@form_builder']
     tags:
       - { name: twig.extension }
 

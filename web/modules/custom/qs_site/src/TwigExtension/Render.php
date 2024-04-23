@@ -2,7 +2,8 @@
 
 namespace Drupal\qs_site\TwigExtension;
 
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Drupal\Core\Form\FormBuilderInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -11,7 +12,32 @@ use Twig\TwigFunction;
  */
 class Render extends AbstractExtension {
 
-  use ContainerAwareTrait;
+  /**
+   * The service container.
+   *
+   * @var \Symfony\Component\DependencyInjection\ContainerInterface
+   */
+  protected $container;
+
+  /**
+   * The form builder.
+   *
+   * @var \Drupal\Core\Form\FormBuilderInterface
+   */
+  protected $formBuilder;
+
+  /**
+   * Constructs a Render Twig Extension.
+   *
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   *   The service container.
+   * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
+   *   *   The form builder.
+   */
+  public function __construct(ContainerInterface $container, FormBuilderInterface $form_builder) {
+    $this->container = $container;
+    $this->formBuilder = $form_builder;
+  }
 
   /**
    * List of all Twig functions.
@@ -48,17 +74,7 @@ class Render extends AbstractExtension {
     $class = 'Drupal\\' . $module . '\\Form\\' . $form;
     $form = new $class($form_id, $this->container);
 
-    return $this->getFormBuilder()->getForm($form, $params);
-  }
-
-  /**
-   * Provides an interface for form building and processing.
-   *
-   * @return \Drupal\Core\Form\FormBuilderInterface
-   *   Return the interface for form building and processing.
-   */
-  protected function getFormBuilder() {
-    return $this->container->get('form_builder');
+    return $this->formBuilder->getForm($form, $params);
   }
 
 }

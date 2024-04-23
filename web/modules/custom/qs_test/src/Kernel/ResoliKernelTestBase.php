@@ -11,14 +11,14 @@ use Drupal\qs_test\NodeTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\qs_test\UserTestTrait;
 use Drupal\taxonomy\TermInterface;
-use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
+use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
 
 /**
  * Provides a base class for Quartiers Solidaires functional tests.
  */
 class ResoliKernelTestBase extends EntityKernelTestBase {
 
-  use EntityReferenceTestTrait;
+  use EntityReferenceFieldCreationTrait;
   use NodeTestTrait;
   use TaxonomyTestTrait;
   use UserTestTrait;

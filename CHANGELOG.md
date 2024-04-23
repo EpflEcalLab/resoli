@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - remove usage of deprecated ContainerAware class - QS-67
 
+### Changed
+- replace usage of deprecated trait Drupal\Tests\field\Traits\EntityReferenceTestTrait in favor of EntityReferenceFieldCreationTrait - QS-67
+
 ## [3.0.0] - 2024-04-22
 ### Security
 - upgrade drupal/core 9.5.11 => 10.0.11 - QS-50

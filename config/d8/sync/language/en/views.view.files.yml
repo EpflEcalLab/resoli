@@ -16,38 +16,15 @@ display:
           label: Taille
         status:
           label: Statut
-          settings:
-            format_custom_false: Temporary
-            format_custom_true: Permanent
-        created:
-          label: 'Upload date'
-        changed:
-          label: 'Changed date'
-        count:
-          label: 'Used in'
       pager:
         options:
           tags:
             next: 'Next ›'
             previous: '‹ Previous'
-          expose:
-            items_per_page_label: 'Items per page'
-            items_per_page_options_all_label: '- All -'
-            offset_label: Offset
       exposed_form:
         options:
           submit_button: Apply
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      empty:
-        area_text_custom:
-          content: 'No files available.'
       filters:
-        filename:
-          expose:
-            label: Filename
         filemime:
           expose:
             label: 'Type MIME'
@@ -55,34 +32,13 @@ display:
           expose:
             label: Statut
   page_1:
-    display_title: 'Files overview'
     display_options:
       menu:
         title: Fichiers
   page_2:
-    display_title: 'File usage'
     display_options:
-      title: 'File usage'
-      fields:
-        entity_label:
-          label: Entity
-        type:
-          label: 'Entity type'
-        module:
-          label: 'Registering module'
-        count:
-          label: 'Use count'
       pager:
         options:
           tags:
             next: 'Next ›'
             previous: '‹ Previous'
-          expose:
-            items_per_page_label: 'Items per page'
-            items_per_page_options_all_label: '- All -'
-            offset_label: Offset
-      arguments:
-        fid:
-          exception:
-            title: All
-          title: 'File usage information for {{ arguments.fid }}'

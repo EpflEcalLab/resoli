@@ -1,5 +1,6 @@
 display:
   default:
+    display_title: Maître
     display_options:
       exposed_form:
         options:
@@ -11,16 +12,27 @@ display:
       pager:
         options:
           tags:
-            previous: '< Zurück'
-            next: 'Weiter >'
-            first: '« Anfang'
-            last: 'Ende »'
+            previous: '‹ Vorherige Seite'
+            next: 'Nächste Seite ›'
+            first: '« Erste Seite'
+            last: 'Letzte Seite »'
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
+            offset_label: Décalage
       fields:
+        id:
+          label: 'Entity ID'
+        created:
+          label: 'Sended at'
+        module:
+          label: Module
+        module_key:
+          label: Key
         mail_from:
           label: Von
+        subject:
+          label: Subject
       empty:
         area_text_custom:
           content: 'Kein Inhalt verfügbar.'

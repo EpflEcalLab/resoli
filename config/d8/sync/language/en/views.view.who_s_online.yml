@@ -5,13 +5,6 @@ display:
     display_title: Maître
     display_options:
       title: 'Utilisateurs en ligne'
-      exposed_form:
-        options:
-          submit_button: Apply
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
       empty:
         area_text_custom:
           content: 'Il y a actuellement 0 utilisateurs en ligne.'

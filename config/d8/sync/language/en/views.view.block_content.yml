@@ -1,10 +1,7 @@
-label: 'Bibliothèque de blocs personnalisés'
-description: 'Trouver et gérer les blocs personnalisés.'
 display:
   default:
     display_title: Maître
     display_options:
-      title: 'Bibliothèque de blocs personnalisés'
       fields:
         info:
           label: 'Description du bloc'
@@ -19,17 +16,6 @@ display:
           tags:
             next: 'Next ›'
             previous: '‹ Previous'
-          expose:
-            items_per_page_label: 'Items per page'
-            items_per_page_options_all_label: '- All -'
-            offset_label: Offset
-      exposed_form:
-        options:
-          submit_button: Apply
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
       filters:
         info:
           expose:
@@ -37,8 +23,3 @@ display:
         type:
           expose:
             label: 'Type de bloc'
-  page_1:
-    display_title: Page
-    display_options:
-      menu:
-        title: 'Bibliothèque de blocs personnalisés'

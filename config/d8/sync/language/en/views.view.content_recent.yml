@@ -5,16 +5,6 @@ display:
     display_title: Maître
     display_options:
       title: 'Contenu récent'
-      exposed_form:
-        options:
-          submit_button: Apply
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
-      empty:
-        area_text_custom:
-          content: 'No content available.'
       use_more_text: Plus
   block_1:
     display_title: Bloc

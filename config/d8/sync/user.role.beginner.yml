@@ -1,9 +1,12 @@
 uuid: 57bde317-300a-48cb-a37b-865545960c97
 langcode: fr
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - file
 id: beginner
 label: Beginner
 weight: 3
 is_admin: null
-permissions: {  }
+permissions:
+  - 'delete own files'

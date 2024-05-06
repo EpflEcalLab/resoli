@@ -1,3 +1,5 @@
+label: 'Terme de taxonomie'
+description: 'Contenu associé à un terme de taxonomie donné.'
 display:
   default:
     display_title: Master
@@ -7,6 +9,7 @@ display:
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
+            offset_label: Décalage
       exposed_form:
         options:
           submit_button: Anwenden
@@ -14,6 +17,10 @@ display:
           exposed_sorts_label: 'Sortieren nach'
           sort_asc_label: Aufsteigend
           sort_desc_label: Absteigend
+      arguments:
+        tid:
+          exception:
+            title: Tout
   feed_1:
     display_title: Newsfeed
   page_1:

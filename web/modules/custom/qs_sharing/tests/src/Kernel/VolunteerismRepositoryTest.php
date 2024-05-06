@@ -4,7 +4,7 @@ namespace Drupal\Tests\qs_sharing\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\qs_test\TaxonomyTestTrait;
-use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
+use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
 
 /**
  * @coversDefaultClass \Drupal\qs_sharing\Repository\VolunteerismRepository
@@ -17,7 +17,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  */
 final class VolunteerismRepositoryTest extends KernelTestBase {
 
-  use EntityReferenceTestTrait;
+  use EntityReferenceFieldCreationTrait;
   use TaxonomyTestTrait;
 
   /**

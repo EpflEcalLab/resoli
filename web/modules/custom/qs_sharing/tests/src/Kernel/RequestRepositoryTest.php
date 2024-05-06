@@ -8,7 +8,7 @@ use Drupal\qs_test\NodeTestTrait;
 use Drupal\qs_test\SharingWorkflowTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\qs_test\UserTestTrait;
-use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
+use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
 
 /**
  * @coversDefaultClass \Drupal\qs_sharing\Repository\RequestRepository
@@ -21,7 +21,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  */
 final class RequestRepositoryTest extends KernelTestBase {
 
-  use EntityReferenceTestTrait;
+  use EntityReferenceFieldCreationTrait;
   use NodeTestTrait;
   use SharingWorkflowTestTrait;
   use TaxonomyTestTrait;

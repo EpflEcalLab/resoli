@@ -5,13 +5,6 @@ display:
     display_title: Maître
     display_options:
       title: 'Nouveaux membres'
-      exposed_form:
-        options:
-          submit_button: Apply
-          reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
-          sort_asc_label: Asc
-          sort_desc_label: Desc
   block_1:
     display_title: 'Nouveaux membres'
     display_options:

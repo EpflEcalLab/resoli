@@ -7,13 +7,14 @@ display:
       pager:
         options:
           tags:
-            next: 'Weiter >'
-            previous: '< Zurück'
-            first: '« Anfang'
-            last: 'Ende »'
+            next: 'Nächste Seite ›'
+            previous: '‹ Vorherige Seite'
+            first: '« Erste Seite'
+            last: 'Letzte Seite »'
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
+            offset_label: Décalage
       exposed_form:
         options:
           submit_button: Anwenden

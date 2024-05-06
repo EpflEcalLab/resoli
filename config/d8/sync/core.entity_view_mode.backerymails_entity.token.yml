@@ -6,5 +6,6 @@ dependencies:
     - backerymails
 id: backerymails_entity.token
 label: Token
+description: ''
 targetEntityType: backerymails_entity
 cache: true

@@ -1,5 +1,5 @@
 name: qs_export
 type: module
 description: Export
-core_version_requirement: ^8.8 || ^9 || ^10
+core_version_requirement: ^8.8 || ^9 || ^10 || ^11
 package: Quartiers Solidaires

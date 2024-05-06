@@ -1,15 +1,35 @@
+label: Files
+description: 'Find and manage files.'
 display:
   default:
     display_title: Master
     display_options:
+      title: Files
+      fields:
+        filemime:
+          label: 'MIME type'
+        filesize:
+          label: Size
+        status:
+          label: Statut
+          settings:
+            format_custom_false: Temporary
+            format_custom_true: Permanent
+        created:
+          label: 'Upload date'
+        changed:
+          label: 'Changed date'
+        count:
+          label: 'Used in'
       pager:
         options:
           tags:
-            next: 'Weiter >'
-            previous: '< Zurück'
+            next: 'Nächste Seite ›'
+            previous: '‹ Vorherige Seite'
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
+            offset_label: Décalage
       exposed_form:
         options:
           submit_button: Anwenden
@@ -17,13 +37,48 @@ display:
           exposed_sorts_label: 'Sortieren nach'
           sort_asc_label: Aufsteigend
           sort_desc_label: Absteigend
-  page_2:
+      empty:
+        area_text_custom:
+          content: 'No files available.'
+      filters:
+        filename:
+          expose:
+            label: Filename
+        filemime:
+          expose:
+            label: 'MIME type'
+        status:
+          expose:
+            label: Statut
+  page_1:
+    display_title: 'Files overview'
     display_options:
+      menu:
+        title: Files
+  page_2:
+    display_title: 'File usage'
+    display_options:
+      title: 'File usage'
+      fields:
+        entity_label:
+          label: Entity
+        type:
+          label: 'Entity type'
+        module:
+          label: 'Registering module'
+        count:
+          label: 'Use count'
       pager:
         options:
           tags:
-            next: 'Weiter >'
-            previous: '< Zurück'
+            next: 'Nächste Seite ›'
+            previous: '‹ Vorherige Seite'
           expose:
             items_per_page_label: 'Elemente pro Seite'
             items_per_page_options_all_label: '- Alle -'
+            offset_label: Décalage
+      arguments:
+        fid:
+          exception:
+            title: Tout
+          title: 'File usage information for {{ arguments.fid }}'

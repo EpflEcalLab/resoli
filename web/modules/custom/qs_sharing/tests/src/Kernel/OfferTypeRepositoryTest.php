@@ -6,7 +6,7 @@ use Drupal\KernelTests\KernelTestBase;
 use Drupal\node\NodeInterface;
 use Drupal\qs_test\NodeTestTrait;
 use Drupal\qs_test\TaxonomyTestTrait;
-use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
+use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
 
 /**
  * @coversDefaultClass \Drupal\qs_sharing\Repository\OfferTypeRepository
@@ -19,7 +19,7 @@ use Drupal\Tests\field\Traits\EntityReferenceTestTrait;
  */
 final class OfferTypeRepositoryTest extends KernelTestBase {
 
-  use EntityReferenceTestTrait;
+  use EntityReferenceFieldCreationTrait;
   use NodeTestTrait;
   use TaxonomyTestTrait;
 

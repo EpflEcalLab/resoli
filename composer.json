@@ -37,15 +37,16 @@
         "drupal/backerymails": "^3.0",
         "drupal/bamboo_twig": "^6.0",
         "drupal/ckeditor": "^1.0",
-        "drupal/core-composer-scaffold": "^10.0",
-        "drupal/core-project-message": "^10.0",
-        "drupal/core-recommended": "^10.0",
+        "drupal/core-composer-scaffold": "^10.2",
+        "drupal/core-project-message": "^10.2",
+        "drupal/core-recommended": "^10.2",
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "^2.0",
         "drupal/gin": "^3.0",
         "drupal/honeypot": "^2.1.2",
         "drupal/image_effects": "^3.4",
         "drupal/jquery_ui_datepicker": "^2.0",
+        "drupal/jquery_ui_draggable": "^2.0",
         "drupal/loco_translate": "^3.0",
         "drupal/mailsystem": "^4.4",
         "drupal/masquerade": "^2.0@beta",
@@ -63,7 +64,7 @@
     "require-dev": {
         "alexandresalome/mailcatcher": "^1.4",
         "behat/behat": "^3.12",
-        "drupal/core-dev": "^10.0",
+        "drupal/core-dev": "^10.2",
         "drupal/default_content": "^2.0@alpha",
         "drupal/drupal-extension": "^5.0",
         "drupal/rules": "^3.0@alpha",
@@ -89,7 +90,8 @@
             "drupal/console-extend-plugin": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true
         }
     },
     "autoload-dev": {

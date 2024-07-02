@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.3] - 2024-07-02
+### Removed
+- remove polyfill.js supply chain attack - QS-74
+
 ## [3.0.2] - 2024-05-23
 ### Security
 - upgrade PHP 8.1 => 8.2 - QS-66
@@ -735,7 +739,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.2...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.3...HEAD
+[3.0.3]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/antistatique/quartiers-solidaires/compare/2.3.8...3.0.0

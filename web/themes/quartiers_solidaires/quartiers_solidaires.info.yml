@@ -6,7 +6,6 @@ screenshot: screenshot.png
 base theme: false
 
 libraries:
-  - quartiers_solidaires/polyfill-io
   - quartiers_solidaires/global-styling
 
 stylesheets-remove:

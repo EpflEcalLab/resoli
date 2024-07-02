@@ -24,12 +24,6 @@ google-place-autocomplete:
   js:
     https://maps.googleapis.com/maps/api/js?key=AIzaSyDCxS2BMP-uAhxYq2PcDKWJBtWc8ZwkBnY&libraries=places: {type: external, defer: true, async: true}
 
-# Polyfill for includes (ie happiness)
-polyfill-io:
-  version: 2.0
-  js:
-    https://cdn.polyfill.io/v2/polyfill.js?features=String.prototype.includes,Array.prototype.find: {type: external}
-
 # Photoswipe
 photoswipe:
   version: 4.1.1

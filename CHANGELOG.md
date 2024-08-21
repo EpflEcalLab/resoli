@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/jquery_ui (1.6.0 => 1.7.0)
 - update drupal/jquery_ui_datepicker (2.0.0 => 2.1.0)
 - update drupal/jquery_ui_draggable (2.0.0 => 2.1.0)
+- update drupal/token (1.14.0 => 1.15.0)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

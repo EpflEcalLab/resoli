@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/admin_toolbar (3.4.2 => 3.5.0)
 - update drupal/allowed_formats (2.0.0 => 3.0.1)
 - update drupal/symfony_mailer_lite (1.0.6 => 1.0.7)
+- update drupal/honeypot (2.1.3 => 2.1.4)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update tools/php-deprecation-detector
 - update tools/php-cs-fixer friendsofphp/php-cs-fixer (v3.50.0 => v3.62.0)
 - update drupal/admin_toolbar (3.4.2 => 3.5.0)
+- update drupal/allowed_formats (2.0.0 => 3.0.1)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/recaptcha (3.2.0 => 3.4.0)
 - update drupal/redirect (1.9.0 => 1.10.0)
 - update drupal/ctools (4.0.4 => 4.1.0)
+- update drupal/crop (2.3.0 => 2.4.0)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

@@ -71,16 +71,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build the docker-compose stack
         run: |
-          docker-compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
           mkdir -p ./log ./backups
       - name: Run the docker stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d test browser
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d test browser
       - name: Bootstrap
         run: docker exec test docker-as-wait db:3306 -- docker-as-drupal bootstrap --force
       - name: Enable upgrade status
-        run: docker-compose exec -T test docker-as-wait db:3306 -- ./vendor/bin/drush en upgrade_status -y
+        run: docker compose exec -T test docker-as-wait db:3306 -- ./vendor/bin/drush en upgrade_status -y
       - name: Run upgrade status
-        run: docker-compose exec -T test docker-as-wait db:3306 -- /var/www/vendor/bin/drush upgrade_status:analyze --ignore-contrib --ignore-uninstalled --all
+        run: docker compose exec -T test docker-as-wait db:3306 -- /var/www/vendor/bin/drush upgrade_status:analyze --ignore-contrib --ignore-uninstalled --all
 
   unit-tests:
     runs-on: ubuntu-latest
@@ -90,10 +90,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build the docker-compose stack
         run: |
-          docker-compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
           mkdir -p ./log ./backups
       - name: Run the docker stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d test
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d test
       - name: Run unit tests
         run: docker exec test docker-as-wait db:3306 -- docker-as-drupal phpunit --skip-default-stops
 
@@ -105,14 +105,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build the docker-compose stack
         run: |
-          docker-compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml build --build-arg user=$(id -u) --build-arg group=$(id -g) test
           mkdir -p ./log ./backups
       - name: Run the docker stack
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml up -d test browser
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d test browser
       - name: Bootstrap
         run: docker exec test docker-as-wait db:3306 -- docker-as-drupal bootstrap --force --with-default-content
       - name: Run Behat tests
-        run: docker-compose exec -T test docker-as-wait db:3306 test:80 browser:4444 -- docker-as-drupal behat --skip-db-reset --skip-default-content
+        run: docker compose exec -T test docker-as-wait db:3306 test:80 browser:4444 -- docker-as-drupal behat --skip-db-reset --skip-default-content
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         if: failure()

@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drush/drush (12.5.1 => 12.5.3)
 - update dompdf/dompdf (v2.0.7 => v2.0.8)
 - update drupal/focal_point (2.0.3 => 2.1.1)
+- update drupal/pathauto (1.12.0 => 1.13.0)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

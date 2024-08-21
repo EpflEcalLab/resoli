@@ -495,7 +495,7 @@ class AddForm extends FormBasic {
     $size = ['o', 'ko', 'Mo', 'Go', 'To', 'Po', 'Eo', 'Zo', 'Yo'];
     $factor = floor((mb_strlen($bytes) - 1) / 3);
 
-    return sprintf("%.{$decimals}f", $bytes / 1024 ** $factor) . ' [' . $size[$factor] . ']';
+    return \sprintf("%.{$decimals}f", $bytes / 1024 ** $factor) . ' [' . $size[$factor] . ']';
   }
 
   /**

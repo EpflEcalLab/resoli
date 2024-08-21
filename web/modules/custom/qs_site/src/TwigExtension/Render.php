@@ -70,8 +70,8 @@ class Render extends AbstractExtension {
    * @return array|null
    *   A render array for the form or NULL if the form does not exist.
    */
-  public function renderForm($module, $form, array $params = [], $form_id = NULL) {
-    $class = 'Drupal\\' . $module . '\\Form\\' . $form;
+    public function renderForm($module, $form, array $params = [], $form_id = NULL) {
+    $class = "Drupal\\{$module}\\Form\\{$form}";
     $form = new $class($form_id, $this->container);
 
     return $this->formBuilder->getForm($form, $params);

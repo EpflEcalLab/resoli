@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update mglaman/phpstan-drupal (1.2.10 => 1.2.12)
 - update drupal/loco_translate (3.0.1 => 3.0.2)
 - update tools/php-deprecation-detector
+- update tools/php-cs-fixer friendsofphp/php-cs-fixer (v3.50.0 => v3.62.0)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

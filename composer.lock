@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0e49a71f3a05d5949461481b309b2f3",
+    "content-hash": "06bddc819461041ecadfa88e0a9a0fc9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3401,30 +3401,30 @@
         },
         {
             "name": "drupal/symfony_mailer_lite",
-            "version": "1.0.7",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/symfony_mailer_lite.git",
-                "reference": "1.0.7"
+                "reference": "2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/symfony_mailer_lite-1.0.7.zip",
-                "reference": "1.0.7",
-                "shasum": "8c0e9846353568f93601eb67e35f5e74458f9f48"
+                "url": "https://ftp.drupal.org/files/projects/symfony_mailer_lite-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "8817b04f6a5372a093f9a695a81e094e4d2f10ab"
             },
             "require": {
-                "drupal/core": "^9 || ^10",
+                "drupal/core": "^10.1 || ^11",
                 "drupal/mailsystem": "^4.4",
                 "html2text/html2text": "^4.0.1",
-                "symfony/mailer": "^5.3 || ^6.0",
+                "symfony/mailer": "^6.4 || ^7.1",
                 "tijsverkoyen/css-to-inline-styles": "^2.2"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.7",
-                    "datestamp": "1720800748",
+                    "version": "2.0.0",
+                    "datestamp": "1720800822",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

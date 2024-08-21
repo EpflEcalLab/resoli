@@ -54,7 +54,7 @@
         "drupal/pathauto": "^1.11",
         "drupal/recaptcha": "^3.1",
         "drupal/redirect": "^1.8@beta",
-        "drupal/symfony_mailer_lite": "^1.0",
+        "drupal/symfony_mailer_lite": "^2.0",
         "drush/drush": "^12",
         "phpoffice/phpspreadsheet": "^1.26",
         "symfony/property-access": "^6.4",

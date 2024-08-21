@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/jquery_ui_draggable (2.0.0 => 2.1.0)
 - update drupal/token (1.14.0 => 1.15.0)
 - update webflo/drupal-finder (1.2.2 => 1.3.1)
+- upgrade drupal/symfony_mailer_lite (1.0.7 => 2.0.0)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

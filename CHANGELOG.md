@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix obsolete docker-compose command in CIs
 
+### Removed
+- remove legacy version annotation on docker-compose.yml
+
 ## [3.0.3] - 2024-07-02
 ### Removed
 - remove polyfill.js supply chain attack - QS-74

@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - remove legacy version annotation on docker-compose.yml
 
+### Security
+- update drupal/upgrade_status (4.2.0 => 4.3.1)
+
 ## [3.0.3] - 2024-07-02
 ### Removed
 - remove polyfill.js supply chain attack - QS-74

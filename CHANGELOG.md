@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - update drupal/upgrade_status (4.2.0 => 4.3.1)
+- update composer/installers (v2.2.0 => v2.3.0)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

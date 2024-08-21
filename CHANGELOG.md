@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/field_group (3.4.0 => 3.6.0)
 - update drupal/metatag (2.0.0 => 2.0.2)
 - update drupal/masquerade (2.0.0-rc4 => 2.0.0)
+- update drupal/gin (3.0.0-rc10 => 3.0.0-rc13)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

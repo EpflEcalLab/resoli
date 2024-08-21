@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - update drupal/upgrade_status (4.2.0 => 4.3.1)
 - update composer/installers (v2.2.0 => v2.3.0)
+- update drupal/backerymails (3.0.0 => 3.0.1)
+- update drupal/bamboo_twig (6.0.1 => 6.0.2)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

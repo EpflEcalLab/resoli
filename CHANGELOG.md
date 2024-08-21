@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/honeypot (2.1.3 => 2.1.4)
 - drupal/mailsystem (4.4.0 => 4.5.0)
 - update dev module drupal/schema_metatag (3.0.1 => 3.0.3)
+- update drupal/field_group (3.4.0 => 3.6.0)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

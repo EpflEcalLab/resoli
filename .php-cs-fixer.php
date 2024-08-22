@@ -22,15 +22,10 @@ $rules['global_namespace_import'] = FALSE;
 $rules['no_superfluous_phpdoc_tags'] = FALSE;
 $rules['ordered_class_elements']['sort_algorithm'] = 'none';
 
-unset($rules['blank_lines_before_namespace']);
-$rules['curly_braces_position']['classes_opening_brace'] = 'same_line';
-$rules['curly_braces_position']['functions_opening_brace'] = 'same_line';
-
 $rules['fully_qualified_strict_types'] = [
   'import_symbols' => true,
   'leading_backslash_in_global_namespace' => false,
   'phpdoc_tags' => [],
 ];
-
 $config->setRules($rules);
 return $config;

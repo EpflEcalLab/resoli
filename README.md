@@ -61,17 +61,17 @@ Build project imgaes (and pull recent development image), start docker services,
 drupal bootsrap script (get a coffee, this will take some time...).
 
 ```bash
-docker-compose build --pull
-docker-compose up --build -d
-docker-compose exec dev docker-as-drupal bootstrap
+docker compose build --pull
+docker compose up --build -d
+docker compose exec dev docker-as-drupal bootstrap
 ```
 
 ### When it's not the first time
 
 ```bash
-docker-compose build --pull
-docker-compose up --build -d
-docker-compose exec dev drush cr (or any other drush command you need)
+docker compose build --pull
+docker compose up --build -d
+docker compose exec dev drush cr (or any other drush command you need)
 ```
 
 #### reCaptcha configurations
@@ -113,13 +113,13 @@ production by using capistrano tasks.
 ```bash
 bundle exec cap production files:download
 bundle exec cap production files:dump
-docker-compose exec dev docker-as-drupal db-restore --file=/var/www/web/sites/default/files/production_dump.sql
+docker compose exec dev docker-as-drupal db-restore --file=/var/www/web/sites/default/files/production_dump.sql
 ```
 
 ### Docker helpT & tips
 
 ```bash
-docker-compose exec dev docker-as-drupal --help
+docker compose exec dev docker-as-drupal --help
 ```
 
 ## 🏋️ Export/Import all translations to a PO file
@@ -171,7 +171,7 @@ You can read more about it in our [CONTRIBUTING section](./CONTRIBUTING.md).
 ## 🚛 Install localy
 
 Refer to Docker project bootstrap section for more information how install with docker, but in resume
-you must run `docker-compose exec dev docker-as-drupal bootsrap` command.
+you must run `docker compose exec dev docker-as-drupal bootsrap` command.
 
 1. Setup your virtualhost (like `http://qs.dev`) to serve `/web`.
 
@@ -271,8 +271,8 @@ you must run `docker-compose exec dev docker-as-drupal bootsrap` command.
 Or on Docker environement:
 
   ```bash
-  docker-compose up -d --build dev test
-  docker-compose exec dev docker-as-drupal db-update
+  docker compose up -d --build dev test
+  docker compose exec dev docker-as-drupal db-update
   ```
 
 ## 🎨 Build the theme
@@ -301,7 +301,7 @@ For more help about Toolbox, the [official documentation](http://frontend.github
 >ou can build locally without any issue, but use following command to do it in Docker environment.
 
   ```bash
-   docker-compose exec dev yarn build
+   docker compose exec dev yarn build
   ```
 
 ## 🧩 Frontend Libraries
@@ -336,7 +336,7 @@ Every tests should be run into the Docker environment.
 1. Run a shell on your Docker test env.
 
 ```bash
-docker-compose exec test bash
+docker compose exec test bash
 ```
 
 1. Once connected via ssh on you Docker test, you may run any `docker-as-drupal` commands
@@ -348,7 +348,7 @@ docker-as-drupal [behat|phpunit|nightwatch]
 You also may use the direct access - whitout opening a bash on the Docket test env. using:
 
 ```bash
-docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
+docker compose exec test docker-as-drupal [behat|phpunit|nightwatch]
 ```
 
 ### Kernel tests
@@ -390,7 +390,7 @@ docker-compose exec test docker-as-drupal [behat|phpunit|nightwatch]
 Customs modules:
 
  - [Quartiers-Solidaires - Badges](./web/modules/custom/qs_badge/README.md)
- 
+
 ### 🌍 i18n
 
 We use [Localise.biz](https://localise.biz) (Loco) to translate the interface. The translation PO file is automatically pushed to Loco when deploying to staging. This means that **the PO file must contain ALL custom translation string of the projet**.
@@ -521,8 +521,8 @@ services:
 ### Drush give me an error "Missing scheme in URL ''"
 It seems you don't use an old-school local environment but Docker.
 
-Read section about setup Docker, then, you have to prepend every command with `docker-compose exec dev` to
-run them on the Docker environment OR open a shell in docker using `docker-compose exec dev bash`.
+Read section about setup Docker, then, you have to prepend every command with `docker compose exec dev` to
+run them on the Docker environment OR open a shell in docker using `docker compose exec dev bash`.
 
 ## 💻 Drush Commands
 

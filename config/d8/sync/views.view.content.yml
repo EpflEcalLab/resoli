@@ -262,6 +262,7 @@ display:
             previous: '‹ Précédent'
             first: '« Premier'
             last: 'Dernier »'
+          pagination_heading_level: h4
       exposed_form:
         type: basic
         options:

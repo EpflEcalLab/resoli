@@ -5,6 +5,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- fix obsolete docker-compose command in CIs
+
+### Removed
+- remove legacy version annotation on docker-compose.yml
+
+### Security
+- update drupal/upgrade_status (4.2.0 => 4.3.1)
+- update composer/installers (v2.2.0 => v2.3.0)
+- update drupal/backerymails (3.0.0 => 3.0.1)
+- update drupal/bamboo_twig (6.0.1 => 6.0.2)
+- update mglaman/phpstan-drupal (1.2.10 => 1.2.12)
+- update drupal/loco_translate (3.0.1 => 3.0.2)
+- update tools/php-deprecation-detector
+- update tools/php-cs-fixer friendsofphp/php-cs-fixer (v3.50.0 => v3.62.0)
+- update drupal/admin_toolbar (3.4.2 => 3.5.0)
+- update drupal/allowed_formats (2.0.0 => 3.0.1)
+- update drupal/symfony_mailer_lite (1.0.6 => 1.0.7)
+- update drupal/honeypot (2.1.3 => 2.1.4)
+- drupal/mailsystem (4.4.0 => 4.5.0)
+- update dev module drupal/schema_metatag (3.0.1 => 3.0.3)
+- update drupal/field_group (3.4.0 => 3.6.0)
+- update drupal/metatag (2.0.0 => 2.0.2)
+- update drupal/masquerade (2.0.0-rc4 => 2.0.0)
+- update drupal/gin (3.0.0-rc10 => 3.0.0-rc13)
+- update drush/drush (12.5.1 => 12.5.3)
+- update dompdf/dompdf (v2.0.7 => v2.0.8)
+- update drupal/focal_point (2.0.3 => 2.1.1)
+- update drupal/pathauto (1.12.0 => 1.13.0)
+- update drupal/recaptcha (3.2.0 => 3.4.0)
+- update drupal/redirect (1.9.0 => 1.10.0)
+- update drupal/ctools (4.0.4 => 4.1.0)
+- update drupal/crop (2.3.0 => 2.4.0)
+- update drupal/gin_toolbar (1.0.0-rc5 => 1.0.0-rc6)
+- update drupal/jquery_ui (1.6.0 => 1.7.0)
+- update drupal/jquery_ui_datepicker (2.0.0 => 2.1.0)
+- update drupal/jquery_ui_draggable (2.0.0 => 2.1.0)
+- update drupal/token (1.14.0 => 1.15.0)
+- update webflo/drupal-finder (1.2.2 => 1.3.1)
+- upgrade drupal/symfony_mailer_lite (1.0.7 => 2.0.0)
+- update drupal/captcha (2.0.5 => 2.0.6)
+- update drupal/core (10.2.5 => 10.3.2)
+
+### Changed
+- replace deprecated user_validate_name by \Drupal\user\UserNameValidator::validateName
 
 ## [3.0.3] - 2024-07-02
 ### Removed

@@ -72,7 +72,7 @@ class OfferManager {
       'type' => 'offer',
       'status' => TRUE,
       'moderation_state' => 'published',
-      'title' => sprintf('%s | %s %s', $offer_type->getTitle(), $contact_firstname, $contact_lastname),
+      'title' => \sprintf('%s | %s %s', $offer_type->getTitle(), $contact_firstname, $contact_lastname),
       'field_offer_type' => $offer_type->id(),
       'field_theme' => $theme->id(),
       'body' => [
@@ -83,7 +83,7 @@ class OfferManager {
         'format' => 'light_html',
         'value' => $availability,
       ],
-      'field_contact_name' => sprintf('%s %s', $contact_firstname, $contact_lastname),
+      'field_contact_name' => \sprintf('%s %s', $contact_firstname, $contact_lastname),
       'field_contact_mail' => $contact_mail,
       'field_contact_phone' => $contact_phone,
       'uid' => $author->id(),

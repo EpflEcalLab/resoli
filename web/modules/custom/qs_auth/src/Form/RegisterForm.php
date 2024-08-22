@@ -7,6 +7,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\qs_auth\Service\Account;
+use Drupal\user\UserNameValidator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -45,7 +46,12 @@ class RegisterForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(Account $account, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler) {
+  public function __construct(
+    Account $account,
+    EntityTypeManagerInterface $entity_type_manager,
+    ModuleHandlerInterface $module_handler,
+    protected UserNameValidator $userNameValidator,
+  ) {
     $this->account = $account;
     $this->termStorage = $entity_type_manager->getStorage('taxonomy_term');
     $this->userStorage = $entity_type_manager->getStorage('user');
@@ -252,7 +258,8 @@ class RegisterForm extends FormBase {
     return new static(
       $container->get('qs_auth.account'),
       $container->get('entity_type.manager'),
-      $container->get('module_handler')
+      $container->get('module_handler'),
+      $container->get('user.name_validator')
     );
   }
 
@@ -328,8 +335,10 @@ class RegisterForm extends FormBase {
     }
 
     // Check username is Drupal compliant.
-    if ($violation = user_validate_name($form_state->getValue('mail'))) {
-      $form_state->setErrorByName('mail', $violation);
+    $violations = $this->userNameValidator->validateName($form_state->getValue('mail'));
+
+    if ($violations->count() > 0) {
+      $form_state->setErrorByName('mail', $violations[0]->getMessage());
     }
 
     // Assert the password_verification is valid.

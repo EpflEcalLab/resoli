@@ -48,6 +48,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/captcha (2.0.5 => 2.0.6)
 - update drupal/core (10.2.5 => 10.3.2)
 
+### Changed
+- replace deprecated user_validate_name by \Drupal\user\UserNameValidator::validateName
+
 ## [3.0.3] - 2024-07-02
 ### Removed
 - remove polyfill.js supply chain attack - QS-74

@@ -2,6 +2,7 @@
 
 namespace Drupal\Behat\Context\Drupal;
 
+use Drupal\Core\File\FileExists;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -146,7 +147,7 @@ class FormContext extends RawDrupalContext {
       $filename = $random->name(10, TRUE) . '.' . $extension;
       $destination = $dirname . $filename;
       $data = $random->paragraphs(3);
-      $file = \Drupal::service('file.repository')->writeData($data, $destination, FileSystemInterface::EXISTS_ERROR);
+      $file = \Drupal::service('file.repository')->writeData($data, $destination, FileExists::Error);
 
       $uploaded_file = [
         'name' => $filename,

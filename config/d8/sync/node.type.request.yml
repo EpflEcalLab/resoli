@@ -11,7 +11,7 @@ third_party_settings:
 name: Request
 type: request
 description: 'Sharing request sent by mail and visible by Volunteers.'
-help: ''
+help: null
 new_revision: true
 preview_mode: 0
 display_submitted: false

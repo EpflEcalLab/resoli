@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update webflo/drupal-finder (1.2.2 => 1.3.1)
 - upgrade drupal/symfony_mailer_lite (1.0.7 => 2.0.0)
 - update drupal/captcha (2.0.5 => 2.0.6)
+- update drupal/core (10.2.5 => 10.3.2)
 
 ## [3.0.3] - 2024-07-02
 ### Removed

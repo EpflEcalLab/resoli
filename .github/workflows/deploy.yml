@@ -42,7 +42,7 @@ jobs:
           bundler-cache: true
 
       # Build assets
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
             node-version: '12'
       - name: Build Styleguide

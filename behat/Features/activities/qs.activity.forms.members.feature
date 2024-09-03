@@ -20,7 +20,7 @@ Feature: Activity Members Form
     And I select "manager+lausanne@antistatique.net" from "edit-member"
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe/dashboard/members#card5"
-    And I should see "qs_activity.activities.form.add.member.success Accueil Café" in the ".alert" element
+    And I should see "qs_activity.activities.form.add.member.success Accueil Café"
 
   @api @preserveDatabase @mail
   Scenario: When adding a Member to the Activity, no mail should be sent

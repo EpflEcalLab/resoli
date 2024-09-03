@@ -14,14 +14,14 @@ Feature: Forget Password
     Given I am on "/authentication/password"
     When I fill in "edit-name" with "Batman"
     And I press "edit-submit"
-    And I should see "If Batman is a valid account, an email will be sent with instructions to reset your password." in the ".alert" element
+    And I should see "If Batman is a valid account, an email will be sent with instructions to reset your password."
 
   @mail
   Scenario: When filling the forget password it should redirect me on the confirmation page & send the one-time-login mail.
     Given I am on "/authentication/password"
     When I fill in "edit-name" with "manager+lausanne@antistatique.net"
     And I press "edit-submit"
-    And I should see "If manager+lausanne@antistatique.net is a valid account, an email will be sent with instructions to reset your password." in the ".alert" element
+    And I should see "If manager+lausanne@antistatique.net is a valid account, an email will be sent with instructions to reset your password."
     Then I should see "qs.auth.pass.confirmation.thanks"
     Then I should see "qs.auth.pass.confirmation.description"
     And 1 mail should be sent

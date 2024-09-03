@@ -8,6 +8,10 @@ base theme: false
 libraries:
   - quartiers_solidaires/global-styling
 
+libraries-extend:
+  core/drupal.message:
+    - quartiers_solidaires/drupal.message
+
 stylesheets-remove:
   - core/assets/vendor/normalize-css/normalize.css
   - core/modules/system/css/system.module.css

@@ -61,7 +61,7 @@ Feature: Sharing Offers edit Form
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
     Then the url should match "/node/64#card69"
-    And I should see "qs_sharing.offers.form.edit.success" in the ".alert" element
+    And I should see "qs_sharing.offers.form.edit.success"
 
   @api @preserveDatabase
   Scenario: In the edit Offer form, I should be able to submit new values for an offer and those one should be persisted.
@@ -79,4 +79,4 @@ Feature: Sharing Offers edit Form
     And the url should match "/fr/node/82#card69" with parameters:
       | theme |
       | 22 |
-    And I should see "qs_sharing.offers.form.edit.success" in the ".alert" element
+    And I should see "qs_sharing.offers.form.edit.success"

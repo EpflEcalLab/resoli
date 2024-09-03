@@ -67,5 +67,5 @@ Feature: Request Solve Form
     And 1 mail should be sent
     Then A mail as been sent to "manager+lausanne@antistatique.net" with subject "qs.mail.request.solved.subject Resoli Sarah Courci Lausanne Mobilité 9 September 2021"
     Then the url should match "/sharing/1/requests#card80"
-    And I should see "qs_sharing.collection.request.solve.success" in the ".alert" element
+    And I should see "qs_sharing.collection.request.solve.success"
     Then I should see 1 "#requests-accordion .card-list-item#card80.solved" element

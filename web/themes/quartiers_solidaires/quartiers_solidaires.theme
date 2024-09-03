@@ -10,19 +10,6 @@ function quartiers_solidaires_theme_suggestions_taxonomy_term_alter(&$suggestion
 }
 
 /**
- * Implements template_preprocess_block().
- *
- * @see https://www.drupal.org/project/drupal/issues/3456176
- * @see https://www.drupal.org/project/drupal/issues/3396318
- *
- * @return void
- */
-function quartiers_solidaires_preprocess_block__system_messages_block(&$variables): void
-{
-  $variables['content'] = StatusMessages::renderMessages();
-}
-
-/**
  * Implements template_preprocess_html().
  *
  * Add body background colors on some specific route.

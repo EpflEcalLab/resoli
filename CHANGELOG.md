@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - replace deprecated user_validate_name by \Drupal\user\UserNameValidator::validateName
+- add new messages.js to replace Ajax status-messages.html.twig
 
 ## [3.0.3] - 2024-07-02
 ### Removed

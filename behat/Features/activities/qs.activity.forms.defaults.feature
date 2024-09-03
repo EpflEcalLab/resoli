@@ -21,7 +21,7 @@ Feature: Activity Defaults Form
       | Accueil Café (defaults) | Body (defaults) | Venue (defaults) | 20 CHF | John | +01 234 56 78 | john.doe@example.org |
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe/dashboard"
-    And I should see "qs_activity.activities.form.edit.defaults.success Accueil Café" in the ".alert" element
+    And I should see "qs_activity.activities.form.edit.defaults.success Accueil Café"
 
   @api @preserveDatabase @mail
   Scenario: When editing the Defaults Values form of Activity, no mail should be sent

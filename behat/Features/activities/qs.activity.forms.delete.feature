@@ -14,7 +14,7 @@ Feature: Activity Delete Form
     When I am on "/lausanne/activities/accueil-cafe/delete"
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe/delete"
-    And I should see "qs_activity.activities.form.delete.error.has_events Accueil Café" in the ".alert" element
+    And I should see "qs_activity.activities.form.delete.error.has_events Accueil Café"
 
   @api @preserveDatabase @mail
   Scenario: When deleting an Activity whitout event, it should works and redirect me on on the community by theme page & no mail should be sent
@@ -22,5 +22,5 @@ Feature: Activity Delete Form
     When I am on "/lausanne/activities/rencontres-reseaux-solidaires/delete"
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/theme"
-    And I should see "qs_activity.activities.form.delete.success Rencontres Réseaux Solidaires" in the ".alert" element
+    And I should see "qs_activity.activities.form.delete.success Rencontres Réseaux Solidaires"
     And 0 mail should be sent

@@ -39,7 +39,7 @@ Feature: Sharing manage Volunteerism Form
     And I check "edit-volunteerism-20"
     And I press "edit-save-and-set-default-values"
     Then the url should match "/sharing/1/user/2/dashboard"
-    And I should see "qs_sharing.volunteerisms.form.manage.success Lausanne" in the ".alert" element
+    And I should see "qs_sharing.volunteerisms.form.manage.success Lausanne"
 
   @api @preserveDatabase
   Scenario: In the manage Volunteerism form, I should be able to submit valid volunteerism and be redirected to create an offer.
@@ -49,7 +49,7 @@ Feature: Sharing manage Volunteerism Form
     And I check "edit-volunteerism-25"
     And I press "edit-save-and-new-offer"
     Then the url should match "/sharing/1/offers/add"
-    And I should see "qs_sharing.volunteerisms.form.manage.success Lausanne" in the ".alert" element
+    And I should see "qs_sharing.volunteerisms.form.manage.success Lausanne"
 
 ## Floating Button
   @api

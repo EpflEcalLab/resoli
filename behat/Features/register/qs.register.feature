@@ -7,7 +7,7 @@ Feature: Register
       | 1 | John | Doe | john.doe@example.org | +01 234 56 78 | qwertz |
     And I press "edit-submit"
     Then the url should match "authentication/approval/1"
-    And I should see "qs_auth.form.register.success John Doe john.doe@example.org" in the ".alert" element
+    And I should see "qs_auth.form.register.success John Doe john.doe@example.org"
     Then I should see "qs.auth.approval.thanks"
     Then I should see "qs.auth.approval.description Lausanne"
     Then I should see "qs.auth.approval.short"

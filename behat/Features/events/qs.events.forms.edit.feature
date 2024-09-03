@@ -26,7 +26,7 @@ Feature: Event Edit Form
       | Accueil Café (edited) | now | 19:12 | 22:15 | Lorem Ipsum | Antistatique | John Doe | +01 234 56 78 | john.doe@example.org | 25 CHF |
     And I press "edit-submit"
     Then the url should match "/lausanne/activities/accueil-cafe/events/accueil-cafe-1/dashboard"
-    And I should see "qs_activity.events.form.edit.success Accueil Café" in the ".alert" element
+    And I should see "qs_activity.events.form.edit.success Accueil Café"
 
   @api @preserveDatabase @mail
   Scenario: When editing an Event, the values should be alterd & stored in the database

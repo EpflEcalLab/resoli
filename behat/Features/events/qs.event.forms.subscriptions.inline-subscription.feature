@@ -28,6 +28,6 @@ Feature: Event Subscriptions Inline Form
     When I select "member2+fribourg@antistatique.net" from "edit-member"
     And I press "edit-submit"
     Then the url should match "/fr/fribourg/activities/ginguettes/events/ginguettes-party-de-vevey/dashboard/subscribers"
-    And I should see "qs_subscription.subscription.form.subscribe.member.success Ginguettes Party de Vevey" in the ".alert" element
+    And I should see "qs_subscription.subscription.form.subscribe.member.success Ginguettes Party de Vevey"
     And 1 mail should be sent
     Then A mail as been sent to "member2+fribourg@antistatique.net" with subject "qs.mail.subscription.waiting_approval.confirm.subject Resoli member2+fribourg@antistatique.net Abel Auboisdormant Fribourg Ginguettes Party de Vevey Ginguettes"

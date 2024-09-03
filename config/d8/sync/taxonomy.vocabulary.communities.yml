@@ -6,3 +6,4 @@ name: Communities
 vid: communities
 description: 'Communities member will belongs to.'
 weight: 0
+new_revision: false

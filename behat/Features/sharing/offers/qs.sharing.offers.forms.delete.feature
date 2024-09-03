@@ -44,5 +44,5 @@ Feature: Offer Delete Form
     Then I should see 1 "form.offer75.delete" element
     Then I follow the link ".offer75.delete button[type='submit']" element
     Then the url should match "/sharing/1/user/8/offers"
-    And I should see "qs_sharing.offers.form.delete.success Papoter ensemble" in the ".alert" element
+    And I should see "qs_sharing.offers.form.delete.success Papoter ensemble"
     And I should see 0 "form.offer75.delete" element

@@ -71,3 +71,7 @@ quill:
 node-autocomplete:
   js:
     libs/node-autocomplete/build/static/js/main.js: {}
+
+drupal.message:
+  js:
+    js/message.js: {}

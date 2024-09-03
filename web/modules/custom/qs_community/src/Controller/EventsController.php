@@ -127,7 +127,7 @@ class EventsController extends ControllerBase {
       $event->field_end_at->date->setTimezone(new \DateTimeZone('Europe/Zurich'));
 
       $bold_timetable->getFont()->setBold(TRUE);
-      $timetable->createText(sprintf(' %s - %s', $event->field_start_at->date->format('H\hi'), $event->field_end_at->date->format('H\hi')));
+      $timetable->createText(\sprintf(' %s - %s', $event->field_start_at->date->format('H\hi'), $event->field_end_at->date->format('H\hi')));
 
       // Set a HTML text for contact with new line.
       $contact = [];

@@ -71,7 +71,7 @@ Feature: Request Archive Form
     Then I follow the link ".request77.archive button[type='submit']" element
     And 0 mail should be sent
     Then the url should match "/sharing/1/requests"
-    And I should see "qs_sharing.collection.request.archive.success" in the ".alert" element
+    And I should see "qs_sharing.collection.request.archive.success"
     Then I should see 2 "#requests-accordion .card-list-item" elements
 
   @api @preserveDatabase @mail
@@ -83,5 +83,5 @@ Feature: Request Archive Form
     Then I follow the link ".request77.archive button[type='submit']" element
     And 0 mail should be sent
     Then the url should match "/sharing/1/requests"
-    And I should see "qs_sharing.collection.request.archive.success" in the ".alert" element
+    And I should see "qs_sharing.collection.request.archive.success"
     Then I should see 2 "#requests-accordion .card-list-item" elements

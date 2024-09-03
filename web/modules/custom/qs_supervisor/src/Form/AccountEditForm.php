@@ -10,6 +10,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\qs_acl\Service\AccessControl;
 use Drupal\qs_auth\Service\Account;
 use Drupal\user\UserInterface;
+use Drupal\user\UserNameValidator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -41,7 +42,12 @@ class AccountEditForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(AccessControl $acl, EntityTypeManagerInterface $entity_type_manager, Account $account) {
+  public function __construct(
+    AccessControl $acl,
+    EntityTypeManagerInterface $entity_type_manager,
+    Account $account,
+    protected UserNameValidator $userNameValidator,
+  ) {
     $this->acl = $acl;
     $this->userStorage = $entity_type_manager->getStorage('user');
     $this->account = $account;
@@ -176,7 +182,8 @@ class AccountEditForm extends FormBase {
     return new static(
       $container->get('qs_acl.access_control'),
       $container->get('entity_type.manager'),
-      $container->get('qs_auth.account')
+      $container->get('qs_auth.account'),
+      $container->get('user.name_validator')
     );
   }
 
@@ -249,8 +256,10 @@ class AccountEditForm extends FormBase {
     }
 
     // Check username is Drupal compliant.
-    if ($violation = user_validate_name($form_state->getValue('mail'))) {
-      $form_state->setErrorByName('mail', $violation);
+    $violations = $this->userNameValidator->validateName($form_state->getValue('mail'));
+
+    if ($violations->count() > 0) {
+      $form_state->setErrorByName('mail', $violations[0]->getMessage());
     }
   }
 

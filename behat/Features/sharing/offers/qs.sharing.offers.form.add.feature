@@ -92,7 +92,7 @@ Feature: Sharing Offers add Form
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
     Then the url should match "/node/64#card82"
-    And I should see "qs_sharing.offers.form.add.success Faire les courses | Sarah Courci Faire les courses" in the ".alert" element
+    And I should see "qs_sharing.offers.form.add.success Faire les courses | Sarah Courci Faire les courses"
 
   @api @preserveDatabase
   Scenario: In the add Offer form, I should be able to submit a valid offer in an new offer type.
@@ -108,4 +108,4 @@ Feature: Sharing Offers add Form
     And I fill in "member+lausanne@antistatique.net" for "edit-contact-mail"
     And I press "edit-submit"
     Then the url should match "/node/82#card83"
-    And I should see "qs_sharing.offers.form.add.success Echange ou don de matériel | Sarah Courci Echange ou don de matériel" in the ".alert" element
+    And I should see "qs_sharing.offers.form.add.success Echange ou don de matériel | Sarah Courci Echange ou don de matériel"

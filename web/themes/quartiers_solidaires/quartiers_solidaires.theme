@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Render\Element\StatusMessages;
+
 /**
  * Add the view mode suggestion to taxonomy detail page.
  */

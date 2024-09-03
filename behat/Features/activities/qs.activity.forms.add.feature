@@ -8,7 +8,7 @@ Feature: Add Activity Form
       | Art Fair | 4 |
     And I press "edit-save"
     Then the url should match "/fr/lausanne/activities/art-fair"
-    And I should see "qs_activity.activities.form.add.success Art Fair" in the ".alert" element
+    And I should see "qs_activity.activities.form.add.success Art Fair"
 
   @api @preserveDatabase
   Scenario: Creating a new Activity into Lausanne and using the "Save & Edit Defaults values" action should redirect me on the Activity Default Values form
@@ -18,7 +18,7 @@ Feature: Add Activity Form
       | Art Fair | 4 |
     And I press "edit-save-and-set-default-values"
     Then the url should match "/fr/lausanne/activities/art-fair/edit/defaults"
-    And I should see "qs_activity.activities.form.add.success Art Fair" in the ".alert" element
+    And I should see "qs_activity.activities.form.add.success Art Fair"
     And the "edit-title" field should contain ""
     And the "edit-body" field should contain ""
     And the "edit-venue" field should contain ""
@@ -35,4 +35,4 @@ Feature: Add Activity Form
       | Art Fair | 4 |
     And I press "edit-save-and-new-event"
     Then the url should match "/fr/lausanne/activities/art-fair/events/add"
-    And I should see "qs_activity.activities.form.add.success Art Fair" in the ".alert" element
+    And I should see "qs_activity.activities.form.add.success Art Fair"

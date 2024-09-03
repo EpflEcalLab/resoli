@@ -46,4 +46,4 @@ Feature: Offer Deactivate Form
     Then the url should match "/sharing/1/user/8/offers"
     And I should see 0 "form.offer71.deactivate" element
     And I should see 1 "form.offer71.reactivate" element
-    And I should see "qs_sharing.offers.form.deactivate.success Transports et déplacements" in the ".alert" element
+    And I should see "qs_sharing.offers.form.deactivate.success Transports et déplacements"

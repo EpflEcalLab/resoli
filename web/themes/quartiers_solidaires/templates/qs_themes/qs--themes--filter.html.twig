@@ -15,9 +15,9 @@
           </div>
           <div class="modal-body p-0">
             <div class="text-sm-center" data-toggle="buttons">
-              <label class="btn checkbox active" id="js-all-themes">
+              <label class="btn checkbox {% if variables.filtered is empty %}active{% endif %}" id="js-all-themes">
                 {{ macros.icon('theme_all_o') }}
-                <input type="radio" name="allthemes" value="all" checked="checked">
+                <input type="radio" name="allthemes" value="all" {% if variables.filtered is empty %}checked="checked"{% endif %}>
                 {{ 'qs.themes.filter_all'|t }}
               </label>
             </div>

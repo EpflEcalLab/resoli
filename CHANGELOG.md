@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - fix input All Themes filters of Activity alway active - QS-80
 
+### Security
+- update module drupal/default_content (2.0.0-alpha2 => 2.0.0-alpha3)
+
 ## [3.0.4] - 2024-09-03
 ### Fixed
 - fix obsolete docker-compose command in CIs

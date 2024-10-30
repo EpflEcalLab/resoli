@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update module drupal/default_content (2.0.0-alpha2 => 2.0.0-alpha3)
 - update drupal/drupal-extension (v5.0.0 => v5.1.0)
 - update drupal/upgrade_status (4.3.5 => 4.3.6)
+- update mglaman/phpstan-drupal (1.2.12 => 1.3.1)
 
 ## [3.0.4] - 2024-09-03
 ### Fixed

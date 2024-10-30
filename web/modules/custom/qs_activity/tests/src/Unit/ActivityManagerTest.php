@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\qs_activity\Unit;
 
-use Drupal\qs_activity\Service\ActivityManager;
 use Drupal\Tests\UnitTestCase;
+use Drupal\qs_activity\Service\ActivityManager;
 
 /**
  * @coversDefaultClass \Drupal\qs_activity\Service\ActivityManager

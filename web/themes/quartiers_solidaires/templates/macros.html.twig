@@ -1,15 +1,12 @@
 {% macro icon(icon, classes) %}
-{% apply spaceless %}
 <span class="icon {{ classes|join(' ') }}" aria-hidden="true">
   <svg>
     <use xlink:href="#icon-{{ icon|default('calendar') }}"></use>
   </svg>
 </span>
-{% endapply %}
 {% endmacro %}
 
 {% macro badge(flag, icon, classes, title, shield, data) %}
-{% apply spaceless %}
 {% set shield = shield ?? false %}
 {% set data = data ?? false %}
 {# The `classes` is used by Behat tests to identify flags #}
@@ -25,7 +22,6 @@
     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-{{ icon|default('confirmed') }}"></use>
   </svg>
 </div>
-{% endapply %}
 {% endmacro %}
 
 {% macro card_button(text, url, icon, direction, attrs, theme) %}

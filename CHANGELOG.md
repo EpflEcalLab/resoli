@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - update module drupal/default_content (2.0.0-alpha2 => 2.0.0-alpha3)
+- update drupal/drupal-extension (v5.0.0 => v5.1.0)
+- update drupal/upgrade_status (4.3.5 => 4.3.6)
 
 ## [3.0.4] - 2024-09-03
 ### Fixed

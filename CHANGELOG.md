@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update mglaman/phpstan-drupal (1.2.12 => 1.3.1)
 - update symfony/property-access (v6.4.8 => v6.4.13)
 - update phpunit/phpunit (9.6.20 => 9.6.21)
+- upgrade drupal/core 10.3.2 => 10.3.6 - QS-81
 
 ## [3.0.4] - 2024-09-03
 ### Fixed

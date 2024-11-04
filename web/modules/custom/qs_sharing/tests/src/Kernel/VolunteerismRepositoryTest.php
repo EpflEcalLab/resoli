@@ -3,8 +3,8 @@
 namespace Drupal\Tests\qs_sharing\Kernel;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\qs_test\TaxonomyTestTrait;
 use Drupal\Tests\field\Traits\EntityReferenceFieldCreationTrait;
+use Drupal\qs_test\TaxonomyTestTrait;
 
 /**
  * @coversDefaultClass \Drupal\qs_sharing\Repository\VolunteerismRepository

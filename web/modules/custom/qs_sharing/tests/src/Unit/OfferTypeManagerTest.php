@@ -3,11 +3,11 @@
 namespace Drupal\Tests\qs_sharing\Unit;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Tests\UnitTestCase;
 use Drupal\node\NodeInterface;
 use Drupal\node\NodeStorageInterface;
 use Drupal\qs_sharing\Manager\OfferTypeManager;
 use Drupal\taxonomy\TermInterface;
-use Drupal\Tests\UnitTestCase;
 use Drupal\user\UserInterface;
 
 /**

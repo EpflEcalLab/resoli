@@ -31,8 +31,8 @@
 
           {# List header #}
           {% set event_date = event.field_start_at.value|date('Y-m-d') %}
-          {% set event_week = event.field_start_at.value|date('W') %}
-          {% set current_week = 'now'|date('W') %}
+          {% set event_week = event.field_start_at.value|date('YW') %}
+          {% set current_week = 'now'|date('YW') %}
 
           {% if 'now'|date('Y-m-d') == event_date %}
             {# TODAY #}

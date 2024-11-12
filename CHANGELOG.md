@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- fix broken list of events by dates when having to display a Week on 2 years (Semaines du 30 Décembre 2024 au 5 Janvier 2025) - QS-83
 
 ## [3.0.5] - 2024-11-04
 ### Fixed

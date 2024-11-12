@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.6] - 2024-11-12
+### Fixed
+- fix broken list of events by dates when having to display a Week on 2 years (Semaines du 30 Décembre 2024 au 5 Janvier 2025) - QS-83
+
 ## [3.0.5] - 2024-11-04
 ### Fixed
 - fix input All Themes filters of Activity alway active - QS-80
@@ -801,7 +805,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.5...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.6...HEAD
+[3.0.6]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.5...3.0.6
 [3.0.5]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.4...3.0.5
 [3.0.4]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.3...3.0.4
 [3.0.3]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.2...3.0.3

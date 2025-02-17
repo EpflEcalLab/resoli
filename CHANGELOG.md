@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Security
+- update drupal/core 10.3.6 => 10.4.2 - QS-79
 
 ## [3.0.6] - 2024-11-12
 ### Fixed

@@ -68,7 +68,7 @@
         "drupal/core-dev": "^10.4",
         "drupal/default_content": "^2.0@alpha",
         "drupal/drupal-extension": "^5.0",
-        "drupal/rules": "^3.0@alpha",
+        "drupal/rules": "^4.0",
         "drupal/schema_metatag": "^3.0",
         "drupal/upgrade_status": "^4.1",
         "mglaman/phpstan-drupal": "^1.1",

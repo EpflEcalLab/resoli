@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/core 10.3.6 => 10.4.2 - QS-79
 - upgrade drupal/gin (3.0.0 => 4.0.0)
 - upgrade drupal/image_effects (3.6.0 => 4.0.0) - QS-79
+- upgrade drupal/rules (3.0.0-alpha8 => 4.0.0) - QS-79
 
 ### Changed
 - use drush.php instead of drush binary during deployment to still have the option to specifiy a PHP version - QS-79

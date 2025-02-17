@@ -16,4 +16,4 @@ SSHKit.config.command_map[:php] = -> { fetch(:php, 'php') }
 # you have to copy those line for each <stage_name>.rb
 # See https://github.com/capistrano/composer/issues/22
 SSHKit.config.command_map[:composer] = -> { fetch(:php, 'php') + ' ' + shared_path.join('composer.phar').to_s }
-SSHKit.config.command_map[:drush] = -> { fetch(:php, 'php') + ' ' + release_path.join('vendor/bin/drush').to_s }
+SSHKit.config.command_map[:drush] = -> { fetch(:php, 'php') + ' ' + release_path.join('vendor/bin/drush.php').to_s }

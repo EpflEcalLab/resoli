@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.7] - 2025-02-24
+### Security
+- update drupal/core 10.3.6 => 10.4.2 - QS-79
+- upgrade drupal/gin (3.0.0 => 4.0.0)
+- upgrade drupal/image_effects (3.6.0 => 4.0.0) - QS-79
+- upgrade drupal/rules (3.0.0-alpha8 => 4.0.0) - QS-79
+
+### Changed
+- use drush.php instead of drush binary during deployment to still have the option to specifiy a PHP version - QS-79
+
+### Added
+- add module drupal/gin_toolbar - QS-79
+
 ## [3.0.6] - 2024-11-12
 ### Fixed
 - fix broken list of events by dates when having to display a Week on 2 years (Semaines du 30 Décembre 2024 au 5 Janvier 2025) - QS-83
@@ -805,7 +818,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.6...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.7...HEAD
+[3.0.7]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.6...3.0.7
 [3.0.6]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.5...3.0.6
 [3.0.5]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.4...3.0.5
 [3.0.4]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.3...3.0.4

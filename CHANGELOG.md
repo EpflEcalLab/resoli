@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.0.7] - 2025-02-24
 ### Security
 - update drupal/core 10.3.6 => 10.4.2 - QS-79
 - upgrade drupal/gin (3.0.0 => 4.0.0)
@@ -816,7 +818,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.6...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.7...HEAD
+[3.0.7]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.6...3.0.7
 [3.0.6]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.5...3.0.6
 [3.0.5]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.4...3.0.5
 [3.0.4]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.3...3.0.4

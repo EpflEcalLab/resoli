@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/upgrade_status (4.3.6 => 4.3.7) - QS-85
 - upgrade drupal/field_group (3.6.0 => 4.0.0) - QS-85
 
+### Removed
+- remove root dependency on phpunit/phpunit - QS-85
+
 ## [3.0.7] - 2025-02-24
 ### Security
 - update drupal/core 10.3.6 => 10.4.2 - QS-79

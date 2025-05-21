@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/admin_toolbar (3.5.1 => 3.5.3) - QS-85
 - update drush/drush (13.3.3 => 13.5.0) - QS-85
 - update drupal/upgrade_status (4.3.6 => 4.3.7) - QS-85
+- upgrade drupal/field_group (3.6.0 => 4.0.0) - QS-85
 
 ## [3.0.7] - 2025-02-24
 ### Security

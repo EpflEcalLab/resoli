@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - downgrade drupal/honeypot (2.2.1 => 2.1.4) - QS-85
 - update drupal/gin (4.0.4 => 4.0.6) - QS-85
 - update drupal/admin_toolbar (3.5.1 => 3.5.3) - QS-85
+- update drush/drush (13.3.3 => 13.5.0) - QS-85
 
 ## [3.0.7] - 2025-02-24
 ### Security

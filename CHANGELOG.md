@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/bamboo_twig (6.0.2 => 6.0.4) - QS-85
 - update drupal/loco_translate (3.0.2 => 3.0.3) - QS-85
 - downgrade drupal/honeypot (2.2.1 => 2.1.4) - QS-85
+- update drupal/gin (4.0.4 => 4.0.6) - QS-85
+- update drupal/admin_toolbar (3.5.1 => 3.5.3) - QS-85
 
 ## [3.0.7] - 2025-02-24
 ### Security

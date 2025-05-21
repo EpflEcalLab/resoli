@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - remove root dependency on phpunit/phpunit - QS-85
 
+### Changed
+- fix PHPCS using deprecated CSS/JS Scanning - QS-85
+
 ## [3.0.7] - 2025-02-24
 ### Security
 - update drupal/core 10.3.6 => 10.4.2 - QS-79

@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.8] - 2025-06-13
+### Security
+- update drupal/bamboo_twig (6.0.2 => 6.0.4) - QS-85
+- update drupal/loco_translate (3.0.2 => 3.0.3) - QS-85
+- downgrade drupal/honeypot (2.2.1 => 2.1.4) - QS-85
+- update drupal/gin (4.0.4 => 4.0.6) - QS-85
+- update drupal/admin_toolbar (3.5.1 => 3.5.3) - QS-85
+- update drush/drush (13.3.3 => 13.5.0) - QS-85
+- update drupal/upgrade_status (4.3.6 => 4.3.7) - QS-85
+- upgrade drupal/field_group (3.6.0 => 4.0.0) - QS-85
+
+### Removed
+- remove root dependency on phpunit/phpunit - QS-85
+
+### Changed
+- fix PHPCS using deprecated CSS/JS Scanning - QS-85
+
 ## [3.0.7] - 2025-02-24
 ### Security
 - update drupal/core 10.3.6 => 10.4.2 - QS-79
@@ -818,7 +835,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.7...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.8...HEAD
+[3.0.8]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.7...3.0.8
 [3.0.7]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.6...3.0.7
 [3.0.6]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.5...3.0.6
 [3.0.5]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.4...3.0.5

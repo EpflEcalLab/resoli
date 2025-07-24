@@ -14,7 +14,6 @@ require 'capistrano/composer'
 require 'capistrano/antistatique'
 require 'capistrano/antistatique/drupal/loco'
 require 'capdrupal'
-require 'slackistrano/capistrano'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('config/capistrano/tasks/*.rake').each { |r| import r }

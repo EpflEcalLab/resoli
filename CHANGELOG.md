@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/gin (4.0.6 => 4.1.0) - QS-87
 - update drupal/metatag (2.1.0 => 2.1.1) - QS-87
 - update drupal/symfony_mailer_lite (2.0.2 => 2.0.3) - QS-87
+- upgrade drupal/core-dev (10.4.7 => 10.5.1) - QS-87
+- update drupal/captcha (2.0.7 => 2.0.8) - QS-87
 
 ## [3.0.8] - 2025-06-13
 ### Security

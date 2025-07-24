@@ -36,7 +36,7 @@ RUN set -eux; \
     yarn build --production
 
 # Drupal container used for the rest of the build execution.
-FROM antistatique/php:8.2-drupal as drupal
+FROM antistatique/php:8.3-drupal as drupal
 
 ARG user=www-data
 ARG group=${user}

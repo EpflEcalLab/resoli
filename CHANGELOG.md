@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update to PHP 8.3 - QS-89
+- update phpspec/prophecy-phpunit (v2.3.0 => v2.4.0) - QS-87
+- update mglaman/phpstan-drupal (1.3.8 => 1.3.9) - QS-87
+- update behat/behat (v3.22.0 => v3.23.0) - QS-87
+- update drupal/upgrade_status (4.3.7 => 4.3.8) - QS-87
+- update drupal/admin_toolbar (3.5.3 => 3.6.1) - QS-87
+- update drupal/gin_toolbar (2.0.0 => 2.1.0) - QS-87
+- update drupal/gin (4.0.6 => 4.1.0) - QS-87
+- update drupal/metatag (2.1.0 => 2.1.1) - QS-87
+- update drupal/symfony_mailer_lite (2.0.2 => 2.0.3) - QS-87
+- upgrade drupal/core-dev (10.4.7 => 10.5.1) - QS-87
+- update drupal/captcha (2.0.7 => 2.0.8) - QS-87
 
 ## [3.0.8] - 2025-06-13
 ### Security

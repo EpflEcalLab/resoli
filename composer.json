@@ -37,9 +37,9 @@
         "drupal/backerymails": "^3.0",
         "drupal/bamboo_twig": "^6.0",
         "drupal/ckeditor": "^1.0",
-        "drupal/core-composer-scaffold": "^10.4",
-        "drupal/core-project-message": "^10.4",
-        "drupal/core-recommended": "^10.4",
+        "drupal/core-composer-scaffold": "^10.5",
+        "drupal/core-project-message": "^10.5",
+        "drupal/core-recommended": "^10.5",
         "drupal/field_group": "^4.0",
         "drupal/focal_point": "^2.0",
         "drupal/gin": "^4.0",
@@ -65,7 +65,7 @@
     "require-dev": {
         "alexandresalome/mailcatcher": "^1.4",
         "behat/behat": "^3.12",
-        "drupal/core-dev": "^10.4",
+        "drupal/core-dev": "^10.5",
         "drupal/default_content": "^2.0@alpha",
         "drupal/drupal-extension": "^5.0",
         "drupal/rules": "^4.0",
@@ -122,6 +122,9 @@
         },
         "enable-patching": true,
         "patches": {
+            "drupal/metatag": {
+                "[3531026] V2UpdatesTest::doSelectionTest() must be compatible with parent UpdatePathTestBase::doSelectionTest": "https://www.drupal.org/files/issues/2025-06-19/3531026-01.patch"
+            }
         }
     }
 }

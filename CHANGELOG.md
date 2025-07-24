@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/symfony_mailer_lite (2.0.2 => 2.0.3) - QS-87
 - upgrade drupal/core-dev (10.4.7 => 10.5.1) - QS-87
 - update drupal/captcha (2.0.7 => 2.0.8) - QS-87
+- update drupal/honeypot (2.1.4 => 2.2.2) - QS-87
 
 ### Removed
 - disable automatic database rollback on failed deployment

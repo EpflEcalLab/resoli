@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/admin_toolbar (3.5.3 => 3.6.1) - QS-87
 - update drupal/gin_toolbar (2.0.0 => 2.1.0) - QS-87
 - update drupal/gin (4.0.6 => 4.1.0) - QS-87
+- update drupal/metatag (2.1.0 => 2.1.1) - QS-87
 
 ## [3.0.8] - 2025-06-13
 ### Security

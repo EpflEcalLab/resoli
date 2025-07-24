@@ -75,7 +75,7 @@ namespace :deploy do
 
   # Backup the database before starting a deployment and rollback on fail.
   after :updated, "drupal:db:backup"
-  before :failed, "drupal:db:rollback"
+  # before :failed, "drupal:db:rollback"
   before :cleanup, "drupal:db:backup:cleanup"
 
   after :updated, "deploy:styleguide:libs:build" unless ENV['CI']

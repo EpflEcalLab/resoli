@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - upgrade drupal/core-dev (10.4.7 => 10.5.1) - QS-87
 - update drupal/captcha (2.0.7 => 2.0.8) - QS-87
 
+### Removed
+- disable automatic database rollback on failed deployment
+
 ## [3.0.8] - 2025-06-13
 ### Security
 - update drupal/bamboo_twig (6.0.2 => 6.0.4) - QS-85

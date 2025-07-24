@@ -11,15 +11,23 @@ registries:
     username: antistatique
     password: "${{ secrets.COMPOSER_TOKEN }}"
 updates:
+  # PHP tools
   - package-ecosystem: composer
-    directory: "/"
+    directory: "/tools/php-cs-fixer"
     versioning-strategy: lockfile-only
-    allow:
-      - dependency-type: production
     registries:
       - composer
     schedule:
-      interval: weekly
+      interval: monthly
+  - package-ecosystem: composer
+    directory: "/tools/php-deprecation-detector"
+    versioning-strategy: lockfile-only
+    registries:
+      - composer
+    schedule:
+      interval: monthly
+
+  # Capistrano
   - package-ecosystem: bundler
     directory: "/"
     versioning-strategy: lockfile-only
@@ -27,8 +35,9 @@ updates:
       - dependency-type: production
     schedule:
       interval: weekly
+
+  # Github Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: weekly
-

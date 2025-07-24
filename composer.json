@@ -44,7 +44,7 @@
         "drupal/focal_point": "^2.0",
         "drupal/gin": "^4.0",
         "drupal/gin_toolbar": "^2.0",
-        "drupal/honeypot": "2.1.4",
+        "drupal/honeypot": "^2.2",
         "drupal/image_effects": "^4.0",
         "drupal/jquery_ui_datepicker": "^2.0",
         "drupal/jquery_ui_draggable": "^2.0",

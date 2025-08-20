@@ -29,11 +29,11 @@ jobs:
           if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
               echo "DEPLOY_ENV=production" >> $GITHUB_ENV
           fi
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Setup deploy envionment (SSH + ruby)
       - name: Install SSH key to deploy
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.9.1
         with:
           ssh-private-key: ${{ secrets.PRIVATE_SSH_KEY }}
       - uses: ruby/setup-ruby@v1

@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update friendsofphp/php-cs-fixer (v3.64.0 => v3.88.2) - QS-90
+- update drupal/metatag (2.1.1 => 2.2.0) - QS-90
 
 ## [3.0.9] - 2025-08-20
 ### Security

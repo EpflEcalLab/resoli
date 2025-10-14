@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/metatag (2.1.1 => 2.2.0) - QS-90
 - update behat/behat (v3.23.0 => v3.25.0) - QS-90
 - update symfony/property-access (v6.4.18 => v6.4.25) - QS-90
+- update drupal/admin_toolbar (3.6.1 => 3.6.2) - QS-90
+- update drupal/gin (4.1.0 => 4.1.2) - QS-90
 
 ## [3.0.9] - 2025-08-20
 ### Security

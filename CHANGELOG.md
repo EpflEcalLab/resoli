@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/admin_toolbar (3.6.1 => 3.6.2) - QS-90
 - update drupal/gin (4.1.0 => 4.1.2) - QS-90
 - update drupal/bamboo_twig (6.0.4 => 6.0.5) - QS-90
+- update phpoffice/phpspreadsheet (1.29.12 => 1.30.0) - QS-90
 
 ## [3.0.9] - 2025-08-20
 ### Security

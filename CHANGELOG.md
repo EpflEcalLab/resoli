@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/loco_translate (3.0.3 => 3.0.4) - QS-90
 - update drupal/pathauto (1.13.0 => 1.14.0) - QS-90
 - update drupal/redirect (1.11.0 => 1.12.0) - QS-90
+- update drush/drush (13.6.0 => 13.6.2) - QS-90
 
 ## [3.0.9] - 2025-08-20
 ### Security

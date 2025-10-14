@@ -62,63 +62,6 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
-   * Provider of ::testHasDashboardSharingAccessReturnsExcepted.
-   *
-   * Set of return value from hasDashboardSharingAccessReturnsExcepted
-   * with expected boolean result on hasDashboardSharingAccess.
-   *
-   * @return iterable
-   *   Return an array of arrays contains expectation.
-   */
-  public function hasDashboardSharingAccessReturnsExcepted(): iterable {
-    yield ['4', FALSE];
-
-    yield ['3', FALSE];
-
-    yield ['2', TRUE];
-  }
-
-  /**
-   * Provider of HasWrite access methods where Author/Admin may only write.
-   *
-   * @return iterable
-   *   Return an array of arrays contains expectation.
-   */
-  public function hasWriteAccessAuthorship(): iterable {
-    yield [NULL, NULL, FALSE];
-
-    yield ['1', '1', TRUE];
-
-    yield ['2', '1', FALSE];
-
-    yield ['1', '2', FALSE];
-
-    yield ['1', NULL, FALSE];
-
-    yield [NULL, '2', FALSE];
-  }
-
-  /**
-   * Provider of ::testIsCommunityVolunteerContextualUser.
-   *
-   * Set of return value from isCommunityReturnsExcepted with excepted boolean
-   * result on isCommunityVolunteer.
-   *
-   * @return iterable
-   *   Return an array of arrays contains expectation.
-   */
-  public function isCommunityReturnsExcepted(): iterable {
-    yield [NULL, FALSE];
-
-    yield [[], FALSE];
-
-    yield [[
-      $this->createMock(NodeInterface::class),
-    ], TRUE,
-    ];
-  }
-
-  /**
    * Ensure the current user will be used when non given.
    *
    * @covers ::hasDashboardSharingAccess
@@ -191,6 +134,23 @@ final class AccessControlTest extends UnitTestCase {
     $result = $acl->hasDashboardSharingAccess($community, $user);
 
     self::assertEquals($excepted, $result);
+  }
+
+  /**
+   * Provider of ::testHasDashboardSharingAccessReturnsExcepted.
+   *
+   * Set of return value from hasDashboardSharingAccessReturnsExcepted
+   * with expected boolean result on hasDashboardSharingAccess.
+   *
+   * @return iterable
+   *   Return an array of arrays contains expectation.
+   */
+  public function hasDashboardSharingAccessReturnsExcepted(): iterable {
+    yield ['4', FALSE];
+
+    yield ['3', FALSE];
+
+    yield ['2', TRUE];
   }
 
   /**
@@ -329,6 +289,26 @@ final class AccessControlTest extends UnitTestCase {
   }
 
   /**
+   * Provider of HasWrite access methods where Author/Admin may only write.
+   *
+   * @return iterable
+   *   Return an array of arrays contains expectation.
+   */
+  public function hasWriteAccessAuthorship(): iterable {
+    yield [NULL, NULL, FALSE];
+
+    yield ['1', '1', TRUE];
+
+    yield ['2', '1', FALSE];
+
+    yield ['1', '2', FALSE];
+
+    yield ['1', NULL, FALSE];
+
+    yield [NULL, '2', FALSE];
+  }
+
+  /**
    * Ensure the current user will be used when non given.
    *
    * @covers ::isCommunityVolunteer
@@ -372,6 +352,26 @@ final class AccessControlTest extends UnitTestCase {
     $result = $this->acl->isCommunityVolunteer($community);
 
     self::assertEquals($excepted, $result);
+  }
+
+  /**
+   * Provider of ::testIsCommunityVolunteerContextualUser.
+   *
+   * Set of return value from isCommunityReturnsExcepted with excepted boolean
+   * result on isCommunityVolunteer.
+   *
+   * @return iterable
+   *   Return an array of arrays contains expectation.
+   */
+  public function isCommunityReturnsExcepted(): iterable {
+    yield [NULL, FALSE];
+
+    yield [[], FALSE];
+
+    yield [[
+      $this->createMock(NodeInterface::class),
+    ], TRUE,
+    ];
   }
 
 }

@@ -37,6 +37,27 @@ final class ActivityManagerTest extends UnitTestCase {
   }
 
   /**
+   * Test the pagination dates.
+   *
+   * @covers ::getPaginationFromDate
+   *
+   * @dataProvider getPaginationFromDateProvider
+   */
+  public function testGetPaginationFromDate(\DateTime $now, \DateTime $start_date, $expected) {
+    $this->activityManager->expects(self::any())
+      ->method('getNow')
+      ->willReturn($now);
+
+    $dates = $this->activityManager->getPaginationFromDate($start_date);
+
+    self::assertEquals($expected['start']->format('YmdHi'), $dates['start']->format('YmdHi'), 'Start date is the Monday of the given date or today if start is in the past.');
+    self::assertEquals($expected['end']->format('YmdHi'), $dates['end']->format('YmdHi'), 'End date is the Sunday (23:59:59) 4 weeks after the start date.');
+    self::assertEquals($expected['prev']->format('YmdHi'), $dates['prev']->format('YmdHi'), 'Previous date is 4 weeks before the start date.');
+    self::assertEquals($expected['next']->format('YmdHi'), $dates['next']->format('YmdHi'), 'Next date is 4 weeks after the end date.');
+    self::assertContainsOnlyInstancesOf(\DateTime::class, $dates);
+  }
+
+  /**
    * Data provider for testing getPaginationFromDate.
    *
    * @throws \Exception
@@ -127,27 +148,6 @@ final class ActivityManagerTest extends UnitTestCase {
         ],
       ],
     ];
-  }
-
-  /**
-   * Test the pagination dates.
-   *
-   * @covers ::getPaginationFromDate
-   *
-   * @dataProvider getPaginationFromDateProvider
-   */
-  public function testGetPaginationFromDate(\DateTime $now, \DateTime $start_date, $expected) {
-    $this->activityManager->expects(self::any())
-      ->method('getNow')
-      ->willReturn($now);
-
-    $dates = $this->activityManager->getPaginationFromDate($start_date);
-
-    self::assertEquals($expected['start']->format('YmdHi'), $dates['start']->format('YmdHi'), 'Start date is the Monday of the given date or today if start is in the past.');
-    self::assertEquals($expected['end']->format('YmdHi'), $dates['end']->format('YmdHi'), 'End date is the Sunday (23:59:59) 4 weeks after the start date.');
-    self::assertEquals($expected['prev']->format('YmdHi'), $dates['prev']->format('YmdHi'), 'Previous date is 4 weeks before the start date.');
-    self::assertEquals($expected['next']->format('YmdHi'), $dates['next']->format('YmdHi'), 'Next date is 4 weeks after the end date.');
-    self::assertContainsOnlyInstancesOf(\DateTime::class, $dates);
   }
 
 }

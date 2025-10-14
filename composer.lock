@@ -1534,20 +1534,20 @@
         },
         {
             "name": "drupal/bamboo_twig",
-            "version": "6.0.4",
+            "version": "6.0.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/bamboo_twig.git",
-                "reference": "6.0.4"
+                "reference": "6.0.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/bamboo_twig-6.0.4.zip",
-                "reference": "6.0.4",
-                "shasum": "6e15f24acf33f0ffd8b6b6bc796aca57a7f7981e"
+                "url": "https://ftp.drupal.org/files/projects/bamboo_twig-6.0.5.zip",
+                "reference": "6.0.5",
+                "shasum": "4452ab6ebd3b3d00b66a159e556bab947300ddbb"
             },
             "require": {
-                "drupal/core": "^10 || ^11"
+                "drupal/core": "^10.5 || ^11"
             },
             "require-dev": {
                 "drupal/coder": "^8.3.1"
@@ -1555,8 +1555,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.0.4",
-                    "datestamp": "1747294579",
+                    "version": "6.0.5",
+                    "datestamp": "1756122238",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

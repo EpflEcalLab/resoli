@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update drupal/bamboo_twig (6.0.4 => 6.0.5) - QS-90
 - update phpoffice/phpspreadsheet (1.29.12 => 1.30.0) - QS-90
 - update drupal/loco_translate (3.0.3 => 3.0.4) - QS-90
+- update drupal/pathauto (1.13.0 => 1.14.0) - QS-90
 
 ## [3.0.9] - 2025-08-20
 ### Security

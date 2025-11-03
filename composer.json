@@ -122,9 +122,6 @@
         },
         "enable-patching": true,
         "patches": {
-            "drupal/metatag": {
-                "[3531026] V2UpdatesTest::doSelectionTest() must be compatible with parent UpdatePathTestBase::doSelectionTest": "https://www.drupal.org/files/issues/2025-06-19/3531026-01.patch"
-            }
         }
     }
 }

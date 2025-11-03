@@ -369,14 +369,14 @@ class AddForm extends FormBasic {
 
     $form['step-3'] = [
       '#type' => 'fieldset',
-      '#description' => $this->t('qs_photo.add.form.step3.description') .
-      '<div class="text-center mb-3">' .
-      $this->t('qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution', [
+      '#description' => $this->t('qs_photo.add.form.step3.description')
+      . '<div class="text-center mb-3">'
+      . $this->t('qs_photo.add.form.step3.helper @file_validate_extensions @file_validate_size @file_validate_image_resolution', [
         '@file_validate_extensions' => $this->extensions,
         '@file_validate_size' => $this->humanFilesize(Environment::getUploadMaxSize()),
         '@file_validate_image_resolution' => '10000x10000',
-      ]) .
-      '</div>',
+      ])
+      . '</div>',
       '#attributes' => [
         'data-step' => $this->t('qs_photo.add.form.step3'),
       ],

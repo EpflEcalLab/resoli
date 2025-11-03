@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.10] - 2025-11-03
+### Security
+- update friendsofphp/php-cs-fixer (v3.64.0 => v3.88.2) - QS-90
+- update drupal/metatag (2.1.1 => 2.2.0) - QS-90
+- update behat/behat (v3.23.0 => v3.25.0) - QS-90
+- update symfony/property-access (v6.4.18 => v6.4.25) - QS-90
+- update drupal/admin_toolbar (3.6.1 => 3.6.2) - QS-90
+- update drupal/gin (4.1.0 => 4.1.2) - QS-90
+- update drupal/bamboo_twig (6.0.4 => 6.0.5) - QS-90
+- update phpoffice/phpspreadsheet (1.29.12 => 1.30.0) - QS-90
+- update drupal/loco_translate (3.0.3 => 3.0.4) - QS-90
+- update drupal/pathauto (1.13.0 => 1.14.0) - QS-90
+- update drupal/redirect (1.11.0 => 1.12.0) - QS-90
+- update drush/drush (13.6.0 => 13.6.2) - QS-90
+- update drupal/core (10.5.1 => 10.5.4) - QS-90
+- update remaining minores dependencies - QS-90
+
 ## [3.0.9] - 2025-08-20
 ### Security
 - update to PHP 8.3 - QS-89
@@ -854,7 +871,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.9...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.10...HEAD
+[3.0.10]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.9...3.0.10
 [3.0.9]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.8...3.0.9
 [3.0.8]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.7...3.0.8
 [3.0.7]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.6...3.0.7

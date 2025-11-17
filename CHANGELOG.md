@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.12] - 2025-11-17
+### Security
+- update drupal/core-dev (10.5.4 => 10.5.6) - ARC-678
+
 ## [3.0.11] - 2025-11-17
 ### Security
 - update actions/upload-artifact@v4 => v5
@@ -876,7 +880,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.11...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.12...HEAD
+[3.0.12]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.11...3.0.12
 [3.0.11]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.10...3.0.11
 [3.0.10]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.9...3.0.10
 [3.0.9]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.8...3.0.9

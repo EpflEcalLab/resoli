@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Security
 - update actions/upload-artifact@v4 => v5
+- update drupal/core-dev (10.5.4 => 10.5.6) - ARC-678
 
 ## [3.0.10] - 2025-11-03
 ### Security

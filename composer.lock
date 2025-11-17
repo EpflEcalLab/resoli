@@ -1919,7 +1919,7 @@
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "10.5.4",
+            "version": "10.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -1963,13 +1963,13 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/10.5.4"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/10.5.6"
             },
             "time": "2024-08-22T14:31:30+00:00"
         },
         {
             "name": "drupal/core-project-message",
-            "version": "10.5.4",
+            "version": "10.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-project-message.git",
@@ -10960,7 +10960,7 @@
         },
         {
             "name": "drupal/core-dev",
-            "version": "10.5.4",
+            "version": "10.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-dev.git",
@@ -11010,7 +11010,7 @@
             ],
             "description": "require-dev dependencies from drupal/drupal; use in addition to drupal/core-recommended to run tests from drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-dev/tree/10.5.4"
+                "source": "https://github.com/drupal/core-dev/tree/10.5.6"
             },
             "time": "2025-05-14T07:11:14+00:00"
         },

@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.0.13] - 2026-01-08
 ### Changed
 - update to Ruby v3 & latests Capistrano
 
@@ -885,7 +887,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - init empty repo
 
-[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.12...HEAD
+[Unreleased]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.13...HEAD
+[3.0.13]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.12...3.0.13
 [3.0.12]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.11...3.0.12
 [3.0.11]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.10...3.0.11
 [3.0.10]: https://github.com/antistatique/quartiers-solidaires/compare/3.0.9...3.0.10

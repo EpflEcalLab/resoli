@@ -8,6 +8,7 @@ set :branch, 'dev'
 set :http_auth_users, [
    [ "quartiers-solidaires", "$apr1$vHMguZuD$ZD0IeqhM0Ioypda9rIdf./" ]
 ]
+before "deploy:updated", "httpauth:protect"
 
 # Override the pull configuration to get all translations from Loco.
 set :loco_pull, {
@@ -15,7 +16,6 @@ set :loco_pull, {
   status: 'all',
 }
 
-before "styleguide:build_local", "httpauth:protect"
 before "styleguide:deploy_build", "styleguide:build_local" unless ENV['CI']
 
 # Map php command in order to change PHP version from "default" setup-one

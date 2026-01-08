@@ -12,8 +12,13 @@ install_plugin Capistrano::SCM::Git
 require 'capistrano/composer'
 
 require 'capistrano/antistatique'
-require 'capistrano/antistatique/drupal/loco'
 require 'capdrupal'
+
+# Uncomment tasks usefull to your project
+require 'capistrano/antistatique/styleguide'
+require 'capistrano/antistatique/httpauth'
+require 'capistrano/antistatique/maintenance'
+require 'capistrano/antistatique/drupal/loco'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('config/capistrano/tasks/*.rake').each { |r| import r }

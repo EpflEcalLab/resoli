@@ -12,6 +12,7 @@ concurrency:
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     env:
       PRIVATE_SSH_KEY: ${{ secrets.PRIVATE_SSH_KEY }}
@@ -29,7 +30,7 @@ jobs:
           if [[ $GITHUB_REF == 'refs/heads/master' ]]; then
               echo "DEPLOY_ENV=production" >> $GITHUB_ENV
           fi
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       # Setup deploy envionment (SSH + ruby)
       - name: Install SSH key to deploy
@@ -38,7 +39,7 @@ jobs:
           ssh-private-key: ${{ secrets.PRIVATE_SSH_KEY }}
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: '3.4'
           bundler-cache: true
 
       # Build assets

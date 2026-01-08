@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - update to Ruby v3 & latests Capistrano
 
+### Added
+- add command drush qs:ex:p in order to export photos - QS-98
+
 ## [3.0.12] - 2025-11-17
 ### Security
 - update drupal/core-dev (10.5.4 => 10.5.6) - ARC-678

@@ -1,0 +1,9 @@
+services:
+  qs_photo.export.photos.commands:
+    class: Drupal\qs_photo\Commands\ExportPhotoCommand
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+      - '@file_system'
+    tags:
+      - { name: drush.command }

@@ -1,7 +1,7 @@
 # Quartiers Solidaires
-Drupal 8 powered.
+Drupal 10 powered.
 
-[![Continuous Integration & Continuous Deployment](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci-cd.yml)
+[![CI](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci.yml/badge.svg)](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci.yml)
 
 ## 🔧 Prerequisites
 
@@ -116,53 +116,11 @@ bundle exec cap production files:dump
 docker compose exec dev docker-as-drupal db-restore --file=/var/www/web/sites/default/files/production_dump.sql
 ```
 
-### Docker helpT & tips
+### Docker help & tips
 
 ```bash
 docker compose exec dev docker-as-drupal --help
 ```
-
-## 🏋️ Export/Import all translations to a PO file
-
-This project don't use the traditionnal translates strings in English.
-We move to a flexible solution which is not language based but keys strings Eg. `form.submit`
-
-To allow the client to update the translation him/herself, you need to export all the custom translations from our modules & templates by running our custom extractor.
-
-### Prerequisites
-
-  * gettext & xgettext
-  * xargs & gxargs
-
-1. Install `gettext`
-
-  ```bash
-  $ brew install gettext
-  $ brew link gettext
-  ```
-
-1. Install `xargs`
-
-  ```bash
-  $ brew install findutils --with-default-names
-  ```
-
-### Export
-
-  ```bash
-  $ ./scripts/trans-extractor/run
-  ```
-
-The PO file is created in the `./config/d8/lang/` directory.
-
-Once done, don't forget to add the new assets on the Loco project.
-
-### Import
-
-When importing in the [Drupal admin interface](admin/config/regional/translate/import) don't forget to check the 2 following checkboxes:
-
-- Overwrite non-customized translations
-- Overwrite existing customized translations
 
 ## 🚔 Check Drupal coding standards & Drupal best practices
 
@@ -309,15 +267,13 @@ For more help about Toolbox, the [official documentation](http://frontend.github
 - [node-autocomplete](web/themes/quartiers_solidaires/libs/node-autocomplete/README.md)
 
 ## 🚀 Deploy
+The deployment is managed By Capistrano. See [the recipes](./config/deploy.rb).
 
 ### First time
 
   ```bash
     # You need to have ruby & bundler installed
    $ bundle install
-   $ npm login
-   # enter the dev@antistatique.net npm credentials, ask Antistatique if you don't have these. (they should normally be in 1Password)
-   $ npm install -g gulp
   ```
 
 ### Each times

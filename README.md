@@ -485,3 +485,6 @@ run them on the Docker environment OR open a shell in docker using `docker compo
 ## 🕙 Crons
 
 ### Crontab
+```
+* */2 * * * /path/to/drush -r /path/to/www.resoli.ch/current/web cron >/dev/null 2>&1
+```

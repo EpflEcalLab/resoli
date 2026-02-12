@@ -1,4 +1,15 @@
 # Quartiers Solidaires
+
+> [!WARNING]
+> **Archived Project** — This project is no longer actively maintained. The Resoli service has been discontinued and the codebase is provided as-is under the **GPL license**.
+>
+> **If you plan to run this project on your own server, be aware of the following risks:**
+> - You are solely responsible for applying **Drupal security updates** and maintaining the application.
+> - No support, warranty, or guarantee of any kind is provided by Antistatique or EPFL+ECAL Lab.
+> - The database is not included — you will start with an empty instance.
+>
+> **Use at your own risk.**
+
 Drupal 10 powered.
 
 [![CI](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci.yml/badge.svg)](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci.yml)

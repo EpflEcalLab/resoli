@@ -1,14 +1,14 @@
-# staging.quartiers-solidaires.ch
-set :deploy_to, '/home/quartiers-solidaires/www/staging.quartiers-solidaires.ch'
+# Staging
+set :deploy_to, '/home/deploy/www/staging'
 
 # set a branch for this release
 set :branch, 'dev'
 
 # Protect the staging with a password
-set :http_auth_users, [
-   [ "quartiers-solidaires", "$apr1$vHMguZuD$ZD0IeqhM0Ioypda9rIdf./" ]
-]
-before "deploy:updated", "httpauth:protect"
+# set :http_auth_users, [
+#    [ "username", "password_hash" ]
+# ]
+# before "deploy:updated", "httpauth:protect"
 
 # Override the pull configuration to get all translations from Loco.
 set :loco_pull, {

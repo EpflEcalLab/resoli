@@ -1,5 +1,5 @@
-# www.resoli.ch
-set :deploy_to, '/home/quartiers-solidaires/www/www.resoli.ch'
+# Production
+set :deploy_to, '/home/deploy/www/production'
 
 # set a branch for this release
 set :branch, 'master'

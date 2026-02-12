@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- add archived project warning to README
+- remove server credentials from Capistrano deploy config
+- disable GitHub Actions deployment workflow (renamed to template)
+
 ## [3.0.13] - 2026-01-08
 ### Changed
 - update to Ruby v3 & latests Capistrano

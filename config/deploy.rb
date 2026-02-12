@@ -1,7 +1,7 @@
 set :application, 'quartiers-solidaires'
 set :repo_url, 'git@github.com:antistatique/quartiers-solidaires.git'
 
-server 'ssh-quartiers-solidaires.alwaysdata.net', user: 'quartiers-solidaires', roles: %w{app db web}
+# server 'your-server.example.com', user: 'deploy', roles: %w{app db web}
 
 set :app_path, "web"
 set :config_path, "config/d8/sync"

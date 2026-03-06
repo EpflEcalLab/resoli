@@ -12,8 +12,6 @@
 
 Drupal 10 powered.
 
-[![CI](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci.yml/badge.svg)](https://github.com/antistatique/quartiers-solidaires/actions/workflows/ci.yml)
-
 ## 🔧 Prerequisites
 
 First of all, you need to have the following tools installed globally on your environment:

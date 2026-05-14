@@ -114,7 +114,7 @@ jobs:
       - name: Run Behat tests
         run: docker compose exec -T test docker-as-wait db:3306 test:80 browser:4444 -- docker-as-drupal behat --skip-db-reset --skip-default-content
       - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         if: failure()
         with:
           path: ./log
